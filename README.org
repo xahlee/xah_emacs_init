@@ -1,0 +1,5 @@
+-*- coding: utf-8 -*-
+
+2012-08-13
+
+Xah Lee's emacs init files. They run on top of http://code.google.com/p/ergoemacs/source/checkout

@@ -17,7 +17,7 @@
   "Insert a blank a-word-a-day html template in a paritcular file."
   (interactive)
 
-  (find-file (concat (xahsite-root-path) "wordyenglish_com/words/new.html") )
+  (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/new.html") )
   (goto-char 1)
   (re-search-forward "<div class=\"δdate\">" nil t)
   (beginning-of-line)

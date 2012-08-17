@@ -1,12 +1,12 @@
 ;; -*- coding: utf-8 -*-
 ;; xah's emacs keybinding.
-;; • http://ergoemacs.org/emacs/xah_emacs_keybinding.el
-;; • http://ergoemacs.org/emacs/xah_emacs_unicode_input.el
-;; • http://ergoemacs.org/emacs/xah_emacs_hyper_super_setup.el
-;; • http://ergoemacs.org/emacs/xah_emacs_mouse_binding.el
-;; • http://ergoemacs.org/emacs/xah_emacs_alias.el
-;; • http://ergoemacs.org/emacs/xah_emacs_abbr.el
-;; • 〈Dvorak Keyboard Layout〉 http://xahlee.org/comp/dvorak_keyboard_layout.html
+;; • xah_emacs_keybinding.el
+;; • xah_emacs_unicode_input.el
+;; • xah_emacs_hyper_super_setup.el
+;; • xah_emacs_mouse_binding.el
+;; • xah_emacs_alias.el
+;; • xah_emacs_abbr.el
+;; • 〈Dvorak Keyboard Layout〉 http://xahlee.info/comp/dvorak_keyboard_layout.html
 ;; • 〈ErgoEmacs Keybinding〉 http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html
 ;; • 〈xah_autohotkey.ahk〉 http://xahlee.org/mswin/xah_autohotkey.ahk
 ;; • 〈Emacs: How to define Hyper ＆ Super Keys〉 http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
@@ -141,7 +141,7 @@
 (global-set-key (kbd "<kp-7> <kp-2>") (lambda () "" (interactive) (find-file "~/web/xahlee_info/comp/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-3>") (lambda () "" (interactive) (find-file "~/web/ergoemacs_org/emacs/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-4>") (lambda () "" (interactive) (find-file "~/Dropbox/twitter tweets.txt")))
-(global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "~/web/ergoemacs_org/emacs/xah_emacs_keybinding.el")))
+(global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "c:/Users/h3/.emacs.d/xah_emacs_init/xah_emacs_keybinding.el")))
 
 (global-set-key (kbd "<kp-7> <kp-6>") 'open-in-desktop)
 (global-set-key (kbd "<kp-7> <kp-7>") 'ibuffer)
@@ -245,6 +245,7 @@
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
+(add-hook 'nxml-mode-hook 'xah-html-mode-keys)
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
 

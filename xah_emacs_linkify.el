@@ -17,35 +17,46 @@ then it will became
 
 Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .svg}. If it is URL (starting with “http”), then no “width” and “height” attribute will be added."
   (interactive)
-  (let ( bds p1 p2 ξpath ξwidthHeight ξwidth ξheight altText)
-    (setq bds (get-selection-or-unit 'filepath))
-    (setq ξpath (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
+  (let* ( 
+         (bds (get-selection-or-unit 'filepath))
+         (ξinputPath (elt bds 0) )
+         (p1 (aref bds 1) )
+         (p2 (aref bds 2) )
+         (ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
+         (ξffp (local-url-to-file-path (expand-file-name ξinputPath ξcurrentDir ))) ;full path
+          ;; (setq ξffp (windows-style-path-to-unix (local-url-to-file-path ξffp)))
+         ξwidthHeight ξwidth ξheight altText
+         )
 
-    (setq altText (file-name-sans-extension (file-name-nondirectory ξpath)))
+;; (message "ooo %s" ξffp)
+
+    (setq altText (file-name-sans-extension (file-name-nondirectory ξffp)))
     (setq altText (replace-regexp-in-string "_" " " altText t t))
     (setq altText (replace-regexp-in-string "-s$" "" altText))
 
-    (if (string-match "\\`http" ξpath)
+    (if (xahsite-is-link-to-xahsite-p (file-relative-name ξffp (or (buffer-file-name) default-directory) ))
         (progn
-          (delete-region p1 p2)
-          (insert "<img src=\"" ξpath "\" alt=\"" altText "\">") )
+          (if (file-exists-p ξffp)
+              (progn
+                (setq ξwidthHeight
+                      (cond
+                       ((string-match "\.svg$" ξffp) (get-image-dimensions ξffp))
+                       (t (get-image-dimensions-imk ξffp)) ) )
+                (setq ξwidth (number-to-string (elt ξwidthHeight 0)))
+                (setq ξheight (number-to-string (elt ξwidthHeight 1)))
+                (delete-region p1 p2)
+                (insert 
+                 (format "<img src=\"%s\" alt=\"%s\" width=\"%s\" height=\"%s\" />"
+                         (xahsite-filepath-to-href-value ξffp (or (buffer-file-name) default-directory))
+                         altText
+                         ξwidth ξheight
+                         ))
+                )
+            (error "File does not exist 「%s」" ξffp )) )
       (progn
-        ;; (setq ξpath (windows-style-path-to-unix (local-url-to-file-path ξpath)))
-        (setq ξpath (local-url-to-file-path ξpath))
-        (if (file-exists-p ξpath)
-            (progn
-              (setq ξwidthHeight
-                    (cond
-                     ((string-match "\.svg$" ξpath) (get-image-dimensions ξpath))
-                     (t (get-image-dimensions-imk ξpath)) ) )
-              (setq ξwidth (number-to-string (elt ξwidthHeight 0)))
-              (setq ξheight (number-to-string (elt ξwidthHeight 1)))
-              (delete-region p1 p2)
-              (insert "<img src=\"" (file-relative-name ξpath) "\"" " " "alt=\"" altText "\"" " " "width=\"" ξwidth "\" " "height=\"" ξheight "\" />")
-              )
-          (error "File does not exist")) ) ) ))
+        (delete-region p1 p2)
+        (insert "<img src=\"" ξffp "\" alt=\"" altText "\">") )
+      ) ))
 
 (defun image-file-to-html-figure-tag ()
   "Replace a image file's path under cursor with a HTML img tag,

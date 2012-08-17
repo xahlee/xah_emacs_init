@@ -184,7 +184,7 @@ The KML file will be created at:
        (p2 (line-end-position))
        (inputStr (buffer-substring-no-properties p1 p2 ))
        (userBufferPath (buffer-file-name))
-       (kmlDirRoot (concat (xahsite-root-path) "xaharts_org/kml/"))
+       (kmlDirRoot (concat (xahsite-server-root-path) "xaharts_org/kml/"))
        (titleCoordList (split-string inputStr "/"))
        (kmlFileTitle (elt titleCoordList 0))
        (coord-y (trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 1))))

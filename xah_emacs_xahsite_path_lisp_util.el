@@ -4,7 +4,7 @@
 ; Xah Lee,
 ; ∑ http://xahlee.org/
 
-(defun xahsite-root-path ()
+(defun xahsite-server-root-path ()
   "Returns the full path of xah lee website local file web root.
 Ends in a slash.
 e.g. c:/Users/h3/web/"
@@ -76,15 +76,17 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
 
-(defun xahsite-is-link-to-xahsite-p (linkString)
-  "Returns true if linkString points to a xah website, else false.
+(defun xahsite-is-link-to-xahsite-p (hrefValue)
+  "Returns true if hrefValue points to a xah website, else false.
 
-Technically, returns true if linkString is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
+hrefValue is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
+
+Technically, returns true if hrefValue is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
 
 See: `xahsite-local-link-p', `xahsite-url-is-xah-website-p'."
-  (if (xahsite-local-link-p linkString)
+  (if (xahsite-local-link-p hrefValue)
       t
-    (xahsite-url-is-xah-website-p linkString)
+    (xahsite-url-is-xah-website-p hrefValue)
     )
   )
 
@@ -101,8 +103,8 @@ e.g. http://ergoemacs.org/emacs/emacs.html ⇒ ergoemacs.org
 e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「ergoemacs.org」.
 
-This function depends on `xahsite-root-path'."
-  (let ((case-fold-search nil) ξstr (ξpathPart (substract-path (downcase fPath) (downcase (xahsite-root-path)))))
+This function depends on `xahsite-server-root-path'."
+  (let ((case-fold-search nil) ξstr (ξpathPart (substract-path (downcase fPath) (downcase (xahsite-server-root-path)))))
     (if (string-match "\\`\\([^/]+?\\)/" ξpathPart )
         (progn
           (setq ξstr (match-string 1 ξpathPart))
@@ -115,7 +117,7 @@ This function depends on `xahsite-root-path'."
 e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「emacs/xyz.html」"
   (let ((case-fold-search nil))
-    (string-match (format "\\`%s[^/]+?/\\(.+\\)" (regexp-quote (xahsite-root-path))) fPath)
+    (string-match (format "\\`%s[^/]+?/\\(.+\\)" (regexp-quote (xahsite-server-root-path))) fPath)
     (match-string 1 fPath) ) )
 
 (defun xahsite-filepath-to-url (webpath)
@@ -129,17 +131,17 @@ will become:
   (format "http://%s/%s" (xahsite-get-domain-of-local-file-path webpath) (xahsite-get-path-relative-to-domain webpath))
   )
 
-(defun xahsite-filepath-to-href-value (linkFilePath currentFilePath)
+(defun xahsite-filepath-to-href-value (linkFilePath currentFilePathOrDir)
   "Return a URL or relative path.
 All arguments should all be full paths.
-If the two paths are in different domain, then return a url (starting with “http://”).
+If the two paths are in different domain, then return a URL (string starts with “http://”).
 Else, return a relative path.
 
 For reverse, see `xahsite-href-value-to-filepath'.
 "
-  (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path linkFilePath) (xahsite-get-domain-of-local-file-path currentFilePath))) )
+  (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path linkFilePath) (xahsite-get-domain-of-local-file-path currentFilePathOrDir))) )
     (if sameDomain-p
-        (progn (file-relative-name linkFilePath (file-name-directory currentFilePath)  ) )
+        (progn (file-relative-name linkFilePath (file-name-directory currentFilePathOrDir)  ) )
       (progn (xahsite-filepath-to-url linkFilePath) ) ) ) )
 ;; test
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/xahlee_org/arts/blog.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html")
@@ -182,7 +184,7 @@ This function does not check input is actually a file path, nor if the result pa
     ;; (replace-regexp-in-string "%27" "'" (replace-regexp-in-string "#.+$" "" ξurl))
 
     (setq ξfPath
-          (format "%s%s" (xahsite-root-path)
+          (format "%s%s" (xahsite-server-root-path)
                   ;; remove www
                   (replace-regexp-in-string
                    "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)"
@@ -365,6 +367,8 @@ Technically, if any string in ξmovedDirs is a prefix of ξfPath."
 (defun local-url-to-file-path (localFileURL)
   "Turn a localhost file URL LOCALFILEURL into a file full path.
 
+localFileURL must be a full path.
+
 For example, the following string shown in browser URL field:
 ; On Windows Vista 2009-06
  〔C:\\Users\\xah\\web\\emacs\\emacs.html〕  IE
@@ -446,7 +450,7 @@ if the inputStr is a relative path, defaultDir is used to resolve to full path."
  (interactive (list (read-string "domain name:")) )
   (let (
         (ξ-sitemapFileName "sitemap" )
-        (ξ-websiteDocRootPath (concat (xahsite-root-path) (replace-regexp-in-string "\\." "_" ξ-domainName "FIXEDCASE" "LITERAL") "/") )
+        (ξ-websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" ξ-domainName "FIXEDCASE" "LITERAL") "/") )
         )
 
     (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))

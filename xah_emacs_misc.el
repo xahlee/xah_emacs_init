@@ -552,3 +552,35 @@ See also: `kill-rectangle', `copy-to-register'."
      (with-temp-buffer
        (insert-register ?0)
        (buffer-string) )) ) )
+
+
+(defun rename-html-inline-image (ξnewFilePath)
+  "Replace current HTML inline image's file name.
+
+When cursor is in HTML link file path, e.g.  <img src=\"gki/macosxlogo.png\" > and this command is called, it'll prompt user for a new name. The link path will be changed to the new name, the corresponding file will also be renamed. The operation is aborted if a name exists."
+  
+  (interactive
+   (let (
+         (defaultInput (expand-file-name 
+                        (elt (get-selection-or-unit 'filepath) 0)
+                        (file-name-directory (or (buffer-file-name) default-directory )) )) )
+     (list (read-string "New name: " defaultInput nil defaultInput )) ) )
+  (let* ( 
+         (bds (get-selection-or-unit 'filepath))
+         (ξinputPath (elt bds 0) )
+         (p1 (aref bds 1) )
+         (p2 (aref bds 2) )
+         (ξffp (local-url-to-file-path (expand-file-name ξinputPath (file-name-directory (or (buffer-file-name) default-directory )) ))) ;full path
+         ;; (setq ξffp (windows-style-path-to-unix (local-url-to-file-path ξffp)))
+         )
+
+    (if (file-exists-p ξnewFilePath)
+        (progn (error "file 「%s」 exist." ξnewFilePath ))
+      (progn
+        (rename-file ξffp ξnewFilePath )
+        (message "rename to %s" ξnewFilePath)
+        (delete-region p1 p2)
+        (insert (xahsite-filepath-to-href-value ξnewFilePath (or (buffer-file-name) default-directory)))
+        )
+      )
+    ))

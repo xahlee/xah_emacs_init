@@ -52,6 +52,7 @@
     ("8ge" "Google Earth")
     ("8gm" "Google Map")
     ("8gc" "Google Chrome")
+    ("8gcd" "googlecode")
     ("8ff" "Firefox")
     ("8sl" "Second Life")
     ("8ll" "Linden Labs")

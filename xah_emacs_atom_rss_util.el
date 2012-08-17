@@ -14,11 +14,11 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
          (βtitle (if ξtitle ξtitle "�") )
          (βid (if ξid ξid (new-atom-id-tag) ) )
          (βsummery (if ξsummery ξsummery "�") )
-         (βcontent (if ξcontentHTML-text (format "<content type=\"xhtml\">
-<div xmlns=\"http://www.w3.org/1999/xhtml\">
+         (βcontent (if ξcontentHTML-text (format " <content type=\"xhtml\">
+ <div xmlns=\"http://www.w3.org/1999/xhtml\">
 %s
-</div>
-</content>" ξcontentHTML-text)
+ </div>
+ </content>" ξcontentHTML-text)
   "") )
          (βupdatedStr (current-date-time-string))
          (βaltLink (if altLinkUrl altLinkUrl (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
