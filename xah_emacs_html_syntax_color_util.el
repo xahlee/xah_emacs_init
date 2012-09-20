@@ -50,6 +50,7 @@ This function requries the `htmlize-buffer' from 〔htmlize.el〕 by Hrvoje Niks
                       ("elisp" . "emacs-lisp-mode")
                       ("haskell" . "haskell-mode")
                       ("html" . "html-mode")
+                      ("mysql" . "sql-mode")
                       ("xml" . "sgml-mode")
                       ("html6" . "html6-mode")
                       ("java" . "java-mode")

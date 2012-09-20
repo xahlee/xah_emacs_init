@@ -14,6 +14,7 @@
 
 (require 'dired-x)
 
+(setenv "PS1" "\\e[0;32m◆\\u@\\H \\D{%Y-%m-%d} \\A\\e[0;30m\\w\\n")
 
 (add-to-list 'auto-mode-alist '("\\.htaccess\\'" . shell-script-mode))
 

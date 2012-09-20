@@ -117,7 +117,8 @@ This function depends on `xahsite-server-root-path'."
 e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「emacs/xyz.html」"
   (let ((case-fold-search nil))
-    (string-match (format "\\`%s[^/]+?/\\(.+\\)" (regexp-quote (xahsite-server-root-path))) fPath)
+    (string-match (format "\\`%s[^/]+?/\\(.+\\)" (regexp-quote (xahsite-server-root-path)))
+                  (replace-regexp-in-string "\\`C:/" "c:/" fPath  "FIXEDCASE" "LITERAL") )
     (match-string 1 fPath) ) )
 
 (defun xahsite-filepath-to-url (webpath)
@@ -141,7 +142,7 @@ For reverse, see `xahsite-href-value-to-filepath'.
 "
   (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path linkFilePath) (xahsite-get-domain-of-local-file-path currentFilePathOrDir))) )
     (if sameDomain-p
-        (progn (file-relative-name linkFilePath (file-name-directory currentFilePathOrDir)  ) )
+        (progn (file-relative-name-emacs24.1.1-fix linkFilePath (file-name-directory currentFilePathOrDir) ) )
       (progn (xahsite-filepath-to-url linkFilePath) ) ) ) )
 ;; test
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/xahlee_org/arts/blog.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html")
@@ -390,14 +391,15 @@ For example, the following string shown in browser URL field:
 "
   (let ((case-fold-search nil))
     (replace-regexp-pairs-in-string localFileURL
-                                    [
-                                     ["\\`file://localhost" ""]
-                                     ["\\`file://" ""]
-                                     ["\\`/\\([A-Za-z]\\):" "\\1:"]          ; Windows C:\\
-                                     ["\\\\" "/"]                          ; Windows \ → /
-                                     ]
-                                    "FIXEDCASE"
-                                    ))
+ [
+  ["\\`file://localhost" ""]
+  ["\\`file://" ""]
+  ["\\`/\\([A-Za-z]\\):" "\\1:"]          ; Windows C:\\
+  ["\\`C:" "c:"] ; need because a bug in `file-relative-name', it doesn't work when path C: is cap
+  ["\\\\" "/"]                          ; Windows \ → /
+  ]
+ "FIXEDCASE"
+ ))
   )
 
 (defun windows-style-path-to-unix  (fpath)

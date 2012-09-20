@@ -23,7 +23,7 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
          (ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
-         (ξffp (local-url-to-file-path (expand-file-name ξinputPath ξcurrentDir ))) ;full path
+         (ξffp (expand-file-name (local-url-to-file-path ξinputPath) ξcurrentDir ) ) ;full path
           ;; (setq ξffp (windows-style-path-to-unix (local-url-to-file-path ξffp)))
          ξwidthHeight ξwidth ξheight altText
          )

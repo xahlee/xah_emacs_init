@@ -180,7 +180,7 @@ input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
            ((string-match "\\`xahsl\\.org" inputStr ) (concat "http://" inputStr))
            (t inputStr) ) )
 
-    (if (string-match-p "\\`http://" ξs)
+    (if (string-match-p "\\`https*://" ξs)
         (if (xahsite-url-is-xah-website-p ξs)
             (find-file (xahsite-url-to-filepath ξs "addFileName" "ξredirect"))
           (browse-url ξs)
@@ -286,7 +286,7 @@ See also: `copy-to-register-1', `insert-register'."
                  (copy-file ξfromPath ξtoPath "OK-IF-ALREADY-EXISTS")
                  (message "wrote to 「%s」." ξtoPath)
                  )
-             (progn (error "program logic error when processing 「%s」" ξtoPath))
+             (progn (error "logic error. The file 「%s」 doesn't exist, it should already." ξtoPath))
              )
            )
          ) ) (xahsite-domain-names))
@@ -463,7 +463,7 @@ Requires ImageMagick shell tool."
            (setq grayscale-p (yes-or-no-p "Grayscale?"))
            (read-string "Bits per pixel (1 2 4 8):" "4")) ) )
   (process-image fileList
-                 (format "%s -depth %s"
+                 (format "+dither %s -depth %s"
                          (if grayscale-p "-type grayscale" "")
                          ;; image magick “-colors” must be at least 8
                          ;; (if (< (string-to-number bitsPerPixel) 3)

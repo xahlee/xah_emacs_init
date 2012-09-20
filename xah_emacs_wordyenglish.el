@@ -19,8 +19,10 @@
 
   (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/new.html") )
   (goto-char 1)
-  (re-search-forward "<div class=\"δdate\">" nil t)
-  (beginning-of-line)
+  (re-search-forward
+"<!-- c:/Users/h3/web/wordyenglish_com/lit/blog.html -->"
+nil t)
+(insert "\n\n")
   (xwe-insert-word-entry)
 )
 

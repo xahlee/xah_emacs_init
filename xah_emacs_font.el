@@ -55,7 +55,7 @@ Warning: tested on Windows 7 and Vista only."
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
   (let (fontList fontToUse stateBefore stateAfter )
     (setq fontList (list
- "Courier New-10" "DejaVu Sans Mono-9" "Lucida Console-10"
+ "Courier New-10" "DejaVu Sans Mono-9" "Lucida Console-10" "Segoe UI Symbol-12"
  "DejaVu Sans-10" "Lucida Sans Unicode-10" "Arial Unicode MS-10"
                     ))
     (setq stateBefore (if (get 'cycle-font 'state) (get 'cycle-font 'state) 0))

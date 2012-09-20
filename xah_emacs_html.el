@@ -288,10 +288,10 @@ Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
     (setq inputStr (buffer-substring-no-properties p1 p2))
 
     (setq replaceList [
-
+ ;; case in find string shouldn't matter.
 ["Ctrl" "<kbd>Ctrl</kbd>"]
 ["Alt" "<kbd>Alt</kbd>"]
-["Shift" "<kbd>Shift</kbd>"]
+["Shift" "<kbd>⇧ Shift</kbd>"]
 ["Cmd" "<kbd>⌘ Cmd</kbd>"]
 ["Option" "<kbd>⌥ Opt</kbd>"]
 ["Opt" "<kbd>⌥ Opt</kbd>"]
@@ -299,17 +299,20 @@ Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
 ["App" "<kbd>Menu</kbd>"]
 ["Menu" "<kbd>Menu</kbd>"]
 ["Meta" "<kbd>Meta</kbd>"]
+["super" "<kbd>Super</kbd>"]
 
-["Return" "<kbd>Return</kbd>"]
-["Enter" "<kbd>Enter</kbd>"]
+["Return" "<kbd>Return ↩</kbd>"]
+["Enter" "<kbd>Enter ↵</kbd>"]
 ["Backspace" "<kbd>⌫ Backspace</kbd>"]
+["delete" "<kbd>⌦ Delete</kbd>"]
 ["Del" "<kbd>⌦ Delete</kbd>"]
+["del" "<kbd>⌦ Delete</kbd>"]
 ["Space" "<kbd>Space</kbd>"]
 ["CapLock" "<kbd>Caps Lock</kbd>"]
 ["Caps Lock" "<kbd>Caps Lock</kbd>"]
 ["CapsLock" "<kbd>Caps Lock</kbd>"]
 ["numlock" "<kbd>Num Lock</kbd>"]
-["Tab" "<kbd>Tab</kbd>"]
+["Tab" "<kbd>Tab ⇆</kbd>"]
 ["Esc" "<kbd>Esc</kbd>"]
 
 ["F10" "<kbd>F10</kbd>"]
@@ -334,8 +337,8 @@ Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
 ["End" "<kbd>End</kbd>"]
 ["PageUp" "<kbd>PageUp</kbd>"]
 ["PageDown" "<kbd>PageDown</kbd>"]
-["delete" "<kbd>Delete</kbd>"]
-["del" "<kbd>Delete</kbd>"]
+["insert" "<kbd>Insert</kbd>"]
+["ins" "<kbd>Insert</kbd>"]
 
 ["pgdn" "<kbd>PageDown</kbd>"]
 ["pgup" "<kbd>PageUp</kbd>"]
