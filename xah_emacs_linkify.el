@@ -243,6 +243,7 @@ If there's a text selection, use the text selection as input.
 Example: http://example.com/xyz.htm
 becomes
 <a class=\"sorc\" href=\"http://example.com/xyz.htm\" title=\"accessed:2008-12-25\">Source example.com</a>
+<a class=\"sorc\" href=\"http://example.com/xyz.htm\" data-accessed=\"2008-12-25\">Source example.com</a>
 
 The anchor text may be of 4 possibilities, depending on value of `universal-argument'.
 
@@ -317,7 +318,7 @@ The anchor text may be of 4 possibilities, depending on value of `universal-argu
 
     (setq ξurl (replace-regexp-in-string "&" "&amp;" ξurl))
     (setq resultLinkStr
-          (format "<a class=\"sorc\" href=\"%s\" title=\"accessed:%s\">%s</a>"
+          (format "<a class=\"sorc\" href=\"%s\" data-accessed=\"%s\">%s</a>"
                   ξurl (format-time-string "%Y-%m-%d") linkText
                   )
           )
@@ -332,11 +333,11 @@ The anchor text may be of 4 possibilities, depending on value of `universal-argu
   "Make the html link under cursor to a defunct form.
 Example:
 If cursor is inside this tag
-<a class=\"sorc\" href=\"http://example.com/\" title=\"accessed:2008-12-26\">…</a>
+<a class=\"sorc\" href=\"http://example.com/\" data-accessed=\"2008-12-26\">…</a>
  (and inside the opening tag.)
 
 It becomes:
-<span class=\"sorcdd\" title=\"accessed:2008-12-26; defunct:2008-12-26; http://example.com\">…</span>"
+<s class=\"deadurl\" title=\"accessed:2008-12-26; defunct:2008-12-26; http://example.com\">…</s>"
   (interactive)
   (let (p1 p2 wholeLinkStr newLinkStr ξurl titleStr)
     (save-excursion
@@ -356,10 +357,10 @@ It becomes:
         (search-forward-regexp  "href=\"\\([^\"]+?\\)\"")
         (setq ξurl (match-string 1))
 
-        (search-forward-regexp  "title=\"\\([^\"]+?\\)\"")
+        (search-forward-regexp  "data-accessed=\"\\([^\"]+?\\)\"")
         (setq titleStr (match-string 1))
 
-        (setq newLinkStr (format "<s class=\"deadurl\" title=\"%s; defunct:%s\">%s</s>" titleStr (format-time-string "%Y-%m-%d") ξurl ) )))
+        (setq newLinkStr (format "<s class=\"deadurl\" title=\"accessed:%s; defunct:%s\">%s</s>" titleStr (format-time-string "%Y-%m-%d") ξurl ) )))
 
     (delete-region p1 p2)
     (insert newLinkStr)))

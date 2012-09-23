@@ -82,7 +82,7 @@ If the file is emacs lisp, run the byte compiled version if appropriate."
     ;; a keyed list of file suffix to comand-line program path/name
     (setq suffixMap 
           '(
-            ("php" . "c:/Users/h3/apps/php-5.4.6-nts-Win32-VC9-x86/php.exe")
+            ("php" . "php")
             ("pl" . "perl")
             ("py" . "python")
             ("rb" . "ruby")
