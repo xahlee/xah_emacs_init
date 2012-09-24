@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8 -*-
-;; 2007-06, 2012-04-06
+;; 2007-06, 2012-09-24
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 
 
@@ -52,6 +52,7 @@ interactively by “eval-buffer”."
         (myPathList
          [
            "C:/Python27"
+           "C:/Users/h3/apps/php-5.4.6-nts-Win32-VC9-x86/"
            ;; "C:/Python32"
            "C:/strawberry/c/bin"
            "C:/strawberry/perl/site/bin"
