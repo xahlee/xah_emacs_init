@@ -34,6 +34,7 @@
 (defalias '8c 'xwe-add-comment)
 
 (defalias 'c 'xah-cite)
+(defalias 'iphp 'insert-php-tag)
 
 (defalias 'dsc 'delete-secondlife-cache)
 

@@ -295,7 +295,7 @@ Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
 ["Cmd" "<kbd>⌘ Cmd</kbd>"]
 ["Option" "<kbd>⌥ Opt</kbd>"]
 ["Opt" "<kbd>⌥ Opt</kbd>"]
-["Win" "<kbd>Win</kbd>"]
+["Win" "<kbd>❖ Win</kbd>"]
 ["App" "<kbd>Menu</kbd>"]
 ["Menu" "<kbd>Menu</kbd>"]
 ["Meta" "<kbd>Meta</kbd>"]

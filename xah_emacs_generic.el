@@ -29,6 +29,7 @@ If no file is associated, just close buffer without prompt for save."
     (kill-buffer (current-buffer))
     ) )
 
+
 (defun make-backup ()
   "Make a backup copy of current buffer's file.
 Create a backup of current buffer's file.
@@ -36,12 +37,12 @@ The new file name is the old file name with “~” appended, in the same dir.
 If such a file already exist, append more “~”.
 If the current buffer is not associated with a file, its a error."
   (interactive)
-  (let ((cFile (buffer-file-name)) backupFileName)
-    (setq backupFileName (concat cFile "~"))
+  (let ((currentFileName (buffer-file-name)) backupFileName)
+    (setq backupFileName (concat currentFileName "~"))
     (while (file-exists-p backupFileName)
       (setq backupFileName (concat backupFileName "~"))
       )
-    (copy-file cFile backupFileName t)
+    (copy-file currentFileName backupFileName t)
     (message (concat "Backup saved as: " (file-name-nondirectory backupFileName)))
     )
   )

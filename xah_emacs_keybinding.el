@@ -98,12 +98,12 @@
 (global-set-key (kbd "<f7> <f7> o") 'org-mode)
 (global-set-key (kbd "<f7> <f7> t") 'text-mode)
 
-(global-set-key (kbd "<f7> <f8> 1") 'insert-random-number)
-(global-set-key (kbd "<f7> <f8> 2") 'insert-random-string)
-(global-set-key (kbd "<f7> <f8> 3") 'insert-random-hex)
-(global-set-key (kbd "<f7> <f8> 4") 'insert-random-uuid)
-(global-set-key (kbd "<f7> <f8> 7") 'insert-date)
-(global-set-key (kbd "<f7> <f8> 8") 'insert-date-time)
+(global-set-key (kbd "<f7> i 1") 'insert-random-number)
+(global-set-key (kbd "<f7> i 2") 'insert-random-string)
+(global-set-key (kbd "<f7> i 3") 'insert-random-hex)
+(global-set-key (kbd "<f7> i 4") 'insert-random-uuid)
+(global-set-key (kbd "<f7> i d") 'insert-date)
+(global-set-key (kbd "<f7> i t") 'insert-date-time)
 
 
 (global-set-key (kbd "C-3") 'copy-to-register-1)
