@@ -76,17 +76,20 @@
 ;; § ----------------------------------------
 ;; default frame
 
-(setq initial-frame-alist '((width . 100) (height . 54)))
+(when (string-equal system-type "windows-nt") 
+  (setq initial-frame-alist '((width . 100) (height . 54)))
+  (setq default-frame-alist
+        '((menu-bar-lines . 1)
+          (left-fringe)
+          (right-fringe)
+          (tool-bar-lines . 0)
+          (width . 100)
+          (height . 52)
+          ))
 
-(setq default-frame-alist
-      '((menu-bar-lines . 1)
-        (left-fringe)
-        (right-fringe)
-        (tool-bar-lines . 0)
-        (width . 100)
-        (height . 52)
-        ))
-
+    (set-frame-parameter nil 'font "DejaVu Sans Mono-10")
+  )
+ 
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
 
 
