@@ -163,22 +163,24 @@ If the path is url (starting with “http://”), and if it's xah site, visite t
 input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported."
   (interactive)
   (let (
-        (inputStr (elt (get-selection-or-unit 'filepath) 0))
-        ξs fPath )
+        (ξs (elt (get-selection-or-unit 'filepath) 0))
+         fPath )
+
+    (setq ξs (remove-uri-fragment ξs))
 
     ;; convenience. if the input string start with a xah domain name, make it a url string
     (setq ξs
           (cond
-           ((string-match "\\`//" inputStr ) (concat "http:" inputStr)) ; relative http protocal, used in css
-           ((string-match "\\`ergoemacs\\.org" inputStr ) (concat "http://" inputStr))
-           ((string-match "\\`wordyenglish\\.com" inputStr ) (concat "http://" inputStr))
-           ((string-match "\\`xaharts\\.org" inputStr ) (concat "http://" inputStr))
-           ((string-match "\\`xahlee\\.info" inputStr ) (concat "http://" inputStr))
-           ((string-match "\\`xahlee\\.org" inputStr ) (concat "http://" inputStr))
-           ((string-match "\\`xahmusic\\.org" inputStr ) (concat "http://" inputStr))
-           ((string-match "\\`xahporn\\.org" inputStr ) (concat "http://" inputStr))
-           ((string-match "\\`xahsl\\.org" inputStr ) (concat "http://" inputStr))
-           (t inputStr) ) )
+           ((string-match "\\`//" ξs ) (concat "http:" ξs)) ; relative http protocal, used in css
+           ((string-match "\\`ergoemacs\\.org" ξs ) (concat "http://" ξs))
+           ((string-match "\\`wordyenglish\\.com" ξs ) (concat "http://" ξs))
+           ((string-match "\\`xaharts\\.org" ξs ) (concat "http://" ξs))
+           ((string-match "\\`xahlee\\.info" ξs ) (concat "http://" ξs))
+           ((string-match "\\`xahlee\\.org" ξs ) (concat "http://" ξs))
+           ((string-match "\\`xahmusic\\.org" ξs ) (concat "http://" ξs))
+           ((string-match "\\`xahporn\\.org" ξs ) (concat "http://" ξs))
+           ((string-match "\\`xahsl\\.org" ξs ) (concat "http://" ξs))
+           (t ξs) ) )
 
     (if (string-match-p "\\`https*://" ξs)
         (if (xahsite-url-is-xah-website-p ξs)
@@ -200,7 +202,7 @@ The clipboard should contain a file path or url to xah site. Open that file in e
     (if (string-match-p "\\`http://" ξs)
         (find-file (xahsite-url-to-filepath ξs "addFileName" "ξredirect"))
       (progn ; not starting “http://”
-        (find-file (xahsite-web-path-to-filepath ξs default-directory)) ) ) ))
+        (find-file (xahsite-web-path-to-filepath (remove-uri-fragment ξs) default-directory)) ) ) ))
 
 (defun xah-browse-url-at-point ()
 "Switch to web browser and load the URL at point.

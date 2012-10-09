@@ -171,7 +171,7 @@ See also: `xahsite-url-to-filepath'
 If the optional argument addFileName is true, then append “index.html” if the resulting path is a dir.
 If the optional argument ξredirect is true, then also consider result of http redirect.
 
-This function does not check input is actually a file path, nor if the result path file exists."
+This function does not check input is actually a URL, nor if the result path file exists."
  ;; test cases:
  ;; (xahsite-url-to-filepath "http://xahlee.org/index.html") ; ⇒ "c:/Users/h3/web/xahlee_org/index.html"
  ;; (xahsite-url-to-filepath "http://xahlee.org/") ; ⇒ "c:/Users/h3/web/http://xahlee.org/index.html"
@@ -179,10 +179,10 @@ This function does not check input is actually a file path, nor if the result pa
  ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
 
   (let ((ξurl xahsiteURL) ξfPath)
-    (setq ξurl (replace-regexp-in-string "#.+\\'" "" ξurl)) ; remove html fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
+    (setq ξurl (remove-uri-fragment ξurl)) ; remove html fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
     (when ξredirect (setq ξurl (xahsite-url-remap ξurl)))
     (when addFileName (setq ξurl (replace-regexp-in-string "/\\'" "/index.html" ξurl)))
-    ;; (replace-regexp-in-string "%27" "'" (replace-regexp-in-string "#.+$" "" ξurl))
+    ;; (replace-regexp-in-string "%27" "'" (remove-uri-fragment ξurl))
 
     (setq ξfPath
           (format "%s%s" (xahsite-server-root-path)
@@ -325,6 +325,20 @@ This function is not complete. i.e. it not contain complete url redirects as spe
     ξs
     ) )
 
+(defun remove-uri-fragment ( ξhref-value)
+  "remove URL ξhref-value fragment, anything after first 「#」 char, including it.
+See also `split-uri-hashmark'"
+  ;; test
+  ;; (remove-uri-fragment "a#b") ; "a"
+  ;; (remove-uri-fragment "#3")  ; ""
+  ;; (remove-uri-fragment "4")  ; "4"
+  ;; (remove-uri-fragment "#")   ; "" 
+  ;; (remove-uri-fragment "")  ; ""
+  (let ((ξx (string-match-p "#" ξhref-value )) )
+    (if ξx
+        (substring ξhref-value 0 ξx)
+      ξhref-value ) ) )
+
 (defun split-uri-hashmark ( ξhref-value)
   "Split a URL ξhref-value by 「#」 char, return a vector.
 e.g. x/y.html#z ⇒ {x/y.html, #z}
@@ -333,7 +347,9 @@ Examples:
  “a#b” ⇒ “a” “#b”
  “#” ⇒ “” “#”
  “#3” ⇒ “” “#3”
- “3#” ⇒ “3” “#”"
+ “3#” ⇒ “3” “#”
+
+See also: `remove-uri-fragment'"
   ;; test
   ;; (split-uri-hashmark "a#b") ; ["a" "#b"]
   ;; (split-uri-hashmark "#3")  ; ["" "#3"]
