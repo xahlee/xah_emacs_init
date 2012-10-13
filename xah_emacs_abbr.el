@@ -108,6 +108,7 @@
     ("8db" "database")
     ("8oop" "object oriented programing")
 
+    ("8line" "────────── ────────── ────────── ────────── ──────────")
     ("8utf8" "-*- coding: utf-8 -*-")
     ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 

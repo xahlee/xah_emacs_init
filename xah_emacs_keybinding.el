@@ -28,6 +28,8 @@
 ;; in linux, <lwindow> is Super 「s」,  while the menu key is 「<menu>」
 (global-set-key (kbd "<lwindow>") 'set-mark-command)
 
+(define-key global-map (kbd "<escape>") 'keyboard-escape-quit)
+
 (global-set-key (kbd "C-7") 'select-text-in-quote)
 (global-set-key (kbd "C-8") 'extend-selection)
 
@@ -141,7 +143,7 @@
 (global-set-key (kbd "<kp-7> <kp-2>") (lambda () "" (interactive) (find-file "~/web/xahlee_info/comp/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-3>") (lambda () "" (interactive) (find-file "~/web/ergoemacs_org/emacs/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-4>") (lambda () "" (interactive) (find-file "~/Dropbox/twitter tweets.txt")))
-(global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "c:/Users/h3/.emacs.d/xah_emacs_init/xah_emacs_keybinding.el")))
+(global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
 
 (global-set-key (kbd "<kp-7> <kp-6>") 'open-in-desktop)
 (global-set-key (kbd "<kp-7> <kp-7>") 'ibuffer)

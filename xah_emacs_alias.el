@@ -6,6 +6,7 @@
 
 ; shortening of often used commands
 (defalias 'o 'occur)
+(defalias 'm 'man)
 (defalias 'd 'delete-matching-lines)
 (defalias 'fd 'find-dired)
 (defalias 'gf 'grep-find)
@@ -13,12 +14,8 @@
 (defalias 'rb 'revert-buffer)
 (defalias 'rs 'replace-string)
 (defalias 'sl 'sort-lines)
-(defalias 'tww 'toggle-word-wrap)
 
 (defalias 'ssm 'shell-script-mode)
-(defalias 'hm 'html-mode)
-
-(defalias 'lp 'list-packages)
 
 (defalias 'tc 'toggle-case-fold-search)
 (defalias 'hp 'highlight-phrase)
@@ -34,26 +31,9 @@
 (defalias '8c 'xwe-add-comment)
 
 (defalias 'c 'xah-cite)
-(defalias 'iphp 'insert-php-tag)
-
-(defalias 'dsc 'delete-secondlife-cache)
+(defalias 'ip 'insert-php-tag)
 
 (defalias 'ft 'fix-timestamp)
 (defalias 'wc 'count-words-region-or-line)
 ;; (defalias 'cp 'copy-to-register-1)
 ;; (defalias 'pt 'insert-register-content-1)
-
-
-
-
-(defun i1 ()
-  "Set input method to chinese-py."
-  (interactive)
-  (set-input-method 'chinese-py)
-)
-
-(defun i2 ()
-  "Set input method to chinese-py-b5."
-  (interactive)
-  (set-input-method 'chinese-py-b5)
-)
