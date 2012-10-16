@@ -89,9 +89,7 @@
 (define-key key-translation-map (kbd "C-2 =") (kbd "≈"))  ; ALMOST EQUAL TO
 
 (define-key key-translation-map (kbd "C-2 &") (kbd "＆")) ; full width ampersand
-(define-key key-translation-map (kbd "C-2 |") (kbd "│")) ; BOX DRAWINGS LIGHT VERTICAL
 (define-key key-translation-map (kbd "C-2 -") (kbd "—")) ; EM DASH
-(define-key key-translation-map (kbd "C-2 _") (kbd "─")) ; BOX DRAWINGS LIGHT HORIZONTAL
 (define-key key-translation-map (kbd "C-2 SPC") (kbd " ")) ; NO-BREAK SPACE
 
 (define-key key-translation-map (kbd "C-2 .") (kbd "…")) ; HORIZONTAL ELLIPSIS
