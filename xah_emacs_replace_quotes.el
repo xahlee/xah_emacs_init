@@ -252,6 +252,12 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
   (curly-quotes-to-bracket "<code>" "</code>")
 )
 
+(defun curly-quotes-to-html-strong-tag ()
+  "Replace 「“…”」 to 「<strong>…</strong>」"
+  (interactive)
+  (curly-quotes-to-bracket "<strong>" "</strong>")
+)
+
 (defun curly-quotes-to-elisp-function-bracket ()
   "Replace “…” to ｢…｣"
   (interactive)

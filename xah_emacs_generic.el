@@ -73,10 +73,9 @@ then it'll call “perl x.pl” in a shell.
 The file can be php, perl, python, ruby, javascript, bash, ocaml, vb, elisp.
 File suffix is used to determine what program to run.
 
-If the file is modified, ask if you want to save first.
- (This command always run the saved version.)
+If the file is modified, ask if you want to save first. (This command always run the saved version.)
 
-If the file is emacs lisp, run the byte compiled version if appropriate."
+If the file is emacs lisp, run the byte compiled version if exist."
   (interactive)
   (let (suffixMap fName fSuffix progName cmdStr)
 
@@ -91,7 +90,7 @@ If the file is emacs lisp, run the byte compiled version if appropriate."
             ("sh" . "bash")
             ("ml" . "ocaml")
             ("vbs" . "cscript")
-                                        ;            ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
+            ;; ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
             )
           )
 

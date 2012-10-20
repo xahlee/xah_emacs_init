@@ -482,8 +482,8 @@ combowords-4.html”"
 (defun xah-update-page-tag ()
   "Update html page navigation tags.
 
-The input is a block or text selection.
-Each line should a file name
+The input is a text block or text selection.
+Each line should a file name/path (can be relative path)
 Update each file's page navigation tag.
 
 Each file name is a file path without dir, and relative to current dir.
@@ -504,7 +504,7 @@ combowords-4.html
     (delete-region p1 p2)
 
     ;; generate the page nav string
-    (setq pageNavStr "<div id=\"pnavbar\">\n")
+    (setq pageNavStr "<div id=\"page-nb\">\n")
     (let (linkPath fTitle (ξi 0) )
       (while (< ξi (length fileList))
         (setq linkPath (elt fileList ξi) )
@@ -522,9 +522,10 @@ combowords-4.html
        (find-file thisFile)
        (goto-char (point-min))
 
-       (if (search-forward "<div id=\"pnavbar\">" nil t)
+       (if
+ (search-forward "<div id=\"page-nb\">" nil t)
            (let (p3 p4 )
-             (backward-char 18)
+             (search-backward "<div")
              (setq p3 (point))
              (sgml-skip-tag-forward 1)
              (setq p4 (point))
@@ -533,9 +534,9 @@ combowords-4.html
              )
          (progn
            (search-forward "<script><!--
-amazon_ad_tag")
+google_ad_client")
            (progn
-             (backward-char 26)
+             (search-backward "<script>")
              (insert pageNavStr "\n\n")
              ) ) )
 
