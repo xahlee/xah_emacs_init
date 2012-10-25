@@ -3,7 +3,6 @@
 ;; Xah Lee
 ;; 2007-06, …, 2011-12-20
 ;; ∑ http://xahlee.org/
-;;  http://ergoemacs.org/emacs/xah_emacs_alias.el
 
 ; load my abbreviations file
 ;(read-abbrev-file "emacs_abbrev")

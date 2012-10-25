@@ -2,7 +2,6 @@
 ;; emacs customization for command aliases
 ;; 
 ;; Xah Lee ; 2007-06
-;;  http://ergoemacs.org/emacs/xah_emacs_abbr.el
 
 ; shortening of often used commands
 (defalias 'o 'occur)

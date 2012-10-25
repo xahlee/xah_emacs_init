@@ -1,7 +1,5 @@
 ;; -*- coding: utf-8 -*-
 ;; mouse keybinding.
-;; • http://ergoemacs.org/emacs/xah_emacs_mouse_binding.el
-;; • http://ergoemacs.org/emacs/xah_emacs_keybinding.el
 ;; Xah Lee
 ;; created: 2011-11-13
 
@@ -10,7 +8,7 @@
 ;; mouse
 
 ;; emacs mouse numbering changes depending on {OS, mouse, driver}.
-;; http://xahlee.org/kbd/X11_mouse_button_numbering.html
+;; http://xahlee.info/kbd/X11_mouse_button_numbering.html
 
 ;; set the “forward button” (5th button) to close.
 (cond
