@@ -86,10 +86,10 @@
           (width . 100)
           (height . 52)
           ))
-
-  (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
-  ;; (set-frame-parameter nil 'font "DejaVu Sans Mono-10")
   )
+
+(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
+;; (set-frame-parameter nil 'font "DejaVu Sans Mono-10")
  
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
 
