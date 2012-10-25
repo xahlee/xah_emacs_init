@@ -1,6 +1,5 @@
 ;;-*- coding: utf-8 -*-
 ;; emacs customization.
-;; • http://ergoemacs.org/emacs/xah_emacs_unicode_input.el
 ;; • 〈Emacs Unicode Math Symbols Input Mode (xmsi-mode)〉 http://ergoemacs.org/emacs/xmsi-math-symbols-input.html
 
 ;; Xah Lee

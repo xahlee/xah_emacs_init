@@ -2,9 +2,6 @@
 ;; emacs customization for setting up hyper and super keys
 ;; 〈Emacs: How to define Hyper ＆ Super Keys〉 http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
 ;; 〈Emacs: Remapping Keys Using key-translation-map〉 http://ergoemacs.org/emacs/emacs_key-translation-map.html
-;; • http://ergoemacs.org/emacs/xah_emacs_keybinding.el
-;; • http://ergoemacs.org/emacs/xah_emacs_unicode_input.el
-;; • http://ergoemacs.org/emacs/xah_emacs_hyper_super_setup.el
 
 ;; Xah Lee
 ;; 2011-05
