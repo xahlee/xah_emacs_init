@@ -598,3 +598,47 @@ When cursor is in HTML link file path, e.g.  <img src=\"gki/macosxlogo.png\" > a
         )
       )
     ))
+
+
+(defun compact-uncompact-block-chinese ()
+  "Remove or add line ending chars on current paragraph.
+This command is similar to a toggle of `fill-paragraph'.
+When there is a text selection, act on the region."
+  (interactive)
+
+  ;; This command symbol has a property “'stateIsCompact-p”.
+  (let (currentStateIsCompact (bigFillColumnVal 4333999) (deactivate-mark nil))
+
+    (save-excursion
+      ;; Determine whether the text is currently compact.
+      (setq currentStateIsCompact
+            (if (eq last-command this-command)
+                (get this-command 'stateIsCompact-p)
+              (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil) ) )
+
+      (if (region-active-p)
+          (if currentStateIsCompact
+              (fill-region (region-beginning) (region-end))
+            (save-restriction 
+                (narrow-to-region (region-beginning) (region-end))
+                (goto-char (point-min))
+                (while (search-forward "\n" nil t) (replace-match "" nil t)) ) )
+        (if currentStateIsCompact
+            (fill-paragraph nil)
+          (let (p1 p2) ; p1 and p2 are beginning/end of text block
+            (progn
+              (if (re-search-backward "\n[ \t]*\n" nil "move")
+                  (progn (re-search-forward "\n[ \t]*\n")
+                         (setq p1 (point) ) )
+                (setq p1 (point) )
+                )
+              (if (re-search-forward "\n[ \t]*\n" nil "move")
+                  (progn (re-search-backward "\n[ \t]*\n")
+                         (setq p2 (point) ))
+                (setq p2 (point) ) ) )
+            (save-restriction 
+              (narrow-to-region p1 p2)
+              (goto-char (point-min))
+              (while (search-forward "\n" nil t) (replace-match "" nil t)) )) ) )
+
+      (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )

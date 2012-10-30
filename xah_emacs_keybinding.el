@@ -28,7 +28,7 @@
 ;; in linux, <lwindow> is Super 「s」,  while the menu key is 「<menu>」
 (global-set-key (kbd "<lwindow>") 'set-mark-command)
 
-(define-key global-map (kbd "<escape>") 'keyboard-escape-quit)
+(define-key global-map (kbd "<escape>") 'keyboard-quit)
 
 (global-set-key (kbd "C-7") 'select-text-in-quote)
 (global-set-key (kbd "C-8") 'extend-selection)

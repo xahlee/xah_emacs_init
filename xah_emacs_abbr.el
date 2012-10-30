@@ -44,7 +44,7 @@
     ("8qt" "QuickTime")
     ("8it" "IntelliType")
     ("8msw" "Microsoft Windows")
-    ("8win" "Windows")
+    ("8win" "window")
     ("8ie" "Internet Explorer")
     ("8yt" "YouTube")
     ("8g" "Google")
