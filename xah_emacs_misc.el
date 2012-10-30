@@ -601,7 +601,8 @@ When cursor is in HTML link file path, e.g.  <img src=\"gki/macosxlogo.png\" > a
 
 
 (defun compact-uncompact-block-chinese ()
-  "Remove or add line ending chars on current paragraph.
+  "Remove or add line ending chars on current text block.
+ (text block is delimited by line endings; similar to a paragraph)
 This command is similar to a toggle of `fill-paragraph'.
 When there is a text selection, act on the region."
   (interactive)
