@@ -11,17 +11,19 @@
 ;; § ----------------------------------------
 
 (defun i1 ()
-  "Set input method to chinese-py."
-  (interactive)
-  (set-input-method 'chinese-py)
-)
-
-(defun i2 ()
   "Set input method to chinese-py-b5."
   (interactive)
-  (set-input-method 'chinese-py-b5)
-)
+  (set-input-method 'chinese-py) )
 
+(defun i2 ()
+  "Set input method to chinese-py."
+  (interactive)
+  (set-input-method 'chinese-tonepy-punct) )
+
+(defun i3 ()
+  "Set input method to chinese-py-b5."
+  (interactive)
+  (set-input-method 'chinese-py-b5) )
 
 (defun browse-url-of-buffer-with-firefox ()
   "Same as `browse-url-of-buffer' but using Firefox.

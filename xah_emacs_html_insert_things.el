@@ -110,9 +110,11 @@ English translation: 李杀 (Xah Lee)
 )
 
 (defun insert-section-break ()
-  "Insert a fiction style section separator “* * *”."
+  "Insert a old style section separator asterism."
   (interactive)
-  (insert "<p class=\"sb\"><span class=\"sb\">✻    ✻    ✻</span></p>"))
+  ;; (insert "<p class=\"sb\"><span class=\"sb\">✻    ✻    ✻</span></p>")
+  (insert "<p><span class=\"b1\">⁂</span></p>")
+)
 
 
 ;; § ----------------------------------------

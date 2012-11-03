@@ -81,6 +81,7 @@ Other files paths for blogs are:
 ~/web/xahlee_info/js/blog.html
 ~/web/xahlee_info/math/blog.html
 ~/web/wordyenglish_com/lit/blog.html
+~/web/wordyenglish_com/chinese/blog.html
 ~/web/xahlee_org/Periodic_dosage_dir/pd.html
 ~/web/xahlee_org/arts/blog.html
 ~/web/xahlee_org/blender/blog.html

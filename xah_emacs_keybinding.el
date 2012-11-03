@@ -146,8 +146,8 @@
 (global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
 
 (global-set-key (kbd "<kp-7> <kp-6>") 'open-in-desktop)
-(global-set-key (kbd "<kp-7> <kp-7>") 'ibuffer)
-(global-set-key (kbd "<kp-7> <kp-8>") 'bookmark-bmenu-list)
+(global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
+(global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)
 (global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
 
 (global-set-key (kbd "<kp-9>") 'isearch-forward)

@@ -98,22 +98,20 @@ The string replaced are:
     (replace-pairs-region p1 p2 '( ["&" "＆"] ["<" "‹"] [">" "›"] ) ) ) )
 
 (defun to-chinese-punctuation (p1 p2)
-  "Replace straight english command and period to Chinese version.
+  "Replace English punctuation to Chinese version.
 When called interactively, do current text block (paragraph) or text selection.
-In lisp code p1 p2 are region."
+When called in lisp code, p1 p2 are region end points."
   (interactive
    (let ( (bds (get-selection-or-unit 'block)))
      (list (elt bds 1) (elt bds 2) ) ) )
-  (save-restriction 
-      (narrow-to-region p1 p2)
-      ;; dash and ellipsis etc
-      (replace-pairs-region (point-min) (point-max)
-                            [
-                             [". " "。"]
-                             [", " "，"]
-                             ["," "，"]
-                             ])
-      ))
+  (replace-pairs-region p1 p2
+                        [
+                         [". " "。"]
+                         [", " "，"]
+                         ["," "，"]
+                         [".</" "。</"]
+                         [".\n" "。\n"]
+                         ]))
 
 (defun replace-straight-quotes (p1 p2)
   "Replace straight double quotes to curly ones, and others.
