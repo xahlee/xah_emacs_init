@@ -109,6 +109,7 @@ When called in lisp code, p1 p2 are region end points."
                          [". " "。"]
                          [", " "，"]
                          ["," "，"]
+                         [": " "："]
                          [".</" "。</"]
                          [".\n" "。\n"]
                          ]))

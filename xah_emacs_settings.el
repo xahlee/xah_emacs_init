@@ -71,6 +71,7 @@
 (set-default-coding-systems 'utf-8-unix)
 
 (set-background-color "honeydew")
+(setq inhibit-splash-screen t)
 
 
 ;; § ----------------------------------------

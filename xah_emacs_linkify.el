@@ -23,7 +23,7 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
          (ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
-         (ξffp (expand-file-name (local-url-to-file-path ξinputPath) ξcurrentDir ) ) ;full path
+         (ξffp (expand-file-name (xahsite-web-path-to-filepath ξinputPath) ξcurrentDir ) ) ;full path
           ;; (setq ξffp (windows-style-path-to-unix (local-url-to-file-path ξffp)))
          ξwidthHeight ξwidth ξheight altText
          )
@@ -242,13 +242,12 @@ If there's a text selection, use the text selection as input.
 
 Example: http://example.com/xyz.htm
 becomes
-<a class=\"sorc\" href=\"http://example.com/xyz.htm\" title=\"accessed:2008-12-25\">Source example.com</a>
-<a class=\"sorc\" href=\"http://example.com/xyz.htm\" data-accessed=\"2008-12-25\">Source example.com</a>
+<a class=\"sorc\" href=\"http://example.com/xyz.htm\" data-accessed=\"2008-12-25\">example.com…</a>
 
 The anchor text may be of 4 possibilities, depending on value of `universal-argument'.
 
 1 → 「‹full url›」
-2 or 4 → 「Source ‹domain›」
+2 or 4 → 「‹domain›…」
 3 → 「img src」
 0 or any → smartly decide."
 
@@ -299,7 +298,7 @@ The anchor text may be of 4 possibilities, depending on value of `universal-argu
     (setq linkText
           (cond
            ((equal prefixArgCode 1) ξurl)           ; full url
-           ((or (equal prefixArgCode 2) (equal prefixArgCode 4) (equal prefixArgCode '(4))) (concat "Source " domainName))           ; Source ‹domain›
+           ((or (equal prefixArgCode 2) (equal prefixArgCode 4) (equal prefixArgCode '(4))) (concat domainName "…"))           ; ‹domain›…
            ((equal prefixArgCode 3) "img src")           ; img src
            (t (if
                   (or

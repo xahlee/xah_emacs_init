@@ -35,6 +35,7 @@
     ("8cs" "computer science")
     ("8ai" "artificial intelligence")
     ("8fs" "fullscreen")
+    ("8ch" "Chinese")
 
     ("eg" "e.g.")
 

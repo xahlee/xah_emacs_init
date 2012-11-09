@@ -73,7 +73,7 @@
 ;; bullets and other symbols
 
 
-(define-key key-translation-map (kbd "C-2 0") (kbd "➲")) ; CIRCLED HEAVY WHITE RIGHTWARDS ARROW
+(define-key key-translation-map (kbd "C-2 0") (kbd "☛")) ; BLACK RIGHT POINTING INDEX
 (define-key key-translation-map (kbd "C-2 2") (kbd "♺")) ; RECYCLING SYMBOL FOR GENERIC MATERIALS
 (define-key key-translation-map (kbd "C-2 3") (kbd "✲")) ; OPEN CENTRE ASTERISK
 (define-key key-translation-map (kbd "C-2 4") (kbd "¤")) ; CURRENCY SIGN
