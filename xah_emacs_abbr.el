@@ -174,7 +174,7 @@
     ("8chmod" "find . -type f -exec chmod 644 {} ';'")
     ("8chmod2" "find . -type d -exec chmod 755 {} ';'")
 
-    ("8lynx" "lynx -dump -display_charset=utf-8 -width=90 ")
+    ("8lynx" "lynx -dump -display_charset=utf-8 ")
     ("8unison" "unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web")
     ("8sftp" "sftp u40651120@s168753655.onlinehome.us")
     ("8ssh" "ssh -l u40651120 xahlee.org")
