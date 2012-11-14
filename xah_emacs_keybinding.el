@@ -132,9 +132,9 @@
 (global-set-key (kbd "<kp-3>") 'xah-open-file-at-cursor)
 (global-set-key (kbd "<C-kp-3>") 'xah-open-file-from-clipboard)
 
-(global-set-key (kbd "<C-kp-space>") 'cycle-font-2)
-(global-set-key (kbd "<C-kp-right>") 'cycle-font-forward)
-(global-set-key (kbd "<C-kp-left>") 'cycle-font-backward)
+(global-set-key (kbd "<C-kp-5>") 'cycle-font-2)
+(global-set-key (kbd "<C-kp-6>") 'cycle-font-forward)
+(global-set-key (kbd "<C-kp-4>") 'cycle-font-backward)
 
 (global-set-key (kbd "<kp-5>") 'save-buffer)
 (global-set-key (kbd "<kp-6>") 'repeat-complex-command)
