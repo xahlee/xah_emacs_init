@@ -278,7 +278,7 @@ See also: `paste-from-register-1', `copy-to-register'."
   "paste text from register 1.
 See also: `copy-to-register-1', `insert-register'."
   (interactive)
-  (insert-register ?1))
+  (insert-register ?1 t))
 
 
 ;; § ----------------------------------------

@@ -8,26 +8,6 @@
 ;; § ----------------------------------------
 ;; inserts generic fixed strings
 
-(defun insert-dtd-html4s ()
-  "Insert html 4.01 strict dtd."
-  (interactive)
-  (insert "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"))
-
-(defun insert-dtd-html5 ()
-  "Insert html5 “dtd”."
-  (interactive)
-  (insert "<!DOCTYPE html>"))
-
-(defun insert-dtd-html4t ()
-  "Insert html 4.01 transitional dtd."
-  (interactive)
-  (insert "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">"))
-
-(defun insert-dtd-xhtml ()
-  "Insert html 4.01 strict dtd."
-  (interactive)
-  (insert "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"))
-
 (defun insert-javascript-tag ()
   "Insert a javascript tag."
   (interactive)
@@ -35,11 +15,6 @@
   (backward-char 14)
   )
 
-(defun insert-php-tag ()
-  "Insert PHP tag <?php ?>."
-  (interactive)
-  (insert "<?php\n\n?>")
-  (backward-char 3))
 
 (defun insert-keywords-tag ()
 "Insert the HTML keywords meta tag."
@@ -48,18 +23,6 @@
 (insert "<meta name=\"description\" content=\"ttt\" />")
 (backward-char 2)
 )
-
-(defun insert-html-template ()
-  "Insert a HTML template of xahlee.org."
-  (interactive)
-  (insert "<!doctype html><html><head><meta charset=\"utf-8\" />
-<title>ttt</title>
-</head>
-<body>
-
-</body>
-</html>
-"))
 
 
 ;; § ----------------------------------------
@@ -109,20 +72,13 @@ English translation: 李杀 (Xah Lee)
 (insert "<div class=\"filler\">↓</div>")
 )
 
-(defun insert-section-break ()
-  "Insert a old style section separator asterism."
-  (interactive)
-  ;; (insert "<p class=\"sb\"><span class=\"sb\">✻    ✻    ✻</span></p>")
-  (insert "<p><span class=\"b1\">⁂</span></p>")
-)
-
 
 ;; § ----------------------------------------
 
 (defun insert-date-tag ()
   "Insert a date tag, e.g. <pre class=\"date\">2006-10-09</pre>."
   (interactive)
-  (insert (concat "<div class=\"δdate\"><time>" (format-time-string "%Y-%m-%d") "</time></div>\n\n\n\n" ))
+  (insert (concat "<div class=\"date-α\"><time>" (format-time-string "%Y-%m-%d") "</time></div>\n\n\n\n" ))
   (backward-char 2)
 )
 

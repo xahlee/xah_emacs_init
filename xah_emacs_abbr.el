@@ -120,6 +120,22 @@
     ("8curly" "“\\([^”]+?\\)”")
     ("8bracket" "\\[\\([^]]+?\\)\\]")
 
+    ;; html
+("8html5" "<!DOCTYPE html>")
+("8html4s" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")
+("8html4t" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">")
+("8xhtml" "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">")
+("8html" "<!doctype html><html><head><meta charset=\"utf-8\" />
+<title>ttt</title>
+</head>
+<body>
+
+</body>
+</html>")
+
+("8php" "<?php\n\n?>")
+("8br" "<p><span class=\"b1\">⁂</span></p>")
+
     ;; css colors
 ("8white" "#ffffff")
 ("8silver" "#c0c0c0")
