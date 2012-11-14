@@ -489,10 +489,10 @@ Update each file's page navigation tag.
 Each file name is a file path without dir, and relative to current dir.
 Sample text selection for input:
 
-combowords.html
-combowords-2.html
-combowords-3.html
-combowords-4.html
+words.html
+words-2.html
+words-3.html
+words-4.html
 "
   (interactive)
   (require 'sgml-mode)
@@ -504,28 +504,28 @@ combowords-4.html
     (delete-region p1 p2)
 
     ;; generate the page nav string
-    (setq pageNavStr "<div id=\"page-nb\">\n")
-    (let (linkPath fTitle (ξi 0) )
-      (while (< ξi (length fileList))
-        (setq linkPath (elt fileList ξi) )
-        (setq fTitle (get-html-file-title linkPath) )
-        (setq pageNavStr (concat pageNavStr "<a href=\"" linkPath "\" title=\"" fTitle "\">" (number-to-string (1+ ξi)) "</a>\n") )
-        (setq ξi (1+ ξi))
-        )
-      )
-    (setq pageNavStr (concat pageNavStr "</div>"))
+    (setq pageNavStr (format "<nav class=\"page\">\n%s</nav>"
+                             (let (ξresult linkPath fTitle (ξi 0) )
+                               (while (< ξi (length fileList))
+                                 (setq linkPath (elt fileList ξi) )
+                                 (setq fTitle (get-html-file-title linkPath) )
+                                 (setq ξresult (concat ξresult "<a href=\"" linkPath "\" title=\"" fTitle "\">" (number-to-string (1+ ξi)) "</a>\n") )
+                                 (setq ξi (1+ ξi))
+                                 )
+                               ξresult
+                               )))
 
     ;; open each file, insert the page nav string
     (mapc
      (lambda (thisFile)
        (message "%s" thisFile)
        (find-file thisFile)
-       (goto-char (point-min))
+       (goto-char 1)
 
        (if
- (search-forward "<div id=\"page-nb\">" nil t)
+ (search-forward "<nav class=\"page\">" nil t)
            (let (p3 p4 )
-             (search-backward "<div")
+             (search-backward "<")
              (setq p3 (point))
              (sgml-skip-tag-forward 1)
              (setq p4 (point))
