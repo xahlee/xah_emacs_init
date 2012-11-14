@@ -31,37 +31,45 @@
   "Change font in current frame between 2 fonts."
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
-  (let (fontList fontToUse stateBefore stateAfter )
-    (setq fontList (list "DejaVu Sans Mono-10" "DejaVu Sans-10" ))
+  (let (ξ-font-list fontToUse stateBefore stateAfter )
+    (setq ξ-font-list (list "DejaVu Sans Mono-10" "DejaVu Sans-10" ))
 
     (setq stateBefore (if (get 'cycle-font-2 'state) (get 'cycle-font-2 'state) 0))
-    (setq stateAfter (% (+ stateBefore (length fontList) num) (length fontList)))
+    (setq stateAfter (% (+ stateBefore (length ξ-font-list) num) (length ξ-font-list)))
     (put 'cycle-font-2 'state stateAfter)
 
-    (setq fontToUse (nth stateAfter fontList))
+    (setq fontToUse (nth stateAfter ξ-font-list))
     (set-frame-parameter nil 'font fontToUse)
     (redraw-frame (selected-frame))
     (message "Current font is: %s" fontToUse )
     )
   )
 
+(defcustom ξ-font-list nil "A list of fonts for `cycle-font' to cycle from." :group 'font)
+
+(set-default 'ξ-font-list '(
+                         "Courier New-10"
+                         "DejaVu Sans Mono-9"
+                         "Lucida Console-10"
+                         "Segoe UI Symbol-12"
+
+                         "DejaVu Sans-10"
+                         "Lucida Sans Unicode-10"
+                         "Arial Unicode MS-10"
+                         ))
+
 (defun cycle-font (num)
   "Change font in current frame.
-Each time this is called, font cycles thru a predefined set of fonts.
+Each time this is called, font cycles thru a predefined list of fonts in the variable `ξ-font-list' .
 If NUM is 1, cycle forward.
-If NUM is -1, cycle backward.
-Warning: tested on Windows 7 and Vista only."
+If NUM is -1, cycle backward."
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
-  (let (fontList fontToUse stateBefore stateAfter )
-    (setq fontList (list
- "Courier New-10" "DejaVu Sans Mono-9" "Lucida Console-10" "Segoe UI Symbol-12"
- "DejaVu Sans-10" "Lucida Sans Unicode-10" "Arial Unicode MS-10"
-                    ))
+  (let (fontToUse stateBefore stateAfter )
     (setq stateBefore (if (get 'cycle-font 'state) (get 'cycle-font 'state) 0))
-    (setq stateAfter (% (+ stateBefore (length fontList) num) (length fontList)))
+    (setq stateAfter (% (+ stateBefore (length ξ-font-list) num) (length ξ-font-list)))
 
-    (setq fontToUse (nth stateAfter fontList))
+    (setq fontToUse (nth stateAfter ξ-font-list))
     (set-frame-parameter nil 'font fontToUse)
     (redraw-frame (selected-frame))
     (message "Current font is: %s" fontToUse )

@@ -3,7 +3,6 @@
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 
 
-;; § ----------------------------------------
 ; loading custom commands and functions
 
 (defun fullpath-relative-to-current-file (file-relative-path)
@@ -40,7 +39,6 @@ interactively by “eval-buffer”."
 )
 
 
-;; § ----------------------------------------
 
 (setenv "LANG" "en_US.UTF-8" )
 (setenv "LC_ALL" "en_US.UTF-8" )
@@ -79,7 +77,6 @@ interactively by “eval-buffer”."
     ) )
 
 
-;; § ----------------------------------------
 
 ; add the dir of this file to load path
 (add-to-list 'load-path (fullpath-relative-to-current-file ""))

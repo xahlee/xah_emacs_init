@@ -95,6 +95,14 @@ becomes
             (while (search-forward-regexp "\\(\\[[0-9]+?\\]\\)" nil t)
               (setq changedItems (cons (match-string 1) changedItems ) )
               (replace-match "" t) )
+
+            (goto-char 1)
+            (while (search-forward "[citation needed]" nil t)
+              (setq changedItems (cons "[citation needed]" changedItems ) )
+              (backward-char 17)
+              (delete-char 17)
+              )
+
             (buffer-string)) )
 
     (if (> (length changedItems) 0)

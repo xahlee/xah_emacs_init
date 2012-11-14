@@ -5,7 +5,6 @@
 ;; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 
 (defun make-html-table-string (textBlock ξdelimiter)
   "Transform the string TEXTBLOCK into a HTML marked up table.

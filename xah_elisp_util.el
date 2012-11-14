@@ -6,7 +6,6 @@
 ; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 (require 'xfrp_find_replace_pairs)
 (require 'xeu_elisp_util)
 

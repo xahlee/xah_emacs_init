@@ -290,7 +290,6 @@ Example: 「it’s」 ⇒ 「it's」."
 
 
 
-;; § ----------------------------------------
 (defun replace-tex-region (start end)
   "Replace some math function names or symbols by their LaTeX markup."
   (interactive "r")

@@ -6,7 +6,6 @@
 ; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 
 (defun grab-lines (n)
 "Delete the next n lines and return a list
@@ -215,7 +214,6 @@ The KML file will be created at:
 
 
 
-;; § ----------------------------------------
 
 (defun insert-ggb-link (fileCoreName fileTitle)
   "Insert HTML link to GeoGebra (“.ggb”) file."

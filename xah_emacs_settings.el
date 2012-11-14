@@ -6,7 +6,6 @@
 ;; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 
 
 (setq org-return-follows-link t)
@@ -17,7 +16,6 @@
 (add-to-list 'auto-mode-alist '("\\.htaccess\\'" . shell-script-mode))
 
 
-;; § ----------------------------------------
 
 ;; (defun turn-spell-checking-on ()
 ;;   "Turn speck-mode or flyspell-mode on."
@@ -29,7 +27,6 @@
 ;; (remove-hook 'text-mode-hook 'turn-spell-checking-on)
 
 
-;; § ----------------------------------------
 ;; 2009-09-29 see http://groups.google.com/group/ergoemacs/msg/9eec3b455cab3ff1 and http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start
 ; (and (= emacs-major-version 23) (defun server-ensure-safe-dir (dir) "Noop" t))
 
@@ -57,7 +54,6 @@
 ;; (add-hook 'html-mode-hook 'hexcolor-add-to-font-lock)
 
 
-;; § ----------------------------------------
 (when (boundp 'tabbar-mode) (tabbar-mode 0))
 
 (math-symbol-input-mode 1)
@@ -74,7 +70,6 @@
 (setq inhibit-splash-screen t)
 
 
-;; § ----------------------------------------
 ;; default frame
 
 (when (string-equal system-type "windows-nt") 
@@ -95,7 +90,6 @@
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
 
 
-;; § ----------------------------------------
 ;; (custom-set-variables
 ;;   ;; custom-set-variables was added by Custom.
 ;;   ;; If you edit it by hand, you could mess it up, so be careful.

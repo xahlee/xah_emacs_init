@@ -45,7 +45,6 @@ Warning: This command does not preserve texts inside double quotes."
 
 
 
-;; § ----------------------------------------
 ;; (defun my-delete-word (arg)
 ;;   "Delete characters forward until encountering the end of a word.
 ;; With argument, do this that many times.

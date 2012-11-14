@@ -7,7 +7,6 @@
 
 
 
-;; § ----------------------------------------
 ; setting paths, loading modules, setup hooks etc.
 
 (require 'xah-html-mode)

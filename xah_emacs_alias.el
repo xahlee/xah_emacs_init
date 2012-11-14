@@ -21,7 +21,6 @@
 (defalias 'hl 'highlight-lines-matching-regexp)
 
 
-;; § ----------------------------------------
 ;; xah personal
 
 (defalias '8w 'xwe-new-word-entry)

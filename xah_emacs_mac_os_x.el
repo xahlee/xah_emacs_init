@@ -6,7 +6,6 @@
 ; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 
 ;; start emacs with GUI from shell
 ;; /Applications/Emacs.app/Contents/MacOS/Emacs 
@@ -45,7 +44,6 @@
  )
 
 
-;; § ----------------------------------------
 ; fonts
 
 ; make available extra CJK-font for carbon emacs in the menu
@@ -56,7 +54,6 @@
 
 
 
-;; § ----------------------------------------
 
 ; Carbon Emacs doesn't inherit shell's env.  A workaround is to shart it from shell like this: “/Applications/Emacs.app/Contents/MacOS/Emacs &” however, exiting the shell by Ctrl+D also kills your emacs. So a workaround is to use the nohub: “nohup /Applications/Emacs.app/Contents/MacOS/Emacs &”.  However, Apple's Term has a feature such that closing the window (by clicking on the Red Light or Cmd+w) kills all processes started from it.  So, the solution is to never close window by clicking or Cmd+w, instead, always use Ctrl+d. However, when ssh to remote server and running “tail -f”, sometimes broken connection causes the session to hang. So you are left with a frozen ssh session where the remote server has disconnected. So, here you can't use Ctrl-d to close the window. If you close the window by clicking, then you'll kill any emacs you might have started from that window. Hot Damn.  So, the optimal solution seems to get Carbon Emacs to start using the Mac's GUI way of inheriting env vars by the file “~/.MacOSX/environment.plist”. Though, that mean you gonna maintain two sets of env vars. Shit. Therefore at the end, maybe just dup it in elisp and forget about all quality solutions. Software Industry is quite fucked anyway. This is peanuts. All this is due to the motherfucking unix fucking env var system fuck. Fuck unix and fuck the unixer's mothers.
 

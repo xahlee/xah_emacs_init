@@ -20,7 +20,6 @@
   )
 
 
-;; § ----------------------------------------
 (defun compact-css-region (p1 p2)
   "Remove unnecessary whitespaces of CSS source code in region.
 CSS is Cascading Style Sheet.
@@ -45,7 +44,6 @@ WARNING: not robust. Designed for my personal use only."
                               )) ) ) )
 
 
-;; § ----------------------------------------
 
 (defun insert-tag ()
   "Insert a HTML tag based on the current line.
@@ -86,7 +84,6 @@ will become
     ))
 
 
-;; § ----------------------------------------
 
 (defun update-html-title (myTitle)
   "update html “title” and “h1” tags on current buffer.
@@ -195,7 +192,6 @@ When called in elisp program, wrap the tag at point P1."
   (insert "</b>"))
 
 
-;; § ----------------------------------------
 
 (defun add-paragraph-tag ()
   "Add <p>…</p> tag to current paragraph or text selection."

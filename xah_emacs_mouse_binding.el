@@ -4,7 +4,6 @@
 ;; created: 2011-11-13
 
 
-;; § ----------------------------------------
 ;; mouse
 
 ;; emacs mouse numbering changes depending on {OS, mouse, driver}.

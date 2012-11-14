@@ -5,7 +5,6 @@
 ;; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 ;; inserts generic fixed strings
 
 (defun insert-javascript-tag ()
@@ -25,7 +24,6 @@
 )
 
 
-;; § ----------------------------------------
 ;; inserts fixed strings, particular to xahsite
 
 (defun insert-lyrics-header ()
@@ -73,7 +71,6 @@ English translation: 李杀 (Xah Lee)
 )
 
 
-;; § ----------------------------------------
 
 (defun insert-date-tag ()
   "Insert a date tag, e.g. <pre class=\"date\">2006-10-09</pre>."
@@ -83,7 +80,6 @@ English translation: 李杀 (Xah Lee)
 )
 
 
-;; § ----------------------------------------
 
 (defun insert-midi ()
   "Insert a midi audio markup."

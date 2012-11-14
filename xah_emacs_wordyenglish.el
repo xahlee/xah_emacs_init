@@ -8,7 +8,6 @@
 ;; many of these opens a particular file and insert a string
 
 
-;; § ----------------------------------------
 ;; xwe = xah wordy english
 ;; 〈Wordy English — the Making of Belles-Lettres〉
 ;; http://xahlee.org/PageTwo_dir/Vocabulary_dir/vocabulary.html

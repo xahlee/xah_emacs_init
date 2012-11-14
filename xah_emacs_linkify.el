@@ -4,7 +4,6 @@
 ;; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 
 (defun image-linkify ()
   "Replace a image file's path under cursor with a HTML img tag,
@@ -423,7 +422,6 @@ If there's a text selection, use that for input."
 
 
 
-;; § ----------------------------------------
 
 (defun youporn-search-linkify ()
   "Make the current line into a YouPorn.com link.
@@ -538,7 +536,6 @@ Warning: the line must end in a line return char else the result is wrong."
 
 
 
-;; § ----------------------------------------
 ;; some custom html markup and functions for working with html
 
 (defun nks-linkify ()
@@ -657,7 +654,6 @@ It will become:
 
 
 
-;; § ----------------------------------------
 ;; more specific to Xah Lee
 
 (defun amazon-search-linkify-url (sString productCat assid)

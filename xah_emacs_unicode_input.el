@@ -12,7 +12,6 @@
 ;; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 ;; problem keys
 ;; for qwerty: () [] {} -_ =+
 ;; for dvorak: () [] {} /? =+
@@ -27,7 +26,6 @@
 (define-key key-translation-map (kbd "C-2 r") (kbd "+")) ; plus
 
 
-;; § ----------------------------------------
 ;; right hand home row
 ;; d htns
 
@@ -36,7 +34,6 @@
 (global-set-key (kbd "C-2 n") 'insert-pair-bracket)            ;[]
 
 
-;; § ----------------------------------------
 ;; right hand bottom row
 ;; b mwvz
 
@@ -69,7 +66,6 @@
 (global-set-key (kbd "C-2 x") 'insert-pair-tortoise-shell-bracket)   ;〔〕
 
 
-;; § ----------------------------------------
 ;; bullets and other symbols
 
 
@@ -97,7 +93,6 @@
 ;; ‣ triangle bullet
 
 
-;; § ----------------------------------------
 
 ;; 【Hyper+‹arrow›】
 ;; (define-key key-translation-map (kbd "<H-left>") (kbd "←")) ; arrow

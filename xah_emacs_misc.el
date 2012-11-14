@@ -8,7 +8,6 @@
 ; many of these opens a particular file and insert a string
 
 
-;; § ----------------------------------------
 
 (defun i1 ()
   "Set input method to chinese-py-b5."
@@ -71,7 +70,6 @@ You need to have the firefox path in `exec-path'. e.g.:
     ))
 
 
-;; § ----------------------------------------
 
 (defun yellowMe ()
   "temp function. change background color of current frame to light yellow.."
@@ -163,7 +161,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 (save-buffer))
 
 
-;; § ----------------------------------------
 
 (defun xah-open-file-at-cursor ()
   "Open the file path under cursor.
@@ -258,7 +255,6 @@ use FireFox to visit it as local file (construct the proper URL)."
 )
 
 
-;; § ----------------------------------------
 
 (defun copy-to-register-1 ()
   "Copy current line or text selection to register 1.
@@ -281,7 +277,6 @@ See also: `copy-to-register-1', `insert-register'."
   (insert-register ?1 t))
 
 
-;; § ----------------------------------------
 
 (defun xah-sync-css ()
   "copy current file to all other xahsite dirs."
@@ -351,7 +346,6 @@ This is Xah Lee's personal command assuming a particular dir structure."
 
 
 
-;; § ----------------------------------------
 
 
 
@@ -368,7 +362,6 @@ http://xahlee.org/Periodic_dosage_dir/pd.html"
 
 
 
-;; § ----------------------------------------
 (defun x-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.
 

@@ -17,12 +17,10 @@
 ;; created: 2007-06.
 
 
-;; § ----------------------------------------
 
 (load (fullpath-relative-to-current-file "xah_emacs_unset_keys"))
 
 
-;; § ----------------------------------------
 ;; generic
 
 ;; in linux, <lwindow> is Super 「s」,  while the menu key is 「<menu>」
@@ -42,7 +40,6 @@
 ;; (global-set-key (kbd "M-SPC") 'beep)
 
 
-;; § ----------------------------------------
 
 ;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
 
@@ -112,13 +109,11 @@
 (global-set-key (kbd "C-4") 'paste-from-register-1)
 
 
-;; § ----------------------------------------
 ;; special keys
 
 (global-set-key (kbd "<insert>") 'switch-to-next-frame)
 
 
-;; § ----------------------------------------
 ;; NUMBERIC KEYPAD. nice number pad conveniences as extra function keys
 
 (global-set-key (kbd "<kp-subtract>") 'close-current-buffer)
@@ -163,7 +158,6 @@
 (global-set-key (kbd "<C-kp-0>") 'tags-loop-continue)
 
 
-;; § ----------------------------------------
 
 (global-set-key (kbd "<C-M-prior>") 'backward-page) ; gnu emacs C-x [
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; gnu emacs C-x ]
@@ -175,7 +169,6 @@
 (global-set-key (kbd "M-2") 'cycle-hyphen-underscore-space)
 
 
-;; § ----------------------------------------
 ;; mode-specific
 
 (when (boundp 'ergoemacs-keymap)
@@ -295,7 +288,6 @@ For `nxml-mode-hook'."
 (add-hook 'dired-mode-hook 'xah-dired-mode-keys)
 
 
-;; § ----------------------------------------
 ;;;; misc
 
 ;; 2011-06-02 gnu emacs on mac fix. On GNU Emacs 23.1.1 compiled for Mac, the Del key in emacs is reported as <kp-delete>, and is bound to delete-backward-char. Idiotic.

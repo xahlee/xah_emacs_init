@@ -8,7 +8,6 @@
 ;; ∑ http://xahlee.org/
 
 
-;; § ----------------------------------------
 
 ;;;; set Hyper and Super key
 ;; (cond
