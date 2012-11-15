@@ -159,8 +159,9 @@
 
 
 
-(global-set-key (kbd "<C-M-prior>") 'backward-page) ; gnu emacs C-x [
-(global-set-key (kbd "<C-M-next>") 'forward-page)   ; gnu emacs C-x ]
+;; keys for moving to prev/next code section (form feed; ^L)
+(global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
+(global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
 
 

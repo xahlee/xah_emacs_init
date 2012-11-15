@@ -27,7 +27,7 @@
     ("8math" "mathematics")
     ("8diff" "difference")
     ("8comp" "computer")
-    ("8lang" "language")
+    ("8l" "language")
     ("8langs" "languages")
     ("8p" "programing")
     ("8exp" "experience")
