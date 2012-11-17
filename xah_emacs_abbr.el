@@ -20,6 +20,8 @@
     ("8atm" "at the moment")
     ("8q" "question")
     ("8i18n" "international")
+    ("8ia" "interactive")
+    ("8ann" "announcement")
     ("8ref" "reference")
     ("8temp" "temperature")
     ("8gvn" "government")
@@ -120,22 +122,6 @@
     ("8curly" "“\\([^”]+?\\)”")
     ("8bracket" "\\[\\([^]]+?\\)\\]")
 
-    ;; html
-("8html5" "<!DOCTYPE html>")
-("8html4s" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")
-("8html4t" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">")
-("8xhtml" "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">")
-("8html" "<!doctype html><html><head><meta charset=\"utf-8\" />
-<title>ttt</title>
-</head>
-<body>
-
-</body>
-</html>")
-
-("8php" "<?php\n\n?>")
-("8br" "<p><span class=\"b1\">⁂</span></p>")
-
     ;; css colors
 ("8white" "#ffffff")
 ("8silver" "#c0c0c0")
@@ -157,6 +143,22 @@
 ("8hsl" "hsl(0,100%,50%)")
 
 ;; html css
+("8html5" "<!DOCTYPE html>")
+("8html4s" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")
+("8html4t" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">")
+("8xhtml" "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">")
+("8html" "<!doctype html><html><head><meta charset=\"utf-8\" />
+<title>ttt</title>
+</head>
+<body>
+
+</body>
+</html>")
+
+("8php" "<?php\n\n?>")
+("8sb" "<div class=\"section\">⁂</div>")
+
+    ("8c" "class=")
     ("8bq" "blockquote")
     ("8w" "width")
     ("8h" "height")
@@ -170,7 +172,6 @@
 </div>
 
 ")
-    ("8sb" "<p class=\"sb\"><span class=\"sb\">✻    ✻    ✻</span></p>")
     ("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
     ("8css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
 
@@ -251,3 +252,5 @@ Second Life: Xah Toll
 
 ;; stop asking whether to save newly added abbrev when quitting emacs
 (setq save-abbrevs nil)
+
+

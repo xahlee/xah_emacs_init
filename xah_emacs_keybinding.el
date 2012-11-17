@@ -1,14 +1,17 @@
 ;; -*- coding: utf-8 -*-
 ;; xah's emacs keybinding.
+
+;; jump points to other files
 ;; • xah_emacs_keybinding.el
 ;; • xah_emacs_unicode_input.el
 ;; • xah_emacs_hyper_super_setup.el
 ;; • xah_emacs_mouse_binding.el
 ;; • xah_emacs_alias.el
 ;; • xah_emacs_abbr.el
+
 ;; • 〈Dvorak Keyboard Layout〉 http://xahlee.info/comp/dvorak_keyboard_layout.html
 ;; • 〈ErgoEmacs Keybinding〉 http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html
-;; • 〈xah_autohotkey.ahk〉 http://xahlee.org/mswin/xah_autohotkey.ahk
+;; • 〈xah_autohotkey.ahk〉 http://xahlee.info/mswin/autohotkey.html
 ;; • 〈Emacs: How to define Hyper ＆ Super Keys〉 http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
 ;; • 〈Emacs: Remapping Keys Using key-translation-map〉 http://ergoemacs.org/emacs/emacs_key-translation-map.html
 ;; • 〈Emacs: Add Custom Keys to Enhance Productivity〉 http://ergoemacs.org/emacs/emacs_useful_user_keybinding.html

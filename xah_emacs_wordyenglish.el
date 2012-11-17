@@ -10,7 +10,7 @@
 
 ;; xwe = xah wordy english
 ;; 〈Wordy English — the Making of Belles-Lettres〉
-;; http://xahlee.org/PageTwo_dir/Vocabulary_dir/vocabulary.html
+;; http://wordyenglish.com/words/vocabulary.html
 
 (defun xwe-new-word-entry ()
   "Insert a blank a-word-a-day html template in a paritcular file."
