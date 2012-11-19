@@ -195,7 +195,6 @@
 
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
-
   (local-set-key (kbd "<f6> p") 'add-paragraph-tag)
   (local-set-key (kbd "<f6> u") 'xah-all-linkify)
   (local-set-key (kbd "<f6> e") 'wrap-html-tag)

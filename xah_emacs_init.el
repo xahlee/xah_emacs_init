@@ -81,6 +81,8 @@ interactively by “eval-buffer”."
 ; add the dir of this file to load path
 (add-to-list 'load-path (fullpath-relative-to-current-file ""))
 
+(package-initialize)
+
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding"))
 (load (fullpath-relative-to-current-file "xah_emacs_mouse_binding"))
 (load (fullpath-relative-to-current-file "xah_emacs_hyper_super_setup"))

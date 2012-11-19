@@ -92,7 +92,7 @@ This function calls `image-linkify' to do its work."
 Example:
 i/goddess.jpg
 becomes
-<a class=\"lgimg\" href=\"i/goddess.jpg\" title=\"622×800\" target=\"_blank\">❐</a>
+<a class=\"big-i\" href=\"i/goddess.jpg\" title=\"622×800\" target=\"_blank\">❐</a>
 
 If there's a text selection, use that region as file name."
   (interactive)
@@ -120,7 +120,7 @@ If there's a text selection, use that region as file name."
     (setq ξwidth (number-to-string (elt ξdimension 0)))
     (setq ξheight (number-to-string (elt ξdimension 1)))
     (setq resultStr
-          (concat "<a class=\"lgimg\" href=\"" (file-relative-name imgPath) "\" target=\"_blank\">" ξwidth "×" ξheight "</a>")
+          (concat "<a class=\"big-i\" href=\"" (file-relative-name imgPath) "\" target=\"_blank\">" ξwidth "×" ξheight "</a>")
 )
 
     (delete-region p3 p4)
