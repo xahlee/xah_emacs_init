@@ -9,20 +9,24 @@
 
 
 
-(defun i1 ()
-  "Set input method to chinese-py-b5."
-  (interactive)
-  (set-input-method 'chinese-py) )
 
-(defun i2 ()
-  "Set input method to chinese-py."
-  (interactive)
-  (set-input-method 'chinese-tonepy-punct) )
+(defun set-input-method-to-chinese (ξn)
+  "Set input method to Chinese.
 
-(defun i3 ()
-  "Set input method to chinese-py-b5."
-  (interactive)
-  (set-input-method 'chinese-py-b5) )
+Normally, set to 'chinese-py.
+C-u → set to 'chinese-tonepy-punct.
+C-u 2 → set to 'chinese-py-b5."
+(interactive "P")
+  (cond
+    ((equal ξn nil)     ; universal-argument not called
+     (set-input-method 'chinese-py))
+    ((equal ξn '(4))    ; C-u
+     (set-input-method 'chinese-tonepy-punct))
+    ((equal ξn 2)       ; C-u 2
+     (set-input-method 'chinese-py-b5))
+    (t                                  ; all other cases
+     (set-input-method 'chinese-py)) )
+ )
 
 (defun browse-url-of-buffer-with-firefox ()
   "Same as `browse-url-of-buffer' but using Firefox.

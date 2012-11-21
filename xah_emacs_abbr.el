@@ -20,6 +20,7 @@
     ("8atm" "at the moment")
     ("8q" "question")
     ("8i18n" "international")
+    ("8org" "organization")
     ("8ia" "interactive")
     ("8ann" "announcement")
     ("8ref" "reference")
@@ -40,6 +41,7 @@
     ("8ch" "Chinese")
 
     ("eg" "e.g.")
+    ("intro" "introduction")
 
     ;; tech
     ("8wp" "Wikipedia")

@@ -268,14 +268,14 @@ The anchor text may be of 4 possibilities, depending on value of `universal-argu
           (search-backward "href=" (- (point) 160)) ; search boundary as extra guard for error
           (forward-char 6)
           (setq p1-url (point))
-          (search-forward "\"" (+ p1-url 150))
+          (search-forward "\"" (+ p1-url 170))
           (setq p2-url (- (point) 1))
 
           (goto-char p1-url)
           (search-backward "<a" (- p1-url 30) )
           (setq p1-tag (point))
           (goto-char p2-url)
-          (search-forward "</a>" (+ p2-url 80))
+          (search-forward "</a>" (+ p2-url 99))
           (setq p2-tag (point))
           )
       (progn

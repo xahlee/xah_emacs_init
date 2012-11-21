@@ -55,8 +55,10 @@
 
 (global-set-key (kbd "<f7> 1") 'xah-fix-number-items-block)
 
+(global-set-key (kbd "<f7> 6") 'open-in-desktop)
 (global-set-key (kbd "<f7> 7") 'xah-open-file-at-cursor)
 (global-set-key (kbd "<f7> 8") 'dired-jump)
+(global-set-key (kbd "<f7> 9") 'set-input-method-to-chinese)
 (global-set-key (kbd "<f7> <delete>") 'delete-current-file)
 
 (global-set-key (kbd "<f7> f") 'copy-file-path)
@@ -143,7 +145,6 @@
 (global-set-key (kbd "<kp-7> <kp-4>") (lambda () "" (interactive) (find-file "~/Dropbox/twitter tweets.txt")))
 (global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
 
-(global-set-key (kbd "<kp-7> <kp-6>") 'open-in-desktop)
 (global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
 (global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)
 (global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
