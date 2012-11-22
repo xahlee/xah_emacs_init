@@ -27,9 +27,14 @@
 ;; generic
 
 ;; in linux, <lwindow> is Super 「s」,  while the menu key is 「<menu>」
-(global-set-key (kbd "<lwindow>") 'set-mark-command)
-
-(define-key global-map (kbd "<escape>") 'keyboard-quit)
+(cond
+ ((string-equal system-type "windows-nt")
+  (global-set-key (kbd "<lwindow>") 'set-mark-command)
+  )
+ ((string-equal system-type "darwin")
+  t )
+ ((string-equal system-type "gnu/linux")
+  t ) )
 
 (global-set-key (kbd "C-7") 'select-text-in-quote)
 (global-set-key (kbd "C-8") 'extend-selection)
@@ -142,8 +147,11 @@
 (global-set-key (kbd "<kp-7> <kp-1>") (lambda () "" (interactive) (find-file "~/web/xahlee_info/js/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-2>") (lambda () "" (interactive) (find-file "~/web/xahlee_info/comp/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-3>") (lambda () "" (interactive) (find-file "~/web/ergoemacs_org/emacs/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-4>") (lambda () "" (interactive) (find-file "~/Dropbox/twitter tweets.txt")))
-(global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
+(global-set-key (kbd "<kp-7> <kp-4>") (lambda () "" (interactive) (find-file "~/web/xahlee_info/math/blog.html")))
+(global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "~/web/wordyenglish_com/chinese/blog.html")))
+(global-set-key (kbd "<kp-7> <kp-6>") (lambda () "" (interactive) (find-file "~/web/wordyenglish_com/lit/blog.html")))
+(global-set-key (kbd "<kp-7> <kp-0>") (lambda () "" (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
+
 
 (global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
 (global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)

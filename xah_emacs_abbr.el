@@ -39,6 +39,7 @@
     ("8ai" "artificial intelligence")
     ("8fs" "fullscreen")
     ("8ch" "Chinese")
+    ("8jp" "Japanese")
 
     ("eg" "e.g.")
     ("intro" "introduction")

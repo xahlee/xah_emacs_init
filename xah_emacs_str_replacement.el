@@ -110,10 +110,20 @@ When called in lisp code, p1 p2 are region end points."
                          [", " "，"]
                          ["," "，"]
                          [": " "："]
-                         [".</" "。</"]
+                         ["; " "；"]
+                         ["! " "！"]
                          ["? " "？"]
-                         ["?" "？"]
+                         [".</" "。</"]
                          ["?</" "？</"]
+                         [":</" "：</"]
+
+                         ;; clean up. Remove extra space.
+                         ["， " "，"]
+                         ["。 " "。"]
+                         ["： " "："]
+                         ["？ " "？"]
+                         ["； " "；"]
+                         ["！ " "！"]
                          ]))
 
 (defun replace-straight-quotes (p1 p2)

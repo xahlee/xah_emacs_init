@@ -292,8 +292,8 @@ Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
 ["Option" "<kbd>⌥ Opt</kbd>"]
 ["Opt" "<kbd>⌥ Opt</kbd>"]
 ["Win" "<kbd>❖ Win</kbd>"]
-["App" "<kbd>Menu</kbd>"]
-["Menu" "<kbd>Menu</kbd>"]
+["App" "<kbd>▤ Menu</kbd>"]
+["Menu" "<kbd>▤ Menu</kbd>"]
 ["Meta" "<kbd>Meta</kbd>"]
 ["super" "<kbd>Super</kbd>"]
 
@@ -332,12 +332,11 @@ Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
 ["Home" "<kbd>Home</kbd>"]
 ["End" "<kbd>End</kbd>"]
 ["PageUp" "<kbd>PageUp</kbd>"]
+["pgdn" "<kbd>PageDown</kbd>"]
 ["PageDown" "<kbd>PageDown</kbd>"]
+["pgup" "<kbd>PageUp</kbd>"]
 ["insert" "<kbd>Insert</kbd>"]
 ["ins" "<kbd>Insert</kbd>"]
-
-["pgdn" "<kbd>PageDown</kbd>"]
-["pgup" "<kbd>PageUp</kbd>"]
 
 ["‹key›" "<kbd>‹key›</kbd>"]
                        ])
