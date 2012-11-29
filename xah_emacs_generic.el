@@ -11,17 +11,23 @@
 
 (require 'browse-url)
 
-(defun delete-current-file ()
-  "Delete the file associated with the current buffer.
-Delete the current buffer too.
-A backup is made with appended \"~\". Existing backup file are overwritten.
+(defun delete-current-file (ξno-backup-p)
+  "Delete the file associated with the current buffer. Close the current buffer too.
+
+A backup file is created with filename appended “~”. Existing backup file is overwritten.
+
+if ΞNO-BACKUP-P is non-nil (when called with `universal-argument'), don't create backup.
+
 If no file is associated, just close buffer without prompt for save."
-  (interactive)
+  (interactive "P")
   (let (fName)
     (when (buffer-file-name) ; buffer is associated with a file
       (setq fName (buffer-file-name))
       (save-buffer fName)
-      (copy-file fName (concat fName "~" ) t)
+      (if ξno-backup-p
+          (progn )
+        (copy-file fName (concat fName "~" ) t)
+        )
       (delete-file fName)
       (message "「%s」 deleted." fName)
       )

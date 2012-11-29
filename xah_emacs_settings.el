@@ -9,7 +9,9 @@
 
 (setq bookmark-default-file "~/.emacs.d/bookmarks")
 
-(setq page-break-lines-modes (quote (emacs-lisp-mode compilation-mode fundamental-mode text-mode org-mode)) )
+(setq page-break-lines-modes (quote (emacs-lisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode)) )
+
+(icomplete-mode 1)
 
 
 (setq org-return-follows-link t)

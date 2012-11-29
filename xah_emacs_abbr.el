@@ -12,6 +12,11 @@
 
 (define-abbrev-table 'global-abbrev-table '(
 
+    ("eg" "e.g.")
+    ("intro" "introduction")
+    ("osx" "OS X")
+    ("macosx" "Mac OS X")
+
     ("8btw" "by the way")
     ("8afaik" "As far as i know")
 
@@ -40,9 +45,6 @@
     ("8fs" "fullscreen")
     ("8ch" "Chinese")
     ("8jp" "Japanese")
-
-    ("eg" "e.g.")
-    ("intro" "introduction")
 
     ;; tech
     ("8wp" "Wikipedia")
@@ -74,7 +76,6 @@
     ("8pp" "PayPal")
     ("8ahd" "American Heritage Dictionary")
     ("8wm" "Window Manager")
-    ("8osx" "OS X")
 
 ;; for programers
     ("8hex" "hexadecimal")

@@ -144,13 +144,38 @@
 (global-set-key (kbd "<kp-5>") 'save-buffer)
 (global-set-key (kbd "<kp-6>") 'repeat-complex-command)
 
-(global-set-key (kbd "<kp-7> <kp-1>") (lambda () "" (interactive) (find-file "~/web/xahlee_info/js/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-2>") (lambda () "" (interactive) (find-file "~/web/xahlee_info/comp/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-3>") (lambda () "" (interactive) (find-file "~/web/ergoemacs_org/emacs/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-4>") (lambda () "" (interactive) (find-file "~/web/xahlee_info/math/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-5>") (lambda () "" (interactive) (find-file "~/web/wordyenglish_com/chinese/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-6>") (lambda () "" (interactive) (find-file "~/web/wordyenglish_com/lit/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-0>") (lambda () "" (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
+;; (setq ε-frequently-used-files  [
+;; "~/git/xah_emacs_init/xah_emacs_keybinding.el"
+;; "~/web/xahlee_info/js/blog.html"
+;; "~/web/xahlee_info/comp/blog.html"
+;; "~/web/ergoemacs_org/emacs/blog.html"
+;; "~/web/xahlee_info/math/blog.html"
+;; "~/web/wordyenglish_com/chinese/blog.html"
+;; "~/web/wordyenglish_com/lit/blog.html"
+;; ] )
+
+;; (defun open-file-fast (εn)
+;;   ""
+;;   (interactive)
+;;   (let ()
+;;     (find-file (elt ε-frequently-used-files εn))
+;;     ))
+
+;; (global-set-key (kbd "<kp-7> <kp-0>") (open-file-fast 0))
+;; (global-set-key (kbd "<kp-7> <kp-1>") (open-file-fast 1))
+;; (global-set-key (kbd "<kp-7> <kp-2>") (open-file-fast 2))
+;; (global-set-key (kbd "<kp-7> <kp-3>") (open-file-fast 3))
+;; (global-set-key (kbd "<kp-7> <kp-4>") (open-file-fast 4))
+;; (global-set-key (kbd "<kp-7> <kp-5>") (open-file-fast 5))
+;; (global-set-key (kbd "<kp-7> <kp-6>") (open-file-fast 6))
+
+(global-set-key (kbd "<kp-7> <kp-0>") (lambda () (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
+(global-set-key (kbd "<kp-7> <kp-1>") (lambda () (interactive) (find-file "~/web/xahlee_info/js/blog.html")))
+(global-set-key (kbd "<kp-7> <kp-2>") (lambda () (interactive) (find-file "~/web/xahlee_info/comp/blog.html")))
+(global-set-key (kbd "<kp-7> <kp-3>") (lambda () (interactive) (find-file "~/web/ergoemacs_org/emacs/blog.html")))
+(global-set-key (kbd "<kp-7> <kp-4>") (lambda () (interactive) (find-file "~/web/xahlee_info/math/blog.html")))
+(global-set-key (kbd "<kp-7> <kp-5>") (lambda () (interactive) (find-file "~/web/wordyenglish_com/chinese/blog.html")))
+(global-set-key (kbd "<kp-7> <kp-6>") (lambda () (interactive) (find-file "~/web/wordyenglish_com/lit/blog.html")))
 
 
 (global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
