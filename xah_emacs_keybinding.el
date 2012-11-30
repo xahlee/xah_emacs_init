@@ -77,12 +77,6 @@
 
 (global-set-key (kbd "<f7> [") 'remove-square-brackets)
 
-(global-set-key (kbd "<f7> <f5> 6") 'run-current-file)
-; (global-set-key (kbd "<f7> <f5> 6") 'eval-buffer)
-(global-set-key (kbd "<f7> <f5> 7") 'eval-last-sexp)
-(global-set-key (kbd "<f7> <f5> 8") 'eval-region)
-(global-set-key (kbd "<f7> <f5> 4") 'eval-expression)
-(global-set-key (kbd "<f7> <f5> 3") 'eval-defun)
 
 ;; commands
 (global-set-key (kbd "<f7> <f6> 5") 'xah-find-text-regex)
@@ -93,19 +87,26 @@
 (global-set-key (kbd "<f7> <f6> 9") 'delete-matching-lines)
 (global-set-key (kbd "<f7> <f6> 0") 'delete-non-matching-lines)
 
-(global-set-key (kbd "<f7> <f7> 3") 'flyspell-buffer)
-(global-set-key (kbd "<f7> <f7> 1") 'global-linum-mode)
-(global-set-key (kbd "<f7> <f7> 2") 'rainbow-mode)
-(global-set-key (kbd "<f7> <f7> 5") visual-line-mode)
-(global-set-key (kbd "<f7> <f7> 6") 'whitespace-mode)
-(global-set-key (kbd "<f7> <f7> 7") 'shell)
-(global-set-key (kbd "<f7> <f7> 8") 'calc)
-(global-set-key (kbd "<f7> <f7> 9") 'calendar)
+(global-set-key (kbd "<f7> e f") 'run-current-file)
+(global-set-key (kbd "<f7> e b") 'eval-buffer)
+(global-set-key (kbd "<f7> e l") 'eval-last-sexp)
+(global-set-key (kbd "<f7> e r") 'eval-region)
+(global-set-key (kbd "<f7> e e") 'eval-expression)
+(global-set-key (kbd "<f7> e d") 'eval-defun)
 
-(global-set-key (kbd "<f7> <f7> h") 'xah-html-mode)
-(global-set-key (kbd "<f7> <f7> e") 'emacs-lisp-mode)
-(global-set-key (kbd "<f7> <f7> o") 'org-mode)
-(global-set-key (kbd "<f7> <f7> t") 'text-mode)
+(global-set-key (kbd "<f7> m 3") 'flyspell-buffer)
+(global-set-key (kbd "<f7> m 1") 'global-linum-mode)
+(global-set-key (kbd "<f7> m 2") 'rainbow-mode)
+(global-set-key (kbd "<f7> m 5") visual-line-mode)
+(global-set-key (kbd "<f7> m 6") 'whitespace-mode)
+(global-set-key (kbd "<f7> m 7") 'shell)
+(global-set-key (kbd "<f7> m 8") 'calc)
+(global-set-key (kbd "<f7> m 9") 'calendar)
+
+(global-set-key (kbd "<f7> m h") 'xah-html-mode)
+(global-set-key (kbd "<f7> m e") 'emacs-lisp-mode)
+(global-set-key (kbd "<f7> m o") 'org-mode)
+(global-set-key (kbd "<f7> m t") 'text-mode)
 
 (global-set-key (kbd "<f7> i 1") 'insert-random-number)
 (global-set-key (kbd "<f7> i 2") 'insert-random-string)
@@ -137,12 +138,14 @@
 (global-set-key (kbd "<kp-3>") 'xah-open-file-at-cursor)
 (global-set-key (kbd "<C-kp-3>") 'xah-open-file-from-clipboard)
 
+(global-set-key (kbd "<kp-4>") nil)
+(global-set-key (kbd "<kp-5>") 'save-buffer)
+(global-set-key (kbd "<kp-6>") nil)
+(global-set-key (kbd "<kp-7>") nil)
+
+(global-set-key (kbd "<C-kp-4>") 'cycle-font-backward)
 (global-set-key (kbd "<C-kp-5>") 'cycle-font-2)
 (global-set-key (kbd "<C-kp-6>") 'cycle-font-forward)
-(global-set-key (kbd "<C-kp-4>") 'cycle-font-backward)
-
-(global-set-key (kbd "<kp-5>") 'save-buffer)
-(global-set-key (kbd "<kp-6>") 'repeat-complex-command)
 
 ;; (setq ε-frequently-used-files  [
 ;; "~/git/xah_emacs_init/xah_emacs_keybinding.el"
