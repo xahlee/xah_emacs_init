@@ -288,6 +288,7 @@ Is does not cover all html tags or convert all html entities.
 
 ["<i>" ""] ["</i>" ""]
 ["<b>" ""] ["</b>" ""]
+["<b class=\"w\">" ""] ["</b>" ""]
 ["<kbd>" ""] ["</kbd>" ""]
 
 ["<ul>" ""] ["</ul>" ""]
@@ -304,6 +305,10 @@ Is does not cover all html tags or convert all html entities.
 
 ["<br>" ""]
 ["<hr>" ""]
+
+["<mark class=\"b\">" ""] ["</mark>" ""]
+["<mark class=\"r\">" ""] ["</mark>" ""]
+
 )))
 
 (setq tempStr (replace-regexp-pairs-in-string tempStr '(

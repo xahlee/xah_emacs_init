@@ -29,7 +29,7 @@
 (defun insert-lyrics-header ()
   "Insert a XahLee.org customized lyrics meta data tag."
   (interactive)
-  (insert "<pre class=\"lycif\">
+  (insert "<pre class=\"lyrics-info\">
 Title: 
 Date: 
 Singer: 
@@ -48,12 +48,12 @@ English translation: 李杀 (Xah Lee)
 "<table>
 <tr>
 <td>
-<pre class=\"lyc\">
+<pre class=\"lyrics-α\">
 �
 </pre>
 </td>
 <td>
-<pre class=\"lyc\">
+<pre class=\"lyrics-α\">
 �
 </pre>
 </td>

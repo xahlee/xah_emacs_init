@@ -12,6 +12,40 @@
 ;; 〈Wordy English — the Making of Belles-Lettres〉
 ;; http://wordyenglish.com/words/vocabulary.html
 
+(defun xwe-move-word-to-page (moveCode)
+  "take current selection or block of text, ask which page to move it to."
+  (interactive "sEnter a letter: Sat Gre Writer Easy Arcane sLang Hyphen Combo Noun Poesy Foreign:")
+  (let (p1 p2 bds ξfile ξwordText)
+    (setq bds (get-selection-or-unit 'block))
+    (setq ξwordText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
+
+    (cond
+     ((string= moveCode "a") (setq ξfile "arcane.html" ))
+     ((string= moveCode "c") (setq ξfile "combowords.html" ))
+     ((string= moveCode "e") (setq ξfile "easy.html" ))
+     ((string= moveCode "f") (setq ξfile "foreignwords.html" ))
+     ((string= moveCode "g") (setq ξfile "gre.html" ))
+     ((string= moveCode "h") (setq ξfile "hyphwords.html" ))
+     ((string= moveCode "l") (setq ξfile "slang.html" ))
+     ((string= moveCode "n") (setq ξfile "noun.html" ))
+     ((string= moveCode "p") (setq ξfile "poesy.html" ))
+     ((string= moveCode "s") (setq ξfile "satwords.html" ))
+     ((string= moveCode "w") (setq ξfile "writerwords.html" ))
+     (t (error "Your letter 「%s」 is not one of the allowed." moveCode ))
+     )
+
+    (delete-region p1 p2 )
+
+    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξfile) )
+    (goto-char 1)
+    (search-forward "<div class=\"ent\">") (search-backward "<")
+    (insert ξwordText "\n\n")
+    (save-buffer )
+    (kill-buffer )
+    (message "Word moved to 「%s」" ξfile)
+    )
+  )
+
 (defun xwe-new-word-entry ()
   "Insert a blank a-word-a-day html template in a paritcular file."
   (interactive)

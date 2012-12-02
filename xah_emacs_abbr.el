@@ -122,9 +122,9 @@
     ("8date" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)")
     ("8d" "\\([0-9]+\\)")
     ("8str" "\\([^\"]+?\\)")
-    ("8tag" "\\([^<]+?\\)<")
     ("8curly" "“\\([^”]+?\\)”")
     ("8bracket" "\\[\\([^]]+?\\)\\]")
+    ("8tag" "\\([</>=\" A-za-z0-9]+\\)")
 
     ;; css colors
 ("8white" "#ffffff")
@@ -187,7 +187,7 @@
     ("7imf" "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
     ("7bmp2png" "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
 
-    ("7gp" "grep -r --include='*html' pattern .")
+    ("7grep" "grep -r -F 'xxx' --include='*html' ~/web")
 
     ("7f0" "find . -type f -empty")
     ("7f0rm" "find . -type f -size 0 -exec rm {} ';'")
@@ -196,15 +196,7 @@
     ("7f0drm" "find . -depth -empty -type d -exec rmdir {} ';'")
     ("7chmod" "find . -type f -exec chmod 644 {} ';'")
     ("7chmod2" "find . -type d -exec chmod 755 {} ';'")
-
     ("7lynx" "lynx -dump -display_charset=utf-8 -width=100")
-    ("7unison" "unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web")
-    ("7sftp" "sftp u40651120@s168753655.onlinehome.us")
-    ("7ssh" "ssh -l u40651120 xahlee.org")
-    ("7rsn" "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude=\"*~\" --exclude=\".git/\" --exclude=\".bash_history\" --exclude=\"logs/\"  --rsh=\"ssh -l u40651120\" ~/web/ u40651120@s168753655.onlinehome.us:~/")
-    ("7rsnbackup" "rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude=\"**/My *\" --rsh=\"ssh -l xah\" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/")
-    ("7rsn-web" "rsync -r -v -t --delete --rsh=\"ssh -l xah\" ~/web/ xah@169.254.153.147:~/web/")
-    ("7rsn-doc" "rsync -r -v -t --delete --exclude=\"**/My *\" --rsh=\"ssh -l xah\" ~/Documents/ xah@169.254.153.147:~/Documents/")
 
 ;; xah personal
     ("8ee" "ErgoEmacs")

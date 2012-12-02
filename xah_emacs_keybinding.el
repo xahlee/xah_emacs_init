@@ -87,7 +87,6 @@
 (global-set-key (kbd "<f7> <f6> 9") 'delete-matching-lines)
 (global-set-key (kbd "<f7> <f6> 0") 'delete-non-matching-lines)
 
-(global-set-key (kbd "<f7> e f") 'run-current-file)
 (global-set-key (kbd "<f7> e b") 'eval-buffer)
 (global-set-key (kbd "<f7> e l") 'eval-last-sexp)
 (global-set-key (kbd "<f7> e r") 'eval-region)
@@ -99,7 +98,6 @@
 (global-set-key (kbd "<f7> m 2") 'rainbow-mode)
 (global-set-key (kbd "<f7> m 5") visual-line-mode)
 (global-set-key (kbd "<f7> m 6") 'whitespace-mode)
-(global-set-key (kbd "<f7> m 7") 'shell)
 (global-set-key (kbd "<f7> m 8") 'calc)
 (global-set-key (kbd "<f7> m 9") 'calendar)
 
@@ -140,8 +138,7 @@
 
 (global-set-key (kbd "<kp-4>") nil)
 (global-set-key (kbd "<kp-5>") 'save-buffer)
-(global-set-key (kbd "<kp-6>") nil)
-(global-set-key (kbd "<kp-7>") nil)
+(global-set-key (kbd "<kp-6>") 'repeat-complex-command)
 
 (global-set-key (kbd "<C-kp-4>") 'cycle-font-backward)
 (global-set-key (kbd "<C-kp-5>") 'cycle-font-2)
@@ -184,6 +181,9 @@
 (global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
 (global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)
 (global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
+
+(global-set-key (kbd "<kp-8> <kp-7>") 'shell)
+(global-set-key (kbd "<kp-8> <kp-8>") 'run-current-file)
 
 (global-set-key (kbd "<kp-9>") 'isearch-forward)
 (global-set-key (kbd "<C-kp-9>") 'isearch-backward)
@@ -252,9 +252,6 @@
 
   (local-set-key (kbd "<f6> <f5> u") 'wrap-url)
 
-  (local-set-key (kbd "<kp-8>") 'browse-url-of-buffer)
-  (local-set-key (kbd "<C-kp-8>") 'xah-browse-url-of-buffer)
-
   (local-set-key (kbd "<f6> <delete>") 'sgml-delete-tag)
   (local-set-key (kbd "<f6> <left>") 'sgml-skip-tag-backward)
   (local-set-key (kbd "<f6> <right>") 'sgml-skip-tag-forward)
@@ -274,6 +271,11 @@
   (local-set-key (kbd "<f6> 2") 'title-bracket-to-html-tag)
   (local-set-key (kbd "<f6> 3") 'emacs-to-windows-kbd-notation)
   (local-set-key (kbd "<f6> 5") 'mark-unicode)
+
+  (local-set-key (kbd "<kp-4>") 'browse-url-of-buffer)
+
+  (local-set-key (kbd "<f6> 6") 'browse-url-of-buffer)
+  (local-set-key (kbd "<f6> C-6") 'xah-browse-url-of-buffer)
 
   (local-set-key (kbd "<f6> 7") 'htmlize-text)
   (local-set-key (kbd "<f6> 8") 'dehtmlize-pre-block)
