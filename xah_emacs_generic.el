@@ -14,7 +14,7 @@
 (defun delete-current-file (ξno-backup-p)
   "Delete the file associated with the current buffer. Close the current buffer too.
 
-A backup file is created with filename appended “~”. Existing backup file is overwritten.
+A backup file is created with filename appended “~‹date time stamp›~”. Existing file of the same name is overwritten.
 
 if ΞNO-BACKUP-P is non-nil (when called with `universal-argument'), don't create backup.
 
@@ -26,7 +26,7 @@ If no file is associated, just close buffer without prompt for save."
       (save-buffer fName)
       (if ξno-backup-p
           (progn )
-        (copy-file fName (concat fName "~" ) t)
+        (copy-file fName (concat fName "~" (format-time-string "%Y%m%d_%H%M%S") "~") t)
         )
       (delete-file fName)
       (message "「%s」 deleted." fName)
@@ -38,15 +38,11 @@ If no file is associated, just close buffer without prompt for save."
 (defun make-backup ()
   "Make a backup copy of current buffer's file.
 Create a backup of current buffer's file.
-The new file name is the old file name with “~” appended, in the same dir.
-If such a file already exist, append more “~”.
+The new file name is the old file name with datetime stamp and “~” appended, in the same dir. If such a file already exist, it's overwritten.
 If the current buffer is not associated with a file, its a error."
   (interactive)
   (let ((currentFileName (buffer-file-name)) backupFileName)
-    (setq backupFileName (concat currentFileName "~"))
-    (while (file-exists-p backupFileName)
-      (setq backupFileName (concat backupFileName "~"))
-      )
+    (setq backupFileName (concat currentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~"))
     (copy-file currentFileName backupFileName t)
     (message (concat "Backup saved as: " (file-name-nondirectory backupFileName)))
     )

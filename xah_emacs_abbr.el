@@ -22,6 +22,7 @@
 
     ("8b" "because")
     ("8ex" "example")
+    ("84ex" "For example")
     ("8atm" "at the moment")
     ("8q" "question")
     ("8i18n" "international")
@@ -98,7 +99,6 @@
     ("8kb" "keyboard")
     ("8kbs" "keyboards")
     ("8kbd" "keybinding")
-    ("84ex" "For example")
     ("8env" "environment")
     ("8var" "variable")
     ("8vars" "variables")
@@ -125,6 +125,9 @@
     ("8curly" "“\\([^”]+?\\)”")
     ("8bracket" "\\[\\([^]]+?\\)\\]")
     ("8tag" "\\([</>=\" A-za-z0-9]+\\)")
+
+    ;; ruby comment
+    ("8rc" "=begin\n\n=end")
 
     ;; css colors
 ("8white" "#ffffff")
@@ -162,7 +165,7 @@
 ("8php" "<?php\n\n?>")
 ("8sb" "<div class=\"section\">⁂</div>")
 
-    ("8c" "class=")
+    ("8c" "class=\"\"")
     ("8bq" "blockquote")
     ("8w" "width")
     ("8h" "height")

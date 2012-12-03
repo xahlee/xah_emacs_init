@@ -14,7 +14,7 @@
 
 (defun xwe-move-word-to-page (moveCode)
   "take current selection or block of text, ask which page to move it to."
-  (interactive "sEnter a letter: Sat Gre Writer Easy Arcane sLang Hyphen Combo Noun Poesy Foreign:")
+  (interactive "sEnter a letter: Sat Gre Writer Easy Arcane sLang Informal Hyphen Combo Noun nounThings Poesy Foreign:")
   (let (p1 p2 bds ξfile ξwordText)
     (setq bds (get-selection-or-unit 'block))
     (setq ξwordText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
@@ -26,10 +26,12 @@
      ((string= moveCode "f") (setq ξfile "foreignwords.html" ))
      ((string= moveCode "g") (setq ξfile "gre.html" ))
      ((string= moveCode "h") (setq ξfile "hyphwords.html" ))
+     ((string= moveCode "i") (setq ξfile "informal.html" ))
      ((string= moveCode "l") (setq ξfile "slang.html" ))
      ((string= moveCode "n") (setq ξfile "noun.html" ))
      ((string= moveCode "p") (setq ξfile "poesy.html" ))
      ((string= moveCode "s") (setq ξfile "satwords.html" ))
+     ((string= moveCode "t") (setq ξfile "noun_things.html" ))
      ((string= moveCode "w") (setq ξfile "writerwords.html" ))
      (t (error "Your letter 「%s」 is not one of the allowed." moveCode ))
      )
@@ -43,8 +45,13 @@
     (save-buffer )
     (kill-buffer )
     (message "Word moved to 「%s」" ξfile)
-    )
-  )
+
+    (let*
+      ;; save the working buffer, but make backup first
+          ((currentFileName (buffer-file-name))
+           (backupFileName (concat currentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~")) )
+        (copy-file currentFileName backupFileName t)
+        (save-buffer ) ) ) )
 
 (defun xwe-new-word-entry ()
   "Insert a blank a-word-a-day html template in a paritcular file."

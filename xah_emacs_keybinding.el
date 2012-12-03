@@ -113,6 +113,7 @@
 (global-set-key (kbd "<f7> i d") 'insert-date)
 (global-set-key (kbd "<f7> i t") 'insert-date-time)
 
+(global-set-key (kbd "<f7> r") 'query-replace-regexp)
 
 (global-set-key (kbd "C-3") 'copy-to-register-1)
 (global-set-key (kbd "C-4") 'paste-from-register-1)
