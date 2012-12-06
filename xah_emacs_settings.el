@@ -101,6 +101,13 @@
 ;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (global-rainbow-delimiters-mode)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(rcirc-default-nick "xahlee"))
+
 
 ;; (custom-set-variables
 ;;   ;; custom-set-variables was added by Custom.
@@ -141,14 +148,14 @@
  '(completions-common-part ((t (:inherit default :foreground "red"))))
  '(diredp-compressed-file-suffix ((t (:foreground "#7b68ee"))))
  '(diredp-ignored-file-name ((t (:foreground "#aaaaaa"))))
- '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "black"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "blue"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "blue"))))
- '(rainbow-delimiters-depth-5-face ((t (:foreground "magenta"))))
- '(rainbow-delimiters-depth-6-face ((t (:foreground "magenta"))))
- '(rainbow-delimiters-depth-7-face ((t (:foreground "green"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "green"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "red"))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "blue"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "blue"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "#8b7500"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "#8b7500"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "#8b7500"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "#8b7500"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "#8b7500"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "#8b7500"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "#8b7500"))))
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red"))))
  '(show-paren-match ((((class color) (background light)) (:background "azure2")))))

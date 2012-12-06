@@ -297,7 +297,7 @@ See also: `copy-to-register-1', `insert-register'."
          (when (not (string= ξfromPath ξtoPath ))
            (if (file-exists-p ξtoPath)
                (progn
-                 (copy-file ξtoPath (concat ξtoPath "~") "OK-IF-ALREADY-EXISTS") ;backup
+                 (copy-file ξtoPath (concat ξtoPath "~" (format-time-string "%Y%m%d_%H%M%S") "~") "OK-IF-ALREADY-EXISTS") ;backup
                  (copy-file ξfromPath ξtoPath "OK-IF-ALREADY-EXISTS")
                  (message "wrote to 「%s」." ξtoPath)
                  )

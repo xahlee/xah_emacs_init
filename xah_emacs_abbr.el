@@ -1,12 +1,13 @@
 ;; -*- coding: utf-8 -*-
 ;; emacs abbrev def
 ;; Xah Lee
-;; 2007-06, …, 2011-12-20
+;; 2007-06, …, 2012-12-06
 ;; ∑ http://xahlee.org/
 
 ; load my abbreviations file
 ;(read-abbrev-file "emacs_abbrev")
 
+
 ;; clear existing value; when changing a abbrev, it is convenient for user to not have previous abbrev around
 (clear-abbrev-table global-abbrev-table)
 
@@ -14,8 +15,12 @@
 
     ("eg" "e.g.")
     ("intro" "introduction")
+    ("mac" "Mac")
     ("osx" "OS X")
     ("macosx" "Mac OS X")
+    ("8trad" "traditional")
+    ("8dict" "dictionary")
+    ("8dicts" "dictionaries")
 
     ("8btw" "by the way")
     ("8afaik" "As far as i know")
@@ -77,6 +82,7 @@
     ("8pp" "PayPal")
     ("8ahd" "American Heritage Dictionary")
     ("8wm" "Window Manager")
+    ("8el" "emacs lisp")
 
 ;; for programers
     ("8hex" "hexadecimal")
@@ -114,11 +120,9 @@
     ("8db" "database")
     ("8oop" "object oriented programing")
 
-    ("8line" "────────── ────────── ────────── ────────── ──────────")
-    ("8utf8" "-*- coding: utf-8 -*-")
-    ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
-;; elisp regex
+
+;;; emacs lisp
     ("8date" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)")
     ("8d" "\\([0-9]+\\)")
     ("8str" "\\([^\"]+?\\)")
@@ -129,7 +133,14 @@
     ;; ruby comment
     ("8rc" "=begin\n\n=end")
 
-    ;; css colors
+    ("8line" "────────── ────────── ────────── ────────── ──────────")
+    ("8utf8" "-*- coding: utf-8 -*-")
+    ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
+
+
+;; html css
+
+;; css colors
 ("8white" "#ffffff")
 ("8silver" "#c0c0c0")
 ("8gray" "#808080")
@@ -149,7 +160,7 @@
 ("8orange" "#ffa500")
 ("8hsl" "hsl(0,100%,50%)")
 
-;; html css
+;; html
 ("8html5" "<!DOCTYPE html>")
 ("8html4s" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")
 ("8html4t" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">")
@@ -182,26 +193,42 @@
     ("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
     ("8css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
 
-;; unix shell
-    ("7ditto" "ditto -ck --sequesterRsrc --keepParent src dest")
-    ("7im" "convert -quality 85% ")
-    ("7ims" "convert -scale 50% -quality 85% ")
-    ("7im256" "convert +dither -colors 256 ")
-    ("7imf" "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
-    ("7bmp2png" "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
+
+;;; unix shell
 
-    ("7grep" "grep -r -F 'xxx' --include='*html' ~/web")
+    ("3rsn" "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.git/' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
 
-    ("7f0" "find . -type f -empty")
-    ("7f0rm" "find . -type f -size 0 -exec rm {} ';'")
-    ("7frm" "find . -name \"*~\" -exec rm {} ';'")
-    ("7f0d" "find . -depth -empty -type d")
-    ("7f0drm" "find . -depth -empty -type d -exec rmdir {} ';'")
-    ("7chmod" "find . -type f -exec chmod 644 {} ';'")
-    ("7chmod2" "find . -type d -exec chmod 755 {} ';'")
-    ("7lynx" "lynx -dump -display_charset=utf-8 -width=100")
+    ("3ditto" "ditto -ck --sequesterRsrc --keepParent src dest")
+    ("3im" "convert -quality 85% ")
+    ("3ims" "convert -scale 50% -quality 85% ")
+    ("3im256" "convert +dither -colors 256 ")
+    ("3imf" "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
+    ("3bmp2png" "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
 
-;; xah personal
+    ("3grep" "grep -r -F 'xxx' --include='*html' ~/web")
+
+    ("3f0" "find . -type f -empty")
+    ("3f0rm" "find . -type f -size 0 -exec rm {} ';'")
+    ("3frm" "find . -name \"*~\" -exec rm {} ';'")
+    ("3f0d" "find . -depth -empty -type d")
+    ("3f0drm" "find . -depth -empty -type d -exec rmdir {} ';'")
+    ("3chmod" "find . -type f -exec chmod 644 {} ';'")
+    ("3chmod2" "find . -type d -exec chmod 755 {} ';'")
+    ("3lynx" "lynx -dump -display_charset=utf-8 -width=100")
+
+; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/ 
+
+; rsync -r -v -t --delete --rsh="ssh -l xah" ~/web/ xah@169.254.153.147:~/web/
+
+; rsync -r -v -t --delete --exclude="**/My *" --rsh="ssh -l xah" ~/Documents/ xah@169.254.153.147:~/Documents/
+
+; unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web 
+; sftp u40651120@s168753655.onlinehome.us 
+; ssh -l u40651120 xahlee.org 
+
+
+
+;;; xah personal
     ("8ee" "ErgoEmacs")
     ("8vdspc" "Visual Dictionary of Special Plane Curves")
     ("8xl" "Xah Lee")
@@ -251,7 +278,8 @@ Second Life: Xah Toll
 
     ))
 
-;; stop asking whether to save newly added abbrev when quitting emacs
+
+;;; stop asking whether to save newly added abbrev when quitting emacs
 (setq save-abbrevs nil)
 
 

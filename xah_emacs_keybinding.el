@@ -137,7 +137,8 @@
 (global-set-key (kbd "<kp-3>") 'xah-open-file-at-cursor)
 (global-set-key (kbd "<C-kp-3>") 'xah-open-file-from-clipboard)
 
-(global-set-key (kbd "<kp-4>") nil)
+(global-set-key (kbd "<kp-4> <kp-4>") 'convert-english-chinese-punctuation)
+
 (global-set-key (kbd "<kp-5>") 'save-buffer)
 (global-set-key (kbd "<kp-6>") 'repeat-complex-command)
 
@@ -249,6 +250,7 @@
   (local-set-key (kbd "<f6> <f5> w") 'wikipedia-linkify)
   (local-set-key (kbd "<f6> <f5> z") 'amazon-linkify)
   (local-set-key (kbd "<f6> <f5> i") 'image-linkify)
+  (local-set-key (kbd "<f6> <f5> j") 'image-file-to-html-figure-tag)
   (local-set-key (kbd "<f6> <f5> f") 'full-size-img-linkify)
 
   (local-set-key (kbd "<f6> <f5> u") 'wrap-url)
@@ -272,8 +274,6 @@
   (local-set-key (kbd "<f6> 2") 'title-bracket-to-html-tag)
   (local-set-key (kbd "<f6> 3") 'emacs-to-windows-kbd-notation)
   (local-set-key (kbd "<f6> 5") 'mark-unicode)
-
-  (local-set-key (kbd "<kp-4>") 'browse-url-of-buffer)
 
   (local-set-key (kbd "<f6> 6") 'browse-url-of-buffer)
   (local-set-key (kbd "<f6> C-6") 'xah-browse-url-of-buffer)

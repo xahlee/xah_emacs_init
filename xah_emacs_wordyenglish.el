@@ -40,7 +40,7 @@
 
     (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξfile) )
     (goto-char 1)
-    (search-forward "<div class=\"ent\">") (search-backward "<")
+    (search-forward "<section class=\"word-α\">") (search-backward "<")
     (insert ξwordText "\n\n")
     (save-buffer )
     (kill-buffer )
@@ -71,12 +71,12 @@ nil t)
   (interactive)
   (insert "<div class=\"δdate\"><time>" (format-time-string "%Y-%m-%d") "</time></div>\n")
   (insert
-   "<div class=\"ent\">
+   "<section class=\"word-α\">
 <p class=\"wd\"></p>
 <div class=\"ex\">
 <div class=\"bdy\"></div>
 <div class=\"src\"></div>
-</div>\n</div>\n\n")
+</section>\n</div>\n\n")
   (re-search-backward "class=\"bdy\">" nil t)
   (forward-char 12)
   (yank)
@@ -113,7 +113,7 @@ Using current word or current text selection."
   (interactive)
   (let (bds p1 p2)
     (require 'sgml-mode) ; for sgml-skip-tag-forward
-    (search-backward "<div class=\"ent\">")
+    (search-backward "<section class=\"word-α\">")
     (search-forward "<div class=\"bdy\">")
     (backward-char 1)
     (sgml-skip-tag-forward 1)

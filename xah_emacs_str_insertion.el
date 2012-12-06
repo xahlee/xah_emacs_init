@@ -6,11 +6,17 @@
 
 (random t)
 
+(defun insert-random-color-hsl ()
+  "Insert a random color string of CSS HSL format.
+Example output: hsl(100,24%,82%)"
+  (interactive)
+  (insert (format "hsl(%d,%d%%,%d%%)" (random 360) (random 100) (random 100))) )
+
 (defun insert-random-hex ()
   "Insert a random 4-digit hexidecimal number."
   (interactive)
-  (let (myCharset (possibleCharsCount 16))
-    (setq myCharset "1234567890abcdef" )
+  (let* ((myCharset "1234567890abcdef" )
+        (possibleCharsCount (length myCharset)))
     (dotimes (ii 4)
       (insert (elt myCharset (random possibleCharsCount))) ) )
   ;; (insert (format "%4x" (random 65535)) )
