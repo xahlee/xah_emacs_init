@@ -9,7 +9,7 @@
 
 (setq bookmark-default-file "~/.emacs.d/bookmarks")
 
-(setq page-break-lines-modes (quote (emacs-lisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode)) )
+(setq page-break-lines-modes (quote (emacs-lisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
 
 ;; interactive name completion for describe-function, describe-variable, etc.
 (icomplete-mode 1)

@@ -67,13 +67,13 @@ English translation: 李杀 (Xah Lee)
 (defun insert-screen-filler ()
 "Insert a custome HTML <div> tag."
 (interactive)
-(insert "<div class=\"filler\">↓</div>")
+(insert "<hr style=\"height:60em;border-left:dashed gray\" />")
 )
 
 
 
 (defun insert-date-tag ()
-  "Insert a date tag, e.g. <pre class=\"date\">2006-10-09</pre>."
+  "Insert a date tag."
   (interactive)
   (insert (concat "<div class=\"date-α\"><time>" (format-time-string "%Y-%m-%d") "</time></div>\n\n\n" ))
   (backward-char 1)
