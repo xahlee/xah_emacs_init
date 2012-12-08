@@ -16,6 +16,10 @@
 ;; for qwerty: () [] {} -_ =+
 ;; for dvorak: () [] {} /? =+
 
+
+(define-prefix-command 'xah-unicode-keymap)
+(global-set-key (kbd "C-2") 'xah-unicode-keymap)
+
 
 ;; right hand top
 ;; f gcrl

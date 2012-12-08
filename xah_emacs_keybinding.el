@@ -179,6 +179,9 @@
 ;; (global-set-key (kbd "<kp-7> <kp-5>") (open-file-fast 5))
 ;; (global-set-key (kbd "<kp-7> <kp-6>") (open-file-fast 6))
 
+(define-prefix-command 'xah-numpad-keymap)
+(global-set-key (kbd "<kp-7>") 'xah-numpad-keymap)
+
 (global-set-key (kbd "<kp-7> <kp-0>") (lambda () (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
 (global-set-key (kbd "<kp-7> <kp-1>") (lambda () (interactive) (find-file "~/web/xahlee_info/js/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-2>") (lambda () (interactive) (find-file "~/web/xahlee_info/comp/blog.html")))
