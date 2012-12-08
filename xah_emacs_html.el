@@ -519,7 +519,7 @@ words-4.html
        (goto-char 1)
 
        (if
- (search-forward "<nav class=\"page\">" nil t)
+           (search-forward "<nav class=\"page\">" nil t)
            (let (p3 p4 )
              (search-backward "<")
              (setq p3 (point))

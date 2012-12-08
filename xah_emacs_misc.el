@@ -203,7 +203,13 @@ input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
           (browse-url ξs)
           )
       (progn ; not starting “http://”
-        (find-file-at-point (xahsite-web-path-to-filepath ξs default-directory)) ) ) ))
+        (let ((ξfff (xahsite-web-path-to-filepath ξs default-directory)) )
+          (if (file-exists-p ξfff)
+              (progn (find-file-at-point ξfff))
+            (progn (message "file doesn't exist: %s" ξfff))
+            )
+          )
+        ) ) ))
 
 (defun xah-open-file-from-clipboard ()
   "Open the file path from OS's clipboard.

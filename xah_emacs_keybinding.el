@@ -64,6 +64,10 @@
 
 ;; command that are not immediate (has prompt) probably should not have a key.
 
+(global-set-key (kbd "<f7> 3") 'bookmark-bmenu-list)
+(global-set-key (kbd "<f7> 4") 'ibuffer)
+(global-set-key (kbd "<f7> 5") 'recentf-open-files)
+
 (global-set-key (kbd "<f7> 6") 'open-in-desktop)
 (global-set-key (kbd "<f7> 7") 'xah-open-file-at-cursor)
 (global-set-key (kbd "<f7> 8") 'dired-jump)
@@ -110,6 +114,7 @@
 (global-set-key (kbd "<f7> <f4> 5") 'emacs-lisp-mode)
 (global-set-key (kbd "<f7> <f4> 6") 'org-mode)
 (global-set-key (kbd "<f7> <f4> 7") 'text-mode)
+
 
 (global-set-key (kbd "<f7> i 1") 'insert-random-number)
 (global-set-key (kbd "<f7> i 2") 'insert-random-string)

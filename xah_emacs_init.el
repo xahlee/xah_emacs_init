@@ -125,7 +125,7 @@ interactively by “eval-buffer”."
 (load (fullpath-relative-to-current-file "xah_emacs_load_misc"))
 
 (when (string-equal system-type "darwin")
-(load (fullpath-relative-to-current-file "xah_emacs_mac_os_x"))
- )
+  (load (fullpath-relative-to-current-file "xah_emacs_mac_os_x"))
+  )
 
 (load (fullpath-relative-to-current-file "xah_emacs_replace_quotes"))
