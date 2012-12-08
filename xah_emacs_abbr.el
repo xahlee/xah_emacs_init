@@ -14,7 +14,6 @@
 (define-abbrev-table 'global-abbrev-table '(
 
     ("eg" "e.g.")
-    ("intro" "introduction")
     ("mac" "Mac")
     ("osx" "OS X")
     ("macosx" "Mac OS X")
@@ -24,6 +23,7 @@
 
     ("8btw" "by the way")
     ("8afaik" "As far as i know")
+    ("8intro" "introduction")
 
     ("8b" "because")
     ("8ex" "example")

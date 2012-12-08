@@ -30,7 +30,7 @@ e.g. c:/Users/h3/web/"
 (defun xahsite-local-link-p (ξhref-value)
   "Return true if it's a local file link, else false.
 
-Non local link may start with these: 
+Non local link may start with these:
 
  http://
  https://
@@ -40,7 +40,7 @@ Non local link may start with these:
  javascript:
 
 The current implementation simply check if “:” occur. If not, consider it local link."
-  ;; 
+  ;;
 ;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" ξhref-value) )
   (not (string-match-p ":" ξhref-value) )
  )
@@ -160,7 +160,7 @@ See also: `xahsite-url-to-filepath'
 "
   (if (string-match-p "\\`http://" ξhrefValue)
         (progn (xahsite-url-to-filepath ξhrefValue "addFileName") )
-      (progn 
+      (progn
         (expand-file-name ξhrefValue (file-name-directory ξhostFilePath ) ) ) ) )
 ;; test
 ;; (xahsite-href-value-to-filepath "http://xahlee.org/Netiquette_dir/death_of_a_troll.html" "c:/Users/h3/web/xahlee_info/comp/Google_Tech_Talk_Lisp_At_JPL_by_Ron_Garret.html")
@@ -332,7 +332,7 @@ See also `split-uri-hashmark'"
   ;; (remove-uri-fragment "a#b") ; "a"
   ;; (remove-uri-fragment "#3")  ; ""
   ;; (remove-uri-fragment "4")  ; "4"
-  ;; (remove-uri-fragment "#")   ; "" 
+  ;; (remove-uri-fragment "#")   ; ""
   ;; (remove-uri-fragment "")  ; ""
   (let ((ξx (string-match-p "#" ξhref-value )) )
     (if ξx
@@ -449,7 +449,7 @@ if the inputStr is a relative path, defaultDir is used to resolve to full path."
   (let ( (ξs inputStr))
     (if (string-match-p "\\`https?://" ξs)
         (progn (setq ξs (xahsite-url-to-filepath ξs "addFileName") ))
-      (progn 
+      (progn
         (when (string-match-p "\\`file://" ξs) (setq ξs (local-url-to-file-path ξs) ))
         (when (string-match-p "\\`[A-Za-z]:\\|\\\\" ξs) (setq ξs (windows-style-path-to-unix ξs) ))
         (setq ξs (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" ξs) )

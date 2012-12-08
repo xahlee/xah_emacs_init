@@ -14,12 +14,13 @@
 
 (defun xwe-move-word-to-page (moveCode)
   "take current selection or block of text, ask which page to move it to."
-  (interactive "sEnter a letter: Sat Gre Writer Easy Arcane sLang Informal Hyphen Combo Noun nounThings Poesy Foreign Mspecial:")
+  (interactive "sEnter a character: [s]sat [g]gre [w]writer [e]easy [a]arcane [l]slang [i]informal [h]hyphen [c]combo [n]noun [t]noun things [p]poesy [f]foreign [3]special:")
   (let (p1 p2 bds ξfile ξwordText)
     (setq bds (get-selection-or-unit 'block))
     (setq ξwordText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
 
     (cond
+     ((string= moveCode "3") (setq ξfile "specialwords.html" ))
      ((string= moveCode "a") (setq ξfile "arcane.html" ))
      ((string= moveCode "c") (setq ξfile "combowords.html" ))
      ((string= moveCode "e") (setq ξfile "easy.html" ))
@@ -28,7 +29,6 @@
      ((string= moveCode "h") (setq ξfile "hyphwords.html" ))
      ((string= moveCode "i") (setq ξfile "informal.html" ))
      ((string= moveCode "l") (setq ξfile "slang.html" ))
-     ((string= moveCode "m") (setq ξfile "specialwords.html" ))
      ((string= moveCode "n") (setq ξfile "noun.html" ))
      ((string= moveCode "p") (setq ξfile "poesy.html" ))
      ((string= moveCode "s") (setq ξfile "satwords.html" ))

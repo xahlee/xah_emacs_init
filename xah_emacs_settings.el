@@ -6,6 +6,7 @@
 ;; ∑ http://xahlee.org/
 
 
+(require 'dired-x)
 
 (setq bookmark-default-file "~/.emacs.d/bookmarks")
 
@@ -14,13 +15,15 @@
 ;; interactive name completion for describe-function, describe-variable, etc.
 (icomplete-mode 1)
 
-
+
+(add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . xah-html-mode))
+;; (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . shell-script-mode))
+
+
 (setq org-return-follows-link t)
 
-
-(require 'dired-x)
-
-(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . shell-script-mode))
 
 
 

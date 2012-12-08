@@ -10,8 +10,6 @@
 ; setting paths, loading modules, setup hooks etc.
 
 (require 'xah-html-mode)
-(add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
-;; (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
 
 (require 'xah_file_util)
 

@@ -51,14 +51,18 @@
 
 ;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
 
-;(global-set-key (kbd "<f7> 2") 'shrink-whitespaces)
-;(global-set-key (kbd "<f7> c") 'compact-uncompact-block)
+;; some idea about command categories, in context to chosing keys for them
 
-;; immediate effect on text, non-
-;; mode vs non-mode
-;; very frequently needed, non-
+;; • whether a command has immediate effect, no prompt. e.g. shell vs delete-matching-lines
+;; • whether a command has is safe to run by mistake. e.g. whitespace-mode vs eval-buffer
+;; • whether a command is frequently needed (few times a hour). e.g. 
 
-(global-set-key (kbd "<f7> 1") 'xah-fix-number-items-block)
+;; idea about key groups
+;; all should be sequence of single keys. 2 to 3 keys. All should start with F7. And all commands should be globally useful.
+;; • 2 keys vs 3 keys
+;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
+
+;; command that are not immediate (has prompt) probably should not have a key.
 
 (global-set-key (kbd "<f7> 6") 'open-in-desktop)
 (global-set-key (kbd "<f7> 7") 'xah-open-file-at-cursor)
@@ -77,34 +81,35 @@
 
 (global-set-key (kbd "<f7> [") 'remove-square-brackets)
 
+;; all immediate, safe.
+(global-set-key (kbd "<f7> <f7> 1") 'rainbow-mode)
+(global-set-key (kbd "<f7> <f7> 2") 'visual-line-mode)
+(global-set-key (kbd "<f7> <f7> 3") 'global-linum-mode)
+(global-set-key (kbd "<f7> <f7> 4") 'whitespace-mode)
+(global-set-key (kbd "<f7> <f7> 5") 'flyspell-buffer)
+(global-set-key (kbd "<f7> <f7> 7") 'calc)
+(global-set-key (kbd "<f7> <f7> 8") 'shell)
+(global-set-key (kbd "<f7> <f7> 9") 'calendar)
 
-;; commands
+;; all immediate, but dangerous
+(global-set-key (kbd "<f7> <f5> 5") 'eval-last-sexp)
+(global-set-key (kbd "<f7> <f5> 6") 'run-current-file)
+(global-set-key (kbd "<f7> <f5> 7") 'eval-buffer)
+(global-set-key (kbd "<f7> <f5> 8") 'eval-defun)
+(global-set-key (kbd "<f7> <f5> 9") 'eval-region)
+
+(global-set-key (kbd "<f7> <f6> 0") 'delete-non-matching-lines)
 (global-set-key (kbd "<f7> <f6> 5") 'xah-find-text-regex)
 (global-set-key (kbd "<f7> <f6> 6") 'xah-find-text)
 (global-set-key (kbd "<f7> <f6> 7") 'shell-command)
 (global-set-key (kbd "<f7> <f6> 8") 'list-matching-lines)
-
 (global-set-key (kbd "<f7> <f6> 9") 'delete-matching-lines)
-(global-set-key (kbd "<f7> <f6> 0") 'delete-non-matching-lines)
 
-(global-set-key (kbd "<f7> e b") 'eval-buffer)
-(global-set-key (kbd "<f7> e l") 'eval-last-sexp)
-(global-set-key (kbd "<f7> e r") 'eval-region)
-(global-set-key (kbd "<f7> e e") 'eval-expression)
-(global-set-key (kbd "<f7> e d") 'eval-defun)
-
-(global-set-key (kbd "<f7> m 3") 'flyspell-buffer)
-(global-set-key (kbd "<f7> m 1") 'global-linum-mode)
-(global-set-key (kbd "<f7> m 2") 'rainbow-mode)
-(global-set-key (kbd "<f7> m 5") visual-line-mode)
-(global-set-key (kbd "<f7> m 6") 'whitespace-mode)
-(global-set-key (kbd "<f7> m 8") 'calc)
-(global-set-key (kbd "<f7> m 9") 'calendar)
-
-(global-set-key (kbd "<f7> m h") 'xah-html-mode)
-(global-set-key (kbd "<f7> m e") 'emacs-lisp-mode)
-(global-set-key (kbd "<f7> m o") 'org-mode)
-(global-set-key (kbd "<f7> m t") 'text-mode)
+(global-set-key (kbd "<f7> <f4> 3") 'xah-html-mode)
+(global-set-key (kbd "<f7> <f4> 4") 'html-mode)
+(global-set-key (kbd "<f7> <f4> 5") 'emacs-lisp-mode)
+(global-set-key (kbd "<f7> <f4> 6") 'org-mode)
+(global-set-key (kbd "<f7> <f4> 7") 'text-mode)
 
 (global-set-key (kbd "<f7> i 1") 'insert-random-number)
 (global-set-key (kbd "<f7> i 2") 'insert-random-string)
@@ -112,8 +117,6 @@
 (global-set-key (kbd "<f7> i 4") 'insert-random-uuid)
 (global-set-key (kbd "<f7> i d") 'insert-date)
 (global-set-key (kbd "<f7> i t") 'insert-date-time)
-
-(global-set-key (kbd "<f7> r") 'query-replace-regexp)
 
 (global-set-key (kbd "C-3") 'copy-to-register-1)
 (global-set-key (kbd "C-4") 'paste-from-register-1)
@@ -321,10 +324,6 @@ For `nxml-mode-hook'."
 ;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
 ;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
     (define-key dired-mode-map (kbd "<f6> 8") 'wdired-change-to-wdired-mode)
-
-    (define-key dired-mode-map (kbd "<f6> 6") '2png)
-    (define-key dired-mode-map (kbd "<f6> 5") '2jpg)
-    (define-key dired-mode-map (kbd "<f6> 4") 'scale-image)
     )
   )
 
