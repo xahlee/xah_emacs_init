@@ -61,12 +61,10 @@
 
   (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/new.html") )
   (goto-char 1)
-  (re-search-forward
-"<!-- c:/Users/h3/web/wordyenglish_com/lit/blog.html -->"
-nil t)
-(insert "\n\n")
+  (search-forward "<section class=\"word-α\">") (search-backward "<")
+  (insert "\n\n")
   (xwe-insert-word-entry)
-)
+  )
 
 (defun xwe-insert-word-entry ()
   "Insert a blank a-word-a-day html template."

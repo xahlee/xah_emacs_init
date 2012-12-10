@@ -114,7 +114,7 @@
 (global-set-key (kbd "<f7> <f4> 5") 'emacs-lisp-mode)
 (global-set-key (kbd "<f7> <f4> 6") 'org-mode)
 (global-set-key (kbd "<f7> <f4> 7") 'text-mode)
-
+(global-set-key (kbd "<f7> <f4> 8") 'shell-script-mode)
 
 (global-set-key (kbd "<f7> i 1") 'insert-random-number)
 (global-set-key (kbd "<f7> i 2") 'insert-random-string)

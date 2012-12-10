@@ -99,10 +99,17 @@ The string replaced are:
 
 (defun convert-english-chinese-punctuation (p1 p2 &optional ξ-to-direction)
   "Replace punctuation from/to English/Chinese Unicode symbols.
+
 When called interactively, do current text block (paragraph) or text selection. If first punctuation for comma is English version, then it's converted to Chinese, and vice versa.
 
-When called in lisp code, p1 p2 are region end points. ξ-to-direction must be any of the following values: 「\"chinese\"」, 「\"english\"」, 「\"auto\"」.
-"
+If `universal-argument' is called:
+
+ no C-u → Automatic.
+ C-u → to English
+ C-u 1 → to English
+ C-u 2 → to Chinese
+
+When called in lisp code, p1 p2 are region begin/end positions. ξ-to-direction must be any of the following values: 「\"chinese\"」, 「\"english\"」, 「\"auto\"」."
   (interactive
    (let ( (bds (get-selection-or-unit 'block)))
      (list (elt bds 1) (elt bds 2) 
@@ -115,17 +122,20 @@ When called in lisp code, p1 p2 are region end points. ξ-to-direction must be a
             )
            ) ) )
   (let ((ξ-english-chinese-punctuation-map
-         [                         [". " "。"]
-                                   [", " "，"]
-                                   ["," "，"]
-                                   [": " "："]
-                                   ["; " "；"]
-                                   ["? " "？"]
-                                   ["! " "！"]
-                                   [".</" "。</"]
-                                   ["?</" "？</"]
-                                   [":</" "：</"]
-                                   ]
+         [   
+          [". " "。"]
+          [".\n" "。\n"]
+          ["," "，"]
+          [": " "："]
+          ["; " "；"]
+          ["?" "？"] ; no space after
+          ["! " "！"]
+
+          ;; for inside HTML
+          [".</" "。</"]
+          ["?</" "？</"]
+          [":</" "：</"]
+          ]
          ))
 
     (replace-pairs-region p1 p2

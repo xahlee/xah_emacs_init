@@ -8,6 +8,8 @@
 
 (require 'dired-x)
 
+(setq default-input-method 'chinese-py)
+
 (setq bookmark-default-file "~/.emacs.d/bookmarks")
 
 (setq page-break-lines-modes (quote (emacs-lisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
@@ -99,10 +101,6 @@
  
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
 
-
-(require 'rainbow-delimiters)
-;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-(global-rainbow-delimiters-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

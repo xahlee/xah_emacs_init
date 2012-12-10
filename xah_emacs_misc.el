@@ -9,7 +9,6 @@
 
 
 
-
 (defun set-input-method-to-chinese (ξn)
   "Set input method to Chinese.
 

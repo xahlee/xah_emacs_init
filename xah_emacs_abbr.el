@@ -20,6 +20,7 @@
     ("8trad" "traditional")
     ("8dict" "dictionary")
     ("8dicts" "dictionaries")
+    ("8desc" "description")
 
     ("8btw" "by the way")
     ("8afaik" "As far as i know")
@@ -197,6 +198,7 @@
 ;;; unix shell
 
     ("3rsn" "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.git/' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+    ("3ssh" "ssh -l u40651120 xahlee.org ")
 
     ("3ditto" "ditto -ck --sequesterRsrc --keepParent src dest")
     ("3im" "convert -quality 85% ")
@@ -224,7 +226,7 @@
 
 ; unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web 
 ; sftp u40651120@s168753655.onlinehome.us 
-; ssh -l u40651120 xahlee.org 
+; 
 
 
 
