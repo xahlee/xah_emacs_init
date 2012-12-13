@@ -100,7 +100,7 @@ The string replaced are:
 (defun convert-english-chinese-punctuation (p1 p2 &optional ξ-to-direction)
   "Replace punctuation from/to English/Chinese Unicode symbols.
 
-When called interactively, do current text block (paragraph) or text selection. If first punctuation for comma is English version, then it's converted to Chinese, and vice versa.
+When called interactively, do current text block (paragraph) or text selection. The conversion direction is automatically determined.
 
 If `universal-argument' is called:
 
@@ -109,7 +109,9 @@ If `universal-argument' is called:
  C-u 1 → to English
  C-u 2 → to Chinese
 
-When called in lisp code, p1 p2 are region begin/end positions. ξ-to-direction must be any of the following values: 「\"chinese\"」, 「\"english\"」, 「\"auto\"」."
+When called in lisp code, p1 p2 are region begin/end positions. ξ-to-direction must be any of the following values: 「\"chinese\"」, 「\"english\"」, 「\"auto\"」.
+
+See also: `remove-punctuation-trailing-redundant-space'."
   (interactive
    (let ( (bds (get-selection-or-unit 'block)))
      (list (elt bds 1) (elt bds 2) 
@@ -139,31 +141,42 @@ When called in lisp code, p1 p2 are region begin/end positions. ξ-to-direction 
          ))
 
     (replace-pairs-region p1 p2
-                          (cond
-                           ((string= ξ-to-direction "chinese") ξ-english-chinese-punctuation-map)
-                           ((string= ξ-to-direction "english") (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map))
-                           ((string= ξ-to-direction "auto")
-                            (if (string-match "。\\|，\\|？\\|！\\|：" (buffer-substring-no-properties p1 p2))
-                                (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map)
-                              ξ-english-chinese-punctuation-map
-                              ))
+                              (cond
+                               ((string= ξ-to-direction "chinese") ξ-english-chinese-punctuation-map)
+                               ((string= ξ-to-direction "english") (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map))
+                               ((string= ξ-to-direction "auto")
+                                (if (string-match "。\\|，\\|？\\|！\\|：" (buffer-substring-no-properties p1 p2))
+                                    (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map)
+                                  ξ-english-chinese-punctuation-map
+                                  ))
 
-                           (t (error "Your 3rd argument 「%s」 isn't valid." ξ-to-direction))
-                           ) )
+                               (t (error "Your 3rd argument 「%s」 isn't valid." ξ-to-direction)) ) ) ) )
 
-    (when (string= ξ-to-direction "chinese")
-      (replace-pairs-region p1 p2
-                            [
-                             ;; clean up. Remove extra space.
-                             ["， " "，"]
-                             ["。 " "。"]
-                             ["： " "："]
-                             ["？ " "？"]
-                             ["； " "；"]
-                             ["！ " "！"]
-                             ] )
-      )
- ) )
+(defun remove-punctuation-trailing-redundant-space (p1 p2)
+  "Remove redundant whitespace after punctuation.
+Works on current block or text selection.
+
+When called in emacs lisp code, the p1 p2 are cursor positions for region.
+
+See also `convert-english-chinese-punctuation'."
+  (interactive
+   (let ( (bds (get-selection-or-unit 'block)))
+     (list (elt bds 1) (elt bds 2) ) ) )
+  (replace-regexp-pairs-region p1 p2
+                               [
+                                ;; clean up. Remove extra space.
+                                [",  +" ", "]
+                                [".   +" ". "]
+
+                                ["， +" "，"]
+                                ["。 +" "。"]
+                                ["： +" "："]
+                                ["？ +" "？"]
+                                ["； +" "；"]
+                                ["！ +" "！"]
+                                ["、 +" "、"]
+                                ]
+                               "FIXEDCASE" "LITERAL") )
 
 (defun replace-straight-quotes (p1 p2)
   "Replace straight double quotes to curly ones, and others.

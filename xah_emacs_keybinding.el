@@ -146,6 +146,7 @@
 (global-set-key (kbd "<C-kp-3>") 'xah-open-file-from-clipboard)
 
 (global-set-key (kbd "<kp-4> <kp-4>") 'convert-english-chinese-punctuation)
+(global-set-key (kbd "<kp-4> <kp-5>") 'remove-punctuation-trailing-redundant-space)
 
 (global-set-key (kbd "<kp-5>") 'save-buffer)
 (global-set-key (kbd "<kp-6>") 'repeat-complex-command)
@@ -291,12 +292,21 @@
 
   (local-set-key (kbd "<f6> 7") 'htmlize-text)
   (local-set-key (kbd "<f6> 8") 'dehtmlize-pre-block)
+  (local-set-key (kbd "<f6> 9") 'code-bracket-to-html-tag)
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
 (add-hook 'nxml-mode-hook 'xah-html-mode-keys)
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
+
+(defun xah-rcirc-mode-keys ()
+  "my keybindings for `rcirc'.
+For `rcirc-mode-hook'."
+  (local-set-key (kbd "<f11>") 'rcirc-insert-prev-input)
+  (local-set-key (kbd "<f12>") 'rcirc-insert-next-input)
+  )
+(add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
 
 (defun xah-org-mode-keys ()
   "my keybindings for `org-mode'.

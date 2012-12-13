@@ -21,6 +21,7 @@
     ("8dict" "dictionary")
     ("8dicts" "dictionaries")
     ("8desc" "description")
+    ("8ty" "thank you")
 
     ("8btw" "by the way")
     ("8afaik" "As far as i know")

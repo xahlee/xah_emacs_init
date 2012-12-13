@@ -286,6 +286,7 @@ Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
     (setq replaceList [
  ;; case in find string shouldn't matter.
 ["Ctrl" "<kbd>Ctrl</kbd>"]
+["AltGr" "<kbd>AltGr</kbd>"]
 ["Alt" "<kbd>Alt</kbd>"]
 ["Shift" "<kbd>⇧ Shift</kbd>"]
 ["Cmd" "<kbd>⌘ Cmd</kbd>"]
