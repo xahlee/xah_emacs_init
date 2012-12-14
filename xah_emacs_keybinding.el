@@ -21,7 +21,7 @@
 
 
 
-(load (fullpath-relative-to-current-file "xah_emacs_unset_keys"))
+;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_unset_keys.el"))
 
 
 ;; generic
@@ -40,7 +40,7 @@
 (global-set-key (kbd "C-8") 'extend-selection)
 
 
-;(global-set-key (kbd "<f8>") ctl-x-map)
+(global-set-key (kbd "<f8>") ctl-x-map)
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
 ;; (global-set-key (kbd "<f8>") 'set-mark-command)
