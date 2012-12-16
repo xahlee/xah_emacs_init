@@ -291,10 +291,9 @@
   (local-set-key (kbd "<f6> 6") 'browse-url-of-buffer)
   (local-set-key (kbd "<f6> C-6") 'xah-browse-url-of-buffer)
 
-  (local-set-key (kbd "<f6> 7") 'htmlize-text)
-  (local-set-key (kbd "<f6> 8") 'dehtmlize-pre-block)
+  (local-set-key (kbd "<f6> 7") 'htmlize-or-dehtmlize-pre-block)
+  (local-set-key (kbd "<f6> 8") 'get-pre-block-make-new-file)
   (local-set-key (kbd "<f6> 9") 'code-bracket-to-html-tag)
-  (local-set-key (kbd "<f6> 0") 'get-pre-block-make-new-file)
 
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)

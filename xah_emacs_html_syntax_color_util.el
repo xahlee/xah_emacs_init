@@ -8,19 +8,9 @@
 
 (require 'htmlize)
 
-(defun get-pre-block-make-new-file ()
-  "Create a new file on current dir with text inside pre code block.
-For example, if the cursor is somewhere between the tags:
-<pre class=\"…\">…▮…</pre>
-
-after calling, all a new file of name 「xx-‹random›.‹suffix›」 is created in current dir, with content from the block.
-
-If there's a text selection, use that region as content.
-"
-  (interactive)
-  (let (
-        (ξlangNameMap
-         '(
+(defvar ξ-language-name-map nil "a alist that maps lang name. Each element has this form 「(‹lang code› . [‹emacs major mode name› ‹file_extension›])」")
+(setq ξ-language-name-map
+'(
            ("ahk" . ["ahk-mode" "ahk"])
 
            ("code" . ["fundamental-mode" "txt"])
@@ -42,7 +32,6 @@ If there's a text selection, use that region as content.
            ("xml" . ["sgml-mode"])
            ("html6" . ["html6-mode" "html6"])
            ("java" . ["java-mode" "java"])
-           ("javascript" . ["js-mode" "js"])
            ("js" . ["js-mode" "js"])
            ("lsl" . ["xlsl-mode" "lsl"])
            ("ocaml" . ["tuareg-mode" "ocaml"])
@@ -52,6 +41,7 @@ If there's a text selection, use that region as content.
            ("povray" . ["pov-mode" "pov"])
            ("powershell" . ["powershell-mode" "ps1"])
            ("python" . ["python-mode" "py"])
+           ("python3" . ["python-mode" "py3"])
            ("qi" . ["shen-mode" "qi"])
            ("ruby" . ["ruby-mode" "rb"])
            ("scala" . ["scala-mode" "scala"])
@@ -60,32 +50,43 @@ If there's a text selection, use that region as content.
            ("vbs" . ["visual-basic-mode" "vbs"])
            ("visualbasic" . ["visual-basic-mode" "vbs"])
            ("mma" . ["fundamental-mode" "m"])
-           )
-         )
-        ξlangCode
-        ξmajorMode
-        ξfileSuffix
-        p1
-        p2
-        ξtextContent
-        )
+           ) )
 
-    (save-excursion
-      (re-search-backward "<pre class=\"\\([-A-Za-z0-9]+\\)\">")
-      (setq ξlangCode (match-string 1))
-      (let (ξxx ξpart1 ξpart2)
-        (setq ξxx (cdr (assoc ξlangCode ξlangNameMap)))
-        (setq ξmajorMode (elt ξxx 0))
-        (setq ξfileSuffix (elt ξxx 1))
-        )
-      (setq p1 (search-forward ">"))
-      (search-forward "</pre>")
-      (search-backward "<" )
-      (setq p2 (point) )
-      (setq ξtextContent (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" "" (buffer-substring-no-properties p1 p2))) )
-      (delete-region p1 p2 )
-      )
+(defun get-pre-block-langCode ()
+  "Get the langCode and boundary of a HTML pre block.
+<pre class=\"‹langCode›\">…▮…</pre>
+Returns a vector [langCode pos1 pos2], where pos1 pos2 are the boundary of the text content."
+  (interactive)
+  (let (langCode p1 p2)
+    (if (region-active-p)
+        (progn  (vector (read-string "langcode:") p1 p2))
+      (save-excursion
+        (re-search-backward "<pre class=\"\\([-A-Za-z0-9]+\\)\"") ; tag begin position
+        (setq langCode (match-string 1))
+        (setq p1 (search-forward ">"))    ; text content begin
+        (search-forward "</pre>")
+        (setq p2 (search-backward "<"))   ; text content end
+        (vector langCode p1 p2) ) ) ))
 
+(defun get-pre-block-make-new-file (ξlangNameMap)
+  "Create a new file on current dir with text inside pre code block.
+For example, if the cursor is somewhere between the tags:
+<pre class=\"…\">…▮…</pre>
+
+after calling, all a new file of name 「xx-‹random›.‹suffix›」 is created in current dir, with content from the block.
+
+If there's a text selection, use that region as content."
+  (interactive (list ξ-language-name-map))
+  (let* (
+        (ξxx (get-pre-block-langCode))
+        (ξlangCode (elt ξxx 0))
+        (p1 (elt ξxx 1))
+        (p2 (elt ξxx 2))
+        (ξyy (cdr (assoc ξlangCode ξlangNameMap)))
+        (ξfileSuffix (elt ξyy 1))
+        (ξtextContent (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" "" (buffer-substring-no-properties p1 p2))) )
+        )
+    (delete-region p1 p2 )
     (split-window-vertically)
     (find-file (format "xx-testscript-%d.%s" (random 9008000 ) ξfileSuffix) )
     (insert ξtextContent)
@@ -93,239 +94,83 @@ If there's a text selection, use that region as content.
     )
   )
 
-
-(defun htmlize-text (ξstring major-mode-name &optional from-to-positions-pair)
-  "HTMLize text. That is, syntax color by adding span tags.
-
-When called interactively, work on current pre tag text block or text selection.
-A “pre tag text block” is text enclosed by the tags
- <pre class=\"lang-code\"> …▮…</pre>
-
-after calling, the text inside the pre tag will be htmlized.
-The “lang-code” can be any of {c, bash, cl, clojure, elisp, haskell, html, xml, js, …}.
-See source code for exact list.
-
-If there's a text selection, ask for a major-mode name and htmlize that region.
-
-When called in lisp code:
-First argument ΞSTRING is the input string.
-Second argument MAJOR-MODE-NAME should be a possible value of the variable `major-mode'.
-If third argument FROM-TO-POSITIONS-PAIR is nil, the function returns a string, else, work on that region.
-It should be a vector or list for positions of the region,
- e.g. [pos1 pos2]
-
+(defun ξhtmlize-string (ξsourceCodeStr ξmajorModeName)
+  "Take ξsourceCodeStr and return a htmlized version using major mode ξmajorModeName.
+The purpose is to syntax color source code in HTML.
 This function requires the `htmlize-buffer' from 〔htmlize.el〕 by Hrvoje Niksic."
-  (interactive
-   (let (ξlangCode ξmajorMode p1 p2
-                   (langNameMap
-                    '(("ahk" . "ahk-mode")
+  (interactive)
+  (let (htmlizeOutputBuffer resultStr)
+    ;; put code in a temp buffer, set the mode, fontify
+    (with-temp-buffer
+      (insert ξsourceCodeStr)
+      (funcall (intern ξmajorModeName))
+      (font-lock-fontify-buffer)
+      (setq htmlizeOutputBuffer (htmlize-buffer))
+      )
+    ;; extract the fontified source code in htmlize output
+    (with-current-buffer htmlizeOutputBuffer
+      (let (p1 p2 )
+        (setq p1 (search-forward "<pre>"))
+        (setq p2 (search-forward "</pre>"))
+        (setq resultStr (buffer-substring-no-properties (+ p1 1) (- p2 6))) ) )
+    (kill-buffer htmlizeOutputBuffer)
+    resultStr ) )
 
-                      ("code" . "fundamental-mode")
-                      ("output" . "fundamental-mode")
+(defun htmlize-pre-block (ξlangCodeMap)
+  "Replace text enclosed by “pre” tag to htmlized code.
+For example, if the cursor is somewhere between the pre tags <pre class=\"‹langCode›\">…▮…</pre>, then after calling, the text inside the pre tag will be htmlized.  That is, wrapped with many span tags.
 
-                      ("bash" . "sh-mode") ; unix script/lines to be run by bash. sh-mode = bash script. shell-mode  = inferor shell
-                      ("cmd" . "dos-mode") ; Windows script/lines to be run by cmd.exe
+The opening tag must be of the form <pre class=\"‹langCode›\">.  The ‹langCode› determines what emacs mode is used to colorize the text. See `ξ-language-name-map' for possible ‹langCode›.
 
-                      ("bbcode" . "xbbcode-mode")
-                      ("c" . "c-mode")
-                      ("cpp" . "c++-mode")
-                      ("cl" . "lisp-mode")
-                      ("clojure" . "clojure-mode")
-                      ("css" . "css-mode")
-                      ("elisp" . "emacs-lisp-mode")
-                      ("haskell" . "haskell-mode")
-                      ("html" . "html-mode")
-                      ("mysql" . "sql-mode")
-                      ("xml" . "sgml-mode")
-                      ("html6" . "html6-mode")
-                      ("java" . "java-mode")
-                      ("javascript" . "js-mode")
-                      ("js" . "js-mode")
-                      ("lsl" . "xlsl-mode")
-                      ("ocaml" . "tuareg-mode")
-                      ("org" . "org-mode")
-                      ("perl" . "cperl-mode")
-                      ("php" . "php-mode")
-                      ("povray" . "pov-mode")
-                      ("powershell" . "powershell-mode")
-                      ("python" . "python-mode")
-                      ("qi" . "shen-mode")
-                      ("ruby" . "ruby-mode")
-                      ("scala" . "scala-mode")
-                      ("scheme" . "scheme-mode")
-                      ("yasnippet" . "snippet-mode")
-                      ("vbs" . "visual-basic-mode")
-                      ("visualbasic" . "visual-basic-mode")
-                      ("mma" . "fundamental-mode")
-                      )))
+See also: `dehtmlize-pre-block', `htmlize-or-dehtmlize-pre-block'.
+This function requires the `htmlize-buffer' from 〔htmlize.el〕 by Hrvoje Niksic."
+  (interactive (list ξ-language-name-map))
+  (let (ξlangCode p1 p2 inputStr ξmodeName )
 
-     (if (region-active-p)
-         (progn
-           (setq ξmajorMode (read-from-minibuffer "Major mode name:" nil nil nil nil "text-mode" nil))
-           (list nil ξmajorMode (vector (region-beginning) (region-end)))
-           )
-       (progn
-         (save-excursion
-           (re-search-backward "<pre class=\"\\([-A-Za-z0-9]+\\)\">")
-           (setq ξlangCode (match-string 1))
-           (setq ξmajorMode (cdr (assoc ξlangCode langNameMap)))
-           (setq p1 (search-forward ">"))
-           (setq p2 (- (search-forward "</pre>") 6) )
-           (list nil ξmajorMode (vector p1 p2) ) ) ) ) ) )
+    (save-excursion
+      (let (( ξxx (get-pre-block-langCode)))
+        (setq ξlangCode (elt ξxx 0))
+        (setq p1 (elt ξxx 1))
+        (setq p2 (elt ξxx 2))
+        (setq inputStr (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" "" (buffer-substring-no-properties p1 p2))) )
+        (setq ξmodeName (elt (cdr (assoc ξlangCode ξlangCodeMap)) 0))
+        )
+      (delete-region p1 p2 )
+      (goto-char p1)
+      (insert (ξhtmlize-string inputStr ξmodeName))
+      )
+    ) )
 
-;; (when (not ξmajorMode) (error "Your language string 「class=\"%s\"」 doesn't match any supported language string. Supported language string are %S" ξmajorMode langNameMap ))
-
-  (let (workOnStringP inputStr outputStr
-                      (ξfrom (elt from-to-positions-pair 0))
-                      (ξto (elt from-to-positions-pair 1))
-                      )
-    (setq workOnStringP (if from-to-positions-pair nil t))
-    ;; (insert-buffer-substring BUFFER &optional START END)
-
-    (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
-    (setq outputStr
-          (let (htmlizeOutputBuffer resultStr)
-            ;; put code in a temp buffer, set the mode, fontify
-            (with-temp-buffer
-              (insert inputStr)
-              (funcall (intern major-mode-name))
-              (font-lock-fontify-buffer)
-              (setq htmlizeOutputBuffer (htmlize-buffer))
-              )
-            ;; extract the fontified source code in htmlize output
-            (with-current-buffer htmlizeOutputBuffer
-              (let (p1 p2 )
-                (setq p1 (search-forward "<pre>"))
-                (setq p2 (search-forward "</pre>"))
-                (setq resultStr (buffer-substring-no-properties (+ p1 1) (- p2 6))) ) )
-            (kill-buffer htmlizeOutputBuffer)
-            resultStr ) )
-
-    (if workOnStringP
-        outputStr
-      (save-excursion
-        (delete-region ξfrom ξto)
-        (goto-char ξfrom)
-        (insert outputStr) )) ) )
-
-;; (defun htmlize-string (sourceCodeStr langModeName)
-;;   "Take SOURCECODESTR and return a htmlized version using LANGMODENAME.
-;; This function requries the htmlize.el by Hrvoje Niksic."
-;;   (require 'htmlize)
-;;   (let (htmlizeOutputBuf p1 p2 resultStr)
-
-;;     ;; put code in a temp buffer, set the mode, fontify
-;;     (with-temp-buffer
-;;       (insert sourceCodeStr)
-;;       (funcall (intern langModeName))
-;;       (font-lock-fontify-buffer)
-;;       (setq htmlizeOutputBuf (htmlize-buffer))
-;;       )
-
-;;     ;; extract the fontified source code in htmlize output
-;;     (with-current-buffer htmlizeOutputBuf
-;;       (setq p1 (search-forward "<pre>"))
-;;       (setq p2 (search-forward "</pre>"))
-;;       (setq resultStr (buffer-substring-no-properties (+ p1 1) (- p2 6))))
-
-;;     (kill-buffer htmlizeOutputBuf)
-;;     resultStr
-;;     ))
-
-;; (defun htmlize-pre-block ()
-;;   "Replace text enclosed by <pre> tag to htmlized code.
-;; For example, if the cursor is somewhere between the pre tags:
-;;  <pre class=\"lang-code\">…▮…</pre>
-
-;; after calling, the text inside the pre tag will be htmlized.
-;; That is, wrapped with many span tags.
-
-;; The opening tag must be of the form <pre class=\"lang-code\">.
-;; The “lang-code” determines what emacs mode is used to colorize the
-;; text.
-
-;;  “lang-code” can be any of {c, elisp, java, javascript, html, xml, css, …}.
-;;  (See source code for a full list)
-
-;; See also: `dehtmlize-pre-block'.
-
-;; This function requires htmlize.el by Hrvoje Niksic."
-;;   (interactive)
-;;   (let (inputStr langCode p1 p2 modeName
-;;     (langModeMap
-;;      '(
-;;        ("ahk" . "ahk-mode")
-;;        ("bash" . "sh-mode")
-;;        ("bbcode" . "xbbcode-mode")
-;;        ("c" . "c-mode")
-;;        ("cl" . "lisp-mode")
-;;        ("clojure" . "clojure-mode")
-;;        ("cmd" . "dos-mode")
-;;        ("css" . "css-mode")
-;;        ("elisp" . "emacs-lisp-mode")
-;;        ("haskell" . "haskell-mode")
-;;        ("html" . "html-mode")
-;;        ("xml" . "sgml-mode")
-;;        ("html6" . "html6-mode")
-;;        ("java" . "java-mode")
-;;        ("javascript" . "js-mode")
-;;        ("js" . "js-mode")
-;;        ("lsl" . "xlsl-mode")
-;;        ("ocaml" . "tuareg-mode")
-;;        ("org" . "org-mode")
-;;        ("perl" . "cperl-mode")
-;;        ("php" . "php-mode")
-;;        ("povray" . "pov-mode")
-;;        ("powershell" . "powershell-mode")
-;;        ("python" . "python-mode")
-;;        ("ruby" . "ruby-mode")
-;;        ("scala" . "scala-mode")
-;;        ("scheme" . "scheme-mode")
-;;        ("vbs" . "visual-basic-mode")
-;;        ("visualbasic" . "visual-basic-mode")
-;;        ) ))
-
-;;     (save-excursion
-;;       (re-search-backward "<pre class=\"\\([-A-Za-z0-9]+\\)\"") ; tag begin position
-;;       (setq langCode (match-string 1))
-;;       (setq p1 (search-forward ">")) ; lang source code string begin 
-;;       (search-forward "</pre>")
-;;       (setq p2 (search-backward "<")) ; lang source code string end
-;;       (search-forward "</pre>") ; tag end position
-;;       (setq inputStr (buffer-substring-no-properties p1 p2))
-
-;;       (setq modeName
-;;             (let ((tempVar (assoc langCode langModeMap) ))
-;;               (if tempVar (cdr tempVar) "text-mode" ) ) )
-
-;;       (delete-region p1 p2)
-;;       (goto-char p1)
-;;       (insert (htmlize-string inputStr modeName)) ) ) )
-
-(defun dehtmlize-pre-block (p1 p2)
+(defun dehtmlize-pre-block ()
   "Delete span tags between pre tags.
-For example, if the cursor is somewhere between the tags:
-<pre class=\"…\">…▮…</pre>
-
-after calling, all span tags inside the block will be removed.
-If there's a text selection, dehtmlize that region.
 
 Note: only span tags of the form 「<span class=\"…\">…</span>」 are deleted.
 
 This command does the reverse of `htmlize-pre-block'."
-  (interactive
-   (if (region-active-p)
-       (list (region-beginning) (region-end))
-     (let (p3 p4)
-       (save-excursion
-         (search-backward "<pre class")
-         (re-search-forward ">")
-         (setq p3 (point)) ; code begin position
-         (re-search-forward "</pre>")
-         (setq p4 (- (point) 6)) ; code end position
-         (list p3 p4 )) ) ) )
-  (dehtmlize-span-region p1 p2)
-   )
+  (interactive)
+  (let (( ξxx (get-pre-block-langCode)))
+    (dehtmlize-span-region (elt ξxx 1) (elt ξxx 2))
+    )
+  )
+
+(defun htmlize-or-dehtmlize-pre-block (langCodeMap)
+  "`htmlize-pre-block' or `dehtmlize-pre-block'."
+  (interactive (list ξ-language-name-map))
+  (let* (
+         (ξxx (get-pre-block-langCode))
+         (langCode (elt ξxx 0))
+         (p1 (elt ξxx 1))
+         (p2 (elt ξxx 2))
+         (inputStr (buffer-substring-no-properties p1 p2) )
+         )
+
+    (if (string-match "<span class=" inputStr)
+        (dehtmlize-span-region p1 p2)
+      (progn
+        (delete-region p1 p2)
+        (insert (ξhtmlize-string inputStr (elt (cdr (assoc langCode langCodeMap)) 0)))
+          )
+      ) ) )
 
 (defun dehtmlize-span-region (p1 p2)
   "Delete HTML “span” tags in region.
@@ -338,7 +183,7 @@ Note: only span tags of the form 「<span class=\"…\">…</span>」 are delete
       (replace-pairs-region (point-min) (point-max) '( ["</span>" ""] ["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">"] ) ) ) ) )
 
 (defun dehtmlize-text (ξstring &optional ξfrom ξto)
-"Delete HTML tags in string or region. 
+"Delete HTML tags in string or region.
 Work on current text block or text selection. (a “text block” is text between empty lines)
 
 When called in lisp code, if ξstring is non-nil, returns a changed string.  If ξstring nil, change the text in the region between positions ξfrom ξto.
