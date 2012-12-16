@@ -204,8 +204,11 @@ input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
       (progn ; not starting “http://”
         (let ((ξfff (xahsite-web-path-to-filepath ξs default-directory)) )
           (if (file-exists-p ξfff)
-              (progn (find-file-at-point ξfff))
-            (progn (message "file doesn't exist: %s" ξfff))
+              (progn (find-file ξfff))
+            (if (file-exists-p (concat ξfff ".el"))
+                  (progn (find-file (concat ξfff ".el")))
+                (progn (message "file doesn't exist: %s" ξfff))
+                )
             )
           )
         ) ) ))

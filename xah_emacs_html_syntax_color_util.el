@@ -8,6 +8,92 @@
 
 (require 'htmlize)
 
+(defun get-pre-block-make-new-file ()
+  "Create a new file on current dir with text inside pre code block.
+For example, if the cursor is somewhere between the tags:
+<pre class=\"…\">…▮…</pre>
+
+after calling, all a new file of name 「xx-‹random›.‹suffix›」 is created in current dir, with content from the block.
+
+If there's a text selection, use that region as content.
+"
+  (interactive)
+  (let (
+        (ξlangNameMap
+         '(
+           ("ahk" . ["ahk-mode" "ahk"])
+
+           ("code" . ["fundamental-mode" "txt"])
+           ("output" . ["fundamental-mode" "txt"])
+
+           ("bash" . ["sh-mode" "sh"])
+           ("cmd" . ["dos-mode" "bat"])
+
+           ("bbcode" . ["xbbcode-mode" "bbcode"])
+           ("c" . ["c-mode" "c"])
+           ("cpp" . ["c++-mode" "cpp"])
+           ("cl" . ["lisp-mode" "lisp"])
+           ("clojure" . ["clojure-mode" "clj"])
+           ("css" . ["css-mode" "css"])
+           ("elisp" . ["emacs-lisp-mode" "el"])
+           ("haskell" . ["haskell-mode" "hs"])
+           ("html" . ["html-mode" "html"])
+           ("mysql" . ["sql-mode" "sql"])
+           ("xml" . ["sgml-mode"])
+           ("html6" . ["html6-mode" "html6"])
+           ("java" . ["java-mode" "java"])
+           ("javascript" . ["js-mode" "js"])
+           ("js" . ["js-mode" "js"])
+           ("lsl" . ["xlsl-mode" "lsl"])
+           ("ocaml" . ["tuareg-mode" "ocaml"])
+           ("org" . ["org-mode" "org"])
+           ("perl" . ["cperl-mode" "pl"])
+           ("php" . ["php-mode" "php"])
+           ("povray" . ["pov-mode" "pov"])
+           ("powershell" . ["powershell-mode" "ps1"])
+           ("python" . ["python-mode" "py"])
+           ("qi" . ["shen-mode" "qi"])
+           ("ruby" . ["ruby-mode" "rb"])
+           ("scala" . ["scala-mode" "scala"])
+           ("scheme" . ["scheme-mode" "scm"])
+           ("yasnippet" . ["snippet-mode" "yasnippet"])
+           ("vbs" . ["visual-basic-mode" "vbs"])
+           ("visualbasic" . ["visual-basic-mode" "vbs"])
+           ("mma" . ["fundamental-mode" "m"])
+           )
+         )
+        ξlangCode
+        ξmajorMode
+        ξfileSuffix
+        p1
+        p2
+        ξtextContent
+        )
+
+    (save-excursion
+      (re-search-backward "<pre class=\"\\([-A-Za-z0-9]+\\)\">")
+      (setq ξlangCode (match-string 1))
+      (let (ξxx ξpart1 ξpart2)
+        (setq ξxx (cdr (assoc ξlangCode ξlangNameMap)))
+        (setq ξmajorMode (elt ξxx 0))
+        (setq ξfileSuffix (elt ξxx 1))
+        )
+      (setq p1 (search-forward ">"))
+      (search-forward "</pre>")
+      (search-backward "<" )
+      (setq p2 (point) )
+      (setq ξtextContent (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" "" (buffer-substring-no-properties p1 p2))) )
+      (delete-region p1 p2 )
+      )
+
+    (split-window-vertically)
+    (find-file (format "xx-testscript-%d.%s" (random 9008000 ) ξfileSuffix) )
+    (insert ξtextContent)
+    ;; (save-buffer )
+    )
+  )
+
+
 (defun htmlize-text (ξstring major-mode-name &optional from-to-positions-pair)
   "HTMLize text. That is, syntax color by adding span tags.
 
@@ -28,7 +114,7 @@ If third argument FROM-TO-POSITIONS-PAIR is nil, the function returns a string, 
 It should be a vector or list for positions of the region,
  e.g. [pos1 pos2]
 
-This function requries the `htmlize-buffer' from 〔htmlize.el〕 by Hrvoje Niksic."
+This function requires the `htmlize-buffer' from 〔htmlize.el〕 by Hrvoje Niksic."
   (interactive
    (let (ξlangCode ξmajorMode p1 p2
                    (langNameMap

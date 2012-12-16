@@ -20,10 +20,6 @@
 ;; created: 2007-06.
 
 
-
-;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_unset_keys.el"))
-
-
 ;; generic
 
 ;; in linux, <lwindow> is Super 「s」,  while the menu key is 「<menu>」
@@ -63,6 +59,10 @@
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
 
 ;; command that are not immediate (has prompt) probably should not have a key.
+
+
+(global-set-key (kbd "M-m") 'hippie-expand)
+
 
 (global-set-key (kbd "<f7> 3") 'bookmark-bmenu-list)
 (global-set-key (kbd "<f7> 4") 'ibuffer)
@@ -226,23 +226,23 @@
 
 ;; mode-specific
 
-(when (boundp 'ergoemacs-keymap)
-(define-key ergoemacs-keymap (kbd "M-m") 'hippie-expand)
-;; (define-key ergoemacs-keymap (kbd "M-G") nil) ; was backward-paragraph
-;; (define-key ergoemacs-keymap (kbd "M-R") nil) ; was forward-paragraph
+;; (when (boundp 'ergoemacs-keymap)
+;; (define-key ergoemacs-keymap (kbd "M-m") 'hippie-expand)
+;; ;; (define-key ergoemacs-keymap (kbd "M-G") nil) ; was backward-paragraph
+;; ;; (define-key ergoemacs-keymap (kbd "M-R") nil) ; was forward-paragraph
 
-(define-key ergoemacs-keymap (kbd "M-;") nil) ; undo
-(define-key ergoemacs-keymap (kbd "M-:") nil) ; redo, undo-tree-redo
-(define-key ergoemacs-keymap (kbd "M-q") nil) ; cut
-(define-key ergoemacs-keymap (kbd "M-Q") nil) ; cut-all
-;(define-key ergoemacs-keymap (kbd "M-j") nil) ; copy
-;(define-key ergoemacs-keymap (kbd "M-k") nil) ; paste, yank
+;; (define-key ergoemacs-keymap (kbd "M-;") nil) ; undo
+;; (define-key ergoemacs-keymap (kbd "M-:") nil) ; redo, undo-tree-redo
+;; (define-key ergoemacs-keymap (kbd "M-q") nil) ; cut
+;; (define-key ergoemacs-keymap (kbd "M-Q") nil) ; cut-all
+;; ;(define-key ergoemacs-keymap (kbd "M-j") nil) ; copy
+;; ;(define-key ergoemacs-keymap (kbd "M-k") nil) ; paste, yank
 
-;; (define-key ergoemacs-keymap (kbd "M-o") nil) ; move-cursor-next-pane
+;; ;; (define-key ergoemacs-keymap (kbd "M-o") nil) ; move-cursor-next-pane
 
-;(define-key ergoemacs-keymap (kbd "M-,") nil) ; shrink-whitespaces
-;(define-key ergoemacs-keymap (kbd "M-'") nil) ; compact-uncompact-block
-)
+;; ;(define-key ergoemacs-keymap (kbd "M-,") nil) ; shrink-whitespaces
+;; ;(define-key ergoemacs-keymap (kbd "M-'") nil) ; compact-uncompact-block
+;; )
 
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
@@ -293,6 +293,8 @@
   (local-set-key (kbd "<f6> 7") 'htmlize-text)
   (local-set-key (kbd "<f6> 8") 'dehtmlize-pre-block)
   (local-set-key (kbd "<f6> 9") 'code-bracket-to-html-tag)
+  (local-set-key (kbd "<f6> 0") 'get-pre-block-make-new-file)
+
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
@@ -321,7 +323,7 @@ For `org-mode-hook'."
 (defun xah-Info-mode-keys ()
   "my keybindings for `Info-mode'.
 For `Info-mode-hook'."
-  (local-set-key (kbd "<kp-8>") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<f6> 6") 'xah-view-emacs-manual-in-browser)
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
@@ -368,3 +370,16 @@ For `nxml-mode-hook'."
 ;;       nil ) ) )
 
 ;; (add-hook 'find-file-hook 'open-in-external-app-some)
+
+
+
+
+;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_unset_keys.el"))
+
+    ;; ("<f1> 6" lookup-all-dictionaries)
+    ;; ("<f1> 7" lookup-google)
+    ;; ("<f1> 8" lookup-wikipedia)
+    ;; ("<f1> 9" lookup-word-definition)
+    ;; ("<f1> 0" lookup-answers.com)
+    ;; ("<f1> [" lookup-word-dict-org)
+    ;; ("<f1> ]" lookup-wiktionary)

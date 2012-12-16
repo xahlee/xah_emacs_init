@@ -51,7 +51,9 @@
     ("8cs" "computer science")
     ("8ai" "artificial intelligence")
     ("8fs" "fullscreen")
+
     ("8ch" "Chinese")
+    ("8eng" "English")
     ("8jp" "Japanese")
 
     ;; tech
@@ -136,7 +138,7 @@
     ("8rc" "=begin\n\n=end")
 
     ("8line" "────────── ────────── ────────── ────────── ──────────")
-    ("8utf8" "-*- coding: utf-8 -*-")
+    ("8u" "-*- coding: utf-8 -*-")
     ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
 
