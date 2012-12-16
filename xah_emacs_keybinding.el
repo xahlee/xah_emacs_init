@@ -147,6 +147,7 @@
 
 (global-set-key (kbd "<kp-4> <kp-4>") 'convert-english-chinese-punctuation)
 (global-set-key (kbd "<kp-4> <kp-5>") 'remove-punctuation-trailing-redundant-space)
+(global-set-key (kbd "<kp-4> <kp-6>") 'convert-ideographic/ascii-space)
 
 (global-set-key (kbd "<kp-5>") 'save-buffer)
 (global-set-key (kbd "<kp-6>") 'repeat-complex-command)

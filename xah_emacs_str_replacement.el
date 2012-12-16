@@ -178,6 +178,31 @@ See also `convert-english-chinese-punctuation'."
                                 ]
                                "FIXEDCASE" "LITERAL") )
 
+(defun convert-ideographic/ascii-space (p1 p2)
+  "Change all space characters between Asian Ideographic one to ASCII one.
+Works on current block or text selection.
+
+When called in emacs lisp code, the p1 p2 are cursor positions for region.
+
+See also `convert-english-chinese-punctuation'
+ `remove-punctuation-trailing-redundant-space'
+"
+  (interactive
+   (let ( (bds (get-selection-or-unit 'block)))
+     (list (elt bds 1) (elt bds 2) ) ) )
+  (let ((ξ-space-char-map
+         [
+          ["　" " "]
+          ]
+         ))
+    (replace-regexp-pairs-region p1 p2
+ (if (string-match "　" (buffer-substring-no-properties p1 p2))
+     ξ-space-char-map
+   (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-space-char-map) )
+ "FIXEDCASE" "LITERAL")
+    )
+  )
+
 (defun replace-straight-quotes (p1 p2)
   "Replace straight double quotes to curly ones, and others.
 Works on current text selection, else the current text block between empty lines.
