@@ -166,7 +166,7 @@ See also `convert-english-chinese-punctuation'."
                                [
                                 ;; clean up. Remove extra space.
                                 [",  +" ", "]
-                                [".   +" ". "]
+                                ["\\.   +" "\\. "]
 
                                 ["， +" "，"]
                                 ["。 +" "。"]

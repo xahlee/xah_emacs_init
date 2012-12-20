@@ -265,17 +265,17 @@ The anchor text may be of 4 possibilities, depending on value of `universal-argu
     ;; If latter, you need to get the boundaries for the entire link too.
     (if (string-match "href=\"" inputStr)
         (save-excursion
-          (search-backward "href=" (- (point) 160)) ; search boundary as extra guard for error
+          (search-backward "href=" (- (point) 90)) ; search boundary as extra guard for error
           (forward-char 6)
           (setq p1-url (point))
-          (search-forward "\"" (+ p1-url 170))
+          (search-forward "\"" (+ p1-url 90))
           (setq p2-url (- (point) 1))
 
           (goto-char p1-url)
           (search-backward "<a" (- p1-url 30) )
           (setq p1-tag (point))
           (goto-char p2-url)
-          (search-forward "</a>" (+ p2-url 99))
+          (search-forward "</a>" (+ p2-url 140))
           (setq p2-tag (point))
           )
       (progn

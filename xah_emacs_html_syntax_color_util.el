@@ -168,7 +168,7 @@ This command does the reverse of `htmlize-pre-block'."
         (dehtmlize-span-region p1 p2)
       (progn
         (delete-region p1 p2)
-        (insert (ξhtmlize-string inputStr (elt (cdr (assoc langCode langCodeMap)) 0)))
+        (insert (ξhtmlize-string (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]+\\'" "\n" inputStr)) (elt (cdr (assoc langCode langCodeMap)) 0)))
           )
       ) ) )
 

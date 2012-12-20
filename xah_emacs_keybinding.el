@@ -383,3 +383,6 @@ For `nxml-mode-hook'."
     ;; ("<f1> 0" lookup-answers.com)
     ;; ("<f1> [" lookup-word-dict-org)
     ;; ("<f1> ]" lookup-wiktionary)
+
+(global-unset-key (kbd "<f2>") )
+(global-set-key (kbd "<f2>") 'cut-line-or-region)

@@ -130,7 +130,7 @@ insert a div tag above the current paragraph."
     (insert "\n")
     (backward-char 1)
     (insert-div-x-note)
-    (insert inputText " ⇒ ")
+    (insert (format "<b class=\"x3nt\">%s</b>⇒ " inputText)  )
     )
   )
 

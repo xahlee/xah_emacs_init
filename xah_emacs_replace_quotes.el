@@ -95,7 +95,7 @@ Generate a report of the replaced strings in a separate buffer."
           (setq changedItems (cons (match-string 1) changedItems ) )
           (replace-match "<code>\\1</code>" t) ) ) )
     
-    (with-output-to-temp-buffer "*changed items*"
+    (with-output-to-temp-buffer "*changed brackets*"
       (mapcar
        (lambda (innerText)
          (princ innerText)

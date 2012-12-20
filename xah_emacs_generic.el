@@ -36,9 +36,9 @@ If no file is associated, just close buffer without prompt for save."
 
 
 (defun make-backup ()
-  "Make a backup copy of current buffer's file.
-Create a backup of current buffer's file.
-The new file name is the old file name with datetime stamp and “~” appended, in the same dir. If such a file already exist, it's overwritten.
+  "Make a backup copy of current file.
+
+The backup file name has the form 「‹name›~‹timestamp›~」, in the same dir. If such a file already exist, it's overwritten.
 If the current buffer is not associated with a file, its a error."
   (interactive)
   (let ((currentFileName (buffer-file-name)) backupFileName)
