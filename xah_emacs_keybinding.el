@@ -384,5 +384,9 @@ For `nxml-mode-hook'."
     ;; ("<f1> [" lookup-word-dict-org)
     ;; ("<f1> ]" lookup-wiktionary)
 
+;; 2012-12-19 fix
 (global-unset-key (kbd "<f2>") )
 (global-set-key (kbd "<f2>") 'cut-line-or-region)
+
+;; 2012-12-19 fix
+(global-set-key (kbd "M-'") 'compact-uncompact-block)
