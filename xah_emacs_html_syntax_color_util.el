@@ -53,20 +53,30 @@
            ) )
 
 (defun get-pre-block-langCode ()
-  "Get the langCode and boundary of a HTML pre block.
-<pre class=\"‹langCode›\">…▮…</pre>
+  "Get the langCode and boundary of current HTML pre block.
+A pre block is text of this form
+<pre class=\"‹langCode›\">…▮…</pre>.
+
 Returns a vector [langCode pos1 pos2], where pos1 pos2 are the boundary of the text content."
   (interactive)
   (let (langCode p1 p2)
     (if (region-active-p)
-        (progn  (vector (read-string "langcode:") p1 p2))
+        (progn
+          (setq p1 (region-beginning) )
+          (setq p2 (region-end) )
+          (setq langCode (read-string "langcode:"))
+ (message "%s %d %d" langCode p1 p2)
+          (vector langCode p1 p2)
+          )
       (save-excursion
         (re-search-backward "<pre class=\"\\([-A-Za-z0-9]+\\)\"") ; tag begin position
         (setq langCode (match-string 1))
         (setq p1 (search-forward ">"))    ; text content begin
         (search-forward "</pre>")
         (setq p2 (search-backward "<"))   ; text content end
-        (vector langCode p1 p2) ) ) ))
+(message "%s %d %d" langCode p1 p2)
+        (vector langCode p1 p2)
+ ) ) ))
 
 (defun get-pre-block-make-new-file (ξlangNameMap)
   "Create a new file on current dir with text inside pre code block.
@@ -141,6 +151,8 @@ This function requires the `htmlize-buffer' from 〔htmlize.el〕 by Hrvoje Niks
       )
     ) )
 
+
+
 (defun dehtmlize-pre-block ()
   "Delete span tags between pre tags.
 
@@ -154,7 +166,7 @@ This command does the reverse of `htmlize-pre-block'."
   )
 
 (defun htmlize-or-dehtmlize-pre-block (langCodeMap)
-  "`htmlize-pre-block' or `dehtmlize-pre-block'."
+  "Call `htmlize-pre-block' or `dehtmlize-pre-block'."
   (interactive (list ξ-language-name-map))
   (let* (
          (ξxx (get-pre-block-langCode))
@@ -174,7 +186,8 @@ This command does the reverse of `htmlize-pre-block'."
 
 (defun dehtmlize-span-region (p1 p2)
   "Delete HTML “span” tags in region.
-Note: only span tags of the form 「<span class=\"…\">…</span>」 are deleted."
+Note: only span tags of the form 「<span class=\"…\">…</span>」 are deleted.
+And 3 html entities &amp; &lt; &gt; are changed to & < >."
   (interactive "r")
   (save-excursion
     (save-restriction
