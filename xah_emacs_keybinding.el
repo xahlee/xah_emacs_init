@@ -134,9 +134,9 @@
 
 ;; NUMBERIC KEYPAD. nice number pad conveniences as extra function keys
 
-(global-set-key (kbd "<kp-subtract>") 'close-current-buffer)
-(global-set-key (kbd "<kp-divide>") 'previous-user-buffer)
-(global-set-key (kbd "<kp-multiply>") 'next-user-buffer)
+(global-set-key (kbd "<kp-subtract>") 'ergoemacs-close-current-buffer)
+(global-set-key (kbd "<kp-divide>") 'ergoemacs-previous-user-buffer)
+(global-set-key (kbd "<kp-multiply>") 'ergoemacs-next-user-buffer)
 
 (global-set-key (kbd "<kp-decimal>") 'other-window)
 (global-set-key (kbd "<kp-0>") 'delete-window)
