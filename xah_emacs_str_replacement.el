@@ -272,8 +272,13 @@ Examples of changes:
  ["?\"" "?”"]
  ["\"<" "”<"]
  ;; ";
- ["\n\"" "\n“"]
  ["\"\n" "”\n"]
+ ])
+
+;; fix straight double quotes by regex
+(replace-regexp-pairs-region (point-min) (point-max)
+[
+ ["\\`\"" "“"]
  ])
 
 ;; fix single quotes to curly
@@ -291,7 +296,7 @@ Examples of changes:
  ["\']" "’]"]
  ])
 
-;; fix fix apostrophe
+;; fix apostrophe
 (replace-regexp-pairs-region (point-min) (point-max)
 [
  ["\\bcan’t\\b" "can't"]

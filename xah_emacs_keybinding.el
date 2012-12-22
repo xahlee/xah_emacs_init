@@ -32,8 +32,8 @@
  ((string-equal system-type "gnu/linux")
   t ) )
 
-(global-set-key (kbd "C-7") 'select-text-in-quote)
-(global-set-key (kbd "C-8") 'extend-selection)
+(global-set-key (kbd "C-7") 'ergoemacs-select-text-in-quote)
+(global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
 
 
 (global-set-key (kbd "<f8>") ctl-x-map)
@@ -129,7 +129,7 @@
 
 ;; special keys
 
-(global-set-key (kbd "<insert>") 'switch-to-next-frame)
+(global-set-key (kbd "<insert>") 'ergoemacs-switch-to-next-frame)
 
 
 ;; NUMBERIC KEYPAD. nice number pad conveniences as extra function keys
