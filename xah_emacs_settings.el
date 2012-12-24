@@ -17,6 +17,7 @@
 ;; interactive name completion for describe-function, describe-variable, etc.
 (icomplete-mode 1)
 
+(add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
 
 (add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . xah-html-mode))

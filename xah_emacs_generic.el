@@ -78,14 +78,13 @@ If the file is modified, ask if you want to save first. (This command always run
 
 If the file is emacs lisp, run the byte compiled version if exist."
   (interactive)
-  (let (suffixMap fName fSuffix progName cmdStr)
-
-    ;; a keyed list of file suffix to comand-line program path/name
-    (setq suffixMap 
-          '(
+  (let* (
+         (suffixMap
+          `(
             ("php" . "php")
             ("pl" . "perl")
             ("py" . "python")
+            ("py3" . ,(if (string-equal system-type "windows-nt") "c:/Python32/python.exe" "python3"))
             ("rb" . "ruby")
             ("js" . "node")             ; node.js
             ("sh" . "bash")
@@ -94,20 +93,22 @@ If the file is emacs lisp, run the byte compiled version if exist."
             ;; ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
             )
           )
+         (fName (buffer-file-name))
+         (fSuffix (file-name-extension fName))
+         (progName (cdr (assoc fSuffix suffixMap)))
+         (cmdStr (concat progName " \""   fName "\""))
+         )
 
-    (setq fName (buffer-file-name))
-    (setq fSuffix (file-name-extension fName))
-    (setq progName (cdr (assoc fSuffix suffixMap)))
-    (setq cmdStr (concat progName " \""   fName "\""))
+    ;; a keyed list of file suffix to comand-line program path/name
 
     (when (buffer-modified-p)
-      (progn 
+      (progn
         (when (y-or-n-p "Buffer modified. Do you want to save first?")
           (save-buffer) ) ) )
 
     (if (string-equal fSuffix "el") ; special case for emacs lisp
-        (progn 
-          (load (file-name-sans-extension fName)) 
+        (progn
+          (load (file-name-sans-extension fName))
           )
       (if progName
           (progn

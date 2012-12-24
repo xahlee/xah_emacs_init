@@ -551,7 +551,7 @@ When called in a program, the first URL is the last list element.
 WARNING: this function extract all text of the form 「<a … href=\"…\" …>」 by a simple regex. It does not extract single quote form 「href='…'」 nor 「src=\"…\"」 , nor other considerations."
   (interactive (list (elt (get-selection-or-unit 'block) 0) ) )
   (let ((urlList (list)))
-    (with-temp-buffer 
+    (with-temp-buffer
       (insert htmlText)
       (goto-char 1)
       (while (re-search-forward "<a.+?href=\"\\([^\"]+?\\)\".+?>" nil t)
@@ -566,3 +566,21 @@ WARNING: this function extract all text of the form 「<a … href=\"…\" …>�
     urlList
     ))
 
+(defun update-article-timestamp ()
+  "Update article's timestamp.
+
+Add today's date to the form
+ <p class=\"author_0\">Xah Lee, <time>2005-01-17</time>, <time>2011-07-25</time></p>
+ of current file."
+  (interactive)
+  (let (p1 p2)
+    (save-excursion
+      (goto-char 1)
+      (when (search-forward "<p class=\"author_0\">Xah Lee" nil)
+        (beginning-of-line)
+        (setq p1 (point) )
+        (end-of-line)
+        (setq p2 (point) )
+        (search-backward "</p>")
+        (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d"))
+                ) ) ) ))
