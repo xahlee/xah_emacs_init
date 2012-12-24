@@ -551,3 +551,120 @@ if the inputStr is a relative path, defaultDir is used to resolve to full path."
 
     (print (concat "finished: " (format-time-string "%Y-%m-%dT%T")))
     ))
+
+(defun xahsite-remove-ads (p1 p2)
+  "Remove all ads of in region p1 p2.
+
+Remove Google adds, Amazon ads, and other ads, Google Analytics
+ Tracker code, Disqus code, …."
+
+  (save-restriction 
+    (narrow-to-region p1 p2)
+
+    (replace-pairs-region 1 (point-max)
+                          [
+
+                           ;; Google Ad
+                           ["<script><!--
+google_ad_client = \"pub-5125343095650532\";
+/* 728x90, created 8/12/09 */
+google_ad_slot = \"8521101965\";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type=\"text/javascript\"
+src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
+</script>" ""]
+
+                           ;; Facebook share button
+                           [
+                            "<div id=\"fb-root\"></div><script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/en_US/all.js#xfbml=1\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>"
+                            ""
+                            ]
+
+                           ;; Facebook share button
+                           [
+                            "<div class=\"fb-like\" data-send=\"false\" data-layout=\"button_count\" data-width=\"60\" data-show-faces=\"true\"></div>"
+                            ""
+                            ]
+
+                           ;; Twitter share button
+                           [
+                            "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"xah_lee\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>"
+                            ""
+                            ]
+
+                           ;; Twitter share button
+                           [
+                            "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"wordy_english\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>"
+                            ""
+                            ]
+                           ;; Twitter share button
+                           [
+                            "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"ergoemacs\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>"
+                            ""
+                            ]
+
+                           ;; Google Plus share button
+                           [
+                            "<div class=\"g-plusone\" data-annotation=\"inline\" data-width=\"120\"></div><script>(function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();</script>"
+                            ""
+                            ]
+
+                           ;; Reddit share button
+                           [
+                            "<a href=\"http://www.reddit.com/submit\" onclick=\"window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false\">😸</a>"
+                            ""
+                            ]
+
+                           ;; Disqus code
+                           [
+                            "<div id=\"disqus_thread\"></div><script>(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://xahlee.disqus.com/embed.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><a href=\"http://disqus.com\" class=\"dsq-brlink\">blog comments powered by <span class=\"logo-disqus\">Disqus</span></a>"
+                            ""
+                            ]
+
+                           ;; gitcafe ad
+                           ["<div class=\"¤gitcafe\"><a href=\"http://gitcafe.com/\" rel=\"nofollow\">GitCafe 中文</a></div>" ""]
+
+                           ;; Paypal donate
+                           [
+                            "<div class=\"ppp8745\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"Y4V2F8TA949M2\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" name=\"submit\" alt=\"PayPal\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>"
+                            ""]
+
+                           ]
+                          )
+
+    (replace-regexp-pairs-region 1 (point-max)
+                                 [
+
+                                  ;; Google Analytics tracker
+                                  [ "<script>var _gaq = .+?();</script>" "" ]
+
+                                  ["<div class=\"βds\">[[:ascii:]]+?</div>" ""]
+
+                                  ["<div class=\"βshare\">\n+</div>" ""]
+
+                                  ["<div class=\"¤xd\">[^<]+?</div>" ""]
+
+                                  ["<div class=\"¤\">[^<]+?</div>" ""]
+
+                                  ;; 1 and 1
+                                  ["<div class=\"¤1n1\">[^<]+?</div>" ""]
+
+                                  [ "<script charset=\"utf-8\" src=\"http://ws.amazon.com[^<]+?</script>" ""]
+
+                                  ["<div class=\"¤tla\"><a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a></div>" ""]
+
+                                  ["<script><!--
+amazon_ad_tag .+?</script>
+<script src=\"http://www.assoc-amazon.com/s/ads.js\"></script>" 
+                                   ""]
+
+                                  ;; ["<div id=\"disqus_thread\"></div><script>.+?</script><a href.+Disqus</span></a>" ""]
+                                  ;; ["<footer>.+?</footer>" ""]
+
+                                  ]
+                                 "FIXEDCASE" "LITERAL")
+    )
+)

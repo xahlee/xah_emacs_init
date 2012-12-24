@@ -7,11 +7,11 @@
 (defun make-blogger-entry ()
   "Make a blogger entry.
 
-Copy the current buffer.
-create a new buffer. Make it html-mode.
-paste it in.
-remove the header and footer.
-fix all relative links to http://xahlee.org/ links.
+Copy the current buffer or text selection.
+Create a new buffer. Make it html-mode.
+Paste it in.
+Remove the header and footer.
+Fix all relative links to http://xahlee.org/ links.
 add a “Perm URL with updates: ‹link›” sentence at top.
 
 This new content is ready to be posted to blogger."
@@ -46,68 +46,40 @@ This new content is ready to be posted to blogger."
           (setq cssStr "")
           ) ) )
 
-    ;; remove header
+    ;; remove beginning to <body>
     (goto-char 1)
-    (when (search-forward "<div class=\"nav\">" nil t)
-      (search-forward "</div>")
-      (delete-region (point) (point-min) )
+    (when (search-forward "<body>" nil "NOERROR")
+      (delete-region 1 (point) )
       )
 
-    ;; remove fixed strings. ads, banners, donation box.
-    (replace-pairs-region 1 (point-max)
- '(
+    ;; remove footer to end
+    (goto-char (point-max))
+    (when (search-backward "<footer>" nil t)
+      (delete-region (point) (point-max) )
+      )
 
-["<script><!--
-google_ad_client = \"pub-5125343095650532\";
-/* 728x90, created 8/12/09 */
-google_ad_slot = \"8521101965\";
-google_ad_width = 728;
-google_ad_height = 90;
-//-->
-</script>
-<script type=\"text/javascript\"
-src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
-</script>" ""]
+    ;; remove disqus tag to end
+    (goto-char (point-max))
+    (when (search-backward "<div id=\"disqus_thread\">" nil t)
+      (delete-region (point) (point-max) )
+      )
 
-["<script charset=\"utf-8\" src=\"http://ws.amazon.com/widgets/q?rt=tf_sw&amp;ServiceVersion=20070822&amp;MarketPlace=US&amp;ID=V20070822/US/xahhome-20/8002/97c57146-4835-472a-a8d9-d43977e801f5\"></script>" ""]
+    (xahsite-remove-ads 1 (point-max))
 
-["<div id=\"disqus_thread\"></div><script>(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://xahlee.disqus.com/embed.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><a href=\"http://disqus.com\" class=\"dsq-brlink\">blog comments powered by <span class=\"logo-disqus\">Disqus</span></a>" ""]
+    ;; change amazong ad id
+    (replace-pairs-region 1 (point-max) [["?tag=xahh-20" "?tag=xahblg-20"]] )
 
-["<script><!--
-amazon_ad_tag = \"xahh-20\"; amazon_ad_width = \"728\"; amazon_ad_height = \"90\"; amazon_ad_logo = \"hide\"; amazon_color_border = \"7E0202\";//--></script>
-<script src=\"http://www.assoc-amazon.com/s/ads.js\"></script>" ""]
-
-["?tag=xahh-20" "?tag=xahblg-20"]
- ))
-
-;; remove header, author, misc ads boxes, etc.
-   (replace-regexp-pairs-region 1 (point-max) '(
+;; remove header, author, etc.
+(replace-regexp-pairs-region 1 (point-max)
+[
+["<header>[ \n[:graph:]]+</header>" ""]
+["<nav class=\"n1\"><a href=\"\\([^\"]+?\\)\">\\([^\"]+?\\)</a></nav>" ""]
 ["<h1>[^<]+?</h1>" ""]
-["<p><span class=\"b3\">[^<]+?</span></p>" ""]
-["<p class=\"αuth\">Xah Lee, [-<>/ ,…time0-9]+?</p>" ""]
-["<div class=\"¤xd\"><a href=\".+?/ads.html\">Advertise Here</a></div>" ""]
-["<div class=\"βds\">[ \n]+</div>" ""]
-["<div class=\"βshare\">[[:ascii:]]+?<img src=\"http://www.reddit.com/static/spreddit1.gif\" /></a>
-</div>" ""]
-))
-
-    ;; remove blogger link
-    (goto-char 1)
-    (when
-        (search-forward "<div class=\"blgcmt\"><a href=" nil t)
-      (let (pt1 pt2 )
-        (beginning-of-line)
-        (setq pt1 (point) )
-        (end-of-line)
-        (setq pt2 (point) )
-        (delete-region pt1 pt2 ) ) )
-
-    ;; remove footer
-    (when (progn
-            (goto-char (point-max))
-            (search-backward "<footer>" nil t))
-      (delete-region (line-beginning-position) (point-max) )
-      )
+["<p class=\"author_0\">Xah Lee, [-<>/ ,…time0-9]+?</time></p>" ""]
+["<!-- http://xahlee.blogspot.com/\\([^ ]+?\\) -->" ""]
+["<footer>\\([^<]+?\\)</footer>" ""]
+]
+)
 
     ;; change relative links to full http://… URL
     (goto-char 1)
@@ -149,9 +121,7 @@ amazon_ad_tag = \"xahh-20\"; amazon_ad_width = \"728\"; amazon_ad_height = \"90\
     (goto-char 1)
     (insert cssStr "\n\n")
 
-(replace-regexp-pairs-region 1 (point-max) '(
-["\n\n+" "\n\n"]
-))
+(replace-regexp-pairs-region 1 (point-max) [["\n\n+" "\n\n"]])
 
     (goto-char 1)
 

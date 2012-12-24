@@ -68,7 +68,7 @@
 (global-set-key (kbd "<f7> 4") 'ibuffer)
 (global-set-key (kbd "<f7> 5") 'recentf-open-files)
 
-(global-set-key (kbd "<f7> 6") 'open-in-desktop)
+(global-set-key (kbd "<f7> 6") 'ergoemacs-open-in-desktop)
 (global-set-key (kbd "<f7> 7") 'xah-open-file-at-cursor)
 (global-set-key (kbd "<f7> 8") 'dired-jump)
 (global-set-key (kbd "<f7> 9") 'set-input-method-to-chinese)
@@ -390,3 +390,5 @@ For `nxml-mode-hook'."
 
 ;; ;; 2012-12-19 fix
 ;; (global-set-key (kbd "M-'") 'compact-uncompact-block)
+
+(global-set-key (kbd "<f1> <f2>") 'helm-mini)
