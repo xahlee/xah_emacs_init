@@ -203,7 +203,7 @@ When called in lisp code, if ξstring is non-nil, returns a changed string.  If 
 
 WARNING: this implementation is for my personal use.
 Is does not cover all html tags or convert all html entities.
-"
+For robust solution you might use: 「lynx -dump -display_charset=utf-8 URL」."
   (interactive
    (if (region-active-p)
        (list nil (region-beginning) (region-end))
@@ -215,57 +215,17 @@ Is does not cover all html tags or convert all html entities.
     (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
     (setq outputStr
           (let ((case-fold-search t) (tempStr inputStr))
-(setq tempStr (replace-pairs-in-string tempStr
- '(
-["<html>" ""] ["</html>" ""]
-["<head>" ""] ["</head>" ""]
-["<title>" ""] ["</title>" ""]
-["<body>" ""] ["</body>" ""]
-["<pre>" ""] ["</pre>" ""]
-
-["<h1>" ""] ["</h1>" ""]
-["<h2>" ""] ["</h2>" ""]
-["<h3>" ""] ["</h3>" ""]
-["<h4>" ""] ["</h4>" ""]
-["<h5>" ""] ["</h5>" ""]
-["<p>" ""] ["</p>" ""]
-
-["<i>" ""] ["</i>" ""]
-["<b>" ""] ["</b>" ""]
-["<b class=\"w\">" ""] ["</b>" ""]
-["<kbd>" ""] ["</kbd>" ""]
-
-["<ul>" ""] ["</ul>" ""]
-["<ol>" ""] ["</ol>" ""]
-["<li>" ""] ["</li>" ""]
-["<blockquote>" ""] ["</blockquote>" ""]
-
-["<table>" ""] ["</table>" ""]
-["<table class=\"nrm\">" ""] ["</table>" ""]
-["<caption>" ""] ["</caption>" ""]
-["<tr>" ""] ["</tr>" ""]
-["<td>" ""] ["</td>" ""]
-["<th>" ""] ["</th>" ""]
-
-["<br>" ""]
-["<hr>" ""]
-
-["<mark class=\"b\">" ""] ["</mark>" ""]
-["<mark class=\"r\">" ""] ["</mark>" ""]
-
-)))
-
 (setq tempStr (replace-regexp-pairs-in-string tempStr '(
-["<span class=\"[^\"]+\">" ""] ["</span>" ""]
-["<var class=\"[^\"]+\">" ""] ["</var>" ""]
-["<pre class=\"[^\"]+\">" ""] ["</pre>" ""]
-["<div class=\"[^\"]+\">" ""] ["</div>" ""]
-["<a href=\"[^\"]+\">" ""] ["</a>" ""]
-)))
+["<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" "\\2 〔 \\1 〕"]
+["<img src=\"\\([^\"]+?\\)\" alt=\"\\([^\"]+?\\)\" width=\"[0-9]+\" height=\"[0-9]+\" */?>" "〔IMAGE “\\2” \\1 〕"]
+["<[a-z0-9]+ */?>" ""]
+["<[a-z0-9]+ class=\"[^\"]+\">" ""]
+["</[a-z0-9]+>" ""]
 
-(setq tempStr (replace-pairs-in-string tempStr
- '(
-["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">"]
+["&amp;" "&"]
+["&lt;" "<"]
+["&gt;" ">"]
+
 )))
 
 tempStr

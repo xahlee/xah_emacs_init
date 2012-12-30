@@ -321,7 +321,7 @@ See also: `copy-to-register-1', `insert-register'."
 For example, this line
  /Users/xah/web/ergoemacs_org/emacs/emacs.html
 becomes
- 〈Xah's Emacs Tutorial〉 http://ergoemacs.org/emacs/emacs.html
+ 〈Xah's Emacs Tutorial〉 @ http://ergoemacs.org/emacs/emacs.html
 
 The title came from HTML file's title tag.
 File path must be a URL scheme, full path, or relative path. See: `xahsite-web-path-to-filepath'.
@@ -329,7 +329,7 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 This is Xah Lee's personal command assuming a particular dir structure."
   (interactive)
   (let* (
-         (bds (get-selection-or-unit 'filepath ))
+         (bds (get-selection-or-unit 'glyphs ))
          (inputStr (elt bds 0) )
          (p1 (elt bds 1) )
          (p2 (elt bds 2) )
@@ -343,7 +343,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
     (setq myTitle (replace-pairs-in-string myTitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]) )
 
     (delete-region p1 p2)
-    (insert "〈" myTitle "〉\n" (xahsite-filepath-to-url myFile))
+    (insert "〈" myTitle "〉 @ " (xahsite-filepath-to-url myFile))
     ))
 
 (defun xah-copy-url-current-file ()

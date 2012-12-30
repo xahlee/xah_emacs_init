@@ -921,7 +921,7 @@ They will be changed into a html link in various formats, depending on the input
 
 If there is text selection, use it as input."
   (interactive)
-  (let* ((myPath (elt (get-selection-or-unit 'filepath ) 0) ))
+  (let* ((myPath (elt (get-selection-or-unit 'glyphs ) 0) ))
     (cond
      ((and (string-match-p "\\`http://xahlee\.blogspot\.com/" myPath)) (blogger-linkify))
      ((and (string-match-p "\\`http://wordy-english\.blogspot\.com/" myPath)) (blogger-linkify))

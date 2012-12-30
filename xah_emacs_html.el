@@ -560,26 +560,33 @@ google_ad_client")
      fileList)
     ))
 
-(defun extract-url (htmlText)
+(defun extract-url (htmlText &optional convert-relative-URL-p)
   "Returns a list of URLs in the HTML text string htmlText.
 
 When called interactively, use text selection as input, or current text block between empty lines. Output URLs in a buffer named 「*extract URL output*」.
 
-When called in a program, the first URL is the last list element.
+If `universal-argument' 【Ctrl+u】 is called first, tries to convert relative URL to HTTP form. 
 
 WARNING: this function extract all text of the form 「<a … href=\"…\" …>」 by a simple regex. It does not extract single quote form 「href='…'」 nor 「src=\"…\"」 , nor other considerations."
-  (interactive (list (elt (get-selection-or-unit 'block) 0) ) )
+  (interactive (list (elt (get-selection-or-unit 'block) 0) current-prefix-arg ) )
   (let ((urlList (list)))
     (with-temp-buffer
       (insert htmlText)
       (goto-char 1)
-      (while (re-search-forward "<a.+?href=\"\\([^\"]+?\\)\".+?>" nil t)
+      (while (re-search-forward "<a.+?href=\"\\([^\"]+?\\)\".+?>" nil "NOERROR")
         (setq urlList (cons (match-string 1) urlList))
         ))
+    (setq urlList (reverse urlList) )
+    (when convert-relative-URL-p
+      (setq urlList
+            (mapcar
+             (lambda (ξx)
+               (xahsite-filepath-to-url (xahsite-href-value-to-filepath ξx (buffer-file-name) )) )
+             urlList) ) )
 
     (when (called-interactively-p 'any)
         (with-output-to-temp-buffer "*extract URL output*"
-          (mapc (lambda (ξx) (princ ξx) (terpri) ) (reverse urlList))
+          (mapc (lambda (ξx) (princ ξx) (terpri) ) urlList)
           )
       )
     urlList
