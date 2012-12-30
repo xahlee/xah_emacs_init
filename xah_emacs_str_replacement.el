@@ -131,7 +131,7 @@ See also: `remove-punctuation-trailing-redundant-space'."
           [": " "："]
           ["; " "；"]
           ["?" "？"] ; no space after
-          ["! " "！"]
+          ["!" "！"]
 
           ;; for inside HTML
           [".</" "。</"]
@@ -145,9 +145,9 @@ See also: `remove-punctuation-trailing-redundant-space'."
                                ((string= ξ-to-direction "chinese") ξ-english-chinese-punctuation-map)
                                ((string= ξ-to-direction "english") (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map))
                                ((string= ξ-to-direction "auto")
-                                (if (string-match "。\\|，\\|？\\|！\\|：" (buffer-substring-no-properties p1 p2))
-                                    (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map)
+                                (if (string-match "," (buffer-substring-no-properties p1 p2))
                                   ξ-english-chinese-punctuation-map
+                                  (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map)
                                   ))
 
                                (t (error "Your 3rd argument 「%s」 isn't valid." ξ-to-direction)) ) ) ) )

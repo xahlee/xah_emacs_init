@@ -14,6 +14,7 @@
 (define-abbrev-table 'global-abbrev-table '(
 
     ("eg" "e.g.")
+    ("ie" "i.e.")
     ("mac" "Mac")
     ("osx" "OS X")
     ("macosx" "Mac OS X")

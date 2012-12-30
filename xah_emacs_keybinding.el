@@ -138,6 +138,9 @@
 (global-set-key (kbd "<kp-divide>") 'ergoemacs-previous-user-buffer)
 (global-set-key (kbd "<kp-multiply>") 'ergoemacs-next-user-buffer)
 
+(global-set-key (kbd "<C-kp-divide>") 'ergoemacs-previous-emacs-buffer)
+(global-set-key (kbd "<C-kp-multiply>") 'ergoemacs-next-emacs-buffer)
+
 (global-set-key (kbd "<kp-decimal>") 'other-window)
 (global-set-key (kbd "<kp-0>") 'delete-window)
 (global-set-key (kbd "<kp-1>") 'delete-other-windows)
@@ -197,7 +200,6 @@
 (global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)
 (global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
 
-(global-set-key (kbd "<kp-8> <kp-7>") 'shell)
 (global-set-key (kbd "<kp-8> <kp-8>") 'run-current-file)
 
 (global-set-key (kbd "<kp-9>") 'isearch-forward)

@@ -257,6 +257,7 @@ Is does not cover all html tags or convert all html entities.
 
 (setq tempStr (replace-regexp-pairs-in-string tempStr '(
 ["<span class=\"[^\"]+\">" ""] ["</span>" ""]
+["<var class=\"[^\"]+\">" ""] ["</var>" ""]
 ["<pre class=\"[^\"]+\">" ""] ["</pre>" ""]
 ["<div class=\"[^\"]+\">" ""] ["</div>" ""]
 ["<a href=\"[^\"]+\">" ""] ["</a>" ""]

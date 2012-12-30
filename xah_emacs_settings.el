@@ -27,6 +27,7 @@
 
 (setq org-return-follows-link t)
 
+(winner-mode 1)
 
 
 
