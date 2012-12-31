@@ -146,7 +146,6 @@
 (global-set-key (kbd "<kp-1>") 'delete-other-windows)
 (global-set-key (kbd "<kp-2>") 'split-window-vertically)
 (global-set-key (kbd "<kp-3>") 'xah-open-file-at-cursor)
-(global-set-key (kbd "<C-kp-3>") 'xah-open-file-from-clipboard)
 
 (global-set-key (kbd "<kp-4> <kp-4>") 'convert-english-chinese-punctuation)
 (global-set-key (kbd "<kp-4> <kp-5>") 'remove-punctuation-trailing-redundant-space)
@@ -187,7 +186,7 @@
 (define-prefix-command 'xah-numpad-keymap)
 (global-set-key (kbd "<kp-7>") 'xah-numpad-keymap)
 
-(global-set-key (kbd "<kp-7> <kp-0>") (lambda () (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
+(global-set-key (kbd "<kp-7> <kp-0>") (lambda () "open emacs keys" (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
 (global-set-key (kbd "<kp-7> <kp-1>") (lambda () (interactive) (find-file "~/web/xahlee_info/js/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-2>") (lambda () (interactive) (find-file "~/web/xahlee_info/comp/blog.html")))
 (global-set-key (kbd "<kp-7> <kp-3>") (lambda () (interactive) (find-file "~/web/ergoemacs_org/emacs/blog.html")))
@@ -201,6 +200,7 @@
 (global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
 
 (global-set-key (kbd "<kp-8> <kp-8>") 'run-current-file)
+(global-set-key (kbd "<kp-8> <kp-3>") 'xah-open-file-from-clipboard)
 
 (global-set-key (kbd "<kp-9>") 'isearch-forward)
 (global-set-key (kbd "<C-kp-9>") 'isearch-backward)

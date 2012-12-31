@@ -435,6 +435,38 @@ Add today's date to the form
         (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d"))
                 ) ) ) ))
 
+(defun xah-update-title (newTitle)
+  "Update a HTML article's title.
+Update the <title>…</title> and <h1>…</h1> of current buffer."
+  (interactive
+   (let (oldTitle)
+     (save-excursion
+       (goto-char 1)
+       (search-forward-regexp "<title>\\([^<]+?\\)</title>")
+       (setq oldTitle (match-string 1 ) )
+       )
+     (list (read-string "New title:" oldTitle nil oldTitle "INHERIT-INPUT-METHOD")) ) )
+  (let (p1 p2)
+    (save-excursion
+      (goto-char 1)
+
+      (progn (search-forward "<title>")
+             (setq p1 (point) )
+             (search-forward "<")
+             (setq p2 (- (point) 1) )
+             (delete-region p1 p2 )
+             (goto-char p1)
+             (insert newTitle ) )
+
+      (progn (search-forward "<h1>")
+             (setq p1 (point) )
+             (search-forward "<")
+             (setq p2 (- (point) 1) )
+             (delete-region p1 p2 )
+             (goto-char p1)
+             (insert newTitle ) )
+      ) ))
+
 (defun xah-update-page-tag-old (p1 p2)
   "Update html page navigation tags.
 
@@ -565,7 +597,7 @@ google_ad_client")
 
 When called interactively, use text selection as input, or current text block between empty lines. Output URLs in a buffer named 「*extract URL output*」.
 
-If `universal-argument' 【Ctrl+u】 is called first, tries to convert relative URL to HTTP form. 
+If `universal-argument' 【Ctrl+u】 is called first, tries to convert relative URL to HTTP form.
 
 WARNING: this function extract all text of the form 「<a … href=\"…\" …>」 by a simple regex. It does not extract single quote form 「href='…'」 nor 「src=\"…\"」 , nor other considerations."
   (interactive (list (elt (get-selection-or-unit 'block) 0) current-prefix-arg ) )
@@ -591,4 +623,3 @@ WARNING: this function extract all text of the form 「<a … href=\"…\" …>�
       )
     urlList
     ))
-

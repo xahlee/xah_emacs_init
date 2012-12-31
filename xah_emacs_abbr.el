@@ -88,6 +88,7 @@
     ("8ahd" "American Heritage Dictionary")
     ("8wm" "Window Manager")
     ("8el" "emacs lisp")
+    ("8os" "Operating System")
 
 ;; for programers
     ("8hex" "hexadecimal")
