@@ -198,7 +198,7 @@ input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
 
     (if (string-match-p "\\`https*://" ξs)
         (if (xahsite-url-is-xah-website-p ξs)
-            (find-file (xahsite-url-to-filepath ξs "addFileName" "ξredirect"))
+            (find-file (xahsite-url-to-filepath ξs "addFileName" ))
           (browse-url ξs)
           )
       (progn ; not starting “http://”
@@ -343,7 +343,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
     (setq myTitle (replace-pairs-in-string myTitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]) )
 
     (delete-region p1 p2)
-    (insert "〈" myTitle "〉@ " (xahsite-filepath-to-url myFile))
+    (insert "〈" myTitle "〉\n" (xahsite-filepath-to-url myFile))
     ))
 
 (defun xah-copy-url-current-file ()

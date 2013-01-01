@@ -85,29 +85,6 @@ will become
 
 
 
-(defun update-html-title (myTitle)
-  "update html “title” and “h1” tags on current buffer.
-current buffer must be a html page.
-Any <title>…</title> or <h1>…</h1> tag content are changed.
-If there's a text selection, work on text selection, else whole visible buffer."
-  (interactive "sEnter Title:")
-  (let (p1 p2 )
-    (if (region-active-p)
-        (progn (setq p1 (region-beginning) )
-               (setq p2 (region-end) )
-               )
-      (progn (setq p1 (point-min) )
-             (setq p2 (point-max) )
-             )
-      )
-    (save-excursion
-      (replace-regexp-pairs-region p1 p2
-                                   (vector
-                                    (vector "<title>\\([^<]+?\\)</title>" (format "<title>%s</title>" myTitle))
-                                    (vector "<h1>\\([^<]+?\\)</h1>" (format "<h1>%s</h1>" myTitle))
-                                    )
-                                   "FIXEDCASE" "LITERAL") ) ) )
-
 (defun insert-div-x-note ()
   "Insert a HTML markup."
   (interactive)
@@ -425,15 +402,38 @@ Add today's date to the form
   (let (p1 p2)
     (save-excursion
       (goto-char 1)
-      (split-window-vertically)
       (when (search-forward "<p class=\"author_0\">Xah Lee" nil)
         (beginning-of-line)
         (setq p1 (point) )
         (end-of-line)
         (setq p2 (point) )
         (search-backward "</p>")
-        (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d"))
-                ) ) ) ))
+        (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
+        (message "%s" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+) ) ))
+
+(defun update-html-title (myTitle)
+  "update html “title” and “h1” tags on current buffer.
+current buffer must be a html page.
+Any <title>…</title> or <h1>…</h1> tag content are changed.
+If there's a text selection, work on text selection, else whole visible buffer."
+  (interactive "sEnter Title:")
+  (let (p1 p2 )
+    (if (region-active-p)
+        (progn (setq p1 (region-beginning) )
+               (setq p2 (region-end) )
+               )
+      (progn (setq p1 (point-min) )
+             (setq p2 (point-max) )
+             )
+      )
+    (save-excursion
+      (replace-regexp-pairs-region p1 p2
+                                   (vector
+                                    (vector "<title>\\([^<]+?\\)</title>" (format "<title>%s</title>" myTitle))
+                                    (vector "<h1>\\([^<]+?\\)</h1>" (format "<h1>%s</h1>" myTitle))
+                                    )
+                                   "FIXEDCASE" "LITERAL") ) ) )
 
 (defun xah-update-title (newTitle)
   "Update a HTML article's title.
