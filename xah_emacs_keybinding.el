@@ -185,19 +185,64 @@
 
 (define-prefix-command 'xah-numpad-keymap)
 (global-set-key (kbd "<kp-7>") 'xah-numpad-keymap)
-
-(global-set-key (kbd "<kp-7> <kp-0>") (lambda () "open emacs keys" (interactive) (find-file "~/git/xah_emacs_init/xah_emacs_keybinding.el")))
-(global-set-key (kbd "<kp-7> <kp-1>") (lambda () (interactive) (find-file "~/web/xahlee_info/js/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-2>") (lambda () (interactive) (find-file "~/web/xahlee_info/comp/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-3>") (lambda () (interactive) (find-file "~/web/ergoemacs_org/emacs/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-4>") (lambda () (interactive) (find-file "~/web/xahlee_info/math/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-5>") (lambda () (interactive) (find-file "~/web/wordyenglish_com/chinese/blog.html")))
-(global-set-key (kbd "<kp-7> <kp-6>") (lambda () (interactive) (find-file "~/web/wordyenglish_com/lit/blog.html")))
-
-
 (global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
 (global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)
 (global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
+(global-set-key (kbd "<kp-7> <kp-0>") 'xah-open-file-fast)
+
+(defun xah-open-file-fast ()
+  "Prompt to open a file from a pre-defined set by entering a number."
+  (interactive)
+  (let (
+        (ξfileList
+         '(
+;;  0 
+           "~/git/xah_emacs_init/xah_emacs_keybinding.el"
+;;  1 
+           "~/web/xahlee_info/comp/blog.html"
+;;  2 
+           "~/web/xahlee_info/js/blog.html"
+;;  3 
+           "~/web/xahlee_info/math/blog.html"
+;;  4 
+           "~/web/wordyenglish_com/chinese/blog.html"
+;;  5 
+           "~/web/wordyenglish_com/lit/blog.html"
+;;  6 
+           "~/web/ergoemacs_org/emacs/blog.html"
+;;  7 
+"~/web/xahmusic_org/music/blog.html"
+;;  8 
+"~/web/xahsl_org/sl/blog.html"
+;;  9 
+"~/web/xahlee_org/sex/blog.html"
+;; 10 
+"~/web/xahporn_org/porn/blog.html"
+;; 11 
+"~/web/xaharts_org/arts/blog.html"
+;; 12 
+"~/web/xahlee_org/Periodic_dosage_dir/pd.html"
+;; 13 
+;; 14 
+;; 15 
+           )
+         )
+        (promptStr "")
+        ξnumber
+        )
+    (let ((ξi 0))
+      (while (< ξi (length ξfileList))
+        (setq promptStr
+              (concat promptStr  "[" (number-to-string ξi) "]" (elt ξfileList ξi) "\n")
+              )
+        (setq ξi (1+ ξi) )
+        )
+      )
+    (setq promptStr (concat promptStr "Enter a number:") )
+    (setq ξnumber (read-number promptStr) )
+    (find-file (elt ξfileList ξnumber) )
+    )
+  )
 
 (global-set-key (kbd "<kp-8> <kp-8>") 'run-current-file)
 (global-set-key (kbd "<kp-8> <kp-3>") 'xah-open-file-from-clipboard)

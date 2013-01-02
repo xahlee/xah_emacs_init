@@ -14,7 +14,7 @@
 
 (defun xwe-move-word-to-page (moveCode)
   "take current selection or block of text, ask which page to move it to."
-  (interactive "sEnter a character: [s]sat [g]gre [w]writer [e]easy [a]arcane [l]slang [i]informal [h]hyphen [c]combo [n]noun [t]noun things [p]poesy [f]foreign [3]special:")
+  (interactive "sEnter a character: [s]sat [g]gre [w]writer [e]easy [a]arcane [l]slang [i]informal [h]hyphen [c]combo [n]noun [t]noun things [8]noun abstract [p]poesy [f]foreign [3]special:")
   (let (p1 p2 bds ξfile ξwordText)
     (setq bds (get-selection-or-unit 'block))
     (setq ξwordText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
@@ -30,9 +30,10 @@
      ((string= moveCode "i") (setq ξfile "informal.html" ))
      ((string= moveCode "l") (setq ξfile "slang.html" ))
      ((string= moveCode "n") (setq ξfile "noun.html" ))
+     ((string= moveCode "t") (setq ξfile "noun_things.html" ))
+     ((string= moveCode "8") (setq ξfile "noun_abs.html" ))
      ((string= moveCode "p") (setq ξfile "poesy.html" ))
      ((string= moveCode "s") (setq ξfile "satwords.html" ))
-     ((string= moveCode "t") (setq ξfile "noun_things.html" ))
      ((string= moveCode "w") (setq ξfile "writerwords.html" ))
 
      (t (error "Your letter 「%s」 is not one of the allowed." moveCode ))

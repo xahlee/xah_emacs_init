@@ -223,7 +223,7 @@ The clipboard should contain a file path or url to xah site. Open that file in e
            (yank)
            (buffer-string) ) ) )
     (if (string-match-p "\\`http://" ξs)
-        (find-file (xahsite-url-to-filepath ξs "addFileName" "ξredirect"))
+        (find-file (xahsite-url-to-filepath ξs "addFileName"))
       (progn ; not starting “http://”
         (find-file (xahsite-web-path-to-filepath (remove-uri-fragment ξs) default-directory)) ) ) ))
 
