@@ -29,6 +29,8 @@
 
 (winner-mode 1)
 
+(blink-cursor-mode 0 )
+
 
 
 ;; (defun turn-spell-checking-on ()

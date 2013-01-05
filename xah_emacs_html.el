@@ -302,6 +302,23 @@ Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
 ["F9" "<kbd>F9</kbd>"]
 ["Fn" "<kbd>Fn</kbd>"]
 
+["kp0" "<kbd>Keypad 0</kbd>"]
+["kp1" "<kbd>Keypad 1</kbd>"]
+["kp2" "<kbd>Keypad 2</kbd>"]
+["kp3" "<kbd>Keypad 3</kbd>"]
+["kp4" "<kbd>Keypad 4</kbd>"]
+["kp5" "<kbd>Keypad 5</kbd>"]
+["kp6" "<kbd>Keypad 6</kbd>"]
+["kp7" "<kbd>Keypad 7</kbd>"]
+["kp8" "<kbd>Keypad 8</kbd>"]
+["kp9" "<kbd>Keypad 9</kbd>"]
+
+["kp+" "<kbd>Keypad +</kbd>"]
+["kp-" "<kbd>Keypad -</kbd>"]
+["kp*" "<kbd>Keypad *</kbd>"]
+["kp/" "<kbd>Keypad /</kbd>"]
+
+
 ["←" "<kbd>←</kbd>"]
 ["→" "<kbd>→</kbd>"]
 ["↑" "<kbd>↑</kbd>"]

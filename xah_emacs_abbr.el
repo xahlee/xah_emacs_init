@@ -221,7 +221,7 @@
     ("3f0drm" "find . -depth -empty -type d -exec rmdir {} ';'")
     ("3chmod" "find . -type f -exec chmod 644 {} ';'")
     ("3chmod2" "find . -type d -exec chmod 755 {} ';'")
-    ("3lynx" "lynx -dump -display_charset=utf-8 -width=100")
+    ("3lynx" "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
 
 ; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/ 
 
