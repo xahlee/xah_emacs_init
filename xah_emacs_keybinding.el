@@ -158,37 +158,13 @@
 (global-set-key (kbd "<C-kp-5>") 'cycle-font-2)
 (global-set-key (kbd "<C-kp-6>") 'cycle-font-forward)
 
-;; (setq ε-frequently-used-files  [
-;; "~/git/xah_emacs_init/xah_emacs_keybinding.el"
-;; "~/web/xahlee_info/js/blog.html"
-;; "~/web/xahlee_info/comp/blog.html"
-;; "~/web/ergoemacs_org/emacs/blog.html"
-;; "~/web/xahlee_info/math/blog.html"
-;; "~/web/wordyenglish_com/chinese/blog.html"
-;; "~/web/wordyenglish_com/lit/blog.html"
-;; ] )
-
-;; (defun open-file-fast (εn)
-;;   ""
-;;   (interactive)
-;;   (let ()
-;;     (find-file (elt ε-frequently-used-files εn))
-;;     ))
-
-;; (global-set-key (kbd "<kp-7> <kp-0>") (open-file-fast 0))
-;; (global-set-key (kbd "<kp-7> <kp-1>") (open-file-fast 1))
-;; (global-set-key (kbd "<kp-7> <kp-2>") (open-file-fast 2))
-;; (global-set-key (kbd "<kp-7> <kp-3>") (open-file-fast 3))
-;; (global-set-key (kbd "<kp-7> <kp-4>") (open-file-fast 4))
-;; (global-set-key (kbd "<kp-7> <kp-5>") (open-file-fast 5))
-;; (global-set-key (kbd "<kp-7> <kp-6>") (open-file-fast 6))
-
 (define-prefix-command 'xah-numpad-keymap)
 (global-set-key (kbd "<kp-7>") 'xah-numpad-keymap)
+(global-set-key (kbd "<kp-7> <kp-0>") 'xah-open-file-fast)
+(global-set-key (kbd "<kp-7> <kp-3>") 'xah-open-file-from-clipboard)
 (global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
 (global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)
 (global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
-(global-set-key (kbd "<kp-7> <kp-0>") 'xah-open-file-fast)
 
 (defun xah-open-file-fast ()
   "Prompt to open a file from a pre-defined set by entering a number."
@@ -245,7 +221,6 @@
   )
 
 (global-set-key (kbd "<kp-8> <kp-8>") 'run-current-file)
-(global-set-key (kbd "<kp-8> <kp-3>") 'xah-open-file-from-clipboard)
 
 (global-set-key (kbd "<kp-9>") 'isearch-forward)
 (global-set-key (kbd "<C-kp-9>") 'isearch-backward)

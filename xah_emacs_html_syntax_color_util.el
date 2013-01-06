@@ -65,7 +65,6 @@ Returns a vector [langCode pos1 pos2], where pos1 pos2 are the boundary of the t
           (setq p1 (region-beginning) )
           (setq p2 (region-end) )
           (setq langCode (read-string "langcode:"))
- (message "%s %d %d" langCode p1 p2)
           (vector langCode p1 p2)
           )
       (save-excursion
@@ -74,7 +73,6 @@ Returns a vector [langCode pos1 pos2], where pos1 pos2 are the boundary of the t
         (setq p1 (search-forward ">"))    ; text content begin
         (search-forward "</pre>")
         (setq p2 (search-backward "<"))   ; text content end
-(message "%s %d %d" langCode p1 p2)
         (vector langCode p1 p2)
  ) ) ))
 
@@ -176,13 +174,22 @@ This command does the reverse of `htmlize-pre-block'."
          (inputStr (buffer-substring-no-properties p1 p2) )
          )
 
-    (if (string-match "<span class=" inputStr)
+    (message "%s" langCode)
+    (if (string-match "<span class=\\|&amp;\\|&lt;\\|&gt;" inputStr)
         (dehtmlize-span-region p1 p2)
-      (progn
-        (delete-region p1 p2)
-        (insert (ξhtmlize-string (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]+\\'" "\n" inputStr)) (elt (cdr (assoc langCode langCodeMap)) 0)))
-          )
-      ) ) )
+      (progn               ;; do htmlize
+        (let (
+              langCodeResult
+              ξmode-name)
+          (setq langCodeResult (assoc langCode langCodeMap))
+          (if (eq langCodeResult nil)
+              (progn (error "Your lang code 「%s」 is not recognized." langCode))
+            (progn
+              (save-excursion 
+                (setq ξmode-name (elt (cdr langCodeResult) 0))
+                (delete-region p1 p2)
+                (insert (ξhtmlize-string (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]+\\'" "\n" inputStr)) ξmode-name))
+                )) )) )) ))
 
 (defun dehtmlize-span-region (p1 p2)
   "Delete HTML “span” tags in region.

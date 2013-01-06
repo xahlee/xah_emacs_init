@@ -835,7 +835,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
 "
   (interactive)
   (let* (
-         (bds (get-selection-or-unit 'glyphs))
+         (bds (get-selection-or-unit 'filepath))
          (inputStr (elt bds 0) )
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
@@ -921,7 +921,7 @@ They will be changed into a html link in various formats, depending on the input
 
 If there is text selection, use it as input."
   (interactive)
-  (let* ((myPath (elt (get-selection-or-unit 'glyphs ) 0) ))
+  (let* ((myPath (elt (get-selection-or-unit 'filepath ) 0) ))
     (cond
      ((and (string-match-p "\\`http://xahlee\.blogspot\.com/" myPath)) (blogger-linkify))
      ((and (string-match-p "\\`http://wordy-english\.blogspot\.com/" myPath)) (blogger-linkify))

@@ -29,6 +29,7 @@
     ("8intro" "introduction")
 
     ("8b" "because")
+    ("8pls" "please")
     ("8ex" "example")
     ("84ex" "For example")
     ("8atm" "at the moment")
