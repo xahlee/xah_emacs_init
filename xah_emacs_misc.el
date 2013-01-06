@@ -165,6 +165,30 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 
+(defun xah-open-file-fast (openCode)
+  "Prompt to open a file from a pre-defined set."
+  (interactive "sOpen file: [3]emacs [4]comp [5]js [6]math [l]lit [c]chinese [m]music [a]art [s]sl [x]sex [p]porn [d]pd [k]keys:")
+  (let (ξfile )
+    (setq ξfile
+          (cond
+           ((string= openCode "3") "~/web/ergoemacs_org/emacs/blog.html" )
+           ((string= openCode "4") "~/web/xahlee_info/comp/blog.html" )
+           ((string= openCode "5") "~/web/xahlee_info/js/blog.html" )
+           ((string= openCode "6") "~/web/xahlee_info/math/blog.html" )
+           ((string= openCode "l") "~/web/wordyenglish_com/lit/blog.html" )
+           ((string= openCode "c") "~/web/wordyenglish_com/chinese/blog.html" )
+           ((string= openCode "m") "~/web/xahmusic_org/music/blog.html" )
+           ((string= openCode "a") "~/web/xaharts_org/arts/blog.html" )
+           ((string= openCode "s") "~/web/xahsl_org/sl/blog.html" )
+           ((string= openCode "x") "~/web/xahlee_org/sex/blog.html" )
+           ((string= openCode "p") "~/web/xahporn_org/porn/blog.html" )
+           ((string= openCode "d") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
+           ((string= openCode "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
+           (t (error "You typed 「%s」, it doesn't associate with a file." openCode ))
+           )
+          )
+    (find-file ξfile ) ) )
+
 (defun xah-open-file-at-cursor ()
   "Open the file path under cursor.
 

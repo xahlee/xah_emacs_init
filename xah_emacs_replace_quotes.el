@@ -159,7 +159,7 @@ Generate a report of the replaced strings in a separate buffer."
       )
     ))
 
-(defun curly-quotes-to-emacs-function-tag (p1 p2)
+(defun curly-quotes-to-emacs-function-tag-old-2013-01-05 (p1 p2)
   "Replace curly quoted “elisp function” names to HTML markup.
 
 For example, the text:
@@ -223,6 +223,74 @@ Some issues:
                 ) ) ) )
         (when (> ξi 0)
           (occur "<var class=\"εf\">[-a-z0-9]+</var>" )) ) ) ))
+
+(defun curly-quotes-to-emacs-function-tag (p1 p2)
+  "Replace curly quoted “elisp function” names to HTML markup.
+
+For example, the text:
+ Call “sort-lines” to sort.
+becomes
+ Call <var class=\"εf\">sort-lines</var> to sort.
+
+Works on current text block or text selection.
+
+When called with `universal-argument', work on whole buffer (but respect `narrow-to-region').
+
+When call in lisp program, the arguments p1 p2 are region positions.
+
+Note: a word is changed only if all of the following are true:
+
+① The function name is tightly enclosed in double curly quotes, e.g. “sort-lines” but not “use sort-lines”.
+① `fboundp' on the function name returns true.
+
+This command also makes a report of changed items.
+
+Some issues:
+
+• If the lisp functions name is less or equal to 2 chars, it won't be tagged. e.g. { * + 1+ eq}
+
+• Only words contaning lowercase a to z, 0-9, or hyphen, are checked, even though elisp identifier allows many other chars. e.g. “yas/reload-all”, “Info-copy-current-node-name” (note capital letter).
+
+• Some words are common in other lang, e.g. “while”, “print”, “string”, unix “find”, “grep”, HTML's “kbd” tag, etc. But they are also built-in elisp symbols. This command will tag them, but you may not want that.
+
+• Personal emacs functions will also be tagged. You may not want them to be because they are not standard functions.
+
+• Some functions are from 3rd party libs, and some are not bundled with GNU emacs , e.g. 「'cl」, 「'htmlize」. They may or may not be tagged depending whether they've been loaded."
+  ;; (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ) )
+  (interactive
+   (cond
+    ((equal current-prefix-arg nil)    ; universal-argument not called
+     (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
+    (t                                  ; all other cases
+     (list (point-min) (point-max) )) ) )
+  (let ( inputStr resultStr )
+    (setq inputStr (buffer-substring-no-properties p1 p2) )
+    (setq resultStr (curly-quotes-to-emacs-function-string inputStr))
+    (when  (not (string= inputStr resultStr))
+      (progn
+        (save-excursion 
+          (save-restriction 
+            (narrow-to-region p1 p2)
+            (delete-region p1 p2)
+            (insert resultStr)
+            (occur "<var class=\"εf\">[-a-z0-9]+</var>" )
+            )
+          )) ) ))
+
+(defun curly-quotes-to-emacs-function-string (ξsomeStr)
+  "Replace curly quoted “elisp function” names to HTML markup."
+  (let ( mStr (case-fold-search nil) )
+    (with-temp-buffer 
+      (insert ξsomeStr)
+      (goto-char 1)
+      (while (search-forward-regexp "“\\([-a-z0-9]+\\)”" (point-max) t)
+        (setq mStr (match-string 1) )
+        (when (and (fboundp (intern mStr))
+                   (> (length mStr) 2))
+          (replace-match (concat "<var class=\"εf\">" mStr "</var>") t t)
+          ) )
+      (buffer-string)
+      ) ))
 
 
 (defun curly-quotes-to-bracket (leftBracket rightBracket)
