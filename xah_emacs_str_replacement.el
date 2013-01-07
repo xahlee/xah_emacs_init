@@ -301,6 +301,7 @@ Examples of changes:
 [
  ["\\bcan’t\\b" "can't"]
  ["\\bdon’t\\b" "don't"]
+ ["\\bdoesn’t\\b" "doesn't"]
  ["\\bain’t\\b" "ain't"]
  ["\\bdidn’t\\b" "didn't"]
  ["\\baren’t\\b" "aren't"]
