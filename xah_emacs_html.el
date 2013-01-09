@@ -624,7 +624,12 @@ WARNING: this function extract all text of the form 「<a … href=\"…\" …>�
       (goto-char 1)
       (while (re-search-forward "<a.+?href=\"\\([^\"]+?\\)\".+?>" nil "NOERROR")
         (setq urlList (cons (match-string 1) urlList))
-        ))
+        )
+      (goto-char 1)
+      (while (re-search-forward "<img.+?src=\"\\([^\"]+?\\)\".+?>" nil "NOERROR")
+        (setq urlList (cons (match-string 1) urlList))
+        )
+      )
     (setq urlList (reverse urlList) )
     (when convert-relative-URL-p
       (setq urlList
@@ -634,9 +639,9 @@ WARNING: this function extract all text of the form 「<a … href=\"…\" …>�
              urlList) ) )
 
     (when (called-interactively-p 'any)
-        (with-output-to-temp-buffer "*extract URL output*"
-          (mapc (lambda (ξx) (princ ξx) (terpri) ) urlList)
-          )
+      (with-output-to-temp-buffer "*extract URL output*"
+        (mapc (lambda (ξx) (princ ξx) (terpri) ) urlList)
+        )
       )
     urlList
     ))
