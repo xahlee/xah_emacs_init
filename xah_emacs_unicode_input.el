@@ -24,8 +24,6 @@
 ;; right hand top
 ;; f gcrl
 
-(global-set-key (kbd "C-2 f") 'insert-pair-single-straight-quote) ; ''
-(global-set-key (kbd "C-2 g") 'insert-pair-double-straight-quote) ; ""
 (define-key key-translation-map (kbd "C-2 c") (kbd "=")) ; equal
 (define-key key-translation-map (kbd "C-2 r") (kbd "+")) ; plus
 
@@ -41,44 +39,41 @@
 ;; right hand bottom row
 ;; b mwvz
 
-(global-set-key (kbd "C-2 m") 'insert-pair-corner-bracket) ;「」
-(global-set-key (kbd "C-2 w") 'insert-pair-angle-bracket)        ;〈〉
-(global-set-key (kbd "C-2 b") 'insert-pair-black-lenticular-bracket) ;【】
+(global-set-key (kbd "C-2 m") 'insert-pair-corner-bracket「」)
+(global-set-key (kbd "C-2 w") 'insert-pair-angle-bracket〈〉)
+(global-set-key (kbd "C-2 b") 'insert-pair-black-lenticular-bracket【】)
 
-(global-set-key (kbd "C-2 M") 'insert-pair-white-corner-bracket) ;『』
-(global-set-key (kbd "C-2 W") 'insert-pair-double-angle-bracket) ;《》
-(global-set-key (kbd "C-2 B") 'insert-pair-white-lenticular-bracket) ;〖〗
+(global-set-key (kbd "C-2 M") 'insert-pair-white-corner-bracket『』)
+(global-set-key (kbd "C-2 W") 'insert-pair-double-angle-bracket《》)
+(global-set-key (kbd "C-2 B") 'insert-pair-white-lenticular-bracket〖〗)
 
 
 ;; left hand top row
 ;; ',.p y
 
-(global-set-key (kbd "C-2 p") 'insert-pair-double-angle-quote) ;«»
-(global-set-key (kbd "C-2 y") 'insert-pair-single-angle-quote) ;‹›
+(global-set-key (kbd "C-2 p") 'insert-pair-double-angle-quote«»)
+(global-set-key (kbd "C-2 y") 'insert-pair-single-angle-quote‹›)
 
 
 ;; left hand home row
 ;; aoeu i
 
-(global-set-key (kbd "C-2 u") 'insert-pair-double-curly-quote) ;“”
-(global-set-key (kbd "C-2 i") 'insert-pair-single-curly-quote) ;‘’
+(global-set-key (kbd "C-2 u") 'insert-pair-double-curly-quote“”)
+(global-set-key (kbd "C-2 i") 'insert-pair-single-curly-quote‘’)
 
 
 ;; left hand bottom row
 ;; ;qjk x
 
-(global-set-key (kbd "C-2 x") 'insert-pair-tortoise-shell-bracket)   ;〔〕
+(global-set-key (kbd "C-2 x") 'insert-pair-tortoise-shell-bracket〔〕)
 
 
 ;; bullets and other symbols
 
 
 (define-key key-translation-map (kbd "C-2 0") (kbd "☛")) ; BLACK RIGHT POINTING INDEX
-(define-key key-translation-map (kbd "C-2 2") (kbd "♺")) ; RECYCLING SYMBOL FOR GENERIC MATERIALS
 (define-key key-translation-map (kbd "C-2 3") (kbd "✲")) ; OPEN CENTRE ASTERISK
 (define-key key-translation-map (kbd "C-2 4") (kbd "¤")) ; CURRENCY SIGN
-(define-key key-translation-map (kbd "C-2 5") (kbd "†")) ; dagger
-(define-key key-translation-map (kbd "C-2 %") (kbd "‡")) ; double dagger
 (define-key key-translation-map (kbd "C-2 6") (kbd "▸")) ; BLACK RIGHT-POINTING SMALL TRIANGLE
 (define-key key-translation-map (kbd "C-2 7") (kbd "▮")) ; BLACK VERTICAL RECTANGLE
 (define-key key-translation-map (kbd "C-2 8") (kbd "•")) ; bullet
@@ -86,7 +81,6 @@
 (define-key key-translation-map (kbd "C-2 (") (kbd "◆")) ; black diamond
 (define-key key-translation-map (kbd "C-2 ?") (kbd "�")) ; REPLACEMENT CHARACTER
 (define-key key-translation-map (kbd "C-2 ~") (kbd "〜")) ; WAVE DASH
-(define-key key-translation-map (kbd "C-2 =") (kbd "≈"))  ; ALMOST EQUAL TO
 
 (define-key key-translation-map (kbd "C-2 \\") (kbd "、")) ; IDEOGRAPHIC COMMA
 
@@ -99,18 +93,6 @@
 ;; ‣ triangle bullet
 
 
-
-;; 【Hyper+‹arrow›】
-;; (define-key key-translation-map (kbd "<H-left>") (kbd "←")) ; arrow
-;; (define-key key-translation-map (kbd "<H-right>") (kbd "→"))
-;; (define-key key-translation-map (kbd "<H-up>") (kbd "↑"))
-;; (define-key key-translation-map (kbd "<H-down>") (kbd "↓"))
-
-;; 【Hyper+Shift+‹arrow›】
-;; (define-key key-translation-map (kbd "<H-S-left>") (kbd "⇐"))
-;; (define-key key-translation-map (kbd "<H-S-right>") (kbd "⇒"))
-;; (define-key key-translation-map (kbd "<H-S-up>") (kbd "⇑"))
-;; (define-key key-translation-map (kbd "<H-S-down>") (kbd "⇓"))
 
 (define-key key-translation-map (kbd "C-2 <left>") (kbd "←")) ; arrow
 (define-key key-translation-map (kbd "C-2 <right>") (kbd "→"))

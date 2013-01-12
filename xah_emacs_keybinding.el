@@ -25,7 +25,7 @@
 ;; in linux, <lwindow> is Super 「s」,  while the menu key is 「<menu>」
 (cond
  ((string-equal system-type "windows-nt")
-  (global-set-key (kbd "<lwindow>") 'set-mark-command)
+  (global-set-key (kbd "<lwindow>") 'smex)
   )
  ((string-equal system-type "darwin")
   t )
@@ -35,6 +35,10 @@
 (global-set-key (kbd "C-7") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
 
+;(global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
+;(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
+(global-set-key (kbd "<f11>") 'ergoemacs-next-user-buffer)
+(global-set-key (kbd "<f12>") 'ergoemacs-previous-user-buffer)
 
 (global-set-key (kbd "<f8>") ctl-x-map)
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
@@ -63,9 +67,8 @@
 
 (global-set-key (kbd "M-m") 'hippie-expand)
 
-
-(global-set-key (kbd "<f7> 3") 'bookmark-bmenu-list)
-(global-set-key (kbd "<f7> 4") 'ibuffer)
+(global-set-key (kbd "<f7> 3") 'repeat-complex-command)
+(global-set-key (kbd "<f7> 4") 'xah-open-file-from-clipboard)
 (global-set-key (kbd "<f7> 5") 'recentf-open-files)
 
 (global-set-key (kbd "<f7> 6") 'ergoemacs-open-in-desktop)
@@ -73,6 +76,8 @@
 (global-set-key (kbd "<f7> 8") 'dired-jump)
 (global-set-key (kbd "<f7> 9") 'set-input-method-to-chinese)
 (global-set-key (kbd "<f7> <delete>") 'delete-current-file)
+
+(global-set-key (kbd "<f7> o") 'xah-open-file-fast)
 
 (global-set-key (kbd "<f7> f") 'copy-file-path)
 (global-set-key (kbd "<f7> s") 'ispell-word)
@@ -123,6 +128,70 @@
 (global-set-key (kbd "<f7> i d") 'insert-date)
 (global-set-key (kbd "<f7> i t") 'insert-date-time)
 
+(define-prefix-command 'xah-win-keymap)
+(global-set-key (kbd "<lwindow>") 'xah-win-keymap)
+
+(global-set-key (kbd "<lwindow> 3") 'repeat-complex-command)
+(global-set-key (kbd "<lwindow> 4") 'xah-open-file-from-clipboard)
+(global-set-key (kbd "<lwindow> 5") 'recentf-open-files)
+
+(global-set-key (kbd "<lwindow> 6") 'ergoemacs-open-in-desktop)
+(global-set-key (kbd "<lwindow> 7") 'xah-open-file-at-cursor)
+(global-set-key (kbd "<lwindow> 8") 'dired-jump)
+(global-set-key (kbd "<lwindow> 9") 'set-input-method-to-chinese)
+(global-set-key (kbd "<lwindow> <delete>") 'delete-current-file)
+
+(global-set-key (kbd "<lwindow> o") 'xah-open-file-fast)
+
+(global-set-key (kbd "<lwindow> f") 'copy-file-path)
+(global-set-key (kbd "<lwindow> s") 'ispell-word)
+(global-set-key (kbd "<lwindow> t") 'title-case-string-region-or-line)
+(global-set-key (kbd "<lwindow> w") 'delete-trailing-whitespace)
+
+(global-set-key (kbd "<lwindow> \\") 'escape-quotes)
+(global-set-key (kbd "<lwindow> '") 'replace-straight-quotes)
+(global-set-key (kbd "<lwindow> `") 'make-backup)
+
+(global-set-key (kbd "<lwindow> [") 'remove-square-brackets)
+
+;; all immediate, safe.
+(global-set-key (kbd "<lwindow> <lwindow> 1") 'rainbow-mode)
+(global-set-key (kbd "<lwindow> <lwindow> 2") 'visual-line-mode)
+(global-set-key (kbd "<lwindow> <lwindow> 3") 'global-linum-mode)
+(global-set-key (kbd "<lwindow> <lwindow> 4") 'whitespace-mode)
+(global-set-key (kbd "<lwindow> <lwindow> 5") 'flyspell-buffer)
+(global-set-key (kbd "<lwindow> <lwindow> 7") 'calc)
+(global-set-key (kbd "<lwindow> <lwindow> 8") 'shell)
+(global-set-key (kbd "<lwindow> <lwindow> 9") 'calendar)
+
+;; all immediate, but dangerous
+(global-set-key (kbd "<lwindow> <f5> 5") 'eval-last-sexp)
+(global-set-key (kbd "<lwindow> <f5> 6") 'run-current-file)
+(global-set-key (kbd "<lwindow> <f5> 7") 'eval-buffer)
+(global-set-key (kbd "<lwindow> <f5> 8") 'eval-defun)
+(global-set-key (kbd "<lwindow> <f5> 9") 'eval-region)
+
+(global-set-key (kbd "<lwindow> <f6> 0") 'delete-non-matching-lines)
+(global-set-key (kbd "<lwindow> <f6> 5") 'xah-find-text-regex)
+(global-set-key (kbd "<lwindow> <f6> 6") 'xah-find-text)
+(global-set-key (kbd "<lwindow> <f6> 7") 'shell-command)
+(global-set-key (kbd "<lwindow> <f6> 8") 'list-matching-lines)
+(global-set-key (kbd "<lwindow> <f6> 9") 'delete-matching-lines)
+
+(global-set-key (kbd "<lwindow> <f4> 3") 'xah-html-mode)
+(global-set-key (kbd "<lwindow> <f4> 4") 'html-mode)
+(global-set-key (kbd "<lwindow> <f4> 5") 'emacs-lisp-mode)
+(global-set-key (kbd "<lwindow> <f4> 6") 'org-mode)
+(global-set-key (kbd "<lwindow> <f4> 7") 'text-mode)
+(global-set-key (kbd "<lwindow> <f4> 8") 'shell-script-mode)
+
+(global-set-key (kbd "<lwindow> i r n") 'insert-random-number)
+(global-set-key (kbd "<lwindow> i r s") 'insert-random-string)
+(global-set-key (kbd "<lwindow> i r h") 'insert-random-hex)
+(global-set-key (kbd "<lwindow> i r u") 'insert-random-uuid)
+(global-set-key (kbd "<lwindow> i d") 'insert-date)
+(global-set-key (kbd "<lwindow> i t") 'insert-date-time)
+
 (global-set-key (kbd "C-3") 'copy-to-register-1)
 (global-set-key (kbd "C-4") 'paste-from-register-1)
 
@@ -132,55 +201,7 @@
 (global-set-key (kbd "<insert>") 'ergoemacs-switch-to-next-frame)
 
 
-;; NUMBERIC KEYPAD. nice number pad conveniences as extra function keys
 
-(global-set-key (kbd "<kp-subtract>") 'ergoemacs-close-current-buffer)
-(global-set-key (kbd "<kp-divide>") 'ergoemacs-previous-user-buffer)
-(global-set-key (kbd "<kp-multiply>") 'ergoemacs-next-user-buffer)
-
-(global-set-key (kbd "<C-kp-divide>") 'ergoemacs-previous-emacs-buffer)
-(global-set-key (kbd "<C-kp-multiply>") 'ergoemacs-next-emacs-buffer)
-
-(global-set-key (kbd "<kp-decimal>") 'other-window)
-(global-set-key (kbd "<kp-0>") 'delete-window)
-(global-set-key (kbd "<kp-1>") 'delete-other-windows)
-(global-set-key (kbd "<kp-2>") 'split-window-vertically)
-(global-set-key (kbd "<kp-3>") 'xah-open-file-at-cursor)
-
-(global-set-key (kbd "<kp-4> <kp-4>") 'convert-english-chinese-punctuation)
-(global-set-key (kbd "<kp-4> <kp-5>") 'remove-punctuation-trailing-redundant-space)
-(global-set-key (kbd "<kp-4> <kp-6>") 'convert-ideographic/ascii-space)
-
-(global-set-key (kbd "<kp-5>") 'save-buffer)
-(global-set-key (kbd "<kp-6>") 'repeat-complex-command)
-
-(global-set-key (kbd "<C-kp-4>") 'cycle-font-backward)
-(global-set-key (kbd "<C-kp-5>") 'cycle-font-2)
-(global-set-key (kbd "<C-kp-6>") 'cycle-font-forward)
-
-(define-prefix-command 'xah-numpad-keymap)
-(global-set-key (kbd "<kp-7>") 'xah-numpad-keymap)
-(global-set-key (kbd "<kp-7> <kp-0>") 'xah-open-file-fast)
-(global-set-key (kbd "<kp-7> <kp-3>") 'xah-open-file-from-clipboard)
-(global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
-(global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)
-(global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
-
-(global-set-key (kbd "<kp-8> <kp-8>") 'run-current-file)
-
-(global-set-key (kbd "<kp-9>") 'isearch-forward)
-(global-set-key (kbd "<C-kp-9>") 'isearch-backward)
-
-(defun xah-isearch-hook ()
-  "Hook for `isearch-mode-hook'"
-  (define-key isearch-mode-map (kbd "<C-kp-9>") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "<kp-9>") 'isearch-repeat-forward)
-  )
-(add-hook 'isearch-mode-hook 'xah-isearch-hook)
-
-(global-set-key (kbd "<C-kp-0>") 'tags-loop-continue)
-
-
 
 ;; keys for moving to prev/next code section (form feed; ^L)
 (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
@@ -321,28 +342,6 @@ For `nxml-mode-hook'."
 
 ;;;; misc
 
-;; 2011-06-02 gnu emacs on mac fix. On GNU Emacs 23.1.1 compiled for Mac, the Del key in emacs is reported as <kp-delete>, and is bound to delete-backward-char. Idiotic.
-(when (string-equal system-type "darwin")
-  (global-set-key (kbd "<kp-delete>") 'delete-char)
-)
-
-
-;; (defun open-in-external-app-some ()
-;;   "for find-file-hook, open image files in external app.
-;; Or PDF files, etc."
-;;   (interactive)
-;;   (let ( (fSuffix (file-name-extension (buffer-file-name))) )
-;;     ;; fSuffix may be nil
-;;     (if fSuffix
-;;         (when (string-match "jpg\\|jpeg\\|png\\|gif\\|pdf" fSuffix)
-;;           (open-in-external-app) )
-;;       nil ) ) )
-
-;; (add-hook 'find-file-hook 'open-in-external-app-some)
-
-
-
-
 ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_unset_keys.el"))
 
     ;; ("<f1> 6" lookup-all-dictionaries)
@@ -353,11 +352,11 @@ For `nxml-mode-hook'."
     ;; ("<f1> [" lookup-word-dict-org)
     ;; ("<f1> ]" lookup-wiktionary)
 
-;; ;; 2012-12-19 fix
-;; (global-unset-key (kbd "<f2>") )
-;; (global-set-key (kbd "<f2>") 'cut-line-or-region)
-
-;; ;; 2012-12-19 fix
-;; (global-set-key (kbd "M-'") 'compact-uncompact-block)
-
 (global-set-key (kbd "<f1> <f2>") 'helm-mini)
+
+;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad"))
+(load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad_number"))
+(load (fullpath-relative-to-current-file "xah_emacs_keybinding_truly_ergonomic"))
+
+
+
