@@ -131,69 +131,40 @@
 (define-prefix-command 'xah-win-keymap)
 (global-set-key (kbd "<lwindow>") 'xah-win-keymap)
 
+(global-set-key (kbd "<lwindow> <lwindow>") 'smex)
+
+(global-set-key (kbd "<lwindow> '") 'replace-straight-quotes)
 (global-set-key (kbd "<lwindow> 3") 'repeat-complex-command)
 (global-set-key (kbd "<lwindow> 4") 'xah-open-file-from-clipboard)
 (global-set-key (kbd "<lwindow> 5") 'recentf-open-files)
-
-(global-set-key (kbd "<lwindow> 6") 'ergoemacs-open-in-desktop)
+(global-set-key (kbd "<lwindow> 6") 'run-current-file) ;; immediate, but dangerous
 (global-set-key (kbd "<lwindow> 7") 'xah-open-file-at-cursor)
 (global-set-key (kbd "<lwindow> 8") 'dired-jump)
-(global-set-key (kbd "<lwindow> 9") 'set-input-method-to-chinese)
 (global-set-key (kbd "<lwindow> <delete>") 'delete-current-file)
-
-(global-set-key (kbd "<lwindow> o") 'xah-open-file-fast)
-
+(global-set-key (kbd "<lwindow> <f6> 7") 'shell-command)
+(global-set-key (kbd "<lwindow> [") 'remove-square-brackets)
+(global-set-key (kbd "<lwindow> \\") 'escape-quotes)
+(global-set-key (kbd "<lwindow> `") 'make-backup)
+(global-set-key (kbd "<lwindow> c") 'copy-to-register-1)
+(global-set-key (kbd "<lwindow> d") 'ergoemacs-open-in-desktop)
 (global-set-key (kbd "<lwindow> f") 'copy-file-path)
+(global-set-key (kbd "<lwindow> i d") 'insert-date)
+(global-set-key (kbd "<lwindow> i r h") 'insert-random-hex)
+(global-set-key (kbd "<lwindow> i r n") 'insert-random-number)
+(global-set-key (kbd "<lwindow> i r s") 'insert-random-string)
+(global-set-key (kbd "<lwindow> i r u") 'insert-random-uuid)
+(global-set-key (kbd "<lwindow> i t") 'insert-date-time)
+(global-set-key (kbd "<lwindow> m c") 'calc)
+(global-set-key (kbd "<lwindow> m f b") 'flyspell-buffer)
+(global-set-key (kbd "<lwindow> m s") 'shell)
+(global-set-key (kbd "<lwindow> m v") 'visual-line-mode)
+(global-set-key (kbd "<lwindow> m w") 'whitespace-mode)
+(global-set-key (kbd "<lwindow> o") 'xah-open-file-fast)
+(global-set-key (kbd "<lwindow> p") 'paste-from-register-1)
 (global-set-key (kbd "<lwindow> s") 'ispell-word)
 (global-set-key (kbd "<lwindow> t") 'title-case-string-region-or-line)
 (global-set-key (kbd "<lwindow> w") 'delete-trailing-whitespace)
 
-(global-set-key (kbd "<lwindow> \\") 'escape-quotes)
-(global-set-key (kbd "<lwindow> '") 'replace-straight-quotes)
-(global-set-key (kbd "<lwindow> `") 'make-backup)
-
-(global-set-key (kbd "<lwindow> [") 'remove-square-brackets)
-
-;; all immediate, safe.
-(global-set-key (kbd "<lwindow> <lwindow> 1") 'rainbow-mode)
-(global-set-key (kbd "<lwindow> <lwindow> 2") 'visual-line-mode)
-(global-set-key (kbd "<lwindow> <lwindow> 3") 'global-linum-mode)
-(global-set-key (kbd "<lwindow> <lwindow> 4") 'whitespace-mode)
-(global-set-key (kbd "<lwindow> <lwindow> 5") 'flyspell-buffer)
-(global-set-key (kbd "<lwindow> <lwindow> 7") 'calc)
-(global-set-key (kbd "<lwindow> <lwindow> 8") 'shell)
-(global-set-key (kbd "<lwindow> <lwindow> 9") 'calendar)
-
-;; all immediate, but dangerous
-(global-set-key (kbd "<lwindow> <f5> 5") 'eval-last-sexp)
-(global-set-key (kbd "<lwindow> <f5> 6") 'run-current-file)
-(global-set-key (kbd "<lwindow> <f5> 7") 'eval-buffer)
-(global-set-key (kbd "<lwindow> <f5> 8") 'eval-defun)
-(global-set-key (kbd "<lwindow> <f5> 9") 'eval-region)
-
-(global-set-key (kbd "<lwindow> <f6> 0") 'delete-non-matching-lines)
-(global-set-key (kbd "<lwindow> <f6> 5") 'xah-find-text-regex)
-(global-set-key (kbd "<lwindow> <f6> 6") 'xah-find-text)
-(global-set-key (kbd "<lwindow> <f6> 7") 'shell-command)
-(global-set-key (kbd "<lwindow> <f6> 8") 'list-matching-lines)
-(global-set-key (kbd "<lwindow> <f6> 9") 'delete-matching-lines)
-
-(global-set-key (kbd "<lwindow> <f4> 3") 'xah-html-mode)
-(global-set-key (kbd "<lwindow> <f4> 4") 'html-mode)
-(global-set-key (kbd "<lwindow> <f4> 5") 'emacs-lisp-mode)
-(global-set-key (kbd "<lwindow> <f4> 6") 'org-mode)
-(global-set-key (kbd "<lwindow> <f4> 7") 'text-mode)
-(global-set-key (kbd "<lwindow> <f4> 8") 'shell-script-mode)
-
-(global-set-key (kbd "<lwindow> i r n") 'insert-random-number)
-(global-set-key (kbd "<lwindow> i r s") 'insert-random-string)
-(global-set-key (kbd "<lwindow> i r h") 'insert-random-hex)
-(global-set-key (kbd "<lwindow> i r u") 'insert-random-uuid)
-(global-set-key (kbd "<lwindow> i d") 'insert-date)
-(global-set-key (kbd "<lwindow> i t") 'insert-date-time)
-
-(global-set-key (kbd "C-3") 'copy-to-register-1)
-(global-set-key (kbd "C-4") 'paste-from-register-1)
 
 
 ;; special keys
@@ -357,6 +328,3 @@ For `nxml-mode-hook'."
 ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad"))
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad_number"))
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding_truly_ergonomic"))
-
-
-
