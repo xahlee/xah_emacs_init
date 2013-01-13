@@ -194,10 +194,7 @@
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
 
-  (local-set-key (kbd "<lwindow> t &") 'replace-html-characters)
-
   (local-set-key (kbd "<lwindow> t 0") 'dehtmlize-text)
-
   (local-set-key (kbd "<lwindow> t 5") 'mark-unicode)
   (local-set-key (kbd "<lwindow> t 6") 'browse-url-of-buffer)
   (local-set-key (kbd "<lwindow> t 7") 'htmlize-or-dehtmlize-pre-block)
@@ -230,16 +227,15 @@
   (local-set-key (kbd "<lwindow> t l z") 'amazon-linkify)
   (local-set-key (kbd "<lwindow> t m") 'xah-make-atom-entry)
   (local-set-key (kbd "<lwindow> t p") 'add-paragraph-tag)
-
+  (local-set-key (kbd "<lwindow> t r ,") 'replace-html-chars-to-unicode)
+  (local-set-key (kbd "<lwindow> t r .") 'replace-html-chars-to-entities)
   (local-set-key (kbd "<lwindow> t r 3") 'xah-update-title)
   (local-set-key (kbd "<lwindow> t r 4") 'xah-update-article-timestamp)
-  (local-set-key (kbd "<lwindow> t r t") 'title-bracket-to-html-tag)
   (local-set-key (kbd "<lwindow> t r k") 'emacs-to-windows-kbd-notation)
-  (local-set-key (kbd "<lwindow> t r q") 'curly-quotes-to-emacs-function-tag)
   (local-set-key (kbd "<lwindow> t r m") 'make-html-table)
-
+  (local-set-key (kbd "<lwindow> t r q") 'curly-quotes-to-emacs-function-tag)
+  (local-set-key (kbd "<lwindow> t r t") 'title-bracket-to-html-tag)
   (local-set-key (kbd "<lwindow> t u") 'xah-all-linkify)
-  (local-set-key (kbd "<lwindow> t ＆") 'replace-html-characters-to-unicode)
 
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
@@ -312,7 +308,7 @@ For `nxml-mode-hook'."
 
 ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad"))
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad_number"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding_truly_ergonomic"))
+;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_truly_ergonomic"))
 (load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
 
 ;; remove ErgoEmacs's changing font size
@@ -321,3 +317,12 @@ For `nxml-mode-hook'."
 (global-unset-key (kbd "C-0") ) ; text-scale-normal-size
 (global-unset-key (kbd "M-5") )
 (global-unset-key (kbd "M-%") )
+
+
+(defun toggle-menu-key ()
+  "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
+  (interactive)
+  (if (eq w32-apps-modifier 'meta)
+        (progn (setq w32-apps-modifier 'nil))
+      (progn (setq w32-apps-modifier 'meta) )
+      ))

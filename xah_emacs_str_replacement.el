@@ -69,8 +69,8 @@ For example:
 ["omega" "ω"]
 ["Pi" "π"])))
 
-(defun replace-html-characters ()
-  "Replace “<” to “&lt;” and some other chars in HTML.
+(defun replace-html-chars-to-entities ()
+  "Replace “<” to “&lt;” and some other special characters in HTML.
 This works on the current text selection or block of text.
 The string replaced are:
  & ⇒ &amp;
@@ -83,10 +83,10 @@ The string replaced are:
     (save-excursion (replace-pairs-region p1 p2 '( ["&" "&amp;"] ["<" "&lt;"] [">" "&gt;"] ) ))
      ) )
 
-(defun replace-html-characters-to-unicode ()
-  "Replace “<” to “‹” and some other chars in HTML.
+(defun replace-html-chars-to-unicode ()
+  "Replace “<” to “‹” and some other special characters in HTML.
 This works on the current text selection or block of text.
-The string replaced are:
+The characters replaced are:
  & ⇒ ＆
  < ⇒ ‹
  > ⇒ ›"
