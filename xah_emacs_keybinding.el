@@ -55,7 +55,7 @@
 
 ;; • whether a command has immediate effect, no prompt. e.g. shell vs delete-matching-lines
 ;; • whether a command has is safe to run by mistake. e.g. whitespace-mode vs eval-buffer
-;; • whether a command is frequently needed (few times a hour). e.g. 
+;; • whether a command is frequently needed (few times a hour). e.g.
 
 ;; idea about key groups
 ;; all should be sequence of single keys. 2 to 3 keys. All should start with F7. And all commands should be globally useful.
@@ -67,75 +67,15 @@
 
 (global-set-key (kbd "M-m") 'hippie-expand)
 
-(global-set-key (kbd "<f7> 3") 'repeat-complex-command)
-(global-set-key (kbd "<f7> 4") 'xah-open-file-from-clipboard)
-(global-set-key (kbd "<f7> 5") 'recentf-open-files)
-
-(global-set-key (kbd "<f7> 6") 'ergoemacs-open-in-desktop)
-(global-set-key (kbd "<f7> 7") 'xah-open-file-at-cursor)
-(global-set-key (kbd "<f7> 8") 'dired-jump)
-(global-set-key (kbd "<f7> 9") 'set-input-method-to-chinese)
-(global-set-key (kbd "<f7> <delete>") 'delete-current-file)
-
-(global-set-key (kbd "<f7> o") 'xah-open-file-fast)
-
-(global-set-key (kbd "<f7> f") 'copy-file-path)
-(global-set-key (kbd "<f7> s") 'ispell-word)
-(global-set-key (kbd "<f7> t") 'title-case-string-region-or-line)
-(global-set-key (kbd "<f7> w") 'delete-trailing-whitespace)
-
-(global-set-key (kbd "<f7> \\") 'escape-quotes)
-(global-set-key (kbd "<f7> '") 'replace-straight-quotes)
-(global-set-key (kbd "<f7> `") 'make-backup)
-
-(global-set-key (kbd "<f7> [") 'remove-square-brackets)
-
-;; all immediate, safe.
-(global-set-key (kbd "<f7> <f7> 1") 'rainbow-mode)
-(global-set-key (kbd "<f7> <f7> 2") 'visual-line-mode)
-(global-set-key (kbd "<f7> <f7> 3") 'global-linum-mode)
-(global-set-key (kbd "<f7> <f7> 4") 'whitespace-mode)
-(global-set-key (kbd "<f7> <f7> 5") 'flyspell-buffer)
-(global-set-key (kbd "<f7> <f7> 7") 'calc)
-(global-set-key (kbd "<f7> <f7> 8") 'shell)
-(global-set-key (kbd "<f7> <f7> 9") 'calendar)
-
-;; all immediate, but dangerous
-(global-set-key (kbd "<f7> <f5> 5") 'eval-last-sexp)
-(global-set-key (kbd "<f7> <f5> 6") 'run-current-file)
-(global-set-key (kbd "<f7> <f5> 7") 'eval-buffer)
-(global-set-key (kbd "<f7> <f5> 8") 'eval-defun)
-(global-set-key (kbd "<f7> <f5> 9") 'eval-region)
-
-(global-set-key (kbd "<f7> <f6> 0") 'delete-non-matching-lines)
-(global-set-key (kbd "<f7> <f6> 5") 'xah-find-text-regex)
-(global-set-key (kbd "<f7> <f6> 6") 'xah-find-text)
-(global-set-key (kbd "<f7> <f6> 7") 'shell-command)
-(global-set-key (kbd "<f7> <f6> 8") 'list-matching-lines)
-(global-set-key (kbd "<f7> <f6> 9") 'delete-matching-lines)
-
-(global-set-key (kbd "<f7> <f4> 3") 'xah-html-mode)
-(global-set-key (kbd "<f7> <f4> 4") 'html-mode)
-(global-set-key (kbd "<f7> <f4> 5") 'emacs-lisp-mode)
-(global-set-key (kbd "<f7> <f4> 6") 'org-mode)
-(global-set-key (kbd "<f7> <f4> 7") 'text-mode)
-(global-set-key (kbd "<f7> <f4> 8") 'shell-script-mode)
-
-(global-set-key (kbd "<f7> i 1") 'insert-random-number)
-(global-set-key (kbd "<f7> i 2") 'insert-random-string)
-(global-set-key (kbd "<f7> i 3") 'insert-random-hex)
-(global-set-key (kbd "<f7> i 4") 'insert-random-uuid)
-(global-set-key (kbd "<f7> i d") 'insert-date)
-(global-set-key (kbd "<f7> i t") 'insert-date-time)
 
 (global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 
-(define-prefix-command 'xah-win-keymap)
-(global-set-key (kbd "<lwindow>") 'xah-win-keymap)
+(define-prefix-command 'xah-keymap)
+(global-set-key (kbd "<lwindow>") 'xah-keymap)
 
 (global-set-key (kbd "<lwindow> <lwindow>") 'smex)
 
-;; y is for unicode insert
+;; e is for unicode insert
 ;; t is mode-specific
 (global-set-key (kbd "<lwindow> '") 'replace-straight-quotes)
 (global-set-key (kbd "<lwindow> ,") 'remove-punctuation-trailing-redundant-space)
@@ -174,10 +114,62 @@
 (global-set-key (kbd "<lwindow> p") 'paste-from-register-1)
 (global-set-key (kbd "<lwindow> r f") 'xah-find-text)
 (global-set-key (kbd "<lwindow> r r") 'xah-find-replace-text)
+(global-set-key (kbd "<lwindow> r q") 'query-replace-regexp)
 (global-set-key (kbd "<lwindow> s") 'shell-command)
 (global-set-key (kbd "<lwindow> w") 'delete-trailing-whitespace)
 (global-set-key (kbd "<lwindow> x") 'xah-cite)
 (global-set-key (kbd "<lwindow> z") 'title-case-string-region-or-line)
+
+
+
+(global-set-key (kbd "<f7>") 'xah-keymap)
+
+(global-set-key (kbd "<f7> <f7>") 'smex)
+
+;; y is for unicode insert
+;; t is mode-specific
+(global-set-key (kbd "<f7> '") 'replace-straight-quotes)
+(global-set-key (kbd "<f7> ,") 'remove-punctuation-trailing-redundant-space)
+(global-set-key (kbd "<f7> .") 'convert-english-chinese-punctuation)
+(global-set-key (kbd "<f7> 3") 'query-replace)
+(global-set-key (kbd "<f7> 4") 'xah-open-file-from-clipboard)
+(global-set-key (kbd "<f7> 5") 'recentf-open-files)
+(global-set-key (kbd "<f7> 6") 'run-current-file) ;; immediate, but dangerous
+(global-set-key (kbd "<f7> 7") 'xah-open-file-at-cursor)
+(global-set-key (kbd "<f7> 8") 'dired-jump)
+(global-set-key (kbd "<f7> 9") 'ispell-word)
+(global-set-key (kbd "<f7> <delete>") 'delete-current-file)
+(global-set-key (kbd "<f7> =") 'repeat-complex-command)
+(global-set-key (kbd "<f7> [") 'remove-square-brackets)
+(global-set-key (kbd "<f7> \\") 'escape-quotes)
+(global-set-key (kbd "<f7> `") 'make-backup)
+(global-set-key (kbd "<f7> b") 'flyspell-buffer)
+(global-set-key (kbd "<f7> c") 'copy-to-register-1)
+(global-set-key (kbd "<f7> d") 'ergoemacs-open-in-desktop)
+(global-set-key (kbd "<f7> f") 'copy-file-path)
+(global-set-key (kbd "<f7> i d") 'insert-date)
+(global-set-key (kbd "<f7> i r h") 'insert-random-hex)
+(global-set-key (kbd "<f7> i r n") 'insert-random-number)
+(global-set-key (kbd "<f7> i r s") 'insert-random-string)
+(global-set-key (kbd "<f7> i r u") 'insert-random-uuid)
+(global-set-key (kbd "<f7> i t") 'insert-date-time)
+(global-set-key (kbd "<f7> m c") 'calc)
+(global-set-key (kbd "<f7> m e") 'emacs-lisp-mode)
+(global-set-key (kbd "<f7> m h") 'xah-html-mode)
+(global-set-key (kbd "<f7> m o") 'org-mode)
+(global-set-key (kbd "<f7> m s") 'shell)
+(global-set-key (kbd "<f7> m t") 'text-mode)
+(global-set-key (kbd "<f7> m v") 'visual-line-mode)
+(global-set-key (kbd "<f7> m w") 'whitespace-mode)
+(global-set-key (kbd "<f7> o") 'xah-open-file-fast)
+(global-set-key (kbd "<f7> p") 'paste-from-register-1)
+(global-set-key (kbd "<f7> r f") 'xah-find-text)
+(global-set-key (kbd "<f7> r r") 'xah-find-replace-text)
+(global-set-key (kbd "<f7> r q") 'query-replace-regexp)
+(global-set-key (kbd "<f7> s") 'shell-command)
+(global-set-key (kbd "<f7> w") 'delete-trailing-whitespace)
+(global-set-key (kbd "<f7> x") 'xah-cite)
+(global-set-key (kbd "<f7> z") 'title-case-string-region-or-line)
 
 
 ;; special keys
@@ -190,7 +182,6 @@
 ;; keys for moving to prev/next code section (form feed; ^L)
 (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
-
 
 
 (global-set-key (kbd "M-\"") 'xah-compact-uncompact-block)
@@ -327,6 +318,6 @@ For `nxml-mode-hook'."
 ;; remove ErgoEmacs's changing font size
 (global-unset-key (kbd "C-+") )
 (global-unset-key (kbd "C--") )
-(global-unset-key (kbd "C-0") )
-(global-unset-key (kbd "C-0") )
+(global-unset-key (kbd "C-0") ) ; text-scale-normal-size
 (global-unset-key (kbd "M-5") )
+(global-unset-key (kbd "M-%") )

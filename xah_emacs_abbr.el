@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;; emacs abbrev def
 ;; Xah Lee
-;; 2007-06, …, 2012-12-06
+;; 2007-06, …, 2013-01-13
 ;; ∑ http://xahlee.org/
 
 ; load my abbreviations file
@@ -18,16 +18,15 @@
     ("mac" "Mac")
     ("osx" "OS X")
     ("macosx" "Mac OS X")
+
     ("8trad" "traditional")
     ("8dict" "dictionary")
     ("8dicts" "dictionaries")
     ("8desc" "description")
     ("8ty" "thank you")
-
     ("8btw" "by the way")
     ("8afaik" "As far as i know")
     ("8intro" "introduction")
-
     ("8b" "because")
     ("8pls" "please")
     ("8ex" "example")
@@ -127,9 +126,7 @@
     ("8db" "database")
     ("8oop" "object oriented programing")
 
-
-
-;;; emacs lisp
+ ;; emacs lisp
     ("8date" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)")
     ("8d" "\\([0-9]+\\)")
     ("8str" "\\([^\"]+?\\)")
@@ -137,17 +134,15 @@
     ("8bracket" "\\[\\([^]]+?\\)\\]")
     ("8tag" "\\([</>=\" A-za-z0-9]+\\)")
 
-    ;; ruby comment
+ ;; ruby comment
     ("8rc" "=begin\n\n=end")
 
+    ("8menu" "〖a▸b▸c▸〗")
     ("8line" "────────── ────────── ────────── ────────── ──────────")
     ("8u" "-*- coding: utf-8 -*-")
     ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
-
-;; html css
-
-;; css colors
+;; css
 ("8white" "#ffffff")
 ("8silver" "#c0c0c0")
 ("8gray" "#808080")
@@ -166,6 +161,7 @@
 ("8purple" "#800080")
 ("8orange" "#ffa500")
 ("8hsl" "hsl(0,100%,50%)")
+
 
 ;; html
 ("8html5" "<!DOCTYPE html>")
