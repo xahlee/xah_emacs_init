@@ -167,7 +167,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 (defun xah-open-file-fast (openCode)
   "Prompt to open a file from a pre-defined set."
-  (interactive "sOpen file: [3]emacs [4]comp [5]js [6]math [l]lit [c]chinese [m]music [a]art [s]sl [x]sex [p]porn [d]pd [k]keys:")
+  (interactive "sOpen file: [3]emacs [4]comp [5]js [6]math [l]lit [c]chinese [m]music [a]art [s]sl [x]sex [p]porn [d]pd [k]key [h]ahk:")
   (let (ξfile )
     (setq ξfile
           (cond
@@ -184,6 +184,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
            ((string= openCode "p") "~/web/xahporn_org/porn/blog.html" )
            ((string= openCode "d") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
            ((string= openCode "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
+           ((string= openCode "h") "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
            (t (error "You typed 「%s」, it doesn't associate with a file." openCode ))
            )
           )
@@ -461,7 +462,7 @@ Requires ImageMagick shell tool."
            (t (list (read-from-minibuffer "file name:") )) ) ) )
      (list myFileList (read-from-minibuffer "scale percentage:")) )
    )
-  (process-image fileList (concat "-scale " scalePercentage "% -quality 85% " ) "-s" ".jpg" )
+  (process-image fileList (concat "-scale " scalePercentage "% -quality 85% -sharpen 1 " ) "-s" ".jpg" )
   )
 
 (defun image-autocrop (fileList)

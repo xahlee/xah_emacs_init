@@ -128,23 +128,28 @@
 (global-set-key (kbd "<f7> i d") 'insert-date)
 (global-set-key (kbd "<f7> i t") 'insert-date-time)
 
+(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
+
 (define-prefix-command 'xah-win-keymap)
 (global-set-key (kbd "<lwindow>") 'xah-win-keymap)
 
 (global-set-key (kbd "<lwindow> <lwindow>") 'smex)
 
 (global-set-key (kbd "<lwindow> '") 'replace-straight-quotes)
-(global-set-key (kbd "<lwindow> 3") 'repeat-complex-command)
+(global-set-key (kbd "<lwindow> ,") 'remove-punctuation-trailing-redundant-space)
+(global-set-key (kbd "<lwindow> .") 'convert-english-chinese-punctuation)
 (global-set-key (kbd "<lwindow> 4") 'xah-open-file-from-clipboard)
 (global-set-key (kbd "<lwindow> 5") 'recentf-open-files)
 (global-set-key (kbd "<lwindow> 6") 'run-current-file) ;; immediate, but dangerous
 (global-set-key (kbd "<lwindow> 7") 'xah-open-file-at-cursor)
 (global-set-key (kbd "<lwindow> 8") 'dired-jump)
+(global-set-key (kbd "<lwindow> 9") 'ispell-word)
 (global-set-key (kbd "<lwindow> <delete>") 'delete-current-file)
-(global-set-key (kbd "<lwindow> <f6> 7") 'shell-command)
+(global-set-key (kbd "<lwindow> =") 'repeat-complex-command)
 (global-set-key (kbd "<lwindow> [") 'remove-square-brackets)
 (global-set-key (kbd "<lwindow> \\") 'escape-quotes)
 (global-set-key (kbd "<lwindow> `") 'make-backup)
+(global-set-key (kbd "<lwindow> b") 'flyspell-buffer)
 (global-set-key (kbd "<lwindow> c") 'copy-to-register-1)
 (global-set-key (kbd "<lwindow> d") 'ergoemacs-open-in-desktop)
 (global-set-key (kbd "<lwindow> f") 'copy-file-path)
@@ -155,16 +160,19 @@
 (global-set-key (kbd "<lwindow> i r u") 'insert-random-uuid)
 (global-set-key (kbd "<lwindow> i t") 'insert-date-time)
 (global-set-key (kbd "<lwindow> m c") 'calc)
-(global-set-key (kbd "<lwindow> m f b") 'flyspell-buffer)
+(global-set-key (kbd "<lwindow> m e") 'emacs-lisp-mode)
+(global-set-key (kbd "<lwindow> m h") 'xah-html-mode)
+(global-set-key (kbd "<lwindow> m o") 'org-mode)
 (global-set-key (kbd "<lwindow> m s") 'shell)
+(global-set-key (kbd "<lwindow> m t") 'text-mode)
 (global-set-key (kbd "<lwindow> m v") 'visual-line-mode)
 (global-set-key (kbd "<lwindow> m w") 'whitespace-mode)
 (global-set-key (kbd "<lwindow> o") 'xah-open-file-fast)
 (global-set-key (kbd "<lwindow> p") 'paste-from-register-1)
-(global-set-key (kbd "<lwindow> s") 'ispell-word)
-(global-set-key (kbd "<lwindow> t") 'title-case-string-region-or-line)
+(global-set-key (kbd "<lwindow> s") 'shell-command)
 (global-set-key (kbd "<lwindow> w") 'delete-trailing-whitespace)
-
+(global-set-key (kbd "<lwindow> x") 'xah-cite)
+(global-set-key (kbd "<lwindow> z") 'title-case-string-region-or-line)
 
 
 ;; special keys
@@ -187,74 +195,56 @@
 
 ;; mode-specific
 
-;; (when (boundp 'ergoemacs-keymap)
-;; (define-key ergoemacs-keymap (kbd "M-m") 'hippie-expand)
-;; ;; (define-key ergoemacs-keymap (kbd "M-G") nil) ; was backward-paragraph
-;; ;; (define-key ergoemacs-keymap (kbd "M-R") nil) ; was forward-paragraph
-
-;; (define-key ergoemacs-keymap (kbd "M-;") nil) ; undo
-;; (define-key ergoemacs-keymap (kbd "M-:") nil) ; redo, undo-tree-redo
-;; (define-key ergoemacs-keymap (kbd "M-q") nil) ; cut
-;; (define-key ergoemacs-keymap (kbd "M-Q") nil) ; cut-all
-;; ;(define-key ergoemacs-keymap (kbd "M-j") nil) ; copy
-;; ;(define-key ergoemacs-keymap (kbd "M-k") nil) ; paste, yank
-
-;; ;; (define-key ergoemacs-keymap (kbd "M-o") nil) ; move-cursor-next-pane
-
-;; ;(define-key ergoemacs-keymap (kbd "M-,") nil) ; shrink-whitespaces
-;; ;(define-key ergoemacs-keymap (kbd "M-'") nil) ; compact-uncompact-block
-;; )
-
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
-  (local-set-key (kbd "<f6> p") 'add-paragraph-tag)
-  (local-set-key (kbd "<f6> u") 'xah-all-linkify)
-  (local-set-key (kbd "<f6> e") 'wrap-html-tag)
-  (local-set-key (kbd "<f6> i") 'insert-tag)
-  (local-set-key (kbd "<f6> a") 'xah-annotate)
-  (local-set-key (kbd "<f6> d") 'insert-date-tag)
+  (local-set-key (kbd "<lwindow> t p") 'add-paragraph-tag)
+  (local-set-key (kbd "<lwindow> t u") 'xah-all-linkify)
+  (local-set-key (kbd "<lwindow> t e") 'wrap-html-tag)
+  (local-set-key (kbd "<lwindow> t i") 'insert-tag)
+  (local-set-key (kbd "<lwindow> t a") 'xah-annotate)
+  (local-set-key (kbd "<lwindow> t d") 'insert-date-tag)
 
-  (local-set-key (kbd "<f6> <f5> 6") 'source-linkify)
-  (local-set-key (kbd "<f6> <f5> e") 'emacs-ref-linkify)
-  (local-set-key (kbd "<f6> <f5> d") 'perldoc-ref-linkify)
-  (local-set-key (kbd "<f6> <f5> p") 'php-ref-linkify)
-  (local-set-key (kbd "<f6> <f5> t") 'word-etymology-linkify)
-  (local-set-key (kbd "<f6> <f5> c") 'chinese-linkify)
-  (local-set-key (kbd "<f6> <f5> w") 'wikipedia-linkify)
-  (local-set-key (kbd "<f6> <f5> z") 'amazon-linkify)
-  (local-set-key (kbd "<f6> <f5> i") 'image-linkify)
-  (local-set-key (kbd "<f6> <f5> j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<f6> <f5> f") 'full-size-img-linkify)
+  (local-set-key (kbd "<lwindow> t l 6") 'source-linkify)
+  (local-set-key (kbd "<lwindow> t l e") 'emacs-ref-linkify)
+  (local-set-key (kbd "<lwindow> t l d") 'perldoc-ref-linkify)
+  (local-set-key (kbd "<lwindow> t l p") 'php-ref-linkify)
+  (local-set-key (kbd "<lwindow> t l t") 'word-etymology-linkify)
+  (local-set-key (kbd "<lwindow> t l c") 'chinese-linkify)
+  (local-set-key (kbd "<lwindow> t l w") 'wikipedia-linkify)
+  (local-set-key (kbd "<lwindow> t l z") 'amazon-linkify)
+  (local-set-key (kbd "<lwindow> t l i") 'image-linkify)
+  (local-set-key (kbd "<lwindow> t l j") 'image-file-to-html-figure-tag)
+  (local-set-key (kbd "<lwindow> t l f") 'full-size-img-linkify)
 
-  (local-set-key (kbd "<f6> <f5> u") 'wrap-url)
+  (local-set-key (kbd "<lwindow> t l u") 'wrap-url)
 
-  (local-set-key (kbd "<f6> <delete>") 'sgml-delete-tag)
-  (local-set-key (kbd "<f6> <left>") 'sgml-skip-tag-backward)
-  (local-set-key (kbd "<f6> <right>") 'sgml-skip-tag-forward)
+  (local-set-key (kbd "<lwindow> t <delete>") 'sgml-delete-tag)
+  (local-set-key (kbd "<lwindow> t <left>") 'sgml-skip-tag-backward)
+  (local-set-key (kbd "<lwindow> t <right>") 'sgml-skip-tag-forward)
 
-  (local-set-key (kbd "<f6> l") 'listify-block)
-  (local-set-key (kbd "<f6> k") 'htmlize-keyboard-shortcut-notation)
-  (local-set-key (kbd "<f6> c") 'make-citation)
-  (local-set-key (kbd "<f6> b") 'make-blogger-entry)
-  (local-set-key (kbd "<f6> m") 'xah-make-atom-entry)
-  (local-set-key (kbd "<f6> t") 'make-html-table)
-  (local-set-key (kbd "<f6> f") 'xah-copy-url-current-file)
+  (local-set-key (kbd "<lwindow> t l l") 'listify-block)
+  (local-set-key (kbd "<lwindow> t k") 'htmlize-keyboard-shortcut-notation)
+  (local-set-key (kbd "<lwindow> t c") 'make-citation)
+  (local-set-key (kbd "<lwindow> t b") 'make-blogger-entry)
+  (local-set-key (kbd "<lwindow> t m") 'xah-make-atom-entry)
+  (local-set-key (kbd "<lwindow> t t") 'make-html-table)
+  (local-set-key (kbd "<lwindow> t f") 'xah-copy-url-current-file)
 
-  (local-set-key (kbd "<f6> ＆") 'replace-html-characters-to-unicode)
-  (local-set-key (kbd "<f6> &") 'replace-html-characters)
+  (local-set-key (kbd "<lwindow> t ＆") 'replace-html-characters-to-unicode)
+  (local-set-key (kbd "<lwindow> t &") 'replace-html-characters)
 
-  (local-set-key (kbd "<f6> 1") 'curly-quotes-to-emacs-function-tag)
-  (local-set-key (kbd "<f6> 2") 'title-bracket-to-html-tag)
-  (local-set-key (kbd "<f6> 3") 'emacs-to-windows-kbd-notation)
-  (local-set-key (kbd "<f6> 5") 'mark-unicode)
+  (local-set-key (kbd "<lwindow> t 1") 'curly-quotes-to-emacs-function-tag)
+  (local-set-key (kbd "<lwindow> t 2") 'title-bracket-to-html-tag)
+  (local-set-key (kbd "<lwindow> t 3") 'emacs-to-windows-kbd-notation)
+  (local-set-key (kbd "<lwindow> t 5") 'mark-unicode)
 
-  (local-set-key (kbd "<f6> 6") 'browse-url-of-buffer)
-  (local-set-key (kbd "<f6> C-6") 'xah-browse-url-of-buffer)
+  (local-set-key (kbd "<lwindow> t 6") 'browse-url-of-buffer)
+  (local-set-key (kbd "<lwindow> t C-6") 'xah-browse-url-of-buffer)
 
-  (local-set-key (kbd "<f6> 7") 'htmlize-or-dehtmlize-pre-block)
-  (local-set-key (kbd "<f6> 0") 'dehtmlize-text)
-  (local-set-key (kbd "<f6> 8") 'get-pre-block-make-new-file)
-  (local-set-key (kbd "<f6> 9") 'code-bracket-to-html-tag)
+  (local-set-key (kbd "<lwindow> t 7") 'htmlize-or-dehtmlize-pre-block)
+  (local-set-key (kbd "<lwindow> t 0") 'dehtmlize-text)
+  (local-set-key (kbd "<lwindow> t 8") 'get-pre-block-make-new-file)
+  (local-set-key (kbd "<lwindow> t 9") 'code-bracket-to-html-tag)
 
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
@@ -284,7 +274,7 @@ For `org-mode-hook'."
 (defun xah-Info-mode-keys ()
   "my keybindings for `Info-mode'.
 For `Info-mode-hook'."
-  (local-set-key (kbd "<f6> 6") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<lwindow> t 6") 'xah-view-emacs-manual-in-browser)
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
@@ -304,7 +294,7 @@ For `nxml-mode-hook'."
   (when (>= emacs-major-version 23)
 ;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
 ;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
-    (define-key dired-mode-map (kbd "<f6> 8") 'wdired-change-to-wdired-mode)
+    (define-key dired-mode-map (kbd "<lwindow> t 8") 'wdired-change-to-wdired-mode)
     )
   )
 

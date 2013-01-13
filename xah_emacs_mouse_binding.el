@@ -21,3 +21,5 @@
  ((string-equal system-type "darwin") ; Mac
   (global-set-key (kbd "<mouse-5>") 'ergoemacs-close-current-buffer) ) )
 
+(global-set-key (kbd "<M-wheel-up>") 'ergoemacs-previous-user-buffer)
+(global-set-key (kbd "<M-wheel-down>") 'ergoemacs-next-user-buffer)

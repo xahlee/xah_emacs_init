@@ -18,88 +18,88 @@
 
 
 (define-prefix-command 'xah-unicode-keymap)
-(global-set-key (kbd "C-2") 'xah-unicode-keymap)
+(global-set-key (kbd "<lwindow> y") 'xah-unicode-keymap)
 
 
 ;; right hand top
 ;; f gcrl
 
-(define-key key-translation-map (kbd "C-2 c") (kbd "=")) ; equal
-(define-key key-translation-map (kbd "C-2 r") (kbd "+")) ; plus
+(define-key key-translation-map (kbd "<lwindow> y c") (kbd "=")) ; equal
+(define-key key-translation-map (kbd "<lwindow> y r") (kbd "+")) ; plus
 
 
 ;; right hand home row
 ;; d htns
 
-(global-set-key (kbd "C-2 h") 'insert-pair-brace)              ;{}
-(global-set-key (kbd "C-2 t") 'insert-pair-paren)              ;()
-(global-set-key (kbd "C-2 n") 'insert-pair-bracket)            ;[]
+(global-set-key (kbd "<lwindow> y h") 'insert-pair-brace)              ;{}
+(global-set-key (kbd "<lwindow> y t") 'insert-pair-paren)              ;()
+(global-set-key (kbd "<lwindow> y n") 'insert-pair-bracket)            ;[]
 
 
 ;; right hand bottom row
 ;; b mwvz
 
-(global-set-key (kbd "C-2 m") 'insert-pair-corner-bracket「」)
-(global-set-key (kbd "C-2 w") 'insert-pair-angle-bracket〈〉)
-(global-set-key (kbd "C-2 b") 'insert-pair-black-lenticular-bracket【】)
+(global-set-key (kbd "<lwindow> y m") 'insert-pair-corner-bracket「」)
+(global-set-key (kbd "<lwindow> y w") 'insert-pair-angle-bracket〈〉)
+(global-set-key (kbd "<lwindow> y b") 'insert-pair-black-lenticular-bracket【】)
 
-(global-set-key (kbd "C-2 M") 'insert-pair-white-corner-bracket『』)
-(global-set-key (kbd "C-2 W") 'insert-pair-double-angle-bracket《》)
-(global-set-key (kbd "C-2 B") 'insert-pair-white-lenticular-bracket〖〗)
+(global-set-key (kbd "<lwindow> y M") 'insert-pair-white-corner-bracket『』)
+(global-set-key (kbd "<lwindow> y W") 'insert-pair-double-angle-bracket《》)
+(global-set-key (kbd "<lwindow> y B") 'insert-pair-white-lenticular-bracket〖〗)
 
 
 ;; left hand top row
 ;; ',.p y
 
-(global-set-key (kbd "C-2 p") 'insert-pair-double-angle-quote«»)
-(global-set-key (kbd "C-2 y") 'insert-pair-single-angle-quote‹›)
+(global-set-key (kbd "<lwindow> y p") 'insert-pair-double-angle-quote«»)
+(global-set-key (kbd "<lwindow> y y") 'insert-pair-single-angle-quote‹›)
 
 
 ;; left hand home row
 ;; aoeu i
 
-(global-set-key (kbd "C-2 u") 'insert-pair-double-curly-quote“”)
-(global-set-key (kbd "C-2 i") 'insert-pair-single-curly-quote‘’)
+(global-set-key (kbd "<lwindow> y u") 'insert-pair-double-curly-quote“”)
+(global-set-key (kbd "<lwindow> y i") 'insert-pair-single-curly-quote‘’)
 
 
 ;; left hand bottom row
 ;; ;qjk x
 
-(global-set-key (kbd "C-2 x") 'insert-pair-tortoise-shell-bracket〔〕)
+(global-set-key (kbd "<lwindow> y x") 'insert-pair-tortoise-shell-bracket〔〕)
 
 
 ;; bullets and other symbols
 
 
-(define-key key-translation-map (kbd "C-2 0") (kbd "☛")) ; BLACK RIGHT POINTING INDEX
-(define-key key-translation-map (kbd "C-2 3") (kbd "✲")) ; OPEN CENTRE ASTERISK
-(define-key key-translation-map (kbd "C-2 4") (kbd "¤")) ; CURRENCY SIGN
-(define-key key-translation-map (kbd "C-2 6") (kbd "▸")) ; BLACK RIGHT-POINTING SMALL TRIANGLE
-(define-key key-translation-map (kbd "C-2 7") (kbd "▮")) ; BLACK VERTICAL RECTANGLE
-(define-key key-translation-map (kbd "C-2 8") (kbd "•")) ; bullet
-(define-key key-translation-map (kbd "C-2 9") (kbd "◇")) ; white diamond
-(define-key key-translation-map (kbd "C-2 (") (kbd "◆")) ; black diamond
-(define-key key-translation-map (kbd "C-2 ?") (kbd "�")) ; REPLACEMENT CHARACTER
-(define-key key-translation-map (kbd "C-2 ~") (kbd "〜")) ; WAVE DASH
+(define-key key-translation-map (kbd "<lwindow> y 0") (kbd "☛")) ; BLACK RIGHT POINTING INDEX
+(define-key key-translation-map (kbd "<lwindow> y 3") (kbd "✲")) ; OPEN CENTRE ASTERISK
+(define-key key-translation-map (kbd "<lwindow> y 4") (kbd "¤")) ; CURRENCY SIGN
+(define-key key-translation-map (kbd "<lwindow> y 6") (kbd "▸")) ; BLACK RIGHT-POINTING SMALL TRIANGLE
+(define-key key-translation-map (kbd "<lwindow> y 7") (kbd "▮")) ; BLACK VERTICAL RECTANGLE
+(define-key key-translation-map (kbd "<lwindow> y 8") (kbd "•")) ; bullet
+(define-key key-translation-map (kbd "<lwindow> y 9") (kbd "◇")) ; white diamond
+(define-key key-translation-map (kbd "<lwindow> y (") (kbd "◆")) ; black diamond
+(define-key key-translation-map (kbd "<lwindow> y ?") (kbd "�")) ; REPLACEMENT CHARACTER
+(define-key key-translation-map (kbd "<lwindow> y ~") (kbd "〜")) ; WAVE DASH
 
-(define-key key-translation-map (kbd "C-2 \\") (kbd "、")) ; IDEOGRAPHIC COMMA
+(define-key key-translation-map (kbd "<lwindow> y \\") (kbd "、")) ; IDEOGRAPHIC COMMA
 
-(define-key key-translation-map (kbd "C-2 &") (kbd "＆")) ; full width ampersand
-(define-key key-translation-map (kbd "C-2 -") (kbd "—")) ; EM DASH
-(define-key key-translation-map (kbd "C-2 SPC") (kbd " ")) ; NO-BREAK SPACE
+(define-key key-translation-map (kbd "<lwindow> y &") (kbd "＆")) ; full width ampersand
+(define-key key-translation-map (kbd "<lwindow> y -") (kbd "—")) ; EM DASH
+(define-key key-translation-map (kbd "<lwindow> y SPC") (kbd " ")) ; NO-BREAK SPACE
 
-(define-key key-translation-map (kbd "C-2 .") (kbd "…")) ; HORIZONTAL ELLIPSIS
+(define-key key-translation-map (kbd "<lwindow> y .") (kbd "…")) ; HORIZONTAL ELLIPSIS
 
 ;; ‣ triangle bullet
 
 
 
-(define-key key-translation-map (kbd "C-2 <left>") (kbd "←")) ; arrow
-(define-key key-translation-map (kbd "C-2 <right>") (kbd "→"))
-(define-key key-translation-map (kbd "C-2 <up>") (kbd "↑"))
-(define-key key-translation-map (kbd "C-2 <down>") (kbd "↓"))
+(define-key key-translation-map (kbd "<lwindow> y <left>") (kbd "←")) ; arrow
+(define-key key-translation-map (kbd "<lwindow> y <right>") (kbd "→"))
+(define-key key-translation-map (kbd "<lwindow> y <up>") (kbd "↑"))
+(define-key key-translation-map (kbd "<lwindow> y <down>") (kbd "↓"))
 
-(define-key key-translation-map (kbd "C-2 <S-left>") (kbd "⇐")) ; arrow
-(define-key key-translation-map (kbd "C-2 <S-right>") (kbd "⇒"))
-(define-key key-translation-map (kbd "C-2 <S-up>") (kbd "⇑"))
-(define-key key-translation-map (kbd "C-2 <S-down>") (kbd "⇓"))
+(define-key key-translation-map (kbd "<lwindow> y <S-left>") (kbd "⇐")) ; arrow
+(define-key key-translation-map (kbd "<lwindow> y <S-right>") (kbd "⇒"))
+(define-key key-translation-map (kbd "<lwindow> y <S-up>") (kbd "⇑"))
+(define-key key-translation-map (kbd "<lwindow> y <S-down>") (kbd "⇓"))

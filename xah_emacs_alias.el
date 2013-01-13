@@ -28,7 +28,6 @@
 (defalias '8s 'xwe-add-source)
 (defalias '8c 'xwe-add-comment)
 
-(defalias 'c 'xah-cite)
 (defalias 'ip 'insert-php-tag)
 
 (defalias 'ft 'fix-timestamp)
