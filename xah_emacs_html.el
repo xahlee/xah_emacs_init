@@ -417,7 +417,7 @@ Add today's date to the form
  of current file."
   (interactive)
   (let (p1 p2)
-    (save-excursion
+    (progn
       (goto-char 1)
       (when (search-forward "<p class=\"author_0\">Xah Lee" nil)
         (beginning-of-line)
