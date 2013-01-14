@@ -31,18 +31,22 @@
 
 ;; windows, the menu/apps key is <apps>
 
-  (global-set-key (kbd "<menu>") 'smex)
+(global-set-key (kbd "<menu>") 'backward-char)
 
-(global-set-key (kbd "C-7") 'ergoemacs-select-text-in-quote)
+(global-set-key (kbd "M-7") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
 
-;(global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
-;(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
+;; (global-set-key (kbd "<f8>") ctl-x-map)
+;; (global-set-key (kbd "<f8>") mode-specific-map)
+
+
+(global-set-key (kbd "<f8>") 'delete-other-windows)
+(global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
+;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
+;; (global-set-key (kbd "<f9>") 'split-window-vertically)
+(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 (global-set-key (kbd "<f11>") 'ergoemacs-next-user-buffer)
 (global-set-key (kbd "<f12>") 'ergoemacs-previous-user-buffer)
-
-(global-set-key (kbd "<f8>") ctl-x-map)
-;; (global-set-key (kbd "<f8>") mode-specific-map)
 
 ;; (global-set-key (kbd "<f8>") 'set-mark-command)
 ;; (global-set-key (kbd "M-SPC") 'set-mark-command)
@@ -65,6 +69,8 @@
 (global-set-key (kbd "<menu> '") 'replace-straight-quotes)
 (global-set-key (kbd "<menu> ,") 'remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> .") 'convert-english-chinese-punctuation)
+(global-set-key (kbd "<menu> 1") 'copy-to-register-1)
+(global-set-key (kbd "<menu> 2") 'paste-from-register-1)
 (global-set-key (kbd "<menu> 3") 'query-replace)
 (global-set-key (kbd "<menu> 4") 'xah-open-file-from-clipboard)
 (global-set-key (kbd "<menu> 5") 'recentf-open-files)
@@ -76,9 +82,9 @@
 (global-set-key (kbd "<menu> =") 'repeat-complex-command)
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> \\") 'escape-quotes)
+(global-set-key (kbd "<menu> ]") 'indent-region)
 (global-set-key (kbd "<menu> `") 'make-backup)
 (global-set-key (kbd "<menu> b") 'flyspell-buffer)
-(global-set-key (kbd "<menu> c") 'copy-to-register-1)
 (global-set-key (kbd "<menu> d") 'ergoemacs-open-in-desktop)
 (global-set-key (kbd "<menu> f") 'copy-file-path)
 (global-set-key (kbd "<menu> i d") 'insert-date)
@@ -96,10 +102,9 @@
 (global-set-key (kbd "<menu> m v") 'visual-line-mode)
 (global-set-key (kbd "<menu> m w") 'whitespace-mode)
 (global-set-key (kbd "<menu> o") 'xah-open-file-fast)
-(global-set-key (kbd "<menu> p") 'paste-from-register-1)
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
-(global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r q") 'query-replace-regexp)
+(global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> s") 'shell-command)
 (global-set-key (kbd "<menu> w") 'delete-trailing-whitespace)
 (global-set-key (kbd "<menu> x") 'xah-cite)
