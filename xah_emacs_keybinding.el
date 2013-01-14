@@ -24,20 +24,14 @@
 
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
+(define-key key-translation-map (kbd "<f7>") (kbd "<menu>"))
 
 ;; in linux, <lwindow> is Super is s
 ;; linux, the menu/apps key is <menu>
 
 ;; windows, the menu/apps key is <apps>
 
-(cond
- ((string-equal system-type "windows-nt")
-  (global-set-key (kbd "<apps>") 'smex)
-  )
- ((string-equal system-type "darwin")
-  t )
- ((string-equal system-type "gnu/linux")
-  t ) )
+  (global-set-key (kbd "<menu>") 'smex)
 
 (global-set-key (kbd "C-7") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
@@ -55,22 +49,6 @@
 ;; (global-set-key (kbd "M-SPC") 'beep)
 
 
-
-;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
-
-;; some idea about command categories, in context to chosing keys for them
-
-;; • whether a command has immediate effect, no prompt. e.g. shell vs delete-matching-lines
-;; • whether a command has is safe to run by mistake. e.g. whitespace-mode vs eval-buffer
-;; • whether a command is frequently needed (few times a hour). e.g.
-
-;; idea about key groups
-;; all should be sequence of single keys. 2 to 3 keys. All should start with F7. And all commands should be globally useful.
-;; • 2 keys vs 3 keys
-;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
-
-;; command that are not immediate (has prompt) probably should not have a key.
-
 
 (global-set-key (kbd "M-m") 'hippie-expand)
 
@@ -127,56 +105,6 @@
 (global-set-key (kbd "<menu> x") 'xah-cite)
 (global-set-key (kbd "<menu> z") 'title-case-string-region-or-line)
 
-
-
-(global-set-key (kbd "<f7>") 'xah-keymap)
-
-(global-set-key (kbd "<f7> <f7>") 'smex)
-
-;; y is for unicode insert
-;; t is mode-specific
-(global-set-key (kbd "<f7> '") 'replace-straight-quotes)
-(global-set-key (kbd "<f7> ,") 'remove-punctuation-trailing-redundant-space)
-(global-set-key (kbd "<f7> .") 'convert-english-chinese-punctuation)
-(global-set-key (kbd "<f7> 3") 'query-replace)
-(global-set-key (kbd "<f7> 4") 'xah-open-file-from-clipboard)
-(global-set-key (kbd "<f7> 5") 'recentf-open-files)
-(global-set-key (kbd "<f7> 6") 'run-current-file) ;; immediate, but dangerous
-(global-set-key (kbd "<f7> 7") 'xah-open-file-at-cursor)
-(global-set-key (kbd "<f7> 8") 'dired-jump)
-(global-set-key (kbd "<f7> 9") 'ispell-word)
-(global-set-key (kbd "<f7> <delete>") 'delete-current-file)
-(global-set-key (kbd "<f7> =") 'repeat-complex-command)
-(global-set-key (kbd "<f7> [") 'remove-square-brackets)
-(global-set-key (kbd "<f7> \\") 'escape-quotes)
-(global-set-key (kbd "<f7> `") 'make-backup)
-(global-set-key (kbd "<f7> b") 'flyspell-buffer)
-(global-set-key (kbd "<f7> c") 'copy-to-register-1)
-(global-set-key (kbd "<f7> d") 'ergoemacs-open-in-desktop)
-(global-set-key (kbd "<f7> f") 'copy-file-path)
-(global-set-key (kbd "<f7> i d") 'insert-date)
-(global-set-key (kbd "<f7> i r h") 'insert-random-hex)
-(global-set-key (kbd "<f7> i r n") 'insert-random-number)
-(global-set-key (kbd "<f7> i r s") 'insert-random-string)
-(global-set-key (kbd "<f7> i r u") 'insert-random-uuid)
-(global-set-key (kbd "<f7> i t") 'insert-date-time)
-(global-set-key (kbd "<f7> m c") 'calc)
-(global-set-key (kbd "<f7> m e") 'emacs-lisp-mode)
-(global-set-key (kbd "<f7> m h") 'xah-html-mode)
-(global-set-key (kbd "<f7> m o") 'org-mode)
-(global-set-key (kbd "<f7> m s") 'shell)
-(global-set-key (kbd "<f7> m t") 'text-mode)
-(global-set-key (kbd "<f7> m v") 'visual-line-mode)
-(global-set-key (kbd "<f7> m w") 'whitespace-mode)
-(global-set-key (kbd "<f7> o") 'xah-open-file-fast)
-(global-set-key (kbd "<f7> p") 'paste-from-register-1)
-(global-set-key (kbd "<f7> r f") 'xah-find-text)
-(global-set-key (kbd "<f7> r r") 'xah-find-replace-text)
-(global-set-key (kbd "<f7> r q") 'query-replace-regexp)
-(global-set-key (kbd "<f7> s") 'shell-command)
-(global-set-key (kbd "<f7> w") 'delete-trailing-whitespace)
-(global-set-key (kbd "<f7> x") 'xah-cite)
-(global-set-key (kbd "<f7> z") 'title-case-string-region-or-line)
 
 
 ;; special keys
@@ -201,48 +129,48 @@
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
 
-  (local-set-key (kbd "<menu> t 0") 'dehtmlize-text)
-  (local-set-key (kbd "<menu> t 5") 'mark-unicode)
-  (local-set-key (kbd "<menu> t 6") 'browse-url-of-buffer)
-  (local-set-key (kbd "<menu> t 7") 'htmlize-or-dehtmlize-pre-block)
-  (local-set-key (kbd "<menu> t 8") 'get-pre-block-make-new-file)
-  (local-set-key (kbd "<menu> t 9") 'code-bracket-to-html-tag)
-  (local-set-key (kbd "<menu> t <delete>") 'sgml-delete-tag)
-  (local-set-key (kbd "<menu> t <left>") 'sgml-skip-tag-backward)
-  (local-set-key (kbd "<menu> t <right>") 'sgml-skip-tag-forward)
-  (local-set-key (kbd "<menu> t C-6") 'xah-browse-url-of-buffer)
-  (local-set-key (kbd "<menu> t a") 'xah-annotate)
-  (local-set-key (kbd "<menu> t b") 'make-blogger-entry)
-  (local-set-key (kbd "<menu> t c") 'make-citation)
-  (local-set-key (kbd "<menu> t d") 'insert-date-tag)
-  (local-set-key (kbd "<menu> t e") 'wrap-html-tag)
-  (local-set-key (kbd "<menu> t f") 'xah-copy-url-current-file)
-  (local-set-key (kbd "<menu> t i") 'insert-tag)
-  (local-set-key (kbd "<menu> t k") 'htmlize-keyboard-shortcut-notation)
-  (local-set-key (kbd "<menu> t l 6") 'source-linkify)
-  (local-set-key (kbd "<menu> t l c") 'chinese-linkify)
-  (local-set-key (kbd "<menu> t l d") 'perldoc-ref-linkify)
-  (local-set-key (kbd "<menu> t l e") 'emacs-ref-linkify)
-  (local-set-key (kbd "<menu> t l f") 'full-size-img-linkify)
-  (local-set-key (kbd "<menu> t l i") 'image-linkify)
-  (local-set-key (kbd "<menu> t l j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<menu> t l l") 'listify-block)
-  (local-set-key (kbd "<menu> t l p") 'php-ref-linkify)
-  (local-set-key (kbd "<menu> t l t") 'word-etymology-linkify)
-  (local-set-key (kbd "<menu> t l u") 'wrap-url)
-  (local-set-key (kbd "<menu> t l w") 'wikipedia-linkify)
-  (local-set-key (kbd "<menu> t l z") 'amazon-linkify)
-  (local-set-key (kbd "<menu> t m") 'xah-make-atom-entry)
-  (local-set-key (kbd "<menu> t p") 'add-paragraph-tag)
-  (local-set-key (kbd "<menu> t r ,") 'replace-html-chars-to-unicode)
-  (local-set-key (kbd "<menu> t r .") 'replace-html-chars-to-entities)
-  (local-set-key (kbd "<menu> t r 3") 'xah-update-title)
-  (local-set-key (kbd "<menu> t r 4") 'xah-update-article-timestamp)
-  (local-set-key (kbd "<menu> t r k") 'emacs-to-windows-kbd-notation)
-  (local-set-key (kbd "<menu> t r m") 'make-html-table)
-  (local-set-key (kbd "<menu> t r q") 'curly-quotes-to-emacs-function-tag)
-  (local-set-key (kbd "<menu> t r t") 'title-bracket-to-html-tag)
-  (local-set-key (kbd "<menu> t u") 'xah-all-linkify)
+  (local-set-key (kbd "<menu> e 0") 'dehtmlize-text)
+  (local-set-key (kbd "<menu> e 5") 'mark-unicode)
+  (local-set-key (kbd "<menu> e 6") 'browse-url-of-buffer)
+  (local-set-key (kbd "<menu> e 7") 'htmlize-or-dehtmlize-pre-block)
+  (local-set-key (kbd "<menu> e 8") 'get-pre-block-make-new-file)
+  (local-set-key (kbd "<menu> e 9") 'code-bracket-to-html-tag)
+  (local-set-key (kbd "<menu> e <delete>") 'sgml-delete-tag)
+  (local-set-key (kbd "<menu> e <left>") 'sgml-skip-tag-backward)
+  (local-set-key (kbd "<menu> e <right>") 'sgml-skip-tag-forward)
+  (local-set-key (kbd "<menu> e C-6") 'xah-browse-url-of-buffer)
+  (local-set-key (kbd "<menu> e a") 'xah-annotate)
+  (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
+  (local-set-key (kbd "<menu> e c") 'make-citation)
+  (local-set-key (kbd "<menu> e d") 'insert-date-tag)
+  (local-set-key (kbd "<menu> e e") 'wrap-html-tag)
+  (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
+  (local-set-key (kbd "<menu> e i") 'insert-tag)
+  (local-set-key (kbd "<menu> e k") 'htmlize-keyboard-shortcut-notation)
+  (local-set-key (kbd "<menu> e l 6") 'source-linkify)
+  (local-set-key (kbd "<menu> e l c") 'chinese-linkify)
+  (local-set-key (kbd "<menu> e l d") 'perldoc-ref-linkify)
+  (local-set-key (kbd "<menu> e l e") 'emacs-ref-linkify)
+  (local-set-key (kbd "<menu> e l f") 'full-size-img-linkify)
+  (local-set-key (kbd "<menu> e l i") 'image-linkify)
+  (local-set-key (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
+  (local-set-key (kbd "<menu> e l l") 'listify-block)
+  (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
+  (local-set-key (kbd "<menu> e l t") 'word-etymology-linkify)
+  (local-set-key (kbd "<menu> e l u") 'wrap-url)
+  (local-set-key (kbd "<menu> e l w") 'wikipedia-linkify)
+  (local-set-key (kbd "<menu> e l z") 'amazon-linkify)
+  (local-set-key (kbd "<menu> e m") 'xah-make-atom-entry)
+  (local-set-key (kbd "<menu> e p") 'add-paragraph-tag)
+  (local-set-key (kbd "<menu> e r ,") 'replace-html-chars-to-unicode)
+  (local-set-key (kbd "<menu> e r .") 'replace-html-chars-to-entities)
+  (local-set-key (kbd "<menu> e r 3") 'xah-update-title)
+  (local-set-key (kbd "<menu> e r 4") 'xah-update-article-timestamp)
+  (local-set-key (kbd "<menu> e r k") 'emacs-to-windows-kbd-notation)
+  (local-set-key (kbd "<menu> e r m") 'make-html-table)
+  (local-set-key (kbd "<menu> e r q") 'curly-quotes-to-emacs-function-tag)
+  (local-set-key (kbd "<menu> e r t") 'title-bracket-to-html-tag)
+  (local-set-key (kbd "<menu> e u") 'xah-all-linkify)
 
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
@@ -272,7 +200,7 @@ For `org-mode-hook'."
 (defun xah-Info-mode-keys ()
   "my keybindings for `Info-mode'.
 For `Info-mode-hook'."
-  (local-set-key (kbd "<menu> t 6") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<menu> e 6") 'xah-view-emacs-manual-in-browser)
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
@@ -292,7 +220,7 @@ For `nxml-mode-hook'."
   (when (>= emacs-major-version 23)
 ;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
 ;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
-    (define-key dired-mode-map (kbd "<menu> t 8") 'wdired-change-to-wdired-mode)
+    (define-key dired-mode-map (kbd "<menu> e 8") 'wdired-change-to-wdired-mode)
     )
   )
 
@@ -333,3 +261,19 @@ For `nxml-mode-hook'."
         (progn (setq w32-apps-modifier 'nil))
       (progn (setq w32-apps-modifier 'meta) )
       ))
+
+
+;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
+
+;; some idea about command categories, in context to chosing keys for them
+
+;; • whether a command has immediate effect, no prompt. e.g. shell vs delete-matching-lines
+;; • whether a command has is safe to run by mistake. e.g. whitespace-mode vs eval-buffer
+;; • whether a command is frequently needed (few times a hour). e.g.
+
+;; idea about key groups
+;; all should be sequence of single keys. 2 to 3 keys. All should start with F7. And all commands should be globally useful.
+;; • 2 keys vs 3 keys
+;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
+
+;; command that are not immediate (has prompt) probably should not have a key.
