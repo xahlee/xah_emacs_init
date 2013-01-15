@@ -27,6 +27,7 @@
 
 
 (setq org-return-follows-link t)
+(setq auto-save-default t)
 
 (winner-mode 1)
 (cua-mode 0)

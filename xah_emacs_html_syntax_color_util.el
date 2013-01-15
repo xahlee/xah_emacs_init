@@ -188,7 +188,9 @@ This command does the reverse of `htmlize-pre-block'."
               (save-excursion 
                 (setq ξmode-name (elt (cdr langCodeResult) 0))
                 (delete-region p1 p2)
-                (insert (ξhtmlize-string (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]+\\'" "\n" inputStr)) ξmode-name))
+                (insert (ξhtmlize-string
+(replace-regexp-in-string "\\`[ \t\n]*" "\n" (replace-regexp-in-string "[ \t\n]+\\'" "\n" inputStr))
+                          ξmode-name))
                 )) )) )) ))
 
 (defun dehtmlize-span-region (p1 p2)

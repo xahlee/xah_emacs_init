@@ -31,7 +31,6 @@
 
 ;; windows, the menu/apps key is <apps>
 
-(global-set-key (kbd "<menu>") 'backward-char)
 
 (global-set-key (kbd "M-7") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
@@ -60,12 +59,16 @@
 (global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 
 (define-prefix-command 'xah-keymap)
-(global-set-key (kbd "<menu>") 'xah-keymap)
+(global-set-key (kbd "<menu>") xah-keymap)
 
 (global-set-key (kbd "<menu> <menu>") 'smex)
 
-;; e is for unicode insert
-;; t is mode-specific
+;; most easy keys. 
+;; .p gc
+;; eu ht
+
+;; u is for unicode insert
+;; e is mode-specific
 (global-set-key (kbd "<menu> '") 'replace-straight-quotes)
 (global-set-key (kbd "<menu> ,") 'remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> .") 'convert-english-chinese-punctuation)
@@ -106,9 +109,39 @@
 (global-set-key (kbd "<menu> r q") 'query-replace-regexp)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> s") 'shell-command)
+(global-set-key (kbd "<menu> t c") 'xah-cite)
+(global-set-key (kbd "<menu> t s") 'save-buffer)
+(global-set-key (kbd "<menu> t z") 'title-case-string-region-or-line)
+(global-set-key (kbd "<menu> u -") "—") ; EM DASH
+(global-set-key (kbd "<menu> u .") "…") ; HORIZONTAL ELLIPSIS
+(global-set-key (kbd "<menu> u 0") "✲") ; OPEN CENTRE ASTERISK
+(global-set-key (kbd "<menu> u 3") "☛") ; BLACK RIGHT POINTING INDEX
+(global-set-key (kbd "<menu> u 4") "◆") ; black diamond
+(global-set-key (kbd "<menu> u 7") "＆") ; full width ampersand
+(global-set-key (kbd "<menu> u 8") "•") ; bullet
+(global-set-key (kbd "<menu> u 9") "◇") ; white diamond
+(global-set-key (kbd "<menu> u <S-right>") "⇒")
+(global-set-key (kbd "<menu> u <right>") "→")
+(global-set-key (kbd "<menu> u B") 'insert-pair-white-lenticular-bracket〖〗)
+(global-set-key (kbd "<menu> u B") 'insert-pair-white-lenticular-bracket〖〗)
+(global-set-key (kbd "<menu> u M") 'insert-pair-white-corner-bracket『』)
+(global-set-key (kbd "<menu> u W") 'insert-pair-double-angle-bracket《》)
+(global-set-key (kbd "<menu> u \\") "、") ; IDEOGRAPHIC COMMA
+(global-set-key (kbd "<menu> u b") 'insert-pair-black-lenticular-bracket【】)
+(global-set-key (kbd "<menu> u c") "=") ; equal
+(global-set-key (kbd "<menu> u h") 'insert-pair-brace)              ;{}
+(global-set-key (kbd "<menu> u i") 'insert-pair-single-curly-quote‘’)
+(global-set-key (kbd "<menu> u m") 'insert-pair-corner-bracket「」)
+(global-set-key (kbd "<menu> u n") 'insert-pair-bracket)            ;[]
+(global-set-key (kbd "<menu> u p") 'insert-pair-double-angle-quote«»)
+(global-set-key (kbd "<menu> u r") "+") ; plus
+(global-set-key (kbd "<menu> u t") 'insert-pair-paren)              ;()
+(global-set-key (kbd "<menu> u u") 'insert-pair-double-curly-quote“”)
+(global-set-key (kbd "<menu> u w") 'insert-pair-angle-bracket〈〉)
+(global-set-key (kbd "<menu> u x") 'insert-pair-tortoise-shell-bracket〔〕)
+(global-set-key (kbd "<menu> u y") 'insert-pair-single-angle-quote‹›)
 (global-set-key (kbd "<menu> w") 'delete-trailing-whitespace)
-(global-set-key (kbd "<menu> x") 'xah-cite)
-(global-set-key (kbd "<menu> z") 'title-case-string-region-or-line)
+(global-set-key (kbd "<menu> x") ctl-x-map)
 
 
 
@@ -133,6 +166,8 @@
 
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
+  ;; .p gc
+  ;; eu ht
 
   (local-set-key (kbd "<menu> e 0") 'dehtmlize-text)
   (local-set-key (kbd "<menu> e 5") 'mark-unicode)
@@ -150,7 +185,6 @@
   (local-set-key (kbd "<menu> e d") 'insert-date-tag)
   (local-set-key (kbd "<menu> e e") 'wrap-html-tag)
   (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
-  (local-set-key (kbd "<menu> e i") 'insert-tag)
   (local-set-key (kbd "<menu> e k") 'htmlize-keyboard-shortcut-notation)
   (local-set-key (kbd "<menu> e l 6") 'source-linkify)
   (local-set-key (kbd "<menu> e l c") 'chinese-linkify)
@@ -165,7 +199,8 @@
   (local-set-key (kbd "<menu> e l u") 'wrap-url)
   (local-set-key (kbd "<menu> e l w") 'wikipedia-linkify)
   (local-set-key (kbd "<menu> e l z") 'amazon-linkify)
-  (local-set-key (kbd "<menu> e m") 'xah-make-atom-entry)
+  (local-set-key (kbd "<menu> e m a") 'xah-make-atom-entry)
+  (local-set-key (kbd "<menu> e m l") 'xah-add-to-related-links)
   (local-set-key (kbd "<menu> e p") 'add-paragraph-tag)
   (local-set-key (kbd "<menu> e r ,") 'replace-html-chars-to-unicode)
   (local-set-key (kbd "<menu> e r .") 'replace-html-chars-to-entities)

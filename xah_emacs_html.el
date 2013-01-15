@@ -45,53 +45,6 @@ WARNING: not robust. Designed for my personal use only."
 
 
 
-(defun insert-tag ()
-  "Insert a HTML tag based on the current line.
-
-If current line is empty, then insert “<p></p>”.
-If current line is a single word, use that word as tag name.
-If current line has 2 words, use first word as tag name,
-second word as value for attribute “class”.
-
-For example,
-
-pre poem
-
-will become
-
-<pre class=\"poem\"></pre>."
-  (interactive)
-  (let (bds p1 p2 myline goodies tagname classVal insStr)
-
-    (setq bds (get-selection-or-unit 'line))
-    (setq myline (elt bds 0) )
-    (setq p1 (elt bds 1) )
-    (setq p2 (elt bds 2) )
-
-    (setq goodies (split-string myline " +" t))
-
-    (cond
-     ((equal (length goodies) 1) (progn (setq tagname "div") (setq classVal (nth 0 goodies))))
-     ((equal (length goodies) 2) (progn (setq tagname (nth 0 goodies)) (setq classVal (nth 1 goodies)))))
-    (delete-region p1 p2)
-
-    (cond
-     ((equal (length goodies) 0) (insert "<p>\n</p>") )
-     ((and t) (insert (concat "<" tagname " class=\"" classVal "\">\n</" tagname ">")))
-     )
-    (search-backward "<")
-    (backward-char 1)
-    ))
-
-
-
-(defun insert-div-x-note ()
-  "Insert a HTML markup."
-  (interactive)
-  (insert "<div class=\"x-note\"></div>\n")
-  (backward-char 7)
-  )
-
 (defun xah-annotate ()
   "Create a annotation in HTML.
 Wrap HTML “span” tag around current word or text selection, then
@@ -106,6 +59,8 @@ insert a div tag above the current paragraph."
     (search-backward "<p")
     (insert "\n")
     (backward-char 1)
+  (insert "<div class=\"x-note\"></div>\n")
+  (backward-char 7)
     (insert-div-x-note)
     (insert (format "<b class=\"x3nt\">%s</b>⇒ " inputText)  )
     )
@@ -114,52 +69,36 @@ insert a div tag above the current paragraph."
 (defun wrap-html-tag (tagName &optional className ξid)
   "Add a HTML tag to beginning and ending of current word or text selection.
 
-When preceded with `universal-argument',
-no arg = prompt for tag, class.
-2 = prompt for tag, id.
-any = prompt for tag, id, class.
-
-When called interactively,
-Default id value is 「id‹random number›」.
-Default class value is 「xyz」.
+The command will prompt for a “class” and “id”. Empty value means don't add the attribute.
 
 When called in lisp program, if className is nil or empty string, don't add the attribute. Same for ξid."
   (interactive
-   (cond
-    ((equal current-prefix-arg nil)     ; universal-argument not called
-     (list
-      (read-string "Tag (span):" nil nil "span") ))
-    ((equal current-prefix-arg '(4))    ; C-u
-     (list
-      (read-string "Tag (span):" nil nil "span")
-      (read-string "Class (xyz):" nil nil "xyz") ))
-    ((equal current-prefix-arg 2)       ; C-u 2
-     (list
-      (read-string "Tag (span):" nil nil "span")
-      (read-string "id:" nil nil (format "id%d" (random (expt 2 28 ))))
-      ))
-    (t                                  ; all other cases
-     (list
-        (read-string "Tag (span):" nil nil "span")
-        (read-string "Class (xyz):" nil nil "xyz")
-        (read-string "id:" nil nil (format "id%d" (random (expt 2 28 )))) )) ) )
+   (list
+        (read-string "Tag (p):" nil nil "p")
+        (read-string "Class:" nil nil "")
+        (read-string "id:" nil nil "") ) )
   (let (bds p1 p2 inputText outputText
-            (classStr (if (equal className nil) "" (format " class=\"%s\"" className)))
-            (idStr (if (equal ξid nil) "" (format " id=\"%s\"" ξid)))
+            (classStr (if (or (equal className nil) (string= className "") ) "" (format " class=\"%s\"" className)))
+            (idStr (if (or (equal ξid nil) (string= ξid "") ) "" (format " id=\"%s\"" ξid)))
             )
     (setq bds (get-selection-or-unit 'word))
     (setq inputText (elt bds 0) )
     (setq p1 (elt bds 1) )
     (setq p2 (elt bds 2) )
 
-    (setq outputText (format "<%s%s%s>%s</%s>" tagName idStr classStr inputText tagName ) )
+    (setq outputText (format "<%s%s%s>%s</%s>" tagName classStr idStr inputText tagName ) )
 
     (delete-region p1 p2)
     (goto-char p1)
-    (insert outputText) ) )
+    (insert outputText)
+    (when                               ; put cursor between when input text is empty
+        (string= inputText "" )
+      (progn (search-backward "</" ) )
+      )
+ ) )
 
 (defun mark-unicode (p1)
-  "Wrap 「<b class=\"u\"></span>」 around current character.
+  "Wrap 「<b class=\"u\"></b>」 around current character.
 
 When called in elisp program, wrap the tag at point P1."
   (interactive (list (point)))
@@ -171,7 +110,9 @@ When called in elisp program, wrap the tag at point P1."
 
 
 (defun add-paragraph-tag ()
-  "Add <p>…</p> tag to current paragraph or text selection."
+  "Add <p>…</p> tag to current paragraph or text selection.
+
+If there's a text selection, wrap p around each text block (separated by 2 newline chars.)"
   (interactive)
   (let (bds p1 p2 inputText)
 
