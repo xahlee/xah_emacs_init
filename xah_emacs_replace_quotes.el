@@ -64,8 +64,8 @@ When called with `universal-argument', work on visible portion of whole buffer (
      (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
     (t                                  ; all other cases
      (list (point-min) (point-max) )) ) )
-  (save-excursion 
-    (save-restriction 
+  (save-excursion
+    (save-restriction
       (narrow-to-region p1 p2)
       (goto-char (point-min))
       (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
@@ -88,13 +88,13 @@ Generate a report of the replaced strings in a separate buffer."
     (setq changedItems '())
 
     (save-excursion
-      (save-restriction 
+      (save-restriction
         (narrow-to-region p1 p2)
         (goto-char (point-min))
         (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
           (setq changedItems (cons (match-string 1) changedItems ) )
           (replace-match "<code>\\1</code>" t) ) ) )
-    
+
     (with-output-to-temp-buffer "*changed brackets*"
       (mapcar
        (lambda (innerText)
@@ -123,8 +123,8 @@ Generate a report of the replaced strings in a separate buffer."
     ;; (setq changedItems (make-hash-table :test 'equal))
     (setq changedItems '())
 
-    (save-excursion 
-      (save-restriction 
+    (save-excursion
+      (save-restriction
         (narrow-to-region p1 p2)
         (goto-char (point-min))
         (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
@@ -268,8 +268,8 @@ Some issues:
     (setq resultStr (curly-quotes-to-emacs-function-string inputStr))
     (when  (not (string= inputStr resultStr))
       (progn
-        (save-excursion 
-          (save-restriction 
+        (save-excursion
+          (save-restriction
             (narrow-to-region p1 p2)
             (delete-region p1 p2)
             (insert resultStr)
@@ -280,7 +280,7 @@ Some issues:
 (defun curly-quotes-to-emacs-function-string (ξsomeStr)
   "Replace curly quoted “elisp function” names to HTML markup."
   (let ( mStr (case-fold-search nil) )
-    (with-temp-buffer 
+    (with-temp-buffer
       (insert ξsomeStr)
       (goto-char 1)
       (while (search-forward-regexp "“\\([-a-z0-9]+\\)”" (point-max) t)

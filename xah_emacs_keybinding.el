@@ -39,8 +39,8 @@
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
 
-(global-set-key (kbd "<f8>") 'delete-other-windows)
-(global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
+(global-set-key (kbd "<f8> <f9>") 'delete-other-windows)
+;; (global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
 ;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
 ;; (global-set-key (kbd "<f9>") 'split-window-vertically)
 (global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
@@ -69,6 +69,8 @@
 
 ;; u is for unicode insert
 ;; e is mode-specific
+;; t is generic dump space
+(global-set-key (kbd "<menu> SPC") 'set-mark-command) ; 
 (global-set-key (kbd "<menu> '") 'replace-straight-quotes)
 (global-set-key (kbd "<menu> ,") 'remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> .") 'convert-english-chinese-punctuation)
@@ -110,6 +112,7 @@
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> s") 'shell-command)
 (global-set-key (kbd "<menu> t c") 'xah-cite)
+(global-set-key (kbd "<menu> t n") 'make-frame-command)
 (global-set-key (kbd "<menu> t s") 'save-buffer)
 (global-set-key (kbd "<menu> t z") 'title-case-string-region-or-line)
 (global-set-key (kbd "<menu> u -") "—") ; EM DASH
@@ -119,7 +122,6 @@
 (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
 (global-set-key (kbd "<menu> u 7") "＆") ; full width ampersand
 (global-set-key (kbd "<menu> u 8") "•") ; bullet
-(global-set-key (kbd "<menu> u 9") "◇") ; white diamond
 (global-set-key (kbd "<menu> u <S-right>") "⇒")
 (global-set-key (kbd "<menu> u <right>") "→")
 (global-set-key (kbd "<menu> u B") 'insert-pair-white-lenticular-bracket〖〗)
@@ -144,6 +146,7 @@
 (global-set-key (kbd "<menu> x") ctl-x-map)
 
 
+
 
 ;; special keys
 
@@ -161,6 +164,7 @@
 
 (global-set-key (kbd "M-2") 'cycle-hyphen-underscore-space)
 
+
 
 ;; mode-specific
 
@@ -171,14 +175,13 @@
 
   (local-set-key (kbd "<menu> e 0") 'dehtmlize-text)
   (local-set-key (kbd "<menu> e 5") 'mark-unicode)
-  (local-set-key (kbd "<menu> e 6") 'browse-url-of-buffer)
+  (local-set-key (kbd "<menu> e 6") 'xah-browse-url-of-buffer)
   (local-set-key (kbd "<menu> e 7") 'htmlize-or-dehtmlize-pre-block)
   (local-set-key (kbd "<menu> e 8") 'get-pre-block-make-new-file)
   (local-set-key (kbd "<menu> e 9") 'code-bracket-to-html-tag)
   (local-set-key (kbd "<menu> e <delete>") 'sgml-delete-tag)
   (local-set-key (kbd "<menu> e <left>") 'sgml-skip-tag-backward)
   (local-set-key (kbd "<menu> e <right>") 'sgml-skip-tag-forward)
-  (local-set-key (kbd "<menu> e C-6") 'xah-browse-url-of-buffer)
   (local-set-key (kbd "<menu> e a") 'xah-annotate)
   (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
   (local-set-key (kbd "<menu> e c") 'make-citation)
@@ -187,15 +190,18 @@
   (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
   (local-set-key (kbd "<menu> e k") 'htmlize-keyboard-shortcut-notation)
   (local-set-key (kbd "<menu> e l 6") 'source-linkify)
-  (local-set-key (kbd "<menu> e l c") 'chinese-linkify)
+
   (local-set-key (kbd "<menu> e l d") 'perldoc-ref-linkify)
   (local-set-key (kbd "<menu> e l e") 'emacs-ref-linkify)
+
   (local-set-key (kbd "<menu> e l f") 'full-size-img-linkify)
   (local-set-key (kbd "<menu> e l i") 'image-linkify)
   (local-set-key (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<menu> e l l") 'listify-block)
   (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
+
   (local-set-key (kbd "<menu> e l t") 'word-etymology-linkify)
+  (local-set-key (kbd "<menu> e l c") 'chinese-linkify)
+
   (local-set-key (kbd "<menu> e l u") 'wrap-url)
   (local-set-key (kbd "<menu> e l w") 'wikipedia-linkify)
   (local-set-key (kbd "<menu> e l z") 'amazon-linkify)
@@ -208,8 +214,10 @@
   (local-set-key (kbd "<menu> e r 4") 'xah-update-article-timestamp)
   (local-set-key (kbd "<menu> e r k") 'emacs-to-windows-kbd-notation)
   (local-set-key (kbd "<menu> e r m") 'make-html-table)
-  (local-set-key (kbd "<menu> e r q") 'curly-quotes-to-emacs-function-tag)
+  (local-set-key (kbd "<menu> e r e") 'curly-quotes-to-emacs-function-tag)
   (local-set-key (kbd "<menu> e r t") 'title-bracket-to-html-tag)
+  (local-set-key (kbd "<menu> e t c") 'insert-random-color-hsl)
+  (local-set-key (kbd "<menu> e t l") 'listify-block)
   (local-set-key (kbd "<menu> e u") 'xah-all-linkify)
 
   )
@@ -301,6 +309,13 @@ For `nxml-mode-hook'."
         (progn (setq w32-apps-modifier 'nil))
       (progn (setq w32-apps-modifier 'meta) )
       ))
+
+(global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket)
+(global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket)
+
+(global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
+(global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
+(global-set-key (kbd "M-j") 'ergoemacs-toggle-letter-case) ; 
 
 
 ;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt

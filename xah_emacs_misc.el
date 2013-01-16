@@ -242,9 +242,9 @@ input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
   "Open the file path from OS's clipboard.
 The clipboard should contain a file path or url to xah site. Open that file in emacs."
   (interactive)
-  (let ( 
-        (ξs 
-         (with-temp-buffer 
+  (let (
+        (ξs
+         (with-temp-buffer
            (yank)
            (buffer-string) ) ) )
     (if (string-match-p "\\`http://" ξs)
@@ -324,7 +324,7 @@ See also: `copy-to-register-1', `insert-register'."
          ξtoPath
          )
     (mapc
-     (lambda (ξx) 
+     (lambda (ξx)
        (let (   )
          (setq ξtoPath (concat (xahsite-url-to-filepath (format "http://%s/" ξx)) ξfromFileName))
          (when (not (string= ξfromPath ξtoPath ))
@@ -389,13 +389,28 @@ This is Xah Lee's personal command assuming a particular dir structure."
 (defun xah-browse-url-of-buffer ()
   "Similar to `browse-url-of-buffer' but visit xahlee.org.
 
+save the file first.
+Then, if `universal-argument' is called, visit the corresponding xahsite URL.
 For example, if current buffer is of this file:
-c:/Users/xah/web/xahlee_org/Periodic_dosage_dir/pd.html
+ ~/web/xahlee_info/index.html
 then after calling this function,
 default browser will be launched and opening this URL:
-http://xahlee.org/Periodic_dosage_dir/pd.html"
+ http://xahlee.info/index.html"
   (interactive)
-  (browse-url (replace-regexp-in-string "c:/Users/h3/web/xahlee_org/" "http://xahlee.org/" (buffer-file-name))) )
+  (let (myURL)
+    (save-buffer)
+    (if current-prefix-arg
+        (progn
+          (setq myURL
+                (xahsite-filepath-to-url (buffer-file-name))))
+      (progn
+        (setq myURL
+              (buffer-file-name)))
+      )
+
+    (browse-url myURL )
+    )
+   )
 
 
 
@@ -604,14 +619,14 @@ See also: `kill-rectangle', `copy-to-register'."
   "Replace current HTML inline image's file name.
 
 When cursor is in HTML link file path, e.g.  <img src=\"gki/macosxlogo.png\" > and this command is called, it'll prompt user for a new name. The link path will be changed to the new name, the corresponding file will also be renamed. The operation is aborted if a name exists."
-  
+
   (interactive
    (let (
-         (defaultInput (expand-file-name 
+         (defaultInput (expand-file-name
                         (elt (get-selection-or-unit 'filepath) 0)
                         (file-name-directory (or (buffer-file-name) default-directory )) )) )
      (list (read-string "New name: " defaultInput nil defaultInput )) ) )
-  (let* ( 
+  (let* (
          (bds (get-selection-or-unit 'filepath))
          (ξinputPath (elt bds 0) )
          (p1 (aref bds 1) )
@@ -652,7 +667,7 @@ When there is a text selection, act on the region."
       (if (region-active-p)
           (if currentStateIsCompact
               (fill-region (region-beginning) (region-end))
-            (save-restriction 
+            (save-restriction
                 (narrow-to-region (region-beginning) (region-end))
                 (goto-char (point-min))
                 (while (search-forward "\n" nil t) (replace-match "" nil t)) ) )
@@ -669,7 +684,7 @@ When there is a text selection, act on the region."
                   (progn (re-search-backward "\n[ \t]*\n")
                          (setq p2 (point) ))
                 (setq p2 (point) ) ) )
-            (save-restriction 
+            (save-restriction
               (narrow-to-region p1 p2)
               (goto-char (point-min))
               (while (search-forward "\n" nil t) (replace-match "" nil t)) )) ) )

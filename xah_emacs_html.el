@@ -75,7 +75,7 @@ When called in lisp program, if className is nil or empty string, don't add the 
   (interactive
    (list
         (read-string "Tag (p):" nil nil "p")
-        (read-string "Class:" nil nil "")
+        (read-string "class:" nil nil "")
         (read-string "id:" nil nil "") ) )
   (let (bds p1 p2 inputText outputText
             (classStr (if (or (equal className nil) (string= className "") ) "" (format " class=\"%s\"" className)))

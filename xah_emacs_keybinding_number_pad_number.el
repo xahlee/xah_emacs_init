@@ -42,11 +42,15 @@
 
 (global-set-key (kbd "<kp-9>") 'isearch-forward)
 (global-set-key (kbd "<C-kp-9>") 'isearch-backward)
+(global-set-key (kbd "<f6>") 'isearch-forward)
+(global-set-key (kbd "<C-f6>") 'isearch-backward)
 
 (defun xah-isearch-hook ()
   "Hook for `isearch-mode-hook'"
   (define-key isearch-mode-map (kbd "<C-kp-9>") 'isearch-repeat-backward)
   (define-key isearch-mode-map (kbd "<kp-9>") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "<C-f6>") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "<f6>") 'isearch-repeat-forward)
   )
 (add-hook 'isearch-mode-hook 'xah-isearch-hook)
 

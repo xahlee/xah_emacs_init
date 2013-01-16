@@ -137,7 +137,10 @@
  ;; ruby comment
     ("8rc" "=begin\n\n=end")
 
+    ("8l" "(☛ )")
     ("8menu" "〖a▸b▸c▸〗")
+    ("8key" "【Alt+f】")
+
     ("8line" "────────── ────────── ────────── ────────── ──────────")
     ("8u" "-*- coding: utf-8 -*-")
     ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
