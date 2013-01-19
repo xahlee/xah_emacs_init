@@ -123,7 +123,9 @@ See also: `remove-punctuation-trailing-redundant-space'."
             (t "chinese")
             )
            ) ) )
-  (let ((ξ-english-chinese-punctuation-map
+  (let (
+        (inputStr (buffer-substring-no-properties p1 p2))
+        (ξ-english-chinese-punctuation-map
          [   
           [". " "。"]
           [".\n" "。\n"]
@@ -145,7 +147,7 @@ See also: `remove-punctuation-trailing-redundant-space'."
                                ((string= ξ-to-direction "chinese") ξ-english-chinese-punctuation-map)
                                ((string= ξ-to-direction "english") (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map))
                                ((string= ξ-to-direction "auto")
-                                (if (string-match "," (buffer-substring-no-properties p1 p2))
+                                (if (string-match ",\\|. " inputStr)
                                   ξ-english-chinese-punctuation-map
                                   (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map)
                                   ))
