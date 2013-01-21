@@ -60,8 +60,6 @@
 (define-prefix-command 'xah-keymap)
 (global-set-key (kbd "<menu>") xah-keymap)
 
-(global-set-key (kbd "<menu> <menu>") 'smex)
-
 ;; truly ergonomic keyboard layout + dvorak
 ;; \` 1234 5 6 7890 []
 ;; \z ',.p y f gcrl /=
@@ -87,6 +85,7 @@
 ;; ★★ every hour
 ;; ★ few times a day
 
+(global-set-key (kbd "<menu> <return>") 'smex)
 (global-set-key (kbd "<menu> <delete>") 'delete-current-file)
 (global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
@@ -96,6 +95,7 @@
 (global-set-key (kbd "<menu> -") 'comment-dwim) ; ★★★
 (global-set-key (kbd "<menu> .") 'convert-english-chinese-punctuation)
 (global-set-key (kbd "<menu> /") 'nil)
+(global-set-key (kbd "<menu> 0") 'delete-window)
 (global-set-key (kbd "<menu> 1") 'copy-to-register-1)
 (global-set-key (kbd "<menu> 2") 'paste-from-register-1)
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ; ★★★
@@ -128,7 +128,7 @@
 (global-set-key (kbd "<menu> i t") 'insert-date-time)
 (global-set-key (kbd "<menu> j") 'nil)
 (global-set-key (kbd "<menu> k") 'nil)
-(global-set-key (kbd "<menu> l") 'nil)
+(global-set-key (kbd "<menu> l") 'recenter-top-bottom)
 (global-set-key (kbd "<menu> m c") 'calc)
 (global-set-key (kbd "<menu> m e") 'emacs-lisp-mode)
 (global-set-key (kbd "<menu> m h") 'xah-html-mode)
@@ -138,7 +138,10 @@
 (global-set-key (kbd "<menu> m v") 'visual-line-mode)
 (global-set-key (kbd "<menu> m w") 'whitespace-mode)
 (global-set-key (kbd "<menu> n") 'ergoemacs-new-empty-buffer) ; ★★★
-(global-set-key (kbd "<menu> o") 'xah-open-file-fast)
+(global-set-key (kbd "<menu> o b") 'bookmark-bmenu-list)
+(global-set-key (kbd "<menu> o f") 'ido-find-file)
+(global-set-key (kbd "<menu> o i") 'ibuffer)
+(global-set-key (kbd "<menu> o o") 'xah-open-file-fast)
 (global-set-key (kbd "<menu> q") 'query-replace) ; ★★★
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
 (global-set-key (kbd "<menu> r q") 'query-replace-regexp)
@@ -181,6 +184,21 @@
 (global-set-key (kbd "<menu> x") ctl-x-map) ; ★★★
 (global-set-key (kbd "<menu> y") 'nil)
 (global-set-key (kbd "<menu> z") 'nil)
+
+(define-key help-map (kbd "1") 'describe-function)
+(define-key help-map (kbd "2") 'describe-variable)
+(define-key help-map (kbd "3") 'describe-key)
+(define-key help-map (kbd "4") 'describe-char)
+(define-key help-map (kbd "5") 'man)
+(define-key help-map (kbd "7") 'lookup-google)
+(define-key help-map (kbd "8") 'lookup-wikipedia)
+(define-key help-map (kbd "9") 'lookup-word-definition)
+(define-key help-map (kbd "`") 'elisp-index-search)
+(define-key help-map (kbd "m") 'ergoemacs-describe-major-mode)
+(define-key help-map (kbd "o") 'nil)  ; ergoemacs-where-is-old-binding
+(define-key help-map (kbd "h") 'nil) ; view-hello-file
+
+(global-set-key (kbd "C--") 'cycle-camel-style-case)
 
 
 
@@ -339,7 +357,8 @@ For `nxml-mode-hook'."
 (global-unset-key (kbd "M-4") )
 (global-unset-key (kbd "M--") )
 (global-unset-key (kbd "M-%") )
-
+(global-unset-key (kbd "M-l") )         ; recenter-top-bottom
+(global-unset-key (kbd "M-0") )         ; delete-window
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

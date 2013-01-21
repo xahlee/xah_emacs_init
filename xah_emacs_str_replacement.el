@@ -5,13 +5,14 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(defun cycle-hyphen-underscore-space ()
-  "Cyclically replace {underscore, space, hypen} chars current line or text selection.
-When called repeatedly, this command cycles the {“ ”, “_”, “-”} characters."
+(defun cycle-camel-style-case ()
+  "Cyclically replace {camelStyle, camel_style} current word or text selection.
+actually, currently just change from camel to underscore. no cycle"
   (interactive)
-  ;; this function sets a property 「'state」. Possible values are 0 to length of charArray.
-  (let (mainText charArray p1 p2 currentState nextState changeFrom
-             changeTo startedWithRegion-p )
+  ;; this function sets a property 「'state」. Possible values are 0 to length of char_array.
+  (let (input_text
+        replace_text char_array p1 p2 current_state next_state changeFrom
+        changeTo startedWithRegion-p )
 
     (if (region-active-p)
         (progn
@@ -19,14 +20,64 @@ When called repeatedly, this command cycles the {“ ”, “_”, “-”} char
           (setq p1 (region-beginning))
           (setq p2 (region-end))
           )
-      (progn (setq startedWithRegion-p nil ) 
-             (setq p1 (line-beginning-position))
-             (setq p2 (line-end-position)) ) )
+      (let ((bds (bounds-of-thing-at-point 'word)))
+        (setq startedWithRegion-p nil )
+        (setq p1 (car bds))
+        (setq p2 (cdr bds)) ) )
+
+    (setq char_array [" " "_"])
+
+    (setq current_state
+          (if (get 'cycle-camel-style-case 'state)
+              (get 'cycle-camel-style-case 'state)
+            0))
+    (setq next_state (% (+ current_state 1) (length char_array)))
+
+    (setq changeFrom (elt char_array current_state ))
+    (setq changeTo (elt char_array next_state ))
+
+    (setq input_text (buffer-substring-no-properties p1 p2))
+
+    (let ((case-fold-search nil))
+      (cond
+       ;; camel to underscore
+       (
+        (equal current_state 0)
+        (setq replace_text (replace-regexp-in-string "\\([A-Z]\\)" "_\\1" input_text) )
+(setq replace_text (downcase replace_text) )
+        )
+       ((equal current_state 1)
+        (setq replace_text (replace-regexp-in-string "_\\([a-z]\\)" "\\,(upcase \\1)" input_text) )
+;; (setq replace_text (downcase replace_text) )
+        ) ) )
+
+    (save-restriction
+      (narrow-to-region p1 p2)
+      (delete-region (point-min) (point-max))
+      (insert replace_text)
+      )
+
+    (put 'cycle-camel-style-case 'state next_state)
+    ) )
+
+(defun cycle-hyphen-underscore-space ()
+  "Cyclically replace {underscore, space, hypen} chars on current word or text selection.
+When called repeatedly, this command cycles the {“ ”, “_”, “-”} characters."
+  (interactive)
+  ;; this function sets a property 「'state」. Possible values are 0 to length of charArray.
+  (let (inputText bds charArray p1 p2 currentState nextState changeFrom
+                 changeTo startedWithRegion-p )
+    (if (region-active-p)
+        (setq startedWithRegion-p t )
+      (setq startedWithRegion-p nil ) )
+
+    (setq bds (get-selection-or-unit 'glyphs))
+    (setq inputText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
 
     (setq charArray [" " "_" "-"])
 
     (setq currentState
-          (if (get 'cycle-hyphen-underscore-space 'state) 
+          (if (get 'cycle-hyphen-underscore-space 'state)
               (get 'cycle-hyphen-underscore-space 'state)
             0))
     (setq nextState (% (+ currentState 1) (length charArray)))
@@ -34,16 +85,18 @@ When called repeatedly, this command cycles the {“ ”, “_”, “-”} char
     (setq changeFrom (elt charArray currentState ))
     (setq changeTo (elt charArray nextState ))
 
-    (setq mainText (replace-regexp-in-string changeFrom changeTo (buffer-substring-no-properties p1 p2)) )
+    (setq inputText (replace-regexp-in-string changeFrom changeTo (buffer-substring-no-properties p1 p2)) )
     (delete-region p1 p2)
-    (insert mainText)
-    
-    (put 'cycle-hyphen-underscore-space 'state nextState)
+    (insert inputText)
 
-    (when startedWithRegion-p 
+    (when (or (string= changeTo " ") startedWithRegion-p) 
       (goto-char p2)
       (set-mark p1)
-      (setq deactivate-mark nil) ) ) )
+      (setq deactivate-mark nil) )
+
+    (put 'cycle-hyphen-underscore-space 'state nextState)
+
+    ) )
 
 (defun replace-mathematica-symbols-region (start end)
   "Replace Mathematica's special char encoding to Unicode of the same semantics.
@@ -114,7 +167,7 @@ When called in lisp code, p1 p2 are region begin/end positions. ξ-to-direction 
 See also: `remove-punctuation-trailing-redundant-space'."
   (interactive
    (let ( (bds (get-selection-or-unit 'block)))
-     (list (elt bds 1) (elt bds 2) 
+     (list (elt bds 1) (elt bds 2)
            (cond
             ((equal current-prefix-arg nil) "auto")
             ((equal current-prefix-arg '(4)) "english")
@@ -126,7 +179,7 @@ See also: `remove-punctuation-trailing-redundant-space'."
   (let (
         (inputStr (buffer-substring-no-properties p1 p2))
         (ξ-english-chinese-punctuation-map
-         [   
+         [
           [". " "。"]
           [".\n" "。\n"]
           ["," "，"]
@@ -230,9 +283,9 @@ Examples of changes:
   (let ( )
     ;; Note: order is important since this is huristic.
 
-    (save-restriction 
+    (save-restriction
       (narrow-to-region p1 p2)
- 
+
 ;; dash and ellipsis etc
 (replace-pairs-region (point-min) (point-max)
 [

@@ -55,6 +55,27 @@ TODO doesn't work.
 ;;       )
 ;;     ))
 
+;; incomplete
+;; (defun camel-case-to-understore-interactive (p1 p2)
+;;   "query replace camelCase to camel_case words in current text block.
+;; When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the p1 p2 are region positions."
+;;   (interactive
+;;    (cond
+;;     ((equal current-prefix-arg nil)    ; universal-argument not called
+;;      (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
+;;     (t                                  ; all other cases
+;;      (list (point-min) (point-max) )) ) )
+;; (let ((case-fold-search nil))
+;;  (save-excursion
+;;     (save-restriction
+;;       (narrow-to-region p1 p2)
+;;       (goto-char (point-min))
+;;       (while (search-forward-regexp "\\b\\([A-Z][a-z]+\\)\\b" nil t)
+;;         (if (y-or-n-p "Replace this one?")
+;;             (replace-match "\\1" t) ) ) ))
+;; )
+;;    )
+
 (defun code-bracket-to-html-tag-interactive (p1 p2)
   "Replace all 「…」 to <code>…</code> in current text block.
 When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the p1 p2 are region positions."
