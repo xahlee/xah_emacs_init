@@ -30,10 +30,6 @@
 ;; linux, the menu/apps key is <menu>
 ;; windows, the menu/apps key is <apps>
 
-(global-set-key (kbd "M-5") 'ergoemacs-select-text-in-quote)
-(global-set-key (kbd "M-7") 'ergoemacs-select-current-line)
-(global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
-
 ;; (global-set-key (kbd "<f8>") ctl-x-map)
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
@@ -118,7 +114,47 @@
 (global-set-key (kbd "<menu> d") 'ergoemacs-open-in-desktop)
 (global-set-key (kbd "<menu> e") 'nil)
 (global-set-key (kbd "<menu> f") 'copy-file-path)
-(global-set-key (kbd "<menu> g") 'nil)
+
+(global-set-key (kbd "<menu> g 1") "!")
+(global-set-key (kbd "<menu> g 2") "@")
+(global-set-key (kbd "<menu> g 3") "#")
+(global-set-key (kbd "<menu> g 4") "$")
+(global-set-key (kbd "<menu> g 5") "%")
+(global-set-key (kbd "<menu> g 6") "^")
+(global-set-key (kbd "<menu> g 7") "&")
+(global-set-key (kbd "<menu> g 8") "*")
+(global-set-key (kbd "<menu> g 9") "(")
+(global-set-key (kbd "<menu> g 0") ")")
+(global-set-key (kbd "<menu> g a") "A")
+(global-set-key (kbd "<menu> g b") "B")
+(global-set-key (kbd "<menu> g c") "C")
+(global-set-key (kbd "<menu> g d") "D")
+(global-set-key (kbd "<menu> g e") "E")
+(global-set-key (kbd "<menu> g f") "F")
+(global-set-key (kbd "<menu> g g") "G")
+(global-set-key (kbd "<menu> g h") "H")
+(global-set-key (kbd "<menu> g i") "I")
+(global-set-key (kbd "<menu> g j") "J")
+(global-set-key (kbd "<menu> g k") "K")
+(global-set-key (kbd "<menu> g l") "L")
+(global-set-key (kbd "<menu> g m") "M")
+(global-set-key (kbd "<menu> g n") "N")
+(global-set-key (kbd "<menu> g o") "O")
+(global-set-key (kbd "<menu> g p") "P")
+(global-set-key (kbd "<menu> g q") "Q")
+(global-set-key (kbd "<menu> g r") "R")
+(global-set-key (kbd "<menu> g s") "S")
+(global-set-key (kbd "<menu> g t") "T")
+(global-set-key (kbd "<menu> g u") "U")
+(global-set-key (kbd "<menu> g v") "V")
+(global-set-key (kbd "<menu> g w") "W")
+(global-set-key (kbd "<menu> g x") "X")
+(global-set-key (kbd "<menu> g y") "Y")
+(global-set-key (kbd "<menu> g z") "Z")
+
+;; abcdefghijklmnopqrstuvwxyz
+
+
 (global-set-key (kbd "<menu> h") help-map) ; ★★★
 (global-set-key (kbd "<menu> i d") 'insert-date)
 (global-set-key (kbd "<menu> i r h") 'insert-random-hex)
@@ -132,6 +168,7 @@
 (global-set-key (kbd "<menu> m c") 'calc)
 (global-set-key (kbd "<menu> m e") 'emacs-lisp-mode)
 (global-set-key (kbd "<menu> m h") 'xah-html-mode)
+(global-set-key (kbd "<menu> m l") 'linum-mode)
 (global-set-key (kbd "<menu> m o") 'org-mode)
 (global-set-key (kbd "<menu> m s") 'shell)
 (global-set-key (kbd "<menu> m t") 'text-mode)
@@ -150,12 +187,11 @@
 (global-set-key (kbd "<menu> t c") 'xah-cite)
 (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
 (global-set-key (kbd "<menu> t n") 'make-frame-command)
-(global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
+(global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace) 
+(global-set-key (kbd "<menu> t l") 'xah-clean-whitespace) 
 (global-set-key (kbd "<menu> t z") 'title-case-string-region-or-line)
 (global-set-key (kbd "<menu> u -") "—") ; EM DASH
 (global-set-key (kbd "<menu> u .") "…") ; HORIZONTAL ELLIPSIS
-(global-set-key (kbd "<menu> u 0") "✲") ; OPEN CENTRE ASTERISK
-(global-set-key (kbd "<menu> u 3") "☛") ; BLACK RIGHT POINTING INDEX
 (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
 (global-set-key (kbd "<menu> u 7") "＆") ; full width ampersand
 (global-set-key (kbd "<menu> u 8") "•") ; bullet
@@ -360,6 +396,18 @@ For `nxml-mode-hook'."
 (global-unset-key (kbd "M-l") )         ; recenter-top-bottom
 (global-unset-key (kbd "M-0") )         ; delete-window
 
+(global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
+(global-set-key (kbd "M-3") 'ergoemacs-select-text-in-quote)
+(global-set-key (kbd "M-7") 'ergoemacs-select-current-line)
+(global-set-key (kbd "M-s") 'ergoemacs-toggle-letter-case)
+
+(global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket)
+(global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket)
+
+(global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
+(global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
+
+
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
   (interactive)
@@ -368,12 +416,6 @@ For `nxml-mode-hook'."
       (progn (setq w32-apps-modifier 'meta) )
       ))
 
-(global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket)
-(global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket)
-
-(global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
-(global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
-(global-set-key (kbd "M-b") 'ergoemacs-toggle-letter-case)
 
 ;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
 

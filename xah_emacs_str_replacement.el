@@ -89,7 +89,7 @@ When called repeatedly, this command cycles the {“ ”, “_”, “-”} char
     (delete-region p1 p2)
     (insert inputText)
 
-    (when (or (string= changeTo " ") startedWithRegion-p) 
+    (when (or (string= changeTo " ") startedWithRegion-p)
       (goto-char p2)
       (set-mark p1)
       (setq deactivate-mark nil) )
@@ -436,7 +436,6 @@ Example: 「it’s」 ⇒ 「it's」."
 
 )
 
-
 
 (defun replace-tex-region (start end)
   "Replace some math function names or symbols by their LaTeX markup."
@@ -489,8 +488,6 @@ Whitespace here is considered any of \\n, tab, space ."
                                   ["  +" " "])
                                t))
 
-
-
 (defun format-c-lang-region (start end)
   "Expand region of c style syntax languages so that it is nicely formated.
 Experimental code.
@@ -512,3 +509,28 @@ WARNING: If region has comment or string, the code'd be fucked up."
       )
     )
   )
+
+(defun xah-clean-whitespace ()
+  "Delete trailing whitespace, and replace sequence of newlines into just 2.
+
+Work on whole buffer, or text selection."
+  (interactive)
+  (let* (
+         (bds (get-selection-or-unit 'buffer))
+         (p1 (elt bds 1))
+         (p2 (elt bds 2))
+         )
+    (save-excursion
+      (save-restriction
+        (narrow-to-region p1 p2)
+        (progn
+          (goto-char (point-min))
+          (while (search-forward-regexp " +\n" nil "noerror")
+            (replace-match "\n") ))
+        (progn
+          (goto-char (point-min))
+          (while (search-forward-regexp "\n\n\n+" nil "noerror")
+            (replace-match "\n\n")
+            ))
+        ))
+    ))
