@@ -32,7 +32,6 @@
 ;; (global-set-key (kbd "<f8>") ctl-x-map)
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
-(global-set-key (kbd "<f8> <f9>") 'delete-other-windows)
 (global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
 (global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 
@@ -181,8 +180,10 @@
 (global-set-key (kbd "<menu> r '") 'replace-straight-quotes)
 (global-set-key (kbd "<menu> r ,") 'remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> r .") 'convert-english-chinese-punctuation)
-(global-set-key (kbd "<menu> r p") 'convert-ideographic/ascii-space)
+(global-set-key (kbd "<menu> r d") 'delete-matching-lines) ; ★★
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
+(global-set-key (kbd "<menu> r l") 'list-matching-lines) ; ★★★
+(global-set-key (kbd "<menu> r p") 'convert-ideographic/ascii-space)
 (global-set-key (kbd "<menu> r q") 'query-replace-regexp)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; ★★★
@@ -264,7 +265,7 @@
   ;; .p gc
   ;; eu ht
 
-  (local-set-key (kbd "<menu> e 0") 'dehtmlize-text)
+  (local-set-key (kbd "<menu> e 0") 'xhm-remove-html-tags)
   (local-set-key (kbd "<menu> e 5") 'mark-unicode)
   (local-set-key (kbd "<menu> e 6") 'xah-browse-url-of-buffer)
   (local-set-key (kbd "<menu> e 7") 'htmlize-or-dehtmlize-pre-block)
@@ -272,14 +273,14 @@
   (local-set-key (kbd "<menu> e <delete>") 'sgml-delete-tag)
   (local-set-key (kbd "<menu> e <left>") 'sgml-skip-tag-backward)
   (local-set-key (kbd "<menu> e <right>") 'sgml-skip-tag-forward)
-  (local-set-key (kbd "<menu> e a") 'xah-annotate)
+  (local-set-key (kbd "<menu> e a") 'xwe-annotate)
   (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
-  (local-set-key (kbd "<menu> e c") 'make-citation)
+  (local-set-key (kbd "<menu> e c") 'xhm-make-citation)
   (local-set-key (kbd "<menu> e d") 'insert-date-tag)
-  (local-set-key (kbd "<menu> e e") 'wrap-html-tag)
+  (local-set-key (kbd "<menu> e e") 'xhm-wrap-html-tag)
   (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
-  (local-set-key (kbd "<menu> e k") 'htmlize-keyboard-shortcut-notation)
-  (local-set-key (kbd "<menu> e l 6") 'source-linkify)
+  (local-set-key (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
+  (local-set-key (kbd "<menu> e l 6") 'xhm-source-url-linkify)
 
   (local-set-key (kbd "<menu> e l d") 'perldoc-ref-linkify)
   (local-set-key (kbd "<menu> e l e") 'emacs-ref-linkify)
@@ -289,28 +290,28 @@
   (local-set-key (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
   (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
 
-  (local-set-key (kbd "<menu> e l t") 'word-etymology-linkify)
-  (local-set-key (kbd "<menu> e l c") 'chinese-linkify)
-  (local-set-key (kbd "<menu> e l l") 'listify-block)
+  (local-set-key (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
+  (local-set-key (kbd "<menu> e l c") 'xwe-chinese-linkify)
+  (local-set-key (kbd "<menu> e l l") 'xhm-lines-to-html-list)
 
-  (local-set-key (kbd "<menu> e l u") 'wrap-url)
-  (local-set-key (kbd "<menu> e l w") 'wikipedia-linkify)
+  (local-set-key (kbd "<menu> e l u") 'xhm-wrap-url)
+  (local-set-key (kbd "<menu> e l w") 'xhm-wikipedia-linkify)
   (local-set-key (kbd "<menu> e l z") 'amazon-linkify)
   (local-set-key (kbd "<menu> e m a") 'xah-make-atom-entry)
   (local-set-key (kbd "<menu> e m l") 'xah-add-to-related-links)
-  (local-set-key (kbd "<menu> e p") 'add-paragraph-tag)
+  (local-set-key (kbd "<menu> e p") 'xhm-wrap-p-tag)
   (local-set-key (kbd "<menu> e r ,") 'replace-html-chars-to-unicode)
   (local-set-key (kbd "<menu> e r .") 'replace-html-chars-to-entities)
-  (local-set-key (kbd "<menu> e r 3") 'xah-update-title)
-  (local-set-key (kbd "<menu> e r 4") 'xah-update-article-timestamp)
+  (local-set-key (kbd "<menu> e r 3") 'xhm-update-title)
+  (local-set-key (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
   (local-set-key (kbd "<menu> e r c") 'code-bracket-to-html-tag)
   (local-set-key (kbd "<menu> e r e") 'curly-quotes-to-emacs-function-tag)
   (local-set-key (kbd "<menu> e r k") 'emacs-to-windows-kbd-notation)
-  (local-set-key (kbd "<menu> e r m") 'make-html-table)
+  (local-set-key (kbd "<menu> e r m") 'xhm-make-html-table)
   (local-set-key (kbd "<menu> e r t") 'title-bracket-to-html-tag)
   (local-set-key (kbd "<menu> e t c") 'insert-random-color-hsl)
-  (local-set-key (kbd "<menu> e t r") 'rename-html-inline-image)
-  (local-set-key (kbd "<menu> e t u") 'extract-url)
+  (local-set-key (kbd "<menu> e t r") 'xhm-rename-html-inline-image)
+  (local-set-key (kbd "<menu> e t u") 'xhm-extract-url)
   (local-set-key (kbd "<menu> e u") 'xah-all-linkify)
 
   )

@@ -16,7 +16,7 @@ then it will became
 
 Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .svg}. If it is URL (starting with “http”), then no “width” and “height” attribute will be added."
   (interactive)
-  (let* ( 
+  (let* (
          (bds (get-selection-or-unit 'filepath))
          (ξinputPath (elt bds 0) )
          (p1 (aref bds 1) )
@@ -44,7 +44,7 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
                 (setq ξwidth (number-to-string (elt ξwidthHeight 0)))
                 (setq ξheight (number-to-string (elt ξwidthHeight 1)))
                 (delete-region p1 p2)
-                (insert 
+                (insert
                  (format "<img src=\"%s\" alt=\"%s\" width=\"%s\" height=\"%s\" />"
                          (xahsite-filepath-to-href-value ξffp (or (buffer-file-name) default-directory))
                          altText
@@ -115,7 +115,6 @@ If there's a text selection, use that region as file name."
     ;;               imgFileName
     ;;             (concat  (substring imgFileName 0 5)  "…" (substring imgFileName -6)  ) ))
 
-
     (setq ξdimension (get-image-dimensions-imk imgPath))
     (setq ξwidth (number-to-string (elt ξdimension 0)))
     (setq ξheight (number-to-string (elt ξdimension 1)))
@@ -158,66 +157,6 @@ WARNING: the decoding is incomplete.
 See also: `url-percent-encode-string'."
   (replace-pairs-in-string ξstring (mapcar (lambda (ξx) (vector (elt ξx 1) (elt ξx 0))) ξurl-encode-chars-pairs) ))
 
-(defun wikipedia-url-linkify (ξstring &optional ξfrom-to-pair)
-  "Make the URL at cursor point into a html link.
-
-If there is a text selection, use that as input.
-
-Example:
-http://en.wikipedia.org/wiki/Emacs
-⇒
-<a href=\"http://en.wikipedia.org/wiki/Emacs\">Emacs</a>.
-
-When called interactively, work on current URL or text selection.
-
-When called in lisp code, if ξstring is non-nil, returns a changed string.  If ξstring nil, change the text in the region between positions in sequence ξfrom-to-pair."
-
-  (interactive
-   (if (region-active-p)
-       (list nil (vector (region-beginning) (region-end)))
-     (let ((bds (get-selection-or-unit 'url)) )
-       (list nil (vector (aref bds 1) (aref bds 2))) ) ) )
-
-  (let (workOnStringP inputStr outputStr
-                      (ξfrom (elt ξfrom-to-pair 0))
-                      (ξto (elt ξfrom-to-pair 1)))
-    (setq workOnStringP (if () t nil))
-    (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
-
-    (setq outputStr (format "<a href=\"%s\">%s</a>" (url-percent-encode-string inputStr) (replace-regexp-in-string "_" " " (url-percent-decode-string (file-name-nondirectory inputStr) ) )) )
-
-    (if workOnStringP
-        outputStr
-      (progn
-        (delete-region ξfrom ξto)
-        (goto-char ξfrom)
-        (insert outputStr) )) ) )
-
-(defun wrap-url (ξstring &optional ξfrom ξto)
-  "Make the URL at cursor point into a html link.
-
-When called interactively, work on current glyph sequence or text selection.
-
-When called in lisp code, if ξstring is non-nil, returns a changed string.  If ξstring nil, change the text in the region between positions ξfrom ξto."
-  (interactive
-   (if (region-active-p)
-       (list nil (region-beginning) (region-end))
-     (let ((bds (unit-at-cursor 'glyphs)) )
-       (list nil (elt bds 1) (elt bds 2)) ) ) )
-
-  (let (workOnStringP inputStr outputStr)
-    (setq workOnStringP (if ξstring t nil))
-    (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
-    (setq outputStr (concat "<a href=\"" (url-percent-encode-string inputStr) "\">" inputStr "</a>" )  )
-
-    (if workOnStringP
-        outputStr
-      (save-excursion
-        (delete-region ξfrom ξto)
-        (goto-char ξfrom)
-        (insert outputStr) )) )
-  )
-
 (defun blogger-linkify ()
   "Make URL at cursor point into a html link.
 
@@ -234,192 +173,6 @@ becomes
 
     (delete-region p7 p8)
     (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-percent-encode-string ξurl) "\">✍</a></div>"))))
-
-(defun source-linkify (prefixArgCode)
-  "Make URL at cursor point into a html link.
-If there's a text selection, use the text selection as input.
-
-Example: http://example.com/xyz.htm
-becomes
-<a class=\"sorc\" href=\"http://example.com/xyz.htm\" data-accessed=\"2008-12-25\">example.com…</a>
-
-The anchor text may be of 4 possibilities, depending on value of `universal-argument'.
-
-1 → 「‹full url›」
-2 or 4 → 「‹domain›…」
-3 → 「img src」
-0 or any → smartly decide."
-
-  (interactive "P")
-  (let (inputStr
-        bds p1-input p2-input
-        p1-url p2-url p1-tag p2-tag
-        ξurl domainName linkText resultLinkStr)
-
-    (setq bds (get-selection-or-unit 'url))
-    (setq inputStr (elt bds 0) )
-    (setq p1-input (elt bds 1) )
-    (setq p2-input (elt bds 2) )
-
-    ;; check if it's just plain URL or already in linked form 「<a href=…>…</a>」
-    ;; If latter, you need to get the boundaries for the entire link too.
-    (if (string-match "href=\"" inputStr)
-        (save-excursion
-          (search-backward "href=" (- (point) 90)) ; search boundary as extra guard for error
-          (forward-char 6)
-          (setq p1-url (point))
-          (search-forward "\"" (+ p1-url 90))
-          (setq p2-url (- (point) 1))
-
-          (goto-char p1-url)
-          (search-backward "<a" (- p1-url 30) )
-          (setq p1-tag (point))
-          (goto-char p2-url)
-          (search-forward "</a>" (+ p2-url 140))
-          (setq p2-tag (point))
-          )
-      (progn
-        (setq p1-url p1-input)
-        (setq p2-url p2-input)
-        (setq p1-tag p1-input)
-        (setq p2-tag p2-input) ) )
-
-    (setq ξurl (replace-regexp-in-string "&amp;" "&" (buffer-substring-no-properties p1-url p2-url) nil "LITERAL") ) ; in case it's already encoded. TODO this is only 99% correct.
-
-    ;; get the domainName
-    (setq domainName
-          (progn
-            (string-match "://\\([^\/]+?\\)/" ξurl)
-            (match-string 1 ξurl)
-            )
-          )
-
-    (setq linkText
-          (cond
-           ((equal prefixArgCode 1) ξurl)           ; full url
-           ((or (equal prefixArgCode 2) (equal prefixArgCode 4) (equal prefixArgCode '(4))) (concat domainName "…"))           ; ‹domain›…
-           ((equal prefixArgCode 3) "img src")           ; img src
-           (t (if
-                  (or
-                   (string-match "wikipedia\\.org.+jpg$" ξurl)
-                   (string-match "wikipedia\\.org.+JPG$" ξurl)
-                   (string-match "wikipedia\\.org.+png$" ξurl)
-                   (string-match "wikipedia\\.org.+PNG$" ξurl)
-                   (string-match "wikipedia\\.org.+svg$" ξurl)
-                   (string-match "wikipedia\\.org.+SVG$" ξurl)
-                   )
-                  "img src"
-                ξurl
-                ))        ; smart
-           )
-          )
-
-    (setq ξurl (replace-regexp-in-string "&" "&amp;" ξurl))
-    (setq resultLinkStr
-          (format "<a class=\"sorc\" href=\"%s\" data-accessed=\"%s\">%s</a>"
-                  ξurl (format-time-string "%Y-%m-%d") linkText
-                  )
-          )
-
-    ;; delete URL and insert the link
-    (delete-region p1-tag p2-tag)
-    (insert resultLinkStr)
-    ))
-
-
-(defun defunct-link ()
-  "Make the html link under cursor to a defunct form.
-Example:
-If cursor is inside this tag
-<a class=\"sorc\" href=\"http://example.com/\" data-accessed=\"2008-12-26\">…</a>
- (and inside the opening tag.)
-
-It becomes:
-<s class=\"deadurl\" title=\"accessed:2008-12-26; defunct:2008-12-26; http://example.com\">…</s>"
-  (interactive)
-  (let (p1 p2 wholeLinkStr newLinkStr ξurl titleStr)
-    (save-excursion
-      ;; get the boundary of opening tag
-      (forward-char 3)
-      (search-backward "<a " ) (setq p1 (point) )
-      (search-forward "</a>") (setq p2 (point) )
-
-      ;; get wholeLinkStr
-      (setq wholeLinkStr (buffer-substring-no-properties p1 p2))
-
-      ;; generate replacement text
-      (with-temp-buffer
-        (insert wholeLinkStr)
-
-        (goto-char 1)
-        (search-forward-regexp  "href=\"\\([^\"]+?\\)\"")
-        (setq ξurl (match-string 1))
-
-        (search-forward-regexp  "data-accessed=\"\\([^\"]+?\\)\"")
-        (setq titleStr (match-string 1))
-
-        (setq newLinkStr (format "<s class=\"deadurl\" title=\"accessed:%s; defunct:%s\">%s</s>" titleStr (format-time-string "%Y-%m-%d") ξurl ) )))
-
-    (delete-region p1 p2)
-    (insert newLinkStr)))
-
-(defun wikipedia-linkify ()
-  "Make the current word or text selection into a Wikipedia link.
-
-For Example: 「Emacs」 ⇒ 「<a href=\"http://en.wikipedia.org/wiki/Emacs\">Emacs</a>」"
-  (interactive)
-  (let (linkText bds p1 p2 wikiTerm resultStr)
-
-    (setq bds (get-selection-or-unit 'url))
-    (setq linkText (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
-
-    (setq wikiTerm (replace-regexp-in-string " " "_" linkText) )
-    (setq resultStr (concat "<a href=\"http://en.wikipedia.org/wiki/" wikiTerm "\">" linkText "</a>"))
-
-    (delete-region p1 p2)
-    (insert resultStr) ))
-
-(defun chinese-linkify ()
-  "Make the current Chinese character into several Chinese dictionary links.
-If there's a text selection, use that for input."
-  (interactive)
-  (let ( ξchar p1 p2 big5Code templateStr resultStr)
-
-    (if (region-active-p)
-        (progn
-          (setq p1 (region-beginning) )
-          (setq p2 (region-end) )
-          )
-      (progn
-        (setq p1 (point) )
-        (setq p2 (1+ (point)) ) ) )
-
-    (setq ξchar (buffer-substring-no-properties p1 p2))
-
-    ;; (setq big5Code (encode-char (string-to-char ξchar) 'big5) )
-
-    (setq templateStr
-          "<div class=\"cδ\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
-          )
-
-    (setq resultStr (replace-regexp-in-string "�" ξchar templateStr))
-    (delete-region p1 p2)
-    (insert resultStr) ))
-
-(defun word-etymology-linkify ()
-  "Make the current word into a etymology reference link.
-."
-  (interactive)
-  (let ( bds p1 p2 inputstr resultStr)
-
-    (setq bds (get-selection-or-unit 'line))
-    (setq inputstr (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
-    (setq resultStr (concat "<span class=\"cδe\"><a href=\"http://www.etymonline.com/index.php?search=" inputstr "\">" inputstr "</a></span>") )
-    (delete-region p1 p2)
-    (insert resultStr) ))
-
 
 
 
@@ -534,7 +287,6 @@ Warning: the line must end in a line return char else the result is wrong."
     (delete-region p1 p2)
     (insert "<p>Google search: <a href=\"" ξurl "\">" ξword "</a>.</p>\n")))
 
-
 
 ;; some custom html markup and functions for working with html
 
@@ -560,98 +312,6 @@ it becomes
     (delete-region p1 p2)
     (insert myresult)
     ))
-
-(defun listify-block ()
-  "Make the current block of lines into a HTML list.
-Any URL in the line will be turned into links.
-
-Example:
-If your cursor is in the following block of text:
-
-Castratos are castrated males made for singing: http://en.wikipedia.org/wiki/Castrato , record of the last castrato: http://www.archive.org/details/AlessandroMoreschi
-human vocal range: http://en.wikipedia.org/wiki/Vocal_range
-
-It will become:
-<ul>
-<li>Castratos are castrated males made for singing: <a href=\"http://en.wikipedia.org/wiki/Castrato\">Castrato</a> , record of the last castrato: <a href=\"http://www.archive.org/details/AlessandroMoreschi\">http://www.archive.org/details/AlessandroMoreschi</a></li>
-<li>human vocal range: <a href=\"http://en.wikipedia.org/wiki/Vocal_range\">Vocal range</a></li>
-</ul>"
-  (interactive)
-  (let (bds p1 p2 inputStr resultStr)
-    (setq bds (get-selection-or-unit 'block))
-    (setq inputStr (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
-    (save-excursion
-      (setq resultStr
-            (with-temp-buffer
-              (insert inputStr)
-              (delete-trailing-whitespace)
-              (goto-char 1)
-              (while
-                  (search-forward-regexp  "\.html$" nil t)
-                (backward-char 1)
-                (xah-all-linkify)
-                )
-
-              (goto-char 1)
-              (while
-                  (not (equal (line-end-position) (point-max)))
-                (beginning-of-line) (insert "<li>")
-                (end-of-line) (insert "</li>")
-                (forward-line 1 )
-                )
-
-              (beginning-of-line) (insert "<li>")
-              (end-of-line) (insert "</li>")
-
-              (goto-char 1)
-              (insert "<ul>\n")
-              (goto-char (point-max))
-              (insert "\n</ul>")
-
-              (buffer-string)
-              ) )
-      )
-    (delete-region p1 p2)
-    (insert resultStr)
-    ) )
-
-(defun listify-block_old_2011-02-01 ()
-  "Make the current block of lines into a HTML list.
-Any URL in the line will be turned into links.
-
-Example:
-If your cursor is in the following block of text:
-
-Castratos are castrated males made for singing: http://en.wikipedia.org/wiki/Castrato , record of the last castrato: http://www.archive.org/details/AlessandroMoreschi
-human vocal range: http://en.wikipedia.org/wiki/Vocal_range
-
-It will become:
-<ul>
-<li>Castratos are castrated males made for singing: <a href=\"http://en.wikipedia.org/wiki/Castrato\">Castrato</a> , record of the last castrato: <a href=\"http://www.archive.org/details/AlessandroMoreschi\">http://www.archive.org/details/AlessandroMoreschi</a></li>
-<li>human vocal range: <a href=\"http://en.wikipedia.org/wiki/Vocal_range\">Vocal range</a></li>
-</ul>"
-  (interactive)
-  (let (p1 p2 mainText lines linkify transform-line)
-    (progn
-      (search-backward "\n\n")
-      (setq p1 (search-forward "\n\n"))
-      (search-forward "\n\n")
-      (setq p2 (search-backward "\n\n"))
-      (setq mainText (buffer-substring-no-properties p1 p2))
-
-      (setq lines (split-string mainText "\n" ))
-      (setq linkify (lambda (x) (when (string-match "\\`http" x) (wrap-url x))))
-      (setq transform-line
-            (lambda (line) (mapconcat 'identity (mapcar linkify (split-string line " ")) " ")) )
-      )
-    (delete-region p1 p2)
-    (insert "<ul>\n")
-    (insert
-     (mapconcat (lambda (x) (concat "<li>" x "</li>"))
-                (mapcar transform-line lines) "\n"))
-    (insert "\n</ul>")))
-
-
 
 
 ;; more specific to Xah Lee
@@ -680,7 +340,6 @@ Sample call:
      sString
      "</a>"
      ) ) )
-
 
 (defun amazon-search-linkify ()
   "Make the current line or text-selection into a Amazon product search link.
@@ -727,7 +386,6 @@ There are other amazon categories, but not supported by this function."
     (delete-region p1 p2)
     (insert  (amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
-
 
 (defun amazon-linkify ()
   "Make the current URL or text selection into a Amazon.com link.
@@ -819,7 +477,6 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 ;;            (delete-region (car bounds) (cdr bounds))
 ;;            (insert resultStr))))
 ;;    ))
-
 
 (defun xah-file-linkify ()
   "Make the path under cursor into a HTML link for xah site.
@@ -931,10 +588,10 @@ If there is text selection, use it as input."
      ((string-match-p "wikipedia.org/" myPath)
       (let ((case-fold-search nil))
         (if (path-ends-in-image-suffix-p myPath)
-            (source-linkify 0)
-          (call-interactively 'wikipedia-url-linkify) ) ) )
+            (xhm-source-url-linkify 0)
+          (call-interactively 'xhm-wikipedia-url-linkify) ) ) )
 
-     ((and (string-match-p "\\`https?://" myPath)) (source-linkify 0)) ; generic URL
+     ((and (string-match-p "\\`https?://" myPath)) (xhm-source-url-linkify 0)) ; generic URL
 
      ((path-ends-in-image-suffix-p myPath) (image-file-to-html-figure-tag))
 

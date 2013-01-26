@@ -149,8 +149,6 @@ This function requires the `htmlize-buffer' from 〔htmlize.el〕 by Hrvoje Niks
       )
     ) )
 
-
-
 (defun dehtmlize-pre-block ()
   "Delete span tags between pre tags.
 
@@ -159,7 +157,7 @@ Note: only span tags of the form 「<span class=\"…\">…</span>」 are delete
 This command does the reverse of `htmlize-pre-block'."
   (interactive)
   (let (( ξxx (get-pre-block-langCode)))
-    (dehtmlize-span-region (elt ξxx 1) (elt ξxx 2))
+    (xhm-remove-span-tag-region (elt ξxx 1) (elt ξxx 2))
     )
   )
 
@@ -176,7 +174,7 @@ This command does the reverse of `htmlize-pre-block'."
 
     (message "%s" langCode)
     (if (string-match "<span class=\\|&amp;\\|&lt;\\|&gt;" inputStr)
-        (dehtmlize-span-region p1 p2)
+        (xhm-remove-span-tag-region p1 p2)
       (progn               ;; do htmlize
         (let (
               langCodeResult
@@ -185,7 +183,7 @@ This command does the reverse of `htmlize-pre-block'."
           (if (eq langCodeResult nil)
               (progn (error "Your lang code 「%s」 is not recognized." langCode))
             (progn
-              (save-excursion 
+              (save-excursion
                 (setq ξmode-name (elt (cdr langCodeResult) 0))
                 (delete-region p1 p2)
                 (insert (ξhtmlize-string
@@ -193,56 +191,3 @@ This command does the reverse of `htmlize-pre-block'."
                           ξmode-name))
                 )) )) )) ))
 
-(defun dehtmlize-span-region (p1 p2)
-  "Delete HTML “span” tags in region.
-Note: only span tags of the form 「<span class=\"…\">…</span>」 are deleted.
-And 3 html entities &amp; &lt; &gt; are changed to & < >."
-  (interactive "r")
-  (save-excursion
-    (save-restriction
-      (narrow-to-region p1 p2)
-      (replace-regexp-pairs-region (point-min) (point-max) '(["<span class=\"[^\"]+\">" ""]))
-      (replace-pairs-region (point-min) (point-max) '( ["</span>" ""] ["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">"] ) ) ) ) )
-
-(defun dehtmlize-text (ξstring &optional ξfrom ξto)
-"Delete HTML tags in string or region.
-Work on current text block or text selection. (a “text block” is text between empty lines)
-
-When called in lisp code, if ξstring is non-nil, returns a changed string.  If ξstring nil, change the text in the region between positions ξfrom ξto.
-
-WARNING: this implementation is for my personal use.
-Is does not cover all html tags or convert all html entities.
-For robust solution you might use: 「lynx -dump -display_charset=utf-8 URL」."
-  (interactive
-   (if (region-active-p)
-       (list nil (region-beginning) (region-end))
-     (let ((bds (get-selection-or-unit 'block)) )
-       (list nil (elt bds 1) (elt bds 2))) ) )
-
-  (let (workOnStringP inputStr outputStr)
-    (setq workOnStringP (if ξstring t nil))
-    (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
-    (setq outputStr
-          (let ((case-fold-search t) (tempStr inputStr))
-(setq tempStr (replace-regexp-pairs-in-string tempStr '(
-["<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" "\\2 〔 \\1 〕"]
-["<img src=\"\\([^\"]+?\\)\" alt=\"\\([^\"]+?\\)\" width=\"[0-9]+\" height=\"[0-9]+\" */?>" "〔IMAGE “\\2” \\1 〕"]
-["<[a-z0-9]+ */?>" ""]
-["<[a-z0-9]+ class=\"[^\"]+\">" ""]
-["</[a-z0-9]+>" ""]
-
-["&amp;" "&"]
-["&lt;" "<"]
-["&gt;" ">"]
-
-)))
-
-tempStr
-             )  )
-
-    (if workOnStringP
-        outputStr
-      (save-excursion
-        (delete-region ξfrom ξto)
-        (goto-char ξfrom)
-        (insert outputStr) )) ) )

@@ -167,3 +167,90 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
       ;;         )
       )))
 
+(defun xwe-chinese-linkify ()
+  "Make the current Chinese character into several Chinese dictionary links.
+If there's a text selection, use that for input."
+  (interactive)
+  (let ( ξchar p1 p2 big5Code templateStr resultStr)
+
+    (if (region-active-p)
+        (progn
+          (setq p1 (region-beginning) )
+          (setq p2 (region-end) )
+          )
+      (progn
+        (setq p1 (point) )
+        (setq p2 (1+ (point)) ) ) )
+
+    (setq ξchar (buffer-substring-no-properties p1 p2))
+
+    ;; (setq big5Code (encode-char (string-to-char ξchar) 'big5) )
+
+    (setq templateStr
+          "<div class=\"cδ\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
+          )
+
+    (setq resultStr (replace-regexp-in-string "�" ξchar templateStr))
+    (delete-region p1 p2)
+    (insert resultStr) ))
+
+(defun xwe-annotate ()
+  "Create a annotation in HTML.
+Wrap HTML “span” tag around current word or text selection, then
+insert a div tag above the current paragraph."
+  (interactive)
+  (let (bds inputText)
+
+    (setq bds (get-selection-or-unit 'word))
+    (setq inputText (elt bds 0) )
+
+    (xhm-wrap-html-tag "span" "xnt")
+    (search-backward "<p")
+    (insert "\n")
+    (backward-char 1)
+  (insert "<div class=\"x-note\"></div>\n")
+  (backward-char 7)
+    (insert-div-x-note)
+    (insert (format "<b class=\"x3nt\">%s</b>⇒ " inputText)  )
+    )
+  )
+
+(defun xwe-word-etymology-linkify ()
+  "Make the current word into a etymology reference link.
+."
+  (interactive)
+  (let ( bds p1 p2 inputstr resultStr)
+
+    (setq bds (get-selection-or-unit 'line))
+    (setq inputstr (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
+    (setq resultStr (concat "<span class=\"cδe\"><a href=\"http://www.etymonline.com/index.php?search=" inputstr "\">" inputstr "</a></span>") )
+    (delete-region p1 p2)
+    (insert resultStr) ))
+
+(defun xwe-query-find-then-bold ()
+  "personal to xahlee.org's vocabulary pages.
+Search forward a word enclosed by “<p class=\"wd\">” and “</p>”,
+then search forward it inside the example body, only if it is not
+already bold. Then, ask user whether that should be bold."
+  (interactive)
+  (let ()
+    (goto-char (point-min))
+    (while (search-forward-regexp "<p class=\"wd\">\\([^\<]+\\)</p>" nil t)
+      (search-forward-regexp (match-string 1))
+      (when (y-or-n-p "Do you want to bold the word?")
+        (xhm-wrap-html-tag "span" "w")
+        ;;(replace-match "<span class=\"x-w\">\\1</span>" t)
+        ))
+    ))
+
+(defun xwe-find-word-usage (myWord)
+  "Grep a dir for a word's usage."
+  (interactive "sWord to search: ")
+  (require 'grep)
+  (grep-compute-defaults)
+  (rgrep myWord "*html" "~/web/p")
+;; ~/web/p
+;; ~/web/flatland/
+;; ~/web/Periodic_dosage_dir/_p2/russell-lecture.html
+;; ~/web/Periodic_dosage_dir/_p2/why_not_christian.html
+)

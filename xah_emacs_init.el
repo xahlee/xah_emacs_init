@@ -99,7 +99,6 @@ interactively by “eval-buffer”."
 (load (fullpath-relative-to-current-file "xah_emacs_generic"))
 
 (load (fullpath-relative-to-current-file "xah_emacs_html"))
-(load (fullpath-relative-to-current-file "xah_emacs_html_table"))
 (load (fullpath-relative-to-current-file "xah_emacs_html_insert_things"))
 (load (fullpath-relative-to-current-file "xah_emacs_html_syntax_color_util"))
 (load (fullpath-relative-to-current-file "xah_emacs_linkify"))

@@ -54,7 +54,7 @@ When called in lisp program, ξsourceFilePath and ξdestFilePath should be file 
         t
         ) ) ) )
 
-(defun xah-update-related-links (filePath destFileList)
+(defun xahsite-update-related-links (filePath destFileList)
   "Update related links tags.
 
 Add the current page (filePath) as link to the “related pages” section at destFileList.
@@ -79,7 +79,7 @@ The related pages are html “div.rltd” element, having this form
      (setq p2 (elt bds 2) )
      (list
       (buffer-file-name)
-      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)) )) (extract-url (elt bds 0))) ) ) )
+      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)) )) (xhm-extract-url (elt bds 0))) ) ) )
 
   (let (p3 p4 currentUrlList)
     (mapc

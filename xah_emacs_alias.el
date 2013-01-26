@@ -4,15 +4,11 @@
 ;; Xah Lee ; 2007-06
 
 ; shortening of often used commands
-(defalias 'o 'occur)
-(defalias 'm 'man)
-(defalias 'd 'delete-matching-lines)
 (defalias 'fd 'find-dired)
 (defalias 'gf 'grep-find)
 (defalias 'lcd 'list-colors-display)
 (defalias 'rb 'revert-buffer)
 (defalias 'rs 'replace-string)
-(defalias 'sl 'sort-lines)
 
 (defalias 'ssm 'shell-script-mode)
 

@@ -45,58 +45,6 @@ WARNING: not robust. Designed for my personal use only."
 
 
 
-(defun xah-annotate ()
-  "Create a annotation in HTML.
-Wrap HTML “span” tag around current word or text selection, then
-insert a div tag above the current paragraph."
-  (interactive)
-  (let (bds inputText)
-
-    (setq bds (get-selection-or-unit 'word))
-    (setq inputText (elt bds 0) )
-
-    (wrap-html-tag "span" "xnt")
-    (search-backward "<p")
-    (insert "\n")
-    (backward-char 1)
-  (insert "<div class=\"x-note\"></div>\n")
-  (backward-char 7)
-    (insert-div-x-note)
-    (insert (format "<b class=\"x3nt\">%s</b>⇒ " inputText)  )
-    )
-  )
-
-(defun wrap-html-tag (tagName &optional className ξid)
-  "Add a HTML tag to beginning and ending of current word or text selection.
-
-The command will prompt for a “class” and “id”. Empty value means don't add the attribute.
-
-When called in lisp program, if className is nil or empty string, don't add the attribute. Same for ξid."
-  (interactive
-   (list
-        (read-string "Tag (p):" nil nil "p")
-        (read-string "class:" nil nil "")
-        (read-string "id:" nil nil "") ) )
-  (let (bds p1 p2 inputText outputText
-            (classStr (if (or (equal className nil) (string= className "") ) "" (format " class=\"%s\"" className)))
-            (idStr (if (or (equal ξid nil) (string= ξid "") ) "" (format " id=\"%s\"" ξid)))
-            )
-    (setq bds (get-selection-or-unit 'word))
-    (setq inputText (elt bds 0) )
-    (setq p1 (elt bds 1) )
-    (setq p2 (elt bds 2) )
-
-    (setq outputText (format "<%s%s%s>%s</%s>" tagName classStr idStr inputText tagName ) )
-
-    (delete-region p1 p2)
-    (goto-char p1)
-    (insert outputText)
-    (when                               ; put cursor between when input text is empty
-        (string= inputText "" )
-      (progn (search-backward "</" ) )
-      )
- ) )
-
 (defun mark-unicode (p1)
   "Wrap 「<b class=\"u\"></b>」 around current character.
 
@@ -109,209 +57,14 @@ When called in elisp program, wrap the tag at point P1."
 
 
 
-(defun add-paragraph-tag ()
-  "Add <p>…</p> tag to current paragraph or text selection.
-
-If there's a text selection, wrap p around each text block (separated by 2 newline chars.)"
-  (interactive)
-  (let (bds p1 p2 inputText)
-
-    (setq bds (get-selection-or-unit 'block))
-    (setq inputText (elt bds 0) )
-    (setq p1 (elt bds 1) )
-    (setq p2 (elt bds 2) )
-
-    (delete-region p1 p2 )
-    (insert "<p>" (replace-regexp-in-string "\n\n+" "</p>\n\n<p>" (trim-string inputText)) "</p>")
-    )
-  )
-
-(defun make-citation ()
-  "Reformat current text block or selection into a canonical citation format.
-
-For example, place cursor somewhere in the following block:
-
-Circus Maximalist
-By PAUL GRAY
-Monday, Sep. 12, 1994
-http://www.time.com/time/magazine/article/0,9171,981408,00.html
-
-After execution, the lines will become
-
-<cite>Circus Maximalist</cite> <time>1994-09-12</time> By Paul Gray. @ <a href=\"http://www.time.com/time/magazine/article/0,9171,981408,00.html\">Source www.time.com</a>
-
-If there's a text selection, use it for input, otherwise the input is a text block between empty lines."
-  (interactive)
-  (let (bds p1 p2 inputText myList ξtitle ξauthor ξdate ξurl )
-
-    (setq bds (get-selection-or-unit 'block))
-    (setq inputText (elt bds 0) )
-    (setq p1 (elt bds 1) )
-    (setq p2 (elt bds 2) )
-
-    (setq inputText (replace-regexp-in-string "^[[:space:]]*" "" inputText)) ; remove white space in front
-
-    (setq myList (split-string inputText "[[:space:]]*\n[[:space:]]*" t) )
-
-    (setq ξtitle (trim-string (elt myList 0)))
-    (setq ξtitle (replace-regexp-in-string "^\"\\(.+\\)\"$" "\\1" ξtitle))
-    (setq ξtitle (replace-pairs-in-string ξtitle '(["’" "'"] ["&" "＆"] )))
-
-    (setq ξauthor (trim-string (elt myList 1)))
-    (setq ξdate (trim-string (elt myList 2)))
-    (setq ξurl (trim-string (elt myList 3)))
-
-    (setq ξauthor (replace-regexp-in-string "\\. " " " ξauthor)) ; remove period in Initals
-    (setq ξauthor (replace-regexp-in-string "By +" "" ξauthor))
-    (setq ξauthor (upcase-initials (downcase ξauthor)))
-    (setq ξdate (fix-timestamp ξdate))
-
-    (setq ξurl (with-temp-buffer (insert ξurl) (source-linkify 2) (buffer-string)))
-
-    (delete-region p1 p2 )
-    (insert (concat "<cite>" ξtitle "</cite>") " " "<time>" ξdate "</time>"  " By " ξauthor ". @ " ξurl)
-    ))
-
-(defun htmlize-keyboard-shortcut-notation ()
-  "Wrap a “kbd” tag around keyboard keys on current text inside 【】, or text selection.
-e.g.
- 【ctrl+w】
-becomes
- 【<kbd>Ctrl</kbd>+<kbd>w</kbd>】
-Same for Alt, Shift, Cmd, Win, Enter, Return, Home… and other strings."
-  (interactive)
-
-  (let (p1 p2 inputStr resultStr replaceList)
-    (if (region-active-p)
-        (progn
-          (setq p1 (region-beginning))
-          (setq p2 (region-end))
-          )
-      (save-excursion
-        (progn
-          (if (search-backward "【" nil t)
-              (progn (forward-char)
-                     (setq p1 (point) ) )
-            (setq p1 (line-beginning-position) )
-            )
-
-          (if (search-forward "】" nil t)
-              (progn (backward-char)
-                     (setq p2 (point) ))
-            (setq p2 (line-end-position) ) ) )) )
-    (setq inputStr (buffer-substring-no-properties p1 p2))
-
-    (setq replaceList [
- ;; case in find string shouldn't matter.
-["Ctrl" "<kbd>Ctrl</kbd>"]
-["AltGr" "<kbd>AltGr</kbd>"]
-["Alt" "<kbd>Alt</kbd>"]
-["Shift" "<kbd>⇧ Shift</kbd>"]
-["command" "<kbd>⌘ Cmd</kbd>"]
-["Cmd" "<kbd>⌘ Cmd</kbd>"]
-["Option" "<kbd>⌥ Opt</kbd>"]
-["Opt" "<kbd>⌥ Opt</kbd>"]
-["Win" "<kbd>❖ Win</kbd>"]
-["App" "<kbd>▤ Menu</kbd>"]
-["Menu" "<kbd>▤ Menu</kbd>"]
-["Meta" "<kbd>Meta</kbd>"]
-["super" "<kbd>Super</kbd>"]
-
-["Return" "<kbd>Return ↩</kbd>"]
-["Enter" "<kbd>Enter ↵</kbd>"]
-["Backspace" "<kbd>⌫ Backspace</kbd>"]
-["Delete" "<kbd>⌦ Delete</kbd>"]
-["Del" "<kbd>⌦ Delete</kbd>"]
-["Space" "<kbd>Space</kbd>"]
-["Caps Lock" "<kbd>Caps Lock</kbd>"]
-["CapsLock" "<kbd>Caps Lock</kbd>"]
-["F Lock" "<kbd>F Lock</kbd>"]
-["Num Lock" "<kbd>Num Lock</kbd>"]
-["Tab" "<kbd>Tab ↹</kbd>"]
-["Esc" "<kbd>Esc</kbd>"]
-
-["F11" "<kbd>F11</kbd>"]
-["F12" "<kbd>F12</kbd>"]
-["F13" "<kbd>F13</kbd>"]
-["F14" "<kbd>F14</kbd>"]
-["F15" "<kbd>F15</kbd>"]
-["F16" "<kbd>F16</kbd>"]
-["F1" "<kbd>F1</kbd>"]
-["F2" "<kbd>F2</kbd>"]
-["F3" "<kbd>F3</kbd>"]
-["F4" "<kbd>F4</kbd>"]
-["F5" "<kbd>F5</kbd>"]
-["F6" "<kbd>F6</kbd>"]
-["F7" "<kbd>F7</kbd>"]
-["F8" "<kbd>F8</kbd>"]
-["F9" "<kbd>F9</kbd>"]
-["Fn" "<kbd>Fn</kbd>"]
-
-["kp0" "<kbd>Keypad 0</kbd>"]
-["kp1" "<kbd>Keypad 1</kbd>"]
-["kp2" "<kbd>Keypad 2</kbd>"]
-["kp3" "<kbd>Keypad 3</kbd>"]
-["kp4" "<kbd>Keypad 4</kbd>"]
-["kp5" "<kbd>Keypad 5</kbd>"]
-["kp6" "<kbd>Keypad 6</kbd>"]
-["kp7" "<kbd>Keypad 7</kbd>"]
-["kp8" "<kbd>Keypad 8</kbd>"]
-["kp9" "<kbd>Keypad 9</kbd>"]
-
-["kp+" "<kbd>Keypad +</kbd>"]
-["kp-" "<kbd>Keypad -</kbd>"]
-["kp*" "<kbd>Keypad *</kbd>"]
-["kp/" "<kbd>Keypad /</kbd>"]
-
-
-["←" "<kbd>←</kbd>"]
-["→" "<kbd>→</kbd>"]
-["↑" "<kbd>↑</kbd>"]
-["↓" "<kbd>↓</kbd>"]
-["Home" "<kbd>↖ Home</kbd>"]
-["End" "<kbd>↘ End</kbd>"]
-["PageUp" "<kbd>⇞ Page △</kbd>"]
-["Page Up" "<kbd>⇞ Page △</kbd>"]
-["PgUp" "<kbd>⇞ Page △</kbd>"]
-["PageDown" "<kbd>⇟ Page ▽</kbd>"]
-["Page Down" "<kbd>⇟ Page ▽</kbd>"]
-["PgDn" "<kbd>⇟ Page ▽</kbd>"]
-["insert" "<kbd>Insert</kbd>"]
-["ins" "<kbd>Insert</kbd>"]
-
-["‹key›" "<kbd>‹key›</kbd>"]
-                       ])
-
-    (let ((case-fold-search t) (case-replace nil)
-          )
-      (setq resultStr (replace-pairs-in-string inputStr replaceList))
-      )
-
-    (setq resultStr (replace-regexp-pairs-in-string resultStr
- [
- ["\+\\([^<]\\) \\(.\\) \\(.\\)\\'" "+<kbd>\\1</kbd> <kbd>\\2</kbd> <kbd>\\3</kbd>"]
- ["\+\\([^<]\\) \\([A-Za-z0-0]\\)\\'" "+<kbd>\\1</kbd> <kbd>\\2</kbd>"]
- ["\+\\([^<]\\)" "+<kbd>\\1</kbd>"]
- ]))
-
-    (delete-region p1 p2)
-    (insert resultStr)
-    )
-
-  ;; test cases
-  ;; 【Ctrl+x a】
-  ;; 【Ctrl+x a b】
-  ;; 【Ctrl+x Ctrl+j】
-  )
-
 (defun emacs-to-windows-kbd-notation (p1 p2)
   "Change emacs keyboard-shortcut notation to Windows's notation.
 
 When called interactively, work on text enclosed in 【…】, or text selection.
 
 For example:
- 「【C-h f】」⇒ 「【Ctrl+h f】」
- 「【M-a】」⇒ 「【Meta+a】」
+ 【C-h f】⇒ 【Ctrl+h f】
+ 【M-a】⇒ 【Meta+a】
 
 This command is just for convenient, not 100% correct translation.
 
@@ -355,7 +108,7 @@ Partly because the Windows key notation isn't exactly standardized. e.g. up arro
     )
   )
 
-(defun xah-update-article-timestamp ()
+(defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
 Add today's date to the form
  <p class=\"author_0\">Xah Lee, <time>2005-01-17</time>, <time>2011-07-25</time></p>
@@ -374,62 +127,7 @@ Add today's date to the form
         (message "%s" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
 ) ) ))
 
-(defun update-html-title (myTitle)
-  "update html “title” and “h1” tags on current buffer.
-current buffer must be a html page.
-Any <title>…</title> or <h1>…</h1> tag content are changed.
-If there's a text selection, work on text selection, else whole visible buffer."
-  (interactive "sEnter Title:")
-  (let (p1 p2 )
-    (if (region-active-p)
-        (progn (setq p1 (region-beginning) )
-               (setq p2 (region-end) )
-               )
-      (progn (setq p1 (point-min) )
-             (setq p2 (point-max) )
-             )
-      )
-    (save-excursion
-      (replace-regexp-pairs-region p1 p2
-                                   (vector
-                                    (vector "<title>\\([^<]+?\\)</title>" (format "<title>%s</title>" myTitle))
-                                    (vector "<h1>\\([^<]+?\\)</h1>" (format "<h1>%s</h1>" myTitle))
-                                    )
-                                   "FIXEDCASE" "LITERAL") ) ) )
-
-(defun xah-update-title (newTitle)
-  "Update a HTML article's title.
-Update the <title>…</title> and <h1>…</h1> of current buffer."
-  (interactive
-   (let (oldTitle)
-     (save-excursion
-       (goto-char 1)
-       (search-forward-regexp "<title>\\([^<]+?\\)</title>")
-       (setq oldTitle (match-string 1 ) )
-       )
-     (list (read-string "New title:" oldTitle nil oldTitle "INHERIT-INPUT-METHOD")) ) )
-  (let (p1 p2)
-    (save-excursion
-      (goto-char 1)
-
-      (progn (search-forward "<title>")
-             (setq p1 (point) )
-             (search-forward "<")
-             (setq p2 (- (point) 1) )
-             (delete-region p1 p2 )
-             (goto-char p1)
-             (insert newTitle ) )
-
-      (progn (search-forward "<h1>")
-             (setq p1 (point) )
-             (search-forward "<")
-             (setq p2 (- (point) 1) )
-             (delete-region p1 p2 )
-             (goto-char p1)
-             (insert newTitle ) )
-      ) ))
-
-(defun xah-update-page-tag-old (p1 p2)
+(defun xahsite-update-page-tag-old (p1 p2)
   "Update html page navigation tags.
 
 The input is a text selection.
@@ -489,7 +187,7 @@ combowords-4.html”"
      filez)
     ))
 
-(defun xah-update-page-tag ()
+(defun xahsite-update-page-tag ()
   "Update html page navigation tags.
 
 The input is a text block or text selection.
@@ -554,39 +252,3 @@ google_ad_client")
      fileList)
     ))
 
-(defun extract-url (htmlText &optional convert-relative-URL-p)
-  "Returns a list of URLs in the HTML text string htmlText.
-
-When called interactively, use text selection as input, or current text block between empty lines. Output URLs in a buffer named 「*extract URL output*」.
-
-If `universal-argument' 【Ctrl+u】 is called first, tries to convert relative URL to HTTP form.
-
-WARNING: this function extract all text of the form 「<a … href=\"…\" …>」 by a simple regex. It does not extract single quote form 「href='…'」 nor 「src=\"…\"」 , nor other considerations."
-  (interactive (list (elt (get-selection-or-unit 'block) 0) current-prefix-arg ) )
-  (let ((urlList (list)))
-    (with-temp-buffer
-      (insert htmlText)
-      (goto-char 1)
-      (while (re-search-forward "<a.+?href=\"\\([^\"]+?\\)\".+?>" nil "NOERROR")
-        (setq urlList (cons (match-string 1) urlList))
-        )
-      (goto-char 1)
-      (while (re-search-forward "<img.+?src=\"\\([^\"]+?\\)\".+?>" nil "NOERROR")
-        (setq urlList (cons (match-string 1) urlList))
-        )
-      )
-    (setq urlList (reverse urlList) )
-    (when convert-relative-URL-p
-      (setq urlList
-            (mapcar
-             (lambda (ξx)
-               (xahsite-filepath-to-url (xahsite-href-value-to-filepath ξx (buffer-file-name) )) )
-             urlList) ) )
-
-    (when (called-interactively-p 'any)
-      (with-output-to-temp-buffer "*extract URL output*"
-        (mapc (lambda (ξx) (princ ξx) (terpri) ) urlList)
-        )
-      )
-    urlList
-    ))

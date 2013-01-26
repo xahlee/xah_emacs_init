@@ -104,17 +104,6 @@ The differences are:
     )
   )
 
-(defun xah-new-empty-buffer ()
-  "Opens a new empty file in a particular dir.
-Specific to Xah Lee."
-  (interactive)
-  (let ()
-    (find-file "~/Documents/ciska/")
-    (switch-to-buffer (generate-new-buffer "untitled"))
-    (funcall (and initial-major-mode))
-    (setq buffer-offer-save t)
-)
-)
 
 (defun delete-secondlife-cache ()
   "Delete Second Life's cache directory."
@@ -153,15 +142,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 (re-search-backward "<p><b>" nil t)
 (re-search-forward "<p><b>" nil t))
 
-(defun make-wiki-entry ()
-  "Open pd.html, and at the right place, paste (a Wikipedia link), and save."
-  (interactive)
-(find-file "~/web/Periodic_dosage_dir/pd.html")
-(goto-char (point-min))
-(re-search-forward "wikime\n" nil t)
-(yank)
-(insert "\n")
-(save-buffer))
+
 
 
 
@@ -279,40 +260,6 @@ use FireFox to visit it as local file (construct the proper URL)."
    (browse-url myStr)
    ))
 
-(defun xah-find-word-usage (myWord)
-  "Grep a dir for a word's usage."
-  (interactive "sWord to search: ")
-  (require 'grep)
-  (grep-compute-defaults)
-  (rgrep myWord "*html" "~/web/p")
-;; ~/web/p
-;; ~/web/flatland/
-;; ~/web/Periodic_dosage_dir/_p2/russell-lecture.html
-;; ~/web/Periodic_dosage_dir/_p2/why_not_christian.html
-)
-
-
-
-(defun copy-to-register-1 ()
-  "Copy current line or text selection to register 1.
-See also: `paste-from-register-1', `copy-to-register'."
-  (interactive)
-  (let* (
-         (bds (get-selection-or-unit 'line ))
-         (inputStr (elt bds 0) )
-         (p1 (elt bds 1) )
-         (p2 (elt bds 2) )
-         )
-    (copy-to-register ?1 p1 p2)
-    (message "copied to register 1: 「%s」." inputStr)
-))
-
-(defun paste-from-register-1 ()
-  "paste text from register 1.
-See also: `copy-to-register-1', `insert-register'."
-  (interactive)
-  (insert-register ?1 t))
-
 
 
 (defun xah-sync-css ()
@@ -421,138 +368,6 @@ default browser will be launched and opening this URL:
   )
 
 
-(defun x-query-find-then-bold ()
-  "personal to xahlee.org's vocabulary pages.
-
-Search forward a word enclosed by “<p class=\"wd\">” and “</p>”,
-then search forward it inside the example body, only if it is not
-already bold. Then, ask user whether that should be bold."
-  (interactive)
-  (let ()
-    (goto-char (point-min))
-    (while (search-forward-regexp "<p class=\"wd\">\\([^\<]+\\)</p>" nil t)
-      (search-forward-regexp (match-string 1))
-      (when (y-or-n-p "Do you want to bold the word?")
-        (wrap-html-tag "span" "w")
-        ;;(replace-match "<span class=\"x-w\">\\1</span>" t)
-        ))
-    ))
-
-(defun 2zip ()
-  "Zip the current file in `dired'.
-If multiple files are marked, only zip the first one.
-Require unix zip commandline tool."
-  (interactive)
-  (require 'dired)
-  (let ( (fileName (elt (dired-get-marked-files) 0))  )
-    (shell-command (format "zip -r '%s.zip' '%s'" (file-relative-name fileName) (file-relative-name fileName)))
-    ))
-
-(defun process-image (fileList argsString newNameSuffix newNameFileSuffix )
-  "Create a new image.
-fileList is a list of image file paths.
-argsString is argument string passed to ImageMagick's “convert” command.
-newNameSuffix is the string appended to file. e.g. “_new” gets you “cat_new.jpg”
-newNameFileSuffix is the new file's file extension. e.g. “.png”
-Requires ImageMagick shell tool."
-  (require 'dired)
-  (mapc
-   (lambda (ξf)
-     (let ( newName cmdStr )
-       (setq newName (concat (file-name-sans-extension ξf) newNameSuffix newNameFileSuffix) )
-       (while (file-exists-p newName)
-         (setq newName (concat (file-name-sans-extension newName) newNameSuffix (file-name-extension newName t))) )
-
-       ;; relative paths used to get around Windows/Cygwin path remapping problem
-       (setq cmdStr
-             (format "convert %s '%s' '%s'" argsString (file-relative-name ξf) (file-relative-name newName)) )
-       (shell-command cmdStr)
-       ))
-   fileList ))
-
-(defun scale-image (fileList scalePercentage)
-  "Create a scaled jpg version of images of marked files in dired.
-The new names have “-s” appended before the file name extension.
-
-Requires ImageMagick shell tool."
-  (interactive
-   (let (
-         (myFileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:") )) ) ) )
-     (list myFileList (read-from-minibuffer "scale percentage:")) )
-   )
-  (process-image fileList (concat "-scale " scalePercentage "% -quality 85% -sharpen 1 " ) "-s" ".jpg" )
-  )
-
-(defun image-autocrop (fileList)
-  "Create a new auto-cropped jpg version of images of marked files in dired.
-Requires ImageMagick shell tool."
-  (interactive
-   (let (
-         (myFileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:") )) ) ) )
-     (list myFileList) )
-   )
-  (process-image fileList "-trim" "-c" ".jpg" )
-  )
-
-(defun 2png (fileList)
-  "Create a png version of images of marked files in dired.
-Requires ImageMagick shell tool."
-  (interactive
-   (let (
-         (myFileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:") )) ) ) )
-     (list myFileList) )
-   )
-  (process-image fileList "" "-2" ".png" )
-  )
-
-(defun 2drawing (fileList grayscale-p bitsPerPixel)
-  "Create a png version of (drawing type) images of marked files in dired.
-Requires ImageMagick shell tool."
-  (interactive
-   (let (
-         (myFileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:") )) ) ) )
-     (list myFileList
-           (setq grayscale-p (yes-or-no-p "Grayscale?"))
-           (read-string "Bits per pixel (1 2 4 8):" "4")) ) )
-  (process-image fileList
-                 (format "+dither %s -depth %s"
-                         (if grayscale-p "-type grayscale" "")
-                         ;; image magick “-colors” must be at least 8
-                         ;; (if (< (string-to-number bitsPerPixel) 3)
-                         ;;     8
-                         ;;     (expt 2 (string-to-number bitsPerPixel)))
-                         bitsPerPixel)  "-2" ".png" )
-  )
-
-(defun 2jpg (fileList)
-  "Create a jpg version of images of marked files in dired.
-Requires ImageMagick shell tool."
-  (interactive
-   (let (
-         (myFileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:") )) ) ) )
-     (list myFileList) )
-   )
-  (process-image fileList "" "-2" ".jpg" ))
 
 (defun xah-compact-uncompact-block ()
   "Remove or insert newline characters on the current block of text.
@@ -605,50 +420,6 @@ When there is a text selection, act on the the selection, else, act on a block o
           ) )
 
       (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )
-
-(defun copy-rectangle-to-clipboard (p1 p2)
-  "Copy region as column (rectangle) to operating system's clipboard.
-This command will also put the text in register 0.
-
-See also: `kill-rectangle', `copy-to-register'."
-  (interactive "r")
-  (let ((x-select-enable-clipboard t))
-    (copy-rectangle-to-register ?0 p1 p2)
-    (kill-new
-     (with-temp-buffer
-       (insert-register ?0)
-       (buffer-string) )) ) )
-
-(defun rename-html-inline-image (ξnewFilePath)
-  "Replace current HTML inline image's file name.
-
-When cursor is in HTML link file path, e.g.  <img src=\"gki/macosxlogo.png\" > and this command is called, it'll prompt user for a new name. The link path will be changed to the new name, the corresponding file will also be renamed. The operation is aborted if a name exists."
-
-  (interactive
-   (let (
-         (defaultInput (expand-file-name
-                        (elt (get-selection-or-unit 'filepath) 0)
-                        (file-name-directory (or (buffer-file-name) default-directory )) )) )
-     (list (read-string "New name: " defaultInput nil defaultInput )) ) )
-  (let* (
-         (bds (get-selection-or-unit 'filepath))
-         (ξinputPath (elt bds 0) )
-         (p1 (aref bds 1) )
-         (p2 (aref bds 2) )
-         (ξffp (local-url-to-file-path (expand-file-name ξinputPath (file-name-directory (or (buffer-file-name) default-directory )) ))) ;full path
-         ;; (setq ξffp (windows-style-path-to-unix (local-url-to-file-path ξffp)))
-         )
-
-    (if (file-exists-p ξnewFilePath)
-        (progn (error "file 「%s」 exist." ξnewFilePath ))
-      (progn
-        (rename-file ξffp ξnewFilePath )
-        (message "rename to %s" ξnewFilePath)
-        (delete-region p1 p2)
-        (insert (xahsite-filepath-to-href-value ξnewFilePath (or (buffer-file-name) default-directory)))
-        )
-      )
-    ))
 
 (defun compact-uncompact-block-chinese ()
   "Remove or add line ending chars on current text block.
