@@ -13,6 +13,8 @@
 
 (require 'xah_file_util)
 
+(require 'xah-comment )
+
 
 ;; I-search with initial contents.
 ;; original source: http://platypope.org/blog/2007/8/5/a-compendium-of-awesomeness

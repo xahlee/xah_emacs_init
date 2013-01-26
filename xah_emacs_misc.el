@@ -167,7 +167,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 (defun xah-open-file-fast (openCode)
   "Prompt to open a file from a pre-defined set."
-  (interactive "sOpen file: [3]emacs [4]comp [5]js [6]math [l]lit [c]chinese [m]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd:")
+  (interactive "sOpen file: [3]emacs [4]comp [5]js [6]math [l]lit [c]chinese [m]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets:")
   (let (ξfile )
     (setq ξfile
           (cond
@@ -180,6 +180,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
            ((string= openCode "m") "~/web/xahmusic_org/music/blog.html" )
            ((string= openCode "a") "~/web/xaharts_org/arts/blog.html" )
            ((string= openCode "sl") "~/web/xahsl_org/sl/blog.html" )
+           ((string= openCode "t") "~/Dropbox/twitter tweets.txt" )
            ((string= openCode "x") "~/web/xahlee_org/sex/blog.html" )
            ((string= openCode "p") "~/web/xahporn_org/porn/blog.html" )
            ((string= openCode "pd") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
@@ -233,11 +234,9 @@ input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
               (progn (find-file ξfff))
             (if (file-exists-p (concat ξfff ".el"))
                   (progn (find-file (concat ξfff ".el")))
-                (progn (message "file doesn't exist: %s" ξfff))
-                )
-            )
-          )
-        ) ) ))
+              (progn
+                (when (y-or-n-p (format "file doesn't exist: %s. Create?" ξfff) )
+                  (progn (find-file ξfff ))) ) ) ) ) ) ) ))
 
 (defun xah-open-file-from-clipboard ()
   "Open the file path from OS's clipboard.
@@ -382,7 +381,6 @@ This is Xah Lee's personal command assuming a particular dir structure."
     )
   )
 
-
 
 
 (defun xah-browse-url-of-buffer ()
@@ -421,7 +419,6 @@ default browser will be launched and opening this URL:
     ;; (browse-url myURL )
     )
   )
-
 
 
 (defun x-query-find-then-bold ()
@@ -557,8 +554,6 @@ Requires ImageMagick shell tool."
    )
   (process-image fileList "" "-2" ".jpg" ))
 
-
-
 (defun xah-compact-uncompact-block ()
   "Remove or insert newline characters on the current block of text.
 This is similar to a toggle for `fill-paragraph' and `unfill-paragraph'.
@@ -624,7 +619,6 @@ See also: `kill-rectangle', `copy-to-register'."
        (insert-register ?0)
        (buffer-string) )) ) )
 
-
 (defun rename-html-inline-image (ξnewFilePath)
   "Replace current HTML inline image's file name.
 
@@ -655,7 +649,6 @@ When cursor is in HTML link file path, e.g.  <img src=\"gki/macosxlogo.png\" > a
         )
       )
     ))
-
 
 (defun compact-uncompact-block-chinese ()
   "Remove or add line ending chars on current text block.

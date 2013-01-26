@@ -60,7 +60,7 @@ If the current buffer is not associated with a file, its a error."
 ;;    ((string-equal system-type "darwin") (shell-command "open ."))
 ;;    ) )
 
-                                        ; from newsgroup gnu.emacs.help, by Richard Riley, 2009-08-02
+;; from newsgroup gnu.emacs.help, by Richard Riley, 2009-08-02
 (defun open-current-file-as-admin ()
   "Open the current buffer as unix root.
 This command works on unixes only."

@@ -22,7 +22,6 @@
 
 ;; generic
 
-
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
 (define-key key-translation-map (kbd "<f7>") (kbd "<menu>"))
 
@@ -32,7 +31,6 @@
 
 ;; (global-set-key (kbd "<f8>") ctl-x-map)
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
-
 
 (global-set-key (kbd "<f8> <f9>") 'delete-other-windows)
 (global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
@@ -86,35 +84,37 @@
 (global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
 
-(global-set-key (kbd "<menu> '") 'replace-straight-quotes)
-(global-set-key (kbd "<menu> ,") 'remove-punctuation-trailing-redundant-space)
-(global-set-key (kbd "<menu> -") 'comment-dwim) ; ★★★
-(global-set-key (kbd "<menu> .") 'convert-english-chinese-punctuation)
+;cycle-camel-style-case
+
+(global-set-key (kbd "<menu> '") 'nil)
+(global-set-key (kbd "<menu> ,") 'nil)
+(global-set-key (kbd "<menu> -") 'xc-comment-smart) ; ★★★ , comment-dwim
+(global-set-key (kbd "<menu> .") 'shell-command)   ; ★★★
 (global-set-key (kbd "<menu> /") 'nil)
 (global-set-key (kbd "<menu> 0") 'delete-window)
 (global-set-key (kbd "<menu> 1") 'copy-to-register-1)
 (global-set-key (kbd "<menu> 2") 'paste-from-register-1)
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ; ★★★
 (global-set-key (kbd "<menu> 4") 'split-window-vertically) ; ★★★
-(global-set-key (kbd "<menu> 5") 'recentf-open-files) ; ★★★
-(global-set-key (kbd "<menu> 6") 'run-current-file) ;; immediate, but dangerous
-(global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor)
-(global-set-key (kbd "<menu> 8") 'dired-jump) ; ★★★
+(global-set-key (kbd "<menu> 5") 'query-replace) ; ★★★
+(global-set-key (kbd "<menu> 6") 'run-current-file) ;; immediate, but dangerous eval-buffer
+(global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ; ★★★ find-file-at-point
+(global-set-key (kbd "<menu> 8") 'dired-jump)              ; ★★★
 (global-set-key (kbd "<menu> 9") 'ispell-word) ; ★★★
 (global-set-key (kbd "<menu> ;") 'nil)
-(global-set-key (kbd "<menu> =") 'repeat-complex-command)
+(global-set-key (kbd "<menu> =") 'nil)
 (global-set-key (kbd "<menu> SPC") 'set-mark-command) ; ★★★
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> \\") 'escape-quotes)
 (global-set-key (kbd "<menu> ]") 'indent-region)
 (global-set-key (kbd "<menu> `") 'make-backup)
-(global-set-key (kbd "<menu> a") 'shell-command) ; ★★
+(global-set-key (kbd "<menu> a") 'mark-whole-buffer) ; ★★
 (global-set-key (kbd "<menu> b") 'flyspell-buffer) ; ★★
 (global-set-key (kbd "<menu> c") 'nil)
 (global-set-key (kbd "<menu> d") 'ergoemacs-open-in-desktop)
 (global-set-key (kbd "<menu> e") 'nil)
 (global-set-key (kbd "<menu> f") 'copy-file-path)
-
+(global-set-key (kbd "<menu> g 0") ")")
 (global-set-key (kbd "<menu> g 1") "!")
 (global-set-key (kbd "<menu> g 2") "@")
 (global-set-key (kbd "<menu> g 3") "#")
@@ -124,7 +124,6 @@
 (global-set-key (kbd "<menu> g 7") "&")
 (global-set-key (kbd "<menu> g 8") "*")
 (global-set-key (kbd "<menu> g 9") "(")
-(global-set-key (kbd "<menu> g 0") ")")
 (global-set-key (kbd "<menu> g a") "A")
 (global-set-key (kbd "<menu> g b") "B")
 (global-set-key (kbd "<menu> g c") "C")
@@ -152,9 +151,6 @@
 (global-set-key (kbd "<menu> g y") "Y")
 (global-set-key (kbd "<menu> g z") "Z")
 
-;; abcdefghijklmnopqrstuvwxyz
-
-
 (global-set-key (kbd "<menu> h") help-map) ; ★★★
 (global-set-key (kbd "<menu> i d") 'insert-date)
 (global-set-key (kbd "<menu> i r h") 'insert-random-hex)
@@ -169,27 +165,35 @@
 (global-set-key (kbd "<menu> m e") 'emacs-lisp-mode)
 (global-set-key (kbd "<menu> m h") 'xah-html-mode)
 (global-set-key (kbd "<menu> m l") 'linum-mode)
-(global-set-key (kbd "<menu> m o") 'org-mode)
 (global-set-key (kbd "<menu> m s") 'shell)
 (global-set-key (kbd "<menu> m t") 'text-mode)
 (global-set-key (kbd "<menu> m v") 'visual-line-mode)
 (global-set-key (kbd "<menu> m w") 'whitespace-mode)
 (global-set-key (kbd "<menu> n") 'ergoemacs-new-empty-buffer) ; ★★★
-(global-set-key (kbd "<menu> o b") 'bookmark-bmenu-list)
+(global-set-key (kbd "<menu> o SPC") 'xah-open-file-fast)
+(global-set-key (kbd "<menu> o b") 'ibuffer)
 (global-set-key (kbd "<menu> o f") 'ido-find-file)
-(global-set-key (kbd "<menu> o i") 'ibuffer)
-(global-set-key (kbd "<menu> o o") 'xah-open-file-fast)
-(global-set-key (kbd "<menu> q") 'query-replace) ; ★★★
+(global-set-key (kbd "<menu> o l") 'bookmark-bmenu-list)
+(global-set-key (kbd "<menu> o r") 'recentf-open-files) ; ★★★
+(global-set-key (kbd "<menu> o s") 'ido-switch-buffer)  ; ★★★
+(global-set-key (kbd "<menu> p") 'nil) ; ★★★
+(global-set-key (kbd "<menu> q") 'quoted-insert) ; ★★★
+(global-set-key (kbd "<menu> r '") 'replace-straight-quotes)
+(global-set-key (kbd "<menu> r ,") 'remove-punctuation-trailing-redundant-space)
+(global-set-key (kbd "<menu> r .") 'convert-english-chinese-punctuation)
+(global-set-key (kbd "<menu> r p") 'convert-ideographic/ascii-space)
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
 (global-set-key (kbd "<menu> r q") 'query-replace-regexp)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; ★★★
 (global-set-key (kbd "<menu> t c") 'xah-cite)
 (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
+(global-set-key (kbd "<menu> t l") 'xah-clean-whitespace)
 (global-set-key (kbd "<menu> t n") 'make-frame-command)
-(global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace) 
-(global-set-key (kbd "<menu> t l") 'xah-clean-whitespace) 
-(global-set-key (kbd "<menu> t z") 'title-case-string-region-or-line)
+(global-set-key (kbd "<menu> t r") 'repeat-complex-command)
+(global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
+(global-set-key (kbd "<menu> t u") 'universal-argument) ; ★★
+(global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
 (global-set-key (kbd "<menu> u -") "—") ; EM DASH
 (global-set-key (kbd "<menu> u .") "…") ; HORIZONTAL ELLIPSIS
 (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
@@ -203,6 +207,7 @@
 (global-set-key (kbd "<menu> u \\") "、") ; IDEOGRAPHIC COMMA
 (global-set-key (kbd "<menu> u b") 'insert-pair-black-lenticular-bracket【】)
 (global-set-key (kbd "<menu> u c") "=") ; equal
+(global-set-key (kbd "<menu> u f") 'insert-pair-single-straight-quote)
 (global-set-key (kbd "<menu> u g") 'insert-pair-double-straight-quote)
 (global-set-key (kbd "<menu> u h") 'insert-pair-brace)              ;{}
 (global-set-key (kbd "<menu> u i") 'insert-pair-single-curly-quote‘’)
@@ -234,7 +239,6 @@
 (define-key help-map (kbd "o") 'nil)  ; ergoemacs-where-is-old-binding
 (define-key help-map (kbd "h") 'nil) ; view-hello-file
 
-(global-set-key (kbd "C--") 'cycle-camel-style-case)
 
 
 
@@ -244,16 +248,13 @@
 
 
 
-
 ;; keys for moving to prev/next code section (form feed; ^L)
 (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
 
 (global-set-key (kbd "M-\"") 'xah-compact-uncompact-block)
-
 (global-set-key (kbd "M-2") 'cycle-hyphen-underscore-space)
-
 
 
 ;; mode-specific
@@ -268,7 +269,6 @@
   (local-set-key (kbd "<menu> e 6") 'xah-browse-url-of-buffer)
   (local-set-key (kbd "<menu> e 7") 'htmlize-or-dehtmlize-pre-block)
   (local-set-key (kbd "<menu> e 8") 'get-pre-block-make-new-file)
-  (local-set-key (kbd "<menu> e 9") 'code-bracket-to-html-tag)
   (local-set-key (kbd "<menu> e <delete>") 'sgml-delete-tag)
   (local-set-key (kbd "<menu> e <left>") 'sgml-skip-tag-backward)
   (local-set-key (kbd "<menu> e <right>") 'sgml-skip-tag-forward)
@@ -303,11 +303,14 @@
   (local-set-key (kbd "<menu> e r .") 'replace-html-chars-to-entities)
   (local-set-key (kbd "<menu> e r 3") 'xah-update-title)
   (local-set-key (kbd "<menu> e r 4") 'xah-update-article-timestamp)
+  (local-set-key (kbd "<menu> e r c") 'code-bracket-to-html-tag)
+  (local-set-key (kbd "<menu> e r e") 'curly-quotes-to-emacs-function-tag)
   (local-set-key (kbd "<menu> e r k") 'emacs-to-windows-kbd-notation)
   (local-set-key (kbd "<menu> e r m") 'make-html-table)
-  (local-set-key (kbd "<menu> e r e") 'curly-quotes-to-emacs-function-tag)
   (local-set-key (kbd "<menu> e r t") 'title-bracket-to-html-tag)
   (local-set-key (kbd "<menu> e t c") 'insert-random-color-hsl)
+  (local-set-key (kbd "<menu> e t r") 'rename-html-inline-image)
+  (local-set-key (kbd "<menu> e t u") 'extract-url)
   (local-set-key (kbd "<menu> e u") 'xah-all-linkify)
 
   )
@@ -385,8 +388,11 @@ For `nxml-mode-hook'."
 (load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
 
 ;; remove ErgoEmacs's changing font size
-(global-unset-key (kbd "C-+") )
-(global-unset-key (kbd "C--") )
+(global-unset-key (kbd "C-+") )         ; text-scale-increase
+(global-unset-key (kbd "C--") )         ; text-scale-increase
+(global-unset-key (kbd "C-a") )         ; mark-whole-buffer
+(global-unset-key (kbd "C-s") )         ; save
+(global-unset-key (kbd "C-o") )         ; open
 (global-unset-key (kbd "C-0") ) ; text-scale-normal-size
 (global-unset-key (kbd "M-5") )
 (global-unset-key (kbd "M-3") )
@@ -395,6 +401,11 @@ For `nxml-mode-hook'."
 (global-unset-key (kbd "M-%") )
 (global-unset-key (kbd "M-l") )         ; recenter-top-bottom
 (global-unset-key (kbd "M-0") )         ; delete-window
+
+(global-set-key (kbd "C--") 'cycle-camel-style-case)
+(global-set-key (kbd "C-1") 'cycle-font-backward)
+(global-set-key (kbd "C-2") 'cycle-font-forward)
+(global-set-key (kbd "C-3") 'cycle-font-2)
 
 (global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
 (global-set-key (kbd "M-3") 'ergoemacs-select-text-in-quote)
@@ -407,7 +418,6 @@ For `nxml-mode-hook'."
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
 
-
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
   (interactive)
@@ -415,7 +425,6 @@ For `nxml-mode-hook'."
         (progn (setq w32-apps-modifier 'nil))
       (progn (setq w32-apps-modifier 'meta) )
       ))
-
 
 ;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
 

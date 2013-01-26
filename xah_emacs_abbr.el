@@ -45,7 +45,7 @@
     ("8diff" "difference")
     ("8comp" "computer")
     ("8l" "language")
-    ("8langs" "languages")
+    ("8ls" "languages")
     ("8p" "programing")
     ("8exp" "experience")
     ("8tech" "technology")
@@ -137,7 +137,8 @@
  ;; ruby comment
     ("8rc" "=begin\n\n=end")
 
-    ("8l" "(☛ )")
+    ("8tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
+    ("8ln" "(☛ )")
     ("8menu" "〖a▸b▸c▸〗")
     ("8key" "【Alt+f】")
 

@@ -297,7 +297,7 @@ Examples of changes:
 
 (replace-pairs-region (point-min) (point-max)
 [
- ["  —  " " — "]
+ ["  —  " " — "]                        ; rid of extra space in em-dash
  ])
 
 ;; fix GNU style ASCII quotes
@@ -378,20 +378,14 @@ Examples of changes:
  ["\"$" "”"]
  ])
 
-;; fix back quotes in HTML code
-(replace-pairs-region (point-min) (point-max)
+;; fix back. quotes in HTML code
+(replace-regexp-pairs-region (point-min) (point-max)
 [
- ;; fix back, e.g. in HTML files
+ ["” \\([a-z]+\\)="       "\" \\1="]
  ["=\”" "=\""]
  ["/” " "/\" "]
- ["” href="       "\" href="]
- ["” class="     "\" class="]
- ["” height="    "\" height="]
- ["” width="     "\" width="]
- ["” src="       "\" src="]
- ["” title="       "\" title="]
+ ["\"\\([0-9]+\\)” "     "\"\\1\" "]
  ])
-
  ) ))
 
 (defun escape-quotes ()

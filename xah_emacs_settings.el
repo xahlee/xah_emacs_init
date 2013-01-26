@@ -27,13 +27,15 @@
 
 
 (setq org-return-follows-link t)
-(setq auto-save-default t)
+; (setq auto-save-default t)
 
 (winner-mode 1)
 (cua-mode 0)
 (electric-pair-mode 0)
 
 (blink-cursor-mode 0 )
+(setq cursor-type 'box)
+
 
 
 
@@ -77,7 +79,6 @@
 (when (boundp 'tabbar-mode) (tabbar-mode 0))
 (setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
 
-
 (math-symbol-input-mode 1)
 
 (set-default 'abbrev-mode t)
@@ -103,6 +104,7 @@
           (tool-bar-lines . 0)
           (width . 100)
           (height . 52)
+          (cursor-type . box)
           ))
   )
 

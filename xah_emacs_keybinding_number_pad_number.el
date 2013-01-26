@@ -19,27 +19,11 @@
 (global-set-key (kbd "<kp-2>") 'split-window-vertically)
 (global-set-key (kbd "<kp-3>") 'xah-open-file-at-cursor)
 
-(global-set-key (kbd "<kp-4> <kp-4>") 'convert-english-chinese-punctuation)
-(global-set-key (kbd "<kp-4> <kp-5>") 'remove-punctuation-trailing-redundant-space)
-(global-set-key (kbd "<kp-4> <kp-6>") 'convert-ideographic/ascii-space)
-
-(global-set-key (kbd "<kp-5>") 'save-buffer)
-(global-set-key (kbd "<kp-6>") 'repeat-complex-command)
-
-(global-set-key (kbd "<C-kp-4>") 'cycle-font-backward)
-(global-set-key (kbd "<C-kp-5>") 'cycle-font-2)
-(global-set-key (kbd "<C-kp-6>") 'cycle-font-forward)
-
-(define-prefix-command 'xah-numpad-keymap)
-(global-set-key (kbd "<kp-7>") 'xah-numpad-keymap)
-(global-set-key (kbd "<kp-7> <kp-0>") 'xah-open-file-fast)
-(global-set-key (kbd "<kp-7> <kp-3>") 'xah-open-file-from-clipboard)
-(global-set-key (kbd "<kp-7> <kp-7>") 'bookmark-bmenu-list)
-(global-set-key (kbd "<kp-7> <kp-8>") 'ibuffer)
-(global-set-key (kbd "<kp-7> <kp-9>") 'recentf-open-files)
-
-(global-set-key (kbd "<kp-8> <kp-8>") 'run-current-file)
-
+(global-set-key (kbd "<kp-4>") 'nil)
+(global-set-key (kbd "<kp-5>") 'nil)
+(global-set-key (kbd "<kp-6>") 'nil)
+(global-set-key (kbd "<kp-7>") 'nil)
+(global-set-key (kbd "<kp-8>") 'nil)
 (global-set-key (kbd "<kp-9>") 'isearch-forward)
 (global-set-key (kbd "<C-kp-9>") 'isearch-backward)
 (global-set-key (kbd "<f6>") 'isearch-forward)
