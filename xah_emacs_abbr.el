@@ -1,3 +1,4 @@
+
 ;; -*- coding: utf-8 -*-
 ;; emacs abbrev def
 ;; Xah Lee
@@ -14,7 +15,8 @@
 (define-abbrev-table 'global-abbrev-table '(
 
     ("eg" "e.g.")
-    ("ie" "i.e.")
+    ("eg" "ℯℊ")
+    ("ie" "𝒾ℯ")
     ("mac" "Mac")
     ("osx" "OS X")
     ("macosx" "Mac OS X")
@@ -166,8 +168,8 @@
 ("8orange" "#ffa500")
 ("8hsl" "hsl(0,100%,50%)")
 
-
 ;; html
+("8cmt" "<!-- \n -->")
 ("8html5" "<!DOCTYPE html>")
 ("8html4s" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")
 ("8html4t" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">")
@@ -183,22 +185,22 @@
 ("8php" "<?php\n\n?>")
 ("8sb" "<div class=\"section\">⁂</div>")
 
-    ("8c" "class=\"\"")
-    ("8bq" "blockquote")
-    ("8w" "width")
-    ("8h" "height")
-    ("8bgc" "background-color")
- 
-    ("8fg" "<figure>\n<figcaption>\n</figcaption>\n</figure>")
-    ("8fc" "<figcaption>\n</figcaption>")
-    ("8faq" "<p class=\"q\">How to do this?</p>
+("8c" "class=\"\"")
+("8bq" "blockquote")
+("8w" "width")
+("8h" "height")
+("8bgc" "background-color")
+
+("8fg" "<figure>\n<figcaption>\n</figcaption>\n</figure>")
+("8fc" "<figcaption>\n</figcaption>")
+("8faq" "<p class=\"q\">How to do this?</p>
 <div class=\"a\">
 <p>this way</p>
 </div>
 
 ")
-    ("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
-    ("8css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
+("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
+("8css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
 
 
 ;;; unix shell
@@ -224,16 +226,15 @@
     ("3chmod2" "find . -type d -exec chmod 755 {} ';'")
     ("3lynx" "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
 
-; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/ 
+; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/
 
 ; rsync -r -v -t --delete --rsh="ssh -l xah" ~/web/ xah@169.254.153.147:~/web/
 
 ; rsync -r -v -t --delete --exclude="**/My *" --rsh="ssh -l xah" ~/Documents/ xah@169.254.153.147:~/Documents/
 
-; unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web 
-; sftp u40651120@s168753655.onlinehome.us 
-; 
-
+; unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web
+; sftp u40651120@s168753655.onlinehome.us
+;
 
 
 ;;; xah personal
@@ -289,5 +290,4 @@ Second Life: Xah Toll
 
 ;;; stop asking whether to save newly added abbrev when quitting emacs
 (setq save-abbrevs nil)
-
 

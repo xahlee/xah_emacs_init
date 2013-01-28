@@ -33,12 +33,10 @@
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
 (global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
-(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 
 ;; (global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
 ;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
 ;; (global-set-key (kbd "<f9>") 'split-window-vertically)
-(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 (global-set-key (kbd "<f11>") 'ergoemacs-next-user-buffer)
 (global-set-key (kbd "<f12>") 'ergoemacs-previous-user-buffer)
 
@@ -113,6 +111,7 @@
 (global-set-key (kbd "<menu> d") 'ergoemacs-open-in-desktop)
 (global-set-key (kbd "<menu> e") 'nil)
 (global-set-key (kbd "<menu> f") 'copy-file-path)
+
 (global-set-key (kbd "<menu> g 0") ")")
 (global-set-key (kbd "<menu> g 1") "!")
 (global-set-key (kbd "<menu> g 2") "@")
@@ -195,6 +194,7 @@
 (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
 (global-set-key (kbd "<menu> t u") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
+
 (global-set-key (kbd "<menu> u -") "—") ; EM DASH
 (global-set-key (kbd "<menu> u .") "…") ; HORIZONTAL ELLIPSIS
 (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
@@ -221,6 +221,7 @@
 (global-set-key (kbd "<menu> u w") 'insert-pair-angle-bracket〈〉)
 (global-set-key (kbd "<menu> u x") 'insert-pair-tortoise-shell-bracket〔〕)
 (global-set-key (kbd "<menu> u y") 'insert-pair-single-angle-quote‹›)
+
 (global-set-key (kbd "<menu> v") 'nil)
 (global-set-key (kbd "<menu> w") 'ergoemacs-close-current-buffer) ; ★★★
 (global-set-key (kbd "<menu> x") ctl-x-map) ; ★★★
@@ -418,6 +419,8 @@ For `nxml-mode-hook'."
 
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
+
+(global-set-key (kbd "<delete>") 'ergoemacs-close-current-buffer)
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
