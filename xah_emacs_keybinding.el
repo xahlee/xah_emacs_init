@@ -23,7 +23,7 @@
 ;; generic
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
-(define-key key-translation-map (kbd "<f7>") (kbd "<menu>"))
+(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))
 
 ;; in linux, by default, <lwindow> is Super,  s-
 ;; linux, the menu/apps key is <menu>
@@ -33,6 +33,8 @@
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
 (global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
+(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
+(global-set-key (kbd "]") 'ergoemacs-close-current-buffer)
 
 ;; (global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
 ;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
@@ -51,7 +53,7 @@
 (define-prefix-command 'xah-keymap)
 (global-set-key (kbd "<menu>") xah-keymap)
 
-;; truly ergonomic keyboard layout + dvorak
+;; Truly Ergonomic keyboard + Dvorak layout
 ;; \` 1234 5 6 7890 []
 ;; \z ',.p y f gcrl /=
 ;;    aoeu i d htns
@@ -68,7 +70,6 @@
 ;; x is for ctl-x-map
 
 ;; add find-file
-;; add universal-argument
 ;; keyboard-quit
 
 ;; stars indicate frequency of use
@@ -84,16 +85,17 @@
 ;cycle-camel-style-case
 
 (global-set-key (kbd "<menu> '") 'nil)
-(global-set-key (kbd "<menu> ,") 'nil)
+(global-set-key (kbd "<menu> ,") 'shell-command-on-region)
 (global-set-key (kbd "<menu> -") 'xc-comment-smart) ; ★★★ , comment-dwim
 (global-set-key (kbd "<menu> .") 'shell-command)   ; ★★★
+
 (global-set-key (kbd "<menu> /") 'nil)
 (global-set-key (kbd "<menu> 0") 'delete-window)
 (global-set-key (kbd "<menu> 1") 'copy-to-register-1)
 (global-set-key (kbd "<menu> 2") 'paste-from-register-1)
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ; ★★★
 (global-set-key (kbd "<menu> 4") 'split-window-vertically) ; ★★★
-(global-set-key (kbd "<menu> 5") 'query-replace) ; ★★★
+(global-set-key (kbd "<menu> 5") 'nil) ; ★★★
 (global-set-key (kbd "<menu> 6") 'run-current-file) ;; immediate, but dangerous eval-buffer
 (global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ; ★★★ find-file-at-point
 (global-set-key (kbd "<menu> 8") 'dired-jump)              ; ★★★
@@ -109,7 +111,7 @@
 (global-set-key (kbd "<menu> b") 'flyspell-buffer) ; ★★
 (global-set-key (kbd "<menu> c") 'nil)
 (global-set-key (kbd "<menu> d") 'ergoemacs-open-in-desktop)
-(global-set-key (kbd "<menu> e") 'nil)
+(global-set-key (kbd "<menu> e") 'nil)  ; mode specific
 (global-set-key (kbd "<menu> f") 'copy-file-path)
 
 (global-set-key (kbd "<menu> g 0") ")")
@@ -174,37 +176,38 @@
 (global-set-key (kbd "<menu> o l") 'bookmark-bmenu-list)
 (global-set-key (kbd "<menu> o r") 'recentf-open-files) ; ★★★
 (global-set-key (kbd "<menu> o s") 'ido-switch-buffer)  ; ★★★
-(global-set-key (kbd "<menu> p") 'nil) ; ★★★
+(global-set-key (kbd "<menu> p") 'nil)
 (global-set-key (kbd "<menu> q") 'quoted-insert) ; ★★★
 (global-set-key (kbd "<menu> r '") 'replace-straight-quotes)
 (global-set-key (kbd "<menu> r ,") 'remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> r .") 'convert-english-chinese-punctuation)
 (global-set-key (kbd "<menu> r d") 'delete-matching-lines) ; ★★
+(global-set-key (kbd "<menu> r e") 'query-replace) ; ★★★
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
 (global-set-key (kbd "<menu> r l") 'list-matching-lines) ; ★★★
 (global-set-key (kbd "<menu> r p") 'convert-ideographic/ascii-space)
-(global-set-key (kbd "<menu> r q") 'query-replace-regexp)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
+(global-set-key (kbd "<menu> r u") 'query-replace-regexp)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; ★★★
 (global-set-key (kbd "<menu> t c") 'xah-cite)
 (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
 (global-set-key (kbd "<menu> t l") 'xah-clean-whitespace)
 (global-set-key (kbd "<menu> t n") 'make-frame-command)
+(global-set-key (kbd "<menu> t o") 'ergoemacs-open-last-closed)
 (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
 (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
-(global-set-key (kbd "<menu> t u") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
 
 (global-set-key (kbd "<menu> u -") "—") ; EM DASH
-(global-set-key (kbd "<menu> u .") "…") ; HORIZONTAL ELLIPSIS
 (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
 (global-set-key (kbd "<menu> u 7") "＆") ; full width ampersand
 (global-set-key (kbd "<menu> u 8") "•") ; bullet
 (global-set-key (kbd "<menu> u <S-right>") "⇒")
 (global-set-key (kbd "<menu> u <right>") "→")
-(global-set-key (kbd "<menu> u B") 'insert-pair-white-lenticular-bracket〖〗)
-(global-set-key (kbd "<menu> u M") 'insert-pair-white-corner-bracket『』)
-(global-set-key (kbd "<menu> u W") 'insert-pair-double-angle-bracket《》)
+(global-set-key (kbd "<menu> u . .") "…") ; HORIZONTAL ELLIPSIS
+(global-set-key (kbd "<menu> u . b") 'insert-pair-white-lenticular-bracket〖〗)
+(global-set-key (kbd "<menu> u . m") 'insert-pair-white-corner-bracket『』)
+(global-set-key (kbd "<menu> u . w") 'insert-pair-double-angle-bracket《》)
 (global-set-key (kbd "<menu> u \\") "、") ; IDEOGRAPHIC COMMA
 (global-set-key (kbd "<menu> u b") 'insert-pair-black-lenticular-bracket【】)
 (global-set-key (kbd "<menu> u c") "=") ; equal
@@ -225,13 +228,10 @@
 (global-set-key (kbd "<menu> v") 'nil)
 (global-set-key (kbd "<menu> w") 'ergoemacs-close-current-buffer) ; ★★★
 (global-set-key (kbd "<menu> x") ctl-x-map) ; ★★★
-(global-set-key (kbd "<menu> y") 'nil)
+(global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> z") 'nil)
 
-(define-key help-map (kbd "1") 'describe-function)
-(define-key help-map (kbd "2") 'describe-variable)
-(define-key help-map (kbd "3") 'describe-key)
-(define-key help-map (kbd "4") 'describe-char)
+(define-key help-map (kbd "c") 'describe-char)
 (define-key help-map (kbd "5") 'man)
 (define-key help-map (kbd "7") 'lookup-google)
 (define-key help-map (kbd "8") 'lookup-wikipedia)
@@ -240,8 +240,6 @@
 (define-key help-map (kbd "m") 'ergoemacs-describe-major-mode)
 (define-key help-map (kbd "o") 'nil)  ; ergoemacs-where-is-old-binding
 (define-key help-map (kbd "h") 'nil) ; view-hello-file
-
-
 
 
 ;; special keys
@@ -266,9 +264,9 @@
   ;; .p gc
   ;; eu ht
 
+  (local-set-key (kbd "<menu> e .") 'xah-browse-url-of-buffer)
   (local-set-key (kbd "<menu> e 0") 'xhm-remove-html-tags)
   (local-set-key (kbd "<menu> e 5") 'mark-unicode)
-  (local-set-key (kbd "<menu> e 6") 'xah-browse-url-of-buffer)
   (local-set-key (kbd "<menu> e 7") 'htmlize-or-dehtmlize-pre-block)
   (local-set-key (kbd "<menu> e 8") 'get-pre-block-make-new-file)
   (local-set-key (kbd "<menu> e <delete>") 'sgml-delete-tag)
@@ -282,19 +280,15 @@
   (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
   (local-set-key (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
   (local-set-key (kbd "<menu> e l 6") 'xhm-source-url-linkify)
-
+  (local-set-key (kbd "<menu> e l c") 'xwe-chinese-linkify)
   (local-set-key (kbd "<menu> e l d") 'perldoc-ref-linkify)
   (local-set-key (kbd "<menu> e l e") 'emacs-ref-linkify)
-
   (local-set-key (kbd "<menu> e l f") 'full-size-img-linkify)
   (local-set-key (kbd "<menu> e l i") 'image-linkify)
   (local-set-key (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
-
-  (local-set-key (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
-  (local-set-key (kbd "<menu> e l c") 'xwe-chinese-linkify)
   (local-set-key (kbd "<menu> e l l") 'xhm-lines-to-html-list)
-
+  (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
+  (local-set-key (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
   (local-set-key (kbd "<menu> e l u") 'xhm-wrap-url)
   (local-set-key (kbd "<menu> e l w") 'xhm-wikipedia-linkify)
   (local-set-key (kbd "<menu> e l z") 'amazon-linkify)
@@ -318,7 +312,6 @@
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
-(add-hook 'nxml-mode-hook 'xah-html-mode-keys)
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
 
@@ -329,6 +322,13 @@ For `rcirc-mode-hook'."
   (local-set-key (kbd "<f12>") 'rcirc-insert-next-input)
   )
 (add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
+
+(defun xah-dired-mode-keys ()
+  "my keybindings for `dired'.
+For `dired-mode-hook'."
+  (local-set-key (kbd "6") 'dired-up-directory)
+  )
+(add-hook 'dired-mode-hook 'xah-dired-mode-keys)
 
 (defun xah-org-mode-keys ()
   "my keybindings for `org-mode'.
@@ -403,13 +403,20 @@ For `nxml-mode-hook'."
 (global-unset-key (kbd "M-%") )
 (global-unset-key (kbd "M-l") )         ; recenter-top-bottom
 (global-unset-key (kbd "M-0") )         ; delete-window
+(global-unset-key (kbd "C-S-t") )       ; ergoemacs-open-last-closed
+(global-unset-key (kbd "C-u") )       ; universal-argument
 
 (global-set-key (kbd "C--") 'cycle-camel-style-case)
 (global-set-key (kbd "C-1") 'cycle-font-backward)
 (global-set-key (kbd "C-2") 'cycle-font-forward)
 (global-set-key (kbd "C-3") 'cycle-font-2)
-
 (global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
+
+(global-set-key (kbd "C-o") 'backward-sexp)
+(global-set-key (kbd "C-u") 'forward-sexp)
+(global-set-key (kbd "C-e") 'down-list)
+(global-set-key (kbd "C-.") 'backward-up-list)
+
 (global-set-key (kbd "M-3") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "M-7") 'ergoemacs-select-current-line)
 (global-set-key (kbd "M-s") 'ergoemacs-toggle-letter-case)
@@ -420,7 +427,6 @@ For `nxml-mode-hook'."
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
 
-(global-set-key (kbd "<delete>") 'ergoemacs-close-current-buffer)
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

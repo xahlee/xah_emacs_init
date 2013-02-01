@@ -33,8 +33,8 @@
   "Hook for `isearch-mode-hook'"
   (define-key isearch-mode-map (kbd "<C-kp-9>") 'isearch-repeat-backward)
   (define-key isearch-mode-map (kbd "<kp-9>") 'isearch-repeat-forward)
-  (define-key isearch-mode-map (kbd "<C-f6>") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "<f6>") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "<C-f7>") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "<f7>") 'isearch-repeat-forward)
   )
 (add-hook 'isearch-mode-hook 'xah-isearch-hook)
 

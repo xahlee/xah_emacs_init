@@ -104,7 +104,6 @@ The differences are:
     )
   )
 
-
 (defun delete-secondlife-cache ()
   "Delete Second Life's cache directory."
   (interactive)
@@ -141,8 +140,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 "))
 (re-search-backward "<p><b>" nil t)
 (re-search-forward "<p><b>" nil t))
-
-
 
 
 
@@ -227,11 +224,24 @@ The clipboard should contain a file path or url to xah site. Open that file in e
         (ξs
          (with-temp-buffer
            (yank)
-           (buffer-string) ) ) )
+           (buffer-string) ) )
+        fpath
+        )
     (if (string-match-p "\\`http://" ξs)
-        (find-file (xahsite-url-to-filepath ξs "addFileName"))
+        (progn
+          (setq fpath (xahsite-url-to-filepath ξs "addFileName") )
+          (if (file-exists-p fpath)
+              (progn (find-file fpath) )
+            (progn (error "file doesn't exist 「%s」" fpath))
+            )
+          )
       (progn ; not starting “http://”
-        (find-file (xahsite-web-path-to-filepath (remove-uri-fragment ξs) default-directory)) ) ) ))
+        (setq fpath (xahsite-web-path-to-filepath (remove-uri-fragment ξs) default-directory) )
+        (if (file-exists-p fpath)
+            (progn (find-file fpath) )
+          (progn (error "file doesn't exist 「%s」" fpath))
+          )
+        ) ) ))
 
 (defun xah-browse-url-at-point ()
 "Switch to web browser and load the URL at point.
