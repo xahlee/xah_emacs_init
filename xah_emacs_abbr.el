@@ -20,8 +20,11 @@
     ("mac" "Mac")
     ("osx" "OS X")
     ("macosx" "Mac OS X")
+    ("ipv4" "IPv4")
+    ("ipv6" "IPv6")
 
     ("8trad" "traditional")
+    ("8addr" "address")
     ("8dict" "dictionary")
     ("8dicts" "dictionaries")
     ("8desc" "description")
@@ -60,6 +63,7 @@
     ("8jp" "Japanese")
 
     ;; tech
+    ("8ipa" "IP address")
     ("8wp" "Wikipedia")
     ("8ms" "Microsoft")
     ("8qt" "QuickTime")
