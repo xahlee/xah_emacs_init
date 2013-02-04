@@ -8,7 +8,7 @@
   "Returns the full path of xah lee website local file web root.
 Ends in a slash.
 e.g. c:/Users/h3/web/"
-  "c:/Users/h3/web/"
+(expand-file-name "~/web/")
 )
 
 (defun xahsite-domain-names ()
