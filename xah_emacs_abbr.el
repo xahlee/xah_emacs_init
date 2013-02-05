@@ -209,7 +209,7 @@
 
 ;;; unix shell
 
-    ("3rsn" "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.git/' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+    ("3rsn" "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
     ("3ssh" "ssh -l u40651120 xahlee.org ")
 
     ("3ditto" "ditto -ck --sequesterRsrc --keepParent src dest")

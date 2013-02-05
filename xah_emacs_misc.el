@@ -227,6 +227,7 @@ The clipboard should contain a file path or url to xah site. Open that file in e
            (buffer-string) ) )
         fpath
         )
+    
     (if (string-match-p "\\`http://" ξs)
         (progn
           (setq fpath (xahsite-url-to-filepath ξs "addFileName") )
@@ -236,7 +237,8 @@ The clipboard should contain a file path or url to xah site. Open that file in e
             )
           )
       (progn ; not starting “http://”
-        (setq fpath (xahsite-web-path-to-filepath (remove-uri-fragment ξs) default-directory) )
+        (setq ξs (remove-uri-fragment ξs) )
+        (setq fpath (xahsite-web-path-to-filepath ξs default-directory) )
         (if (file-exists-p fpath)
             (progn (find-file fpath) )
           (progn (error "file doesn't exist 「%s」" fpath))
