@@ -22,6 +22,7 @@
     ("macosx" "Mac OS X")
     ("ipv4" "IPv4")
     ("ipv6" "IPv6")
+    ("msw" "Microsoft Windows")
 
     ("8trad" "traditional")
     ("8addr" "address")
@@ -68,7 +69,6 @@
     ("8ms" "Microsoft")
     ("8qt" "QuickTime")
     ("8it" "IntelliType")
-    ("8msw" "Microsoft Windows")
     ("8win" "window")
     ("8ie" "Internet Explorer")
     ("8yt" "YouTube")

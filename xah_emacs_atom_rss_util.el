@@ -101,7 +101,7 @@ Other files paths for blogs are:
           (if (string-match "<span class=\"b[0-9]\">\\([^<]+?\\)</span>" inputStr)
               (progn (match-string 1 inputStr ))
             (progn "�") ) )
-        (summeryText "�tutorial")
+        (summeryText "tutorial")
         (currentFilePath (buffer-file-name))
         (atomFilePath
          (if (string-match-p "wordyenglish_com/words/new.html\\'" currentFilePath )
