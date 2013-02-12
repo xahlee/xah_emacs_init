@@ -114,8 +114,7 @@ Other files paths for blogs are:
          (let ( (myurls (xhm-extract-url inputStr)) firstLink)
            (if (>= (length myurls) 1)
                (progn
-                 (setq firstLink (elt myurls (1- (length myurls))))
-                 (message "first link 「%s」" firstLink)
+                 (setq firstLink (elt myurls 0))
                  (if (string-match-p "\\`http://" firstLink)
                      (if (xahsite-url-is-xah-website-p firstLink)
                          (xahsite-filepath-to-href-value (xahsite-url-to-filepath firstLink "addFileName") currentFilePath)

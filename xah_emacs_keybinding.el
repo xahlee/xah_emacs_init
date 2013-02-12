@@ -202,8 +202,14 @@
 (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
 (global-set-key (kbd "<menu> u 7") "＆") ; full width ampersand
 (global-set-key (kbd "<menu> u 8") "•") ; bullet
-(global-set-key (kbd "<menu> u <S-right>") "⇒")
 (global-set-key (kbd "<menu> u <right>") "→")
+(global-set-key (kbd "<menu> u <left>") "←")
+(global-set-key (kbd "<menu> u <up>") "↑")
+(global-set-key (kbd "<menu> u <down>") "↓")
+(global-set-key (kbd "<menu> u . <left>") "⇐")
+(global-set-key (kbd "<menu> u . <right>") "⇒")
+(global-set-key (kbd "<menu> u . <up>") "⇑")
+(global-set-key (kbd "<menu> u . <down>") "⇓")
 (global-set-key (kbd "<menu> u . .") "…") ; HORIZONTAL ELLIPSIS
 (global-set-key (kbd "<menu> u . b") 'insert-pair-white-lenticular-bracket〖〗)
 (global-set-key (kbd "<menu> u . m") 'insert-pair-white-corner-bracket『』)
