@@ -40,6 +40,9 @@ See also: `paste-from-register-1', `copy-to-register'."
   "paste text from register 1.
 See also: `copy-to-register-1', `insert-register'."
   (interactive)
+  (when (region-active-p)
+    (delete-region (region-beginning) (region-end) )
+    )
   (insert-register ?1 t))
 
 (defun compact-parens ()

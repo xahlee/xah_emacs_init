@@ -34,7 +34,6 @@ If no file is associated, just close buffer without prompt for save."
     (kill-buffer (current-buffer))
     ) )
 
-
 (defun make-backup ()
   "Make a backup copy of current file.
 
@@ -42,11 +41,14 @@ The backup file name has the form 「‹name›~‹timestamp›~」, in the same
 If the current buffer is not associated with a file, its a error."
   (interactive)
   (let ((currentFileName (buffer-file-name)) backupFileName)
-    (setq backupFileName (concat currentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~"))
-    (copy-file currentFileName backupFileName t)
-    (message (concat "Backup saved as: " (file-name-nondirectory backupFileName)))
-    )
-  )
+    (if (file-exists-p currentFileName)
+        (progn
+          (setq backupFileName (concat currentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~"))
+          (copy-file currentFileName backupFileName t)
+          (message (concat "Backup saved as: " (file-name-nondirectory backupFileName)))
+          )
+      (progn ; file doesn't exist happens when it's new file not yet saved.
+        (message (format "file 「%s」 doesn't exist." currentFileName)) ) ) ) )
 
 ;; Added to ergoemacs minor mode
 ;; (defun open-in-desktop ()
@@ -220,7 +222,8 @@ then it'll call “java x” in a shell."
 ;;       )))
 
 (defun count-words-region-or-line ()
-  "Print number of words and chars in text selection or line."
+  "Print number of words and chars in text selection or line.
+In emacs 24, you can use `count-words'."
   (interactive)
   (let (bds p1 p2 )
     (setq bds (get-selection-or-unit 'line))

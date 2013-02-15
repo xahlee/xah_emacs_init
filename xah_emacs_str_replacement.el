@@ -524,7 +524,13 @@ Work on whole buffer, or text selection."
         (progn
           (goto-char (point-min))
           (while (search-forward-regexp "\n\n\n+" nil "noerror")
-            (replace-match "\n\n")
-            ))
-        ))
+            (replace-match "\n\n") )) )) ))
+
+(defun xah-clean-whitespace-backup ()
+  "make a backup then call `xah-clean-whitespace-backup'"
+  (interactive)
+  (progn
+    (make-backup)
+    (xah-clean-whitespace)
     ))
+

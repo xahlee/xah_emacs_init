@@ -433,7 +433,6 @@ For `nxml-mode-hook'."
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
 
-
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
   (interactive)

@@ -145,17 +145,17 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 (defun xah-open-file-fast (openCode)
   "Prompt to open a file from a pre-defined set."
-  (interactive "sOpen file: [3]emacs [4]comp [5]js [6]math [l]lit [c]chinese [m]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets:")
+  (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets:")
   (let (ξfile )
     (setq ξfile
           (cond
            ((string= openCode "3") "~/web/ergoemacs_org/emacs/blog.html" )
            ((string= openCode "4") "~/web/xahlee_info/comp/blog.html" )
-           ((string= openCode "5") "~/web/xahlee_info/js/blog.html" )
-           ((string= openCode "6") "~/web/xahlee_info/math/blog.html" )
+           ((string= openCode "j") "~/web/xahlee_info/js/blog.html" )
+           ((string= openCode "m") "~/web/xahlee_info/math/blog.html" )
            ((string= openCode "l") "~/web/wordyenglish_com/lit/blog.html" )
            ((string= openCode "c") "~/web/wordyenglish_com/chinese/blog.html" )
-           ((string= openCode "m") "~/web/xahmusic_org/music/blog.html" )
+           ((string= openCode "u") "~/web/xahmusic_org/music/blog.html" )
            ((string= openCode "a") "~/web/xaharts_org/arts/blog.html" )
            ((string= openCode "sl") "~/web/xahsl_org/sl/blog.html" )
            ((string= openCode "t") "~/Dropbox/twitter tweets.txt" )
@@ -173,18 +173,15 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 (defun xah-open-file-at-cursor ()
   "Open the file path under cursor.
 
-If there's no current text selection, this command uses path as input. If there is a text selection, it uses the text selection for path. (convenient if the file path contains space)
+If there is text selection, uses the text selection for path.
 
-When called with `universal-argument', it'll try to use the `kill-ring''s last item as path. (setting useKillRing-p to t.)
+If the path is starts with “http://”, and if it's xah site, convert to file path and open the file, else launch browser vistiting that URL.
 
-If the path is url (starting with “http://”), and if it's xah site, visite the file, else launch browser vistiting that url.
-
-input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported."
+Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported."
   (interactive)
   (let (
         (ξs (elt (get-selection-or-unit 'filepath) 0))
          fPath )
-
     (setq ξs (remove-uri-fragment ξs))
 
     ;; convenience. if the input string start with a xah domain name, make it a url string
@@ -203,17 +200,23 @@ input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
 
     (if (string-match-p "\\`https*://" ξs)
         (if (xahsite-url-is-xah-website-p ξs)
-            (find-file (xahsite-url-to-filepath ξs "addFileName" ))
-          (browse-url ξs)
+            (let ((ξfp (xahsite-url-to-filepath ξs )))
+              (if (file-exists-p ξfp)
+                  (progn (find-file ξfp ))
+                (progn (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp) )
+                         (progn (find-file ξfff ))))
+                )
+              )
+          (progn (browse-url ξs))
           )
       (progn ; not starting “http://”
         (let ((ξfff (xahsite-web-path-to-filepath ξs default-directory)) )
           (if (file-exists-p ξfff)
               (progn (find-file ξfff))
             (if (file-exists-p (concat ξfff ".el"))
-                  (progn (find-file (concat ξfff ".el")))
+                (progn (find-file (concat ξfff ".el")))
               (progn
-                (when (y-or-n-p (format "file doesn't exist: %s. Create?" ξfff) )
+                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfff) )
                   (progn (find-file ξfff ))) ) ) ) ) ) ) ))
 
 (defun xah-open-file-from-clipboard ()
@@ -227,7 +230,7 @@ The clipboard should contain a file path or url to xah site. Open that file in e
            (buffer-string) ) )
         fpath
         )
-    
+
     (if (string-match-p "\\`http://" ξs)
         (progn
           (setq fpath (xahsite-url-to-filepath ξs "addFileName") )
