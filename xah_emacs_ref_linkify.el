@@ -5,10 +5,9 @@
   "When in `Info-mode', view the current page in browser
 For example: if current node is 「(elisp) The Mark」, switch to browser and load 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
   (interactive)
-  (let ()
-    (browse-url (replace-regexp-in-string "http://ergoemacs.org/" "file:///C:/Users/h3/web/ergoemacs_org/" (emacs-info-node-string-to-url (Info-copy-current-node-name)) "FIXEDCASE" "LITERAL" ))
-
-     ) )
+  (browse-url
+(xahsite-url-to-filepath (emacs-info-node-string-to-url (Info-copy-current-node-name)))
+ ) )
 
 (defun emacs-info-node-string-to-url (infoNodeStr)
   "Make the current line or selection into a emacs reference link.

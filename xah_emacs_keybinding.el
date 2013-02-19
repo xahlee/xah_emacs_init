@@ -78,6 +78,7 @@
 ;; ★ few times a day
 
 (global-set-key (kbd "<menu> <return>") 'smex)
+(global-set-key (kbd "<menu> RET") 'smex)
 (global-set-key (kbd "<menu> <delete>") 'delete-current-file)
 (global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
@@ -397,7 +398,7 @@ For `nxml-mode-hook'."
 
 ;; remove ErgoEmacs's changing font size
 (global-unset-key (kbd "C-+") )         ; text-scale-increase
-(global-unset-key (kbd "C--") )         ; text-scale-increase
+(global-unset-key (kbd "C--") )         ; text-scale-decrease
 (global-unset-key (kbd "C-a") )         ; mark-whole-buffer
 (global-unset-key (kbd "C-s") )         ; save
 (global-unset-key (kbd "C-o") )         ; open
@@ -432,6 +433,8 @@ For `nxml-mode-hook'."
 
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
+
+
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

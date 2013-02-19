@@ -186,8 +186,17 @@ This command does the reverse of `htmlize-pre-block'."
               (save-excursion
                 (setq ξmode-name (elt (cdr langCodeResult) 0))
                 (delete-region p1 p2)
-                (insert (ξhtmlize-string
-(replace-regexp-in-string "\\`[ \t\n]*" "\n" (replace-regexp-in-string "[ \t\n]+\\'" "\n" inputStr))
-                          ξmode-name))
+(let ((tempstr inputStr))
+ (setq tempstr (replace-regexp-in-string "\\`[ \t\n]*" "\n" tempstr) ) ; trim beginning
+ (setq tempstr (replace-regexp-in-string "[ \t\n]+\\'" "\n" tempstr) ) ; trim trailing
+ (insert (ξhtmlize-string tempstr ξmode-name))
+)
+                 
                 )) )) )) ))
+
+
+
+
+
+
 

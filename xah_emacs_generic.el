@@ -150,6 +150,31 @@ then it'll call “java x” in a shell."
     (shell-command cmd-str))
   )
 
+(defun python-2to3 ()
+  "Convert current buffer from python 2 to python 3.
+
+this command calls python3's script 「2to3」."
+  (interactive)
+  (let* (
+         (fName (buffer-file-name))
+         (fSuffix (file-name-extension fName))
+         )
+    (when (buffer-modified-p)
+      (progn
+        (when (y-or-n-p "Buffer modified. Do you want to save first?")
+          (save-buffer) ) ) )
+
+    (if (or (string-equal fSuffix "py") (string-equal fSuffix "py3") )
+        (progn
+          (shell-command (format "2to3 -w %s" fName))
+          (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES")
+          )
+      (progn
+            (error "file 「%s」 doesn't end in “.py” or “.py3”." fName)
+            )
+      )
+    ))
+
 ;; ; the following 2 about dired are for opening all marked files. They are pulled from dired-x.
 ;; (defun dired-do-find-marked-files (&optional noselect)
 ;;   "Find all marked files displaying all of them simultaneously.

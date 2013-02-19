@@ -9,294 +9,6 @@
 (require 'xfrp_find_replace_pairs)
 (require 'xeu_elisp_util)
 
-(defun replace-html-named-entities (ξstring &optional ξfrom ξto)
-  "Replace HTML entities to Unicode character.
-For example, “&copy;” becomes “©”.
-
-When called interactively, work on current text block or text selection. (a “text block” is text between empty lines)
-
-When called in lisp code, if ξstring is non-nil, returns a changed string.  If ξstring nil, change the text in the region between positions ξfrom ξto.
-
-The following HTML Entities are not replaced:
- &amp; &
- &lt; <
- &gt; >"
-  (interactive
-   (if (region-active-p)
-       (list nil (region-beginning) (region-end))
-     (let ((bds (get-selection-or-unit 'block)) )
-       (list nil (elt bds 1) (elt bds 2))) ) )
-
-  (let (workOnStringP inputStr outputStr)
-    (setq workOnStringP (if ξstring t nil))
-    (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
-
-    (setq outputStr
-          (let ((case-fold-search nil))
-            (replace-pairs-in-string inputStr
- [
-  ["&nbsp;" " "]
-  ["&ensp;" " "]
-  ["&emsp;" " "]
-  ["&thinsp;" " "]
-
-  ["&rlm;" "‏"]
-  ["&lrm;" "‎"]
-  ["&zwj;" "‍"]
-  ["&zwnj;" "‌"]
-
-  ["&iexcl;" "¡"]
-  ["&cent;" "¢"]
-  ["&pound;" "£"]
-  ["&curren;" "¤"]
-  ["&yen;" "¥"]
-  ["&brvbar;" "¦"]
-  ["&sect;" "§"]
-  ["&uml;" "¨"]
-  ["&copy;" "©"]
-  ["&ordf;" "ª"]
-  ["&laquo;" "«"]
-  ["&not;" "¬"]
-  ["&shy;" "­"]
-  ["&reg;" "®"]
-  ["&macr;" "¯"]
-  ["&deg;" "°"]
-  ["&plusmn;" "±"]
-  ["&sup2;" "²"]
-  ["&sup3;" "³"]
-  ["&acute;" "´"]
-  ["&micro;" "µ"]
-  ["&para;" "¶"]
-  ["&middot;" "·"]
-  ["&cedil;" "¸"]
-  ["&sup1;" "¹"]
-  ["&ordm;" "º"]
-  ["&raquo;" "»"]
-  ["&frac14;" "¼"]
-  ["&frac12;" "½"]
-  ["&frac34;" "¾"]
-  ["&iquest;" "¿"]
-  ["&Agrave;" "À"]
-  ["&Aacute;" "Á"]
-  ["&Acirc;" "Â"]
-  ["&Atilde;" "Ã"]
-  ["&Auml;" "Ä"]
-  ["&Aring;" "Å"]
-  ["&AElig;" "Æ"]
-  ["&Ccedil;" "Ç"]
-  ["&Egrave;" "È"]
-  ["&Eacute;" "É"]
-  ["&Ecirc;" "Ê"]
-  ["&Euml;" "Ë"]
-  ["&Igrave;" "Ì"]
-  ["&Iacute;" "Í"]
-  ["&Icirc;" "Î"]
-  ["&Iuml;" "Ï"]
-  ["&ETH;" "Ð"]
-  ["&Ntilde;" "Ñ"]
-  ["&Ograve;" "Ò"]
-  ["&Oacute;" "Ó"]
-  ["&Ocirc;" "Ô"]
-  ["&Otilde;" "Õ"]
-  ["&Ouml;" "Ö"]
-  ["&times;" "×"]
-  ["&Oslash;" "Ø"]
-  ["&Ugrave;" "Ù"]
-  ["&Uacute;" "Ú"]
-  ["&Ucirc;" "Û"]
-  ["&Uuml;" "Ü"]
-  ["&Yacute;" "Ý"]
-  ["&THORN;" "Þ"]
-  ["&szlig;" "ß"]
-  ["&agrave;" "à"]
-  ["&aacute;" "á"]
-  ["&acirc;" "â"]
-  ["&atilde;" "ã"]
-  ["&auml;" "ä"]
-  ["&aring;" "å"]
-  ["&aelig;" "æ"]
-  ["&ccedil;" "ç"]
-  ["&egrave;" "è"]
-  ["&eacute;" "é"]
-  ["&ecirc;" "ê"]
-  ["&euml;" "ë"]
-  ["&igrave;" "ì"]
-  ["&iacute;" "í"]
-  ["&icirc;" "î"]
-  ["&iuml;" "ï"]
-  ["&eth;" "ð"]
-  ["&ntilde;" "ñ"]
-  ["&ograve;" "ò"]
-  ["&oacute;" "ó"]
-  ["&ocirc;" "ô"]
-  ["&otilde;" "õ"]
-  ["&ouml;" "ö"]
-  ["&divide;" "÷"]
-  ["&oslash;" "ø"]
-  ["&ugrave;" "ù"]
-  ["&uacute;" "ú"]
-  ["&ucirc;" "û"]
-  ["&uuml;" "ü"]
-  ["&yacute;" "ý"]
-  ["&thorn;" "þ"]
-  ["&yuml;" "ÿ"]
-  ["&fnof;" "ƒ"]
-  ["&Alpha;" "Α"]
-  ["&Beta;" "Β"]
-  ["&Gamma;" "Γ"]
-  ["&Delta;" "Δ"]
-  ["&Epsilon;" "Ε"]
-  ["&Zeta;" "Ζ"]
-  ["&Eta;" "Η"]
-  ["&Theta;" "Θ"]
-  ["&Iota;" "Ι"]
-  ["&Kappa;" "Κ"]
-  ["&Lambda;" "Λ"]
-  ["&Mu;" "Μ"]
-  ["&Nu;" "Ν"]
-  ["&Xi;" "Ξ"]
-  ["&Omicron;" "Ο"]
-  ["&Pi;" "Π"]
-  ["&Rho;" "Ρ"]
-  ["&Sigma;" "Σ"]
-  ["&Tau;" "Τ"]
-  ["&Upsilon;" "Υ"]
-  ["&Phi;" "Φ"]
-  ["&Chi;" "Χ"]
-  ["&Psi;" "Ψ"]
-  ["&Omega;" "Ω"]
-  ["&alpha;" "α"]
-  ["&beta;" "β"]
-  ["&gamma;" "γ"]
-  ["&delta;" "δ"]
-  ["&epsilon;" "ε"]
-  ["&zeta;" "ζ"]
-  ["&eta;" "η"]
-  ["&theta;" "θ"]
-  ["&iota;" "ι"]
-  ["&kappa;" "κ"]
-  ["&lambda;" "λ"]
-  ["&mu;" "μ"]
-  ["&nu;" "ν"]
-  ["&xi;" "ξ"]
-  ["&omicron;" "ο"]
-  ["&pi;" "π"]
-  ["&rho;" "ρ"]
-  ["&sigmaf;" "ς"]
-  ["&sigma;" "σ"]
-  ["&tau;" "τ"]
-  ["&upsilon;" "υ"]
-  ["&phi;" "φ"]
-  ["&chi;" "χ"]
-  ["&psi;" "ψ"]
-  ["&omega;" "ω"]
-  ["&thetasym;" "ϑ"]
-  ["&upsih;" "ϒ"]
-  ["&piv;" "ϖ"]
-  ["&bull;" "•"]
-  ["&hellip;" "…"]
-  ["&prime;" "′"]
-  ["&Prime;" "″"]
-  ["&oline;" "‾"]
-  ["&frasl;" "⁄"]
-  ["&weierp;" "℘"]
-  ["&image;" "ℑ"]
-  ["&real;" "ℜ"]
-  ["&trade;" "™"]
-  ["&alefsym;" "ℵ"]
-  ["&larr;" "←"]
-  ["&uarr;" "↑"]
-  ["&rarr;" "→"]
-  ["&darr;" "↓"]
-  ["&harr;" "↔"]
-  ["&crarr;" "↵"]
-  ["&lArr;" "⇐"]
-  ["&uArr;" "⇑"]
-  ["&rArr;" "⇒"]
-  ["&dArr;" "⇓"]
-  ["&hArr;" "⇔"]
-  ["&forall;" "∀"]
-  ["&part;" "∂"]
-  ["&exist;" "∃"]
-  ["&empty;" "∅"]
-  ["&nabla;" "∇"]
-  ["&isin;" "∈"]
-  ["&notin;" "∉"]
-  ["&ni;" "∋"]
-  ["&prod;" "∏"]
-  ["&sum;" "∑"]
-  ["&minus;" "−"]
-  ["&lowast;" "∗"]
-  ["&radic;" "√"]
-  ["&prop;" "∝"]
-  ["&infin;" "∞"]
-  ["&ang;" "∠"]
-  ["&and;" "∧"]
-  ["&or;" "∨"]
-  ["&cap;" "∩"]
-  ["&cup;" "∪"]
-  ["&int;" "∫"]
-  ["&there4;" "∴"]
-  ["&sim;" "∼"]
-  ["&cong;" "≅"]
-  ["&asymp;" "≈"]
-  ["&ne;" "≠"]
-  ["&equiv;" "≡"]
-  ["&le;" "≤"]
-  ["&ge;" "≥"]
-  ["&sub;" "⊂"]
-  ["&sup;" "⊃"]
-  ["&nsub;" "⊄"]
-  ["&sube;" "⊆"]
-  ["&supe;" "⊇"]
-  ["&oplus;" "⊕"]
-  ["&otimes;" "⊗"]
-  ["&perp;" "⊥"]
-  ["&sdot;" "⋅"]
-  ["&lceil;" "⌈"]
-  ["&rceil;" "⌉"]
-  ["&lfloor;" "⌊"]
-  ["&rfloor;" "⌋"]
-  ["&lang;" "〈"]
-  ["&rang;" "〉"]
-  ["&loz;" "◊"]
-  ["&spades;" "♠"]
-  ["&clubs;" "♣"]
-  ["&hearts;" "♥"]
-  ["&diams;" "♦"]
-  ["&quot;" "\""]
-  ["&OElig;" "Œ"]
-  ["&oelig;" "œ"]
-  ["&Scaron;" "Š"]
-  ["&scaron;" "š"]
-  ["&Yuml;" "Ÿ"]
-  ["&circ;" "ˆ"]
-  ["&tilde;" "˜"]
-  ["&ndash;" "–"]
-  ["&mdash;" "—"]
-  ["&lsquo;" "‘"]
-  ["&rsquo;" "’"]
-  ["&sbquo;" "‚"]
-  ["&ldquo;" "“"]
-  ["&rdquo;" "”"]
-  ["&bdquo;" "„"]
-  ["&dagger;" "†"]
-  ["&Dagger;" "‡"]
-  ["&permil;" "‰"]
-  ["&lsaquo;" "‹"]
-  ["&rsaquo;" "›"]
-  ["&euro;" "€"]
-  ]
- )
-            )  )
-
-    (if workOnStringP
-        outputStr
-      (save-excursion
-        (delete-region ξfrom ξto)
-        (goto-char ξfrom)
-        (insert outputStr) )) ) )
-
 (defun remove-vowel-old (&optional ξstring ξfrom ξto)
   "Remove the following letters: {a e i o u}.
 
@@ -338,7 +50,7 @@ list or vector pair.  Else, returns a changed string."
        (list nil (vector (car bds) (cdr bds))) ) ) )
 
   (let (workOnStringP inputStr outputStr ξfrom ξto )
-    (when ξfrom-to-pair 
+    (when ξfrom-to-pair
         (setq ξfrom (elt ξfrom-to-pair 0) )
         (setq ξto (elt ξfrom-to-pair 1) )
       )
@@ -388,6 +100,36 @@ Test cases
       (setq tempStr (replace-regexp-in-string "\\`#x" "" tempStr )) ; elisp …
       (setq tempStr (replace-regexp-in-string "\\`#" "" tempStr ))  ; CSS …
       )
-    
+
     (message "Hex %s is %d" tempStr (string-to-number tempStr 16 ) )
     ))
+
+
+(defun replace-latin-alphabet-to-gothic (p1 p2 reverse-direction-p)
+  "Replace English alphabets to Unicode gothic characters.
+For example, A ⇒ 𝔄, a ⇒ 𝔞.
+
+When called interactively, work on current text block or text selection. (a “text block” is text between empty lines)
+
+If any `universal-argument' is given, reverse direction.
+
+When called in elisp, the p1 and p2 are region begin/end positions to work on."
+  (interactive
+   (let ((bds (get-selection-or-unit 'block)) )
+     (list (elt bds 1) (elt bds 2) current-prefix-arg )) )
+
+  (let (
+        (latin-to-gothic [ ["A" "𝔄"] ["B" "𝔅"] ["C" "ℭ"] ["D" "𝔇"] ["E" "𝔈"] ["F" "𝔉"] ["G" "𝔊"] ["H" "ℌ"] ["I" "ℑ"] ["J" "𝔍"] ["K" "𝔎"] ["L" "𝔏"] ["M" "𝔐"] ["N" "𝔑"] ["O" "𝔒"] ["P" "𝔓"] ["Q" "𝔔"] ["R" "ℜ"] ["S" "𝔖"] ["T" "𝔗"] ["U" "𝔘"] ["V" "𝔙"] ["W" "𝔚"] ["X" "𝔛"] ["Y" "𝔜"] ["Z" "ℨ"] ["a" "𝔞"] ["b" "𝔟"] ["c" "𝔠"] ["d" "𝔡"] ["e" "𝔢"] ["f" "𝔣"] ["g" "𝔤"] ["h" "𝔥"] ["i" "𝔦"] ["j" "𝔧"] ["k" "𝔨"] ["l" "𝔩"] ["m" "𝔪"] ["n" "𝔫"] ["o" "𝔬"] ["p" "𝔭"] ["q" "𝔮"] ["r" "𝔯"] ["s" "𝔰"] ["t" "𝔱"] ["u" "𝔲"] ["v" "𝔳"] ["w" "𝔴"] ["x" "𝔵"] ["y" "𝔶"] ["z" "𝔷"] ])
+
+        (gothic-to-latin [ ["𝔄" "A"] ["𝔅" "B"] ["ℭ" "C"] ["𝔇" "D"] ["𝔈" "E"] ["𝔉" "F"] ["𝔊" "G"] ["ℌ" "H"] ["ℑ" "I"] ["𝔍" "J"] ["𝔎" "K"] ["𝔏" "L"] ["𝔐" "M"] ["𝔑" "N"] ["𝔒" "O"] ["𝔓" "P"] ["𝔔" "Q"] ["ℜ" "R"] ["𝔖" "S"] ["𝔗" "T"] ["𝔘" "U"] ["𝔙" "V"] ["𝔚" "W"] ["𝔛" "X"] ["𝔜" "Y"] ["ℨ" "Z"] ["𝔞" "a"] ["𝔟" "b"] ["𝔠" "c"] ["𝔡" "d"] ["𝔢" "e"] ["𝔣" "f"] ["𝔤" "g"] ["𝔥" "h"] ["𝔦" "i"] ["𝔧" "j"] ["𝔨" "k"] ["𝔩" "l"] ["𝔪" "m"] ["𝔫" "n"] ["𝔬" "o"] ["𝔭" "p"] ["𝔮" "q"] ["𝔯" "r"] ["𝔰" "s"] ["𝔱" "t"] ["𝔲" "u"] ["𝔳" "v"] ["𝔴" "w"] ["𝔵" "x"] ["𝔶" "y"] ["𝔷" "z"] ])
+
+        useMap
+        )
+
+    (if reverse-direction-p
+        (progn (setq useMap gothic-to-latin))
+      (progn (setq useMap latin-to-gothic))
+      )
+    (save-excursion
+      (let ((case-fold-search nil))
+        (replace-pairs-region p1 p2 useMap ) ) ) ) )

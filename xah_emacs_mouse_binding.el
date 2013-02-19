@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8 -*-
-;; mouse keybinding.
+;; mouse settings.
 ;; Xah Lee
 ;; created: 2011-11-13
 
@@ -17,9 +17,8 @@
   )
  ((string-equal system-type "gnu/linux")
   (global-set-key (kbd "<mouse-9>") 'ergoemacs-close-current-buffer)
+  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
   )
  ((string-equal system-type "darwin") ; Mac
   (global-set-key (kbd "<mouse-5>") 'ergoemacs-close-current-buffer) ) )
-
-(global-set-key (kbd "<M-wheel-up>") 'ergoemacs-previous-user-buffer)
-(global-set-key (kbd "<M-wheel-down>") 'ergoemacs-next-user-buffer)
