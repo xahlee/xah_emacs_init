@@ -94,8 +94,6 @@
 
 
 ;; default frame
-
-(when (string-equal system-type "windows-nt") 
   (setq initial-frame-alist '((width . 100) (height . 54)))
   (setq default-frame-alist
         '((menu-bar-lines . 1)
@@ -104,9 +102,8 @@
           (tool-bar-lines . 0)
           (width . 100)
           (height . 52)
-          (cursor-type . box)
+          ;; (cursor-type . box)
           ))
-  )
 
 
 (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))

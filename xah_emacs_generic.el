@@ -70,13 +70,13 @@ This command works on unixes only."
   (when buffer-file-name (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun run-current-file ()
-  "Execute or compile the current file.
-For example, if the current buffer is the file x.pl,
-then it'll call “perl x.pl” in a shell.
+  "Execute the current file.
+For example, if the current buffer is the file xx.py,
+then it'll call “python xx.py” in a shell.
 The file can be php, perl, python, ruby, javascript, bash, ocaml, vb, elisp.
 File suffix is used to determine what program to run.
 
-If the file is modified, ask if you want to save first. (This command always run the saved version.)
+If the file is modified, ask if you want to save first.
 
 If the file is emacs lisp, run the byte compiled version if exist."
   (interactive)
@@ -101,42 +101,19 @@ If the file is emacs lisp, run the byte compiled version if exist."
          (cmdStr (concat progName " \""   fName "\""))
          )
 
-    ;; a keyed list of file suffix to comand-line program path/name
-
     (when (buffer-modified-p)
-      (progn
-        (when (y-or-n-p "Buffer modified. Do you want to save first?")
-          (save-buffer) ) ) )
+      (when (y-or-n-p "Buffer modified. Do you want to save first?")
+          (save-buffer) ) )
 
     (if (string-equal fSuffix "el") ; special case for emacs lisp
-        (progn
-          (load (file-name-sans-extension fName))
-          )
+        (load (file-name-sans-extension fName))
       (if progName
           (progn
             (message "Running…")
             (shell-command cmdStr "*run-current-file output*" )
             )
         (message "No recognized program file suffix for this file.")
-        )
-      )
-
-    ;;    ;; if file is povray, open the generated image; refresh from disk
-    ;;    (when (equal fSuffix "pov")
-    ;;      (let ((revert-without-query (list "\\.png$")))
-    ;;        (find-file-other-window
-    ;;         (concat (file-name-sans-extension fName) ".png"))
-    ;;        (redraw-display)
-    ;;        ;; (revert-buffer t t)
-    ;;        )
-    ;;
-;;;;       (let ((povImgFile (concat (file-name-sans-extension fName) ".png")))
-;;;;         (find-file povImgFile)
-;;;;         (redraw-display)
-;;;;         ;; (revert-buffer t t)
-;;;;         )
-    ;;)
-    ))
+        ) ) ))
 
 (defun run-current-java-file ()
   "Execute the current file's class with Java.

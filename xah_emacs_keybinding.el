@@ -83,6 +83,10 @@
 (global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
 
+;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
+;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
+
+
 ;cycle-camel-style-case
 
 (global-set-key (kbd "<menu> '") 'nil)
@@ -322,6 +326,13 @@
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
 
+;; (defun xah-isearch-mode-keys ()
+;;   "my keybindings for `isearch-mode'.
+;; For `isearch-mode-hook'."
+;;   (define-key isearch-mode-map (kbd "C-f") 'isearch-repeat-forward)
+;;   )
+;; (add-hook 'isearch-mode-hook 'xah-isearch-mode-keys )
+
 (defun xah-rcirc-mode-keys ()
   "my keybindings for `rcirc'.
 For `rcirc-mode-hook'."
@@ -458,3 +469,5 @@ For `nxml-mode-hook'."
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
 
 ;; command that are not immediate (has prompt) probably should not have a key.
+
+
