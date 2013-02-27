@@ -170,10 +170,12 @@
 (global-set-key (kbd "<menu> m e") 'emacs-lisp-mode)
 (global-set-key (kbd "<menu> m h") 'xah-html-mode)
 (global-set-key (kbd "<menu> m l") 'linum-mode)
+(global-set-key (kbd "<menu> m p") 'php-mode)
 (global-set-key (kbd "<menu> m s") 'shell)
 (global-set-key (kbd "<menu> m t") 'text-mode)
 (global-set-key (kbd "<menu> m v") 'visual-line-mode)
 (global-set-key (kbd "<menu> m w") 'whitespace-mode)
+(global-set-key (kbd "<menu> m x") 'nxml-mode)
 (global-set-key (kbd "<menu> n") 'ergoemacs-new-empty-buffer) ; ★★★
 (global-set-key (kbd "<menu> o SPC") 'xah-open-file-fast)
 (global-set-key (kbd "<menu> o b") 'ibuffer)
@@ -243,10 +245,11 @@
 (global-set-key (kbd "<menu> z") 'nil)
 
 (define-key help-map (kbd "c") 'describe-char)
-(define-key help-map (kbd "5") 'man)
+(define-key help-map (kbd "3") 'man)
 (define-key help-map (kbd "7") 'lookup-google)
 (define-key help-map (kbd "8") 'lookup-wikipedia)
 (define-key help-map (kbd "9") 'lookup-word-definition)
+(define-key help-map (kbd "0") 'lookup-all-dictionaries)
 (define-key help-map (kbd "`") 'elisp-index-search)
 (define-key help-map (kbd "m") 'ergoemacs-describe-major-mode)
 (define-key help-map (kbd "o") 'nil)  ; ergoemacs-where-is-old-binding
@@ -323,6 +326,8 @@
   )
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
+(add-hook 'nxml-mode-hook 'xah-html-mode-keys)
+
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
 
@@ -365,13 +370,7 @@ For `Info-mode-hook'."
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
-(defun xah-nxml-mode-keys ()
-  "my keybindings for `nxml-mode'.
-For `nxml-mode-hook'."
-  (local-set-key (kbd "<M-up>") 'nxml-backward-up-element)
-  (local-set-key (kbd "<M-down>") 'nxml-down-element)
-  )
-(add-hook 'nxml-mode-hook 'xah-nxml-mode-keys)
+
 
 (defun xah-dired-mode-keys ()
   "Modify keymaps used by `dired'."

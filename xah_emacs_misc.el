@@ -145,7 +145,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 (defun xah-open-file-fast (openCode)
   "Prompt to open a file from a pre-defined set."
-  (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets:")
+  (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets [uk]kbd [d]dl:")
   (let (ξfile )
     (setq ξfile
           (cond
@@ -165,6 +165,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
            ((string= openCode "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
            ((string= openCode "h") "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
            ((string= openCode "kbd") "~/web/xahlee_info/kbd/keyboarding.html" )
+           ((string= openCode "uk") "~/web/xahlee_info/kbd/keyboarding.html" )
+           ((string= openCode "d") "~/Downloads/" )
            (t (error "You typed 「%s」, it doesn't associate with a file." openCode ))
            )
           )
