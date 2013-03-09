@@ -47,7 +47,10 @@
 
 (defcustom ξ-font-list nil "A list of fonts for `cycle-font' to cycle from." :group 'font)
 
-(set-default 'ξ-font-list '(
+(set-default 'ξ-font-list 
+(cond
+ ((string-equal system-type "windows-nt") ; Windows
+'(
                          "Courier New-10"
                          "DejaVu Sans Mono-9"
                          "Lucida Console-10"
@@ -56,7 +59,18 @@
                          "DejaVu Sans-10"
                          "Lucida Sans Unicode-10"
                          "Arial Unicode MS-10"
-                         ))
+                         )
+  )
+ ((string-equal system-type "gnu/linux")
+ '(
+                         "DejaVu Sans Mono-9"
+                         "Symbola-12"
+                         "DejaVu Sans-10"
+                         )
+ )
+ ((string-equal system-type "darwin") ; Mac
+  nil ) )
+)
 
 (defun cycle-font (num)
   "Change font in current frame.

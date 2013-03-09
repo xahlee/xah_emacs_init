@@ -93,6 +93,7 @@
 (global-set-key (kbd "<menu> ,") 'shell-command-on-region)
 (global-set-key (kbd "<menu> -") 'xc-comment-smart) ; ★★★ , comment-dwim
 (global-set-key (kbd "<menu> .") 'shell-command)   ; ★★★
+(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
 
 (global-set-key (kbd "<menu> /") 'nil)
 (global-set-key (kbd "<menu> 0") 'delete-window)
@@ -206,21 +207,22 @@
 (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
 
 (global-set-key (kbd "<menu> u -") "—") ; EM DASH
-(global-set-key (kbd "<menu> u 4") "◆") ; black diamond
-(global-set-key (kbd "<menu> u 7") "＆") ; full width ampersand
-(global-set-key (kbd "<menu> u 8") "•") ; bullet
-(global-set-key (kbd "<menu> u <right>") "→")
-(global-set-key (kbd "<menu> u <left>") "←")
-(global-set-key (kbd "<menu> u <up>") "↑")
-(global-set-key (kbd "<menu> u <down>") "↓")
+(global-set-key (kbd "<menu> u . .") "…") ; HORIZONTAL ELLIPSIS
+(global-set-key (kbd "<menu> u . <down>") "⇓")
 (global-set-key (kbd "<menu> u . <left>") "⇐")
 (global-set-key (kbd "<menu> u . <right>") "⇒")
 (global-set-key (kbd "<menu> u . <up>") "⇑")
-(global-set-key (kbd "<menu> u . <down>") "⇓")
-(global-set-key (kbd "<menu> u . .") "…") ; HORIZONTAL ELLIPSIS
 (global-set-key (kbd "<menu> u . b") 'insert-pair-white-lenticular-bracket〖〗)
 (global-set-key (kbd "<menu> u . m") 'insert-pair-white-corner-bracket『』)
 (global-set-key (kbd "<menu> u . w") 'insert-pair-double-angle-bracket《》)
+(global-set-key (kbd "<menu> u 4") "◆") ; black diamond
+(global-set-key (kbd "<menu> u 7") "＆") ; full width ampersand
+(global-set-key (kbd "<menu> u 8") "•") ; bullet
+(global-set-key (kbd "<menu> u <down>") "↓")
+(global-set-key (kbd "<menu> u <left>") "←")
+(global-set-key (kbd "<menu> u <right>") "→")
+(global-set-key (kbd "<menu> u <up>") "↑")
+(global-set-key (kbd "<menu> u SPC") (lambda () (interactive) (insert " "))) ;insert non-breaking space
 (global-set-key (kbd "<menu> u \\") "、") ; IDEOGRAPHIC COMMA
 (global-set-key (kbd "<menu> u b") 'insert-pair-black-lenticular-bracket【】)
 (global-set-key (kbd "<menu> u c") "=") ; equal

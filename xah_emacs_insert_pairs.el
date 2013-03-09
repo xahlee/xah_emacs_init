@@ -34,6 +34,8 @@ The argument leftBracket rightBracket are strings."
 
 ;; (insert-parentheses)
 
+
+
 (defun insert-pair-paren () (interactive) (insert-bracket-pair "(" ")") )
 (defun insert-pair-bracket () (interactive) (insert-bracket-pair "[" "]") )
 (defun insert-pair-brace () (interactive) (insert-bracket-pair "{" "}") )

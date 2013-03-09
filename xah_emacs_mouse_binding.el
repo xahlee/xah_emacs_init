@@ -17,8 +17,9 @@
   )
  ((string-equal system-type "gnu/linux")
   (global-set-key (kbd "<mouse-9>") 'ergoemacs-close-current-buffer)
-  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase) ; control wheel up
+  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease) ; control wheel down
+  (global-set-key (kbd "<mouse-3>") 'describe-char) ; right button
   )
  ((string-equal system-type "darwin") ; Mac
   (global-set-key (kbd "<mouse-5>") 'ergoemacs-close-current-buffer) ) )

@@ -133,3 +133,10 @@ When called in elisp, the p1 and p2 are region begin/end positions to work on."
     (save-excursion
       (let ((case-fold-search nil))
         (replace-pairs-region p1 p2 useMap ) ) ) ) )
+
+(require 'calc-bin)
+
+(defun dec-to-bin (decStr)
+"convert the decimal number string decStr into a binary (string)"
+  (let ((calc-number-radix 2))
+    (math-format-radix (string-to-number decStr))))
