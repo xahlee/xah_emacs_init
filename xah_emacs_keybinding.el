@@ -86,7 +86,6 @@
 ;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
 ;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
 
-
 ;cycle-camel-style-case
 
 (global-set-key (kbd "<menu> '") 'nil)
@@ -120,6 +119,16 @@
 (global-set-key (kbd "<menu> e") 'nil)  ; mode specific
 (global-set-key (kbd "<menu> f") 'copy-file-path)
 
+(global-set-key (kbd "<menu> g '") "\"")
+(global-set-key (kbd "<menu> g ,") "<")
+(global-set-key (kbd "<menu> g -") "_")
+(global-set-key (kbd "<menu> g .") ">")
+(global-set-key (kbd "<menu> g /") "?")
+(global-set-key (kbd "<menu> g ;") ":")
+(global-set-key (kbd "<menu> g =") "+")
+(global-set-key (kbd "<menu> g \\") "|")
+(global-set-key (kbd "<menu> g `") "~")
+
 (global-set-key (kbd "<menu> g 0") ")")
 (global-set-key (kbd "<menu> g 1") "!")
 (global-set-key (kbd "<menu> g 2") "@")
@@ -130,6 +139,7 @@
 (global-set-key (kbd "<menu> g 7") "&")
 (global-set-key (kbd "<menu> g 8") "*")
 (global-set-key (kbd "<menu> g 9") "(")
+
 (global-set-key (kbd "<menu> g a") "A")
 (global-set-key (kbd "<menu> g b") "B")
 (global-set-key (kbd "<menu> g c") "C")
@@ -372,8 +382,6 @@ For `Info-mode-hook'."
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
-
-
 (defun xah-dired-mode-keys ()
   "Modify keymaps used by `dired'."
 ;;  (define-key dired-mode-map (kbd "<return>") 'dired-find-alternate-file) ; was dired-advertised-find-file
@@ -446,8 +454,6 @@ For `Info-mode-hook'."
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
 
-
-
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
   (interactive)
@@ -470,5 +476,4 @@ For `Info-mode-hook'."
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
 
 ;; command that are not immediate (has prompt) probably should not have a key.
-
 
