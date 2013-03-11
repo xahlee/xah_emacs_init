@@ -122,34 +122,6 @@ For example:
 ["omega" "ω"]
 ["Pi" "π"])))
 
-(defun replace-html-chars-to-entities ()
-  "Replace “<” to “&lt;” and some other special characters in HTML.
-This works on the current text selection or block of text.
-The string replaced are:
- & ⇒ &amp;
- < ⇒ &lt;
- > ⇒ &gt;"
-  (interactive)
-  (let (bds p1 p2 myText)
-    (setq bds (get-selection-or-unit 'block))
-    (setq myText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
-    (save-excursion (replace-pairs-region p1 p2 '( ["&" "&amp;"] ["<" "&lt;"] [">" "&gt;"] ) ))
-     ) )
-
-(defun replace-html-chars-to-unicode ()
-  "Replace “<” to “‹” and some other special characters in HTML.
-This works on the current text selection or block of text.
-The characters replaced are:
- & ⇒ ＆
- < ⇒ ‹
- > ⇒ ›"
-  (interactive)
-  (let (bds p1 p2 myText)
-    (setq bds (get-selection-or-unit 'block))
-    (setq myText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
-
-    (replace-pairs-region p1 p2 '( ["&" "＆"] ["<" "‹"] [">" "›"] ) ) ) )
-
 (defun convert-english-chinese-punctuation (p1 p2 &optional ξ-to-direction)
   "Replace punctuation from/to English/Chinese Unicode symbols.
 
@@ -293,6 +265,7 @@ Examples of changes:
  ["—" " — "]
  ["..." "…"]
  [":)" "☺"]
+ ["e.g." "⁖"]
  ["~=" "≈"]
  ])
 
