@@ -273,12 +273,6 @@
 (global-set-key (kbd "<insert>") 'ergoemacs-switch-to-next-frame)
 
 
-
-;; keys for moving to prev/next code section (form feed; ^L)
-(global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
-(global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
-
-
 (global-set-key (kbd "M-\"") 'xah-compact-uncompact-block)
 (global-set-key (kbd "M-2") 'cycle-hyphen-underscore-space)
 
@@ -453,6 +447,14 @@ For `Info-mode-hook'."
 
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
+
+(global-set-key (kbd "<S-prior>") 'scroll-down) ; page up
+(global-set-key (kbd "<S-next>") 'scroll-up) ; page down
+
+;; keys for moving to prev/next code section (form feed; ^L)
+(global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
+(global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
+
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
