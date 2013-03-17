@@ -107,7 +107,7 @@ Require unix zip commandline tool."
   "Create a new image.
 fileList is a list of image file paths.
 argsString is argument string passed to ImageMagick's “convert” command.
-newNameSuffix is the string appended to file. e.g. “_new” gets you “cat_new.jpg”
+newNameSuffix is the string appended to file. e.g. “_new” gets you “…_new.jpg”
 newNameFileSuffix is the new file's file extension. e.g. “.png”
 Requires ImageMagick shell tool."
   (require 'dired)

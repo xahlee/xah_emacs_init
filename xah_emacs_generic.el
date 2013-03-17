@@ -12,13 +12,13 @@
 (require 'browse-url)
 
 (defun delete-current-file (ξno-backup-p)
-  "Delete the file associated with the current buffer. Close the current buffer too.
+  "Delete the file associated with the current buffer.
+
+Also close the current buffer.  If no file is associated, just close buffer without prompt for save.
 
 A backup file is created with filename appended “~‹date time stamp›~”. Existing file of the same name is overwritten.
 
-if ΞNO-BACKUP-P is non-nil (when called with `universal-argument'), don't create backup.
-
-If no file is associated, just close buffer without prompt for save."
+when called with `universal-argument', don't create backup."
   (interactive "P")
   (let (fName)
     (when (buffer-file-name) ; buffer is associated with a file

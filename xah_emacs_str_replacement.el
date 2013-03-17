@@ -355,12 +355,12 @@ Examples of changes:
 ;; fix back. quotes in HTML code
 (replace-regexp-pairs-region (point-min) (point-max)
 [
- ["” \\([a-z]+\\)="       "\" \\1="]
+ ["” \\([-a-z]+\\)="       "\" \\1="]   ; any 「” some-thing=」
  ["=\”" "=\""]
  ["/” " "/\" "]
  ["\"\\([0-9]+\\)” "     "\"\\1\" "]
- ])
- ) ))
+ ]
+) ) ))
 
 (defun escape-quotes ()
   "Replace 「\"」 by 「\\\"」 in current line or text selection."

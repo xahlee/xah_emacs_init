@@ -180,7 +180,7 @@
 (global-set-key (kbd "<menu> m c") 'calc)
 (global-set-key (kbd "<menu> m e") 'emacs-lisp-mode)
 (global-set-key (kbd "<menu> m h") 'xah-html-mode)
-(global-set-key (kbd "<menu> m l") 'linum-mode)
+(global-set-key (kbd "<menu> m l") 'global-linum-mode)
 (global-set-key (kbd "<menu> m p") 'php-mode)
 (global-set-key (kbd "<menu> m s") 'shell)
 (global-set-key (kbd "<menu> m t") 'text-mode)
@@ -225,7 +225,9 @@
 (global-set-key (kbd "<menu> u . b") 'insert-pair-white-lenticular-bracket〖〗)
 (global-set-key (kbd "<menu> u . m") 'insert-pair-white-corner-bracket『』)
 (global-set-key (kbd "<menu> u . w") 'insert-pair-double-angle-bracket《》)
+(global-set-key (kbd "<menu> u 3") "◇") ; white diamond
 (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
+(global-set-key (kbd "<menu> u 5") "🎶") ; MULTIPLE MUSICAL NOTES
 (global-set-key (kbd "<menu> u 7") "＆") ; full width ampersand
 (global-set-key (kbd "<menu> u 8") "•") ; bullet
 (global-set-key (kbd "<menu> u <down>") "↓")

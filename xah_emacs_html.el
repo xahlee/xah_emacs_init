@@ -46,14 +46,14 @@ WARNING: not robust. Designed for my personal use only."
 
 
 (defun mark-unicode (p1)
-  "Wrap 「<b class=\"u\"></b>」 around current character.
+  "Wrap 「<mark class=\"unicode\"></mark>」 around current character.
 
 When called in elisp program, wrap the tag at point P1."
   (interactive (list (point)))
   (goto-char p1)
-  (insert "<b class=\"u\">")
+  (insert "<mark class=\"unicode\">")
   (forward-char 1)
-  (insert "</b>"))
+  (insert "</mark>"))
 
 
 
