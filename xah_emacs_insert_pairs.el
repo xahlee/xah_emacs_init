@@ -12,29 +12,45 @@
 
 (defun insert-bracket-pair (leftBracket rightBracket)
   "Insert a matching bracket.
-If region is not active, place the cursor between them.
-If region is active, insert around the region, place the cursor after the right bracket.
+
+If there's a text selection, insert bracket around it.
+If there's no text selection:
+  If cursor is on whitespace, insert bracket.
+  If cursor is not on whitespace, insert bracket around current word.
 
 The argument leftBracket rightBracket are strings."
   (if (region-active-p)
-      (let (
-            (p1 (region-beginning))
-            (p2 (region-end))
+        (progn
+          (let (
+                (p1 (region-beginning))
+                (p2 (region-end))
             )
-        (goto-char p2)
-        (insert rightBracket)
-        (goto-char p1)
-        (insert leftBracket)
-        (goto-char (+ p2 2))
-        )
-    (progn
-      (insert leftBracket rightBracket)
-      (backward-char 1) ) )
-  )
+            (goto-char p2)
+            (insert rightBracket)
+            (goto-char p1)
+            (insert leftBracket)
+            (goto-char (+ p2 2))
+            ))
+      (progn
+        (if (looking-at "[ \t\n]")
+            (progn
+              (insert leftBracket rightBracket)
+             (search-backward rightBracket ) )
+          (progn
+            (let* (
+                   (bds (unit-at-cursor 'word))
+                   (p1 (elt bds 1))
+                   (p2 (elt bds 2))
+                   )
+              (goto-char p2)
+              (insert rightBracket)
+              (goto-char p1)
+              (insert leftBracket)
+              (goto-char (+ p2 (length leftBracket)))
+              )
+            )) )))
 
 ;; (insert-parentheses)
-
-
 
 (defun insert-pair-paren () (interactive) (insert-bracket-pair "(" ")") )
 (defun insert-pair-bracket () (interactive) (insert-bracket-pair "[" "]") )

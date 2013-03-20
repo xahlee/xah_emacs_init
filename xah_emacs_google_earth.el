@@ -7,6 +7,9 @@
 
 
 
+;; ✈ 🌎
+;; ⊕ 🌐 
+
 (defun grab-lines (n)
 "Delete the next n lines and return a list
 where each element is a line."
@@ -35,7 +38,7 @@ title is the title for the HTML link.
 longitude-latitude is a vector [longitude latitude]. Each must be a decimal number. Positive signifies east, negative signifies west.
 
 Example of inserted text:
- <a href=\"http://maps.google.com/maps?q=25.269536%2C82.990723\" title=\"Petrified Forest National Park\">✈</a>"
+ <a href=\"http://maps.google.com/maps?q=25.269536%2C82.990723\" title=\"Petrified Forest National Park\">🌐</a>"
   (interactive)
   (let ( ξtitle ξy ξx)
     (setq ξtitle (if title title ""))
@@ -47,16 +50,16 @@ Example of inserted text:
       (progn 
         (setq ξx "x�") 
         (setq ξy "y�") ) )
-    (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string ξy) "%2C" (number-to-string ξx) "\" title=\"" ξtitle "\" target=\"_blank\">✈</a>\n")))
+    (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string ξy) "%2C" (number-to-string ξx) "\" title=\"" ξtitle "\" target=\"_blank\">🌐</a>\n")))
 
 (defun insert-google-earth-link (&optional ξtitle filePath)
   "Insert a HTML markup for link to a local Goole Earth file.
  ΞTITLE is the ξtitle attribute in the anchor link.
  FILE-PATH is the full path to the KML file.
 Here's a sample inserted text:
-<a href=\"../kml/las_vegas.kmz\" title=\"Las Vegas\">⊕</a>"
+<a href=\"../kml/las_vegas.kmz\" title=\"Las Vegas\">🌎</a>"
   (interactive)
-  (insert (format "<a href=\"%s\" title=\"%s\">⊕</a>\n" (if filePath (xahsite-filepath-to-url filePath) "�") (if ξtitle ξtitle "�") )) )
+  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if filePath (xahsite-filepath-to-url filePath) "�") (if ξtitle ξtitle "�") )) )
 
 (defun insert-kml (&optional ξkmlTitle ξlonlat sourceFilePath)
   "Insert a simple Google Earth KML markup template.
@@ -171,7 +174,7 @@ Example:
 Las Vegas/36.1027/-115.1730
 
 The line will be replaced to like this:
-<a href=\"…/las_vegas.kml\" title=\"Las Vegas\">⊕</a>
+<a href=\"…/las_vegas.kml\" title=\"Las Vegas\">🌎</a>
 
  (Note: latitude is y-axis, longitude is x-axis)
 
