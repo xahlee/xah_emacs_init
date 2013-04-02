@@ -23,6 +23,113 @@
     ("msw" "Microsoft Windows")
     ("ms" "Microsoft")
 
+;
+;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
+;("t" "the") ; 1
+;;; ("t" "be") ; 2
+;("2" "to")
+;;; ("t" "of") ; 4
+;("n" "and")
+;;; ("t" "a") ; 6
+;;; ("t" "in") ; 7
+;("h" "that")
+;("v" "have")
+;;; ("t" "I") ; 10
+;;; ("t" "it") ; 11
+;("4" "for")
+;("8" "not")
+;; ("t" "on") ; 14
+;("w" "with") ; 15
+;; ("t" "he") ; 16
+;; ("t" "as") ; 17
+;("u" "you") ; 18
+;; ("t" "do") ; 19
+;; ("t" "at") ; 20
+;; ("t" "this") ; 21
+;("b" "but") ; 22
+;; ("t" "his") ; 23
+;; ("t" "by") ; 24
+;; ("t" "from") ; 25
+;; ("t" "they") ; 26
+;; ("t" "we") ; 27
+;; ("t" "say") ; 28
+;; ("t" "her") ; 29
+;; ("t" "she") ; 30
+;; ("t" "or") ; 31
+;; ("t" "an") ; 32
+;; ("t" "will") ; 33
+;; ("t" "my") ; 34
+;; ("t" "one") ; 35
+;; ("t" "all") ; 36
+;; ("t" "would") ; 37
+;; ("t" "there") ; 38
+;; ("t" "their") ; 39
+;; ("t" "what") ; 40
+;; ("t" "so") ; 41
+;; ("t" "up") ; 42
+;; ("t" "out") ; 43
+;; ("t" "if") ; 44
+;; ("t" "about") ; 45
+;; ("t" "who") ; 46
+;; ("t" "get") ; 47
+;; ("t" "which") ; 48
+;; ("t" "go") ; 49
+;; ("t" "me") ; 50
+;; ("t" "when") ; 51
+;; ("t" "make") ; 52
+;; ("t" "can") ; 53
+;; ("t" "like") ; 54
+;; ("t" "time") ; 55
+;; ("t" "no") ; 56
+;; ("t" "just") ; 57
+;; ("t" "him") ; 58
+;; ("t" "know") ; 59
+;; ("t" "take") ; 60
+;("pp" "people") ; 61
+;; ("t" "into") ; 62
+;; ("t" "year") ; 63
+;; ("t" "your") ; 64
+;; ("t" "good") ; 65
+;; ("t" "some") ; 66
+;; ("t" "could") ; 67
+;; ("t" "them") ; 68
+;; ("t" "see") ; 69
+;; ("t" "other") ; 70
+;; ("t" "than") ; 71
+;; ("t" "then") ; 72
+;; ("t" "now") ; 73
+;; ("t" "look") ; 74
+;; ("t" "only") ; 75
+;; ("t" "come") ; 76
+;; ("t" "its") ; 77
+;; ("t" "over") ; 78
+;; ("t" "think") ; 79
+;; ("t" "also") ; 80
+;; ("t" "back") ; 81
+;; ("t" "after") ; 82
+;; ("t" "use") ; 83
+;; ("t" "two") ; 84
+;; ("t" "how") ; 85
+;; ("t" "our") ; 86
+;; ("t" "work") ; 87
+;; ("t" "first") ; 88
+;; ("t" "well") ; 89
+;; ("t" "way") ; 90
+;; ("t" "even") ; 91
+;; ("t" "new") ; 92
+;; ("t" "want") ; 93
+;("bc" "because")
+;; ("t" "any") ; 95
+;; ("t" "these") ; 96
+; ("t" "give") ; 97
+; ("t" "day") ; 98
+; ("t" "most") ; 99
+; ("t" "us") ; 100
+
+; ("tm" "time")
+; ("g" "good")
+; ("ipt" "important")
+
     ("8trad" "traditional")
     ("8addr" "address")
     ("8dict" "dictionary")
@@ -213,8 +320,6 @@
     ("3rsn2" "rsync -z -r -v -t  --delete  ~/web/  /media/OS/Users/h3/web/")
 
     ("3ssh" "ssh -l u40651120 xahlee.org ")
-
-    ("3ditto" "ditto -ck --sequesterRsrc --keepParent src dest")
     ("3im" "convert -quality 85% ")
     ("3ims" "convert -scale 50% -quality 85% ")
     ("3im256" "convert +dither -colors 256 ")

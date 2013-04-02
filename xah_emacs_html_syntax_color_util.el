@@ -17,12 +17,17 @@
            ("output" . ["fundamental-mode" "txt"])
 
            ("bash" . ["sh-mode" "sh"])
+           ("bash-output" . ["sh-mode" "sh"])
+           ("unix-config" . ["conf-space-mode" "conf"])
            ("cmd" . ["dos-mode" "bat"])
 
            ("bbcode" . ["xbbcode-mode" "bbcode"])
            ("c" . ["c-mode" "c"])
            ("cpp" . ["c++-mode" "cpp"])
            ("cl" . ["lisp-mode" "lisp"])
+
+           ("org-mode" . ["org-mode" "org"])
+
            ("clojure" . ["clojure-mode" "clj"])
            ("css" . ["css-mode" "css"])
            ("elisp" . ["emacs-lisp-mode" "el"])
@@ -30,7 +35,7 @@
            ("html" . ["html-mode" "html"])
            ("mysql" . ["sql-mode" "sql"])
            ("xml" . ["sgml-mode"])
-           ("html6" . ["html6-mode" "html6"])
+           ("html6" . ["xah-html6-mode" "html6"])
            ("java" . ["java-mode" "java"])
            ("js" . ["js-mode" "js"])
            ("lsl" . ["xlsl-mode" "lsl"])

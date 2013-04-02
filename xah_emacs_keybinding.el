@@ -24,6 +24,7 @@
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
 (define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))
+(define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
 ;; in linux, by default, <lwindow> is Super,  s-
 ;; linux, the menu/apps key is <menu>
@@ -93,6 +94,7 @@
 (global-set-key (kbd "<menu> -") 'xc-comment-smart) ; ★★★ , comment-dwim
 (global-set-key (kbd "<menu> .") 'shell-command)   ; ★★★
 (global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
+(global-set-key (kbd "<menu> <tab>") 'indent-region)
 
 (global-set-key (kbd "<menu> /") 'nil)
 (global-set-key (kbd "<menu> 0") 'delete-window)
@@ -110,7 +112,6 @@
 (global-set-key (kbd "<menu> SPC") 'set-mark-command) ; ★★★
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> \\") 'escape-quotes)
-(global-set-key (kbd "<menu> ]") 'indent-region)
 (global-set-key (kbd "<menu> `") 'make-backup)
 (global-set-key (kbd "<menu> a") 'mark-whole-buffer) ; ★★
 (global-set-key (kbd "<menu> b") 'flyspell-buffer) ; ★★
@@ -167,7 +168,43 @@
 (global-set-key (kbd "<menu> g y") "Y")
 (global-set-key (kbd "<menu> g z") "Z")
 
-(global-set-key (kbd "<menu> h") help-map) ; ★★★
+; (global-set-key (kbd "<menu> h") help-map) ; ★★★
+(global-set-key (kbd "<menu> h `") 'elisp-index-search)
+
+(global-set-key (kbd "<menu> h 0") 'lookup-all-dictionaries)
+(global-set-key (kbd "<menu> h 1") 'describe-function)
+(global-set-key (kbd "<menu> h 2") 'describe-variable)
+(global-set-key (kbd "<menu> h 3") 'man)
+(global-set-key (kbd "<menu> h 4") 'describe-char)
+(global-set-key (kbd "<menu> h 5") 'nil)
+(global-set-key (kbd "<menu> h 6") 'nil)
+(global-set-key (kbd "<menu> h 7") 'lookup-google)
+(global-set-key (kbd "<menu> h 8") 'lookup-wikipedia)
+(global-set-key (kbd "<menu> h 9") 'lookup-word-definition)
+
+(global-set-key (kbd "<menu> h a") 'apropos-command)
+(global-set-key (kbd "<menu> h b") 'describe-bindings)
+(global-set-key (kbd "<menu> h c") 'describe-char)
+(global-set-key (kbd "<menu> h C") 'describe-coding-system)
+(global-set-key (kbd "<menu> h d") 'apropos-documentation)
+(global-set-key (kbd "<menu> h e") 'view-echo-area-messages)
+(global-set-key (kbd "<menu> h f") 'describe-function)
+(global-set-key (kbd "<menu> h F") 'Info-goto-emacs-command-node)
+(global-set-key (kbd "<menu> h i") 'info)
+(global-set-key (kbd "<menu> h I") 'describe-input-method)
+(global-set-key (kbd "<menu> h I") 'Info-goto-emacs-key-command-node)
+(global-set-key (kbd "<menu> h k") 'describe-key)
+(global-set-key (kbd "<menu> h l") 'view-lossage)
+(global-set-key (kbd "<menu> h L") 'describe-language-environment)
+(global-set-key (kbd "<menu> h m") 'ergoemacs-describe-major-mode)
+(global-set-key (kbd "<menu> h n") 'view-emacs-news)
+(global-set-key (kbd "<menu> h p") 'finder-by-keyword)
+(global-set-key (kbd "<menu> h r") 'info-emacs-manual)
+(global-set-key (kbd "<menu> h s") 'describe-syntax)
+(global-set-key (kbd "<menu> h S") 'info-lookup-symbol)
+(global-set-key (kbd "<menu> h v") 'describe-variable)
+(global-set-key (kbd "<menu> h w") 'where-is)
+
 (global-set-key (kbd "<menu> i d") 'insert-date)
 (global-set-key (kbd "<menu> i r h") 'insert-random-hex)
 (global-set-key (kbd "<menu> i r n") 'insert-random-number)
@@ -178,7 +215,7 @@
 (global-set-key (kbd "<menu> k") 'nil)
 (global-set-key (kbd "<menu> l") 'recenter-top-bottom)
 (global-set-key (kbd "<menu> m c") 'calc)
-(global-set-key (kbd "<menu> m e") 'emacs-lisp-mode)
+(global-set-key (kbd "<menu> m e") 'xah-elisp-mode)
 (global-set-key (kbd "<menu> m h") 'xah-html-mode)
 (global-set-key (kbd "<menu> m l") 'global-linum-mode)
 (global-set-key (kbd "<menu> m p") 'php-mode)
@@ -217,6 +254,7 @@
 (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
 
 (global-set-key (kbd "<menu> u -") "—") ; EM DASH
+(global-set-key (kbd "<menu> u ,") 'insert-pair-greater-less)
 (global-set-key (kbd "<menu> u . .") "…") ; HORIZONTAL ELLIPSIS
 (global-set-key (kbd "<menu> u . <down>") "⇓")
 (global-set-key (kbd "<menu> u . <left>") "⇐")
@@ -298,7 +336,7 @@
   (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
   (local-set-key (kbd "<menu> e c") 'xhm-make-citation)
   (local-set-key (kbd "<menu> e d") 'insert-date-tag)
-  (local-set-key (kbd "<menu> e e") 'xhm-wrap-html-tag)
+  (local-set-key (kbd "<menu> e e") 'xah-all-linkify)
   (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
   (local-set-key (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
   (local-set-key (kbd "<menu> e l 6") 'xhm-source-url-linkify)
@@ -329,12 +367,42 @@
   (local-set-key (kbd "<menu> e t c") 'insert-random-color-hsl)
   (local-set-key (kbd "<menu> e t r") 'xhm-rename-html-inline-image)
   (local-set-key (kbd "<menu> e t u") 'xhm-extract-url)
-  (local-set-key (kbd "<menu> e u") 'xah-all-linkify)
+  (local-set-key (kbd "<menu> e u") 'xhm-wrap-html-tag)
 
-  )
+  (local-set-key (kbd "<menu> e w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
+)
+
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
 (add-hook 'nxml-mode-hook 'xah-html-mode-keys)
+
+(defun xah-eval-defun ()
+  "like `eval-defun' but doesn't need proper indentation for it to work.
+Still, the code isn't 100% correct.
+"
+  (interactive)
+  (save-excursion
+    (search-backward "(defun")
+    ;;    (mark-sexp)
+    ;;    (eval-region (region-beginning) (region-end))
+    (forward-sexp)
+    (call-interactively 'eval-last-sexp)
+    )
+  )
+
+(defun xah-elisp-mode-keys ()
+  "Modify keymaps used by lisp mode."
+  ;; .p gc
+  ;; eu ht
+
+  (local-set-key (kbd "<menu> e t") 'eval-last-sexp)
+  (local-set-key (kbd "<menu> e f") 'xah-eval-defun)
+)
+
+(add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
+(add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
+
+(add-hook 'xah-elisp-mode-hook 'ac-emacs-lisp-mode-setup)
 
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
@@ -457,6 +525,7 @@ For `Info-mode-hook'."
 (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
+(global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

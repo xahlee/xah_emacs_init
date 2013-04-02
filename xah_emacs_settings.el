@@ -7,12 +7,13 @@
 
 
 (require 'dired-x)
+(require 'xah-elisp-mode)
 
 (setq default-input-method 'chinese-py)
 
 (setq bookmark-default-file "~/.emacs.d/bookmarks")
 
-(setq page-break-lines-modes (quote (emacs-lisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
+(setq page-break-lines-modes (quote (emacs-lisp-mode xah-elisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
 
 ;; interactive name completion for describe-function, describe-variable, etc.
 (icomplete-mode 1)
@@ -23,8 +24,9 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . xah-html-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-unix-mode))
 
+(add-to-list 'auto-mode-alist '("\\.el\\'" . xah-elisp-mode))
 
 (setq org-return-follows-link t)
 ; (setq auto-save-default t)
@@ -35,7 +37,6 @@
 
 (blink-cursor-mode 0 )
 (setq cursor-type 'box)
-
 
 
 
@@ -105,10 +106,9 @@
           ;; (cursor-type . box)
           ))
 
-
 (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
 ;; (set-frame-parameter nil 'font "DejaVu Sans Mono-10")
- 
+
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
 
 
@@ -149,7 +149,6 @@
 ;;  ;; '(xlsl-mode-format-style 1)
 ;;  ;; '(xlsl-reference-url "http://lslwiki.net/lslwiki/wakka.php?wakka=")
 ;; )
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

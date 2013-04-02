@@ -486,7 +486,7 @@ if the inputStr is a relative path, defaultDir is used to resolve to full path."
       ((string= ξletterCode "8") (setq ξdomain "xahsl.org" ))
       (t (error "Your letter 「%s」 is not one of the allowed." ξletterCode ))
       )
-     
+
      (list ξdomain) ) )
   (let (
         (ξ-sitemapFileName "sitemap" )
@@ -562,7 +562,7 @@ if the inputStr is a relative path, defaultDir is used to resolve to full path."
 Remove Google adds, Amazon ads, and other ads, Google Analytics
  Tracker code, Disqus code, …."
 
-  (save-restriction 
+  (save-restriction
     (narrow-to-region p1 p2)
 
     (replace-pairs-region 1 (point-max)
@@ -612,7 +612,7 @@ src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
 
   ;; Google Plus share button
   [
-   "<div class=\"g-plusone\" data-annotation=\"inline\" data-width=\"120\"></div><script>(function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();</script>"
+"<div class=\"g-plusone\" data-annotation=\"inline\" data-width=\"300\"></div><script>(function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();</script>"
    ""
    ]
 
@@ -635,6 +635,10 @@ src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
   [
    "<div class=\"ppp8745\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"Y4V2F8TA949M2\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" name=\"submit\" alt=\"PayPal\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>"
    ""]
+
+[
+"<div class=\"job-α\"><a href=\"http://xahlee.org/PageTwo_dir/Personal_dir/Xah_Lee_Resume.html\">Programer for Hire</a></div>"
+""]
 
   ;; 1and1 web hosting
   [
@@ -672,7 +676,7 @@ src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
 
                                   ["<script><!--
 amazon_ad_tag .+?</script>
-<script src=\"http://www.assoc-amazon.com/s/ads.js\"></script>" 
+<script src=\"http://www.assoc-amazon.com/s/ads.js\"></script>"
                                    ""]
 
                                   ;; ["<div id=\"disqus_thread\"></div><script>.+?</script><a href.+Disqus</span></a>" ""]

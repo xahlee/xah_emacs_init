@@ -13,10 +13,10 @@
 (defun insert-bracket-pair (leftBracket rightBracket)
   "Insert a matching bracket.
 
-If there's a text selection, insert bracket around it.
+If there's a text selection, insert brackets around it.
 If there's no text selection:
-  If cursor is on whitespace, insert bracket.
-  If cursor is not on whitespace, insert bracket around current word.
+  If cursor is on whitespace, insert brackets.
+  If cursor is not on whitespace, insert brackets around current word.
 
 The argument leftBracket rightBracket are strings."
   (if (region-active-p)
@@ -32,7 +32,7 @@ The argument leftBracket rightBracket are strings."
             (goto-char (+ p2 2))
             ))
       (progn
-        (if (looking-at "[ \t\n]")
+        (if (or (looking-at "[ \t\n]") (= (point) (point-max) ))
             (progn
               (insert leftBracket rightBracket)
              (search-backward rightBracket ) )
@@ -55,6 +55,7 @@ The argument leftBracket rightBracket are strings."
 (defun insert-pair-paren () (interactive) (insert-bracket-pair "(" ")") )
 (defun insert-pair-bracket () (interactive) (insert-bracket-pair "[" "]") )
 (defun insert-pair-brace () (interactive) (insert-bracket-pair "{" "}") )
+(defun insert-pair-greater-less () (interactive) (insert-bracket-pair "<" ">") )
 
 (defun insert-pair-single-angle-quote‹› () (interactive) (insert-bracket-pair "‹" "›") )
 (defun insert-pair-double-angle-quote«» () (interactive) (insert-bracket-pair "«" "»") )

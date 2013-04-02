@@ -8,7 +8,9 @@
 (defalias 'gf 'grep-find)
 (defalias 'lcd 'list-colors-display)
 (defalias 'rb 'revert-buffer)
-(defalias 'rs 'replace-string)
+
+(defalias 'elm 'emacs-lisp-mode)
+(defalias 'hm 'html-mode)
 
 (defalias 'ssm 'shell-script-mode)
 

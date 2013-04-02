@@ -180,70 +180,7 @@ Generate a report of the replaced strings in a separate buffer."
       )
     ))
 
-(defun curly-quotes-to-emacs-function-tag-old-2013-01-05 (p1 p2)
-  "Replace curly quoted “elisp function” names to HTML markup.
 
-For example, the text:
- <p>Call “sort-lines” to sort.</p>
-becomes
- <p>Call <var class=\"εf\">sort-lines</var> to sort.</p>
-
-If there's no text selection, work on current text block, else, on text selection. When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the arguments p1 p2 are region positions.
-
-Note: a word is changed only if all of the following are true:
-
-① It is enclosed in <p> tag, or <ul>, <ol>, <table>, <figcaption>. (For example, not inside <h1> or <title>, <a>, or other tags.)
-② The function name is tightly enclosed in double curly quotes, e.g. “sort-lines” but not “use sort-lines”.
-③ `fboundp' returns true.
-
-This command assumes that all tags are closed in your HTML. e.g. <p> must be closed with </p>.
-
-This command also makes a report of changed items.
-
-Some issues:
-
-• If the lisp functions name is less or equal to 2 chars, it won't be tagged. e.g. {「*」,「+」,「1+」, …}.
-
-• Only words contaning lowercase a to z, 0-9, or hyphen, are checked, even though elisp identifier allows many other chars. e.g. “yas/reload-all”, “Info-copy-current-node-name” (note capital letter).
-
-• Some words are common in other lang, e.g. “while”, “print”, “string”, unix “find”, “grep”, HTML's “kbd” tag, etc. But they are also built-in elisp symbols. This command will tag them, but you may not want to tag them.
-
-• Personal emacs functions will also be tagged. You may not want them to be because they are not standard functions.
-
-• Some functions are from 3rd party libs, and some are not bundled with GNU emacs , e.g. 「'cl」, 「'htmlize」. They may or may not be tagged depending whether they've been loaded."
-  ;; (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ) )
-  (interactive
-   (cond
-    ((equal current-prefix-arg nil)    ; universal-argument not called
-     (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
-    (t                                  ; all other cases
-     (list (point-min) (point-max) )) ) )
-
-  (require 'sgml-mode) ; from html-mode, needs sgml-skip-tag-forward
-  (let (p3 p4 mStr (ξi 0) (case-fold-search nil) )
-    (save-excursion
-      (save-restriction
-        (narrow-to-region p1 p2)
-        (goto-char (point-min))
-        (while (search-forward-regexp "<p>\\|<ul>\\|<ol>\\|<table\\|<figcaption>" nil t)
-          (backward-char)
-          (setq p3 (point) )
-          (sgml-skip-tag-forward 1)
-          (setq p4 (point) )
-
-          (save-restriction
-            (narrow-to-region p3 p4)
-            (goto-char (point-min))
-            (while (search-forward-regexp "“\\([-a-z0-9]+\\)”" (point-max) t)
-              (setq mStr (match-string 1) )
-
-              (when (and (fboundp (intern mStr))
-                         (> (length mStr) 2))
-                (replace-match (concat "<var class=\"εf\">" mStr "</var>") t t)
-                (setq ξi (1+ ξi) )
-                ) ) ) )
-        (when (> ξi 0)
-          (occur "<var class=\"εf\">[-a-z0-9]+</var>" )) ) ) ))
 
 (defun curly-quotes-to-emacs-function-tag (p1 p2)
   "Replace curly quoted “elisp function” names to HTML markup.
@@ -251,7 +188,7 @@ Some issues:
 For example, the text:
  Call “sort-lines” to sort.
 becomes
- Call <var class=\"εf\">sort-lines</var> to sort.
+ Call <code class=\"elisp-ƒ\">sort-lines</code> to sort.
 
 Works on current text block or text selection.
 
@@ -294,7 +231,7 @@ Some issues:
             (narrow-to-region p1 p2)
             (delete-region p1 p2)
             (insert resultStr)
-            (occur "<var class=\"εf\">[-a-z0-9]+</var>" )
+            (occur "<code class=\"elisp-ƒ\">[-a-z0-9]+</code>" )
             )
           )) ) ))
 
@@ -308,7 +245,7 @@ Some issues:
         (setq mStr (match-string 1) )
         (when (and (fboundp (intern mStr))
                    (> (length mStr) 2))
-          (replace-match (concat "<var class=\"εf\">" mStr "</var>") t t)
+          (replace-match (concat "<code class=\"elisp-ƒ\">" mStr "</code>") t t)
           ) )
       (buffer-string)
       ) ))
