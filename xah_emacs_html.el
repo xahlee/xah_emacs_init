@@ -57,40 +57,43 @@ When called in elisp program, wrap the tag at point P1."
 
 
 
-(defun emacs-to-windows-kbd-notation (p1 p2)
+(defun emacs-to-windows-kbd-notation-string (inputStr)
   "Change emacs keyboard-shortcut notation to Windows's notation.
-
-When called interactively, work on text enclosed in 【…】, or text selection.
-
 For example:
- 【C-h f】⇒ 【Ctrl+h f】
- 【M-a】⇒ 【Meta+a】
+ 「C-h f」⇒ 「Ctrl+h f」
+ 「M-a」⇒ 「Meta+a」
+ 「<f9> <f8>」 ⇒ 「F9 F8」
 
-This command is just for convenient, not 100% correct translation.
-
-Partly because the Windows key notation isn't exactly standardized. e.g. up arrow key may be ↑ or UpArrow.
+This command will do most emacs syntax correctly, but not 100% correct.
 "
-  (interactive
-   (let ((bds (get-selection-or-unit ["^【" "^】"])) )
-     (list (elt bds 1) (elt bds 2)) ) )
-
-  (let (  (case-fold-search nil))
-    (replace-pairs-region p1 p2
-                          '(
-                            ["C-" "Ctrl+"]
-                            ["M-" "Meta+"]
-                            ["S-" "Shift+"]
-
-                            ["s-" "Super+"]
-                            ["H-" "Hyper+"]
+(replace-regexp-pairs-in-string inputStr
+[
+                            ["C-\\(.\\)" "Ctrl+\\1"]
+                            ["M-\\(.\\)" "Meta+\\1"]
+                            ["S-\\(.\\)" "Shift+\\1"]
+                            ["s-\\(.\\)" "Super+\\1"]
+                            ["H-\\(.\\)" "Hyper+\\1"]
 
                             ["<prior>" "PageUp"]
                             ["<next>" "PageDown"]
                             ["<home>" "Home"]
                             ["<end>" "End"]
 
+                            ["<f1>" "F1"]
+                            ["<f2>" "F2"]
+                            ["<f3>" "F3"]
+                            ["<f4>" "F4"]
+                            ["<f5>" "F5"]
+                            ["<f6>" "F6"]
+                            ["<f7>" "F7"]
+                            ["<f8>" "F8"]
+                            ["<f9>" "F9"]
+                            ["<f10>" "F10"]
+                            ["<f11>" "F11"]
+                            ["<f12>" "F12"]
+
                             ["RET" "Enter"]
-                            ["<return>" "Enter"]
+                            ["<return>" "Return"]
                             ["TAB" "Tab"]
                             ["<tab>" "Tab"]
 
@@ -104,9 +107,31 @@ Partly because the Windows key notation isn't exactly standardized. e.g. up arro
 
                             ["<backspace>" "Backspace"]
                             ["DEL" "Delete"]
-                            ))
-    )
+                            ]
+ "FIXEDCASE")
   )
+
+(defun emacs-to-windows-kbd-notation (p1 p2)
+  "Change emacs key notation to Windows's notation.
+
+For example:
+ 【C-h f】⇒ 【Ctrl+h f】
+ 【M-a】⇒ 【Meta+a】
+
+When called interactively, work on text selection or text enclosed in 【…】.
+
+For detail on exactly which string are changed, see `emacs-to-windows-kbd-notation-string'.
+"
+  (interactive
+   (let ((bds (get-selection-or-unit ["^【" "^】"])) )
+     (list (elt bds 1) (elt bds 2)) ) )
+
+  (let (  (case-fold-search nil)
+          (inputStr (buffer-substring-no-properties p1 p2))
+          )
+    (delete-region p1 p2 )
+    (insert
+     (emacs-to-windows-kbd-notation-string inputStr) ) ) )
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.

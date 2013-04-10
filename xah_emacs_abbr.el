@@ -251,11 +251,11 @@
     ("8rc" "=begin\n\n=end")
 
     ("8tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
-    ("8ln" "(☛ )")
+    ("8t" "〔☛ 〕")
     ("8menu" "〖a ▸ b ▸ c〗")
     ("8key" "【Alt+f】")
 
-    ("8line" "────────── ────────── ────────── ────────── ──────────")
+    ("8li" "────────── ────────── ────────── ────────── ──────────")
     ("8u" "-*- coding: utf-8 -*-")
     ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
@@ -316,7 +316,7 @@
 
 ;;; unix shell
 
-    ("3rsn" "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+    ("3s" "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
     ("3rsn2" "rsync -z -r -v -t  --delete  ~/web/  /media/OS/Users/h3/web/")
 
     ("3ssh" "ssh -l u40651120 xahlee.org ")

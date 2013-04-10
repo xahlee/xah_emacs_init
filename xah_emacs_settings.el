@@ -9,6 +9,9 @@
 (require 'dired-x)
 (require 'xah-elisp-mode)
 
+(setq yow-file "/home/xah/.emacs.d/zippy_pinhead_quotes.txt" )
+(setq sentence-end-double-space nil )
+
 (setq default-input-method 'chinese-py)
 
 (setq bookmark-default-file "~/.emacs.d/bookmarks")

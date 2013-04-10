@@ -117,9 +117,10 @@
 (global-set-key (kbd "<menu> b") 'flyspell-buffer) ; ★★
 (global-set-key (kbd "<menu> c") 'nil)
 (global-set-key (kbd "<menu> d") 'ergoemacs-open-in-desktop)
-(global-set-key (kbd "<menu> e") 'nil)  ; mode specific
+; (global-set-key (kbd "<menu> e") 'nil)  ; mode specific
 (global-set-key (kbd "<menu> f") 'copy-file-path)
 
+(global-set-key (kbd "<menu> g") 'nil)
 (global-set-key (kbd "<menu> g '") "\"")
 (global-set-key (kbd "<menu> g ,") "<")
 (global-set-key (kbd "<menu> g -") "_")
@@ -168,7 +169,7 @@
 (global-set-key (kbd "<menu> g y") "Y")
 (global-set-key (kbd "<menu> g z") "Z")
 
-; (global-set-key (kbd "<menu> h") help-map) ; ★★★
+(global-set-key (kbd "<menu> h") help-map) ; ★★★
 (global-set-key (kbd "<menu> h `") 'elisp-index-search)
 
 (global-set-key (kbd "<menu> h 0") 'lookup-all-dictionaries)
@@ -205,15 +206,17 @@
 (global-set-key (kbd "<menu> h v") 'describe-variable)
 (global-set-key (kbd "<menu> h w") 'where-is)
 
+(global-set-key (kbd "<menu> i") 'nil)
 (global-set-key (kbd "<menu> i d") 'insert-date)
 (global-set-key (kbd "<menu> i r h") 'insert-random-hex)
 (global-set-key (kbd "<menu> i r n") 'insert-random-number)
 (global-set-key (kbd "<menu> i r s") 'insert-random-string)
 (global-set-key (kbd "<menu> i r u") 'insert-random-uuid)
 (global-set-key (kbd "<menu> i t") 'insert-date-time)
-(global-set-key (kbd "<menu> j") 'nil)
-(global-set-key (kbd "<menu> k") 'nil)
+(global-set-key (kbd "<menu> j") 'kmacro-start-macro)
+(global-set-key (kbd "<menu> k") 'kmacro-end-macro)
 (global-set-key (kbd "<menu> l") 'recenter-top-bottom)
+(global-set-key (kbd "<menu> m") 'nil)
 (global-set-key (kbd "<menu> m c") 'calc)
 (global-set-key (kbd "<menu> m e") 'xah-elisp-mode)
 (global-set-key (kbd "<menu> m h") 'xah-html-mode)
@@ -225,6 +228,7 @@
 (global-set-key (kbd "<menu> m w") 'whitespace-mode)
 (global-set-key (kbd "<menu> m x") 'nxml-mode)
 (global-set-key (kbd "<menu> n") 'ergoemacs-new-empty-buffer) ; ★★★
+(global-set-key (kbd "<menu> o") 'nil)
 (global-set-key (kbd "<menu> o SPC") 'xah-open-file-fast)
 (global-set-key (kbd "<menu> o b") 'ibuffer)
 (global-set-key (kbd "<menu> o f") 'ido-find-file)
@@ -233,6 +237,7 @@
 (global-set-key (kbd "<menu> o s") 'ido-switch-buffer)  ; ★★★
 (global-set-key (kbd "<menu> p") 'nil)
 (global-set-key (kbd "<menu> q") 'quoted-insert) ; ★★★
+(global-set-key (kbd "<menu> r") 'nil)
 (global-set-key (kbd "<menu> r '") 'replace-straight-quotes)
 (global-set-key (kbd "<menu> r ,") 'remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> r .") 'convert-english-chinese-punctuation)
@@ -244,6 +249,7 @@
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; ★★★
+(global-set-key (kbd "<menu> t") 'nil)
 (global-set-key (kbd "<menu> t c") 'xah-cite)
 (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
 (global-set-key (kbd "<menu> t l") 'xah-clean-whitespace)
@@ -253,9 +259,10 @@
 (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
 (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
 
+(global-set-key (kbd "<menu> u") 'nil) ;
 (global-set-key (kbd "<menu> u -") "—") ; EM DASH
 (global-set-key (kbd "<menu> u ,") 'insert-pair-greater-less)
-(global-set-key (kbd "<menu> u . .") "…") ; HORIZONTAL ELLIPSIS
+
 (global-set-key (kbd "<menu> u . <down>") "⇓")
 (global-set-key (kbd "<menu> u . <left>") "⇐")
 (global-set-key (kbd "<menu> u . <right>") "⇒")
@@ -276,16 +283,18 @@
 (global-set-key (kbd "<menu> u \\") "、") ; IDEOGRAPHIC COMMA
 (global-set-key (kbd "<menu> u b") 'insert-pair-black-lenticular-bracket【】)
 (global-set-key (kbd "<menu> u c") "=") ; equal
+(global-set-key (kbd "<menu> u d") 'insert-pair-double-curly-quote“”)
 (global-set-key (kbd "<menu> u f") 'insert-pair-single-straight-quote)
 (global-set-key (kbd "<menu> u g") 'insert-pair-double-straight-quote)
 (global-set-key (kbd "<menu> u h") 'insert-pair-brace)              ;{}
 (global-set-key (kbd "<menu> u i") 'insert-pair-single-curly-quote‘’)
+(global-set-key (kbd "<menu> u l") "…") ; HORIZONTAL ELLIPSIS
 (global-set-key (kbd "<menu> u m") 'insert-pair-corner-bracket「」)
 (global-set-key (kbd "<menu> u n") 'insert-pair-bracket)            ;[]
 (global-set-key (kbd "<menu> u p") 'insert-pair-double-angle-quote«»)
 (global-set-key (kbd "<menu> u r") "+") ; plus
 (global-set-key (kbd "<menu> u t") 'insert-pair-paren)              ;()
-(global-set-key (kbd "<menu> u u") 'insert-pair-double-curly-quote“”)
+(global-set-key (kbd "<menu> u u") 'nil)
 (global-set-key (kbd "<menu> u w") 'insert-pair-angle-bracket〈〉)
 (global-set-key (kbd "<menu> u x") 'insert-pair-tortoise-shell-bracket〔〕)
 (global-set-key (kbd "<menu> u y") 'insert-pair-single-angle-quote‹›)
@@ -526,6 +535,9 @@ For `Info-mode-hook'."
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
+
+; idea from eric crosson, 2013-04-06 http://ericscrosson.wordpress.com/2013/04/05/minimizing-keystrokes-required-by-punctuation/
+(global-set-key (kbd ",") (lambda() (interactive) (insert ", ")))
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

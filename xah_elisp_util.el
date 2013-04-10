@@ -140,3 +140,17 @@ When called in elisp, the p1 and p2 are region begin/end positions to work on."
 "convert the decimal number string decStr into a binary (string)"
   (let ((calc-number-radix 2))
     (math-format-radix (string-to-number decStr))))
+
+(defun replace-BOM-mark-etc ()
+  "Query replace Unicode some invisible Unicode chars.
+The chars to be searched are:
+ RIGHT-TO-LEFT MARK 8207 x200f
+ ZERO WIDTH NO-BREAK SPACE 65279 xfeff
+
+start on cursor position to end.
+    "
+  (interactive)
+  (let ()
+    (query-replace-regexp "\u200f\\|\ufeff" "")
+    ))
+
