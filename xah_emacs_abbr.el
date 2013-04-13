@@ -279,7 +279,7 @@
 ("8orange" "#ffa500")
 ("8hsl" "hsl(0,100%,50%)")
 
-;; html
+;; HTML
 ("8cmt" "<!-- \n -->")
 ("8html5" "<!DOCTYPE html>")
 ("8html4s" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")

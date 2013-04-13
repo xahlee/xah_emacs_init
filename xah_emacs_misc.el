@@ -116,7 +116,7 @@ The differences are:
  )
 
 (defun make-lojban-entry ()
-  "Insert a blank a-lojban-a-day html template in a paritcular file."
+  "Insert a blank a-lojban-a-day HTML template in a paritcular file."
   (interactive)
 (find-file "~/web/lojban/valsi_dikni/valsi_dikni.html")
 (goto-char (point-min))

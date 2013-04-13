@@ -158,7 +158,7 @@ See also: `url-percent-encode-string'."
   (replace-pairs-in-string ξstring (mapcar (lambda (ξx) (vector (elt ξx 1) (elt ξx 0))) ξurl-encode-chars-pairs) ))
 
 (defun blogger-linkify ()
-  "Make URL at cursor point into a html link.
+  "Make URL at cursor point into a HTML link.
 
 Example: http://xahlee.blogspot.com/2010/03/some.html
 becomes
@@ -288,7 +288,7 @@ Warning: the line must end in a line return char else the result is wrong."
     (insert "<p>Google search: <a href=\"" ξurl "\">" ξword "</a>.</p>\n")))
 
 
-;; some custom html markup and functions for working with html
+;; some custom HTML markup and functions for working with HTML
 
 (defun nks-linkify ()
   "Make the current word into into a link to Wolfram Science site.
@@ -524,8 +524,26 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
           )
       (progn (message (format "Cannot locate the file: 「%s」" fPath) )) ) ) )
 
+(defun javascript-linkify ()
+  "Make the path under cursor into a HTML link.
+ ⁖ <script src=\"xyz.js\"></script>
+"
+  (interactive)
+  (let* (
+         (bds (get-selection-or-unit 'filepath))
+         (inputStr (elt bds 0) )
+         (p1 (aref bds 1) )
+         (p2 (aref bds 2) )
+         fPath 
+)
+    (setq fPath (file-relative-name inputStr) )
+          (delete-region p1 p2)
+          (insert (format "<script src=\"%s\"></script>" fPath)
+)
+     ) )
+
 (defun xah-curve-linkify ()
-  "Make the current word or text selection into a html link.
+  "Make the current word or text selection into a HTML link.
 
 This function works on Xah Lee's website only.
  Example:
@@ -574,7 +592,7 @@ text can be any of:
 • Wikipedia link
 • any URL
 
-They will be changed into a html link in various formats, depending on the input.
+They will be changed into a HTML link in various formats, depending on the input.
 
 If there is text selection, use it as input."
   (interactive)
@@ -584,6 +602,7 @@ If there is text selection, use it as input."
      ((and (string-match-p "\\`http://wordy-english\.blogspot\.com/" myPath)) (blogger-linkify))
      ((and (string-match-p "www\.amazon\.com/" myPath)) (amazon-linkify))
      ((and (string-match-p "www\.youtube\.com/" myPath)) (youtube-linkify))
+     ((and (string-match-p "\\.js\\'" myPath)) (javascript-linkify))
      ((xahsite-url-is-xah-website-p myPath) (xah-file-linkify))
      ((string-match-p "wikipedia.org/" myPath)
       (let ((case-fold-search nil))

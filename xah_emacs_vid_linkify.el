@@ -5,14 +5,14 @@
 ;; c:/Users/xah/web/xahlee_org/Periodic_dosage_dir/sanga_pemci/xx.html
 
 (defun youtube-string (video-id)
-  "Return html code for embedding video of youtube's VIDEO-ID.
+  "Return HTML code for embedding video of youtube's VIDEO-ID.
 Example call:
  (youtube-string \"bFSS826ETlk\")"
 (concat "<iframe title=\"YouTube video player\" class=\"youtube-player\" width=\"640\" height=\"385\" src=\"http://www.youtube.com/embed/" video-id "?rel=0\"></iframe>")
   )
 
 (defun youtube-string-old (video-id)
-  "Return html code for embedding video of youtube's VIDEO-ID.
+  "Return HTML code for embedding video of youtube's VIDEO-ID.
 Example call:
  (youtube-string \"bFSS826ETlk\")"
 
@@ -69,7 +69,7 @@ here's old version output
     ))
 
 (defun google-video-string (video-id)
-	"Return html code for embedding video of Google Video's VIDEO-ID.
+	"Return HTML code for embedding video of Google Video's VIDEO-ID.
 Example call:
  (google-video-string \"2336889538700185341\")"
   (let (ξurl)
@@ -106,7 +106,7 @@ Example:
 
 
 (defun dailymotion-video-string (video-id)
-	"Return html code for embedding video of dailymotion.com's VIDEO-ID.
+	"Return HTML code for embedding video of dailymotion.com's VIDEO-ID.
 Example call:
  (dailymotion-linkify \"x1af0v\")"
 	(concat
@@ -173,7 +173,7 @@ it becomes
 
 
 (defun tudou-video-string (video-id)
-	"Return html code for embedding video of tudou.com's VIDEO-ID.
+	"Return HTML code for embedding video of tudou.com's VIDEO-ID.
 Example call:
  (tudou-video-string \"9OoINUl31dQ\")"
   (let (ξurl)
@@ -262,7 +262,7 @@ Here's a example result:
 (defun break-video-linkify ()
   "Make the current line into a embeded HTML video object.
 
-The current line must be a embeded video html code from break.com.
+The current line must be a embeded video HTML code from break.com.
 
 Example:
 <object width=\"464\" height=\"376\" id=\"670986\" type=\"application/x-shockwave-flash\" classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" alt=\"Hot Asian Chick Falls Off a Stripper Pole Funny Videos\"><param name=\"movie\" value=\"http://embed.break.com/NjcwOTg2\"></param><param name=\"allowScriptAccess\" value=\"always\"></param><embed src=\"http://embed.break.com/NjcwOTg2\" type=\"application/x-shockwave-flash\" allowScriptAccess=always width=\"464\" height=\"376\"></embed></object><br><font size=1><a href=\"http://www.break.com/index/hot-asian-chick-falls-off-stripper-pole.html\" target=\"_blank\">Hot Asian Chick Falls Off a Stripper Pole</a> - Watch more <a href=\"http://www.break.com/\" target=\"_blank\">Funny Videos</a></font>
@@ -270,7 +270,7 @@ Example:
 Becomes:
 <object type=\"application/x-shockwave-flash\" data=\"http://embed.break.com/NjcwOTg2\" width=\"464\" height=\"376\"><param name=\"movie\" value=\"http://embed.break.com/NjcwOTg2\"><param name=\"allowScriptAccess\" value=\"always\"><param name=\"id\" value=\"670986\"><param name=\"classid=\" value=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\"></object>
 
-This is valid html.
+This is valid HTML.
 
 See: URL  `http://xahlee.org/js/html_embed_video.html'"
 	(interactive)

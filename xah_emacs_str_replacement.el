@@ -193,6 +193,8 @@ See also `convert-english-chinese-punctuation'."
                                [
                                 ;; clean up. Remove extra space.
                                 [",  +" ", "]
+                                ["?  +" "? "]
+                                ["!  +" "! "]
                                 ["\\.   +" "\\. "]
 
                                 ["， +" "，"]
@@ -235,11 +237,11 @@ See also `convert-english-chinese-punctuation'
 Works on current text selection, else the current text block between empty lines.
 
 Examples of changes:
- \"…\" ⇒ “…”
- ... ⇒ …
- I’m => I'm
- -- ⇒ —
- ~= ⇒ ≈
+ 「\"…\"」 ⇒ 「“…”」
+ 「...」 ⇒ 「…」
+ 「I’m」 => 「I'm」
+ 「--」 ⇒ 「—」
+ 「~=」 ⇒ 「≈」
 
  In lisp program, the arguments P1 and P2 are region boundaries.
 "
@@ -264,8 +266,8 @@ Examples of changes:
  ["--" " — "]
  ["—" " — "]
  ["..." "…"]
- [":)" "☺"]
- [":(" "☹"]
+ [" :)" " ☺"]
+ [" :(" " ☹"]
  [";)" "😉"]
  ["e.g." "⁖"]
  ["~=" "≈"]

@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;; 2010-09-03
 
-;; Replace “…” to one of 〔…〕, 「…」, 【…】 or html tag. Or other similar text processing.
+;; Replace “…” to one of 〔…〕, 「…」, 【…】 or HTML tag. Or other similar text processing.
 
 (defun cap-first-letter ()
   "Replace “<p>a…” to cap “<p>A…”

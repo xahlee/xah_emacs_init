@@ -229,7 +229,7 @@ The KML file will be created at:
 This function will take 2 lines the cursor is on as input,
 create a Geogebra file (.ggb),
 create a HTML file that embed the ggb applet,
-and insert a link to the html file in the current buffer.
+and insert a link to the HTML file in the current buffer.
 
 The cursor must be on 2 lines separated by empty lines.
 The lines are:
@@ -247,10 +247,10 @@ make-ggb will then create the files at:
 ~/web/SpecialPlaneCurves_dir/ggb/ellipse_trace.html
 ~/web/SpecialPlaneCurves_dir/ggb/ellipse_trace.ggb
 
-and the html file's <title> tag content will be “Ellisp Tracing”.
+and the HTML file's <title> tag content will be “Ellisp Tracing”.
 The ggb file is copied from a template file at
 ~/web/SpecialPlaneCurves_dir/ggb/x-template.ggb
-The html file is copied from a template file at
+The HTML file is copied from a template file at
 ~/web/SpecialPlaneCurves_dir/ggb/x-template.html
 
 Finally, the 2 input lines will be replaced by this link:

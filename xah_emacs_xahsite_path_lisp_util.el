@@ -179,7 +179,7 @@ This function does not check input is actually a URL, nor if the result path fil
  ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
 
   (let ((ξurl xahsiteURL) ξfPath)
-    (setq ξurl (remove-uri-fragment ξurl)) ; remove html fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
+    (setq ξurl (remove-uri-fragment ξurl)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
     (when ξredirect (setq ξurl (xahsite-url-remap ξurl)))
     (when addFileName (setq ξurl (replace-regexp-in-string "/\\'" "/index.html" ξurl)))
     ;; (replace-regexp-in-string "%27" "'" (remove-uri-fragment ξurl))

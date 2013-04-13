@@ -63,7 +63,7 @@ When called interactively, filePath is the current file. destFileList is file pa
 
 When called in lisp program, filePath is a string. destFileList is list of filenames. All paths should be absolute path.
 
-The related pages are html “div.rltd” element, having this form
+The related pages are HTML “div.rltd” element, having this form
 
 <div class=\"rltd\">
 <ul>
@@ -126,13 +126,13 @@ This code is specific to xahlee.org ."
   )
 
 (defun xah-fix-to-html4strict (&optional fName)
-  "Change buffer content from html4 trans to html4 strict,
+  "Change buffer content from HTML4 trans to HTML4 strict,
 by performing some custome set of find-replace operations.
 
 If FNAME is given, then process that file.
 
 The change is based on few simple regex replacements. So, there may be errors.
- (this function is for Xah only because it assums some specific html formatting style)
+ (this function is for Xah only because it assums some specific HTML formatting style)
 
 todo: 
 • consecutive img tags should have single div wrap, not on each.
@@ -399,7 +399,7 @@ to file at FPATH."
 (defun xah-put-dstp ()
   "Insert a file creation date like
 “<div class=\"dstp\">2008-12.</div>”
-in the appropriate footer location of the current XahLee.org html file.
+in the appropriate footer location of the current XahLee.org HTML file.
 
 This command requires the GetFileInfo command line util in OS X."
   (interactive)

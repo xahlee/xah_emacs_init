@@ -57,7 +57,7 @@
         (save-buffer ) ) ) )
 
 (defun xwe-new-word-entry ()
-  "Insert a blank a-word-a-day html template in a paritcular file."
+  "Insert a blank a-word-a-day HTML template in a paritcular file."
   (interactive)
 
   (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/new.html") )
@@ -68,7 +68,7 @@
   )
 
 (defun xwe-insert-word-entry ()
-  "Insert a blank a-word-a-day html template."
+  "Insert a blank a-word-a-day HTML template."
   (interactive)
   (insert
    "<section class=\"word-α\">

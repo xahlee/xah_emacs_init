@@ -42,7 +42,7 @@ English translation: 李杀 (Xah Lee)
   )
 
 (defun insert-lyrics-table ()
-  "Insert a html 2-columns table for holding english chinese lyrics."
+  "Insert a HTML 2-columns table for holding english chinese lyrics."
   (interactive)
   (insert 
 "<table>

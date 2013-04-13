@@ -9,7 +9,8 @@
 (require 'dired-x)
 (require 'xah-elisp-mode)
 
-(setq yow-file "/home/xah/.emacs.d/zippy_pinhead_quotes.txt" )
+(setq ergoemacs-repeat-movement-commands 'all)
+
 (setq sentence-end-double-space nil )
 
 (setq default-input-method 'chinese-py)
@@ -34,7 +35,7 @@
 (setq org-return-follows-link t)
 ; (setq auto-save-default t)
 
-(winner-mode 1)
+(winner-mode 0)
 (cua-mode 0)
 (electric-pair-mode 0)
 

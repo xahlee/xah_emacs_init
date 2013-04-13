@@ -15,27 +15,25 @@
 
 If there's a text selection, insert brackets around it.
 If there's no text selection:
-  If cursor is on whitespace, insert brackets.
-  If cursor is not on whitespace, insert brackets around current word.
+  If cursor is on alphanumeric char or hyphen or understore, insert brackets around current word.
+  else, insert brackets.
 
 The argument leftBracket rightBracket are strings."
   (if (region-active-p)
-        (progn
-          (let (
-                (p1 (region-beginning))
-                (p2 (region-end))
-            )
-            (goto-char p2)
-            (insert rightBracket)
-            (goto-char p1)
-            (insert leftBracket)
-            (goto-char (+ p2 2))
-            ))
       (progn
-        (if (or (looking-at "[ \t\n]") (= (point) (point-max) ))
-            (progn
-              (insert leftBracket rightBracket)
-             (search-backward rightBracket ) )
+        (let (
+              (p1 (region-beginning))
+              (p2 (region-end))
+              )
+          (goto-char p2)
+          (insert rightBracket)
+          (goto-char p1)
+          (insert leftBracket)
+          (goto-char (+ p2 2))
+          ))
+    (progn ; no text selection
+                                        ;(= (point) (point-max) )
+      (if (looking-at "[-A-Za-z0-9]")
           (progn
             (let* (
                    (bds (unit-at-cursor 'word))
@@ -48,7 +46,10 @@ The argument leftBracket rightBracket are strings."
               (insert leftBracket)
               (goto-char (+ p2 (length leftBracket)))
               )
-            )) )))
+            )
+        (progn
+          (insert leftBracket rightBracket)
+          (search-backward rightBracket ) )) )))
 
 ;; (insert-parentheses)
 
