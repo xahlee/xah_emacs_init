@@ -179,35 +179,8 @@ See also: `remove-punctuation-trailing-redundant-space'."
 
                                (t (error "Your 3rd argument 「%s」 isn't valid." ξ-to-direction)) ) ) ) )
 
-(defun remove-punctuation-trailing-redundant-space (p1 p2)
-  "Remove redundant whitespace after punctuation.
-Works on current block or text selection.
 
-When called in emacs lisp code, the p1 p2 are cursor positions for region.
-
-See also `convert-english-chinese-punctuation'."
-  (interactive
-   (let ( (bds (get-selection-or-unit 'block)))
-     (list (elt bds 1) (elt bds 2) ) ) )
-  (replace-regexp-pairs-region p1 p2
-                               [
-                                ;; clean up. Remove extra space.
-                                [",  +" ", "]
-                                ["?  +" "? "]
-                                ["!  +" "! "]
-                                ["\\.   +" "\\. "]
-
-                                ["， +" "，"]
-                                ["。 +" "。"]
-                                ["： +" "："]
-                                ["？ +" "？"]
-                                ["； +" "；"]
-                                ["！ +" "！"]
-                                ["、 +" "、"]
-                                ]
-                               "FIXEDCASE" "LITERAL") )
-
-(defun convert-ideographic/ascii-space (p1 p2)
+(defun convert-asian/ascii-space (p1 p2)
   "Change all space characters between Asian Ideographic one to ASCII one.
 Works on current block or text selection.
 
@@ -231,6 +204,34 @@ See also `convert-english-chinese-punctuation'
  "FIXEDCASE" "LITERAL")
     )
   )
+
+(defun remove-punctuation-trailing-redundant-space (p1 p2)
+  "Remove redundant whitespace after punctuation.
+Works on current block or text selection.
+
+When called in emacs lisp code, the p1 p2 are cursor positions for region.
+
+See also `convert-english-chinese-punctuation'."
+  (interactive
+   (let ( (bds (get-selection-or-unit 'block)))
+     (list (elt bds 1) (elt bds 2) ) ) )
+  (replace-regexp-pairs-region p1 p2
+                               [
+                                ;; clean up. Remove extra space.
+                                [",  +" ", "]
+                                ["?  +" "? "]
+                                ["!  +" "! "]
+                                ["\\.  +" ". "]
+
+                                ["， +" "，"]
+                                ["。 +" "。"]
+                                ["： +" "："]
+                                ["？ +" "？"]
+                                ["； +" "；"]
+                                ["！ +" "！"]
+                                ["、 +" "、"]
+                                ]
+                               "FIXEDCASE" "LITERAL") )
 
 (defun replace-straight-quotes (p1 p2)
   "Replace straight double quotes to curly ones, and others.
@@ -260,111 +261,116 @@ Examples of changes:
     (save-restriction
       (narrow-to-region p1 p2)
 
-;; dash and ellipsis etc
-(replace-pairs-region (point-min) (point-max)
-[
- ["--" " — "]
- ["—" " — "]
- ["..." "…"]
- [" :)" " ☺"]
- [" :(" " ☹"]
- [";)" "😉"]
- ["e.g." "⁖"]
- ["~=" "≈"]
- ])
+      ;; dash and ellipsis etc
+      (replace-pairs-region (point-min) (point-max)
+                            [
+                             ["--" " — "]
+                             ["—" " — "]
+                             ["..." "…"]
+                             [" :)" " ☺"]
+                             [" :(" " ☹"]
+                             [";)" "😉"]
+                             ["e.g." "⁖"]
+                             ["~=" "≈"]
+                             ])
 
-(replace-pairs-region (point-min) (point-max)
-[
- ["  —  " " — "]                        ; rid of extra space in em-dash
- ])
+      (replace-pairs-region (point-min) (point-max)
+                            [
+                             ["  —  " " — "]                        ; rid of extra space in em-dash
+                             [" , " ", "]
+                             ])
 
-;; fix GNU style ASCII quotes
-(replace-pairs-region (point-min) (point-max)
-[
- ["``" "“"]
- ["''" "”"]
- ])
+      ;; fix GNU style ASCII quotes
+      (replace-pairs-region (point-min) (point-max)
+                            [
+                             ["``" "“"]
+                             ["''" "”"]
+                             ])
 
-;; fix straight double quotes
-(replace-pairs-region (point-min) (point-max)
-[
- [">\"" ">“"]
- ["(\"" "(“"]
- [" \"" " “"]
- ["\" " "” "]
- ["\"," "”,"]
- ["\"." "”."]
- ["\"?" "”?"]
- ["\";" "”;"]
- ["\":" "”:"]
- ["\")" "”)"]
- ["\"]" "”]"]
- [".\"" ".”"]
- [",\"" ",”"]
- ["!\"" "!”"]
- ["?\"" "?”"]
- ["\"<" "”<"]
- ;; ";
- ["\"\n" "”\n"]
- ])
+      ;; fix straight double quotes
+      (replace-pairs-region (point-min) (point-max)
+                            [
+                             [">\"" ">“"]
+                             ["(\"" "(“"]
+                             [" \"" " “"]
+                             ["\" " "” "]
+                             ["\"," "”,"]
+                             ["\"." "”."]
+                             ["\"?" "”?"]
+                             ["\";" "”;"]
+                             ["\":" "”:"]
+                             ["\")" "”)"]
+                             ["\"]" "”]"]
+                             [".\"" ".”"]
+                             [",\"" ",”"]
+                             ["!\"" "!”"]
+                             ["?\"" "?”"]
+                             ["\"<" "”<"]
+                             ;; ";
+                             ["\"\n" "”\n"]
+                             ])
 
-;; fix straight double quotes by regex
-(replace-regexp-pairs-region (point-min) (point-max)
-[
- ["\\`\"" "“"]
- ])
+      ;; fix straight double quotes by regex
+      (replace-regexp-pairs-region (point-min) (point-max)
+                                   [
+                                    ["\\`\"" "“"]
+                                    ])
 
-;; fix single quotes to curly
-(replace-pairs-region (point-min) (point-max)
-[
- [">\'" ">‘"]
- [" \'" " ‘"]
- ["\' " "’ "]
- ["\'," "’,"]
- [".\'" ".’"]
- ["!\'" "!’"]
- ["?\'" "?’"]
- ["(\'" "(‘"]
- ["\')" "’)"]
- ["\']" "’]"]
- ])
+      ;; fix single quotes to curly
+      (replace-pairs-region (point-min) (point-max)
+                            [
+                             [">\'" ">‘"]
+                             [" \'" " ‘"]
+                             ["\' " "’ "]
+                             ["\'," "’,"]
+                             [".\'" ".’"]
+                             ["!\'" "!’"]
+                             ["?\'" "?’"]
+                             ["(\'" "(‘"]
+                             ["\')" "’)"]
+                             ["\']" "’]"]
+                             ])
 
-;; fix apostrophe
-(replace-regexp-pairs-region (point-min) (point-max)
-[
- ["\\bcan’t\\b" "can't"]
- ["\\bdon’t\\b" "don't"]
- ["\\bdoesn’t\\b" "doesn't"]
- ["\\bain’t\\b" "ain't"]
- ["\\bdidn’t\\b" "didn't"]
- ["\\baren’t\\b" "aren't"]
- ["\\bwasn’t\\b" "wasn't"]
- ["\\bweren’t\\b" "weren't"]
- ["\\bcouldn’t\\b" "couldn't"]
- ["\\bshouldn’t\\b" "shouldn't"]
+      ;; fix apostrophe
+      (replace-regexp-pairs-region (point-min) (point-max)
+                                   [
+                                    ["\\bcan’t\\b" "can't"]
+                                    ["\\bdon’t\\b" "don't"]
+                                    ["\\bdoesn’t\\b" "doesn't"]
+                                    ["\\bain’t\\b" "ain't"]
+                                    ["\\bdidn’t\\b" "didn't"]
+                                    ["\\baren’t\\b" "aren't"]
+                                    ["\\bwasn’t\\b" "wasn't"]
+                                    ["\\bweren’t\\b" "weren't"]
+                                    ["\\bcouldn’t\\b" "couldn't"]
+                                    ["\\bshouldn’t\\b" "shouldn't"]
 
- ["\\b’ve\\b" "'ve"]
- ["\\b’re\\b" "'re"]
- ["\\b‘em\\b" "'em"]
- ["\\b’ll\\b" "'ll"]
- ["\\b’m\\b" "'m"]
- ["\\b’d\\b" "'d"]
- ["\\b’s\\b" "'s"]
- ["s’ " "s' "]
- ["s’\n" "s'\n"]
+                                    ["\\b’ve\\b" "'ve"]
+                                    ["\\b’re\\b" "'re"]
+                                    ["\\b‘em\\b" "'em"]
+                                    ["\\b’ll\\b" "'ll"]
+                                    ["\\b’m\\b" "'m"]
+                                    ["\\b’d\\b" "'d"]
+                                    ["\\b’s\\b" "'s"]
+                                    ["s’ " "s' "]
+                                    ["s’\n" "s'\n"]
 
- ["\"$" "”"]
- ])
+                                    ["\"$" "”"]
+                                    ])
 
-;; fix back. quotes in HTML code
-(replace-regexp-pairs-region (point-min) (point-max)
-[
- ["” \\([-a-z]+\\)="       "\" \\1="]   ; any 「” some-thing=」
- ["=\”" "=\""]
- ["/” " "/\" "]
- ["\"\\([0-9]+\\)” "     "\"\\1\" "]
- ]
-) ) ))
+      ;; fix back. quotes in HTML code
+      (replace-regexp-pairs-region (point-min) (point-max)
+                                   [
+                                    ["” \\([-a-z]+\\)="       "\" \\1="]   ; any 「” some-thing=」
+                                    ["=\”" "=\""]
+                                    ["/” " "/\" "]
+                                    ["\"\\([0-9]+\\)” "     "\"\\1\" "]
+                                    ]
+                                   )
+
+      (remove-punctuation-trailing-redundant-space (point-min) (point-max) )
+
+      ) ))
 
 (defun escape-quotes ()
   "Replace 「\"」 by 「\\\"」 in current line or text selection."

@@ -9,7 +9,7 @@
 (require 'dired-x)
 (require 'xah-elisp-mode)
 
-(setq ergoemacs-repeat-movement-commands 'all)
+(setq ergoemacs-repeat-movement-commands 'nil)
 
 (setq sentence-end-double-space nil )
 

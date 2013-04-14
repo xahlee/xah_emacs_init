@@ -276,7 +276,7 @@
 (global-set-key (kbd "<menu> r e") 'query-replace) ; ★★★
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
 (global-set-key (kbd "<menu> r l") 'list-matching-lines) ; ★★★
-(global-set-key (kbd "<menu> r p") 'convert-ideographic/ascii-space)
+(global-set-key (kbd "<menu> r p") 'convert-asian/ascii-space)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; ★★★
@@ -373,8 +373,8 @@
   (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
   (local-set-key (kbd "<menu> e c") 'xhm-make-citation)
   (local-set-key (kbd "<menu> e d") 'insert-date-tag)
-  (local-set-key (kbd "<menu> e e") 'xah-all-linkify)
   (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
+  (local-set-key (kbd "<menu> e h") 'xah-all-linkify)
   (local-set-key (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
   (local-set-key (kbd "<menu> e l 6") 'xhm-source-url-linkify)
   (local-set-key (kbd "<menu> e l c") 'xwe-chinese-linkify)
@@ -383,7 +383,7 @@
   (local-set-key (kbd "<menu> e l f") 'full-size-img-linkify)
   (local-set-key (kbd "<menu> e l i") 'image-linkify)
   (local-set-key (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<menu> e l l") 'xhm-lines-to-html-list)
+  (local-set-key (kbd "<menu> e l i") 'xhm-lines-to-html-list)
   (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
   (local-set-key (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
   (local-set-key (kbd "<menu> e l u") 'xhm-wrap-url)
@@ -538,7 +538,6 @@ For `Info-mode-hook'."
 (global-set-key (kbd "C-1") 'cycle-font-backward)
 (global-set-key (kbd "C-2") 'cycle-font-forward)
 (global-set-key (kbd "C-3") 'cycle-font-2)
-(global-set-key (kbd "C-8") 'ergoemacs-extend-selection)
 
 (global-set-key (kbd "C-o") 'backward-sexp)
 (global-set-key (kbd "C-u") 'forward-sexp)
