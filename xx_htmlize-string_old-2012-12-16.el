@@ -38,7 +38,7 @@ text.
  “lang-code” can be any of {c, elisp, java, js, html, xml, css, …}.
  (See source code for a full list)
 
-See also: `dehtmlize-pre-block'.
+See also: `xhm-dehtmlize-pre-block'.
 
 This function requires htmlize.el by Hrvoje Niksic."
   (interactive (list ξ-language-name-map))

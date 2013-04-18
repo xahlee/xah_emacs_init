@@ -22,6 +22,8 @@
     ("ipv6" "IPv6")
     ("msw" "Microsoft Windows")
     ("ms" "Microsoft")
+    ("ex" "example:")
+    ("fex" "For example:")
 
 ;
 ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
@@ -141,8 +143,6 @@
     ("8intro" "introduction")
     ("8b" "because")
     ("8pls" "please")
-    ("8ex" "example")
-    ("84ex" "For example")
     ("8atm" "at the moment")
     ("8q" "question")
     ("8i18n" "international")

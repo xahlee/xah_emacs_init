@@ -6,13 +6,13 @@
 
 (random t)
 
-(defun insert-random-color-hsl ()
+(defun ξ-insert-random-color-hsl ()
   "Insert a random color string of CSS HSL format.
 Example output: hsl(100,24%,82%)"
   (interactive)
   (insert (format "hsl(%d,%d%%,%d%%)" (random 360) (random 100) (random 100))) )
 
-(defun insert-random-hex ()
+(defun ξ-insert-random-hex ()
   "Insert a random 4-digit hexidecimal number."
   (interactive)
   (let* ((myCharset "1234567890abcdef" )
@@ -22,7 +22,7 @@ Example output: hsl(100,24%,82%)"
   ;; (insert (format "%4x" (random 65535)) )
   )
 
-(defun insert-random-string ()
+(defun ξ-insert-random-string ()
   "Insert a random alphanumerics string of length 5.
 The possible chars are 0 to 9, and a to z (lower case)."
   (interactive)
@@ -31,7 +31,7 @@ The possible chars are 0 to 9, and a to z (lower case)."
     (dotimes (ii 5)
       (insert (elt myCharset (random possibleCharsCount))) ) ) )
 
-(defun insert-random-uuid ()
+(defun ξ-insert-random-uuid ()
   "Insert a random universally unique identifier (UUID).
 
 UUID is a 32 digits hexadecimal formatted in certain way with dash.
@@ -49,7 +49,7 @@ Example of a UUID: 1df63142-a513-c850-31a3-535fc3520c3d
            (random (expt 16 6)) ) ) )
 
 ;; primarily Christopher Wellons. 2011-11-18
-(defun insert-random-uuid-2 ()
+(defun ξ-insert-random-uuid-2 ()
   "Insert a UUID. This uses a simple hashing of variable data."
   (interactive)
   (let ((myStr (md5 (format "%s%s%s%s%s%s%s%s%s%s"
@@ -72,13 +72,13 @@ Example of a UUID: 1df63142-a513-c850-31a3-535fc3520c3d
                     (substring myStr 20 32)))))
 
 
-;; (defun insert-random-number ()
+;; (defun ξ-insert-random-number ()
 ;;   "Insert a random number."
 ;;   (interactive)
 ;;   (insert (number-to-string (random )))
 ;;   )
 
-(defun insert-random-number ()
+(defun ξ-insert-random-number ()
   "Insert a random number of length 5."
   (interactive)
   (let (myCharset (possibleCharsCount 10))

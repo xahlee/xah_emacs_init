@@ -23,13 +23,9 @@
 (icomplete-mode 1)
 
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\'" . php-mode))
-
+(add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . xah-html-mode))
-;; (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-unix-mode))
-
 (add-to-list 'auto-mode-alist '("\\.el\\'" . xah-elisp-mode))
 
 (setq org-return-follows-link t)

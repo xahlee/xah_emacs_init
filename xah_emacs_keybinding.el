@@ -87,8 +87,9 @@
 ;                                 【m】 commit
 ; /home/xah/git/ergoemacs/ergoemacs/ergoemacs-keybindings/ergoemacs-variants.el
 
-;(global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
-;(global-set-key (kbd "<menu> RET") 'smex) ; in ErgoEmacs
+(global-set-key (kbd "<menu>") 'nil)
+(global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
+(global-set-key (kbd "<menu> RET") 'smex) ; in ErgoEmacs
 (global-set-key (kbd "<menu> <delete>") 'delete-current-file)
 (global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
@@ -130,7 +131,7 @@
 (global-set-key (kbd "<menu> 9") 'ispell-word) ; ★★★
 (global-set-key (kbd "<menu> ;") 'nil)
 (global-set-key (kbd "<menu> =") 'nil)
-; (global-set-key (kbd "<menu> SPC") 'set-mark-command) ; ★★★
+(global-set-key (kbd "<menu> SPC") 'set-mark-command) ; ★★★
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> \\") 'escape-quotes)
 (global-set-key (kbd "<menu> `") 'make-backup)
@@ -235,10 +236,10 @@
 (progn
   (global-set-key (kbd "<menu> i") 'nil)
   (global-set-key (kbd "<menu> i d") 'insert-date)
-  (global-set-key (kbd "<menu> i r h") 'insert-random-hex)
-  (global-set-key (kbd "<menu> i r n") 'insert-random-number)
-  (global-set-key (kbd "<menu> i r s") 'insert-random-string)
-  (global-set-key (kbd "<menu> i r u") 'insert-random-uuid)
+  (global-set-key (kbd "<menu> i r h") 'ξ-insert-random-hex)
+  (global-set-key (kbd "<menu> i r n") 'ξ-insert-random-number)
+  (global-set-key (kbd "<menu> i r s") 'ξ-insert-random-string)
+  (global-set-key (kbd "<menu> i r u") 'ξ-insert-random-uuid)
   (global-set-key (kbd "<menu> i t") 'insert-date-time)
  )
 
@@ -261,11 +262,11 @@
 (global-set-key (kbd "<menu> n") 'ergoemacs-new-empty-buffer) ; ★★★
 (global-set-key (kbd "<menu> o") 'nil)
 (global-set-key (kbd "<menu> o SPC") 'xah-open-file-fast)
-(global-set-key (kbd "<menu> o b") 'ibuffer)
-(global-set-key (kbd "<menu> o f") 'ido-find-file)
-(global-set-key (kbd "<menu> o l") 'bookmark-bmenu-list)
-(global-set-key (kbd "<menu> o r") 'recentf-open-files) ; ★★★
-(global-set-key (kbd "<menu> o s") 'ido-switch-buffer)  ; ★★★
+(global-set-key (kbd "<menu> o c") 'bookmark-bmenu-list)
+(global-set-key (kbd "<menu> o g") 'ibuffer)
+(global-set-key (kbd "<menu> o h") 'recentf-open-files) ; ★★★
+(global-set-key (kbd "<menu> o n") 'ido-find-file)
+(global-set-key (kbd "<menu> o t") 'ido-switch-buffer)  ; ★★★
 (global-set-key (kbd "<menu> p") 'nil)
 (global-set-key (kbd "<menu> q") 'quoted-insert) ; ★★★
 (global-set-key (kbd "<menu> r") 'nil)
@@ -341,8 +342,6 @@
 (global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> z") 'nil)
 
-
-
 
 ;; special keys
 
@@ -360,53 +359,63 @@
   ;; .p gc
   ;; eu ht
 
-  (local-set-key (kbd "<menu> e") 'nil)
-  (local-set-key (kbd "<menu> e .") 'xah-browse-url-of-buffer)
-  (local-set-key (kbd "<menu> e 0") 'xhm-remove-html-tags)
-  (local-set-key (kbd "<menu> e 5") 'mark-unicode)
-  (local-set-key (kbd "<menu> e 7") 'htmlize-or-dehtmlize-pre-block)
-  (local-set-key (kbd "<menu> e 8") 'get-pre-block-make-new-file)
-  (local-set-key (kbd "<menu> e <delete>") 'sgml-delete-tag)
-  (local-set-key (kbd "<menu> e <left>") 'sgml-skip-tag-backward)
-  (local-set-key (kbd "<menu> e <right>") 'sgml-skip-tag-forward)
-  (local-set-key (kbd "<menu> e a") 'xwe-annotate)
-  (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
-  (local-set-key (kbd "<menu> e c") 'xhm-make-citation)
-  (local-set-key (kbd "<menu> e d") 'insert-date-tag)
-  (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
-  (local-set-key (kbd "<menu> e h") 'xah-all-linkify)
-  (local-set-key (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
-  (local-set-key (kbd "<menu> e l 6") 'xhm-source-url-linkify)
-  (local-set-key (kbd "<menu> e l c") 'xwe-chinese-linkify)
-  (local-set-key (kbd "<menu> e l d") 'perldoc-ref-linkify)
-  (local-set-key (kbd "<menu> e l e") 'emacs-ref-linkify)
-  (local-set-key (kbd "<menu> e l f") 'full-size-img-linkify)
-  (local-set-key (kbd "<menu> e l i") 'image-linkify)
-  (local-set-key (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<menu> e l i") 'xhm-lines-to-html-list)
-  (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
-  (local-set-key (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
-  (local-set-key (kbd "<menu> e l u") 'xhm-wrap-url)
-  (local-set-key (kbd "<menu> e l w") 'xhm-wikipedia-linkify)
-  (local-set-key (kbd "<menu> e l z") 'amazon-linkify)
-  (local-set-key (kbd "<menu> e m a") 'xah-make-atom-entry)
-  (local-set-key (kbd "<menu> e m l") 'xah-add-to-related-links)
-  (local-set-key (kbd "<menu> e p") 'xhm-wrap-p-tag)
-  (local-set-key (kbd "<menu> e r ,") 'xhm-replace-html-chars-to-unicode)
-  (local-set-key (kbd "<menu> e r .") 'xhm-replace-html-chars-to-entities)
-  (local-set-key (kbd "<menu> e r 3") 'xhm-update-title)
-  (local-set-key (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
-  (local-set-key (kbd "<menu> e r c") 'code-bracket-to-html-tag)
-  (local-set-key (kbd "<menu> e r e") 'curly-quotes-to-emacs-function-tag)
-  (local-set-key (kbd "<menu> e r k") 'emacs-to-windows-kbd-notation)
-  (local-set-key (kbd "<menu> e r m") 'xhm-make-html-table)
-  (local-set-key (kbd "<menu> e r t") 'title-bracket-to-html-tag)
-  (local-set-key (kbd "<menu> e t c") 'insert-random-color-hsl)
-  (local-set-key (kbd "<menu> e t r") 'xhm-rename-html-inline-image)
-  (local-set-key (kbd "<menu> e t u") 'xhm-extract-url)
-  (local-set-key (kbd "<menu> e u") 'xhm-wrap-html-tag)
-
-  (local-set-key (kbd "<menu> e w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
+  (define-key xhm-keymap (kbd "<menu> e 0") 'xhm-remove-html-tags)
+  (define-key xhm-keymap (kbd "<menu> e 5") 'mark-unicode)
+  (define-key xhm-keymap (kbd "<menu> e 7") 'xhm-htmlize-or-de-precode)
+  (define-key xhm-keymap (kbd "<menu> e 8") 'xhm-get-precode-make-new-file)
+  (define-key xhm-keymap (kbd "<menu> e a") 'xwe-annotate)
+  (define-key xhm-keymap (kbd "<menu> e b") 'make-blogger-entry)
+  (define-key xhm-keymap (kbd "<menu> e c") 'xhm-make-citation)
+  (define-key xhm-keymap (kbd "<menu> e d") 'insert-date-tag)
+  (define-key xhm-keymap (kbd "<menu> e e") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e f") 'xah-copy-url-current-file)
+  (define-key xhm-keymap (kbd "<menu> e g") 'xah-browse-url-of-buffer)
+  (define-key xhm-keymap (kbd "<menu> e h") 'xah-all-linkify)
+  (define-key xhm-keymap (kbd "<menu> e i") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e j") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
+  (define-key xhm-keymap (kbd "<menu> e l") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e l 6") 'xhm-source-url-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l c") 'xwe-chinese-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l d") 'perldoc-ref-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l e") 'emacs-ref-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l f") 'full-size-img-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l i") 'image-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
+  (define-key xhm-keymap (kbd "<menu> e l i") 'xhm-lines-to-html-list)
+  (define-key xhm-keymap (kbd "<menu> e l p") 'php-ref-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l u") 'xhm-wrap-url)
+  (define-key xhm-keymap (kbd "<menu> e l w") 'xhm-wikipedia-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l z") 'amazon-linkify)
+  (define-key xhm-keymap (kbd "<menu> e m") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e m a") 'xah-make-atom-entry)
+  (define-key xhm-keymap (kbd "<menu> e m l") 'xah-add-to-related-links)
+  (define-key xhm-keymap (kbd "<menu> e n") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e o") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e p") 'xhm-wrap-p-tag)
+  (define-key xhm-keymap (kbd "<menu> e q") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e r") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e r ,") 'xhm-replace-html-chars-to-unicode)
+  (define-key xhm-keymap (kbd "<menu> e r .") 'xhm-replace-html-chars-to-entities)
+  (define-key xhm-keymap (kbd "<menu> e r 3") 'xhm-update-title)
+  (define-key xhm-keymap (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
+  (define-key xhm-keymap (kbd "<menu> e r c") 'code-bracket-to-html-tag)
+  (define-key xhm-keymap (kbd "<menu> e r e") 'curly-quotes-to-emacs-function-tag)
+  (define-key xhm-keymap (kbd "<menu> e r k") 'emacs-to-windows-kbd-notation)
+  (define-key xhm-keymap (kbd "<menu> e r m") 'xhm-make-html-table)
+  (define-key xhm-keymap (kbd "<menu> e r t") 'title-bracket-to-html-tag)
+  (define-key xhm-keymap (kbd "<menu> e s") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e t") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e t c") 'ξ-insert-random-color-hsl)
+  (define-key xhm-keymap (kbd "<menu> e t r") 'xhm-rename-html-inline-image)
+  (define-key xhm-keymap (kbd "<menu> e t u") 'xhm-extract-url)
+  (define-key xhm-keymap (kbd "<menu> e u") 'xhm-wrap-html-tag)
+  (define-key xhm-keymap (kbd "<menu> e v") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
+  (define-key xhm-keymap (kbd "<menu> e x") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e y") 'nil)
+  (define-key xhm-keymap (kbd "<menu> e z") 'nil)
 )
 
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
@@ -563,9 +572,6 @@ For `Info-mode-hook'."
 
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
-; idea from eric crosson, 2013-04-06 http://ericscrosson.wordpress.com/2013/04/05/minimizing-keystrokes-required-by-punctuation/
-(global-set-key (kbd ",") (lambda() (interactive) (insert ", ")))
-
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
   (interactive)
@@ -573,7 +579,6 @@ For `Info-mode-hook'."
         (progn (setq w32-apps-modifier 'nil))
       (progn (setq w32-apps-modifier 'meta) )
       ))
-
 
 ;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
 
