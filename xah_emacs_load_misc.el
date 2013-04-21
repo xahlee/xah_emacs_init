@@ -9,11 +9,14 @@
 
 ; setting paths, loading modules, setup hooks etc.
 
-(require 'xah-html-mode)
-
+(require 'dired-x)
 (require 'xah_file_util)
-
-(require 'xah-comment )
+(require 'xah-html-mode)
+(require 'xah-comment)
+(require 'xah-elisp-mode)
+(require 'xah-php-mode)
+(require 'xah-css-mode)
+(require 'insert-random-id)
 
 
 ;; I-search with initial contents.

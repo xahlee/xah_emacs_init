@@ -6,8 +6,6 @@
 ;; ∑ http://xahlee.org/
 
 
-(require 'dired-x)
-(require 'xah-elisp-mode)
 
 (setq ergoemacs-repeat-movement-commands 'nil)
 
@@ -27,6 +25,23 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
 (add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-unix-mode))
 (add-to-list 'auto-mode-alist '("\\.el\\'" . xah-elisp-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . xah-css-mode))
+
+
+
+;(remove-hook 'find-file-hook 'recentf-track-opened-file)
+;(remove-hook 'find-file-hook 'global-linum-mode-check-buffers)
+;(remove-hook 'find-file-hook 'global-subword-mode-check-buffers)
+;(remove-hook 'find-file-hook 'global-page-break-lines-mode-check-buffers)
+;(remove-hook 'find-file-hook 'global-auto-complete-mode-check-buffers)
+
+;(remove-hook 'find-file-hook 'yas/global-mode-check-buffers)
+;(remove-hook 'find-file-hook 'global-undo-tree-mode-check-buffers)
+;(remove-hook 'find-file-hook 'global-font-lock-mode-check-buffers)
+;(remove-hook 'find-file-hook 'epa-file-find-file-hook)
+;(remove-hook 'find-file-hook 'vc-find-file-hook)
+;(remove-hook 'find-file-hook 'save-place-find-file-hook)
+
 
 (setq org-return-follows-link t)
 ; (setq auto-save-default t)
@@ -77,7 +92,8 @@
 ;; (add-hook 'html-mode-hook 'hexcolor-add-to-font-lock)
 
 
-(when (boundp 'tabbar-mode) (tabbar-mode 0))
+
+; (when (boundp 'tabbar-mode) (tabbar-mode 0))
 (setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
 
 (math-symbol-input-mode 1)

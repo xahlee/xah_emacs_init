@@ -27,8 +27,8 @@
 (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
 ;; in linux, by default, <lwindow> is Super,  s-
-;; linux, the menu/apps key is <menu>
-;; windows, the menu/apps key is <apps>
+;; Linux, the menu/apps key syntax is <menu>
+;; Windows, the menu/apps key syntax is <apps>
 
 ;; (global-set-key (kbd "<f8>") ctl-x-map)
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
@@ -251,7 +251,7 @@
 (global-set-key (kbd "<menu> m c") 'calc)
 (global-set-key (kbd "<menu> m e") 'xah-elisp-mode)
 (global-set-key (kbd "<menu> m h") 'xah-html-mode)
-(global-set-key (kbd "<menu> m l") 'global-linum-mode)
+(global-set-key (kbd "<menu> m l") 'linum-mode)
 (global-set-key (kbd "<menu> m p") 'php-mode)
 (global-set-key (kbd "<menu> m s") 'shell)
 (global-set-key (kbd "<menu> m t") 'text-mode)
@@ -376,13 +376,13 @@
   (define-key xhm-keymap (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
   (define-key xhm-keymap (kbd "<menu> e l") 'nil)
   (define-key xhm-keymap (kbd "<menu> e l 6") 'xhm-source-url-linkify)
+  (define-key xhm-keymap (kbd "<menu> e l .") 'xhm-lines-to-html-list)
   (define-key xhm-keymap (kbd "<menu> e l c") 'xwe-chinese-linkify)
   (define-key xhm-keymap (kbd "<menu> e l d") 'perldoc-ref-linkify)
   (define-key xhm-keymap (kbd "<menu> e l e") 'emacs-ref-linkify)
   (define-key xhm-keymap (kbd "<menu> e l f") 'full-size-img-linkify)
   (define-key xhm-keymap (kbd "<menu> e l i") 'image-linkify)
   (define-key xhm-keymap (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
-  (define-key xhm-keymap (kbd "<menu> e l i") 'xhm-lines-to-html-list)
   (define-key xhm-keymap (kbd "<menu> e l p") 'php-ref-linkify)
   (define-key xhm-keymap (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
   (define-key xhm-keymap (kbd "<menu> e l u") 'xhm-wrap-url)
@@ -407,7 +407,6 @@
   (define-key xhm-keymap (kbd "<menu> e r t") 'title-bracket-to-html-tag)
   (define-key xhm-keymap (kbd "<menu> e s") 'nil)
   (define-key xhm-keymap (kbd "<menu> e t") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e t c") 'ξ-insert-random-color-hsl)
   (define-key xhm-keymap (kbd "<menu> e t r") 'xhm-rename-html-inline-image)
   (define-key xhm-keymap (kbd "<menu> e t u") 'xhm-extract-url)
   (define-key xhm-keymap (kbd "<menu> e u") 'xhm-wrap-html-tag)
@@ -529,9 +528,9 @@ For `Info-mode-hook'."
 ;; remove ErgoEmacs's changing font size
 (global-unset-key (kbd "C-+") )         ; text-scale-increase
 (global-unset-key (kbd "C--") )         ; text-scale-decrease
-(global-unset-key (kbd "C-a") )         ; mark-whole-buffer
-(global-unset-key (kbd "C-s") )         ; save
-(global-unset-key (kbd "C-o") )         ; open
+;(global-unset-key (kbd "C-a") )         ; mark-whole-buffer
+;(global-unset-key (kbd "C-s") )         ; save
+;(global-unset-key (kbd "C-o") )         ; open
 (global-unset-key (kbd "C-0") ) ; text-scale-normal-size
 (global-unset-key (kbd "M-5") )
 (global-unset-key (kbd "M-3") )
@@ -548,10 +547,13 @@ For `Info-mode-hook'."
 (global-set-key (kbd "C-2") 'cycle-font-forward)
 (global-set-key (kbd "C-3") 'cycle-font-2)
 
-(global-set-key (kbd "C-o") 'backward-sexp)
-(global-set-key (kbd "C-u") 'forward-sexp)
-(global-set-key (kbd "C-e") 'down-list)
-(global-set-key (kbd "C-.") 'backward-up-list)
+;(global-set-key (kbd "C-o") 'backward-sexp)
+;(global-set-key (kbd "C-u") 'forward-sexp)
+;(global-set-key (kbd "C-e") 'down-list)
+;(global-set-key (kbd "C-.") 'backward-up-list)
+
+
+
 
 (global-set-key (kbd "M-3") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "M-7") 'ergoemacs-select-current-line)

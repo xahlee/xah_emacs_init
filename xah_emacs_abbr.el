@@ -23,7 +23,7 @@
     ("msw" "Microsoft Windows")
     ("ms" "Microsoft")
     ("ex" "example:")
-    ("fex" "For example:")
+    ("fex" "for example:")
 
 ;
 ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language

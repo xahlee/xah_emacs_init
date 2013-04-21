@@ -125,10 +125,14 @@ Requires ImageMagick shell tool."
        ))
    fileList ))
 
-(defun scale-image (fileList scalePercentage)
-  "Create a scaled jpg version of images of marked files in dired.
+(defun scale-image (fileList scalePercentage sharpen-p)
+  "Create a scaled JPG version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
+When called in lisp code, 
+ fileList is a list.
+ scalePercentage is a integer.
+ sharpen-p is true or false.
 Requires ImageMagick shell tool."
   (interactive
    (let (
@@ -137,13 +141,20 @@ Requires ImageMagick shell tool."
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:") )) ) ) )
-     (list myFileList (read-from-minibuffer "scale percentage:")) )
+     (list myFileList
+           (read-from-minibuffer "Scale %:")
+           (y-or-n-p "Sharpen")
+           ) )
    )
-  (process-image fileList (concat "-scale " scalePercentage "% -quality 85% -sharpen 1 " ) "-s" ".jpg" )
+  (let ((sharpenOrNo (if sharpen-p "-sharpen 1" "" )))
+    (process-image fileList
+                   (format "-scale %s%% -quality 85% %s " scalePercentage sharpenOrNo)
+                   "-s" ".jpg" )
+    )
   )
 
 (defun image-autocrop (fileList)
-  "Create a new auto-cropped jpg version of images of marked files in dired.
+  "Create a new auto-cropped JPG version of images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
    (let (
@@ -196,7 +207,7 @@ Requires ImageMagick shell tool."
   )
 
 (defun 2jpg (fileList)
-  "Create a jpg version of images of marked files in dired.
+  "Create a JPG version of images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
    (let (

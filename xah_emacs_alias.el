@@ -11,6 +11,7 @@
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
+(defalias 'dnml 'delete-non-matching-lines)
 
 (defalias 'ssm 'shell-script-mode)
 

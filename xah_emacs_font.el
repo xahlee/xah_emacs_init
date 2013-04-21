@@ -133,3 +133,11 @@ See also: `font-lock-fontify-block', `font-lock-fontify-buffer'."
     (setq-default line-spacing nil)   ; no extra heigh between lines
     )
   (redraw-display))
+
+(defun toggle-margin-right ()
+  "Toggle the right margin between `fill-column' or window width.
+This command is convenient when reading novel, documentation."
+  (interactive)
+  (if (eq (cdr (window-margins)) nil)
+      (set-window-margins nil 0 (- (window-body-width) fill-column))
+    (set-window-margins nil 0 0) ) )
