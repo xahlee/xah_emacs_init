@@ -21,12 +21,18 @@
 (icomplete-mode 1)
 
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
 (add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-unix-mode))
+
+;(autoload 'xah-elisp-mode "xah-elisp-mode" "load xah-elisp-mode for elisp file" t)
 (add-to-list 'auto-mode-alist '("\\.el\\'" . xah-elisp-mode))
+
+;(autoload 'xah-css-mode "xah-css-mode" "load xah-css-mode for CSS file" t)
 (add-to-list 'auto-mode-alist '("\\.css\\'" . xah-css-mode))
 
+(add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
+
+(add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))
+(add-to-list 'magic-mode-alist '("<\\?php" . xah-php-mode) )
 
 
 ;(remove-hook 'find-file-hook 'recentf-track-opened-file)
@@ -41,7 +47,6 @@
 ;(remove-hook 'find-file-hook 'epa-file-find-file-hook)
 ;(remove-hook 'find-file-hook 'vc-find-file-hook)
 ;(remove-hook 'find-file-hook 'save-place-find-file-hook)
-
 
 (setq org-return-follows-link t)
 ; (setq auto-save-default t)

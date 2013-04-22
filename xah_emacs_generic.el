@@ -242,6 +242,36 @@ In emacs 24, you can use `count-words'."
 
         (message "Words: %d. Chars: %d." wCnt charCnt) )) ) )
 
+(defun is-timestamp-p (inputString)
+  "Return t if inputString is a date/time stamp, else nil.
+This is based on heuristic, so it's not 100% correct.
+If the string contains any month names, weekday names, or of the form dddd-dd-dd, dddd-dd-dddd, dddd-dd-dd, or using slash, then it's considered a date.
+WARNING: this function haven't been tested.
+"
+  (let (
+        ((ξstr inputString)
+         (monthNames '("January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December") )
+         (monthAbbr '( "Jan." "Feb." "Mar." "Apr." "May." "Jun." "Jul." "Aug." "Sep." "Oct." "Nov." "Dec." ) )
+         (weekdayNames '("Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" "Sunday"))
+         ξresult
+         )
+
+        (cond
+         ((string-match (regexp-opt (append monthNames monthAbbr weekdayNames) 'words) ξstr) t)
+         ;; mm/dd/yyyy
+         ((string-match "\\b[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]\\b" ξstr) t)
+         ;; yyyy/mm/dd
+         ((string-match "\\b[0-9][0-9][0-9][0-9]/[0-9][0-9]/[0-9][0-9]\\b" ξstr) t)
+         ;; mm/dd/yy
+         ((string-match "\\b[0-9][0-9]/[0-9][0-9]/[0-9][0-9]\\b" ξstr) t)
+         ;; mm-dd-yyyy
+         ((string-match "\\b[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]\\b" ξstr) t)
+         ;; yyyy-mm-dd
+         ((string-match "\\b[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\b" ξstr) t)
+         ;; mm-dd-yy
+         ((string-match "\\b[0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\b" ξstr) t)
+         (t nil) ) ) ))
+
 (defun fix-timestamp (input-string &optional ξfrom-to)
   "Change timestamp under cursor into a yyyy-mm-dd format.
 If there's a text selection, use that as input, else use current line.

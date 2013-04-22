@@ -1,7 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;; some custome string functions for working with HTML
-;; 2007-06
-;;   Xah Lee
+;; most things moved to xah-html-mode
 ;; ∑ http://xahlee.org/
 
 (defun forward-html-end-tag ()
@@ -18,30 +17,6 @@
   (search-backward "</")
   ;; (forward-char-char 2)
   )
-
-
-(defun compact-css-region (p1 p2)
-  "Remove unnecessary whitespaces of CSS source code in region.
-CSS is Cascading Style Sheet.
-WARNING: not robust. Designed for my personal use only."
-  (interactive "r")
-  (let ()
-    (save-restriction
-      (narrow-to-region p1 p2)
-      (replace-regexp-pairs-region (point-min) (point-max) '(["  +" " "]))
-      (replace-pairs-region (point-min) (point-max)
-                            '(
-                              ["\n" ""]
-                              [" /* " "/*"]
-                              [" */ " "*/"]
-                              [" {" "{"]
-                              ["{ " "{"]
-                              ["; " ";"]
-                              [": " ":"]
-
-                              [";}" "}"]
-                              ["}" "}\n"]
-                              )) ) ) )
 
 
 
