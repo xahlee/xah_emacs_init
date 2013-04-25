@@ -272,7 +272,7 @@ WARNING: this function haven't been tested.
          ((string-match "\\b[0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\b" ξstr) t)
          (t nil) ) ) ))
 
-(defun fix-timestamp (input-string &optional ξfrom-to)
+(defun fix-timestamp (ξinput-string &optional ξfrom-to)
   "Change timestamp under cursor into a yyyy-mm-dd format.
 If there's a text selection, use that as input, else use current line.
 
@@ -284,8 +284,8 @@ For example:
  「11/28/1994」                     ⇒ 「1994-11-28」
  「1994/11/28」                     ⇒ 「1994-11-28」
 
-When called in lisp program, the optional second argument ΞFROM-TO is a vector [from to] of region boundary. (it can also be a list)
-If ΞFROM-TO is non-nil, the region is taken as input (and INPUT-STRING is ignored).
+When called in lisp program, the optional second argument “ξfrom-to” is a vector [from to] of region boundary. (it can also be a list)
+If “ξfrom-to” is non-nil, the region is taken as input (and “ξinput-string” is ignored).
 
 Code detail: URL `http://ergoemacs.org/emacs/elisp_parse_time.html'"
   (interactive
@@ -296,7 +296,7 @@ Code detail: URL `http://ergoemacs.org/emacs/elisp_parse_time.html'"
      )
    )
   (let (
-        (ξstr (if ξfrom-to (buffer-substring-no-properties (elt ξfrom-to 0) (elt ξfrom-to 1) ) input-string))
+        (ξstr (if ξfrom-to (buffer-substring-no-properties (elt ξfrom-to 0) (elt ξfrom-to 1) ) ξinput-string))
         (workOnRegionP (if ξfrom-to t nil)))
     (require 'parse-time)
 

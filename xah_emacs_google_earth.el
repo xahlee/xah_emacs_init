@@ -8,7 +8,7 @@
 
 
 ;; ✈ 🌎
-;; ⊕ 🌐 
+;; ⊕ 🌐
 
 (defun grab-lines (n)
 "Delete the next n lines and return a list
@@ -43,19 +43,19 @@ Example of inserted text:
   (let ( ξtitle ξy ξx)
     (setq ξtitle (if title title ""))
     (if longitude-latitude
-        (progn 
-          (setq ξx (elt longitude-latitude 0)) 
-          (setq ξy (elt longitude-latitude 1)) 
+        (progn
+          (setq ξx (elt longitude-latitude 0))
+          (setq ξy (elt longitude-latitude 1))
           )
-      (progn 
-        (setq ξx "x�") 
+      (progn
+        (setq ξx "x�")
         (setq ξy "y�") ) )
     (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string ξy) "%2C" (number-to-string ξx) "\" title=\"" ξtitle "\" target=\"_blank\">🌐</a>\n")))
 
 (defun insert-google-earth-link (&optional ξtitle filePath)
   "Insert a HTML markup for link to a local Goole Earth file.
- ΞTITLE is the ξtitle attribute in the anchor link.
- FILE-PATH is the full path to the KML file.
+ “ξtitle” is the “title” attribute in the anchor link.
+ “file-path” is the full path to the KML file.
 Here's a sample inserted text:
 <a href=\"../kml/las_vegas.kmz\" title=\"Las Vegas\">🌎</a>"
   (interactive)
@@ -78,7 +78,7 @@ used in the <description> tag."
       (progn
         (setq coord-x 0)
         (setq coord-y 0) ) )
-    
+
     (insert
 
      (format "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
@@ -117,7 +117,7 @@ becomes 「[37.44345 -6.253966666666667]」"
     (setq ξlatStr (elt ξtmpPair 0))
     (setq ξlonStr (elt ξtmpPair 1))
     (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" ξlatStr )
-        (progn 
+        (progn
             (setq ξdeg  (string-to-number (match-string 1 ξlatStr) ))
             (setq ξmin  (string-to-number (match-string 2 ξlatStr) ))
             (setq ξsec  (string-to-number (match-string 3 ξlatStr) ))
@@ -134,7 +134,7 @@ becomes 「[37.44345 -6.253966666666667]」"
       )
 
 (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" ξlonStr )
-        (progn 
+        (progn
             (setq ξdeg  (string-to-number (match-string 1 ξlonStr) ))
             (setq ξmin  (string-to-number (match-string 2 ξlonStr) ))
             (setq ξsec  (string-to-number (match-string 3 ξlonStr) ))
@@ -161,7 +161,7 @@ becomes 「[37.44345 -6.253966666666667]」"
 ;;   (interactive)
 ;;   (let (var1)
 ;;     (setq var1 some)
-    
+
 ;;     ))
 
 (defun make-google-earth ()
@@ -214,7 +214,6 @@ The KML file will be created at:
     (save-buffer)
     )
   ))
-
 
 
 

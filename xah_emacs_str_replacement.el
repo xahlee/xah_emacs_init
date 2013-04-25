@@ -179,7 +179,6 @@ See also: `remove-punctuation-trailing-redundant-space'."
 
                                (t (error "Your 3rd argument 「%s」 isn't valid." ξ-to-direction)) ) ) ) )
 
-
 (defun convert-asian/ascii-space (p1 p2)
   "Change all space characters between Asian Ideographic one to ASCII one.
 Works on current block or text selection.
@@ -232,6 +231,78 @@ See also `convert-english-chinese-punctuation'."
                                 ["、 +" "、"]
                                 ]
                                "FIXEDCASE" "LITERAL") )
+
+(defun convert-fullwidth-chars (p1 p2 &optional ξ-to-direction)
+  "Convert ASCII chars to/from Unicode fullwidth version.
+
+When called interactively, do text selection or text block (paragraph).
+
+The conversion direction is determined like this: if the command has been repeated, then toggle. Else, always do to-Unicode direction.
+
+If `universal-argument' is called:
+
+ no C-u → Automatic.
+ C-u → to ASCII
+ C-u 1 → to ASCII
+ C-u 2 → to Unicode
+
+When called in lisp code, p1 p2 are region begin/end positions. ξ-to-direction must be any of the following values: 「\"unicode\"」, 「\"ascii\"」, 「\"auto\"」.
+
+See also: `remove-punctuation-trailing-redundant-space'."
+  (interactive
+   (let ( (bds (get-selection-or-unit 'block)))
+     (list (elt bds 1) (elt bds 2)
+           (cond
+            ((equal current-prefix-arg nil) "auto")
+            ((equal current-prefix-arg '(4)) "ascii")
+            ((equal current-prefix-arg 1) "ascii")
+            ((equal current-prefix-arg 2) "unicode")
+            (t "unicode")
+            )
+           ) ) )
+  (let* (
+        (ξ-ascii-unicode-map
+         [
+ ["0" "０"] ["1" "１"] ["2" "２"] ["3" "３"] ["4" "４"] ["5" "５"] ["6" "６"] ["7" "７"] ["8" "８"] ["9" "９"]
+ ["A" "Ａ"] ["B" "Ｂ"] ["C" "Ｃ"] ["D" "Ｄ"] ["E" "Ｅ"] ["F" "Ｆ"] ["G" "Ｇ"] ["H" "Ｈ"] ["I" "Ｉ"] ["J" "Ｊ"] ["K" "Ｋ"] ["L" "Ｌ"] ["M" "Ｍ"] ["N" "Ｎ"] ["O" "Ｏ"] ["P" "Ｐ"] ["Q" "Ｑ"] ["R" "Ｒ"] ["S" "Ｓ"] ["T" "Ｔ"] ["U" "Ｕ"] ["V" "Ｖ"] ["W" "Ｗ"] ["X" "Ｘ"] ["Y" "Ｙ"] ["Z" "Ｚ"]
+ ["a" "ａ"] ["b" "ｂ"] ["c" "ｃ"] ["d" "ｄ"] ["e" "ｅ"] ["f" "ｆ"] ["g" "ｇ"] ["h" "ｈ"] ["i" "ｉ"] ["j" "ｊ"] ["k" "ｋ"] ["l" "ｌ"] ["m" "ｍ"] ["n" "ｎ"] ["o" "ｏ"] ["p" "ｐ"] ["q" "ｑ"] ["r" "ｒ"] ["s" "ｓ"] ["t" "ｔ"] ["u" "ｕ"] ["v" "ｖ"] ["w" "ｗ"] ["x" "ｘ"] ["y" "ｙ"] ["z" "ｚ"]
+ ["," "，"] ["." "．"] [":" "："] [";" "；"] ["!" "！"] ["?" "？"] ["\"" "＂"] ["'" "＇"] ["`" "｀"] ["^" "＾"] ["~" "～"] ["¯" "￣"] ["_" "＿"]
+ ["&" "＆"] ["@" "＠"] ["#" "＃"] ["%" "％"] ["+" "＋"] ["-" "－"] ["*" "＊"] ["=" "＝"] ["<" "＜"] [">" "＞"] ["(" "（"] [")" "）"] ["[" "［"] ["]" "］"] ["{" "｛"] ["}" "｝"] ["(" "｟"] [")" "｠"] ["|" "｜"] ["¦" "￤"] ["/" "／"] ["\\" "＼"] ["¬" "￢"] ["$" "＄"] ["£" "￡"] ["¢" "￠"] ["₩" "￦"] ["¥" "￥"]
+          ]
+         )
+        (ξ-reverse-map (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-ascii-unicode-map))
+
+        (cmdStates ["to-unicode" "to-ascii"])
+        (stateBefore (if (get 'convert-fullwidth-chars 'state) (get 'convert-fullwidth-chars 'state) 0))
+        (stateAfter (% (+ stateBefore (length cmdStates) 1) (length cmdStates)))
+)
+
+;"０\\|１\\|２\\|３\\|４\\|５\\|６\\|７\\|８\\|９\\|Ａ\\|Ｂ\\|Ｃ\\|Ｄ\\|Ｅ\\|Ｆ\\|Ｇ\\|Ｈ\\|Ｉ\\|Ｊ\\|Ｋ\\|Ｌ\\|Ｍ\\|Ｎ\\|Ｏ\\|Ｐ\\|Ｑ\\|Ｒ\\|Ｓ\\|Ｔ\\|Ｕ\\|Ｖ\\|Ｗ\\|Ｘ\\|Ｙ\\|Ｚ\\|ａ\\|ｂ\\|ｃ\\|ｄ\\|ｅ\\|ｆ\\|ｇ\\|ｈ\\|ｉ\\|ｊ\\|ｋ\\|ｌ\\|ｍ\\|ｎ\\|ｏ\\|ｐ\\|ｑ\\|ｒ\\|ｓ\\|ｔ\\|ｕ\\|ｖ\\|ｗ\\|ｘ\\|ｙ\\|ｚ"
+
+;(message "before %s" stateBefore)
+;(message "after %s" stateAfter)
+;(message "ξ-to-direction %s" ξ-to-direction)
+;(message "real-this-command  %s" this-command)
+;(message "real-last-command %s" last-command)
+
+(let ((case-fold-search nil))
+ (replace-pairs-region
+ p1 p2
+ (cond
+  ((string= ξ-to-direction "unicode") ξ-ascii-unicode-map)
+  ((string= ξ-to-direction "ascii") ξ-reverse-map)
+  ((string= ξ-to-direction "auto")
+   (if (equal this-command last-command)
+       (if (eq stateBefore 0)
+           ξ-ascii-unicode-map
+         ξ-reverse-map
+         )
+     ξ-ascii-unicode-map
+     ))
+      (t (error "Your 3rd argument 「%s」 isn't valid." ξ-to-direction)) ) )
+)
+(put 'convert-fullwidth-chars 'state stateAfter)
+ ) )
 
 (defun replace-straight-quotes (p1 p2)
   "Replace straight double quotes to curly ones, and others.

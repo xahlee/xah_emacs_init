@@ -5,7 +5,7 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(defun copy-file-path (prefixArgCode)
+(defun copy-file-path (&optional dirPathOnly-p)
   "Copy the current buffer's file path or dired path to `kill-ring'.
 If `universal-argument' is called, copy only the dir path."
   (interactive "P")
@@ -15,7 +15,7 @@ If `universal-argument' is called, copy only the dir path."
            (buffer-file-name)
            )))
     (kill-new 
-     (if (equal prefixArgCode nil)
+     (if (equal dirPathOnly-p nil)
          fPath
        (file-name-directory fPath)
        )))  
@@ -37,7 +37,7 @@ See also: `paste-from-register-1', `copy-to-register'."
 ))
 
 (defun paste-from-register-1 ()
-  "paste text from register 1.
+  "Paste text from register 1.
 See also: `copy-to-register-1', `insert-register'."
   (interactive)
   (when (region-active-p)

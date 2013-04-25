@@ -20,6 +20,24 @@
 ;; created: 2007-06.
 
 
+
+;(global-unset-key (kbd "C-+") )         ; text-scale-increase
+;(global-unset-key (kbd "C--") )         ; text-scale-decrease
+;(global-unset-key (kbd "C-a") )         ; mark-whole-buffer
+;(global-unset-key (kbd "C-s") )         ; save
+;(global-unset-key (kbd "C-o") )         ; open
+;(global-unset-key (kbd "C-0") ) ; text-scale-normal-size
+;(global-unset-key (kbd "M-5") )
+;(global-unset-key (kbd "M-3") )
+;(global-unset-key (kbd "M-4") )
+;(global-unset-key (kbd "M--") )
+;(global-unset-key (kbd "M-%") )
+;(global-unset-key (kbd "M-l") )         ; recenter-top-bottom
+;(global-unset-key (kbd "M-0") )         ; delete-window
+;(global-unset-key (kbd "C-S-t") )       ; ergoemacs-open-last-closed
+;(global-unset-key (kbd "C-u") )       ; universal-argument
+
+
 ;; generic
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
@@ -61,8 +79,8 @@
 ;;    ;qjk x b mwv-
 
 ;; prefix keys should be
-;; .p gc
-;; eu ht
+;; .p yf gc
+;; eu id ht
 
 ;; u is for unicode insert
 ;; e is mode-specific
@@ -86,6 +104,8 @@
 ; 【e】 【u】 C-x   【i】  | 【d】 C-h 【h】 C-c 【t】
 ;                                 【m】 commit
 ; /home/xah/git/ergoemacs/ergoemacs/ergoemacs-keybindings/ergoemacs-variants.el
+; 〈Keyboard Layouts Fight! Dvorak, Maltron, Colemak, NEO, Bépo, Turkish-F, …〉
+; http://xahlee.info/kbd/dvorak_and_all_keyboard_layouts.html
 
 (global-set-key (kbd "<menu>") 'nil)
 (global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
@@ -142,56 +162,56 @@
 ; (global-set-key (kbd "<menu> e") 'nil)  ; mode specific
  (global-set-key (kbd "<menu> f") 'copy-file-path)
 
-(progn
-  (global-set-key (kbd "<menu> g") 'nil)
-  (global-set-key (kbd "<menu> g '") "\"")
-  (global-set-key (kbd "<menu> g ,") "<")
-  (global-set-key (kbd "<menu> g -") "_")
-  (global-set-key (kbd "<menu> g .") ">")
-  (global-set-key (kbd "<menu> g /") "?")
-  (global-set-key (kbd "<menu> g ;") ":")
-  (global-set-key (kbd "<menu> g =") "+")
-  (global-set-key (kbd "<menu> g \\") "|")
-  (global-set-key (kbd "<menu> g `") "~")
-
-  (global-set-key (kbd "<menu> g 0") ")")
-  (global-set-key (kbd "<menu> g 1") "!")
-  (global-set-key (kbd "<menu> g 2") "@")
-  (global-set-key (kbd "<menu> g 3") "#")
-  (global-set-key (kbd "<menu> g 4") "$")
-  (global-set-key (kbd "<menu> g 5") "%")
-  (global-set-key (kbd "<menu> g 6") "^")
-  (global-set-key (kbd "<menu> g 7") "&")
-  (global-set-key (kbd "<menu> g 8") "*")
-  (global-set-key (kbd "<menu> g 9") "(")
-
-  (global-set-key (kbd "<menu> g a") "A")
-  (global-set-key (kbd "<menu> g b") "B")
-  (global-set-key (kbd "<menu> g c") "C")
-  (global-set-key (kbd "<menu> g d") "D")
-  (global-set-key (kbd "<menu> g e") "E")
-  (global-set-key (kbd "<menu> g f") "F")
-  (global-set-key (kbd "<menu> g g") "G")
-  (global-set-key (kbd "<menu> g h") "H")
-  (global-set-key (kbd "<menu> g i") "I")
-  (global-set-key (kbd "<menu> g j") "J")
-  (global-set-key (kbd "<menu> g k") "K")
-  (global-set-key (kbd "<menu> g l") "L")
-  (global-set-key (kbd "<menu> g m") "M")
-  (global-set-key (kbd "<menu> g n") "N")
-  (global-set-key (kbd "<menu> g o") "O")
-  (global-set-key (kbd "<menu> g p") "P")
-  (global-set-key (kbd "<menu> g q") "Q")
-  (global-set-key (kbd "<menu> g r") "R")
-  (global-set-key (kbd "<menu> g s") "S")
-  (global-set-key (kbd "<menu> g t") "T")
-  (global-set-key (kbd "<menu> g u") "U")
-  (global-set-key (kbd "<menu> g v") "V")
-  (global-set-key (kbd "<menu> g w") "W")
-  (global-set-key (kbd "<menu> g x") "X")
-  (global-set-key (kbd "<menu> g y") "Y")
-  (global-set-key (kbd "<menu> g z") "Z")
-  )
+;(progn
+;  (global-set-key (kbd "<menu> g") 'nil)
+;  (global-set-key (kbd "<menu> g '") "\"")
+;  (global-set-key (kbd "<menu> g ,") "<")
+;  (global-set-key (kbd "<menu> g -") "_")
+;  (global-set-key (kbd "<menu> g .") ">")
+;  (global-set-key (kbd "<menu> g /") "?")
+;  (global-set-key (kbd "<menu> g ;") ":")
+;  (global-set-key (kbd "<menu> g =") "+")
+;  (global-set-key (kbd "<menu> g \\") "|")
+;  (global-set-key (kbd "<menu> g `") "~")
+;
+;  (global-set-key (kbd "<menu> g 0") ")")
+;  (global-set-key (kbd "<menu> g 1") "!")
+;  (global-set-key (kbd "<menu> g 2") "@")
+;  (global-set-key (kbd "<menu> g 3") "#")
+;  (global-set-key (kbd "<menu> g 4") "$")
+;  (global-set-key (kbd "<menu> g 5") "%")
+;  (global-set-key (kbd "<menu> g 6") "^")
+;  (global-set-key (kbd "<menu> g 7") "&")
+;  (global-set-key (kbd "<menu> g 8") "*")
+;  (global-set-key (kbd "<menu> g 9") "(")
+;
+;  (global-set-key (kbd "<menu> g a") "A")
+;  (global-set-key (kbd "<menu> g b") "B")
+;  (global-set-key (kbd "<menu> g c") "C")
+;  (global-set-key (kbd "<menu> g d") "D")
+;  (global-set-key (kbd "<menu> g e") "E")
+;  (global-set-key (kbd "<menu> g f") "F")
+;  (global-set-key (kbd "<menu> g g") "G")
+;  (global-set-key (kbd "<menu> g h") "H")
+;  (global-set-key (kbd "<menu> g i") "I")
+;  (global-set-key (kbd "<menu> g j") "J")
+;  (global-set-key (kbd "<menu> g k") "K")
+;  (global-set-key (kbd "<menu> g l") "L")
+;  (global-set-key (kbd "<menu> g m") "M")
+;  (global-set-key (kbd "<menu> g n") "N")
+;  (global-set-key (kbd "<menu> g o") "O")
+;  (global-set-key (kbd "<menu> g p") "P")
+;  (global-set-key (kbd "<menu> g q") "Q")
+;  (global-set-key (kbd "<menu> g r") "R")
+;  (global-set-key (kbd "<menu> g s") "S")
+;  (global-set-key (kbd "<menu> g t") "T")
+;  (global-set-key (kbd "<menu> g u") "U")
+;  (global-set-key (kbd "<menu> g v") "V")
+;  (global-set-key (kbd "<menu> g w") "W")
+;  (global-set-key (kbd "<menu> g x") "X")
+;  (global-set-key (kbd "<menu> g y") "Y")
+;  (global-set-key (kbd "<menu> g z") "Z")
+;  )
 
 (progn
 ;  (global-set-key (kbd "<menu> h") help-map) ; ★★★
@@ -248,18 +268,17 @@
 (global-set-key (kbd "<menu> l") 'recenter-top-bottom)
 
 (global-set-key (kbd "<menu> m") 'nil)
-(global-set-key (kbd "<menu> m c") 'calc)
-(global-set-key (kbd "<menu> m e") 'xah-elisp-mode)
-(global-set-key (kbd "<menu> m h") 'xah-html-mode)
-(global-set-key (kbd "<menu> m l") 'linum-mode)
-(global-set-key (kbd "<menu> m p") 'php-mode)
-(global-set-key (kbd "<menu> m s") 'shell)
-(global-set-key (kbd "<menu> m t") 'text-mode)
-(global-set-key (kbd "<menu> m v") 'visual-line-mode)
-(global-set-key (kbd "<menu> m w") 'whitespace-mode)
-(global-set-key (kbd "<menu> m x") 'nxml-mode)
 
-(global-set-key (kbd "<menu> n") 'ergoemacs-new-empty-buffer) ; ★★★
+(global-set-key (kbd "<menu> n") 'nil)
+(global-set-key (kbd "<menu> n c") 'visual-line-mode)
+(global-set-key (kbd "<menu> n g") 'whitespace-mode)
+(global-set-key (kbd "<menu> n h") 'calc)
+(global-set-key (kbd "<menu> n n") 'linum-mode)
+(global-set-key (kbd "<menu> n t") 'shell)
+
+(global-set-key (kbd "<menu> n e") 'xah-elisp-mode)
+(global-set-key (kbd "<menu> n p") 'xah-php-mode)
+
 (global-set-key (kbd "<menu> o") 'nil)
 (global-set-key (kbd "<menu> o SPC") 'xah-open-file-fast)
 (global-set-key (kbd "<menu> o c") 'bookmark-bmenu-list)
@@ -267,7 +286,9 @@
 (global-set-key (kbd "<menu> o h") 'recentf-open-files) ; ★★★
 (global-set-key (kbd "<menu> o n") 'ido-find-file)
 (global-set-key (kbd "<menu> o t") 'ido-switch-buffer)  ; ★★★
+
 (global-set-key (kbd "<menu> p") 'nil)
+
 (global-set-key (kbd "<menu> q") 'quoted-insert) ; ★★★
 (global-set-key (kbd "<menu> r") 'nil)
 (global-set-key (kbd "<menu> r '") 'replace-straight-quotes)
@@ -336,7 +357,7 @@
   (global-set-key (kbd "<menu> u y") 'insert-pair-single-angle-quote‹›)
   )
 
-(global-set-key (kbd "<menu> v") 'nil)
+(global-set-key (kbd "<menu> v") 'comment-dwim)
 (global-set-key (kbd "<menu> w") 'ergoemacs-close-current-buffer) ; ★★★
 (global-set-key (kbd "<menu> x") ctl-x-map) ; ★★★
 (global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
@@ -525,23 +546,6 @@ For `Info-mode-hook'."
 ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_truly_ergonomic"))
 (load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
 
-;; remove ErgoEmacs's changing font size
-(global-unset-key (kbd "C-+") )         ; text-scale-increase
-(global-unset-key (kbd "C--") )         ; text-scale-decrease
-;(global-unset-key (kbd "C-a") )         ; mark-whole-buffer
-;(global-unset-key (kbd "C-s") )         ; save
-;(global-unset-key (kbd "C-o") )         ; open
-(global-unset-key (kbd "C-0") ) ; text-scale-normal-size
-(global-unset-key (kbd "M-5") )
-(global-unset-key (kbd "M-3") )
-(global-unset-key (kbd "M-4") )
-(global-unset-key (kbd "M--") )
-(global-unset-key (kbd "M-%") )
-(global-unset-key (kbd "M-l") )         ; recenter-top-bottom
-(global-unset-key (kbd "M-0") )         ; delete-window
-;(global-unset-key (kbd "C-S-t") )       ; ergoemacs-open-last-closed
-;(global-unset-key (kbd "C-u") )       ; universal-argument
-
 (global-set-key (kbd "C--") 'cycle-camel-style-case)
 (global-set-key (kbd "C-1") 'cycle-font-backward)
 (global-set-key (kbd "C-2") 'cycle-font-forward)
@@ -551,9 +555,6 @@ For `Info-mode-hook'."
 ;(global-set-key (kbd "C-u") 'forward-sexp)
 ;(global-set-key (kbd "C-e") 'down-list)
 ;(global-set-key (kbd "C-.") 'backward-up-list)
-
-
-
 
 (global-set-key (kbd "M-3") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "M-7") 'ergoemacs-select-current-line)
@@ -573,6 +574,13 @@ For `Info-mode-hook'."
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
+
+(require 'ido)
+(define-key ido-file-completion-map (kbd "C-o") 'ido-fallback-command)
+
+(global-set-key (kbd "C-4") 'convert-fullwidth-chars)
+
+
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

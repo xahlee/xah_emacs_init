@@ -7,6 +7,8 @@
 
 
 
+(global-linum-mode 0)
+
 (setq ergoemacs-repeat-movement-commands 'nil)
 
 (setq sentence-end-double-space nil )
@@ -98,7 +100,7 @@
 
 
 
-; (when (boundp 'tabbar-mode) (tabbar-mode 0))
+(when (boundp 'tabbar-mode) (tabbar-mode 0))
 (setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
 
 (math-symbol-input-mode 1)

@@ -37,19 +37,22 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
         (progn
           (if (file-exists-p ξffp)
               (progn
-                (setq ξwidthHeight
+                (setq ξwidthHeight ξwidthHeightStr
                       (cond
                        ((string-match "\.svg$" ξffp) (get-image-dimensions ξffp))
                        (t (get-image-dimensions-imk ξffp)) ) )
                 (setq ξwidth (number-to-string (elt ξwidthHeight 0)))
                 (setq ξheight (number-to-string (elt ξwidthHeight 1)))
+                (setq ξwidthHeightStr
+                      (if (string-match "\.svg$" ξffp)
+                          ""
+                       (format "width=\"%s\" height=\"%s\"" ξwidth ξheight) )
+                      )
                 (delete-region p1 p2)
                 (insert
-                 (format "<img src=\"%s\" alt=\"%s\" width=\"%s\" height=\"%s\" />"
+                 (format "<img src=\"%s\" alt=\"%s\" ξwidthHeightStr />"
                          (xahsite-filepath-to-href-value ξffp (or (buffer-file-name) default-directory))
-                         altText
-                         ξwidth ξheight
-                         ))
+                         altText ξwidthHeightStr ))
                 )
             (error "File does not exist 「%s」" ξffp )) )
       (progn
