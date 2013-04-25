@@ -36,7 +36,6 @@
 (add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))
 (add-to-list 'magic-mode-alist '("<\\?php" . xah-php-mode) )
 
-
 ;(remove-hook 'find-file-hook 'recentf-track-opened-file)
 ;(remove-hook 'find-file-hook 'global-linum-mode-check-buffers)
 ;(remove-hook 'find-file-hook 'global-subword-mode-check-buffers)
@@ -100,7 +99,15 @@
 
 
 
+(when (boundp 'tabbar-ruler-global-tabbar)
+  (setq tabbar-ruler-global-tabbar nil) ; If you want tabbar
+  (setq tabbar-ruler-global-ruler nil) ; if you want a global ruler
+  (setq tabbar-ruler-popup-menu nil) ; If you want a popup menu.
+  (setq tabbar-ruler-popup-toolbar nil) ; If you want a popup toolbar
+)
+
 (when (boundp 'tabbar-mode) (tabbar-mode 0))
+
 (setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
 
 (math-symbol-input-mode 1)

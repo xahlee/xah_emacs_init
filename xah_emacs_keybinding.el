@@ -131,7 +131,7 @@
   (define-key help-map (kbd "h") 'nil) ; view-hello-file
   )
 
-(global-set-key (kbd "<menu> .") 'shell-command)   ; ★★★
+(global-set-key (kbd "<menu> .") 'nil)
 (global-set-key (kbd "<menu> '") 'nil)
 (global-set-key (kbd "<menu> ,") 'shell-command-on-region)
 (global-set-key (kbd "<menu> -") 'xc-comment-smart) ; ★★★ , comment-dwim
@@ -144,7 +144,7 @@
 (global-set-key (kbd "<menu> 2") 'paste-from-register-1)
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ; ★★★
 (global-set-key (kbd "<menu> 4") 'split-window-vertically) ; ★★★
-(global-set-key (kbd "<menu> 5") 'nil) ; ★★★
+(global-set-key (kbd "<menu> 5") 'shell-command) ; ★★★
 (global-set-key (kbd "<menu> 6") 'run-current-file) ;; immediate, but dangerous eval-buffer
 (global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ; ★★★ find-file-at-point
 (global-set-key (kbd "<menu> 8") 'dired-jump)              ; ★★★
@@ -284,7 +284,6 @@
 (global-set-key (kbd "<menu> o c") 'bookmark-bmenu-list)
 (global-set-key (kbd "<menu> o g") 'ibuffer)
 (global-set-key (kbd "<menu> o h") 'recentf-open-files) ; ★★★
-(global-set-key (kbd "<menu> o n") 'ido-find-file)
 (global-set-key (kbd "<menu> o t") 'ido-switch-buffer)  ; ★★★
 
 (global-set-key (kbd "<menu> p") 'nil)
@@ -358,7 +357,7 @@
   )
 
 (global-set-key (kbd "<menu> v") 'comment-dwim)
-(global-set-key (kbd "<menu> w") 'ergoemacs-close-current-buffer) ; ★★★
+(global-set-key (kbd "<menu> w") 'nil) ; ★★★
 (global-set-key (kbd "<menu> x") ctl-x-map) ; ★★★
 (global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> z") 'nil)
@@ -579,8 +578,6 @@ For `Info-mode-hook'."
 (define-key ido-file-completion-map (kbd "C-o") 'ido-fallback-command)
 
 (global-set-key (kbd "C-4") 'convert-fullwidth-chars)
-
-
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

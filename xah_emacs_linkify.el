@@ -22,42 +22,42 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
          (ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
-         (ξffp (expand-file-name (xahsite-web-path-to-filepath ξinputPath) ξcurrentDir ) ) ;full path
-          ;; (setq ξffp (windows-style-path-to-unix (local-url-to-file-path ξffp)))
-         ξwidthHeight ξwidth ξheight altText
+         (ξfp (expand-file-name (xahsite-web-path-to-filepath ξinputPath) ξcurrentDir ) ) ;full path
+          ;; (setq ξfp (windows-style-path-to-unix (local-url-to-file-path ξfp)))
+          altText
          )
 
-;; (message "ooo %s" ξffp)
+;; (message "ooo %s" ξfp)
 
-    (setq altText (file-name-sans-extension (file-name-nondirectory ξffp)))
+    (setq altText (file-name-sans-extension (file-name-nondirectory ξfp)))
     (setq altText (replace-regexp-in-string "_" " " altText t t))
     (setq altText (replace-regexp-in-string "-s$" "" altText))
 
-    (if (xahsite-is-link-to-xahsite-p (file-relative-name ξffp (or (buffer-file-name) default-directory) ))
+    (if (xahsite-is-link-to-xahsite-p (file-relative-name ξfp (or (buffer-file-name) default-directory) ))
         (progn
-          (if (file-exists-p ξffp)
-              (progn
-                (setq ξwidthHeight ξwidthHeightStr
+          (if (file-exists-p ξfp)
+              (let (ξwh ξw ξh ξwhStr)
+                (setq ξwh
                       (cond
-                       ((string-match "\.svg$" ξffp) (get-image-dimensions ξffp))
-                       (t (get-image-dimensions-imk ξffp)) ) )
-                (setq ξwidth (number-to-string (elt ξwidthHeight 0)))
-                (setq ξheight (number-to-string (elt ξwidthHeight 1)))
-                (setq ξwidthHeightStr
-                      (if (string-match "\.svg$" ξffp)
+                       ((string-match "\.svg$" ξfp) (get-image-dimensions ξfp))
+                       (t (get-image-dimensions-imk ξfp)) ) )
+                (setq ξw (number-to-string (elt ξwh 0)))
+                (setq ξh (number-to-string (elt ξwh 1)))
+                (setq ξwhStr
+                      (if (string-match "\.svg$" ξfp)
                           ""
-                       (format "width=\"%s\" height=\"%s\"" ξwidth ξheight) )
+                       (format "width=\"%s\" height=\"%s\"" ξw ξh) )
                       )
                 (delete-region p1 p2)
                 (insert
-                 (format "<img src=\"%s\" alt=\"%s\" ξwidthHeightStr />"
-                         (xahsite-filepath-to-href-value ξffp (or (buffer-file-name) default-directory))
-                         altText ξwidthHeightStr ))
+                 (format "<img src=\"%s\" alt=\"%s\" %s />"
+                         (xahsite-filepath-to-href-value ξfp (or (buffer-file-name) default-directory))
+                         altText ξwhStr ))
                 )
-            (error "File does not exist 「%s」" ξffp )) )
+            (error "File does not exist 「%s」" ξfp )) )
       (progn
         (delete-region p1 p2)
-        (insert "<img src=\"" ξffp "\" alt=\"" altText "\">") )
+        (insert "<img src=\"" ξfp "\" alt=\"" altText "\">") )
       ) ))
 
 (defun image-file-to-html-figure-tag ()

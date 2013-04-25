@@ -377,40 +377,48 @@ Code detail: URL `http://ergoemacs.org/emacs/elisp_parse_time.html'"
                (insert ξstr) )
       ξstr ) ))
 
-(defun change-file-newline (fpath eol-system)
-  "Change file's line ending to unix convention.
-FPATH is full path to file.
-eol-system is one of “'unix”, “'dos”, “'mac”.
-The “'dos” means Windows's convention.
-The “'mac” means Mac OS Classic's convention.
-For Mac OS X, use “'unix”."
-  (let (mybuffer)
-    (setq mybuffer (find-file fpath))
-    (set-buffer-file-coding-system eol-system)
-    (save-buffer)
-    (kill-buffer mybuffer)
-    )
-  )
+(defun change-file-line-ending (fpath lineEndingStyle)
+  "Change file's newline character.
+ 「fpath」 is full path to file.
+ 「lineEndingStyle」 is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 
-(defun dired-2unix-eol-marked-files ()
-  "Change marked file's newline convention to unix,
-or file under cursor if no file is marked."
-  (interactive)
-  (mapc
-   (lambda (ff) (change-file-newline ff 'unix))
-   (dired-get-marked-files))
-  )
+If the file is already opened, it will be saved after this command.
+"
+  (let (mybuffer
+        (bufferOpened-p (get-file-buffer fpath))
+        )
+    (if bufferOpened-p
+        (progn (with-current-buffer bufferOpened-p (set-buffer-file-coding-system lineEndingStyle) (save-buffer) ))
+      (progn
+        (setq mybuffer (find-file fpath))
+        (set-buffer-file-coding-system lineEndingStyle)
+        (save-buffer)
+        (kill-buffer mybuffer) ) ) ) )
 
-(defun dired-utf-8-unix-marked-files ()
-  "Change marked file's newline convention to unix,
-or file under cursor if no file is marked."
-  (interactive)
-  (mapc
-   (lambda (ff) (change-file-newline ff 'utf-8-unix))
-   (dired-get-marked-files))
-  )
+(defun change-file-line-ending-style (fileList lineEndingStyle)
+  "Change current file or dired marked file's newline convention.
+When called in lisp program, “lineEndingStyle” is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+"
+  (interactive
+   (list
+    (if (eq major-mode 'dired-mode )
+        (dired-get-marked-files)
+      (list (buffer-file-name)) )    
+    (ido-completing-read "Style:" '("Unix" "Mac OS 9" "Windows") "PREDICATE" "REQUIRE-MATCH"))
+   )
+  (let* (
+         (nlStyle
+          (cond
+           ((equal lineEndingStyle "Unix") 'unix)
+           ((equal lineEndingStyle "Mac OS 9") 'mac)
+           ((equal lineEndingStyle "Windows") 'dos)
+           ))
+         )
+    (mapc
+     (lambda (ff) (change-file-line-ending ff nlStyle))
+     fileList)) )
 
-;; --------------------------------------------------
+
 ;; don't use much anymore
 
                                         ; (beep-for-n-min 1)
