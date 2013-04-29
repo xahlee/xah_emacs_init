@@ -1,9 +1,12 @@
 ;; -*- coding: utf-8 -*-
 ;; some elisp string replacement functions
 
-;; 2007-06, 2011-09-29
+;; 2007-06
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
+
+(require 'xfrp_find_replace_pairs)
+(require 'xeu_elisp_util)
 
 (defun cycle-camel-style-case ()
   "Cyclically replace {camelStyle, camel_style} current word or text selection.
@@ -98,20 +101,20 @@ When called repeatedly, this command cycles the {“ ”, “_”, “-”} char
 
     ) )
 
-(defun replace-mathematica-symbols-region (start end)
+(defun replace-mathematica-symbols-region (p1 p2)
   "Replace Mathematica's special char encoding to Unicode of the same semantics.
 For example:
  \\=\\[Infinity] ⇒ ∞
  \\=\\[Equal] ⇒ =="
   (interactive "r")
-  (replace-pairs-region start end '(
+  (replace-pairs-region p1 p2 '(
  ["\\[Infinity]" "∞"]
  ["\\[Equal]" "=="])))
 
-(defun replace-greek-region (start end)
+(defun replace-greek-region (p1 p2)
   "Replace math symbols. e.g. alpha to α."
   (interactive "r")
-(replace-pairs-region start end '(
+(replace-pairs-region p1 p2 '(
 ["alpha" "α"]
 ["beta" "β"]
 ["gamma" "γ"]
@@ -217,11 +220,13 @@ See also `convert-english-chinese-punctuation'."
   (replace-regexp-pairs-region p1 p2
                                [
                                 ;; clean up. Remove extra space.
+                                [" +," ","]
                                 [",  +" ", "]
                                 ["?  +" "? "]
                                 ["!  +" "! "]
                                 ["\\.  +" ". "]
 
+;; fullwidth punctuations
                                 ["， +" "，"]
                                 ["。 +" "。"]
                                 ["： +" "："]
@@ -303,6 +308,36 @@ See also: `remove-punctuation-trailing-redundant-space'."
 )
 (put 'convert-fullwidth-chars 'state stateAfter)
  ) )
+
+
+(defun replace-latin-alphabet-to-gothic (p1 p2 reverse-direction-p)
+  "Replace English alphabets to Unicode gothic characters.
+For example, A ⇒ 𝔄, a ⇒ 𝔞.
+
+When called interactively, work on current text block or text selection. (a “text block” is text between empty lines)
+
+If any `universal-argument' is given, reverse direction.
+
+When called in elisp, the p1 and p2 are region begin/end positions to work on."
+  (interactive
+   (let ((bds (get-selection-or-unit 'block)) )
+     (list (elt bds 1) (elt bds 2) current-prefix-arg )) )
+
+  (let (
+        (latin-to-gothic [ ["A" "𝔄"] ["B" "𝔅"] ["C" "ℭ"] ["D" "𝔇"] ["E" "𝔈"] ["F" "𝔉"] ["G" "𝔊"] ["H" "ℌ"] ["I" "ℑ"] ["J" "𝔍"] ["K" "𝔎"] ["L" "𝔏"] ["M" "𝔐"] ["N" "𝔑"] ["O" "𝔒"] ["P" "𝔓"] ["Q" "𝔔"] ["R" "ℜ"] ["S" "𝔖"] ["T" "𝔗"] ["U" "𝔘"] ["V" "𝔙"] ["W" "𝔚"] ["X" "𝔛"] ["Y" "𝔜"] ["Z" "ℨ"] ["a" "𝔞"] ["b" "𝔟"] ["c" "𝔠"] ["d" "𝔡"] ["e" "𝔢"] ["f" "𝔣"] ["g" "𝔤"] ["h" "𝔥"] ["i" "𝔦"] ["j" "𝔧"] ["k" "𝔨"] ["l" "𝔩"] ["m" "𝔪"] ["n" "𝔫"] ["o" "𝔬"] ["p" "𝔭"] ["q" "𝔮"] ["r" "𝔯"] ["s" "𝔰"] ["t" "𝔱"] ["u" "𝔲"] ["v" "𝔳"] ["w" "𝔴"] ["x" "𝔵"] ["y" "𝔶"] ["z" "𝔷"] ])
+
+        (gothic-to-latin [ ["𝔄" "A"] ["𝔅" "B"] ["ℭ" "C"] ["𝔇" "D"] ["𝔈" "E"] ["𝔉" "F"] ["𝔊" "G"] ["ℌ" "H"] ["ℑ" "I"] ["𝔍" "J"] ["𝔎" "K"] ["𝔏" "L"] ["𝔐" "M"] ["𝔑" "N"] ["𝔒" "O"] ["𝔓" "P"] ["𝔔" "Q"] ["ℜ" "R"] ["𝔖" "S"] ["𝔗" "T"] ["𝔘" "U"] ["𝔙" "V"] ["𝔚" "W"] ["𝔛" "X"] ["𝔜" "Y"] ["ℨ" "Z"] ["𝔞" "a"] ["𝔟" "b"] ["𝔠" "c"] ["𝔡" "d"] ["𝔢" "e"] ["𝔣" "f"] ["𝔤" "g"] ["𝔥" "h"] ["𝔦" "i"] ["𝔧" "j"] ["𝔨" "k"] ["𝔩" "l"] ["𝔪" "m"] ["𝔫" "n"] ["𝔬" "o"] ["𝔭" "p"] ["𝔮" "q"] ["𝔯" "r"] ["𝔰" "s"] ["𝔱" "t"] ["𝔲" "u"] ["𝔳" "v"] ["𝔴" "w"] ["𝔵" "x"] ["𝔶" "y"] ["𝔷" "z"] ])
+
+        useMap
+        )
+
+    (if reverse-direction-p
+        (progn (setq useMap gothic-to-latin))
+      (progn (setq useMap latin-to-gothic))
+      )
+    (save-excursion
+      (let ((case-fold-search nil))
+        (replace-pairs-region p1 p2 useMap ) ) ) ) )
 
 (defun replace-straight-quotes (p1 p2)
   "Replace straight double quotes to curly ones, and others.
@@ -465,7 +500,7 @@ Examples of changes:
 
 (defun replace-curly-apostrophe ()
   "Replace some single curly quotes to straight version,
-in current text block or text selection.
+in text selection or text block.
 Example: 「it’s」 ⇒ 「it's」."
   (interactive "r")
 (let (bds p1 p2)
@@ -485,11 +520,71 @@ Example: 「it’s」 ⇒ 「it's」."
 
 )
 
+
+(defun remove-vowel-old (&optional ξstring ξfrom ξto)
+  "Remove the following letters: {a e i o u}.
+
+When called interactively, work on current text block or text selection. (a “text block” is text between empty lines)
+
+When called in lisp code, if ξstring is non-nil, returns a changed string.  If ξstring nil, change the text in the region between positions ξfrom ξto."
+  (interactive
+   (if (region-active-p)
+       (list nil (region-beginning) (region-end))
+     (let ((bds (bounds-of-thing-at-point 'paragraph)) )
+       (list nil (car bds) (cdr bds)) ) ) )
+
+  (let (workOnStringP inputStr outputStr)
+    (setq workOnStringP (if ξstring t nil))
+    (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
+    (setq outputStr
+          (let ((case-fold-search t))
+            (replace-regexp-in-string "a\\|e\\|i\\|o\\|u\\|" "" inputStr) )  )
+
+    (if workOnStringP
+        outputStr
+      (save-excursion
+        (delete-region ξfrom ξto)
+        (goto-char ξfrom)
+        (insert outputStr) )) ) )
+
+(defun remove-vowel (ξstring &optional ξfrom-to-pair)
+  "Remove the following letters: {a e i o u}.
+
+When called interactively, work on current text block or text selection. (a “text block” is text between empty lines)
+
+When called in lisp code, if ξfrom-to-pair is non-nil, change the text
+in the region between positions [from to]. ξfrom-to-pair should be a
+list or vector pair.  Else, returns a changed string."
+  (interactive
+   (if (region-active-p)
+       (list nil (vector (region-beginning) (region-end)))
+     (let ((bds (bounds-of-thing-at-point 'paragraph)) )
+       (list nil (vector (car bds) (cdr bds))) ) ) )
+
+  (let (workOnStringP inputStr outputStr ξfrom ξto )
+    (when ξfrom-to-pair
+        (setq ξfrom (elt ξfrom-to-pair 0) )
+        (setq ξto (elt ξfrom-to-pair 1) )
+      )
+
+    (setq workOnStringP (if ξfrom-to-pair nil t))
+    (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
+    (setq outputStr
+          (let ((case-fold-search t))
+            (replace-regexp-in-string "a\\|e\\|i\\|o\\|u\\|" "" inputStr) )  )
+
+    (if workOnStringP
+        outputStr
+      (save-excursion
+        (delete-region ξfrom ξto)
+        (goto-char ξfrom)
+        (insert outputStr) )) ) )
+
 
-(defun replace-tex-region (start end)
+(defun replace-tex-region (p1 p2)
   "Replace some math function names or symbols by their LaTeX markup."
   (interactive "r")
-(replace-pairs-region start end '(
+(replace-pairs-region p1 p2 '(
 ["*" "\\ "]
 ["cos(" "\\cos("]
 ["sin(" "\\sin("]
@@ -498,13 +593,13 @@ Example: 「it’s」 ⇒ 「it's」."
 ["R^2" "\\mathbb{R}^2"]
 ["R^3" "\\mathbb{R}^3"])))
 
-(defun mathematica-to-lsl-region (start end)
+(defun mathematica-to-lsl-region (p1 p2)
   "Change Mathematica syntax to LSL syntax on region.
 
 LSL is Linden Scripting Language.
 This command does simple string replacement only."
   (interactive "r")
-(replace-pairs-region start end '(
+(replace-pairs-region p1 p2 '(
 ["Cos[" "llCos("]
 ["Sin[" "llSin("]
 ["Tan[" "llTan("]
@@ -528,16 +623,16 @@ The goal of these replacement is to reduce the file size of a Mathematica Graphi
     (goto-char 1)
     (while (search-forward-regexp "\\([0-9]\\)\\.\\([0-9][0-9][0-9]\\)[0-9]+" nil t) (replace-match "\\1.\\2" t nil)))
 
-(defun compact-region (start end)
+(defun compact-region (p1 p2)
   "Replace any sequence of whitespace chars to a single space on region.
 Whitespace here is considered any of \\n, tab, space ."
   (interactive "r")
-  (replace-regexp-pairs-region start end
+  (replace-regexp-pairs-region p1 p2
                                '( ["[\n\t]+" " "]
                                   ["  +" " "])
                                t))
 
-(defun format-c-lang-region (start end)
+(defun format-c-lang-region (p1 p2)
   "Expand region of c style syntax languages so that it is nicely formated.
 Experimental code.
 WARNING: If region has comment or string, the code'd be fucked up."
@@ -545,8 +640,8 @@ WARNING: If region has comment or string, the code'd be fucked up."
 
   (save-excursion
     (save-restriction
-      (narrow-to-region start end)
-      (replace-regexp-pairs-region start end
+      (narrow-to-region p1 p2)
+      (replace-regexp-pairs-region p1 p2
                                    '(
                                      ["{" "{\n"]
                                      [";" ";\n"]
@@ -554,7 +649,7 @@ WARNING: If region has comment or string, the code'd be fucked up."
                                      [";[\t\n]*}" "; }"]
                                      )
                                    t)
-      (indent-region start end)
+      (indent-region p1 p2)
       )
     )
   )
@@ -574,7 +669,7 @@ Work on whole buffer, or text selection."
         (narrow-to-region p1 p2)
         (progn
           (goto-char (point-min))
-          (while (search-forward-regexp " +\n" nil "noerror")
+          (while (search-forward-regexp "[ \t]+\n" nil "noerror")
             (replace-match "\n") ))
         (progn
           (goto-char (point-min))

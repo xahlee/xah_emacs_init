@@ -142,7 +142,9 @@
 (global-set-key (kbd "<menu> 0") 'delete-window)
 (global-set-key (kbd "<menu> 1") 'copy-to-register-1)
 (global-set-key (kbd "<menu> 2") 'paste-from-register-1)
+(global-set-key (kbd "<menu> 3") 'nil)
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ; ★★★
+(global-set-key (kbd "<menu> 4") 'nil)
 (global-set-key (kbd "<menu> 4") 'split-window-vertically) ; ★★★
 (global-set-key (kbd "<menu> 5") 'shell-command) ; ★★★
 (global-set-key (kbd "<menu> 6") 'run-current-file) ;; immediate, but dangerous eval-buffer
@@ -155,8 +157,8 @@
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> \\") 'escape-quotes)
 (global-set-key (kbd "<menu> `") 'make-backup)
-(global-set-key (kbd "<menu> a") 'mark-whole-buffer) ; ★★
-(global-set-key (kbd "<menu> b") 'flyspell-buffer) ; ★★
+(global-set-key (kbd "<menu> a") 'mark-whole-buffer) ; ★★★
+(global-set-key (kbd "<menu> b") 'nil)
 (global-set-key (kbd "<menu> c") 'nil)
 (global-set-key (kbd "<menu> d") 'ergoemacs-open-in-desktop)
 ; (global-set-key (kbd "<menu> e") 'nil)  ; mode specific
@@ -270,14 +272,13 @@
 (global-set-key (kbd "<menu> m") 'nil)
 
 (global-set-key (kbd "<menu> n") 'nil)
-(global-set-key (kbd "<menu> n c") 'visual-line-mode)
-(global-set-key (kbd "<menu> n g") 'whitespace-mode)
+(global-set-key (kbd "<menu> n y") 'visual-line-mode)
+(global-set-key (kbd "<menu> n .") 'whitespace-mode)
 (global-set-key (kbd "<menu> n h") 'calc)
-(global-set-key (kbd "<menu> n n") 'linum-mode)
+(global-set-key (kbd "<menu> n p") 'linum-mode)
 (global-set-key (kbd "<menu> n t") 'shell)
-
-(global-set-key (kbd "<menu> n e") 'xah-elisp-mode)
-(global-set-key (kbd "<menu> n p") 'xah-php-mode)
+(global-set-key (kbd "<menu> n 3") 'xah-elisp-mode)
+(global-set-key (kbd "<menu> n 4") 'xah-php-mode)
 
 (global-set-key (kbd "<menu> o") 'nil)
 (global-set-key (kbd "<menu> o SPC") 'xah-open-file-fast)
@@ -307,11 +308,10 @@
   (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> t l") 'xah-clean-whitespace)
-  (global-set-key (kbd "<menu> t n") 'make-frame-command)
-  (global-set-key (kbd "<menu> t o") 'ergoemacs-open-last-closed)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
   (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
+  (global-set-key (kbd "<menu> t b") 'flyspell-buffer)
 )
 
 (progn
@@ -549,13 +549,13 @@ For `Info-mode-hook'."
 (global-set-key (kbd "C-1") 'cycle-font-backward)
 (global-set-key (kbd "C-2") 'cycle-font-forward)
 (global-set-key (kbd "C-3") 'cycle-font-2)
+(global-set-key (kbd "M-3") 'ergoemacs-select-text-in-quote)
 
 ;(global-set-key (kbd "C-o") 'backward-sexp)
 ;(global-set-key (kbd "C-u") 'forward-sexp)
 ;(global-set-key (kbd "C-e") 'down-list)
 ;(global-set-key (kbd "C-.") 'backward-up-list)
 
-(global-set-key (kbd "M-3") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "M-7") 'ergoemacs-select-current-line)
 (global-set-key (kbd "M-s") 'ergoemacs-toggle-letter-case)
 
@@ -578,6 +578,8 @@ For `Info-mode-hook'."
 (define-key ido-file-completion-map (kbd "C-o") 'ido-fallback-command)
 
 (global-set-key (kbd "C-4") 'convert-fullwidth-chars)
+(global-set-key (kbd "C-5") 'replace-latin-alphabet-to-gothic)
+
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

@@ -34,9 +34,10 @@ When called in lisp program, ξsourceFilePath and ξdestFilePath should be file 
       (progn
         (setq ξtitle (get-html-file-title ξsourceFilePath))
         (goto-char 1)
-        (if (search-forward "<div class=\"rltd\">
-<ul>" nil t)
-            (insert (format "\n<li><a href=\"%s\">%s</a></li>" ξnewHrefValue ξtitle))
+        (if (search-forward "<div class=\"rltd\">" nil t)
+            (progn (search-forward "<ul>" nil t)
+                   (insert "\n" (format "<li><a href=\"%s\">%s</a></li>" ξnewHrefValue ξtitle))
+                   )
           (progn 
             (goto-char (point-max))
             (search-backward "<div id=\"disqus_thread\">")

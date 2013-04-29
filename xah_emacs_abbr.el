@@ -24,8 +24,8 @@
     ("ms" "Microsoft")
     ("ex" "example:")
     ("fex" "for example:")
+    ("dev" "develop")
 
-;
 ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
 ;("t" "the") ; 1
 ;;; ("t" "be") ; 2
