@@ -51,8 +51,8 @@
 ;; (global-set-key (kbd "<f8>") ctl-x-map)
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
-(global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
-(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
+;(global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
+;(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 (global-set-key (kbd "]") 'ergoemacs-close-current-buffer)
 
 ;; (global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
@@ -130,6 +130,11 @@
   (define-key help-map (kbd "o") 'nil)  ; ergoemacs-where-is-old-binding
   (define-key help-map (kbd "h") 'nil) ; view-hello-file
   )
+
+(global-set-key (kbd "<menu> <f9>") 'linum-mode)
+(global-set-key (kbd "<menu> <f10>") 'whitespace-mode)
+(global-set-key (kbd "<menu> <f11>") 'calc)
+(global-set-key (kbd "<menu> <f12>") 'shell)
 
 (global-set-key (kbd "<menu> .") 'nil)
 (global-set-key (kbd "<menu> '") 'nil)
@@ -273,12 +278,9 @@
 
 (global-set-key (kbd "<menu> n") 'nil)
 (global-set-key (kbd "<menu> n y") 'visual-line-mode)
-(global-set-key (kbd "<menu> n .") 'whitespace-mode)
-(global-set-key (kbd "<menu> n h") 'calc)
-(global-set-key (kbd "<menu> n p") 'linum-mode)
-(global-set-key (kbd "<menu> n t") 'shell)
 (global-set-key (kbd "<menu> n 3") 'xah-elisp-mode)
 (global-set-key (kbd "<menu> n 4") 'xah-php-mode)
+(global-set-key (kbd "<menu> n 5") 'xah-html-mode)
 
 (global-set-key (kbd "<menu> o") 'nil)
 (global-set-key (kbd "<menu> o SPC") 'xah-open-file-fast)
@@ -579,7 +581,6 @@ For `Info-mode-hook'."
 
 (global-set-key (kbd "C-4") 'convert-fullwidth-chars)
 (global-set-key (kbd "C-5") 'replace-latin-alphabet-to-gothic)
-
 
 (defun toggle-menu-key ()
   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"

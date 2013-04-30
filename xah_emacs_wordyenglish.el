@@ -204,9 +204,9 @@ insert a div tag above the current paragraph."
     (setq inputText (elt bds 0) )
     (xhm-wrap-html-tag "span" "xnt")
     (search-backward "<p")
-  (insert "<div class=\"x-note\"></div>\n\n")
+    (insert "<div class=\"xnote\"></div>\n\n")
     (search-backward "</div>")
-    (insert (format "<b class=\"x3nt\">%s</b>⇒ " inputText)  )
+    (insert (format "<b class=\"x3nt\">%s</b>→ " inputText)  )
     )
   )
 
