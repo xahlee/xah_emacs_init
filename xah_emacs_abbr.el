@@ -316,27 +316,6 @@
 
 ;;; unix shell
 
-    ("3s" "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
-    ("3rsn2" "rsync -z -r -v -t  --delete  ~/web/  /media/OS/Users/h3/web/")
-
-    ("3ssh" "ssh -l u40651120 xahlee.org ")
-    ("3im" "convert -quality 85% ")
-    ("3ims" "convert -scale 50% -quality 85% ")
-    ("3im256" "convert +dither -colors 256 ")
-    ("3imf" "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
-    ("3bmp2png" "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
-
-    ("3grep" "grep -r -F 'xxx' --include='*html' ~/web")
-
-    ("3f0" "find . -type f -empty")
-    ("3f0rm" "find . -type f -size 0 -exec rm {} ';'")
-    ("3frm" "find . -name \"*~\" -exec rm {} ';'")
-    ("3f0d" "find . -depth -empty -type d")
-    ("3f0drm" "find . -depth -empty -type d -exec rmdir {} ';'")
-    ("3chmod" "find . -type f -exec chmod 644 {} ';'")
-    ("3chmod2" "find . -type d -exec chmod 755 {} ';'")
-    ("3lynx" "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
-    ("3feh" "feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x1000 ~/Pictures/cinse_pixra3/ &")
 
 ; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/
 

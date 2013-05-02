@@ -481,3 +481,46 @@ When there is a text selection, act on the region."
               (while (search-forward "\n" nil t) (replace-match "" nil t)) )) ) )
 
       (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )
+
+
+
+
+
+(defun shell-abbrevs (cmdAbbrev)
+  "insert shell command from a selection prompt."
+  (interactive
+(let ((xah-shell-commands
+
+      '(
+
+        ("rsync1" . "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+
+        ("ssh" . "ssh -l u40651120 xahlee.org ")
+        ("img1" . "convert -quality 85% ")
+        ("imgScale" . "convert -scale 50% -quality 85% ")
+        ("img256" . "convert +dither -colors 256 ")
+        ("imgBatch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
+        ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
+
+        ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
+
+        ("rm_empty" . "find . -type f -empty")
+        ("chmod_file" . "find . -type f -exec chmod 644 {} ';'")
+        ("rm~" . "find . -name \"*~\" -exec rm {} ';'")
+        ("findEmptyDir" . "find . -depth -empty -type d")
+        ("rmEmptyDir" . "find . -depth -empty -type d -exec rmdir {} ';'")
+        ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
+        ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
+        ("vp" . "feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x1000 ~/Pictures/cinse_pixra3/ &")
+        )
+
+      ))
+ (list
+    (ido-completing-read "HTML tag:" (mapcar (lambda (x) (car x)) xah-shell-commands) "PREDICATE" "REQUIRE-MATCH")
+     )
+)
+    )
+  (let ()
+    (insert (cdr (assoc cmdAbbrev xah-shell-commands)))
+  ))
+

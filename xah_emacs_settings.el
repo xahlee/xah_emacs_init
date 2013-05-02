@@ -9,6 +9,8 @@
 
 (global-linum-mode 0)
 
+(setq enable-recursive-minibuffers t )
+
 (setq ergoemacs-repeat-movement-commands 'nil)
 
 (setq sentence-end-double-space nil )
