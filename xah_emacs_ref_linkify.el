@@ -22,7 +22,7 @@ For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/eli
     (cond
      ((string-match "(elisp)" infoNodeStr )  (format "%s%s%s.html" domainStr "emacs_manual/elisp/" tempPath))
      ((string-match "(emacs)" infoNodeStr ) (format "%s%s%s.html" domainStr "emacs_manual/emacs/" tempPath))
-     (t (error "infoNodeStr doesn't match “(elisp)” or “(emacs)”: %s" infoNodeStr)) ) ) )
+     (t (user-error "infoNodeStr 「%s」 doesn't match “(elisp)” or “(emacs)”" infoNodeStr)) ) ) )
 
 (defun emacs-ref-linkify ()
   "Make the current line or selection into a emacs reference link.
@@ -73,7 +73,7 @@ Then it'll become:
                (cond
                 ((string-match "emacs_manual/elisp" ξfpath ) "(elisp) ")
                 ((string-match "emacs_manual/emacs" ξfpath ) "(emacs) ")
-                (t (error "ξfpath doesn't match “elisp” or “emacs”: %s" ξfpath)) )
+                (t (error "ξfpath 「%s」 doesn't match “elisp” or “emacs”" ξfpath)) )
 
                (replace-regexp-in-string "_002d" "-" (replace-regexp-in-string "-" " " (file-name-sans-extension (file-name-nondirectory ξfpath))))
                ) ) ) )

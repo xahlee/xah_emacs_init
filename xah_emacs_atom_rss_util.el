@@ -92,15 +92,11 @@ Other files paths for blogs are:
 "
   (interactive)
   (let* (
-        (bds (get-selection-or-unit 'block)) 
+        (bds (get-selection-or-unit 'block))
         (inputStr (elt bds 0))
         (p1 (elt bds 1))
         (p2 (elt bds 2))
         (p3)
-        (titleText
-          (if (string-match "<span class=\"b[0-9]\">\\([^<]+?\\)</span>" inputStr)
-              (progn (match-string 1 inputStr ))
-            (progn "�") ) )
         (summeryText "tutorial")
         (currentFilePath (buffer-file-name))
         (atomFilePath
@@ -109,31 +105,40 @@ Other files paths for blogs are:
            (replace-regexp-in-string "\\.html\\'" ".xml" currentFilePath "FIXEDCASE" "LITERAL")
            )
          )
+        (titleText
+         (if (string-match "<h3>\\([^<]+?\\)</h3>" inputStr)
+             (progn (match-string 1 inputStr ))
+           (progn
+             (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" inputStr)
+                 (progn (match-string 2 inputStr))
+               (progn "�") ) ) ) )
 
         (altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
-         (let ( (myurls (xhm-extract-url inputStr)) firstLink)
+         (let ( (myurls (xhm-extract-url inputStr)) firstLink1)
            (if (>= (length myurls) 1)
                (progn
-                 (setq firstLink (elt myurls 0))
-                 (if (string-match-p "\\`http://" firstLink)
-                     (if (xahsite-url-is-xah-website-p firstLink)
-                         (xahsite-filepath-to-href-value (xahsite-url-to-filepath firstLink "addFileName") currentFilePath)
-                       firstLink
+                 (setq firstLink1 (elt myurls 0))
+                 (if (string-match-p "\\`http://" firstLink1)
+                     (if (xahsite-url-is-xah-website-p firstLink1)
+                         (xahsite-filepath-to-href-value (xahsite-url-to-filepath firstLink1 "addFileName") currentFilePath)
+                       firstLink1
                        )
                    (xahsite-filepath-to-href-value
-                    (expand-file-name firstLink (file-name-directory currentFilePath ))
+                    (expand-file-name firstLink1 (file-name-directory currentFilePath ))
                     currentFilePath)
                    )
                  )
              (xahsite-filepath-to-url currentFilePath) ) ) )
          )
     (find-file atomFilePath)
+    (update-atom-updated-tag (buffer-file-name))
     (goto-char 1)
     (search-forward "<entry>" nil t)
     (beginning-of-line)
     (setq p3 (point) )
     (insert-atom-entry titleText (new-atom-id-tag) summeryText inputStr altURL)
-    (update-atom-updated-tag (buffer-file-name))
-    (when (not (search-forward "�" nil t) ) (progn (goto-char p3)))
+    (search-backward "</summary>")
+
+;    (when (not (search-forward "�" nil t) ) (progn (goto-char p3)))
     )
   )

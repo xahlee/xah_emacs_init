@@ -24,7 +24,6 @@
     ("ms" "Microsoft")
     ("ex" "example:")
     ("fex" "for example:")
-    ("dev" "develop")
 
 ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
 ;("t" "the") ; 1
@@ -186,7 +185,6 @@
     ("8ff" "Firefox")
     ("8sl" "Second Life")
     ("8ll" "Linden Labs")
-    ("8pv" "Phoenix Viewer")
     ("8fb" "Facebook")
     ("8ahk" "AutoHotkey")
     ("8pr" "POV-Ray")
@@ -206,6 +204,7 @@
     ("8hex" "hexadecimal")
     ("8ui" "user interface")
     ("8alt" "alternative")
+    ("8dev" "develop")
     ("8p" "program")
     ("8pl" "programing language")
     ("8paren" "parenthesis")
@@ -224,7 +223,7 @@
     ("8kbs" "keyboards")
     ("8kbd" "keybinding")
     ("8env" "environment")
-    ("8var" "variable")
+    ("8v" "variable")
     ("8vars" "variables")
     ("8ev" "environment variable")
     ("8evs" "environment variables")
@@ -233,10 +232,12 @@
     ("8fl" "functional language")
     ("8ca" "cellular automata")
     ("8f" "function")
-    ("8para" "parameter")
+    ("8pm" "parameter")
     ("8prog" "programing")
     ("8db" "database")
     ("8oop" "object oriented programing")
+
+
 
  ;; emacs lisp
     ("8date" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)")

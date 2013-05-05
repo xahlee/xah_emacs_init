@@ -180,7 +180,7 @@ See also: `remove-punctuation-trailing-redundant-space'."
                                   (mapcar (lambda (ξpair) (vector (elt ξpair 1) (elt ξpair 0))) ξ-english-chinese-punctuation-map)
                                   ))
 
-                               (t (error "Your 3rd argument 「%s」 isn't valid." ξ-to-direction)) ) ) ) )
+                               (t (user-error "Your 3rd argument 「%s」 isn't valid" ξ-to-direction)) ) ) ) )
 
 (defun convert-asian/ascii-space (p1 p2)
   "Change all space characters between Asian Ideographic one to ASCII one.
@@ -304,7 +304,7 @@ See also: `remove-punctuation-trailing-redundant-space'."
          )
      ξ-ascii-unicode-map
      ))
-      (t (error "Your 3rd argument 「%s」 isn't valid." ξ-to-direction)) ) )
+      (t (user-error "Your 3rd argument 「%s」 isn't valid" ξ-to-direction)) ) )
 )
 (put 'convert-fullwidth-chars 'state stateAfter)
  ) )

@@ -41,7 +41,8 @@
 ;; generic
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
-(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))
+(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
+;(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))
 (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
 ;; in linux, by default, <lwindow> is Super,  s-
@@ -268,7 +269,7 @@
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
   (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
   (global-set-key (kbd "<menu> t b") 'flyspell-buffer)
-  (global-set-key (kbd "<menu> t 3") 'shell-abbrevs)
+  (global-set-key (kbd "<menu> t 3") 'xah-shell-commands)
 )
 
 (progn

@@ -112,7 +112,7 @@ becomes 「[37.44345 -6.253966666666667]」"
     (setq tt2 (replace-regexp-in-string "'" "′" tt2 t t) )
 
     (setq ξtmpPair (split-string tt2 " +"))
-    (when (not (equal (length ξtmpPair) 2)) (error "Error. Input can contain only one space."))
+    (when (not (equal (length ξtmpPair) 2)) (user-error "Error: input can contain only one space"))
 
     (setq ξlatStr (elt ξtmpPair 0))
     (setq ξlonStr (elt ξtmpPair 1))
@@ -127,10 +127,10 @@ becomes 「[37.44345 -6.253966666666667]」"
                  ((string= (downcase ξsign) "n") nil)
                  ((string= ξsign "") nil)
                  ((string= (downcase ξsign) "s") (setq ξlatNum (* -1 ξlatNum) ))
-                 (t (error "your input is malformed. Your latitude ends with a char that's not “N” or “S”."))
+                 (t (user-error "Your input is malformed. Your latitude ends with a char that's not N or S"))
                  )
             )
-      (progn (error "your latitude is malformed.") )
+      (progn (user-error "Your latitude is malformed") )
       )
 
 (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" ξlonStr )
@@ -144,10 +144,10 @@ becomes 「[37.44345 -6.253966666666667]」"
                  ((string= (downcase ξsign) "e") nil)
                  ((string= ξsign "") nil)
                  ((string= (downcase ξsign) "w") (setq ξlonNum (* -1 ξlonNum) ))
-                 (t (error "your input is malformed. Your longitude ends with a char that's not “E” or “W”."))
+                 (t (user-error "Your input is malformed. Your longitude ends with a char that's not E or W"))
                  )
             )
-      (progn (error "your longitude is malformed.") )
+      (progn (user-error "Your longitude is malformed") )
       )
 (vector ξlatNum ξlonNum) ) )
 

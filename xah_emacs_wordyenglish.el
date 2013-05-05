@@ -36,7 +36,7 @@
      ((string= moveCode "s") (setq ξfile "satwords.html" ))
      ((string= moveCode "w") (setq ξfile "writerwords.html" ))
 
-     (t (error "Your letter 「%s」 is not one of the allowed." moveCode ))
+     (t (user-error "Your letter 「%s」 is not one of the allowed" moveCode ))
      )
 
     (delete-region p1 p2 )

@@ -4,10 +4,15 @@
 ;; Xah Lee ; 2007-06
 
 ; shortening of often used commands
+
 (defalias 'fd 'find-dired)
 (defalias 'gf 'grep-find)
 (defalias 'lcd 'list-colors-display)
 (defalias 'rb 'revert-buffer)
+(defalias 'rs 'replace-string)
+(defalias 'sl 'sort-lines)
+(defalias 'snf 'sort-numeric-fields)
+(defalias 'g 'grep)
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
