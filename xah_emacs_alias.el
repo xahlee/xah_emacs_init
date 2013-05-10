@@ -13,6 +13,7 @@
 (defalias 'sl 'sort-lines)
 (defalias 'snf 'sort-numeric-fields)
 (defalias 'g 'grep)
+(defalias 'wm 'whitespace-mode)
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
@@ -34,7 +35,7 @@
 
 (defalias 'ip 'insert-php-tag)
 
-(defalias 'ft 'fix-timestamp)
+(defalias 'ft 'fix-datetimestamp)
 (defalias 'wc 'count-words-region-or-line)
 ;; (defalias 'cp 'copy-to-register-1)
 ;; (defalias 'pt 'insert-register-content-1)

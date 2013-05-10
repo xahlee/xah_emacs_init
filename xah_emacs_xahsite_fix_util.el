@@ -32,7 +32,7 @@ When called in lisp program, ξsourceFilePath and ξdestFilePath should be file 
           (kill-buffer ξbuffer)
           nil)
       (progn
-        (setq ξtitle (get-html-file-title ξsourceFilePath))
+        (setq ξtitle (xhm-get-html-file-title ξsourceFilePath))
         (goto-char 1)
         (if (search-forward "<div class=\"rltd\">" nil t)
             (progn (search-forward "<ul>" nil t)

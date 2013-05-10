@@ -327,7 +327,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
     (setq myFile (xahsite-web-path-to-filepath inputStr))
     (setq myTitle
           (if (string-match-p ".+html\\'" myFile)
-              (get-html-file-title myFile)
+              (xhm-get-html-file-title myFile)
             (file-name-nondirectory myFile)))
     (setq myTitle (replace-pairs-in-string myTitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]) )
 
@@ -512,8 +512,25 @@ When there is a text selection, act on the region."
   "insert shell command from a selection prompt."
   (interactive
    (list
-      (ido-completing-read "HTML tag:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH") ) )
+      (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH") ) )
   (progn
     (insert (cdr (assoc cmdAbbrev xah-shell-abbrev-alist)))
     ))
 
+(defun xah-to-xah-elisp-mode  ()
+  "redo my tutorial's code elisp markup"
+  (interactive)
+  (make-backup)
+  (goto-char 1)
+  (while
+      (search-forward "<pre class=\"elisp\">" nil "NOERROR")
+    (replace-match "<pre class=\"emacs-lisp\">" "FIXEDCASE" "LITERAL" )
+
+    ;; (let* (
+    ;;       ( ξxx (xhm-get-precode-langCode))
+    ;;       (p1 (elt ξxx 1))
+    ;;       (p2 (elt ξxx 2))
+    ;;       )
+    ;;    )
+    (call-interactively 'xhm-htmlize-or-de-precode)
+    (call-interactively 'xhm-htmlize-or-de-precode) ) )

@@ -510,7 +510,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
         (progn
           (setq titleText
                 (if (string-match-p ".+html\\'" fPath)
-                    (get-html-file-title fPath)
+                    (xhm-get-html-file-title fPath)
                   (file-name-nondirectory fPath)))
           (setq resultStr
                 (if (string-equal

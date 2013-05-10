@@ -140,7 +140,7 @@ words-4.html
                              (let (ξresult linkPath fTitle (ξi 0) )
                                (while (< ξi (length fileList))
                                  (setq linkPath (elt fileList ξi) )
-                                 (setq fTitle (get-html-file-title linkPath) )
+                                 (setq fTitle (xhm-get-html-file-title linkPath) )
                                  (setq ξresult (concat ξresult "<a href=\"" linkPath "\" title=\"" fTitle "\">" (number-to-string (1+ ξi)) "</a>\n") )
                                  (setq ξi (1+ ξi))
                                  )

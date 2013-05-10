@@ -373,7 +373,7 @@
   (define-key xhm-keymap (kbd "<menu> e r 3") 'xhm-update-title)
   (define-key xhm-keymap (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
   (define-key xhm-keymap (kbd "<menu> e r c") 'code-bracket-to-html-tag)
-  (define-key xhm-keymap (kbd "<menu> e r e") 'htmlize-elisp-ƒ-names)
+  (define-key xhm-keymap (kbd "<menu> e r e") 'xhm-htmlize-elisp-keywords)
   (define-key xhm-keymap (kbd "<menu> e r k") 'emacs-to-windows-kbd-notation)
   (define-key xhm-keymap (kbd "<menu> e r m") 'xhm-make-html-table)
   (define-key xhm-keymap (kbd "<menu> e r t") 'title-bracket-to-html-tag)
@@ -461,7 +461,7 @@ For `org-mode-hook'."
 (defun xah-Info-mode-keys ()
   "my keybindings for `Info-mode'.
 For `Info-mode-hook'."
-  (local-set-key (kbd "<menu> e 6") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<menu> e g") 'xah-view-emacs-manual-in-browser)
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 

@@ -73,6 +73,8 @@ This new content is ready to be posted to blogger."
 (replace-regexp-pairs-region 1 (point-max)
 [
 ["<header>[ \n[:graph:]]+</header>" ""]
+["<article>" ""]
+["</article>" ""]
 ["<nav class=\"n1\"><a href=\"\\([^\"]+?\\)\">\\([^\"]+?\\)</a></nav>" ""]
 ["<h1>[^<]+?</h1>" ""]
 ["<p class=\"author_0\">Xah Lee, [-<>/ ,…time0-9]+?</time></p>" ""]
