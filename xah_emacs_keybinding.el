@@ -222,7 +222,6 @@
   (global-set-key (kbd "<menu> i r n") 'ξ-insert-random-number)
   (global-set-key (kbd "<menu> i r s") 'ξ-insert-random-string)
   (global-set-key (kbd "<menu> i r u") 'ξ-insert-random-uuid)
-  (global-set-key (kbd "<menu> i t") 'insert-date-time)
  )
 
 (global-set-key (kbd "<menu> j") 'kmacro-start-macro)
@@ -248,7 +247,7 @@
 
 (global-set-key (kbd "<menu> q") 'quoted-insert) ; ★★★
 (global-set-key (kbd "<menu> r") 'nil)
-(global-set-key (kbd "<menu> r '") 'replace-straight-quotes)
+(global-set-key (kbd "<menu> r '") 'ξ-replace-straight-quotes)
 (global-set-key (kbd "<menu> r ,") 'remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> r .") 'convert-english-chinese-punctuation)
 (global-set-key (kbd "<menu> r d") 'delete-matching-lines) ; ★★

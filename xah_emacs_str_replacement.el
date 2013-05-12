@@ -101,30 +101,6 @@ When called repeatedly, this command cycles the {“ ”, “_”, “-”} char
 
     ) )
 
-(defun replace-mathematica-symbols-region (p1 p2)
-  "Replace Mathematica's special char encoding to Unicode of the same semantics.
-For example:
- \\=\\[Infinity] ⇒ ∞
- \\=\\[Equal] ⇒ =="
-  (interactive "r")
-  (replace-pairs-region p1 p2 '(
- ["\\[Infinity]" "∞"]
- ["\\[Equal]" "=="])))
-
-(defun replace-greek-region (p1 p2)
-  "Replace math symbols. e.g. alpha to α."
-  (interactive "r")
-(replace-pairs-region p1 p2 '(
-["alpha" "α"]
-["beta" "β"]
-["gamma" "γ"]
-["theta" "θ"]
-["lambda" "λ"]
-["delta" "δ"]
-["epsilon" "ε"]
-["omega" "ω"]
-["Pi" "π"])))
-
 (defun convert-english-chinese-punctuation (p1 p2 &optional ξ-to-direction)
   "Replace punctuation from/to English/Chinese Unicode symbols.
 
@@ -309,7 +285,6 @@ See also: `remove-punctuation-trailing-redundant-space'."
 (put 'convert-fullwidth-chars 'state stateAfter)
  ) )
 
-
 (defun replace-latin-alphabet-to-gothic (p1 p2 reverse-direction-p)
   "Replace English alphabets to Unicode gothic characters.
 For example, A ⇒ 𝔄, a ⇒ 𝔞.
@@ -339,7 +314,54 @@ When called in elisp, the p1 and p2 are region begin/end positions to work on."
       (let ((case-fold-search nil))
         (replace-pairs-region p1 p2 useMap ) ) ) ) )
 
-(defun replace-straight-quotes (p1 p2)
+(defun change-bracket-pairs (fromType toType)
+  "Change bracket pairs from one type to another on text selection or text block.
+For example, change all parenthesis () to square brackets [].
+
+When called in lisp program, fromType and toType is a string of a bracket pair. ⁖ \"()\", likewise for toType."
+  (interactive
+   (let (
+         (bracketTypes '("[]" "()" "{}" "“”" "‘’" "〈〉" "《》" "「」" "『』" "【】" "〖〗"))
+         )
+     (list
+      (ido-completing-read "Replace this:" bracketTypes "PREDICATE" )
+      (ido-completing-read "To:" bracketTypes "PREDICATE" ) ) ) )
+
+  (let* (
+         (bds (get-selection-or-unit 'block))
+         (p1 (elt bds 1))
+         (p2 (elt bds 2))
+         (changePairs (vector
+                 (vector (char-to-string (elt fromType 0)) (char-to-string (elt toType 0)))
+                 (vector (char-to-string (elt fromType 1)) (char-to-string (elt toType 1)))
+                 ))
+         )
+    (replace-pairs-region p1 p2 changePairs) ) )
+
+
+(defun ξ-replace-curly-apostrophe ()
+  "Replace some single curly quotes to straight version,
+in text selection or text block.
+Example: 「it’s」 ⇒ 「it's」."
+  (interactive "r")
+(let (bds p1 p2)
+    (setq bds (get-selection-or-unit 'block))
+    (setq p1 (elt bds 1) p2 (elt bds 2)  )
+    (replace-pairs-region p1 p2 '(
+["‘tis" "'tis"]
+["’s" "'s"]
+["’d" "'d"]
+["n’t" "n't"]
+["’ve" "'ve"]
+["’ll" "'ll"]
+["’m" "'m"]
+["’re" "'re"]
+["s’ " "s' "]))
+    )
+
+)
+
+(defun ξ-replace-straight-quotes (p1 p2)
   "Replace straight double quotes to curly ones, and others.
 Works on current text selection, else the current text block between empty lines.
 
@@ -498,29 +520,6 @@ Examples of changes:
     )
   )
 
-(defun replace-curly-apostrophe ()
-  "Replace some single curly quotes to straight version,
-in text selection or text block.
-Example: 「it’s」 ⇒ 「it's」."
-  (interactive "r")
-(let (bds p1 p2)
-    (setq bds (get-selection-or-unit 'block))
-    (setq p1 (elt bds 1) p2 (elt bds 2)  )
-    (replace-pairs-region p1 p2 '(
-["‘tis" "'tis"]
-["’s" "'s"]
-["’d" "'d"]
-["n’t" "n't"]
-["’ve" "'ve"]
-["’ll" "'ll"]
-["’m" "'m"]
-["’re" "'re"]
-["s’ " "s' "]))
-    )
-
-)
-
-
 (defun remove-vowel-old (&optional ξstring ξfrom ξto)
   "Remove the following letters: {a e i o u}.
 
@@ -581,7 +580,32 @@ list or vector pair.  Else, returns a changed string."
         (insert outputStr) )) ) )
 
 
-(defun replace-tex-region (p1 p2)
+
+(defun replace-mathematica-symbols-region (p1 p2)
+  "Replace Mathematica's special char encoding to Unicode of the same semantics.
+For example:
+ \\=\\[Infinity] ⇒ ∞
+ \\=\\[Equal] ⇒ =="
+  (interactive "r")
+  (replace-pairs-region p1 p2 '(
+ ["\\[Infinity]" "∞"]
+ ["\\[Equal]" "=="])))
+
+(defun replace-greek-region (p1 p2)
+  "Replace math symbols. e.g. alpha to α."
+  (interactive "r")
+(replace-pairs-region p1 p2 '(
+["alpha" "α"]
+["beta" "β"]
+["gamma" "γ"]
+["theta" "θ"]
+["lambda" "λ"]
+["delta" "δ"]
+["epsilon" "ε"]
+["omega" "ω"]
+["Pi" "π"])))
+
+(defun ξ-replace-tex-region (p1 p2)
   "Replace some math function names or symbols by their LaTeX markup."
   (interactive "r")
 (replace-pairs-region p1 p2 '(

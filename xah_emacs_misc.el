@@ -526,11 +526,17 @@ When there is a text selection, act on the region."
       (search-forward "<pre class=\"elisp\">" nil "NOERROR")
     (replace-match "<pre class=\"emacs-lisp\">" "FIXEDCASE" "LITERAL" )
 
-    ;; (let* (
-    ;;       ( ξxx (xhm-get-precode-langCode))
-    ;;       (p1 (elt ξxx 1))
-    ;;       (p2 (elt ξxx 2))
-    ;;       )
-    ;;    )
-    (call-interactively 'xhm-htmlize-or-de-precode)
-    (call-interactively 'xhm-htmlize-or-de-precode) ) )
+    (let* (
+          ( ξxx (xhm-get-precode-langCode))
+          (langCode (elt ξxx 0))
+          (p1 (elt ξxx 1))
+          (p2 (elt ξxx 2))
+          )
+
+      (xhm-remove-span-tag-region p1 p2)
+      (goto-char p1)
+      (xhm-htmlize-precode xhm-lang-name-map)
+       )
+
+;; (call-interactively 'xhm-htmlize-or-de-precode)
+ ) )
