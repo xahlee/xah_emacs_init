@@ -52,11 +52,10 @@
 ;; (global-set-key (kbd "<f8>") ctl-x-map)
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
-;(global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
-;(global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 (global-set-key (kbd "]") 'ergoemacs-close-current-buffer)
-
+;(global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
 ;; (global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
+;; (global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 ;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
 ;; (global-set-key (kbd "<f9>") 'split-window-vertically)
 (global-set-key (kbd "<f11>") 'ergoemacs-next-user-buffer)
@@ -145,7 +144,7 @@
 (global-set-key (kbd "<menu> <tab>") 'indent-region)
 
 (global-set-key (kbd "<menu> /") 'nil)
-(global-set-key (kbd "<menu> 0") 'delete-window)
+(global-set-key (kbd "<menu> 0") 'nil)
 (global-set-key (kbd "<menu> 1") 'copy-to-register-1)
 (global-set-key (kbd "<menu> 2") 'paste-from-register-1)
 (global-set-key (kbd "<menu> 3") 'nil)
@@ -283,6 +282,7 @@
   (global-set-key (kbd "<menu> u . b") 'insert-pair-white-lenticular-bracket〖〗)
   (global-set-key (kbd "<menu> u . m") 'insert-pair-white-corner-bracket『』)
   (global-set-key (kbd "<menu> u . w") 'insert-pair-double-angle-bracket《》)
+  (global-set-key (kbd "<menu> u 2") "¤") ; white diamond
   (global-set-key (kbd "<menu> u 3") "◇") ; white diamond
   (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
   (global-set-key (kbd "<menu> u 5") "🎶") ; MULTIPLE MUSICAL NOTES
@@ -408,6 +408,25 @@ Still, the code isn't 100% correct.
     )
   )
 
+;; (defun xah-cperl-mode-keys ()
+;;   "Modify keymaps used by cperl-mode."
+;;   (local-set-key (kbd ")") 'self-insert-command)
+;;   (local-set-key (kbd "]") 'self-insert-command)
+;; )
+;; (add-hook 'cperl-mode-hook 'xah-cperl-mode-keys)
+
+
+;; ;(setq mybuf (get-buffer-create "*show commands*"))
+;; (defun xx ()
+;;   "tttttt"
+;;   (let ()
+;;     (princ (format "%s\n" last-command) mybuf )
+;;     )
+;;   ;;(message "%s" last-command)
+;;   )
+;; (add-hook 'post-command-hook 'xx)
+;; (remove-hook 'post-command-hook 'xx)
+
 (defun xah-elisp-mode-keys ()
   "Modify keymaps used by lisp mode."
   ;; .p gc
@@ -517,7 +536,7 @@ For `Info-mode-hook'."
 
 (global-set-key (kbd "M-\"") 'xah-compact-uncompact-Block)
 
-;(global-set-key (kbd "M-2") 'delete-window)
+(global-set-key (kbd "M-2") 'delete-window)
 (global-set-key (kbd "M-9") 'ergoemacs-select-text-in-quote)
 (global-set-key (kbd "M-s") 'ergoemacs-toggle-letter-case)
 

@@ -127,7 +127,7 @@ then it'll call “java x” in a shell."
     (shell-command cmd-str))
   )
 
-(defun python-2to3 ()
+(defun python-2to3-current-file ()
   "Convert current buffer from python 2 to python 3.
 
 this command calls python3's script 「2to3」."
@@ -277,6 +277,7 @@ When called in lisp program, “lineEndingStyle” is one of 'unix 'dos 'mac or 
            ((equal lineEndingStyle "Unix") 'unix)
            ((equal lineEndingStyle "Mac OS 9") 'mac)
            ((equal lineEndingStyle "Windows") 'dos)
+           (t (error "code logic error 65327. Expect one of it." ))
            ))
          )
     (mapc

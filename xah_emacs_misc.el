@@ -143,34 +143,62 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 
+(defvar xah-filelist nil "alist for files i need to open frequently. Key is a short abbrev, Value is file path.")
+(setq xah-filelist
+      '(
+        ("3emacs" . "~/web/ergoemacs_org/emacs/blog.html" )
+        ("4code" . "~/web/xahlee_info/comp/blog.html" )
+        ("js" . "~/web/xahlee_info/js/blog.html" )
+        ("math" . "~/web/xahlee_info/math/blog.html" )
+        ("linguistics" . "~/web/wordyenglish_com/lit/blog.html" )
+        ("chinese" . "~/web/wordyenglish_com/chinese/blog.html" )
+        ("music" . "~/web/xahmusic_org/music/blog.html" )
+        ("arts" . "~/web/xaharts_org/arts/blog.html" )
+        ("sl" . "~/web/xahsl_org/sl/blog.html" )
+        ("twitter" . "~/Dropbox/twitter tweets.txt" )
+        ("sex" . "~/web/xahlee_org/sex/blog.html" )
+        ("porn" . "~/web/xahporn_org/porn/blog.html" )
+        ("pd" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
+        ("keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
+        ("ahk" . "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
+        ("download" . "~/Downloads/" )
+        ) )
+
 (defun xah-open-file-fast (openCode)
   "Prompt to open a file from a pre-defined set."
-  (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets [uk]kbd [d]dl:")
-  (let (ξfile )
-    (setq ξfile
-          (cond
-           ((string= openCode "3") "~/web/ergoemacs_org/emacs/blog.html" )
-           ((string= openCode "4") "~/web/xahlee_info/comp/blog.html" )
-           ((string= openCode "j") "~/web/xahlee_info/js/blog.html" )
-           ((string= openCode "m") "~/web/xahlee_info/math/blog.html" )
-           ((string= openCode "l") "~/web/wordyenglish_com/lit/blog.html" )
-           ((string= openCode "c") "~/web/wordyenglish_com/chinese/blog.html" )
-           ((string= openCode "u") "~/web/xahmusic_org/music/blog.html" )
-           ((string= openCode "a") "~/web/xaharts_org/arts/blog.html" )
-           ((string= openCode "sl") "~/web/xahsl_org/sl/blog.html" )
-           ((string= openCode "t") "~/Dropbox/twitter tweets.txt" )
-           ((string= openCode "x") "~/web/xahlee_org/sex/blog.html" )
-           ((string= openCode "p") "~/web/xahporn_org/porn/blog.html" )
-           ((string= openCode "pd") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
-           ((string= openCode "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
-           ((string= openCode "h") "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
-           ((string= openCode "kbd") "~/web/xahlee_info/kbd/keyboarding.html" )
-           ((string= openCode "uk") "~/web/xahlee_info/kbd/keyboarding.html" )
-           ((string= openCode "d") "~/Downloads/" )
-           (t (user-error "You typed 「%s」, it doesn't associate with a file." openCode ))
-           )
-          )
-    (find-file ξfile ) ) )
+  (interactive
+   (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-filelist)))
+   )
+  (find-file (cdr (assoc openCode xah-filelist)) ) )
+
+;; (defun xah-open-file-fast (openCode)
+;;   "Prompt to open a file from a pre-defined set."
+;;   (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets [uk]kbd [d]dl:")
+;;   (let (ξfile )
+;;     (setq ξfile
+;;           (cond
+;;            ((string= openCode "3") "~/web/ergoemacs_org/emacs/blog.html" )
+;;            ((string= openCode "4") "~/web/xahlee_info/comp/blog.html" )
+;;            ((string= openCode "j") "~/web/xahlee_info/js/blog.html" )
+;;            ((string= openCode "m") "~/web/xahlee_info/math/blog.html" )
+;;            ((string= openCode "l") "~/web/wordyenglish_com/lit/blog.html" )
+;;            ((string= openCode "c") "~/web/wordyenglish_com/chinese/blog.html" )
+;;            ((string= openCode "u") "~/web/xahmusic_org/music/blog.html" )
+;;            ((string= openCode "a") "~/web/xaharts_org/arts/blog.html" )
+;;            ((string= openCode "sl") "~/web/xahsl_org/sl/blog.html" )
+;;            ((string= openCode "t") "~/Dropbox/twitter tweets.txt" )
+;;            ((string= openCode "x") "~/web/xahlee_org/sex/blog.html" )
+;;            ((string= openCode "p") "~/web/xahporn_org/porn/blog.html" )
+;;            ((string= openCode "pd") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
+;;            ((string= openCode "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
+;;            ((string= openCode "h") "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
+;;            ((string= openCode "kbd") "~/web/xahlee_info/kbd/keyboarding.html" )
+;;            ((string= openCode "uk") "~/web/xahlee_info/kbd/keyboarding.html" )
+;;            ((string= openCode "d") "~/Downloads/" )
+;;            (t (user-error "You typed 「%s」, it doesn't associate with a file." openCode ))
+;;            )
+;;           )
+;;     (find-file ξfile ) ) )
 
 (defun xah-open-file-at-cursor ()
   "Open the file path under cursor.

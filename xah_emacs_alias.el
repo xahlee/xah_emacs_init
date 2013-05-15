@@ -15,6 +15,9 @@
 (defalias 'g 'grep)
 (defalias 'wm 'whitespace-mode)
 
+(defalias 'eb 'eval-buffer)
+(defalias 'er 'eval-region)
+
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
 (defalias 'dnml 'delete-non-matching-lines)

@@ -7,25 +7,16 @@
 
 
 
-(global-linum-mode 0)
-
-(setq enable-recursive-minibuffers t )
-
 (setq ergoemacs-repeat-movement-commands 'nil)
 
 (setq sentence-end-double-space nil )
 
-(setq default-input-method 'chinese-py)
-
-(setq bookmark-default-file "~/.emacs.d/bookmarks")
+;; set the fallback input method to Chinese for toggle-input-method
+(setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 
 (setq page-break-lines-modes (quote (emacs-lisp-mode xah-elisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
 
-;; interactive name completion for describe-function, describe-variable, etc.
-(icomplete-mode 1)
-
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
-(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-unix-mode))
 
 ;(autoload 'xah-elisp-mode "xah-elisp-mode" "load xah-elisp-mode for elisp file" t)
 (add-to-list 'auto-mode-alist '("\\.el\\'" . xah-elisp-mode))
@@ -59,7 +50,6 @@
 (electric-pair-mode 0)
 
 (blink-cursor-mode 0 )
-(setq cursor-type 'box)
 
 
 
@@ -101,21 +91,15 @@
 
 
 
-(when (boundp 'tabbar-ruler-global-tabbar)
-  (setq tabbar-ruler-global-tabbar nil) ; If you want tabbar
-  (setq tabbar-ruler-global-ruler nil) ; if you want a global ruler
-  (setq tabbar-ruler-popup-menu nil) ; If you want a popup menu.
-  (setq tabbar-ruler-popup-toolbar nil) ; If you want a popup toolbar
+(when (boundp 'tabbar-mode)
+  (tabbar-mode 0)
 )
-
-(when (boundp 'tabbar-mode) (tabbar-mode 0))
 
 (setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
 
 (math-symbol-input-mode 1)
 
 (set-default 'abbrev-mode t)
-(setq initial-major-mode (quote text-mode))
 
 (setq shift-select-mode nil)
 (setq yas/indent-line nil)
@@ -142,14 +126,7 @@
 ;; (set-frame-parameter nil 'font "DejaVu Sans Mono-10")
 
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
-
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(rcirc-default-nick "xahlee"))
 
 
 ;; (custom-set-variables
