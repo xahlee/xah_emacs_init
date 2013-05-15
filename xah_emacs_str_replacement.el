@@ -324,8 +324,8 @@ When called in lisp program, fromType and toType is a string of a bracket pair. 
          (bracketTypes '("[]" "()" "{}" "“”" "‘’" "〈〉" "《》" "「」" "『』" "【】" "〖〗"))
          )
      (list
-      (ido-completing-read "Replace this:" bracketTypes "PREDICATE" )
-      (ido-completing-read "To:" bracketTypes "PREDICATE" ) ) ) )
+      (ido-completing-read "Replace this:" bracketTypes )
+      (ido-completing-read "To:" bracketTypes ) ) ) )
 
   (let* (
          (bds (get-selection-or-unit 'block))
