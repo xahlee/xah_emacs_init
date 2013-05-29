@@ -72,6 +72,11 @@ interactively by “eval-buffer”."
     (setq exec-path (append myPathList (list "." exec-directory)) )
     ) )
 
+(when (string-equal system-type "windows-nt")
+  ;; let emacs know Firefox's path
+  (add-to-list 'exec-path "c:/Program Files (x86)/Mozilla Firefox/")
+  )
+
 ;(setenv "SHELL" "C:/Windows/system32/cmd.exe" )
 ;(setenv "SHELL" "C:/Windows/system32/cmdproxy.exe" )
 
@@ -80,7 +85,6 @@ interactively by “eval-buffer”."
 
 ;; Warning! w32-quote-process-args is t.
 ;; You should set this to nil when using a system shell.
-
 
 
 

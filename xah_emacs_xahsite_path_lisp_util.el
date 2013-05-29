@@ -448,7 +448,7 @@ inputStr can have any of these form:
 if the inputStr is a relative path, defaultDir is used to resolve to full path."
   (let ( (ξs inputStr))
 
-    (setq ξs (replace-regexp-in-string "^file://" "" ξs "FIXEDCASE" "LITERAL" ) )
+    ;; (setq ξs (replace-regexp-in-string "^file:///" "" ξs "FIXEDCASE" "LITERAL" ) )
     ;; (setq ξs (replace-regexp-in-string "^/media/OS/Users/h3" "~" ξs "FIXEDCASE" "LITERAL" ) )
 
     (if (string-match-p "\\`https?://" ξs)
