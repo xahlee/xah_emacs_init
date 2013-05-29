@@ -7,6 +7,8 @@
 
 
 
+(global-linum-mode 0)
+
 (setq ergoemacs-repeat-movement-commands 'nil)
 
 (setq sentence-end-double-space nil )

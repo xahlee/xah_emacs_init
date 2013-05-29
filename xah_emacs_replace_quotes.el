@@ -96,7 +96,11 @@ When called with `universal-argument', work on visible portion of whole buffer (
 (defun code-bracket-to-html-tag (p1 p2)
   "Replace all 「…」 to <code>…</code>.
 
-If there's no text selection, work on current text block, else, on text selection. When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the arguments p1 p2 are region positions.
+Work on text selection or current text block.
+
+When called with `universal-argument', work on whole buffer (but respect `narrow-to-region').
+
+When called in lisp program, the arguments p1 p2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
 (interactive
@@ -292,3 +296,4 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
 
 ;;     )
 ;;   )
+

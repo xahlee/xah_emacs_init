@@ -228,7 +228,7 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
            ((string-match "\\`xahsl\\.org" ξs ) (concat "http://" ξs))
            (t ξs) ) )
 
-    (if (string-match-p "\\`https*://" ξs)
+    (if (string-match-p "\\`https?://" ξs)
         (if (xahsite-url-is-xah-website-p ξs)
             (let ((ξfp (xahsite-url-to-filepath ξs )))
               (if (file-exists-p ξfp)
@@ -513,7 +513,7 @@ When there is a text selection, act on the region."
 (defcustom xah-shell-abbrev-alist nil "alist of xah's shell abbrevs")
 (setq xah-shell-abbrev-alist
           '(
-            ("rsync1" . "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.bash_history' --exclude='logs/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+            ("rsync1" . "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
 
             ("ssh" . "ssh -l u40651120 xahlee.org ")
             ("img1" . "convert -quality 85% ")

@@ -108,11 +108,18 @@
 ; http://xahlee.info/kbd/dvorak_and_all_keyboard_layouts.html
 
 (global-set-key (kbd "<menu>") 'nil)
-(global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
+
 (global-set-key (kbd "<menu> RET") 'smex) ; in ErgoEmacs
-(global-set-key (kbd "<menu> <delete>") 'delete-current-file)
+
+(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
+(global-set-key (kbd "<menu> <f10>") 'whitespace-mode)
+(global-set-key (kbd "<menu> <f11>") 'calc)
+(global-set-key (kbd "<menu> <f12>") 'shell)
 (global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
+(global-set-key (kbd "<menu> <f9>") 'linum-mode)
+(global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
+(global-set-key (kbd "<menu> <tab>") 'indent-region)
 
 ;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
 
@@ -131,17 +138,10 @@
   (define-key help-map (kbd "h") 'nil) ; view-hello-file
   )
 
-(global-set-key (kbd "<menu> <f9>") 'linum-mode)
-(global-set-key (kbd "<menu> <f10>") 'whitespace-mode)
-(global-set-key (kbd "<menu> <f11>") 'calc)
-(global-set-key (kbd "<menu> <f12>") 'shell)
-
 (global-set-key (kbd "<menu> .") 'nil)
 (global-set-key (kbd "<menu> '") 'nil)
 (global-set-key (kbd "<menu> ,") 'shell-command-on-region)
 (global-set-key (kbd "<menu> -") 'xc-comment-smart) ; ★★★ , comment-dwim
-(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
-(global-set-key (kbd "<menu> <tab>") 'indent-region)
 
 (global-set-key (kbd "<menu> /") 'nil)
 (global-set-key (kbd "<menu> 0") 'nil)
@@ -268,6 +268,7 @@
   (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
   (global-set-key (kbd "<menu> t b") 'flyspell-buffer)
   (global-set-key (kbd "<menu> t 3") 'xah-shell-commands)
+  (global-set-key (kbd "<menu> t <backspace>") 'delete-current-file)
 )
 
 (progn
@@ -368,7 +369,7 @@
   (define-key xhm-keymap (kbd "<menu> e q") 'nil)
   (define-key xhm-keymap (kbd "<menu> e r") 'nil)
   (define-key xhm-keymap (kbd "<menu> e r ,") 'xhm-replace-html-chars-to-unicode)
-  (define-key xhm-keymap (kbd "<menu> e r .") 'xhm-replace-html-chars-to-entities)
+  (define-key xhm-keymap (kbd "<menu> e r .") 'xhm-replace-html-&<>-to-entities)
   (define-key xhm-keymap (kbd "<menu> e r 3") 'xhm-update-title)
   (define-key xhm-keymap (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
   (define-key xhm-keymap (kbd "<menu> e r c") 'code-bracket-to-html-tag)

@@ -314,19 +314,38 @@ When called in elisp, the p1 and p2 are region begin/end positions to work on."
       (let ((case-fold-search nil))
         (replace-pairs-region p1 p2 useMap ) ) ) ) )
 
+(defvar bracketsList nil "a list of bracket pairs. ⁖ () {} [] “” ‘’ ‹› «» 「」 『』 【】 〖〗 ….")
+(setq bracketsList '( "()" "{}" "[]" "“”" "‘’" "‹›" "«»" "「」" "『』" "【】" "〖〗" "〈〉" "《》" "<>"))
+
+(defun remove-quotes-or-brackets (bracketType)
+  "Remove quotes/brackets
+Works on current block or text selection.
+"
+  (interactive
+   (list (ido-completing-read "from:" bracketsList) ) )
+  (let* (
+         (bds (get-selection-or-unit 'block))
+         (p1 (elt bds 1))
+         (p2 (elt bds 2))
+         )
+    (replace-regexp-pairs-region p1 p2
+                                 (vector 
+                                  (vector (substring bracketType 0 1) "")
+                                  (vector (substring bracketType 1 2) "")
+                                  )
+                                 "FIXEDCASE" "LITERAL")
+    ) )
+
 (defun change-bracket-pairs (fromType toType)
   "Change bracket pairs from one type to another on text selection or text block.
 For example, change all parenthesis () to square brackets [].
 
 When called in lisp program, fromType and toType is a string of a bracket pair. ⁖ \"()\", likewise for toType."
   (interactive
-   (let (
-         (bracketTypes '("[]" "()" "{}" "“”" "‘’" "〈〉" "《》" "「」" "『』" "【】" "〖〗"))
-         )
+   (let ( )
      (list
-      (ido-completing-read "Replace this:" bracketTypes )
-      (ido-completing-read "To:" bracketTypes ) ) ) )
-
+      (ido-completing-read "Replace this:" bracketsList )
+      (ido-completing-read "To:" bracketsList ) ) ) )
   (let* (
          (bds (get-selection-or-unit 'block))
          (p1 (elt bds 1))
