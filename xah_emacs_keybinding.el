@@ -53,11 +53,11 @@
 ;; (global-set-key (kbd "<f8>") mode-specific-map)
 
 (global-set-key (kbd "]") 'ergoemacs-close-current-buffer)
-;(global-set-key (kbd "<f9>") 'ergoemacs-switch-to-next-frame)
-;; (global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
-;; (global-set-key (kbd "<f10>") 'ergoemacs-close-current-buffer)
 ;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
 ;; (global-set-key (kbd "<f9>") 'split-window-vertically)
+(global-set-key (kbd "<f9>") 'delete-other-windows)
+;(global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
+(global-set-key (kbd "<f10>") 'split-window-vertically)
 (global-set-key (kbd "<f11>") 'ergoemacs-next-user-buffer)
 (global-set-key (kbd "<f12>") 'ergoemacs-previous-user-buffer)
 
@@ -145,9 +145,8 @@
 
 (global-set-key (kbd "<menu> /") 'nil)
 (global-set-key (kbd "<menu> 0") 'nil)
-(global-set-key (kbd "<menu> 1") 'copy-to-register-1)
-(global-set-key (kbd "<menu> 2") 'paste-from-register-1)
-(global-set-key (kbd "<menu> 3") 'nil)
+(global-set-key (kbd "<menu> 1") 'nil)
+(global-set-key (kbd "<menu> 2") 'delete-window) ; ★★★
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ; ★★★
 (global-set-key (kbd "<menu> 4") 'nil)
 (global-set-key (kbd "<menu> 4") 'split-window-vertically) ; ★★★
@@ -246,6 +245,8 @@
 
 (global-set-key (kbd "<menu> q") 'quoted-insert) ; ★★★
 (global-set-key (kbd "<menu> r") 'nil)
+(global-set-key (kbd "<menu> r j") 'copy-to-register-1)
+(global-set-key (kbd "<menu> r k") 'paste-from-register-1)
 (global-set-key (kbd "<menu> r '") 'ξ-replace-straight-quotes)
 (global-set-key (kbd "<menu> r ,") 'remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> r .") 'convert-english-chinese-punctuation)

@@ -162,6 +162,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
         ("ahk" . "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
         ("download" . "~/Downloads/" )
+        ("pictures" . "~/Pictures/" )
+        ("git" . "~/git/" )
         ) )
 
 (defun xah-open-file-fast (openCode)
@@ -532,6 +534,7 @@ When there is a text selection, act on the region."
             ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
             ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
             ("vp" . "feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x1000 ~/Pictures/cinse_pixra3/ &")
+            ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")
             )
 
           )

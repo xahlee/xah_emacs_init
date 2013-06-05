@@ -314,8 +314,11 @@ When called in elisp, the p1 and p2 are region begin/end positions to work on."
       (let ((case-fold-search nil))
         (replace-pairs-region p1 p2 useMap ) ) ) ) )
 
-(defvar bracketsList nil "a list of bracket pairs. ⁖ () {} [] “” ‘’ ‹› «» 「」 『』 【】 〖〗 ….")
-(setq bracketsList '( "()" "{}" "[]" "“”" "‘’" "‹›" "«»" "「」" "『』" "【】" "〖〗" "〈〉" "《》" "<>"))
+(defvar bracketsList nil "a list of bracket pairs. ⁖ () {} [] “” ‘’ ‹› «» 「」 『』 ….")
+(setq bracketsList '( "()" "{}" "[]" "<>" "“”" "‘’" "‹›" "«»" "「」" "『』" "【】" "〖〗" "〈〉" "《》" "〔〕" "⦅⦆" "〚〛" "⦃⦄"
+"〈〉" "⦑⦒" "⧼⧽" 
+"⟦⟧" "⟨⟩" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱"
+))
 
 (defun remove-quotes-or-brackets (bracketType)
   "Remove quotes/brackets

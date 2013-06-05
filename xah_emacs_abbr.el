@@ -25,6 +25,8 @@
     ("ex" "example:")
     ("fex" "for example:")
 
+    ("fex" "for example:")
+
 ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
 ;("t" "the") ; 1
 ;;; ("t" "be") ; 2
