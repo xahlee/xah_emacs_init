@@ -9,7 +9,11 @@
 
 (global-linum-mode 0)
 
-(setq ergoemacs-repeat-movement-commands 'nil)
+(progn 
+  (setq ergoemacs-mode-used "5.8.0")
+  (setq ergoemacs-variant nil)
+  (setq ergoemacs-repeat-movement-commands 'nil)
+  )
 
 (setq sentence-end-double-space nil )
 
@@ -141,8 +145,6 @@
 ;;  ;; '(initial-major-mode (quote text-mode))
 ;;  ;; '(initial-scratch-message "")
 ;;  ;; '(line-number-display-limit-width 500)
-;;  ;; '(menu-bar-mode t)
-;;  ;; '(minibuffer-prompt-properties (quote (read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)))
 ;;  ;; '(mouse-buffer-menu-mode-mult 4)
 ;;  ;; '(pov-run-high "+R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640 +i%s")
 ;;  ;; '(recentf-exclude (quote ("/ftp")))

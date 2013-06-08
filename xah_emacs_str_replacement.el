@@ -702,8 +702,7 @@ WARNING: If region has comment or string, the code'd be fucked up."
 
 (defun xah-clean-whitespace ()
   "Delete trailing whitespace, and replace sequence of newlines into just 2.
-
-Work on whole buffer, or text selection."
+Work on text selection or whole buffer."
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'buffer))

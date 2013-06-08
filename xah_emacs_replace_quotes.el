@@ -103,10 +103,12 @@ When called with `universal-argument', work on whole buffer (but respect `narrow
 When called in lisp program, the arguments p1 p2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-(interactive
+  (interactive
    (cond
     ((equal current-prefix-arg nil)    ; universal-argument not called
-     (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
+     (let ((bds (get-selection-or-unit 'block))) 
+       (message "prifx arg %s" current-prefix-arg)
+       (list (elt bds 1) (elt bds 2) ) ))
     (t                                  ; all other cases
      (list (point-min) (point-max) )) ) )
   (let (changedItems)
@@ -115,10 +117,17 @@ Generate a report of the replaced strings in a separate buffer."
     (save-excursion
       (save-restriction
         (narrow-to-region p1 p2)
+
         (goto-char (point-min))
         (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
           (setq changedItems (cons (match-string 1) changedItems ) )
-          (replace-match "<code>\\1</code>" t) ) ) )
+          (replace-match "<code>\\1</code>" t) )
+
+        (goto-char (point-min))
+        (while (search-forward-regexp "〔\\([-/\\:~.A-Za-z]+?\\)〕" nil t)
+          (setq changedItems (cons (match-string 1) changedItems ) )
+          (replace-match "<code class=\"path-α\">\\1</code>" t) )
+        ) )
 
     (with-output-to-temp-buffer "*changed brackets*"
       (mapcar

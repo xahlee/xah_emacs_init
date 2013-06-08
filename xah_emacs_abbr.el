@@ -369,6 +369,7 @@ Second Life: Xah Toll
 ("8ueek" "http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html")
 ("8uhtml" "http://xahlee.info/js/index.html")
 
+("8uapache" "http://xahlee.info/linux/apache_tutorial.html")
 ("8uperl" "http://xahlee.info/perl-python/perl_basics.html")
 ("8upython" "http://xahlee.info/python/python3_basics.html")
 ("8uruby" "http://xahlee.info/ruby/ruby_basics.html")

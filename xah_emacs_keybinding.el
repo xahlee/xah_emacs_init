@@ -55,9 +55,9 @@
 (global-set-key (kbd "]") 'ergoemacs-close-current-buffer)
 ;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
 ;; (global-set-key (kbd "<f9>") 'split-window-vertically)
-(global-set-key (kbd "<f9>") 'delete-other-windows)
+;; (global-set-key (kbd "<f9>") 'delete-other-windows)
 ;(global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
-(global-set-key (kbd "<f10>") 'split-window-vertically)
+;; (global-set-key (kbd "<f10>") 'split-window-vertically)
 (global-set-key (kbd "<f11>") 'ergoemacs-next-user-buffer)
 (global-set-key (kbd "<f12>") 'ergoemacs-previous-user-buffer)
 
@@ -525,8 +525,8 @@ For `Info-mode-hook'."
 (global-set-key (kbd "C-3") 'cycle-font-2)
 (global-set-key (kbd "C-4") 'convert-fullwidth-chars)
 (global-set-key (kbd "C-5") 'replace-latin-alphabet-to-gothic)
-(global-set-key (kbd "C-6") 'cycle-hyphen-underscore-space)
-(global-set-key (kbd "C-7") 'nil)
+(global-set-key (kbd "C-6") 'nil)
+(global-set-key (kbd "C-7") 'cycle-hyphen-underscore-space)
 (global-set-key (kbd "C-8") 'nil)
 (global-set-key (kbd "C-9") 'nil)
 (global-set-key (kbd "C-0") 'nil)
@@ -582,4 +582,7 @@ For `Info-mode-hook'."
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
 
 ;; command that are not immediate (has prompt) probably should not have a key.
+
+
+
 
