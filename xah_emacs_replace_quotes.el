@@ -128,7 +128,7 @@ Generate a report of the replaced strings in a separate buffer."
           (setq changedItems (cons (match-string 1) changedItems ) )
           (replace-match "<code class=\"path-α\">\\1</code>" t) )
         ) )
-
+    
     (with-output-to-temp-buffer "*changed brackets*"
       (mapcar
        (lambda (innerText)
@@ -137,6 +137,7 @@ Generate a report of the replaced strings in a separate buffer."
          )
        changedItems)
       )
+
     ))
 
 (defun title-bracket-to-html-tag (p1 p2)

@@ -183,6 +183,7 @@
     ("8ge" "Google Earth")
     ("8gm" "Google Map")
     ("8gc" "Google Chrome")
+    ("8gp" "Google Plus")
     ("8gcd" "googlecode")
     ("8ff" "Firefox")
     ("8sl" "Second Life")
@@ -295,7 +296,6 @@
 
 </body>
 </html>")
-
 ("8php" "<?php\n\n?>")
 ("8sb" "<div class=\"section\">⁂</div>")
 
@@ -382,8 +382,7 @@ Second Life: Xah Toll
 ("8umma" "http://xahlee.info/M/index.html")
 ("8ujava" "http://xahlee.info/java-a-day/java.html")
 ("8utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")
-
-    ))
+))
 
 
 ;;; stop asking whether to save newly added abbrev when quitting emacs

@@ -470,24 +470,9 @@ if the inputStr is a relative path, defaultDir is used to resolve to full path."
 (defun xahsite-generate-sitemap (ξ-domainName)
   "Generate a sitemap.xml.gz file of xahsite at doc root.
 ξ-domainName must match a existing one."
-  (interactive
-   (let (ξletterCode ξdomain)
-     (setq ξletterCode
-           (read-string "Pick one: [1]ergoemacs.org [2]wordyenglish.com [3]xaharts.org [4]xahlee.info [5]xahlee.org [6]xahmusic.org [7]xahporn.org [8]xahsl.org:") )
-
-     (cond
-      ((string= ξletterCode "1") (setq ξdomain "ergoemacs.org" ))
-      ((string= ξletterCode "2") (setq ξdomain "wordyenglish.com" ))
-      ((string= ξletterCode "3") (setq ξdomain "xaharts.org" ))
-      ((string= ξletterCode "4") (setq ξdomain "xahlee.info" ))
-      ((string= ξletterCode "5") (setq ξdomain "xahlee.org" ))
-      ((string= ξletterCode "6") (setq ξdomain "xahmusic.org" ))
-      ((string= ξletterCode "7") (setq ξdomain "xahporn.org" ))
-      ((string= ξletterCode "8") (setq ξdomain "xahsl.org" ))
-      (t (error "Your letter 「%s」 is not one of the allowed." ξletterCode ))
-      )
-
-     (list ξdomain) ) )
+(interactive
+   (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" )))
+   )
   (let (
         (ξ-sitemapFileName "sitemap" )
         (ξ-websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" ξ-domainName "FIXEDCASE" "LITERAL") "/") )
