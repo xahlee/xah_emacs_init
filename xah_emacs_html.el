@@ -34,20 +34,17 @@ When called in elisp program, wrap the tag at point P1."
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
-Add today's date to the form
- <p class=\"author_0\">Xah Lee, <time>2005-01-17</time>, <time>2011-07-25</time></p>
- of current file."
+Add today's date to the byline tag of current file."
   (interactive)
   (let (p1 p2)
     (progn
       (goto-char 1)
-      (when (search-forward "<p class=\"author_0\">Xah Lee" nil)
-        (beginning-of-line)
-        (setq p1 (point) )
-        (end-of-line)
-        (setq p2 (point) )
-        (search-backward "</p>")
+      (when (search-forward "<div class=\"byline\">" nil)
+(backward-char 1)
+(sgml-skip-tag-forward 1)
+        (search-backward "</div>")
         (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
+        (search-backward "<time>")
         (message "%s" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
 ) ) ))
 

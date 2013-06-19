@@ -89,24 +89,6 @@
 ; 【e】 【u】 C-x   【i】  | 【d】 C-h 【h】 C-c 【t】
 ;                                 【m】 commit
 
-(global-set-key (kbd "<menu>") 'nil)
-
-(global-set-key (kbd "<menu> RET") 'smex) ; in ErgoEmacs
-
-(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
-(global-set-key (kbd "<menu> <f10>") 'whitespace-mode)
-(global-set-key (kbd "<menu> <f11>") 'calc)
-(global-set-key (kbd "<menu> <f12>") 'shell)
-(global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
-(global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
-(global-set-key (kbd "<menu> <f9>") 'linum-mode)
-(global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
-(global-set-key (kbd "<menu> <tab>") 'indent-region)
-
-;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
-
-;cycle-camel-style-case
-
 (progn
   (define-key help-map (kbd "c") 'describe-char)
   (define-key help-map (kbd "3") 'man)
@@ -119,6 +101,24 @@
   (define-key help-map (kbd "o") 'nil)  ; ergoemacs-where-is-old-binding
   (define-key help-map (kbd "h") 'nil) ; view-hello-file
   )
+
+(global-set-key (kbd "<menu>") 'nil)
+
+(global-set-key (kbd "<menu> RET") 'smex) ; in ErgoEmacs
+(global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
+(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
+(global-set-key (kbd "<menu> <tab>") 'indent-region)
+
+(global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
+(global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
+(global-set-key (kbd "<menu> <f9>") 'linum-mode)
+(global-set-key (kbd "<menu> <f10>") 'whitespace-mode)
+(global-set-key (kbd "<menu> <f11>") 'calc)
+(global-set-key (kbd "<menu> <f12>") 'shell)
+
+;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
+
+;cycle-camel-style-case
 
 (global-set-key (kbd "<menu> .") 'nil)
 (global-set-key (kbd "<menu> '") 'nil)
@@ -146,7 +146,7 @@
 (global-set-key (kbd "<menu> a") 'mark-whole-buffer) ; ★★★
 (global-set-key (kbd "<menu> b") 'nil)
 (global-set-key (kbd "<menu> c") 'nil)
-(global-set-key (kbd "<menu> d") 'ergoemacs-open-in-desktop)
+
 ; (global-set-key (kbd "<menu> e") 'nil)  ; mode specific
  (global-set-key (kbd "<menu> f") 'copy-file-path)
 
@@ -154,6 +154,7 @@
 (progn
   (global-set-key (kbd "<menu> g") 'nil)
 )
+
 
 (progn
 ;  (global-set-key (kbd "<menu> h") help-map) ; ★★★
@@ -222,6 +223,7 @@
 (global-set-key (kbd "<menu> o g") 'ibuffer)
 (global-set-key (kbd "<menu> o h") 'recentf-open-files) ; ★★★
 (global-set-key (kbd "<menu> o t") 'ido-switch-buffer)  ; ★★★
+(global-set-key (kbd "<menu> o d") 'ergoemacs-open-in-desktop)
 
 (global-set-key (kbd "<menu> p") 'nil)
 
@@ -569,6 +571,8 @@ For `Info-mode-hook'."
 (global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket)
 (global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket)
 
+;; (global-set-key (kbd "<backspace>") 'delete-backward-char)
+
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
 
@@ -605,6 +609,4 @@ For `Info-mode-hook'."
 ;; • 2 keys vs 3 keys
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
 
-(ergoemacs-mode 1)
-
-(browse-kill-ring-default-keybindings)
+;; (browse-kill-ring-default-keybindings)

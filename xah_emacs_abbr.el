@@ -26,6 +26,7 @@
     ("fex" "for example:")
 
     ("fex" "for example:")
+    ("8rsi" "Repetitive Strain Injury")
 
 ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
 ;("t" "the") ; 1
@@ -240,8 +241,6 @@
     ("8db" "database")
     ("8oop" "object oriented programing")
 
-
-
  ;; emacs lisp
     ("8date" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)")
     ("8d" "\\([0-9]+\\)")
@@ -318,7 +317,6 @@
 
 
 ;;; unix shell
-
 
 ; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/
 

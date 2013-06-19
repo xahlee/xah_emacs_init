@@ -77,7 +77,7 @@ This new content is ready to be posted to blogger."
 ["</article>" ""]
 ["<nav class=\"n1\"><a href=\"\\([^\"]+?\\)\">\\([^\"]+?\\)</a></nav>" ""]
 ["<h1>[^<]+?</h1>" ""]
-["<p class=\"author_0\">Xah Lee, [-<>/ ,…time0-9]+?</time></p>" ""]
+["<div class=\"byline\"><address class=\"author\">[-<>/ ,…time0-9]+?</time></div>" ""]
 ["<!-- http://xahlee.blogspot.com/\\([^ ]+?\\) -->" ""]
 ["<footer>\\([^<]+?\\)</footer>" ""]
 ]
