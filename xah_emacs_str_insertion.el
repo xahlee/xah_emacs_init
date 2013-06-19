@@ -33,6 +33,14 @@ This command is conveniently used together with `kill-rectangle' and `string-rec
       )
 ))
 
+(defun insert-alphabets ()
+  "Insert letters a to z.
+Note: this command is similar to `rectangle-number-lines' with a format of 「%c」."
+  (interactive)
+  (dotimes (ii 26 )
+(insert (format "%c\n" (+ 97 ii)))
+))
+
 (defun insert-unicode-drawing-box ()
   "Insert a drawing box of Unicode chars."
   (interactive)
@@ -43,3 +51,7 @@ This command is conveniently used together with `kill-rectangle' and `string-rec
 │ │ │
 └─┴─┘
 "))
+
+
+
+

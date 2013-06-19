@@ -99,3 +99,5 @@ interactively by “eval-buffer”."
   )
 
 (load (fullpath-relative-to-current-file "xah_emacs_replace_quotes"))
+
+(server-start "LEAVE-DEAD")

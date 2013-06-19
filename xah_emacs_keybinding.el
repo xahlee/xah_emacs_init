@@ -8,6 +8,7 @@
 ;; • xah_emacs_mouse_binding.el
 ;; • xah_emacs_alias.el
 ;; • xah_emacs_abbr.el
+;; ~/git/ergoemacs/ergoemacs/ergoemacs-keybindings/ergoemacs-variants.el
 
 ;; • 〈Dvorak Keyboard Layout〉 http://xahlee.info/comp/dvorak_keyboard_layout.html
 ;; • 〈ErgoEmacs Keybinding〉 http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html
@@ -15,33 +16,16 @@
 ;; • 〈Emacs: How to define Hyper ＆ Super Keys〉 http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
 ;; • 〈Emacs: Remapping Keys Using key-translation-map〉 http://ergoemacs.org/emacs/emacs_key-translation-map.html
 ;; • 〈Emacs: Add Custom Keys to Enhance Productivity〉 http://ergoemacs.org/emacs/emacs_useful_user_keybinding.html
+;; • 〈Keyboard Layouts Fight! Dvorak, Maltron, Colemak, NEO, Bépo, Turkish-F, …〉  http://xahlee.info/kbd/dvorak_and_all_keyboard_layouts.html
 
 ;; Xah Lee
 ;; created: 2007-06.
 
 
-
-;(global-unset-key (kbd "C-+") )         ; text-scale-increase
-;(global-unset-key (kbd "C--") )         ; text-scale-decrease
-;(global-unset-key (kbd "C-a") )         ; mark-whole-buffer
-;(global-unset-key (kbd "C-s") )         ; save
-;(global-unset-key (kbd "C-o") )         ; open
-;(global-unset-key (kbd "C-0") ) ; text-scale-normal-size
-;(global-unset-key (kbd "M-5") )
-;(global-unset-key (kbd "M-3") )
-;(global-unset-key (kbd "M-4") )
-;(global-unset-key (kbd "M--") )
-;(global-unset-key (kbd "M-%") )
-;(global-unset-key (kbd "M-l") )         ; recenter-top-bottom
-;(global-unset-key (kbd "M-0") )         ; delete-window
-;(global-unset-key (kbd "C-S-t") )       ; ergoemacs-open-last-closed
-;(global-unset-key (kbd "C-u") )       ; universal-argument
-
-
 ;; generic
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
-(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
+;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
 ;(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))
 (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
@@ -100,12 +84,10 @@
 ; er t y ui
 ; df g h jk
 
+; matt's ErgoEmacs key sequence bindings
 ; 【.】 【p】 【y】       | 【f】 C-h 【g】 C-c 【c】
 ; 【e】 【u】 C-x   【i】  | 【d】 C-h 【h】 C-c 【t】
 ;                                 【m】 commit
-; /home/xah/git/ergoemacs/ergoemacs/ergoemacs-keybindings/ergoemacs-variants.el
-; 〈Keyboard Layouts Fight! Dvorak, Maltron, Colemak, NEO, Bépo, Turkish-F, …〉
-; http://xahlee.info/kbd/dvorak_and_all_keyboard_layouts.html
 
 (global-set-key (kbd "<menu>") 'nil)
 
@@ -277,6 +259,8 @@
   (global-set-key (kbd "<menu> u -") "—") ; EM DASH
   (global-set-key (kbd "<menu> u ,") 'insert-pair-greater-less)
 
+  (global-set-key (kbd "<menu> u RET") 'xah-insert-unicode)
+
   (global-set-key (kbd "<menu> u . <down>") "⇓")
   (global-set-key (kbd "<menu> u . <left>") "⇐")
   (global-set-key (kbd "<menu> u . <right>") "⇒")
@@ -284,7 +268,7 @@
   (global-set-key (kbd "<menu> u . b") 'insert-pair-white-lenticular-bracket〖〗)
   (global-set-key (kbd "<menu> u . m") 'insert-pair-white-corner-bracket『』)
   (global-set-key (kbd "<menu> u . w") 'insert-pair-double-angle-bracket《》)
-  (global-set-key (kbd "<menu> u 2") "¤") ; white diamond
+  (global-set-key (kbd "<menu> u 2") "¤")
   (global-set-key (kbd "<menu> u 3") "◇") ; white diamond
   (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
   (global-set-key (kbd "<menu> u 5") "🎶") ; MULTIPLE MUSICAL NOTES
@@ -417,7 +401,6 @@ Still, the code isn't 100% correct.
 ;; )
 ;; (add-hook 'cperl-mode-hook 'xah-cperl-mode-keys)
 
-
 ;; ;(setq mybuf (get-buffer-create "*show commands*"))
 ;; (defun xx ()
 ;;   "tttttt"
@@ -440,8 +423,6 @@ Still, the code isn't 100% correct.
 
 (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
 (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
-
-(add-hook 'xah-elisp-mode-hook 'ac-emacs-lisp-mode-setup)
 
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
@@ -531,10 +512,53 @@ For `Info-mode-hook'."
 (global-set-key (kbd "C-9") 'nil)
 (global-set-key (kbd "C-0") 'nil)
 
+;; ;; (global-set-key (kbd "C-a") 'nil) ; select all
+;; (global-set-key (kbd "C-b") 'nil)
+;; ;; (global-set-key (kbd "C-c") 'nil) ; mode specific
+;; (global-set-key (kbd "C-d") 'nil)
+;; (global-set-key (kbd "C-e") 'nil)
+;; ;; (global-set-key (kbd "C-f") 'nil) ; find
+;; ;; (global-set-key (kbd "C-g") 'nil) ; cancel
+;; ;; (global-set-key (kbd "C-h") 'nil) ; help
+;; ;; (global-set-key (kbd "C-i") 'nil) ; tab
+;; ;; (global-set-key (kbd "C-j") 'nil) ; newline
+;; (global-set-key (kbd "C-k") 'nil)
+;; (global-set-key (kbd "C-l") 'nil)
+;; ;; (global-set-key (kbd "C-m") 'nil) ; return
+;; ;; (global-set-key (kbd "C-n") 'nil) ; new
+;; ;; (global-set-key (kbd "C-o") 'nil) ; open
+;; (global-set-key (kbd "C-p") 'nil)
+;; ;; (global-set-key (kbd "C-q") 'nil) ; quote
+;; (global-set-key (kbd "C-r") 'nil)
+;; (global-set-key (kbd "C-s") 'nil)
+;; (global-set-key (kbd "C-t") 'nil)
+;; (global-set-key (kbd "C-u") 'nil)
+;; (global-set-key (kbd "C-v") 'nil)
+;; ;; (global-set-key (kbd "C-w") 'nil) ; close
+;; ;; (global-set-key (kbd "C-x") 'nil) C-x
+;; ;; (global-set-key (kbd "C-y") 'nil)
+;; (global-set-key (kbd "C-z") 'nil)
+
 ;(global-set-key (kbd "C-o") 'backward-sexp)
 ;(global-set-key (kbd "C-u") 'forward-sexp)
 ;(global-set-key (kbd "C-e") 'down-list)
 ;(global-set-key (kbd "C-.") 'backward-up-list)
+
+;(global-unset-key (kbd "C-+") )         ; text-scale-increase
+;(global-unset-key (kbd "C--") )         ; text-scale-decrease
+;(global-unset-key (kbd "C-a") )         ; mark-whole-buffer
+;(global-unset-key (kbd "C-s") )         ; save
+;(global-unset-key (kbd "C-o") )         ; open
+;(global-unset-key (kbd "C-0") ) ; text-scale-normal-size
+;(global-unset-key (kbd "M-5") )
+;(global-unset-key (kbd "M-3") )
+;(global-unset-key (kbd "M-4") )
+;(global-unset-key (kbd "M--") )
+;(global-unset-key (kbd "M-%") )
+;(global-unset-key (kbd "M-l") )         ; recenter-top-bottom
+;(global-unset-key (kbd "M-0") )         ; delete-window
+;(global-unset-key (kbd "C-S-t") )       ; ergoemacs-open-last-closed
+;(global-unset-key (kbd "C-u") )       ; universal-argument
 
 (global-set-key (kbd "M-\"") 'xah-compact-uncompact-Block)
 
@@ -568,21 +592,19 @@ For `Info-mode-hook'."
       (progn (setq w32-apps-modifier 'meta) )
       ))
 
-;; c:/Users/h3/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
+;; ~/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
 
 ;; some idea about command categories, in context to chosing keys for them
 
-;; • whether a command has immediate effect, no prompt. e.g. shell vs delete-matching-lines
-;; • whether a command has is safe to run by mistake. e.g. whitespace-mode vs eval-buffer
-;; • whether a command is frequently needed (few times a hour). e.g.
+;; • whether a command has immediate effect, no prompt. ⁖ shell vs delete-matching-lines
+;; • whether a command has is safe to run by mistake. ⁖ whitespace-mode vs eval-buffer
+;; • whether a command is frequently needed ⁖ few times a min, hour, day
 
 ;; idea about key groups
 ;; all should be sequence of single keys. 2 to 3 keys. All should start with F7. And all commands should be globally useful.
 ;; • 2 keys vs 3 keys
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
 
-;; command that are not immediate (has prompt) probably should not have a key.
+(ergoemacs-mode 1)
 
-
-
-
+(browse-kill-ring-default-keybindings)
