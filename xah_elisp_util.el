@@ -40,7 +40,7 @@ Test cases
       (setq tempStr (replace-regexp-in-string "\\`#" "" tempStr ))  ; CSS …
       )
 
-    (message "Hex %s is %d" tempStr (string-to-number tempStr 16 ) )
+    (message "Hex 「%s」 is 「%d」" tempStr (string-to-number tempStr 16 ) )
     ))
 
 

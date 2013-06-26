@@ -570,11 +570,83 @@ src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
 </div>"
  ""]
 
+  ;; Google Ad
+["<div class=\"ad66704\">
+<script type=\"text/javascript\"><!--
+google_ad_client = \"ca-pub-5125343095650532\";
+/* 728x90, created 8/12/09 */
+google_ad_slot = \"8521101965\";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type=\"text/javascript\"
+src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
+</script>
+</div>"
+""]
+
+  ;; Google Ad
+["<script type=\"text/javascript\"><!--
+google_ad_client = \"ca-pub-5125343095650532\";
+/* 200x200 */
+google_ad_slot = \"1321390789\";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type=\"text/javascript\"
+src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
+</script>
+<br />"
+""]
+
+  ;; Google Ad
+["<div class=\"ads-bottom-65900\">
+<script type=\"text/javascript\"><!--
+google_ad_client = \"ca-pub-5125343095650532\";
+/* 728x90, created 8/12/09 */
+google_ad_slot = \"8521101965\";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type=\"text/javascript\"
+src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
+</script>
+</div>"
+""]
+
+;; Google Plus
+["<div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div>" ""]
+
+;; twitter
+["<div class=\"twitter\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"xah_lee\" data-count=\"none\">Tweet</a></div>" ""]
+["<div class=\"twitter\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"ErgoEmacs\" data-count=\"none\">Tweet</a></div>" ""]
+["<div class=\"twitter\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"wordy_english\" data-count=\"none\">Tweet</a></div>" ""]
+
+;; facebook
+["<div class=\"fb-like\" data-send=\"false\" data-layout=\"button_count\" data-width=\"90\" data-show-faces=\"false\"></div>" ""]
+
+["<p>emacs lisp project</p>
+<a href=\"http://www.pledgie.com/campaigns/19973\" rel=\"nofollow\"><img alt=\"Click here to lend your support to: Emacs Lisp Project and make a donation at www.pledgie.com !\" src=\"http://www.pledgie.com/campaigns/19973.png?skin_name=chrome\" border=\"0\" /></a>"
+""]
+
+;; paypal
+["<div class=\"paypal-donate-60910\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"8127788\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif\" name=\"submit\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>
+<p>thank you <a href=\"http://xahlee.org/thanks.html\" rel=\"nofollow\">donors</a></p>
+<br />"
+""]
+
   ;; Disqus code
   [
    "<div id=\"disqus_thread\"></div><script>(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://xahlee.disqus.com/embed.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><a href=\"http://disqus.com\" class=\"dsq-brlink\">blog comments powered by <span class=\"logo-disqus\">Disqus</span></a>"
    ""
    ]
+
+  ;; amazon ad
+["<iframe src=\"http://rcm.amazon.com/e/cm?t=xahhome-20&o=1&p=286&l=bn1&mode=pc-hardware&browse=13900871&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr\" marginwidth=\"0\" marginheight=\"0\" width=\"200\" height=\"200\" border=\"0\" frameborder=\"0\" style=\"border:none;\" scrolling=\"no\"></iframe>"
+""]
 
   ;; gitcafe ad
   ["<div class=\"¤gitcafe\"><a href=\"http://gitcafe.com/\" rel=\"nofollow\">GitCafe 中文</a></div>" ""]
@@ -590,7 +662,7 @@ src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
 
   ;; 1and1 web hosting
   [
-   "<div class=\"¤1n1\"><a href=\"http://www.1and1.com/?k_id=10914806\" rel=\"nofollow\">Web Hosting by 1＆1</a></div>"
+"<a href=\"http://www.1and1.com/?k_id=10914806\" target=\"_blank\" rel=\"nofollow\"><img src=\"http://adimg.uimserv.net/1und1/Werbemittel_US/wh_an_180x150.gif\" width=\"180\" height=\"150\" border=\"0\"/></a>"
    ""
    ]
 
@@ -602,35 +674,34 @@ src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
                           )
 
     (replace-regexp-pairs-region 1 (point-max)
-                                 [
+ [
 
-                                  ;; Google Analytics tracker
-                                  [ "<script>var _gaq = .+?();</script>" "" ]
+;; Google Analytics tracker
+[ "<script>var _gaq = .+?();</script>" "" ]
 
-                                  ["<div class=\"βds\">[[:ascii:]]+?</div>" ""]
+["<div class=\"byline\"><address class=\"author\">[[:ascii:]]+?</time></div>" ""]
 
-                                  ["<div class=\"βshare\">\n+</div>" ""]
+["<aside id=\"id1\">[[:ascii:]]+?</aside>" ""]
 
-                                  ["<div class=\"¤xd\">[^<]+?</div>" ""]
+["<div class=\"share-buttons\">\n+</div>" ""]
 
-                                  ["<div class=\"¤\">[^<]+?</div>" ""]
+["<div class=\"¤xd\">[^<]+?</div>" ""]
 
-                                  ;; 1 and 1
-                                  ["<div class=\"¤1n1\">[^<]+?</div>" ""]
+["<div class=\"¤\">[^<]+?</div>" ""]
 
-                                  [ "<script charset=\"utf-8\" src=\"http://ws.amazon.com[^<]+?</script>" ""]
+[ "<script charset=\"utf-8\" src=\"http://ws.amazon.com[^<]+?</script>" ""]
 
-                                  ["<div class=\"¤tla\"><a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a></div>" ""]
+["<div class=\"¤tla\"><a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a></div>" ""]
 
-                                  ["<script><!--
+["<script><!--
 amazon_ad_tag .+?</script>
 <script src=\"http://www.assoc-amazon.com/s/ads.js\"></script>"
-                                   ""]
+ ""]
 
-                                  ;; ["<div id=\"disqus_thread\"></div><script>.+?</script><a href.+Disqus</span></a>" ""]
-                                  ;; ["<footer>.+?</footer>" ""]
+;; ["<div id=\"disqus_thread\"></div><script>.+?</script><a href.+Disqus</span></a>" ""]
+;; ["<footer>.+?</footer>" ""]
 
-                                  ]
-                                 "FIXEDCASE" "LITERAL")
+]
+"FIXEDCASE" "LITERAL")
     )
 )

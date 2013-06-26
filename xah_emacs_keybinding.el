@@ -253,7 +253,7 @@
   (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
   (global-set-key (kbd "<menu> t b") 'flyspell-buffer)
   (global-set-key (kbd "<menu> t 3") 'xah-shell-commands)
-  (global-set-key (kbd "<menu> t <backspace>") 'delete-current-file)
+  (global-set-key (kbd "<menu> <delete>") 'delete-current-file)
 )
 
 (progn
@@ -609,4 +609,5 @@ For `Info-mode-hook'."
 ;; • 2 keys vs 3 keys
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
 
-;; (browse-kill-ring-default-keybindings)
+
+;; (ergoemacs-ignore-prev-global) ; Do not honor previously defined global keys. 2013-06-24

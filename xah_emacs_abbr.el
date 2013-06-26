@@ -185,6 +185,7 @@
     ("8gm" "Google Map")
     ("8gc" "Google Chrome")
     ("8gp" "Google Plus")
+    ("8so" "StackOverflow")
     ("8gcd" "googlecode")
     ("8ff" "Firefox")
     ("8sl" "Second Life")
