@@ -27,7 +27,9 @@
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
 ;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
 ;(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))
-(define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
+;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
+
+;; (global-set-key (kbd "<delete>") 'set-mark-command)
 
 ;; in linux, by default, <lwindow> is Super,  s-
 ;; Linux, the menu/apps key syntax is <menu>
@@ -319,14 +321,9 @@
   "Modify keymaps used by `html-mode'."
   ;; .p gc
   ;; eu ht
-
-  (define-key xhm-keymap (kbd "<menu> e 0") 'xhm-remove-html-tags)
   (define-key xhm-keymap (kbd "<menu> e 5") 'mark-unicode)
-  (define-key xhm-keymap (kbd "<menu> e 7") 'xhm-htmlize-or-de-precode)
-  (define-key xhm-keymap (kbd "<menu> e 8") 'xhm-get-precode-make-new-file)
   (define-key xhm-keymap (kbd "<menu> e a") 'xwe-annotate)
   (define-key xhm-keymap (kbd "<menu> e b") 'make-blogger-entry)
-  (define-key xhm-keymap (kbd "<menu> e c") 'xhm-make-citation)
   (define-key xhm-keymap (kbd "<menu> e d") 'insert-date-tag)
   (define-key xhm-keymap (kbd "<menu> e e") 'nil)
   (define-key xhm-keymap (kbd "<menu> e f") 'xah-copy-url-current-file)
@@ -334,10 +331,7 @@
   (define-key xhm-keymap (kbd "<menu> e h") 'xah-all-linkify)
   (define-key xhm-keymap (kbd "<menu> e i") 'nil)
   (define-key xhm-keymap (kbd "<menu> e j") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
   (define-key xhm-keymap (kbd "<menu> e l") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e l 6") 'xhm-source-url-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l .") 'xhm-lines-to-html-list)
   (define-key xhm-keymap (kbd "<menu> e l c") 'xwe-chinese-linkify)
   (define-key xhm-keymap (kbd "<menu> e l d") 'perldoc-ref-linkify)
   (define-key xhm-keymap (kbd "<menu> e l e") 'emacs-ref-linkify)
@@ -346,36 +340,24 @@
   (define-key xhm-keymap (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
   (define-key xhm-keymap (kbd "<menu> e l p") 'php-ref-linkify)
   (define-key xhm-keymap (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l u") 'xhm-wrap-url)
-  (define-key xhm-keymap (kbd "<menu> e l w") 'xhm-wikipedia-linkify)
   (define-key xhm-keymap (kbd "<menu> e l z") 'amazon-linkify)
-  (define-key xhm-keymap (kbd "<menu> e m") 'xhm-pre-source-code)
   (define-key xhm-keymap (kbd "<menu> e n") 'nil)
   (define-key xhm-keymap (kbd "<menu> e o") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e p") 'xhm-wrap-p-tag)
   (define-key xhm-keymap (kbd "<menu> e q") 'nil)
   (define-key xhm-keymap (kbd "<menu> e r") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e r ,") 'xhm-replace-html-chars-to-unicode)
-  (define-key xhm-keymap (kbd "<menu> e r .") 'xhm-replace-html-&<>-to-entities)
-  (define-key xhm-keymap (kbd "<menu> e r 3") 'xhm-update-title)
   (define-key xhm-keymap (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
   (define-key xhm-keymap (kbd "<menu> e r c") 'code-bracket-to-html-tag)
-  (define-key xhm-keymap (kbd "<menu> e r e") 'xhm-htmlize-elisp-keywords)
-  (define-key xhm-keymap (kbd "<menu> e r k") 'emacs-to-windows-kbd-notation)
-  (define-key xhm-keymap (kbd "<menu> e r m") 'xhm-make-html-table)
   (define-key xhm-keymap (kbd "<menu> e r t") 'title-bracket-to-html-tag)
   (define-key xhm-keymap (kbd "<menu> e s") 'nil)
   (define-key xhm-keymap (kbd "<menu> e t") 'nil)
   (define-key xhm-keymap (kbd "<menu> e t a") 'xah-make-atom-entry)
   (define-key xhm-keymap (kbd "<menu> e t l") 'xah-add-to-related-links)
-  (define-key xhm-keymap (kbd "<menu> e t r") 'xhm-rename-html-inline-image)
-  (define-key xhm-keymap (kbd "<menu> e t u") 'xhm-extract-url)
-  (define-key xhm-keymap (kbd "<menu> e u") 'xhm-wrap-html-tag)
   (define-key xhm-keymap (kbd "<menu> e v") 'nil)
   (define-key xhm-keymap (kbd "<menu> e w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
   (define-key xhm-keymap (kbd "<menu> e x") 'nil)
   (define-key xhm-keymap (kbd "<menu> e y") 'nil)
   (define-key xhm-keymap (kbd "<menu> e z") 'nil)
+
 )
 
 (add-hook 'html-mode-hook 'xah-html-mode-keys)

@@ -124,7 +124,7 @@ Generate a report of the replaced strings in a separate buffer."
           (replace-match "<code>\\1</code>" t) )
 
         (goto-char (point-min))
-        (while (search-forward-regexp "〔\\([-/\\:~.A-Za-z]+?\\)〕" nil t)
+        (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z]+?\\)〕" nil t)
           (setq changedItems (cons (match-string 1) changedItems ) )
           (replace-match "<code class=\"path-α\">\\1</code>" t) )
         ) )
