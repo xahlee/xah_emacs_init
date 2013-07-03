@@ -314,8 +314,8 @@ When called in elisp, the p1 and p2 are region begin/end positions to work on."
       (let ((case-fold-search nil))
         (replace-pairs-region p1 p2 useMap ) ) ) ) )
 
-(defvar bracketsList nil "a list of bracket pairs. ⁖ () {} [] “” ‘’ ‹› «» 「」 『』 ….")
-(setq bracketsList '( "()" "{}" "[]" "<>" "“”" "‘’" "‹›" "«»" "「」" "『』" "【】" "〖〗" "〈〉" "《》" "〔〕" "⦅⦆" "〚〛" "⦃⦄"
+(defvar xah-bracketsList nil "a list of bracket pairs. ⁖ () {} [] “” ‘’ ‹› «» 「」 『』 ….")
+(setq xah-bracketsList '( "()" "{}" "[]" "<>" "“”" "‘’" "‹›" "«»" "「」" "『』" "【】" "〖〗" "〈〉" "《》" "〔〕" "⦅⦆" "〚〛" "⦃⦄"
 "〈〉" "⦑⦒" "⧼⧽" 
 "⟦⟧" "⟨⟩" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱"
 ))
@@ -325,7 +325,7 @@ When called in elisp, the p1 and p2 are region begin/end positions to work on."
 Works on current block or text selection.
 "
   (interactive
-   (list (ido-completing-read "from:" bracketsList) ) )
+   (list (ido-completing-read "from:" xah-bracketsList) ) )
   (let* (
          (bds (get-selection-or-unit 'block))
          (p1 (elt bds 1))
@@ -347,8 +347,8 @@ When called in lisp program, fromType and toType is a string of a bracket pair. 
   (interactive
    (let ( )
      (list
-      (ido-completing-read "Replace this:" bracketsList )
-      (ido-completing-read "To:" bracketsList ) ) ) )
+      (ido-completing-read "Replace this:" xah-bracketsList )
+      (ido-completing-read "To:" xah-bracketsList ) ) ) )
   (let* (
          (bds (get-selection-or-unit 'block))
          (p1 (elt bds 1))
@@ -525,22 +525,18 @@ Examples of changes:
 (defun escape-quotes ()
   "Replace 「\"」 by 「\\\"」 in current line or text selection."
   (interactive)
-  (let (bds p1 p2)
-    (setq bds (get-selection-or-unit 'line))
-    (setq p1 (elt bds 1) p2 (elt bds 2)  )
-    (replace-pairs-region p1 p2 '(["\"" "\\\""]))
-    )
-  )
+  (let* ((bds (get-selection-or-unit 'line))
+         (p1 (elt bds 1)) 
+         (p2 (elt bds 2)))
+    (replace-pairs-region p1 p2 '(["\"" "\\\""])) ) )
 
 (defun unescape-quotes ()
   "Replace  「\\\"」 by 「\"」 in current line or text selection."
   (interactive)
-  (let (bds p1 p2)
-    (setq bds (get-selection-or-unit 'line))
-    (setq p1 (elt bds 1) p2 (elt bds 2)  )
-    (replace-pairs-region p1 p2 '(["\\\"" "\""]))
-    )
-  )
+  (let* ((bds (get-selection-or-unit 'line))
+        (p1 (elt bds 1)) 
+        (p2 (elt bds 2)))
+    (replace-pairs-region p1 p2 '(["\\\"" "\""])) ) )
 
 (defun remove-vowel-old (&optional ξstring ξfrom ξto)
   "Remove the following letters: {a e i o u}.

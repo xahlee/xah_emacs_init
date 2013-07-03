@@ -148,7 +148,7 @@ Requires ImageMagick shell tool."
    )
   (let ((sharpenOrNo (if sharpen-p "-sharpen 1" "" )))
     (process-image fileList
-                   (format "-scale %s%% -quality 85% %s " scalePercentage sharpenOrNo)
+                   (format "-scale %s%% -quality 85%% %s " scalePercentage sharpenOrNo)
                    "-s" ".jpg" )
     )
   )

@@ -20,6 +20,9 @@
 
 (setq sentence-end-double-space nil )
 
+;; (setq ido-enable-flex-matching nil )
+;; (setq ido-enable-flex-matching t )
+
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 

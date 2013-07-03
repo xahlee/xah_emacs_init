@@ -414,7 +414,7 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 
     ;; extract the id from text
     (cond
-     ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/" mainText) (setq asin (match-string 1 mainText) ))
+     ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" mainText) (setq asin (match-string 1 mainText) ))
      ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" mainText) (setq asin (match-string 1 mainText) ))
      ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" mainText) (setq asin (match-string 1 mainText) ))
      ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" mainText) (setq asin (match-string 1 mainText) ))

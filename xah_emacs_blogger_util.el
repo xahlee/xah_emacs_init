@@ -72,7 +72,7 @@ This new content is ready to be posted to blogger."
 ;; remove header, author, etc.
 (replace-regexp-pairs-region 1 (point-max)
 [
-["<header>[ \n[:graph:]]+</header>" ""]
+["<nav id=\"t5\">[ \n[:graph:]]+</nav>" ""]
 ["<article>" ""]
 ["</article>" ""]
 ["<nav class=\"n1\"><a href=\"\\([^\"]+?\\)\">\\([^\"]+?\\)</a></nav>" ""]

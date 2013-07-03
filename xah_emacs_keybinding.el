@@ -321,42 +321,65 @@
   "Modify keymaps used by `html-mode'."
   ;; .p gc
   ;; eu ht
-  (define-key xhm-keymap (kbd "<menu> e 5") 'mark-unicode)
-  (define-key xhm-keymap (kbd "<menu> e a") 'xwe-annotate)
-  (define-key xhm-keymap (kbd "<menu> e b") 'make-blogger-entry)
-  (define-key xhm-keymap (kbd "<menu> e d") 'insert-date-tag)
-  (define-key xhm-keymap (kbd "<menu> e e") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e f") 'xah-copy-url-current-file)
-  (define-key xhm-keymap (kbd "<menu> e g") 'xah-browse-url-of-buffer)
-  (define-key xhm-keymap (kbd "<menu> e h") 'xah-all-linkify)
-  (define-key xhm-keymap (kbd "<menu> e i") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e j") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e l") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e l c") 'xwe-chinese-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l d") 'perldoc-ref-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l e") 'emacs-ref-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l f") 'full-size-img-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l i") 'image-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
-  (define-key xhm-keymap (kbd "<menu> e l p") 'php-ref-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
-  (define-key xhm-keymap (kbd "<menu> e l z") 'amazon-linkify)
-  (define-key xhm-keymap (kbd "<menu> e n") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e o") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e q") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e r") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
-  (define-key xhm-keymap (kbd "<menu> e r c") 'code-bracket-to-html-tag)
-  (define-key xhm-keymap (kbd "<menu> e r t") 'title-bracket-to-html-tag)
-  (define-key xhm-keymap (kbd "<menu> e s") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e t") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e t a") 'xah-make-atom-entry)
-  (define-key xhm-keymap (kbd "<menu> e t l") 'xah-add-to-related-links)
-  (define-key xhm-keymap (kbd "<menu> e v") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
-  (define-key xhm-keymap (kbd "<menu> e x") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e y") 'nil)
-  (define-key xhm-keymap (kbd "<menu> e z") 'nil)
+
+  (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
+  (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
+
+  (local-set-key (kbd "<menu> e 0") 'xhm-remove-html-tags)
+  (local-set-key (kbd "<menu> e 7") 'xhm-htmlize-or-de-precode)
+  (local-set-key (kbd "<menu> e 8") 'xhm-get-precode-make-new-file)
+  (local-set-key (kbd "<menu> e c") 'xhm-make-citation)
+  (local-set-key (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
+  (local-set-key (kbd "<menu> e l 6") 'xhm-source-url-linkify)
+  (local-set-key (kbd "<menu> e l .") 'xhm-lines-to-html-list)
+  (local-set-key (kbd "<menu> e l u") 'xhm-wrap-url)
+  (local-set-key (kbd "<menu> e l w") 'xhm-wikipedia-linkify)
+  (local-set-key (kbd "<menu> e m") 'xhm-pre-source-code)
+  (local-set-key (kbd "<menu> e p") 'xhm-wrap-p-tag)
+  (local-set-key (kbd "<menu> e r ,") 'xhm-replace-html-chars-to-unicode)
+  (local-set-key (kbd "<menu> e r .") 'xhm-replace-html-&<>-to-entities)
+  (local-set-key (kbd "<menu> e r 3") 'xhm-update-title)
+  (local-set-key (kbd "<menu> e r e") 'xhm-htmlize-elisp-keywords)
+  (local-set-key (kbd "<menu> e r k") 'xhm-emacs-to-windows-kbd-notation)
+  (local-set-key (kbd "<menu> e r m") 'xhm-make-html-table)
+  (local-set-key (kbd "<menu> e t r") 'xhm-rename-html-inline-image)
+  (local-set-key (kbd "<menu> e t u") 'xhm-extract-url)
+  (local-set-key (kbd "<menu> e u") 'xhm-wrap-html-tag)
+
+  (local-set-key (kbd "<menu> e 5") 'mark-unicode)
+  (local-set-key (kbd "<menu> e a") 'xwe-annotate)
+  (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
+  (local-set-key (kbd "<menu> e d") 'insert-date-tag)
+  (local-set-key (kbd "<menu> e e") 'nil)
+  (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
+  (local-set-key (kbd "<menu> e g") 'xah-browse-url-of-buffer)
+  (local-set-key (kbd "<menu> e h") 'xah-all-linkify)
+  (local-set-key (kbd "<menu> e i") 'nil)
+  (local-set-key (kbd "<menu> e j") 'nil)
+  (local-set-key (kbd "<menu> e l c") 'xwe-chinese-linkify)
+  (local-set-key (kbd "<menu> e l d") 'perldoc-ref-linkify)
+  (local-set-key (kbd "<menu> e l e") 'emacs-ref-linkify)
+  (local-set-key (kbd "<menu> e l f") 'full-size-img-linkify)
+  (local-set-key (kbd "<menu> e l i") 'image-linkify)
+  (local-set-key (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
+  (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
+  (local-set-key (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
+  (local-set-key (kbd "<menu> e l z") 'amazon-linkify)
+  (local-set-key (kbd "<menu> e n") 'nil)
+  (local-set-key (kbd "<menu> e o") 'nil)
+  (local-set-key (kbd "<menu> e q") 'nil)
+  (local-set-key (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
+  (local-set-key (kbd "<menu> e r c") 'code-bracket-to-html-tag)
+  (local-set-key (kbd "<menu> e r t") 'title-bracket-to-html-tag)
+  (local-set-key (kbd "<menu> e s") 'nil)
+  (local-set-key (kbd "<menu> e t") 'nil)
+  (local-set-key (kbd "<menu> e t a") 'xah-make-atom-entry)
+  (local-set-key (kbd "<menu> e t l") 'xah-add-to-related-links)
+  (local-set-key (kbd "<menu> e v") 'nil)
+  (local-set-key (kbd "<menu> e w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
+  (local-set-key (kbd "<menu> e x") 'nil)
+  (local-set-key (kbd "<menu> e y") 'nil)
+  (local-set-key (kbd "<menu> e z") 'nil)
 
 )
 
@@ -426,13 +449,6 @@ For `rcirc-mode-hook'."
   )
 (add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
 
-(defun xah-dired-mode-keys ()
-  "my keybindings for `dired'.
-For `dired-mode-hook'."
-  (local-set-key (kbd "6") 'dired-up-directory)
-  )
-(add-hook 'dired-mode-hook 'xah-dired-mode-keys)
-
 (defun xah-org-mode-keys ()
   "my keybindings for `org-mode'.
 For `org-mode-hook'."
@@ -450,11 +466,15 @@ For `Info-mode-hook'."
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
+
+
+
 (defun xah-dired-mode-keys ()
   "Modify keymaps used by `dired'."
 ;;  (define-key dired-mode-map (kbd "<return>") 'dired-find-alternate-file) ; was dired-advertised-find-file
 ;;  (define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file ".."))) ; was dired-up-directory
-  (define-key dired-mode-map (kbd "M-$") nil) ; was dired-up-directory
+  ;; (define-key dired-mode-map (kbd "M-$") nil) ; was dired-up-directory
+;; (local-set-key (kbd "6") 'dired-up-directory)
   (when (>= emacs-major-version 23)
 ;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
 ;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)

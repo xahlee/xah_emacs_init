@@ -235,8 +235,7 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
             (let ((ξfp (xahsite-url-to-filepath ξs )))
               (if (file-exists-p ξfp)
                   (progn (find-file ξfp ))
-                (progn (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp) )
-                         (progn (find-file ξfff ))))
+                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp) ) (find-file ξs ))
                 )
               )
           (progn (browse-url ξs))
@@ -247,9 +246,7 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
               (progn (find-file ξfff))
             (if (file-exists-p (concat ξfff ".el"))
                 (progn (find-file (concat ξfff ".el")))
-              (progn
-                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfff) )
-                  (progn (find-file ξfff ))) ) ) ) ) ) ) ))
+              (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfff) ) (find-file ξfff )) ) ) ) ) ) ))
 
 (defun xah-open-file-from-clipboard ()
   "Open the file path from OS's clipboard.
@@ -512,7 +509,7 @@ When there is a text selection, act on the region."
 
       (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )
 
-(defcustom xah-shell-abbrev-alist nil "alist of xah's shell abbrevs")
+(defcustom xah-shell-abbrev-alist nil "alist of xah's shell abbrevs" :group 'xah)
 (setq xah-shell-abbrev-alist
           '(
             ("rsync1" . "rsync -z -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
@@ -533,7 +530,7 @@ When there is a text selection, act on the region."
             ("rmEmptyDir" . "find . -depth -empty -type d -exec rmdir {} ';'")
             ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
             ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
-            ("vp" . "feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x1000 . &")
+            ("viewp" . "feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x1000 . &")
             ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")
             )
 
