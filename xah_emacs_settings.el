@@ -20,6 +20,8 @@
 
 (setq sentence-end-double-space nil )
 
+;; (set-default cursor-type 'bar)
+
 ;; (setq ido-enable-flex-matching nil )
 ;; (setq ido-enable-flex-matching t )
 
@@ -103,9 +105,10 @@
 
 
 
-(when (boundp 'tabbar-mode)
-  (tabbar-mode 0)
-)
+;; (eval-when-compile
+;;   (when (boundp 'tabbar-mode)
+;;     (tabbar-mode 0)
+;;     ))
 
 (setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
 

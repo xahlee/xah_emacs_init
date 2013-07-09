@@ -359,7 +359,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
     (setq myTitle (replace-pairs-in-string myTitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]) )
 
     (delete-region p1 p2)
-    (insert "〈" myTitle "〉\n" (xahsite-filepath-to-url myFile))
+    (insert myTitle "\n" (xahsite-filepath-to-url myFile))
     ))
 
 (defun xah-copy-url-current-file ()
