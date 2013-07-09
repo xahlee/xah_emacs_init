@@ -386,7 +386,6 @@ default browser will be launched and opening this URL:
  http://xahlee.info/index.html"
   (interactive)
   (let (myURL)
-    (save-buffer)
     (if current-prefix-arg
         (progn
           (setq myURL
@@ -394,6 +393,10 @@ default browser will be launched and opening this URL:
       (progn
         (setq myURL
               (buffer-file-name)))
+      )
+
+    (when (buffer-modified-p )
+      (save-buffer)
       )
 
     (cond

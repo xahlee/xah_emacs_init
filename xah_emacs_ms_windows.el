@@ -40,8 +40,8 @@
   )
 
 
-;(setenv "SHELL" "C:/Windows/system32/cmd.exe" )
-;(setenv "SHELL" "C:/Windows/system32/cmdproxy.exe" )
+;; (setenv "SHELL" "C:/Windows/system32/cmd.exe" )
+;; (setenv "SHELL" "C:/Windows/system32/cmdproxy.exe" )
 
 ;; Warning! shell-command-switch is "-c".
 ;; You should set this to "/c" when using a system shell.
