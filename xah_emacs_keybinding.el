@@ -120,7 +120,7 @@
 
 ;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
 
-;cycle-camel-style-case
+;xah-cycle-camel-style-case
 
 (global-set-key (kbd "<menu> .") 'nil)
 (global-set-key (kbd "<menu> '") 'nil)
@@ -143,7 +143,7 @@
 (global-set-key (kbd "<menu> =") 'nil)
 (global-set-key (kbd "<menu> SPC") 'set-mark-command) ; ★★★
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
-(global-set-key (kbd "<menu> \\") 'escape-quotes)
+(global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
 (global-set-key (kbd "<menu> `") 'make-backup)
 (global-set-key (kbd "<menu> a") 'mark-whole-buffer) ; ★★★
 (global-set-key (kbd "<menu> b") 'nil)
@@ -233,14 +233,14 @@
 (global-set-key (kbd "<menu> r") 'nil)
 (global-set-key (kbd "<menu> r j") 'copy-to-register-1)
 (global-set-key (kbd "<menu> r k") 'paste-from-register-1)
-(global-set-key (kbd "<menu> r '") 'ξ-replace-straight-quotes)
-(global-set-key (kbd "<menu> r ,") 'remove-punctuation-trailing-redundant-space)
-(global-set-key (kbd "<menu> r .") 'convert-english-chinese-punctuation)
+(global-set-key (kbd "<menu> r '") 'xah-replace-straight-quotes)
+(global-set-key (kbd "<menu> r ,") 'xah-remove-punctuation-trailing-redundant-space)
+(global-set-key (kbd "<menu> r .") 'xah-convert-english-chinese-punctuation)
 (global-set-key (kbd "<menu> r d") 'delete-matching-lines) ; ★★
 (global-set-key (kbd "<menu> r e") 'query-replace) ; ★★★
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
 (global-set-key (kbd "<menu> r l") 'list-matching-lines) ; ★★★
-(global-set-key (kbd "<menu> r p") 'convert-asian/ascii-space)
+(global-set-key (kbd "<menu> r p") 'xah-convert-asian/ascii-space)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; ★★★
@@ -504,14 +504,14 @@ For `Info-mode-hook'."
 ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_truly_ergonomic"))
 (load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
 
-(global-set-key (kbd "C--") 'cycle-camel-style-case)
+(global-set-key (kbd "C--") 'xah-cycle-camel-style-case)
 (global-set-key (kbd "C-1") 'cycle-font-backward)
 (global-set-key (kbd "C-2") 'cycle-font-forward)
 (global-set-key (kbd "C-3") 'cycle-font-2)
-(global-set-key (kbd "C-4") 'convert-fullwidth-chars)
-(global-set-key (kbd "C-5") 'replace-latin-alphabet-to-gothic)
+(global-set-key (kbd "C-4") 'xah-convert-fullwidth-chars)
+(global-set-key (kbd "C-5") 'xah-convert-latin-alphabet-gothic)
 (global-set-key (kbd "C-6") 'nil)
-(global-set-key (kbd "C-7") 'cycle-hyphen-underscore-space)
+(global-set-key (kbd "C-7") 'xah-cycle-hyphen-underscore-space)
 (global-set-key (kbd "C-8") 'nil)
 (global-set-key (kbd "C-9") 'nil)
 (global-set-key (kbd "C-0") 'nil)

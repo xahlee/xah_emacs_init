@@ -22,9 +22,9 @@
 (global-set-key (kbd "<kp-down>") 'split-window-vertically)
 (global-set-key (kbd "<kp-next>") 'xah-open-file-at-cursor)
 
-(global-set-key (kbd "<kp-left> <kp-left>") 'convert-english-chinese-punctuation)
-(global-set-key (kbd "<kp-left> <kp-space>") 'remove-punctuation-trailing-redundant-space)
-(global-set-key (kbd "<kp-left> <kp-right>") 'convert-asian/ascii-space)
+(global-set-key (kbd "<kp-left> <kp-left>") 'xah-convert-english-chinese-punctuation)
+(global-set-key (kbd "<kp-left> <kp-space>") 'xah-remove-punctuation-trailing-redundant-space)
+(global-set-key (kbd "<kp-left> <kp-right>") 'xah-convert-asian/ascii-space)
 
 (global-set-key (kbd "<kp-space>") 'save-buffer)
 (global-set-key (kbd "<kp-right>") 'repeat-complex-command)

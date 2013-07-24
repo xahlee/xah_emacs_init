@@ -78,7 +78,10 @@ interactively by “eval-buffer”."
 (load (fullpath-relative-to-current-file "xah_emacs_google_earth"))
 
 (load (fullpath-relative-to-current-file "xah_emacs_str_insertion"))
+
 (load (fullpath-relative-to-current-file "xah_emacs_str_replacement"))
+(require 'xah-misc-commands)
+
 (load (fullpath-relative-to-current-file "xah_emacs_str_rep_func"))
 
 (load (fullpath-relative-to-current-file "xah_emacs_font"))
