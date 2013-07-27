@@ -104,17 +104,6 @@ The differences are:
     )
   )
 
-(defun delete-secondlife-cache ()
-  "Delete Second Life's cache directory."
-  (interactive)
-  (when (string-equal system-type "windows-nt")
-    (w32-shell-execute "explore" "c:/Users/xah/AppData/Local/SecondLife/")
-    (w32-shell-execute "explore" "c:/Users/xah/AppData/Local/PhoenixViewer/")
-;; "~/Documents/autohotkey/delete Second Life cache.ahk"
-    ;; (shell-command "rm -R c:/Users/xah/AppData/Local/SecondLife/ &")
-    )
- )
-
 (defun make-lojban-entry ()
   "Insert a blank a-lojban-a-day HTML template in a paritcular file."
   (interactive)
@@ -164,6 +153,16 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("download" . "~/Downloads/" )
         ("pictures" . "~/Pictures/" )
         ("git" . "~/git/" )
+("Ubuntu One" . "~/Ubuntu One/")
+("Xah_Lee_Resume.html" . "~/web/xahlee_org/PageTwo_dir/Personal_dir/Xah_Lee_Resume.html")
+("bavlamdei.txt" . "~/Dropbox/cabdei/bavlamdei.txt")
+("check_local_links.pl" . "~/git/xahscripts/validate_website/check_local_links.pl")
+("emacs_tutorial_update_emails" . "~/Dropbox/cabdei/emacs_tutorial_update_emails.txt")
+("find-replace.py3" . "~/git/xah_find_replace/find-replace.py3")
+("mipri" . "~/Dropbox/zekri_open/mipri/")
+("second life" . "/media/OS/Users/xah/Google Drive/second life/")
+("Google Drive" . "/media/OS/Users/xah/Google Drive/")
+("SkyDrive" . "/media/OS/Users/xah/SkyDrive/")
         ) )
 
 (defun xah-open-file-fast (openCode)

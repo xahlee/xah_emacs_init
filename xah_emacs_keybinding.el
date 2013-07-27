@@ -146,8 +146,9 @@
 (global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
 (global-set-key (kbd "<menu> `") 'make-backup)
 (global-set-key (kbd "<menu> a") 'mark-whole-buffer) ; ★★★
-(global-set-key (kbd "<menu> b") 'nil)
-(global-set-key (kbd "<menu> c") 'nil)
+(global-set-key (kbd "<menu> b") 'xah-shell-commands)
+(global-set-key (kbd "<menu> c") 'xah-open-file-fast)
+
 
 ; (global-set-key (kbd "<menu> e") 'nil)  ; mode specific
  (global-set-key (kbd "<menu> f") 'copy-file-path)
@@ -220,7 +221,6 @@
 (global-set-key (kbd "<menu> n 5") 'xah-html-mode)
 
 (global-set-key (kbd "<menu> o") 'nil)
-(global-set-key (kbd "<menu> o SPC") 'xah-open-file-fast)
 (global-set-key (kbd "<menu> o c") 'bookmark-bmenu-list)
 (global-set-key (kbd "<menu> o g") 'ibuffer)
 (global-set-key (kbd "<menu> o h") 'recentf-open-files) ; ★★★
@@ -254,7 +254,6 @@
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
   (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
   (global-set-key (kbd "<menu> t b") 'flyspell-buffer)
-  (global-set-key (kbd "<menu> t 3") 'xah-shell-commands)
   (global-set-key (kbd "<menu> <delete>") 'delete-current-file)
 )
 
@@ -590,13 +589,13 @@ For `Info-mode-hook'."
 (require 'ido)
 (define-key ido-file-completion-map (kbd "C-o") 'ido-fallback-command)
 
-(defun toggle-menu-key ()
-  "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
-  (interactive)
-  (if (eq w32-apps-modifier 'meta)
-        (progn (setq w32-apps-modifier 'nil))
-      (progn (setq w32-apps-modifier 'meta) )
-      ))
+;; (defun toggle-menu-key ()
+;;   "toggle the value of `w32-apps-modifier' between 'meta and 'nil"
+;;   (interactive)
+;;   (if (eq w32-apps-modifier 'meta)
+;;         (progn (setq w32-apps-modifier 'nil))
+;;       (progn (setq w32-apps-modifier 'meta) )
+;;       ))
 
 ;; ~/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
 
