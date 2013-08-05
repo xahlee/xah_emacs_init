@@ -20,16 +20,17 @@ A backup file is created with filename appended “~‹date time stamp›~”. E
 
 when called with `universal-argument', don't create backup."
   (interactive "P")
-  (let (fName)
-    (when (buffer-file-name) ; buffer is associated with a file
-      (setq fName (buffer-file-name))
+  (let* (
+         (fName (buffer-file-name)) 
+        (backupName (concat fName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
+    (when fName ; buffer is associated with a file
       (save-buffer fName)
       (if ξno-backup-p
           (progn )
-        (copy-file fName (concat fName "~" (format-time-string "%Y%m%d_%H%M%S") "~") t)
+        (copy-file fName backupName t)
         )
       (delete-file fName)
-      (message "「%s」 deleted." fName)
+      (message "deleted and backup created at 「%s」." backupName)
       )
     (kill-buffer (current-buffer))
     ) )

@@ -612,3 +612,9 @@ For `Info-mode-hook'."
 
 
 ;; (ergoemacs-ignore-prev-global) ; Do not honor previously defined global keys. 2013-06-24
+
+  (global-set-key (kbd "<S-f11>") 'ergoemacs-previous-emacs-buffer) ; 
+  (global-set-key (kbd "<S-f12>") 'ergoemacs-next-emacs-buffer) ; 
+
+  (global-set-key (kbd "<C-S-iso-lefttab>") 'ergoemacs-previous-user-buffer) ; logitech g700 g6
+  (global-set-key (kbd "<C-tab>") 'ergoemacs-next-user-buffer) ; logitech g700 g7
