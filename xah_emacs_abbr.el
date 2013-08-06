@@ -381,13 +381,9 @@ Second Life: Xah Toll
 ("8umma" "http://xahlee.info/M/index.html")
 ("8ujava" "http://xahlee.info/java-a-day/java.html")
 ("8utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")
-))
-
 
 ("3cl" "console.log(x);")
-
-
-
+))
 
 
 ;;; stop asking whether to save newly added abbrev when quitting emacs
