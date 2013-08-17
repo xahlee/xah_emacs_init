@@ -538,12 +538,12 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
          fPath 
-)
+         )
     (setq fPath (file-relative-name inputStr) )
-          (delete-region p1 p2)
-          (insert (format "<script src=\"%s\"></script>" fPath)
-)
-     ) )
+    (delete-region p1 p2)
+    (insert (format "<script defer src=\"%s\"></script>" fPath)
+            )
+    ) )
 
 (defun xah-curve-linkify ()
   "Make the current word or text selection into a HTML link.

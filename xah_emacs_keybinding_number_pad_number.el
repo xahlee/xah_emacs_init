@@ -25,9 +25,6 @@
 (global-set-key (kbd "<kp-7>") 'nil)
 (global-set-key (kbd "<kp-8>") 'nil)
 (global-set-key (kbd "<kp-9>") 'isearch-forward)
-(global-set-key (kbd "<C-kp-9>") 'isearch-backward)
-(global-set-key (kbd "<f6>") 'isearch-forward)
-(global-set-key (kbd "<C-f6>") 'isearch-backward)
 
 (defun xah-isearch-hook ()
   "Hook for `isearch-mode-hook'"

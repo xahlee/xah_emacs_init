@@ -212,7 +212,7 @@
 (global-set-key (kbd "<menu> k") 'kmacro-end-macro)
 (global-set-key (kbd "<menu> l") 'recenter-top-bottom)
 
-(global-set-key (kbd "<menu> m") 'nil)
+(global-set-key (kbd "<menu> m") "_")
 
 (global-set-key (kbd "<menu> n") 'nil)
 (global-set-key (kbd "<menu> n y") 'visual-line-mode)
@@ -320,6 +320,8 @@
   "Modify keymaps used by `html-mode'."
   ;; .p gc
   ;; eu ht
+
+  (local-set-key (kbd "<f6>") 'xah-browse-url-of-buffer)
 
   (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
   (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
