@@ -164,6 +164,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("Google Drive" . "/media/OS/Users/xah/Google Drive/")
         ("SkyDrive" . "/media/OS/Users/xah/SkyDrive/")
         ("sitemove" . "/home/xah/git/xahscripts/elisp/xah_site_move.el")
+        ("windows pictures" . "/media/OS/Users/xah/Pictures/")
         ) )
 
 (defun xah-open-file-fast (openCode)
@@ -532,7 +533,7 @@ When there is a text selection, act on the region."
             ("rmEmptyDir" . "find . -depth -empty -type d -exec rmdir {} ';'")
             ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
             ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
-            ("viewp" . "feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x1000 . &")
+            ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x1000 .")
             ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")
             )
 

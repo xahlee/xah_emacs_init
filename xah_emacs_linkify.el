@@ -545,6 +545,27 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
             )
     ) )
 
+(defun css-linkify ()
+  "Make the path under cursor into a HTML link.
+ ⁖ 
+/home/xah/web/xahlee_org/lit.css
+→
+<link rel=\"stylesheet\" href=\"../lit.css\" />
+"
+  (interactive)
+  (let* (
+         (bds (get-selection-or-unit 'filepath))
+         (inputStr (elt bds 0) )
+         (p1 (aref bds 1) )
+         (p2 (aref bds 2) )
+         fPath 
+         )
+    (setq fPath (file-relative-name inputStr) )
+    (delete-region p1 p2)
+    (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" fPath)
+            )
+    ) )
+
 (defun xah-curve-linkify ()
   "Make the current word or text selection into a HTML link.
 
@@ -606,6 +627,8 @@ If there is text selection, use it as input."
      ((and (string-match-p "www\.amazon\.com/" myPath)) (amazon-linkify))
      ((and (string-match-p "www\.youtube\.com/" myPath)) (youtube-linkify))
      ((and (string-match-p "\\.js\\'" myPath)) (javascript-linkify))
+     ((and (string-match-p "\\.css\\'" myPath)) (css-linkify))
+
      ((xahsite-url-is-xah-website-p myPath) (xah-file-linkify))
      ((string-match-p "wikipedia.org/" myPath)
       (let ((case-fold-search nil))

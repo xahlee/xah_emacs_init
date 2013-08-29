@@ -14,6 +14,7 @@
 (require 'xah-html-mode)
 (require 'xah-comment)
 (require 'xah-elisp-mode)
+(require 'xah-js-mode)
 (require 'xah-php-mode)
 (require 'xah-css-mode)
 (require 'insert-random-id)

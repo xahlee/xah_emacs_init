@@ -34,19 +34,34 @@ When called in elisp program, wrap the tag at point P1."
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
-Add today's date to the byline tag of current file."
+Add today's date to the byline tag of current file, also delete the last one if there are more than one."
   (interactive)
-  (let (p1 p2)
+  (let (p1 p2 ξnum )
     (progn
       (goto-char 1)
       (when (search-forward "<div class=\"byline\">" nil)
-(backward-char 1)
-(sgml-skip-tag-forward 1)
+        (setq p1 (point) )
+        (backward-char 1)
+        (sgml-skip-tag-forward 1)
+        (setq p2 (point) )
+
+        (setq ξnum (count-matches "<time>" p1 p2 ) )
+
+        ;; if there are more than 1 “time” tag, delete the last one
+        (when (> ξnum 1)
+          (let (p3 p4)
+        (goto-char p2)
+            (search-backward "</time>")
+            (setq p4 (+ (point) 7) )
+            (search-backward "<time>")
+            (setq p3 (point) )
+            (delete-region p3 p4 )
+            ) )
+        (goto-char p2)
         (search-backward "</div>")
         (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
         (search-backward "<time>")
-        (message "%s" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
-) ) ))
+        ) ) ))
 
 (defun xahsite-update-page-tag-old (p1 p2)
   "Update HTML page navigation tags.

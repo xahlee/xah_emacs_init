@@ -20,6 +20,9 @@
 
 (setq sentence-end-double-space nil )
 
+;; (setq auto-save-default t)
+;; (setq auto-save-visited-file-name t )
+
 ;; (set-default cursor-type 'bar)
 
 ;; (setq ido-enable-flex-matching nil )
@@ -34,6 +37,9 @@
 
 ;(autoload 'xah-elisp-mode "xah-elisp-mode" "load xah-elisp-mode for elisp file" t)
 (add-to-list 'auto-mode-alist '("\\.el\\'" . xah-elisp-mode))
+
+;(autoload 'xah-js-mode "xah-js-mode" "load xah-js-mode for JavaScript file" t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . xah-js-mode))
 
 ;(autoload 'xah-css-mode "xah-css-mode" "load xah-css-mode for CSS file" t)
 (add-to-list 'auto-mode-alist '("\\.css\\'" . xah-css-mode))
@@ -57,7 +63,6 @@
 ;(remove-hook 'find-file-hook 'save-place-find-file-hook)
 
 (setq org-return-follows-link t)
-; (setq auto-save-default t)
 
 (winner-mode 0)
 (cua-mode 0)

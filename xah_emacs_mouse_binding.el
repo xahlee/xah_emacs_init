@@ -24,8 +24,31 @@
  ((string-equal system-type "gnu/linux")
   (global-set-key (kbd "<mouse-9>") 'ergoemacs-close-current-buffer) ; next page button
 
-  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase) ; control wheel up
-  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease) ; control wheel down
+  ;; 'text-scale-increase
+
+;; 'mwheel-scroll
+  ;; forward-word,
+  ;; 'ergoemacs-backward-open-bracket
+  ;; 'ergoemacs-forward-block
+
+  (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
+  (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
+
+  (global-set-key (kbd "<C-mouse-4>") 'ergoemacs-backward-open-bracket) ; shift wheel up
+  (global-set-key (kbd "<C-mouse-5>") 'ergoemacs-forward-close-bracket) ; shift wheel down
+
+  (global-set-key (kbd "<S-mouse-4>") 'ergoemacs-backward-close-bracket) ; control wheel up
+  (global-set-key (kbd "<S-mouse-5>") 'ergoemacs-forward-open-bracket) ; control wheel down
+
+  (global-set-key (kbd "<M-mouse-4>") 'ergoemacs-backward-block) ; alt wheel up
+  (global-set-key (kbd "<M-mouse-5>") 'ergoemacs-forward-block) ; alt wheel down
+
+  ;; (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (forward-line -2))) ; wheel up
+  ;; (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (forward-line 2))) ; wheel down
+
+  ;; (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
+  ;; (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
+
   )
 
  ((string-equal system-type "darwin") ; Mac

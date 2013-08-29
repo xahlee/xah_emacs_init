@@ -7,7 +7,7 @@
 (defun xah-add-to-related-links (ξsourceFilePath ξdestFilePath)
   "Add current file as a link to the related links section of filename at point.
 
-When called interactively, ξsourceFilePath the path of current buffer, and ξdestFilePath is the path/url under cursor.
+When called interactively, ξsourceFilePath is the path of current buffer, and ξdestFilePath is the path/url under cursor.
 
 When called interactively, the buffer for ξdestFilePath is left unsaved and as current.
 
