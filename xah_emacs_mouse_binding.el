@@ -34,14 +34,14 @@
   (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
   (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
 
-  (global-set-key (kbd "<C-mouse-4>") 'ergoemacs-backward-open-bracket) ; shift wheel up
-  (global-set-key (kbd "<C-mouse-5>") 'ergoemacs-forward-close-bracket) ; shift wheel down
+  (global-set-key (kbd "<C-mouse-4>") 'ergoemacs-backward-block ) ;
+  (global-set-key (kbd "<C-mouse-5>") 'ergoemacs-forward-block) ;
 
-  (global-set-key (kbd "<S-mouse-4>") 'ergoemacs-backward-close-bracket) ; control wheel up
-  (global-set-key (kbd "<S-mouse-5>") 'ergoemacs-forward-open-bracket) ; control wheel down
+  (global-set-key (kbd "<S-mouse-4>") 'ergoemacs-backward-close-bracket) ;
+  (global-set-key (kbd "<S-mouse-5>") 'ergoemacs-forward-open-bracket) ;
 
-  (global-set-key (kbd "<M-mouse-4>") 'ergoemacs-backward-block) ; alt wheel up
-  (global-set-key (kbd "<M-mouse-5>") 'ergoemacs-forward-block) ; alt wheel down
+  (global-set-key (kbd "<M-mouse-4>") 'ergoemacs-backward-open-bracket ) ;
+  (global-set-key (kbd "<M-mouse-5>") 'ergoemacs-forward-close-bracket ) ;
 
   ;; (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (forward-line -2))) ; wheel up
   ;; (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (forward-line 2))) ; wheel down
