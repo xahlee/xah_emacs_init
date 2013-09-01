@@ -69,6 +69,7 @@
 (electric-pair-mode 0)
 
 (blink-cursor-mode 0 )
+(delete-selection-mode 1)
 
 
 

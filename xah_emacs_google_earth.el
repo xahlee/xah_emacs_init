@@ -31,21 +31,21 @@ where each element is a line."
 ;  (prin1 lines (current-buffer))
 ))
 
-(defun insert-google-map-link (&optional title longitude-latitude)
+(defun insert-google-map-link (&optional εtitle εcoord)
   "Insert HTML link to Google Map.
 
-title is the title for the HTML link.
-longitude-latitude is a vector [longitude latitude]. Each must be a decimal number. Positive signifies east, negative signifies west.
+εtitle is the εtitle for the HTML link.
+εcoord is a vector [x y] where x is longitude and y is latitude. Each must be a decimal number.
 
 Example of inserted text:
  <a href=\"http://maps.google.com/maps?q=25.269536%2C82.990723\" title=\"Petrified Forest National Park\">🌐</a>"
   (interactive)
   (let ( ξtitle ξy ξx)
-    (setq ξtitle (if title title ""))
-    (if longitude-latitude
+    (setq ξtitle (if εtitle εtitle ""))
+    (if εcoord
         (progn
-          (setq ξx (elt longitude-latitude 0))
-          (setq ξy (elt longitude-latitude 1))
+          (setq ξx (elt εcoord 0))
+          (setq ξy (elt εcoord 1))
           )
       (progn
         (setq ξx "x�")

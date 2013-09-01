@@ -14,13 +14,28 @@ If `universal-argument' is called, copy only the dir path."
              default-directory
            (buffer-file-name)
            )))
-    (kill-new 
+    (kill-new
      (if (equal dirPathOnly-p nil)
          fPath
        (file-name-directory fPath)
-       )))  
+       )))
   (message "File path copied.") )
 
+(defun delete-cut-text-block ()
+  "delete the current text block (paragraph) and also put it to `kill-ring'."
+  (interactive)
+  (let (p1 p2)
+    (progn
+      (if (re-search-backward "\n[ \t]*\n" nil "NOERROR")
+          (progn (re-search-forward "\n[ \t]*\n")
+                 (setq p1 (point) ) )
+        (setq p1 (point)))
+      (if (re-search-forward "\n[ \t]*\n" nil "NOERROR")
+          (progn (re-search-backward "\n[ \t]*\n")
+                 (setq p2 (point) ))
+        (setq p2 (point) ) ) )
+    (kill-region p1 p2)
+    (delete-blank-lines) ))
 
 (defun copy-to-register-1 ()
   "Copy current line or text selection to register 1.
@@ -67,7 +82,6 @@ Warning: This command does not preserve texts inside double quotes."
     (delete-region p1 p2)
     (insert resultText) ) )
 
-
 
 ;; (defun my-delete-word (arg)
 ;;   "Delete characters forward until encountering the end of a word.
@@ -91,7 +105,6 @@ Warning: This command does not preserve texts inside double quotes."
 ;;    (save-excursion (move-end-of-line 1) (point)))
 ;;   (delete-char 1)
 ;; )
-
 
 (defun 2zip ()
   "Zip the current file in `dired'.
@@ -129,7 +142,7 @@ Requires ImageMagick shell tool."
   "Create a scaled JPG version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
-When called in lisp code, 
+When called in lisp code,
  fileList is a list.
  scalePercentage is a integer.
  sharpen-p is true or false.

@@ -106,11 +106,15 @@
   (define-key help-map (kbd "h") 'nil) ; view-hello-file
   )
 
+(global-set-key (kbd "<tab>") 'nil)
+(global-set-key (kbd "<tab> <tab>") 'yas/expand)
+
 (global-set-key (kbd "<menu>") 'nil)
 
 (global-set-key (kbd "<menu> RET") 'smex) ; in ErgoEmacs
 (global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
-(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
+;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
+(global-set-key (kbd "<menu> <backspace>") 'delete-cut-text-block)
 (global-set-key (kbd "<menu> <tab>") 'indent-region)
 
 (global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
@@ -327,61 +331,61 @@
   (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
   (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
 
-  (local-set-key (kbd "<menu> e 0") 'xhm-remove-html-tags)
-  (local-set-key (kbd "<menu> e 7") 'xhm-htmlize-or-de-precode)
-  (local-set-key (kbd "<menu> e 8") 'xhm-get-precode-make-new-file)
-  (local-set-key (kbd "<menu> e c") 'xhm-make-citation)
-  (local-set-key (kbd "<menu> e k") 'xhm-htmlize-keyboard-shortcut-notation)
-  (local-set-key (kbd "<menu> e l 6") 'xhm-source-url-linkify)
-  (local-set-key (kbd "<menu> e l .") 'xhm-lines-to-html-list)
-  (local-set-key (kbd "<menu> e l u") 'xhm-wrap-url)
-  (local-set-key (kbd "<menu> e l w") 'xhm-wikipedia-linkify)
-  (local-set-key (kbd "<menu> e m") 'xhm-pre-source-code)
-  (local-set-key (kbd "<menu> e p") 'xhm-wrap-p-tag)
-  (local-set-key (kbd "<menu> e r ,") 'xhm-replace-html-chars-to-unicode)
-  (local-set-key (kbd "<menu> e r .") 'xhm-replace-html-&<>-to-entities)
-  (local-set-key (kbd "<menu> e r 3") 'xhm-update-title)
-  (local-set-key (kbd "<menu> e r e") 'xhm-htmlize-elisp-keywords)
-  (local-set-key (kbd "<menu> e r k") 'xhm-emacs-to-windows-kbd-notation)
-  (local-set-key (kbd "<menu> e r m") 'xhm-make-html-table)
-  (local-set-key (kbd "<menu> e t r") 'xhm-rename-html-inline-image)
-  (local-set-key (kbd "<menu> e t u") 'xhm-extract-url)
-  (local-set-key (kbd "<menu> e u") 'xhm-wrap-html-tag)
+  (local-set-key (kbd "<tab> 0") 'xhm-remove-html-tags)
+  (local-set-key (kbd "<tab> 7") 'xhm-htmlize-or-de-precode)
+  (local-set-key (kbd "<tab> 8") 'xhm-get-precode-make-new-file)
+  (local-set-key (kbd "<tab> c") 'xhm-make-citation)
+  (local-set-key (kbd "<tab> k") 'xhm-htmlize-keyboard-shortcut-notation)
+  (local-set-key (kbd "<tab> l 6") 'xhm-source-url-linkify)
+  (local-set-key (kbd "<tab> l .") 'xhm-lines-to-html-list)
+  (local-set-key (kbd "<tab> l u") 'xhm-wrap-url)
+  (local-set-key (kbd "<tab> l w") 'xhm-wikipedia-linkify)
+  (local-set-key (kbd "<tab> m") 'xhm-pre-source-code)
+  (local-set-key (kbd "<tab> p") 'xhm-wrap-p-tag)
+  (local-set-key (kbd "<tab> r ,") 'xhm-replace-html-chars-to-unicode)
+  (local-set-key (kbd "<tab> r .") 'xhm-replace-html-&<>-to-entities)
+  (local-set-key (kbd "<tab> r 3") 'xhm-update-title)
+  (local-set-key (kbd "<tab> r e") 'xhm-htmlize-elisp-keywords)
+  (local-set-key (kbd "<tab> r k") 'xhm-emacs-to-windows-kbd-notation)
+  (local-set-key (kbd "<tab> r m") 'xhm-make-html-table)
+  (local-set-key (kbd "<tab> t r") 'xhm-rename-html-inline-image)
+  (local-set-key (kbd "<tab> t u") 'xhm-extract-url)
+  (local-set-key (kbd "<tab> u") 'xhm-wrap-html-tag)
 
-  (local-set-key (kbd "<menu> e 5") 'mark-unicode)
-  (local-set-key (kbd "<menu> e a") 'xwe-annotate)
-  (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
-  (local-set-key (kbd "<menu> e d") 'insert-date-tag)
-  (local-set-key (kbd "<menu> e e") 'nil)
-  (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
-  (local-set-key (kbd "<menu> e g") 'xah-browse-url-of-buffer)
-  (local-set-key (kbd "<menu> e h") 'xah-all-linkify)
-  (local-set-key (kbd "<menu> e i") 'nil)
-  (local-set-key (kbd "<menu> e j") 'nil)
-  (local-set-key (kbd "<menu> e l c") 'xwe-chinese-linkify)
-  (local-set-key (kbd "<menu> e l d") 'perldoc-ref-linkify)
-  (local-set-key (kbd "<menu> e l e") 'emacs-ref-linkify)
-  (local-set-key (kbd "<menu> e l f") 'full-size-img-linkify)
-  (local-set-key (kbd "<menu> e l i") 'image-linkify)
-  (local-set-key (kbd "<menu> e l j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<menu> e l p") 'php-ref-linkify)
-  (local-set-key (kbd "<menu> e l t") 'xwe-word-etymology-linkify)
-  (local-set-key (kbd "<menu> e l z") 'amazon-linkify)
-  (local-set-key (kbd "<menu> e n") 'nil)
-  (local-set-key (kbd "<menu> e o") 'nil)
-  (local-set-key (kbd "<menu> e q") 'nil)
-  (local-set-key (kbd "<menu> e r 4") 'xahsite-update-article-timestamp)
-  (local-set-key (kbd "<menu> e r c") 'code-bracket-to-html-tag)
-  (local-set-key (kbd "<menu> e r t") 'title-bracket-to-html-tag)
-  (local-set-key (kbd "<menu> e s") 'nil)
-  (local-set-key (kbd "<menu> e t") 'nil)
-  (local-set-key (kbd "<menu> e t a") 'xah-make-atom-entry)
-  (local-set-key (kbd "<menu> e t l") 'xah-add-to-related-links)
-  (local-set-key (kbd "<menu> e v") 'nil)
-  (local-set-key (kbd "<menu> e w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
-  (local-set-key (kbd "<menu> e x") 'nil)
-  (local-set-key (kbd "<menu> e y") 'nil)
-  (local-set-key (kbd "<menu> e z") 'nil)
+  (local-set-key (kbd "<tab> 5") 'mark-unicode)
+  (local-set-key (kbd "<tab> a") 'xwe-annotate)
+  (local-set-key (kbd "<tab> b") 'make-blogger-entry)
+  (local-set-key (kbd "<tab> d") 'insert-date-tag)
+  (local-set-key (kbd "<tab> e") 'nil)
+  (local-set-key (kbd "<tab> f") 'xah-copy-url-current-file)
+  (local-set-key (kbd "<tab> g") 'xah-browse-url-of-buffer)
+  (local-set-key (kbd "<tab> h") 'xah-all-linkify)
+  (local-set-key (kbd "<tab> i") 'nil)
+  (local-set-key (kbd "<tab> j") 'nil)
+  (local-set-key (kbd "<tab> l c") 'xwe-chinese-linkify)
+  (local-set-key (kbd "<tab> l d") 'perldoc-ref-linkify)
+  (local-set-key (kbd "<tab> l e") 'emacs-ref-linkify)
+  (local-set-key (kbd "<tab> l f") 'full-size-img-linkify)
+  (local-set-key (kbd "<tab> l i") 'image-linkify)
+  (local-set-key (kbd "<tab> l j") 'image-file-to-html-figure-tag)
+  (local-set-key (kbd "<tab> l p") 'php-ref-linkify)
+  (local-set-key (kbd "<tab> l t") 'xwe-word-etymology-linkify)
+  (local-set-key (kbd "<tab> l z") 'amazon-linkify)
+  (local-set-key (kbd "<tab> n") 'nil)
+  (local-set-key (kbd "<tab> o") 'nil)
+  (local-set-key (kbd "<tab> q") 'nil)
+  (local-set-key (kbd "<tab> r 4") 'xahsite-update-article-timestamp)
+  (local-set-key (kbd "<tab> r c") 'code-bracket-to-html-tag)
+  (local-set-key (kbd "<tab> r t") 'title-bracket-to-html-tag)
+  (local-set-key (kbd "<tab> s") 'nil)
+  (local-set-key (kbd "<tab> t") 'nil)
+  (local-set-key (kbd "<tab> t a") 'xah-make-atom-entry)
+  (local-set-key (kbd "<tab> t l") 'xah-add-to-related-links)
+  (local-set-key (kbd "<tab> v") 'nil)
+  (local-set-key (kbd "<tab> w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
+  (local-set-key (kbd "<tab> x") 'nil)
+  (local-set-key (kbd "<tab> y") 'nil)
+  (local-set-key (kbd "<tab> z") 'nil)
 
 )
 
@@ -426,12 +430,21 @@ Still, the code isn't 100% correct.
   ;; .p gc
   ;; eu ht
 
-  (local-set-key (kbd "<menu> e t") 'eval-last-sexp)
-  (local-set-key (kbd "<menu> e f") 'xah-eval-defun)
+  (local-set-key (kbd "<tab> t") 'eval-last-sexp)
+  (local-set-key (kbd "<tab> f") 'xah-eval-defun)
 )
 
 (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
 (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
+
+
+
+(defun xah-magit-mode-keys ()
+  "Modify keymaps ."
+  (local-set-key (kbd "<tab> <tab>") 'magit-toggle-section)
+)
+
+(add-hook 'magit-mode-hook 'xah-magit-mode-keys)
 
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
@@ -464,7 +477,7 @@ For `org-mode-hook'."
 (defun xah-Info-mode-keys ()
   "my keybindings for `Info-mode'.
 For `Info-mode-hook'."
-  (local-set-key (kbd "<menu> e g") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<tab> g") 'xah-view-emacs-manual-in-browser)
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
@@ -477,7 +490,7 @@ For `Info-mode-hook'."
   (when (>= emacs-major-version 23)
 ;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
 ;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
-    (define-key dired-mode-map (kbd "<menu> e 8") 'wdired-change-to-wdired-mode)
+    (define-key dired-mode-map (kbd "<tab> 8") 'wdired-change-to-wdired-mode)
     )
   )
 
@@ -612,4 +625,10 @@ For `Info-mode-hook'."
 ;; (ergoemacs-ignore-prev-global) ; Do not honor previously defined global keys. 2013-06-24
 
 (global-set-key (kbd "<S-backspace>") 'delete-char)
+
+(global-set-key (kbd "<M-backspace>") 'backward-kill-word)
+
+(global-set-key (kbd "<M-return>") 'open-line)
+
+(global-set-key (kbd "<M-return>") 'open-line)
 
