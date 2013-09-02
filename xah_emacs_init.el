@@ -55,6 +55,7 @@ interactively by “eval-buffer”."
   (load (fullpath-relative-to-current-file "xah_emacs_ms_windows.el")))
 
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding"))
+(load (fullpath-relative-to-current-file "xah_emacs_keybinding_mode_specific"))
 (load (fullpath-relative-to-current-file "xah_emacs_mouse_binding"))
 (load (fullpath-relative-to-current-file "xah_emacs_hyper_super_setup"))
 (load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))

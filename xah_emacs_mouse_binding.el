@@ -43,6 +43,9 @@
   (global-set-key (kbd "<M-mouse-4>") 'ergoemacs-backward-open-bracket ) ;
   (global-set-key (kbd "<M-mouse-5>") 'ergoemacs-forward-close-bracket ) ;
 
+  (global-set-key (kbd "<C-S-mouse-4>") 'text-scale-increase) ;
+  (global-set-key (kbd "<C-S-mouse-5>") 'text-scale-decrease) ;
+
   ;; (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (forward-line -2))) ; wheel up
   ;; (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (forward-line 2))) ; wheel down
 
