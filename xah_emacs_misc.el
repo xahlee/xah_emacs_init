@@ -165,6 +165,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("SkyDrive" . "/media/OS/Users/xah/SkyDrive/")
         ("sitemove" . "/home/xah/git/xahscripts/elisp/xah_site_move.el")
         ("windows pictures" . "/media/OS/Users/xah/Pictures/")
+        ("book" . "/media/OS/Users/xah/SkyDrive/books/")
         ) )
 
 (defun xah-open-file-fast (openCode)
@@ -395,6 +396,8 @@ default browser will be launched and opening this URL:
             )
           )
 
+    (xah-clean-whitespace)
+
     (when (buffer-modified-p )
       (save-buffer)
       )
@@ -571,3 +574,4 @@ When there is a text selection, act on the region."
 
 ;; (call-interactively 'xhm-htmlize-or-de-precode)
  ) )
+

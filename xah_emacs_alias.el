@@ -14,6 +14,7 @@
 (defalias 'snf 'sort-numeric-fields)
 (defalias 'g 'grep)
 (defalias 'wm 'whitespace-mode)
+(defalias 'dsm 'delete-selection-mode)
 
 (defalias 'eb 'eval-buffer)
 (defalias 'er 'eval-region)

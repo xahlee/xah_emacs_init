@@ -65,11 +65,10 @@
 (setq org-return-follows-link t)
 
 (winner-mode 0)
-(cua-mode 0)
+(cua-mode 0) (delete-selection-mode 1)
 (electric-pair-mode 0)
 
 (blink-cursor-mode 0 )
-(delete-selection-mode 1)
 
 
 

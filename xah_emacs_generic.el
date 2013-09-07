@@ -11,6 +11,25 @@
 
 (require 'browse-url)
 
+;(defun forword-word-camelCase ()
+;  "DOCSTRING"
+;  (interactive)
+;  (let (p1 p2 ξtext)
+;    (forward-word)
+;    (setq p1 (point) )
+;    (backward-word )
+;    (setq p2 (point) )
+;    (setq ξtext (buffer-substring-no-properties p1 p2) )
+;    (if 
+;        (let ((case-fold-search nil))
+;          (string-match "[a-z]+[A-Z]" ξtext)
+;          )
+;        (progn (search-forward "[A-Z]" nil "NOERROR")
+;               )
+;      (progn )
+;      )
+;    ))
+
 (defun delete-current-file (ξno-backup-p)
   "Delete the file associated with the current buffer.
 

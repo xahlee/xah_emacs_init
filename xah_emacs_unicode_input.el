@@ -36,6 +36,7 @@
         ("←" . "ah")
         ("→" . "an")
         ("↑" . "ac")
+        ("👍" . "tu")
         ) )
 
 (defun xah-insert-unicode ()
@@ -47,4 +48,5 @@
     (insert (car (assoc (substring gotThis 0 1) xah-unicode-list)))
     )
   )
+
 

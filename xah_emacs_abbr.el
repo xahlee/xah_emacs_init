@@ -25,8 +25,20 @@
     ("ex" "example:")
     ("fex" "for example:")
 
-    ("fex" "for example:")
     ("8rsi" "Repetitive Strain Injury")
+
+    ("t" "the")
+    ("2" "to")
+    ("o" "of")
+    ("n" "and")
+    ("ta" "that")
+    ("h" "have")
+    ("4" "for")
+    ("u" "you")
+    ("w" "with")
+    ("b" "but")
+
+    ("comm" "communication")
 
 ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
 ;("t" "the") ; 1
