@@ -27,13 +27,13 @@
 
     ("8rsi" "Repetitive Strain Injury")
 
-    ("t" "the")
-    ("2" "to")
+;    ("t" "the")                         ; problem with “doesn't ”
+;    ("2" "to")                          ; problem with just enter a number
     ("o" "of")
     ("n" "and")
     ("ta" "that")
     ("h" "have")
-    ("4" "for")
+;    ("4" "for")
     ("u" "you")
     ("w" "with")
     ("b" "but")
