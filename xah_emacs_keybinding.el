@@ -555,3 +555,5 @@
 ; 16    0.00%  shell-command-on-region
 
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_vi.el"))
+
+(cua-mode 0) (delete-selection-mode 1)
