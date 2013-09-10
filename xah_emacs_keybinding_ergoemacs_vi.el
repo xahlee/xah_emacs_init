@@ -1,9 +1,24 @@
 ;; -*- coding: utf-8 -*-
 
+;; a vi-like modal keybinding for emacs.
+;; the keys are based on ergoemacs-mode and dvorak layout and for The truly Ergonomic Keyboard.
+;; created: 2013-09-10
+;; Xah Lee
+
+;; some notes:
+;; • other than being a modal input system, this design doesn't follow vi or vim's traditions. For example: there's no command such as “dd”. and there's no typing a digit followed by a command to repeat n times. This isn't a vi emulation mode.
+;; • Unlike vi, where you have {i, o, a} keys to go into insertion mode, but they can't switch you back to command mode. Also, the 【Esc】 key switch you back to command mode, but isn't a toggle.
+;; • the only key to switch mode is 【‹toggle key›】. This ‹toggle key› is currently the 【backspace】 key.
+;; • the keymap is largely compatible with ergoemacs-mode. It's based on mapping the most frequetly used command to the most easy-to-press key positions.
+;; • this is currently a prototype. That is, alpha stage. Lots improvement can be made. For example: make it a proper minor mode. • fine tune lots keys for command mode. (introduce key sequence there)
+
+;; i wrote this mode for myself. License is open source. Feel free to copy but please give credit.
+;; if you like to see this mode go further, donate at http://ergoemacs.org/emacs/emacs.html , or buy my tutorial http://ergoemacs.org/emacs/buy_xah_emacs_tutorial.html and let me know. Thanks.
+
 (defvar v3-insert-state-q t "boolean value. true means insertion mode is on.")
 (setq v3-insert-state-q t)
 
-(global-set-key (kbd "<end>") 'v3-modal-switch)
+(global-set-key (kbd "<delete>") 'v3-modal-switch)
 
 (defun v3-modal-switch ()
   "switch between insertion mode and command mode."
@@ -26,21 +41,21 @@
         (global-set-key (kbd ".") 'self-insert-command)
         (global-set-key (kbd "'") 'self-insert-command) ;
         (global-set-key (kbd ",") 'self-insert-command) ;
-        (global-set-key (kbd "-") 'self-insert-command ) 
+        (global-set-key (kbd "-") 'self-insert-command )
         (global-set-key (kbd "/") 'self-insert-command)
         (global-set-key (kbd "0") 'self-insert-command)
         (global-set-key (kbd "1") 'self-insert-command)
-        (global-set-key (kbd "2") 'self-insert-command) 
-        (global-set-key (kbd "3") 'self-insert-command) 
-        (global-set-key (kbd "4") 'self-insert-command) 
-        (global-set-key (kbd "5") 'self-insert-command) 
-        (global-set-key (kbd "6") 'self-insert-command)   
-        (global-set-key (kbd "7") 'self-insert-command) 
-        (global-set-key (kbd "8") 'self-insert-command)              
-        (global-set-key (kbd "9") 'self-insert-command) 
+        (global-set-key (kbd "2") 'self-insert-command)
+        (global-set-key (kbd "3") 'self-insert-command)
+        (global-set-key (kbd "4") 'self-insert-command)
+        (global-set-key (kbd "5") 'self-insert-command)
+        (global-set-key (kbd "6") 'self-insert-command)
+        (global-set-key (kbd "7") 'self-insert-command)
+        (global-set-key (kbd "8") 'self-insert-command)
+        (global-set-key (kbd "9") 'self-insert-command)
         (global-set-key (kbd ";") 'self-insert-command)
         (global-set-key (kbd "=") 'self-insert-command)
-        (global-set-key (kbd "SPC") 'self-insert-command) 
+        (global-set-key (kbd "SPC") 'self-insert-command)
         (global-set-key (kbd "[") 'self-insert-command)
         (global-set-key (kbd "\\") 'self-insert-command)
         (global-set-key (kbd "`") 'self-insert-command)
@@ -120,7 +135,7 @@
       (global-set-key (kbd "u") 'delete-char) ;
       (global-set-key (kbd "v") nil)
       (global-set-key (kbd "w") nil)
-      (global-set-key (kbd "x") nil)
+      (global-set-key (kbd "x") 'undo)
       (global-set-key (kbd "y") 'redo)
       (global-set-key (kbd "z") nil)
 
