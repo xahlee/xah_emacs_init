@@ -10,7 +10,7 @@
 ;; • Unlike vi, where you have {i, o, a} keys to go into insertion mode, but they can't switch you back to command mode. Also, the 【Esc】 key switch you back to command mode, but isn't a toggle.
 ;; • the only key to switch mode is 【‹toggle key›】. This ‹toggle key› is currently the 【backspace】 key.
 ;; • the keymap is largely compatible with ergoemacs-mode. It's based on mapping the most frequetly used command to the most easy-to-press key positions.
-;; • this is currently a prototype. That is, alpha stage. Lots improvement can be made. 
+;; • this is currently a prototype. That is, alpha stage. Lots improvement can be made.
 
 ;; TODO
 ;; • make it a proper minor mode.
@@ -21,17 +21,17 @@
 ;; i wrote this mode for myself. License is open source. Feel free to copy but please give credit.
 ;; if you like to see this mode go further, donate at http://ergoemacs.org/emacs/emacs.html , or buy my tutorial http://ergoemacs.org/emacs/buy_xah_emacs_tutorial.html and let me know. Thanks.
 
-(require 'ergoemacs-mode )              ; calls some editing functions in ergoemacs-mode.
-
+(require 'ergoemacs-mode) ; calls some editing functions in ergoemacs-mode.
 
 (defvar v3-insert-state-q t "boolean value. true means insertion mode is on.")
 (setq v3-insert-state-q t)
 
-(global-set-key (kbd "<delete>") 'v3-modal-switch)
+(global-set-key (kbd "<delete>") 'v3-modal-switch) ; you might add other toggle key
 
 (defun v3-insert-mode-init ()
   "DOCSTRING"
   (interactive)
+  ;; TODO use a proper keymap
   (progn
     (global-set-key (kbd ".") 'self-insert-command)
     (global-set-key (kbd "'") 'self-insert-command) ;
@@ -105,7 +105,7 @@
     (global-set-key (kbd ";") 'undo)
     (global-set-key (kbd "=") 'flyspell-buffer)
     (global-set-key (kbd "SPC") 'set-mark-command)
-    (global-set-key (kbd "[") 'remove-square-brackets)
+    (global-set-key (kbd "[") nil)
     (global-set-key (kbd "\\") 'xah-escape-quotes)
     (global-set-key (kbd "`") 'make-backup)
     (global-set-key (kbd "a") nil) ;
@@ -119,7 +119,7 @@
     (global-set-key (kbd "i") 'kill-line)
     (global-set-key (kbd "j") 'ergoemacs-copy-line-or-region)
     (global-set-key (kbd "k") 'yank)
-    (global-set-key (kbd "l") 'xah-clean-whitespace)
+    (global-set-key (kbd "l") 'recenter-top-bottom)
     (global-set-key (kbd "m") "_")
     (global-set-key (kbd "n") 'forward-char)
     (global-set-key (kbd "o") 'other-window)
@@ -138,26 +138,29 @@
   )
 
 (defun v3-modal-switch ()
-  "Switch between insertion {mode, command} modes."
+  "Switch between {insertion, command} modes."
   (interactive)
   (if v3-insert-state-q
       (progn
         (setq cursor-type 'box )
-        (message "%s" "command mode on")
+        (message "%s" "command mode on") ; TODO show state in mode line instead. dont print msg
         (setq v3-insert-state-q nil )
         )
     (progn
       (setq cursor-type 'bar )
-      (message "%s" "insert mode on")
+      (message "%s" "insert mode on")   ; TODO show state in mode line instead. dont print msg
       (setq v3-insert-state-q t )
       )
     )
-  (force-window-update)
+  (force-window-update) ; TODO force cursor shape change to show, but sometimes doesn't work
   (if v3-insert-state-q
       (v3-insert-mode-init)
     (v3-command-mode-init)
     )
   )
 
+;; when in going into minibuffer, switch to insertion mode.
 (add-hook 'minibuffer-setup-hook 'v3-insert-mode-init)
 (add-hook 'minibuffer-exit-hook 'v3-command-mode-init)
+
+;; TODO when in shell mode, switch to insertion mode.
