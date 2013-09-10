@@ -6,8 +6,6 @@
   ;; .p gc
   ;; eu ht
 
-  (local-set-key (kbd "<f6>") 'xah-browse-url-of-buffer)
-
   (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
   (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
   (local-set-key (kbd "<tab> .") 'xhm-lines-to-html-list)
@@ -25,7 +23,8 @@
   (local-set-key (kbd "<tab> b") 'make-blogger-entry)
   (local-set-key (kbd "<tab> c") 'xhm-make-citation)
   (local-set-key (kbd "<tab> d") 'insert-date-tag)
-  (local-set-key (kbd "<tab> e") nil)
+  (local-set-key (kbd "<tab> e") 'xah-browse-url-of-buffer) ;5401    0.33%  xah-browse-url-of-buffer
+
   (local-set-key (kbd "<tab> f") 'xah-copy-url-current-file)
   (local-set-key (kbd "<tab> g") 'xah-browse-url-of-buffer)
   (local-set-key (kbd "<tab> h") 'xah-all-linkify)
@@ -56,7 +55,7 @@
   (local-set-key (kbd "<tab> r m") 'xhm-make-html-table)
   (local-set-key (kbd "<tab> r t") 'title-bracket-to-html-tag)
   (local-set-key (kbd "<tab> s") 'nil)
-  (local-set-key (kbd "<tab> t a") 'xah-make-atom-entry)
+  (local-set-key (kbd "<tab> t h") 'xah-make-atom-entry)
   (local-set-key (kbd "<tab> t l") 'xah-add-to-related-links)
   (local-set-key (kbd "<tab> t r") 'xhm-rename-html-inline-image)
   (local-set-key (kbd "<tab> t u") 'xhm-extract-url)

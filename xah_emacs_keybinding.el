@@ -39,8 +39,6 @@
 ;; Linux, the menu/apps key syntax is <menu>
 ;; Windows, the menu/apps key syntax is <apps>
 
-;; (global-set-key (kbd "<f8>") mode-specific-map)
-
 (global-set-key (kbd "]") 'ergoemacs-close-current-buffer)
 ;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
 ;; (global-set-key (kbd "<f9>") 'split-window-vertically)
@@ -48,11 +46,7 @@
 ;(global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
 ;; (global-set-key (kbd "<f10>") 'split-window-vertically)
 
-(global-set-key (kbd "<M-backspace>") 'nil) ;need to set this to something useful
-
-;; (global-set-key (kbd "<f8>") 'set-mark-command)
-;; (global-set-key (kbd "M-SPC") 'set-mark-command)
-;; (global-set-key (kbd "M-SPC") 'beep)
+(global-set-key (kbd "<M-backspace>") nil) ;need to set this to something useful
 
 
 
@@ -97,14 +91,14 @@
   (define-key help-map (kbd "0") 'lookup-all-dictionaries)
   (define-key help-map (kbd "`") 'elisp-index-search)
   (define-key help-map (kbd "m") 'ergoemacs-describe-major-mode)
-  (define-key help-map (kbd "o") 'nil)  ; ergoemacs-where-is-old-binding
-  (define-key help-map (kbd "h") 'nil) ; view-hello-file
+  (define-key help-map (kbd "o") nil)  ; ergoemacs-where-is-old-binding
+  (define-key help-map (kbd "h") nil) ; view-hello-file
   )
 
-(global-set-key (kbd "<tab>") 'nil)
+(global-set-key (kbd "<tab>") nil)
 (global-set-key (kbd "<tab> <tab>") 'yas/expand)
 
-(global-set-key (kbd "<menu> <return>") 'smex) ; in ErgoEmacs
+(global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
 ;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
 (global-set-key (kbd "<menu> <backspace>") 'delete-cut-text-block)
 (global-set-key (kbd "<menu> <tab>") 'indent-region)
@@ -112,7 +106,14 @@
 (global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
 
-(global-set-key (kbd "<f9> <f6>") 'flyspell-buffer)
+(require 'package)
+(package-initialize)
+(require 'highlight-symbol)
+(global-set-key (kbd "<f8> <f8>") 'highlight-symbol-at-point)
+(global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
+(global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
+(global-set-key (kbd "<f8> <f9>") 'highlight-symbol-query-replace)
+
 (global-set-key (kbd "<f9> <f7>") 'visual-line-mode)
 (global-set-key (kbd "<f9> <f8>") 'linum-mode)
 (global-set-key (kbd "<f9> <f9>") 'whitespace-mode)
@@ -120,54 +121,63 @@
 (global-set-key (kbd "<f9> <f11>") 'calc)
 (global-set-key (kbd "<f9> <f12>") 'shell)
 
+(global-set-key (kbd "<f9> 0") nil)
+(global-set-key (kbd "<f9> 1") nil)
+(global-set-key (kbd "<f9> 2") nil)
 (global-set-key (kbd "<f9> 3") 'xah-elisp-mode)
 (global-set-key (kbd "<f9> 4") 'xah-php-mode)
 (global-set-key (kbd "<f9> 5") 'xah-html-mode)
 (global-set-key (kbd "<f9> 6") 'html-mode)
+(global-set-key (kbd "<f9> 7") nil)
+(global-set-key (kbd "<f9> 8") nil)
+(global-set-key (kbd "<f9> 9") nil)
+
+(global-set-key (kbd "<f9> <return>") 'run-current-file) ;    1494    0.09%  run-current-file
 
 ;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
 
 ;xah-cycle-camel-style-case
 
-(global-set-key (kbd "<menu> .") 'nil)
-(global-set-key (kbd "<menu> '") 'ergoemacs-compact-uncompact-block) ;   1037    0.06%  ergoemacs-compact-uncompact-block
-(global-set-key (kbd "<menu> ,") 'ergoemacs-shrink-whitespaces) ;   5852    0.36%  ergoemacs-shrink-whitespaces
+(global-set-key (kbd "<menu> .") nil)
+(global-set-key (kbd "<menu> '") nil) ;
+(global-set-key (kbd "<menu> ,") nil) ;
 
 (global-set-key (kbd "<menu> -") 'xc-comment-smart) ; ★★★ , comment-dwim.
 
-(global-set-key (kbd "<menu> /") 'nil)
-(global-set-key (kbd "<menu> 0") 'nil)
-(global-set-key (kbd "<menu> 1") 'nil)
+(global-set-key (kbd "<menu> /") nil)
+(global-set-key (kbd "<menu> 0") nil)
+(global-set-key (kbd "<menu> 1") nil)
 (global-set-key (kbd "<menu> 2") 'delete-window) ; ★★★
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ; ★★★
-(global-set-key (kbd "<menu> 4") 'nil)
-(global-set-key (kbd "<menu> 4") 'split-window-vertically) ; ★★★
-(global-set-key (kbd "<menu> 5") 'shell-command) ; ★★★
-(global-set-key (kbd "<menu> 6") 'run-current-file) ;; immediate, but dangerous eval-buffer
-(global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ; ★★★ find-file-at-point
-(global-set-key (kbd "<menu> 8") 'dired-jump) ; ★★★
+(global-set-key (kbd "<menu> 4") 'split-window-vertically) ; ★★★    2742    0.17%  split-window-vertically
+
+(global-set-key (kbd "<menu> 5") 'shell-command) ; ★★★ ; 274    0.02%  shell-command
+(global-set-key (kbd "<menu> 6") 'save-buffer)   ;25468    1.58%  save-buffer
+(global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ; ★★★ find-file-at-point 4773    0.30%  xah-open-file-at-cursor
+(global-set-key (kbd "<menu> 8") 'dired-jump)              ; ★★★ 2377    0.15%  dired-jump
 (global-set-key (kbd "<menu> 9") 'ispell-word) ; ★★★
-(global-set-key (kbd "<menu> ;") 'nil)
-(global-set-key (kbd "<menu> =") nil)
+(global-set-key (kbd "<menu> ;") nil)
+(global-set-key (kbd "<menu> =") 'flyspell-buffer)
 (global-set-key (kbd "<menu> SPC") 'set-mark-command) ; ★★★
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
 (global-set-key (kbd "<menu> `") 'make-backup)
-(global-set-key (kbd "<menu> a") 'mark-whole-buffer) ; ★★     408    0.03%  mark-whole-buffer
+(global-set-key (kbd "<menu> a") nil) ;
 (global-set-key (kbd "<menu> b") 'xah-shell-commands)
 (global-set-key (kbd "<menu> c") 'xah-open-file-fast)
 
-; (global-set-key (kbd "<menu> e") 'nil)  ; mode specific
+(global-set-key (kbd "<menu> e") nil) ;
+
  (global-set-key (kbd "<menu> f") 'copy-file-path)
 
 ; ~/git/xah_emacs_init/xah_emacs_keybinding_shift_switch.el
 (progn
-  (global-set-key (kbd "<menu> g") 'nil)
+  (global-set-key (kbd "<menu> g") nil)
 )
 
 (progn
 ;  (global-set-key (kbd "<menu> h") help-map) ; ★★★
-  (global-set-key (kbd "<menu> h") 'nil)
+  (global-set-key (kbd "<menu> h") nil)
   (global-set-key (kbd "<menu> h `") 'elisp-index-search)
 
   (global-set-key (kbd "<menu> h 0") 'lookup-all-dictionaries)
@@ -175,8 +185,8 @@
   (global-set-key (kbd "<menu> h 2") 'describe-variable)
   (global-set-key (kbd "<menu> h 3") 'man)
   (global-set-key (kbd "<menu> h 4") 'describe-char)
-  (global-set-key (kbd "<menu> h 5") 'nil)
-  (global-set-key (kbd "<menu> h 6") 'nil)
+  (global-set-key (kbd "<menu> h 5") nil)
+  (global-set-key (kbd "<menu> h 6") nil)
   (global-set-key (kbd "<menu> h 7") 'lookup-google)
   (global-set-key (kbd "<menu> h 8") 'lookup-wikipedia)
   (global-set-key (kbd "<menu> h 9") 'lookup-word-definition)
@@ -206,7 +216,7 @@
   )
 
 (progn
-  (global-set-key (kbd "<menu> i") 'nil)
+  (global-set-key (kbd "<menu> i") nil)
   (global-set-key (kbd "<menu> i d") 'insert-date)
   (global-set-key (kbd "<menu> i n") 'ξ-insert-random-number)
   (global-set-key (kbd "<menu> i x") 'ξ-insert-random-hex)
@@ -216,13 +226,12 @@
 
 (global-set-key (kbd "<menu> j") 'kmacro-start-macro)
 (global-set-key (kbd "<menu> k") 'kmacro-end-macro)
-(global-set-key (kbd "<menu> l") nil)   ; 'recenter-top-bottom
+(global-set-key (kbd "<menu> l") 'xah-clean-whitespace)
 
 (global-set-key (kbd "<menu> m") "_")
 
-(global-set-key (kbd "<menu> n") 'nil)
-
-(global-set-key (kbd "<menu> o") 'nil)
+(global-set-key (kbd "<menu> n") nil)
+(global-set-key (kbd "<menu> o") nil)
 (global-set-key (kbd "<menu> o c") 'bookmark-bmenu-list)
 (global-set-key (kbd "<menu> o g") 'ibuffer) ;     198    0.01%  ibuffer
 (global-set-key (kbd "<menu> o h") 'recentf-open-files) ; ★★★     333    0.02%  recentf-open-files
@@ -233,7 +242,7 @@
 (global-set-key (kbd "<menu> p") 'query-replace) ; ★★★    2746    0.17%  query-replace
 
 (global-set-key (kbd "<menu> q") nil)
-(global-set-key (kbd "<menu> r") 'nil)
+(global-set-key (kbd "<menu> r") nil)
 (global-set-key (kbd "<menu> r j") 'copy-to-register-1)
 (global-set-key (kbd "<menu> r k") 'paste-from-register-1)
 (global-set-key (kbd "<menu> r '") 'xah-replace-straight-quotes)
@@ -246,16 +255,15 @@
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp) ;     288    0.02%  query-replace-regexp
 
-(global-set-key (kbd "<menu> s") 'save-buffer) ; ★★★   25468    1.58%  save-buffer
+(global-set-key (kbd "<menu> s") nil) ;    
 
 (progn
-  (global-set-key (kbd "<menu> t") 'nil)
+  (global-set-key (kbd "<menu> t") nil)
   (global-set-key (kbd "<menu> t 2") 'make-frame-command)
   (global-set-key (kbd "<menu> t 3") 'ergoemacs-new-empty-buffer) ;    1700    0.11%  ergoemacs-new-empty-buffer
   (global-set-key (kbd "<menu> t 4") 'ido-find-file) ;     765    0.05%  ido-find-file
   (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
-  (global-set-key (kbd "<menu> t l") 'xah-clean-whitespace)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
   (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
@@ -263,7 +271,7 @@
   )
 
 (progn
-  (global-set-key (kbd "<menu> u") 'nil) ;
+  (global-set-key (kbd "<menu> u") nil) ;
   (global-set-key (kbd "<menu> u -") "—") ; EM DASH
   (global-set-key (kbd "<menu> u ,") 'insert-pair-greater-less)
 
@@ -302,17 +310,17 @@
   (global-set-key (kbd "<menu> u p") 'insert-pair-double-angle-quote«»)
   (global-set-key (kbd "<menu> u r") "+") ; plus
   (global-set-key (kbd "<menu> u t") 'insert-pair-paren)              ;()
-  (global-set-key (kbd "<menu> u u") 'nil)
+  (global-set-key (kbd "<menu> u u") nil)
   (global-set-key (kbd "<menu> u w") 'insert-pair-angle-bracket〈〉)
   (global-set-key (kbd "<menu> u x") 'insert-pair-tortoise-shell-bracket〔〕)
   (global-set-key (kbd "<menu> u y") 'insert-pair-single-angle-quote‹›)
   )
 
-(global-set-key (kbd "<menu> v") 'nil)
-(global-set-key (kbd "<menu> w") 'nil) ; ★★★
+(global-set-key (kbd "<menu> v") nil)
+(global-set-key (kbd "<menu> w") nil) ; ★★★
 (global-set-key (kbd "<menu> x") ctl-x-map)
 (global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
-(global-set-key (kbd "<menu> z") 'nil)
+(global-set-key (kbd "<menu> z") nil)
 
 
 ;; special keys
@@ -345,37 +353,37 @@
 (global-set-key (kbd "C-3") 'cycle-font-2)
 (global-set-key (kbd "C-4") 'xah-convert-fullwidth-chars)
 (global-set-key (kbd "C-5") 'xah-convert-latin-alphabet-gothic)
-(global-set-key (kbd "C-6") 'nil)
+(global-set-key (kbd "C-6") nil)
 (global-set-key (kbd "C-7") 'xah-cycle-hyphen-underscore-space)
-(global-set-key (kbd "C-8") 'nil)
-(global-set-key (kbd "C-9") 'nil)
+(global-set-key (kbd "C-8") nil)
+(global-set-key (kbd "C-9") nil)
 
-;; ;; (global-set-key (kbd "C-a") 'nil) ; select all
-;; (global-set-key (kbd "C-b") 'nil)
-;; ;; (global-set-key (kbd "C-c") 'nil) ; mode specific
-;; (global-set-key (kbd "C-d") 'nil)
-;; (global-set-key (kbd "C-e") 'nil)
-;; ;; (global-set-key (kbd "C-f") 'nil) ; find
-;; ;; (global-set-key (kbd "C-g") 'nil) ; cancel
-;; ;; (global-set-key (kbd "C-h") 'nil) ; help
-;; ;; (global-set-key (kbd "C-i") 'nil) ; tab
-;; ;; (global-set-key (kbd "C-j") 'nil) ; newline
-;; (global-set-key (kbd "C-k") 'nil)
-;; (global-set-key (kbd "C-l") 'nil)
-;; ;; (global-set-key (kbd "C-m") 'nil) ; return
-;; ;; (global-set-key (kbd "C-n") 'nil) ; new
-;; ;; (global-set-key (kbd "C-o") 'nil) ; open
-;; (global-set-key (kbd "C-p") 'nil)
-;; ;; (global-set-key (kbd "C-q") 'nil) ; quote
-;; (global-set-key (kbd "C-r") 'nil)
-;; (global-set-key (kbd "C-s") 'nil)
-;; (global-set-key (kbd "C-t") 'nil)
-;; (global-set-key (kbd "C-u") 'nil)
-;; (global-set-key (kbd "C-v") 'nil)
-;; ;; (global-set-key (kbd "C-w") 'nil) ; close
-;; ;; (global-set-key (kbd "C-x") 'nil) C-x
-;; ;; (global-set-key (kbd "C-y") 'nil)
-;; (global-set-key (kbd "C-z") 'nil)
+;; ;; (global-set-key (kbd "C-a") nil) ; select all
+;; (global-set-key (kbd "C-b") nil)
+;; ;; (global-set-key (kbd "C-c") nil) ; mode specific
+;; (global-set-key (kbd "C-d") nil)
+;; (global-set-key (kbd "C-e") nil)
+;; ;; (global-set-key (kbd "C-f") nil) ; find
+;; ;; (global-set-key (kbd "C-g") nil) ; cancel
+;; ;; (global-set-key (kbd "C-h") nil) ; help
+;; ;; (global-set-key (kbd "C-i") nil) ; tab
+;; ;; (global-set-key (kbd "C-j") nil) ; newline
+;; (global-set-key (kbd "C-k") nil)
+;; (global-set-key (kbd "C-l") nil)
+;; ;; (global-set-key (kbd "C-m") nil) ; return
+;; ;; (global-set-key (kbd "C-n") nil) ; new
+;; ;; (global-set-key (kbd "C-o") nil) ; open
+;; (global-set-key (kbd "C-p") nil)
+;; ;; (global-set-key (kbd "C-q") nil) ; quote
+;; (global-set-key (kbd "C-r") nil)
+;; (global-set-key (kbd "C-s") nil)
+;; (global-set-key (kbd "C-t") nil)
+;; (global-set-key (kbd "C-u") nil)
+;; (global-set-key (kbd "C-v") nil)
+;; ;; (global-set-key (kbd "C-w") nil) ; close
+;; ;; (global-set-key (kbd "C-x") nil) C-x
+;; ;; (global-set-key (kbd "C-y") nil)
+;; (global-set-key (kbd "C-z") nil)
 
 ;(global-set-key (kbd "C-o") 'backward-sexp)
 ;(global-set-key (kbd "C-u") 'forward-sexp)
@@ -460,21 +468,6 @@
 
 (global-set-key (kbd "s-x") "ξ")
 
-;; (global-set-key (kbd "M-g") nil)
-;; (global-set-key (kbd "M-r") nil)
-;; (global-set-key (kbd "M-o") nil)
-;; (global-set-key (kbd "M-2") nil)
-;; (global-set-key (kbd "M-3") nil)
-;; (global-set-key (kbd "M-4") nil)
-;; (global-set-key (kbd "<menu> 2") nil)
-;; (global-set-key (kbd "<menu> 3") nil)
-;; (global-set-key (kbd "<menu> 4") nil)
-
-;; (global-set-key (kbd "<home>") 'other-window)
-;; (global-set-key (kbd "<end>") 'smex)
-;; (global-set-key (kbd "<prior>") 'split-window-below)
-;; (global-set-key (kbd "<next>") 'delete-other-windows)
-
 ;; (global-set-key (kbd "<right>") 'forward-word)
 ;; (global-set-key (kbd "<left>") 'backward-word)
 ;; (global-set-key (kbd "<up>") 'ergoemacs-backward-block)
@@ -504,8 +497,8 @@
 
 ;(global-set-key (kbd "M-o") 'other-window) ; 6067    0.38%  ergoemacs-M-o
 
-(global-set-key (kbd "M-,") 'ergoemacs-shrink-whitespaces)
-(global-set-key (kbd "M-'") 'ergoemacs-compact-uncompact-block)
+(global-set-key (kbd "M-,") 'ergoemacs-shrink-whitespaces) ;5852    0.36%  ergoemacs-shrink-whitespaces
+(global-set-key (kbd "M-'") 'ergoemacs-compact-uncompact-block) ;1037    0.06%  ergoemacs-compact-uncompact-block
 
 (global-set-key (kbd "M-6") 'ergoemacs-select-current-block) ;   3107    0.19%  ergoemacs-select-current-block
 (global-set-key (kbd "M-7") 'ergoemacs-select-current-line) ;   2526    0.16%  ergoemacs-select-current-line
@@ -539,28 +532,26 @@
 (global-set-key (kbd "<menu> t 5") 'ergoemacs-open-in-external-app) ; 0.00%  ergoemacs-open-in-external-app
 
 (global-set-key (kbd "<menu> t 8") 'write-file)
-(global-set-key (kbd "<menu> t 0") 'mark-whole-buffer)
+(global-set-key (kbd "<menu> t 0") 'mark-whole-buffer) ;★★     408    0.03%  mark-whole-buffer
 ;(global-set-key (kbd "<menu> t 3") 'isearch-forward)
 
 ;; (global-set-key (kbd "<home>") 'other-window)
-;; (global-set-key (kbd "<end>") 'smex);    3459    0.21%  smex
+;; (global-set-key (kbd "<end>") 'smex)
 ;; (global-set-key (kbd "<prior>") 'split-window-below) ;    2735    0.17%  split-window-vertically
 ;; (global-set-key (kbd "<next>") 'delete-other-windows) ;    4996    0.31%  delete-other-windows
 
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ;  93862    5.83%  ergoemacs-backward-block
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block)    ;  80008    4.97%  ergoemacs-forward-block
-
 (global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket) ;  14181    0.88%  ergoemacs-backward-open-bracket
-
 (global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket) ;  17177    1.07%  ergoemacs-forward-close-bracket
+
+(global-set-key (kbd "C-t") 'nil)
+
 
 (global-set-key (kbd "<left>") 'backward-word) ;
 (global-set-key (kbd "<right>") 'forward-word ) ;
 
-(require 'package)
-(package-initialize)
-(require 'highlight-symbol)
-(global-set-key (kbd "<f7> <f7>") 'highlight-symbol-at-point)
-(global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
-(global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
-(global-set-key (kbd "<f7> <f8>") 'highlight-symbol-query-replace)
+;shell-command-on-region
+; 16    0.00%  shell-command-on-region
+
+(load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_vi.el"))
