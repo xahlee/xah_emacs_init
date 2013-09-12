@@ -26,7 +26,9 @@
 (defvar v3-insert-state-q t "boolean value. true means insertion mode is on.")
 (setq v3-insert-state-q t)
 
-(global-set-key (kbd "<delete>") 'v3-modal-switch) ; you might add other toggle key
+;; the most important, mode toggle key. you might add other toggle key
+(global-set-key (kbd "<delete>") 'v3-modal-switch) ; this is the DEL key (not backspace)
+(global-set-key (kbd "<M-delete>") 'v3-modal-switch)
 
 (defun v3-insert-mode-init ()
   "DOCSTRING"
@@ -113,7 +115,7 @@
     (global-set-key (kbd "c") 'previous-line)
     (global-set-key (kbd "d") 'move-beginning-of-line)
     (global-set-key (kbd "e") 'delete-backward-char) ;
-    (global-set-key (kbd "f") 'copy-file-path)
+    (global-set-key (kbd "f") nil)
     (global-set-key (kbd "g") 'backward-word)
     (global-set-key (kbd "h") 'backward-char)
     (global-set-key (kbd "i") 'kill-line)
@@ -163,4 +165,6 @@
 (add-hook 'minibuffer-setup-hook 'v3-insert-mode-init)
 (add-hook 'minibuffer-exit-hook 'v3-command-mode-init)
 
+
 ;; TODO when in shell mode, switch to insertion mode.
+(add-hook 'shell-mode-hook 'v3-insert-mode-init)

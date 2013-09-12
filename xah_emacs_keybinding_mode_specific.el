@@ -6,6 +6,8 @@
   ;; .p gc
   ;; eu ht
 
+  (local-set-key (kbd "<f6>") 'xah-browse-url-of-buffer) ;5401    0.33%  xah-browse-url-of-buffer
+
   (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
   (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
   (local-set-key (kbd "<tab> .") 'xhm-lines-to-html-list)
@@ -23,7 +25,7 @@
   (local-set-key (kbd "<tab> b") 'make-blogger-entry)
   (local-set-key (kbd "<tab> c") 'xhm-make-citation)
   (local-set-key (kbd "<tab> d") 'insert-date-tag)
-  (local-set-key (kbd "<tab> e") 'xah-browse-url-of-buffer) ;5401    0.33%  xah-browse-url-of-buffer
+  (local-set-key (kbd "<tab> e") 'xhm-wrap-html-tag)
 
   (local-set-key (kbd "<tab> f") 'xah-copy-url-current-file)
   (local-set-key (kbd "<tab> g") 'xah-browse-url-of-buffer)
@@ -55,11 +57,11 @@
   (local-set-key (kbd "<tab> r m") 'xhm-make-html-table)
   (local-set-key (kbd "<tab> r t") 'title-bracket-to-html-tag)
   (local-set-key (kbd "<tab> s") 'nil)
-  (local-set-key (kbd "<tab> t h") 'xah-make-atom-entry)
+  (local-set-key (kbd "<tab> t a") 'xah-make-atom-entry)
   (local-set-key (kbd "<tab> t l") 'xah-add-to-related-links)
   (local-set-key (kbd "<tab> t r") 'xhm-rename-html-inline-image)
   (local-set-key (kbd "<tab> t u") 'xhm-extract-url)
-  (local-set-key (kbd "<tab> u") 'xhm-wrap-html-tag)
+  (local-set-key (kbd "<tab> u") nil)
   (local-set-key (kbd "<tab> v") 'nil)
   (local-set-key (kbd "<tab> w") (lambda () (interactive) (xhm-wrap-html-tag "b" "w")))
   (local-set-key (kbd "<tab> x") 'nil)
@@ -213,6 +215,7 @@ For `Info-mode-hook'."
   ;; (define-key dired-mode-map (kbd "M-$") nil) ; was dired-up-directory
 ;; (local-set-key (kbd "6") 'dired-up-directory)
     (define-key dired-mode-map (kbd "M-g") 'backward-word)
+    (define-key dired-mode-map (kbd "M-c") 'previous-line)
   (when (>= emacs-major-version 23)
 ;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
 ;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)

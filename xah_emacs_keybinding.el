@@ -162,7 +162,7 @@
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
 (global-set-key (kbd "<menu> `") 'make-backup)
-(global-set-key (kbd "<menu> a") nil) ;
+(global-set-key (kbd "<menu> a") 'mark-whole-buffer) ;★★     408    0.03%  mark-whole-buffer
 (global-set-key (kbd "<menu> b") 'xah-shell-commands)
 (global-set-key (kbd "<menu> c") 'xah-open-file-fast)
 
@@ -259,9 +259,12 @@
 
 (progn
   (global-set-key (kbd "<menu> t") nil)
-  (global-set-key (kbd "<menu> t 2") 'make-frame-command)
+  (global-set-key (kbd "<menu> t 2") 'make-frame-command) ;    
   (global-set-key (kbd "<menu> t 3") 'ergoemacs-new-empty-buffer) ;    1700    0.11%  ergoemacs-new-empty-buffer
-  (global-set-key (kbd "<menu> t 4") 'ido-find-file) ;     765    0.05%  ido-find-file
+  (global-set-key (kbd "<menu> t 4") 'ido-find-file)         ; open. 765    0.05%  ido-find-file
+  (global-set-key (kbd "<menu> t 6") 'ergoemacs-open-in-external-app) ; 0.00%  ergoemacs-open-in-external-app
+(global-set-key (kbd "<menu> s") 'write-file) ;
+
   (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
@@ -479,6 +482,9 @@
 
 
 
+
+(global-set-key (kbd "M-SPC") 'set-mark-command)
+
 (global-set-key (kbd "M-g") 'backward-word)
 (global-set-key (kbd "M-r") 'forward-word)
 (global-set-key (kbd "M-h") 'backward-char)
@@ -523,17 +529,9 @@
 (global-set-key (kbd "<S-prior>") 'ergoemacs-previous-emacs-buffer)
 (global-set-key (kbd "<S-next>") 'ergoemacs-next-emacs-buffer)
 
-;(global-set-key (kbd "C-S-n") 'make-frame-command)
-
-(global-set-key (kbd "C-w") 'ergoemacs-close-current-buffer) ;   19318    1.20%  ergoemacs-close-current-buffer
-(global-set-key (kbd "<menu> w") 'ergoemacs-close-current-buffer) ;   19318    1.20%  ergoemacs-close-current-buffer
-
 (global-set-key (kbd "C-S-t") 'ergoemacs-open-last-closed) ;     832    0.05%  ergoemacs-open-last-closed
-(global-set-key (kbd "<menu> t 5") 'ergoemacs-open-in-external-app) ; 0.00%  ergoemacs-open-in-external-app
 
-(global-set-key (kbd "<menu> t 8") 'write-file)
-(global-set-key (kbd "<menu> t 0") 'mark-whole-buffer) ;★★     408    0.03%  mark-whole-buffer
-;(global-set-key (kbd "<menu> t 3") 'isearch-forward)
+(global-set-key (kbd "<menu> w") 'ergoemacs-close-current-buffer) ;   19318    1.20%  ergoemacs-close-current-buffer
 
 ;; (global-set-key (kbd "<home>") 'other-window)
 ;; (global-set-key (kbd "<end>") 'smex)
