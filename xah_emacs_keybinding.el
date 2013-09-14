@@ -228,7 +228,7 @@
 (global-set-key (kbd "<menu> k") 'kmacro-end-macro)
 (global-set-key (kbd "<menu> l") 'xah-clean-whitespace)
 
-(global-set-key (kbd "<menu> m") "_")
+(global-set-key (kbd "<menu> m") nil)
 
 (global-set-key (kbd "<menu> n") nil)
 (global-set-key (kbd "<menu> o") nil)
@@ -270,7 +270,7 @@
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
   (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
-  (global-set-key (kbd "<menu> <delete>") 'delete-current-file)
+  (global-set-key (kbd "<menu> t <delete>") 'delete-current-file)
   )
 
 (progn
@@ -531,7 +531,7 @@
 
 (global-set-key (kbd "C-S-t") 'ergoemacs-open-last-closed) ;     832    0.05%  ergoemacs-open-last-closed
 
-(global-set-key (kbd "<menu> w") 'ergoemacs-close-current-buffer) ;   19318    1.20%  ergoemacs-close-current-buffer
+(global-set-key (kbd "C-w") 'ergoemacs-close-current-buffer) ;   19318    1.20%  ergoemacs-close-current-buffer
 
 ;; (global-set-key (kbd "<home>") 'other-window)
 ;; (global-set-key (kbd "<end>") 'smex)
@@ -546,8 +546,8 @@
 (global-set-key (kbd "C-t") 'nil)
 
 
-(global-set-key (kbd "<left>") 'backward-word) ;
-(global-set-key (kbd "<right>") 'forward-word ) ;
+;; (global-set-key (kbd "<left>") 'backward-word) ;
+;; (global-set-key (kbd "<right>") 'forward-word ) ;
 
 ;shell-command-on-region
 ; 16    0.00%  shell-command-on-region

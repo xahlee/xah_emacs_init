@@ -206,7 +206,7 @@ insert a div tag above the current paragraph."
     (search-backward "<p")
     (insert "<div class=\"xnote\"></div>\n\n")
     (search-backward "</div>")
-    (insert (format "<b class=\"x3nt\">%s</b>→ " inputText)  )
+    (insert (format "<b class=\"x3nt\">%s</b> " inputText)  )
     )
   )
 

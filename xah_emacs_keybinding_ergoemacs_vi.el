@@ -29,6 +29,8 @@
 ;; the most important, mode toggle key. you might add other toggle key
 (global-set-key (kbd "<delete>") 'v3-modal-switch) ; this is the DEL key (not backspace)
 (global-set-key (kbd "<M-delete>") 'v3-modal-switch)
+(global-set-key (kbd "<menu> <delete>") 'v3-modal-switch)
+
 
 (defun v3-insert-mode-init ()
   "DOCSTRING"
@@ -106,10 +108,9 @@
     (global-set-key (kbd "9") 'ergoemacs-select-text-in-quote)
     (global-set-key (kbd ";") 'undo)
     (global-set-key (kbd "=") 'flyspell-buffer)
-    (global-set-key (kbd "SPC") 'set-mark-command)
     (global-set-key (kbd "[") nil)
     (global-set-key (kbd "\\") 'xah-escape-quotes)
-    (global-set-key (kbd "`") 'make-backup)
+    (global-set-key (kbd "`") nil)
     (global-set-key (kbd "a") nil) ;
     (global-set-key (kbd "b") nil)
     (global-set-key (kbd "c") 'previous-line)
