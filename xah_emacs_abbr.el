@@ -27,16 +27,16 @@
 
     ("8rsi" "Repetitive Strain Injury")
 
-;    ("t" "the")                         ; problem with “doesn't ”
-;    ("2" "to")                          ; problem with just enter a number
-    ("o" "of")
-    ("n" "and")
-    ("ta" "that")
-    ("h" "have")
-;    ("4" "for")
-    ("u" "you")
-    ("w" "with")
-    ("b" "but")
+;; ;    ("t" "the")                         ; problem with “doesn't ”
+;; ;    ("2" "to")                          ; problem with just enter a number
+;;     ("o" "of")
+;;     ("n" "and")
+;;     ("ta" "that")
+;;     ("h" "have")
+;; ;    ("4" "for")
+;;     ("u" "you")
+;;     ("w" "with")
+;;     ("b" "but")
 
     ("comm" "communication")
 
@@ -220,6 +220,7 @@
 ;; for programers
     ("8hex" "hexadecimal")
     ("8ui" "user interface")
+    ("8gui" "graphical user interface")
     ("8alt" "alternative")
     ("8dev" "develop")
     ("8p" "program")
@@ -345,6 +346,7 @@
 
 ;;; xah personal
     ("8ee" "ErgoEmacs")
+    ("8eem" "ergoemacs-mode")
     ("8vdspc" "Visual Dictionary of Special Plane Curves")
     ("8xl" "Xah Lee")
     ("8xim" "Twitter: @xah_lee

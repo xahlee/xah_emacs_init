@@ -255,11 +255,11 @@
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp) ;     288    0.02%  query-replace-regexp
 
-(global-set-key (kbd "<menu> s") nil) ;    
+(global-set-key (kbd "<menu> s") nil) ;
 
 (progn
   (global-set-key (kbd "<menu> t") nil)
-  (global-set-key (kbd "<menu> t 2") 'make-frame-command) ;    
+  (global-set-key (kbd "<menu> t 2") 'make-frame-command) ;
   (global-set-key (kbd "<menu> t 3") 'ergoemacs-new-empty-buffer) ;    1700    0.11%  ergoemacs-new-empty-buffer
   (global-set-key (kbd "<menu> t 4") 'ido-find-file)         ; open. 765    0.05%  ido-find-file
   (global-set-key (kbd "<menu> t 6") 'ergoemacs-open-in-external-app) ; 0.00%  ergoemacs-open-in-external-app
@@ -320,7 +320,7 @@
   )
 
 (global-set-key (kbd "<menu> v") nil)
-(global-set-key (kbd "<menu> w") nil) ; ★★★
+(global-set-key (kbd "<menu> w") nil)
 (global-set-key (kbd "<menu> x") ctl-x-map)
 (global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> z") nil)
@@ -482,7 +482,6 @@
 
 
 
-
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 
 (global-set-key (kbd "M-g") 'backward-word)
@@ -544,7 +543,6 @@
 (global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket) ;  17177    1.07%  ergoemacs-forward-close-bracket
 
 (global-set-key (kbd "C-t") 'nil)
-
 
 ;; (global-set-key (kbd "<left>") 'backward-word) ;
 ;; (global-set-key (kbd "<right>") 'forward-word ) ;
