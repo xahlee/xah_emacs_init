@@ -65,7 +65,7 @@
 (setq org-return-follows-link t)
 
 (winner-mode 0)
-(cua-mode 0) (delete-selection-mode 1)
+(delete-selection-mode 1)
 (electric-pair-mode 0)
 
 (blink-cursor-mode 0 )
@@ -196,3 +196,5 @@
  '(rainbow-delimiters-depth-9-face ((t (:foreground "#8b7500"))))
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red"))))
  '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
+
+  (setq ido-enable-flex-matching t)

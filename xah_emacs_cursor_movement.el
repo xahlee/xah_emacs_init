@@ -33,3 +33,31 @@
 ;;   (interactive)
 ;;   (goto-char (point-max))
 ;; )
+
+(defun beginning-of-line-or-block ()
+  "Move cursor to beginning of line, or beginning of current or previous text block.
+ (a text block is separated by empty lines)"
+  (interactive)
+  (if (or (equal last-command this-command )
+          (equal last-command 'end-of-line-or-block ) )
+      (ergoemacs-backward-block)
+    (beginning-of-line)
+    ))
+
+(defun end-of-line-or-block ()
+  "Move cursor to end of line, or end of current or next text block.
+ (a text block is separated by empty lines)"
+  (interactive)
+  (if (or (equal last-command this-command )
+          (equal last-command 'beginning-of-line-or-block ) )
+      (ergoemacs-forward-block)
+    (end-of-line)
+    ))
+
+(defun forward-quote-symbol (&optional εnumber)
+  "Move cursor to the next occurrence ASCII double quote symbol
+With a negative prefix argument NUMBER, move backward NUMBER closed brackets."
+  (interactive "p")
+  (if (and εnumber (> 0 εnumber))
+      (forward-quote-symbol (- 0 εnumber))
+    (search-forward-regexp (eval-when-compile (regexp-opt '("\""))) nil t εnumber)))

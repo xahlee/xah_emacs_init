@@ -27,16 +27,20 @@
 (setq v3-insert-state-q t)
 
 ;; the most important, mode toggle key. you might add other toggle key
-(global-set-key (kbd "<delete>") 'v3-modal-switch) ; this is the DEL key (not backspace)
-(global-set-key (kbd "<M-delete>") 'v3-modal-switch)
-(global-set-key (kbd "<menu> <delete>") 'v3-modal-switch)
-
+(global-set-key (kbd "<delete>") 'v3-mode-toggle) ; this is the DEL key (not backspace)
+(global-set-key (kbd "<menu> <delete>") 'v3-mode-toggle)
 
 (defun v3-insert-mode-init ()
   "DOCSTRING"
   (interactive)
   ;; TODO use a proper keymap
   (progn
+    (global-set-key (kbd "SPC") 'self-insert-command)
+    (global-set-key (kbd ";") 'self-insert-command)
+    (global-set-key (kbd "=") 'self-insert-command)
+    (global-set-key (kbd "[") 'self-insert-command)
+    (global-set-key (kbd "\\") 'self-insert-command)
+    (global-set-key (kbd "`") 'self-insert-command)
     (global-set-key (kbd ".") 'self-insert-command)
     (global-set-key (kbd "'") 'self-insert-command) ;
     (global-set-key (kbd ",") 'self-insert-command) ;
@@ -52,12 +56,6 @@
     (global-set-key (kbd "7") 'self-insert-command)
     (global-set-key (kbd "8") 'self-insert-command)
     (global-set-key (kbd "9") 'self-insert-command)
-    (global-set-key (kbd ";") 'self-insert-command)
-    (global-set-key (kbd "=") 'self-insert-command)
-    (global-set-key (kbd "SPC") 'self-insert-command)
-    (global-set-key (kbd "[") 'self-insert-command)
-    (global-set-key (kbd "\\") 'self-insert-command)
-    (global-set-key (kbd "`") 'self-insert-command)
     (global-set-key (kbd "a") 'self-insert-command)
     (global-set-key (kbd "b") 'self-insert-command)
     (global-set-key (kbd "c") 'self-insert-command)
@@ -91,30 +89,30 @@
   "DOCSTRING"
   (interactive)
   (progn
+    (global-set-key (kbd ";") 'undo)
+    (global-set-key (kbd "=") nil)
+    (global-set-key (kbd "[") nil)
+    (global-set-key (kbd "\\") 'xah-escape-quotes)
+    (global-set-key (kbd "`") nil)
     (global-set-key (kbd ".") 'backward-kill-word)
     (global-set-key (kbd "'") 'ergoemacs-compact-uncompact-block) ;
     (global-set-key (kbd ",") 'ergoemacs-shrink-whitespaces) ;
-    (global-set-key (kbd "-") 'comment-dwim)
+    (global-set-key (kbd "-") nil)
     (global-set-key (kbd "/") nil)
     (global-set-key (kbd "0") nil)
     (global-set-key (kbd "1") nil)
     (global-set-key (kbd "2") 'delete-window)
     (global-set-key (kbd "3") 'delete-other-windows)
     (global-set-key (kbd "4") 'split-window-vertically)
-    (global-set-key (kbd "5") 'query-replace)
+    (global-set-key (kbd "5") nil)
     (global-set-key (kbd "6") 'ergoemacs-select-current-block) ;
     (global-set-key (kbd "7") 'ergoemacs-select-current-line)
     (global-set-key (kbd "8") 'ergoemacs-extend-selection)
     (global-set-key (kbd "9") 'ergoemacs-select-text-in-quote)
-    (global-set-key (kbd ";") 'undo)
-    (global-set-key (kbd "=") 'flyspell-buffer)
-    (global-set-key (kbd "[") nil)
-    (global-set-key (kbd "\\") 'xah-escape-quotes)
-    (global-set-key (kbd "`") nil)
-    (global-set-key (kbd "a") nil) ;
+    (global-set-key (kbd "a") 'v3-insert-mode-activate) ;
     (global-set-key (kbd "b") nil)
     (global-set-key (kbd "c") 'previous-line)
-    (global-set-key (kbd "d") 'move-beginning-of-line)
+    (global-set-key (kbd "d") 'beginning-of-line-or-block)
     (global-set-key (kbd "e") 'delete-backward-char) ;
     (global-set-key (kbd "f") nil)
     (global-set-key (kbd "g") 'backward-word)
@@ -123,49 +121,55 @@
     (global-set-key (kbd "j") 'ergoemacs-copy-line-or-region)
     (global-set-key (kbd "k") 'yank)
     (global-set-key (kbd "l") 'recenter-top-bottom)
-    (global-set-key (kbd "m") "_")
+    (global-set-key (kbd "m") 'ergoemacs-backward-open-bracket)
     (global-set-key (kbd "n") 'forward-char)
     (global-set-key (kbd "o") 'other-window)
     (global-set-key (kbd "p") 'kill-word)
     (global-set-key (kbd "q") 'ergoemacs-cut-line-or-region)
     (global-set-key (kbd "r") 'forward-word)
-    (global-set-key (kbd "s") 'save-buffer) ;
+    (global-set-key (kbd "s") 'end-of-line-or-block) ;
     (global-set-key (kbd "t") 'next-line)
     (global-set-key (kbd "u") 'delete-char) ;
-    (global-set-key (kbd "v") nil)
-    (global-set-key (kbd "w") 'ergoemacs-close-current-buffer)
-    (global-set-key (kbd "x") 'undo)
+    (global-set-key (kbd "v") 'ergoemacs-forward-close-bracket)
+    (global-set-key (kbd "w") 'forward-quote-symbol)
+    (global-set-key (kbd "x") nil)
     (global-set-key (kbd "y") 'redo)
     (global-set-key (kbd "z") nil)
     )
   )
 
-(defun v3-modal-switch ()
+(defun v3-mode-toggle ()
   "Switch between {insertion, command} modes."
   (interactive)
   (if v3-insert-state-q
-      (progn
-        (setq cursor-type 'box )
-        (message "%s" "command mode on") ; TODO show state in mode line instead. dont print msg
-        (setq v3-insert-state-q nil )
-        )
-    (progn
-      (setq cursor-type 'bar )
-      (message "%s" "insert mode on")   ; TODO show state in mode line instead. dont print msg
-      (setq v3-insert-state-q t )
-      )
-    )
-  (force-window-update) ; TODO force cursor shape change to show, but sometimes doesn't work
-  (if v3-insert-state-q
-      (v3-insert-mode-init)
-    (v3-command-mode-init)
+      (v3-command-mode-activate)
+    (v3-insert-mode-activate)
     )
   )
 
-;; when in going into minibuffer, switch to insertion mode.
-(add-hook 'minibuffer-setup-hook 'v3-insert-mode-init)
-(add-hook 'minibuffer-exit-hook 'v3-command-mode-init)
+(defun v3-command-mode-activate ()
+  "Switch to command mode."
+  (interactive)
+  (setq cursor-type 'box )
+  (setq v3-insert-state-q nil )
+  (force-window-update) ; TODO force cursor shape change to show, but sometimes doesn't work
+  (v3-command-mode-init)
+  )
 
+(defun v3-insert-mode-activate ()
+  "Switch to insertion mode."
+  (interactive)
+  (setq cursor-type 'bar )
+  (setq v3-insert-state-q t )
+  (force-window-update) ; TODO force cursor shape change to show, but sometimes doesn't work
+  (v3-insert-mode-init)
+  )
+
+;; when in going into minibuffer, switch to insertion mode.
+(add-hook 'minibuffer-setup-hook 'v3-insert-mode-activate)
+(add-hook 'minibuffer-exit-hook 'v3-command-mode-activate)
 
 ;; TODO when in shell mode, switch to insertion mode.
-(add-hook 'shell-mode-hook 'v3-insert-mode-init)
+(add-hook 'shell-mode-hook 'v3-insert-mode-activate)
+
+;; TODO show state in mode line

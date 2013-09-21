@@ -25,6 +25,8 @@
     ("ex" "example:")
     ("fex" "for example:")
 
+    ("cat" "=(^o^)=")
+
     ("8rsi" "Repetitive Strain Injury")
 
 ;; ;    ("t" "the")                         ; problem with “doesn't ”
@@ -346,7 +348,7 @@
 
 ;;; xah personal
     ("8ee" "ErgoEmacs")
-    ("8eem" "ergoemacs-mode")
+    ("8em" "ergoemacs-mode")
     ("8vdspc" "Visual Dictionary of Special Plane Curves")
     ("8xl" "Xah Lee")
     ("8xim" "Twitter: @xah_lee

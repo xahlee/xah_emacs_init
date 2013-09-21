@@ -575,3 +575,30 @@ When there is a text selection, act on the region."
 ;; (call-interactively 'xhm-htmlize-or-de-precode)
  ) )
 
+;; (defun ergoemacs-forward-block (&optional number)
+;;   "Move cursor forward to the beginning of next text block.
+;; A text block is separated by 2 empty lines (or line with just whitespace).
+;; In most major modes, this is similar to `forward-paragraph', but this command's behavior is the same regardless of syntax table.
+
+;; With a prefix argument NUMBER, move forward NUMBER blocks.
+;; With a negative prefix argument NUMBER, move backward NUMBER blocks."
+;;   (interactive "p")
+;;   (if (and number
+;;            (> 0 number))
+;;       (ergoemacs-backward-block (- 0 number))
+;;   (if (search-forward-regexp "\n[[:blank:]\n]*\n+" nil "NOERROR" number)
+;;       (progn nil)
+;;     (progn (goto-char (point-max))))))
+
+;; (defun ergoemacs-backward-block (&optional number)
+;;   "Move cursor backward to previous text block.
+;; See: `ergoemacs-forward-block'"
+;;   (interactive "p")
+;;   (if (and number
+;;            (> 0 number))
+;;       (ergoemacs-forward-block (- 0 number))
+;;     (if (search-backward-regexp "\n[\t\n ]*\n+" nil "NOERROR" number)
+;;         (progn
+;;           (skip-chars-backward "\n\t ")
+;;           )
+;;       (progn (goto-char (point-min))))))
