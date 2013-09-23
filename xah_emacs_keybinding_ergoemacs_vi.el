@@ -110,11 +110,11 @@
     (global-set-key (kbd "8") 'ergoemacs-extend-selection)
     (global-set-key (kbd "9") 'ergoemacs-select-text-in-quote)
     (global-set-key (kbd "a") 'v3-insert-mode-activate) ;
-    (global-set-key (kbd "b") nil)
+    (global-set-key (kbd "b") 'ergoemacs-toggle-letter-case)
     (global-set-key (kbd "c") 'previous-line)
-    (global-set-key (kbd "d") 'beginning-of-line-or-block)
+    (global-set-key (kbd "d") 'ergoemacs-beginning-of-line-or-block)
     (global-set-key (kbd "e") 'delete-backward-char) ;
-    (global-set-key (kbd "f") nil)
+    (global-set-key (kbd "f") 'isearch-forward)
     (global-set-key (kbd "g") 'backward-word)
     (global-set-key (kbd "h") 'backward-char)
     (global-set-key (kbd "i") 'kill-line)
@@ -127,12 +127,12 @@
     (global-set-key (kbd "p") 'kill-word)
     (global-set-key (kbd "q") 'ergoemacs-cut-line-or-region)
     (global-set-key (kbd "r") 'forward-word)
-    (global-set-key (kbd "s") 'end-of-line-or-block) ;
+    (global-set-key (kbd "s") 'ergoemacs-end-of-line-or-block) ;
     (global-set-key (kbd "t") 'next-line)
     (global-set-key (kbd "u") 'delete-char) ;
     (global-set-key (kbd "v") 'ergoemacs-forward-close-bracket)
     (global-set-key (kbd "w") 'forward-quote-symbol)
-    (global-set-key (kbd "x") nil)
+    (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)
     (global-set-key (kbd "y") 'redo)
     (global-set-key (kbd "z") nil)
     )

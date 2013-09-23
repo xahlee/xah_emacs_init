@@ -97,7 +97,7 @@ Other files paths for blogs are:
         (p1 (elt bds 1))
         (p2 (elt bds 2))
         (p3)
-        (summeryText "tutorial")
+        (summeryText "…")
         (currentFilePath (buffer-file-name))
         (atomFilePath
          (if (string-match-p "wordyenglish_com/words/new.html\\'" currentFilePath )

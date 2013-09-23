@@ -489,7 +489,7 @@
 (global-set-key (kbd "M-.") 'backward-kill-word)
 (global-set-key (kbd "M-p") 'kill-word)
 (global-set-key (kbd "M-i") 'kill-line)
-(global-set-key (kbd "M-d") 'move-beginning-of-line)
+(global-set-key (kbd "M-d") 'ergoemacs-beginning-of-line-or-block)
 (global-set-key (kbd "M-q") 'ergoemacs-cut-line-or-region)
 (global-set-key (kbd "M-j") 'ergoemacs-copy-line-or-region)
 (global-set-key (kbd "M-k") 'yank)
@@ -515,7 +515,7 @@
 (global-set-key (kbd "<f5>") 'undo)
 (global-set-key (kbd "<C-f5>") 'redo)
 
-;(global-set-key (kbd "<f11>") 'delete-other-windows)
+(global-set-key (kbd "<f11>") 'delete-other-windows)
 (global-set-key (kbd "<f12>") 'other-window); 6067    0.38%  other-window
 (global-set-key (kbd "<C-prior>") 'ergoemacs-previous-user-buffer)
 (global-set-key (kbd "<C-next>") 'ergoemacs-next-user-buffer)
