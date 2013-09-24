@@ -166,7 +166,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("sitemove" . "/home/xah/git/xahscripts/elisp/xah_site_move.el")
         ("windows pictures" . "/media/OS/Users/xah/Pictures/")
         ("book" . "/media/OS/Users/xah/SkyDrive/books/")
-        ) )
+        ("css-index" . "/home/xah/web/xahlee_info/js/css_index.html")
+) )
 
 (defun xah-open-file-fast (openCode)
   "Prompt to open a file from a pre-defined set."

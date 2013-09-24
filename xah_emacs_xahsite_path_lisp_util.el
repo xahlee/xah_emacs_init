@@ -554,81 +554,18 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
  [
 
   ;; Google Ad
-  [
-"<div class=\"ad66704\">
-<script type=\"text/javascript\"><!--
-google_ad_client = \"ca-pub-5125343095650532\";
-/* largeRectAd */
-google_ad_slot = \"9906895181\";
-google_ad_width = 336;
-google_ad_height = 280;
-//-->
-</script>
-<script type=\"text/javascript\"
-src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
-</script>
-</div>"
- ""]
-
-  ;; Google Ad
-["<div class=\"ad66704\">
-<script type=\"text/javascript\"><!--
-google_ad_client = \"ca-pub-5125343095650532\";
-/* 728x90, created 8/12/09 */
-google_ad_slot = \"8521101965\";
-google_ad_width = 728;
-google_ad_height = 90;
-//-->
-</script>
-<script type=\"text/javascript\"
-src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
-</script>
-</div>"
-""]
-
-  ;; Google Ad
-["<script type=\"text/javascript\"><!--
-google_ad_client = \"ca-pub-5125343095650532\";
-/* 200x200 */
-google_ad_slot = \"1321390789\";
-google_ad_width = 200;
-google_ad_height = 200;
-//-->
-</script>
-<script type=\"text/javascript\"
-src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
-</script>
-<br />"
-""]
-
-  ;; Google Ad
-["<div class=\"ads-bottom-65900\">
-<script type=\"text/javascript\"><!--
-google_ad_client = \"ca-pub-5125343095650532\";
-/* 728x90, created 8/12/09 */
-google_ad_slot = \"8521101965\";
-google_ad_width = 728;
-google_ad_height = 90;
-//-->
-</script>
-<script type=\"text/javascript\"
-src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
-</script>
-</div>"
-""]
-
-["<script type=\"text/javascript\"><!--
-google_ad_client = \"ca-pub-5125343095650532\";
-/* 160x600 */
-google_ad_slot = \"4521229185\";
-google_ad_width = 160;
-google_ad_height = 600;
-//-->
-</script>
-<script type=\"text/javascript\"
-src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
+[
+"<script async src=\"http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
+<!-- 728x90, created 8/12/09 -->
+<ins class=\"adsbygoogle\"
+     style=\"display:inline-block;width:728px;height:90px\"
+     data-ad-client=\"ca-pub-5125343095650532\"
+     data-ad-slot=\"8521101965\"></ins>
+<script>
+\(adsbygoogle = window.adsbygoogle || []).push({});
 </script>"
-""]
+""
+]
 
 ;; Google Plus
 ["<div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div>" ""]
@@ -645,6 +582,10 @@ src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <div id=\"fb-root\"></div>
 <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/en_US/all.js#xfbml=1\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>"
+""]
+
+;; social network links
+["<a href=\"https://twitter.com/ErgoEmacs\"> </a> <a href=\"https://plus.google.com/113859563190964307534/posts\"> </a> <a href=\"https://www.facebook.com/xahlee\"> </a>"
 ""]
 
 ;; paypal
@@ -693,11 +634,15 @@ src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">
 ;; Google Analytics tracker
 [ "<script>var _gaq = .+?();</script>" "" ]
 
-["<div class=\"byline\"><address class=\"author\">[[:ascii:]]+?</time></div>" ""]
+["<div class=\"ad66704\">[\n ]*</div>" ""]
+
+["<div class=\"ads-bottom-65900\">[\n ]*</div>" ""]
+
+["<div class=\"byline\"><address class=\"author\">[[:ascii:]…]+?</time></div>" ""]
 
 ["<aside id=\"id1\">[[:ascii:]]+?</aside>" ""]
 
-["<div class=\"share-buttons\">\n+</div>" ""]
+["<div class=\"share-buttons\">[\n ]*</div>" ""]
 
 ["<div class=\"¤xd\">[^<]+?</div>" ""]
 

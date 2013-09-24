@@ -7,10 +7,8 @@
 
 ;; some notes:
 ;; • other than being a modal input system, this design doesn't follow vi or vim's traditions. For example: there's no command such as “dd”. and there's no typing a digit followed by a command to repeat n times. This is not a vi emulation mode.
-;; • Unlike vi, where you have {i, o, a} keys to go into insertion mode, but they can't switch you back to command mode. Also, the 【Esc】 key switch you back to command mode, but isn't a toggle.
-;; • the only key to switch mode is 【‹toggle key›】. This ‹toggle key› is currently the 【backspace】 key.
 ;; • the keymap is largely compatible with ergoemacs-mode. It's based on mapping the most frequetly used command to the most easy-to-press key positions.
-;; • this is currently a prototype. That is, alpha stage. Lots improvement can be made.
+;; • created this around 2013-08. Used it daily since. 
 
 ;; TODO
 ;; • make it a proper minor mode.
@@ -26,9 +24,9 @@
 (defvar v3-insert-state-q t "boolean value. true means insertion mode is on.")
 (setq v3-insert-state-q t)
 
-;; the most important, mode toggle key. you might add other toggle key
-(global-set-key (kbd "<delete>") 'v3-mode-toggle) ; this is the DEL key (not backspace)
-(global-set-key (kbd "<menu> <delete>") 'v3-mode-toggle)
+;; to enter insert mode, press the command mode key then 【a】
+(global-set-key (kbd "<delete>") 'v3-command-mode-activate)
+(global-set-key (kbd "<end>") 'v3-command-mode-activate)
 
 (defun v3-insert-mode-init ()
   "DOCSTRING"
@@ -104,6 +102,11 @@
     (global-set-key (kbd "2") 'delete-window)
     (global-set-key (kbd "3") 'delete-other-windows)
     (global-set-key (kbd "4") 'split-window-vertically)
+
+; 5605    0.35%  cua-set-mark; 944    0.06%  set-mark-command
+;   5064    0.31%  delete-other-windows
+;   6077    0.38%  ergoemacs-M-o
+
     (global-set-key (kbd "5") nil)
     (global-set-key (kbd "6") 'ergoemacs-select-current-block) ;
     (global-set-key (kbd "7") 'ergoemacs-select-current-line)
