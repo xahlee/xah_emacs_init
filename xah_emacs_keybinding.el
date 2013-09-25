@@ -28,6 +28,7 @@
 ;; generic
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
+(define-key key-translation-map (kbd "<f7>") (kbd "<menu>"))  ; useful when in terminal or Mac
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
@@ -117,12 +118,13 @@
 (global-set-key (kbd "<f8> <f9>") 'highlight-symbol-query-replace)
 
 (global-set-key (kbd "<f9> SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
-(global-set-key (kbd "<f9> <f7>") 'visual-line-mode)
-(global-set-key (kbd "<f9> <f8>") 'linum-mode)
-(global-set-key (kbd "<f9> <f9>") 'whitespace-mode)
-(global-set-key (kbd "<f9> <f10>") 'calendar)
-(global-set-key (kbd "<f9> <f11>") 'calc)
-(global-set-key (kbd "<f9> <f12>") 'shell)
+(global-set-key (kbd "<f9> <f6>") 'visual-line-mode)
+(global-set-key (kbd "<f9> <f7>") 'linum-mode)
+(global-set-key (kbd "<f9> <f8>") 'whitespace-mode)
+(global-set-key (kbd "<f9> <f9>") 'shell)
+(global-set-key (kbd "<f9> <f10>") 'calc)
+(global-set-key (kbd "<f9> <f11>") 'calendar)
+(global-set-key (kbd "<f9> <f12>") nil)
 
 (global-set-key (kbd "<f9> 0") nil)
 (global-set-key (kbd "<f9> 1") nil)

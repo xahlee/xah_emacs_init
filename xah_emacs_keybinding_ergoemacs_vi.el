@@ -26,7 +26,7 @@
 
 ;; to enter insert mode, press the command mode key then 【a】
 (global-set-key (kbd "<delete>") 'v3-command-mode-activate)
-(global-set-key (kbd "<end>") 'v3-command-mode-activate)
+(global-set-key (kbd "<end>") 'v3-command-mode-activate) ; a fallback when in terminal or other
 
 (defun v3-insert-mode-init ()
   "DOCSTRING"
