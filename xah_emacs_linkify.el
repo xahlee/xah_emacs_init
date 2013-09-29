@@ -625,7 +625,7 @@ If there is text selection, use it as input."
      ((and (string-match-p "\\`http://xahlee\.blogspot\.com/" myPath)) (blogger-linkify))
      ((and (string-match-p "\\`http://wordy-english\.blogspot\.com/" myPath)) (blogger-linkify))
      ((and (string-match-p "www\.amazon\.com/" myPath)) (amazon-linkify))
-     ((and (string-match-p "www\.youtube\.com/" myPath)) (youtube-linkify))
+     ((and (string-match-p "www\.youtube\.com/watch" myPath)) (youtube-linkify))
      ((and (string-match-p "\\.js\\'" myPath)) (javascript-linkify))
      ((and (string-match-p "\\.css\\'" myPath)) (css-linkify))
 

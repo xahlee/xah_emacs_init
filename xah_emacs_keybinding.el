@@ -506,7 +506,7 @@
 (global-set-key (kbd "M-8") 'ergoemacs-extend-selection) ; 3332    0.21%  ergoemacs-extend-selection
 (global-set-key (kbd "M-9") 'ergoemacs-select-text-in-quote) ; 4603    0.28%  ergoemacs-select-text-in-quote
 
-;;(global-set-key (kbd "M--") 'comment-dwim) ; 1214    0.08%  comment-dwim
+(global-set-key (kbd "M--") 'comment-dwim) ; 1214    0.08%  comment-dwim
 (global-set-key (kbd "M-f") 'isearch-forward)
 
 ;(global-set-key (kbd "<escape>") 'keyboard-quit)
@@ -535,8 +535,8 @@
 
 (global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ;  93862    5.83%  ergoemacs-backward-block
 (global-set-key (kbd "<next>") 'ergoemacs-forward-block)    ;  80008    4.97%  ergoemacs-forward-block
-(global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket) ;  14181    0.88%  ergoemacs-backward-open-bracket
-(global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket) ;  17177    1.07%  ergoemacs-forward-close-bracket
+;(global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket) ;  14181    0.88%  ergoemacs-backward-open-bracket
+;(global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket) ;  17177    1.07%  ergoemacs-forward-close-bracket
 
 (global-set-key (kbd "C-t") 'nil)
 
@@ -549,3 +549,81 @@
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_vi.el"))
 
 (delete-selection-mode 1)
+
+
+(defun ergoemacs-forward-open-bracket (&optional number)
+  "Move cursor to the next occurrence of left bracket or quotation mark.
+
+With prefix NUMBER, move forward to the next NUMBER left bracket or quotation mark.
+
+With a negative prefix NUMBER, move backward to the previous NUMBER left bracket or quotation mark."
+  (interactive "p")
+  (if (and number
+           (> 0 number))
+      (ergoemacs-backward-open-bracket (- 0 number))
+    (forward-char 1)
+    (search-forward-regexp
+     (eval-when-compile
+       (regexp-opt
+        '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«"))) nil t number)
+    (backward-char 1)))
+
+(defun ergoemacs-backward-open-bracket (&optional number)
+  "Move cursor to the previous occurrence of left bracket or quotation mark.
+With prefix argument NUMBER, move backward NUMBER open brackets.
+With a negative prefix NUMBER, move forward NUMBER open brackets."
+  (interactive "p")
+  (if (and number
+           (> 0 number))
+      (ergoemacs-forward-open-bracket (- 0 number))
+    (search-backward-regexp
+   (eval-when-compile
+     (regexp-opt
+      '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«"))) nil t number)))
+
+(defun ergoemacs-forward-close-bracket (&optional number)
+  "Move cursor to the next occurrence of right bracket or quotation mark.
+With a prefix argument NUMBER, move forward NUMBER closed bracket.
+With a negative prefix argument NUMBER, move backward NUMBER closed brackets."
+  (interactive "p")
+  (if (and number
+           (> 0 number))
+      (ergoemacs-backward-close-bracket (- 0 number))
+    (search-forward-regexp
+     (eval-when-compile
+       (regexp-opt '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»"))) nil t number)))
+
+(defun ergoemacs-backward-close-bracket (&optional number)
+  "Move cursor to the previous occurrence of right bracket or quotation mark.
+With a prefix argument NUMBER, move backward NUMBER closed brackets.
+With a negative prefix argument NUMBER, move forward NUMBER closed brackets."
+  (interactive "p")
+  (if (and number
+           (> 0 number))
+      (ergoemacs-forward-close-bracket (- 0 number))
+    (backward-char 1)
+    (search-backward-regexp
+     (eval-when-compile
+       (regexp-opt '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»"))) nil t number)
+    (forward-char 1)))
+
+
+(defun ergoemacs-forward-quote (&optional number)
+  "Move cursor to the next occurrence of ASCII quotation mark, single or double.
+
+With prefix NUMBER, move forward to the next NUMBER quotation mark.
+
+With a negative prefix NUMBER, move backward to the previous NUMBER quotation mark."
+  (interactive "p")
+  (if (and number (> 0 number))
+      (ergoemacs-forward-quote (- 0 number))
+    (search-forward-regexp (eval-when-compile (regexp-opt '("\"" "'"))) nil t number)
+    ))
+
+(defun ergoemacs-backward-quote (&optional number)
+  "Move cursor to the previous occurrence of ASCII quotation mark, single or double.
+With prefix argument NUMBER, move backward NUMBER quotation mark.
+With a negative prefix NUMBER, move forward NUMBER quotation mark."
+  (interactive "p")
+  (if (and number (> 0 number)) (ergoemacs-backward-quote (- 0 number))
+    (search-backward-regexp (eval-when-compile (regexp-opt '("\"" "'"))) nil t number)))

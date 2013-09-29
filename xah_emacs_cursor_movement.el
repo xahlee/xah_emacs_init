@@ -53,11 +53,3 @@
       (ergoemacs-forward-block)
     (end-of-line)
     ))
-
-(defun forward-quote-symbol (&optional εnumber)
-  "Move cursor to the next occurrence ASCII double quote symbol
-With a negative prefix argument NUMBER, move backward NUMBER closed brackets."
-  (interactive "p")
-  (if (and εnumber (> 0 εnumber))
-      (forward-quote-symbol (- 0 εnumber))
-    (search-forward-regexp (eval-when-compile (regexp-opt '("\""))) nil t εnumber)))

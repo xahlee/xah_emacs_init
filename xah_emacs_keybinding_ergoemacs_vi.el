@@ -8,7 +8,7 @@
 ;; some notes:
 ;; • other than being a modal input system, this design doesn't follow vi or vim's traditions. For example: there's no command such as “dd”. and there's no typing a digit followed by a command to repeat n times. This is not a vi emulation mode.
 ;; • the keymap is largely compatible with ergoemacs-mode. It's based on mapping the most frequetly used command to the most easy-to-press key positions.
-;; • created this around 2013-08. Used it daily since. 
+;; • created this around 2013-08. Used it daily since.
 
 ;; TODO
 ;; • make it a proper minor mode.
@@ -26,7 +26,8 @@
 
 ;; to enter insert mode, press the command mode key then 【a】
 (global-set-key (kbd "<delete>") 'v3-command-mode-activate)
-(global-set-key (kbd "<end>") 'v3-command-mode-activate) ; a fallback when in terminal or other
+(global-set-key (kbd "<home>") 'v3-command-mode-activate) ; a fallback when in terminal or other
+(global-set-key (kbd "<end>") 'v3-insert-mode-activate)
 
 (defun v3-insert-mode-init ()
   "DOCSTRING"
@@ -99,9 +100,12 @@
     (global-set-key (kbd "/") nil)
     (global-set-key (kbd "0") nil)
     (global-set-key (kbd "1") nil)
-    (global-set-key (kbd "2") 'delete-window)
-    (global-set-key (kbd "3") 'delete-other-windows)
-    (global-set-key (kbd "4") 'split-window-vertically)
+    (global-set-key (kbd "2") nil)
+    (global-set-key (kbd "3") 'set-mark-command)
+    (global-set-key (kbd "4") 'keyboard-quit)
+
+    (global-set-key (kbd "3") 'ergoemacs-backward-quote)
+    (global-set-key (kbd "4") 'ergoemacs-forward-quote)
 
 ; 5605    0.35%  cua-set-mark; 944    0.06%  set-mark-command
 ;   5064    0.31%  delete-other-windows
@@ -134,7 +138,7 @@
     (global-set-key (kbd "t") 'next-line)
     (global-set-key (kbd "u") 'delete-char) ;
     (global-set-key (kbd "v") 'ergoemacs-forward-close-bracket)
-    (global-set-key (kbd "w") 'forward-quote-symbol)
+    (global-set-key (kbd "w") nil)
     (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)
     (global-set-key (kbd "y") 'redo)
     (global-set-key (kbd "z") nil)
