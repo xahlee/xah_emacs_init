@@ -25,8 +25,7 @@
 (setq v3-insert-state-q t)
 
 ;; to enter insert mode, press the command mode key then 【a】
-(global-set-key (kbd "<delete>") 'v3-command-mode-activate)
-(global-set-key (kbd "<home>") 'v3-command-mode-activate) ; a fallback when in terminal or other
+(global-set-key (kbd "<home>") 'v3-command-mode-activate)
 (global-set-key (kbd "<end>") 'v3-insert-mode-activate)
 
 (defun v3-insert-mode-init ()

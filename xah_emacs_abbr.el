@@ -392,6 +392,7 @@ Second Life: Xah Toll
 ("8ujs" "http://xahlee.info/js/javascript_basics.html")
 ("8uphp" "http://xahlee.info/php/php_basics.html")
 ("8ucss" "http://xahlee.info/js/css_index.html")
+("8udvorak" "http://xahlee.info/comp/dvorak_keyboard_layout.html")
 
 ("8uocaml" "http://xahlee.info/ocaml/ocaml.html")
 ("8ups" "http://xahlee.info/powershell/index.html")
