@@ -4,12 +4,7 @@
 
 ;; c:/Users/xah/web/xahlee_org/Periodic_dosage_dir/sanga_pemci/xx.html
 
-(defun youtube-string (video-id)
-  "Return HTML code for embedding video of youtube's VIDEO-ID.
-Example call:
- (youtube-string \"bFSS826ETlk\")"
-(concat "<iframe title=\"YouTube video player\" class=\"youtube-player\" width=\"640\" height=\"385\" src=\"http://www.youtube.com/embed/" video-id "?rel=0\"></iframe>")
-  )
+
 
 (defun youtube-string-old (video-id)
   "Return HTML code for embedding video of youtube's VIDEO-ID.
@@ -21,6 +16,13 @@ Example call:
     (concat
      "<object type=\"application/x-shockwave-flash\" data=\"" ξurl "\" width=\"480\" height=\"385\"><param name=\"movie\" value=\"" ξurl "\"></object>")
     ) )
+
+(defun youtube-string (video-id)
+  "Return HTML code for embedding video of youtube's VIDEO-ID.
+Example call:
+ (youtube-string \"bFSS826ETlk\")"
+(concat "<iframe width=\"640\" height=\"480\" src=\"http://www.youtube.com/embed/" video-id "?rel=0\"></iframe>")
+  )
 
 (defun youtube-linkify ()
   "Make the current line into a embeded HTML video object.

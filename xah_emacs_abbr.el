@@ -25,7 +25,7 @@
     ("ex" "example:")
     ("fex" "for example:")
 
-    ("cat" "=(^o^)=")
+    ("8cat" "=(^o^)=")
 
     ("8rsi" "Repetitive Strain Injury")
 
