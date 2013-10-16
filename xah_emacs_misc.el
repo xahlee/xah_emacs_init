@@ -529,10 +529,10 @@ When there is a text selection, act on the region."
             ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
 
             ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
-
-            ("rm_empty" . "find . -type f -empty")
-            ("chmod_file" . "find . -type f -exec chmod 644 {} ';'")
-            ("rm~" . "find . -name \"*~\" -exec rm {} ';'")
+ 
+            ("rm empty" . "find . -type f -empty")
+            ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
+            ("rm emacs backup~" . "find . -name \"*~\" -exec rm {} ';'")
             ("findEmptyDir" . "find . -depth -empty -type d")
             ("rmEmptyDir" . "find . -depth -empty -type d -exec rmdir {} ';'")
             ("chmod2" . "find . -type d -exec chmod 755 {} ';'")

@@ -28,9 +28,10 @@
 ;; generic
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
-(define-key key-translation-map (kbd "<f7>") (kbd "<menu>"))  ; useful when in terminal or Mac
+(define-key key-translation-map (kbd "C-t") (kbd "<menu>"))  ; useful when in terminal or Mac
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+(define-key key-translation-map (kbd "<XF86Launch8>") (kbd "C-g"))
 ;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
 ;(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
@@ -160,7 +161,7 @@
 (global-set-key (kbd "<menu> 6") 'write-file)
 (global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ;  find-file-at-point 4773    0.30%  xah-open-file-at-cursor
 (global-set-key (kbd "<menu> 8") 'dired-jump)              ;  2377    0.15%  dired-jump
-(global-set-key (kbd "<menu> 9") nil)
+(global-set-key (kbd "<menu> 9") 'ispell-word)
 (global-set-key (kbd "<menu> ;") nil) ;
 (global-set-key (kbd "<menu> =") nil)
 (global-set-key (kbd "<menu> SPC") 'set-mark-command) ;
@@ -232,7 +233,7 @@
 
 (global-set-key (kbd "<menu> m") nil)
 
-(global-set-key (kbd "<menu> n") nil)
+(global-set-key (kbd "<menu> n") 'narrow-to-region)
 (global-set-key (kbd "<menu> o") nil)
 (global-set-key (kbd "<menu> o c") 'bookmark-bmenu-list)
 (global-set-key (kbd "<menu> o g") 'ibuffer) ; 198    0.01%  ibuffer
@@ -319,7 +320,7 @@
   )
 
 (global-set-key (kbd "<menu> v") nil)
-(global-set-key (kbd "<menu> w") nil)
+(global-set-key (kbd "<menu> w") 'widen)
 (global-set-key (kbd "<menu> x") ctl-x-map)
 (global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> z") nil)
@@ -496,7 +497,7 @@
 (global-set-key (kbd "M-j") 'ergoemacs-copy-line-or-region)
 (global-set-key (kbd "M-k") 'yank)
 
-;;(global-set-key (kbd "M-o") 'other-window) ; 
+;;(global-set-key (kbd "M-o") 'other-window) ;
 
 (global-set-key (kbd "M-,") 'ergoemacs-shrink-whitespaces) ;5852    0.36%  ergoemacs-shrink-whitespaces
 (global-set-key (kbd "M-'") 'ergoemacs-compact-uncompact-block) ;1037    0.06%  ergoemacs-compact-uncompact-block
@@ -549,7 +550,6 @@
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_vi.el"))
 
 (delete-selection-mode 1)
-
 
 (defun ergoemacs-forward-open-bracket (&optional number)
   "Move cursor to the next occurrence of left bracket or quotation mark.
@@ -607,7 +607,6 @@ With a negative prefix argument NUMBER, move forward NUMBER closed brackets."
        (regexp-opt '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»"))) nil t number)
     (forward-char 1)))
 
-
 (defun ergoemacs-forward-quote (&optional number)
   "Move cursor to the next occurrence of ASCII quotation mark, single or double.
 
@@ -627,3 +626,4 @@ With a negative prefix NUMBER, move forward NUMBER quotation mark."
   (interactive "p")
   (if (and number (> 0 number)) (ergoemacs-backward-quote (- 0 number))
     (search-backward-regexp (eval-when-compile (regexp-opt '("\"" "'"))) nil t number)))
+

@@ -115,7 +115,7 @@
     (global-set-key (kbd "7") 'ergoemacs-select-current-line)
     (global-set-key (kbd "8") 'ergoemacs-extend-selection)
     (global-set-key (kbd "9") 'ergoemacs-select-text-in-quote)
-    (global-set-key (kbd "a") 'v3-insert-mode-activate) ;
+    (global-set-key (kbd "a") 'open-line) ;
     (global-set-key (kbd "b") 'ergoemacs-toggle-letter-case)
     (global-set-key (kbd "c") 'previous-line)
     (global-set-key (kbd "d") 'ergoemacs-beginning-of-line-or-block)
