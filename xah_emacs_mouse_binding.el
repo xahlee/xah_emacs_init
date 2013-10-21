@@ -3,11 +3,14 @@
 ;; Xah Lee
 ;; created: 2011-11-13
 
-
-;; mouse
+;; Emacs Mouse Wheel Config
+;; http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html
 
 ;; emacs mouse numbering changes depending on {OS, mouse, driver}.
 ;; http://xahlee.info/kbd/X11_mouse_button_numbering.html
+
+
+;; mouse
 
   (global-set-key (kbd "<mouse-3>") 'describe-char) ; right button
 
@@ -24,18 +27,11 @@
  ((string-equal system-type "gnu/linux")
   (global-set-key (kbd "<mouse-9>") 'ergoemacs-close-current-buffer) ; next page button
 
-  ;; 'text-scale-increase
+  (global-set-key (kbd "<mouse-4>") 'ergoemacs-backward-block) ; wheel up
+  (global-set-key (kbd "<mouse-5>") 'ergoemacs-forward-block) ; wheel down
 
-;; 'mwheel-scroll
-  ;; forward-word,
-  ;; 'ergoemacs-backward-open-bracket
-  ;; 'ergoemacs-forward-block
-
-  (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
-  (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
-
-  (global-set-key (kbd "<C-mouse-4>") 'ergoemacs-backward-block ) ;
-  (global-set-key (kbd "<C-mouse-5>") 'ergoemacs-forward-block) ;
+  (global-set-key (kbd "<C-mouse-4>") 'scroll-down-10-lines) ;
+  (global-set-key (kbd "<C-mouse-5>") 'scroll-up-10-lines) ;
 
   (global-set-key (kbd "<S-mouse-4>") 'backward-word) ;
   (global-set-key (kbd "<S-mouse-5>") 'forward-word) ;
@@ -46,13 +42,28 @@
   (global-set-key (kbd "<C-S-mouse-4>") 'text-scale-increase) ;
   (global-set-key (kbd "<C-S-mouse-5>") 'text-scale-decrease) ;
 
-  ;; (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (forward-line -2))) ; wheel up
-  ;; (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (forward-line 2))) ; wheel down
-
-  ;; (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
-  ;; (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
-
   )
 
  ((string-equal system-type "darwin") ; Mac
   (global-set-key (kbd "<mouse-5>") 'ergoemacs-close-current-buffer) ) )
+
+(defun scroll-up-10-lines ()
+  "Scroll up 10 lines"
+  (interactive)
+  (scroll-up 10))
+
+(defun scroll-down-10-lines ()
+  "Scroll down 10 lines"
+  (interactive)
+  (scroll-down 10))
+
+(defun cursor-down-some-lines ()
+  "Move cursor down 10 logical lines"
+  (interactive)
+  (forward-line 10)
+)
+
+(defun cursor-up-some-lines ()
+  "Move cursor up 10 logical lines"
+  (interactive)
+  (forward-line -10))
