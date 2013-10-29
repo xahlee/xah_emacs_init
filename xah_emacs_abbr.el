@@ -22,10 +22,12 @@
     ("ipv6" "IPv6")
     ("msw" "Microsoft Windows")
     ("ms" "Microsoft")
-    ("ex" "example:")
-    ("fex" "for example:")
+    ("ex" "Example:")
+    ("fex" "For example:")
 
     ("8cat" "=(^o^)=")
+
+    ("8arrows" "➵ ➙ ► ▻ ☛ ☞ 👆 👇 👈 👉 ⇰ ➛ ➜ ➝ ➞ ➟ ➠ ➢ ➣ ➤ ➥ ➦ ➧ ➨ ➲ ➺ ➻ ➼ ➽ ➾")
 
     ("8rsi" "Repetitive Strain Injury")
 
@@ -330,7 +332,7 @@
 
 ")
 ("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
-("8css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
+("8c2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
 
 
 ;;; unix shell

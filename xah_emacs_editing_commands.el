@@ -142,11 +142,14 @@ Requires ImageMagick shell tool."
   "Create a scaled JPG version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
+If `universal-argument' is given, output is png format.
+
 When called in lisp code,
  fileList is a list.
  scalePercentage is a integer.
  sharpen-p is true or false.
-Requires ImageMagick shell tool."
+
+Requires ImageMagick unix shell tool."
   (interactive
    (let (
          (myFileList
@@ -159,10 +162,12 @@ Requires ImageMagick shell tool."
            (y-or-n-p "Sharpen")
            ) )
    )
-  (let ((sharpenOrNo (if sharpen-p "-sharpen 1" "" )))
+  (let ((sharpenOrNo (if sharpen-p "-sharpen 1" "" ))
+        (outputSuffix (if current-prefix-arg ".png" ".jpg" ) )
+        )
     (process-image fileList
                    (format "-scale %s%% -quality 85%% %s " scalePercentage sharpenOrNo)
-                   "-s" ".jpg" )
+                   "-s" outputSuffix )
     )
   )
 

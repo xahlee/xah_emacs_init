@@ -27,11 +27,11 @@
  ((string-equal system-type "gnu/linux")
   (global-set-key (kbd "<mouse-9>") 'ergoemacs-close-current-buffer) ; next page button
 
-  (global-set-key (kbd "<mouse-4>") 'ergoemacs-backward-block) ; wheel up
-  (global-set-key (kbd "<mouse-5>") 'ergoemacs-forward-block) ; wheel down
+  (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
+  (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
 
-  (global-set-key (kbd "<C-mouse-4>") 'scroll-down-10-lines) ;
-  (global-set-key (kbd "<C-mouse-5>") 'scroll-up-10-lines) ;
+  (global-set-key (kbd "<C-mouse-4>") 'ergoemacs-backward-block) ; wheel up
+  (global-set-key (kbd "<C-mouse-5>") 'ergoemacs-forward-block) ; wheel down
 
   (global-set-key (kbd "<S-mouse-4>") 'backward-word) ;
   (global-set-key (kbd "<S-mouse-5>") 'forward-word) ;

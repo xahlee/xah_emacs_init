@@ -229,6 +229,8 @@
 
 ;(global-set-key (kbd "<menu> j") 'kmacro-start-macro) ;  42    0.00%  kmacro-start-macro
 ;(global-set-key (kbd "<menu> k") 'kmacro-end-macro)   ; 36    0.00%  kmacro-end-macro
+(global-set-key (kbd "<menu> j") 'ergoemacs-copy-all)
+(global-set-key (kbd "<menu> k") 'kmacro-end-macro)
 (global-set-key (kbd "<menu> l") 'xah-clean-whitespace)
 
 (global-set-key (kbd "<menu> m") nil)
@@ -244,7 +246,7 @@
 
 (global-set-key (kbd "<menu> p") 'query-replace) ; 2746    0.17%  query-replace
 
-(global-set-key (kbd "<menu> q") nil)
+(global-set-key (kbd "<menu> q") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> r") nil)
 (global-set-key (kbd "<menu> r 3") 'copy-to-register-1)
 (global-set-key (kbd "<menu> r 4") 'paste-from-register-1)
