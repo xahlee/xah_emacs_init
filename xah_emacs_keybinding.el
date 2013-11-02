@@ -148,7 +148,7 @@
 (global-set-key (kbd "<menu> '") nil) ;
 (global-set-key (kbd "<menu> ,") nil) ;
 
-(global-set-key (kbd "<menu> -") 'xc-comment-smart) ; 385    0.02%  xc-comment-smart
+(global-set-key (kbd "<menu> -") nil)
 
 (global-set-key (kbd "<menu> /") nil)
 (global-set-key (kbd "<menu> 0") nil)
@@ -325,7 +325,7 @@
 (global-set-key (kbd "<menu> w") 'widen)
 (global-set-key (kbd "<menu> x") ctl-x-map)
 (global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
-(global-set-key (kbd "<menu> z") nil)
+(global-set-key (kbd "<menu> z") 'xc-comment-smart) ; 385    0.02%  xc-comment-smart
 
 
 ;; special keys
@@ -509,7 +509,7 @@
 (global-set-key (kbd "M-8") 'ergoemacs-extend-selection) ; 3332    0.21%  ergoemacs-extend-selection
 (global-set-key (kbd "M-9") 'ergoemacs-select-text-in-quote) ; 4603    0.28%  ergoemacs-select-text-in-quote
 
-(global-set-key (kbd "M--") 'comment-dwim) ; 1214    0.08%  comment-dwim
+
 (global-set-key (kbd "M-f") 'isearch-forward)
 
 ;(global-set-key (kbd "<escape>") 'keyboard-quit)
@@ -527,9 +527,14 @@
 (global-set-key (kbd "<S-prior>") 'ergoemacs-previous-emacs-buffer)
 (global-set-key (kbd "<S-next>") 'ergoemacs-next-emacs-buffer)
 
+(global-set-key (kbd "<C-S-iso-lefttab>") 'ergoemacs-previous-user-buffer)
+(global-set-key (kbd "<C-tab>") 'ergoemacs-next-user-buffer)
+
 (global-set-key (kbd "C-S-t") 'ergoemacs-open-last-closed) ; 832    0.05%  ergoemacs-open-last-closed
 
 (global-set-key (kbd "C-w") 'ergoemacs-close-current-buffer) ; 19318    1.20%  ergoemacs-close-current-buffer
+(global-set-key (kbd "C-z") 'comment-dwim) ; 1214    0.08%  comment-dwim
+
 
 ;; (global-set-key (kbd "<home>") 'other-window)
 ;; (global-set-key (kbd "<end>") 'smex)
@@ -541,7 +546,6 @@
 ;(global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket) ;  14181    0.88%  ergoemacs-backward-open-bracket
 ;(global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket) ;  17177    1.07%  ergoemacs-forward-close-bracket
 
-(global-set-key (kbd "C-t") 'nil)
 
 ;; (global-set-key (kbd "<left>") 'backward-word) ;
 ;; (global-set-key (kbd "<right>") 'forward-word ) ;

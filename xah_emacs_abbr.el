@@ -176,7 +176,6 @@
     ("8comp" "computer")
     ("8l" "language")
     ("8ls" "languages")
-    ("8p" "programing")
     ("8exp" "experience")
     ("8tech" "technology")
     ("8cs" "computer science")
