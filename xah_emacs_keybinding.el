@@ -29,9 +29,10 @@
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
 (define-key key-translation-map (kbd "C-t") (kbd "<menu>"))  ; useful when in terminal or Mac
+
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-(define-key key-translation-map (kbd "<XF86Launch8>") (kbd "C-g"))
+
 ;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
 ;(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
@@ -99,6 +100,8 @@
   (define-key help-map (kbd "h") nil) ; view-hello-file
   )
 
+(global-set-key (kbd "<XF86Launch8>") 'set-mark-command)
+
 (global-set-key (kbd "<tab>") nil)
 (global-set-key (kbd "<tab> <tab>") 'yas/expand)
 
@@ -164,7 +167,7 @@
 (global-set-key (kbd "<menu> 9") 'ispell-word)
 (global-set-key (kbd "<menu> ;") nil) ;
 (global-set-key (kbd "<menu> =") nil)
-(global-set-key (kbd "<menu> SPC") 'set-mark-command) ;
+(global-set-key (kbd "<menu> SPC") 'set-mark-command)
 (global-set-key (kbd "<menu> [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
 (global-set-key (kbd "<menu> `") 'make-backup)
@@ -289,6 +292,18 @@
   (global-set-key (kbd "<menu> u . b") 'insert-pair-white-lenticular-bracket〖〗)
   (global-set-key (kbd "<menu> u . m") 'insert-pair-white-corner-bracket『』)
   (global-set-key (kbd "<menu> u . w") 'insert-pair-double-angle-bracket《》)
+
+  (global-set-key (kbd "<menu> u 1") "!")
+  (global-set-key (kbd "<menu> u 2") "@")
+  (global-set-key (kbd "<menu> u 3") "#") ;
+  (global-set-key (kbd "<menu> u 4") "$") ;
+  (global-set-key (kbd "<menu> u 5") "%") ;
+  (global-set-key (kbd "<menu> u 6") "^")
+  (global-set-key (kbd "<menu> u 7") "&") ;
+  (global-set-key (kbd "<menu> u 8") "*") ;
+  (global-set-key (kbd "<menu> u 9") "(") ;
+  (global-set-key (kbd "<menu> u 0") ")")
+
   (global-set-key (kbd "<menu> u 2") "¤")
   (global-set-key (kbd "<menu> u 3") "◇") ; white diamond
   (global-set-key (kbd "<menu> u 4") "◆") ; black diamond
@@ -411,11 +426,7 @@
 ;(global-unset-key (kbd "C-S-t") )       ; ergoemacs-open-last-closed
 ;(global-unset-key (kbd "C-u") )       ; universal-argument
 
-(global-set-key (kbd "M-\"") 'xah-compact-uncompact-Block)
-
-(global-set-key (kbd "M-2") 'delete-window)
-(global-set-key (kbd "M-9") 'ergoemacs-select-text-in-quote)
-(global-set-key (kbd "M-s") 'ergoemacs-toggle-letter-case)
+(load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_raw.el"))
 
 ;; (global-set-key (kbd "<backspace>") 'delete-backward-char)
 
@@ -481,60 +492,12 @@
 
 
 
-(global-set-key (kbd "M-SPC") 'set-mark-command)
-
-(global-set-key (kbd "M-g") 'backward-word)
-(global-set-key (kbd "M-r") 'forward-word)
-(global-set-key (kbd "M-h") 'backward-char)
-(global-set-key (kbd "M-n") 'forward-char)
-(global-set-key (kbd "M-t") 'next-line)
-(global-set-key (kbd "M-c") 'previous-line)
-(global-set-key (kbd "M-e") 'delete-backward-char)
-(global-set-key (kbd "M-u") 'delete-char)
-(global-set-key (kbd "M-.") 'backward-kill-word)
-(global-set-key (kbd "M-p") 'kill-word)
-(global-set-key (kbd "M-i") 'kill-line)
-(global-set-key (kbd "M-d") 'ergoemacs-beginning-of-line-or-block)
-(global-set-key (kbd "M-q") 'ergoemacs-cut-line-or-region)
-(global-set-key (kbd "M-j") 'ergoemacs-copy-line-or-region)
-(global-set-key (kbd "M-k") 'yank)
-
-;;(global-set-key (kbd "M-o") 'other-window) ;
-
-(global-set-key (kbd "M-,") 'ergoemacs-shrink-whitespaces) ;5852    0.36%  ergoemacs-shrink-whitespaces
-(global-set-key (kbd "M-'") 'ergoemacs-compact-uncompact-block) ;1037    0.06%  ergoemacs-compact-uncompact-block
-
-(global-set-key (kbd "M-6") 'ergoemacs-select-current-block) ; 3107    0.19%  ergoemacs-select-current-block
-(global-set-key (kbd "M-7") 'ergoemacs-select-current-line) ; 2526    0.16%  ergoemacs-select-current-line
-(global-set-key (kbd "M-8") 'ergoemacs-extend-selection) ; 3332    0.21%  ergoemacs-extend-selection
-(global-set-key (kbd "M-9") 'ergoemacs-select-text-in-quote) ; 4603    0.28%  ergoemacs-select-text-in-quote
-
-
-(global-set-key (kbd "M-f") 'isearch-forward)
-
-;(global-set-key (kbd "<escape>") 'keyboard-quit)
-(global-set-key (kbd "<f2>") 'ergoemacs-cut-line-or-region)
-(global-set-key (kbd "<f3>") 'ergoemacs-copy-line-or-region)
-(global-set-key (kbd "<f4>") 'yank)
-(global-set-key (kbd "<C-f4>") 'yank-pop)
-(global-set-key (kbd "<f5>") 'undo)
-(global-set-key (kbd "<C-f5>") 'redo)
-
 (global-set-key (kbd "<f11>") 'delete-other-windows)
 (global-set-key (kbd "<f12>") 'other-window); 6067    0.38%  other-window
 (global-set-key (kbd "<C-prior>") 'ergoemacs-previous-user-buffer)
 (global-set-key (kbd "<C-next>") 'ergoemacs-next-user-buffer)
 (global-set-key (kbd "<S-prior>") 'ergoemacs-previous-emacs-buffer)
 (global-set-key (kbd "<S-next>") 'ergoemacs-next-emacs-buffer)
-
-(global-set-key (kbd "<C-S-iso-lefttab>") 'ergoemacs-previous-user-buffer)
-(global-set-key (kbd "<C-tab>") 'ergoemacs-next-user-buffer)
-
-(global-set-key (kbd "C-S-t") 'ergoemacs-open-last-closed) ; 832    0.05%  ergoemacs-open-last-closed
-
-(global-set-key (kbd "C-w") 'ergoemacs-close-current-buffer) ; 19318    1.20%  ergoemacs-close-current-buffer
-(global-set-key (kbd "C-z") 'comment-dwim) ; 1214    0.08%  comment-dwim
-
 
 ;; (global-set-key (kbd "<home>") 'other-window)
 ;; (global-set-key (kbd "<end>") 'smex)
@@ -546,7 +509,6 @@
 ;(global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket) ;  14181    0.88%  ergoemacs-backward-open-bracket
 ;(global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket) ;  17177    1.07%  ergoemacs-forward-close-bracket
 
-
 ;; (global-set-key (kbd "<left>") 'backward-word) ;
 ;; (global-set-key (kbd "<right>") 'forward-word ) ;
 
@@ -557,79 +519,10 @@
 
 (delete-selection-mode 1)
 
-(defun ergoemacs-forward-open-bracket (&optional number)
-  "Move cursor to the next occurrence of left bracket or quotation mark.
+
 
-With prefix NUMBER, move forward to the next NUMBER left bracket or quotation mark.
-
-With a negative prefix NUMBER, move backward to the previous NUMBER left bracket or quotation mark."
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (ergoemacs-backward-open-bracket (- 0 number))
-    (forward-char 1)
-    (search-forward-regexp
-     (eval-when-compile
-       (regexp-opt
-        '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«"))) nil t number)
-    (backward-char 1)))
-
-(defun ergoemacs-backward-open-bracket (&optional number)
-  "Move cursor to the previous occurrence of left bracket or quotation mark.
-With prefix argument NUMBER, move backward NUMBER open brackets.
-With a negative prefix NUMBER, move forward NUMBER open brackets."
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (ergoemacs-forward-open-bracket (- 0 number))
-    (search-backward-regexp
-   (eval-when-compile
-     (regexp-opt
-      '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«"))) nil t number)))
-
-(defun ergoemacs-forward-close-bracket (&optional number)
-  "Move cursor to the next occurrence of right bracket or quotation mark.
-With a prefix argument NUMBER, move forward NUMBER closed bracket.
-With a negative prefix argument NUMBER, move backward NUMBER closed brackets."
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (ergoemacs-backward-close-bracket (- 0 number))
-    (search-forward-regexp
-     (eval-when-compile
-       (regexp-opt '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»"))) nil t number)))
-
-(defun ergoemacs-backward-close-bracket (&optional number)
-  "Move cursor to the previous occurrence of right bracket or quotation mark.
-With a prefix argument NUMBER, move backward NUMBER closed brackets.
-With a negative prefix argument NUMBER, move forward NUMBER closed brackets."
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (ergoemacs-forward-close-bracket (- 0 number))
-    (backward-char 1)
-    (search-backward-regexp
-     (eval-when-compile
-       (regexp-opt '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»"))) nil t number)
-    (forward-char 1)))
-
-(defun ergoemacs-forward-quote (&optional number)
-  "Move cursor to the next occurrence of ASCII quotation mark, single or double.
-
-With prefix NUMBER, move forward to the next NUMBER quotation mark.
-
-With a negative prefix NUMBER, move backward to the previous NUMBER quotation mark."
-  (interactive "p")
-  (if (and number (> 0 number))
-      (ergoemacs-forward-quote (- 0 number))
-    (search-forward-regexp (eval-when-compile (regexp-opt '("\"" "'"))) nil t number)
-    ))
-
-(defun ergoemacs-backward-quote (&optional number)
-  "Move cursor to the previous occurrence of ASCII quotation mark, single or double.
-With prefix argument NUMBER, move backward NUMBER quotation mark.
-With a negative prefix NUMBER, move forward NUMBER quotation mark."
-  (interactive "p")
-  (if (and number (> 0 number)) (ergoemacs-backward-quote (- 0 number))
-    (search-backward-regexp (eval-when-compile (regexp-opt '("\"" "'"))) nil t number)))
+;; ;; 2013-11-04 make emacs auto show suggestions when a prefix key is pressed
+;; (require 'guide-key)
+;; (setq guide-key/guide-key-sequence '("<menu> t" "<tab> t" ))
+;; (guide-key-mode 0)
 

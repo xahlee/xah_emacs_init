@@ -167,6 +167,10 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("windows pictures" . "/media/OS/Users/xah/Pictures/")
         ("book" . "/media/OS/Users/xah/SkyDrive/books/")
         ("css-index" . "/home/xah/web/xahlee_info/js/css_index.html")
+
+        ("perl" . "/home/xah/web/xahlee_info/perl/perl_index.html")
+        ("python" . "/home/xah/web/xahlee_info/perl-python/index.html")
+        ("ruby" . "/home/xah/web/xahlee_info/ruby/ruby_index.html")
 ) )
 
 (defun xah-open-file-fast (openCode)
@@ -396,12 +400,8 @@ default browser will be launched and opening this URL:
             (buffer-file-name)
             )
           )
-
-    (xah-clean-whitespace)
-
-    (when (buffer-modified-p )
-      (save-buffer)
-      )
+    
+    (when (buffer-modified-p ) (xah-clean-whitespace) (save-buffer) )
 
     (cond
      ((string-equal system-type "windows-nt") ; Windows

@@ -118,7 +118,7 @@
     (global-set-key (kbd "a") 'open-line) ;
     (global-set-key (kbd "b") 'ergoemacs-toggle-letter-case)
     (global-set-key (kbd "c") 'previous-line)
-    (global-set-key (kbd "d") 'ergoemacs-beginning-of-line-or-block)
+    (global-set-key (kbd "d") 'ergoemacs-beginning-of-line-or-what)
     (global-set-key (kbd "e") 'delete-backward-char) ;
     (global-set-key (kbd "f") 'isearch-forward)
     (global-set-key (kbd "g") 'backward-word)
@@ -133,14 +133,14 @@
     (global-set-key (kbd "p") 'kill-word)
     (global-set-key (kbd "q") 'ergoemacs-cut-line-or-region)
     (global-set-key (kbd "r") 'forward-word)
-    (global-set-key (kbd "s") 'ergoemacs-end-of-line-or-block) ;
+    (global-set-key (kbd "s") 'ergoemacs-end-of-line-or-what) ;
     (global-set-key (kbd "t") 'next-line)
     (global-set-key (kbd "u") 'delete-char) ;
     (global-set-key (kbd "v") 'ergoemacs-forward-close-bracket)
     (global-set-key (kbd "w") nil)
     (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)
     (global-set-key (kbd "y") 'redo)
-    (global-set-key (kbd "z") nil)
+    (global-set-key (kbd "z") 'comment-dwim)
     )
   )
 

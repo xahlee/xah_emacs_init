@@ -8,6 +8,9 @@
 
   (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
   (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
+
+  (local-set-key (kbd "<tab> <return>") 'xhm-insert-br-tag)
+  (local-set-key (kbd "<tab> -") 'xhm-insert-hr-tag)
   (local-set-key (kbd "<tab> .") 'xhm-lines-to-html-list)
   (local-set-key (kbd "<tab> '") nil)
   (local-set-key (kbd "<tab> ,") nil)
@@ -221,6 +224,8 @@ For `Info-mode-hook'."
   ;; (local-set-key (kbd "6") 'dired-up-directory)
   (define-key dired-mode-map (kbd "M-g") 'backward-word)
   (define-key dired-mode-map (kbd "M-c") 'previous-line)
+  (define-key dired-mode-map (kbd "o") 'other-window)
+
   (when (>= emacs-major-version 23)
  ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
  ;;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)

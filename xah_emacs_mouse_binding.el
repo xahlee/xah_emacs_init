@@ -33,8 +33,8 @@
   (global-set-key (kbd "<C-mouse-4>") 'ergoemacs-backward-block) ; wheel up
   (global-set-key (kbd "<C-mouse-5>") 'ergoemacs-forward-block) ; wheel down
 
-  (global-set-key (kbd "<S-mouse-4>") 'backward-word) ;
-  (global-set-key (kbd "<S-mouse-5>") 'forward-word) ;
+  (global-set-key (kbd "<S-mouse-4>") 'ergoemacs-previous-emacs-buffer) ;
+  (global-set-key (kbd "<S-mouse-5>") 'ergoemacs-next-emacs-buffer) ;
 
   (global-set-key (kbd "<M-mouse-4>") 'ergoemacs-backward-open-bracket ) ;
   (global-set-key (kbd "<M-mouse-5>") 'ergoemacs-forward-close-bracket ) ;

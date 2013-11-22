@@ -1,10 +1,7 @@
 ;; 2010-06-07
 ;; ∑ http://xahlee.org/
 
-
 ;; c:/Users/xah/web/xahlee_org/Periodic_dosage_dir/sanga_pemci/xx.html
-
-
 
 (defun youtube-string-old (video-id)
   "Return HTML code for embedding video of youtube's VIDEO-ID.
@@ -78,7 +75,7 @@ Example call:
 
     (setq ξurl (concat "http://video\.google\.com/googleplayer\.swf\?docid=" video-id "&amp;fs=true" ))
     (concat
-     "<object type=\"application/x-shockwave-flash\" data=\"" ξurl 
+     "<object type=\"application/x-shockwave-flash\" data=\"" ξurl
      "\" width=\"400\" height=\"326\"><param name=\"movie\" value=\"" ξurl "\"><param name=\"allowFullScreen\" value=\"true\"><param name=\"allowScriptAccess\" value=\"always\"></object>")
     ))
 
@@ -105,7 +102,6 @@ Example:
     (delete-region p1 p2)
     (insert (google-video-string vID)
             ) ))
-
 
 (defun dailymotion-video-string (video-id)
 	"Return HTML code for embedding video of dailymotion.com's VIDEO-ID.
@@ -147,7 +143,7 @@ http://vimeo.com/27206452
 it becomes
 
 <figure>
-<iframe src=\"http://player.vimeo.com/video/27206452?title=0&amp;byline=0&amp;portrait=0\" width=\"400\" height=\"300\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<iframe src=\"http://player.vimeo.com/video/27206452\" width=\"500\" height=\"294\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 <figcaption>
 </figcaption>
 </figure>
@@ -158,21 +154,26 @@ it becomes
     (setq p2 (line-end-position) )
     (setq inputStr (buffer-substring-no-properties p1 p2))
 
-    (string-match "http://vimeo.com/\\([0-9]\\{8\\}\\)" inputStr)
-    (setq vID (match-string 1 inputStr) )
+;; http://player.vimeo.com/video/5228616
+
+    (setq vID
+          (if (string-match "vimeo.com/video/" inputStr)
+              (progn (string-match "https*://.*vimeo.com/video/\\([0-9]+\\)" inputStr)
+                     (match-string 1 inputStr))
+            (progn (string-match "https*://vimeo.com/\\([0-9]+\\)" inputStr)
+                   (match-string 1 inputStr) ))
+          )
 
     (delete-region p1 p2)
-    (insert (concat 
+    (insert (concat
 "<figure>\n"
-"<iframe src=\"http://player.vimeo.com/video/" vID "?title=0&amp;byline=0&amp;portrait=0\" width=\"400\" height=\"300\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>\n"
+"<iframe src=\"http://player.vimeo.com/video/" vID "\" width=\"500\" height=\"294\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>\n"
 "<figcaption>
 </figcaption>
 </figure>"
 ) )
-
-(backward-char 24)
+(search-backward "</figcaption>")
  ))
-
 
 (defun tudou-video-string (video-id)
 	"Return HTML code for embedding video of tudou.com's VIDEO-ID.
@@ -245,8 +246,6 @@ Here's a example result:
       "</object>"
       )) ))
 
-
-
 ;; (defun get-current-line-or-region ()
 ;;   "Return current line or text selection if there's one."
 ;;   (interactive)
@@ -256,10 +255,9 @@ Here's a example result:
 ;;       (setq p1 (point))
 ;;       (search-forward "\n" nil t) (backward-char)
 ;;       (setq p2 (point)))
-;;     (buffer-substring-no-properties p1 p2)    
+;;     (buffer-substring-no-properties p1 p2)
 ;;     )
 ;;   )
-
 
 (defun break-video-linkify ()
   "Make the current line into a embeded HTML video object.
