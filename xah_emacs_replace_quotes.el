@@ -94,7 +94,12 @@ When called with `universal-argument', work on visible portion of whole buffer (
             (replace-match "<code>\\1</code>" t) ) ) )) )
 
 (defun code-bracket-to-html-tag (p1 p2)
-  "Replace all 「…」 to <code>…</code>.
+  "Replace all 「…」 to <code>…</code> and others.
+
+• 「…」 → <code>…</code>
+• 〔…〕 → <code class=\"path-α\">\\1</code>
+•  ‹…› → <var class=\"d\">…</var>
+• 〔<…〕 → 〔☛ <…〕
 
 Work on text selection or current text block.
 
@@ -124,21 +129,28 @@ Generate a report of the replaced strings in a separate buffer."
           (replace-match "<code>\\1</code>" t) )
 
         (goto-char (point-min))
+        (while (search-forward-regexp "‹\\([^›]+?\\)›" nil t)
+          (setq changedItems (cons (match-string 1) changedItems ) )
+          (replace-match "<var class=\"d\">\\1</var>" t) )
+
+        (goto-char (point-min))
+        (while (search-forward-regexp "〔<a href\\([^〕]+?\\)</a>〕" nil t)
+          (setq changedItems (cons (match-string 1) changedItems ) )
+          (replace-match "〔☛ <a href\\1</a>〕" t) )
+
+        (goto-char (point-min))
         (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z]+?\\)〕" nil t)
           (setq changedItems (cons (match-string 1) changedItems ) )
           (replace-match "<code class=\"path-α\">\\1</code>" t) )
+
         ) )
     
     (with-output-to-temp-buffer "*changed brackets*"
       (mapcar
        (lambda (innerText)
          (princ innerText)
-         (princ "\n")
-         )
-       changedItems)
-      )
-
-    ))
+         (princ "\n") )
+       (reverse changedItems) ) ) ))
 
 (defun title-bracket-to-html-tag (p1 p2)
   "Replace all 〈…〉 to <cite>…</cite>.

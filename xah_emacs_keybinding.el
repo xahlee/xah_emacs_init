@@ -115,11 +115,14 @@
 
 (require 'package)
 (package-initialize)
-(require 'highlight-symbol)
+
+(progn 
+(require 'highlight-symbol nil "noerror")
 (global-set-key (kbd "<f8> <f8>") 'highlight-symbol-at-point)
 (global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
 (global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
 (global-set-key (kbd "<f8> <f9>") 'highlight-symbol-query-replace)
+)
 
 (global-set-key (kbd "<f9> SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
 (global-set-key (kbd "<f9> <f6>") 'visual-line-mode)
@@ -233,7 +236,7 @@
 ;(global-set-key (kbd "<menu> j") 'kmacro-start-macro) ;  42    0.00%  kmacro-start-macro
 ;(global-set-key (kbd "<menu> k") 'kmacro-end-macro)   ; 36    0.00%  kmacro-end-macro
 (global-set-key (kbd "<menu> j") 'ergoemacs-copy-all)
-(global-set-key (kbd "<menu> k") 'kmacro-end-macro)
+(global-set-key (kbd "<menu> k") nil)
 (global-set-key (kbd "<menu> l") 'xah-clean-whitespace)
 
 (global-set-key (kbd "<menu> m") nil)
@@ -252,7 +255,7 @@
 (global-set-key (kbd "<menu> q") 'ergoemacs-cut-all)
 (global-set-key (kbd "<menu> r") nil)
 (global-set-key (kbd "<menu> r 3") 'copy-to-register-1)
-(global-set-key (kbd "<menu> r 4") 'paste-from-register-1)
+(global-set-key (kbd "<menu> r 8") 'paste-from-register-1)
 (global-set-key (kbd "<menu> r '") 'xah-replace-straight-quotes)
 (global-set-key (kbd "<menu> r ,") 'xah-remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> r .") 'xah-convert-english-chinese-punctuation)

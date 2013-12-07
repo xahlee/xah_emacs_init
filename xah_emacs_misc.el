@@ -170,7 +170,10 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
         ("perl" . "/home/xah/web/xahlee_info/perl/perl_index.html")
         ("python" . "/home/xah/web/xahlee_info/perl-python/index.html")
+        ("python3" . "/home/xah/web/xahlee_info/python/python3_basics.html")
         ("ruby" . "/home/xah/web/xahlee_info/ruby/ruby_index.html")
+        ("py2doc" . "/home/xah/web/xahlee_info/python_doc_2.7.6/index.html")
+        ("py3doc" . "/home/xah/web/xahlee_info/python_doc_3.3.3/index.html")
 ) )
 
 (defun xah-open-file-fast (openCode)
@@ -400,7 +403,7 @@ default browser will be launched and opening this URL:
             (buffer-file-name)
             )
           )
-    
+
     (when (buffer-modified-p ) (xah-clean-whitespace) (save-buffer) )
 
     (cond
@@ -529,7 +532,7 @@ When there is a text selection, act on the region."
             ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
 
             ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
- 
+
             ("rm empty" . "find . -type f -empty")
             ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
             ("rm emacs backup~" . "find . -name \"*~\" -exec rm {} ';'")
@@ -603,3 +606,26 @@ When there is a text selection, act on the region."
 ;;           (skip-chars-backward "\n\t ")
 ;;           )
 ;;       (progn (goto-char (point-min))))))
+
+(defun python-ref-linkify ()
+  "Transform current line (a file path) into a link.
+For example, this line:
+
+/home/xah/web/xahlee_info/python_doc_2.7.6/library/stdtypes.html#mapping-types-dict
+
+becomes
+
+<span class=\"ref\"><a href=\"../python_doc_2.7.6/library/stdtypes.html#mapping-types-dict\">5. Built-in Types — Python v2.7.6 documentation #mapping-types-dict</a></span>
+
+The path is relative to current file. The link text is the linked file's title, plus fragment url part, if any.
+
+Requires a python script. See code."
+  (interactive)
+  (let (scriptName bds)
+    (setq bds (bounds-of-thing-at-point 'filename) )
+    (save-excursion 
+      (setq scriptName (format "/usr/bin/python3 /home/xah/git/xahscripts/emacs_pydoc_ref_linkify.py3 %s" (buffer-file-name)) )
+      (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t)
+      )
+    ))
+

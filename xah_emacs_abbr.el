@@ -23,7 +23,7 @@
     ("ms" "Microsoft")
     ("ex" "Example:")
     ("fex" "For example:")
-
+    ("jq" "jQuery")
     ("8cat" "=(^o^)=")
 
     ("8arrows" "➵ ➙ ► ▻ ☛ ☞ 👆 👇 👈 👉 ⇰ ➛ ➜ ➝ ➞ ➟ ➠ ➢ ➣ ➤ ➥ ➦ ➧ ➨ ➲ ➺ ➻ ➼ ➽ ➾")
