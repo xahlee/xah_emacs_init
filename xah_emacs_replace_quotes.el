@@ -134,9 +134,9 @@ Generate a report of the replaced strings in a separate buffer."
           (replace-match "<var class=\"d\">\\1</var>" t) )
 
         (goto-char (point-min))
-        (while (search-forward-regexp "〔<a href\\([^〕]+?\\)</a>〕" nil t)
+        (while (search-forward-regexp "〔<a href=" nil t)
           (setq changedItems (cons (match-string 1) changedItems ) )
-          (replace-match "〔☛ <a href\\1</a>〕" t) )
+          (replace-match "〔☛ <a href=" t) )
 
         (goto-char (point-min))
         (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z]+?\\)〕" nil t)

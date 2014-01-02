@@ -527,6 +527,91 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
           )
       (progn (message (format "Cannot locate the file: 「%s」" fPath) )) ) ) )
 
+
+(defun nodejs-get-title (fName fragPart)
+  "Return the file frag part function title.
+ (nodejs-get-title \"/home/xah/web/xahlee_info/node_api/net.html\" \"#net_server_listen_port_host_backlog_callback\" )
+returns
+ \"server.listen(port, [host], [backlog], [callback])\"
+"
+  (with-temp-buffer
+    (insert-file-contents fName nil nil nil t)
+    (goto-char 1)
+    (if (string= fragPart "")
+        (progn
+          (search-forward "<div id=\"apicontent\">")
+          (if (search-forward "<h1>" nil "NOERROR")
+              (progn (buffer-substring-no-properties
+                      (point)
+                      (-  (search-forward "<span>") 6)) )
+            (progn 
+              (goto-char 1)
+              (buffer-substring-no-properties
+               (search-forward "<title>")
+               (- (search-forward "</title>") 8)) ) ) )
+      (progn
+        (search-forward fragPart)
+        (buffer-substring-no-properties
+         (search-forward "\">")
+         (-  (search-forward "</a>") 4))  )
+      ) ))
+
+(defun nodejs-ref-linkify ()
+  "Make the path under cursor into a HTML link for xah site.
+
+For Example, if you cursor is on the text “../emacs/emacs.html”,
+then it'll become:
+“<a href=\"../emacs/emacs.html\">Xah's Emacs Tutorial</a>”.
+The link text is pulled from the file's <h1> tag.
+
+If there is text selection, use it as file path.
+
+The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath'.
+
+sample
+file:///home/xah/web/xahlee_info/node_api/process.html#process_process_execpath
+
+file:///home/xah/web/xahlee_info/node_api/process.html#process_process_execpath
+
+<span class=\"ref\"><a href=\"../node_api/process.html#process_process_execpath\">Node doc process.execpath</a></span>
+
+linkText
+
+"
+  (interactive)
+  (let* (
+         (bds (get-selection-or-unit 'filepath))
+         (inputStr (elt bds 0) )
+         (p1 (aref bds 1) )
+         (p2 (aref bds 2) )
+         (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
+         (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
+
+         (temp87318 (split-uri-hashmark inputStr) )
+         (urlMainPart (elt temp87318 0) )
+         (urlFragPart (elt temp87318 1) )
+         (fPath (xahsite-web-path-to-filepath urlMainPart default-directory) )
+         rltvPath titleText resultStr
+         )
+
+    (if (file-exists-p fPath)
+        (progn
+          (setq titleText (concat "⬢ " (nodejs-get-title fPath urlFragPart) ))
+          (setq resultStr
+                (if (string-equal
+                     (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
+                     (xahsite-get-domain-of-local-file-path fPath)
+                     )
+                    (progn
+                      (setq rltvPath (file-relative-name fPath currentBufferFileDir))
+                      (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" rltvPath urlFragPart titleText))
+                  (progn
+                    (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url fPath) urlFragPart titleText)) ) )
+          (delete-region p1 p2)
+          (insert resultStr)
+          )
+      (progn (message (format "Cannot locate the file: 「%s」" fPath) )) ) ) )
+
 (defun javascript-linkify ()
   "Make the path under cursor into a HTML link.
  ⁖ <script src=\"xyz.js\"></script>
@@ -626,6 +711,8 @@ If there is text selection, use it as input."
      ((and (string-match-p "\\`http://wordy-english\.blogspot\.com/" myPath)) (blogger-linkify))
      ((and (string-match-p "www\.amazon\.com/" myPath)) (amazon-linkify))
      ((and (string-match-p "www\.youtube\.com/watch" myPath)) (youtube-linkify))
+     ((and (string-match-p "/emacs_manual/" myPath)) (emacs-ref-linkify))
+     ((and (string-match-p "/node_api/" myPath)) (nodejs-ref-linkify))
      ((and (string-match-p "\\.js\\'" myPath)) (javascript-linkify))
      ((and (string-match-p "\\.css\\'" myPath)) (css-linkify))
 

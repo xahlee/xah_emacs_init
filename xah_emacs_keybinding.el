@@ -100,7 +100,7 @@
   (define-key help-map (kbd "h") nil) ; view-hello-file
   )
 
-(global-set-key (kbd "<XF86Launch8>") 'set-mark-command)
+(global-set-key (kbd "<XF86Launch8>") 'universal-argument)
 
 (global-set-key (kbd "<tab>") nil)
 (global-set-key (kbd "<tab> <tab>") 'yas/expand)

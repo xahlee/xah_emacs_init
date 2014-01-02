@@ -174,6 +174,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("ruby" . "/home/xah/web/xahlee_info/ruby/ruby_index.html")
         ("py2doc" . "/home/xah/web/xahlee_info/python_doc_2.7.6/index.html")
         ("py3doc" . "/home/xah/web/xahlee_info/python_doc_3.3.3/index.html")
+
+        ("unicode" . "/home/xah/web/xahlee_info/comp/unicode_6_emoticons_list.html")
 ) )
 
 (defun xah-open-file-fast (openCode)
@@ -624,8 +626,20 @@ Requires a python script. See code."
   (let (scriptName bds)
     (setq bds (bounds-of-thing-at-point 'filename) )
     (save-excursion 
-      (setq scriptName (format "/usr/bin/python3 /home/xah/git/xahscripts/emacs_pydoc_ref_linkify.py3 %s" (buffer-file-name)) )
+      (setq scriptName (format "/usr/bin/python3 /home/xah/git/xahscripts/emacs_pydoc_ref_linkify.py3.py %s" (buffer-file-name)) )
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t)
+      )
+    ))
+
+(defun xah-decode-uri (p1 p2)
+  "percent decode uri for text selection
+
+Requires a node.js script. See code."
+  (interactive "r")
+  (let (scriptName)
+    (save-excursion 
+      (setq scriptName (concat "/usr/bin/node /home/xah/git/xahscripts/emacs_uri_decode.js") )
+      (shell-command-on-region p1 p2 scriptName nil "REPLACE" nil t)
       )
     ))
 

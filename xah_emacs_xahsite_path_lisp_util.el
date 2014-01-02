@@ -341,20 +341,22 @@ See also `split-uri-hashmark'"
 
 (defun split-uri-hashmark ( ξhref-value)
   "Split a URL ξhref-value by 「#」 char, return a vector.
-e.g. x/y.html#z ⇒ {x/y.html, #z}
+ e.g. \"y.html#z\" ⇒ [\"y.html\", \"#z\"]
 
 Examples:
- “a#b” ⇒ “a” “#b”
- “#” ⇒ “” “#”
- “#3” ⇒ “” “#3”
- “3#” ⇒ “3” “#”
+ 「a#b」 ⇒ 「a」 「#b」
+ 「#」 ⇒ 「」 「#」
+ 「#3」 ⇒ 「」 「#3」
+ 「3#」 ⇒ 「3」 「#」
+ 「4」 ⇒  「4」 「」
+ 「」 ⇒  「」 「」
 
 See also: `remove-uri-fragment'"
   ;; test
   ;; (split-uri-hashmark "a#b") ; ["a" "#b"]
   ;; (split-uri-hashmark "#3")  ; ["" "#3"]
-  ;; (split-uri-hashmark "4")  ; ["4" ""]
   ;; (split-uri-hashmark "#")   ; ["" "#"]
+  ;; (split-uri-hashmark "4")  ; ["4" ""]
   ;; (split-uri-hashmark "")  ; ["" ""]
   (let ((ξx (string-match-p "#" ξhref-value )) )
     (if ξx

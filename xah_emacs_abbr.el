@@ -363,7 +363,12 @@ Second Life: Xah Toll
 ")
 
 ;; xah url
-("8xs" " Xah ∑ http://xahlee.org/")
+("8xs" " Xah Lee
+ xahlee@gmail.com
+ 408 470 0213
+ http://xahlee.org/
+ US citizen.
+ Mountain View, CA.")
 
 ("8uee" "http://ergoemacs.org/")
 ("8uwe" "http://wordyenglish.com/")
@@ -384,6 +389,13 @@ Second Life: Xah Toll
 ("8uahk" "http://xahlee.info/mswin/autohotkey.html")
 ("8ueek" "http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html")
 ("8uhtml" "http://xahlee.info/js/index.html")
+
+("8ulang" "<a href=\"../java-a-day/java.html\">Java</a>
+<a href=\"../python/python3_basics.html\">Python</a>
+<a href=\"../ruby/ruby_basics.html\">Ruby</a>
+<a href=\"../perl-python/perl_basics.html\">Perl</a>
+<a href=\"../php/php_basics.html\">PHP</a>
+<a href=\"http://ergoemacs.org/emacs/elisp.html\">Emacs Lisp</a>")
 
 ("8uapache" "http://xahlee.info/linux/apache_tutorial.html")
 ("8uperl" "http://xahlee.info/perl-python/perl_basics.html")
