@@ -12,12 +12,6 @@
 ;; hog emacs down when you happened to open a large file with thousands of lines
 (global-linum-mode 0)
 
-;; (progn 
-;;   (setq ergoemacs-mode-used "5.8.0")
-;;   (setq ergoemacs-variant nil)
-;;   (setq ergoemacs-repeat-movement-commands 'nil)
-;;   )
-
 (setq sentence-end-double-space nil )
 
 ;; (setq auto-save-default t)

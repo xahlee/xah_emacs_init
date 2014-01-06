@@ -17,7 +17,7 @@
 ;; set the “forward button” (5th button) to close.
 (cond
  ((string-equal system-type "windows-nt") ; Windows
-  (global-set-key (kbd "<mouse-5>") 'ergoemacs-close-current-buffer)
+  (global-set-key (kbd "<mouse-5>") 'xah-close-current-buffer)
 
   (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase) ; control+shift wheel up
   (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease) ; control+shift wheel down
@@ -25,19 +25,19 @@
   )
 
  ((string-equal system-type "gnu/linux")
-  (global-set-key (kbd "<mouse-9>") 'ergoemacs-close-current-buffer) ; next page button
+  (global-set-key (kbd "<mouse-9>") 'xah-close-current-buffer) ; next page button
 
   (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
   (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
 
-  (global-set-key (kbd "<C-mouse-4>") 'ergoemacs-backward-block) ; wheel up
-  (global-set-key (kbd "<C-mouse-5>") 'ergoemacs-forward-block) ; wheel down
+  (global-set-key (kbd "<C-mouse-4>") 'xah-backward-block) ; wheel up
+  (global-set-key (kbd "<C-mouse-5>") 'xah-forward-block) ; wheel down
 
-  (global-set-key (kbd "<S-mouse-4>") 'ergoemacs-previous-emacs-buffer) ;
-  (global-set-key (kbd "<S-mouse-5>") 'ergoemacs-next-emacs-buffer) ;
+  (global-set-key (kbd "<S-mouse-4>") 'xah-previous-emacs-buffer) ;
+  (global-set-key (kbd "<S-mouse-5>") 'xah-next-emacs-buffer) ;
 
-  (global-set-key (kbd "<M-mouse-4>") 'ergoemacs-backward-open-bracket ) ;
-  (global-set-key (kbd "<M-mouse-5>") 'ergoemacs-forward-close-bracket ) ;
+  (global-set-key (kbd "<M-mouse-4>") 'xah-backward-open-bracket ) ;
+  (global-set-key (kbd "<M-mouse-5>") 'xah-forward-close-bracket ) ;
 
   (global-set-key (kbd "<C-S-mouse-4>") 'text-scale-increase) ;
   (global-set-key (kbd "<C-S-mouse-5>") 'text-scale-decrease) ;
@@ -45,7 +45,7 @@
   )
 
  ((string-equal system-type "darwin") ; Mac
-  (global-set-key (kbd "<mouse-5>") 'ergoemacs-close-current-buffer) ) )
+  (global-set-key (kbd "<mouse-5>") 'xah-close-current-buffer) ) )
 
 (defun scroll-up-10-lines ()
   "Scroll up 10 lines"

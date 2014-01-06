@@ -6,12 +6,12 @@
 
 
 
-(global-set-key (kbd "<kp-subtract>") 'ergoemacs-close-current-buffer)
-(global-set-key (kbd "<kp-divide>") 'ergoemacs-previous-user-buffer)
-(global-set-key (kbd "<kp-multiply>") 'ergoemacs-next-user-buffer)
+(global-set-key (kbd "<kp-subtract>") 'xah-close-current-buffer)
+(global-set-key (kbd "<kp-divide>") 'xah-previous-user-buffer)
+(global-set-key (kbd "<kp-multiply>") 'xah-next-user-buffer)
 
-(global-set-key (kbd "<C-kp-divide>") 'ergoemacs-previous-emacs-buffer)
-(global-set-key (kbd "<C-kp-multiply>") 'ergoemacs-next-emacs-buffer)
+(global-set-key (kbd "<C-kp-divide>") 'xah-previous-emacs-buffer)
+(global-set-key (kbd "<C-kp-multiply>") 'xah-next-emacs-buffer)
 
 
 (global-set-key (kbd "<kp-next>") 'other-window)

@@ -39,17 +39,7 @@
 
 ;; (global-set-key (kbd "<delete>") 'set-mark-command)
 
-;; in linux, by default the left Windows logo key is “super” with syntax 「s-」
-;; on Microsoft Windows, the left Windows logo key is <lwindow>
-;; Linux, the menu/apps key syntax is <menu>
-;; Windows, the menu/apps key syntax is <apps>
-
-(global-set-key (kbd "]") 'ergoemacs-close-current-buffer)
-;; (global-set-key (kbd "<f8>") 'ergoemacs-switch-to-next-frame)
-;; (global-set-key (kbd "<f9>") 'split-window-vertically)
-;; (global-set-key (kbd "<f9>") 'delete-other-windows)
-;(global-set-key (kbd "<f9>") 'ergoemacs-move-cursor-next-pane)
-;; (global-set-key (kbd "<f10>") 'split-window-vertically)
+(global-set-key (kbd "]") 'xah-close-current-buffer)
 
 (global-set-key (kbd "<M-backspace>") nil) ;need to set this to something useful
 
@@ -95,7 +85,7 @@
   (define-key help-map (kbd "9") 'lookup-word-definition)
   (define-key help-map (kbd "0") 'lookup-all-dictionaries)
   (define-key help-map (kbd "`") 'elisp-index-search)
-  (define-key help-map (kbd "m") 'ergoemacs-describe-major-mode)
+  (define-key help-map (kbd "m") 'xah-describe-major-mode)
   (define-key help-map (kbd "o") nil)  ; ergoemacs-where-is-old-binding
   (define-key help-map (kbd "h") nil) ; view-hello-file
   )
@@ -110,8 +100,8 @@
 (global-set-key (kbd "<menu> <backspace>") 'delete-cut-text-block)
 (global-set-key (kbd "<menu> <tab>") 'indent-region)
 
-(global-set-key (kbd "<menu> <f2>") 'ergoemacs-cut-all)
-(global-set-key (kbd "<menu> <f3>") 'ergoemacs-copy-all)
+(global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
+(global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 
 (require 'package)
 (package-initialize)
@@ -214,7 +204,7 @@
   (global-set-key (kbd "<menu> h k") 'describe-key)
   (global-set-key (kbd "<menu> h l") 'view-lossage)
   (global-set-key (kbd "<menu> h L") 'describe-language-environment)
-  (global-set-key (kbd "<menu> h m") 'ergoemacs-describe-major-mode)
+  (global-set-key (kbd "<menu> h m") 'xah-describe-major-mode)
   (global-set-key (kbd "<menu> h n") 'view-emacs-news)
   (global-set-key (kbd "<menu> h p") 'finder-by-keyword)
   (global-set-key (kbd "<menu> h r") 'info-emacs-manual)
@@ -235,7 +225,7 @@
 
 ;(global-set-key (kbd "<menu> j") 'kmacro-start-macro) ;  42    0.00%  kmacro-start-macro
 ;(global-set-key (kbd "<menu> k") 'kmacro-end-macro)   ; 36    0.00%  kmacro-end-macro
-(global-set-key (kbd "<menu> j") 'ergoemacs-copy-all)
+(global-set-key (kbd "<menu> j") 'xah-copy-all)
 (global-set-key (kbd "<menu> k") nil)
 (global-set-key (kbd "<menu> l") 'xah-clean-whitespace)
 
@@ -248,11 +238,11 @@
 (global-set-key (kbd "<menu> o h") 'recentf-open-files) ;  333    0.02%  recentf-open-files
 (global-set-key (kbd "<menu> o t") 'ido-switch-buffer)  ; 33    0.00%  ido-switch-buffer
 
-(global-set-key (kbd "<menu> o d") 'ergoemacs-open-in-desktop) ; 325    0.02%  ergoemacs-open-in-desktop
+(global-set-key (kbd "<menu> o d") 'xah-open-in-desktop) ; 325    0.02%  xah-open-in-desktop
 
 (global-set-key (kbd "<menu> p") 'query-replace) ; 2746    0.17%  query-replace
 
-(global-set-key (kbd "<menu> q") 'ergoemacs-cut-all)
+(global-set-key (kbd "<menu> q") 'xah-cut-all)
 (global-set-key (kbd "<menu> r") nil)
 (global-set-key (kbd "<menu> r 3") 'copy-to-register-1)
 (global-set-key (kbd "<menu> r 8") 'paste-from-register-1)
@@ -270,9 +260,9 @@
 (progn
   (global-set-key (kbd "<menu> t") nil)
   (global-set-key (kbd "<menu> t 2") 'make-frame-command) ;
-  (global-set-key (kbd "<menu> t 3") 'ergoemacs-new-empty-buffer) ;  1700    0.11%  ergoemacs-new-empty-buffer
+  (global-set-key (kbd "<menu> t 3") 'xah-new-empty-buffer) ;  1700    0.11%  xah-new-empty-buffer
   (global-set-key (kbd "<menu> t 4") 'ido-find-file)         ; open. 765    0.05%  ido-find-file
-  (global-set-key (kbd "<menu> t 6") 'ergoemacs-open-in-external-app) ; 0.00%  ergoemacs-open-in-external-app
+  (global-set-key (kbd "<menu> t 6") 'xah-open-in-external-app) ; 0.00%  xah-open-in-external-app
   (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
@@ -348,7 +338,7 @@
 
 ;; special keys
 
-(global-set-key (kbd "<insert>") 'ergoemacs-switch-to-next-frame)
+(global-set-key (kbd "<insert>") 'xah-switch-to-next-frame)
 
 
 ;;;; misc
@@ -426,15 +416,16 @@
 ;(global-unset-key (kbd "M-%") )
 ;(global-unset-key (kbd "M-l") )         ; recenter-top-bottom
 ;(global-unset-key (kbd "M-0") )         ; delete-window
-;(global-unset-key (kbd "C-S-t") )       ; ergoemacs-open-last-closed
+;(global-unset-key (kbd "C-S-t") )       ; xah-open-last-closed
 ;(global-unset-key (kbd "C-u") )       ; universal-argument
 
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_raw.el"))
+(load (fullpath-relative-to-current-file "xah_emacs_keybinding_functions.el"))
 
 ;; (global-set-key (kbd "<backspace>") 'delete-backward-char)
 
-(global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ; page up
-(global-set-key (kbd "<next>") 'ergoemacs-forward-block) ; page down
+(global-set-key (kbd "<prior>") 'xah-backward-block) ; page up
+(global-set-key (kbd "<next>") 'xah-forward-block) ; page down
 
 (global-set-key (kbd "<S-prior>") 'scroll-down) ; page up
 (global-set-key (kbd "<S-next>") 'scroll-up) ; page down
@@ -486,8 +477,8 @@
 
 ;; (global-set-key (kbd "<right>") 'forward-word)
 ;; (global-set-key (kbd "<left>") 'backward-word)
-;; (global-set-key (kbd "<up>") 'ergoemacs-backward-block)
-;; (global-set-key (kbd "<down>") 'ergoemacs-forward-block)
+;; (global-set-key (kbd "<up>") 'xah-backward-block)
+;; (global-set-key (kbd "<down>") 'xah-forward-block)
 
 ;; (global-set-key (kbd "M-2") nil)
 ;; (global-set-key (kbd "M-3") nil)
@@ -497,20 +488,20 @@
 
 (global-set-key (kbd "<f11>") 'delete-other-windows)
 (global-set-key (kbd "<f12>") 'other-window); 6067    0.38%  other-window
-(global-set-key (kbd "<C-prior>") 'ergoemacs-previous-user-buffer)
-(global-set-key (kbd "<C-next>") 'ergoemacs-next-user-buffer)
-(global-set-key (kbd "<S-prior>") 'ergoemacs-previous-emacs-buffer)
-(global-set-key (kbd "<S-next>") 'ergoemacs-next-emacs-buffer)
+(global-set-key (kbd "<C-prior>") 'xah-previous-user-buffer)
+(global-set-key (kbd "<C-next>") 'xah-next-user-buffer)
+(global-set-key (kbd "<S-prior>") 'xah-previous-emacs-buffer)
+(global-set-key (kbd "<S-next>") 'xah-next-emacs-buffer)
 
 ;; (global-set-key (kbd "<home>") 'other-window)
 ;; (global-set-key (kbd "<end>") 'smex)
 ;; (global-set-key (kbd "<prior>") 'split-window-below) ;  2735    0.17%  split-window-vertically
 ;; (global-set-key (kbd "<next>") 'delete-other-windows) ;  4996    0.31%  delete-other-windows
 
-(global-set-key (kbd "<prior>") 'ergoemacs-backward-block) ;  93862    5.83%  ergoemacs-backward-block
-(global-set-key (kbd "<next>") 'ergoemacs-forward-block)    ;  80008    4.97%  ergoemacs-forward-block
-;(global-set-key (kbd "<home>") 'ergoemacs-backward-open-bracket) ;  14181    0.88%  ergoemacs-backward-open-bracket
-;(global-set-key (kbd "<end>") 'ergoemacs-forward-close-bracket) ;  17177    1.07%  ergoemacs-forward-close-bracket
+(global-set-key (kbd "<prior>") 'xah-backward-block) ;  93862    5.83%  xah-backward-block
+(global-set-key (kbd "<next>") 'xah-forward-block)    ;  80008    4.97%  xah-forward-block
+;(global-set-key (kbd "<home>") 'xah-backward-open-bracket) ;  14181    0.88%  xah-backward-open-bracket
+;(global-set-key (kbd "<end>") 'xah-forward-close-bracket) ;  17177    1.07%  xah-forward-close-bracket
 
 ;; (global-set-key (kbd "<left>") 'backward-word) ;
 ;; (global-set-key (kbd "<right>") 'forward-word ) ;

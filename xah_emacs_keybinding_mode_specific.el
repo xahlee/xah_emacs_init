@@ -158,8 +158,8 @@ For `isearch-mode-hook'."
   (define-key comint-mode-map (kbd "M-.") 'backward-kill-word)
   (define-key comint-mode-map (kbd "M-p") 'kill-word)
   (define-key comint-mode-map (kbd "M-d") 'move-beginning-of-line)
-  (define-key comint-mode-map (kbd "M-q") 'ergoemacs-cut-line-or-region)
-  (define-key comint-mode-map (kbd "M-j") 'ergoemacs-copy-line-or-region)
+  (define-key comint-mode-map (kbd "M-q") 'xah-cut-line-or-region)
+  (define-key comint-mode-map (kbd "M-j") 'xah-copy-line-or-region)
   (define-key comint-mode-map (kbd "M-k") 'yank)
   )
 (add-hook 'comint-mode-hook 'xah-comint-keys )
@@ -176,8 +176,8 @@ For `isearch-mode-hook'."
   (define-key minibuffer-local-map (kbd "M-.") 'backward-kill-word)
   (define-key minibuffer-local-map (kbd "M-p") 'kill-word)
   (define-key minibuffer-local-map (kbd "M-d") 'move-beginning-of-line)
-  (define-key minibuffer-local-map (kbd "M-q") 'ergoemacs-cut-line-or-region)
-  (define-key minibuffer-local-map (kbd "M-j") 'ergoemacs-copy-line-or-region)
+  (define-key minibuffer-local-map (kbd "M-q") 'xah-cut-line-or-region)
+  (define-key minibuffer-local-map (kbd "M-j") 'xah-copy-line-or-region)
   (define-key minibuffer-local-map (kbd "M-k") 'yank)
 
 ;; add back some bindings for commands whose binding we displaced
