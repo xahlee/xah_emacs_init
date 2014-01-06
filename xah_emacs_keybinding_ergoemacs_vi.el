@@ -93,7 +93,7 @@
     (global-set-key (kbd "\\") 'xah-escape-quotes)
     (global-set-key (kbd "`") nil)
     (global-set-key (kbd ".") 'backward-kill-word)
-    (global-set-key (kbd "'") 'compact-uncompact-block) ;
+    (global-set-key (kbd "'") 'xah-compact-uncompact-block) ;
     (global-set-key (kbd ",") 'xah-shrink-whitespaces) ;
     (global-set-key (kbd "-") nil)
     (global-set-key (kbd "/") nil)

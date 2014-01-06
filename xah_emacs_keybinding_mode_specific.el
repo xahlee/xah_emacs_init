@@ -212,14 +212,9 @@ For `Info-mode-hook'."
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
-
 (progn 
   (require 'dired )
-;;  (define-key dired-mode-map (kbd "<return>") 'dired-find-alternate-file) ; was dired-advertised-find-file
-  (define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
 
-  ;;  (define-key dired-mode-map (kbd "<return>") 'dired-find-alternate-file) ; was dired-advertised-find-file
-  ;;  (define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file ".."))) ; was dired-up-directory
   ;; (define-key dired-mode-map (kbd "M-$") nil) ; was dired-up-directory
   ;; (local-set-key (kbd "6") 'dired-up-directory)
   (define-key dired-mode-map (kbd "M-g") 'backward-word)
