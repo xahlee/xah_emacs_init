@@ -61,6 +61,9 @@ Add today's date to the byline tag of current file, also delete the last one if 
         (search-backward "</div>")
         (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
         (search-backward "<time>")
+
+        (replace-pairs-region (line-beginning-position) (line-end-position) 
+                              [ ["…, , " "…, "] ])
         ) ) ))
 
 (defun xahsite-update-page-tag-old (p1 p2)
