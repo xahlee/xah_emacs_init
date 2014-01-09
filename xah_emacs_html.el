@@ -65,8 +65,10 @@ Add today's date to the byline tag of current file, also delete the last one if 
         (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
 
         ;; remove repeated comma separator
-        (replace-pairs-region p1 (line-end-position) [ ["…, , " "…, "] ])
+        (replace-pairs-region p1 (line-end-position) [ [", , " ", "] ])
+        (replace-pairs-region p1 (line-end-position) [ ["</time>, <time>" "</time>, …, <time>"] ])
 
+        (search-backward "<time>")
         ) ) )
 
 (defun xahsite-update-page-tag-old (p1 p2)

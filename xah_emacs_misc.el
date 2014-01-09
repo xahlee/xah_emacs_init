@@ -626,7 +626,7 @@ Requires a python script. See code."
   (let (scriptName bds)
     (setq bds (bounds-of-thing-at-point 'filename) )
     (save-excursion 
-      (setq scriptName (format "/usr/bin/python3 /home/xah/git/xahscripts/emacs_pydoc_ref_linkify.py3.py %s" (buffer-file-name)) )
+      (setq scriptName (format "/usr/bin/python3 /home/xah/git/xahscripts/emacs_pydoc_ref_linkify.py3 %s" (buffer-file-name)) )
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t)
       )
     ))
