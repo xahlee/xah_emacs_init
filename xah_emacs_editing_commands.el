@@ -5,7 +5,7 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(defun copy-file-path (&optional dirPathOnly-p)
+(defun xah-copy-file-path (&optional dirPathOnly-p)
   "Copy the current buffer's file path or dired path to `kill-ring'.
 If `universal-argument' is called, copy only the dir path."
   (interactive "P")
@@ -21,7 +21,7 @@ If `universal-argument' is called, copy only the dir path."
        )))
   (message "File path copied.") )
 
-(defun delete-cut-text-block ()
+(defun xah-delete-cut-text-block ()
   "delete the current text block (paragraph) and also put it to `kill-ring'."
   (interactive)
   (let (p1 p2)
@@ -37,9 +37,9 @@ If `universal-argument' is called, copy only the dir path."
     (kill-region p1 p2)
     (delete-blank-lines) ))
 
-(defun copy-to-register-1 ()
+(defun xah-copy-to-register-1 ()
   "Copy current line or text selection to register 1.
-See also: `paste-from-register-1', `copy-to-register'."
+See also: `xah-paste-from-register-1', `copy-to-register'."
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'line ))
@@ -51,16 +51,16 @@ See also: `paste-from-register-1', `copy-to-register'."
     (message "copied to register 1: 「%s」." inputStr)
 ))
 
-(defun paste-from-register-1 ()
+(defun xah-paste-from-register-1 ()
   "Paste text from register 1.
-See also: `copy-to-register-1', `insert-register'."
+See also: `xah-copy-to-register-1', `insert-register'."
   (interactive)
   (when (region-active-p)
     (delete-region (region-beginning) (region-end) )
     )
   (insert-register ?1 t))
 
-(defun compact-parens ()
+(defun xah-compact-parens ()
   "Removing white spaces in ending parenthesises.
 Removes white space from cursor point to end of code block (\n\n).
 Or, act on a text selection.
@@ -240,7 +240,7 @@ Requires ImageMagick shell tool."
 
 
 
-(defun copy-rectangle-to-clipboard (p1 p2)
+(defun xah-copy-rectangle-to-clipboard (p1 p2)
   "Copy region as column (rectangle) to operating system's clipboard.
 This command will also put the text in register 0.
 

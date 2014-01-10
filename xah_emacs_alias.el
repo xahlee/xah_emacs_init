@@ -41,5 +41,5 @@
 
 (defalias 'ft 'fix-datetimestamp)
 (defalias 'wc 'count-words-region-or-line)
-;; (defalias 'cp 'copy-to-register-1)
+;; (defalias 'cp 'xah-copy-to-register-1)
 ;; (defalias 'pt 'insert-register-content-1)

@@ -97,7 +97,7 @@
 
 (global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
 ;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
-(global-set-key (kbd "<menu> <backspace>") 'delete-cut-text-block)
+(global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
 (global-set-key (kbd "<menu> <tab>") 'indent-region)
 
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
@@ -170,7 +170,7 @@
 
 (global-set-key (kbd "<menu> e") nil) ;
 
- (global-set-key (kbd "<menu> f") 'copy-file-path) ;  2041    0.13%  copy-file-path
+ (global-set-key (kbd "<menu> f") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
 
 ; ~/git/xah_emacs_init/xah_emacs_keybinding_shift_switch.el
 (global-set-key (kbd "<menu> g") 'list-matching-lines) ; 432    0.03%  list-matching-lines
@@ -244,8 +244,8 @@
 
 (global-set-key (kbd "<menu> q") 'xah-cut-all)
 (global-set-key (kbd "<menu> r") nil)
-(global-set-key (kbd "<menu> r 3") 'copy-to-register-1)
-(global-set-key (kbd "<menu> r 8") 'paste-from-register-1)
+(global-set-key (kbd "<menu> r 3") 'xah-copy-to-register-1)
+(global-set-key (kbd "<menu> r 8") 'xah-paste-from-register-1)
 (global-set-key (kbd "<menu> r '") 'xah-replace-straight-quotes)
 (global-set-key (kbd "<menu> r ,") 'xah-remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> r .") 'xah-convert-english-chinese-punctuation)
