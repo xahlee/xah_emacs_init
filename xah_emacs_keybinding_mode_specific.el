@@ -9,6 +9,7 @@
   (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
   (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
 
+
   (local-set-key (kbd "<tab> <backspace>") 'xhm-remove-html-tags)
   (local-set-key (kbd "<tab> <return>") 'xhm-insert-br-tag)
   (local-set-key (kbd "<tab> -") 'xhm-insert-hr-tag)
@@ -20,7 +21,7 @@
   (local-set-key (kbd "<tab> 3") 'xhm-update-title)
   (local-set-key (kbd "<tab> 4") 'xahsite-update-article-timestamp)
   (local-set-key (kbd "<tab> 5") 'mark-unicode)
-  (local-set-key (kbd "<tab> 5") 'nil)
+  (local-set-key (kbd "<tab> 6") 'xhm-html-to-text)
   (local-set-key (kbd "<tab> 7") 'xhm-htmlize-or-de-precode)
   (local-set-key (kbd "<tab> 8") 'xhm-get-precode-make-new-file)
   (local-set-key (kbd "<tab> a") 'xwe-annotate)

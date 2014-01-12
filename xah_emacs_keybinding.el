@@ -332,7 +332,7 @@
 (global-set-key (kbd "<menu> v") nil)
 (global-set-key (kbd "<menu> w") 'widen)
 (global-set-key (kbd "<menu> x") ctl-x-map)
-(global-set-key (kbd "<menu> y") 'universal-argument) ; ★★
+(global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> z") 'xc-comment-smart) ; 385    0.02%  xc-comment-smart
 
 

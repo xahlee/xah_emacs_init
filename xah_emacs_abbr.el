@@ -203,6 +203,7 @@
     ("8gcd" "googlecode")
     ("8ff" "Firefox")
     ("8sl" "Second Life")
+    ("8lsl" "Linden Scripting Language")
     ("8ll" "Linden Labs")
     ("8fb" "Facebook")
     ("8ahk" "AutoHotkey")
