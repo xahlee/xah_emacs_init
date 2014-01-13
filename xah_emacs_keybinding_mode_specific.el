@@ -144,6 +144,9 @@ For `isearch-mode-hook'."
   (define-key isearch-mode-map (kbd "<f12>") 'isearch-repeat-forward)
   (define-key isearch-mode-map (kbd "<f11>") 'isearch-repeat-backward)
 ;  (define-key isearch-mode-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+
+  (define-key isearch-mode-map (kbd "<next>") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "<prior>") 'isearch-repeat-backward)
   )
 (add-hook 'isearch-mode-hook 'xah-isearch-mode-keys )
 

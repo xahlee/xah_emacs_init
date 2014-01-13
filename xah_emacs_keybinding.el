@@ -24,8 +24,14 @@
 ;; Xah Lee
 ;; created: 2007-06.
 
+
 
-;; generic
+
+(require 'package)
+(package-initialize)
+(require 'highlight-symbol nil "noerror")
+
+;; generic
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
 (define-key key-translation-map (kbd "C-t") (kbd "<menu>"))  ; useful when in terminal or Mac
@@ -77,42 +83,7 @@
 ; 【e】 【u】 C-x   【i】  | 【d】 C-h 【h】 C-c 【t】
 ;                                 【m】 commit
 
-(progn
-  (define-key help-map (kbd "c") 'describe-char)
-  (define-key help-map (kbd "3") 'man)
-  (define-key help-map (kbd "7") 'lookup-google)
-  (define-key help-map (kbd "8") 'lookup-wikipedia)
-  (define-key help-map (kbd "9") 'lookup-word-definition)
-  (define-key help-map (kbd "0") 'lookup-all-dictionaries)
-  (define-key help-map (kbd "`") 'elisp-index-search)
-  (define-key help-map (kbd "m") 'xah-describe-major-mode)
-  (define-key help-map (kbd "o") nil)  ; ergoemacs-where-is-old-binding
-  (define-key help-map (kbd "h") nil) ; view-hello-file
-  )
-
-(global-set-key (kbd "<XF86Launch8>") 'universal-argument)
-
-(global-set-key (kbd "<tab>") nil)
-(global-set-key (kbd "<tab> <tab>") 'yas/expand)
-
-(global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
-;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
-(global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
-(global-set-key (kbd "<menu> <tab>") 'indent-region)
-
-(global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
-(global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
-
-(require 'package)
-(package-initialize)
-
-(progn 
-(require 'highlight-symbol nil "noerror")
-(global-set-key (kbd "<f8> <f8>") 'highlight-symbol-at-point)
-(global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
-(global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
-(global-set-key (kbd "<f8> <f9>") 'highlight-symbol-query-replace)
-)
+(global-set-key (kbd "<tab>") nil)      ; mode specific
 
 (global-set-key (kbd "<f9> SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
 (global-set-key (kbd "<f9> <f6>") 'visual-line-mode)
@@ -136,11 +107,26 @@
 
 (global-set-key (kbd "<f9> <return>") 'run-current-file) ;  1494    0.09%  run-current-file
 
+(global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
+;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
+(global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
+(global-set-key (kbd "<menu> <tab>") 'indent-region)
+
+(global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
+(global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
+
+(progn 
+(global-set-key (kbd "<menu> <f8>") 'highlight-symbol-at-point)
+(global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
+(global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
+(global-set-key (kbd "<menu> <f9>") 'highlight-symbol-query-replace)
+)
+
 ;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
 
 ;xah-cycle-camel-style-case
 
-(global-set-key (kbd "<menu> .") nil)
+(global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> '") nil) ;
 (global-set-key (kbd "<menu> ,") nil) ;
 
@@ -332,7 +318,7 @@
 (global-set-key (kbd "<menu> v") nil)
 (global-set-key (kbd "<menu> w") 'widen)
 (global-set-key (kbd "<menu> x") ctl-x-map)
-(global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
+(global-set-key (kbd "<menu> y") 'yas/expand)
 (global-set-key (kbd "<menu> z") 'xc-comment-smart) ; 385    0.02%  xc-comment-smart
 
 
@@ -486,6 +472,7 @@
 
 
 
+(global-set-key (kbd "<f10>") 'split-window-vertically)
 (global-set-key (kbd "<f11>") 'delete-other-windows)
 (global-set-key (kbd "<f12>") 'other-window); 6067    0.38%  other-window
 (global-set-key (kbd "<C-prior>") 'xah-previous-user-buffer)
