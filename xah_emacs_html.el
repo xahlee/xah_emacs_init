@@ -37,8 +37,8 @@ When called in elisp program, wrap the tag at point P1."
 Add today's date to the byline tag of current file, also delete the last one if there are more than one."
   (interactive)
   (let (p1 p2 ξnum )
+    (save-excursion 
       (goto-char 1)
-
       (when (search-forward "<div class=\"byline\">" nil)
         (setq p1 (point) )
         (backward-char 1)
@@ -51,7 +51,7 @@ Add today's date to the byline tag of current file, also delete the last one if 
         ;; if there are more than 1 “time” tag, delete the last one
         (when (> ξnum 1)
           (let (p3 p4)
-        (goto-char p2)
+            (goto-char p2)
             (search-backward "</time>")
             (setq p4 (+ (point) 7) )
             (search-backward "<time>")
@@ -68,8 +68,10 @@ Add today's date to the byline tag of current file, also delete the last one if 
         (replace-pairs-region p1 (line-end-position) [ [", , " ", "] ])
         (replace-pairs-region p1 (line-end-position) [ ["</time>, <time>" "</time>, …, <time>"] ])
 
+        (message "%s" (buffer-substring-no-properties p1 (line-end-position)))
         (search-backward "<time>")
-        ) ) )
+        ))
+       ) )
 
 (defun xahsite-update-page-tag-old (p1 p2)
   "Update HTML page navigation tags.

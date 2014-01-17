@@ -24,7 +24,6 @@
 ;; Xah Lee
 ;; created: 2007-06.
 
-
 
 
 (require 'package)
@@ -107,28 +106,26 @@
 
 (global-set-key (kbd "<f9> <return>") 'run-current-file) ;  1494    0.09%  run-current-file
 
+(global-set-key (kbd "<menu> <menu>") 'exchange-point-and-mark)
 (global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
 ;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
 (global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
 (global-set-key (kbd "<menu> <tab>") 'indent-region)
-
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 
-(progn 
+(progn
 (global-set-key (kbd "<menu> <f8>") 'highlight-symbol-at-point)
 (global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
 (global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
 (global-set-key (kbd "<menu> <f9>") 'highlight-symbol-query-replace)
 )
 
-;; (global-set-key (kbd "<menu> <tab>") 'yas/expand)
-
 ;xah-cycle-camel-style-case
 
 (global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> '") nil) ;
-(global-set-key (kbd "<menu> ,") nil) ;
+(global-set-key (kbd "<menu> ,") 'toggle-input-method)
 
 (global-set-key (kbd "<menu> -") nil)
 
@@ -454,8 +451,6 @@
 
 (global-set-key (kbd "<M-return>") 'open-line)
 
-;(global-set-key (kbd "<menu> p") 'yas/expand)
-;(global-set-key (kbd "") 'indent-region)
 ;
 ;'indent-for-tab-command
 

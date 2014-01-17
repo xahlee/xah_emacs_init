@@ -90,7 +90,6 @@
     (global-set-key (kbd ";") 'undo)
     (global-set-key (kbd "=") nil)
     (global-set-key (kbd "[") nil)
-    (global-set-key (kbd "\\") 'xah-escape-quotes)
     (global-set-key (kbd "`") nil)
     (global-set-key (kbd ".") 'backward-kill-word)
     (global-set-key (kbd "'") 'xah-compact-uncompact-block) ;
@@ -109,6 +108,8 @@
 ; 5605    0.35%  cua-set-mark; 944    0.06%  set-mark-command
 ;   5064    0.31%  delete-other-windows
 ;   6077    0.38%  ergoemacs-M-o
+
+    ;;  toggle-input-method
 
     (global-set-key (kbd "5") nil)
     (global-set-key (kbd "6") 'xah-select-current-block) ;
