@@ -407,6 +407,8 @@ Second Life: Xah Toll
 ("8ucss" "http://xahlee.info/js/css_index.html")
 ("8udvorak" "http://xahlee.info/comp/dvorak_keyboard_layout.html")
 
+("8ute" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html")
+
 ("8uocaml" "http://xahlee.info/ocaml/ocaml.html")
 ("8ups" "http://xahlee.info/powershell/index.html")
 ("8umma" "http://xahlee.info/M/index.html")

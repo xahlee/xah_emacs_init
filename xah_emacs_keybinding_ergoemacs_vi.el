@@ -6,9 +6,12 @@
 ;; Xah Lee
 
 ;; some notes:
-;; • other than being a modal input system, this design doesn't follow vi or vim's traditions. For example: there's no command such as “dd”. and there's no typing a digit followed by a command to repeat n times. This is not a vi emulation mode.
+;; • This is not a vi emulation mode. other than being a modal input system, this design doesn't follow vi or vim's traditions. For example: there's no command such as “dd”. and there's no typing a digit followed by a command to repeat n times.
 ;; • the keymap is largely compatible with ergoemacs-mode. It's based on mapping the most frequetly used command to the most easy-to-press key positions.
 ;; • created this around 2013-08. Used it daily since.
+;; • you'll also need xah_emacs_keybinding_functions.el
+
+;; home page 〈Ergoemacs-vi Mode〉 http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 
 ;; TODO
 ;; • make it a proper minor mode.
@@ -16,19 +19,19 @@
 ;; • support different keyboard layouts.
 ;; • reconsider some keybinding so it's more friendly for normal PC keyboard or Microsoft 4000.
 
-;; i wrote this mode for myself. License is open source. Feel free to copy but please give credit.
-;; if you like to see this mode go further, donate at http://ergoemacs.org/emacs/emacs.html , or buy my tutorial http://ergoemacs.org/emacs/buy_xah_emacs_tutorial.html and let me know. Thanks.
+;; i wrote this mode for myself. License is open source. Feel free to copy but please link to http://ergoemacs.org/emacs/emacs.html or a specific relevant page on that domain.
+;; if you like to see this mode go further, buy my tutorial http://ergoemacs.org/emacs/buy_xah_emacs_tutorial.html and let me know. Thanks.
 
 ;; (require 'ergoemacs-mode) ; calls some editing functions in ergoemacs-mode.
 
-(defvar v3-insert-state-q t "boolean value. true means insertion mode is on.")
-(setq v3-insert-state-q t)
+(defvar x6-insert-state-q t "boolean value. true means insertion mode is on.")
+(setq x6-insert-state-q t)
 
 ;; to enter insert mode, press the command mode key then 【a】
-(global-set-key (kbd "<home>") 'v3-command-mode-activate)
-(global-set-key (kbd "<end>") 'v3-insert-mode-activate)
+(global-set-key (kbd "<home>") 'x6-command-mode-activate)
+(global-set-key (kbd "<end>") 'x6-insert-mode-activate)
 
-(defun v3-insert-mode-init ()
+(defun x6-insert-mode-init ()
   "DOCSTRING"
   (interactive)
   ;; TODO use a proper keymap
@@ -83,7 +86,7 @@
     )
   )
 
-(defun v3-command-mode-init ()
+(defun x6-command-mode-init ()
   "DOCSTRING"
   (interactive)
   (progn
@@ -145,38 +148,38 @@
     )
   )
 
-(defun v3-mode-toggle ()
+(defun x6-mode-toggle ()
   "Switch between {insertion, command} modes."
   (interactive)
-  (if v3-insert-state-q
-      (v3-command-mode-activate)
-    (v3-insert-mode-activate)
+  (if x6-insert-state-q
+      (x6-command-mode-activate)
+    (x6-insert-mode-activate)
     )
   )
 
-(defun v3-command-mode-activate ()
+(defun x6-command-mode-activate ()
   "Switch to command mode."
   (interactive)
   (setq cursor-type 'box )
-  (setq v3-insert-state-q nil )
+  (setq x6-insert-state-q nil )
   (force-window-update) ; TODO force cursor shape change to show, but sometimes doesn't work
-  (v3-command-mode-init)
+  (x6-command-mode-init)
   )
 
-(defun v3-insert-mode-activate ()
+(defun x6-insert-mode-activate ()
   "Switch to insertion mode."
   (interactive)
   (setq cursor-type 'bar )
-  (setq v3-insert-state-q t )
+  (setq x6-insert-state-q t )
   (force-window-update) ; TODO force cursor shape change to show, but sometimes doesn't work
-  (v3-insert-mode-init)
+  (x6-insert-mode-init)
   )
 
 ;; when in going into minibuffer, switch to insertion mode.
-(add-hook 'minibuffer-setup-hook 'v3-insert-mode-activate)
-(add-hook 'minibuffer-exit-hook 'v3-command-mode-activate)
+(add-hook 'minibuffer-setup-hook 'x6-insert-mode-activate)
+(add-hook 'minibuffer-exit-hook 'x6-command-mode-activate)
 
 ;; TODO when in shell mode, switch to insertion mode.
-(add-hook 'shell-mode-hook 'v3-insert-mode-activate)
+(add-hook 'shell-mode-hook 'x6-insert-mode-activate)
 
 ;; TODO show state in mode line
