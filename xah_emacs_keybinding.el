@@ -75,7 +75,6 @@
 (global-set-key (kbd "<menu> 2") 'delete-window)        ;
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ;4996    0.31%  delete-other-windows
 (global-set-key (kbd "<menu> 4") 'split-window-vertically) ; 2742    0.17%  split-window-vertically
-
 (global-set-key (kbd "<menu> 5") 'shell-command) ;  ; 274    0.02%  shell-command
 (global-set-key (kbd "<menu> 6") 'write-file)
 (global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ;  find-file-at-point 4773    0.30%  xah-open-file-at-cursor
@@ -191,7 +190,6 @@
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
   (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
-  (global-set-key (kbd "<menu> t <delete>") 'delete-current-file)
   )
 
 (progn
@@ -297,4 +295,9 @@
 ;; (require 'guide-key)
 ;; (setq guide-key/guide-key-sequence '("<menu> t" "<tab> t" ))
 ;; (guide-key-mode 0)
+
+; 5605    0.35%  cua-set-mark; 944    0.06%  set-mark-command
+;   6077    0.38%  ergoemacs-M-o
+;;  toggle-input-method
+
 

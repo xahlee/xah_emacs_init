@@ -32,7 +32,7 @@
 (global-set-key (kbd "<end>") 'x6-insert-mode-activate)
 
 (defun x6-insert-mode-init ()
-  "DOCSTRING"
+  "set insertion mode keys"
   (interactive)
   ;; TODO use a proper keymap
   (progn
@@ -87,7 +87,7 @@
   )
 
 (defun x6-command-mode-init ()
-  "DOCSTRING"
+  "set command mode keys"
   (interactive)
   (progn
     (global-set-key (kbd ";") 'undo)
@@ -102,17 +102,12 @@
     (global-set-key (kbd "0") nil)
     (global-set-key (kbd "1") nil)
     (global-set-key (kbd "2") nil)
-    (global-set-key (kbd "3") 'set-mark-command)
-    (global-set-key (kbd "4") 'keyboard-quit)
-
     (global-set-key (kbd "3") 'xah-backward-quote)
     (global-set-key (kbd "4") 'xah-forward-quote)
 
-; 5605    0.35%  cua-set-mark; 944    0.06%  set-mark-command
-;   5064    0.31%  delete-other-windows
-;   6077    0.38%  ergoemacs-M-o
-
-    ;;  toggle-input-method
+    ;; (global-set-key (kbd "2") 'delete-window)
+    ;; (global-set-key (kbd "3") 'delete-other-windows)
+    ;; (global-set-key (kbd "4") 'split-window-vertically)
 
     (global-set-key (kbd "5") nil)
     (global-set-key (kbd "6") 'xah-select-current-block) ;
@@ -158,7 +153,7 @@
   )
 
 (defun x6-command-mode-activate ()
-  "Switch to command mode."
+  "Activate command mode."
   (interactive)
   (setq cursor-type 'box )
   (setq x6-insert-state-q nil )
@@ -167,7 +162,7 @@
   )
 
 (defun x6-insert-mode-activate ()
-  "Switch to insertion mode."
+  "Activate insertion mode."
   (interactive)
   (setq cursor-type 'bar )
   (setq x6-insert-state-q t )

@@ -88,6 +88,7 @@
 (global-set-key (kbd "<f9> 8") nil)
 (global-set-key (kbd "<f9> 9") nil)
 
+(global-set-key (kbd "<f9> <delete>") 'delete-current-file)
 (global-set-key (kbd "<f9> <return>") 'run-current-file) ;  1494    0.09%  run-current-file
 
 (global-set-key (kbd "<f10>") 'split-window-vertically)
