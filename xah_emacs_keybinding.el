@@ -2,14 +2,22 @@
 ;; xah's emacs keybinding.
 
 ;; jump points to other files
+
 ;; • xah_emacs_init.el
-;; • xah_emacs_keybinding.el
-;; • xah_emacs_keybinding_mode_specific.el
-;; • xah_emacs_unicode_input.el
-;; • xah_emacs_hyper_super_setup.el
-;; • xah_emacs_mouse_binding.el
-;; • xah_emacs_alias.el
 ;; • xah_emacs_abbr.el
+;; • xah_emacs_alias.el
+;; • xah_emacs_hyper_super_setup.el
+;; • xah_emacs_keybinding.el
+;; • xah_emacs_keybinding_control_key.el
+;; • xah_emacs_keybinding_ergoemacs_raw.el
+;; • xah_emacs_keybinding_ergoemacs_vi.el
+;; • xah_emacs_keybinding_functions.el
+;; • xah_emacs_keybinding_mode_specific.el
+;; • xah_emacs_keybinding_special_keys.el
+;; • xah_emacs_keybinding_unset_keys.el
+;; • xah_emacs_mouse_binding.el
+;; • xah_emacs_unicode_input.el
+
 ;; ~/git/ergoemacs/ergoemacs/ergoemacs-keybindings/ergoemacs-variants.el
 
 ;; • 〈Ergoemacs-vi Mode〉 http://ergoemacs.org/misc/ergoemacs_vi_mode.html
@@ -36,7 +44,7 @@
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
 (define-key key-translation-map (kbd "C-t") (kbd "<menu>"))  ; useful when in terminal or Mac
-;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
+                                        ;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
 
@@ -48,20 +56,20 @@
 
 (global-set-key (kbd "<menu> <menu>") 'exchange-point-and-mark)
 (global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
-;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
+                                        ;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
 (global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
 (global-set-key (kbd "<menu> <tab>") 'indent-region)
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 
 (progn
-(global-set-key (kbd "<menu> <f8>") 'highlight-symbol-at-point)
-(global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
-(global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
-(global-set-key (kbd "<menu> <f9>") 'highlight-symbol-query-replace)
-)
+  (global-set-key (kbd "<menu> <f8>") 'highlight-symbol-at-point)
+  (global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
+  (global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
+  (global-set-key (kbd "<menu> <f9>") 'highlight-symbol-query-replace)
+  )
 
-;xah-cycle-camel-style-case
+                                        ;xah-cycle-camel-style-case
 
 (global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> '") nil) ;
@@ -90,15 +98,17 @@
 (global-set-key (kbd "<menu> b") 'xah-shell-commands)
 (global-set-key (kbd "<menu> c") 'xah-open-file-fast)
 
+(global-set-key (kbd "<menu> d") 'yas/expand)
+
 (global-set-key (kbd "<menu> e") nil) ;
 
- (global-set-key (kbd "<menu> f") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
+(global-set-key (kbd "<menu> f") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
 
-; ~/git/xah_emacs_init/xah_emacs_keybinding_shift_switch.el
+                                        ; ~/git/xah_emacs_init/xah_emacs_keybinding_shift_switch.el
 (global-set-key (kbd "<menu> g") 'list-matching-lines) ; 432    0.03%  list-matching-lines
 
 (progn
-;  (global-set-key (kbd "<menu> h") help-map) ;
+                                        ;  (global-set-key (kbd "<menu> h") help-map) ;
   (global-set-key (kbd "<menu> h") nil)
 
   (global-set-key (kbd "<menu> h 0") 'lookup-all-dictionaries)
@@ -143,10 +153,10 @@
   (global-set-key (kbd "<menu> i x") 'ξ-insert-random-hex)
   (global-set-key (kbd "<menu> i s") 'ξ-insert-random-string)
   (global-set-key (kbd "<menu> i u") 'ξ-insert-random-uuid)
- )
+  )
 
-;(global-set-key (kbd "<menu> j") 'kmacro-start-macro) ;  42    0.00%  kmacro-start-macro
-;(global-set-key (kbd "<menu> k") 'kmacro-end-macro)   ; 36    0.00%  kmacro-end-macro
+                                        ;(global-set-key (kbd "<menu> j") 'kmacro-start-macro) ;  42    0.00%  kmacro-start-macro
+                                        ;(global-set-key (kbd "<menu> k") 'kmacro-end-macro)   ; 36    0.00%  kmacro-end-macro
 (global-set-key (kbd "<menu> j") 'xah-copy-all)
 (global-set-key (kbd "<menu> k") nil)
 (global-set-key (kbd "<menu> l") 'xah-clean-whitespace)
@@ -177,7 +187,7 @@
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
 
-  (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
+(global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
 
 (progn
   (global-set-key (kbd "<menu> t") nil)
@@ -253,7 +263,7 @@
 (global-set-key (kbd "<menu> v") nil)
 (global-set-key (kbd "<menu> w") 'widen)
 (global-set-key (kbd "<menu> x") ctl-x-map)
-(global-set-key (kbd "<menu> y") 'yas/expand)
+(global-set-key (kbd "<menu> y") nil)
 (global-set-key (kbd "<menu> z") 'xc-comment-smart) ; 385    0.02%  xc-comment-smart
 
 
@@ -299,5 +309,4 @@
 ; 5605    0.35%  cua-set-mark; 944    0.06%  set-mark-command
 ;   6077    0.38%  ergoemacs-M-o
 ;;  toggle-input-method
-
 

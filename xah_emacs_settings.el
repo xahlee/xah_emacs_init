@@ -136,11 +136,32 @@
           ;; (cursor-type . box)
           ))
 
-(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
+;; set font
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (progn
+    nil )
+  )
+ ((string-equal system-type "darwin")   ; Mac OS X
+  (progn
+    (add-to-list 'default-frame-alist '(font . "Monaco-14"))
+    )
+  )
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")) )
+  )
+ )
+
+;; Emacs Lisp: Determine OS, Emacs Version, Machine Host Name
+;; http://ergoemacs.org/emacs/elisp_determine_OS_version.html
+
+;; Emacs: How to List ＆ Set Font
+;; http://ergoemacs.org/emacs/emacs_list_and_set_font.html
+
 ;; (set-frame-parameter nil 'font "DejaVu Sans Mono-10")
 
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
-
 
 
 ;; (custom-set-variables
@@ -192,5 +213,4 @@
  '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
 
   (setq ido-enable-flex-matching t)
-
 

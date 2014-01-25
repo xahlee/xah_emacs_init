@@ -53,7 +53,7 @@
 
 (global-set-key (kbd "]") 'xah-close-current-buffer)
 
-(global-set-key (kbd "<XF86Launch8>") 'delete-other-windows)
+(global-set-key (kbd "<XF86Launch8>") 'save-buffer)
 
 (global-set-key (kbd "<insert>") 'xah-switch-to-next-frame)
 
