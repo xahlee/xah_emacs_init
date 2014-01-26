@@ -203,6 +203,7 @@
     ("8gcd" "googlecode")
     ("8ff" "Firefox")
     ("8sl" "Second Life")
+    ("8bb" "Backbone")
     ("8lsl" "Linden Scripting Language")
     ("8ll" "Linden Labs")
     ("8fb" "Facebook")
@@ -333,6 +334,11 @@
 ("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
 ("8c2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
 
+;; JavaScript
+("3c" "console.log();")
+("3f" "function () {};")
+("3v" "var = ;")
+
 
 ;;; unix shell
 
@@ -415,7 +421,6 @@ Second Life: Xah Toll
 ("8ujava" "http://xahlee.info/java-a-day/java.html")
 ("8utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")
 
-("3cl" "console.log(x);")
 ))
 
 
