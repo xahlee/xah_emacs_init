@@ -398,28 +398,24 @@ default browser will be launched and opening this URL:
  http://xahlee.info/index.html"
   (interactive)
   (let (myURL)
-
     (setq myURL
           (if current-prefix-arg
               (xahsite-filepath-to-url (buffer-file-name))
-            (buffer-file-name)
-            )
-          )
+            (buffer-file-name) ) )
 
     (when (buffer-modified-p ) (xah-clean-whitespace) (save-buffer) )
 
     (cond
      ((string-equal system-type "windows-nt") ; Windows
       (when (string-match "^c:/" myURL) (setq myURL (concat "file:///" myURL)))
+      (browse-url-firefox myURL)
       )
      ((string-equal system-type "gnu/linux")
-      t
+      (browse-url-firefox myURL)
       )
      ((string-equal system-type "darwin") ; Mac
-      t
+      (browse-url myURL )      
       ) )
-    (browse-url-firefox myURL )
-    ;; (browse-url myURL )
     )
   )
 
