@@ -4,6 +4,9 @@
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;(global-set-key (kbd "<escape>") 'keyboard-quit)
 
+(global-set-key (kbd "<f15>") 'other-frame)      ; capslock
+(global-set-key (kbd "<f17>") 'other-frame)      ; middle
+
 
 (global-set-key (kbd "<tab>") nil)      ; mode specific
 

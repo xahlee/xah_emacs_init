@@ -31,6 +31,9 @@
 (global-set-key (kbd "<home>") 'x6-command-mode-activate)
 (global-set-key (kbd "<end>") 'x6-insert-mode-activate)
 
+(global-set-key (kbd "<f7>") 'x6-command-mode-activate)
+(global-set-key (kbd "<f8>") 'x6-insert-mode-activate)
+
 (defun x6-insert-mode-init ()
   "set insertion mode keys"
   (interactive)
