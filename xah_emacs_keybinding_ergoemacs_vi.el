@@ -139,7 +139,7 @@
     (global-set-key (kbd "t") 'next-line)
     (global-set-key (kbd "u") 'delete-char) ;
     (global-set-key (kbd "v") 'xah-forward-close-bracket)
-    (global-set-key (kbd "w") nil)
+    (global-set-key (kbd "w") 'x6-insert-mode-activate)
     (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)
     (global-set-key (kbd "y") 'redo)
     (global-set-key (kbd "z") 'comment-dwim)
