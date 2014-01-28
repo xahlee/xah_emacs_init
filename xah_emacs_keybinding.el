@@ -40,13 +40,6 @@
 (package-initialize)
 (require 'highlight-symbol nil "noerror")
 
-
-
-(define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
-(define-key key-translation-map (kbd "C-t") (kbd "<menu>"))  ; useful when in terminal or Mac
-(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))  ; useful when in terminal or Mac
-                                        ;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
-;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
 
 

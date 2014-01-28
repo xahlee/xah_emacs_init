@@ -24,15 +24,19 @@
 
 ;; (require 'ergoemacs-mode) ; calls some editing functions in ergoemacs-mode.
 
+;; sample keys to activate command/insert mode. They should be on home row or thumb key. On standard PC keyboard, good positions are capslock, tab, space, key next to space, return. But you should use Maltron, Kinesis, Truly Ergonomic keyboard etc. see http://ergoemacs.org/emacs/emacs_best_keyboard.html http://xahlee.info/kbd/keyboarding.html
+;; (global-set-key (kbd "<f7>") 'x6-command-mode-activate)
+;; (global-set-key (kbd "<escape>") 'x6-command-mode-activate)
+;; (global-set-key (kbd "<home>") 'x6-command-mode-activate)
+;; (global-set-key (kbd "<f19>") 'x6-command-mode-activate)
+;; (global-set-key (kbd "<f8>") 'x6-insert-mode-activate)
+
+;; (global-set-key (kbd "<f8>") 'x6-insert-mode-activate)
+;; (global-set-key (kbd "<end>") 'x6-insert-mode-activate)
+;; (global-set-key (kbd "<return>") 'x6-insert-mode-activate)
+
 (defvar x6-insert-state-q t "boolean value. true means insertion mode is on.")
 (setq x6-insert-state-q t)
-
-;; to enter insert mode, press the command mode key then 【a】
-(global-set-key (kbd "<home>") 'x6-command-mode-activate)
-(global-set-key (kbd "<end>") 'x6-insert-mode-activate)
-
-(global-set-key (kbd "<f7>") 'x6-command-mode-activate)
-(global-set-key (kbd "<f8>") 'x6-insert-mode-activate)
 
 (defun x6-insert-mode-init ()
   "set insertion mode keys"
@@ -103,16 +107,11 @@
     (global-set-key (kbd "-") nil)
     (global-set-key (kbd "/") nil)
     (global-set-key (kbd "0") nil)
-    (global-set-key (kbd "1") nil)
-    (global-set-key (kbd "2") nil)
-    (global-set-key (kbd "3") 'xah-backward-quote)
-    (global-set-key (kbd "4") 'xah-forward-quote)
-
-    ;; (global-set-key (kbd "2") 'delete-window)
-    ;; (global-set-key (kbd "3") 'delete-other-windows)
-    ;; (global-set-key (kbd "4") 'split-window-vertically)
-
-    (global-set-key (kbd "5") nil)
+    (global-set-key (kbd "1") 'xah-previous-user-buffer)
+    (global-set-key (kbd "2") 'xah-next-user-buffer)
+    (global-set-key (kbd "3") 'delete-other-windows)
+    (global-set-key (kbd "4") 'split-window-vertically)
+    (global-set-key (kbd "5") 'xah-forward-quote)
     (global-set-key (kbd "6") 'xah-select-current-block) ;
     (global-set-key (kbd "7") 'xah-select-current-line)
     (global-set-key (kbd "8") 'xah-extend-selection)
