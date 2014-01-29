@@ -521,8 +521,7 @@ When there is a text selection, act on the region."
 (defcustom xah-shell-abbrev-alist nil "alist of xah's shell abbrevs" :group 'xah)
 (setq xah-shell-abbrev-alist
           '(
-            ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/'  --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
-
+            ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
             ("ssh" . "ssh -l u40651120 xahlee.org ")
             ("img1" . "convert -quality 85% ")
             ("imgScale" . "convert -scale 50% -quality 85% ")

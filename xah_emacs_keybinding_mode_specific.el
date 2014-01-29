@@ -9,7 +9,6 @@
   (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
   (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
 
-
   (local-set-key (kbd "<tab> <backspace>") 'xhm-remove-html-tags)
   (local-set-key (kbd "<tab> <return>") 'xhm-insert-br-tag)
   (local-set-key (kbd "<tab> -") 'xhm-insert-hr-tag)
@@ -39,7 +38,7 @@
   (local-set-key (kbd "<tab> k") 'xhm-htmlize-keyboard-shortcut-notation)
   (local-set-key (kbd "<tab> l 3") 'xhm-source-url-linkify)
   (local-set-key (kbd "<tab> l c") 'xwe-chinese-linkify)
-  
+
   (local-set-key (kbd "<tab> l d") 'perldoc-ref-linkify)
   (local-set-key (kbd "<tab> l e") 'emacs-ref-linkify)
   (local-set-key (kbd "<tab> l f") 'full-size-img-linkify)
@@ -123,8 +122,6 @@ Still, the code isn't 100% correct.
 
 (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
 (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
-
-
 
 (defun xah-magit-mode-keys ()
   "Modify keymaps ."
@@ -217,7 +214,7 @@ For `Info-mode-hook'."
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
-(progn 
+(progn
   (require 'dired )
 
   ;; (define-key dired-mode-map (kbd "M-$") nil) ; was dired-up-directory
@@ -234,3 +231,11 @@ For `Info-mode-hook'."
     (define-key dired-mode-map (kbd "<tab> 8") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
     )
   )
+
+(defun xah-Man-mode-keys ()
+  "my keybindings."
+  (local-set-key (kbd "3") 'delete-other-windows)
+  (local-set-key (kbd "4") 'split-window-vertically)
+  )
+(add-hook 'Man-mode-hook 'xah-Man-mode-keys)
+
