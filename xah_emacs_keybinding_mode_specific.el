@@ -225,6 +225,8 @@ For `Info-mode-hook'."
   (define-key dired-mode-map (kbd "M-g") 'backward-word)
   (define-key dired-mode-map (kbd "M-c") 'previous-line)
   (define-key dired-mode-map (kbd "o") 'other-window)
+  (define-key dired-mode-map (kbd "1") 'xah-previous-user-buffer)
+  (define-key dired-mode-map (kbd "2") 'xah-next-user-buffer)
 
   (when (>= emacs-major-version 23)
  ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)

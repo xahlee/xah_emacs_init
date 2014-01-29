@@ -100,7 +100,7 @@
     (global-set-key (kbd ";") 'undo)
     (global-set-key (kbd "=") nil)
     (global-set-key (kbd "[") nil)
-    (global-set-key (kbd "`") nil)
+    (global-set-key (kbd "`") 'other-frame)
     (global-set-key (kbd ".") 'backward-kill-word)
     (global-set-key (kbd "'") 'xah-compact-uncompact-block) ;
     (global-set-key (kbd ",") 'xah-shrink-whitespaces) ;

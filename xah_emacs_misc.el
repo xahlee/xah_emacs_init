@@ -414,7 +414,8 @@ default browser will be launched and opening this URL:
       (browse-url-firefox myURL)
       )
      ((string-equal system-type "darwin") ; Mac
-      (browse-url myURL )      
+      ;; (browse-url-firefox myURL)
+      (browse-url myURL )
       ) )
     )
   )
@@ -621,7 +622,7 @@ Requires a python script. See code."
   (interactive)
   (let (scriptName bds)
     (setq bds (bounds-of-thing-at-point 'filename) )
-    (save-excursion 
+    (save-excursion
       (setq scriptName (format "/usr/bin/python3 /home/xah/git/xahscripts/emacs_pydoc_ref_linkify.py3 %s" (buffer-file-name)) )
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t)
       )
@@ -633,7 +634,7 @@ Requires a python script. See code."
 Requires a node.js script. See code."
   (interactive "r")
   (let (scriptName)
-    (save-excursion 
+    (save-excursion
       (setq scriptName (concat "/usr/bin/node /home/xah/git/xahscripts/emacs_uri_decode.js") )
       (shell-command-on-region p1 p2 scriptName nil "REPLACE" nil t)
       )

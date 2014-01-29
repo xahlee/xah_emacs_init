@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
-;; (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;(global-set-key (kbd "<escape>") 'keyboard-quit)
 
 (global-set-key (kbd "<home>") 'x6-command-mode-activate)
