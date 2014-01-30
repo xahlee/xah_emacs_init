@@ -108,7 +108,7 @@
     (global-set-key (kbd "/") nil)
     (global-set-key (kbd "0") nil)
     (global-set-key (kbd "1") 'xah-previous-user-buffer)
-    (global-set-key (kbd "2") 'xah-next-user-buffer)
+    (global-set-key (kbd "2") 'delete-window)
     (global-set-key (kbd "3") 'delete-other-windows)
     (global-set-key (kbd "4") 'split-window-vertically)
     (global-set-key (kbd "5") 'xah-forward-quote)

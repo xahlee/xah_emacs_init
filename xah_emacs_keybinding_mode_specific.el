@@ -229,7 +229,9 @@ For `Info-mode-hook'."
   (define-key dired-mode-map (kbd "M-c") 'previous-line)
   (define-key dired-mode-map (kbd "o") 'other-window)
   (define-key dired-mode-map (kbd "1") 'xah-previous-user-buffer)
-  (define-key dired-mode-map (kbd "2") 'xah-next-user-buffer)
+  (define-key dired-mode-map (kbd "2") 'delete-window)
+  (define-key dired-mode-map (kbd "3") 'delete-other-windows)
+  (define-key dired-mode-map (kbd "4") 'split-window-vertically)
 
   (when (>= emacs-major-version 23)
  ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
