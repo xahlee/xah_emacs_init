@@ -95,6 +95,29 @@
 (global-set-key (kbd "<menu> d") 'yas/expand)
 
 (global-set-key (kbd "<menu> e") nil) ;
+(global-set-key (kbd "<menu> e SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
+(global-set-key (kbd "<menu> e <f6>") 'visual-line-mode)
+(global-set-key (kbd "<menu> e <f7>") 'linum-mode)
+(global-set-key (kbd "<menu> e <f8>") 'whitespace-mode)
+(global-set-key (kbd "<menu> e <f9>") 'shell)
+(global-set-key (kbd "<menu> e <f10>") 'calc)
+(global-set-key (kbd "<menu> e <f11>") 'calendar)
+(global-set-key (kbd "<menu> e <f12>") nil)
+
+(global-set-key (kbd "<menu> e 0") nil)
+(global-set-key (kbd "<menu> e 1") nil)
+(global-set-key (kbd "<menu> e 2") nil)
+(global-set-key (kbd "<menu> e 3") 'xah-elisp-mode)
+(global-set-key (kbd "<menu> e 4") 'xah-php-mode)
+(global-set-key (kbd "<menu> e 5") 'xah-html-mode)
+(global-set-key (kbd "<menu> e 6") 'html-mode)
+(global-set-key (kbd "<menu> e 7") nil)
+(global-set-key (kbd "<menu> e 8") nil)
+(global-set-key (kbd "<menu> e 9") nil)
+(global-set-key (kbd "<menu> e <backspace>") 'delete-current-file)
+(global-set-key (kbd "<menu> e C-d") 'delete-current-file)
+(global-set-key (kbd "<menu> e <return>") 'run-current-file) ;  1494    0.09%  run-current-file
+
 
 (global-set-key (kbd "<menu> f") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
 

@@ -65,8 +65,8 @@
 (global-set-key (kbd "<S-prior>") 'xah-previous-emacs-buffer)
 (global-set-key (kbd "<S-next>") 'xah-next-emacs-buffer)
 
-;(global-set-key (kbd "<home>") 'xah-backward-open-bracket) ;  14181    0.88%  xah-backward-open-bracket
-;(global-set-key (kbd "<end>") 'xah-forward-close-bracket) ;  17177    1.07%  xah-forward-close-bracket
+;  14181    0.88%  xah-backward-open-bracket
+;  17177    1.07%  xah-forward-close-bracket
 
 
 (global-set-key (kbd "]") 'xah-close-current-buffer)
@@ -85,33 +85,6 @@
 (global-set-key (kbd "<f1> [") 'lookup-word-dict-org)
 (global-set-key (kbd "<f1> ]") 'lookup-wiktionary)
 
-
-(global-set-key (kbd "<f9> SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
-(global-set-key (kbd "<f9> <f6>") 'visual-line-mode)
-(global-set-key (kbd "<f9> <f7>") 'linum-mode)
-(global-set-key (kbd "<f9> <f8>") 'whitespace-mode)
-(global-set-key (kbd "<f9> <f9>") 'shell)
-(global-set-key (kbd "<f9> <f10>") 'calc)
-(global-set-key (kbd "<f9> <f11>") 'calendar)
-(global-set-key (kbd "<f9> <f12>") nil)
 
-(global-set-key (kbd "<f9> 0") nil)
-(global-set-key (kbd "<f9> 1") nil)
-(global-set-key (kbd "<f9> 2") nil)
-(global-set-key (kbd "<f9> 3") 'xah-elisp-mode)
-(global-set-key (kbd "<f9> 4") 'xah-php-mode)
-(global-set-key (kbd "<f9> 5") 'xah-html-mode)
-(global-set-key (kbd "<f9> 6") 'html-mode)
-(global-set-key (kbd "<f9> 7") nil)
-(global-set-key (kbd "<f9> 8") nil)
-(global-set-key (kbd "<f9> 9") nil)
-
-(global-set-key (kbd "<f9> <delete>") 'delete-current-file)
-(global-set-key (kbd "<f9> C-d") 'delete-current-file)
-(global-set-key (kbd "<f9> <return>") 'run-current-file) ;  1494    0.09%  run-current-file
-
-(global-set-key (kbd "<f10>") 'split-window-vertically)
-(global-set-key (kbd "<f11>") 'delete-other-windows)
-;; delete-window
-(global-set-key (kbd "<f12>") 'other-window); 6067    0.38%  other-window
+; 6067    0.38%  other-window
 
