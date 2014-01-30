@@ -98,9 +98,9 @@
 (global-set-key (kbd "<menu> e 3") 'whitespace-mode)
 (global-set-key (kbd "<menu> e 4") 'linum-mode)
 (global-set-key (kbd "<menu> e 5") 'visual-line-mode)
-(global-set-key (kbd "<menu> e 6") 'calc)
-(global-set-key (kbd "<menu> e 7") 'shell)
-(global-set-key (kbd "<menu> e 8") 'calendar)
+(global-set-key (kbd "<menu> e 6") 'calendar)
+(global-set-key (kbd "<menu> e 7") 'calc)
+(global-set-key (kbd "<menu> e 8") 'shell)
 (global-set-key (kbd "<menu> e e") 'xah-elisp-mode)
 (global-set-key (kbd "<menu> e h") 'xah-html-mode)
 (global-set-key (kbd "<menu> e SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
