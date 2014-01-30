@@ -19,6 +19,8 @@
 (global-set-key (kbd "M-e") 'delete-backward-char)
 (global-set-key (kbd "M-u") 'delete-char)
 (global-set-key (kbd "M-.") 'backward-kill-word)
+
+(global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-p") 'kill-word)
 (global-set-key (kbd "M-i") 'kill-line)
 (global-set-key (kbd "M-d") 'xah-beginning-of-line-or-block)

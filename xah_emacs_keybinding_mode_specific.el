@@ -124,11 +124,17 @@ Still, the code isn't 100% correct.
 (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
 
 (defun xah-magit-mode-keys ()
-  "Modify keymaps ."
+  "Modify keymaps."
   (local-set-key (kbd "<tab> <tab>") 'magit-toggle-section)
+  (local-set-key (kbd "o") 'magit-status-mode)
 )
-
 (add-hook 'magit-mode-hook 'xah-magit-mode-keys)
+
+(defun xah-help-mode-keys ()
+  "Modify keymaps"
+  (local-set-key (kbd "g") 'backward-word)
+)
+(add-hook 'help-mode-hook 'xah-help-mode-keys)
 
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
