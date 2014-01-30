@@ -1,13 +1,17 @@
 ;; -*- coding: utf-8 -*-
+;; 2014-01-29
 
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 ;(global-set-key (kbd "<escape>") 'keyboard-quit)
 
+(define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
+(define-key key-translation-map (kbd "C-t") (kbd "<menu>"))  ; useful when in terminal or Mac
+
+
+
 (global-set-key (kbd "<home>") 'x6-command-mode-activate)
 (global-set-key (kbd "<f19>") 'x6-command-mode-activate)
-;; (global-set-key (kbd "<f7>") 'x6-command-mode-activate)
-;; (global-set-key (kbd "<f8>") 'x6-insert-mode-activate)
 
 (global-set-key (kbd "<end>") 'x6-insert-mode-activate)
 ;; (global-set-key (kbd "<return>") 'x6-insert-mode-activate)
@@ -15,12 +19,6 @@
 (global-set-key (kbd "<f15>") 'other-frame)      ; capslock
 (global-set-key (kbd "<f17>") 'other-frame)      ; middle
 
-(define-key key-translation-map (kbd "s-t") (kbd "<menu>"))
-(define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
-(define-key key-translation-map (kbd "C-t") (kbd "<menu>"))  ; useful when in terminal or Mac
-(define-key key-translation-map (kbd "<f6>") (kbd "<menu>"))  ; useful when in terminal or Mac
-(define-key key-translation-map (kbd "<C-return>") (kbd "<menu>"))  ; useful when in terminal or Mac
-                                        ;(define-key key-translation-map (kbd "C-8") (kbd "<menu>"))
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
 (global-set-key (kbd "<tab>") nil)      ; mode specific
