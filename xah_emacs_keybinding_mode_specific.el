@@ -1,6 +1,65 @@
 ;;-*- coding: utf-8 -*-
 ;; 2013-09-02
 
+
+(defun xah-isearch-mode-keys ()
+  "xah keybindings for `isearch-mode'.
+For `isearch-mode-hook'."
+  (define-key isearch-mode-map (kbd "M-f") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "M-F") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "<f12>") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "<f11>") 'isearch-repeat-backward)
+;  (define-key isearch-mode-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+
+  (define-key isearch-mode-map (kbd "<next>") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "<prior>") 'isearch-repeat-backward)
+  )
+(add-hook 'isearch-mode-hook 'xah-isearch-mode-keys )
+
+(defun xah-comint-keys ()
+  "xah keybindings for `comint-mode-hook'."
+  (define-key comint-mode-map (kbd "M-g") 'backward-word)
+  (define-key comint-mode-map (kbd "M-r") 'forward-word)
+  (define-key comint-mode-map (kbd "M-h") 'backward-char)
+  (define-key comint-mode-map (kbd "M-n") 'forward-char)
+  (define-key comint-mode-map (kbd "M-t") 'next-line)
+  (define-key comint-mode-map (kbd "M-c") 'previous-line)
+  (define-key comint-mode-map (kbd "M-e") 'delete-backward-char)
+  (define-key comint-mode-map (kbd "M-u") 'delete-char)
+  (define-key comint-mode-map (kbd "M-.") 'backward-kill-word)
+  (define-key comint-mode-map (kbd "M-p") 'kill-word)
+  (define-key comint-mode-map (kbd "M-d") 'move-beginning-of-line)
+  (define-key comint-mode-map (kbd "M-q") 'xah-cut-line-or-region)
+  (define-key comint-mode-map (kbd "M-j") 'xah-copy-line-or-region)
+  (define-key comint-mode-map (kbd "M-k") 'yank)
+  )
+(add-hook 'comint-mode-hook 'xah-comint-keys )
+(add-hook 'minibuffer-inactive-mode-hook 'xah-comint-keys )
+
+(progn 
+  (define-key minibuffer-local-map (kbd "M-g") 'backward-word)
+  (define-key minibuffer-local-map (kbd "M-r") 'forward-word)
+  (define-key minibuffer-local-map (kbd "M-h") 'backward-char)
+  (define-key minibuffer-local-map (kbd "M-n") 'forward-char)
+  (define-key minibuffer-local-map (kbd "M-t") 'next-line)
+  (define-key minibuffer-local-map (kbd "M-c") 'previous-line)
+  (define-key minibuffer-local-map (kbd "M-e") 'delete-backward-char)
+  (define-key minibuffer-local-map (kbd "M-u") 'delete-char)
+  (define-key minibuffer-local-map (kbd "M-.") 'backward-kill-word)
+  (define-key minibuffer-local-map (kbd "M-p") 'kill-word)
+  (define-key minibuffer-local-map (kbd "M-d") 'move-beginning-of-line)
+  (define-key minibuffer-local-map (kbd "M-q") 'xah-cut-line-or-region)
+  (define-key minibuffer-local-map (kbd "M-j") 'xah-copy-line-or-region)
+  (define-key minibuffer-local-map (kbd "M-k") 'yank)
+
+;; add back some bindings for commands whose binding we displaced
+(define-key minibuffer-local-map (kbd "<f11>") 'previous-history-element)
+(define-key minibuffer-local-map (kbd "<f12>") 'next-history-element)
+(define-key minibuffer-local-map (kbd "S-<f11>") 'previous-matching-history-element)
+(define-key minibuffer-local-map (kbd "S-<f12>") 'next-matching-history-element)
+)
+
+
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
   ;; .p gc
@@ -79,19 +138,52 @@
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
 (add-hook 'nxml-mode-hook 'xah-html-mode-keys)
 
-(defun xah-eval-defun ()
-  "like `eval-defun' but doesn't need proper indentation for it to work.
-Still, the code isn't 100% correct.
-"
-  (interactive)
-  (save-excursion
-    (search-backward "(defun")
-    ;;    (mark-sexp)
-    ;;    (eval-region (region-beginning) (region-end))
-    (forward-sexp)
-    (call-interactively 'eval-last-sexp)
+
+(progn
+  (require 'dired )
+
+  ;; (define-key dired-mode-map (kbd "M-$") nil) ; was dired-up-directory
+  ;; (local-set-key (kbd "6") 'dired-up-directory)
+  (define-key dired-mode-map (kbd "M-g") 'backward-word)
+  (define-key dired-mode-map (kbd "M-c") 'previous-line)
+  (define-key dired-mode-map (kbd "o") 'other-window)
+  (define-key dired-mode-map (kbd "1") 'xah-previous-user-buffer)
+  (define-key dired-mode-map (kbd "2") 'delete-window)
+  (define-key dired-mode-map (kbd "3") 'delete-other-windows)
+  (define-key dired-mode-map (kbd "4") 'split-window-vertically)
+
+  (when (>= emacs-major-version 23)
+ ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
+ ;;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
+    (define-key dired-mode-map (kbd "<tab> 8") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
     )
   )
+
+
+(defun xah-magit-mode-keys ()
+  "Modify keymaps."
+  (local-set-key (kbd "<tab> <tab>") 'magit-toggle-section)
+  (local-set-key (kbd "o") 'magit-status-mode)
+  (local-set-key (kbd "1") 'xah-previous-user-buffer)
+  (local-set-key (kbd "2") 'delete-window)
+  (local-set-key (kbd "3") 'delete-other-windows)
+  (local-set-key (kbd "4") 'split-window-vertically)
+)
+(add-hook 'magit-mode-hook 'xah-magit-mode-keys)
+
+(defun xah-Man-mode-keys ()
+  "my keybindings."
+  (local-set-key (kbd "1") 'xah-previous-user-buffer)
+  (local-set-key (kbd "2") 'delete-window)
+  (local-set-key (kbd "3") 'delete-other-windows)
+  (local-set-key (kbd "4") 'split-window-vertically)
+  )
+(add-hook 'Man-mode-hook 'xah-Man-mode-keys)
+
+
+
+
+
 
 ;; (defun xah-cperl-mode-keys ()
 ;;   "Modify keymaps used by cperl-mode."
@@ -123,12 +215,7 @@ Still, the code isn't 100% correct.
 (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
 (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
 
-(defun xah-magit-mode-keys ()
-  "Modify keymaps."
-  (local-set-key (kbd "<tab> <tab>") 'magit-toggle-section)
-  (local-set-key (kbd "o") 'magit-status-mode)
-)
-(add-hook 'magit-mode-hook 'xah-magit-mode-keys)
+
 
 (defun xah-help-mode-keys ()
   "Modify keymaps"
@@ -139,60 +226,7 @@ Still, the code isn't 100% correct.
 ;; (unload-feature 'sgml-mode)
 ;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
 
-(defun xah-isearch-mode-keys ()
-  "xah keybindings for `isearch-mode'.
-For `isearch-mode-hook'."
-  (define-key isearch-mode-map (kbd "M-f") 'isearch-repeat-forward)
-  (define-key isearch-mode-map (kbd "M-F") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "<f12>") 'isearch-repeat-forward)
-  (define-key isearch-mode-map (kbd "<f11>") 'isearch-repeat-backward)
-;  (define-key isearch-mode-map (kbd "<escape>") 'minibuffer-keyboard-quit)
-
-  (define-key isearch-mode-map (kbd "<next>") 'isearch-repeat-forward)
-  (define-key isearch-mode-map (kbd "<prior>") 'isearch-repeat-backward)
-  )
-(add-hook 'isearch-mode-hook 'xah-isearch-mode-keys )
-
-(defun xah-comint-keys ()
-  "xah keybindings for `comint-mode-hook'."
-  (define-key comint-mode-map (kbd "M-g") 'backward-word)
-  (define-key comint-mode-map (kbd "M-r") 'forward-word)
-  (define-key comint-mode-map (kbd "M-h") 'backward-char)
-  (define-key comint-mode-map (kbd "M-n") 'forward-char)
-  (define-key comint-mode-map (kbd "M-t") 'next-line)
-  (define-key comint-mode-map (kbd "M-c") 'previous-line)
-  (define-key comint-mode-map (kbd "M-e") 'delete-backward-char)
-  (define-key comint-mode-map (kbd "M-u") 'delete-char)
-  (define-key comint-mode-map (kbd "M-.") 'backward-kill-word)
-  (define-key comint-mode-map (kbd "M-p") 'kill-word)
-  (define-key comint-mode-map (kbd "M-d") 'move-beginning-of-line)
-  (define-key comint-mode-map (kbd "M-q") 'xah-cut-line-or-region)
-  (define-key comint-mode-map (kbd "M-j") 'xah-copy-line-or-region)
-  (define-key comint-mode-map (kbd "M-k") 'yank)
-  )
-(add-hook 'comint-mode-hook 'xah-comint-keys )
-(add-hook 'minibuffer-inactive-mode-hook 'xah-comint-keys )
-
-  (define-key minibuffer-local-map (kbd "M-g") 'backward-word)
-  (define-key minibuffer-local-map (kbd "M-r") 'forward-word)
-  (define-key minibuffer-local-map (kbd "M-h") 'backward-char)
-  (define-key minibuffer-local-map (kbd "M-n") 'forward-char)
-  (define-key minibuffer-local-map (kbd "M-t") 'next-line)
-  (define-key minibuffer-local-map (kbd "M-c") 'previous-line)
-  (define-key minibuffer-local-map (kbd "M-e") 'delete-backward-char)
-  (define-key minibuffer-local-map (kbd "M-u") 'delete-char)
-  (define-key minibuffer-local-map (kbd "M-.") 'backward-kill-word)
-  (define-key minibuffer-local-map (kbd "M-p") 'kill-word)
-  (define-key minibuffer-local-map (kbd "M-d") 'move-beginning-of-line)
-  (define-key minibuffer-local-map (kbd "M-q") 'xah-cut-line-or-region)
-  (define-key minibuffer-local-map (kbd "M-j") 'xah-copy-line-or-region)
-  (define-key minibuffer-local-map (kbd "M-k") 'yank)
-
-;; add back some bindings for commands whose binding we displaced
-(define-key minibuffer-local-map (kbd "<f11>") 'previous-history-element)
-(define-key minibuffer-local-map (kbd "<f12>") 'next-history-element)
-(define-key minibuffer-local-map (kbd "S-<f11>") 'previous-matching-history-element)
-(define-key minibuffer-local-map (kbd "S-<f12>") 'next-matching-history-element)
+
 
 (defun xah-rcirc-mode-keys ()
   "my keybindings for `rcirc'.
@@ -220,30 +254,16 @@ For `Info-mode-hook'."
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
-(progn
-  (require 'dired )
-
-  ;; (define-key dired-mode-map (kbd "M-$") nil) ; was dired-up-directory
-  ;; (local-set-key (kbd "6") 'dired-up-directory)
-  (define-key dired-mode-map (kbd "M-g") 'backward-word)
-  (define-key dired-mode-map (kbd "M-c") 'previous-line)
-  (define-key dired-mode-map (kbd "o") 'other-window)
-  (define-key dired-mode-map (kbd "1") 'xah-previous-user-buffer)
-  (define-key dired-mode-map (kbd "2") 'delete-window)
-  (define-key dired-mode-map (kbd "3") 'delete-other-windows)
-  (define-key dired-mode-map (kbd "4") 'split-window-vertically)
-
-  (when (>= emacs-major-version 23)
- ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
- ;;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
-    (define-key dired-mode-map (kbd "<tab> 8") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
+(defun xah-eval-defun ()
+  "like `eval-defun' but doesn't need proper indentation for it to work.
+Still, the code isn't 100% correct.
+"
+  (interactive)
+  (save-excursion
+    (search-backward "(defun")
+    ;;    (mark-sexp)
+    ;;    (eval-region (region-beginning) (region-end))
+    (forward-sexp)
+    (call-interactively 'eval-last-sexp)
     )
   )
-
-(defun xah-Man-mode-keys ()
-  "my keybindings."
-  (local-set-key (kbd "3") 'delete-other-windows)
-  (local-set-key (kbd "4") 'split-window-vertically)
-  )
-(add-hook 'Man-mode-hook 'xah-Man-mode-keys)
-
