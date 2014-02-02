@@ -7,11 +7,11 @@
 (global-set-key (kbd "C-4") 'xah-convert-fullwidth-chars)
 (global-set-key (kbd "C-5") 'xah-convert-latin-alphabet-gothic)
 (global-set-key (kbd "C-6") nil)
-(global-set-key (kbd "C-7") 'xah-cycle-hyphen-underscore-space)
-(global-set-key (kbd "C-8") nil)
+(global-set-key (kbd "C-7") 'xah-previous-user-buffer)
+(global-set-key (kbd "C-8") 'xah-next-user-buffer)
 (global-set-key (kbd "C-9") nil)
 
-(progn 
+(progn
   (require 'ido)
   (define-key ido-file-completion-map (kbd "C-o") 'ido-fallback-command))
 

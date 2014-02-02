@@ -11,7 +11,6 @@
 
 
 (global-set-key (kbd "<home>") 'x6-command-mode-activate)
-(global-set-key (kbd "<f19>") 'x6-command-mode-activate)
 
 (global-set-key (kbd "<end>") 'x6-insert-mode-activate)
 ;; (global-set-key (kbd "<return>") 'x6-insert-mode-activate)
@@ -36,9 +35,6 @@
 (global-set-key (kbd "<C-f4>") 'yank-pop)
 (global-set-key (kbd "<f5>") 'undo)
 (global-set-key (kbd "<C-f5>") 'redo)
-
-(global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)
-(global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
 
 (global-set-key (kbd "C-S-t") 'xah-open-last-closed) ; 832    0.05%  xah-open-last-closed
 
