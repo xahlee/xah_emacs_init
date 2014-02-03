@@ -159,6 +159,12 @@ For `isearch-mode-hook'."
     )
   )
 
+(defun xah-perl-modes-keys ()
+  "Modify keymaps."
+  ;; (local-set-key (kbd "o") 'magit-status-mode)
+  ;; if in command mode, make ; do undo
+)
+(add-hook 'cperl-mode-hook 'xah-perl-modes-keys)
 
 (defun xah-magit-mode-keys ()
   "Modify keymaps."

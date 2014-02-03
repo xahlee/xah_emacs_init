@@ -85,7 +85,7 @@
 (global-set-key (kbd "<menu> ;") nil) ;
 (global-set-key (kbd "<menu> =") nil)
 (global-set-key (kbd "<menu> SPC") 'set-mark-command)
-(global-set-key (kbd "<menu> [") 'remove-square-brackets)
+(global-set-key (kbd "<menu> [") nil)
 (global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
 (global-set-key (kbd "<menu> `") 'make-backup)
 (global-set-key (kbd "<menu> a") 'mark-whole-buffer) ;★★     408    0.03%  mark-whole-buffer
@@ -181,6 +181,7 @@
 
 (global-set-key (kbd "<menu> q") 'xah-cut-all)
 (global-set-key (kbd "<menu> r") nil)
+(global-set-key (kbd "<menu> r [") 'remove-square-brackets)
 (global-set-key (kbd "<menu> r 3") 'xah-copy-to-register-1)
 (global-set-key (kbd "<menu> r 8") 'xah-paste-from-register-1)
 (global-set-key (kbd "<menu> r '") 'xah-replace-straight-quotes)
