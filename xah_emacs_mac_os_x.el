@@ -1,17 +1,77 @@
 ;-*- coding: utf-8 -*-
 ; Mac OS X Emacs related emacs customization
 
-; 2007-06, 2009-08-04
+; 2007-06, 2014-02-05
 ;   Xah Lee
 ; ∑ http://xahlee.org/
 
 
 
 ;; start emacs with GUI from shell
-;; /Applications/Emacs.app/Contents/MacOS/Emacs 
+;; /Applications/Emacs.app/Contents/MacOS/Emacs
 
-;; start emacsclient from shell  
-;; Applications/Emacs.app/Contents/MacOS/bin/emacsclient 
+;; start emacsclient from shell
+;; Applications/Emacs.app/Contents/MacOS/bin/emacsclient
+
+; setting Super ＆ Hyper keys for the Mac keyboard, for emacs running in OS X
+
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'meta)
+(setq ns-function-modifier 'control) ; set Mac's Fn key to type Hyper
+
+;; (cond
+;;  ((string-equal system-type "windows-nt") ; Microsoft Windows
+;;   (progn
+;;     nil )
+;;   )
+;;  ((string-equal system-type "darwin")   ; Mac OS X
+;;   (progn
+
+;; (global-set-key (kbd "s-\"") 'xah-compact-uncompact-Block)
+;; (global-set-key (kbd "s-2") 'delete-window)
+;; (global-set-key (kbd "s-9") 'xah-select-text-in-quote)
+;; (global-set-key (kbd "s-s") 'xah-toggle-letter-case)
+
+;; (global-set-key (kbd "s-SPC") 'set-mark-command)
+
+;; (global-set-key (kbd "s-g") 'backward-word)
+;; (global-set-key (kbd "s-r") 'forward-word)
+;; (global-set-key (kbd "s-h") 'backward-char)
+;; (global-set-key (kbd "s-n") 'forward-char)
+;; (global-set-key (kbd "s-t") 'next-line)
+;; (global-set-key (kbd "s-c") 'previous-line)
+;; (global-set-key (kbd "s-e") 'delete-backward-char)
+;; (global-set-key (kbd "s-u") 'delete-char)
+;; (global-set-key (kbd "s-.") 'backward-kill-word)
+;; (global-set-key (kbd "s-o") 'other-window)
+;; (global-set-key (kbd "s-p") 'kill-word)
+;; (global-set-key (kbd "s-i") 'kill-line)
+;; (global-set-key (kbd "s-d") 'xah-beginning-of-line-or-block)
+;; (global-set-key (kbd "s-q") 'xah-cut-line-or-region)
+;; (global-set-key (kbd "s-j") 'xah-copy-line-or-region)
+;; (global-set-key (kbd "s-k") 'yank)
+
+;; (global-set-key (kbd "s-,") 'xah-shrink-whitespaces) ;5852    0.36%  xah-shrink-whitespaces
+;; (global-set-key (kbd "s-'") 'xah-compact-uncompact-block) ;1037    0.06%  xah-compact-uncompact-block
+
+;; (global-set-key (kbd "s-6") 'xah-select-current-block) ; 3107    0.19%  xah-select-current-block
+;; (global-set-key (kbd "s-7") 'xah-select-current-line) ; 2526    0.16%  xah-select-current-line
+;; (global-set-key (kbd "s-8") 'xah-extend-selection) ; 3332    0.21%  xah-extend-selection
+;; (global-set-key (kbd "s-9") 'xah-select-text-in-quote) ; 4603    0.28%  xah-select-text-in-quote
+
+;; (global-set-key (kbd "s-f") 'isearch-forward)
+
+;; (global-set-key (kbd "s-m") 'hippie-expand)
+
+;; (global-set-key (kbd "s-w") nil)        ; 2014-02-04 todo. this is a hack
+
+;;     )
+;;   )
+;;  ((string-equal system-type "gnu/linux") ; linux
+;;   (progn
+;;      )
+;;   )
+;;  )
 
 (defun open-with-textwrangler ()
   "Open the current file in Mac's TextWrangler."

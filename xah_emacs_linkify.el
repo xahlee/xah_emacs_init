@@ -40,7 +40,10 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
                 (setq ξwh
                       (cond
                        ((string-match "\.svg$" ξfp) (get-image-dimensions ξfp))
-                       (t (get-image-dimensions-imk ξfp)) ) )
+                       
+(t (get-image-dimensions ξfp))
+;; (t (get-image-dimensions-imk ξfp))
+ ) )
                 (setq ξw (number-to-string (elt ξwh 0)))
                 (setq ξh (number-to-string (elt ξwh 1)))
                 (setq ξwhStr

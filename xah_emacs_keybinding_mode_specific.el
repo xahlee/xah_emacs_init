@@ -1,7 +1,6 @@
 ;;-*- coding: utf-8 -*-
 ;; 2013-09-02
 
-
 (defun xah-isearch-mode-keys ()
   "xah keybindings for `isearch-mode'.
 For `isearch-mode-hook'."
@@ -36,7 +35,7 @@ For `isearch-mode-hook'."
 (add-hook 'comint-mode-hook 'xah-comint-keys )
 (add-hook 'minibuffer-inactive-mode-hook 'xah-comint-keys )
 
-(progn 
+(progn
   (define-key minibuffer-local-map (kbd "M-g") 'backward-word)
   (define-key minibuffer-local-map (kbd "M-r") 'forward-word)
   (define-key minibuffer-local-map (kbd "M-h") 'backward-char)
@@ -138,7 +137,6 @@ For `isearch-mode-hook'."
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
 (add-hook 'nxml-mode-hook 'xah-html-mode-keys)
 
-
 (progn
   (require 'dired )
 
@@ -183,13 +181,9 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "2") 'delete-window)
   (local-set-key (kbd "3") 'delete-other-windows)
   (local-set-key (kbd "4") 'split-window-vertically)
+  (local-set-key (kbd "s") 'xah-end-of-line-or-block)
   )
 (add-hook 'Man-mode-hook 'xah-Man-mode-keys)
-
-
-
-
-
 
 ;; (defun xah-cperl-mode-keys ()
 ;;   "Modify keymaps used by cperl-mode."
@@ -220,8 +214,6 @@ For `isearch-mode-hook'."
 
 (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
 (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
-
-
 
 (defun xah-help-mode-keys ()
   "Modify keymaps"

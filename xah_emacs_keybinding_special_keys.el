@@ -19,6 +19,7 @@
 (global-set-key (kbd "<f17>") 'other-frame)      ; middle
 
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
+
 
 (global-set-key (kbd "<tab>") nil)      ; mode specific
 
@@ -79,6 +80,6 @@
 (global-set-key (kbd "<f1> [") 'lookup-word-dict-org)
 (global-set-key (kbd "<f1> ]") 'lookup-wiktionary)
 
-
 ; 6067    0.38%  other-window
 
+(global-set-key (kbd "<f10>") 'other-frame)

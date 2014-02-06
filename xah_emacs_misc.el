@@ -179,6 +179,9 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("py3doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
 
         ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")
+
+        ("obn_outbound_notes" . "~/git/outbound_notes/")
+        ("o2_outbound_server" . "~/xobt2/outbound/")
 ) )
 
 (defun xah-open-file-fast (openCode)
@@ -625,7 +628,7 @@ Requires a python script. See code."
   (let (scriptName bds)
     (setq bds (bounds-of-thing-at-point 'filename) )
     (save-excursion
-      (setq scriptName (format "/usr/bin/python3 ~/git/xahscripts/emacs_pydoc_ref_linkify.py3 %s" (buffer-file-name)) )
+      (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)) )
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t)
       )
     ))
