@@ -43,8 +43,20 @@
 (global-set-key (kbd "C-z") 'comment-dwim) ; 1214    0.08%  comment-dwim
 
 
-(global-set-key (kbd "<prior>") 'xah-backward-block) ; page up 93862    5.83%  xah-backward-block
-(global-set-key (kbd "<next>") 'xah-forward-block) ;  page down 80008    4.97%  xah-forward-block
+
+;; page up 93862    5.83%  xah-backward-block
+;; page down 80008    4.97%  xah-forward-block
+
+;; problem in org mode
+;; (global-set-key (kbd "<C-tab>") 'xah-previous-user-buffer) ; page up
+;; (global-set-key (kbd "<C-S-tab>") 'xah-next-user-buffer) ; page down
+
+;; problem with this is that, if a split screen is juts 5 lines high, it goes over
+;; (global-set-key (kbd "<prior>") (lambda () (interactive) (scroll-down 10))) ; page up
+;; (global-set-key (kbd "<next>") (lambda () (interactive) (scroll-up 10))) ; page down
+
+(global-set-key (kbd "<C-prior>") 'xah-previous-user-buffer) ; page up
+(global-set-key (kbd "<C-next>") 'xah-next-user-buffer) ; page down
 
 (global-set-key (kbd "<S-prior>") 'scroll-down) ; page up
 (global-set-key (kbd "<S-next>") 'scroll-up) ; page down
@@ -54,11 +66,6 @@
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
-
-(global-set-key (kbd "<C-prior>") 'xah-previous-user-buffer)
-(global-set-key (kbd "<C-next>") 'xah-next-user-buffer)
-(global-set-key (kbd "<S-prior>") 'xah-previous-emacs-buffer)
-(global-set-key (kbd "<S-next>") 'xah-next-emacs-buffer)
 
 ;  14181    0.88%  xah-backward-open-bracket
 ;  17177    1.07%  xah-forward-close-bracket

@@ -63,7 +63,7 @@
   (global-set-key (kbd "<menu> <f9>") 'highlight-symbol-query-replace)
   )
 
-                                        ;xah-cycle-camel-style-case
+;; xah-cycle-camel-style-case
 
 (global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> '") nil) ;
@@ -72,8 +72,8 @@
 (global-set-key (kbd "<menu> -") nil)
 
 (global-set-key (kbd "<menu> /") nil)
-(global-set-key (kbd "<menu> 0") nil)
-(global-set-key (kbd "<menu> 1") nil)
+(global-set-key (kbd "<menu> 0") 'end-of-buffer)
+(global-set-key (kbd "<menu> 1") 'beginning-of-buffer)
 (global-set-key (kbd "<menu> 2") 'delete-window)        ;
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ;4996    0.31%  delete-other-windows
 (global-set-key (kbd "<menu> 4") 'split-window-vertically) ; 2742    0.17%  split-window-vertically

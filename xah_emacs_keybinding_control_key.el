@@ -11,6 +11,9 @@
 (global-set-key (kbd "C-8") 'xah-next-user-buffer)
 (global-set-key (kbd "C-9") nil)
 
+(global-set-key (kbd "C-&") 'xah-previous-emacs-buffer)
+(global-set-key (kbd "C-*") 'xah-next-emacs-buffer)
+
 (progn
   (require 'ido)
   (define-key ido-file-completion-map (kbd "C-o") 'ido-fallback-command))
@@ -28,8 +31,9 @@
 ;; (global-set-key (kbd "C-k") nil)
 ;; (global-set-key (kbd "C-l") nil)
 ;; ;; (global-set-key (kbd "C-m") nil) ; return
-;; ;; (global-set-key (kbd "C-n") nil) ; new
-;; ;; (global-set-key (kbd "C-o") nil) ; open
+(global-set-key (kbd "C-S-n") 'make-frame-command) ; new
+(global-set-key (kbd "C-n") 'xah-new-empty-buffer) ; new
+(global-set-key (kbd "C-o") 'find-file) ; open
 ;; (global-set-key (kbd "C-p") nil)
 ;; ;; (global-set-key (kbd "C-q") nil) ; quote
 ;; (global-set-key (kbd "C-r") nil)
@@ -40,7 +44,7 @@
 ;; ;; (global-set-key (kbd "C-w") nil) ; close
 ;; ;; (global-set-key (kbd "C-x") nil) C-x
 ;; ;; (global-set-key (kbd "C-y") nil)
-;; (global-set-key (kbd "C-z") nil)
+(global-set-key (kbd "C-z") 'undo)
 
 ;(global-set-key (kbd "C-o") 'backward-sexp)
 ;(global-set-key (kbd "C-u") 'forward-sexp)
