@@ -167,7 +167,7 @@ For `isearch-mode-hook'."
 (defun xah-magit-mode-keys ()
   "Modify keymaps."
   (local-set-key (kbd "<tab> <tab>") 'magit-toggle-section)
-  (local-set-key (kbd "o") 'magit-status-mode)
+  ;; (local-set-key (kbd "o") 'magit-status-mode)
   (local-set-key (kbd "1") 'xah-previous-user-buffer)
   (local-set-key (kbd "2") 'delete-window)
   (local-set-key (kbd "3") 'delete-other-windows)
@@ -181,7 +181,8 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "2") 'delete-window)
   (local-set-key (kbd "3") 'delete-other-windows)
   (local-set-key (kbd "4") 'split-window-vertically)
-  (local-set-key (kbd "s") 'xah-end-of-line-or-block)
+  (local-set-key (kbd "6") 'xah-select-current-block)
+  (local-set-key (kbd "8") 'xah-extend-selection)
   )
 (add-hook 'Man-mode-hook 'xah-Man-mode-keys)
 

@@ -40,7 +40,6 @@
 (package-initialize)
 (require 'highlight-symbol nil "noerror")
 
-
 
 
 ;; stars indicate frequency of use
@@ -189,10 +188,11 @@
 (global-set-key (kbd "<menu> r .") 'xah-convert-english-chinese-punctuation)
 (global-set-key (kbd "<menu> r d") 'delete-matching-lines) ; ★★     317    0.02%  delete-matching-lines
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
+(global-set-key (kbd "<menu> r g") 'xah-convert-latin-alphabet-gothic)
 (global-set-key (kbd "<menu> r p") 'xah-convert-asian/ascii-space)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
-
+(global-set-key (kbd "<menu> r w") 'xah-convert-fullwidth-chars)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
 
 (progn
