@@ -51,19 +51,9 @@
 ;; (global-set-key (kbd "<C-tab>") 'xah-previous-user-buffer) ; page up
 ;; (global-set-key (kbd "<C-S-tab>") 'xah-next-user-buffer) ; page down
 
-(defun xah-scroll-down-some ()
-  "scroll down 10 lines"
-  (interactive)
-  (scroll-down 10))
-
-(defun xah-scroll-up-some ()
-  "scroll up 10 lines"
-  (interactive)
-  (scroll-up 10))
-
-;; problem with this is that, if a split screen is juts 5 lines high, it goes over
-(global-set-key (kbd "<prior>") 'xah-scroll-down-some) ; page up
-(global-set-key (kbd "<next>") 'xah-scroll-up-some) ; page down
+;; ;; problem with setting page up/down key to scroll 10 lines is: if a split screen is juts 5 lines high, it goes over. • page down no longer move cursor to end of bufffer
+;; (global-set-key (kbd "<prior>") 'xah-scroll-down-some) ; page up
+;; (global-set-key (kbd "<next>") 'xah-scroll-up-some) ; page down
 
 (global-set-key (kbd "<C-prior>") 'xah-previous-user-buffer) ; page up
 (global-set-key (kbd "<C-next>") 'xah-next-user-buffer) ; page down

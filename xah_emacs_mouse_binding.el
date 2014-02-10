@@ -12,6 +12,9 @@
 
 ;; mouse
 
+;; no acceleration on wheel
+(setq mouse-wheel-progressive-speed nil)
+
   (global-set-key (kbd "<mouse-3>") 'describe-char) ; right button
 
 ;; set the “forward button” (5th button) to close.
@@ -30,40 +33,30 @@
   (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
   (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
 
-  (global-set-key (kbd "<C-mouse-4>") 'xah-backward-block) ; wheel up
-  (global-set-key (kbd "<C-mouse-5>") 'xah-forward-block) ; wheel down
+  ;; ;; no accelerated scroll, but works well with logitech spin wheel http://xahlee.info/kbd/mouse_with_spinning_flywheel.html
+  ;; (global-set-key (kbd "<mouse-4>") 'xah-scroll-down-10-lines) ; wheel up
+  ;; (global-set-key (kbd "<mouse-5>") 'xah-scroll-up-10-lines) ; wheel down
 
-  (global-set-key (kbd "<S-mouse-4>") 'xah-previous-emacs-buffer) ;
-  (global-set-key (kbd "<S-mouse-5>") 'xah-next-emacs-buffer) ;
+;; 'xah-backward-block
+;; 'xah-forward-block
+
+  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase) ; wheel up
+  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease) ; wheel down
+
+  (global-set-key (kbd "<S-mouse-4>") 'previous-buffer) ;
+  (global-set-key (kbd "<S-mouse-5>") 'next-buffer) ;
 
   (global-set-key (kbd "<M-mouse-4>") 'xah-backward-open-bracket ) ;
   (global-set-key (kbd "<M-mouse-5>") 'xah-forward-close-bracket ) ;
 
-  (global-set-key (kbd "<C-S-mouse-4>") 'text-scale-increase) ;
-  (global-set-key (kbd "<C-S-mouse-5>") 'text-scale-decrease) ;
+  (global-set-key (kbd "<s-mouse-4>") 'mwheel-scroll ) ;
+  (global-set-key (kbd "<s-mouse-5>") 'mwheel-scroll ) ;
+
+  (global-set-key (kbd "<C-S-mouse-4>") nil) ;
+  (global-set-key (kbd "<C-S-mouse-5>") nil) ;
 
   )
 
  ((string-equal system-type "darwin") ; Mac
   (global-set-key (kbd "<mouse-5>") 'xah-close-current-buffer) ) )
 
-(defun scroll-up-10-lines ()
-  "Scroll up 10 lines"
-  (interactive)
-  (scroll-up 10))
-
-(defun scroll-down-10-lines ()
-  "Scroll down 10 lines"
-  (interactive)
-  (scroll-down 10))
-
-(defun cursor-down-some-lines ()
-  "Move cursor down 10 logical lines"
-  (interactive)
-  (forward-line 10)
-)
-
-(defun cursor-up-some-lines ()
-  "Move cursor up 10 logical lines"
-  (interactive)
-  (forward-line -10))
