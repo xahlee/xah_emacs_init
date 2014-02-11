@@ -98,19 +98,19 @@ e.g. http://ergoemacs.org/emacs/emacs.html ⇒ ergoemacs.org
 "
 (replace-regexp-in-string "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/.+" "\\2.\\3" myURL) )
 
-(defun xahsite-get-domain-of-local-file-path (fPath)
-  "Returns the domain name of full path fPath belong to.
+(defun xahsite-get-domain-of-local-file-path (absPath)
+  "Returns the domain name of full path absPath belong to.
 e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「ergoemacs.org」.
 
 This function depends on `xahsite-server-root-path'."
-  (let ((case-fold-search nil) ξstr (ξpathPart (substract-path (downcase fPath) (downcase (xahsite-server-root-path)))))
+  (let ((case-fold-search nil) ξstr (ξpathPart (substract-path (downcase absPath) (downcase (xahsite-server-root-path)))))
     (if (string-match "\\`\\([^/]+?\\)/" ξpathPart )
         (progn
           (setq ξstr (match-string 1 ξpathPart))
           (replace-regexp-in-string "_" "." ξstr "FIXEDCASE" "LITERAL")
           )
-      (error "「%s」 is not a full path for xah site." fPath ) ) ) )
+      (error "「%s」 is not a full path for xah site." absPath ) ) ) )
 
 (defun xahsite-get-path-relative-to-domain (fPath)
   "Returns the path relative to that file's domain's root dir.

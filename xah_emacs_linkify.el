@@ -503,11 +503,13 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
          fPath rltvPath titleText resultStr
-         (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
+         (currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
          )
 
     (setq fPath (xahsite-web-path-to-filepath inputStr default-directory) )
+
+(message "xx fPath is %s" fPath)
 
     (if (file-exists-p fPath)
         (progn
@@ -516,15 +518,20 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
                     (xhm-get-html-file-title fPath)
                   (file-name-nondirectory fPath)))
           (setq resultStr
-                (if (string-equal
+                (let ()
+ (if (string-equal
                      (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
                      (xahsite-get-domain-of-local-file-path fPath)
                      )
                     (progn
+(message "xx is equal" )
                       (setq rltvPath (file-relative-name fPath currentBufferFileDir))
                       (format "<a href=\"%s\">%s</a>" rltvPath titleText))
                   (progn
-                    (format "<a href=\"%s\">%s</a>" (xahsite-filepath-to-url fPath) titleText)) ) )
+(message "xx is  no equal" )
+                    (format "<a href=\"%s\">%s</a>" (xahsite-filepath-to-url fPath) titleText)) )
+)
+ )
           (delete-region p1 p2)
           (insert resultStr)
           )
