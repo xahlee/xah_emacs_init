@@ -211,6 +211,7 @@ For `isearch-mode-hook'."
 
   (local-set-key (kbd "<tab> t") 'eval-last-sexp)
   (local-set-key (kbd "<tab> f") 'xah-eval-defun)
+  ;; (local-set-key (kbd "<tab> <tab>") 'indent-for-tab-command)
 )
 
 (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)

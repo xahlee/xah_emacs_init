@@ -51,7 +51,7 @@
 (global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
                                         ;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
 (global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
-(global-set-key (kbd "<menu> <tab>") 'indent-region)
+(global-set-key (kbd "<menu> <tab>") 'indent-for-tab-command)
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 

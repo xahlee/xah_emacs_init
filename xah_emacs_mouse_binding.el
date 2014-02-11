@@ -40,17 +40,17 @@
 ;; 'xah-backward-block
 ;; 'xah-forward-block
 
-  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase) ; wheel up
-  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease) ; wheel down
+  (global-set-key (kbd "<C-mouse-4>") 'xah-backward-block) ;
+  (global-set-key (kbd "<C-mouse-5>") 'xah-forward-block) ;
 
-  (global-set-key (kbd "<S-mouse-4>") 'previous-buffer) ;
-  (global-set-key (kbd "<S-mouse-5>") 'next-buffer) ;
+  (global-set-key (kbd "<S-mouse-4>") 'xah-cursor-up-10-lines) ; 
+  (global-set-key (kbd "<S-mouse-5>") 'xah-cursor-down-10-lines) ; 
 
-  (global-set-key (kbd "<M-mouse-4>") 'xah-backward-open-bracket ) ;
-  (global-set-key (kbd "<M-mouse-5>") 'xah-forward-close-bracket ) ;
+  (global-set-key (kbd "<M-mouse-4>") 'xah-backward-close-bracket) ;
+  (global-set-key (kbd "<M-mouse-5>") 'xah-forward-close-bracket) ;
 
-  (global-set-key (kbd "<s-mouse-4>") 'mwheel-scroll ) ;
-  (global-set-key (kbd "<s-mouse-5>") 'mwheel-scroll ) ;
+  (global-set-key (kbd "<s-mouse-4>") 'text-scale-increase ) ;
+  (global-set-key (kbd "<s-mouse-5>") 'text-scale-decrease ) ;
 
   (global-set-key (kbd "<C-S-mouse-4>") nil) ;
   (global-set-key (kbd "<C-S-mouse-5>") nil) ;

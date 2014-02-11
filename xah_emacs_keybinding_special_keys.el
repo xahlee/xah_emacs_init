@@ -52,8 +52,8 @@
 ;; (global-set-key (kbd "<C-S-tab>") 'xah-next-user-buffer) ; page down
 
 ;; ;; problem with setting page up/down key to scroll 10 lines is: if a split screen is juts 5 lines high, it goes over. • page down no longer move cursor to end of bufffer
-;; (global-set-key (kbd "<prior>") 'xah-scroll-down-some) ; page up
-;; (global-set-key (kbd "<next>") 'xah-scroll-up-some) ; page down
+;; (global-set-key (kbd "<prior>") 'xah-scroll-down-10-lines) ; page up
+;; (global-set-key (kbd "<next>") 'xah-scroll-up-10-lines) ; page down
 
 (global-set-key (kbd "<C-prior>") 'xah-previous-user-buffer) ; page up
 (global-set-key (kbd "<C-next>") 'xah-next-user-buffer) ; page down

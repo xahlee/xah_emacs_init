@@ -9,27 +9,6 @@
 
 
 
-(defun xah-scroll-down-10-lines ()
-  "scroll down 10 lines"
-  (interactive)
-  (scroll-down 10))
-
-(defun xah-scroll-up-10-lines ()
-  "scroll up 10 lines"
-  (interactive)
-  (scroll-up 10))
-
-(defun cursor-down-some-lines ()
-  "Move cursor down 10 logical lines"
-  (interactive)
-  (forward-line 10)
-)
-
-(defun cursor-up-some-lines ()
-  "Move cursor up 10 logical lines"
-  (interactive)
-  (forward-line -10))
-
 (defun set-input-method-to-chinese (ξn)
   "Set input method to Chinese.
 

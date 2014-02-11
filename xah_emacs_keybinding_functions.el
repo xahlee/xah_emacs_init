@@ -1,132 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;; 2014-01-05
 
-(defun xah-forward-block (&optional number)
-  "Move cursor forward to the beginning of next text block.
-A text block is separated by 2 empty lines (or line with just whitespace).
-In most major modes, this is similar to `forward-paragraph', but this command's behavior is the same regardless of syntax table.
-
-With a prefix argument NUMBER, move forward NUMBER blocks.
-With a negative prefix argument NUMBER, move backward NUMBER blocks."
-  (interactive "p")
-  (if (and number (> 0 number))
-      (xah-backward-block (- 0 number))
-  (if (search-forward-regexp "\n[[:blank:]\n]*\n+" nil "NOERROR" number)
-      (progn (backward-char))
-    (progn (goto-char (point-max))))))
-
-(defun xah-backward-block (&optional number)
-  "Move cursor backward to previous text block.
-See: `xah-forward-block'"
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (xah-forward-block (- 0 number))
-    (if (search-backward-regexp "\n[\t\n ]*\n+" nil "NOERROR" number)
-        (progn
-          (skip-chars-backward "\n\t ")
-          (forward-char 1))
-      (progn (goto-char (point-min))))))
-
-(defun xah-beginning-of-line-or-block ()
-  "Move cursor to beginning of line, or beginning of current or previous text block.
- (a text block is separated by empty lines)"
-  (interactive)
-  (if (or (equal last-command this-command )
-          (equal last-command 'xah-end-of-line-or-block ) )
-      (xah-backward-block)
-    (beginning-of-line)
-    ))
-
-(defun xah-end-of-line-or-block ()
-  "Move cursor to end of line, or end of current or next text block.
- (a text block is separated by empty lines)"
-  (interactive)
-  (if (or (equal last-command this-command )
-          (equal last-command 'xah-beginning-of-line-or-block ) )
-      (xah-forward-block)
-    (end-of-line)
-    ))
-
-(defun xah-forward-open-bracket (&optional number)
-  "Move cursor to the next occurrence of left bracket or quotation mark.
-
-With prefix NUMBER, move forward to the next NUMBER left bracket or quotation mark.
-
-With a negative prefix NUMBER, move backward to the previous NUMBER left bracket or quotation mark."
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (xah-backward-open-bracket (- 0 number))
-    (forward-char 1)
-    (search-forward-regexp
-     (eval-when-compile
-       (regexp-opt
-        '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«"))) nil t number)
-    (backward-char 1)))
-
-(defun xah-backward-open-bracket (&optional number)
-  "Move cursor to the previous occurrence of left bracket or quotation mark.
-With prefix argument NUMBER, move backward NUMBER open brackets.
-With a negative prefix NUMBER, move forward NUMBER open brackets."
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (xah-forward-open-bracket (- 0 number))
-    (search-backward-regexp
-   (eval-when-compile
-     (regexp-opt
-      '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«"))) nil t number)))
-
-(defun xah-forward-close-bracket (&optional number)
-  "Move cursor to the next occurrence of right bracket or quotation mark.
-With a prefix argument NUMBER, move forward NUMBER closed bracket.
-With a negative prefix argument NUMBER, move backward NUMBER closed brackets."
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (xah-backward-close-bracket (- 0 number))
-    (search-forward-regexp
-     (eval-when-compile
-       (regexp-opt '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»"))) nil t number)))
-
-(defun xah-backward-close-bracket (&optional number)
-  "Move cursor to the previous occurrence of right bracket or quotation mark.
-With a prefix argument NUMBER, move backward NUMBER closed brackets.
-With a negative prefix argument NUMBER, move forward NUMBER closed brackets."
-  (interactive "p")
-  (if (and number
-           (> 0 number))
-      (xah-forward-close-bracket (- 0 number))
-    (backward-char 1)
-    (search-backward-regexp
-     (eval-when-compile
-       (regexp-opt '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»"))) nil t number)
-    (forward-char 1)))
-
-(defun xah-forward-quote (&optional number)
-  "Move cursor to the next occurrence of ASCII quotation mark, single or double.
-
-With prefix NUMBER, move forward to the next NUMBER quotation mark.
-
-With a negative prefix NUMBER, move backward to the previous NUMBER quotation mark."
-  (interactive "p")
-  (if (and number (> 0 number))
-      (xah-forward-quote (- 0 number))
-    (search-forward-regexp (eval-when-compile (regexp-opt '("\"" "'"))) nil t number)
-    ))
-
-(defun xah-backward-quote (&optional number)
-  "Move cursor to the previous occurrence of ASCII quotation mark, single or double.
-With prefix argument NUMBER, move backward NUMBER quotation mark.
-With a negative prefix NUMBER, move forward NUMBER quotation mark."
-  (interactive "p")
-  (if (and number (> 0 number)) (xah-backward-quote (- 0 number))
-    (search-backward-regexp (eval-when-compile (regexp-opt '("\"" "'"))) nil t number)))
-
-
-
-
 (defun xah-copy-line-or-region ()
   "Copy current line, or current text selection."
   (interactive)
@@ -273,12 +147,12 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   "Select text between the nearest left and right delimiters.
 Delimiters are paired characters:
  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩
- For practical purposes, also: \"\", but not single quotes."
+ For practical purposes, also: \"double quote\" and 'single quote'."
  (interactive)
  (let (p1)
-   (skip-chars-backward "^<>([{“「『‹«（〈《〔【〖⦗〘⦅〚⦃⟨\"")
+   (skip-chars-backward "^<>([{“「『‹«（〈《〔【〖⦗〘⦅〚⦃⟨\"'")
    (setq p1 (point))
-   (skip-chars-forward "^<>)]}”」』›»）〉》〕】〗⦘〙⦆〛⦄⟩\"")
+   (skip-chars-forward "^<>)]}”」』›»）〉》〕】〗⦘〙⦆〛⦄⟩\"'")
    (set-mark p1)))
 
 (defun xah-select-current-line ()
