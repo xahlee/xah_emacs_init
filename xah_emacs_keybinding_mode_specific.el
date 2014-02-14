@@ -186,12 +186,7 @@ For `isearch-mode-hook'."
   )
 (add-hook 'Man-mode-hook 'xah-Man-mode-keys)
 
-;; (defun xah-cperl-mode-keys ()
-;;   "Modify keymaps used by cperl-mode."
-;;   (local-set-key (kbd ")") 'self-insert-command)
-;;   (local-set-key (kbd "]") 'self-insert-command)
-;; )
-;; (add-hook 'cperl-mode-hook 'xah-cperl-mode-keys)
+
 
 ;; ;(setq mybuf (get-buffer-create "*show commands*"))
 ;; (defun xx ()

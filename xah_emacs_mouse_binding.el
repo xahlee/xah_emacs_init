@@ -12,11 +12,6 @@
 
 ;; mouse
 
-;; no acceleration on wheel
-(setq mouse-wheel-progressive-speed nil)
-
-  (global-set-key (kbd "<mouse-3>") 'describe-char) ; right button
-
 ;; set the “forward button” (5th button) to close.
 (cond
  ((string-equal system-type "windows-nt") ; Windows
@@ -28,6 +23,9 @@
   )
 
  ((string-equal system-type "gnu/linux")
+
+(global-set-key (kbd "<mouse-3>") 'describe-char) ; right button
+
   (global-set-key (kbd "<mouse-9>") 'xah-close-current-buffer) ; next page button
 
   (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
@@ -37,14 +35,11 @@
   ;; (global-set-key (kbd "<mouse-4>") 'xah-scroll-down-10-lines) ; wheel up
   ;; (global-set-key (kbd "<mouse-5>") 'xah-scroll-up-10-lines) ; wheel down
 
-;; 'xah-backward-block
-;; 'xah-forward-block
-
   (global-set-key (kbd "<C-mouse-4>") 'xah-backward-block) ;
   (global-set-key (kbd "<C-mouse-5>") 'xah-forward-block) ;
 
-  (global-set-key (kbd "<S-mouse-4>") 'xah-cursor-up-10-lines) ; 
-  (global-set-key (kbd "<S-mouse-5>") 'xah-cursor-down-10-lines) ; 
+  (global-set-key (kbd "<S-mouse-4>") 'xah-cursor-up-10-lines) ;
+  (global-set-key (kbd "<S-mouse-5>") 'xah-cursor-down-10-lines) ;
 
   (global-set-key (kbd "<M-mouse-4>") 'xah-backward-close-bracket) ;
   (global-set-key (kbd "<M-mouse-5>") 'xah-forward-close-bracket) ;

@@ -139,7 +139,7 @@ Generate a report of the replaced strings in a separate buffer."
           (replace-match "〔☛ <a href=" t) )
 
         (goto-char (point-min))
-        (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z]+?\\)〕" nil t)
+        (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z0-9]+?\\)〕" nil t)
           (setq changedItems (cons (match-string 1) changedItems ) )
           (replace-match "<code class=\"path-α\">\\1</code>" t) )
 

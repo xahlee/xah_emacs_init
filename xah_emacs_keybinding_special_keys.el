@@ -71,20 +71,16 @@
 ;  17177    1.07%  xah-forward-close-bracket
 
 
-(global-set-key (kbd "]") 'xah-close-current-buffer)
-
-(global-set-key (kbd "<XF86Launch8>") 'save-buffer)
 
 (global-set-key (kbd "<insert>") 'xah-switch-to-next-frame)
 
 
 
-(global-set-key (kbd "<f1> 6") 'lookup-all-dictionaries)
-(global-set-key (kbd "<f1> 7") 'lookup-google)
-(global-set-key (kbd "<f1> 8") 'lookup-wikipedia)
-(global-set-key (kbd "<f1> 9") 'lookup-word-definition)
-(global-set-key (kbd "<f1> 0") 'lookup-answers.com)
-(global-set-key (kbd "<f1> [") 'lookup-word-dict-org)
-(global-set-key (kbd "<f1> ]") 'lookup-wiktionary)
-
 ; 6067    0.38%  other-window
+
+(global-set-key (kbd "<XF86Launch5>") 'xah-close-current-buffer) ; F14 upper right corner
+
+;; <XF86Tools> F13 upper left corner
+;; <XF86Launch5> F14 upper right corner
+;; <XF86Launch8> F17 middle
+

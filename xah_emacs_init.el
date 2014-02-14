@@ -80,6 +80,7 @@ interactively by “eval-buffer”."
 
 (load (fullpath-relative-to-current-file "xah_emacs_cursor_movement"))
 (load (fullpath-relative-to-current-file "xah_emacs_editing_commands"))
+(load (fullpath-relative-to-current-file "xah_emacs_dired_commands"))
 (load (fullpath-relative-to-current-file "xah_emacs_generic"))
 
 (load (fullpath-relative-to-current-file "xah_emacs_html"))

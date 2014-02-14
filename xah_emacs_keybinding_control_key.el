@@ -30,9 +30,11 @@
 ;; (global-set-key (kbd "C-k") nil)
 ;; (global-set-key (kbd "C-l") nil)
 ;; ;; (global-set-key (kbd "C-m") nil) ; return
-(global-set-key (kbd "C-S-n") 'make-frame-command) ; new
-(global-set-key (kbd "C-n") 'xah-new-empty-buffer) ; new
-(global-set-key (kbd "C-o") 'find-file) ; open
+(global-set-key (kbd "C-S-n") 'make-frame-command) ; new window
+(global-set-key (kbd "C-n") 'xah-new-empty-buffer) ; 1700    0.11%  xah-new-empty-buffer
+
+(global-set-key (kbd "C-o") 'find-file) ; open. 765    0.05%  ido-find-file
+(global-set-key (kbd "C-S-o") 'xah-open-in-external-app) ; 0.00%  xah-open-in-external-app
 ;; (global-set-key (kbd "C-p") nil)
 ;; ;; (global-set-key (kbd "C-q") nil) ; quote
 ;; (global-set-key (kbd "C-r") nil)

@@ -112,9 +112,7 @@
 (global-set-key (kbd "<menu> g") 'list-matching-lines) ; 432    0.03%  list-matching-lines
 
 (progn
-                                        ;  (global-set-key (kbd "<menu> h") help-map) ;
   (global-set-key (kbd "<menu> h") nil)
-
   (global-set-key (kbd "<menu> h 0") 'lookup-all-dictionaries)
   (global-set-key (kbd "<menu> h 1") nil)
   (global-set-key (kbd "<menu> h 2") nil)
@@ -181,31 +179,31 @@
 (global-set-key (kbd "<menu> q") 'xah-cut-all)
 (global-set-key (kbd "<menu> r") nil)
 (global-set-key (kbd "<menu> r [") 'remove-square-brackets)
-(global-set-key (kbd "<menu> r 3") 'xah-copy-to-register-1)
-(global-set-key (kbd "<menu> r 8") 'xah-paste-from-register-1)
 (global-set-key (kbd "<menu> r '") 'xah-replace-straight-quotes)
 (global-set-key (kbd "<menu> r ,") 'xah-remove-punctuation-trailing-redundant-space)
 (global-set-key (kbd "<menu> r .") 'xah-convert-english-chinese-punctuation)
 (global-set-key (kbd "<menu> r d") 'delete-matching-lines) ; ★★     317    0.02%  delete-matching-lines
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
 (global-set-key (kbd "<menu> r g") 'xah-convert-latin-alphabet-gothic)
+(global-set-key (kbd "<menu> r j") 'xah-copy-to-register-1)
 (global-set-key (kbd "<menu> r p") 'xah-convert-asian/ascii-space)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
+(global-set-key (kbd "<menu> r k") 'xah-paste-from-register-1)
 (global-set-key (kbd "<menu> r w") 'xah-convert-fullwidth-chars)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
 
 (progn
+
   (global-set-key (kbd "<menu> t") nil)
-  (global-set-key (kbd "<menu> t 2") 'make-frame-command) ;
-  (global-set-key (kbd "<menu> t 3") 'xah-new-empty-buffer) ;  1700    0.11%  xah-new-empty-buffer
-  (global-set-key (kbd "<menu> t 4") 'ido-find-file)         ; open. 765    0.05%  ido-find-file
-  (global-set-key (kbd "<menu> t 6") 'xah-open-in-external-app) ; 0.00%  xah-open-in-external-app
+  (global-set-key (kbd "<menu> t 2") 'make-frame-command)
+  (global-set-key (kbd "<menu> t 3") 'xah-new-empty-buffer)
+  (global-set-key (kbd "<menu> t 4") 'find-file)
+
   (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
-  (global-set-key (kbd "<menu> t w") 'delete-trailing-whitespace)
   )
 
 (progn
