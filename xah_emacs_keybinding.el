@@ -70,12 +70,24 @@
 
 (global-set-key (kbd "<menu> -") nil)
 
+;; xah's
+   ;; 5064    0.31%  delete-other-windows
+   ;; 1384    0.09%  ergoemacs-move-cursor-next-pane
+   ;; 2742    0.17%  split-window-vertically
+   ;; 1136    0.07%  delete-window
+
+;; all people
+;; 18   other-window            19256   0.41    0.79
+;; 34   move-cursor-next-pane   12183   0.26    0.50
+;; 49   delete-other-windows    6968    0.15    0.29
+;; 67	split-window-vertically	4035	0.09	0.17
+
 (global-set-key (kbd "<menu> /") nil)
 (global-set-key (kbd "<menu> 0") 'end-of-buffer)
 (global-set-key (kbd "<menu> 1") 'beginning-of-buffer)
-(global-set-key (kbd "<menu> 2") 'delete-window)        ;
-(global-set-key (kbd "<menu> 3") 'delete-other-windows) ;4996    0.31%  delete-other-windows
-(global-set-key (kbd "<menu> 4") 'split-window-vertically) ; 2742    0.17%  split-window-vertically
+(global-set-key (kbd "<menu> 2") 'delete-window) ;    
+(global-set-key (kbd "<menu> 3") 'delete-other-windows) ;
+(global-set-key (kbd "<menu> 4") 'split-window-vertically) ; 
 (global-set-key (kbd "<menu> 5") 'shell-command) ;  ; 274    0.02%  shell-command
 (global-set-key (kbd "<menu> 6") 'write-file)
 (global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ;  find-file-at-point 4773    0.30%  xah-open-file-at-cursor
@@ -185,11 +197,9 @@
 (global-set-key (kbd "<menu> r d") 'delete-matching-lines) ; ★★     317    0.02%  delete-matching-lines
 (global-set-key (kbd "<menu> r f") 'xah-find-text)
 (global-set-key (kbd "<menu> r g") 'xah-convert-latin-alphabet-gothic)
-(global-set-key (kbd "<menu> r j") 'xah-copy-to-register-1)
 (global-set-key (kbd "<menu> r p") 'xah-convert-asian/ascii-space)
 (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
 (global-set-key (kbd "<menu> r u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
-(global-set-key (kbd "<menu> r k") 'xah-paste-from-register-1)
 (global-set-key (kbd "<menu> r w") 'xah-convert-fullwidth-chars)
 (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
 
@@ -199,9 +209,10 @@
   (global-set-key (kbd "<menu> t 2") 'make-frame-command)
   (global-set-key (kbd "<menu> t 3") 'xah-new-empty-buffer)
   (global-set-key (kbd "<menu> t 4") 'find-file)
-
   (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
+  (global-set-key (kbd "<menu> t j") 'xah-copy-to-register-1)
+  (global-set-key (kbd "<menu> t k") 'xah-paste-from-register-1)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
   )
