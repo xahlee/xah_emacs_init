@@ -2,10 +2,10 @@
 
 (global-set-key (kbd "C-1") 'cycle-font-backward)
 (global-set-key (kbd "C-2") 'cycle-font-forward)
-(global-set-key (kbd "C-3") 'cycle-font-2)
-(global-set-key (kbd "C-4") nil)
-(global-set-key (kbd "C-5") nil)
-(global-set-key (kbd "C-6") 'xah-cycle-camel-style-case)
+(global-set-key (kbd "C-3") 'xah-cycle-hyphen-underscore-space)
+(global-set-key (kbd "C-4") 'xah-cycle-camel-style-case)
+(global-set-key (kbd "C-5") 'cycle-font-2)
+(global-set-key (kbd "C-6") nil)
 (global-set-key (kbd "C-7") 'xah-previous-user-buffer)
 (global-set-key (kbd "C-8") 'xah-next-user-buffer)
 (global-set-key (kbd "C-9") nil)
@@ -45,7 +45,6 @@
 ;; ;; (global-set-key (kbd "C-w") nil) ; close
 ;; ;; (global-set-key (kbd "C-x") nil) C-x
 ;; ;; (global-set-key (kbd "C-y") nil)
-(global-set-key (kbd "C-z") 'undo)
 
 ;(global-set-key (kbd "C-o") 'backward-sexp)
 ;(global-set-key (kbd "C-u") 'forward-sexp)
@@ -67,3 +66,10 @@
 ;(global-unset-key (kbd "M-0") )         ; delete-window
 ;(global-unset-key (kbd "C-S-t") )       ; xah-open-last-closed
 ;(global-unset-key (kbd "C-u") )       ; universal-argument
+
+(global-set-key (kbd "C-S-t") 'xah-open-last-closed) ; 832    0.05%  xah-open-last-closed
+(global-set-key (kbd "C-w") 'xah-close-current-buffer) ; 19318    1.20%  xah-close-current-buffer
+
+;; 1214    0.08%  comment-dwim
+
+(global-set-key (kbd "C-z") 'undo)

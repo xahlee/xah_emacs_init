@@ -4,11 +4,10 @@
 ;; http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html
 
 (global-set-key (kbd "M-\"") 'xah-compact-uncompact-Block)
-(global-set-key (kbd "M-2") 'delete-window)
 (global-set-key (kbd "M-9") 'xah-select-text-in-quote)
-(global-set-key (kbd "M-s") 'xah-toggle-letter-case)
 
 (global-set-key (kbd "M-SPC") 'set-mark-command)
+(global-set-key (kbd "M-z") 'xah-toggle-letter-case)
 
 (global-set-key (kbd "M-g") 'backward-word)
 (global-set-key (kbd "M-r") 'forward-word)

@@ -172,8 +172,8 @@
                                         ;(global-set-key (kbd "<menu> j") 'kmacro-start-macro) ;  42    0.00%  kmacro-start-macro
                                         ;(global-set-key (kbd "<menu> k") 'kmacro-end-macro)   ; 36    0.00%  kmacro-end-macro
 (global-set-key (kbd "<menu> j") 'xah-copy-all)
-(global-set-key (kbd "<menu> k") nil)
-(global-set-key (kbd "<menu> l") 'xah-clean-whitespace)
+(global-set-key (kbd "<menu> k") 'xah-clean-whitespace)
+(global-set-key (kbd "<menu> l") 'recenter-top-bottom)
 
 (global-set-key (kbd "<menu> m") nil)
 

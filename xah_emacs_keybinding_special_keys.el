@@ -11,12 +11,8 @@
 
 
 (global-set-key (kbd "<home>") 'x6-command-mode-activate)
-
 (global-set-key (kbd "<end>") 'x6-insert-mode-activate)
 ;; (global-set-key (kbd "<return>") 'x6-insert-mode-activate)
-
-(global-set-key (kbd "<f15>") 'other-frame)      ; capslock
-(global-set-key (kbd "<f17>") 'other-frame)      ; middle
 
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
@@ -36,11 +32,6 @@
 (global-set-key (kbd "<C-f4>") 'yank-pop)
 (global-set-key (kbd "<f5>") 'undo)
 (global-set-key (kbd "<C-f5>") 'redo)
-
-(global-set-key (kbd "C-S-t") 'xah-open-last-closed) ; 832    0.05%  xah-open-last-closed
-
-(global-set-key (kbd "C-w") 'xah-close-current-buffer) ; 19318    1.20%  xah-close-current-buffer
-(global-set-key (kbd "C-z") 'comment-dwim) ; 1214    0.08%  comment-dwim
 
 
 
@@ -76,11 +67,17 @@
 
 
 
+(global-set-key (kbd "<f14>") 'xah-close-current-buffer) ;truely ergo keyboard, upper right key
+
+(global-set-key (kbd "<f17>") 'other-frame) ; truely ergo keyboard, middle key
+
 ; 6067    0.38%  other-window
 
 (global-set-key (kbd "<XF86Launch5>") 'xah-close-current-buffer) ; F14 upper right corner
 
-;; <XF86Tools> F13 upper left corner
-;; <XF86Launch5> F14 upper right corner
-;; <XF86Launch8> F17 middle
+(global-set-key (kbd "<XF86Cut>") 'xah-cut-line-or-region)
+(global-set-key (kbd "<XF86Copy>") 'xah-copy-line-or-region)
+(global-set-key (kbd "<XF86Paste>") 'yank)
+(global-set-key (kbd "<XF86Close>") 'xah-close-current-buffer) 
+
 

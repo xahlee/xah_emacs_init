@@ -127,16 +127,15 @@
 
 
 ;; default frame
-  (setq initial-frame-alist '((width . 100) (height . 54)))
-  (setq default-frame-alist
-        '((menu-bar-lines . 1)
-          (left-fringe)
-          (right-fringe)
-          (tool-bar-lines . 0)
-          (width . 100)
-          (height . 52)
-          ;; (cursor-type . box)
-          ))
+(setq initial-frame-alist '((width . 100) (height . 54)))
+(setq default-frame-alist
+      '((menu-bar-lines . 1)
+        (left-fringe)
+        (right-fringe)
+        (tool-bar-lines . 0)
+        (width . 100)
+        (height . 52)
+        ))
 
 ;; set font
 (cond
