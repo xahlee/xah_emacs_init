@@ -1,6 +1,13 @@
 ;; -*- coding: utf-8 -*-
 ;; 2014-01-05
 
+(defun xah-cut-line-or-region ()
+  "Cut the current line, or current text selection."
+  (interactive)
+  (if (region-active-p)
+      (kill-region (region-beginning) (region-end))
+    (kill-region (line-beginning-position) (line-beginning-position 2)) ) )
+
 (defun xah-copy-line-or-region ()
   "Copy current line, or current text selection."
   (interactive)
@@ -135,13 +142,6 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
      ((string= "all caps" (get this-command 'state))
       (downcase-region p1 p2) (put this-command 'state "all lower")) )
     ) )
-
-(defun xah-cut-line-or-region ()
-  "Cut the current line, or current text selection."
-  (interactive)
-  (if (region-active-p)
-      (kill-region (region-beginning) (region-end))
-    (kill-region (line-beginning-position) (line-beginning-position 2)) ) )
 
 (defun xah-select-text-in-quote ()
   "Select text between the nearest left and right delimiters.

@@ -102,6 +102,7 @@
     (global-set-key (kbd ".") 'backward-kill-word)
     (global-set-key (kbd "'") 'xah-compact-uncompact-block) ;
     (global-set-key (kbd ",") 'xah-shrink-whitespaces) ;
+    (global-set-key (kbd "SPC") 'set-mark-command) ;
     (global-set-key (kbd "0") nil)
     (global-set-key (kbd "1") nil)
     (global-set-key (kbd "2") 'delete-window)
