@@ -147,12 +147,12 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   "Select text between the nearest left and right delimiters.
 Delimiters are paired characters:
  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩
- For practical purposes, also: \"double quote\" and 'single quote'."
+ For practical purposes, also: \"double quote\"."
  (interactive)
  (let (p1)
-   (skip-chars-backward "^<>([{“「『‹«（〈《〔【〖⦗〘⦅〚⦃⟨\"'")
+   (skip-chars-backward "^<>([{“「『‹«（〈《〔【〖⦗〘⦅〚⦃⟨\"")
    (setq p1 (point))
-   (skip-chars-forward "^<>)]}”」』›»）〉》〕】〗⦘〙⦆〛⦄⟩\"'")
+   (skip-chars-forward "^<>)]}”」』›»）〉》〕】〗⦘〙⦆〛⦄⟩\"")
    (set-mark p1)))
 
 (defun xah-select-current-line ()

@@ -102,7 +102,6 @@
     (global-set-key (kbd ".") 'backward-kill-word)
     (global-set-key (kbd "'") 'xah-compact-uncompact-block) ;
     (global-set-key (kbd ",") 'xah-shrink-whitespaces) ;
-    (global-set-key (kbd "SPC") 'set-mark-command) ;
     (global-set-key (kbd "0") nil)
     (global-set-key (kbd "1") nil)
     (global-set-key (kbd "2") 'delete-window)
@@ -114,17 +113,17 @@
     (global-set-key (kbd "8") 'xah-extend-selection)
     (global-set-key (kbd "9") 'xah-select-text-in-quote)
     (global-set-key (kbd "a") 'open-line) ;
-    (global-set-key (kbd "b") nil)
+    (global-set-key (kbd "b") 'xah-toggle-letter-case)
     (global-set-key (kbd "c") 'previous-line)
     (global-set-key (kbd "d") 'xah-beginning-of-line-or-block)
     (global-set-key (kbd "e") 'delete-backward-char) ;
-    (global-set-key (kbd "f") nil)
+    (global-set-key (kbd "f") 'set-mark-command)
     (global-set-key (kbd "g") 'backward-word)
     (global-set-key (kbd "h") 'backward-char)
     (global-set-key (kbd "i") 'kill-line)
     (global-set-key (kbd "j") 'xah-copy-line-or-region)
     (global-set-key (kbd "k") 'yank)
-    (global-set-key (kbd "l") nil)
+    (global-set-key (kbd "l") 'recenter-top-bottom)
     (global-set-key (kbd "m") 'xah-backward-open-bracket)
     (global-set-key (kbd "n") 'forward-char)
     (global-set-key (kbd "o") 'other-window)
@@ -136,7 +135,7 @@
     (global-set-key (kbd "u") 'delete-char) ;
     (global-set-key (kbd "v") 'xah-forward-close-bracket)
     (global-set-key (kbd "w") 'x6-insert-mode-activate)
-    (global-set-key (kbd "x") 'nil)
+    (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)
     (global-set-key (kbd "y") 'redo)
     (global-set-key (kbd "z") 'comment-dwim)
     )
