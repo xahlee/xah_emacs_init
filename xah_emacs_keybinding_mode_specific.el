@@ -67,6 +67,7 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "<C-left>") 'xhm-skip-tag-backward)
   (local-set-key (kbd "<C-right>") 'xhm-skip-tag-forward)
 
+  (local-set-key (kbd "<tab>") (make-keymap))
   (local-set-key (kbd "<tab> <backspace>") 'xhm-remove-html-tags)
   (local-set-key (kbd "<tab> <return>") 'xhm-insert-br-tag)
   (local-set-key (kbd "<tab> -") 'xhm-insert-hr-tag)
@@ -153,6 +154,7 @@ For `isearch-mode-hook'."
   (when (>= emacs-major-version 23)
  ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
  ;;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
+    (define-key dired-mode-map (kbd "<tab>") (make-keymap))
     (define-key dired-mode-map (kbd "<tab> 8") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
     )
   )
@@ -166,7 +168,6 @@ For `isearch-mode-hook'."
 
 (defun xah-magit-mode-keys ()
   "Modify keymaps."
-  (local-set-key (kbd "<tab> <tab>") 'magit-toggle-section)
   ;; (local-set-key (kbd "o") 'magit-status-mode)
   (local-set-key (kbd "1") 'xah-previous-user-buffer)
   (local-set-key (kbd "2") 'delete-window)
@@ -201,12 +202,9 @@ For `isearch-mode-hook'."
 
 (defun xah-elisp-mode-keys ()
   "Modify keymaps used by lisp mode."
-  ;; .p gc
-  ;; eu ht
-
+  (local-set-key (kbd "<tab>") (make-keymap))
   (local-set-key (kbd "<tab> t") 'eval-last-sexp)
   (local-set-key (kbd "<tab> f") 'xah-eval-defun)
-  ;; (local-set-key (kbd "<tab> <tab>") 'indent-for-tab-command)
 )
 
 (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
@@ -242,12 +240,13 @@ For `org-mode-hook'."
   )
 (add-hook 'org-mode-hook 'xah-org-mode-keys)
 
-(defun xah-Info-mode-keys ()
-  "my keybindings for `Info-mode'.
-For `Info-mode-hook'."
-  (local-set-key (kbd "<tab> g") 'xah-view-emacs-manual-in-browser)
-  )
-(add-hook 'Info-mode-hook 'xah-Info-mode-keys)
+;; (defun xah-Info-mode-keys ()
+;;   "my keybindings for `Info-mode'.
+;; For `Info-mode-hook'."
+  ;; (local-set-key (kbd "<tab>") (make-keymap))
+  ;; (local-set-key (kbd "<tab> g") 'xah-view-emacs-manual-in-browser)
+;;   )
+;; (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
 (defun xah-eval-defun ()
   "like `eval-defun' but doesn't need proper indentation for it to work.

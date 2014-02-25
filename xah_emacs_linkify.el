@@ -502,36 +502,34 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
          (inputStr (elt bds 0) )
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
-         fPath rltvPath titleText resultStr
+         (inputStParts (split-uri-hashmark inputStr) )
+         (pt1 (aref inputStParts 0) )
+         (fragPart (aref inputStParts 1) )
+         (fPath (xahsite-web-path-to-filepath pt1 default-directory) )
+         rltvPath titleText resultStr
          (currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
          )
 
-    (setq fPath (xahsite-web-path-to-filepath inputStr default-directory) )
 
-(message "xx fPath is %s" fPath)
 
     (if (file-exists-p fPath)
         (progn
           (setq titleText
                 (if (string-match-p ".+html\\'" fPath)
-                    (xhm-get-html-file-title fPath)
+                    (concat (xhm-get-html-file-title fPath) fragPart)
                   (file-name-nondirectory fPath)))
           (setq resultStr
-                (let ()
- (if (string-equal
+                (if (string-equal
                      (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
                      (xahsite-get-domain-of-local-file-path fPath)
                      )
                     (progn
-(message "xx is equal" )
                       (setq rltvPath (file-relative-name fPath currentBufferFileDir))
-                      (format "<a href=\"%s\">%s</a>" rltvPath titleText))
+                      (format "<a href=\"%s\">%s</a>" (concat rltvPath fragPart) titleText))
                   (progn
-(message "xx is  no equal" )
-                    (format "<a href=\"%s\">%s</a>" (xahsite-filepath-to-url fPath) titleText)) )
-)
- )
+                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url fPath) fragPart) titleText)) )
+                )
           (delete-region p1 p2)
           (insert resultStr)
           )

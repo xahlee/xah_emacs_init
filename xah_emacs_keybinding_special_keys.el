@@ -17,9 +17,7 @@
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 
 
-(global-set-key (kbd "<tab>") nil)      ; mode specific
 
-
 
 (global-set-key (kbd "<S-backspace>") 'delete-char)
 (global-set-key (kbd "<M-backspace>") 'backward-kill-word)
@@ -78,6 +76,7 @@
 (global-set-key (kbd "<XF86Cut>") 'xah-cut-line-or-region)
 (global-set-key (kbd "<XF86Copy>") 'xah-copy-line-or-region)
 (global-set-key (kbd "<XF86Paste>") 'yank)
+(global-set-key (kbd "C-<XF86Paste>") 'yank-pop)
 (global-set-key (kbd "<XF86Close>") 'xah-close-current-buffer) 
 
 
