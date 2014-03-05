@@ -9,6 +9,8 @@
 
 ;; (global-subword-mode 0)
 
+(auto-revert-mode 1)
+
 (setq scroll-error-top-bottom t )
 
 ;; hog emacs down when you happened to open a large file with thousands of lines
