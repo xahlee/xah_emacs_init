@@ -64,12 +64,16 @@
  ((string-equal system-type "gnu/linux")
  '(
                          "DejaVu Sans Mono-9"
-                         "Symbola-12"
-                         "DejaVu Sans-10"
+                         "DejaVu Sans-9"
+                         "Symbola-13"
                          )
  )
  ((string-equal system-type "darwin") ; Mac
-  nil ) )
+  '(
+                         "DejaVu Sans Mono-9"
+                         "DejaVu Sans-9"
+                         "Symbola-13"
+                         ) ) )
 )
 
 (defun cycle-font (ξ-n)

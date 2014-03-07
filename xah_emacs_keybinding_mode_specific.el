@@ -208,7 +208,8 @@ For `isearch-mode-hook'."
 )
 
 (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
-(add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
+;; (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
+;; (remove-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
 
 (defun xah-help-mode-keys ()
   "Modify keymaps"
