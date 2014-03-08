@@ -51,25 +51,31 @@ interactively by “eval-buffer”."
 
 (package-initialize)
 
-(when (string-equal system-type "windows-nt")
-  (load (fullpath-relative-to-current-file "xah_emacs_ms_windows.el")))
+(when (string-equal system-type "windows-nt") (load (fullpath-relative-to-current-file "xah_emacs_ms_windows")))
 
-;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_unset_keys.el"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding_functions.el"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_raw.el"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding_special_keys.el"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding_control_key.el"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_vi.el"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding_mode_specific"))
+(if (boundp 'xah-load-xahkeys-q)
+    (when xah-load-xahkeys-q
+      ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_unset_keys.el"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_vi"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_raw"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_special_keys"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_control_key"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_mode_specific"))
+      ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad_number"))
+      (load (fullpath-relative-to-current-file "xah_emacs_mouse_binding"))
+      (load (fullpath-relative-to-current-file "xah_emacs_hyper_super_setup"))
+      ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_truly_ergonomic"))
+      )
+  (progn
+    nil
+    )
+  )
 
-;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad"))
-(load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad_number"))
-;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_truly_ergonomic"))
-(load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
+(load (fullpath-relative-to-current-file "xah_emacs_keybinding_functions"))
+(load (fullpath-relative-to-current-file "xah_emacs_cursor_movement"))
 
-(load (fullpath-relative-to-current-file "xah_emacs_mouse_binding"))
-(load (fullpath-relative-to-current-file "xah_emacs_hyper_super_setup"))
 (load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
 (load (fullpath-relative-to-current-file "xah_emacs_alias"))
 (load (fullpath-relative-to-current-file "xah_emacs_abbr"))
@@ -78,7 +84,6 @@ interactively by “eval-buffer”."
 (load (fullpath-relative-to-current-file "xah_emacs_xahsite_path_lisp_util"))
 (load (fullpath-relative-to-current-file "xah_emacs_insert_pairs"))
 
-(load (fullpath-relative-to-current-file "xah_emacs_cursor_movement"))
 (load (fullpath-relative-to-current-file "xah_emacs_editing_commands"))
 (load (fullpath-relative-to-current-file "xah_emacs_dired_commands"))
 (load (fullpath-relative-to-current-file "xah_emacs_generic"))

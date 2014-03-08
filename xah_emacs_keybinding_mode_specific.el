@@ -207,7 +207,7 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "<tab> f") 'xah-eval-defun)
 )
 
-(add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
+;; (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
 ;; (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
 ;; (remove-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
 

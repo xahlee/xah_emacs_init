@@ -36,16 +36,13 @@
 
 
 
-(require 'package)
-(package-initialize)
-(require 'highlight-symbol nil "noerror")
-
-
-
 ;; stars indicate frequency of use
 ;; ★★★ every minute
 ;; ★★ every hour
 ;; ★ few times a day
+
+(define-prefix-command 'xah-menu-keymap)
+(global-set-key (kbd "<menu>") 'xah-menu-keymap)
 
 (global-set-key (kbd "<menu> <menu>") 'exchange-point-and-mark)
 (global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
@@ -55,12 +52,15 @@
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 
-(progn
-  (global-set-key (kbd "<menu> <f8>") 'highlight-symbol-at-point)
-  (global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
-  (global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
-  (global-set-key (kbd "<menu> <f9>") 'highlight-symbol-query-replace)
-  )
+;; (progn
+;;   (require 'package)
+;;   (package-initialize)
+;;   (require 'highlight-symbol nil "noerror")
+;;   (global-set-key (kbd "<menu> <f8>") 'highlight-symbol-at-point)
+;;   (global-set-key (kbd "<C-f8>") 'highlight-symbol-prev)
+;;   (global-set-key (kbd "<C-f9>") 'highlight-symbol-next)
+;;   (global-set-key (kbd "<menu> <f9>") 'highlight-symbol-query-replace)
+;;   )
 
 ;; xah-cycle-camel-style-case
 
@@ -85,9 +85,9 @@
 (global-set-key (kbd "<menu> /") nil)
 (global-set-key (kbd "<menu> 0") 'end-of-buffer)
 (global-set-key (kbd "<menu> 1") 'beginning-of-buffer)
-(global-set-key (kbd "<menu> 2") 'delete-window) ;    
+(global-set-key (kbd "<menu> 2") 'delete-window) ;
 (global-set-key (kbd "<menu> 3") 'delete-other-windows) ;
-(global-set-key (kbd "<menu> 4") 'split-window-vertically) ; 
+(global-set-key (kbd "<menu> 4") 'split-window-vertically) ;
 (global-set-key (kbd "<menu> 5") 'shell-command) ;  ; 274    0.02%  shell-command
 (global-set-key (kbd "<menu> 6") 'write-file)
 (global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ;  find-file-at-point 4773    0.30%  xah-open-file-at-cursor
