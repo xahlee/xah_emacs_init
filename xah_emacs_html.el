@@ -20,6 +20,20 @@
 
 
 
+(defun xah-ref-span-tag ()
+  "Add <p>…</p> tag to current text block or text selection.
+If there's a text selection, wrap p around each text block (separated by 2 newline chars.)"
+  (interactive)
+  (let (bds p1 p2 inputText)
+    (setq bds (get-selection-or-unit 'line))
+    (setq inputText (elt bds 0) )
+    (setq p1 (elt bds 1) )
+    (setq p2 (elt bds 2) )
+    (set-mark p1)
+    (goto-char p2)
+    (xhm-wrap-html-tag "span" "ref")
+    ) )
+
 (defun mark-unicode (p1)
   "Wrap 「<mark class=\"unicode\"></mark>」 around current character.
 

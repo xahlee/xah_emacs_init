@@ -12,7 +12,7 @@
 (global-auto-revert-mode 1)
 
 ;; (add-hook 'xah-css-mode-hook 'rainbow-mode)
-;; (remove-hook 'css-mode-hook 'rainbow-mode)
+(remove-hook 'css-mode-hook 'rainbow-mode)
 ;; (remove-hook 'xah-css-mode-hook 'rainbow-mode)
 
 (setq scroll-error-top-bottom t )

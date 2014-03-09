@@ -43,3 +43,5 @@
 (defalias 'wc 'count-words-region-or-line)
 ;; (defalias 'cp 'xah-copy-to-register-1)
 ;; (defalias 'pt 'insert-register-content-1)
+
+(defalias 'ms 'magit-status)

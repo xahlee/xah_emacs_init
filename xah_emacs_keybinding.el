@@ -68,7 +68,7 @@
 (global-set-key (kbd "<menu> '") nil) ;
 (global-set-key (kbd "<menu> ,") 'toggle-input-method)
 
-(global-set-key (kbd "<menu> -") nil)
+(global-set-key (kbd "<menu> -") 'insert-form-feed)
 
 ;; xah's
    ;; 5064    0.31%  delete-other-windows

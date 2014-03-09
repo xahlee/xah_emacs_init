@@ -109,7 +109,7 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "<tab> l w") 'xhm-wikipedia-linkify)
   (local-set-key (kbd "<tab> l z") 'amazon-linkify)
   (local-set-key (kbd "<tab> m") 'xhm-pre-source-code)
-  (local-set-key (kbd "<tab> n") 'nil)
+  (local-set-key (kbd "<tab> n") 'xah-ref-span-tag)
   (local-set-key (kbd "<tab> o") 'nil)
   (local-set-key (kbd "<tab> p") 'xhm-wrap-p-tag)
   (local-set-key (kbd "<tab> q") 'nil)

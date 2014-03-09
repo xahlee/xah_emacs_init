@@ -80,7 +80,9 @@
   "Change font in current frame.
 Each time this is called, font cycles thru a predefined list of fonts in the variable `ξ-font-list' .
 If ξ-n is 1, cycle forward.
-If ξ-n is -1, cycle backward."
+If ξ-n is -1, cycle backward.
+see also `cycle-font-forward', `cycle-font-backward'
+"
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
   (let (fontToUse stateBefore stateAfter )

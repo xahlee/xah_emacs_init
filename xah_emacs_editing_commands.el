@@ -106,7 +106,6 @@ Warning: This command does not preserve texts inside double quotes."
 ;;   (delete-char 1)
 ;; )
 
-
 
 
 (defun xah-copy-rectangle-to-clipboard (p1 p2)
@@ -121,4 +120,9 @@ See also: `kill-rectangle', `copy-to-register'."
      (with-temp-buffer
        (insert-register ?0)
        (buffer-string) )) ) )
+
+(defun insert-form-feed ()
+  "insert a form feed char (ASCII 12)"
+  (interactive)
+  (insert ""))
 
