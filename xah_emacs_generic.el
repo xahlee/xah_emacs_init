@@ -30,14 +30,14 @@
 ;      )
 ;    ))
 
-(defun delete-current-file (ξno-backup-p)
+(defun xah-delete-current-file (ξno-backup-p)
   "Delete the file associated with the current buffer.
 
 Also close the current buffer.  If no file is associated, just close buffer without prompt for save.
 
 A backup file is created with filename appended “~‹date time stamp›~”. Existing file of the same name is overwritten.
 
-when called with `universal-argument', don't create backup."
+When called with `universal-argument', don't create backup."
   (interactive "P")
   (let* (
          (fName (buffer-file-name)) 
@@ -89,7 +89,7 @@ This command works on unixes only."
   (interactive)
   (when buffer-file-name (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-(defun run-current-file ()
+(defun xah-run-current-file ()
   "Execute the current file.
 For example, if the current buffer is the file xx.py,
 then it'll call “python xx.py” in a shell.
@@ -130,7 +130,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
       (if progName
           (progn
             (message "Running…")
-            (shell-command cmdStr "*run-current-file output*" )
+            (shell-command cmdStr "*xah-run-current-file output*" )
             )
         (message "No recognized program file suffix for this file.")
         ) ) ))

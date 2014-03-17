@@ -555,6 +555,11 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
     (replace-pairs-region 1 (point-max)
  [
 
+  ;; google analytics tracker
+["<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-1','xahlee.info');ga('send','pageview');</script>" ""]
+
+["<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-3','ergoemacs.org');ga('send','pageview');</script>" ""]
+
   ;; Google Ad
 [
 "<script async src=\"http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
@@ -572,6 +577,13 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 ;; Google Plus
 ["<div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div>" ""]
 
+;; social network links ergoemacs.org
+["<a href=\"https://twitter.com/ErgoEmacs\"> </a> <a href=\"https://plus.google.com/113859563190964307534/posts\"> </a> <a href=\"https://www.facebook.com/xahlee\"> </a>"
+ ""]
+
+;; social network links xahlee.info
+["<a href=\"https://twitter.com/xah_lee\"> </a> <a href=\"https://plus.google.com/112757647855302148298\"> </a> <a href=\"http://www.facebook.com/xahlee\"> </a>" ""]
+
 ;; twitter
 ["<div class=\"twitter\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"xah_lee\" data-count=\"none\">Tweet</a></div>" ""]
 ["<div class=\"twitter\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"ErgoEmacs\" data-count=\"none\">Tweet</a></div>" ""]
@@ -584,10 +596,6 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <div id=\"fb-root\"></div>
 <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/en_US/all.js#xfbml=1\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>"
-""]
-
-;; social network links
-["<a href=\"https://twitter.com/ErgoEmacs\"> </a> <a href=\"https://plus.google.com/113859563190964307534/posts\"> </a> <a href=\"https://www.facebook.com/xahlee\"> </a>"
 ""]
 
 ;; paypal
@@ -632,9 +640,6 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 
     (replace-regexp-pairs-region 1 (point-max)
  [
-
-;; Google Analytics tracker
-[ "<script>var _gaq = .+?();</script>" "" ]
 
 ["<div class=\"ad66704\">[\n ]*</div>" ""]
 

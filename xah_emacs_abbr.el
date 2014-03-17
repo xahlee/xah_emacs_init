@@ -8,8 +8,7 @@
 ;(read-abbrev-file "emacs_abbrev")
 
 
-;; clear existing value; when changing a abbrev, it is convenient for user to not have previous abbrev around
-(clear-abbrev-table global-abbrev-table)
+;; (clear-abbrev-table global-abbrev-table)
 
 (define-abbrev-table 'global-abbrev-table '(
 
@@ -273,9 +272,9 @@
     ("8rc" "=begin\n\n=end")
 
     ("8tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
-    ("8t" "〔☛ 〕")
     ("8menu" "〖a ▸ b ▸ c〗")
     ("8key" "【Alt+f】")
+    ("8song" "singer ⭑ 〈name〉")
 
     ("8li" "────────── ────────── ────────── ────────── ──────────")
     ("8u" "-*- coding: utf-8 -*-")
@@ -425,5 +424,5 @@ Second Life: Xah Toll
 
 
 ;;; stop asking whether to save newly added abbrev when quitting emacs
-(setq save-abbrevs nil)
+(setq save-abbrevs 'silently)
 

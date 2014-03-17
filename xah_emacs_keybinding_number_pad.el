@@ -41,7 +41,7 @@
 (global-set-key (kbd "<kp-home> <kp-up>") 'ibuffer)
 (global-set-key (kbd "<kp-home> <kp-prior>") 'recentf-open-files)
 
-(global-set-key (kbd "<kp-up> <kp-up>") 'run-current-file)
+(global-set-key (kbd "<kp-up> <kp-up>") 'xah-run-current-file)
 
 (global-set-key (kbd "<kp-prior>") 'isearch-forward)
 (global-set-key (kbd "<C-kp-prior>") 'isearch-backward)

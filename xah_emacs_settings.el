@@ -18,7 +18,7 @@
 (setq scroll-error-top-bottom t )
 
 ;; hog emacs down when you happened to open a large file with thousands of lines
-(global-linum-mode 0)
+;; (global-linum-mode 0)
 
 (setq sentence-end-double-space nil )
 

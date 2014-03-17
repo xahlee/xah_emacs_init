@@ -75,15 +75,21 @@ You need to have the firefox path in `exec-path'. e.g.:
 
 
 (defun yellowMe ()
-  "temp function. change background color of current frame to light yellow.."
+  "temp function. change background color of current frame to light yellow."
   (interactive)
   (set-background-color "cornsilk")
   )
 
 (defun pinkMe ()
-  "temp function. change background color of current frame to light pink.."
+  "temp function. change background color of current frame to light pink."
   (interactive)
   (set-background-color "lavender blush")
+  )
+
+(defun honeyMe ()
+  "temp function. change background color of current frame to honeydew."
+  (interactive)
+  (set-background-color "honeydew")
   )
 
 (defun list-matching-lines2 ()
@@ -135,19 +141,21 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 (defvar xah-filelist nil "alist for files i need to open frequently. Key is a short abbrev, Value is file path.")
 (setq xah-filelist
       '(
-        ("3emacs" . "~/web/ergoemacs_org/emacs/blog.html" )
-        ("4code" . "~/web/xahlee_info/comp/blog.html" )
-        ("js" . "~/web/xahlee_info/js/blog.html" )
-        ("math" . "~/web/xahlee_info/math/blog.html" )
-        ("linguistics" . "~/web/wordyenglish_com/lit/blog.html" )
-        ("chinese" . "~/web/wordyenglish_com/chinese/blog.html" )
-        ("music" . "~/web/xahmusic_org/music/blog.html" )
-        ("arts" . "~/web/xaharts_org/arts/blog.html" )
-        ("sl" . "~/web/xahsl_org/sl/blog.html" )
+        ("3emacs_blog" . "~/web/ergoemacs_org/emacs/blog.html" )
+        ("4comp_blog" . "~/web/xahlee_info/comp/blog.html" )
+        ("web_blog" . "~/web/xahlee_info/js/blog.html" )
+
+        ("math_blog" . "~/web/xahlee_info/math/blog.html" )
+        ("linguistics_blog" . "~/web/wordyenglish_com/lit/blog.html" )
+        ("chinese_blog" . "~/web/wordyenglish_com/chinese/blog.html" )
+        ("music_blog" . "~/web/xahmusic_org/music/blog.html" )
+        ("arts_blog" . "~/web/xaharts_org/arts/blog.html" )
+        ("sl_blog" . "~/web/xahsl_org/sl/blog.html" )
+        ("sex_blog" . "~/web/xahlee_org/sex/blog.html" )
+        ("porn_blog" . "~/web/xahporn_org/porn/blog.html" )
+        ("pd_blog" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
+
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
-        ("sex" . "~/web/xahlee_org/sex/blog.html" )
-        ("porn" . "~/web/xahporn_org/porn/blog.html" )
-        ("pd" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
         ("keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
         ("ahk" . "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
 
@@ -171,10 +179,14 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("book" . "/media/OS/Users/xah/SkyDrive/books/")
         ("css-index" . "~/web/xahlee_info/js/css_index.html")
 
+        ("emacs_tutorial" . "~/web/ergoemacs_org/emacs/emacs.html")
+        ("elisp_tutorial" . "~/web/ergoemacs_org/emacs/elisp.html")
+        ("js" . "~/web/xahlee_info/js/js.html" )
         ("perl" . "~/web/xahlee_info/perl/perl_index.html")
         ("python" . "~/web/xahlee_info/perl-python/index.html")
         ("python3" . "~/web/xahlee_info/python/python3_basics.html")
         ("ruby" . "~/web/xahlee_info/ruby/ruby_index.html")
+        ("java" . "~/web/xahlee_info/java-a-day/java.html")
         ("py2doc" . "~/web/xahlee_info/python_doc_2.7.6/index.html")
         ("py3doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
 

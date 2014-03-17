@@ -38,10 +38,10 @@ Requires ImageMagick shell tool."
    fileList ))
 
 (defun scale-image (fileList scalePercentage sharpen-p)
-  "Create a scaled JPG version of images of marked files in dired.
+  "Create a scaled version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
-If `universal-argument' is given, output is png format.
+If `universal-argument' is given, output is PNG format. Else, JPG.
 
 When called in lisp code,
  fileList is a list.
