@@ -5,10 +5,10 @@
 ;; ∑ http://xahlee.org/
 
 
-(defun 2zip ()
+(defun xah-dired-2zip ()
   "Zip the current file in `dired'.
 If multiple files are marked, only zip the first one.
-Require unix zip commandline tool."
+Require unix zip command line tool."
   (interactive)
   (require 'dired)
   (let ( (fileName (elt (dired-get-marked-files) 0))  )
@@ -37,7 +37,7 @@ Requires ImageMagick shell tool."
        ))
    fileList ))
 
-(defun scale-image (fileList scalePercentage sharpen-p)
+(defun xah-dired-scale-image (fileList scalePercentage sharpen-p)
   "Create a scaled version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
@@ -85,7 +85,7 @@ Requires ImageMagick shell tool."
   (xah-process-image fileList "-trim" "-c" ".jpg" )
   )
 
-(defun 2png (fileList)
+(defun xah-dired-2png (fileList)
   "Create a png version of images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
@@ -100,7 +100,7 @@ Requires ImageMagick shell tool."
   (xah-process-image fileList "" "-2" ".png" )
   )
 
-(defun 2drawing (fileList grayscale-p bitsPerPixel)
+(defun xah-dired-2drawing (fileList grayscale-p bitsPerPixel)
   "Create a png version of (drawing type) images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
@@ -123,7 +123,7 @@ Requires ImageMagick shell tool."
                          bitsPerPixel)  "-2" ".png" )
   )
 
-(defun 2jpg (fileList)
+(defun xah-dired-2jpg (fileList)
   "Create a JPG version of images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive

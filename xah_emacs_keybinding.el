@@ -214,7 +214,7 @@
 
   (global-set-key (kbd "<menu> u RET") 'xah-insert-unicode)
 
-  (global-set-key (kbd "<menu> u 7") "＆") ;
+  (global-set-key (kbd "<menu> u 7") "＆") ;  
 
   (global-set-key (kbd "<menu> u . <down>") "⇓")
   (global-set-key (kbd "<menu> u . <left>") "⇐")
