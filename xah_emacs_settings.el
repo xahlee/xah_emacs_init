@@ -9,6 +9,9 @@
 
 ;; (global-subword-mode 0)
 
+;; specify font for all unicode characters
+(set-fontset-font t 'unicode "Symbola" nil 'prepend)
+
 (global-auto-revert-mode 1)
 
 ;; (add-hook 'xah-css-mode-hook 'rainbow-mode)

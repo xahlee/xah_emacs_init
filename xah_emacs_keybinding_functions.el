@@ -384,3 +384,20 @@ Else it is a user buffer."
         (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)) )  myFileList) )
        ((string-equal system-type "gnu/linux")
         (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath)) ) myFileList) ) ) ) ) )
+
+(defun xah-click-to-search (πclick)
+  "Mouse click to start `isearch-forward-symbol-at-point' (emacs 24.4) at clicked point."
+  (interactive "e")
+  (let ((p1 (posn-point (event-start πclick))))
+    (goto-char p1)
+    (isearch-forward-symbol-at-point)
+    ;; (describe-char p1)
+    ))
+
+(defun xah-click-describe-char (πclick)
+  "Mouse click to `describe-char' at clicked point."
+  (interactive "e")
+  (let ((p1 (posn-point (event-start πclick))))
+    (goto-char p1)
+    (describe-char p1)
+    ))
