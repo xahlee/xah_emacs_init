@@ -183,13 +183,15 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("elisp_tutorial" . "~/web/ergoemacs_org/emacs/elisp.html")
         ("js" . "~/web/xahlee_info/js/js.html" )
         ("perl" . "~/web/xahlee_info/perl/perl_index.html")
+
+        ("php" . "~/web/xahlee_info/php/php_basics.html")
         ("python" . "~/web/xahlee_info/perl-python/index.html")
         ("python3" . "~/web/xahlee_info/python/python3_basics.html")
         ("ruby" . "~/web/xahlee_info/ruby/ruby_index.html")
         ("java" . "~/web/xahlee_info/java-a-day/java.html")
         ("py2doc" . "~/web/xahlee_info/python_doc_2.7.6/index.html")
         ("py3doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
-
+        
         ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")
 
         ("obn_outbound_notes" . "~/git/outbound_notes/")

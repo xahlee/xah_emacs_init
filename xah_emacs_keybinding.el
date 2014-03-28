@@ -250,7 +250,7 @@
   (global-set-key (kbd "<menu> u y") 'insert-pair-single-angle-quote‹›)
   )
 
-(global-set-key (kbd "<menu> v") nil)
+(global-set-key (kbd "<menu> v") 'toggle-case-fold-search)
 (global-set-key (kbd "<menu> w") 'widen)
 (global-set-key (kbd "<menu> x") ctl-x-map)
 (global-set-key (kbd "<menu> y") nil)

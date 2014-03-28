@@ -274,7 +274,7 @@
     ("8tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
     ("8menu" "〖a ▸ b ▸ c〗")
     ("8key" "【Alt+f】")
-    ("8song" "singer ⭑ 〈name〉")
+    ("8song" "singer ❀ 〈title〉")
 
     ("8li" "────────── ────────── ────────── ────────── ──────────")
     ("8u" "-*- coding: utf-8 -*-")

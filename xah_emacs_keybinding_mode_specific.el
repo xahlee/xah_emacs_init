@@ -154,7 +154,8 @@ For `isearch-mode-hook'."
   (when (>= emacs-major-version 23)
  ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
  ;;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
-    (define-key dired-mode-map (kbd "<tab>") (make-keymap))
+    ;; (define-key dired-mode-map (kbd "<tab>") (make-keymap))
+    (define-key dired-mode-map (kbd "<tab>") nil)
     (define-key dired-mode-map (kbd "<tab> 8") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
     )
   )
@@ -186,8 +187,6 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "8") 'xah-extend-selection)
   )
 (add-hook 'Man-mode-hook 'xah-Man-mode-keys)
-
-
 
 ;; ;(setq mybuf (get-buffer-create "*show commands*"))
 ;; (defun xx ()

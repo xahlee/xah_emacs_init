@@ -25,7 +25,6 @@
 
 (defalias 'ssm 'shell-script-mode)
 
-(defalias 'c 'toggle-case-fold-search)
 (defalias 'hp 'highlight-phrase)
 (defalias 'hl 'highlight-lines-matching-regexp)
 
