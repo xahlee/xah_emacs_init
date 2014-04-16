@@ -569,7 +569,7 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
      data-ad-client=\"ca-pub-5125343095650532\"
      data-ad-slot=\"8521101965\"></ins>
 <script>
-\(adsbygoogle = window.adsbygoogle || []).push({});
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>"
 ""
 ]

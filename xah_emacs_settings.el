@@ -9,8 +9,13 @@
 
 ;; (global-subword-mode 0)
 
+;; open pdf files in hex mode
+(add-to-list 'auto-mode-alist '("\\.pdf\\'" . hexl-mode))
+
 ;; specify font for all unicode characters
 (set-fontset-font t 'unicode "Symbola" nil 'prepend)
+
+(electric-indent-mode 0) ; default is on in emacs 24.4
 
 (global-auto-revert-mode 1)
 

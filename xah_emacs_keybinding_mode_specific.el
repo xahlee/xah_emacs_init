@@ -6,10 +6,9 @@
 For `isearch-mode-hook'."
   (define-key isearch-mode-map (kbd "M-f") 'isearch-repeat-forward)
   (define-key isearch-mode-map (kbd "M-F") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "<f12>") 'isearch-repeat-forward)
-  (define-key isearch-mode-map (kbd "<f11>") 'isearch-repeat-backward)
 ;  (define-key isearch-mode-map (kbd "<escape>") 'minibuffer-keyboard-quit)
-
+  (define-key isearch-mode-map (kbd "<f11>") 'isearch-ring-retreat)
+  (define-key isearch-mode-map (kbd "<f12>") 'isearch-ring-advance)
   (define-key isearch-mode-map (kbd "<next>") 'isearch-repeat-forward)
   (define-key isearch-mode-map (kbd "<prior>") 'isearch-repeat-backward)
   )
