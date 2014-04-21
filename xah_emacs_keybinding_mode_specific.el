@@ -77,7 +77,7 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "<tab> 2") nil)
   (local-set-key (kbd "<tab> 3") 'xhm-update-title)
   (local-set-key (kbd "<tab> 4") 'xahsite-update-article-timestamp)
-  (local-set-key (kbd "<tab> 5") 'mark-unicode)
+  (local-set-key (kbd "<tab> 5") 'xah-mark-unicode)
   (local-set-key (kbd "<tab> 6") 'xhm-html-to-text)
   (local-set-key (kbd "<tab> 7") 'xhm-htmlize-or-de-precode)
   (local-set-key (kbd "<tab> 8") 'xhm-get-precode-make-new-file)

@@ -34,15 +34,19 @@ If there's a text selection, wrap p around each text block (separated by 2 newli
     (xhm-wrap-html-tag "span" "ref")
     ) )
 
-(defun mark-unicode (p1)
-  "Wrap 「<mark class=\"unicode\"></mark>」 around current character.
-
-When called in elisp program, wrap the tag at point P1."
+(defun xah-mark-unicode (p1)
+  "Wrap 「<mark class=\"unicode\" title=\"U+…: ‹NAME›\"></mark>」 around current character.
+When called in elisp program, wrap the tag at cursor position p1."
   (interactive (list (point)))
-  (goto-char p1)
-  (insert "<mark class=\"unicode\">")
-  (forward-char 1)
-  (insert "</mark>"))
+  (let* (
+         (ξcodepoint (string-to-char (buffer-substring-no-properties p1 (1+ p1))) )
+         (ξname (get-char-code-property ξcodepoint 'name))
+         )
+    (goto-char p1)
+    (insert (format "<mark class=\"unicode\" title=\"U+%X: %s\">" ξcodepoint ξname) )
+    (forward-char 1)
+    (insert (format "</mark>") )
+    ) )
 
 
 
@@ -51,7 +55,7 @@ When called in elisp program, wrap the tag at point P1."
 Add today's date to the byline tag of current file, also delete the last one if there are more than one."
   (interactive)
   (let (p1 p2 ξnum )
-    (progn 
+    (progn
       (goto-char 1)
       (when (search-forward "<div class=\"byline\">" nil)
         (setq p1 (point) )
@@ -212,3 +216,19 @@ google_ad_client")
      fileList)
     ))
 
+(defun xah-syntax-color-hex ()
+"Syntax color hex color spec such as 「#ff1100」 in current buffer."
+  (interactive)
+  (font-lock-add-keywords
+   nil
+   '(("#[abcdef[:digit:]]\\{6\\}"
+      (0 (put-text-property
+          (match-beginning 0)
+          (match-end 0)
+          'face (list :background (match-string-no-properties 0)))))))
+  (font-lock-fontify-buffer)
+  )
+
+(add-hook 'xah-css-mode-hook 'xah-syntax-color-hex)
+(add-hook 'xah-php-mode-hook 'xah-syntax-color-hex)
+(add-hook 'xah-html-mode-hook 'xah-syntax-color-hex)

@@ -167,7 +167,7 @@ it becomes
     (delete-region p1 p2)
     (insert (concat
 "<figure>\n"
-"<iframe src=\"http://player.vimeo.com/video/" vID "\" width=\"500\" height=\"294\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>\n"
+"<iframe src=\"http://player.vimeo.com/video/" vID "\" width=\"650\" height=\"365\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>\n"
 "<figcaption>
 </figcaption>
 </figure>"
