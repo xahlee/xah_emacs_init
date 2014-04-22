@@ -229,6 +229,46 @@ google_ad_client")
   (font-lock-fontify-buffer)
   )
 
-(add-hook 'xah-css-mode-hook 'xah-syntax-color-hex)
+(defun xah-syntax-color-hsl ()
+  "Syntax color hex color spec such as 「hsl(0,90%,41%)」 in current buffer."
+  (interactive)
+  (font-lock-add-keywords
+   nil
+  '(("hsl( *\\([0-9]\\{1,3\\}\\) *, *\\([0-9]\\{1,3\\}\\)% *, *\\([0-9]\\{1,3\\}\\)% *)"
+     (0 (put-text-property
+         (+ (match-beginning 0) 3)
+         (match-end 0)
+         'face (list :background
+ (concat "#" (mapconcat 'identity 
+                        (mapcar
+                         (lambda (x) (format "%02x" (round (* x 255))))
+                         (color-hsl-to-rgb
+                          (/ (string-to-number (match-string-no-properties 1)) 360.0)
+                          (/ (string-to-number (match-string-no-properties 2)) 100.0)
+                          (/ (string-to-number (match-string-no-properties 3)) 100.0)
+                          ) )
+                        "" )) ;  "#00aa00"
+                      ))))) )
+  (font-lock-fontify-buffer)
+  )
+
+;; (concat "#" (mapconcat 'identity 
+;;                         (mapcar
+;;                          (lambda (x) (format "%x" (round (* x 255))))
+;;                          (color-hsl-to-rgb
+;;                           (/ (string-to-number "0") 360.0)
+;;                           (/ (string-to-number "90") 100.0)
+;;                           (/ (string-to-number "50") 100.0)
+;;                           ) )
+;;                         "" ))
+
+;; (format "%2x" (round (* (/ (string-to-number "49") 100.0) 255)))
+;; (format "%02x" 10)
+
 (add-hook 'xah-php-mode-hook 'xah-syntax-color-hex)
-(add-hook 'xah-html-mode-hook 'xah-syntax-color-hex)
+(add-hook 'xah-php-mode-hook 'xah-syntax-color-hex)
+
+(add-hook 'xah-html-mode-hook 'xah-syntax-color-hsl)
+(add-hook 'xah-html-mode-hook 'xah-syntax-color-hsl)
+
+
