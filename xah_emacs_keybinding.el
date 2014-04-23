@@ -153,10 +153,10 @@
 (progn
   (global-set-key (kbd "<menu> i") nil)
   (global-set-key (kbd "<menu> i d") 'insert-date)
-  (global-set-key (kbd "<menu> i n") 'ξ-insert-random-number)
-  (global-set-key (kbd "<menu> i x") 'ξ-insert-random-hex)
-  (global-set-key (kbd "<menu> i s") 'ξ-insert-random-string)
-  (global-set-key (kbd "<menu> i u") 'ξ-insert-random-uuid)
+  (global-set-key (kbd "<menu> i n") 'xah-insert-random-number)
+  (global-set-key (kbd "<menu> i x") 'xah-insert-random-hex)
+  (global-set-key (kbd "<menu> i s") 'xah-insert-random-string)
+  (global-set-key (kbd "<menu> i u") 'xah-insert-random-uuid)
   )
 
  ;;(global-set-key (kbd "<menu> j") 'kmacro-start-macro) ;  42    0.00%  kmacro-start-macro

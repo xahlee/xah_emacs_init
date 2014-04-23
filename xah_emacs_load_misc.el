@@ -17,7 +17,7 @@
 (require 'xah-js-mode)
 (require 'xah-php-mode)
 (require 'xah-css-mode)
-(require 'insert-random-id)
+(require 'xah-insert-random-id)
 
 
 ;; I-search with initial contents.
