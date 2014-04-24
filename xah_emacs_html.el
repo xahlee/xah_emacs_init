@@ -217,7 +217,7 @@ google_ad_client")
     ))
 
 (defun xah-syntax-color-hex ()
-"Syntax color hex color spec such as 「#ff1100」 in current buffer."
+"Syntax color hex color spec ⁖ 「#ff1100」 in current buffer."
   (interactive)
   (font-lock-add-keywords
    nil
@@ -230,7 +230,7 @@ google_ad_client")
   )
 
 (defun xah-syntax-color-hsl ()
-  "Syntax color hex color spec such as 「hsl(0,90%,41%)」 in current buffer."
+  "Syntax color CSS's HSL color spec ⁖ 「hsl(0,90%,41%)」 in current buffer."
   (interactive)
   (font-lock-add-keywords
    nil

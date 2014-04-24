@@ -376,7 +376,8 @@ Second Life: Xah Toll
  US citizen.
  Mountain View, CA.")
 
-("8uee" "http://ergoemacs.org/")
+("8wec" "wordyenglish_com")
+
 ("8uwe" "http://wordyenglish.com/")
 ("8uxa" "http://xaharts.org/")
 ("8uxl" "http://xahlee.org/")
@@ -384,7 +385,7 @@ Second Life: Xah Toll
 ("8uxm" "http://xahmusic.org/")
 ("8uxp" "http://xahporn.org/")
 ("8uxsl" "http://xahsl.org/")
-("8wec" "wordyenglish_com")
+("8uunicode" "http://xahlee.info/comp/unicode_index.html")
 
 ("8uvmm" "http://VirtualMathMuseum.org/")
 ("8u3dxm" "http://3D-XplorMath.org/")

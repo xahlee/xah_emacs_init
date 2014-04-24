@@ -15,7 +15,7 @@
 ;; fixed-width "Courier New" "Unifont"  "FixedsysTTF" "Miriam Fixed" "Lucida Console" "Lucida Sans Typewriter" "DejaVu Sans Mono-10" "Lucida Console-10"
 ;; variable-width "Arial Unicode MS-10" "Code2000" "STIXGeneral" "Lucida Console-10"
 
-(defun set-font-to-monospace ()
+(defun xah-set-font-to-monospace ()
   "Change font in current frame to a monospaced one."
   (interactive)
   (set-frame-parameter nil 'font "DejaVu Sans Mono")
@@ -27,16 +27,16 @@
   (set-frame-parameter nil 'font "DejaVu Sans")
   )
 
-(defun cycle-font-2 (ξ-n)
+(defun xah-cycle-font-2 (ξ-n)
   "Change font in current frame between 2 fonts."
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
   (let (ξ-font-list fontToUse stateBefore stateAfter )
     (setq ξ-font-list (list "DejaVu Sans Mono-10" "DejaVu Sans-10" ))
 
-    (setq stateBefore (if (get 'cycle-font-2 'state) (get 'cycle-font-2 'state) 0))
+    (setq stateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
     (setq stateAfter (% (+ stateBefore (length ξ-font-list) ξ-n) (length ξ-font-list)))
-    (put 'cycle-font-2 'state stateAfter)
+    (put 'xah-cycle-font-2 'state stateAfter)
 
     (setq fontToUse (nth stateAfter ξ-font-list))
     (set-frame-parameter nil 'font fontToUse)
@@ -45,7 +45,7 @@
     )
   )
 
-(defcustom ξ-font-list nil "A list of fonts for `cycle-font' to cycle from." :group 'font)
+(defcustom ξ-font-list nil "A list of fonts for `xah-cycle-font' to cycle from." :group 'font)
 
 (set-default 'ξ-font-list 
 (cond
@@ -76,17 +76,17 @@
                          ) ) )
 )
 
-(defun cycle-font (ξ-n)
+(defun xah-cycle-font (ξ-n)
   "Change font in current frame.
 Each time this is called, font cycles thru a predefined list of fonts in the variable `ξ-font-list' .
 If ξ-n is 1, cycle forward.
 If ξ-n is -1, cycle backward.
-see also `cycle-font-forward', `cycle-font-backward'
+see also `xah-cycle-font-forward', `xah-cycle-font-backward'
 "
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
   (let (fontToUse stateBefore stateAfter )
-    (setq stateBefore (if (get 'cycle-font 'state) (get 'cycle-font 'state) 0))
+    (setq stateBefore (if (get 'xah-cycle-font 'state) (get 'xah-cycle-font 'state) 0))
     (setq stateAfter (% (+ stateBefore (length ξ-font-list) ξ-n) (length ξ-font-list)))
 
     (setq fontToUse (nth stateAfter ξ-font-list))
@@ -94,20 +94,20 @@ see also `cycle-font-forward', `cycle-font-backward'
     (redraw-frame (selected-frame))
     (message "Current font is: %s" fontToUse )
 
-    (put 'cycle-font 'state stateAfter) ) )
+    (put 'xah-cycle-font 'state stateAfter) ) )
 
-(defun cycle-font-forward ()
+(defun xah-cycle-font-forward ()
   "Switch to the next font, in the current frame.
-See `cycle-font'."
+See `xah-cycle-font'."
   (interactive)
-  (cycle-font 1)
+  (xah-cycle-font 1)
   )
 
-(defun cycle-font-backward ()
+(defun xah-cycle-font-backward ()
   "Switch to the previous font, in the current frame.
-See `cycle-font'."
+See `xah-cycle-font'."
   (interactive)
-  (cycle-font -1)
+  (xah-cycle-font -1)
   )
 
 ;; (defun set-font-by-mode ()
@@ -120,7 +120,7 @@ See `cycle-font'."
 ;;    )
 ;;   )
 
-(defun unfontify-selection-or-block ()
+(defun xah-unfontify-selection-or-block ()
   "Unfontify text selection or current block of text.
 See also: `font-lock-fontify-block', `font-lock-fontify-buffer'."
   (interactive)
@@ -131,7 +131,7 @@ See also: `font-lock-fontify-block', `font-lock-fontify-buffer'."
     )
   )
 
-(defun toggle-line-spacing ()
+(defun xah-toggle-line-spacing ()
   "Toggle line spacing between no extra space to extra half line height."
   (interactive)
   (if (eq line-spacing nil)
@@ -140,7 +140,7 @@ See also: `font-lock-fontify-block', `font-lock-fontify-buffer'."
     )
   (redraw-display))
 
-(defun toggle-margin-right ()
+(defun xah-toggle-margin-right ()
   "Toggle the right margin between `fill-column' or window width.
 This command is convenient when reading novel, documentation."
   (interactive)
