@@ -21,7 +21,7 @@
   (set-frame-parameter nil 'font "DejaVu Sans Mono")
   )
 
-(defun set-font-to-variable-width ()
+(defun xah-set-font-to-variable-width ()
   "Change font in current frame to a monospaced one."
   (interactive)
   (set-frame-parameter nil 'font "DejaVu Sans")
@@ -58,7 +58,6 @@
 
                          "DejaVu Sans-10"
                          "Lucida Sans Unicode-10"
-                         "Arial Unicode MS-10"
                          )
   )
  ((string-equal system-type "gnu/linux")

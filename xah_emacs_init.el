@@ -105,6 +105,7 @@ interactively by “eval-buffer”."
 
 (load (fullpath-relative-to-current-file "xah_emacs_font"))
 (load (fullpath-relative-to-current-file "xah_emacs_misc"))
+(load (fullpath-relative-to-current-file "xah_emacs_browse_url"))
 
 (load (fullpath-relative-to-current-file "xah_emacs_atom_rss_util"))
 (load (fullpath-relative-to-current-file "xah_emacs_blogger_util"))
