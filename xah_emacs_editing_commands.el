@@ -121,7 +121,7 @@ See also: `kill-rectangle', `copy-to-register'."
        (insert-register ?0)
        (buffer-string) )) ) )
 
-(defun insert-form-feed ()
+(defun xah-insert-form-feed ()
   "insert a form feed char (ASCII 12)"
   (interactive)
   (insert ""))

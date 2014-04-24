@@ -54,7 +54,7 @@ When called with `universal-argument', don't create backup."
     (kill-buffer (current-buffer))
     ) )
 
-(defun make-backup ()
+(defun xah-make-backup ()
   "Make a backup copy of current file.
 
 The backup file name has the form 「‹name›~‹timestamp›~」, in the same dir. If such a file already exist, it's overwritten.

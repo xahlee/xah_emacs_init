@@ -576,7 +576,7 @@ When there is a text selection, act on the region."
 (defun xah-to-xah-elisp-mode  ()
   "redo my tutorial's code elisp markup"
   (interactive)
-  (make-backup)
+  (xah-make-backup)
   (goto-char 1)
   (while
       (search-forward "<pre class=\"elisp\">" nil "NOERROR")

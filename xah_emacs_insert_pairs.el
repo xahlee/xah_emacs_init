@@ -10,7 +10,7 @@
 
 ;;;; matching pairs
 
-(defun insert-bracket-pair (leftBracket rightBracket)
+(defun xah-insert-bracket-pair (leftBracket rightBracket)
   "Insert a matching bracket.
 
 If there's a text selection, insert brackets around it.
@@ -53,22 +53,22 @@ The argument leftBracket rightBracket are strings."
 
 ;; (insert-parentheses)
 
-(defun insert-pair-paren () (interactive) (insert-bracket-pair "(" ")") )
-(defun insert-pair-bracket () (interactive) (insert-bracket-pair "[" "]") )
-(defun insert-pair-brace () (interactive) (insert-bracket-pair "{" "}") )
-(defun insert-pair-greater-less () (interactive) (insert-bracket-pair "<" ">") )
+(defun xah-insert-paren () (interactive) (xah-insert-bracket-pair "(" ")") )
+(defun xah-insert-bracket () (interactive) (xah-insert-bracket-pair "[" "]") )
+(defun xah-insert-brace () (interactive) (xah-insert-bracket-pair "{" "}") )
+(defun xah-insert-greater-less () (interactive) (xah-insert-bracket-pair "<" ">") )
 
-(defun insert-pair-single-angle-quote‹› () (interactive) (insert-bracket-pair "‹" "›") )
-(defun insert-pair-double-angle-quote«» () (interactive) (insert-bracket-pair "«" "»") )
-(defun insert-pair-double-curly-quote“” () (interactive) (insert-bracket-pair "“" "”") )
-(defun insert-pair-single-curly-quote‘’ () (interactive) (insert-bracket-pair "‘" "’") )
-(defun insert-pair-double-straight-quote () (interactive) (insert-bracket-pair "\"" "\"") )
-(defun insert-pair-single-straight-quote () (interactive) (insert-bracket-pair "'" "'") )
+(defun xah-insert-single-angle-quote‹› () (interactive) (xah-insert-bracket-pair "‹" "›") )
+(defun xah-insert-double-angle-quote«» () (interactive) (xah-insert-bracket-pair "«" "»") )
+(defun xah-insert-double-curly-quote“” () (interactive) (xah-insert-bracket-pair "“" "”") )
+(defun xah-insert-single-curly-quote‘’ () (interactive) (xah-insert-bracket-pair "‘" "’") )
+(defun xah-insert-double-straight-quote () (interactive) (xah-insert-bracket-pair "\"" "\"") )
+(defun xah-insert-single-straight-quote () (interactive) (xah-insert-bracket-pair "'" "'") )
 
-(defun insert-pair-corner-bracket「」 () (interactive) (insert-bracket-pair "「" "」") )
-(defun insert-pair-white-corner-bracket『』 () (interactive) (insert-bracket-pair "『" "』") )
-(defun insert-pair-angle-bracket〈〉 () (interactive) (insert-bracket-pair "〈" "〉") )
-(defun insert-pair-double-angle-bracket《》 () (interactive) (insert-bracket-pair "《" "》") )
-(defun insert-pair-white-lenticular-bracket〖〗 () (interactive) (insert-bracket-pair "〖" "〗") )
-(defun insert-pair-black-lenticular-bracket【】 () (interactive) (insert-bracket-pair "【" "】") )
-(defun insert-pair-tortoise-shell-bracket〔〕 () (interactive) (insert-bracket-pair "〔" "〕") )
+(defun xah-insert-corner-bracket「」 () (interactive) (xah-insert-bracket-pair "「" "」") )
+(defun xah-insert-white-corner-bracket『』 () (interactive) (xah-insert-bracket-pair "『" "』") )
+(defun xah-insert-angle-bracket〈〉 () (interactive) (xah-insert-bracket-pair "〈" "〉") )
+(defun xah-insert-double-angle-bracket《》 () (interactive) (xah-insert-bracket-pair "《" "》") )
+(defun xah-insert-white-lenticular-bracket〖〗 () (interactive) (xah-insert-bracket-pair "〖" "〗") )
+(defun xah-insert-black-lenticular-bracket【】 () (interactive) (xah-insert-bracket-pair "【" "】") )
+(defun xah-insert-tortoise-shell-bracket〔〕 () (interactive) (xah-insert-bracket-pair "〔" "〕") )

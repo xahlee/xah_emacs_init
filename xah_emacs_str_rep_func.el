@@ -70,7 +70,7 @@ The replace string should be:
     )
   )
 
-(defun remove-square-brackets  ()
+(defun xah-remove-square-brackets  ()
   "Delete any text of the form “[‹n›]”.
 
 Works on text selection or current text block.
