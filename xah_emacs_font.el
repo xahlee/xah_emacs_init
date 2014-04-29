@@ -148,8 +148,7 @@ This command is convenient when reading novel, documentation."
     (set-window-margins nil 0 0) ) )
 
 (defun xah-toggle-read-article-mode ()
-  "create new window for current buffer, set word wrap, window size.
-"
+  "make current window in a easy reading moder for article/novel text."
   (interactive)
   (let ( 
         ;; (thisFrame (make-frame '( (nam . "xah reading frame") (width . 70) )))
