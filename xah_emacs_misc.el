@@ -567,9 +567,18 @@ Requires a python script. See code."
       )
     ))
 
-(defun xah-decode-uri (p1 p2)
-  "percent decode uri for text selection
+(defun xah-decode-percent-encoded-uri (p1 p2)
+  "Percent decode URI for text selection."
+  (interactive "r")
+  (let ((myStr (buffer-substring-no-properties p1 p2)))
+    (save-excursion
+      (save-restriction
+        (delete-region p1 p2 )
+        (insert (decode-coding-string (url-unhex-string myStr ) 'utf-8))
+        ) ) ))
 
+(defun xah-decode-percent-encoded-uri-js (p1 p2)
+  "percent decode uri for text selection
 Requires a node.js script. See code."
   (interactive "r")
   (let (scriptName)
@@ -578,4 +587,13 @@ Requires a node.js script. See code."
       (shell-command-on-region p1 p2 scriptName nil "REPLACE" nil t)
       )
     ))
+
+(defun xah-slide-show ()
+  "start external program to do slideshow of current dir.
+Linux only. Requires 「feh」 image viewer.
+"
+  (interactive)
+  (let ()
+(shell-command (format "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%%f'\" --geometry 1600x1000 '%s'" (expand-file-name default-directory)) )
+  ))
 

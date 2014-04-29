@@ -146,3 +146,24 @@ This command is convenient when reading novel, documentation."
   (if (eq (cdr (window-margins)) nil)
       (set-window-margins nil 0 (- (window-body-width) fill-column))
     (set-window-margins nil 0 0) ) )
+
+(defun xah-toggle-read-article-mode ()
+  "create new window for current buffer, set word wrap, window size.
+"
+  (interactive)
+  (let ( 
+        ;; (thisFrame (make-frame '( (nam . "xah reading frame") (width . 70) )))
+        ) 
+    (if (equal (get this-command 'state) nil)
+        (progn
+          (set-frame-width (window-frame) 70)
+          (variable-pitch-mode 1)       
+          (setq word-wrap t)
+          (put this-command 'state t)
+          )
+      (progn
+        (set-frame-width (window-frame) 100)
+        (variable-pitch-mode 0)         
+        (setq word-wrap nil)
+        (put this-command 'state nil)
+        ) ) ) )

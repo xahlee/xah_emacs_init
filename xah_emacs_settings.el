@@ -171,6 +171,24 @@
   )
  )
 
+(defun xah-font-change ()
+  "…"
+  (variable-pitch-mode 1)
+  (text-scale-increase 0.5 )
+)
+
+(add-hook 'html-mode-hook 'xah-font-change)
+(add-hook 'xah-html-mode-hook 'xah-font-change)
+(add-hook 'nxml-mode-hook 'xah-font-change)
+
+
+(defun xah-font-change ()
+  "…"
+  (variable-pitch-mode 1)
+)
+(set-window-margins nil 0 9)
+
+
 ;; Emacs Lisp: Determine OS, Emacs Version, Machine Host Name
 ;; http://ergoemacs.org/emacs/elisp_determine_OS_version.html
 

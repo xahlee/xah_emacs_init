@@ -3,19 +3,7 @@
 
 ;; Replace “…” to one of 〔…〕, 「…」, 【…】 or HTML tag. Or other similar text processing.
 
-(defun cap-first-letter ()
-  "Replace “<p>a…” to cap “<p>A…”
-TODO doesn't work.
-"
-  (interactive)
-  (let ((case-fold-search nil))
-    (query-replace-regexp "<p>\\([a-z]\\)" (concat "<p>" (upcase (match-string 1 )))
-; "<p>\\,(upcase \\1)"
-;; "<p>\\,(upcase \\1)"
-)
- ))
-
-;; (defun code-bracket-to-html-tag ()
+;; (defun xah-bracket→html ()
 ;;   "Replace all 「…」 to <code>…</code> in current buffer."
 ;;   (interactive)
 ;;   (let (changedItems)
@@ -76,7 +64,7 @@ TODO doesn't work.
 ;; )
 ;;    )
 
-(defun code-bracket-to-html-tag-interactive (p1 p2)
+(defun xah-corner-bracket→html-i (p1 p2)
   "Replace all 「…」 to <code>…</code> in current text block.
 When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the p1 p2 are region positions."
   (interactive
@@ -93,7 +81,7 @@ When called with `universal-argument', work on visible portion of whole buffer (
         (if (y-or-n-p "Replace this one?")
             (replace-match "<code>\\1</code>" t) ) ) )) )
 
-(defun code-bracket-to-html-tag (p1 p2)
+(defun xah-bracket→html (p1 p2)
   "Replace all 「…」 to <code>…</code> and others.
 
 • 「…」 → <code>…</code>
@@ -103,19 +91,10 @@ When called with `universal-argument', work on visible portion of whole buffer (
 
 Work on text selection or current text block.
 
-When called with `universal-argument', work on whole buffer (but respect `narrow-to-region').
-
 When called in lisp program, the arguments p1 p2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-  (interactive
-   (cond
-    ((equal current-prefix-arg nil)    ; universal-argument not called
-     (let ((bds (get-selection-or-unit 'block))) 
-       (message "prifx arg %s" current-prefix-arg)
-       (list (elt bds 1) (elt bds 2) ) ))
-    (t                                  ; all other cases
-     (list (point-min) (point-max) )) ) )
+  (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ) )
   (let (changedItems)
     (setq changedItems '())
 
@@ -142,7 +121,6 @@ Generate a report of the replaced strings in a separate buffer."
         (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z0-9]+?\\)〕" nil t)
           (setq changedItems (cons (match-string 1) changedItems ) )
           (replace-match "<code class=\"path-α\">\\1</code>" t) )
-
         ) )
     
     (with-output-to-temp-buffer "*changed brackets*"
@@ -152,19 +130,16 @@ Generate a report of the replaced strings in a separate buffer."
          (princ "\n") )
        (reverse changedItems) ) ) ))
 
-(defun title-bracket-to-html-tag (p1 p2)
+(defun xah-title-bracket→html (p1 p2)
   "Replace all 〈…〉 to <cite>…</cite>.
 Also replace 《…》 to <cite class=\"book\">…</span>.
 
-If there's no text selection, work on current text block, else, on text selection. When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the arguments p1 p2 are region positions.
+If there's no text selection, work on current text block, else, on text selection.
+
+When call in lisp program, the arguments p1 p2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-  (interactive
-   (cond
-    ((equal current-prefix-arg nil)    ; universal-argument not called
-     (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
-    (t                                  ; all other cases
-     (list (point-min) (point-max) )) ) )
+  (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ) )
   (let (changedItems)
 
     ;; (setq changedItems (make-hash-table :test 'equal))
@@ -207,7 +182,7 @@ Generate a report of the replaced strings in a separate buffer."
     ))
 
 
-(defun curly-quotes-to-bracket (leftBracket rightBracket)
+(defun xah-curly-quotes→bracket (leftBracket rightBracket)
   "Replace “…” to one of 「…」.
 Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
   (interactive)
@@ -222,70 +197,70 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
               "“\\([^”]+?\\)”"
            (concat leftBracket "\\1" rightBracket) )) ) ))
 
-(defun curly-quotes-to-code-bracket ()
+(defun xah-curly-quotes→code-bracket ()
   "Replace “…” to 「…」"
   (interactive)
-  (curly-quotes-to-bracket "「" "」")
+  (xah-curly-quotes→bracket "「" "」")
 )
 
-(defun curly-quotes-to-html-code-tag ()
+(defun xah-curly-quotes→html-code-tag ()
   "Replace 「“…”」 to 「<code>…</code>」"
   (interactive)
-  (curly-quotes-to-bracket "<code>" "</code>")
+  (xah-curly-quotes→bracket "<code>" "</code>")
 )
 
-(defun curly-quotes-to-html-strong-tag ()
+(defun xah-curly-quotes→html-strong-tag ()
   "Replace 「“…”」 to 「<strong>…</strong>」"
   (interactive)
-  (curly-quotes-to-bracket "<strong>" "</strong>")
+  (xah-curly-quotes→bracket "<strong>" "</strong>")
 )
 
-(defun curly-quotes-to-elisp-function-bracket ()
+(defun xah-curly-quotes→elisp-function-bracket ()
   "Replace “…” to ｢…｣"
   (interactive)
-  (curly-quotes-to-bracket "｢" "｣")
+  (xah-curly-quotes→bracket "｢" "｣")
 )
 
-(defun curly-quotes-to-french-quote ()
+(defun xah-curly-quotes→french-quote ()
   "Replace “…” to «…»"
   (interactive)
-  (curly-quotes-to-bracket "«" "»")
+  (xah-curly-quotes→bracket "«" "»")
 )
 
-(defun curly-quotes-to-kbd-tag ()
+(defun xah-curly-quotes→kbd-tag ()
   "Replace “…” to <kbd>…</kbd>"
   (interactive)
-  (curly-quotes-to-bracket "<kbd>" "</kbd>")
+  (xah-curly-quotes→bracket "<kbd>" "</kbd>")
 )
 
-(defun curly-quotes-to-keyboard-bracket ()
+(defun xah-curly-quotes→keyboard-bracket ()
   "Replace “…” to 【…】"
   (interactive)
-  (curly-quotes-to-bracket "【" "】")
+  (xah-curly-quotes→bracket "【" "】")
 )
 
-(defun curly-quotes-to-menu-bracket ()
+(defun xah-curly-quotes→menu-bracket ()
   "Replace “…” to 〖…〗"
   (interactive)
-  (curly-quotes-to-bracket "〖" "〗")
+  (xah-curly-quotes→bracket "〖" "〗")
 )
 
-(defun curly-quotes-to-book-bracket ()
+(defun xah-curly-quotes→book-bracket ()
   "Replace “…” to 《…》"
   (interactive)
-  (curly-quotes-to-bracket "《" "》")
+  (xah-curly-quotes→bracket "《" "》")
 )
 
-(defun curly-quotes-to-title-bracket ()
+(defun xah-curly-quotes→title-bracket ()
   "Replace “…” to 〈…〉"
   (interactive)
-  (curly-quotes-to-bracket "〈" "〉")
+  (xah-curly-quotes→bracket "〈" "〉")
 )
 
-(defun curly-quotes-to-file-path ()
+(defun xah-curly-quotes→file-path ()
   "Replace “…” to 〔…〕"
   (interactive)
-  (curly-quotes-to-bracket "〔" "〕")
+  (xah-curly-quotes→bracket "〔" "〕")
 )
 
 ;; (defun curly-quotes-replacement ()

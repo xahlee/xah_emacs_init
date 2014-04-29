@@ -52,6 +52,8 @@
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 
+(global-set-key (kbd "<menu> SPC") "_") ; low line (underscore)
+
 ;; xah-cycle-camel-style-case
 
 (global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
@@ -96,6 +98,8 @@
 (global-set-key (kbd "<menu> d") 'yas/expand)
 
 (global-set-key (kbd "<menu> e") nil) ;
+
+(global-set-key (kbd "<menu> e 2") 'xah-toggle-read-article-mode)
 (global-set-key (kbd "<menu> e 3") 'whitespace-mode)
 (global-set-key (kbd "<menu> e 4") 'linum-mode)
 (global-set-key (kbd "<menu> e 5") 'visual-line-mode)
@@ -244,6 +248,7 @@
   (global-set-key (kbd "<menu> u n") 'xah-insert-bracket)            ;[]
   (global-set-key (kbd "<menu> u p") 'xah-insert-double-angle-quote«»)
   (global-set-key (kbd "<menu> u r") "+") ; plus
+  (global-set-key (kbd "<menu> u s") "_") ; low line
   (global-set-key (kbd "<menu> u t") 'xah-insert-paren)              ;()
   (global-set-key (kbd "<menu> u w") 'xah-insert-angle-bracket〈〉)
   (global-set-key (kbd "<menu> u x") 'xah-insert-tortoise-shell-bracket〔〕)
