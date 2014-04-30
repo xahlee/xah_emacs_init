@@ -87,7 +87,6 @@
 (global-set-key (kbd "<menu> 9") 'ispell-word)
 (global-set-key (kbd "<menu> ;") nil) ;
 (global-set-key (kbd "<menu> =") nil)
-(global-set-key (kbd "<menu> SPC") nil)
 (global-set-key (kbd "<menu> [") nil)
 (global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
 (global-set-key (kbd "<menu> `") 'xah-make-backup)

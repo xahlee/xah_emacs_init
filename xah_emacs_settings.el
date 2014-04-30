@@ -130,7 +130,7 @@
 (math-symbol-input-mode 1)
 
 (setq ido-enable-flex-matching t)
-(ido-vertical-mode 1)
+;; (ido-vertical-mode 1)
 
 (set-default 'abbrev-mode t)
 
