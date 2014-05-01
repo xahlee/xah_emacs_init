@@ -49,8 +49,8 @@ interactively by “eval-buffer”."
 ; add the dir of this file to load path
 (add-to-list 'load-path (fullpath-relative-to-current-file ""))
 
-(require 'package)
-(package-initialize)
+;; (require 'package)
+;; (package-initialize)
 
 (when (string-equal system-type "windows-nt") (load (fullpath-relative-to-current-file "xah_emacs_ms_windows")))
 
