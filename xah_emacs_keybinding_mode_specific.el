@@ -159,6 +159,16 @@ For `isearch-mode-hook'."
     )
   )
 
+(defun xah-help-mode-setup ()
+  "for help-mode-hook."
+  (save-current-buffer
+    (set-buffer "*Help*" )
+    (local-unset-key (kbd "r"))
+    (local-unset-key (kbd "8"))
+    ) )
+(add-hook 'help-mode-hook 'xah-help-mode-setup)
+(remove-hook 'help-mode-hook 'xah-help-mode-keys)
+
 (defun xah-perl-modes-keys ()
   "Modify keymaps."
   ;; (local-set-key (kbd "o") 'magit-status-mode)

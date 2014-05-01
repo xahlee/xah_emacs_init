@@ -19,7 +19,6 @@
 
 
 
-
 (global-set-key (kbd "<S-backspace>") 'delete-char)
 (global-set-key (kbd "<M-backspace>") 'backward-kill-word)
 
@@ -36,7 +35,6 @@
 (global-set-key (kbd "<f12>") 'xah-next-user-buffer)
 (global-set-key (kbd "<C-f11>") 'xah-previous-emacs-buffer)
 (global-set-key (kbd "<C-f12>") 'xah-next-emacs-buffer)
-
 
 
 
@@ -84,6 +82,5 @@
 (global-set-key (kbd "<XF86Copy>") 'xah-copy-line-or-region)
 (global-set-key (kbd "<XF86Paste>") 'yank)
 (global-set-key (kbd "C-<XF86Paste>") 'yank-pop)
-(global-set-key (kbd "<XF86Close>") 'xah-close-current-buffer) 
-
+(global-set-key (kbd "<XF86Close>") 'xah-close-current-buffer)
 
