@@ -106,8 +106,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("music_blog" . "~/web/xahmusic_org/music/blog.html" )
         ("arts_blog" . "~/web/xaharts_org/arts/blog.html" )
         ("sl_blog" . "~/web/xahsl_org/sl/blog.html" )
-        ("sex_blog" . "~/web/xahlee_org/sex/blog.html" )
-        ("porn_blog" . "~/web/xahporn_org/porn/blog.html" )
         ("pd_blog" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
 
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
@@ -148,9 +146,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("py3doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
         
         ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")
-
-        ("obn_outbound_notes" . "~/git/outbound_notes/")
-        ("o2_outbound_server" . "~/xobt2/outbound/")
 ) )
 
 (defun xah-open-file-fast (openCode)
@@ -162,7 +157,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 ;; (defun xah-open-file-fast (openCode)
 ;;   "Prompt to open a file from a pre-defined set."
-;;   (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [p]porn [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets [uk]kbd [d]dl:")
+;;   (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets [uk]kbd [d]dl:")
 ;;   (let (ξfile )
 ;;     (setq ξfile
 ;;           (cond
@@ -177,7 +172,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 ;;            ((string= openCode "sl") "~/web/xahsl_org/sl/blog.html" )
 ;;            ((string= openCode "t") "~/Dropbox/twitter tweets.txt" )
 ;;            ((string= openCode "x") "~/web/xahlee_org/sex/blog.html" )
-;;            ((string= openCode "p") "~/web/xahporn_org/porn/blog.html" )
 ;;            ((string= openCode "pd") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
 ;;            ((string= openCode "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
 ;;            ((string= openCode "h") "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
@@ -229,6 +223,7 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
           )
       (progn ; not starting “http://”
         (let ((ξfff (xahsite-web-path-to-filepath ξs default-directory)) )
+(message "%s" ξfff)
           (if (file-exists-p ξfff)
               (progn (find-file ξfff))
             (if (file-exists-p (concat ξfff ".el"))

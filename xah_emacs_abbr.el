@@ -326,8 +326,8 @@
 
 ("8fg" "<figure>\n<figcaption>\n</figcaption>\n</figure>")
 ("8fc" "<figcaption>\n</figcaption>")
-("8faq" "<p class=\"q\">How to do this?</p>
-<div class=\"a\">
+("8faq" "<div class=\"a\">
+<p class=\"q\">How to do this?</p>
 <p>this way</p>
 </div>
 

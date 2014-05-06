@@ -147,7 +147,7 @@ This command is convenient when reading novel, documentation."
       (set-window-margins nil 0 (- (window-body-width) fill-column))
     (set-window-margins nil 0 0) ) )
 
-(defun xah-toggle-read-article-mode ()
+(defun xah-toggle-read-novel-mode ()
   "make current window in a easy reading moder for article/novel text."
   (interactive)
   (let ( 
