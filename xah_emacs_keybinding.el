@@ -52,7 +52,7 @@
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 
-(global-set-key (kbd "<menu> SPC") (lambda () (interactive) (insert "_"))) ; low line (underscore)
+;; (global-set-key (kbd "<menu> SPC") (lambda () (interactive) (insert "_"))) ; low line (underscore)
 
 ;; xah-cycle-camel-style-case
 
@@ -208,48 +208,6 @@
   (global-set-key (kbd "<menu> t k") 'xah-paste-from-register-1)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
-  )
-
-(progn
-  (global-set-key (kbd "<menu> u") nil) ;
-  (global-set-key (kbd "<menu> u -") (lambda () (interactive) (insert "—"))) ; EM DASH
-  (global-set-key (kbd "<menu> u ,") 'xah-insert-greater-less)
-
-  (global-set-key (kbd "<menu> u RET") 'xah-insert-unicode)
-  (global-set-key (kbd "<menu> u 7") (lambda () (interactive) (insert "＆"))) 
-  (global-set-key (kbd "<menu> u 8") (lambda () (interactive) (insert "•")))
-
-  (global-set-key (kbd "<menu> u . <down>") (lambda () (interactive) (insert "⇓")))
-  (global-set-key (kbd "<menu> u . <left>") (lambda () (interactive) (insert "⇐")))
-  (global-set-key (kbd "<menu> u . <right>") (lambda () (interactive) (insert "⇒")))
-  (global-set-key (kbd "<menu> u . <up>") (lambda () (interactive) (insert "⇑")))
-  (global-set-key (kbd "<menu> u . b") 'xah-insert-white-lenticular-bracket〖〗)
-  (global-set-key (kbd "<menu> u . m") 'xah-insert-white-corner-bracket『』)
-  (global-set-key (kbd "<menu> u . w") 'xah-insert-double-angle-bracket《》)
-
-  (global-set-key (kbd "<menu> u <down>") (lambda () (interactive) (insert "↓")))
-  (global-set-key (kbd "<menu> u <left>") (lambda () (interactive) (insert "←")))
-  (global-set-key (kbd "<menu> u <right>") (lambda () (interactive) (insert "→")))
-  (global-set-key (kbd "<menu> u <up>") (lambda () (interactive) (insert "↑")))
-  (global-set-key (kbd "<menu> u SPC") (lambda () (interactive) (insert " "))) ;insert non-breaking space
-  (global-set-key (kbd "<menu> u \\") (lambda () (interactive) (insert "、"))) ; IDEOGRAPHIC COMMA
-
-  (global-set-key (kbd "<menu> u b") 'xah-insert-black-lenticular-bracket【】)
-  (global-set-key (kbd "<menu> u c") (lambda () (interactive) (insert "="))) ; equal
-  (global-set-key (kbd "<menu> u d") 'xah-insert-double-curly-quote“”)
-  (global-set-key (kbd "<menu> u f") 'xah-insert-single-straight-quote)
-  (global-set-key (kbd "<menu> u g") 'xah-insert-double-straight-quote)
-  (global-set-key (kbd "<menu> u h") 'xah-insert-brace)              ;{}
-  (global-set-key (kbd "<menu> u i") 'xah-insert-single-curly-quote‘’)
-  (global-set-key (kbd "<menu> u l") (lambda () (interactive) (insert "…"))) ; HORIZONTAL ELLIPSIS
-  (global-set-key (kbd "<menu> u m") 'xah-insert-corner-bracket「」)
-  (global-set-key (kbd "<menu> u n") 'xah-insert-bracket)            ;[]
-  (global-set-key (kbd "<menu> u p") 'xah-insert-double-angle-quote«»)
-  (global-set-key (kbd "<menu> u r") (lambda () (interactive) (insert "+"))) ; plus
-  (global-set-key (kbd "<menu> u t") 'xah-insert-paren)              ;()
-  (global-set-key (kbd "<menu> u w") 'xah-insert-angle-bracket〈〉)
-  (global-set-key (kbd "<menu> u x") 'xah-insert-tortoise-shell-bracket〔〕)
-  (global-set-key (kbd "<menu> u y") 'xah-insert-single-angle-quote‹›)
   )
 
 (global-set-key (kbd "<menu> v") 'toggle-case-fold-search)
