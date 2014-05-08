@@ -204,6 +204,7 @@
   (global-set-key (kbd "<menu> t 3") 'xah-new-empty-buffer)
   (global-set-key (kbd "<menu> t 4") 'find-file)
   (global-set-key (kbd "<menu> t c") 'xah-cite)
+  (global-set-key (kbd "<menu> t d") 'fix-datetimestamp)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> t j") 'xah-copy-to-register-1)
   (global-set-key (kbd "<menu> t k") 'xah-paste-from-register-1)
