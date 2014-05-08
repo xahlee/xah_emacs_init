@@ -113,8 +113,9 @@
 
 (global-set-key (kbd "<menu> f") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
 
-                                        ; ~/git/xah_emacs_init/xah_emacs_keybinding_shift_switch.el
-(global-set-key (kbd "<menu> g") 'list-matching-lines) ; 432    0.03%  list-matching-lines
+(global-set-key (kbd "<menu> g") 'isearch-forward) 
+
+; 432    0.03%  list-matching-lines
 
 (progn
   (global-set-key (kbd "<menu> h") nil)

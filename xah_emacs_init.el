@@ -63,6 +63,8 @@ interactively by “eval-buffer”."
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding"))
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding_control_key"))
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding_mode_specific"))
+      (load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_shift_switch"))
       ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad"))
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad_number"))
       (load (fullpath-relative-to-current-file "xah_emacs_mouse_binding"))
@@ -77,7 +79,6 @@ interactively by “eval-buffer”."
 (load (fullpath-relative-to-current-file "xah_emacs_keybinding_functions"))
 (load (fullpath-relative-to-current-file "xah_emacs_cursor_movement"))
 
-(load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
 (load (fullpath-relative-to-current-file "xah_emacs_alias"))
 (load (fullpath-relative-to-current-file "xah_emacs_abbr"))
 

@@ -19,7 +19,7 @@
 ;; (define-prefix-command 'xah-unicode-keymap)
 ;; (global-set-key (kbd "<menu> u") xah-unicode-keymap)
 
-(defvar xah-unicode-list nil "alist of Unicode symbols. first element is unicode, second element is a string used as key shortcut in ido-completing-read")
+(defvar xah-unicode-list nil "alist of Unicode symbols. first element is a Unicode character, second element is a string used as key shortcut in `ido-completing-read'")
 (setq xah-unicode-list
       '(
         ("◇" . "3" )
@@ -52,8 +52,6 @@
 
 (progn
 
-  (define-key key-translation-map (kbd "<menu> SPC") (kbd "_")) ;low line (underscore)
-
   (define-key key-translation-map (kbd "<menu> u -") (kbd "—")) ; EM DASH
   (global-set-key (kbd "<menu> u ,") 'xah-insert-greater-less)
 
@@ -68,7 +66,7 @@
   (global-set-key (kbd "<menu> u . b") 'xah-insert-white-lenticular-bracket〖〗)
   (global-set-key (kbd "<menu> u . m") 'xah-insert-white-corner-bracket『』)
   (global-set-key (kbd "<menu> u . w") 'xah-insert-double-angle-bracket《》)
-
+  
   (define-key key-translation-map (kbd "<menu> u <down>") (kbd "↓"))
   (define-key key-translation-map (kbd "<menu> u <left>") (kbd "←"))
   (define-key key-translation-map (kbd "<menu> u <right>") (kbd "→"))
