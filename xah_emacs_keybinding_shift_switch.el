@@ -1,7 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;; xah's emacs keybinding.
 
-
 (define-key key-translation-map (kbd "<menu> SPC SPC") (kbd "_")) ;low line (underscore)
 (define-key key-translation-map (kbd "<menu> SPC RET") (kbd "-"))
 

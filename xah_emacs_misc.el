@@ -476,11 +476,10 @@ When there is a text selection, act on the region."
             ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x1000 .")
             ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")
             )
-
           )
 
 (defun xah-shell-commands (cmdAbbrev)
-  "insert shell command from a selection prompt."
+  "insert shell command from a list of abbrevs."
   (interactive
    (list
       (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH") ) )
