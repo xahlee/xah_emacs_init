@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8 -*-
-;; some custome string insertion functions
+;; some string insertion functions
 ;; 2007-06, 2011-05-27
 ;; Xah Lee,
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html

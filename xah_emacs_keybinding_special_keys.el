@@ -11,9 +11,9 @@
 
 
 
-(global-set-key (kbd "<home>") 'x6-command-mode-activate)
-(global-set-key (kbd "<end>") 'x6-insert-mode-activate)
-;; (global-set-key (kbd "<return>") 'x6-insert-mode-activate)
+(global-set-key (kbd "<home>") 'eex-command-mode-activate)
+(global-set-key (kbd "<end>") 'eex-insert-mode-activate)
+;; (global-set-key (kbd "<return>") 'eex-insert-mode-activate)
 
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
 

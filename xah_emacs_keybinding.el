@@ -10,9 +10,10 @@
 ;; • xah_emacs_keybinding.el
 ;; • xah_emacs_keybinding_control_key.el
 ;; • xah_emacs_keybinding_ergoemacs_raw.el
-;; • xah_emacs_keybinding_ergoemacs_vi.el
+;; • xah_emacs_keybinding_ergoemacs_xah.el
 ;; • xah_emacs_keybinding_functions.el
 ;; • xah_emacs_keybinding_mode_specific.el
+;; • xah_emacs_keybinding_shift_switch.el
 ;; • xah_emacs_keybinding_special_keys.el
 ;; • xah_emacs_keybinding_unset_keys.el
 ;; • xah_emacs_mouse_binding.el

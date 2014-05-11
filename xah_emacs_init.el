@@ -57,7 +57,7 @@ interactively by “eval-buffer”."
 (if (boundp 'xah-load-xahkeys-q)
     (when xah-load-xahkeys-q
       ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_unset_keys.el"))
-      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_vi"))
+      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_xah"))
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding_ergoemacs_raw"))
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding_special_keys"))
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding"))
