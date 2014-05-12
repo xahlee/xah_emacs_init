@@ -427,5 +427,5 @@ Second Life: Xah Toll
 
 
 ;;; stop asking whether to save newly added abbrev when quitting emacs
-(setq save-abbrevs 'silently)
+(setq save-abbrevs nil)
 

@@ -123,7 +123,7 @@
     (global-set-key (kbd "j") 'xah-copy-line-or-region)
     (global-set-key (kbd "k") 'yank)
     (global-set-key (kbd "l") 'recenter-top-bottom)
-    (global-set-key (kbd "m") 'xah-backward-all-bracket)
+    (global-set-key (kbd "m") 'xah-backward-open-bracket)
     (global-set-key (kbd "n") 'forward-char)
     (global-set-key (kbd "o") 'other-window)
     (global-set-key (kbd "p") 'kill-word)
@@ -132,7 +132,7 @@
     (global-set-key (kbd "s") 'xah-end-of-line-or-block) ;
     (global-set-key (kbd "t") 'next-line)
     (global-set-key (kbd "u") 'delete-char) ;
-    (global-set-key (kbd "v") 'xah-forward-all-bracket)
+    (global-set-key (kbd "v") 'xah-forward-close-bracket)
     (global-set-key (kbd "w") 'eex-insert-mode-activate)
     (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)
     (global-set-key (kbd "y") 'redo)
