@@ -197,6 +197,7 @@
     ("8yt" "YouTube")
     ("8g" "Google")
     ("8ge" "Google Earth")
+    ("8gh" "Google Hangout")
     ("8gm" "Google Map")
     ("8gc" "Google Chrome")
     ("8gp" "Google Plus")
