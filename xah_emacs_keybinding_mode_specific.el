@@ -144,6 +144,7 @@ For `isearch-mode-hook'."
   ;; (local-set-key (kbd "6") 'dired-up-directory)
   (define-key dired-mode-map (kbd "M-g") 'backward-word)
   (define-key dired-mode-map (kbd "M-c") 'previous-line)
+  (define-key dired-mode-map (kbd "C-o") 'ido-find-file)
   (define-key dired-mode-map (kbd "o") 'other-window)
   (define-key dired-mode-map (kbd "1") 'xah-previous-user-buffer)
   (define-key dired-mode-map (kbd "2") 'delete-window)
