@@ -239,4 +239,3 @@
 ;;  '(rainbow-delimiters-depth-9-face ((t (:foreground "#8b7500"))))
 ;;  '(rainbow-delimiters-unmatched-face ((t (:foreground "red"))))
 ;;  '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
-

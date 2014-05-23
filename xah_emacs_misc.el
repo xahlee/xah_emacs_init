@@ -121,7 +121,12 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("Xah_Lee_Resume.html" . "~/web/xahlee_org/PageTwo_dir/Personal_dir/Xah_Lee_Resume.html")
         ("bavlamdei.txt" . "~/Dropbox/cabdei/bavlamdei.txt")
         ("check_local_links.pl" . "~/git/xahscripts/validate_website/check_local_links.pl")
+
         ("emacs_tutorial_update_emails" . "~/Dropbox/cabdei/emacs_tutorial_update_emails.txt")
+        ("xahleeinfo_update_emails" . "~/Dropbox/cabdei/xahlee.info_update_emails.txt")
+        ("xah_js_tutorial_update_emails" . "~/Dropbox/cabdei/xah_js_tutorial_update_emails.txt")
+        ("xah_python_tutorial_update_emails" . "~/Dropbox/cabdei/xah_python_tutorial_update_emails.txt")
+
         ("find-replace.py3" . "~/git/xah_find_replace/find-replace.py3")
         ("mipri" . "~/Dropbox/zekri_open/mipri/")
         ("second life" . "/media/OS/Users/xah/Google Drive/second life/")
@@ -144,8 +149,9 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("java" . "~/web/xahlee_info/java-a-day/java.html")
         ("py2doc" . "~/web/xahlee_info/python_doc_2.7.6/index.html")
         ("py3doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
-        
+
         ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")
+
 ) )
 
 (defun xah-open-file-fast (openCode)
@@ -353,7 +359,6 @@ This is Xah Lee's personal command assuming a particular dir structure."
     (message "URL copied %s" ξurl)
     )
   )
-
 
 
 
@@ -591,3 +596,97 @@ Linux only. Requires 「feh」 image viewer.
 (shell-command (format "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%%f'\" --geometry 1600x1000 '%s'" (expand-file-name default-directory)) )
   ))
 
+(defun xah-remove-paypal-unimportant-text ()
+  "..."
+  (interactive)
+  (let ()
+(replace-pairs-region 1 (point-max)
+ [
+["Dear Xah Lee," ""]
+["Hello Xah Lee," ""]
+["To see all the transaction details, please log into your PayPal account." ""]
+["Thanks for using PayPal. You can now ship any items. To see all the transaction details, log in to your PayPal account." ""]
+["It may take a few moments for this transaction to appear in your account." ""]
+["Seller Protection - Not Eligible" ""]
+["It may take a few moments for this transaction to appear in your account." ""]
+["Questions? Go to the Help Center at: www.paypal.com/help." ""]
+["Questions? Visit the Help Center at: www.paypal.com/help." ""]
+["Thanks for using PayPal – the safer, easier way to pay and get paid online." ""]
+["Please do not reply to this email. This mailbox is not monitored and you will not receive a response. For assistance, log in to your PayPal account and click Help in the top right corner of any PayPal page." ""]
+["You can receive plain text emails instead of HTML emails. To change your Notifications preferences, log in to your account, go to your Profile, and click My settings." ""]
+["Please keep this number for future reference, as your customer doesn't have a PayPal Transaction ID for this payment." ""]
+["Lift your withdrawal and receiving limits. Log in to your PayPal account and click View limits on your Account Overview page." ""]
+
+["Once the money's there you can:
+Spend the money online at thousands of stores that accept PayPal.
+Transfer it to your bank account (takes 2-3 days).
+Get a PayPal Debit MasterCard." ""]
+
+["Don't see the money in your account?" ""]
+
+["Don’t worry - sometimes it just takes a few minutes for it to show up." ""]
+["Don't worry - sometimes it just takes a few minutes for it to show up." ""]
+
+["Sincerely,
+PayPal" ""]
+
+["Help Center:
+https://www.paypal.com/us/cgi-bin/helpweb?cmd=_help" ""]
+
+["Resolution Center:
+https://www.paypal.com/us/cgi-bin/?cmd=_complaint-view
+" ""]
+
+["Security Center:
+https://www.paypal.com/us/security" ""]
+
+["Please don't reply to this email. It'll just confuse the computer that sent it and you won't get a response." ""]
+
+["This email was sent by an automated system, so if you reply, nobody will see it. To get in touch with us, log in to your account and click \"Contact Us\" at the bottom of any page." ""]
+
+["Copyright © 2014 PayPal, Inc. All rights reserved. PayPal is located at 2211 N. First St., San Jose, CA 95131." ""]
+
+["Instructions to merchant:
+The buyer hasn't entered any instructions." ""]
+
+["Instructions from buyer:
+None provided" ""]
+
+["----------------------------------------------------------------"
+""]
+                           ]
+                          )
+(replace-regexp-pairs-region 1 (point-max)
+ [
+
+["Get the details
+https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}\\)"
+""]
+
+["Important note: \\([ a-zA-Z,]+?\\) has provided an unconfirmed address. Please check the Transaction Details page for this payment to find out whether you will be covered by PayPal Seller Protection."
+ ""]
+
+["PPID PP\\([0-9]\\{3,4\\}\\) - \\([0-9a-fA-F]\\{12,13\\}\\)" ""]
+
+["PayPal Email ID +PP\\([0-9]\\{3,4\\}\\) - \\([0-9a-fA-F]\\{12,13\\}\\)" ""]
+
+]
+"FIXEDCASE" "LITERAL")
+
+(let* (
+         (bds (get-selection-or-unit 'buffer))
+         (p1 (elt bds 1))
+         (p2 (elt bds 2))
+         )
+    (save-excursion
+      (save-restriction
+        (narrow-to-region p1 p2)
+        (progn
+          (goto-char (point-min))
+          (while (search-forward-regexp "[ \t]+\n" nil "noerror")
+            (replace-match "\n") ))
+        (progn
+          (goto-char (point-min))
+          (while (search-forward-regexp "\n\n\n+" nil "noerror")
+            (replace-match "\n\n") )) )) )
+))

@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8 -*-
-;; xah's emacs keybinding.
+;; xah's emacs keybinding shift switch.
 
 (define-key key-translation-map (kbd "<menu> SPC SPC") (kbd "_")) ;low line (underscore)
 (define-key key-translation-map (kbd "<menu> SPC RET") (kbd "-"))

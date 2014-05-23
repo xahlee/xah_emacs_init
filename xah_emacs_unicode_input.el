@@ -16,8 +16,8 @@
 ;; for qwerty: () [] {} -_ =+
 ;; for dvorak: () [] {} /? =+
 
-;; (define-prefix-command 'xah-unicode-keymap)
-;; (global-set-key (kbd "<menu> u") xah-unicode-keymap)
+(define-prefix-command 'xah-unicode-keymap)
+(global-set-key (kbd "<menu> SPC") xah-unicode-keymap)
 
 (defvar xah-unicode-list nil "alist of Unicode symbols. first element is a Unicode character, second element is a string used as key shortcut in `ido-completing-read'")
 (setq xah-unicode-list
@@ -51,43 +51,46 @@
   )
 
 (progn
+  (define-key key-translation-map (kbd "<menu> SPC SPC") (kbd "_")) ;low line (underscore)
+  (define-key key-translation-map (kbd "<menu> SPC RET") (kbd "-"))
 
-  (define-key key-translation-map (kbd "<menu> u -") (kbd "—")) ; EM DASH
-  (global-set-key (kbd "<menu> u ,") 'xah-insert-greater-less)
+  (define-key key-translation-map (kbd "<menu> SPC -") (kbd "—")) ; EM DASH
 
-  (global-set-key (kbd "<menu> u RET") 'xah-insert-unicode)
-  (define-key key-translation-map (kbd "<menu> u 7") (kbd "＆")) 
-  (define-key key-translation-map (kbd "<menu> u 8") (kbd "•"))
+  (define-key key-translation-map (kbd "<menu> SPC . <down>") (kbd "⇓"))
+  (define-key key-translation-map (kbd "<menu> SPC . <left>") (kbd "⇐"))
+  (define-key key-translation-map (kbd "<menu> SPC . <right>") (kbd "⇒"))
+  (define-key key-translation-map (kbd "<menu> SPC . <up>") (kbd "⇑"))
+  (define-key key-translation-map (kbd "<menu> SPC <down>") (kbd "↓"))
+  (define-key key-translation-map (kbd "<menu> SPC <left>") (kbd "←"))
+  (define-key key-translation-map (kbd "<menu> SPC <right>") (kbd "→"))
+  (define-key key-translation-map (kbd "<menu> SPC <up>") (kbd "↑"))
+  (define-key key-translation-map (kbd "<menu> SPC SPC") (kbd " ")) ;insert non-breaking space
+  (define-key key-translation-map (kbd "<menu> SPC \\") (kbd "、")) ; IDEOGRAPHIC COMMA
 
-  (define-key key-translation-map (kbd "<menu> u . <down>") (kbd "⇓"))
-  (define-key key-translation-map (kbd "<menu> u . <left>") (kbd "⇐"))
-  (define-key key-translation-map (kbd "<menu> u . <right>") (kbd "⇒"))
-  (define-key key-translation-map (kbd "<menu> u . <up>") (kbd "⇑"))
-  (global-set-key (kbd "<menu> u . b") 'xah-insert-white-lenticular-bracket〖〗)
-  (global-set-key (kbd "<menu> u . m") 'xah-insert-white-corner-bracket『』)
-  (global-set-key (kbd "<menu> u . w") 'xah-insert-double-angle-bracket《》)
-  
-  (define-key key-translation-map (kbd "<menu> u <down>") (kbd "↓"))
-  (define-key key-translation-map (kbd "<menu> u <left>") (kbd "←"))
-  (define-key key-translation-map (kbd "<menu> u <right>") (kbd "→"))
-  (define-key key-translation-map (kbd "<menu> u <up>") (kbd "↑"))
-  (define-key key-translation-map (kbd "<menu> u SPC") (kbd " ")) ;insert non-breaking space
-  (define-key key-translation-map (kbd "<menu> u \\") (kbd "、")) ; IDEOGRAPHIC COMMA
+  (global-set-key (kbd "<menu> SPC ,") 'xah-insert-greater-less)
 
-  (global-set-key (kbd "<menu> u b") 'xah-insert-black-lenticular-bracket【】)
-  (define-key key-translation-map (kbd "<menu> u c") (kbd "=")) ; equal
-  (global-set-key (kbd "<menu> u d") 'xah-insert-double-curly-quote“”)
-  (global-set-key (kbd "<menu> u f") 'xah-insert-single-straight-quote)
-  (global-set-key (kbd "<menu> u g") 'xah-insert-double-straight-quote)
-  (global-set-key (kbd "<menu> u h") 'xah-insert-brace)              ;{}
-  (global-set-key (kbd "<menu> u i") 'xah-insert-single-curly-quote‘’)
-  (define-key key-translation-map (kbd "<menu> u l") (kbd "…")) ; HORIZONTAL ELLIPSIS
-  (global-set-key (kbd "<menu> u m") 'xah-insert-corner-bracket「」)
-  (global-set-key (kbd "<menu> u n") 'xah-insert-bracket)            ;[]
-  (global-set-key (kbd "<menu> u p") 'xah-insert-double-angle-quote«»)
-  (define-key key-translation-map (kbd "<menu> u r") (kbd "+")) ; plus
-  (global-set-key (kbd "<menu> u t") 'xah-insert-paren)              ;()
-  (global-set-key (kbd "<menu> u w") 'xah-insert-angle-bracket〈〉)
-  (global-set-key (kbd "<menu> u x") 'xah-insert-tortoise-shell-bracket〔〕)
-  (global-set-key (kbd "<menu> u y") 'xah-insert-single-angle-quote‹›)
+  (define-key key-translation-map (kbd "<menu> SPC 7") (kbd "＆"))
+  (define-key key-translation-map (kbd "<menu> SPC 8") (kbd "•"))
+
+  (global-set-key (kbd "<menu> SPC . b") 'xah-insert-white-lenticular-bracket〖〗)
+  (global-set-key (kbd "<menu> SPC . m") 'xah-insert-white-corner-bracket『』)
+  (global-set-key (kbd "<menu> SPC . w") 'xah-insert-double-angle-bracket《》)
+
+  (global-set-key (kbd "<menu> SPC b") 'xah-insert-black-lenticular-bracket【】)
+  (define-key key-translation-map (kbd "<menu> SPC c") (kbd "=")) ; equal
+  (global-set-key (kbd "<menu> SPC d") 'xah-insert-double-curly-quote“”)
+  (global-set-key (kbd "<menu> SPC f") 'xah-insert-single-straight-quote)
+  (global-set-key (kbd "<menu> SPC g") 'xah-insert-double-straight-quote)
+  (global-set-key (kbd "<menu> SPC h") 'xah-insert-brace)              ;{}
+  (global-set-key (kbd "<menu> SPC i") 'xah-insert-single-curly-quote‘’)
+  (define-key key-translation-map (kbd "<menu> SPC l") (kbd "…")) ; HORIZONTAL ELLIPSIS
+  (global-set-key (kbd "<menu> SPC m") 'xah-insert-corner-bracket「」)
+  (global-set-key (kbd "<menu> SPC n") 'xah-insert-bracket)            ;[]
+  (global-set-key (kbd "<menu> SPC p") 'xah-insert-double-angle-quote«»)
+  (define-key key-translation-map (kbd "<menu> SPC r") (kbd "+")) ; plus
+  (global-set-key (kbd "<menu> SPC t") 'xah-insert-paren)              ;()
+  (global-set-key (kbd "<menu> SPC u") 'xah-insert-unicode)
+  (global-set-key (kbd "<menu> SPC w") 'xah-insert-angle-bracket〈〉)
+  (global-set-key (kbd "<menu> SPC x") 'xah-insert-tortoise-shell-bracket〔〕)
+  (global-set-key (kbd "<menu> SPC y") 'xah-insert-single-angle-quote‹›)
   )

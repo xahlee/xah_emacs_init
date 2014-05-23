@@ -83,7 +83,7 @@ If the current buffer is not associated with a file, its a error."
 ;;    ) )
 
 ;; from newsgroup gnu.emacs.help, by Richard Riley, 2009-08-02
-(defun open-current-file-as-admin ()
+(defun xah-open-current-file-as-admin ()
   "Open the current buffer as unix root.
 This command works on unixes only."
   (interactive)
@@ -135,7 +135,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
         (message "No recognized program file suffix for this file.")
         ) ) ))
 
-(defun run-current-java-file ()
+(defun xah-run-current-java-file ()
   "Execute the current file's class with Java.
 For example, if the current buffer is the file x.java,
 then it'll call “java x” in a shell."
@@ -147,7 +147,7 @@ then it'll call “java x” in a shell."
     (shell-command cmd-str))
   )
 
-(defun python-2to3-current-file ()
+(defun xah-python-2to3-current-file ()
   "Convert current buffer from python 2 to python 3.
 
 this command calls python3's script 「2to3」."
@@ -243,7 +243,7 @@ this command calls python3's script 「2to3」."
 ;;       (message "Words: %d. Chars: %d." wCnt charCnt)
 ;;       )))
 
-(defun count-words-region-or-line ()
+(defun xah-count-words-region-or-line ()
   "Print number of words and chars in text selection or line.
 In emacs 24, you can use `count-words'."
   (interactive)
@@ -262,7 +262,7 @@ In emacs 24, you can use `count-words'."
 
         (message "Words: %d. Chars: %d." wCnt charCnt) )) ) )
 
-(defun change-file-line-ending (fpath lineEndingStyle)
+(defun xah-change-file-line-ending (fpath lineEndingStyle)
   "Change file's newline character.
  「fpath」 is full path to file.
  「lineEndingStyle」 is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
@@ -280,7 +280,7 @@ If the file is already opened, it will be saved after this command.
         (save-buffer)
         (kill-buffer mybuffer) ) ) ) )
 
-(defun change-file-line-ending-style (fileList lineEndingStyle)
+(defun xah-change-file-line-ending-style (fileList lineEndingStyle)
   "Change current file or dired marked file's newline convention.
 When called in lisp program, “lineEndingStyle” is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 "
@@ -301,21 +301,21 @@ When called in lisp program, “lineEndingStyle” is one of 'unix 'dos 'mac or 
            ))
          )
     (mapc
-     (lambda (ff) (change-file-line-ending ff nlStyle))
+     (lambda (ff) (xah-change-file-line-ending ff nlStyle))
      fileList)) )
 
 
 ;; don't use much anymore
 
-                                        ; (beep-for-n-min 1)
-(defun beep-for-n-min (n)
+;; (xah-beep-for-n-min 1)
+(defun xah-beep-for-n-min (n)
   "Make 1 beep sound per second for N minutes.
 WARNING: when beeping starts, emacs will freeze.
 Press \\[keyboard-quit] to cancel the beep."
   (dotimes (i (* 60 n)) (progn (beep) (sleep-for 1)))
   )
 
-(defun set-alarm-after-n-min (n)
+(defun xah-set-alarm-after-n-min (n)
   "Make a alarm clock beep alert after N minutes.
 The beep will last for 5 minutes.
 WARNING: when beeping starts, emacs will freeze.
@@ -323,7 +323,7 @@ Press \\[keyboard-quit] to cancel the beep."
   (interactive "nHow many minutes from now: ")
   (run-with-timer
    (* 60 n) nil
-   'beep-for-n-min 5
+   'xah-beep-for-n-min 5
    ))
 
 (defun xah-erase-buffer ()

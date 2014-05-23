@@ -64,7 +64,7 @@ interactively by “eval-buffer”."
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding_control_key"))
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding_mode_specific"))
       (load (fullpath-relative-to-current-file "xah_emacs_unicode_input"))
-      (load (fullpath-relative-to-current-file "xah_emacs_keybinding_shift_switch"))
+      ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_shift_switch"))
       ;; (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad"))
       (load (fullpath-relative-to-current-file "xah_emacs_keybinding_number_pad_number"))
       (load (fullpath-relative-to-current-file "xah_emacs_mouse_binding"))
@@ -85,6 +85,8 @@ interactively by “eval-buffer”."
 (load (fullpath-relative-to-current-file "xah_elisp_util"))
 (load (fullpath-relative-to-current-file "xah_emacs_xahsite_path_lisp_util"))
 (load (fullpath-relative-to-current-file "xah_emacs_insert_pairs"))
+
+(load (fullpath-relative-to-current-file "~/Dropbox/xah-emacs-private b53d8d39"))
 
 (load (fullpath-relative-to-current-file "xah_emacs_editing_commands"))
 (load (fullpath-relative-to-current-file "xah_emacs_dired_commands"))
