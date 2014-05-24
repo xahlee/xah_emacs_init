@@ -3,9 +3,7 @@
 
 (define-key key-translation-map (kbd "C-p") (kbd "<menu>")) ; stupid Mac OS X don't do menu/app key 〈Mac OS X: Keyboard Layout, Keymapping, Keybinding, Software ⌨〉 http://xahlee.info/kbd/Mac_OS_X_keymapping_keybinding_tools.html
 
-(define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
-(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-;(global-set-key (kbd "<escape>") 'keyboard-quit)
+(define-key key-translation-map (kbd "<f17>") (kbd "C-g")) ; truely ergo keyboard, middle key
 
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
 
@@ -71,8 +69,6 @@
 
 
 (global-set-key (kbd "<f14>") 'xah-close-current-buffer) ;truely ergo keyboard, upper right key
-
-(global-set-key (kbd "<f17>") 'other-frame) ; truely ergo keyboard, middle key
 
 ; 6067    0.38%  other-window
 

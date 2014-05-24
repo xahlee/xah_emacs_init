@@ -9,6 +9,8 @@
 
 ;; (global-subword-mode 0)
 
+(which-function-mode 1) ; show current function in mode line
+
 ;; open pdf files in hex mode
 (add-to-list 'auto-mode-alist '("\\.pdf\\'" . hexl-mode))
 

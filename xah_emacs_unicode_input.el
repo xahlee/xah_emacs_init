@@ -19,37 +19,6 @@
 (define-prefix-command 'xah-unicode-keymap)
 (global-set-key (kbd "<menu> SPC") xah-unicode-keymap)
 
-(defvar xah-unicode-list nil "alist of Unicode symbols. first element is a Unicode character, second element is a string used as key shortcut in `ido-completing-read'")
-(setq xah-unicode-list
-      '(
-        ("◇" . "3" )
-        ("◆" . "4" )
-        ("¤" . "2" )
-        ("…" . "l" )
-        (" " . "s" )
-        ("、" . "," )
-        ("•" . "8" )
-        ("⭑" . "9" )
-        ("🎶" . "5" )
-        ("—" . "-" )
-        ("＆" . "7" )
-        ("↓" . "at")
-        ("←" . "ah")
-        ("→" . "an")
-        ("↑" . "ac")
-        ("👍" . "tu")
-        ) )
-
-(defun xah-insert-unicode ()
-  "insert a unicode"
-  (interactive)
-  (let (gotThis)
-    (setq gotThis
-          (ido-completing-read "insert:" (mapcar (lambda (x) (concat (car x) (cdr x))) xah-unicode-list)) )
-    (insert (car (assoc (substring gotThis 0 1) xah-unicode-list)))
-    )
-  )
-
 (progn
   (define-key key-translation-map (kbd "<menu> SPC SPC") (kbd "_")) ;low line (underscore)
   (define-key key-translation-map (kbd "<menu> SPC RET") (kbd "-"))
@@ -64,7 +33,6 @@
   (define-key key-translation-map (kbd "<menu> SPC <left>") (kbd "←"))
   (define-key key-translation-map (kbd "<menu> SPC <right>") (kbd "→"))
   (define-key key-translation-map (kbd "<menu> SPC <up>") (kbd "↑"))
-  (define-key key-translation-map (kbd "<menu> SPC SPC") (kbd " ")) ;insert non-breaking space
   (define-key key-translation-map (kbd "<menu> SPC \\") (kbd "、")) ; IDEOGRAPHIC COMMA
 
   (global-set-key (kbd "<menu> SPC ,") 'xah-insert-greater-less)

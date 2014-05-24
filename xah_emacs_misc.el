@@ -29,20 +29,20 @@ C-u 2 → set to 'chinese-py-b5."
 
 
 
-(defun xah-yellowMe ()
-  "temp function. change background color of current frame to light yellow."
+(defun xah-color-me-yellow ()
+  "Change background color of current window to light yellow."
   (interactive)
   (set-background-color "cornsilk")
   )
 
-(defun xah-pinkMe ()
-  "temp function. change background color of current frame to light pink."
+(defun xah-color-me-pinky ()
+  "Change background color of current window to light pink."
   (interactive)
   (set-background-color "lavender blush")
   )
 
-(defun xah-honeyMe ()
-  "temp function. change background color of current frame to honeydew."
+(defun xah-color-me-honeydew ()
+  "Change background color of current window to honeydew."
   (interactive)
   (set-background-color "honeydew")
   )
@@ -266,7 +266,7 @@ The clipboard should contain a file path or url to xah site. Open that file in e
         ) ) ))
 
 (defun xah-browse-url-at-point ()
-"Switch to web browser and load the URL at point.
+"Switch to web browser and load the URL at cursor position.
 This code is designed to work on Mac OS X only.
 
 If the cursor is on a URL, visit it
@@ -544,28 +544,6 @@ When there is a text selection, act on the region."
 ;;           )
 ;;       (progn (goto-char (point-min))))))
 
-(defun xah-python-ref-linkify ()
-  "Transform current line (a file path) into a link.
-For example, this line:
-
-~/web/xahlee_info/python_doc_2.7.6/library/stdtypes.html#mapping-types-dict
-
-becomes
-
-<span class=\"ref\"><a href=\"../python_doc_2.7.6/library/stdtypes.html#mapping-types-dict\">5. Built-in Types — Python v2.7.6 documentation #mapping-types-dict</a></span>
-
-The path is relative to current file. The link text is the linked file's title, plus fragment url part, if any.
-
-Requires a python script. See code."
-  (interactive)
-  (let (scriptName bds)
-    (setq bds (bounds-of-thing-at-point 'filename) )
-    (save-excursion
-      (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)) )
-      (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t)
-      )
-    ))
-
 (defun xah-decode-percent-encoded-uri (p1 p2)
   "Percent decode URI for text selection."
   (interactive "r")
@@ -616,44 +594,30 @@ Linux only. Requires 「feh」 image viewer.
 ["You can receive plain text emails instead of HTML emails. To change your Notifications preferences, log in to your account, go to your Profile, and click My settings." ""]
 ["Please keep this number for future reference, as your customer doesn't have a PayPal Transaction ID for this payment." ""]
 ["Lift your withdrawal and receiving limits. Log in to your PayPal account and click View limits on your Account Overview page." ""]
-
 ["Once the money's there you can:
 Spend the money online at thousands of stores that accept PayPal.
 Transfer it to your bank account (takes 2-3 days).
 Get a PayPal Debit MasterCard." ""]
-
 ["Don't see the money in your account?" ""]
-
 ["Don’t worry - sometimes it just takes a few minutes for it to show up." ""]
 ["Don't worry - sometimes it just takes a few minutes for it to show up." ""]
-
 ["Sincerely,
 PayPal" ""]
-
 ["Help Center:
 https://www.paypal.com/us/cgi-bin/helpweb?cmd=_help" ""]
-
 ["Resolution Center:
 https://www.paypal.com/us/cgi-bin/?cmd=_complaint-view
 " ""]
-
 ["Security Center:
 https://www.paypal.com/us/security" ""]
-
 ["Please don't reply to this email. It'll just confuse the computer that sent it and you won't get a response." ""]
-
 ["This email was sent by an automated system, so if you reply, nobody will see it. To get in touch with us, log in to your account and click \"Contact Us\" at the bottom of any page." ""]
-
 ["Copyright © 2014 PayPal, Inc. All rights reserved. PayPal is located at 2211 N. First St., San Jose, CA 95131." ""]
-
 ["Instructions to merchant:
 The buyer hasn't entered any instructions." ""]
-
 ["Instructions from buyer:
 None provided" ""]
-
-["----------------------------------------------------------------"
-""]
+["----------------------------------------------------------------" ""]
                            ]
                           )
 (replace-regexp-pairs-region 1 (point-max)
@@ -690,3 +654,56 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
           (while (search-forward-regexp "\n\n\n+" nil "noerror")
             (replace-match "\n\n") )) )) )
 ))
+
+(defun xah-replace-BOM-mark-etc ()
+  "Query replace Unicode some invisible Unicode chars.
+The chars to be searched are:
+ RIGHT-TO-LEFT MARK 8207 x200f
+ ZERO WIDTH NO-BREAK SPACE 65279 xfeff
+
+start on cursor position to end.
+    "
+  (interactive)
+  (let ()
+    (query-replace-regexp "\u200f\\|\ufeff" "")
+    ))
+
+(defun xah-show-hexadecimal-value ()
+  "Prints the decimal value of a hexadecimal string under cursor.
+TODO: 2014-05-23 doesn't work. something's broken.
+
+Samples of valid input:
+
+  ffaf
+  ffff
+  0xffff
+  #xffff
+  FFFF
+  0xFFFF
+  #xFFFF
+
+Test cases
+  64*0xc8+#x12c 190*0x1f4+#x258
+  100 200 300   400 500 600"
+  (interactive )
+
+  (let (inputStr tempStr p1 p2
+                 (case-fold-search t) )
+    (save-excursion
+      ;; (skip-chars-backward "0123456789abcdef")
+      ;; (search-backward-regexp "[[:xdigit:]]+" nil t)
+      (search-backward-regexp "[0123456789abcdef]+" nil t)
+      (setq p1 (point) )
+      (search-forward-regexp "[0123456789abcdef]+" nil t)
+      (setq p2 (point) )
+
+      (setq inputStr (buffer-substring-no-properties p1 p2) )
+
+      (let ((case-fold-search nil) )
+        (setq tempStr (replace-regexp-in-string "\\`0x" "" inputStr )) ; C, Perl, …
+        (setq tempStr (replace-regexp-in-string "\\`#x" "" tempStr )) ; elisp …
+        (setq tempStr (replace-regexp-in-string "\\`#" "" tempStr ))  ; CSS …
+        )
+
+      ;; (message "Hex 「%s」 is 「%d」" tempStr (string-to-number tempStr 16 ) )
+      (message "input 「%s」 Hex 「%s」 is 「%d」" inputStr tempStr (string-to-number tempStr 16 ) ) ) ))

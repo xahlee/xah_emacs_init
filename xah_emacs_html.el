@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8 -*-
-;; some custome string functions for working with HTML
+;; stuff related to HTML
 ;; most things moved to xah-html-mode
 ;; ∑ http://xahlee.org/
 
@@ -17,8 +17,6 @@
   (search-backward "</")
   ;; (forward-char-char 2)
   )
-
-
 
 (defun xah-ref-span-tag ()
   "Add <p>…</p> tag to current text block or text selection.
@@ -47,8 +45,6 @@ When called in elisp program, wrap the tag at cursor position p1."
     (forward-char 1)
     (insert (format "</mark>") )
     ) )
-
-
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
@@ -265,10 +261,24 @@ google_ad_client")
 ;; (format "%2x" (round (* (/ (string-to-number "49") 100.0) 255)))
 ;; (format "%02x" 10)
 
-(add-hook 'xah-php-mode-hook 'xah-syntax-color-hex)
-(add-hook 'xah-php-mode-hook 'xah-syntax-color-hex)
+(defun xah-python-ref-linkify ()
+  "Transform current line (a file path) into a link.
+For example, this line:
 
-(add-hook 'xah-html-mode-hook 'xah-syntax-color-hsl)
-(add-hook 'xah-html-mode-hook 'xah-syntax-color-hsl)
+~/web/xahlee_info/python_doc_2.7.6/library/stdtypes.html#mapping-types-dict
 
+becomes
 
+<span class=\"ref\"><a href=\"../python_doc_2.7.6/library/stdtypes.html#mapping-types-dict\">5. Built-in Types — Python v2.7.6 documentation #mapping-types-dict</a></span>
+
+The path is relative to current file. The link text is the linked file's title, plus fragment url part, if any.
+
+Requires a python script. See code."
+  (interactive)
+  (let (scriptName bds)
+    (setq bds (bounds-of-thing-at-point 'filename) )
+    (save-excursion
+      (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)) )
+      (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t)
+      )
+    ))
