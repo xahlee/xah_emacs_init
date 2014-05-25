@@ -1,11 +1,15 @@
 ;; -*- coding: utf-8 -*-
 ;; 2014-01-29
 
-(define-key key-translation-map (kbd "C-p") (kbd "<menu>")) ; stupid Mac OS X don't do menu/app key 〈Mac OS X: Keyboard Layout, Keymapping, Keybinding, Software ⌨〉 http://xahlee.info/kbd/Mac_OS_X_keymapping_keybinding_tools.html
-
-(define-key key-translation-map (kbd "<f17>") (kbd "C-g")) ; truely ergo keyboard, middle key
-
 (define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
+
+(define-key key-translation-map (kbd "C-p") (kbd "<menu>")) ; Mac OS X don't do menu/app key.
+;; 〈Mac OS X: Keyboard Layout, Keymapping, Keybinding, Software ⌨〉
+;; http://xahlee.info/kbd/Mac_OS_X_keymapping_keybinding_tools.html
+
+(define-key key-translation-map (kbd "<menu> <end>") (kbd "C-g"))
+(define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
+(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 
 

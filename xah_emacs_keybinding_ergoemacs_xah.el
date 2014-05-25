@@ -49,8 +49,8 @@
     (global-set-key (kbd "\\") 'self-insert-command)
     (global-set-key (kbd "`") 'self-insert-command)
     (global-set-key (kbd ".") 'self-insert-command)
-    (global-set-key (kbd "'") 'self-insert-command) ;
-    (global-set-key (kbd ",") 'self-insert-command) ;
+    (global-set-key (kbd "'") 'self-insert-command)
+    (global-set-key (kbd ",") 'self-insert-command)
     (global-set-key (kbd "-") 'self-insert-command )
     (global-set-key (kbd "/") 'self-insert-command)
     (global-set-key (kbd "0") 'self-insert-command)
