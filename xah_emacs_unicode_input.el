@@ -17,6 +17,7 @@
 ;; for dvorak: () [] {} /? =+
 
 (define-prefix-command 'xah-unicode-keymap)
+
 (global-set-key (kbd "<menu> SPC") xah-unicode-keymap)
 
 (progn
