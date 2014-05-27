@@ -72,14 +72,46 @@ See: `xah-forward-block'"
     (end-of-line)
     ))
 
+
+(defvar xah-brackets-open nil "list of open bracket chars.")
 (setq xah-brackets-open '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«") )
+
+(defvar xah-brackets-close nil "list of close bracket chars.")
 (setq xah-brackets-close '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»") )
+
+(defvar xah-ascii-quotes nil "list of quotation chars.")
 (setq xah-ascii-quotes '("'" "\"") )
+
+(defvar xah-punctuations nil "list of punctuation chars.")
+(setq xah-punctuations '("=" "*" "$" "#" "+" "\\" "&" "@" "%" "!" "?" "^" "`" "~") )
+
+(defun xah-forward-punct (&optional number)
+  "Move cursor to the next occurrence of punctuation.
+
+The list of punctuations to jump to is defined by `xah-punctuations'"
+  (interactive "p")
+  (if (and number (> 0 number))
+      (xah-backward-punct (- 0 number))
+    (forward-char 1)
+    (search-forward-regexp (eval-when-compile (regexp-opt xah-punctuations)) nil t number)
+    (backward-char 1)))
+
+(defun xah-backward-punct (&optional number)
+  "Move cursor to the previous occurrence of punctuation.
+
+The list of punctuations to jump to is defined by `xah-punctuations'"
+  (interactive "p")
+  (if (and number (> 0 number))
+      (xah-forward-punct (- 0 number))
+    (search-backward-regexp (eval-when-compile (regexp-opt xah-punctuations)) nil t number)))
 
 (defun xah-forward-all-bracket (&optional number)
   "Move cursor to the next occurrence of left bracket or quotation mark.
 With prefix NUMBER, move forward to the next NUMBER left bracket or quotation mark.
-With a negative prefix NUMBER, move backward to the previous NUMBER left bracket or quotation mark."
+With a negative prefix NUMBER, move backward to the previous NUMBER left bracket or quotation mark.
+
+The list of brackets to jump to is defined by `xah-brackets-open' and `xah-brackets-close' and `xah-ascii-quotes'"
+
   (interactive "p")
   (if (and number (> 0 number))
       (xah-backward-open-bracket (- 0 number))
@@ -90,7 +122,9 @@ With a negative prefix NUMBER, move backward to the previous NUMBER left bracket
 (defun xah-backward-all-bracket (&optional number)
   "Move cursor to the previous occurrence of left bracket or quotation mark.
 With prefix argument NUMBER, move backward NUMBER open brackets.
-With a negative prefix NUMBER, move forward NUMBER open brackets."
+With a negative prefix NUMBER, move forward NUMBER open brackets.
+
+The list of brackets to jump to is defined by `xah-brackets-open' and `xah-brackets-close' and `xah-ascii-quotes'"
   (interactive "p")
   (if (and number (> 0 number))
       (xah-forward-open-bracket (- 0 number))
@@ -110,7 +144,9 @@ With a negative prefix NUMBER, move backward to the previous NUMBER left bracket
 (defun xah-backward-open-bracket (&optional number)
   "Move cursor to the previous occurrence of left bracket or quotation mark.
 With prefix argument NUMBER, move backward NUMBER open brackets.
-With a negative prefix NUMBER, move forward NUMBER open brackets."
+With a negative prefix NUMBER, move forward NUMBER open brackets.
+
+The list of brackets to jump to is defined by `xah-brackets-open'."
   (interactive "p")
   (if (and number (> 0 number))
       (xah-forward-open-bracket (- 0 number))
@@ -119,7 +155,9 @@ With a negative prefix NUMBER, move forward NUMBER open brackets."
 (defun xah-forward-close-bracket (&optional number)
   "Move cursor to the next occurrence of right bracket or quotation mark.
 With a prefix argument NUMBER, move forward NUMBER closed bracket.
-With a negative prefix argument NUMBER, move backward NUMBER closed brackets."
+With a negative prefix argument NUMBER, move backward NUMBER closed brackets.
+
+The list of brackets to jump to is defined by `xah-brackets-close'."
   (interactive "p")
   (if (and number
            (> 0 number))
@@ -131,7 +169,9 @@ With a negative prefix argument NUMBER, move backward NUMBER closed brackets."
 (defun xah-backward-close-bracket (&optional number)
   "Move cursor to the previous occurrence of right bracket or quotation mark.
 With a prefix argument NUMBER, move backward NUMBER closed brackets.
-With a negative prefix argument NUMBER, move forward NUMBER closed brackets."
+With a negative prefix argument NUMBER, move forward NUMBER closed brackets.
+
+The list of brackets to jump to is defined by `xah-brackets-close'."
   (interactive "p")
   (if (and number (> 0 number))
       (xah-forward-close-bracket (- 0 number))
@@ -142,7 +182,9 @@ With a negative prefix argument NUMBER, move forward NUMBER closed brackets."
 (defun xah-forward-quote (&optional number)
   "Move cursor to the next occurrence of ASCII quotation mark, single or double.
 With prefix NUMBER, move forward to the next NUMBER quotation mark.
-With a negative prefix NUMBER, move backward to the previous NUMBER quotation mark."
+With a negative prefix NUMBER, move backward to the previous NUMBER quotation mark.
+
+The list of quotes to jump to is defined by `xah-ascii-quotes'."
   (interactive "p")
   (if (and number (> 0 number))
       (xah-forward-quote (- 0 number))
@@ -152,7 +194,9 @@ With a negative prefix NUMBER, move backward to the previous NUMBER quotation ma
 (defun xah-backward-quote (&optional number)
   "Move cursor to the previous occurrence of ASCII quotation mark, single or double.
 With prefix argument NUMBER, move backward NUMBER quotation mark.
-With a negative prefix NUMBER, move forward NUMBER quotation mark."
+With a negative prefix NUMBER, move forward NUMBER quotation mark.
+
+The list of quotes to jump to is defined by `xah-ascii-quotes'."
   (interactive "p")
   (if (and number (> 0 number)) (xah-backward-quote (- 0 number))
     (search-backward-regexp (eval-when-compile (regexp-opt xah-ascii-quotes)) nil t number)))

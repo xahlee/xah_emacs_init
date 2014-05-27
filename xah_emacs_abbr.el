@@ -338,7 +338,7 @@
 
 ;; JavaScript
 ("3c" "console.log();")
-("3f" "function () {}")
+("3f" "function (x) {return 3;}")
 ("3v" "var = ;")
 
 

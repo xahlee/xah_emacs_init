@@ -102,11 +102,11 @@
     (global-set-key (kbd "'") 'xah-compact-uncompact-block) ;
     (global-set-key (kbd ",") 'xah-shrink-whitespaces) ;
     (global-set-key (kbd "0") 'xah-forward-quote)
-    (global-set-key (kbd "1") nil)
+    (global-set-key (kbd "1") 'xah-backward-punct)
     (global-set-key (kbd "2") 'delete-window)
     (global-set-key (kbd "3") 'delete-other-windows)
     (global-set-key (kbd "4") 'split-window-vertically)
-    (global-set-key (kbd "5") nil)
+    (global-set-key (kbd "5") 'xah-forward-punct)
     (global-set-key (kbd "6") 'xah-select-current-block) ;
     (global-set-key (kbd "7") 'xah-select-current-line)
     (global-set-key (kbd "8") 'xah-extend-selection)
