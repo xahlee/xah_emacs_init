@@ -7,9 +7,8 @@
 ;; 〈Mac OS X: Keyboard Layout, Keymapping, Keybinding, Software ⌨〉
 ;; http://xahlee.info/kbd/Mac_OS_X_keymapping_keybinding_tools.html
 
-;; (define-key key-translation-map (kbd "<menu> <end>") (kbd "C-g")) ; doesn't work in some cases in minibuffer. ⁖ when emacs asking yes or no when opening a none-existing file path
-(define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
-(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+;; (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
+;; (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 
 

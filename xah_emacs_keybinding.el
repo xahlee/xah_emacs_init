@@ -45,7 +45,11 @@
 (define-prefix-command 'xah-menu-keymap)
 (global-set-key (kbd "<menu>") 'xah-menu-keymap)
 
-(global-set-key (kbd "<menu> <menu>") 'exchange-point-and-mark)
+(define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
+;; (define-key key-translation-map (kbd "<menu> <end>") (kbd "C-g")) ; doesn't work in some cases in minibuffer. ⁖ when emacs asking yes or no when opening a none-existing file path
+
+;; (global-set-key (kbd "<menu> <menu>") 'keyboard-quit)
+
 (global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
                                         ;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
 (global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
@@ -97,7 +101,7 @@
 
 (global-set-key (kbd "<menu> d") 'yas/expand)
 
-(progn 
+(progn
   (define-prefix-command 'xah-menu-e-keymap)
   (global-set-key (kbd "<menu> e") xah-menu-e-keymap) ;
   (global-set-key (kbd "<menu> e 2") 'xah-toggle-read-article-mode)
@@ -191,7 +195,7 @@
 
 (global-set-key (kbd "<menu> q") 'xah-cut-all)
 
-(progn 
+(progn
   (define-prefix-command 'xah-menu-r-keymap)
   (global-set-key (kbd "<menu> r") xah-menu-r-keymap)
   (global-set-key (kbd "<menu> r [") 'xah-remove-square-brackets)
@@ -273,7 +277,6 @@
 ; 5605    0.35%  cua-set-mark; 944    0.06%  set-mark-command
 ;   6077    0.38%  ergoemacs-M-o
 ;;  toggle-input-method
-
 
  ;  42    0.00%  kmacro-start-macro
  ; 36    0.00%  kmacro-end-macro

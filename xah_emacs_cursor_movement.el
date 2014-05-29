@@ -82,8 +82,11 @@ See: `xah-forward-block'"
 (defvar xah-ascii-quotes nil "list of quotation chars.")
 (setq xah-ascii-quotes '("'" "\"") )
 
-(defvar xah-punctuations nil "list of punctuation chars.")
-(setq xah-punctuations '("=" "*" "$" "#" "+" "\\" "&" "@" "%" "!" "?" "^" "`" "~") )
+(defvar xah-punctuations nil "list of punctuation chars for easy jump. Typically exclude things that are too common, such as underscore or slash.")
+(setq xah-punctuations '("=" "$" "#" "+" "*" ";" "." "," "\\" "&" "@" "%" "!" "?" "^" "`" "~") )
+
+(defvar xah-punctuation-regex nil "a regex string for the purpose of jumping to punctuations in programing modes.")
+(setq xah-punctuation-regex "[=.*+,#$%&:;<>@^`~!\?\|]+")
 
 (defun xah-forward-punct (&optional number)
   "Move cursor to the next occurrence of punctuation.
@@ -93,7 +96,7 @@ The list of punctuations to jump to is defined by `xah-punctuations'"
   (if (and number (> 0 number))
       (xah-backward-punct (- 0 number))
     (forward-char 1)
-    (search-forward-regexp (eval-when-compile (regexp-opt xah-punctuations)) nil t number)
+    (search-forward-regexp xah-punctuation-regex nil t number)
     (backward-char 1)))
 
 (defun xah-backward-punct (&optional number)
@@ -103,7 +106,9 @@ The list of punctuations to jump to is defined by `xah-punctuations'"
   (interactive "p")
   (if (and number (> 0 number))
       (xah-forward-punct (- 0 number))
-    (search-backward-regexp (eval-when-compile (regexp-opt xah-punctuations)) nil t number)))
+    (search-backward-regexp xah-punctuation-regex nil t number)))
+
+;; (eval-when-compile (regexp-opt xah-punctuations))
 
 (defun xah-forward-all-bracket (&optional number)
   "Move cursor to the next occurrence of left bracket or quotation mark.
