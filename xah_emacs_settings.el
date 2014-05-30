@@ -13,33 +13,42 @@
 (set-background-color "honeydew")
 (setq inhibit-splash-screen t)
 
-;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789
 
-;; default frame
-(setq initial-frame-alist '((width . 90) (height . 52)))
+;; initial window and default window
+
+;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789
+
+(setq initial-frame-alist 
+      '(
+        (width . 92) 
+        (height . 54)
+        ) )
 
 (setq default-frame-alist
       '((menu-bar-lines . 1)
         (left-fringe)
         (right-fringe)
         (tool-bar-lines . 0)
-        (width . 90)
+        (width . 92)
         (height . 52)
         ))
 
-
 ;; set default font
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (when (member "DejaVu Sans Mono" (font-family-list))
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
+    (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
+    )
   )
  ((string-equal system-type "darwin")   ; Mac OS X
   (when (member "DejaVu Sans Mono" (font-family-list))
+    (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
   )
  ((string-equal system-type "gnu/linux") ; linux
   (when (member "DejaVu Sans Mono" (font-family-list))
+    (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
   )
  )
