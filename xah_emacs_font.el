@@ -17,23 +17,6 @@
   (set-fontset-font t 'unicode "Symbola" nil 'prepend))
 
 
-;; set default font
-(cond
- ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (when (member "DejaVu Sans Mono" (font-family-list))
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
-  )
- ((string-equal system-type "darwin")   ; Mac OS X
-  (when (member "DejaVu Sans Mono" (font-family-list))
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
-  )
- ((string-equal system-type "gnu/linux") ; linux
-  (when (member "DejaVu Sans Mono" (font-family-list))
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
-  )
- )
-
-
 
 ;; use variable-width font for some modes
 (defun xah-font-change ()

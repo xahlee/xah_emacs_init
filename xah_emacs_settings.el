@@ -6,65 +6,85 @@
 ;; ∑ http://xahlee.org/
 
 
+;; fundamental
 
-;; (global-subword-mode 0)
+(set-default-coding-systems 'utf-8-unix)
 
-(which-function-mode 1) ; show current function in mode line
+(set-background-color "honeydew")
+(setq inhibit-splash-screen t)
 
-;; open pdf files in hex mode
-(add-to-list 'auto-mode-alist '("\\.pdf\\'" . hexl-mode))
+;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789
+
+;; default frame
+(setq initial-frame-alist '((width . 90) (height . 52)))
 
+(setq default-frame-alist
+      '((menu-bar-lines . 1)
+        (left-fringe)
+        (right-fringe)
+        (tool-bar-lines . 0)
+        (width . 90)
+        (height . 52)
+        ))
+
+
+;; set default font
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (when (member "DejaVu Sans Mono" (font-family-list))
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
+  )
+ ((string-equal system-type "darwin")   ; Mac OS X
+  (when (member "DejaVu Sans Mono" (font-family-list))
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
+  )
+ ((string-equal system-type "gnu/linux") ; linux
+  (when (member "DejaVu Sans Mono" (font-family-list))
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
+  )
+ )
+
+;; Emacs Lisp: Determine OS, Emacs Version, Machine Host Name
+;; http://ergoemacs.org/emacs/elisp_determine_OS_version.html
+
+
+
+(winner-mode 0)
+(delete-selection-mode 1)
+(electric-pair-mode 0)
+(blink-cursor-mode 0 )
+(setq sentence-end-double-space nil )
 (electric-indent-mode 0) ; default is on in emacs 24.4
-
 (global-auto-revert-mode 1)
-
-;; (add-hook 'xah-css-mode-hook 'rainbow-mode)
-(remove-hook 'css-mode-hook 'rainbow-mode)
-;; (remove-hook 'xah-css-mode-hook 'rainbow-mode)
 
 (setq scroll-error-top-bottom t )
 
+(setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
+(setq ido-enable-flex-matching t)
+(set-default 'abbrev-mode t)
+
+(setq shift-select-mode nil)
+
+(setq org-startup-folded nil)
+(setq org-return-follows-link t)
+
+
+;; (global-subword-mode 0)
+
+;; (which-function-mode 1) ; show current function in mode line
+
 ;; hog emacs down when you happened to open a large file with thousands of lines
 ;; (global-linum-mode 0)
-
-(setq sentence-end-double-space nil )
 
 ;; (setq auto-save-default t)
 ;; (setq auto-save-visited-file-name t )
 
 ;; (set-default cursor-type 'bar)
 
-;; (setq ido-enable-flex-matching nil )
-;; (setq ido-enable-flex-matching t )
-
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 
 (setq page-break-lines-modes (quote (emacs-lisp-mode xah-elisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
-
-(add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
-
-;(autoload 'xah-elisp-mode "xah-elisp-mode" "load xah-elisp-mode for elisp file" t)
-(add-to-list 'auto-mode-alist '("\\.el\\'" . xah-elisp-mode))
-
-;(autoload 'xah-js-mode "xah-js-mode" "load xah-js-mode for JavaScript file" t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . xah-js-mode))
-
-;(autoload 'xah-css-mode "xah-css-mode" "load xah-css-mode for CSS file" t)
-(add-to-list 'auto-mode-alist '("\\.css\\'" . xah-css-mode))
-
-(add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
-
-(add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))
-(add-to-list 'magic-mode-alist '("<\\?php" . xah-php-mode) )
-
-(setq org-return-follows-link t)
-
-(winner-mode 0)
-(delete-selection-mode 1)
-(electric-pair-mode 0)
-
-(blink-cursor-mode 0 )
 
 
 
@@ -111,37 +131,11 @@
 ;;     (tabbar-mode 0)
 ;;     ))
 
-(setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
-
-(math-symbol-input-mode 1)
-
-(setq ido-enable-flex-matching t)
 ;; (ido-vertical-mode 1)
 
-(set-default 'abbrev-mode t)
-
-(setq shift-select-mode nil)
 (setq yas/indent-line nil)
-(setq org-startup-folded nil)
-(set-default-coding-systems 'utf-8-unix)
 
-(set-background-color "honeydew")
-(setq inhibit-splash-screen t)
-
-
-;; default frame
-(setq initial-frame-alist '((width . 100) (height . 54)))
-(setq default-frame-alist
-      '((menu-bar-lines . 1)
-        (left-fringe)
-        (right-fringe)
-        (tool-bar-lines . 0)
-        (width . 100)
-        (height . 52)
-        ))
-
-;; Emacs Lisp: Determine OS, Emacs Version, Machine Host Name
-;; http://ergoemacs.org/emacs/elisp_determine_OS_version.html
+(math-symbol-input-mode 1)
 
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
 
@@ -193,3 +187,7 @@
 ;;  '(rainbow-delimiters-depth-9-face ((t (:foreground "#8b7500"))))
 ;;  '(rainbow-delimiters-unmatched-face ((t (:foreground "red"))))
 ;;  '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
+
+;; (add-hook 'xah-css-mode-hook 'rainbow-mode)
+;; (remove-hook 'css-mode-hook 'rainbow-mode)
+;; (remove-hook 'xah-css-mode-hook 'rainbow-mode)

@@ -118,6 +118,7 @@ interactively by “eval-buffer”."
 (load (xah-fullpath-relative-to-current-file "xah_emacs_wordyenglish"))
 
 (load (xah-fullpath-relative-to-current-file "xah_emacs_settings"))
+(load (xah-fullpath-relative-to-current-file "xah_emacs_file_association"))
 
 (load (xah-fullpath-relative-to-current-file "xah_emacs_load_misc"))
 
