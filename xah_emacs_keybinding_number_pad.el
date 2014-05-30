@@ -29,9 +29,9 @@
 (global-set-key (kbd "<kp-space>") 'save-buffer)
 (global-set-key (kbd "<kp-right>") 'repeat-complex-command)
 
-(global-set-key (kbd "<C-kp-left>") 'xah-cycle-font-backward)
+(global-set-key (kbd "<C-kp-left>") 'xah-cycle-font-previous)
 (global-set-key (kbd "<C-kp-space>") 'xah-cycle-font-2)
-(global-set-key (kbd "<C-kp-right>") 'xah-cycle-font-forward)
+(global-set-key (kbd "<C-kp-right>") 'xah-cycle-font-next)
 
 (define-prefix-command 'xah-numpad-keymap)
 (global-set-key (kbd "<kp-home>") 'xah-numpad-keymap)

@@ -22,7 +22,7 @@
 ;;  need a key to close window.
 
 ;; (global-set-key (kbd "<kp-6>") 'repeat-complex-command)
-;; (global-set-key (kbd "<C-kp-4>") 'xah-cycle-font-backward)
+;; (global-set-key (kbd "<C-kp-4>") 'xah-cycle-font-previous)
 ;; (global-set-key (kbd "<C-kp-5>") 'xah-cycle-font-2)
-;; (global-set-key (kbd "<C-kp-6>") 'xah-cycle-font-forward)
+;; (global-set-key (kbd "<C-kp-6>") 'xah-cycle-font-next)
 

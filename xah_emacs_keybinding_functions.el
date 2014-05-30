@@ -193,7 +193,9 @@ Delimiters are paired characters:
 ;; by Nikolaj Schumacher, 2008-10-20. Released under GPL.
 (defun xah-extend-selection (arg &optional incremental)
   "Select the current word.
-Subsequent calls expands the selection to larger semantic unit."
+Subsequent calls expands the selection to larger semantic unit.
+
+This command works mostly in lisp syntax."
   (interactive (list (prefix-numeric-value current-prefix-arg)
                      (or (and transient-mark-mode mark-active)
                          (eq last-command this-command))))

@@ -221,11 +221,13 @@
   (global-set-key (kbd "<menu> t 4") 'find-file)
   (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t d") 'fix-datetimestamp)
+  (global-set-key (kbd "<menu> t e") 'ace-jump-mode)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> t j") 'xah-copy-to-register-1)
   (global-set-key (kbd "<menu> t k") 'xah-paste-from-register-1)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t s") 'title-case-string-region-or-line)
+
   )
 
 (global-set-key (kbd "<menu> v") 'toggle-case-fold-search)

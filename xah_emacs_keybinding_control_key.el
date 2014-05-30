@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
-(global-set-key (kbd "C-1") 'xah-cycle-font-backward)
-(global-set-key (kbd "C-2") 'xah-cycle-font-forward)
+(global-set-key (kbd "C-1") 'xah-cycle-font-previous)
+(global-set-key (kbd "C-2") 'xah-cycle-font-next)
 (global-set-key (kbd "C-3") 'xah-cycle-hyphen-underscore-space)
 (global-set-key (kbd "C-4") 'xah-cycle-camel-style-case)
 (global-set-key (kbd "C-5") 'xah-cycle-font-2)

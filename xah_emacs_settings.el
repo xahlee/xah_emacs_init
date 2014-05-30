@@ -14,9 +14,6 @@
 ;; open pdf files in hex mode
 (add-to-list 'auto-mode-alist '("\\.pdf\\'" . hexl-mode))
 
-;; specify font for all unicode characters
-(set-fontset-font t 'unicode "Symbola" nil 'prepend)
-
 (electric-indent-mode 0) ; default is on in emacs 24.4
 
 (global-auto-revert-mode 1)
@@ -60,19 +57,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))
 (add-to-list 'magic-mode-alist '("<\\?php" . xah-php-mode) )
-
-;(remove-hook 'find-file-hook 'recentf-track-opened-file)
-;(remove-hook 'find-file-hook 'global-linum-mode-check-buffers)
-;(remove-hook 'find-file-hook 'global-subword-mode-check-buffers)
-;(remove-hook 'find-file-hook 'global-page-break-lines-mode-check-buffers)
-;(remove-hook 'find-file-hook 'global-auto-complete-mode-check-buffers)
-
-;(remove-hook 'find-file-hook 'yas/global-mode-check-buffers)
-;(remove-hook 'find-file-hook 'global-undo-tree-mode-check-buffers)
-;(remove-hook 'find-file-hook 'global-font-lock-mode-check-buffers)
-;(remove-hook 'find-file-hook 'epa-file-find-file-hook)
-;(remove-hook 'find-file-hook 'vc-find-file-hook)
-;(remove-hook 'find-file-hook 'save-place-find-file-hook)
 
 (setq org-return-follows-link t)
 
@@ -156,40 +140,8 @@
         (height . 52)
         ))
 
-;; set font
-(cond
- ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (progn
-    nil )
-  )
- ((string-equal system-type "darwin")   ; Mac OS X
-  (progn
-    (add-to-list 'default-frame-alist '(font . "Monaco-14"))
-    )
-  )
- ((string-equal system-type "gnu/linux") ; linux
-  (progn
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")) )
-  )
- )
-
-(defun xah-font-change ()
-  "…"
-  (variable-pitch-mode 1)
-  ;; (text-scale-increase 0.5 )
-)
-
-(add-hook 'html-mode-hook 'xah-font-change)
-(add-hook 'xah-html-mode-hook 'xah-font-change)
-(add-hook 'nxml-mode-hook 'xah-font-change)
-
 ;; Emacs Lisp: Determine OS, Emacs Version, Machine Host Name
 ;; http://ergoemacs.org/emacs/elisp_determine_OS_version.html
-
-;; Emacs: How to List ＆ Set Font
-;; http://ergoemacs.org/emacs/emacs_list_and_set_font.html
-
-;; (set-frame-parameter nil 'font "DejaVu Sans Mono-10")
 
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
 
