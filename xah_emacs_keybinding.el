@@ -113,6 +113,7 @@
   (global-set-key (kbd "<menu> e 8") 'shell)
   (global-set-key (kbd "<menu> e e") 'xah-elisp-mode)
   (global-set-key (kbd "<menu> e h") 'xah-html-mode)
+  (global-set-key (kbd "<menu> e t") 'toggle-case-fold-search)
   (global-set-key (kbd "<menu> e SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
   (global-set-key (kbd "<menu> e <backspace>") 'xah-delete-current-file)
   (global-set-key (kbd "<menu> e <return>") 'xah-run-current-file) ;  1494    0.09%  xah-run-current-file
@@ -230,7 +231,7 @@
 
   )
 
-(global-set-key (kbd "<menu> v") 'toggle-case-fold-search)
+(global-set-key (kbd "<menu> v") nil)
 (global-set-key (kbd "<menu> w") nil)
 (global-set-key (kbd "<menu> x") ctl-x-map)
 (global-set-key (kbd "<menu> y") nil)

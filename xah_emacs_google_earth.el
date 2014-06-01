@@ -52,28 +52,28 @@ Example of inserted text:
         (setq ξy "y�") ) )
     (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string ξy) "%2C" (number-to-string ξx) "\" title=\"" ξtitle "\" target=\"_blank\">🌐</a>\n")))
 
-(defun insert-google-earth-link (&optional ξtitle filePath)
+(defun insert-google-earth-link (&optional εtitle filePath)
   "Insert a HTML markup for link to a local Goole Earth file.
- “ξtitle” is the “title” attribute in the anchor link.
+ “εtitle” is the “title” attribute in the anchor link.
  “file-path” is the full path to the KML file.
 Here's a sample inserted text:
 <a href=\"../kml/las_vegas.kmz\" title=\"Las Vegas\">🌎</a>"
   (interactive)
-  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if filePath (xahsite-filepath-to-url filePath) "�") (if ξtitle ξtitle "�") )) )
+  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if filePath (xahsite-filepath-to-url filePath) "�") (if εtitle εtitle "�") )) )
 
-(defun insert-kml (&optional ξkmlTitle ξlonlat sourceFilePath)
+(defun insert-kml (&optional ε-kml-title ε-lon-lat ε-source-fpath)
   "Insert a simple Google Earth KML markup template.
  ΞKMLTITLE is the name to use for the <name> tag.
-ξlonlat is a vector [longitude latitude]. They must be real numbers.
+ε-lon-lat is a vector [longitude latitude]. They must be real numbers.
  SOURCEFILEPATH is the file that links to this kml file,
 used in the <description> tag."
   (interactive)
   (let (coord-x coord-y)
-    (when (not ξkmlTitle) (setq ξkmlTitle "�"))
-    (if ξlonlat
+    (when (not ε-kml-title) (setq ε-kml-title "�"))
+    (if ε-lon-lat
         (progn
-          (setq coord-x (elt ξlonlat 0))
-          (setq coord-y (elt ξlonlat 1))
+          (setq coord-x (elt ε-lon-lat 0))
+          (setq coord-y (elt ε-lon-lat 1))
           )
       (progn
         (setq coord-x 0)
@@ -92,8 +92,8 @@ used in the <description> tag."
 </Placemark>
 </kml>
 "
-             ξkmlTitle
-             (if sourceFilePath (format "See: %s" (xahsite-filepath-to-url sourceFilePath)) "")
+             ε-kml-title
+             (if ε-source-fpath (format "See: %s" (xahsite-filepath-to-url ε-source-fpath)) "")
              (number-to-string coord-x)
              (number-to-string coord-y) ) )))
 
@@ -217,10 +217,10 @@ The KML file will be created at:
 
 
 
-(defun insert-ggb-link (fileCoreName fileTitle)
+(defun insert-ggb-link (ε-file-core-name ε-file-title)
   "Insert HTML link to GeoGebra (“.ggb”) file."
   (interactive)
-  (insert "<a class=\"ggb\" href=\"../ggb/" fileCoreName ".html\">" fileTitle "</a>"))
+  (insert "<a class=\"ggb\" href=\"../ggb/" ε-file-core-name ".html\">" ε-file-title "</a>"))
 
 (defun make-ggb ()
 "Create a Geogebra file set and link.

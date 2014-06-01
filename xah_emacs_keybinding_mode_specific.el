@@ -209,17 +209,6 @@ For `isearch-mode-hook'."
 ;; (add-hook 'post-command-hook 'xx)
 ;; (remove-hook 'post-command-hook 'xx)
 
-(defun xah-elisp-mode-keys ()
-  "Modify keymaps used by lisp mode."
-  (local-set-key (kbd "<tab>") (make-keymap))
-  (local-set-key (kbd "<tab> t") 'eval-last-sexp)
-  (local-set-key (kbd "<tab> f") 'xah-eval-defun)
-)
-
-;; (add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-keys)
-;; (add-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
-;; (remove-hook 'emacs-lisp-mode-hook 'xah-elisp-mode-keys)
-
 (defun xah-help-mode-keys ()
   "Modify keymaps"
   (local-set-key (kbd "g") 'backward-word)

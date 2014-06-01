@@ -4,14 +4,14 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(defun xah-add-to-related-links (ξsourceFilePath ξdestFilePath)
+(defun xah-add-to-related-links (εsource-file-path εdest-file-path)
   "Add current file as a link to the related links section of filename at point.
 
-When called interactively, ξsourceFilePath is the path of current buffer, and ξdestFilePath is the path/url under cursor.
+When called interactively, εsource-file-path is the path of current buffer, and εdest-file-path is the path/url under cursor.
 
-When called interactively, the buffer for ξdestFilePath is left unsaved and as current.
+When called interactively, the buffer for εdest-file-path is left unsaved and as current.
 
-When called in lisp program, ξsourceFilePath and ξdestFilePath should be file full paths. If changes are made to ξdestFilePath, it returns t, else nil."
+When called in lisp program, εsource-file-path and εdest-file-path should be file full paths. If changes are made to εdest-file-path, it returns t, else nil."
   (interactive
    (let* (
           (bds (get-selection-or-unit 'line))
@@ -23,16 +23,16 @@ When called in lisp program, ξsourceFilePath and ξdestFilePath should be file 
      )
    )
   (let ( ξtitle ξnewHrefValue ξbuffer )
-    (setq ξbuffer (find-file ξdestFilePath ) )
+    (setq ξbuffer (find-file εdest-file-path ) )
     (goto-char 1)
-    (setq ξnewHrefValue (xahsite-filepath-to-href-value ξsourceFilePath ξdestFilePath) )
+    (setq ξnewHrefValue (xahsite-filepath-to-href-value εsource-file-path εdest-file-path) )
     (if (search-forward ξnewHrefValue nil t)
         (progn
-          (when (called-interactively-p 'interactive) (message (format "Link 「%s」 already exists at 「%s」."  ξnewHrefValue ξdestFilePath) ) )
+          (when (called-interactively-p 'interactive) (message (format "Link 「%s」 already exists at 「%s」."  ξnewHrefValue εdest-file-path) ) )
           (kill-buffer ξbuffer)
           nil)
       (progn
-        (setq ξtitle (xhm-get-html-file-title ξsourceFilePath))
+        (setq ξtitle (xhm-get-html-file-title εsource-file-path))
         (goto-char 1)
         (if (search-forward "<div class=\"rltd\">" nil t)
             (progn (search-forward "<ul>" nil t)
@@ -49,7 +49,7 @@ When called in lisp program, ξsourceFilePath and ξdestFilePath should be file 
 
 " ξnewHrefValue ξtitle)) ) )
         (when (not (called-interactively-p 'interactive) )
-          (write-region (point-min) (point-max) ξdestFilePath)
+          (write-region (point-min) (point-max) εdest-file-path)
           (kill-buffer)
           )
         t
