@@ -45,7 +45,7 @@
 
 
 
-(defun xah-cycle-font-2 (εn)
+(defun xah-cycle-font-2 (φn)
   "Change font in current window between 2 fonts."
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
@@ -56,7 +56,7 @@
         stateAfter )
 
     (setq stateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
-    (setq stateAfter (% (+ stateBefore (length ξ-font-list) εn) (length ξ-font-list)))
+    (setq stateAfter (% (+ stateBefore (length ξ-font-list) φn) (length ξ-font-list)))
     (put 'xah-cycle-font-2 'state stateAfter)
 
     (setq fontToUse (nth stateAfter ξ-font-list))
@@ -98,17 +98,17 @@
                  ) ) )
              )
 
-(defun xah-cycle-font (εn)
+(defun xah-cycle-font (φn)
   "Change font in current frame.
 Each time this is called, font cycles thru a predefined list of fonts in the variable `ξ-font-list' .
-If εn is 1, cycle forward.
-If εn is -1, cycle backward.
+If φn is 1, cycle forward.
+If φn is -1, cycle backward.
 See also `xah-cycle-font-next', `xah-cycle-font-previous'."
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
   (let (fontToUse stateBefore stateAfter )
     (setq stateBefore (if (get 'xah-cycle-font 'state) (get 'xah-cycle-font 'state) 0))
-    (setq stateAfter (% (+ stateBefore (length ξ-font-list) εn) (length ξ-font-list)))
+    (setq stateAfter (% (+ stateBefore (length ξ-font-list) φn) (length ξ-font-list)))
 
     (setq fontToUse (nth stateAfter ξ-font-list))
     (set-frame-font fontToUse t)

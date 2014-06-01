@@ -20,7 +20,7 @@ For example:
 ["theta" "θ"]
 ["lambda" "λ"]
 ["delta" "δ"]
-["epsilon" "ε"]
+["epsilon" "φ"]
 ["omega" "ω"]
 ["Pi" "π"])))
 

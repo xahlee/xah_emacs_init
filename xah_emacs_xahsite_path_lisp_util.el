@@ -27,7 +27,7 @@ e.g. c:/Users/h3/web/"
   )
 
 
-(defun xahsite-local-link-p (εhref-value)
+(defun xahsite-local-link-p (φhref-value)
   "Return true if it's a local file link, else false.
 
 Non local link may start with these:
@@ -41,8 +41,8 @@ Non local link may start with these:
 
 The current implementation simply check if “:” occur. If not, consider it local link."
   ;;
-;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" εhref-value) )
-  (not (string-match-p ":" εhref-value) )
+;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" φhref-value) )
+  (not (string-match-p ":" φhref-value) )
  )
 
 (defun xahsite-url-is-xah-website-p (myURL)
@@ -76,17 +76,17 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
 
-(defun xahsite-is-link-to-xahsite-p (ε-href-value)
-  "Returns true if ε-href-value points to a xah website, else false.
+(defun xahsite-is-link-to-xahsite-p (φ-href-value)
+  "Returns true if φ-href-value points to a xah website, else false.
 
-ε-href-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
+φ-href-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
 
-Technically, returns true if ε-href-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
+Technically, returns true if φ-href-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
 
 See: `xahsite-local-link-p', `xahsite-url-is-xah-website-p'."
-  (if (xahsite-local-link-p ε-href-value)
+  (if (xahsite-local-link-p φ-href-value)
       t
-    (xahsite-url-is-xah-website-p ε-href-value)
+    (xahsite-url-is-xah-website-p φ-href-value)
     )
   )
 
@@ -149,27 +149,27 @@ For reverse, see `xahsite-href-value-to-filepath'.
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/index.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" )
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" "c:/Users/h3/web/ergoemacs_org/index.html" )
 
-(defun xahsite-href-value-to-filepath (εhref-value ε-host-file-path)
+(defun xahsite-href-value-to-filepath (φhref-value φ-host-file-path)
   "Returns the file path of a link to xah website.
 
-εhref-value is the link string, in 「href=\"…\"」. The value can be a URL to xahsite or relative path.
-ε-host-file-path is a full path of the host file name or its dir.
+φhref-value is the link string, in 「href=\"…\"」. The value can be a URL to xahsite or relative path.
+φ-host-file-path is a full path of the host file name or its dir.
 
 For reverse, see `xahsite-filepath-to-href-value'.
 See also: `xahsite-url-to-filepath'
 "
-  (if (string-match-p "\\`http://" εhref-value)
-        (progn (xahsite-url-to-filepath εhref-value "addFileName") )
+  (if (string-match-p "\\`http://" φhref-value)
+        (progn (xahsite-url-to-filepath φhref-value "addFileName") )
       (progn
-        (expand-file-name εhref-value (file-name-directory ε-host-file-path ) ) ) ) )
+        (expand-file-name φhref-value (file-name-directory φ-host-file-path ) ) ) ) )
 ;; test
 ;; (xahsite-href-value-to-filepath "http://xahlee.org/Netiquette_dir/death_of_a_troll.html" "c:/Users/h3/web/xahlee_info/comp/Google_Tech_Talk_Lisp_At_JPL_by_Ron_Garret.html")
 
-(defun xahsite-url-to-filepath (xahsiteURL &optional ε-add-file-name εredirect)
+(defun xahsite-url-to-filepath (xahsiteURL &optional φ-add-file-name φredirect)
   "Returns the file path of a xah website URL xahsiteURL.
 
-If the optional argument ε-add-file-name is true, then append “index.html” if the resulting path is a dir.
-If the optional argument εredirect is true, then also consider result of http redirect.
+If the optional argument φ-add-file-name is true, then append “index.html” if the resulting path is a dir.
+If the optional argument φredirect is true, then also consider result of http redirect.
 
 This function does not check input is actually a URL, nor if the result path file exists."
  ;; test cases:
@@ -180,8 +180,8 @@ This function does not check input is actually a URL, nor if the result path fil
 
   (let ((ξurl xahsiteURL) ξfPath)
     (setq ξurl (remove-uri-fragment ξurl)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
-    (when εredirect (setq ξurl (xahsite-url-remap ξurl)))
-    (when ε-add-file-name (setq ξurl (replace-regexp-in-string "/\\'" "/index.html" ξurl)))
+    (when φredirect (setq ξurl (xahsite-url-remap ξurl)))
+    (when φ-add-file-name (setq ξurl (replace-regexp-in-string "/\\'" "/index.html" ξurl)))
     ;; (replace-regexp-in-string "%27" "'" (remove-uri-fragment ξurl))
 
     (setq ξfPath
@@ -325,8 +325,8 @@ This function is not complete. i.e. it not contain complete url redirects as spe
     ξs
     ) )
 
-(defun remove-uri-fragment (εhref-value)
-  "remove URL εhref-value fragment, anything after first 「#」 char, including it.
+(defun remove-uri-fragment (φhref-value)
+  "remove URL φhref-value fragment, anything after first 「#」 char, including it.
 See also `split-uri-hashmark'"
   ;; test
   ;; (remove-uri-fragment "a#b") ; "a"
@@ -334,13 +334,13 @@ See also `split-uri-hashmark'"
   ;; (remove-uri-fragment "4")  ; "4"
   ;; (remove-uri-fragment "#")   ; ""
   ;; (remove-uri-fragment "")  ; ""
-  (let ((ξx (string-match-p "#" εhref-value )) )
+  (let ((ξx (string-match-p "#" φhref-value )) )
     (if ξx
-        (substring εhref-value 0 ξx)
-      εhref-value ) ) )
+        (substring φhref-value 0 ξx)
+      φhref-value ) ) )
 
-(defun split-uri-hashmark (εhref-value)
-  "Split a URL εhref-value by 「#」 char, return a vector.
+(defun split-uri-hashmark (φhref-value)
+  "Split a URL φhref-value by 「#」 char, return a vector.
  e.g. \"y.html#z\" ⇒ [\"y.html\", \"#z\"]
 
 Examples:
@@ -358,22 +358,22 @@ See also: `remove-uri-fragment'"
   ;; (split-uri-hashmark "#")   ; ["" "#"]
   ;; (split-uri-hashmark "4")  ; ["4" ""]
   ;; (split-uri-hashmark "")  ; ["" ""]
-  (let ((ξx (string-match-p "#" εhref-value )) )
+  (let ((ξx (string-match-p "#" φhref-value )) )
     (if ξx
-        (vector (substring εhref-value 0 ξx) (substring εhref-value ξx) )
-      (vector εhref-value "" ) ) ) )
+        (vector (substring φhref-value 0 ξx) (substring φhref-value ξx) )
+      (vector φhref-value "" ) ) ) )
 
 
 
-(defun file-moved-p (εfpath εmoved-dirs )
-  "Return true if either paths are in εmoved-dirs list or as a subdir.
-εfpath is a full path to a file.
-εmoved-dirs is a list/sequence of file full paths.
-Return true if εfpath is in εmoved-dirs or is a subdir of εmoved-dirs.
-Technically, if any string in εmoved-dirs is a prefix of εfpath."
+(defun file-moved-p (φfpath φmoved-dirs )
+  "Return true if either paths are in φmoved-dirs list or as a subdir.
+φfpath is a full path to a file.
+φmoved-dirs is a list/sequence of file full paths.
+Return true if φfpath is in φmoved-dirs or is a subdir of φmoved-dirs.
+Technically, if any string in φmoved-dirs is a prefix of φfpath."
   (let ( ( ξfound nil) ( ξi 0) )
-    (while (and (not ξfound) (< ξi (length εmoved-dirs)) )
-      (setq ξfound (string-match-p (concat "\\`" (regexp-quote (elt εmoved-dirs ξi)) ) εfpath ) )
+    (while (and (not ξfound) (< ξi (length φmoved-dirs)) )
+      (setq ξfound (string-match-p (concat "\\`" (regexp-quote (elt φmoved-dirs ξi)) ) φfpath ) )
       (setq ξi (1+ ξi) ) )
     ξfound
     )
@@ -465,19 +465,19 @@ if the inputStr is a relative path, defaultDir is used to resolve to full path."
     ξs
     ))
 
-(defun path-ends-in-image-suffix-p (εpath)
-  "Returns t if εpath ends in .jpg .png .gif .svg, else nil."
-  (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" εpath))
+(defun path-ends-in-image-suffix-p (φpath)
+  "Returns t if φpath ends in .jpg .png .gif .svg, else nil."
+  (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" φpath))
 
-(defun xahsite-generate-sitemap (ε-domain-name)
+(defun xahsite-generate-sitemap (φ-domain-name)
   "Generate a sitemap.xml.gz file of xahsite at doc root.
-ε-domain-name must match a existing one."
+φ-domain-name must match a existing one."
 (interactive
    (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" )))
    )
   (let (
         (ξ-sitemapFileName "sitemap" )
-        (ξ-websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" ε-domain-name "FIXEDCASE" "LITERAL") "/") )
+        (ξ-websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" φ-domain-name "FIXEDCASE" "LITERAL") "/") )
         )
 
     (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
@@ -521,7 +521,7 @@ if the inputStr is a relative path, defaultDir is used to resolve to full path."
              (when (not (search-forward "<meta http-equiv=\"refresh\"" nil "noerror"))
                (with-current-buffer ξsitemapBuffer
                  (insert "<url><loc>")
-                 (insert (concat "http://" ε-domain-name "/" (substring ξf (length ξ-websiteDocRootPath))))
+                 (insert (concat "http://" φ-domain-name "/" (substring ξf (length ξ-websiteDocRootPath))))
                  (insert "</loc></url>\n") )) ) )
          )
        (find-lisp-find-files ξ-websiteDocRootPath "\\.html$"))

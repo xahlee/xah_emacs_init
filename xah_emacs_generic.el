@@ -30,7 +30,7 @@
 ;      )
 ;    ))
 
-(defun xah-delete-current-file (εno-backup-p)
+(defun xah-delete-current-file (φno-backup-p)
   "Delete the file associated with the current buffer.
 
 Also close the current buffer.  If no file is associated, just close buffer without prompt for save.
@@ -44,7 +44,7 @@ When called with `universal-argument', don't create backup."
         (backupName (concat fName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
     (when fName ; buffer is associated with a file
       (save-buffer fName)
-      (if εno-backup-p
+      (if φno-backup-p
           (progn )
         (copy-file fName backupName t)
         )
