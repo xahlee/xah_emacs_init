@@ -55,14 +55,14 @@ When called in lisp program, φsource-file-path and φdest-file-path should be f
         t
         ) ) ) )
 
-(defun xahsite-update-related-links (filePath destFileList)
+(defun xahsite-update-related-links (φfilePath φdestFileList)
   "Update related links tags.
 
-Add the current page (filePath) as link to the “related pages” section at destFileList.
+Add the current page (φfilePath) as link to the “related pages” section at φdestFileList.
 
-When called interactively, filePath is the current file. destFileList is file paths extracted from current text block or text selection.
+When called interactively, φfilePath is the current file. φdestFileList is file paths extracted from current text block or text selection.
 
-When called in lisp program, filePath is a string. destFileList is list of filenames. All paths should be absolute path.
+When called in lisp program, φfilePath is a string. φdestFileList is list of filenames. All paths should be absolute path.
 
 The related pages are HTML “div.rltd” element, having this form
 
@@ -85,9 +85,9 @@ The related pages are HTML “div.rltd” element, having this form
   (let (p3 p4 currentUrlList)
     (mapc
      (lambda (ξy)
-       (xah-add-to-related-links filePath ξy)
+       (xah-add-to-related-links φfilePath ξy)
        )
-     destFileList)
+     φdestFileList)
     ))
 
 (defun xah-fix-add-alts ()
@@ -114,19 +114,19 @@ This code is specific to xahlee.org ."
       )
 ))
 
-(defun xah-fix-rm-span-quote (start end)
+(defun xah-fix-rm-span-quote (φstart φend)
   "remove “” around <span class=\"code\"></span> tags in current buffer."
   (interactive "r")
 
   (save-excursion
-    (narrow-to-region start end)
+    (narrow-to-region φstart φend)
     (while
         (search-forward-regexp "“<span class=\"code\">\\([^<]+?\\)</span>”" nil t)
       (replace-match "<span class=\"code\">\\1</span>" t))
     )
   )
 
-(defun xah-fix-to-html4strict (&optional fName)
+(defun xah-fix-to-html4strict (&optional φfName)
   "Change buffer content from HTML4 trans to HTML4 strict,
 by performing some custome set of find-replace operations.
 
@@ -141,47 +141,47 @@ todo:
 This function is specific to xahlee.org. 2008-05-10."
   (interactive)
 
-(when fName (find-file fName))
+  (when φfName (find-file φfName))
 
 ;; wrap div.img to “<img …>”
-    (goto-char (point-min))
-    (while (search-forward-regexp "
+  (goto-char (point-min))
+  (while (search-forward-regexp "
 
 <img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?>" nil t)
-(replace-match "
+    (replace-match "
 
 <div class=\"img\"><img src=\"\\1\" alt=\"\\2\" width=\"\\3\" height=\"\\4\"></div>" t))
 
 ;; fix “<a><div.img><img></div></a>” to “<div.img><a><img></a></div>”
-    (goto-char (point-min))
-    (while (search-forward-regexp "<a href=\"\\([^\"]+\\)\"><div class=\"img\"><img src=\"\\([^\"]+\\)\" alt=\"\\([^\"]+\\)\" width=\"\\([0-9]+\\)\" height=\"\\([0-9]+\\)\"></div></a>" nil t)
-(replace-match "<div class=\"img\"><a href=\"\\1\"><img src=\"\\2\" alt=\"\\3\" width=\"\\4\" height=\"\\5\"></a></div>" t))
+  (goto-char (point-min))
+  (while (search-forward-regexp "<a href=\"\\([^\"]+\\)\"><div class=\"img\"><img src=\"\\([^\"]+\\)\" alt=\"\\([^\"]+\\)\" width=\"\\([0-9]+\\)\" height=\"\\([0-9]+\\)\"></div></a>" nil t)
+    (replace-match "<div class=\"img\"><a href=\"\\1\"><img src=\"\\2\" alt=\"\\3\" width=\"\\4\" height=\"\\5\"></a></div>" t))
 
 ;; consecutive img should just have one div.img wrap, not on each.
 ;; remove “</div><div.img>”
-    (goto-char (point-min))
-    (while (search-forward-regexp "height=\"\\([0-9]+\\)\"></div>
+  (goto-char (point-min))
+  (while (search-forward-regexp "height=\"\\([0-9]+\\)\"></div>
 <div class=\"img\">" nil t)
-(replace-match "height=\"\\1\">
+    (replace-match "height=\"\\1\">
 " t))
 
 ;; change “<img…></div><p class="cpt">…</p>” to  “<img…><p class="cpt">…</p></div>”
-    (goto-char (point-min))
-    (while (search-forward-regexp "<img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?></div>
+  (goto-char (point-min))
+  (while (search-forward-regexp "<img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?></div>
 *<p class=\"cpt\">
 * *\\([^§]+?\\)</p>" nil t)
-(replace-match "<img src=\"\\1\" alt=\"\\2\" width=\"\\3\" height=\"\\4\"><p class=\"cpt\">\\5</p></div>" t))
+    (replace-match "<img src=\"\\1\" alt=\"\\2\" width=\"\\3\" height=\"\\4\"><p class=\"cpt\">\\5</p></div>" t))
 
 ;; wrap img tag to “<img…>\n<p>above:” pairs.
 ;;    (goto-char (point-min))
 ;;    (while (search-forward-regexp "<img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?>\n*<p>\n*above ?: ?\n?\\([^§]+?\\)</p>" nil t) (replace-match "<div class=\"img\"><img src=\"\\1\" alt=\"\\2\" width=\"\\3\" height=\"\\4\"><p>above: \\5</p></div>" t))
 
-    ;;(goto-char (point-min))
-    ;;(while (search-forward-regexp "<blockquote>\n?«?\n?\\([^<]+\\)\n?»?\n?</blockquote>" nil t) (replace-match "<blockquote><p>\\1</p></blockquote>"))
+;;(goto-char (point-min))
+;;(while (search-forward-regexp "<blockquote>\n?«?\n?\\([^<]+\\)\n?»?\n?</blockquote>" nil t) (replace-match "<blockquote><p>\\1</p></blockquote>"))
 
 ;;     (goto-char (point-min))
 ;;     (while (search-forward-regexp "</blockquote>\n+<blockquote>" nil t) (replace-match "" t t))
-)
+  )
 
 (defun xah-fix-wrap-img-figure ()
   "Change current buffer's <div class=\"img\"> to <figure> and <p class=\"cpt\"> to <figcaption>."
@@ -286,12 +286,12 @@ This function is specific to xahlee.org. 2008-05-10."
         (set-buffer mybuff)
         ) )) )
 
-(defun xah-fix-ellipsis (ξstring &optional ξfrom ξto)
+(defun xah-fix-ellipsis (φstring &optional φfrom φto)
   "Change “...” to “…”.
 
 When called interactively, work on current text block or text selection. (a “text block” is text between empty lines)
 
-When called in lisp code, if ξstring is non-nil, returns a changed string.  If ξstring nil, change the text in the region between positions ξfrom ξto."
+When called in lisp code, if φstring is non-nil, returns a changed string.  If φstring nil, change the text in the region between positions φfrom φto."
   (interactive
    (if (region-active-p)
        (list nil (region-beginning) (region-end))
@@ -299,15 +299,15 @@ When called in lisp code, if ξstring is non-nil, returns a changed string.  If 
        (list nil (elt bds 1) (elt bds 2)) ) ) )
 
   (let (workOnStringP inputStr outputStr)
-    (setq workOnStringP (if ξstring t nil))
-    (setq inputStr (if workOnStringP ξstring (buffer-substring-no-properties ξfrom ξto)))
+    (setq workOnStringP (if φstring t nil))
+    (setq inputStr (if workOnStringP φstring (buffer-substring-no-properties φfrom φto)))
     (setq outputStr (replace-regexp-in-string "\\.\\.\\." "…" inputStr))
 
     (if workOnStringP
         outputStr
       (save-excursion
-        (delete-region ξfrom ξto)
-        (goto-char ξfrom)
+        (delete-region φfrom φto)
+        (goto-char φfrom)
         (insert outputStr) )) )
   )
 
@@ -380,12 +380,12 @@ Also change 「<li>1. 」 to 「<li>① 」."
 ;; (fset 'xah-fix-img-alt
 ;;    "\363alt=\"\"\C-m\347\347\252\361\344\353\351\C-ci")
 
-(defun xah-add-dstp (fpath)
+(defun xah-add-dstp (φfpath)
   "Insert a file creation date like
 “<div class=\"dstp\">2008-12.</div>”
-to file at FPATH."
+to file at ΦFPATH."
 (let (mybuffer)
-    (setq mybuffer (find-file fpath))
+    (setq mybuffer (find-file φfpath))
 
     (xah-put-dstp)
 

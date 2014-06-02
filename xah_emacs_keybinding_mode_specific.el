@@ -239,13 +239,13 @@ For `org-mode-hook'."
   )
 (add-hook 'org-mode-hook 'xah-org-mode-keys)
 
-;; (defun xah-Info-mode-keys ()
-;;   "my keybindings for `Info-mode'.
-;; For `Info-mode-hook'."
-  ;; (local-set-key (kbd "<tab>") (make-keymap))
-  ;; (local-set-key (kbd "<tab> g") 'xah-view-emacs-manual-in-browser)
-;;   )
-;; (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
+(defun xah-Info-mode-keys ()
+  "my keybindings for `Info-mode'.
+For `Info-mode-hook'."
+  (local-set-key (kbd "<menu> u g") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<mouse-8>") 'Info-history-back)
+  )
+(add-hook 'Info-mode-hook 'xah-Info-mode-keys)
 
 (defun xah-eval-defun ()
   "like `eval-defun' but doesn't need proper indentation for it to work.

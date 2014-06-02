@@ -144,7 +144,7 @@ If there's a text selection, use that region as file name."
                               ]
  )
 
-(defun url-percent-encode-string (ξstring)
+(defun url-percent-encode-string (φstring)
   "Returns URL percent-encoded
 Example:
  http://en.wikipedia.org/wiki/Python_(programming_language)
@@ -153,15 +153,15 @@ Example:
 WARNING: the encoding is incomplete.
 See also: `url-percent-decode-string'."
 (progn
-    (replace-pairs-in-string ξstring ξurl-encode-chars-pairs)
+    (replace-pairs-in-string φstring ξurl-encode-chars-pairs)
     ))
 
-(defun url-percent-decode-string (ξstring)
+(defun url-percent-decode-string (φstring)
   "Decode URL percent-encoded string.
 e.g. 「%28」 ⇒ 「'」.
 WARNING: the decoding is incomplete.
 See also: `url-percent-encode-string'."
-  (replace-pairs-in-string ξstring (mapcar (lambda (ξx) (vector (elt ξx 1) (elt ξx 0))) ξurl-encode-chars-pairs) ))
+  (replace-pairs-in-string φstring (mapcar (lambda (ξx) (vector (elt ξx 1) (elt ξx 0))) ξurl-encode-chars-pairs) ))
 
 (defun blogger-linkify ()
   "Make URL at cursor point into a HTML link.
