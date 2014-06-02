@@ -10,7 +10,7 @@
 
 ;;;; matching pairs
 
-(defun xah-insert-bracket-pair (leftBracket rightBracket)
+(defun xah-insert-bracket-pair (φleftBracket φrightBracket)
   "Insert a matching bracket.
 
 If there's a text selection, insert brackets around it.
@@ -18,7 +18,7 @@ If there's no text selection:
   If cursor is on alphanumeric char or hyphen or understore, insert brackets around current word.
   else, insert brackets.
 
-The argument leftBracket rightBracket are strings."
+The argument φleftBracket φrightBracket are strings."
   (if (region-active-p)
       (progn
         (let (
@@ -26,9 +26,9 @@ The argument leftBracket rightBracket are strings."
               (p2 (region-end))
               )
           (goto-char p2)
-          (insert rightBracket)
+          (insert φrightBracket)
           (goto-char p1)
-          (insert leftBracket)
+          (insert φleftBracket)
           (goto-char (+ p2 2))
           ))
     (progn ; no text selection
@@ -41,15 +41,15 @@ The argument leftBracket rightBracket are strings."
                    (p2 (elt bds 2))
                    )
               (goto-char p2)
-              (insert rightBracket)
+              (insert φrightBracket)
               (goto-char p1)
-              (insert leftBracket)
-              (goto-char (+ p2 (length leftBracket)))
+              (insert φleftBracket)
+              (goto-char (+ p2 (length φleftBracket)))
               )
             )
         (progn
-          (insert leftBracket rightBracket)
-          (search-backward rightBracket ) )) )))
+          (insert φleftBracket φrightBracket)
+          (search-backward φrightBracket ) )) )))
 
 ;; (insert-parentheses)
 

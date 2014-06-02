@@ -9,20 +9,20 @@ For example: if current node is 「(elisp) The Mark」, switch to browser and lo
 (xahsite-url-to-filepath (emacs-info-node-string-to-url (Info-copy-current-node-name)))
  ) )
 
-(defun emacs-info-node-string-to-url (infoNodeStr)
+(defun emacs-info-node-string-to-url (φinfo-node-str)
   "Make the current line or selection into a emacs reference link.
 For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
   (let ((domainStr "http://ergoemacs.org/")
         (tempPath
-         (replace-pairs-in-string infoNodeStr [["(elisp) " ""]
+         (replace-pairs-in-string φinfo-node-str [["(elisp) " ""]
                                                ["(emacs) " ""]
                                                ["-" "_002d"]
                                                [" " "-"] ] ) ) )
 
     (cond
-     ((string-match "(elisp)" infoNodeStr )  (format "%s%s%s.html" domainStr "emacs_manual/elisp/" tempPath))
-     ((string-match "(emacs)" infoNodeStr ) (format "%s%s%s.html" domainStr "emacs_manual/emacs/" tempPath))
-     (t (user-error "infoNodeStr 「%s」 doesn't match “(elisp)” or “(emacs)”" infoNodeStr)) ) ) )
+     ((string-match "(elisp)" φinfo-node-str )  (format "%s%s%s.html" domainStr "emacs_manual/elisp/" tempPath))
+     ((string-match "(emacs)" φinfo-node-str ) (format "%s%s%s.html" domainStr "emacs_manual/emacs/" tempPath))
+     (t (user-error "φinfo-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" φinfo-node-str)) ) ) )
 
 (defun emacs-ref-linkify ()
   "Make the current line or selection into a emacs reference link.

@@ -52,14 +52,14 @@ Example of inserted text:
         (setq ξy "y�") ) )
     (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string ξy) "%2C" (number-to-string ξx) "\" title=\"" ξtitle "\" target=\"_blank\">🌐</a>\n")))
 
-(defun insert-google-earth-link (&optional φtitle filePath)
+(defun insert-google-earth-link (&optional φtitle φfilePath)
   "Insert a HTML markup for link to a local Goole Earth file.
  “φtitle” is the “title” attribute in the anchor link.
  “file-path” is the full path to the KML file.
 Here's a sample inserted text:
 <a href=\"../kml/las_vegas.kmz\" title=\"Las Vegas\">🌎</a>"
   (interactive)
-  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if filePath (xahsite-filepath-to-url filePath) "�") (if φtitle φtitle "�") )) )
+  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if φfilePath (xahsite-filepath-to-url φfilePath) "�") (if φtitle φtitle "�") )) )
 
 (defun insert-kml (&optional φ-kml-title φ-lon-lat φ-source-fpath)
   "Insert a simple Google Earth KML markup template.
@@ -97,13 +97,13 @@ used in the <description> tag."
              (number-to-string coord-x)
              (number-to-string coord-y) ) )))
 
-(defun latitude-longitude-decimalize (latlon)
-  "Convert latitude longitude string LATLON in minutes second format to decimal.
+(defun latitude-longitude-decimalize (φlatlon)
+  "Convert latitude longitude string ΦLATLON in minutes second format to decimal.
 
 For example: 「\"37°26′36.42″N 06°15′14.28″W\"」
 becomes 「[37.44345 -6.253966666666667]」"
   (interactive)
-  (let (ξtmpPair (tt2 latlon) ξlatStr ξlatNum ξlonStr ξlonNum
+  (let (ξtmpPair (tt2 φlatlon) ξlatStr ξlatNum ξlonStr ξlonNum
  ξdeg ξmin ξsec ξsign (ξc (/ 1.0 60.0))
 )
 
@@ -151,8 +151,8 @@ becomes 「[37.44345 -6.253966666666667]」"
       )
 (vector ξlatNum ξlonNum) ) )
 
-;; (defun minsec-to-dec (latlong)
-;;   "Convert latitude longitude string LATLONG in minutes second format to decimal.
+;; (defun minsec-to-dec (φlatlong)
+;;   "Convert latitude longitude string ΦLATLONG in minutes second format to decimal.
 
 ;; For example: 「37°26′36.42″N 06°15′14.28″W」
 ;; becomes

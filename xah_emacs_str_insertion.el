@@ -37,12 +37,12 @@ This command is conveniently used together with `kill-rectangle' and `string-rec
       )
 ))
 
-(defun xah-insert-alphabets-az (&optional useUppercase-p)
+(defun xah-insert-alphabets-az (&optional φuse-uppercase-p)
   "Insert letters a to z vertically.
 If `universal-argument' is called first, use CAPITAL letters.
 Note: this command is similar to `rectangle-number-lines', starting at 65 or 97, and with a format of 「%c」."
   (interactive "P")
-  (let ((startChar (if useUppercase-p 65 97 )))
+  (let ((startChar (if φuse-uppercase-p 65 97 )))
     (dotimes (ii 26 )
       (insert (format "%c\n" (+ startChar ii)))
       ) ) )

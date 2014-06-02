@@ -228,7 +228,7 @@ Note: old version returns this form:
     (delete-region p1 p2)
     (insert "<a class=\"utb\" href=\"" ξurl "\">" ξword "</a>")))
 
-(defun video-search-string (searchString)
+(defun video-search-string (φsearchString)
   "Return a Google video search string URL of SEARCHSTRING.
 
 Example:
@@ -237,7 +237,7 @@ Example:
 
 This command is called by `video-search-linkify'."
   (let (strEncoded)
-    (setq strEncoded searchString )
+    (setq strEncoded φsearchString )
     (setq strEncoded (replace-regexp-in-string " " "+" strEncoded ) )
     (setq strEncoded (url-percent-encode-string strEncoded ) )
     (concat "http://www.google.com/search?tbs=vid%3A1&q=" strEncoded)
@@ -322,16 +322,16 @@ it becomes
 
 ;; more specific to Xah Lee
 
-(defun amazon-search-linkify-url (sString productCat assid)
+(defun amazon-search-linkify-url (φsString φproductCat φassid)
   "Returns a URL of amazon search based on search string and product category.
-sString is the search string. e.g. “deep throat”
-productCat is a short code for amazon's product category.
+φsString is the search string. e.g. “deep throat”
+φproductCat is a short code for amazon's product category.
 See `amazon-search-linkify' for the possible code string.
 Sample call:
  (amazon-search-linkify-url \"debbie does dollas\" \"dvd\" \"xahh-20\")"
   (interactive)
   (let (sStrPercent)
-    (setq sStrPercent sString)
+    (setq sStrPercent φsString)
     (setq sStrPercent (replace-regexp-in-string " " "%20" sStrPercent) )
     (setq sStrPercent (replace-regexp-in-string "," "%2c" sStrPercent) )
 
@@ -339,11 +339,11 @@ Sample call:
      "<a class=\"amzs\" href=\"http://www.amazon.com/gp/search?ie=UTF8&amp;keywords="
      sStrPercent
      "&amp;tag="
-     assid
+     φassid
      "&amp;index="
-     productCat
+     φproductCat
      "&amp;linkCode=ur2&amp;camp=1789&amp;creative=9325\">"
-     sString
+     φsString
      "</a>"
      ) ) )
 
@@ -536,16 +536,16 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
       (progn (message (format "Cannot locate the file: 「%s」" fPath) )) ) ) )
 
 
-(defun nodejs-get-title (fName fragPart)
+(defun nodejs-get-title (φfName φfragPart)
   "Return the file frag part function title.
  (nodejs-get-title \"/home/xah/web/xahlee_info/node_api/net.html\" \"#net_server_listen_port_host_backlog_callback\" )
 returns
  \"server.listen(port, [host], [backlog], [callback])\"
 "
   (with-temp-buffer
-    (insert-file-contents fName nil nil nil t)
+    (insert-file-contents φfName nil nil nil t)
     (goto-char 1)
-    (if (string= fragPart "")
+    (if (string= φfragPart "")
         (progn
           (search-forward "<div id=\"apicontent\">")
           (if (search-forward "<h1>" nil "NOERROR")
@@ -558,7 +558,7 @@ returns
                (search-forward "<title>")
                (- (search-forward "</title>") 8)) ) ) )
       (progn
-        (search-forward fragPart)
+        (search-forward φfragPart)
         (buffer-substring-no-properties
          (search-forward "\">")
          (-  (search-forward "</a>") 4))  )

@@ -172,77 +172,6 @@ this command calls python3's script 「2to3」."
       )
     ))
 
-;; ; the following 2 about dired are for opening all marked files. They are pulled from dired-x.
-;; (defun dired-do-find-marked-files (&optional noselect)
-;;   "Find all marked files displaying all of them simultaneously.
-;; With optional NOSELECT just find files but do not select them.
-
-;; The current window is split across all files marked, as evenly as possible.
-;; Remaining lines go to bottom-most window.  The number of files that can be
-;; displayed this way is restricted by the height of the current window and
-;; `window-min-height'.
-
-;; To keep dired buffer displayed, type \\[split-window-vertically] first.
-;; To display just marked files, type \\[delete-other-windows] first."
-;;   (interactive "P")
-;;   (dired-simultaneous-find-file (dired-get-marked-files) noselect))
-
-;; (defun dired-simultaneous-find-file (file-list noselect)
-;;   "Visit all files in FILE-LIST and display them simultaneously.
-;; The current window is split across all files in FILE-LIST, as evenly as
-;; possible.  Remaining lines go to the bottom-most window.  The number of
-;; files that can be displayed this way is restricted by the height of the
-;; current window and the variable `window-min-height'.  With non-nil
-;; NOSELECT the files are merely found but not selected."
-
-;;   ;; We don't make this function interactive because it is usually too clumsy
-;;   ;; to specify FILE-LIST interactively unless via dired.
-
-;;   (let (size)
-
-;;     (if noselect
-;;         ;; Do not select the buffer.
-;;         (find-file-noselect (car file-list))
-
-;;       ;; We will have to select the buffer.  Calculate and check window size.
-;;       (setq size (/ (window-height) (length file-list)))
-;;       (or (<= window-min-height size)
-;;           (error "Too many files to visit simultaneously.  Try C-u prefix"))
-;;       (find-file (car file-list)))
-
-;;     ;; Decrement.
-;;     (setq file-list (cdr file-list))
-
-;;     (while file-list
-
-;;       (if noselect
-;;           ;; Do not select the buffer.
-;;           (find-file-noselect (car file-list))
-
-;;         ;; Vertically split off a window of desired size.  Upper window will
-;;         ;; have SIZE lines.  Select lower (larger) window.  We split it again.
-;;         (select-window (split-window nil size))
-;;         (find-file (car file-list)))
-
-;;       ;; Decrement.
-;;       (setq file-list (cdr file-list)))))
-
-;; (defun count-region (posBegin posEnd)
-;;   "Print number of words and chars in region."
-;;   (interactive "r")
-;;   (message "Counting …")
-;;   (save-excursion
-;;     (let (wCnt charCnt)
-;;       (setq wCnt 0)
-;;       (setq charCnt (- posEnd posBegin))
-;;       (goto-char posBegin)
-;;       (while (and (< (point) posEnd)
-;;                   (re-search-forward "\\w+\\W*" posEnd t))
-;;         (setq wCnt (1+ wCnt)))
-
-;;       (message "Words: %d. Chars: %d." wCnt charCnt)
-;;       )))
-
 (defun xah-count-words-region-or-line ()
   "Print number of words and chars in text selection or line.
 In emacs 24, you can use `count-words'."
@@ -262,27 +191,27 @@ In emacs 24, you can use `count-words'."
 
         (message "Words: %d. Chars: %d." wCnt charCnt) )) ) )
 
-(defun xah-change-file-line-ending (fpath lineEndingStyle)
+(defun xah-change-file-line-ending (φfpath φline-ending-style)
   "Change file's newline character.
- 「fpath」 is full path to file.
- 「lineEndingStyle」 is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+ 「φfpath」 is full path to file.
+ 「φline-ending-style」 is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 
 If the file is already opened, it will be saved after this command.
 "
   (let (mybuffer
-        (bufferOpened-p (get-file-buffer fpath))
+        (bufferOpened-p (get-file-buffer φfpath))
         )
     (if bufferOpened-p
-        (progn (with-current-buffer bufferOpened-p (set-buffer-file-coding-system lineEndingStyle) (save-buffer) ))
+        (progn (with-current-buffer bufferOpened-p (set-buffer-file-coding-system φline-ending-style) (save-buffer) ))
       (progn
-        (setq mybuffer (find-file fpath))
-        (set-buffer-file-coding-system lineEndingStyle)
+        (setq mybuffer (find-file φfpath))
+        (set-buffer-file-coding-system φline-ending-style)
         (save-buffer)
         (kill-buffer mybuffer) ) ) ) )
 
-(defun xah-change-file-line-ending-style (fileList lineEndingStyle)
+(defun xah-change-file-line-ending-style (φfile-list φline-ending-style)
   "Change current file or dired marked file's newline convention.
-When called in lisp program, “lineEndingStyle” is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+When called in lisp program, “φline-ending-style” is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 "
   (interactive
    (list
@@ -294,15 +223,15 @@ When called in lisp program, “lineEndingStyle” is one of 'unix 'dos 'mac or 
   (let* (
          (nlStyle
           (cond
-           ((equal lineEndingStyle "Unix") 'unix)
-           ((equal lineEndingStyle "Mac OS 9") 'mac)
-           ((equal lineEndingStyle "Windows") 'dos)
+           ((equal φline-ending-style "Unix") 'unix)
+           ((equal φline-ending-style "Mac OS 9") 'mac)
+           ((equal φline-ending-style "Windows") 'dos)
            (t (error "code logic error 65327. Expect one of it." ))
            ))
          )
     (mapc
      (lambda (ff) (xah-change-file-line-ending ff nlStyle))
-     fileList)) )
+     φfile-list)) )
 
 
 ;; don't use much anymore

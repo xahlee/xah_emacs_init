@@ -9,7 +9,7 @@
 
 
 
-(defun xah-set-input-method-to-chinese (ξn)
+(defun xah-set-input-method-to-chinese (φn)
   "Set input method to Chinese.
 
 Normally, set to 'chinese-py.
@@ -17,11 +17,11 @@ C-u → set to 'chinese-tonepy-punct.
 C-u 2 → set to 'chinese-py-b5."
 (interactive "P")
   (cond
-    ((equal ξn nil)     ; universal-argument not called
+    ((equal φn nil)     ; universal-argument not called
      (set-input-method 'chinese-py))
-    ((equal ξn '(4))    ; C-u
+    ((equal φn '(4))    ; C-u
      (set-input-method 'chinese-tonepy-punct))
-    ((equal ξn 2)       ; C-u 2
+    ((equal φn 2)       ; C-u 2
      (set-input-method 'chinese-py-b5))
     (t                                  ; all other cases
      (set-input-method 'chinese-py)) )
@@ -154,37 +154,37 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 ) )
 
-(defun xah-open-file-fast (openCode)
+(defun xah-open-file-fast (φopen-code)
   "Prompt to open a file from a pre-defined set."
   (interactive
    (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-filelist)))
    )
-  (find-file (cdr (assoc openCode xah-filelist)) ) )
+  (find-file (cdr (assoc φopen-code xah-filelist)) ) )
 
-;; (defun xah-open-file-fast (openCode)
+;; (defun xah-open-file-fast (φopen-code)
 ;;   "Prompt to open a file from a pre-defined set."
 ;;   (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets [uk]kbd [d]dl:")
 ;;   (let (ξfile )
 ;;     (setq ξfile
 ;;           (cond
-;;            ((string= openCode "3") "~/web/ergoemacs_org/emacs/blog.html" )
-;;            ((string= openCode "4") "~/web/xahlee_info/comp/blog.html" )
-;;            ((string= openCode "j") "~/web/xahlee_info/js/blog.html" )
-;;            ((string= openCode "m") "~/web/xahlee_info/math/blog.html" )
-;;            ((string= openCode "l") "~/web/wordyenglish_com/lit/blog.html" )
-;;            ((string= openCode "c") "~/web/wordyenglish_com/chinese/blog.html" )
-;;            ((string= openCode "u") "~/web/xahmusic_org/music/blog.html" )
-;;            ((string= openCode "a") "~/web/xaharts_org/arts/blog.html" )
-;;            ((string= openCode "sl") "~/web/xahsl_org/sl/blog.html" )
-;;            ((string= openCode "t") "~/Dropbox/twitter tweets.txt" )
-;;            ((string= openCode "x") "~/web/xahlee_org/sex/blog.html" )
-;;            ((string= openCode "pd") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
-;;            ((string= openCode "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
-;;            ((string= openCode "h") "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
-;;            ((string= openCode "kbd") "~/web/xahlee_info/kbd/keyboarding.html" )
-;;            ((string= openCode "uk") "~/web/xahlee_info/kbd/keyboarding.html" )
-;;            ((string= openCode "d") "~/Downloads/" )
-;;            (t (user-error "You typed 「%s」, it doesn't associate with a file." openCode ))
+;;            ((string= φopen-code "3") "~/web/ergoemacs_org/emacs/blog.html" )
+;;            ((string= φopen-code "4") "~/web/xahlee_info/comp/blog.html" )
+;;            ((string= φopen-code "j") "~/web/xahlee_info/js/blog.html" )
+;;            ((string= φopen-code "m") "~/web/xahlee_info/math/blog.html" )
+;;            ((string= φopen-code "l") "~/web/wordyenglish_com/lit/blog.html" )
+;;            ((string= φopen-code "c") "~/web/wordyenglish_com/chinese/blog.html" )
+;;            ((string= φopen-code "u") "~/web/xahmusic_org/music/blog.html" )
+;;            ((string= φopen-code "a") "~/web/xaharts_org/arts/blog.html" )
+;;            ((string= φopen-code "sl") "~/web/xahsl_org/sl/blog.html" )
+;;            ((string= φopen-code "t") "~/Dropbox/twitter tweets.txt" )
+;;            ((string= φopen-code "x") "~/web/xahlee_org/sex/blog.html" )
+;;            ((string= φopen-code "pd") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
+;;            ((string= φopen-code "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
+;;            ((string= φopen-code "h") "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
+;;            ((string= φopen-code "kbd") "~/web/xahlee_info/kbd/keyboarding.html" )
+;;            ((string= φopen-code "uk") "~/web/xahlee_info/kbd/keyboarding.html" )
+;;            ((string= φopen-code "d") "~/Downloads/" )
+;;            (t (user-error "You typed 「%s」, it doesn't associate with a file." φopen-code ))
 ;;            )
 ;;           )
 ;;     (find-file ξfile ) ) )
@@ -483,13 +483,13 @@ When there is a text selection, act on the region."
             )
           )
 
-(defun xah-shell-commands (cmdAbbrev)
+(defun xah-shell-commands (φcmd-abbrev)
   "insert shell command from a list of abbrevs."
   (interactive
    (list
       (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH") ) )
   (progn
-    (insert (cdr (assoc cmdAbbrev xah-shell-abbrev-alist)))
+    (insert (cdr (assoc φcmd-abbrev xah-shell-abbrev-alist)))
     ))
 
 (defun xah-to-xah-elisp-mode  ()
@@ -515,34 +515,6 @@ When there is a text selection, act on the region."
 
 ;; (call-interactively 'xhm-htmlize-or-de-precode)
  ) )
-
-;; (defun xah-forward-block (&optional number)
-;;   "Move cursor forward to the beginning of next text block.
-;; A text block is separated by 2 empty lines (or line with just whitespace).
-;; In most major modes, this is similar to `forward-paragraph', but this command's behavior is the same regardless of syntax table.
-
-;; With a prefix argument NUMBER, move forward NUMBER blocks.
-;; With a negative prefix argument NUMBER, move backward NUMBER blocks."
-;;   (interactive "p")
-;;   (if (and number
-;;            (> 0 number))
-;;       (xah-backward-block (- 0 number))
-;;   (if (search-forward-regexp "\n[[:blank:]\n]*\n+" nil "NOERROR" number)
-;;       (progn nil)
-;;     (progn (goto-char (point-max))))))
-
-;; (defun xah-backward-block (&optional number)
-;;   "Move cursor backward to previous text block.
-;; See: `xah-forward-block'"
-;;   (interactive "p")
-;;   (if (and number
-;;            (> 0 number))
-;;       (xah-forward-block (- 0 number))
-;;     (if (search-backward-regexp "\n[\t\n ]*\n+" nil "NOERROR" number)
-;;         (progn
-;;           (skip-chars-backward "\n\t ")
-;;           )
-;;       (progn (goto-char (point-min))))))
 
 (defun xah-decode-percent-encoded-uri (p1 p2)
   "Percent decode URI for text selection."

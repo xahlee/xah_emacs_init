@@ -3,25 +3,25 @@
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 ;; 〈Emacs Lisp: Updating Atom Webfeed〉 http://ergoemacs.org/emacs/elisp_update_atom.html
 
-(defun insert-atom-entry (&optional ξtitle ξid ξsummery ξcontentHTML-text altLinkUrl)
+(defun insert-atom-entry (&optional φtitle φid φsummery φcontentHTML-text φaltLinkUrl)
   "Insert a Atom webfeed entry template,
  in the current buffer's cursor position.
 
-Optional argument altLinkUrl is used in the atom tag: <link rel=\"alternate\" href=\"…\"/>
+Optional argument φaltLinkUrl is used in the atom tag: <link rel=\"alternate\" href=\"…\"/>
 Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
   (interactive)
   (let* (
-         (βtitle (if ξtitle ξtitle "�") )
-         (βid (if ξid ξid (new-atom-id-tag) ) )
-         (βsummery (if ξsummery ξsummery "�") )
-         (βcontent (if ξcontentHTML-text (format " <content type=\"xhtml\">
+         (ξtitle (if φtitle φtitle "�") )
+         (ξid (if φid φid (new-atom-id-tag) ) )
+         (ξsummery (if φsummery φsummery "�") )
+         (ξcontent (if φcontentHTML-text (format " <content type=\"xhtml\">
  <div xmlns=\"http://www.w3.org/1999/xhtml\">
 %s
  </div>
- </content>" ξcontentHTML-text)
+ </content>" φcontentHTML-text)
   "") )
-         (βupdatedStr (current-date-time-string))
-         (βaltLink (if altLinkUrl altLinkUrl (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
+         (ξupdatedStr (current-date-time-string))
+         (ξaltLink (if φaltLinkUrl φaltLinkUrl (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
          )
     (insert (format "<entry>
 <title>%s</title>
@@ -33,30 +33,31 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
 </entry>
 
 "
-                    βtitle
+                    ξtitle
                     ξid
-                    βupdatedStr
-                    βsummery
-                    βcontent
-                    βaltLink
+                    ξupdatedStr
+                    ξsummery
+                    ξcontent
+                    ξaltLink
                     )) ) )
 
-(defun new-atom-id-tag (&optional domainName)
+(defun new-atom-id-tag (&optional φdomainName)
   "Returns a newly generated ATOM webfeed's “id” element string.
 Example of return value: 「tag:xahlee.org,2010-03-31:022128」
 
 If DOMAINNAME is given, use that for the domain name.
 Else, use “xahlee.org”."
-    (format "tag:%s%s" (if domainName domainName "xahlee.org") (format-time-string ",%Y-%m-%d:%H%M%S" (current-time) 1)) )
+    (format "tag:%s%s" (if φdomainName φdomainName "xahlee.org") (format-time-string ",%Y-%m-%d:%H%M%S" (current-time) 1)) )
 
-(defun update-atom-updated-tag (filePath)
-  "Update the <updated> tag of a ATOM webfeed file at filePath,
+(defun update-atom-updated-tag (φfilePath)
+  "Update the <updated> tag of a ATOM webfeed file at φfilePath,
 to current date/time stamp.
 This command leaves the file unsaved."
   (interactive
    (list (buffer-file-name))
    )
     (let (p1 p2)
+      (find-file φfilePath)
       (goto-char 1)
       (search-forward "<updated>")
       (setq p1 (point) )

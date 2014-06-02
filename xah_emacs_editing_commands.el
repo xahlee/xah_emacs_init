@@ -5,7 +5,7 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(defun xah-copy-file-path (&optional dirPathOnly-p)
+(defun xah-copy-file-path (&optional φdirPathOnly-p)
   "Copy the current buffer's file path or dired path to `kill-ring'.
 If `universal-argument' is called, copy only the dir path."
   (interactive "P")
@@ -15,7 +15,7 @@ If `universal-argument' is called, copy only the dir path."
            (buffer-file-name)
            )))
     (kill-new
-     (if (equal dirPathOnly-p nil)
+     (if (equal φdirPathOnly-p nil)
          fPath
        (file-name-directory fPath)
        )))
@@ -81,30 +81,6 @@ Warning: This command does not preserve texts inside double quotes."
 
     (delete-region p1 p2)
     (insert resultText) ) )
-
-
-;; (defun my-delete-word (arg)
-;;   "Delete characters forward until encountering the end of a word.
-;; With argument, do this that many times.
-;; This command does not push erased text to kill-ring."
-;;   (interactive "p")
-;;   (delete-region (point) (progn (forward-word arg) (point))))
-
-;; (defun my-backward-delete-word (arg)
-;;   "Delete characters backward until encountering the beginning of a word.
-;; With argument, do this that many times.
-;; This command does not push erased text to kill-ring."
-;;   (interactive "p")
-;;   (my-delete-word (- arg)))
-
-;; (defun my-delete-line ()
-;;   "Delete text from current position to end of line char."
-;;   (interactive)
-;;   (delete-region
-;;    (point)
-;;    (save-excursion (move-end-of-line 1) (point)))
-;;   (delete-char 1)
-;; )
 
 
 

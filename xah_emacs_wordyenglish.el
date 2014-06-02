@@ -12,7 +12,7 @@
 ;; 〈Wordy English — the Making of Belles-Lettres〉
 ;; http://wordyenglish.com/words/vocabulary.html
 
-(defun xwe-move-word-to-page (moveCode)
+(defun xwe-move-word-to-page (φmoveCode)
   "take current selection or block of text, ask which page to move it to."
   (interactive "sEnter a character: [s]sat [g]gre [w]writer [e]easy [a]arcane [l]slang [i]informal [h]hyphen [c]combo [n]noun [t]noun things [8]noun abstract [p]poesy [f]foreign [3]special:")
   (let (p1 p2 bds ξfile ξwordText)
@@ -20,23 +20,23 @@
     (setq ξwordText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
 
     (cond
-     ((string= moveCode "3") (setq ξfile "specialwords.html" ))
-     ((string= moveCode "a") (setq ξfile "arcane.html" ))
-     ((string= moveCode "c") (setq ξfile "combowords.html" ))
-     ((string= moveCode "e") (setq ξfile "easy.html" ))
-     ((string= moveCode "f") (setq ξfile "foreignwords.html" ))
-     ((string= moveCode "g") (setq ξfile "gre.html" ))
-     ((string= moveCode "h") (setq ξfile "hyphwords.html" ))
-     ((string= moveCode "i") (setq ξfile "informal.html" ))
-     ((string= moveCode "l") (setq ξfile "slang.html" ))
-     ((string= moveCode "n") (setq ξfile "noun.html" ))
-     ((string= moveCode "t") (setq ξfile "noun_things.html" ))
-     ((string= moveCode "8") (setq ξfile "noun_abs.html" ))
-     ((string= moveCode "p") (setq ξfile "poesy.html" ))
-     ((string= moveCode "s") (setq ξfile "satwords.html" ))
-     ((string= moveCode "w") (setq ξfile "writerwords.html" ))
+     ((string= φmoveCode "3") (setq ξfile "specialwords.html" ))
+     ((string= φmoveCode "a") (setq ξfile "arcane.html" ))
+     ((string= φmoveCode "c") (setq ξfile "combowords.html" ))
+     ((string= φmoveCode "e") (setq ξfile "easy.html" ))
+     ((string= φmoveCode "f") (setq ξfile "foreignwords.html" ))
+     ((string= φmoveCode "g") (setq ξfile "gre.html" ))
+     ((string= φmoveCode "h") (setq ξfile "hyphwords.html" ))
+     ((string= φmoveCode "i") (setq ξfile "informal.html" ))
+     ((string= φmoveCode "l") (setq ξfile "slang.html" ))
+     ((string= φmoveCode "n") (setq ξfile "noun.html" ))
+     ((string= φmoveCode "t") (setq ξfile "noun_things.html" ))
+     ((string= φmoveCode "8") (setq ξfile "noun_abs.html" ))
+     ((string= φmoveCode "p") (setq ξfile "poesy.html" ))
+     ((string= φmoveCode "s") (setq ξfile "satwords.html" ))
+     ((string= φmoveCode "w") (setq ξfile "writerwords.html" ))
 
-     (t (user-error "Your letter 「%s」 is not one of the allowed" moveCode ))
+     (t (user-error "Your letter 「%s」 is not one of the allowed" φmoveCode ))
      )
 
     (delete-region p1 p2 )
@@ -238,12 +238,12 @@ already bold. Then, ask user whether that should be bold."
         ))
     ))
 
-(defun xwe-find-word-usage (myWord)
+(defun xwe-find-word-usage (φword)
   "Grep a dir for a word's usage."
   (interactive "sWord to search: ")
   (require 'grep)
   (grep-compute-defaults)
-  (rgrep myWord "*html" "~/web/p")
+  (rgrep φword "*html" "~/web/p")
 ;; ~/web/p
 ;; ~/web/flatland/
 ;; ~/web/Periodic_dosage_dir/_p2/russell-lecture.html

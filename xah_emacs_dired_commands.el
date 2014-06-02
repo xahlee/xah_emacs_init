@@ -15,36 +15,36 @@ Require unix zip command line tool."
     (shell-command (format "zip -r '%s.zip' '%s'" (file-relative-name fileName) (file-relative-name fileName)))
     ))
 
-(defun xah-process-image (fileList argsString newNameSuffix newNameFileSuffix )
+(defun xah-process-image (φfile-list φargs-str φnew-name-suffix φnew-name-file-suffix )
   "Create a new image.
-fileList is a list of image file paths.
-argsString is argument string passed to ImageMagick's “convert” command.
-newNameSuffix is the string appended to file. e.g. “_new” gets you “…_new.jpg”
-newNameFileSuffix is the new file's file extension. e.g. “.png”
+φfile-list is a list of image file paths.
+φargs-str is argument string passed to ImageMagick's “convert” command.
+φnew-name-suffix is the string appended to file. e.g. “_new” gets you “…_new.jpg”
+φnew-name-file-suffix is the new file's file extension. e.g. “.png”
 Requires ImageMagick shell tool."
   (require 'dired)
   (mapc
    (lambda (ξf)
      (let ( newName cmdStr )
-       (setq newName (concat (file-name-sans-extension ξf) newNameSuffix newNameFileSuffix) )
+       (setq newName (concat (file-name-sans-extension ξf) φnew-name-suffix φnew-name-file-suffix) )
        (while (file-exists-p newName)
-         (setq newName (concat (file-name-sans-extension newName) newNameSuffix (file-name-extension newName t))) )
+         (setq newName (concat (file-name-sans-extension newName) φnew-name-suffix (file-name-extension newName t))) )
 
        ;; relative paths used to get around Windows/Cygwin path remapping problem
        (setq cmdStr
-             (format "convert %s '%s' '%s'" argsString (file-relative-name ξf) (file-relative-name newName)) )
+             (format "convert %s '%s' '%s'" φargs-str (file-relative-name ξf) (file-relative-name newName)) )
        (shell-command cmdStr)
        ))
-   fileList ))
+   φfile-list ))
 
-(defun xah-dired-scale-image (fileList scalePercentage sharpen-p)
+(defun xah-dired-scale-image (φfile-list scalePercentage sharpen-p)
   "Create a scaled version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
 If `universal-argument' is given, output is PNG format. Else, JPG.
 
 When called in lisp code,
- fileList is a list.
+ φfile-list is a list.
  scalePercentage is a integer.
  sharpen-p is true or false.
 
@@ -64,13 +64,13 @@ Requires ImageMagick unix shell tool."
   (let ((sharpenOrNo (if sharpen-p "-sharpen 1" "" ))
         (outputSuffix (if current-prefix-arg ".png" ".jpg" ) )
         )
-    (xah-process-image fileList
+    (xah-process-image φfile-list
                    (format "-scale %s%% -quality 85%% %s " scalePercentage sharpenOrNo)
                    "-s" outputSuffix )
     )
   )
 
-(defun xah-image-autocrop (fileList)
+(defun xah-image-autocrop (φfile-list)
   "Create a new auto-cropped JPG version of images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
@@ -82,10 +82,10 @@ Requires ImageMagick shell tool."
            (t (list (read-from-minibuffer "file name:") )) ) ) )
      (list myFileList) )
    )
-  (xah-process-image fileList "-trim" "-c" ".jpg" )
+  (xah-process-image φfile-list "-trim" "-c" ".jpg" )
   )
 
-(defun xah-dired-2png (fileList)
+(defun xah-dired-2png (φfile-list)
   "Create a png version of images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
@@ -97,10 +97,10 @@ Requires ImageMagick shell tool."
            (t (list (read-from-minibuffer "file name:") )) ) ) )
      (list myFileList) )
    )
-  (xah-process-image fileList "" "-2" ".png" )
+  (xah-process-image φfile-list "" "-2" ".png" )
   )
 
-(defun xah-dired-2drawing (fileList grayscale-p bitsPerPixel)
+(defun xah-dired-2drawing (φfile-list grayscale-p bitsPerPixel)
   "Create a png version of (drawing type) images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
@@ -113,7 +113,7 @@ Requires ImageMagick shell tool."
      (list myFileList
            (setq grayscale-p (yes-or-no-p "Grayscale?"))
            (read-string "Bits per pixel (1 2 4 8):" "4")) ) )
-  (xah-process-image fileList
+  (xah-process-image φfile-list
                  (format "+dither %s -depth %s"
                          (if grayscale-p "-type grayscale" "")
                          ;; image magick “-colors” must be at least 8
@@ -123,7 +123,7 @@ Requires ImageMagick shell tool."
                          bitsPerPixel)  "-2" ".png" )
   )
 
-(defun xah-dired-2jpg (fileList)
+(defun xah-dired-2jpg (φfile-list)
   "Create a JPG version of images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
@@ -135,4 +135,4 @@ Requires ImageMagick shell tool."
            (t (list (read-from-minibuffer "file name:") )) ) ) )
      (list myFileList) )
    )
-  (xah-process-image fileList "" "-2" ".jpg" ))
+  (xah-process-image φfile-list "" "-2" ".jpg" ))

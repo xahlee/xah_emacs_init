@@ -59,11 +59,11 @@ On Mac OS X, you don't need to. This command makes this shell call:
        ) )
     ))
 
-(defun xah-browse-url-Google-Chrome (uri)
+(defun xah-browse-url-Google-Chrome (φuri)
   "Same as `browse-url' but using Google Chrome."
   (interactive)
   (let ()
-    (shell-command (concat "chrome " uri))
+    (shell-command (concat "chrome " φuri))
     ))
 
 (defun xah-browse-url-of-buffer-firefox-2 ()

@@ -24,7 +24,7 @@ For example:
 ["omega" "ω"]
 ["Pi" "π"])))
 
-(defun ξ-replace-tex-region (p1 p2)
+(defun xah-replace-tex-region (p1 p2)
   "Replace some math function names or symbols by their LaTeX markup."
   (interactive "r")
 (replace-pairs-region p1 p2 '(

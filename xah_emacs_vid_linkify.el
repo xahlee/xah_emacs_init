@@ -3,22 +3,22 @@
 
 ;; c:/Users/xah/web/xahlee_org/Periodic_dosage_dir/sanga_pemci/xx.html
 
-(defun youtube-string-old (video-id)
-  "Return HTML code for embedding video of youtube's VIDEO-ID.
+(defun youtube-string-old (φvideo-id)
+  "Return HTML code for embedding video of youtube's ΦVIDEO-ID.
 Example call:
  (youtube-string \"bFSS826ETlk\")"
 
   (let (ξurl)
-    (setq ξurl (concat "http://www.youtube.com/v/" video-id))
+    (setq ξurl (concat "http://www.youtube.com/v/" φvideo-id))
     (concat
      "<object type=\"application/x-shockwave-flash\" data=\"" ξurl "\" width=\"480\" height=\"385\"><param name=\"movie\" value=\"" ξurl "\"></object>")
     ) )
 
-(defun youtube-string (video-id)
-  "Return HTML code for embedding video of youtube's VIDEO-ID.
+(defun youtube-string (φvideo-id)
+  "Return HTML code for embedding video of youtube's ΦVIDEO-ID.
 Example call:
  (youtube-string \"bFSS826ETlk\")"
-(concat "<iframe width=\"640\" height=\"480\" src=\"http://www.youtube.com/embed/" video-id "?rel=0\"></iframe>")
+(concat "<iframe width=\"640\" height=\"480\" src=\"http://www.youtube.com/embed/" φvideo-id "?rel=0\"></iframe>")
   )
 
 (defun youtube-linkify ()
@@ -67,13 +67,13 @@ here's old version output
     (backward-char 1)
     ))
 
-(defun google-video-string (video-id)
-	"Return HTML code for embedding video of Google Video's VIDEO-ID.
+(defun google-video-string (φvideo-id)
+	"Return HTML code for embedding video of Google Video's ΦVIDEO-ID.
 Example call:
  (google-video-string \"2336889538700185341\")"
   (let (ξurl)
 
-    (setq ξurl (concat "http://video\.google\.com/googleplayer\.swf\?docid=" video-id "&amp;fs=true" ))
+    (setq ξurl (concat "http://video\.google\.com/googleplayer\.swf\?docid=" φvideo-id "&amp;fs=true" ))
     (concat
      "<object type=\"application/x-shockwave-flash\" data=\"" ξurl
      "\" width=\"400\" height=\"326\"><param name=\"movie\" value=\"" ξurl "\"><param name=\"allowFullScreen\" value=\"true\"><param name=\"allowScriptAccess\" value=\"always\"></object>")
@@ -103,12 +103,12 @@ Example:
     (insert (google-video-string vID)
             ) ))
 
-(defun dailymotion-video-string (video-id)
-	"Return HTML code for embedding video of dailymotion.com's VIDEO-ID.
+(defun dailymotion-video-string (φvideo-id)
+	"Return HTML code for embedding video of dailymotion.com's ΦVIDEO-ID.
 Example call:
  (dailymotion-linkify \"x1af0v\")"
 	(concat
-   "<object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/" video-id "\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/" video-id "\"><param name=\"allowFullScreen\" value=\"true\"></object>"
+   "<object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/" φvideo-id "\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/" φvideo-id "\"><param name=\"allowFullScreen\" value=\"true\"></object>"
    )
   )
 
@@ -175,12 +175,11 @@ it becomes
 (search-backward "</figcaption>")
  ))
 
-(defun tudou-video-string (video-id)
-	"Return HTML code for embedding video of tudou.com's VIDEO-ID.
+(defun tudou-video-string (φvideo-id)
+	"Return HTML code for embedding video of tudou.com's ΦVIDEO-ID.
 Example call:
  (tudou-video-string \"9OoINUl31dQ\")"
-  (let (ξurl)
-    (setq ξurl (concat "http://www.tudou.com/v/" video-id "/v.swf" ))
+  (let ((ξurl (concat "http://www.tudou.com/v/" φvideo-id "/v.swf" )))
     (concat "<object type=\"application/x-shockwave-flash\" data=\"" ξurl "\" width=\"480\" height=\"400\"><param name=\"movie\" value=\"" ξurl "\"></object>" )
     ) )
 

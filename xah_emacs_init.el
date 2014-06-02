@@ -5,8 +5,8 @@
 
 ; loading custom commands and functions
 
-(defun xah-fullpath-relative-to-current-file (file-relative-path)
-  "Returns the full path of FILE-RELATIVE-PATH, relative to file location where this function is called.
+(defun xah-fullpath-relative-to-current-file (φfile-relative-path)
+  "Returns the full path of ΦFILE-RELATIVE-PATH, relative to file location where this function is called.
 
 Example: If you have this line
  (xah-fullpath-relative-to-current-file \"../xyz.el\")
@@ -35,7 +35,7 @@ doesn't.  If the file is called by `eval-buffer', then
 load-file-name is nil. You want to be able to get the current
 file's full path regardless the file is run by “load” or
 interactively by “eval-buffer”."
-  (concat (file-name-directory (or load-file-name buffer-file-name)) file-relative-path)
+  (concat (file-name-directory (or load-file-name buffer-file-name)) φfile-relative-path)
 )
 
 

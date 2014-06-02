@@ -330,30 +330,30 @@ Else it is a user buffer."
 
 
 
-(defun xah-open-in-external-app (&optional file)
-  "Open the current file or dired marked files in external app.
+(defun xah-open-in-external-app (&optional φfile)
+  "Open the current φfile or dired marked files in external app.
 
 The app is chosen from your OS's preference."
   (interactive)
-  (let ( doIt
-         (myFileList
+  (let ( ξdoIt
+         (ξfileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((not file) (list (buffer-file-name)))
-           (file (list file)))))
+           ((not φfile) (list (buffer-file-name)))
+           (φfile (list φfile)))))
     
-    (setq doIt (if (<= (length myFileList) 5)
+    (setq ξdoIt (if (<= (length ξfileList) 5)
                    t
                  (y-or-n-p "Open more than 5 files? ") ) )
     
-    (when doIt
+    (when ξdoIt
       (cond
        ((string-equal system-type "windows-nt")
-        (mapc (lambda (fPath) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" fPath t t)) ) myFileList))
+        (mapc (lambda (fPath) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" fPath t t)) ) ξfileList))
        ((string-equal system-type "darwin")
-        (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)) )  myFileList) )
+        (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)) )  ξfileList) )
        ((string-equal system-type "gnu/linux")
-        (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath)) ) myFileList) ) ) ) ) )
+        (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath)) ) ξfileList) ) ) ) ) )
 
 (defun xah-open-in-desktop ()
   "Show current file in desktop (OS's file manager)."
@@ -367,10 +367,10 @@ The app is chosen from your OS's preference."
     ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
     ) ))
 
-(defun xah-switch-to-next-frame (&optional number)
+(defun xah-switch-to-next-frame (&optional φnumber)
   "Select the next frame on current display, and raise it."
   (interactive "p")
-  (other-frame (or number 1)))
+  (other-frame (or φnumber 1)))
 
 (defun xah-new-empty-buffer ()
   "Opens a new empty buffer."
@@ -387,19 +387,19 @@ The app is chosen from your OS's preference."
 ;; status to offer save
 ;; This custome kill buffer is close-current-buffer.
 
-(defun xah-click-to-search (πclick)
+(defun xah-click-to-search (φclick)
   "Mouse click to start `isearch-forward-symbol-at-point' (emacs 24.4) at clicked point."
   (interactive "e")
-  (let ((p1 (posn-point (event-start πclick))))
+  (let ((p1 (posn-point (event-start φclick))))
     (goto-char p1)
     (isearch-forward-symbol-at-point)
     ;; (describe-char p1)
     ))
 
-(defun xah-click-describe-char (πclick)
+(defun xah-click-describe-char (φclick)
   "Mouse click to `describe-char' at clicked point."
   (interactive "e")
-  (let ((p1 (posn-point (event-start πclick))))
+  (let ((p1 (posn-point (event-start φclick))))
     (goto-char p1)
     (describe-char p1)
     ))
