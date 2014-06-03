@@ -17,6 +17,8 @@
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
+(defalias 'acm 'auto-complete-mode)
+(defalias 'cm 'company-mode)
 
 (defalias 'ssm 'shell-script-mode)
 
