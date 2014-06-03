@@ -145,10 +145,10 @@ See also: `font-lock-fontify-block', `font-lock-fontify-buffer'."
   "Toggle line spacing between no extra space to extra half line height."
   (interactive)
   (if (eq line-spacing nil)
-      (setq-default line-spacing 0.5) ; add 0.5 height between lines
-    (setq-default line-spacing nil)   ; no extra heigh between lines
+      (setq line-spacing 0.5) ; add 0.5 height between lines
+    (setq line-spacing nil)   ; no extra heigh between lines
     )
-  (redraw-display))
+  (redraw-frame (selected-frame)))
 
 (defun xah-toggle-margin-right ()
   "Toggle the right margin between `fill-column' or window width.
@@ -159,24 +159,26 @@ This command is convenient when reading novel, documentation."
     (set-window-margins nil 0 0) ) )
 
 (defun xah-toggle-read-novel-mode ()
-  "make current window in a easy reading moder for article/novel text."
+  "Make current window in a easy reading moder for article/novel text."
   (interactive)
-  (let (
-        ;; (thisFrame (make-frame '( (nam . "xah reading frame") (width . 70) )))
-        )
+  (let ( )
     (if (equal (get this-command 'state) nil)
         (progn
-          (set-frame-width (window-frame) 70)
+          (set-window-margins nil 0 (- (window-body-width) fill-column))
           (variable-pitch-mode 1)
+          (setq line-spacing 0.5)
           (setq word-wrap t)
           (put this-command 'state t)
           )
       (progn
-        (set-frame-width (window-frame) 100)
+        (set-window-margins nil 0 0)
         (variable-pitch-mode 0)
+        (setq line-spacing nil)
         (setq word-wrap nil)
         (put this-command 'state nil)
-        ) ) ) )
+        ) )
+    (redraw-frame (selected-frame))
+    ) )
 
 ;; correct syntax for some fonts (tested on Windows Vista)
 ;; "-*-Courier New-normal-r-*-*-14-112-96-96-c-*-iso8859-1"
