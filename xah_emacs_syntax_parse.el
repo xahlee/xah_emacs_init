@@ -66,7 +66,7 @@ Note:
  (parse-partial-sexp (point-min) pos)
 "
   (interactive)
-  (let ((parse-sexp-ignore-comments t)
+  (let* ((parse-sexp-ignore-comments t)
         (parse-sexp-lookup-properties parse-sexp-lookup-properties)
         (ξstate
          (if current-prefix-arg
