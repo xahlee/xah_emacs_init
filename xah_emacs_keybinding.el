@@ -108,7 +108,7 @@
 
   (global-set-key (kbd "<menu> e SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
 
-  (global-set-key (kbd "<menu> e 2") 'xah-toggle-read-article-mode)
+  (global-set-key (kbd "<menu> e r") 'xah-toggle-read-novel-mode)
   (global-set-key (kbd "<menu> e 3") 'whitespace-mode)
   (global-set-key (kbd "<menu> e 4") 'linum-mode)
   (global-set-key (kbd "<menu> e 5") 'visual-line-mode)
@@ -130,16 +130,16 @@
 
   (define-prefix-command 'xah-menu-h-keymap)
   (global-set-key (kbd "<menu> h") xah-menu-h-keymap)
-  (global-set-key (kbd "<menu> h 0") 'lookup-all-dictionaries)
   (global-set-key (kbd "<menu> h 1") nil)
   (global-set-key (kbd "<menu> h 2") nil)
   (global-set-key (kbd "<menu> h 3") 'man)
   (global-set-key (kbd "<menu> h 4") 'elisp-index-search)
-  (global-set-key (kbd "<menu> h 5") nil)
-  (global-set-key (kbd "<menu> h 6") nil)
+  (global-set-key (kbd "<menu> h 5") 'apropos-variable)
+  (global-set-key (kbd "<menu> h 6") 'apropos-value)
   (global-set-key (kbd "<menu> h 7") 'lookup-google)
   (global-set-key (kbd "<menu> h 8") 'lookup-wikipedia)
   (global-set-key (kbd "<menu> h 9") 'lookup-word-definition)
+  (global-set-key (kbd "<menu> h 0") 'lookup-all-dictionaries)
 
   (global-set-key (kbd "<menu> h a") 'apropos-command)
   (global-set-key (kbd "<menu> h b") 'describe-bindings)
@@ -149,20 +149,30 @@
   (global-set-key (kbd "<menu> h e") 'view-echo-area-messages)
   (global-set-key (kbd "<menu> h f") 'describe-function)
   (global-set-key (kbd "<menu> h F") 'Info-goto-emacs-command-node)
+  (global-set-key (kbd "<menu> h g") nil)
+  (global-set-key (kbd "<menu> h h") nil)
   (global-set-key (kbd "<menu> h i") 'info)
   (global-set-key (kbd "<menu> h I") 'describe-input-method)
-  (global-set-key (kbd "<menu> h I") 'Info-goto-emacs-key-command-node)
+  (global-set-key (kbd "<menu> h j") 'Info-goto-emacs-key-command-node)
   (global-set-key (kbd "<menu> h k") 'describe-key)
+  (global-set-key (kbd "<menu> h K") 'Info-goto-emacs-key-command-node)
   (global-set-key (kbd "<menu> h l") 'view-lossage)
   (global-set-key (kbd "<menu> h L") 'describe-language-environment)
   (global-set-key (kbd "<menu> h m") 'xah-describe-major-mode)
   (global-set-key (kbd "<menu> h n") 'view-emacs-news)
+  (global-set-key (kbd "<menu> h o") nil)
   (global-set-key (kbd "<menu> h p") 'finder-by-keyword)
+  (global-set-key (kbd "<menu> h q") nil)
   (global-set-key (kbd "<menu> h r") 'info-emacs-manual)
   (global-set-key (kbd "<menu> h s") 'describe-syntax)
   (global-set-key (kbd "<menu> h S") 'info-lookup-symbol)
+  (global-set-key (kbd "<menu> h t") nil)
+  (global-set-key (kbd "<menu> h u") nil)
   (global-set-key (kbd "<menu> h v") 'describe-variable)
   (global-set-key (kbd "<menu> h w") 'where-is)
+  (global-set-key (kbd "<menu> h x") nil)
+  (global-set-key (kbd "<menu> h y") nil)
+  (global-set-key (kbd "<menu> h z") nil)
   )
 
 (progn
@@ -274,7 +284,7 @@
   )
 
 (global-set-key (kbd "<menu> x") nil)
-(global-set-key (kbd "<menu> y") nil)
+(global-set-key (kbd "<menu> y") 'complete-symbol)
 (global-set-key (kbd "<menu> z") 'xc-comment-smart) ; 385    0.02%  xc-comment-smart
 
 
