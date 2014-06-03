@@ -133,4 +133,4 @@ interactively by “eval-buffer”."
 ;; (server-start )
 
 (load (xah-fullpath-relative-to-current-file "xah_emacs_syntax_parse"))
-
+(load (xah-fullpath-relative-to-current-file "xah_emacs_overlay_and_char_properties"))

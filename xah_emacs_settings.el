@@ -83,7 +83,7 @@
 ;; (which-function-mode 1) ; show current function in mode line
 
 ;; hog emacs down when you happened to open a large file with thousands of lines
-;; (global-linum-mode 0)
+(global-linum-mode 0)
 
 ;; (setq auto-save-default t)
 ;; (setq auto-save-visited-file-name t )
