@@ -1,6 +1,6 @@
 ;; 2014-05-30
 
-(defun σ-syntax-bracket-forward ()
+(defun xah-syntax-bracket-forward ()
   "Move curvor to the 1st closing bracket, according to current syntax table."
   (interactive)
   (let ()
@@ -8,7 +8,7 @@
     (forward-char 1)
   ))
 
-(defun σ-syntax-bracket-backward ()
+(defun xah-syntax-bracket-backward ()
   "Move curvor previous opening bracket, according to current syntax table."
   (interactive)
   (let ()
@@ -17,7 +17,7 @@
     (backward-char 1)
   ))
 
-(defun σ-forward-comment (φcount)
+(defun xah-forward-comment (φcount)
   "Call `forward-comment' interactively.
 
 when called interactively with no argument, call
@@ -36,14 +36,14 @@ test cases:
     (prin1 (forward-comment φcount))
   ))
 
-(defun σ-scan-list (φcount φcurrent-depth)
+(defun xah-scan-list (φcount φcurrent-depth)
   "Call `scan-lists' interactively."
   (interactive "nCount:\nnDepth:")
   (let ((parse-sexp-ignore-comments t))
     (goto-char (scan-lists (point) φcount φcurrent-depth))
   ))
 
-(defun σ-scan-sexps (φcount)
+(defun xah-scan-sexps (φcount)
   "Call `scan-sexps' interactively.
 note: (scan-sexps n) is equivalent to (scan-list n 0) , i think."
   (interactive "nCount:")
@@ -51,7 +51,7 @@ note: (scan-sexps n) is equivalent to (scan-list n 0) , i think."
     (goto-char (scan-sexps (point) φcount))
   ))
 
-(defun σ-parse-partial-sexp ()
+(defun xah-parse-partial-sexp ()
   "Call `syntax-ppss' or `parse-partial-sexp'.
 Also print it results. Return the parser state.
 
