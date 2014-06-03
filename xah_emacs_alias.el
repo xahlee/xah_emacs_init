@@ -13,16 +13,10 @@
 (defalias 'sl 'sort-lines)
 (defalias 'snf 'sort-numeric-fields)
 (defalias 'g 'grep)
-(defalias 'wm 'whitespace-mode)
 (defalias 'dsm 'delete-selection-mode)
-
-(defalias 'eb 'eval-buffer)
-(defalias 'er 'eval-region)
-(defalias 'ee 'eval-expression)
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
-(defalias 'dnml 'delete-non-matching-lines)
 
 (defalias 'ssm 'shell-script-mode)
 
