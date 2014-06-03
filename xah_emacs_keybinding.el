@@ -248,6 +248,7 @@
   (global-set-key (kbd "<menu> v r") 'eval-region)
   (global-set-key (kbd "<menu> v d") 'eval-defun)
   (global-set-key (kbd "<menu> v e") 'eval-expression)
+  (global-set-key (kbd "<menu> v l") 'eval-last-sexp)
   (global-set-key (kbd "<menu> v <backspace>") 'xah-delete-current-file)
   (global-set-key (kbd "<menu> v <return>") 'xah-run-current-file) ;  1494    0.09%  xah-run-current-file
   )

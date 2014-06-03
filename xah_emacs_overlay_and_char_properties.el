@@ -75,41 +75,6 @@ print the list result.
 
 ;; Move cursor to the next begin/end position of a overlay, make a text selection of its region.
 
-;; — Function: overlays-in beg end
-
-;;     This function returns a list of the overlays that overlap the region beg through end. “Overlap” means that at least one character is contained within the overlay and also contained within the specified region; however, empty overlays are included in the result if they are located at beg, strictly between beg and end, or at end when end denotes the position at the end of the buffer. 
-
-;; — Function: next-overlay-change pos
-
-;;     This function returns the buffer position of the next beginning or end of an overlay, after pos. If there is none, it returns (point-max). 
-
-;; — Function: previous-overlay-change pos
-
-;;     This function returns the buffer position of the previous beginning or end of an overlay, before pos. If there is none, it returns (point-min). 
-
-;; As an example, here's a simplified (and inefficient) version of the primitive function next-single-char-property-change (see Property Search). It searches forward from position pos for the next position where the value of a given property prop, as obtained from either overlays or text properties, changes.
-
-;;      (defun next-single-char-property-change (position prop)
-;;        (save-excursion
-;;          (goto-char position)
-;;          (let ((propval (get-char-property (point) prop)))
-;;            (while (and (not (eobp))
-;;                        (eq (get-char-property (point) prop) propval))
-;;              (goto-char (min (next-overlay-change (point))
-;;                              (next-single-property-change (point) prop)))))
-;;          (point)))
-
-
-;; (put-text-property
-;;  (line-beginning-position)
-;;  (line-end-position)
-;;  'face 'bold)
-
-;; (put-text-property
-;;  (line-beginning-position)
-;;  (line-end-position)
-;;  'font-lock-face 'bold)
-
 ;; (overlay-put (make-overlay 4 14) 'invisible t)
 
 ;; ;; If you want to display an ellipsis:
