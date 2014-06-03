@@ -40,6 +40,7 @@
 
   (define-key key-translation-map (kbd "<menu> SPC 3") (kbd "φ"))
   (define-key key-translation-map (kbd "<menu> SPC 4") (kbd "ξ"))
+  (define-key key-translation-map (kbd "<menu> SPC 6") (kbd "ƒ"))
   (define-key key-translation-map (kbd "<menu> SPC 7") (kbd "＆"))
   (define-key key-translation-map (kbd "<menu> SPC 8") (kbd "•"))
 
