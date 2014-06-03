@@ -131,3 +131,6 @@ interactively by “eval-buffer”."
 ;; (server-force-delete)
 ;; ;; (server-start "LEAVE-DEAD" "INHIBIT-PROMPT")
 ;; (server-start )
+
+(load (xah-fullpath-relative-to-current-file "xah_emacs_syntax_parse"))
+

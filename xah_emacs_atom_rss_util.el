@@ -3,7 +3,7 @@
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 ;; 〈Emacs Lisp: Updating Atom Webfeed〉 http://ergoemacs.org/emacs/elisp_update_atom.html
 
-(defun insert-atom-entry (&optional φtitle φid φsummery φcontentHTML-text φaltLinkUrl)
+(defun insert-atom-entry (&optional φtitle φid φsummary φcontentHTML-text φaltLinkUrl)
   "Insert a Atom webfeed entry template,
  in the current buffer's cursor position.
 
@@ -13,7 +13,7 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
   (let* (
          (ξtitle (if φtitle φtitle "�") )
          (ξid (if φid φid (new-atom-id-tag) ) )
-         (ξsummery (if φsummery φsummery "�") )
+         (ξsummary (if φsummary φsummary "�") )
          (ξcontent (if φcontentHTML-text (format " <content type=\"xhtml\">
  <div xmlns=\"http://www.w3.org/1999/xhtml\">
 %s
@@ -36,7 +36,7 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
                     ξtitle
                     ξid
                     ξupdatedStr
-                    ξsummery
+                    ξsummary
                     ξcontent
                     ξaltLink
                     )) ) )
@@ -98,7 +98,7 @@ Other files paths for blogs are:
         (p1 (elt bds 1))
         (p2 (elt bds 2))
         (p3)
-        (summeryText "…")
+        (summaryText "…")
         (currentFilePath (buffer-file-name))
         (atomFilePath
          (if (string-match-p "wordyenglish_com/words/new.html\\'" currentFilePath )
@@ -137,7 +137,7 @@ Other files paths for blogs are:
     (search-forward "<entry>" nil t)
     (beginning-of-line)
     (setq p3 (point) )
-    (insert-atom-entry titleText (new-atom-id-tag) summeryText inputStr altURL)
+    (insert-atom-entry titleText (new-atom-id-tag) summaryText inputStr altURL)
     (search-backward "</summary>")
 
 ;    (when (not (search-forward "�" nil t) ) (progn (goto-char p3)))

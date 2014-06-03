@@ -37,7 +37,7 @@ Requires ImageMagick shell tool."
        ))
    φfile-list ))
 
-(defun xah-dired-scale-image (φfile-list scalePercentage sharpen-p)
+(defun xah-dired-scale-image (φfile-list φscale-percentage φsharpen-p)
   "Create a scaled version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
@@ -45,8 +45,8 @@ If `universal-argument' is given, output is PNG format. Else, JPG.
 
 When called in lisp code,
  φfile-list is a list.
- scalePercentage is a integer.
- sharpen-p is true or false.
+ φscale-percentage is a integer.
+ φsharpen-p is true or false.
 
 Requires ImageMagick unix shell tool."
   (interactive
@@ -61,11 +61,11 @@ Requires ImageMagick unix shell tool."
            (y-or-n-p "Sharpen")
            ) )
    )
-  (let ((sharpenOrNo (if sharpen-p "-sharpen 1" "" ))
+  (let ((sharpenOrNo (if φsharpen-p "-sharpen 1" "" ))
         (outputSuffix (if current-prefix-arg ".png" ".jpg" ) )
         )
     (xah-process-image φfile-list
-                   (format "-scale %s%% -quality 85%% %s " scalePercentage sharpenOrNo)
+                   (format "-scale %s%% -quality 85%% %s " φscale-percentage sharpenOrNo)
                    "-s" outputSuffix )
     )
   )
@@ -100,7 +100,7 @@ Requires ImageMagick shell tool."
   (xah-process-image φfile-list "" "-2" ".png" )
   )
 
-(defun xah-dired-2drawing (φfile-list grayscale-p bitsPerPixel)
+(defun xah-dired-2drawing (φfile-list φgrayscale-p φbits-per-pixel)
   "Create a png version of (drawing type) images of marked files in dired.
 Requires ImageMagick shell tool."
   (interactive
@@ -111,16 +111,16 @@ Requires ImageMagick shell tool."
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:") )) ) ) )
      (list myFileList
-           (setq grayscale-p (yes-or-no-p "Grayscale?"))
+           (setq φgrayscale-p (yes-or-no-p "Grayscale?"))
            (read-string "Bits per pixel (1 2 4 8):" "4")) ) )
   (xah-process-image φfile-list
                  (format "+dither %s -depth %s"
-                         (if grayscale-p "-type grayscale" "")
+                         (if φgrayscale-p "-type grayscale" "")
                          ;; image magick “-colors” must be at least 8
-                         ;; (if (< (string-to-number bitsPerPixel) 3)
+                         ;; (if (< (string-to-number φbits-per-pixel) 3)
                          ;;     8
-                         ;;     (expt 2 (string-to-number bitsPerPixel)))
-                         bitsPerPixel)  "-2" ".png" )
+                         ;;     (expt 2 (string-to-number φbits-per-pixel)))
+                         φbits-per-pixel)  "-2" ".png" )
   )
 
 (defun xah-dired-2jpg (φfile-list)

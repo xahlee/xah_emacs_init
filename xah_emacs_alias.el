@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;; emacs customization for command aliases
-;; 
+;;
 ;; Xah Lee ; 2007-06
 
 ; shortening of often used commands
@@ -18,15 +18,13 @@
 
 (defalias 'eb 'eval-buffer)
 (defalias 'er 'eval-region)
+(defalias 'ee 'eval-expression)
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
 (defalias 'dnml 'delete-non-matching-lines)
 
 (defalias 'ssm 'shell-script-mode)
-
-(defalias 'hp 'highlight-phrase)
-(defalias 'hl 'highlight-lines-matching-regexp)
 
 
 ;; xah personal

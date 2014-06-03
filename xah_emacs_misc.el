@@ -107,6 +107,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("arts_blog" . "~/web/xaharts_org/arts/blog.html" )
         ("sl_blog" . "~/web/xahsl_org/sl/blog.html" )
         ("pd_blog" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
+        ("sex_blog" . "~/web/xahlee_org/sex/blog.html" )
 
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
         ("keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
