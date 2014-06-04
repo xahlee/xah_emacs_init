@@ -243,6 +243,7 @@
   (global-set-key (kbd "<menu> t j") 'xah-copy-to-register-1)
   (global-set-key (kbd "<menu> t k") 'xah-paste-from-register-1)
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
+  (global-set-key (kbd "<menu> t m") 'magit-status)
   )
 
 (progn
