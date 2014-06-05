@@ -115,6 +115,7 @@
   (global-set-key (kbd "<menu> e 6") 'calendar)
   (global-set-key (kbd "<menu> e 7") 'calc)
   (global-set-key (kbd "<menu> e 8") 'shell)
+  (global-set-key (kbd "<menu> e b") 'toggle-debug-on-error)
   (global-set-key (kbd "<menu> e e") 'xah-elisp-mode)
   (global-set-key (kbd "<menu> e h") 'xah-html-mode)
   (global-set-key (kbd "<menu> e t") 'toggle-case-fold-search)
