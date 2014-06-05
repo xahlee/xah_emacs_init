@@ -31,7 +31,7 @@ Move cursor to begining of first overlay, mark at the overlay's end. And print t
   (interactive)
   (let ((ξoverlays (overlays-at (point))))
     (if ξoverlays
-        (progn 
+        (progn
           (goto-char (overlay-start (nth 0 ξoverlays)) )
           (push-mark (overlay-end (nth 0 ξoverlays)) )
           (print (overlay-properties (nth 0 ξoverlays)) )
@@ -72,6 +72,36 @@ print the list result.
          )
     (print ξols)
     ))
+
+(defun xah-invisible-region (p1 p2 hide-p)
+  "Hide or show region P1 to P2, according to HIDE-P."
+  (remove-overlays p1 p2 'invisible 'xah)
+  (when hide-p
+    (let ((ovly (make-overlay p1 p2 nil 'front-advance)))
+      (overlay-put ovly 'evaporate t)
+      (overlay-put ovly 'invisible 'xah)
+      (overlay-put ovly 'isearch-open-invisible 'xah-isearch-open-invisible)
+)) )
+
+;; add-to-invisibility-spec
+;; remove-from-invisibility-spec
+;; buffer-invisibility-spec
+
+;; (add-to-invisibility-spec '(outline . t))
+
+(defun xhide (p1 p2)
+  "DOCSTRING"
+  (interactive "r")
+  (let ()
+    (xah-invisible-region 50 100 t)
+  ))
+
+(defun xshow (p1 p2)
+  "DOCSTRING"
+  (interactive "r")
+  (let ()
+    (xah-invisible-region 50 100 nil)
+  ))
 
 ;; Move cursor to the next begin/end position of a overlay, make a text selection of its region.
 

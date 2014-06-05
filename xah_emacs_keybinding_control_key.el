@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
-(global-set-key (kbd "<C-f9>") 'σ-syntax-bracket-backward)
-(global-set-key (kbd "<C-f10>") 'σ-syntax-bracket-forward)
+(global-set-key (kbd "<C-f9>") 'xah-syntax-bracket-backward)
+(global-set-key (kbd "<C-f10>") 'xah-syntax-bracket-forward)
 (global-set-key (kbd "<C-f7>") 'xah-goto-previous-overlay)
 (global-set-key (kbd "<C-f8>") 'xah-goto-next-overlay)
 

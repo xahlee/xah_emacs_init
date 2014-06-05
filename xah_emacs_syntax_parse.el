@@ -1,19 +1,20 @@
 ;; 2014-05-30
 
 (defun xah-syntax-bracket-forward ()
-  "Move curvor to the 1st closing bracket, according to current syntax table."
+  "Move cursor to the 1st closing bracket, according to current syntax table.
+This command is dumb, it'll not ignore brackets inside comment or string."
   (interactive)
-  (let ()
-    (skip-syntax-forward "^)")
+  (let ((ξdist (skip-syntax-forward "^)")) )
+    (message "Distance traveled: %s" ξdist)
     (forward-char 1)
   ))
 
 (defun xah-syntax-bracket-backward ()
-  "Move curvor previous opening bracket, according to current syntax table."
+  "Move cursor to previous opening bracket, according to current syntax table.
+This command is dumb, it'll not ignore brackets inside comment or string."
   (interactive)
-  (let ()
-    (skip-syntax-backward "^(")
-    (backward-char 1)
+  (let ((ξdist (skip-syntax-backward "^(")))
+    (message "Distance traveled: %s" ξdist)
     (backward-char 1)
   ))
 
@@ -43,17 +44,39 @@ test cases:
     (goto-char (scan-lists (point) φcount φcurrent-depth))
   ))
 
-(defun xah-scan-sexps (φcount)
+(defun xah-scan-sexps ()
   "Call `scan-sexps' interactively.
-note: (scan-sexps n) is equivalent to (scan-list n 0) , i think."
-  (interactive "nCount:")
+Call this (scan-sexps (point) 1)
+It returns a position.
+Note: (scan-sexps n) is equivalent to (scan-list n 0) , i think.
+ `scan-list'
+
+scan-sexps just move thru complete sexp units and stop on anything that's mis-matched brackets.
+• Atom without paren counts as 1 sexp.
+• atoms enclosed by a well-matched paren is 1 sexp.
+For example, the following are all 1 sexp.
+
+ ▮x
+ ▮(y)
+ ▮((z))
+ ▮((z) ())
+ ▮\"\"
+ ▮\"x\"
+
+scan-sexps will error if encounting on unmatched paren, ⁖
+
+ ▮( x
+ ▮ x )
+
+"
+  (interactive)
   (let ((parse-sexp-ignore-comments t))
-    (goto-char (scan-sexps (point) φcount))
+    (goto-char (scan-sexps (point) 1))
   ))
 
 (defun xah-parse-partial-sexp ()
   "Call `syntax-ppss' or `parse-partial-sexp'.
-Also print it results. Return the parser state.
+Also print its result. Return the parser state.
 
 If no `universal-argument' received, call
  (syntax-ppss (point))
