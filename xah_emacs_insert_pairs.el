@@ -64,7 +64,7 @@ The argument φleftBracket φrightBracket are strings."
 (defun xah-insert-single-curly-quote‘’ () (interactive) (xah-insert-bracket-pair "‘" "’") )
 (defun xah-insert-double-straight-quote () (interactive) (xah-insert-bracket-pair "\"" "\"") )
 (defun xah-insert-single-straight-quote () (interactive) (xah-insert-bracket-pair "'" "'") )
-
+(defun xah-insert-emacs-quote () (interactive) (xah-insert-bracket-pair "`" "'") )
 (defun xah-insert-corner-bracket「」 () (interactive) (xah-insert-bracket-pair "「" "」") )
 (defun xah-insert-white-corner-bracket『』 () (interactive) (xah-insert-bracket-pair "『" "』") )
 (defun xah-insert-angle-bracket〈〉 () (interactive) (xah-insert-bracket-pair "〈" "〉") )
