@@ -42,10 +42,12 @@
 ;; ★★ every hour
 ;; ★ few times a day
 
+(define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
+(define-key key-translation-map (kbd "C-p") (kbd "<menu>")) ; Mac OS X don't do menu/app key.
+
 (define-prefix-command 'xah-menu-keymap)
 (global-set-key (kbd "<menu>") 'xah-menu-keymap)
 
-(define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
 ;; (define-key key-translation-map (kbd "<menu> <end>") (kbd "C-g")) ; doesn't work in some cases in minibuffer. ⁖ when emacs asking yes or no when opening a none-existing file path
 
 ;; (global-set-key (kbd "<menu> <menu>") 'keyboard-quit)
@@ -66,6 +68,12 @@
 (global-set-key (kbd "<menu> ,") 'toggle-input-method)
 
 (global-set-key (kbd "<menu> -") 'xah-insert-form-feed)
+(global-set-key (kbd "<menu> /") nil)
+(global-set-key (kbd "<menu> ;") nil) 
+(global-set-key (kbd "<menu> =") nil)
+(global-set-key (kbd "<menu> [") nil)
+(global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
+(global-set-key (kbd "<menu> `") 'xah-make-backup)
 
 ;; xah's
    ;; 5064    0.31%  delete-other-windows
@@ -79,7 +87,6 @@
 ;; 49   delete-other-windows    6968    0.15    0.29
 ;; 67	split-window-vertically	4035	0.09	0.17
 
-(global-set-key (kbd "<menu> /") nil)
 (global-set-key (kbd "<menu> 0") 'end-of-buffer)
 (global-set-key (kbd "<menu> 1") 'beginning-of-buffer)
 (global-set-key (kbd "<menu> 2") 'delete-window) ;
@@ -90,11 +97,7 @@
 (global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ;  find-file-at-point 4773    0.30%  xah-open-file-at-cursor
 (global-set-key (kbd "<menu> 8") 'dired-jump)              ;  2377    0.15%  dired-jump
 (global-set-key (kbd "<menu> 9") 'ispell-word)
-(global-set-key (kbd "<menu> ;") nil) ;
-(global-set-key (kbd "<menu> =") nil)
-(global-set-key (kbd "<menu> [") nil)
-(global-set-key (kbd "<menu> \\") 'xah-escape-quotes)
-(global-set-key (kbd "<menu> `") 'xah-make-backup)
+
 (global-set-key (kbd "<menu> a") 'mark-whole-buffer) ;★★     408    0.03%  mark-whole-buffer
 (global-set-key (kbd "<menu> b") 'xah-shell-commands)
 (global-set-key (kbd "<menu> c") 'xah-open-file-fast)
@@ -121,7 +124,7 @@
   (global-set-key (kbd "<menu> e t") 'toggle-case-fold-search)
   )
 
-(global-set-key (kbd "<menu> f") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
+(global-set-key (kbd "<menu> f") nil) 
 
 (global-set-key (kbd "<menu> g") 'isearch-forward)
 
@@ -223,7 +226,7 @@
   (global-set-key (kbd "<menu> r g") 'xah-convert-latin-alphabet-gothic)
   (global-set-key (kbd "<menu> r p") 'xah-convert-asian/ascii-space)
   (global-set-key (kbd "<menu> r r") 'xah-find-replace-text)
-  (global-set-key (kbd "<menu> r s") 'title-case-string-region-or-line)
+  (global-set-key (kbd "<menu> r e") 'title-case-string-region-or-line)
   (global-set-key (kbd "<menu> r u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
   (global-set-key (kbd "<menu> r w") 'xah-convert-fullwidth-chars)
 
@@ -243,6 +246,7 @@
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> t j") 'xah-copy-to-register-1)
   (global-set-key (kbd "<menu> t k") 'xah-paste-from-register-1)
+  (global-set-key (kbd "<menu> t p") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
   (global-set-key (kbd "<menu> t m") 'magit-status)
   )

@@ -1,14 +1,10 @@
 ;; -*- coding: utf-8 -*-
 ;; 2014-01-29
 
-(define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
-
-(define-key key-translation-map (kbd "C-p") (kbd "<menu>")) ; Mac OS X don't do menu/app key.
 ;; 〈Mac OS X: Keyboard Layout, Keymapping, Keybinding, Software ⌨〉
 ;; http://xahlee.info/kbd/Mac_OS_X_keymapping_keybinding_tools.html
 
-;; (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
-;; (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+(define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
 
 
 
@@ -17,11 +13,6 @@
 ;; (global-set-key (kbd "<return>") 'eex-insert-mode-activate)
 
 ;; (define-key key-translation-map (kbd "<henkan>") (kbd "<delete>")) ; henkan is the 変換 key on Japanese keyboard for “do convert”
-
-
-
-(global-set-key (kbd "<S-backspace>") 'delete-char)
-(global-set-key (kbd "<M-backspace>") 'backward-kill-word)
 
 
 
