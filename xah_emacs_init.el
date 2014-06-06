@@ -73,7 +73,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-fullpath-relative-to-caller "xah_elisp_util"))
 (load (xah-fullpath-relative-to-caller "xah_emacs_xahsite_path_lisp_util"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_insert_pairs"))
+(load (xah-fullpath-relative-to-caller "xah_emacs_insert_brackets"))
 
 (load "~/Dropbox/xah-emacs-private_b53d8d39")
 
