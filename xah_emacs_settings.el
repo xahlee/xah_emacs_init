@@ -18,9 +18,9 @@
 
 ;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789
 
-(setq initial-frame-alist 
+(setq initial-frame-alist
       '(
-        (width . 92) 
+        (width . 92)
         (height . 54)
         ) )
 
@@ -140,7 +140,9 @@
 ;;     (tabbar-mode 0)
 ;;     ))
 
-;; (ido-vertical-mode 1)
+(when (fboundp 'ido-vertical-mode)
+    (ido-vertical-mode 1)
+)
 
 (setq yas/indent-line nil)
 

@@ -8,15 +8,17 @@
 
 
 
-;;;; matching pairs
+(require 'xeu_elisp_util)
 
 (defun xah-insert-bracket-pair (φleft-bracket φright-bracket)
   "Insert a matching bracket.
 
 If there's a text selection, insert brackets around it.
 If there's no text selection:
-  If cursor is on alphanumeric char or hyphen or understore, insert brackets around current word.
+  If cursor has alphanumeric char before or after, insert brackets around current word.
   else, insert brackets.
+
+Alphanumeric char here includes hyphen and underscore.
 
 The argument φleft-bracket φright-bracket are strings."
   (if (region-active-p)
@@ -32,8 +34,10 @@ The argument φleft-bracket φright-bracket are strings."
           (goto-char (+ p2 2))
           ))
     (progn ; no text selection
-                                        ;(= (point) (point-max) )
-      (if (looking-at "[-A-Za-z0-9]")
+      (if (or
+           (looking-at "[_-A-Za-z0-9]")
+           (looking-back "[_-A-Za-z0-9]")
+           )
           (progn
             (let* (
                    (bds (unit-at-cursor 'word))

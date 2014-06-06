@@ -117,11 +117,14 @@ When there is a text selection, act on the region."
   "Toggle the letter case of current word or text selection.
 Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   (interactive)
+
   (let (p1 p2 (deactivate-mark nil) (case-fold-search nil))
     (if (region-active-p)
         (setq p1 (region-beginning) p2 (region-end))
       (let ((bds (bounds-of-thing-at-point 'word) ) )
         (setq p1 (car bds) p2 (cdr bds)) ) )
+
+;; (message "bds %s %s" p1 p2)
 
     (when (not (eq last-command this-command))
       (save-excursion

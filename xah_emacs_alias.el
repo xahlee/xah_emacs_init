@@ -32,7 +32,6 @@
 
 (defalias 'ip 'insert-php-tag)
 
-(defalias 'ft 'xah-fix-datetimestamp)
 (defalias 'wc 'xah-count-words-region-or-line)
 ;; (defalias 'cp 'xah-copy-to-register-1)
 ;; (defalias 'pt 'insert-register-content-1)

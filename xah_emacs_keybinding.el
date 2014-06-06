@@ -122,6 +122,8 @@
   (global-set-key (kbd "<menu> e e") 'xah-elisp-mode)
   (global-set-key (kbd "<menu> e h") 'xah-html-mode)
   (global-set-key (kbd "<menu> e t") 'toggle-case-fold-search)
+  (global-set-key (kbd "<menu> e v") 'desktop-save)
+
   )
 
 (global-set-key (kbd "<menu> f") nil) 
@@ -195,7 +197,13 @@
 
 (global-set-key (kbd "<menu> m") search-map)
 
-(global-set-key (kbd "<menu> n") nil)
+(progn
+  (define-prefix-command 'xah-menu-n-keymap)
+  (global-set-key (kbd "<menu> n") xah-menu-n-keymap)
+  (global-set-key (kbd "<menu> n n") 'narrow-to-region) 
+  (global-set-key (kbd "<menu> n d") 'narrow-to-defun) 
+  (global-set-key (kbd "<menu> n w") 'widen) 
+  )
 
 (progn
   (define-prefix-command 'xah-menu-o-keymap)
@@ -235,26 +243,25 @@
 (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
 
 (progn
+  ;; this should reserved for user-defined keys
   (define-prefix-command 'xah-menu-t-keymap)
   (global-set-key (kbd "<menu> t") xah-menu-t-keymap)
-  ;; (global-set-key (kbd "<menu> t 2") 'make-frame-command)
-  ;; (global-set-key (kbd "<menu> t 3") 'xah-new-empty-buffer)
-  ;; (global-set-key (kbd "<menu> t 4") 'find-file)
-  (global-set-key (kbd "<menu> t c") 'xah-cite)
-  (global-set-key (kbd "<menu> t d") 'xah-fix-datetimestamp)
-  (global-set-key (kbd "<menu> t e") 'ace-jump-mode)
+  (global-set-key (kbd "<menu> t 2") 'make-frame-command)
+  (global-set-key (kbd "<menu> t 3") 'xah-new-empty-buffer)
+  (global-set-key (kbd "<menu> t 4") 'find-file)
   (global-set-key (kbd "<menu> t f") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> t j") 'xah-copy-to-register-1)
   (global-set-key (kbd "<menu> t k") 'xah-paste-from-register-1)
+  (global-set-key (kbd "<menu> t m") 'magit-status)
+  (global-set-key (kbd "<menu> t e") 'ace-jump-mode)
+  (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t p") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
   (global-set-key (kbd "<menu> t r") 'repeat-complex-command)
-  (global-set-key (kbd "<menu> t m") 'magit-status)
   )
 
 (progn
   (define-prefix-command 'xah-menu-u-keymap)
   (global-set-key (kbd "<menu> u") xah-menu-u-keymap)
-  (global-set-key (kbd "<menu> u b") nil)
   )
 
 (progn
