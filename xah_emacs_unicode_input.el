@@ -25,8 +25,7 @@
   (define-key key-translation-map (kbd "<menu> SPC SPC") (kbd "_")) ; low line (underscore)
   (global-set-key (kbd "<menu> SPC RET") 'xah-insert-unicode)
 
-  (define-key key-translation-map (kbd "<menu> SPC .") nil) 
-
+  (define-key key-translation-map (kbd "<menu> SPC .") nil)
 
   (define-key key-translation-map (kbd "<menu> SPC <down>") (kbd "↓"))
   (define-key key-translation-map (kbd "<menu> SPC <left>") (kbd "←"))
@@ -60,14 +59,14 @@
   (global-set-key (kbd "<menu> SPC o") nil)
   (define-key key-translation-map (kbd "<menu> SPC p") (kbd "+")) ; plus
   (global-set-key (kbd "<menu> SPC q") nil)
-  (global-set-key (kbd "<menu> SPC r") nil)
+  (global-set-key (kbd "<menu> SPC r") 'xah-insert-tortoise-shell-bracket〔〕)
   (global-set-key (kbd "<menu> SPC s") nil)
   (global-set-key (kbd "<menu> SPC t") 'xah-insert-paren)
   (define-key key-translation-map (kbd "<menu> SPC u") (kbd "-")) ; minus
 
   (global-set-key (kbd "<menu> SPC v") 'xah-insert-double-angle-quote«»)
   (global-set-key (kbd "<menu> SPC w") 'xah-insert-angle-bracket〈〉)
-  (global-set-key (kbd "<menu> SPC x") 'xah-insert-tortoise-shell-bracket〔〕)
+  (global-set-key (kbd "<menu> SPC x") nil)
   (global-set-key (kbd "<menu> SPC y") 'xah-insert-single-angle-quote‹›)
   (global-set-key (kbd "<menu> SPC z") nil)
 
