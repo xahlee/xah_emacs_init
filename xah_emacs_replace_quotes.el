@@ -182,7 +182,7 @@ Generate a report of the replaced strings in a separate buffer."
     ))
 
 
-(defun xah-curly-quotes→bracket (φleftBracket φrightBracket)
+(defun xah-curly-quotes→bracket (φleft-bracket φright-bracket)
   "Replace “…” to one of 「…」.
 Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
   (interactive)
@@ -191,11 +191,11 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
         (progn
           (dired-do-query-replace-regexp
            "“\\([^”]+?\\)”"
-           (concat φleftBracket "\\1" φrightBracket)
+           (concat φleft-bracket "\\1" φright-bracket)
            ))
       (progn (query-replace-regexp
               "“\\([^”]+?\\)”"
-           (concat φleftBracket "\\1" φrightBracket) )) ) ))
+           (concat φleft-bracket "\\1" φright-bracket) )) ) ))
 
 (defun xah-curly-quotes→code-bracket ()
   "Replace “…” to 「…」"
