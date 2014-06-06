@@ -10,7 +10,7 @@
 
 ;;;; matching pairs
 
-(defun xah-insert-bracket-pair (φleftBracket φrightBracket)
+(defun xah-insert-bracket-pair (φleft-bracket φright-bracket)
   "Insert a matching bracket.
 
 If there's a text selection, insert brackets around it.
@@ -18,7 +18,7 @@ If there's no text selection:
   If cursor is on alphanumeric char or hyphen or understore, insert brackets around current word.
   else, insert brackets.
 
-The argument φleftBracket φrightBracket are strings."
+The argument φleft-bracket φright-bracket are strings."
   (if (region-active-p)
       (progn
         (let (
@@ -26,9 +26,9 @@ The argument φleftBracket φrightBracket are strings."
               (p2 (region-end))
               )
           (goto-char p2)
-          (insert φrightBracket)
+          (insert φright-bracket)
           (goto-char p1)
-          (insert φleftBracket)
+          (insert φleft-bracket)
           (goto-char (+ p2 2))
           ))
     (progn ; no text selection
@@ -41,15 +41,15 @@ The argument φleftBracket φrightBracket are strings."
                    (p2 (elt bds 2))
                    )
               (goto-char p2)
-              (insert φrightBracket)
+              (insert φright-bracket)
               (goto-char p1)
-              (insert φleftBracket)
-              (goto-char (+ p2 (length φleftBracket)))
+              (insert φleft-bracket)
+              (goto-char (+ p2 (length φleft-bracket)))
               )
             )
         (progn
-          (insert φleftBracket φrightBracket)
-          (search-backward φrightBracket ) )) )))
+          (insert φleft-bracket φright-bracket)
+          (search-backward φright-bracket ) )) )))
 
 ;; (insert-parentheses)
 
@@ -61,9 +61,9 @@ The argument φleftBracket φrightBracket are strings."
 (defun xah-insert-single-angle-quote‹› () (interactive) (xah-insert-bracket-pair "‹" "›") )
 (defun xah-insert-double-angle-quote«» () (interactive) (xah-insert-bracket-pair "«" "»") )
 (defun xah-insert-double-curly-quote“” () (interactive) (xah-insert-bracket-pair "“" "”") )
-(defun xah-insert-single-curly-quote‘’ () (interactive) (xah-insert-bracket-pair "‘" "’") )
-(defun xah-insert-double-straight-quote () (interactive) (xah-insert-bracket-pair "\"" "\"") )
-(defun xah-insert-single-straight-quote () (interactive) (xah-insert-bracket-pair "'" "'") )
+(defun xah-insert-curly-single-quote‘’ () (interactive) (xah-insert-bracket-pair "‘" "’") )
+(defun xah-insert-ascii-double-quote () (interactive) (xah-insert-bracket-pair "\"" "\"") )
+(defun xah-insert-ascii-single-quote () (interactive) (xah-insert-bracket-pair "'" "'") )
 (defun xah-insert-emacs-quote () (interactive) (xah-insert-bracket-pair "`" "'") )
 (defun xah-insert-corner-bracket「」 () (interactive) (xah-insert-bracket-pair "「" "」") )
 (defun xah-insert-white-corner-bracket『』 () (interactive) (xah-insert-bracket-pair "『" "』") )
