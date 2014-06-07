@@ -95,6 +95,10 @@
 
 (setq page-break-lines-modes (quote (emacs-lisp-mode xah-elisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
 
+(when (boundp 'ido-vertical-mode)
+    (ido-vertical-mode 1)
+)
+
 
 
 ;; (defun turn-spell-checking-on ()
@@ -139,10 +143,6 @@
 ;;   (when (boundp 'tabbar-mode)
 ;;     (tabbar-mode 0)
 ;;     ))
-
-(when (fboundp 'ido-vertical-mode)
-    (ido-vertical-mode 1)
-)
 
 (setq yas/indent-line nil)
 

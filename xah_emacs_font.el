@@ -168,7 +168,7 @@ This command is convenient when reading novel, documentation."
 
 Call again to toggle back."
   (interactive)
-  (if (equal (get this-command 'state) nil)
+  (if (eq (get this-command 'state-on-p) nil)
       (progn
         (set-window-margins nil 0 
                             (if (> fill-column (window-body-width) )
@@ -179,14 +179,14 @@ Call again to toggle back."
         (variable-pitch-mode 1)
         (setq line-spacing 0.4)
         (setq word-wrap t)
-        (put this-command 'state t)
+        (put this-command 'state-on-p t)
         )
     (progn
       (set-window-margins nil 0 0)
       (variable-pitch-mode 0)
       (setq line-spacing nil)
       (setq word-wrap nil)
-      (put this-command 'state nil)
+      (put this-command 'state-on-p nil)
       ) )
   (redraw-frame (selected-frame)) )
 

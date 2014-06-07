@@ -22,7 +22,7 @@
   (require 'ido)
   (define-key ido-file-completion-map (kbd "C-o") 'ido-fallback-command))
 
-;; ;; (global-set-key (kbd "C-a") nil) ; select all
+ (global-set-key (kbd "C-a") 'mark-whole-buffer) ; select all
 ;; (global-set-key (kbd "C-b") nil)
 
 ;; ;; (global-set-key (kbd "C-c") nil) ; mode specific

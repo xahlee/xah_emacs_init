@@ -72,7 +72,6 @@ See: `xah-forward-block'"
     (end-of-line)
     ))
 
-
 (defvar xah-brackets-open nil "list of open bracket chars.")
 (setq xah-brackets-open '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«") )
 

@@ -38,8 +38,8 @@ To solve this problem, when your code only knows the relative path of another fi
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-fullpath-relative-to-caller ""))
 
-;; (require 'package)
-;; (package-initialize)
+(require 'package)
+(package-initialize)
 
 (when (string-equal system-type "windows-nt") (load (xah-fullpath-relative-to-caller "xah_emacs_ms_windows")))
 
