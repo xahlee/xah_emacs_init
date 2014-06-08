@@ -58,7 +58,7 @@
 
 
 
-(global-set-key (kbd "<insert>") 'xah-switch-to-next-frame)
+(global-set-key (kbd "<insert>") 'other-frame)
 
 
 

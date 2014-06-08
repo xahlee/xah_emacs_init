@@ -152,6 +152,9 @@
 (progn
   (define-prefix-command 'xah-menu-c-keymap)
   (global-set-key (kbd "<menu> c") xah-menu-c-keymap)
+  (global-set-key (kbd "<menu> c SPC") 'query-replace) ;2746    0.17%  query-replace
+  (global-set-key (kbd "<menu> c <return>") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
+
   )
 
 (progn
@@ -163,20 +166,6 @@
 ;; these are all kinda non-risky commands. that is, they change display, or do prompt, etc. it's ok to accidentally run them
   (define-prefix-command 'xah-menu-e-keymap)
   (global-set-key (kbd "<menu> e") xah-menu-e-keymap)
-
-  (global-set-key (kbd "<menu> e SPC") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
-  (global-set-key (kbd "<menu> e 3") 'whitespace-mode)
-  (global-set-key (kbd "<menu> e 4") 'linum-mode)
-  (global-set-key (kbd "<menu> e 5") 'visual-line-mode)
-  (global-set-key (kbd "<menu> e 6") 'calendar)
-  (global-set-key (kbd "<menu> e 7") 'calc)
-  (global-set-key (kbd "<menu> e 8") 'shell)
-  (global-set-key (kbd "<menu> e 9") 'eshell)
-  (global-set-key (kbd "<menu> e b") 'toggle-debug-on-error)
-  (global-set-key (kbd "<menu> e e") 'xah-elisp-mode)
-  (global-set-key (kbd "<menu> e h") 'xah-html-mode)
-  (global-set-key (kbd "<menu> e c") 'toggle-case-fold-search)
-  (global-set-key (kbd "<menu> e v") 'desktop-save)
 
   )
 
@@ -257,21 +246,43 @@
 (progn
   (define-prefix-command 'xah-menu-n-keymap)
   (global-set-key (kbd "<menu> n") xah-menu-n-keymap)
+
+  (global-set-key (kbd "<menu> n SPC") nil) 
+  (global-set-key (kbd "<menu> n <return>") nil)
+
+  (global-set-key (kbd "<menu> n 3") 'whitespace-mode)
+  (global-set-key (kbd "<menu> n 4") 'linum-mode)
+  (global-set-key (kbd "<menu> n 5") 'visual-line-mode)
+  (global-set-key (kbd "<menu> n 6") 'calendar)
+  (global-set-key (kbd "<menu> n 7") 'calc)
+  (global-set-key (kbd "<menu> n 8") 'shell)
+  (global-set-key (kbd "<menu> n 9") 'eshell)
+
+  (global-set-key (kbd "<menu> n s") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
+
+  (global-set-key (kbd "<menu> n b") 'toggle-debug-on-error)
+  (global-set-key (kbd "<menu> n c") 'toggle-case-fold-search)
   (global-set-key (kbd "<menu> n h") 'narrow-to-region)
   (global-set-key (kbd "<menu> n t") 'narrow-to-defun)
+  (global-set-key (kbd "<menu> n v") 'desktop-save)
   (global-set-key (kbd "<menu> n w") 'widen)
+
   )
 
 (progn
   (define-prefix-command 'xah-menu-o-keymap)
   (global-set-key (kbd "<menu> o") xah-menu-o-keymap)
+  (global-set-key (kbd "<menu> o SPC") 'ido-switch-buffer)  ; 33    0.00%  ido-switch-buffer
+  (global-set-key (kbd "<menu> o <return>") 'recentf-open-files) ;  333    0.02%  recentf-open-files
+
   (global-set-key (kbd "<menu> o c") 'bookmark-bmenu-list)
   (global-set-key (kbd "<menu> o g") 'ibuffer) ; 198    0.01%  ibuffer
-  (global-set-key (kbd "<menu> o h") 'recentf-open-files) ;  333    0.02%  recentf-open-files
-  (global-set-key (kbd "<menu> o t") 'ido-switch-buffer)  ; 33    0.00%  ido-switch-buffer
   )
 
-(global-set-key (kbd "<menu> p") 'query-replace) ; 2746    0.17%  query-replace
+(progn
+  (define-prefix-command 'xah-menu-p-keymap)
+  (global-set-key (kbd "<menu> p") xah-menu-p-keymap)
+  )
 
 (progn
   (define-prefix-command 'xah-menu-q-keymap)
@@ -284,10 +295,9 @@
   (define-prefix-command 'xah-menu-r-keymap)
   (global-set-key (kbd "<menu> r") xah-menu-r-keymap)
 
-  (global-set-key (kbd "<menu> r d") 'delete-matching-lines) ; ★★     317    0.02%  delete-matching-lines
-  (global-set-key (kbd "<menu> r b") 'delete-non-matching-lines)
-
-  (global-set-key (kbd "<menu> r u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
+  (global-set-key (kbd "<menu> r t") 'delete-matching-lines) ; ★★     317    0.02%  delete-matching-lines
+  (global-set-key (kbd "<menu> r h") 'delete-non-matching-lines)
+  (global-set-key (kbd "<menu> r d") 'delete-duplicate-lines)
 
   (global-set-key (kbd "<menu> r 1") 'kmacro-start-macro)
   (global-set-key (kbd "<menu> r 2") 'kmacro-end-macro)
@@ -308,6 +318,9 @@
   (global-set-key (kbd "<menu> t <backspace>") 'xah-delete-current-file)
   (global-set-key (kbd "<menu> t -") 'xah-insert-form-feed)
   (global-set-key (kbd "<menu> t .") 'title-case-string-region-or-line)
+
+  (global-set-key (kbd "<menu> t 3") 'xah-elisp-mode)
+  (global-set-key (kbd "<menu> t 4") 'xah-html-mode)
 
   (global-set-key (kbd "<menu> t 7") 'xah-copy-to-register-1)
   (global-set-key (kbd "<menu> t 8") 'xah-paste-from-register-1)
@@ -451,13 +464,30 @@
 ;   6077    0.38%  ergoemacs-M-o
 ;;  toggle-input-method
 
- ;  42    0.00%  kmacro-start-macro
- ; 36    0.00%  kmacro-end-macro
+;; C-x r C-@	point-to-register
+;; C-x r SPC	point-to-register
+;; C-x r +		increment-register
+;; C-x r f		frame-configuration-to-register
+;; C-x r g		insert-register
+;; C-x r i		insert-register
+;; C-x r j		jump-to-register
+;; C-x r n		number-to-register
+;; C-x r r		copy-rectangle-to-register
+;; C-x r s		copy-to-register
+;; C-x r w		window-configuration-to-register
+;; C-x r x		copy-to-register
+;; C-x r C-SPC	point-to-register
+;; C-x v i		vc-register
 
 ;; ;; todo add:
   ;; (global-set-key (kbd "<menu> r 4") 'set-mark-command)
 
 ;; C-x C-@		pop-global-mark
+;; C-x C-p		mark-page
+;; C-x C-x		exchange-point-and-mark
+;; C-x h		mark-whole-buffer
+;; C-x C-SPC	pop-global-mark
+
 ;; C-x C-b		list-buffers
 ;; C-x C-c		save-buffers-kill-terminal
 ;; C-x C-d		list-directory
@@ -469,29 +499,23 @@
 ;; C-x RET		Prefix Command
 ;; C-x C-n		set-goal-column
 ;; C-x C-o		delete-blank-lines
-;; C-x C-p		mark-page
 ;; C-x C-q		toggle-read-only
 ;; C-x C-r		find-file-read-only
-;; C-x C-s		save-buffer
 ;; C-x C-t		transpose-lines
 ;; C-x C-u		upcase-region
 ;; C-x C-v		find-alternate-file
 ;; C-x C-w		write-file
-;; C-x C-x		exchange-point-and-mark
 ;; C-x C-z		suspend-frame
 ;; C-x ESC		Prefix Command
 ;; C-x $		set-selective-display
 ;; C-x '		expand-abbrev
-;; C-x (		kmacro-start-macro
-;; C-x )		kmacro-end-macro
 ;; C-x *		calc-dispatch
-;; C-x +		balance-windows
 ;; C-x -		shrink-window-if-larger-than-buffer
 ;; C-x .		set-fill-prefix
-;; C-x 0		delete-window
-;; C-x 1		delete-other-windows
-;; C-x 2		split-window-vertically
+
+;; C-x +		balance-windows
 ;; C-x 3		split-window-horizontally
+
 ;; C-x 4		ctl-x-4-prefix
 ;; C-x 5		ctl-x-5-prefix
 ;; C-x 6		2C-command
@@ -509,7 +533,6 @@
 ;; C-x d		dired
 ;; C-x e		kmacro-end-and-call-macro
 ;; C-x f		set-fill-column
-;; C-x h		mark-whole-buffer
 ;; C-x i		insert-file
 ;; C-x k		kill-buffer
 ;; C-x l		count-lines-page
@@ -525,7 +548,6 @@
 ;; C-x {		shrink-window-horizontally
 ;; C-x }		enlarge-window-horizontally
 ;; C-x DEL		backward-kill-sentence
-;; C-x C-SPC	pop-global-mark
 ;; C-x C-+		text-scale-adjust
 ;; C-x C--		text-scale-adjust
 ;; C-x C-0		text-scale-adjust
@@ -534,6 +556,7 @@
 ;; C-x <C-right>	next-buffer
 ;; C-x <left>	previous-buffer
 ;; C-x <right>	next-buffer
+
 ;; C-x C-k C-a	kmacro-add-counter
 ;; C-x C-k C-c	kmacro-set-counter
 ;; C-x C-k C-d	kmacro-delete-ring-head
@@ -556,6 +579,7 @@
 ;; C-x C-k q	kbd-macro-query
 ;; C-x C-k r	apply-macro-to-region-lines
 ;; C-x C-k s	kmacro-start-macro
+
 ;; C-x RET C-\	set-input-method
 ;; C-x RET F	set-file-name-coding-system
 ;; C-x RET X	set-next-selection-coding-system
@@ -567,8 +591,7 @@
 ;; C-x RET r	revert-buffer-with-coding-system
 ;; C-x RET t	set-terminal-coding-system
 ;; C-x RET x	set-selection-coding-system
-;; C-x ESC ESC	repeat-complex-command
-;; C-x M-:		repeat-complex-command
+
 ;; C-x 4 C-f	find-file-other-window
 ;; C-x 4 C-o	display-buffer
 ;; C-x 4 .		find-tag-other-window
@@ -580,6 +603,7 @@
 ;; C-x 4 f		find-file-other-window
 ;; C-x 4 m		compose-mail-other-window
 ;; C-x 4 r		find-file-read-only-other-window
+
 ;; C-x 5 C-f	find-file-other-frame
 ;; C-x 5 C-o	display-buffer-other-frame
 ;; C-x 5 .		find-tag-other-frame
@@ -592,6 +616,7 @@
 ;; C-x 5 m		compose-mail-other-frame
 ;; C-x 5 o		other-frame
 ;; C-x 5 r		find-file-read-only-other-frame
+
 ;; C-x 6 2		2C-two-columns
 ;; C-x 6 b		2C-associate-buffer
 ;; C-x 6 s		2C-split
@@ -607,30 +632,13 @@
 ;; C-x a l		add-mode-abbrev
 ;; C-x a n		expand-jump-to-next-slot
 ;; C-x a p		expand-jump-to-previous-slot
-;; C-x n d		narrow-to-defun
-;; C-x n n		narrow-to-region
+
 ;; C-x n p		narrow-to-page
-;; C-x n w		widen
-;; C-x r C-@	point-to-register
-;; C-x r SPC	point-to-register
-;; C-x r +		increment-register
+
 ;; C-x r b		bookmark-jump
-
-;; C-x r f		frame-configuration-to-register
-;; C-x r g		insert-register
-;; C-x r i		insert-register
-;; C-x r j		jump-to-register
-
 ;; C-x r l		bookmark-bmenu-list
 ;; C-x r m		bookmark-set
-;; C-x r n		number-to-register
 
-;; C-x r r		copy-rectangle-to-register
-;; C-x r s		copy-to-register
-
-;; C-x r w		window-configuration-to-register
-;; C-x r x		copy-to-register
-;; C-x r C-SPC	point-to-register
 ;; C-x v +		vc-update
 ;; C-x v =		vc-diff
 ;; C-x v D		vc-root-diff
@@ -641,7 +649,6 @@
 ;; C-x v d		vc-dir
 ;; C-x v g		vc-annotate
 ;; C-x v h		vc-insert-headers
-;; C-x v i		vc-register
 ;; C-x v l		vc-print-log
 ;; C-x v m		vc-merge
 ;; C-x v r		vc-retrieve-tag
@@ -662,4 +669,6 @@
 
 ;; ;; todo
 ;; select all, copy all, open, those standard keys
-;; register stuff
+
+;; • add all emacs commands to my key sequence system
+;; add rectangle commands, register 

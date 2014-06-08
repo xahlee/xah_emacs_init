@@ -151,18 +151,16 @@
 (defun eex-command-mode-activate ()
   "Activate command mode."
   (interactive)
-  (setq cursor-type 'box )
+  (modify-all-frames-parameters (list (cons 'cursor-type 'box)))
   (setq eex-insert-state-q nil )
-  (force-window-update) ; TODO force cursor shape change to show, but sometimes doesn't work
   (eex-command-mode-init)
   )
 
 (defun eex-insert-mode-activate ()
   "Activate insertion mode."
   (interactive)
-  (setq cursor-type 'bar )
+  (modify-all-frames-parameters (list (cons 'cursor-type 'bar)))
   (setq eex-insert-state-q t )
-  (force-window-update) ; TODO force cursor shape change to show, but sometimes doesn't work
   (eex-insert-mode-init)
   )
 

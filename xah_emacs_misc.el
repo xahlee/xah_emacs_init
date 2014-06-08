@@ -683,30 +683,12 @@ Test cases
 
 
 
-;; 2007
-;; I-search with initial contents.
-;; original source: http://platypope.org/blog/2007/8/5/a-compendium-of-awesomeness
-(defvar isearch-initial-string nil)
+(defun xah-uncode-chars-html ()
+  "temp. print a list of unicode with special html markup.
 
-(defun isearch-set-initial-string ()
-  (remove-hook 'isearch-mode-hook 'isearch-set-initial-string)
-  (setq isearch-string isearch-initial-string)
-  (isearch-search-and-update))
-
-(defun isearch-forward-at-point (&optional regexp-p no-recursive-edit)
-  "Interactive search forward for the symbol at point."
-  (interactive "P\np")
-  (if regexp-p (isearch-forward regexp-p no-recursive-edit)
-    (let* ((end (progn (skip-syntax-forward "w_") (point)))
-           (begin (progn (skip-syntax-backward "w_") (point))))
-      (if (eq begin end)
-          (isearch-forward regexp-p no-recursive-edit)
-        (setq isearch-initial-string (buffer-substring begin end))
-        (add-hook 'isearch-mode-hook 'isearch-set-initial-string)
-        (isearch-forward regexp-p no-recursive-edit)))))
-
-(defun xx-uncode ()
-  "DOCSTRING"
+example: put cursor on this word
+U+1D400
+then call this command."
   (interactive)
   (let* (
         (bds (get-selection-or-unit 'glyphs))
@@ -725,27 +707,4 @@ Test cases
                (ξname (get-char-code-property ξchar 'name))
                )
               (insert (format "<mark class=\"unicode\" title=\"%s: %s\">%c</mark>\n" ξu-notation ξname ξchar))
-          )
-        )
-
-    )
-)
-
-;; #x1D400
-
-;; U+1D400
-;; #x1D400
-
-(defun xx-xah-mark-unicode (p1)
-  "Wrap 「<mark class=\"unicode\" title=\"U+…: ‹NAME›\"></mark>」 around current character.
-When called in elisp program, wrap the tag at cursor position p1."
-  (interactive (list (point)))
-  (let* (
-         (ξcodepoint (string-to-char (buffer-substring-no-properties p1 (1+ p1))) )
-         (ξname (get-char-code-property ξcodepoint 'name))
-         )
-    (goto-char p1)
-    (insert (format "<mark class=\"unicode\" title=\"U+%X: %s\">" ξcodepoint ξname) )
-    (forward-char 1)
-    (insert (format "</mark>") )
-    ) )
+          ) ) ) )

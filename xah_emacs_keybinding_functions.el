@@ -370,11 +370,6 @@ The app is chosen from your OS's preference."
     ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
     ) ))
 
-(defun xah-switch-to-next-frame (&optional φnumber)
-  "Select the next frame on current display, and raise it."
-  (interactive "p")
-  (other-frame (or φnumber 1)))
-
 (defun xah-new-empty-buffer ()
   "Opens a new empty buffer."
   (interactive)
