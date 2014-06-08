@@ -98,23 +98,23 @@
     (global-set-key (kbd "SPC") 'set-mark-command)
     (global-set-key (kbd ";") 'undo)
     (global-set-key (kbd ".") 'backward-kill-word)
-    (global-set-key (kbd "'") 'xah-compact-uncompact-block) ;
-    (global-set-key (kbd ",") 'xah-shrink-whitespaces) ;
+    (global-set-key (kbd "'") 'xah-compact-uncompact-block)
+    (global-set-key (kbd ",") 'xah-shrink-whitespaces)
     (global-set-key (kbd "0") 'xah-forward-quote)
     (global-set-key (kbd "1") 'xah-backward-punct)
     (global-set-key (kbd "2") 'delete-window)
     (global-set-key (kbd "3") 'delete-other-windows)
     (global-set-key (kbd "4") 'split-window-vertically)
     (global-set-key (kbd "5") 'xah-forward-punct)
-    (global-set-key (kbd "6") 'xah-select-current-block) ;
+    (global-set-key (kbd "6") 'xah-select-current-block)
     (global-set-key (kbd "7") 'xah-select-current-line)
     (global-set-key (kbd "8") 'xah-extend-selection)
     (global-set-key (kbd "9") 'xah-select-text-in-quote)
-    (global-set-key (kbd "a") 'open-line) ;
+    (global-set-key (kbd "a") 'open-line)
     (global-set-key (kbd "b") 'xah-toggle-letter-case)
     (global-set-key (kbd "c") 'previous-line)
     (global-set-key (kbd "d") 'xah-beginning-of-line-or-block)
-    (global-set-key (kbd "e") 'delete-backward-char) ;
+    (global-set-key (kbd "e") 'delete-backward-char)
     (global-set-key (kbd "f") nil)
     (global-set-key (kbd "g") 'backward-word)
     (global-set-key (kbd "h") 'backward-char)
@@ -128,9 +128,9 @@
     (global-set-key (kbd "p") 'kill-word)
     (global-set-key (kbd "q") 'xah-cut-line-or-region)
     (global-set-key (kbd "r") 'forward-word)
-    (global-set-key (kbd "s") 'xah-end-of-line-or-block) ;
+    (global-set-key (kbd "s") 'xah-end-of-line-or-block)
     (global-set-key (kbd "t") 'next-line)
-    (global-set-key (kbd "u") 'delete-char) ;
+    (global-set-key (kbd "u") 'delete-char)
     (global-set-key (kbd "v") 'xah-forward-close-bracket)
     (global-set-key (kbd "w") 'eex-insert-mode-activate)
     (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)

@@ -54,7 +54,7 @@ See: `xah-forward-block'"
 
 (defun xah-beginning-of-line-or-block ()
   "Move cursor to beginning of line, or beginning of current or previous text block.
- (a text block is separated by empty lines)"
+ (a text block is separated by blank lines)"
   (interactive)
   (if (or (equal last-command this-command )
           (equal last-command 'xah-end-of-line-or-block ) )
@@ -64,7 +64,7 @@ See: `xah-forward-block'"
 
 (defun xah-end-of-line-or-block ()
   "Move cursor to end of line, or end of current or next text block.
- (a text block is separated by empty lines)"
+ (a text block is separated by blank lines)"
   (interactive)
   (if (or (equal last-command this-command )
           (equal last-command 'xah-beginning-of-line-or-block ) )

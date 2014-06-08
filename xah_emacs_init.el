@@ -38,6 +38,9 @@ To solve this problem, when your code only knows the relative path of another fi
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-fullpath-relative-to-caller ""))
 
+(add-to-list 'load-path "~/git/xah-elisp-mode/")
+
+
 (require 'package)
 (package-initialize)
 
