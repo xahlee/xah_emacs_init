@@ -104,7 +104,7 @@
 ;; xah-cycle-camel-style-case
 
 (global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
-(global-set-key (kbd "<menu> '") nil) ;
+(global-set-key (kbd "<menu> '") nil)
 (global-set-key (kbd "<menu> ,") 'toggle-input-method)
 
 (global-set-key (kbd "<menu> -") nil)
@@ -128,14 +128,14 @@
 ;; 49   delete-other-windows    6968    0.15    0.29
 ;; 67	split-window-vertically	4035	0.09	0.17
 
-(global-set-key (kbd "<menu> 0") 'end-of-buffer)
-(global-set-key (kbd "<menu> 1") 'beginning-of-buffer)
-(global-set-key (kbd "<menu> 2") 'delete-window) ;
-(global-set-key (kbd "<menu> 3") 'delete-other-windows) ;
-(global-set-key (kbd "<menu> 4") 'split-window-vertically) ;
-(global-set-key (kbd "<menu> 5") 'shell-command) ;  ; 274    0.02%  shell-command
+(global-set-key (kbd "<menu> 0") nil)
+(global-set-key (kbd "<menu> 1") nil)
+(global-set-key (kbd "<menu> 2") 'delete-window)
+(global-set-key (kbd "<menu> 3") 'delete-other-windows)
+(global-set-key (kbd "<menu> 4") 'split-window-vertically)
+(global-set-key (kbd "<menu> 5") 'shell-command)
 (global-set-key (kbd "<menu> 6") 'write-file)
-(global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ;  find-file-at-point 4773    0.30%  xah-open-file-at-cursor
+(global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ;  find-file-at-point
 (global-set-key (kbd "<menu> 8") 'dired-jump)              ;  2377    0.15%  dired-jump
 (global-set-key (kbd "<menu> 9") 'ispell-word)
 
@@ -155,6 +155,9 @@
   (global-set-key (kbd "<menu> c SPC") 'query-replace) ;2746    0.17%  query-replace
   (global-set-key (kbd "<menu> c <return>") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
 
+  (global-set-key (kbd "<menu> c e") 'beginning-of-buffer)
+  (global-set-key (kbd "<menu> c u") 'end-of-buffer)
+
   )
 
 (progn
@@ -163,7 +166,7 @@
   )
 
 (progn
-;; these are all kinda non-risky commands. that is, they change display, or do prompt, etc. it's ok to accidentally run them
+  ;; this is mode-specific
   (define-prefix-command 'xah-menu-e-keymap)
   (global-set-key (kbd "<menu> e") xah-menu-e-keymap)
 
@@ -247,7 +250,7 @@
   (define-prefix-command 'xah-menu-n-keymap)
   (global-set-key (kbd "<menu> n") xah-menu-n-keymap)
 
-  (global-set-key (kbd "<menu> n SPC") nil) 
+  (global-set-key (kbd "<menu> n SPC") nil)
   (global-set-key (kbd "<menu> n <return>") nil)
 
   (global-set-key (kbd "<menu> n 3") 'whitespace-mode)
@@ -256,13 +259,12 @@
   (global-set-key (kbd "<menu> n 6") 'calendar)
   (global-set-key (kbd "<menu> n 7") 'calc)
   (global-set-key (kbd "<menu> n 8") 'shell)
-  (global-set-key (kbd "<menu> n 9") 'eshell)
-
-  (global-set-key (kbd "<menu> n s") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
 
   (global-set-key (kbd "<menu> n b") 'toggle-debug-on-error)
   (global-set-key (kbd "<menu> n c") 'toggle-case-fold-search)
+  (global-set-key (kbd "<menu> n e") 'eshell)
   (global-set-key (kbd "<menu> n h") 'narrow-to-region)
+  (global-set-key (kbd "<menu> n s") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
   (global-set-key (kbd "<menu> n t") 'narrow-to-defun)
   (global-set-key (kbd "<menu> n v") 'desktop-save)
   (global-set-key (kbd "<menu> n w") 'widen)
@@ -358,7 +360,7 @@
   (global-set-key (kbd "<menu> t u") nil)
   (global-set-key (kbd "<menu> t v") 'xah-make-backup)
   (global-set-key (kbd "<menu> t w") nil)
-  (global-set-key (kbd "<menu> t x") nil)
+  (global-set-key (kbd "<menu> t x") 'xah-compact-parens)
   (global-set-key (kbd "<menu> t y") 'yas/expand)
   (global-set-key (kbd "<menu> t z") 'xah-toggle-read-novel-mode)
 

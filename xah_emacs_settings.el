@@ -88,8 +88,6 @@
 ;; (setq auto-save-default t)
 ;; (setq auto-save-visited-file-name t )
 
-;; (set-default cursor-type 'bar)
-
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 

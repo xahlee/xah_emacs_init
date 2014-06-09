@@ -2,29 +2,29 @@
 ;; 2014-01-05
 
 (defun xah-cut-line-or-region ()
-  "Cut the current line, or current text selection."
+  "Cut the current line, or text selection."
   (interactive)
   (if (region-active-p)
       (kill-region (region-beginning) (region-end))
     (kill-region (line-beginning-position) (line-beginning-position 2)) ) )
 
 (defun xah-copy-line-or-region ()
-  "Copy current line, or current text selection."
+  "Copy current line, or text selection."
   (interactive)
   (if (region-active-p)
       (kill-ring-save (region-beginning) (region-end))
     (kill-ring-save (line-beginning-position) (line-beginning-position 2)) ) )
 
 (defun xah-copy-all ()
-  "Put the whole buffer content into the kill-ring.
-If narrow-to-region is in effect, then copy that region only."
+  "Put the whole buffer content into the `kill-ring'.
+If `narrow-to-region' is in effect, then copy that region only."
   (interactive)
   (kill-new (buffer-string))
   (message "Buffer content copied copy-region-as-kill"))
 
 (defun xah-cut-all ()
-  "Cut the whole buffer content into the kill-ring.
-If narrow-to-region is in effect, then cut that region only."
+  "Cut the whole buffer content into the `kill-ring'.
+If `narrow-to-region' is in effect, then cut that region only."
   (interactive)
   (kill-region (point-min) (point-max))
   (message "Buffer content cut"))
@@ -165,7 +165,7 @@ Delimiters are paired characters:
   (set-mark (line-beginning-position)))
 
 (defun xah-select-current-block ()
-  "Select the current block of next between empty lines."
+  "Select the current block of text between empty lines."
   (interactive)
   (let (p1 p2)
     (progn

@@ -84,7 +84,7 @@
 
 (defun xwe-add-definition ()
   "Insert a word definition entry template.
-Using current word or current text selection."
+Using current word or text selection."
   (interactive)
   (let (bds p1 p2 ξstr str2)
     (setq bds (get-selection-or-unit 'word))
@@ -100,7 +100,7 @@ Using current word or current text selection."
 
 (defun xwe-add-source ()
   "Insert a word definition entry template.
-Using current word or current text selection."
+Using current word or text selection."
   (interactive)
   (let (bds p1 p2)
     (require 'sgml-mode) ; for sgml-skip-tag-forward

@@ -3,11 +3,8 @@
 ;; Xah Lee
 ;; created: 2011-11-13
 
-;; Emacs Mouse Wheel Config
+;; Emacs: How to Set Mouse Buttons ＆ Wheel
 ;; http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html
-
-;; emacs mouse numbering changes depending on {OS, mouse, driver}.
-;; http://xahlee.info/kbd/X11_mouse_button_numbering.html
 
 
 ;; mouse
@@ -33,14 +30,14 @@
   ;; (global-set-key (kbd "<mouse-4>") 'xah-scroll-down-10-lines) ; wheel up
   ;; (global-set-key (kbd "<mouse-5>") 'xah-scroll-up-10-lines) ; wheel down
 
-  (global-set-key (kbd "<C-mouse-4>") 'xah-beginning-of-line-or-block) ;
-  (global-set-key (kbd "<C-mouse-5>") 'xah-end-of-line-or-block) ;
+  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
-  (global-set-key (kbd "<S-mouse-4>") 'xah-cursor-up-10-lines) ;
-  (global-set-key (kbd "<S-mouse-5>") 'xah-cursor-down-10-lines) ;
+  (global-set-key (kbd "<S-mouse-4>") 'xah-cursor-up-10-lines)
+  (global-set-key (kbd "<S-mouse-5>") 'xah-cursor-down-10-lines)
 
-  (global-set-key (kbd "<C-S-mouse-4>") nil) ;
-  (global-set-key (kbd "<C-S-mouse-5>") nil) ;
+  (global-set-key (kbd "<C-S-mouse-4>") nil)
+  (global-set-key (kbd "<C-S-mouse-5>") nil)
   )
 
  ((string-equal system-type "darwin") ; Mac

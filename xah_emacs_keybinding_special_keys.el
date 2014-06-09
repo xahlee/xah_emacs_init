@@ -6,6 +6,8 @@
 
 (define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
 
+(global-set-key (kbd "<f6>") 'redo)
+
 
 
 (global-set-key (kbd "<home>") 'eex-command-mode-activate)

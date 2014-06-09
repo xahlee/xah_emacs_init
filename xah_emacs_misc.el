@@ -678,8 +678,8 @@ Test cases
         (setq tempStr (replace-regexp-in-string "\\`#" "" tempStr ))  ; CSS …
         )
 
-      ;; (message "Hex 「%s」 is 「%d」" tempStr (string-to-number tempStr 16 ) )
-      (message "input 「%s」 Hex 「%s」 is 「%d」" inputStr tempStr (string-to-number tempStr 16 ) ) ) ))
+      ;; (message "Hex 「%s」 is 「%d」" tempStr (string-to-number tempStr 16))
+      (message "input 「%s」 Hex 「%s」 is 「%d」" inputStr tempStr (string-to-number tempStr 16)))))
 
 
 
@@ -706,5 +706,6 @@ then call this command."
                (ξu-notation (format "U+%X" ξchar) )
                (ξname (get-char-code-property ξchar 'name))
                )
-              (insert (format "<mark class=\"unicode\" title=\"%s: %s\">%c</mark>\n" ξu-notation ξname ξchar))
-          ) ) ) )
+              (insert (format "<mark class=\"unicode\" title=\"%s: %s\">%c</mark>\n" ξu-notation ξname ξchar))))))
+
+

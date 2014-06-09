@@ -96,7 +96,7 @@
   (interactive)
   (progn
     (global-set-key (kbd "SPC") 'set-mark-command)
-    (global-set-key (kbd ";") 'undo)
+    (global-set-key (kbd ";") nil)
     (global-set-key (kbd ".") 'backward-kill-word)
     (global-set-key (kbd "'") 'xah-compact-uncompact-block)
     (global-set-key (kbd ",") 'xah-shrink-whitespaces)
@@ -115,7 +115,7 @@
     (global-set-key (kbd "c") 'previous-line)
     (global-set-key (kbd "d") 'xah-beginning-of-line-or-block)
     (global-set-key (kbd "e") 'delete-backward-char)
-    (global-set-key (kbd "f") nil)
+    (global-set-key (kbd "f") 'undo)
     (global-set-key (kbd "g") 'backward-word)
     (global-set-key (kbd "h") 'backward-char)
     (global-set-key (kbd "i") 'kill-line)

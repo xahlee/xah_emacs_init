@@ -19,7 +19,7 @@ If `universal-argument' is called, copy only the dir path."
          fPath
        (file-name-directory fPath)
        )))
-  (message "File path copied.") )
+  (message "File path copied."))
 
 (defun xah-delete-cut-text-block ()
   "delete the current text block (paragraph) and also put it to `kill-ring'."
@@ -28,12 +28,12 @@ If `universal-argument' is called, copy only the dir path."
     (progn
       (if (re-search-backward "\n[ \t]*\n" nil "NOERROR")
           (progn (re-search-forward "\n[ \t]*\n")
-                 (setq p1 (point) ) )
+                 (setq p1 (point)))
         (setq p1 (point)))
       (if (re-search-forward "\n[ \t]*\n" nil "NOERROR")
           (progn (re-search-backward "\n[ \t]*\n")
                  (setq p2 (point) ))
-        (setq p2 (point) ) ) )
+        (setq p2 (point))) )
     (kill-region p1 p2)
     (delete-blank-lines) ))
 
@@ -45,8 +45,7 @@ See also: `xah-paste-from-register-1', `copy-to-register'."
          (bds (get-selection-or-unit 'line ))
          (inputStr (elt bds 0) )
          (p1 (elt bds 1) )
-         (p2 (elt bds 2) )
-         )
+         (p2 (elt bds 2)))
     (copy-to-register ?1 p1 p2)
     (message "copied to register 1: 「%s」." inputStr)
 ))
@@ -61,9 +60,9 @@ See also: `xah-copy-to-register-1', `insert-register'."
   (insert-register ?1 t))
 
 (defun xah-compact-parens ()
-  "Removing white spaces in ending parenthesises.
-Removes white space from cursor point to end of code block (\n\n).
-Or, act on a text selection.
+  "Removing whitespaces in ending repetition of parenthesises.
+Removes whitespace from cursor point to end of code block (that is, 2 or more blank lines.).
+if there's a text selection, act on the region.
 Warning: This command does not preserve texts inside double quotes."
   (interactive)
   (let (inputStr resultText p1 p2)
@@ -76,11 +75,13 @@ Warning: This command does not preserve texts inside double quotes."
               (search-forward-regexp "\n\n" nil t)
               (setq p2 (- (point) 2))
               )))
+    (save-excursion 
+      (save-restriction 
+        (narrow-to-region p1 p2)
+        (goto-char (point-min))
 
-    (setq resultText (replace-regexp-pairs-in-string (buffer-substring-no-properties p1 p2) '(["[ \t\n]+)[ \t\n]+" " )"])) )
-
-    (delete-region p1 p2)
-    (insert resultText) ) )
+        (while (search-forward-regexp "[ \t\n]+)[ \t\n]+)" nil t) (replace-match "))"))
+        ))))
 
 
 
@@ -95,7 +96,7 @@ See also: `kill-rectangle', `copy-to-register'."
     (kill-new
      (with-temp-buffer
        (insert-register ?0)
-       (buffer-string) )) ) )
+       (buffer-string) ))))
 
 (defun xah-insert-form-feed ()
   "insert a form feed char (ASCII 12)"

@@ -5,6 +5,9 @@
 (global-set-key (kbd "<C-f7>") 'xah-goto-previous-overlay)
 (global-set-key (kbd "<C-f8>") 'xah-goto-next-overlay)
 
+(global-set-key (kbd "C-e") 'undo)
+(global-set-key (kbd "C-.") 'redo)
+
 (global-set-key (kbd "C-1") 'xah-cycle-font-previous)
 (global-set-key (kbd "C-2") 'xah-cycle-font-next)
 (global-set-key (kbd "C-3") 'xah-cycle-hyphen-underscore-space)
