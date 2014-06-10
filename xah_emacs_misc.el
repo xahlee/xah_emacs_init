@@ -195,7 +195,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 If there is text selection, uses the text selection for path.
 
-If the path is starts with “http://”, and if it's xah site, convert to file path and open the file, else launch browser vistiting that URL.
+If the path is starts with “http://”, launch browser vistiting that URL, or open the corresponding file, if it's xah site.
 
 Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported."
   (interactive)

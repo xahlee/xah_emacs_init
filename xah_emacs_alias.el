@@ -36,4 +36,6 @@
 ;; (defalias 'cp 'xah-copy-to-register-1)
 ;; (defalias 'pt 'insert-register-content-1)
 
-(defalias 'ms 'magit-status)
+
+
+(defalias 'ffap 'xah-open-file-at-cursor)

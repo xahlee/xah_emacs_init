@@ -64,7 +64,8 @@ To solve this problem, when your code only knows the relative path of another fi
     (when xah-load-xahkeys-q
       ;; (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_unset_keys.el"))
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_ergoemacs_xah"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_ergoemacs_raw"))
+      ;; (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_ergoemacs_raw"))
+      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_meta"))
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_special_keys"))
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding"))
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_control_key"))

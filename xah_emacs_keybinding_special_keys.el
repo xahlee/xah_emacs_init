@@ -6,8 +6,6 @@
 
 (define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
 
-(global-set-key (kbd "<f6>") 'redo)
-
 
 
 (global-set-key (kbd "<home>") 'eex-command-mode-activate)
@@ -75,4 +73,25 @@
 (global-set-key (kbd "<XF86Paste>") 'yank)
 (global-set-key (kbd "C-<XF86Paste>") 'yank-pop)
 (global-set-key (kbd "<XF86Close>") 'xah-close-current-buffer)
+
+
+(progn
+  (define-prefix-command 'xah-menu-f10-keymap)
+  (global-set-key (kbd "<f10>") xah-menu-f10-keymap)
+
+  (global-set-key (kbd "<f10> <left>") 'xah-goto-previous-overlay)
+  (global-set-key (kbd "<f10> <right>") 'xah-goto-next-overlay)
+  (global-set-key (kbd "<f10> <backspace>") 'xah-remove-overlays-region)
+  (global-set-key (kbd "<f10> <return>") 'xah-show-overlay-at-point)
+
+  (global-set-key (kbd "<f10> b") 'xah-make-overlay-bold-region)
+  (global-set-key (kbd "<f10> a") 'xah-show-all-overlays)
+
+  (global-set-key (kbd "<f10> 8") 'xah-syntax-bracket-forward)
+  (global-set-key (kbd "<f10> 7") 'xah-syntax-bracket-backward)
+  (global-set-key (kbd "<f10> c") 'xah-forward-comment)
+  (global-set-key (kbd "<f10> l") 'xah-scan-list)
+  (global-set-key (kbd "<f10> s") 'xah-scan-sexps)
+  (global-set-key (kbd "<f10> p") 'xah-parse-partial-sexp)
+  )
 

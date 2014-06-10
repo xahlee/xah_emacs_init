@@ -3,7 +3,6 @@
 
 ;; jump points to other files
 
-;; • xah_emacs_init.el
 ;; • xah_emacs_abbr.el
 ;; • xah_emacs_alias.el
 ;; • xah_emacs_hyper_super_setup.el
@@ -134,9 +133,9 @@
 (global-set-key (kbd "<menu> 3") 'delete-other-windows)
 (global-set-key (kbd "<menu> 4") 'split-window-vertically)
 (global-set-key (kbd "<menu> 5") 'shell-command)
-(global-set-key (kbd "<menu> 6") 'write-file)
-(global-set-key (kbd "<menu> 7") 'xah-open-file-at-cursor) ;  find-file-at-point
-(global-set-key (kbd "<menu> 8") 'dired-jump)              ;  2377    0.15%  dired-jump
+(global-set-key (kbd "<menu> 6") nil)
+(global-set-key (kbd "<menu> 7") 'beginning-of-buffer)
+(global-set-key (kbd "<menu> 8") 'end-of-buffer)
 (global-set-key (kbd "<menu> 9") 'ispell-word)
 
 (progn
@@ -152,12 +151,18 @@
 (progn
   (define-prefix-command 'xah-menu-c-keymap)
   (global-set-key (kbd "<menu> c") xah-menu-c-keymap)
-  (global-set-key (kbd "<menu> c SPC") 'query-replace) ;2746    0.17%  query-replace
-  (global-set-key (kbd "<menu> c <return>") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
+  (global-set-key (kbd "<menu> c SPC") 'pop-global-mark)
+  (global-set-key (kbd "<menu> c <return>") 'exchange-point-and-mark)
 
-  (global-set-key (kbd "<menu> c e") 'beginning-of-buffer)
-  (global-set-key (kbd "<menu> c u") 'end-of-buffer)
+  (global-set-key (kbd "<menu> c 3") 'ffap)
+  (global-set-key (kbd "<menu> c 4") 'dired-jump)
 
+  (global-set-key (kbd "<menu> c c") 'bookmark-bmenu-list)
+
+  (global-set-key (kbd "<menu> c g") 'ido-switch-buffer) ;switch-to-buffer
+  (global-set-key (kbd "<menu> c t") 'ibuffer) ; 198    0.01%  ibuffer
+  (global-set-key (kbd "<menu> c h") 'recentf-open-files) ;  333    0.02%  recentf-open-files
+  (global-set-key (kbd "<menu> c u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
   )
 
 (progn
@@ -274,17 +279,10 @@
 (progn
   (define-prefix-command 'xah-menu-o-keymap)
   (global-set-key (kbd "<menu> o") xah-menu-o-keymap)
-  (global-set-key (kbd "<menu> o SPC") 'ido-switch-buffer)  ; 33    0.00%  ido-switch-buffer
-  (global-set-key (kbd "<menu> o <return>") 'recentf-open-files) ;  333    0.02%  recentf-open-files
-
-  (global-set-key (kbd "<menu> o c") 'bookmark-bmenu-list)
-  (global-set-key (kbd "<menu> o g") 'ibuffer) ; 198    0.01%  ibuffer
+  (global-set-key (kbd "<menu> o SPC") nil)
   )
 
-(progn
-  (define-prefix-command 'xah-menu-p-keymap)
-  (global-set-key (kbd "<menu> p") xah-menu-p-keymap)
-  )
+(global-set-key (kbd "<menu> p") 'query-replace) ; 2746    0.17%  query-replace
 
 (progn
   (define-prefix-command 'xah-menu-q-keymap)
@@ -293,7 +291,7 @@
   )
 
 (progn
-;; kinda replacement related
+  ;; kinda replacement related
   (define-prefix-command 'xah-menu-r-keymap)
   (global-set-key (kbd "<menu> r") xah-menu-r-keymap)
 
@@ -303,9 +301,7 @@
 
   (global-set-key (kbd "<menu> r 1") 'kmacro-start-macro)
   (global-set-key (kbd "<menu> r 2") 'kmacro-end-macro)
-  (global-set-key (kbd "<menu> r 3") 'call-last-kbd-macro) ; control something
-  (global-set-key (kbd "<menu> r 4") 'apply-macro-to-region-lines)
-  (global-set-key (kbd "<f10>") 'call-last-kbd-macro)
+  (global-set-key (kbd "<menu> r 3") 'apply-macro-to-region-lines)
   )
 
 (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
@@ -388,30 +384,17 @@
 (progn
   (define-prefix-command 'xah-menu-v-keymap)
   (global-set-key (kbd "<menu> v") xah-menu-v-keymap)
-  (global-set-key (kbd "<menu> v b") 'eval-buffer)
-  (global-set-key (kbd "<menu> v r") 'eval-region)
-  (global-set-key (kbd "<menu> v d") 'eval-defun)
-  (global-set-key (kbd "<menu> v e") 'eval-expression)
-  (global-set-key (kbd "<menu> v l") 'eval-last-sexp)
   )
 
 (progn
   (define-prefix-command 'xah-menu-w-keymap)
   (global-set-key (kbd "<menu> w") xah-menu-w-keymap)
-  (global-set-key (kbd "<menu> w <left>") 'xah-goto-previous-overlay)
-  (global-set-key (kbd "<menu> w <right>") 'xah-goto-next-overlay)
-  (global-set-key (kbd "<menu> w <backspace>") 'xah-remove-overlays-region)
-  (global-set-key (kbd "<menu> w <return>") 'xah-show-overlay-at-point)
 
-  (global-set-key (kbd "<menu> w b") 'xah-make-overlay-bold-region)
-  (global-set-key (kbd "<menu> w a") 'xah-show-all-overlays)
-
-  (global-set-key (kbd "<menu> w 8") 'xah-syntax-bracket-forward)
-  (global-set-key (kbd "<menu> w 7") 'xah-syntax-bracket-backward)
-  (global-set-key (kbd "<menu> w c") 'xah-forward-comment)
-  (global-set-key (kbd "<menu> w l") 'xah-scan-list)
-  (global-set-key (kbd "<menu> w s") 'xah-scan-sexps)
-  (global-set-key (kbd "<menu> w p") 'xah-parse-partial-sexp)
+  (global-set-key (kbd "<menu> w b") 'eval-buffer)
+  (global-set-key (kbd "<menu> w r") 'eval-region)
+  (global-set-key (kbd "<menu> w d") 'eval-defun)
+  (global-set-key (kbd "<menu> w e") 'eval-expression)
+  (global-set-key (kbd "<menu> w l") 'eval-last-sexp)
 
   )
 
@@ -484,11 +467,8 @@
 ;; ;; todo add:
   ;; (global-set-key (kbd "<menu> r 4") 'set-mark-command)
 
-;; C-x C-@		pop-global-mark
 ;; C-x C-p		mark-page
-;; C-x C-x		exchange-point-and-mark
 ;; C-x h		mark-whole-buffer
-;; C-x C-SPC	pop-global-mark
 
 ;; C-x C-b		list-buffers
 ;; C-x C-c		save-buffers-kill-terminal
@@ -531,7 +511,6 @@
 ;; C-x ^		enlarge-window
 ;; C-x `		next-error
 ;; C-x a		Prefix Command
-;; C-x b		switch-to-buffer
 ;; C-x d		dired
 ;; C-x e		kmacro-end-and-call-macro
 ;; C-x f		set-fill-column
@@ -544,9 +523,8 @@
 ;; C-x q		kbd-macro-query
 ;; C-x r		Prefix Command
 ;; C-x s		save-some-buffers
-;; C-x u		undo
+
 ;; C-x v		vc-prefix-map
-;; C-x z		repeat
 ;; C-x {		shrink-window-horizontally
 ;; C-x }		enlarge-window-horizontally
 ;; C-x DEL		backward-kill-sentence
@@ -673,4 +651,6 @@
 ;; select all, copy all, open, those standard keys
 
 ;; • add all emacs commands to my key sequence system
-;; add rectangle commands, register 
+;; add rectangle commands, register
+
+;; C-x z		repeat

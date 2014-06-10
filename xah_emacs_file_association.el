@@ -22,3 +22,9 @@
 
 ;; open pdf files in hex mode
 (add-to-list 'auto-mode-alist '("\\.pdf\\'" . hexl-mode))
+
+(autoload 'vimrc-mode "vimrc-mode" "loads vimrc-mode" "INTERACTIVE")
+
+(when (fboundp 'vimrc-mode)
+  (add-to-list 'auto-mode-alist '(".vim\\(rc\\)?$" . vimrc-mode))
+)
