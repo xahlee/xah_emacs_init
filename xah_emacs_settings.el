@@ -59,7 +59,6 @@
 
 
 (winner-mode 0)
-(delete-selection-mode 1)
 (electric-pair-mode 0)
 (blink-cursor-mode 0 )
 (setq sentence-end-double-space nil )
@@ -69,7 +68,6 @@
 (setq scroll-error-top-bottom t )
 
 (setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
-(setq ido-enable-flex-matching t)
 (set-default 'abbrev-mode t)
 
 (setq shift-select-mode nil)
@@ -93,9 +91,9 @@
 
 (setq page-break-lines-modes (quote (emacs-lisp-mode xah-elisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
 
-(when (boundp 'ido-vertical-mode)
-    (ido-vertical-mode 1)
-)
+;; (when (boundp 'ido-vertical-mode)
+;;     (ido-vertical-mode 1)
+;; )
 
 
 

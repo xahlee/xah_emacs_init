@@ -91,8 +91,7 @@
 
 ;; (global-set-key (kbd "<menu> <menu>") 'keyboard-quit)
 
-(global-set-key (kbd "<menu> <return>") 'smex) ; 3459    0.21%  smex
-                                        ;(global-set-key (kbd "<menu> <backspace>") 'delete-indentation)
+(global-set-key (kbd "<menu> <return>") 'execute-extended-command)
 (global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
 (global-set-key (kbd "<menu> <tab>") 'indent-for-tab-command)
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
@@ -323,13 +322,14 @@
   (global-set-key (kbd "<menu> t 7") 'xah-copy-to-register-1)
   (global-set-key (kbd "<menu> t 8") 'xah-paste-from-register-1)
 
-  (global-set-key (kbd "<menu> t a") nil)
+  (global-set-key (kbd "<menu> t a") 'ace-jump-mode-pop-mark)
   (global-set-key (kbd "<menu> t b") 'xah-shell-commands)
   (global-set-key (kbd "<menu> t c") 'xah-cite)
   (global-set-key (kbd "<menu> t d") 'insert-date)
   (global-set-key (kbd "<menu> t e") 'xah-find-replace-text)
   (global-set-key (kbd "<menu> t f") 'xah-find-text)
   (global-set-key (kbd "<menu> t g") 'ace-jump-mode)
+
   (global-set-key (kbd "<menu> t h") 'xah-open-file-fast)
   (global-set-key (kbd "<menu> t i n") 'xah-insert-random-number)
   (global-set-key (kbd "<menu> t i s") 'xah-insert-random-string)
@@ -356,7 +356,6 @@
   (global-set-key (kbd "<menu> t u") nil)
   (global-set-key (kbd "<menu> t v") 'xah-make-backup)
   (global-set-key (kbd "<menu> t w") nil)
-  (global-set-key (kbd "<menu> t x") 'xah-compact-parens)
   (global-set-key (kbd "<menu> t y") 'yas/expand)
   (global-set-key (kbd "<menu> t z") 'xah-toggle-read-novel-mode)
 
