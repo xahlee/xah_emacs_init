@@ -59,30 +59,6 @@ See also: `xah-copy-to-register-1', `insert-register'."
     )
   (insert-register ?1 t))
 
-(defun xah-compact-parens ()
-  "Removing whitespaces in ending repetition of parenthesises.
-Removes whitespace from cursor point to end of code block (that is, 2 or more blank lines.).
-if there's a text selection, act on the region.
-Warning: This command does not preserve texts inside double quotes."
-  (interactive)
-  (let (inputStr resultText p1 p2)
-
-    (setq inputStr
-          (if (region-active-p)
-              (progn (setq p1 (region-beginning) ) (setq p2 (region-end) ))
-            (save-excursion
-              (setq p1 (point) )
-              (search-forward-regexp "\n\n" nil t)
-              (setq p2 (- (point) 2))
-              )))
-    (save-excursion 
-      (save-restriction 
-        (narrow-to-region p1 p2)
-        (goto-char (point-min))
-
-        (while (search-forward-regexp "[ \t\n]+)[ \t\n]+)" nil t) (replace-match "))"))
-        ))))
-
 
 
 (defun xah-copy-rectangle-to-clipboard (p1 p2)
