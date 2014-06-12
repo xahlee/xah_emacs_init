@@ -153,12 +153,15 @@
   (global-set-key (kbd "<menu> c SPC") 'pop-global-mark)
   (global-set-key (kbd "<menu> c <return>") 'exchange-point-and-mark)
 
-  (global-set-key (kbd "<menu> c 3") 'ffap)
-  (global-set-key (kbd "<menu> c 4") 'dired-jump)
+  (global-set-key (kbd "<menu> c 3") nil)
+  (global-set-key (kbd "<menu> c 4") nil)
+
+  (global-set-key (kbd "<menu> c e") 'ffap)
+  (global-set-key (kbd "<menu> c u") 'dired-jump)
 
   (global-set-key (kbd "<menu> c c") 'bookmark-bmenu-list)
 
-  (global-set-key (kbd "<menu> c g") 'ido-switch-buffer) ;switch-to-buffer
+  (global-set-key (kbd "<menu> c g") 'ido-switch-buffer)
   (global-set-key (kbd "<menu> c t") 'ibuffer) ; 198    0.01%  ibuffer
   (global-set-key (kbd "<menu> c h") 'recentf-open-files) ;  333    0.02%  recentf-open-files
   (global-set-key (kbd "<menu> c u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
