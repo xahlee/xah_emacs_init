@@ -21,7 +21,7 @@ If `universal-argument' is called, copy only the dir path."
        )))
   (message "File path copied."))
 
-(defun xah-delete-cut-text-block ()
+(defun xah-delete-text-block ()
   "delete the current text block (paragraph) and also put it to `kill-ring'."
   (interactive)
   (let (p1 p2)

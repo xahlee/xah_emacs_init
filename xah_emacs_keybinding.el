@@ -91,15 +91,88 @@
 
 ;; (global-set-key (kbd "<menu> <menu>") 'keyboard-quit)
 
-(global-set-key (kbd "<menu> <return>") 'execute-extended-command)
-(global-set-key (kbd "<menu> <backspace>") 'xah-delete-cut-text-block)
-(global-set-key (kbd "<menu> <tab>") 'indent-for-tab-command)
+(global-set-key (kbd "<menu> <return>") 'smex)
 (global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
 (global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 
 ;; (global-set-key (kbd "<menu> SPC") (lambda () (interactive) (insert "_"))) ; low line (underscore)
 
-;; xah-cycle-camel-style-case
+(progn
+  (define-prefix-command 'xah-menu-backspace-keymap)
+  (global-set-key (kbd "<menu> <backspace>") xah-menu-backspace-keymap)
+;; 'xah-delete-text-block
+  )
+
+(progn
+  (define-prefix-command 'xah-menu-delete-keymap)
+  (global-set-key (kbd "<menu> <delete>") xah-menu-delete-keymap)
+  )
+
+(progn
+  (define-prefix-command 'xah-menu-tab-keymap)
+  (global-set-key (kbd "<menu> <tab>") xah-menu-tab-keymap)
+  (global-set-key (kbd "<menu> <tab> y") 'yas/expand)
+  (global-set-key (kbd "<menu> <tab> <tab>") 'indent-for-tab-command)
+  (global-set-key (kbd "<menu> <tab> i") 'complete-symbol)
+  )
+
+(progn
+  (define-prefix-command 'xah-menu-space-keymap)
+  (global-set-key (kbd "<menu> SPC") xah-menu-space-keymap)
+
+;; 'comment-dwim
+  ;; cut, copy, paste
+
+  (global-set-key (kbd "<menu> SPC SPC") nil)
+  (global-set-key (kbd "<menu> SPC <return>") 'xah-run-current-file) ;  1494    0.09%  xah-run-current-file
+  (global-set-key (kbd "<menu> SPC <backspace>") 'xah-delete-current-file)
+  (global-set-key (kbd "<menu> SPC -") 'xah-insert-form-feed)
+  (global-set-key (kbd "<menu> SPC .") 'title-case-string-region-or-line)
+
+  (global-set-key (kbd "<menu> SPC 3") 'xah-elisp-mode)
+  (global-set-key (kbd "<menu> SPC 4") 'xah-html-mode)
+
+  (global-set-key (kbd "<menu> SPC 7") 'xah-copy-to-register-1)
+  (global-set-key (kbd "<menu> SPC 8") 'xah-paste-from-register-1)
+
+  (global-set-key (kbd "<menu> SPC a") 'ace-jump-mode-pop-mark)
+  (global-set-key (kbd "<menu> SPC b") 'xah-shell-commands)
+  (global-set-key (kbd "<menu> SPC c") 'xah-cite)
+  (global-set-key (kbd "<menu> SPC d") 'insert-date)
+  (global-set-key (kbd "<menu> SPC e") 'xah-find-replace-text)
+  (global-set-key (kbd "<menu> SPC f") 'xah-find-text)
+  (global-set-key (kbd "<menu> SPC g") 'ace-jump-mode)
+
+  (global-set-key (kbd "<menu> SPC h") 'xah-open-file-fast)
+  (global-set-key (kbd "<menu> SPC i n") 'xah-insert-random-number)
+  (global-set-key (kbd "<menu> SPC i s") 'xah-insert-random-string)
+  (global-set-key (kbd "<menu> SPC i u") 'xah-insert-random-uuid)
+  (global-set-key (kbd "<menu> SPC i x") 'xah-insert-random-hex)
+  (global-set-key (kbd "<menu> SPC j") 'xah-copy-all)
+  (global-set-key (kbd "<menu> SPC k") nil)
+  (global-set-key (kbd "<menu> SPC l") 'xah-open-in-desktop) ; 325    0.02%  xah-open-in-desktop
+  (global-set-key (kbd "<menu> SPC m") 'magit-status)
+  (global-set-key (kbd "<menu> SPC n") nil)
+  (global-set-key (kbd "<menu> SPC o") 'xah-open-file-from-clipboard)
+  (global-set-key (kbd "<menu> SPC p") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
+  (global-set-key (kbd "<menu> SPC q") 'xah-cut-all)
+  (global-set-key (kbd "<menu> SPC r 3") 'xah-escape-quotes)
+  (global-set-key (kbd "<menu> SPC r '") 'xah-replace-straight-quotes)
+  (global-set-key (kbd "<menu> SPC r ,") 'xah-remove-punctuation-trailing-redundant-space)
+  (global-set-key (kbd "<menu> SPC r .") 'xah-convert-english-chinese-punctuation)
+  (global-set-key (kbd "<menu> SPC r [") 'xah-remove-square-brackets)
+  (global-set-key (kbd "<menu> SPC r g") 'xah-convert-latin-alphabet-gothic)
+  (global-set-key (kbd "<menu> SPC r p") 'xah-convert-asian/ascii-space)
+  (global-set-key (kbd "<menu> SPC r w") 'xah-convert-fullwidth-chars)
+  (global-set-key (kbd "<menu> SPC s") nil)
+  (global-set-key (kbd "<menu> SPC t") nil)
+  (global-set-key (kbd "<menu> SPC u") nil)
+  (global-set-key (kbd "<menu> SPC v") 'xah-make-backup)
+  (global-set-key (kbd "<menu> SPC w") nil)
+  (global-set-key (kbd "<menu> SPC y") nil)
+  (global-set-key (kbd "<menu> SPC z") 'xah-toggle-read-novel-mode)
+
+ )
 
 (global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
 (global-set-key (kbd "<menu> '") nil)
@@ -114,27 +187,15 @@
 (global-set-key (kbd "<menu> \\") nil)
 (global-set-key (kbd "<menu> `") nil)
 
-;; xah's
-   ;; 5064    0.31%  delete-other-windows
-   ;; 1384    0.09%  ergoemacs-move-cursor-next-pane
-   ;; 2742    0.17%  split-window-vertically
-   ;; 1136    0.07%  delete-window
-
-;; all people
-;; 18   other-window            19256   0.41    0.79
-;; 34   move-cursor-next-pane   12183   0.26    0.50
-;; 49   delete-other-windows    6968    0.15    0.29
-;; 67	split-window-vertically	4035	0.09	0.17
-
 (global-set-key (kbd "<menu> 0") nil)
 (global-set-key (kbd "<menu> 1") nil)
 (global-set-key (kbd "<menu> 2") 'delete-window)
 (global-set-key (kbd "<menu> 3") 'delete-other-windows)
 (global-set-key (kbd "<menu> 4") 'split-window-vertically)
-(global-set-key (kbd "<menu> 5") 'shell-command)
-(global-set-key (kbd "<menu> 6") nil)
-(global-set-key (kbd "<menu> 7") 'beginning-of-buffer)
-(global-set-key (kbd "<menu> 8") 'end-of-buffer)
+(global-set-key (kbd "<menu> 5") 'beginning-of-buffer)
+(global-set-key (kbd "<menu> 6") 'end-of-buffer)
+(global-set-key (kbd "<menu> 7") 'ffap)
+(global-set-key (kbd "<menu> 8") 'dired-jump)
 (global-set-key (kbd "<menu> 9") 'ispell-word)
 
 (progn
@@ -153,18 +214,13 @@
   (global-set-key (kbd "<menu> c SPC") 'pop-global-mark)
   (global-set-key (kbd "<menu> c <return>") 'exchange-point-and-mark)
 
-  (global-set-key (kbd "<menu> c 3") nil)
-  (global-set-key (kbd "<menu> c 4") nil)
-
-  (global-set-key (kbd "<menu> c e") 'ffap)
-  (global-set-key (kbd "<menu> c u") 'dired-jump)
-
   (global-set-key (kbd "<menu> c c") 'bookmark-bmenu-list)
-
+  (global-set-key (kbd "<menu> c u") nil)
+  (global-set-key (kbd "<menu> c e") nil)
   (global-set-key (kbd "<menu> c g") 'ido-switch-buffer)
-  (global-set-key (kbd "<menu> c t") 'ibuffer) ; 198    0.01%  ibuffer
-  (global-set-key (kbd "<menu> c h") 'recentf-open-files) ;  333    0.02%  recentf-open-files
-  (global-set-key (kbd "<menu> c u") 'query-replace-regexp) ; 288    0.02%  query-replace-regexp
+  (global-set-key (kbd "<menu> c h") 'recentf-open-files)
+  (global-set-key (kbd "<menu> c t") 'ibuffer)
+  (global-set-key (kbd "<menu> c p") 'query-replace-regexp)
   )
 
 (progn
@@ -266,6 +322,7 @@
   (global-set-key (kbd "<menu> n 6") 'calendar)
   (global-set-key (kbd "<menu> n 7") 'calc)
   (global-set-key (kbd "<menu> n 8") 'shell)
+  (global-set-key (kbd "<menu> n 9") 'shell-command)
 
   (global-set-key (kbd "<menu> n b") 'toggle-debug-on-error)
   (global-set-key (kbd "<menu> n c") 'toggle-case-fold-search)
@@ -275,7 +332,6 @@
   (global-set-key (kbd "<menu> n t") 'narrow-to-defun)
   (global-set-key (kbd "<menu> n v") 'desktop-save)
   (global-set-key (kbd "<menu> n w") 'widen)
-
   )
 
 (progn
@@ -313,75 +369,26 @@
   (define-prefix-command 'xah-menu-t-keymap)
   (global-set-key (kbd "<menu> t") xah-menu-t-keymap)
 
-  (global-set-key (kbd "<menu> t SPC") nil)
-  (global-set-key (kbd "<menu> t <return>") 'xah-run-current-file) ;  1494    0.09%  xah-run-current-file
-  (global-set-key (kbd "<menu> t <backspace>") 'xah-delete-current-file)
-  (global-set-key (kbd "<menu> t -") 'xah-insert-form-feed)
-  (global-set-key (kbd "<menu> t .") 'title-case-string-region-or-line)
-
-  (global-set-key (kbd "<menu> t 3") 'xah-elisp-mode)
-  (global-set-key (kbd "<menu> t 4") 'xah-html-mode)
-
-  (global-set-key (kbd "<menu> t 7") 'xah-copy-to-register-1)
-  (global-set-key (kbd "<menu> t 8") 'xah-paste-from-register-1)
-
-  (global-set-key (kbd "<menu> t a") 'ace-jump-mode-pop-mark)
-  (global-set-key (kbd "<menu> t b") 'xah-shell-commands)
-  (global-set-key (kbd "<menu> t c") 'xah-cite)
-  (global-set-key (kbd "<menu> t d") 'insert-date)
-  (global-set-key (kbd "<menu> t e") 'xah-find-replace-text)
-  (global-set-key (kbd "<menu> t f") 'xah-find-text)
-  (global-set-key (kbd "<menu> t g") 'ace-jump-mode)
-
-  (global-set-key (kbd "<menu> t h") 'xah-open-file-fast)
-  (global-set-key (kbd "<menu> t i n") 'xah-insert-random-number)
-  (global-set-key (kbd "<menu> t i s") 'xah-insert-random-string)
-  (global-set-key (kbd "<menu> t i u") 'xah-insert-random-uuid)
-  (global-set-key (kbd "<menu> t i x") 'xah-insert-random-hex)
-  (global-set-key (kbd "<menu> t j") 'xah-copy-all)
-  (global-set-key (kbd "<menu> t k") nil)
-  (global-set-key (kbd "<menu> t l") 'xah-open-in-desktop) ; 325    0.02%  xah-open-in-desktop
-  (global-set-key (kbd "<menu> t m") 'magit-status)
-  (global-set-key (kbd "<menu> t n") nil)
-  (global-set-key (kbd "<menu> t o") 'xah-open-file-from-clipboard)
-  (global-set-key (kbd "<menu> t p") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
-  (global-set-key (kbd "<menu> t q") 'xah-cut-all)
-  (global-set-key (kbd "<menu> t r 3") 'xah-escape-quotes)
-  (global-set-key (kbd "<menu> t r '") 'xah-replace-straight-quotes)
-  (global-set-key (kbd "<menu> t r ,") 'xah-remove-punctuation-trailing-redundant-space)
-  (global-set-key (kbd "<menu> t r .") 'xah-convert-english-chinese-punctuation)
-  (global-set-key (kbd "<menu> t r [") 'xah-remove-square-brackets)
-  (global-set-key (kbd "<menu> t r g") 'xah-convert-latin-alphabet-gothic)
-  (global-set-key (kbd "<menu> t r p") 'xah-convert-asian/ascii-space)
-  (global-set-key (kbd "<menu> t r w") 'xah-convert-fullwidth-chars)
-  (global-set-key (kbd "<menu> t s") nil)
-  (global-set-key (kbd "<menu> t t") nil)
-  (global-set-key (kbd "<menu> t u") nil)
-  (global-set-key (kbd "<menu> t v") 'xah-make-backup)
-  (global-set-key (kbd "<menu> t w") nil)
-  (global-set-key (kbd "<menu> t y") 'yas/expand)
-  (global-set-key (kbd "<menu> t z") 'xah-toggle-read-novel-mode)
+  (global-set-key (kbd "<menu> t SPC") 'rectangle-mark-mode)
+  (global-set-key (kbd "<menu> t c") 'replace-rectangle)
+  (global-set-key (kbd "<menu> t d") 'delete-rectangle)
+  (global-set-key (kbd "<menu> t e") 'sort-lines)
+  (global-set-key (kbd "<menu> t g") 'kill-rectangle)
+  (global-set-key (kbd "<menu> t l") 'clear-rectangle)
+  (global-set-key (kbd "<menu> t n") 'rectangle-number-lines)
+  (global-set-key (kbd "<menu> t o") 'open-rectangle)
+  (global-set-key (kbd "<menu> t p") 'shell-command-on-region)
+  (global-set-key (kbd "<menu> t r") 'yank-rectangle)
+  (global-set-key (kbd "<menu> t t") 'repeat-complex-command)
+  (global-set-key (kbd "<menu> t y") 'delete-whitespace-rectangle)
 
   )
 
-(progn
-  (define-prefix-command 'xah-menu-u-keymap)
-  (global-set-key (kbd "<menu> u") xah-menu-u-keymap)
-
-  (global-set-key (kbd "<menu> u SPC") 'rectangle-mark-mode)
-
-  (global-set-key (kbd "<menu> u c") 'replace-rectangle)
-  (global-set-key (kbd "<menu> u d") 'delete-rectangle)
-  (global-set-key (kbd "<menu> u e") 'sort-lines)
-  (global-set-key (kbd "<menu> u g") 'kill-rectangle)
-  (global-set-key (kbd "<menu> u l") 'clear-rectangle)
-  (global-set-key (kbd "<menu> u n") 'rectangle-number-lines)
-  (global-set-key (kbd "<menu> u o") 'open-rectangle)
-  (global-set-key (kbd "<menu> u p") 'shell-command-on-region)
-  (global-set-key (kbd "<menu> u r") 'yank-rectangle)
-  (global-set-key (kbd "<menu> u t") 'repeat-complex-command)
-  (global-set-key (kbd "<menu> u y") 'delete-whitespace-rectangle)
-  )
+;; u is for char insert
+;; (progn
+;;   (define-prefix-command 'xah-menu-u-keymap)
+;;   (global-set-key (kbd "<menu> u") xah-menu-u-keymap)
+;;  )
 
 (progn
   (define-prefix-command 'xah-menu-v-keymap)
@@ -425,7 +432,7 @@
 
 ;; ~/web/ergoemacs_org/emacs/gnu_emacs_keybinding_C-x.txt
 
-;; some idea about command categories, in context to chosing keys for them
+;; some idea about command categories, in context to choosing keys for them
 
 ;; • whether a command has immediate effect, no prompt. ⁖ shell vs delete-matching-lines
 ;; • whether a command has is safe to run by mistake. ⁖ whitespace-mode vs eval-buffer
