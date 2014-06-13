@@ -92,8 +92,6 @@
 ;; (global-set-key (kbd "<menu> <menu>") 'keyboard-quit)
 
 (global-set-key (kbd "<menu> <return>") 'smex)
-(global-set-key (kbd "<menu> <f2>") 'xah-cut-all)
-(global-set-key (kbd "<menu> <f3>") 'xah-copy-all)
 
 ;; (global-set-key (kbd "<menu> SPC") (lambda () (interactive) (insert "_"))) ; low line (underscore)
 
@@ -117,11 +115,9 @@
   )
 
 (progn
+  ;; this should reserved for user-defined keys
   (define-prefix-command 'xah-menu-space-keymap)
   (global-set-key (kbd "<menu> SPC") xah-menu-space-keymap)
-
-;; 'comment-dwim
-  ;; cut, copy, paste
 
   (global-set-key (kbd "<menu> SPC SPC") nil)
   (global-set-key (kbd "<menu> SPC <return>") 'xah-run-current-file) ;  1494    0.09%  xah-run-current-file
@@ -143,18 +139,18 @@
   (global-set-key (kbd "<menu> SPC f") 'xah-find-text)
   (global-set-key (kbd "<menu> SPC g") 'ace-jump-mode)
 
-  (global-set-key (kbd "<menu> SPC h") 'xah-open-file-fast)
+  (global-set-key (kbd "<menu> SPC h") nil)
   (global-set-key (kbd "<menu> SPC i n") 'xah-insert-random-number)
   (global-set-key (kbd "<menu> SPC i s") 'xah-insert-random-string)
   (global-set-key (kbd "<menu> SPC i u") 'xah-insert-random-uuid)
   (global-set-key (kbd "<menu> SPC i x") 'xah-insert-random-hex)
   (global-set-key (kbd "<menu> SPC j") 'xah-copy-all)
   (global-set-key (kbd "<menu> SPC k") nil)
-  (global-set-key (kbd "<menu> SPC l") 'xah-open-in-desktop) ; 325    0.02%  xah-open-in-desktop
+  (global-set-key (kbd "<menu> SPC l") 'xah-open-in-desktop)
   (global-set-key (kbd "<menu> SPC m") 'magit-status)
   (global-set-key (kbd "<menu> SPC n") nil)
   (global-set-key (kbd "<menu> SPC o") 'xah-open-file-from-clipboard)
-  (global-set-key (kbd "<menu> SPC p") 'xah-copy-file-path) ;  2041    0.13%  xah-copy-file-path
+  (global-set-key (kbd "<menu> SPC p") 'xah-copy-file-path)
   (global-set-key (kbd "<menu> SPC q") 'xah-cut-all)
   (global-set-key (kbd "<menu> SPC r 3") 'xah-escape-quotes)
   (global-set-key (kbd "<menu> SPC r '") 'xah-replace-straight-quotes)
@@ -166,7 +162,7 @@
   (global-set-key (kbd "<menu> SPC r w") 'xah-convert-fullwidth-chars)
   (global-set-key (kbd "<menu> SPC s") nil)
   (global-set-key (kbd "<menu> SPC t") nil)
-  (global-set-key (kbd "<menu> SPC u") nil)
+  (global-set-key (kbd "<menu> SPC u") 'xah-open-file-fast)
   (global-set-key (kbd "<menu> SPC v") 'xah-make-backup)
   (global-set-key (kbd "<menu> SPC w") nil)
   (global-set-key (kbd "<menu> SPC y") nil)
@@ -174,7 +170,7 @@
 
  )
 
-(global-set-key (kbd "<menu> .") 'universal-argument) ; ★★
+(global-set-key (kbd "<menu> .") 'universal-argument)
 (global-set-key (kbd "<menu> '") nil)
 (global-set-key (kbd "<menu> ,") 'toggle-input-method)
 
@@ -211,8 +207,8 @@
 (progn
   (define-prefix-command 'xah-menu-c-keymap)
   (global-set-key (kbd "<menu> c") xah-menu-c-keymap)
-  (global-set-key (kbd "<menu> c SPC") 'pop-global-mark)
-  (global-set-key (kbd "<menu> c <return>") 'exchange-point-and-mark)
+  (global-set-key (kbd "<menu> c SPC") nil)
+  (global-set-key (kbd "<menu> c <return>") nil)
 
   (global-set-key (kbd "<menu> c c") 'bookmark-bmenu-list)
   (global-set-key (kbd "<menu> c u") nil)
@@ -241,8 +237,6 @@
   )
 
 (global-set-key (kbd "<menu> g") 'isearch-forward)
-
-; 432    0.03%  list-matching-lines
 
 (progn
 
@@ -298,10 +292,7 @@
   (global-set-key (kbd "<menu> i") xah-menu-i-keymap)
   )
 
-(progn
-  (define-prefix-command 'xah-menu-j-keymap)
-  (global-set-key (kbd "<menu> j") xah-menu-j-keymap)
-  )
+(global-set-key (kbd "<menu> j") 'xah-copy-all)
 
 (global-set-key (kbd "<menu> k") 'xah-clean-whitespace)
 
@@ -323,6 +314,7 @@
   (global-set-key (kbd "<menu> n 7") 'calc)
   (global-set-key (kbd "<menu> n 8") 'shell)
   (global-set-key (kbd "<menu> n 9") 'shell-command)
+  (global-set-key (kbd "<menu> n 0") 'shell-command-on-region)
 
   (global-set-key (kbd "<menu> n b") 'toggle-debug-on-error)
   (global-set-key (kbd "<menu> n c") 'toggle-case-fold-search)
@@ -342,58 +334,110 @@
 
 (global-set-key (kbd "<menu> p") 'query-replace) ; 2746    0.17%  query-replace
 
-(progn
-  (define-prefix-command 'xah-menu-q-keymap)
-  (global-set-key (kbd "<menu> q") xah-menu-q-keymap)
-  (global-set-key (kbd "<menu> q SPC") 'quoted-insert)
-  )
+(global-set-key (kbd "<menu> q") 'xah-cut-all)
 
 (progn
   ;; kinda replacement related
   (define-prefix-command 'xah-menu-r-keymap)
   (global-set-key (kbd "<menu> r") xah-menu-r-keymap)
 
-  (global-set-key (kbd "<menu> r t") 'delete-matching-lines) ; ★★     317    0.02%  delete-matching-lines
-  (global-set-key (kbd "<menu> r h") 'delete-non-matching-lines)
-  (global-set-key (kbd "<menu> r d") 'delete-duplicate-lines)
-
   (global-set-key (kbd "<menu> r 1") 'kmacro-start-macro)
   (global-set-key (kbd "<menu> r 2") 'kmacro-end-macro)
   (global-set-key (kbd "<menu> r 3") 'apply-macro-to-region-lines)
+  (global-set-key (kbd "<menu> r 4") 'sort-lines)
+  (global-set-key (kbd "<menu> r 5") 'sort-numeric-fields)
+  (global-set-key (kbd "<menu> r 6") 'reverse-lines)
+  (global-set-key (kbd "<menu> r 7") 'list-matching-lines)
+  (global-set-key (kbd "<menu> r 8") 'delete-matching-lines)
+  (global-set-key (kbd "<menu> r 9") 'delete-non-matching-lines)
+  (global-set-key (kbd "<menu> r 0") 'delete-duplicate-lines)
+
+  (global-set-key (kbd "<menu> r SPC") 'rectangle-mark-mode)
+  (global-set-key (kbd "<menu> r c") 'replace-rectangle)
+  (global-set-key (kbd "<menu> r d") 'delete-rectangle)
+  (global-set-key (kbd "<menu> r g") 'kill-rectangle)
+  (global-set-key (kbd "<menu> r l") 'clear-rectangle)
+  (global-set-key (kbd "<menu> r n") 'rectangle-number-lines)
+  (global-set-key (kbd "<menu> r o") 'open-rectangle)
+  (global-set-key (kbd "<menu> r r") 'yank-rectangle)
+  (global-set-key (kbd "<menu> r y") 'delete-whitespace-rectangle)
+
   )
 
 (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
 
 (progn
-  ;; this should reserved for user-defined keys
   (define-prefix-command 'xah-menu-t-keymap)
   (global-set-key (kbd "<menu> t") xah-menu-t-keymap)
 
-  (global-set-key (kbd "<menu> t SPC") 'rectangle-mark-mode)
-  (global-set-key (kbd "<menu> t c") 'replace-rectangle)
-  (global-set-key (kbd "<menu> t d") 'delete-rectangle)
-  (global-set-key (kbd "<menu> t e") 'sort-lines)
-  (global-set-key (kbd "<menu> t g") 'kill-rectangle)
-  (global-set-key (kbd "<menu> t l") 'clear-rectangle)
-  (global-set-key (kbd "<menu> t n") 'rectangle-number-lines)
-  (global-set-key (kbd "<menu> t o") 'open-rectangle)
-  (global-set-key (kbd "<menu> t p") 'shell-command-on-region)
-  (global-set-key (kbd "<menu> t r") 'yank-rectangle)
+  ;; cut, copy, paste
+
+  (global-set-key (kbd "<menu> t SPC") 'pop-global-mark)
+  (global-set-key (kbd "<menu> t <return>") 'exchange-point-and-mark)
+
   (global-set-key (kbd "<menu> t t") 'repeat-complex-command)
-  (global-set-key (kbd "<menu> t y") 'delete-whitespace-rectangle)
+  (global-set-key (kbd "<menu> t h") nil)
 
   )
-
-;; u is for char insert
-;; (progn
-;;   (define-prefix-command 'xah-menu-u-keymap)
-;;   (global-set-key (kbd "<menu> u") xah-menu-u-keymap)
-;;  )
 
 (progn
-  (define-prefix-command 'xah-menu-v-keymap)
-  (global-set-key (kbd "<menu> v") xah-menu-v-keymap)
+;; u is for char insert
+
+  (define-prefix-command 'xah-menu-u-keymap)
+  (global-set-key (kbd "<menu> u") 'xah-menu-u-keymap)
+
+  (global-set-key (kbd "<menu> u <menu>") 'xah-insert-paren)
+  (define-key key-translation-map (kbd "<menu> u SPC") (kbd "_")) ; low line (underscore)
+  (global-set-key (kbd "<menu> u RET") 'xah-insert-unicode)
+
+  (define-key key-translation-map (kbd "<menu> u .") nil)
+
+  (define-key key-translation-map (kbd "<menu> u <down>") (kbd "↓"))
+  (define-key key-translation-map (kbd "<menu> u <left>") (kbd "←"))
+  (define-key key-translation-map (kbd "<menu> u <right>") (kbd "→"))
+  (define-key key-translation-map (kbd "<menu> u <up>") (kbd "↑"))
+  (define-key key-translation-map (kbd "<menu> u \\") (kbd "、")) ; IDEOGRAPHIC COMMA
+
+  (global-set-key (kbd "<menu> u ,") 'xah-insert-greater-less)
+
+  (define-key key-translation-map (kbd "<menu> u 3") (kbd "φ"))
+  (define-key key-translation-map (kbd "<menu> u 4") (kbd "ξ"))
+  (define-key key-translation-map (kbd "<menu> u 6") (kbd "ƒ"))
+  (define-key key-translation-map (kbd "<menu> u 7") (kbd "＆"))
+  (define-key key-translation-map (kbd "<menu> u 8") (kbd "•"))
+  (define-key key-translation-map (kbd "<menu> u 9") (kbd "—")) ; EM DASH
+
+  (global-set-key (kbd "<menu> u a") nil)
+  (global-set-key (kbd "<menu> u b") 'xah-insert-black-lenticular-bracket【】)
+  (global-set-key (kbd "<menu> u c") 'xah-insert-ascii-single-quote)
+  (global-set-key (kbd "<menu> u d") 'xah-insert-double-curly-quote“”)
+  (define-key key-translation-map (kbd "<menu> u e") (kbd "=")) ; equal
+  (global-set-key (kbd "<menu> u f") 'xah-insert-emacs-quote)
+  (global-set-key (kbd "<menu> u g") 'xah-insert-ascii-double-quote)
+  (global-set-key (kbd "<menu> u h") 'xah-insert-brace)              ;{}
+  (global-set-key (kbd "<menu> u i") 'xah-insert-curly-single-quote‘’)
+  (global-set-key (kbd "<menu> u j") nil)
+  (global-set-key (kbd "<menu> u k") nil)
+  (define-key key-translation-map (kbd "<menu> u l") (kbd "…")) ; HORIZONTAL ELLIPSIS
+  (global-set-key (kbd "<menu> u m") 'xah-insert-corner-bracket「」)
+  (global-set-key (kbd "<menu> u n") 'xah-insert-bracket)            ;[]
+  (global-set-key (kbd "<menu> u o") nil)
+  (define-key key-translation-map (kbd "<menu> u p") (kbd "+")) ; plus
+  (global-set-key (kbd "<menu> u q") nil)
+  (global-set-key (kbd "<menu> u r") 'xah-insert-tortoise-shell-bracket〔〕)
+  (global-set-key (kbd "<menu> u s") nil)
+  (global-set-key (kbd "<menu> u t") 'xah-insert-paren)
+  (define-key key-translation-map (kbd "<menu> u u") (kbd "-")) ; minus
+
+  (global-set-key (kbd "<menu> u v") 'xah-insert-double-angle-quote«»)
+  (global-set-key (kbd "<menu> u w") 'xah-insert-angle-bracket〈〉)
+  (global-set-key (kbd "<menu> u x") nil)
+  (global-set-key (kbd "<menu> u y") 'xah-insert-single-angle-quote‹›)
+  (global-set-key (kbd "<menu> u z") nil)
+
   )
+
+(global-set-key (kbd "<menu> v") nil)
 
 (progn
   (define-prefix-command 'xah-menu-w-keymap)
@@ -407,17 +451,11 @@
 
   )
 
-(progn
-  (define-prefix-command 'xah-menu-x-keymap)
-  (global-set-key (kbd "<menu> x") xah-menu-x-keymap)
-  )
+(global-set-key (kbd "<menu> x") nil)
 
-(progn
-  (define-prefix-command 'xah-menu-y-keymap)
-  (global-set-key (kbd "<menu> y") xah-menu-y-keymap)
-  )
+(global-set-key (kbd "<menu> y") nil)
 
-(global-set-key (kbd "<menu> z") 'xc-comment-smart) ; 385    0.02%  xc-comment-smart
+(global-set-key (kbd "<menu> z") 'comment-dwim)
 
 
 ;;;; misc
@@ -663,3 +701,5 @@
 ;; add rectangle commands, register
 
 ;; C-x z		repeat
+
+;; 'quoted-insert

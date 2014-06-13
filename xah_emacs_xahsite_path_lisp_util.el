@@ -645,8 +645,6 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 
 ["<div class=\"ads-bottom-65900\">[\n ]*</div>" ""]
 
-["<div class=\"byline\"><address class=\"author\">[[:ascii:]…]+?</time></div>" ""]
-
 ["<aside id=\"id1\">[[:ascii:]]+?</aside>" ""]
 
 ["<div class=\"share-buttons\">[\n ]*</div>" ""]
