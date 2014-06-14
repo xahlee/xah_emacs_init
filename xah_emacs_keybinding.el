@@ -112,6 +112,7 @@
   (global-set-key (kbd "<menu> <tab> y") 'yas/expand)
   (global-set-key (kbd "<menu> <tab> <tab>") 'indent-for-tab-command)
   (global-set-key (kbd "<menu> <tab> i") 'complete-symbol)
+  (global-set-key (kbd "<menu> <tab> r") 'indent-rigidly)
   )
 
 (progn
@@ -119,23 +120,32 @@
   (define-prefix-command 'xah-menu-space-keymap)
   (global-set-key (kbd "<menu> SPC") xah-menu-space-keymap)
 
+  (global-set-key (kbd "<menu> SPC <menu>") 'xah-open-file-fast)
   (global-set-key (kbd "<menu> SPC SPC") nil)
   (global-set-key (kbd "<menu> SPC <return>") 'xah-run-current-file) ;  1494    0.09%  xah-run-current-file
   (global-set-key (kbd "<menu> SPC <backspace>") 'xah-delete-current-file)
+  (global-set-key (kbd "<menu> SPC <tab>") nil)
+  (global-set-key (kbd "<menu> SPC <delete>") nil)
+  (global-set-key (kbd "<menu> SPC <home>") nil)
+  (global-set-key (kbd "<menu> SPC <end>") nil)
+
   (global-set-key (kbd "<menu> SPC -") 'xah-insert-form-feed)
   (global-set-key (kbd "<menu> SPC .") 'title-case-string-region-or-line)
 
+  (global-set-key (kbd "<menu> SPC 1") 'xah-copy-to-register-1)
+  (global-set-key (kbd "<menu> SPC 2") 'xah-paste-from-register-1)
   (global-set-key (kbd "<menu> SPC 3") 'xah-elisp-mode)
   (global-set-key (kbd "<menu> SPC 4") 'xah-html-mode)
+  (global-set-key (kbd "<menu> SPC 7") nil)
+  (global-set-key (kbd "<menu> SPC 8") nil)
 
-  (global-set-key (kbd "<menu> SPC 7") 'xah-copy-to-register-1)
-  (global-set-key (kbd "<menu> SPC 8") 'xah-paste-from-register-1)
+;; 'xah-open-in-desktop
 
   (global-set-key (kbd "<menu> SPC a") 'ace-jump-mode-pop-mark)
   (global-set-key (kbd "<menu> SPC b") 'xah-shell-commands)
   (global-set-key (kbd "<menu> SPC c") 'xah-cite)
   (global-set-key (kbd "<menu> SPC d") 'insert-date)
-  (global-set-key (kbd "<menu> SPC e") 'xah-find-replace-text)
+  (global-set-key (kbd "<menu> SPC e") nil)
   (global-set-key (kbd "<menu> SPC f") 'xah-find-text)
   (global-set-key (kbd "<menu> SPC g") 'ace-jump-mode)
 
@@ -144,14 +154,14 @@
   (global-set-key (kbd "<menu> SPC i s") 'xah-insert-random-string)
   (global-set-key (kbd "<menu> SPC i u") 'xah-insert-random-uuid)
   (global-set-key (kbd "<menu> SPC i x") 'xah-insert-random-hex)
-  (global-set-key (kbd "<menu> SPC j") 'xah-copy-all)
+  (global-set-key (kbd "<menu> SPC j") nil)
   (global-set-key (kbd "<menu> SPC k") nil)
-  (global-set-key (kbd "<menu> SPC l") 'xah-open-in-desktop)
+  (global-set-key (kbd "<menu> SPC l") nil)
   (global-set-key (kbd "<menu> SPC m") 'magit-status)
   (global-set-key (kbd "<menu> SPC n") nil)
   (global-set-key (kbd "<menu> SPC o") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> SPC p") 'xah-copy-file-path)
-  (global-set-key (kbd "<menu> SPC q") 'xah-cut-all)
+  (global-set-key (kbd "<menu> SPC q") nil)
   (global-set-key (kbd "<menu> SPC r 3") 'xah-escape-quotes)
   (global-set-key (kbd "<menu> SPC r '") 'xah-replace-straight-quotes)
   (global-set-key (kbd "<menu> SPC r ,") 'xah-remove-punctuation-trailing-redundant-space)
@@ -162,7 +172,7 @@
   (global-set-key (kbd "<menu> SPC r w") 'xah-convert-fullwidth-chars)
   (global-set-key (kbd "<menu> SPC s") nil)
   (global-set-key (kbd "<menu> SPC t") nil)
-  (global-set-key (kbd "<menu> SPC u") 'xah-open-file-fast)
+  (global-set-key (kbd "<menu> SPC u") 'xah-find-replace-text)
   (global-set-key (kbd "<menu> SPC v") 'xah-make-backup)
   (global-set-key (kbd "<menu> SPC w") nil)
   (global-set-key (kbd "<menu> SPC y") nil)
@@ -172,7 +182,11 @@
 
 (global-set-key (kbd "<menu> .") 'universal-argument)
 (global-set-key (kbd "<menu> '") nil)
-(global-set-key (kbd "<menu> ,") 'toggle-input-method)
+
+(progn
+  (define-prefix-command 'xah-menu-comma-keymap)
+  (global-set-key (kbd "<menu> ,") xah-menu-comma-keymap)
+  )
 
 (global-set-key (kbd "<menu> -") nil)
 
@@ -188,8 +202,8 @@
 (global-set-key (kbd "<menu> 2") 'delete-window)
 (global-set-key (kbd "<menu> 3") 'delete-other-windows)
 (global-set-key (kbd "<menu> 4") 'split-window-vertically)
-(global-set-key (kbd "<menu> 5") 'beginning-of-buffer)
-(global-set-key (kbd "<menu> 6") 'end-of-buffer)
+(global-set-key (kbd "<menu> 5") nil)
+(global-set-key (kbd "<menu> 6") nil)
 (global-set-key (kbd "<menu> 7") 'ffap)
 (global-set-key (kbd "<menu> 8") 'dired-jump)
 (global-set-key (kbd "<menu> 9") 'ispell-word)
@@ -199,10 +213,7 @@
   (global-set-key (kbd "<menu> a") xah-menu-a-keymap)
   )
 
-(progn
-  (define-prefix-command 'xah-menu-b-keymap)
-  (global-set-key (kbd "<menu> b") xah-menu-b-keymap)
-  )
+  (global-set-key (kbd "<menu> b") 'end-of-buffer)
 
 (progn
   (define-prefix-command 'xah-menu-c-keymap)
@@ -219,10 +230,7 @@
   (global-set-key (kbd "<menu> c p") 'query-replace-regexp)
   )
 
-(progn
-  (define-prefix-command 'xah-menu-d-keymap)
-  (global-set-key (kbd "<menu> d") xah-menu-d-keymap)
-  )
+  (global-set-key (kbd "<menu> d") 'beginning-of-buffer)
 
 (progn
   ;; this is mode-specific
@@ -301,6 +309,8 @@
 (global-set-key (kbd "<menu> m") search-map)
 
 (progn
+  ;; commands here shouldn't change the buffer immediately.
+  ;; they turn on minor/major mode, or prompt
   (define-prefix-command 'xah-menu-n-keymap)
   (global-set-key (kbd "<menu> n") xah-menu-n-keymap)
 
@@ -319,11 +329,12 @@
   (global-set-key (kbd "<menu> n b") 'toggle-debug-on-error)
   (global-set-key (kbd "<menu> n c") 'toggle-case-fold-search)
   (global-set-key (kbd "<menu> n e") 'eshell)
-  (global-set-key (kbd "<menu> n h") 'narrow-to-region)
-  (global-set-key (kbd "<menu> n s") 'flyspell-buffer) ; 306    0.02%  flyspell-buffer
+  (global-set-key (kbd "<menu> n h") 'widen)
+  (global-set-key (kbd "<menu> n n") 'narrow-to-region)
+  (global-set-key (kbd "<menu> n s") 'flyspell-buffer)
   (global-set-key (kbd "<menu> n t") 'narrow-to-defun)
-  (global-set-key (kbd "<menu> n v") 'desktop-save)
-  (global-set-key (kbd "<menu> n w") 'widen)
+  (global-set-key (kbd "<menu> n w") nil)
+
   )
 
 (progn
@@ -346,7 +357,7 @@
   (global-set-key (kbd "<menu> r 3") 'apply-macro-to-region-lines)
   (global-set-key (kbd "<menu> r 4") 'sort-lines)
   (global-set-key (kbd "<menu> r 5") 'sort-numeric-fields)
-  (global-set-key (kbd "<menu> r 6") 'reverse-lines)
+  (global-set-key (kbd "<menu> r 6") 'reverse-region)
   (global-set-key (kbd "<menu> r 7") 'list-matching-lines)
   (global-set-key (kbd "<menu> r 8") 'delete-matching-lines)
   (global-set-key (kbd "<menu> r 9") 'delete-non-matching-lines)
@@ -370,13 +381,27 @@
   (define-prefix-command 'xah-menu-t-keymap)
   (global-set-key (kbd "<menu> t") xah-menu-t-keymap)
 
-  ;; cut, copy, paste
+  (global-set-key (kbd "<menu> t SPC") 'exchange-point-and-mark)
+  (global-set-key (kbd "<menu> t <return>") 'pop-global-mark)
 
-  (global-set-key (kbd "<menu> t SPC") 'pop-global-mark)
-  (global-set-key (kbd "<menu> t <return>") 'exchange-point-and-mark)
+  (global-set-key (kbd "<menu> t 3") 'copy-to-register)
+  (global-set-key (kbd "<menu> t 4") 'insert-register)
+  (global-set-key (kbd "<menu> t 5") 'number-to-register)
+  (global-set-key (kbd "<menu> t 6") 'increment-register)
+  (global-set-key (kbd "<menu> t 7") 'point-to-register)
+  (global-set-key (kbd "<menu> t 8") 'jump-to-register)
+
+  (global-set-key (kbd "<menu> t q") 'xah-cut-line-or-region)
+  (global-set-key (kbd "<menu> t j") 'xah-copy-line-or-region)
+  (global-set-key (kbd "<menu> t k") 'yank)
 
   (global-set-key (kbd "<menu> t t") 'repeat-complex-command)
-  (global-set-key (kbd "<menu> t h") nil)
+  (global-set-key (kbd "<menu> t h") 'repeat)
+
+  (global-set-key (kbd "<menu> t f") 'frame-configuration-to-register)
+  (global-set-key (kbd "<menu> t r") 'copy-rectangle-to-register)
+  (global-set-key (kbd "<menu> t w") 'window-configuration-to-register)
+  (global-set-key (kbd "<menu> t v") 'vc-register)
 
   )
 
@@ -496,89 +521,74 @@
 ;   6077    0.38%  ergoemacs-M-o
 ;;  toggle-input-method
 
-;; C-x r C-@	point-to-register
-;; C-x r SPC	point-to-register
-;; C-x r +		increment-register
-;; C-x r f		frame-configuration-to-register
-;; C-x r g		insert-register
-;; C-x r i		insert-register
-;; C-x r j		jump-to-register
-;; C-x r n		number-to-register
-;; C-x r r		copy-rectangle-to-register
-;; C-x r s		copy-to-register
-;; C-x r w		window-configuration-to-register
-;; C-x r x		copy-to-register
-;; C-x r C-SPC	point-to-register
-;; C-x v i		vc-register
-
 ;; ;; todo add:
   ;; (global-set-key (kbd "<menu> r 4") 'set-mark-command)
 
-;; C-x C-p		mark-page
-;; C-x h		mark-whole-buffer
+;; C-x C-p	mark-page
 
-;; C-x C-b		list-buffers
-;; C-x C-c		save-buffers-kill-terminal
-;; C-x C-d		list-directory
-;; C-x C-e		eval-last-sexp
-;; C-x C-f		find-file
-;; C-x TAB		indent-rigidly
-;; C-x C-k		kmacro-keymap
-;; C-x C-l		downcase-region
-;; C-x RET		Prefix Command
-;; C-x C-n		set-goal-column
-;; C-x C-o		delete-blank-lines
-;; C-x C-q		toggle-read-only
-;; C-x C-r		find-file-read-only
-;; C-x C-t		transpose-lines
-;; C-x C-u		upcase-region
-;; C-x C-v		find-alternate-file
-;; C-x C-w		write-file
-;; C-x C-z		suspend-frame
-;; C-x ESC		Prefix Command
-;; C-x $		set-selective-display
-;; C-x '		expand-abbrev
-;; C-x *		calc-dispatch
-;; C-x -		shrink-window-if-larger-than-buffer
-;; C-x .		set-fill-prefix
+;; C-x C-l	downcase-region
+;; C-x C-u	upcase-region
 
-;; C-x +		balance-windows
-;; C-x 3		split-window-horizontally
+;; C-x C-t	transpose-lines
+;; C-x C-o	delete-blank-lines
+;; C-x C-q	toggle-read-only
 
-;; C-x 4		ctl-x-4-prefix
-;; C-x 5		ctl-x-5-prefix
-;; C-x 6		2C-command
-;; C-x 8		Prefix Command
-;; C-x ;		comment-set-column
-;; C-x <		scroll-left
-;; C-x =		what-cursor-position
-;; C-x >		scroll-right
-;; C-x [		backward-page
-;; C-x ]		forward-page
-;; C-x ^		enlarge-window
-;; C-x `		next-error
-;; C-x a		Prefix Command
-;; C-x d		dired
-;; C-x e		kmacro-end-and-call-macro
-;; C-x f		set-fill-column
-;; C-x i		insert-file
-;; C-x k		kill-buffer
-;; C-x l		count-lines-page
-;; C-x m		compose-mail
-;; C-x n		Prefix Command
-;; C-x o		other-window
-;; C-x q		kbd-macro-query
-;; C-x r		Prefix Command
-;; C-x s		save-some-buffers
+;; C-x C-f	find-file
+;; C-x C-r	find-file-read-only
+;; C-x C-v	find-alternate-file
+;; C-x C-w	write-file
 
-;; C-x v		vc-prefix-map
-;; C-x {		shrink-window-horizontally
-;; C-x }		enlarge-window-horizontally
-;; C-x DEL		backward-kill-sentence
-;; C-x C-+		text-scale-adjust
-;; C-x C--		text-scale-adjust
-;; C-x C-0		text-scale-adjust
-;; C-x C-=		text-scale-adjust
+;; C-x d	dired
+
+;; C-x e	kmacro-end-and-call-macro
+;; C-x q	kbd-macro-query
+;; C-x C-k	kmacro-keymap
+
+
+;; C-x C-c	save-buffers-kill-terminal
+;; C-x C-d	list-directory
+;; C-x C-n	set-goal-column
+;; C-x C-z	suspend-frame
+;; C-x ESC	Prefix Command
+;; C-x $	set-selective-display
+;; C-x '	expand-abbrev
+;; C-x *	calc-dispatch
+;; C-x -	shrink-window-if-larger-than-buffer
+;; C-x .	set-fill-prefix
+
+;; C-x +	balance-windows
+;; C-x 3	split-window-horizontally
+
+;; C-x 4	ctl-x-4-prefix
+;; C-x 5	ctl-x-5-prefix
+;; C-x 6	2C-command
+;; C-x 8	Prefix Command
+;; C-x ;	comment-set-column
+;; C-x <	scroll-left
+;; C-x =	what-cursor-position
+;; C-x >	scroll-right
+;; C-x [	backward-page
+;; C-x ]	forward-page
+;; C-x ^	enlarge-window
+;; C-x `	next-error
+;; C-x f	set-fill-column
+;; C-x i	insert-file
+;; C-x k	kill-buffer
+;; C-x l	count-lines-page
+;; C-x m	compose-mail
+;; C-x n	Prefix Command
+;; C-x o	other-window
+;; C-x r	Prefix Command
+;; C-x s	save-some-buffers
+
+;; C-x v	vc-prefix-map
+;; C-x {	shrink-window-horizontally
+;; C-x }	enlarge-window-horizontally
+;; C-x DEL	backward-kill-sentence
+;; C-x C-+	text-scale-adjust
+;; C-x C--	text-scale-adjust
+;; C-x C-0	text-scale-adjust
+;; C-x C-=	text-scale-adjust
 ;; C-x <C-left>	previous-buffer
 ;; C-x <C-right>	next-buffer
 ;; C-x <left>	previous-buffer
@@ -621,85 +631,77 @@
 
 ;; C-x 4 C-f	find-file-other-window
 ;; C-x 4 C-o	display-buffer
-;; C-x 4 .		find-tag-other-window
-;; C-x 4 0		kill-buffer-and-window
-;; C-x 4 a		add-change-log-entry-other-window
-;; C-x 4 b		switch-to-buffer-other-window
-;; C-x 4 c		clone-indirect-buffer-other-window
-;; C-x 4 d		dired-other-window
-;; C-x 4 f		find-file-other-window
-;; C-x 4 m		compose-mail-other-window
-;; C-x 4 r		find-file-read-only-other-window
+;; C-x 4 .	find-tag-other-window
+;; C-x 4 0	kill-buffer-and-window
+;; C-x 4 a	add-change-log-entry-other-window
+;; C-x 4 b	switch-to-buffer-other-window
+;; C-x 4 c	clone-indirect-buffer-other-window
+;; C-x 4 d	dired-other-window
+;; C-x 4 f	find-file-other-window
+;; C-x 4 m	compose-mail-other-window
+;; C-x 4 r	find-file-read-only-other-window
 
 ;; C-x 5 C-f	find-file-other-frame
 ;; C-x 5 C-o	display-buffer-other-frame
-;; C-x 5 .		find-tag-other-frame
-;; C-x 5 0		delete-frame
-;; C-x 5 1		delete-other-frames
-;; C-x 5 2		make-frame-command
-;; C-x 5 b		switch-to-buffer-other-frame
-;; C-x 5 d		dired-other-frame
-;; C-x 5 f		find-file-other-frame
-;; C-x 5 m		compose-mail-other-frame
-;; C-x 5 o		other-frame
-;; C-x 5 r		find-file-read-only-other-frame
+;; C-x 5 .	find-tag-other-frame
+;; C-x 5 0	delete-frame
+;; C-x 5 1	delete-other-frames
+;; C-x 5 2	make-frame-command
+;; C-x 5 b	switch-to-buffer-other-frame
+;; C-x 5 d	dired-other-frame
+;; C-x 5 f	find-file-other-frame
+;; C-x 5 m	compose-mail-other-frame
+;; C-x 5 o	other-frame
+;; C-x 5 r	find-file-read-only-other-frame
 
-;; C-x 6 2		2C-two-columns
-;; C-x 6 b		2C-associate-buffer
-;; C-x 6 s		2C-split
+;; C-x 6 2	2C-two-columns
+;; C-x 6 b	2C-associate-buffer
+;; C-x 6 s	2C-split
 ;; C-x 6 <f2>	2C-two-columns
 ;; C-x 8 RET	ucs-insert
 ;; C-x a C-a	add-mode-abbrev
-;; C-x a '		expand-abbrev
-;; C-x a +		add-mode-abbrev
-;; C-x a -		inverse-add-global-abbrev
-;; C-x a e		expand-abbrev
-;; C-x a g		add-global-abbrev
-;; C-x a i		Prefix Command
-;; C-x a l		add-mode-abbrev
-;; C-x a n		expand-jump-to-next-slot
-;; C-x a p		expand-jump-to-previous-slot
+;; C-x a '	expand-abbrev
+;; C-x a +	add-mode-abbrev
+;; C-x a -	inverse-add-global-abbrev
+;; C-x a e	expand-abbrev
+;; C-x a g	add-global-abbrev
+;; C-x a i	Prefix Command
+;; C-x a l	add-mode-abbrev
+;; C-x a n	expand-jump-to-next-slot
+;; C-x a p	expand-jump-to-previous-slot
 
-;; C-x n p		narrow-to-page
+;; C-x n p	narrow-to-page
 
-;; C-x r b		bookmark-jump
-;; C-x r l		bookmark-bmenu-list
-;; C-x r m		bookmark-set
+;; C-x r b	bookmark-jump
+;; C-x r l	bookmark-bmenu-list
+;; C-x r m	bookmark-set
 
-;; C-x v +		vc-update
-;; C-x v =		vc-diff
-;; C-x v D		vc-root-diff
-;; C-x v L		vc-print-root-log
-;; C-x v a		vc-update-change-log
-;; C-x v b		vc-switch-backend
-;; C-x v c		vc-rollback
-;; C-x v d		vc-dir
-;; C-x v g		vc-annotate
-;; C-x v h		vc-insert-headers
-;; C-x v l		vc-print-log
-;; C-x v m		vc-merge
-;; C-x v r		vc-retrieve-tag
-;; C-x v s		vc-create-tag
-;; C-x v u		vc-revert
-;; C-x v v		vc-next-action
-;; C-x v ~		vc-revision-other-window
+;; C-x v +	vc-update
+;; C-x v =	vc-diff
+;; C-x v D	vc-root-diff
+;; C-x v L	vc-print-root-log
+;; C-x v a	vc-update-change-log
+;; C-x v b	vc-switch-backend
+;; C-x v c	vc-rollback
+;; C-x v d	vc-dir
+;; C-x v g	vc-annotate
+;; C-x v h	vc-insert-headers
+;; C-x v l	vc-print-log
+;; C-x v m	vc-merge
+;; C-x v r	vc-retrieve-tag
+;; C-x v s	vc-create-tag
+;; C-x v u	vc-revert
+;; C-x v v	vc-next-action
+;; C-x v ~	vc-revision-other-window
+
 ;; C-x a i g	inverse-add-global-abbrev
 ;; C-x a i l	inverse-add-mode-abbrev
-;; C-x		Prefix Command
-;; C-x @		Prefix Command
-;; C-x @ S		event-apply-shift-modifier
-;; C-x @ a		event-apply-alt-modifier
-;; C-x @ c		event-apply-control-modifier
-;; C-x @ h		event-apply-hyper-modifier
-;; C-x @ m		event-apply-meta-modifier
-;; C-x @ s		event-apply-super-modifier
 
 ;; ;; todo
 ;; select all, copy all, open, those standard keys
 
 ;; • add all emacs commands to my key sequence system
-;; add rectangle commands, register
-
-;; C-x z		repeat
 
 ;; 'quoted-insert
+
+;; 'toggle-input-method

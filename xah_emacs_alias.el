@@ -13,7 +13,7 @@
 (defalias 'sl 'sort-lines)
 (defalias 'snf 'sort-numeric-fields)
 (defalias 'g 'grep)
-(defalias 'dsm 'delete-selection-mode)
+(defalias 'ds 'desktop-save)
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
