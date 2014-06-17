@@ -37,7 +37,7 @@ Requires ImageMagick shell tool."
        ))
    φfile-list ))
 
-(defun xah-dired-scale-image (φfile-list φscale-percentage φsharpen-p)
+(defun xah-dired-scale-image (φfile-list φscale-percentage φsharpen?)
   "Create a scaled version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
@@ -46,7 +46,7 @@ If `universal-argument' is given, output is PNG format. Else, JPG.
 When called in lisp code,
  φfile-list is a list.
  φscale-percentage is a integer.
- φsharpen-p is true or false.
+ φsharpen? is true or false.
 
 Requires ImageMagick unix shell tool."
   (interactive
@@ -61,7 +61,7 @@ Requires ImageMagick unix shell tool."
            (y-or-n-p "Sharpen")
            ) )
    )
-  (let ((sharpenOrNo (if φsharpen-p "-sharpen 1" "" ))
+  (let ((sharpenOrNo (if φsharpen? "-sharpen 1" "" ))
         (outputSuffix (if current-prefix-arg ".png" ".jpg" ) )
         )
     (xah-process-image φfile-list

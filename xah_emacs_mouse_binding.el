@@ -42,4 +42,3 @@
 
  ((string-equal system-type "darwin") ; Mac
   (global-set-key (kbd "<mouse-5>") 'xah-close-current-buffer) ) )
-

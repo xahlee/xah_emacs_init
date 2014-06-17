@@ -76,7 +76,7 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
 
-(defun xahsite-is-link-to-xahsite-p (φ-href-value)
+(defun xahsite-is-link-to-xahsite? (φ-href-value)
   "Returns true if φ-href-value points to a xah website, else false.
 
 φ-href-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.

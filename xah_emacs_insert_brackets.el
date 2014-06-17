@@ -15,7 +15,7 @@
 
 If there's a text selection, insert brackets around it.
 If there's no text selection:
-  If cursor has alphanumeric char before or after, insert brackets around current word.
+  If the char before cursor is alphanumeric, insert brackets around current word.
   else, insert brackets.
 
 Alphanumeric char here includes hyphen and underscore.
@@ -36,7 +36,7 @@ The argument φleft-bracket φright-bracket are strings."
     (progn ; no text selection
       (if (or
            (looking-at "[_-A-Za-z0-9]")
-           (looking-back "[_-A-Za-z0-9]")
+           ;; (looking-back "[_-A-Za-z0-9]")
            )
           (progn
             (let* (

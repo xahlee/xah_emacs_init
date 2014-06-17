@@ -710,4 +710,28 @@ then call this command."
                )
               (insert (format "<mark class=\"unicode\" title=\"%s: %s\">%c</mark>\n" ξu-notation ξname ξchar))))))
 
+(defun xah-redo-syntax-coloring-html (φlang-code)
+  "temp. redo pre lang code syntax coloring in current html page."
+  (interactive)
+
+    ;; get φlang-code if called interactively
+    ;; move cursor to inside <pre class="js">
+    ;; call xhm-dehtmlize-precode
+    ;; call xhm-htmlize-precode
+    ;; repeat
+
+(let (langCode p1 p2)
+    (save-excursion
+(goto-char (point-min))
+      (re-search-forward "<pre class=\"\\([-A-Za-z0-9]+\\)\"") ; tag begin position
+      (setq langCode (match-string 1))
+      (setq p1 (search-forward ">")) ; text content begin
+      (backward-char 1)
+      (xhm-skip-tag-forward)
+      (setq p2 (search-backward "</pre>")) ; text content end
+      (vector langCode p1 p2)))
+
+  )
+
+
 

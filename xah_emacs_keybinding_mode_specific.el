@@ -63,7 +63,6 @@ For `isearch-mode-hook'."
   ;; .p gc
   ;; eu ht
 
-  (local-set-key (kbd "<tab>") (make-keymap))
   (local-set-key (kbd "<tab> '") nil)
   (local-set-key (kbd "<tab> ,") nil)
   (local-set-key (kbd "<tab> 1") nil)
