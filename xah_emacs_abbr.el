@@ -10,7 +10,8 @@
 
 ;; (clear-abbrev-table global-abbrev-table)
 
-(define-abbrev-table 'global-abbrev-table '(
+(define-abbrev-table 'global-abbrev-table 
+  '(
 
     ("eg" "⁖")
     ("mac" "Mac")
@@ -31,124 +32,124 @@
 
     ("8rsi" "Repetitive Strain Injury")
 
-;; ;    ("t" "the")                         ; problem with “doesn't ”
-;; ;    ("2" "to")                          ; problem with just enter a number
-;;     ("o" "of")
-;;     ("n" "and")
-;;     ("ta" "that")
-;;     ("h" "have")
-;; ;    ("4" "for")
-;;     ("u" "you")
-;;     ("w" "with")
-;;     ("b" "but")
+    ;; ;    ("t" "the")                         ; problem with “doesn't ”
+    ;; ;    ("2" "to")                          ; problem with just enter a number
+    ;;     ("o" "of")
+    ;;     ("n" "and")
+    ;;     ("ta" "that")
+    ;;     ("h" "have")
+    ;; ;    ("4" "for")
+    ;;     ("u" "you")
+    ;;     ("w" "with")
+    ;;     ("b" "but")
 
     ("comm" "communication")
 
-;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
-;("t" "the") ; 1
+    ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
+ ;("t" "the") ; 1
 ;;; ("t" "be") ; 2
-;("2" "to")
+ ;("2" "to")
 ;;; ("t" "of") ; 4
-;("n" "and")
+ ;("n" "and")
 ;;; ("t" "a") ; 6
 ;;; ("t" "in") ; 7
-;("h" "that")
-;("v" "have")
+ ;("h" "that")
+ ;("v" "have")
 ;;; ("t" "I") ; 10
 ;;; ("t" "it") ; 11
-;("4" "for")
-;("8" "not")
-;; ("t" "on") ; 14
-;("w" "with") ; 15
-;; ("t" "he") ; 16
-;; ("t" "as") ; 17
-;("u" "you") ; 18
-;; ("t" "do") ; 19
-;; ("t" "at") ; 20
-;; ("t" "this") ; 21
-;("b" "but") ; 22
-;; ("t" "his") ; 23
-;; ("t" "by") ; 24
-;; ("t" "from") ; 25
-;; ("t" "they") ; 26
-;; ("t" "we") ; 27
-;; ("t" "say") ; 28
-;; ("t" "her") ; 29
-;; ("t" "she") ; 30
-;; ("t" "or") ; 31
-;; ("t" "an") ; 32
-;; ("t" "will") ; 33
-;; ("t" "my") ; 34
-;; ("t" "one") ; 35
-;; ("t" "all") ; 36
-;; ("t" "would") ; 37
-;; ("t" "there") ; 38
-;; ("t" "their") ; 39
-;; ("t" "what") ; 40
-;; ("t" "so") ; 41
-;; ("t" "up") ; 42
-;; ("t" "out") ; 43
-;; ("t" "if") ; 44
-;; ("t" "about") ; 45
-;; ("t" "who") ; 46
-;; ("t" "get") ; 47
-;; ("t" "which") ; 48
-;; ("t" "go") ; 49
-;; ("t" "me") ; 50
-;; ("t" "when") ; 51
-;; ("t" "make") ; 52
-;; ("t" "can") ; 53
-;; ("t" "like") ; 54
-;; ("t" "time") ; 55
-;; ("t" "no") ; 56
-;; ("t" "just") ; 57
-;; ("t" "him") ; 58
-;; ("t" "know") ; 59
-;; ("t" "take") ; 60
-;("pp" "people") ; 61
-;; ("t" "into") ; 62
-;; ("t" "year") ; 63
-;; ("t" "your") ; 64
-;; ("t" "good") ; 65
-;; ("t" "some") ; 66
-;; ("t" "could") ; 67
-;; ("t" "them") ; 68
-;; ("t" "see") ; 69
-;; ("t" "other") ; 70
-;; ("t" "than") ; 71
-;; ("t" "then") ; 72
-;; ("t" "now") ; 73
-;; ("t" "look") ; 74
-;; ("t" "only") ; 75
-;; ("t" "come") ; 76
-;; ("t" "its") ; 77
-;; ("t" "over") ; 78
-;; ("t" "think") ; 79
-;; ("t" "also") ; 80
-;; ("t" "back") ; 81
-;; ("t" "after") ; 82
-;; ("t" "use") ; 83
-;; ("t" "two") ; 84
-;; ("t" "how") ; 85
-;; ("t" "our") ; 86
-;; ("t" "work") ; 87
-;; ("t" "first") ; 88
-;; ("t" "well") ; 89
-;; ("t" "way") ; 90
-;; ("t" "even") ; 91
-;; ("t" "new") ; 92
-;; ("t" "want") ; 93
-;("bc" "because")
-;; ("t" "any") ; 95
-;; ("t" "these") ; 96
-; ("t" "give") ; 97
-; ("t" "day") ; 98
-; ("t" "most") ; 99
-; ("t" "us") ; 100
+ ;("4" "for")
+ ;("8" "not")
+    ;; ("t" "on") ; 14
+ ;("w" "with") ; 15
+    ;; ("t" "he") ; 16
+    ;; ("t" "as") ; 17
+ ;("u" "you") ; 18
+    ;; ("t" "do") ; 19
+    ;; ("t" "at") ; 20
+    ;; ("t" "this") ; 21
+ ;("b" "but") ; 22
+    ;; ("t" "his") ; 23
+    ;; ("t" "by") ; 24
+    ;; ("t" "from") ; 25
+    ;; ("t" "they") ; 26
+    ;; ("t" "we") ; 27
+    ;; ("t" "say") ; 28
+    ;; ("t" "her") ; 29
+    ;; ("t" "she") ; 30
+    ;; ("t" "or") ; 31
+    ;; ("t" "an") ; 32
+    ;; ("t" "will") ; 33
+    ;; ("t" "my") ; 34
+    ;; ("t" "one") ; 35
+    ;; ("t" "all") ; 36
+    ;; ("t" "would") ; 37
+    ;; ("t" "there") ; 38
+    ;; ("t" "their") ; 39
+    ;; ("t" "what") ; 40
+    ;; ("t" "so") ; 41
+    ;; ("t" "up") ; 42
+    ;; ("t" "out") ; 43
+    ;; ("t" "if") ; 44
+    ;; ("t" "about") ; 45
+    ;; ("t" "who") ; 46
+    ;; ("t" "get") ; 47
+    ;; ("t" "which") ; 48
+    ;; ("t" "go") ; 49
+    ;; ("t" "me") ; 50
+    ;; ("t" "when") ; 51
+    ;; ("t" "make") ; 52
+    ;; ("t" "can") ; 53
+    ;; ("t" "like") ; 54
+    ;; ("t" "time") ; 55
+    ;; ("t" "no") ; 56
+    ;; ("t" "just") ; 57
+    ;; ("t" "him") ; 58
+    ;; ("t" "know") ; 59
+    ;; ("t" "take") ; 60
+ ;("pp" "people") ; 61
+    ;; ("t" "into") ; 62
+    ;; ("t" "year") ; 63
+    ;; ("t" "your") ; 64
+    ;; ("t" "good") ; 65
+    ;; ("t" "some") ; 66
+    ;; ("t" "could") ; 67
+    ;; ("t" "them") ; 68
+    ;; ("t" "see") ; 69
+    ;; ("t" "other") ; 70
+    ;; ("t" "than") ; 71
+    ;; ("t" "then") ; 72
+    ;; ("t" "now") ; 73
+    ;; ("t" "look") ; 74
+    ;; ("t" "only") ; 75
+    ;; ("t" "come") ; 76
+    ;; ("t" "its") ; 77
+    ;; ("t" "over") ; 78
+    ;; ("t" "think") ; 79
+    ;; ("t" "also") ; 80
+    ;; ("t" "back") ; 81
+    ;; ("t" "after") ; 82
+    ;; ("t" "use") ; 83
+    ;; ("t" "two") ; 84
+    ;; ("t" "how") ; 85
+    ;; ("t" "our") ; 86
+    ;; ("t" "work") ; 87
+    ;; ("t" "first") ; 88
+    ;; ("t" "well") ; 89
+    ;; ("t" "way") ; 90
+    ;; ("t" "even") ; 91
+    ;; ("t" "new") ; 92
+    ;; ("t" "want") ; 93
+ ;("bc" "because")
+    ;; ("t" "any") ; 95
+    ;; ("t" "these") ; 96
+ ; ("t" "give") ; 97
+ ; ("t" "day") ; 98
+ ; ("t" "most") ; 99
+ ; ("t" "us") ; 100
 
-; ("tm" "time")
-; ("g" "good")
-; ("ipt" "important")
+ ; ("tm" "time")
+ ; ("g" "good")
+ ; ("ipt" "important")
 
     ("8trad" "traditional")
     ("8addr" "address")
@@ -223,7 +224,7 @@
     ("8el" "emacs lisp")
     ("8os" "Operating System")
 
-;; for programers
+    ;; for programers
     ("8hex" "hexadecimal")
     ("8ui" "user interface")
     ("8gui" "graphical user interface")
@@ -261,7 +262,7 @@
     ("8db" "database")
     ("8oop" "object oriented programing")
 
- ;; emacs lisp
+    ;; emacs lisp
     ("8date" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)")
     ("8d" "\\([0-9]+\\)")
     ("8dot" "\\(.\\)")
@@ -271,7 +272,7 @@
     ("8tag" "\\([</>=\" A-Za-z0-9]+\\)")
     ("8az" "\\([A-Za-z0-9]+\\)")
 
- ;; ruby comment
+    ;; ruby comment
     ("8rc" "=begin\n\n=end")
 
     ("8tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
@@ -283,78 +284,78 @@
     ("8u" "-*- coding: utf-8 -*-")
     ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
-;; css
-("8white" "#ffffff")
-("8silver" "#c0c0c0")
-("8gray" "#808080")
-("8black" "#000000")
-("8red" "#ff0000")
-("8maroon" "#800000")
-("8yellow" "#ffff00")
-("8olive" "#808000")
-("8lime" "#00ff00")
-("8green" "#008000")
-("8aqua" "#00ffff")
-("8teal" "#008080")
-("8blue" "#0000ff")
-("8navy" "#000080")
-("8fuchsia" "#ff00ff")
-("8purple" "#800080")
-("8orange" "#ffa500")
-("8hsl" "hsl(0,100%,50%)")
+    ;; css
+    ("8white" "#ffffff")
+    ("8silver" "#c0c0c0")
+    ("8gray" "#808080")
+    ("8black" "#000000")
+    ("8red" "#ff0000")
+    ("8maroon" "#800000")
+    ("8yellow" "#ffff00")
+    ("8olive" "#808000")
+    ("8lime" "#00ff00")
+    ("8green" "#008000")
+    ("8aqua" "#00ffff")
+    ("8teal" "#008080")
+    ("8blue" "#0000ff")
+    ("8navy" "#000080")
+    ("8fuchsia" "#ff00ff")
+    ("8purple" "#800080")
+    ("8orange" "#ffa500")
+    ("8hsl" "hsl(0,100%,50%)")
 
-;; HTML
-("8cmt" "<!-- \n -->")
-("8html5" "<!DOCTYPE html>")
-("8html4s" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")
-("8html4t" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">")
-("8xhtml" "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">")
-("8html" "<!doctype html><html><head><meta charset=\"utf-8\" />
+    ;; HTML
+    ("8cmt" "<!-- \n -->")
+    ("8html5" "<!DOCTYPE html>")
+    ("8html4s" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")
+    ("8html4t" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">")
+    ("8xhtml" "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">")
+    ("8html" "<!doctype html><html><head><meta charset=\"utf-8\" />
 <title>ttt</title>
 </head>
 <body>
 
 </body>
 </html>")
-("8php" "<?php\n\n?>")
-("8sb" "<div class=\"section\">⁂</div>")
+    ("8php" "<?php\n\n?>")
+    ("8sb" "<div class=\"section\">⁂</div>")
 
-("8c" "class=\"\"")
-("8bq" "blockquote")
-("8w" "width")
-("8h" "height")
-("8bgc" "background-color")
+    ("8c" "class=\"\"")
+    ("8bq" "blockquote")
+    ("8w" "width")
+    ("8h" "height")
+    ("8bgc" "background-color")
 
-("8fg" "<figure>\n<figcaption>\n</figcaption>\n</figure>")
-("8fc" "<figcaption>\n</figcaption>")
-("8faq" "<div class=\"a\">
+    ("8fg" "<figure>\n<figcaption>\n</figcaption>\n</figure>")
+    ("8fc" "<figcaption>\n</figcaption>")
+    ("8faq" "<div class=\"a\">
 <p class=\"q\">How to do this?</p>
 <p>this way</p>
 </div>
 
 ")
-("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
-("8css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
+    ("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
+    ("8css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
 
-;; JavaScript
-("3c" "console.log();")
-("3f" "function (x) {return 3;}")
-("3v" "var = ;")
+    ;; JavaScript
+    ("3c" "console.log();")
+    ("3f" "function (x) {return 3;}")
+    ("3v" "var = ;")
 
-
+    
 ;;; unix shell
 
-; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/
+ ; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/
 
-; rsync -r -v -t --delete --rsh="ssh -l xah" ~/web/ xah@169.254.153.147:~/web/
+ ; rsync -r -v -t --delete --rsh="ssh -l xah" ~/web/ xah@169.254.153.147:~/web/
 
-; rsync -r -v -t --delete --exclude="**/My *" --rsh="ssh -l xah" ~/Documents/ xah@169.254.153.147:~/Documents/
+ ; rsync -r -v -t --delete --exclude="**/My *" --rsh="ssh -l xah" ~/Documents/ xah@169.254.153.147:~/Documents/
 
-; unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web
-; sftp u40651120@s168753655.onlinehome.us
-;
+ ; unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web
+ ; sftp u40651120@s168753655.onlinehome.us
+ ;
 
-
+    
 ;;; xah personal
     ("8ee" "ErgoEmacs")
     ("8em" "ergoemacs-mode")
@@ -371,60 +372,61 @@ MSN: p0lyglut@yahoo.com or xahlee
 Second Life: Xah Toll
 ")
 
-;; xah url
-("8xs" " Xah Lee
+    ;; xah url
+    ("8xs" " Xah Lee
  xahlee@gmail.com
  408 470 0213
  http://xahlee.org/
  US citizen.
  Mountain View, CA.")
 
-("8wec" "wordyenglish_com")
+    ("8wec" "wordyenglish_com")
 
-("8uwe" "http://wordyenglish.com/")
-("8uxa" "http://xaharts.org/")
-("8uxl" "http://xahlee.org/")
-("8uxli" "http://xahlee.info/")
-("8uxm" "http://xahmusic.org/")
-("8uxp" "http://xahporn.org/")
-("8uxsl" "http://xahsl.org/")
-("8uunicode" "http://xahlee.info/comp/unicode_index.html")
+    ("8uwe" "http://wordyenglish.com/")
+    ("8uxa" "http://xaharts.org/")
+    ("8uxl" "http://xahlee.org/")
+    ("8uxli" "http://xahlee.info/")
+    ("8uxm" "http://xahmusic.org/")
+    ("8uxp" "http://xahporn.org/")
+    ("8uxsl" "http://xahsl.org/")
+    ("8uunicode" "http://xahlee.info/comp/unicode_index.html")
 
-("8uvmm" "http://VirtualMathMuseum.org/")
-("8u3dxm" "http://3D-XplorMath.org/")
+    ("8uvmm" "http://VirtualMathMuseum.org/")
+    ("8u3dxm" "http://3D-XplorMath.org/")
 
-("8uvi" "http://ergoemacs.org/emacs/emergency_vi.html")
-("8uemacs" "http://ergoemacs.org/emacs/emacs.html")
-("8uelisp" "http://ergoemacs.org/emacs/elisp.html")
-("8uahk" "http://xahlee.info/mswin/autohotkey.html")
-("8ueek" "http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html")
-("8uhtml" "http://xahlee.info/js/index.html")
+    ("8uvi" "http://ergoemacs.org/emacs/emergency_vi.html")
+    ("8uemacs" "http://ergoemacs.org/emacs/emacs.html")
+    ("8uelisp" "http://ergoemacs.org/emacs/elisp.html")
+    ("8uahk" "http://xahlee.info/mswin/autohotkey.html")
+    ("8ueek" "http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html")
+    ("8uhtml" "http://xahlee.info/js/index.html")
+    ("8uem" "http://ergoemacs.github.io/ergoemacs-mode/")
 
-("8ulang" "<a href=\"../java-a-day/java.html\">Java</a>
+    ("8ulang" "<a href=\"../java-a-day/java.html\">Java</a>
 <a href=\"../python/python3_basics.html\">Python</a>
 <a href=\"../ruby/ruby_basics.html\">Ruby</a>
 <a href=\"../perl-python/perl_basics.html\">Perl</a>
 <a href=\"../php/php_basics.html\">PHP</a>
 <a href=\"http://ergoemacs.org/emacs/elisp.html\">Emacs Lisp</a>")
 
-("8uapache" "http://xahlee.info/linux/apache_tutorial.html")
-("8uperl" "http://xahlee.info/perl-python/perl_basics.html")
-("8upython" "http://xahlee.info/python/python3_basics.html")
-("8uruby" "http://xahlee.info/ruby/ruby_basics.html")
-("8ujs" "http://xahlee.info/js/javascript_basics.html")
-("8uphp" "http://xahlee.info/php/php_basics.html")
-("8ucss" "http://xahlee.info/js/css_index.html")
-("8udvorak" "http://xahlee.info/comp/dvorak_keyboard_layout.html")
+    ("8uapache" "http://xahlee.info/linux/apache_tutorial.html")
+    ("8uperl" "http://xahlee.info/perl-python/perl_basics.html")
+    ("8upython" "http://xahlee.info/python/python3_basics.html")
+    ("8uruby" "http://xahlee.info/ruby/ruby_basics.html")
+    ("8ujs" "http://xahlee.info/js/javascript_basics.html")
+    ("8uphp" "http://xahlee.info/php/php_basics.html")
+    ("8ucss" "http://xahlee.info/js/css_index.html")
+    ("8udvorak" "http://xahlee.info/comp/dvorak_keyboard_layout.html")
 
-("8ute" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html")
+    ("8ute" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html")
 
-("8uocaml" "http://xahlee.info/ocaml/ocaml.html")
-("8ups" "http://xahlee.info/powershell/index.html")
-("8umma" "http://xahlee.info/M/index.html")
-("8ujava" "http://xahlee.info/java-a-day/java.html")
-("8utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")
+    ("8uocaml" "http://xahlee.info/ocaml/ocaml.html")
+    ("8ups" "http://xahlee.info/powershell/index.html")
+    ("8umma" "http://xahlee.info/M/index.html")
+    ("8ujava" "http://xahlee.info/java-a-day/java.html")
+    ("8utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")
 
-))
+    ))
 
 
 ;;; stop asking whether to save newly added abbrev when quitting emacs

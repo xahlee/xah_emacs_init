@@ -33,7 +33,7 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
     (setq altText (replace-regexp-in-string "_" " " altText t t))
     (setq altText (replace-regexp-in-string "-s$" "" altText))
 
-    (if (xahsite-is-link-to-xahsite? (file-relative-name ξfp (or (buffer-file-name) default-directory) ) )
+    (if (xahsite-is-link-to-xahsite-p (file-relative-name ξfp (or (buffer-file-name) default-directory) ) )
         (progn
           (if (file-exists-p ξfp)
               (let (ξwh ξw ξh ξwhStr)

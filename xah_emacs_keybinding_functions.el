@@ -26,8 +26,9 @@ If `narrow-to-region' is in effect, then copy that region only."
   "Cut the whole buffer content into the `kill-ring'.
 If `narrow-to-region' is in effect, then cut that region only."
   (interactive)
-  (kill-region (point-min) (point-max))
-  (message "Buffer content cut"))
+  (kill-new (buffer-string))
+  (delete-region (point-min) (point-max) )
+  )
 
 (defun xah-shrink-whitespaces ()
   "Remove white spaces around cursor to just one or none.
@@ -344,11 +345,11 @@ The app is chosen from your OS's preference."
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((not φfile) (list (buffer-file-name)))
            (φfile (list φfile)))))
-    
+
     (setq ξdoIt (if (<= (length ξfileList) 5)
                    t
                  (y-or-n-p "Open more than 5 files? ") ) )
-    
+
     (when ξdoIt
       (cond
        ((string-equal system-type "windows-nt")

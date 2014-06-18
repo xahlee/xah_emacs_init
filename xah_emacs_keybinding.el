@@ -121,7 +121,10 @@
   (global-set-key (kbd "<menu> SPC") xah-menu-space-keymap)
 
   (global-set-key (kbd "<menu> SPC <menu>") 'xah-open-file-fast)
-  (global-set-key (kbd "<menu> SPC SPC") nil)
+  (global-set-key (kbd "<menu> SPC SPC e") 'xah-elisp-mode)
+  (global-set-key (kbd "<menu> SPC SPC h") 'xah-html-mode)
+  (global-set-key (kbd "<menu> SPC SPC j") 'xah-js-mode)
+  (global-set-key (kbd "<menu> SPC SPC c") 'xah-css-mode)
   (global-set-key (kbd "<menu> SPC <return>") 'xah-run-current-file) ;  1494    0.09%  xah-run-current-file
   (global-set-key (kbd "<menu> SPC <backspace>") 'xah-delete-current-file)
   (global-set-key (kbd "<menu> SPC <tab>") nil)
@@ -138,8 +141,6 @@
   (global-set-key (kbd "<menu> SPC 4") nil)
   (global-set-key (kbd "<menu> SPC 7") nil)
   (global-set-key (kbd "<menu> SPC 8") nil)
-
-;; 'xah-open-in-desktop
 
   (global-set-key (kbd "<menu> SPC a") 'ace-jump-mode-pop-mark)
   (global-set-key (kbd "<menu> SPC b") 'xah-shell-commands)
@@ -158,7 +159,7 @@
   (global-set-key (kbd "<menu> SPC k") nil)
   (global-set-key (kbd "<menu> SPC l") nil)
   (global-set-key (kbd "<menu> SPC m") 'magit-status)
-  (global-set-key (kbd "<menu> SPC n") nil)
+  (global-set-key (kbd "<menu> SPC n") 'xah-make-backup)
   (global-set-key (kbd "<menu> SPC o") 'xah-open-file-from-clipboard)
   (global-set-key (kbd "<menu> SPC p") 'xah-copy-file-path)
   (global-set-key (kbd "<menu> SPC q") nil)
@@ -173,7 +174,7 @@
   (global-set-key (kbd "<menu> SPC s") nil)
   (global-set-key (kbd "<menu> SPC t") nil)
   (global-set-key (kbd "<menu> SPC u") 'xah-find-replace-text)
-  (global-set-key (kbd "<menu> SPC v") 'xah-make-backup)
+  (global-set-key (kbd "<menu> SPC v") nil)
   (global-set-key (kbd "<menu> SPC w") nil)
   (global-set-key (kbd "<menu> SPC y") nil)
   (global-set-key (kbd "<menu> SPC z") 'xah-toggle-read-novel-mode)
@@ -221,6 +222,7 @@
   (global-set-key (kbd "<menu> c SPC") nil)
   (global-set-key (kbd "<menu> c <return>") nil)
 
+  (global-set-key (kbd "<menu> c o") 'xah-open-in-desktop)
   (global-set-key (kbd "<menu> c c") 'bookmark-bmenu-list)
   (global-set-key (kbd "<menu> c u") nil)
   (global-set-key (kbd "<menu> c e") nil)
@@ -247,7 +249,6 @@
 (global-set-key (kbd "<menu> g") 'isearch-forward)
 
 (progn
-
   (define-prefix-command 'xah-menu-h-keymap)
   (global-set-key (kbd "<menu> h") xah-menu-h-keymap)
   (global-set-key (kbd "<menu> h 1") nil)
@@ -316,11 +317,7 @@
 
   (global-set-key (kbd "<menu> n SPC") nil)
   (global-set-key (kbd "<menu> n <return>") nil)
-
-  (global-set-key (kbd "<menu> n SPC e") 'xah-elisp-mode)
-  (global-set-key (kbd "<menu> n SPC h") 'xah-html-mode)
-  (global-set-key (kbd "<menu> n SPC j") 'xah-js-mode)
-  (global-set-key (kbd "<menu> n SPC c") 'xah-css-mode)
+  (global-set-key (kbd "<menu> n SPC") nil)
 
   (global-set-key (kbd "<menu> n 3") 'whitespace-mode)
   (global-set-key (kbd "<menu> n 4") 'linum-mode)
@@ -411,59 +408,8 @@
   )
 
 (progn
-;; u is for char insert
-
   (define-prefix-command 'xah-menu-u-keymap)
   (global-set-key (kbd "<menu> u") 'xah-menu-u-keymap)
-
-  (global-set-key (kbd "<menu> u <menu>") 'xah-insert-paren)
-  (define-key key-translation-map (kbd "<menu> u SPC") (kbd "_")) ; low line (underscore)
-  (global-set-key (kbd "<menu> u RET") 'xah-insert-unicode)
-
-  (define-key key-translation-map (kbd "<menu> u .") nil)
-
-  (define-key key-translation-map (kbd "<menu> u <down>") (kbd "↓"))
-  (define-key key-translation-map (kbd "<menu> u <left>") (kbd "←"))
-  (define-key key-translation-map (kbd "<menu> u <right>") (kbd "→"))
-  (define-key key-translation-map (kbd "<menu> u <up>") (kbd "↑"))
-  (define-key key-translation-map (kbd "<menu> u \\") (kbd "、")) ; IDEOGRAPHIC COMMA
-
-  (global-set-key (kbd "<menu> u ,") 'xah-insert-greater-less)
-
-  (define-key key-translation-map (kbd "<menu> u 3") (kbd "φ"))
-  (define-key key-translation-map (kbd "<menu> u 4") (kbd "ξ"))
-  (define-key key-translation-map (kbd "<menu> u 6") (kbd "ƒ"))
-  (define-key key-translation-map (kbd "<menu> u 7") (kbd "＆"))
-  (define-key key-translation-map (kbd "<menu> u 8") (kbd "•"))
-  (define-key key-translation-map (kbd "<menu> u 9") (kbd "—")) ; EM DASH
-
-  (global-set-key (kbd "<menu> u a") nil)
-  (global-set-key (kbd "<menu> u b") 'xah-insert-black-lenticular-bracket【】)
-  (global-set-key (kbd "<menu> u c") 'xah-insert-ascii-single-quote)
-  (global-set-key (kbd "<menu> u d") 'xah-insert-double-curly-quote“”)
-  (define-key key-translation-map (kbd "<menu> u e") (kbd "=")) ; equal
-  (global-set-key (kbd "<menu> u f") 'xah-insert-emacs-quote)
-  (global-set-key (kbd "<menu> u g") 'xah-insert-ascii-double-quote)
-  (global-set-key (kbd "<menu> u h") 'xah-insert-brace)              ;{}
-  (global-set-key (kbd "<menu> u i") 'xah-insert-curly-single-quote‘’)
-  (global-set-key (kbd "<menu> u j") nil)
-  (global-set-key (kbd "<menu> u k") nil)
-  (define-key key-translation-map (kbd "<menu> u l") (kbd "…")) ; HORIZONTAL ELLIPSIS
-  (global-set-key (kbd "<menu> u m") 'xah-insert-corner-bracket「」)
-  (global-set-key (kbd "<menu> u n") 'xah-insert-bracket)            ;[]
-  (global-set-key (kbd "<menu> u o") nil)
-  (define-key key-translation-map (kbd "<menu> u p") (kbd "+")) ; plus
-  (global-set-key (kbd "<menu> u q") nil)
-  (global-set-key (kbd "<menu> u r") 'xah-insert-tortoise-shell-bracket〔〕)
-  (global-set-key (kbd "<menu> u s") nil)
-  (global-set-key (kbd "<menu> u t") 'xah-insert-paren)
-  (define-key key-translation-map (kbd "<menu> u u") (kbd "-")) ; minus
-
-  (global-set-key (kbd "<menu> u v") 'xah-insert-double-angle-quote«»)
-  (global-set-key (kbd "<menu> u w") 'xah-insert-angle-bracket〈〉)
-  (global-set-key (kbd "<menu> u x") nil)
-  (global-set-key (kbd "<menu> u y") 'xah-insert-single-angle-quote‹›)
-  (global-set-key (kbd "<menu> u z") nil)
 
   )
 
@@ -522,13 +468,6 @@
 ;; (setq guide-key/guide-key-sequence '("<menu> t" "<tab> t" ))
 ;; (guide-key-mode 0)
 
-; 5605    0.35%  cua-set-mark; 944    0.06%  set-mark-command
-;   6077    0.38%  ergoemacs-M-o
-;;  toggle-input-method
-
-;; ;; todo add:
-  ;; (global-set-key (kbd "<menu> r 4") 'set-mark-command)
-
 ;; C-x C-p	mark-page
 
 ;; C-x C-l	downcase-region
@@ -543,12 +482,9 @@
 ;; C-x C-v	find-alternate-file
 ;; C-x C-w	write-file
 
-;; C-x d	dired
-
 ;; C-x e	kmacro-end-and-call-macro
 ;; C-x q	kbd-macro-query
 ;; C-x C-k	kmacro-keymap
-
 
 ;; C-x C-c	save-buffers-kill-terminal
 ;; C-x C-d	list-directory
@@ -710,3 +646,59 @@
 ;; 'quoted-insert
 
 ;; 'toggle-input-method
+
+(progn
+
+  (define-prefix-command 'xah-delete-keymap)
+  (global-set-key (kbd "<delete>") 'xah-delete-keymap)
+
+  (define-key key-translation-map (kbd "<delete> <menu>") (kbd "-")) ; hyphen
+  (define-key key-translation-map (kbd "<delete> SPC") (kbd "_")) ; low line (underscore)
+  (global-set-key (kbd "<delete> RET") 'xah-insert-unicode)
+
+  (define-key key-translation-map (kbd "<delete> .") nil)
+
+  (define-key key-translation-map (kbd "<delete> <down>") (kbd "↓"))
+  (define-key key-translation-map (kbd "<delete> <left>") (kbd "←"))
+  (define-key key-translation-map (kbd "<delete> <right>") (kbd "→"))
+  (define-key key-translation-map (kbd "<delete> <up>") (kbd "↑"))
+  (define-key key-translation-map (kbd "<delete> \\") (kbd "、")) ; IDEOGRAPHIC COMMA
+
+  (global-set-key (kbd "<delete> ,") 'xah-insert-greater-less)
+
+  (define-key key-translation-map (kbd "<delete> 3") (kbd "φ"))
+  (define-key key-translation-map (kbd "<delete> 4") (kbd "ξ"))
+  (define-key key-translation-map (kbd "<delete> 6") (kbd "ƒ"))
+  (define-key key-translation-map (kbd "<delete> 7") (kbd "＆"))
+  (define-key key-translation-map (kbd "<delete> 8") (kbd "•"))
+  (define-key key-translation-map (kbd "<delete> 9") (kbd "—")) ; EM DASH
+
+  (global-set-key (kbd "<delete> a") nil)
+  (global-set-key (kbd "<delete> b") 'xah-insert-black-lenticular-bracket【】)
+  (global-set-key (kbd "<delete> c") 'xah-insert-ascii-single-quote)
+  (global-set-key (kbd "<delete> d") 'xah-insert-double-curly-quote“”)
+  (define-key key-translation-map (kbd "<delete> e") (kbd "=")) ; equal
+  (global-set-key (kbd "<delete> f") 'xah-insert-emacs-quote)
+  (global-set-key (kbd "<delete> g") 'xah-insert-ascii-double-quote)
+  (global-set-key (kbd "<delete> h") 'xah-insert-brace)              ;{}
+  (global-set-key (kbd "<delete> i") 'xah-insert-curly-single-quote‘’)
+  (global-set-key (kbd "<delete> j") nil)
+  (global-set-key (kbd "<delete> k") nil)
+  (define-key key-translation-map (kbd "<delete> l") (kbd "…")) ; HORIZONTAL ELLIPSIS
+  (global-set-key (kbd "<delete> m") 'xah-insert-corner-bracket「」)
+  (global-set-key (kbd "<delete> n") 'xah-insert-bracket)            ;[]
+  (global-set-key (kbd "<delete> o") nil)
+  (define-key key-translation-map (kbd "<delete> p") (kbd "+")) ; plus
+  (global-set-key (kbd "<delete> q") nil)
+  (global-set-key (kbd "<delete> r") 'xah-insert-tortoise-shell-bracket〔〕)
+  (global-set-key (kbd "<delete> s") nil)
+  (global-set-key (kbd "<delete> t") 'xah-insert-paren)
+  (define-key key-translation-map (kbd "<delete> u") (kbd "-")) ; minus
+
+  (global-set-key (kbd "<delete> v") 'xah-insert-double-angle-quote«»)
+  (global-set-key (kbd "<delete> w") 'xah-insert-angle-bracket〈〉)
+  (global-set-key (kbd "<delete> x") nil)
+  (global-set-key (kbd "<delete> y") 'xah-insert-single-angle-quote‹›)
+  (global-set-key (kbd "<delete> z") nil)
+
+  )

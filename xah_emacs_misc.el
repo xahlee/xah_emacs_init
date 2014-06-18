@@ -145,6 +145,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("js" . "~/web/xahlee_info/js/js.html" )
         ("perl" . "~/web/xahlee_info/perl/perl_index.html")
 
+        ("projection" . "~/git/mercury/emacs-projection-mode/")
+
         ("php" . "~/web/xahlee_info/php/php_basics.html")
         ("python" . "~/web/xahlee_info/perl-python/index.html")
         ("python3" . "~/web/xahlee_info/python/python3_basics.html")
@@ -709,29 +711,3 @@ then call this command."
                (ξname (get-char-code-property ξchar 'name))
                )
               (insert (format "<mark class=\"unicode\" title=\"%s: %s\">%c</mark>\n" ξu-notation ξname ξchar))))))
-
-(defun xah-redo-syntax-coloring-html (φlang-code)
-  "temp. redo pre lang code syntax coloring in current html page."
-  (interactive)
-
-    ;; get φlang-code if called interactively
-    ;; move cursor to inside <pre class="js">
-    ;; call xhm-dehtmlize-precode
-    ;; call xhm-htmlize-precode
-    ;; repeat
-
-(let (langCode p1 p2)
-    (save-excursion
-(goto-char (point-min))
-      (re-search-forward "<pre class=\"\\([-A-Za-z0-9]+\\)\"") ; tag begin position
-      (setq langCode (match-string 1))
-      (setq p1 (search-forward ">")) ; text content begin
-      (backward-char 1)
-      (xhm-skip-tag-forward)
-      (setq p2 (search-backward "</pre>")) ; text content end
-      (vector langCode p1 p2)))
-
-  )
-
-
-

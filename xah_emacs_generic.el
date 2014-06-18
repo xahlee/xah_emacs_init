@@ -65,10 +65,9 @@ If the current buffer is not associated with a file, its a error."
         (progn
           (setq backupFileName (concat currentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~"))
           (copy-file currentFileName backupFileName t)
-          (message (concat "Backup saved as: " (file-name-nondirectory backupFileName)))
-          )
+          (message (concat "Backup saved as: " (file-name-nondirectory backupFileName))))
       (progn ; file doesn't exist happens when it's new file not yet saved.
-        (message (format "file 「%s」 doesn't exist." currentFileName)) ) ) ) )
+        (message (format "file 「%s」 doesn't exist." currentFileName))))))
 
 ;; Added to ergoemacs minor mode
 ;; (defun open-in-desktop ()

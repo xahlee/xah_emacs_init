@@ -19,6 +19,8 @@
 (defalias 'hm 'html-mode)
 (defalias 'acm 'auto-complete-mode)
 (defalias 'cm 'company-mode)
+(defalias 'jsm 'js-mode)
+(defalias 'js2 'js2-mode)
 
 (defalias 'ssm 'shell-script-mode)
 
