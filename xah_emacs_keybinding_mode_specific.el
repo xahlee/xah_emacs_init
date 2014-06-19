@@ -192,7 +192,7 @@ For `isearch-mode-hook'."
 
 
 (defun xah-rcirc-mode-keys ()
-  "my keybindings for `rcirc'.
+  "Modify keybindings for `rcirc'.
 For `rcirc-mode-hook'."
   (local-set-key (kbd "<f11>") 'rcirc-insert-prev-input)
   (local-set-key (kbd "<f12>") 'rcirc-insert-next-input)
@@ -200,18 +200,20 @@ For `rcirc-mode-hook'."
 (add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
 
 (defun xah-org-mode-keys ()
-  "my keybindings for `org-mode'.
+  "Modify keybindings for `org-mode'.
 For `org-mode-hook'."
   (local-set-key (kbd "<M-up>") 'org-metaup)
   (local-set-key (kbd "<M-down>") 'org-metadown)
   (local-set-key (kbd "<M-left>") 'org-metaleft)
   (local-set-key (kbd "<M-right>") 'org-metaright)
   (local-set-key (kbd "M-h") 'backward-char)
+  (local-set-key (kbd "C-a") 'mark-whole-buffer)
+
   )
 (add-hook 'org-mode-hook 'xah-org-mode-keys)
 
 (defun xah-Info-mode-keys ()
-  "my keybindings for `Info-mode'.
+  "Modify keybindings for `Info-mode'.
 For `Info-mode-hook'."
   (local-set-key (kbd "<menu> u g") 'xah-view-emacs-manual-in-browser)
   (local-set-key (kbd "<mouse-8>") 'Info-history-back)

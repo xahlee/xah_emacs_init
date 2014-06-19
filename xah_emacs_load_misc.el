@@ -8,7 +8,6 @@
 
 ; setting paths, loading modules, setup hooks etc.
 
-(require 'dired-x)
 (require 'xah_file_util)
 (require 'xah-html-mode)
 (require 'xah-comment)

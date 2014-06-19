@@ -13,6 +13,8 @@
 (set-background-color "honeydew")
 (setq inhibit-splash-screen t)
 
+(setq x-select-enable-clipboard-manager nil)
+
 ;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
 ;; ;; (setq ediff-split-window-function 'split-window-horizontally)
 
