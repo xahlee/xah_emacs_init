@@ -214,6 +214,7 @@
     ("8pr" "POV-Ray")
     ("8ps" "PowerShell")
     ("8m" "Mathematica")
+    ("8wl" "Wolfram Language")
     ("8cl" "Common Lisp")
     ("8e" "emacs")
     ("8js" "JavaScript")
