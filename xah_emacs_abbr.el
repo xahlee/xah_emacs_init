@@ -338,11 +338,6 @@
     ("8css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
     ("8css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
 
-    ;; JavaScript
-    ("3c" "console.log();")
-    ("3f" "function (x) {return 3;}")
-    ("3v" "var = ;")
-
     
 ;;; unix shell
 
