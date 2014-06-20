@@ -95,7 +95,7 @@
   "set command mode keys"
   (interactive)
   (progn
-    (global-set-key (kbd "SPC") 'set-mark-command)
+    ;; (global-set-key (kbd "SPC") 'set-mark-command)
     (global-set-key (kbd ";") nil)
     (global-set-key (kbd ".") 'backward-kill-word)
     (global-set-key (kbd "'") 'xah-compact-uncompact-block)

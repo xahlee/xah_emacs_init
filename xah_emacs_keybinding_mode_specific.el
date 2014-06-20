@@ -60,13 +60,8 @@ For `isearch-mode-hook'."
 
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
-  ;; .p gc
-  ;; eu ht
+;; • 〈Dvorak Keyboard Layout〉 http://xahlee.info/comp/dvorak_keyboard_layout.html
 
-  (local-set-key (kbd "<tab> '") nil)
-  (local-set-key (kbd "<tab> ,") nil)
-  (local-set-key (kbd "<tab> 1") nil)
-  (local-set-key (kbd "<tab> 2") nil)
   (local-set-key (kbd "<tab> 4") 'xahsite-update-article-timestamp)
   (local-set-key (kbd "<tab> 5") 'xah-mark-unicode)
   (local-set-key (kbd "<tab> a") 'xwe-annotate)
@@ -78,7 +73,6 @@ For `isearch-mode-hook'."
 
   (local-set-key (kbd "<tab> h") 'xah-all-linkify)
   (local-set-key (kbd "<tab> i") 'image-linkify)
-  (local-set-key (kbd "<tab> j") 'nil)
   (local-set-key (kbd "<tab> l c") 'xwe-chinese-linkify)
 
   (local-set-key (kbd "<tab> l d") 'perldoc-ref-linkify)
@@ -89,18 +83,10 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "<tab> l t") 'xwe-word-etymology-linkify)
   (local-set-key (kbd "<tab> l z") 'amazon-linkify)
   (local-set-key (kbd "<tab> n") 'xah-ref-span-tag)
-  (local-set-key (kbd "<tab> o") 'nil)
-  (local-set-key (kbd "<tab> q") 'nil)
   (local-set-key (kbd "<tab> r c") 'xah-bracket→html)
   (local-set-key (kbd "<tab> r t") 'xah-title-bracket→html)
-  (local-set-key (kbd "<tab> s") 'nil)
   (local-set-key (kbd "<tab> t a") 'xah-make-atom-entry)
   (local-set-key (kbd "<tab> t l") 'xah-add-to-related-links)
-  (local-set-key (kbd "<tab> u") nil)
-  (local-set-key (kbd "<tab> v") 'nil)
-  (local-set-key (kbd "<tab> x") 'nil)
-  (local-set-key (kbd "<tab> y") 'nil)
-  (local-set-key (kbd "<tab> z") 'nil)
 
 )
 
