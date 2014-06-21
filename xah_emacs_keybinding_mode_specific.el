@@ -201,7 +201,7 @@ For `org-mode-hook'."
 (defun xah-Info-mode-keys ()
   "Modify keybindings for `Info-mode'.
 For `Info-mode-hook'."
-  (local-set-key (kbd "<menu> u g") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<menu> e g") 'xah-view-emacs-manual-in-browser)
   (local-set-key (kbd "<mouse-8>") 'Info-history-back)
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)

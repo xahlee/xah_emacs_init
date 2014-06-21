@@ -87,13 +87,7 @@
 (define-prefix-command 'xah-menu-keymap)
 (global-set-key (kbd "<menu>") 'xah-menu-keymap)
 
-;; (define-key key-translation-map (kbd "<menu> <end>") (kbd "C-g")) ; doesn't work in some cases in minibuffer. ⁖ when emacs asking yes or no when opening a none-existing file path
-
-;; (global-set-key (kbd "<menu> <menu>") 'keyboard-quit)
-
 (global-set-key (kbd "<menu> <return>") 'smex)
-
-;; (global-set-key (kbd "<menu> SPC") (lambda () (interactive) (insert "_"))) ; low line (underscore)
 
 (progn
   (define-prefix-command 'xah-menu-backspace-keymap)
@@ -109,11 +103,13 @@
 (progn
   (define-prefix-command 'xah-menu-tab-keymap)
   (global-set-key (kbd "<menu> <tab>") xah-menu-tab-keymap)
-  (global-set-key (kbd "<menu> <tab> y") 'yas/expand)
+  (global-set-key (kbd "<menu> <tab> y") 'yas-expand)
   (global-set-key (kbd "<menu> <tab> <tab>") 'indent-for-tab-command)
   (global-set-key (kbd "<menu> <tab> i") 'complete-symbol)
   (global-set-key (kbd "<menu> <tab> g") 'indent-rigidly)
   (global-set-key (kbd "<menu> <tab> r") 'indent-region)
+  (global-set-key (kbd "<menu> <tab> e") 'expand-abbrev)
+
   )
 
 (progn
@@ -126,7 +122,7 @@
   (define-key xah-user-keymap (kbd "SPC h") 'xah-html-mode)
   (define-key xah-user-keymap (kbd "SPC j") 'xah-js-mode)
   (define-key xah-user-keymap (kbd "SPC c") 'xah-css-mode)
-  (define-key xah-user-keymap (kbd "<return>") 'xah-run-current-file) ;  1494    0.09%  xah-run-current-file
+  (define-key xah-user-keymap (kbd "<return>") 'xah-run-current-file)
   (define-key xah-user-keymap (kbd "<backspace>") 'xah-delete-current-file)
   (define-key xah-user-keymap (kbd "<tab>") nil)
   (define-key xah-user-keymap (kbd "<delete>") nil)
@@ -164,7 +160,7 @@
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
   (define-key xah-user-keymap (kbd "p") 'xah-copy-file-path)
   (define-key xah-user-keymap (kbd "q") nil)
-  (define-key xah-user-keymap (kbd "r 3") 'xah-escape-quotes)
+  (define-key xah-user-keymap (kbd "r c") 'xah-escape-quotes)
   (define-key xah-user-keymap (kbd "r '") 'xah-replace-straight-quotes)
   (define-key xah-user-keymap (kbd "r ,") 'xah-remove-punctuation-trailing-redundant-space)
   (define-key xah-user-keymap (kbd "r .") 'xah-convert-english-chinese-punctuation)
@@ -213,9 +209,16 @@
 (progn
   (define-prefix-command 'xah-menu-a-keymap)
   (global-set-key (kbd "<menu> a") xah-menu-a-keymap)
+
+  (global-set-key (kbd "<menu> a g") 'add-global-abbrev)
+  (global-set-key (kbd "<menu> a a") 'add-mode-abbrev)
+  (global-set-key (kbd "<menu> a v") 'inverse-add-global-abbrev)
+  (global-set-key (kbd "<menu> a l") 'inverse-add-mode-abbrev)
+  (global-set-key (kbd "<menu> a n") 'expand-jump-to-next-slot)
+  (global-set-key (kbd "<menu> a p") 'expand-jump-to-previous-slot)
   )
 
-  (global-set-key (kbd "<menu> b") 'end-of-buffer)
+(global-set-key (kbd "<menu> b") 'end-of-buffer)
 
 (progn
   (define-prefix-command 'xah-menu-c-keymap)
@@ -460,7 +463,29 @@
 
   )
 
-(global-set-key (kbd "<menu> v") nil)
+(progn
+  (define-prefix-command 'xah-menu-v-keymap)
+  (global-set-key (kbd "<menu> v") xah-menu-v-keymap)
+
+  (define-key xah-menu-v-keymap (kbd "+") 'vc-update)
+  (define-key xah-menu-v-keymap (kbd "=") 'vc-diff)
+  (define-key xah-menu-v-keymap (kbd "D") 'vc-root-diff)
+  (define-key xah-menu-v-keymap (kbd "L") 'vc-print-root-log)
+  (define-key xah-menu-v-keymap (kbd "a") 'vc-update-change-log)
+  (define-key xah-menu-v-keymap (kbd "b") 'vc-switch-backend)
+  (define-key xah-menu-v-keymap (kbd "c") 'vc-rollback)
+  (define-key xah-menu-v-keymap (kbd "d") 'vc-dir)
+  (define-key xah-menu-v-keymap (kbd "g") 'vc-annotate)
+  (define-key xah-menu-v-keymap (kbd "h") 'vc-insert-headers)
+  (define-key xah-menu-v-keymap (kbd "l") 'vc-print-log)
+  (define-key xah-menu-v-keymap (kbd "m") 'vc-merge)
+  (define-key xah-menu-v-keymap (kbd "r") 'vc-retrieve-tag)
+  (define-key xah-menu-v-keymap (kbd "s") 'vc-create-tag)
+  (define-key xah-menu-v-keymap (kbd "u") 'vc-revert)
+  (define-key xah-menu-v-keymap (kbd "v") 'vc-next-action)
+  (define-key xah-menu-v-keymap (kbd "~") 'vc-revision-other-window)
+
+  )
 
 (progn
   (define-prefix-command 'xah-menu-w-keymap)
@@ -495,25 +520,16 @@
 
 ;; some idea about command categories, in context to choosing keys for them
 
-;; • whether a command has immediate effect, no prompt. ⁖ shell vs delete-matching-lines
-;; • whether a command has is safe to run by mistake. ⁖ whitespace-mode vs eval-buffer
 ;; • whether a command is frequently needed ⁖ few times a min, hour, day
+;; • whether a command has immediate effect, no prompt. ⁖ kill-word vs shell, delete-matching-lines
+;; • whether a command is safe to run by mistake. ⁖ whitespace-mode vs eval-buffer
 
 ;; idea about key groups
 ;; all should be sequence of single keys. 2 to 3 keys. All should start with F7. And all commands should be globally useful.
 ;; • 2 keys vs 3 keys
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
 
-;; (ergoemacs-ignore-prev-global) ; Do not honor previously defined global keys. 2013-06-24
-
-;'indent-for-tab-command
-
 
-
-;; ;; 2013-11-04 make emacs auto show suggestions when a prefix key is pressed
-;; (require 'guide-key)
-;; (setq guide-key/guide-key-sequence '("<menu> t" "<tab> t" ))
-;; (guide-key-mode 0)
 
 (progn
   ;; command dump. rarely used commands but put them here to have a key anyway
@@ -575,7 +591,6 @@
 ;; C-x C-z	suspend-frame
 ;; C-x ESC	Prefix Command
 ;; C-x $	set-selective-display
-;; C-x '	expand-abbrev
 ;; C-x *	calc-dispatch
 ;; C-x -	shrink-window-if-larger-than-buffer
 ;; C-x .	set-fill-prefix
@@ -683,43 +698,12 @@
 ;; C-x 6 s	2C-split
 ;; C-x 6 <f2>	2C-two-columns
 ;; C-x 8 RET	ucs-insert
-;; C-x a C-a	add-mode-abbrev
-;; C-x a '	expand-abbrev
-;; C-x a +	add-mode-abbrev
-;; C-x a -	inverse-add-global-abbrev
-;; C-x a e	expand-abbrev
-;; C-x a g	add-global-abbrev
-;; C-x a i	Prefix Command
-;; C-x a l	add-mode-abbrev
-;; C-x a n	expand-jump-to-next-slot
-;; C-x a p	expand-jump-to-previous-slot
 
 ;; C-x n p	narrow-to-page
 
 ;; C-x r b	bookmark-jump
 ;; C-x r l	bookmark-bmenu-list
 ;; C-x r m	bookmark-set
-
-;; C-x v +	vc-update
-;; C-x v =	vc-diff
-;; C-x v D	vc-root-diff
-;; C-x v L	vc-print-root-log
-;; C-x v a	vc-update-change-log
-;; C-x v b	vc-switch-backend
-;; C-x v c	vc-rollback
-;; C-x v d	vc-dir
-;; C-x v g	vc-annotate
-;; C-x v h	vc-insert-headers
-;; C-x v l	vc-print-log
-;; C-x v m	vc-merge
-;; C-x v r	vc-retrieve-tag
-;; C-x v s	vc-create-tag
-;; C-x v u	vc-revert
-;; C-x v v	vc-next-action
-;; C-x v ~	vc-revision-other-window
-
-;; C-x a i g	inverse-add-global-abbrev
-;; C-x a i l	inverse-add-mode-abbrev
 
 ;; ;; todo
 ;; select all, copy all, open, those standard keys
@@ -729,3 +713,8 @@
 ;; 'quoted-insert
 
 ;; 'toggle-input-method
+
+;; ;; 2013-11-04 make emacs auto show suggestions when a prefix key is pressed
+;; (require 'guide-key)
+;; (setq guide-key/guide-key-sequence '("<menu> t" "<tab> t" ))
+;; (guide-key-mode 1)
