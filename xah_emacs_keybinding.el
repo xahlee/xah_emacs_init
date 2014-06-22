@@ -228,12 +228,13 @@
 
   (global-set-key (kbd "<menu> c o") 'xah-open-in-desktop)
   (global-set-key (kbd "<menu> c c") 'bookmark-bmenu-list)
-  (global-set-key (kbd "<menu> c u") nil)
+  (global-set-key (kbd "<menu> c u") 'ffap)
   (global-set-key (kbd "<menu> c e") 'dired-jump)
   (global-set-key (kbd "<menu> c g") 'ido-switch-buffer)
   (global-set-key (kbd "<menu> c h") 'recentf-open-files)
   (global-set-key (kbd "<menu> c t") 'ibuffer)
-  (global-set-key (kbd "<menu> c p") 'query-replace-regexp)
+  (global-set-key (kbd "<menu> c p") 'find-file)
+
   )
 
   (global-set-key (kbd "<menu> d") 'beginning-of-buffer)
@@ -245,7 +246,7 @@
 
   )
 
-(global-set-key (kbd "<menu> f") 'ffap)
+(global-set-key (kbd "<menu> f") nil)
 
 (global-set-key (kbd "<menu> g") 'isearch-forward)
 
@@ -424,6 +425,7 @@
   (define-key key-translation-map (kbd "<menu> u <up>") (kbd "↑"))
   (define-key key-translation-map (kbd "<menu> u \\") (kbd "、")) ; IDEOGRAPHIC COMMA
 
+  (global-set-key (kbd "<menu> u .") 'ucs-insert)
   (global-set-key (kbd "<menu> u ,") nil)
 
   (define-key key-translation-map (kbd "<menu> u 3") (kbd "φ"))
@@ -491,11 +493,11 @@
   (define-prefix-command 'xah-menu-w-keymap)
   (global-set-key (kbd "<menu> w") xah-menu-w-keymap)
 
-  (global-set-key (kbd "<menu> w b") 'eval-buffer)
-  (global-set-key (kbd "<menu> w r") 'eval-region)
-  (global-set-key (kbd "<menu> w d") 'eval-defun)
-  (global-set-key (kbd "<menu> w e") 'eval-expression)
-  (global-set-key (kbd "<menu> w l") 'eval-last-sexp)
+  (global-set-key (kbd "<menu> w .") 'eval-buffer)
+  (global-set-key (kbd "<menu> w e") 'eval-region)
+  (global-set-key (kbd "<menu> w m") 'eval-last-sexp)
+  (global-set-key (kbd "<menu> w p") 'eval-expression)
+  (global-set-key (kbd "<menu> w u") 'eval-defun)
 
   )
 
@@ -576,7 +578,6 @@
 ;; C-x C-o	delete-blank-lines
 ;; C-x C-q	toggle-read-only
 
-;; C-x C-f	find-file
 ;; C-x C-r	find-file-read-only
 ;; C-x C-v	find-alternate-file
 ;; C-x C-w	write-file
@@ -601,7 +602,6 @@
 ;; C-x 4	ctl-x-4-prefix
 ;; C-x 5	ctl-x-5-prefix
 ;; C-x 6	2C-command
-;; C-x 8	Prefix Command
 ;; C-x ;	comment-set-column
 ;; C-x <	scroll-left
 ;; C-x =	what-cursor-position
@@ -697,12 +697,10 @@
 ;; C-x 6 b	2C-associate-buffer
 ;; C-x 6 s	2C-split
 ;; C-x 6 <f2>	2C-two-columns
-;; C-x 8 RET	ucs-insert
 
 ;; C-x n p	narrow-to-page
 
 ;; C-x r b	bookmark-jump
-;; C-x r l	bookmark-bmenu-list
 ;; C-x r m	bookmark-set
 
 ;; ;; todo
