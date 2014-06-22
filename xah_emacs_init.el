@@ -125,6 +125,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-fullpath-relative-to-caller "xah_emacs_wordyenglish"))
 
 (load (xah-fullpath-relative-to-caller "xah_emacs_settings"))
+(load (xah-fullpath-relative-to-caller "xah_emacs_settings_external_packages"))
 (load (xah-fullpath-relative-to-caller "xah_emacs_file_association"))
 
 (load (xah-fullpath-relative-to-caller "xah_emacs_load_misc"))

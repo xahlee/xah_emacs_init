@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
-;; A collection of generic Emacs settings
+;; Emacs settings for packages bundled with emacs only
 
-;; 2007-06, 2011-06-12
+;; 2007-06
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
@@ -81,7 +81,6 @@
 (setq org-return-follows-link t)
 
 
-;; (global-subword-mode 0)
 
 ;; (which-function-mode 1) ; show current function in mode line
 
@@ -96,58 +95,12 @@
 
 (setq page-break-lines-modes (quote (emacs-lisp-mode xah-elisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
 
-;; (when (boundp 'ido-vertical-mode)
-;;     (ido-vertical-mode 1)
-;; )
-
-
-
-;; (defun turn-spell-checking-on ()
-;;   "Turn speck-mode or flyspell-mode on."
-;;   (speck-mode 1)
-;; ;  (flyspell-mode 1)
-;;   )
-
-;; (add-hook 'text-mode-hook 'turn-spell-checking-on)
-;; (remove-hook 'text-mode-hook 'turn-spell-checking-on)
 
 
 ;; 2009-09-29 see http://groups.google.com/group/ergoemacs/msg/9eec3b455cab3ff1 and http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start
 ; (and (= emacs-major-version 23) (defun server-ensure-safe-dir (dir) "Noop" t))
 
 
-;; (add-hook 'emacs-lisp-mode-hook
-;;  (lambda ()
-;;   (modify-syntax-entry ?- "w" emacs-lisp-mode-syntax-table )
-;;  )
-;; )
-
-
-;; ;; by Nikolaj Schumacher. http://www.emacswiki.org/emacs/HexColour
-;; (defvar hexcolor-keywords
-;;   '(("#[abcdef[:digit:]]\\{6\\}"
-;;      (0 (put-text-property
-;;          (match-beginning 0)
-;;          (match-end 0)
-;;          'face (list :background
-;;                      (match-string-no-properties 0)))))))
-
-;; (defun hexcolor-add-to-font-lock ()
-;;   (interactive)
-;;   (font-lock-add-keywords nil hexcolor-keywords))
-;; (add-hook 'css-mode-hook 'hexcolor-add-to-font-lock)
-;; (add-hook 'html-mode-hook 'hexcolor-add-to-font-lock)
-
-
-
-;; (eval-when-compile
-;;   (when (boundp 'tabbar-mode)
-;;     (tabbar-mode 0)
-;;     ))
-
-(setq yas/indent-line nil)
-
-(math-symbol-input-mode 1)
 
 ;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
 
@@ -199,7 +152,3 @@
 ;;  '(rainbow-delimiters-depth-9-face ((t (:foreground "#8b7500"))))
 ;;  '(rainbow-delimiters-unmatched-face ((t (:foreground "red"))))
 ;;  '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
-
-;; (add-hook 'xah-css-mode-hook 'rainbow-mode)
-;; (remove-hook 'css-mode-hook 'rainbow-mode)
-;; (remove-hook 'xah-css-mode-hook 'rainbow-mode)
