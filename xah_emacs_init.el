@@ -101,7 +101,6 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-fullpath-relative-to-caller "xah_emacs_html"))
 (load (xah-fullpath-relative-to-caller "xah_emacs_html_insert_things"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_html_syntax_color_util"))
 (load (xah-fullpath-relative-to-caller "xah_emacs_linkify"))
 (load (xah-fullpath-relative-to-caller "xah_emacs_ref_linkify"))
 (load (xah-fullpath-relative-to-caller "xah_emacs_vid_linkify"))

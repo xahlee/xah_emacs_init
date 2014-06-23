@@ -1,5 +1,21 @@
 ;; 2014-05-30
 
+(defun xah-inside-string? (&optional φpos)
+  "Return true if inside string, else false.
+This depends on major mode having setup syntax table properly."
+  (interactive)
+  (let ((ξresult (nth 3 (syntax-ppss φpos))))
+    (print ξresult)
+    ξresult))
+
+(defun xah-inside-comment? (&optional φpos)
+  "Return true if inside comment, else false.
+This depends on major mode having setup syntax table properly."
+ (interactive)
+ (let ((ξresult (nth 4 (syntax-ppss φpos))))
+    (print ξresult)
+    ξresult))
+
 (defun xah-syntax-bracket-forward ()
   "Move cursor to the 1st closing bracket, according to current syntax table.
 This command is dumb, it'll not ignore brackets inside comment or string."

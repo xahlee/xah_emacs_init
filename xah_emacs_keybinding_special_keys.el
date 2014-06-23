@@ -1,5 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;; 2014-01-29
+;; emacs keybinding for special keys 
+;; Xah Lee
 
 ;; 〈Mac OS X: Keyboard Layout, Keymapping, Keybinding, Software ⌨〉
 ;; http://xahlee.info/kbd/Mac_OS_X_keymapping_keybinding_tools.html

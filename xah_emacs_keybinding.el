@@ -34,20 +34,15 @@
 
 
 
-;; stars indicate frequency of use
-;; ★★★ every minute
-;; ★★ every hour
-;; ★ few times a day
-
 ;; 2014-06-06 this file are keybinding of key sequences, starting with the menu key
-;; eventually, i shall have a complete system that covers entire emacs usage.
+;; the goal is to have a key system to completely replace emacs 1k+ keys.
 
 ;; design sketch
 
 ;; the keys are now hardcoded for dvorak.
 
 ;; some design principles
-;; • each key sequence should have 2 or 3 keys, no more. (counting the lead key)
+;; • each key sequence should have 2 or 3 keys, no more. (counting the lead key) some command may have 4 or more keys, but any command used daily have max of 3 keys.
 ;; • the keys:
 
 ;; .p gc
@@ -60,11 +55,11 @@
 ;; ,.p gcr
 ;; oeu htn
 
-;; • all other letters should be 2-keys sequence. ⁖ 【menu z】, 【menu 8】
-
-;; • the 【menu t ‹key›】 space is reserved for user to define their own commands
+;; • the 【menu space ‹key›】 space is reserved for user to define their own commands
 ;; • the 【menu h ‹key›】 space is for emacs help. basically equivalent to 【C-h ‹key›】
-;; • the 【menu space ‹key›】 space is for inserting brackets (){}[]""''“”‘’ and other brackets, and for inserting “=” “+” any unicode chars.
+;; • the 【menu u ‹key›】 space is for inserting brackets (){}[]""''“”‘’ and other brackets, and for inserting “=” “+” any unicode chars.
+;; • the 【menu p】 is for query-replace
+;; • the 【menu g】 is for isearch
 ;; • 【menu enter】 is for execute-extended-command
 ;; • 【menu menu】  is undecided.
 
@@ -81,13 +76,15 @@
 ;; Emacs: Fast-repeat vs Non-fast-repeat Commands ＆ Keys
 ;; http://xahlee.info/kbd/repeatable_vs_non-repeatable_keys_commands.html
 
-(define-key key-translation-map (kbd "<apps>") (kbd "<menu>"))
+(when (string-equal system-type "windows-nt")
+  (define-key key-translation-map (kbd "<apps>") (kbd "<menu>")))
+
 (define-key key-translation-map (kbd "C-p") (kbd "<menu>")) ; Mac OS X don't do menu/app key.
 
 (define-prefix-command 'xah-menu-keymap)
 (global-set-key (kbd "<menu>") 'xah-menu-keymap)
 
-(global-set-key (kbd "<menu> <return>") 'smex)
+(global-set-key (kbd "<menu> <return>") 'smex) ; todo check if  bound, else execute-extended-command
 
 (progn
   (define-prefix-command 'xah-menu-backspace-keymap)
@@ -109,7 +106,6 @@
   (global-set-key (kbd "<menu> <tab> g") 'indent-rigidly)
   (global-set-key (kbd "<menu> <tab> r") 'indent-region)
   (global-set-key (kbd "<menu> <tab> e") 'expand-abbrev)
-
   )
 
 (progn
@@ -179,7 +175,7 @@
  )
 
 (global-set-key (kbd "<menu> .") 'universal-argument)
-(global-set-key (kbd "<menu> '") nil)
+(global-set-key (kbd "<menu> '") 'quoted-insert)
 
 (progn
   (define-prefix-command 'xah-menu-comma-keymap)
@@ -210,6 +206,14 @@
   (define-prefix-command 'xah-menu-a-keymap)
   (global-set-key (kbd "<menu> a") xah-menu-a-keymap)
 
+  (global-set-key (kbd "<menu> a SPC") 'expand-abbrev)
+
+  (global-set-key (kbd "<menu> a m") 'abbrev-mode)
+
+  (global-set-key (kbd "<menu> a '") 'abbrev-prefix-mark)
+  (global-set-key (kbd "<menu> a e") 'edit-abbrevs)
+  (global-set-key (kbd "<menu> a r") 'expand-region-abbrevs)
+  (global-set-key (kbd "<menu> a u") 'unexpand-abbrev)
   (global-set-key (kbd "<menu> a g") 'add-global-abbrev)
   (global-set-key (kbd "<menu> a a") 'add-mode-abbrev)
   (global-set-key (kbd "<menu> a v") 'inverse-add-global-abbrev)
@@ -302,8 +306,14 @@
   )
 
 (progn
-  (define-prefix-command 'xah-menu-i-keymap)
-  (global-set-key (kbd "<menu> i") goto-map)
+  (define-prefix-command 'xah-menu-i-keymap) ; commands in goto-map
+  (global-set-key (kbd "<menu> i") xah-menu-i-keymap)
+
+  (define-key xah-menu-i-keymap (kbd "<tab>") 'move-to-column)
+  (define-key xah-menu-i-keymap (kbd "c") 'goto-char)
+  (define-key xah-menu-i-keymap (kbd "g") 'goto-line)
+  (define-key xah-menu-i-keymap (kbd "n") 'next-error)
+  (define-key xah-menu-i-keymap (kbd "p") 'previous-error)
   )
 
 (global-set-key (kbd "<menu> j") 'xah-copy-all)
@@ -312,33 +322,47 @@
 
 (global-set-key (kbd "<menu> l") 'recenter-top-bottom)
 
-(global-set-key (kbd "<menu> m") search-map)
+(progn
+  (define-prefix-command 'xah-menu-m-keymap) ; commands in search-map
+  (global-set-key (kbd "<menu> m") xah-menu-m-keymap)
+
+  (define-key xah-menu-m-keymap (kbd ".") 'isearch-forward-symbol-at-point)
+  (define-key xah-menu-m-keymap (kbd "s") 'isearch-forward-symbol)
+  (define-key xah-menu-m-keymap (kbd "w") 'isearch-forward-word)
+  (define-key xah-menu-m-keymap (kbd "h .") 'highlight-symbol-at-point)
+  (define-key xah-menu-m-keymap (kbd "h f") 'hi-lock-find-patterns)
+  (define-key xah-menu-m-keymap (kbd "h l") 'highlight-lines-matching-regexp)
+  (define-key xah-menu-m-keymap (kbd "h p") 'highlight-phrase)
+  (define-key xah-menu-m-keymap (kbd "h r") 'highlight-regexp)
+  (define-key xah-menu-m-keymap (kbd "h u") 'unhighlight-regexp)
+  (define-key xah-menu-m-keymap (kbd "h w") 'hi-lock-write-interactive-patterns)
+)
 
 (progn
   ;; commands here shouldn't change the buffer immediately.
   ;; they turn on minor/major mode, change display, or prompt, etc.
-  (define-prefix-command 'xah-no-harm-keymap)
-  (global-set-key (kbd "<menu> n") xah-no-harm-keymap)
+  (define-prefix-command 'xah-harmless-keymap)
+  (global-set-key (kbd "<menu> n") xah-harmless-keymap)
 
-  (define-key xah-no-harm-keymap (kbd "SPC") nil)
-  (define-key xah-no-harm-keymap (kbd "<return>") nil)
+  (define-key xah-harmless-keymap (kbd "SPC") nil)
+  (define-key xah-harmless-keymap (kbd "<return>") nil)
 
-  (define-key xah-no-harm-keymap (kbd "3") 'whitespace-mode)
-  (define-key xah-no-harm-keymap (kbd "4") 'linum-mode)
-  (define-key xah-no-harm-keymap (kbd "5") 'visual-line-mode)
-  (define-key xah-no-harm-keymap (kbd "6") 'calendar)
-  (define-key xah-no-harm-keymap (kbd "7") 'calc)
-  (define-key xah-no-harm-keymap (kbd "8") 'shell)
-  (define-key xah-no-harm-keymap (kbd "9") 'shell-command)
-  (define-key xah-no-harm-keymap (kbd "0") 'shell-command-on-region)
+  (define-key xah-harmless-keymap (kbd "3") 'whitespace-mode)
+  (define-key xah-harmless-keymap (kbd "4") 'linum-mode)
+  (define-key xah-harmless-keymap (kbd "5") 'visual-line-mode)
+  (define-key xah-harmless-keymap (kbd "6") 'calendar)
+  (define-key xah-harmless-keymap (kbd "7") 'calc)
+  (define-key xah-harmless-keymap (kbd "8") 'shell)
+  (define-key xah-harmless-keymap (kbd "9") 'shell-command)
+  (define-key xah-harmless-keymap (kbd "0") 'shell-command-on-region)
 
-  (define-key xah-no-harm-keymap (kbd "b") 'toggle-debug-on-error)
-  (define-key xah-no-harm-keymap (kbd "c") 'toggle-case-fold-search)
-  (define-key xah-no-harm-keymap (kbd "e") 'eshell)
-  (define-key xah-no-harm-keymap (kbd "h") 'widen)
-  (define-key xah-no-harm-keymap (kbd "n") 'narrow-to-region)
-  (define-key xah-no-harm-keymap (kbd "s") 'flyspell-buffer)
-  (define-key xah-no-harm-keymap (kbd "t") 'narrow-to-defun)
+  (define-key xah-harmless-keymap (kbd "b") 'toggle-debug-on-error)
+  (define-key xah-harmless-keymap (kbd "c") 'toggle-case-fold-search)
+  (define-key xah-harmless-keymap (kbd "e") 'eshell)
+  (define-key xah-harmless-keymap (kbd "h") 'widen)
+  (define-key xah-harmless-keymap (kbd "n") 'narrow-to-region)
+  (define-key xah-harmless-keymap (kbd "s") 'flyspell-buffer)
+  (define-key xah-harmless-keymap (kbd "t") 'narrow-to-defun)
 
   )
 
@@ -395,6 +419,7 @@
   (global-set-key (kbd "<menu> t 7") 'point-to-register)
   (global-set-key (kbd "<menu> t 8") 'jump-to-register)
 
+  (global-set-key (kbd "<menu> t p") 'query-replace-regexp)
   (global-set-key (kbd "<menu> t q") 'xah-cut-line-or-region)
   (global-set-key (kbd "<menu> t j") 'xah-copy-line-or-region)
   (global-set-key (kbd "<menu> t k") 'yank)
@@ -707,8 +732,6 @@
 ;; select all, copy all, open, those standard keys
 
 ;; • add all emacs commands to my key sequence system
-
-;; 'quoted-insert
 
 ;; 'toggle-input-method
 

@@ -147,7 +147,7 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
       (downcase-region p1 p2) (put this-command 'state "all lower")) )
     ) )
 
-(defun xah-select-text-in-quote ()
+(defun xah-select-text-in-bracket ()
   "Select text between the nearest left and right delimiters.
 Delimiters are paired characters:
  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩
@@ -158,6 +158,40 @@ Delimiters are paired characters:
    (setq p1 (point))
    (skip-chars-forward "^<>)]}”」』›»）〉》〕】〗⦘〙⦆〛⦄⟩\"")
    (set-mark p1)))
+
+;; (matching-paren ?\()
+
+(defun xah--backward-real-double-quote ()
+  "move cursor bakcward to a \", but excluding those with backslash."
+  (interactive)
+  (search-backward-regexp "\\s\"" )
+  (while (looking-back "\\\\")
+    (search-backward-regexp "\\s\"" )))
+
+(defun xah--forward-real-double-quote ()
+  "move cursor forward-sexp to a \", but excluding those with backslash."
+  (interactive)
+  (search-forward-regexp "\\s\"" )
+  (while (looking-back "\\\\\"")
+    (search-forward-regexp "\\s\"" )))
+
+(defun xah-select-text-in-quote ()
+  "Select text between \"double\" quotes."
+  (interactive)
+  (let (p1 p2)
+
+    (if (nth 3 (syntax-ppss))
+        (progn
+          (xah--backward-real-double-quote)
+          (forward-char)
+          (setq p1 (point))
+          (xah--forward-real-double-quote)
+          (backward-char 1)
+          (setq p2 (point))
+          (goto-char p1)
+          (set-mark p2))
+      (progn (xah--forward-real-double-quote)
+(xah-select-text-in-quote) ))))
 
 (defun xah-select-current-line ()
   "Select the current line"
