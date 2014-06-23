@@ -24,28 +24,24 @@ C-u 2 → set to 'chinese-py-b5."
     ((equal φn 2)       ; C-u 2
      (set-input-method 'chinese-py-b5))
     (t                                  ; all other cases
-     (set-input-method 'chinese-py)) )
- )
+     (set-input-method 'chinese-py))))
 
 
 
 (defun xah-color-me-yellow ()
   "Change background color of current window to light yellow."
   (interactive)
-  (set-background-color "cornsilk")
-  )
+  (set-background-color "cornsilk"))
 
 (defun xah-color-me-pinky ()
   "Change background color of current window to light pink."
   (interactive)
-  (set-background-color "lavender blush")
-  )
+  (set-background-color "lavender blush"))
 
 (defun xah-color-me-honeydew ()
   "Change background color of current window to honeydew."
   (interactive)
-  (set-background-color "honeydew")
-  )
+  (set-background-color "honeydew"))
 
 (defun xah-list-matching-lines2 ()
   "Show lines in the current buffer matching current word or text selection.
@@ -57,13 +53,11 @@ The differences are:
   (interactive)
   (let (bds p1 p2 myStr )
     (setq bds (get-selection-or-unit 'glyphs))
-    (setq myStr (elt bds 0) )
-    (setq p1 (elt bds 1) )
-    (setq p2 (elt bds 2) )
+    (setq myStr (elt bds 0))
+    (setq p1 (elt bds 1))
+    (setq p2 (elt bds 2))
 
-    (list-matching-lines (regexp-quote myStr))
-    )
-  )
+    (list-matching-lines (regexp-quote myStr))))
 
 (defun xah-make-lojban-entry ()
   "Insert a blank a-lojban-a-day HTML template in a paritcular file."
@@ -155,16 +149,13 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("py2doc" . "~/web/xahlee_info/python_doc_2.7.6/index.html")
         ("py3doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
 
-        ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")
-
-) )
+        ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")))
 
 (defun xah-open-file-fast (φopen-code)
   "Prompt to open a file from a pre-defined set."
   (interactive
-   (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-filelist)))
-   )
-  (find-file (cdr (assoc φopen-code xah-filelist)) ) )
+   (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-filelist))))
+  (find-file (cdr (assoc φopen-code xah-filelist))))
 
 ;; (defun xah-open-file-fast (φopen-code)
 ;;   "Prompt to open a file from a pre-defined set."
@@ -205,41 +196,43 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
   (interactive)
   (let (
         (ξs (elt (get-selection-or-unit 'filepath) 0))
-         fPath )
-    (setq ξs (remove-uri-fragment ξs))
+        fPath )
 
-    ;; convenience. if the input string start with a xah domain name, make it a url string
-    (setq ξs
-          (cond
-           ((string-match "\\`//" ξs ) (concat "http:" ξs)) ; relative http protocal, used in css
-           ((string-match "\\`ergoemacs\\.org" ξs ) (concat "http://" ξs))
-           ((string-match "\\`wordyenglish\\.com" ξs ) (concat "http://" ξs))
-           ((string-match "\\`xaharts\\.org" ξs ) (concat "http://" ξs))
-           ((string-match "\\`xahlee\\.info" ξs ) (concat "http://" ξs))
-           ((string-match "\\`xahlee\\.org" ξs ) (concat "http://" ξs))
-           ((string-match "\\`xahmusic\\.org" ξs ) (concat "http://" ξs))
-           ((string-match "\\`xahporn\\.org" ξs ) (concat "http://" ξs))
-           ((string-match "\\`xahsl\\.org" ξs ) (concat "http://" ξs))
-           (t ξs) ) )
+    (if (= (length ξs) 0)
+        (progn (message "no path obtained"))
+      (progn 
+        (setq ξs (remove-uri-fragment ξs))
+        (message "ξs %s" ξs)
 
-    (if (string-match-p "\\`https?://" ξs)
-        (if (xahsite-url-is-xah-website-p ξs)
-            (let ((ξfp (xahsite-url-to-filepath ξs )))
-              (if (file-exists-p ξfp)
-                  (progn (find-file ξfp ))
-                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp) ) (find-file ξs ))
-                )
-              )
-          (progn (browse-url ξs))
-          )
-      (progn ; not starting “http://”
-        (let ((ξfff (xahsite-web-path-to-filepath ξs default-directory)) )
-(message "%s" ξfff)
-          (if (file-exists-p ξfff)
-              (progn (find-file ξfff))
-            (if (file-exists-p (concat ξfff ".el"))
-                (progn (find-file (concat ξfff ".el")))
-              (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfff) ) (find-file ξfff )) ) ) ) ) ) ))
+        ;; convenience. if the input string start with a xah domain name, make it a url string
+        (setq ξs
+              (cond
+               ((string-match "\\`//" ξs ) (concat "http:" ξs)) ; relative http protocal, used in css
+               ((string-match "\\`ergoemacs\\.org" ξs ) (concat "http://" ξs))
+               ((string-match "\\`wordyenglish\\.com" ξs ) (concat "http://" ξs))
+               ((string-match "\\`xaharts\\.org" ξs ) (concat "http://" ξs))
+               ((string-match "\\`xahlee\\.info" ξs ) (concat "http://" ξs))
+               ((string-match "\\`xahlee\\.org" ξs ) (concat "http://" ξs))
+               ((string-match "\\`xahmusic\\.org" ξs ) (concat "http://" ξs))
+               ((string-match "\\`xahporn\\.org" ξs ) (concat "http://" ξs))
+               ((string-match "\\`xahsl\\.org" ξs ) (concat "http://" ξs))
+               (t ξs)))
+
+        (if (string-match-p "\\`https?://" ξs)
+            (if (xahsite-url-is-xah-website-p ξs)
+                (let ((ξfp (xahsite-url-to-filepath ξs )))
+                  (if (file-exists-p ξfp)
+                      (progn (find-file ξfp ))
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp)) (find-file ξs ))))
+              (progn (browse-url ξs)))
+          (progn ; not starting “http://”
+            (let ((ξfff (xahsite-web-path-to-filepath ξs default-directory)))
+              (message "ξfff %s" ξfff)
+              (if (file-exists-p ξfff)
+                  (progn (find-file ξfff))
+                (if (file-exists-p (concat ξfff ".el"))
+                    (progn (find-file (concat ξfff ".el")))
+                  (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfff)) (find-file ξfff )))))))))))
 
 (defun xah-open-file-from-clipboard ()
   "Open the file path from OS's clipboard.

@@ -6,14 +6,14 @@
   (interactive)
   (if (region-active-p)
       (kill-region (region-beginning) (region-end))
-    (kill-region (line-beginning-position) (line-beginning-position 2)) ) )
+    (kill-region (line-beginning-position) (line-beginning-position 2))))
 
 (defun xah-copy-line-or-region ()
   "Copy current line, or text selection."
   (interactive)
   (if (region-active-p)
       (kill-ring-save (region-beginning) (region-end))
-    (kill-ring-save (line-beginning-position) (line-beginning-position 2)) ) )
+    (kill-ring-save (line-beginning-position) (line-beginning-position 2))))
 
 (defun xah-copy-all ()
   "Put the whole buffer content into the `kill-ring'.
@@ -27,8 +27,7 @@ If `narrow-to-region' is in effect, then copy that region only."
 If `narrow-to-region' is in effect, then cut that region only."
   (interactive)
   (kill-new (buffer-string))
-  (delete-region (point-min) (point-max) )
-  )
+  (delete-region (point-min) (point-max)))
 
 (defun xah-shrink-whitespaces ()
   "Remove white spaces around cursor to just one or none.
@@ -48,12 +47,12 @@ Calling this command 3 times will always result in no whitespaces around cursor.
       ;; todo: might consider whitespace as defined by syntax table, and also consider whitespace chars in unicode if syntax table doesn't already considered it.
       (setq cursor-point (point))
 
-      (setq space-tab-neighbor-p (if (or (looking-at " \\|\t") (looking-back " \\|\t")) t nil) )
-      (move-beginning-of-line 1) (setq line-begin-pos (point) )
-      (move-end-of-line 1) (setq line-end-pos (point) )
+      (setq space-tab-neighbor-p (if (or (looking-at " \\|\t") (looking-back " \\|\t")) t nil))
+      (move-beginning-of-line 1) (setq line-begin-pos (point))
+      (move-end-of-line 1) (setq line-end-pos (point))
       ;;       (re-search-backward "\n$") (setq line-begin-pos (point) )
       ;;       (re-search-forward "\n$") (setq line-end-pos (point) )
-      (setq line-has-meat-p (if (< 0 (count-matches "[[:graph:]]" line-begin-pos line-end-pos)) t nil) )
+      (setq line-has-meat-p (if (< 0 (count-matches "[[:graph:]]" line-begin-pos line-end-pos)) t nil))
       (goto-char cursor-point)
 
       (skip-chars-backward "\t ")
@@ -100,19 +99,19 @@ When there is a text selection, act on the region."
       (setq currentStateIsCompact
             (if (eq last-command this-command)
                 (get this-command 'stateIsCompact-p)
-              (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil) ) )
+              (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil)))
 
       (if (region-active-p)
           (if currentStateIsCompact
               (fill-region (region-beginning) (region-end))
             (let ((fill-column bigFillColumnVal))
-              (fill-region (region-beginning) (region-end))) )
+              (fill-region (region-beginning) (region-end))))
         (if currentStateIsCompact
             (fill-paragraph nil)
           (let ((fill-column bigFillColumnVal))
-            (fill-paragraph nil)) ) )
+            (fill-paragraph nil))))
 
-      (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )
+      (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)))))
 
 (defun xah-toggle-letter-case ()
   "Toggle the letter case of current word or text selection.
@@ -122,8 +121,8 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   (let (p1 p2 (deactivate-mark nil) (case-fold-search nil))
     (if (region-active-p)
         (setq p1 (region-beginning) p2 (region-end))
-      (let ((bds (bounds-of-thing-at-point 'symbol) ) )
-        (setq p1 (car bds) p2 (cdr bds)) ) )
+      (let ((bds (bounds-of-thing-at-point 'symbol)))
+        (setq p1 (car bds) p2 (cdr bds))))
 
 ;; (message "bds %s %s" p1 p2)
 
@@ -132,11 +131,11 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
         (goto-char p1)
         (cond
          ((looking-at "[[:lower:]][[:lower:]]") (put this-command 'state "all lower"))
-         ((looking-at "[[:upper:]][[:upper:]]") (put this-command 'state "all caps") )
-         ((looking-at "[[:upper:]][[:lower:]]") (put this-command 'state "init caps") )
+         ((looking-at "[[:upper:]][[:upper:]]") (put this-command 'state "all caps"))
+         ((looking-at "[[:upper:]][[:lower:]]") (put this-command 'state "init caps"))
          ((looking-at "[[:lower:]]") (put this-command 'state "all lower"))
-         ((looking-at "[[:upper:]]") (put this-command 'state "all caps") )
-         (t (put this-command 'state "all lower") ) ) ) )
+         ((looking-at "[[:upper:]]") (put this-command 'state "all caps"))
+         (t (put this-command 'state "all lower")))))
 
     (cond
      ((string= "all lower" (get this-command 'state))
@@ -144,8 +143,7 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
      ((string= "init caps" (get this-command 'state))
       (upcase-region p1 p2) (put this-command 'state "all caps"))
      ((string= "all caps" (get this-command 'state))
-      (downcase-region p1 p2) (put this-command 'state "all lower")) )
-    ) )
+      (downcase-region p1 p2) (put this-command 'state "all lower")))))
 
 (defun xah-select-text-in-bracket ()
   "Select text between the nearest left and right delimiters.
@@ -179,7 +177,6 @@ Delimiters are paired characters:
   "Select text between \"double\" quotes."
   (interactive)
   (let (p1 p2)
-
     (if (nth 3 (syntax-ppss))
         (progn
           (xah--backward-real-double-quote)
@@ -191,7 +188,7 @@ Delimiters are paired characters:
           (goto-char p1)
           (set-mark p2))
       (progn (xah--forward-real-double-quote)
-(xah-select-text-in-quote) ))))
+             (xah-select-text-in-quote)))))
 
 (defun xah-select-current-line ()
   "Select the current line"
