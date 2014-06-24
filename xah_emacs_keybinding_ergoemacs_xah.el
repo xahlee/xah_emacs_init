@@ -102,11 +102,11 @@
     (global-set-key (kbd "2") 'delete-window)
     (global-set-key (kbd "3") 'delete-other-windows)
     (global-set-key (kbd "4") 'split-window-vertically)
-    (global-set-key (kbd "5") nil)
-    (global-set-key (kbd "6") 'redo)
-    (global-set-key (kbd "7") 'xah-backward-punct)
+    (global-set-key (kbd "5") 'redo)
+    (global-set-key (kbd "6") 'xah-select-current-block)
+    (global-set-key (kbd "7") 'xah-select-current-line)
     (global-set-key (kbd "8") 'xah-extend-selection)
-    (global-set-key (kbd "9") 'xah-forward-punct)
+    (global-set-key (kbd "9") 'xah-select-text-in-bracket-or-quote)
     (global-set-key (kbd "0") 'xah-forward-quote)
 
     (global-set-key (kbd "a") 'open-line)
@@ -121,7 +121,7 @@
     (global-set-key (kbd "j") 'xah-copy-line-or-region)
     (global-set-key (kbd "k") 'yank)
     (global-set-key (kbd "l") 'recenter-top-bottom)
-    (global-set-key (kbd "m") 'xah-backward-open-bracket)
+    (global-set-key (kbd "m") 'xah-backward-left-bracket)
     (global-set-key (kbd "n") 'forward-char)
     (global-set-key (kbd "o") 'other-window)
     (global-set-key (kbd "p") 'kill-word)
@@ -130,7 +130,7 @@
     (global-set-key (kbd "s") 'xah-end-of-line-or-block)
     (global-set-key (kbd "t") 'next-line)
     (global-set-key (kbd "u") 'delete-char)
-    (global-set-key (kbd "v") 'xah-forward-close-bracket)
+    (global-set-key (kbd "v") 'xah-forward-right-bracket)
     (global-set-key (kbd "w") 'eex-insert-mode-activate)
     (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)
     (global-set-key (kbd "y") 'set-mark-command)
@@ -198,8 +198,8 @@
 ;;  414    0.28%  xah-toggle-letter-case
 ;;   61    0.04%  xah-cycle-hyphen-underscore-space
 
-;; 1598    1.08%  xah-backward-open-bracket
-;;  805    0.54%  xah-forward-close-bracket
+;; 1598    1.08%  xah-backward-left-bracket
+;;  805    0.54%  xah-forward-right-bracket
 
 ;;  415    0.28%  xah-select-current-block
 ;;  515    0.35%  xah-select-current-line
@@ -228,7 +228,7 @@
 ;; 2019    1.36%  newline
 ;; 1712    1.16%  xah-cut-line-or-region
 ;; 1672    1.13%  isearch-repeat-forward
-;; 1598    1.08%  xah-backward-open-bracket
+;; 1598    1.08%  xah-backward-left-bracket
 ;; 1593    1.08%  org-self-insert-command
 ;; 1506    1.02%  xah-close-current-buffer
 ;; 1500    1.01%  backward-kill-word
@@ -242,7 +242,7 @@
 ;; 911    0.61%  other-window
 ;; 908    0.61%  xah-extend-selection
 ;; 885    0.60%  xah-copy-line-or-region
-;; 805    0.54%  xah-forward-close-bracket
+;; 805    0.54%  xah-forward-right-bracket
 ;; 770    0.52%  set-mark-command
 ;; 766    0.52%  delete-other-windows
 ;; 671    0.45%  forward-char

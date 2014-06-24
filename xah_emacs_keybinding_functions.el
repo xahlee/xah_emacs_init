@@ -145,59 +145,95 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
      ((string= "all caps" (get this-command 'state))
       (downcase-region p1 p2) (put this-command 'state "all lower")))))
 
-(defun xah-select-text-in-bracket ()
-  "Select text between the nearest left and right delimiters.
-Delimiters are paired characters:
- () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩
- For practical purposes, also: \"double quote\"."
- (interactive)
- (let (p1)
-   (skip-chars-backward "^<>([{“「『‹«（〈《〔【〖⦗〘⦅〚⦃⟨\"")
-   (setq p1 (point))
-   (skip-chars-forward "^<>)]}”」』›»）〉》〕】〗⦘〙⦆〛⦄⟩\"")
-   (set-mark p1)))
-
-;; (matching-paren ?\()
-
 (defun xah--backward-real-double-quote ()
-  "move cursor bakcward to a \", but excluding those with backslash."
+  "Move cursor bakcward to a \", but excluding those with backslash."
   (interactive)
-  (search-backward-regexp "\\s\"" )
+  (search-backward "\"" nil t)
   (while (looking-back "\\\\")
-    (search-backward-regexp "\\s\"" )))
+    (search-backward "\"" nil t)))
 
 (defun xah--forward-real-double-quote ()
-  "move cursor forward-sexp to a \", but excluding those with backslash."
+  "Move cursor forward to a \", but excluding those with backslash."
   (interactive)
-  (search-forward-regexp "\\s\"" )
+  (search-forward "\"" nil t)
   (while (looking-back "\\\\\"")
-    (search-forward-regexp "\\s\"" )))
+    (search-forward "\"" nil t)))
+
+;; (defun xah-select-text-in-quote ()
+;;   "Select text between \"double\" quotes."
+;;   (interactive)
+;;   (let (p1 p2)
+;;     (if (nth 3 (syntax-ppss))
+;;         (progn
+;;           (xah--backward-real-double-quote)
+;;           (forward-char)
+;;           (setq p1 (point))
+;;           (xah--forward-real-double-quote)
+;;           (backward-char 1)
+;;           (setq p2 (point))
+;;           (goto-char p1)
+;;           (set-mark p2))
+;;       (progn
+;;         (error "Cursor not inside quote")))))
 
 (defun xah-select-text-in-quote ()
-  "Select text between \"double\" quotes."
+  "Select text between ASCII quotes, single or double."
   (interactive)
   (let (p1 p2)
     (if (nth 3 (syntax-ppss))
         (progn
-          (xah--backward-real-double-quote)
-          (forward-char)
+          (backward-up-list 1 "ESCAPE-STRINGS" "NO-SYNTAX-CROSSING")
           (setq p1 (point))
-          (xah--forward-real-double-quote)
-          (backward-char 1)
+          (forward-sexp 1)
           (setq p2 (point))
-          (goto-char p1)
-          (set-mark p2))
-      (progn (xah--forward-real-double-quote)
-             (xah-select-text-in-quote)))))
+          (goto-char (1+ p1))
+          (set-mark (1- p2)))
+      (progn
+        (error "Cursor not inside quote")))))
+
+(defun xah-select-text-in-bracket ()
+  "Select text between the nearest brackets.
+⁖  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩."
+  (interactive)
+  (let (pos p1 p2)
+    (setq pos (point))
+    (search-backward-regexp "\\s(" nil t )
+    (setq p1 (point))
+    (forward-sexp 1)
+    (setq p2 (point))
+    (goto-char (1+ p1))
+    (set-mark (1- p2))))
+
+(defun xah-select-text-in-bracket-or-quote ()
+  "Select text between the nearest brackets or quote."
+  (interactive)
+  (if (nth 3 (syntax-ppss))
+        (xah-select-text-in-quote)
+      (xah-select-text-in-bracket)))
+
+;; (progn (goto-char pos)
+;;            (xah--backward-real-double-quote)
+;;            (setq ξquote-p1 (1+ (point)))
+;;            (goto-char pos)
+;;            (xah--forward-real-double-quote)
+;;            (setq ξquote-p2 (1- (point))))
+
+;; (if (and
+;;          (> ξquote-p1 p1)
+;;          (< ξquote-p1 pos)
+;;          (< ξquote-p2 p2)
+;;          (> ξquote-p2 pos))
+;;         (progn (goto-char ξquote-p1) (set-mark ξquote-p2))
+;;       (progn (goto-char p1) (set-mark p2)))
 
 (defun xah-select-current-line ()
   "Select the current line"
   (interactive)
-  (end-of-line) ; move to end of line
+  (end-of-line)
   (set-mark (line-beginning-position)))
 
 (defun xah-select-current-block ()
-  "Select the current block of text between empty lines."
+  "Select the current block of text between blank  lines."
   (interactive)
   (let (p1 p2)
     (progn
@@ -403,7 +439,7 @@ The app is chosen from your OS's preference."
     ) ))
 
 (defun xah-new-empty-buffer ()
-  "Opens a new empty buffer."
+  "Open a new empty buffer."
   (interactive)
   (let ((buf (generate-new-buffer "untitled")))
     (switch-to-buffer buf)

@@ -54,7 +54,10 @@ test cases:
   ))
 
 (defun xah-scan-list (φcount φcurrent-depth)
-  "Call `scan-lists' interactively."
+  "Call `scan-lists' interactively.
+scan-list basically move by n number of bracket groups.
+it's similar to `forward-sexp', except that forward-sexp also consider atoms (that is, sequence of chars not enclosed by paren, but scan-list only counts paren'd item.)
+"
   (interactive "nCount:\nnDepth:")
   (let ((parse-sexp-ignore-comments t))
     (goto-char (scan-lists (point) φcount φcurrent-depth))

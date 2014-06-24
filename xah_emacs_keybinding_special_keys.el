@@ -55,8 +55,8 @@
 
 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
 
-;  14181    0.88%  xah-backward-open-bracket
-;  17177    1.07%  xah-forward-close-bracket
+;  14181    0.88%  xah-backward-left-bracket
+;  17177    1.07%  xah-forward-right-bracket
 
 
 

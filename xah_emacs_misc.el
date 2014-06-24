@@ -202,8 +202,7 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
         (progn (message "no path obtained"))
       (progn 
         (setq ξs (remove-uri-fragment ξs))
-        (message "ξs %s" ξs)
-
+        
         ;; convenience. if the input string start with a xah domain name, make it a url string
         (setq ξs
               (cond
@@ -227,7 +226,6 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
               (progn (browse-url ξs)))
           (progn ; not starting “http://”
             (let ((ξfff (xahsite-web-path-to-filepath ξs default-directory)))
-              (message "ξfff %s" ξfff)
               (if (file-exists-p ξfff)
                   (progn (find-file ξfff))
                 (if (file-exists-p (concat ξfff ".el"))

@@ -198,7 +198,7 @@
 (global-set-key (kbd "<menu> 5") nil)
 (global-set-key (kbd "<menu> 6") 'xah-select-current-block)
 (global-set-key (kbd "<menu> 7") 'xah-select-current-line)
-(global-set-key (kbd "<menu> 8") 'xah-select-text-in-quote)
+(global-set-key (kbd "<menu> 8") 'xah-select-text-in-bracket-or-quote)
 (global-set-key (kbd "<menu> 9") 'ispell-word)
 (global-set-key (kbd "<menu> 0") nil)
 

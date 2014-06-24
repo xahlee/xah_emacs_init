@@ -24,6 +24,10 @@
 
 (defalias 'ssm 'shell-script-mode)
 
+(defalias 'tpu-edt 'nil)
+(defalias 'TPU-EDT 'nil)
+
+
 
 ;; xah personal
 

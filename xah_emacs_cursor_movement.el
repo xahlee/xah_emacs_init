@@ -26,11 +26,11 @@
 
 (defun xah-forward-block (&optional φn)
   "Move cursor forward to the beginning of next text block.
-A text block is separated by 2 empty lines (or line with just whitespace).
+A text block is separated by blank lines.
 In most major modes, this is similar to `forward-paragraph', but this command's behavior is the same regardless of syntax table."
   (interactive "p")
   (if (search-forward-regexp "\n[[:blank:]\n]*\n+" nil "NOERROR" φn)
-      (progn (point))
+      (progn (backward-char 1) (point))
     (progn (goto-char (point-max)))))
 
 (defun xah-backward-block (&optional φn)
@@ -39,7 +39,8 @@ See: `xah-forward-block'"
   (interactive)
   (if (search-backward-regexp "\n[\t\n ]*\n+" nil "NOERROR" φn)
       (progn
-        (skip-chars-backward "\n\t "))
+        (skip-chars-backward "\n\t ")
+        (forward-char 1))
     (progn (goto-char (point-min)))))
 
 (defun xah-beginning-of-line-or-block (&optional φn)
@@ -64,20 +65,19 @@ See: `xah-forward-block'"
               (equal last-command 'xah-beginning-of-line-or-block ))
           (xah-forward-block)
         (end-of-line))
-    (progn (xah-forward-block φn))
-    ))
+    (progn (xah-forward-block φn))))
 
-(defvar xah-brackets-open nil "list of open bracket chars.")
-(setq xah-brackets-open '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«") )
+(defvar xah-left-brackets nil "List of open bracket chars.")
+(setq xah-left-brackets '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«"))
 
-(defvar xah-brackets-close nil "list of close bracket chars.")
-(setq xah-brackets-close '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»") )
+(defvar xah-right-brackets nil "list of close bracket chars.")
+(setq xah-right-brackets '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»"))
 
-(defvar xah-ascii-quotes nil "list of quotation chars.")
-(setq xah-ascii-quotes '("'" "\"") )
+(defvar xah-ascii-quotes nil "List of quotation chars.")
+(setq xah-ascii-quotes '("'" "\""))
 
 (defvar xah-punctuations nil "list of punctuation chars for easy jump. Typically exclude things that are too common, such as underscore or slash.")
-(setq xah-punctuations '("=" "$" "#" "+" "*" ";" "." "," "\\" "&" "@" "%" "!" "?" "^" "`" "~") )
+(setq xah-punctuations '("=" "$" "#" "+" "*" ";" "." "," "\\" "&" "@" "%" "!" "?" "^" "`" "~"))
 
 (defvar xah-punctuation-regex nil "a regex string for the purpose of jumping to punctuations in programing modes.")
 (setq xah-punctuation-regex "[=.*+,#$%&:;<>@^`~!\?\|]+")
@@ -109,13 +109,12 @@ The list of punctuations to jump to is defined by `xah-punctuations'"
 With prefix ΦN, move forward to the next ΦN left bracket or quotation mark.
 With a negative prefix ΦN, move backward to the previous ΦN left bracket or quotation mark.
 
-The list of brackets to jump to is defined by `xah-brackets-open' and `xah-brackets-close' and `xah-ascii-quotes'"
-
+The list of brackets to jump to is defined by `xah-left-brackets' and `xah-right-brackets' and `xah-ascii-quotes'"
   (interactive "p")
   (if (and φn (> 0 φn))
-      (xah-backward-open-bracket (- 0 φn))
+      (xah-backward-left-bracket (- 0 φn))
     (forward-char 1)
-    (search-forward-regexp (eval-when-compile (regexp-opt (append xah-brackets-open xah-brackets-close xah-ascii-quotes ))) nil t φn)
+    (search-forward-regexp (eval-when-compile (regexp-opt (append xah-left-brackets xah-right-brackets xah-ascii-quotes ))) nil t φn)
     (backward-char 1)))
 
 (defun xah-backward-all-bracket (&optional φn)
@@ -123,82 +122,36 @@ The list of brackets to jump to is defined by `xah-brackets-open' and `xah-brack
 With prefix argument ΦN, move backward ΦN open brackets.
 With a negative prefix ΦN, move forward ΦN open brackets.
 
-The list of brackets to jump to is defined by `xah-brackets-open' and `xah-brackets-close' and `xah-ascii-quotes'"
+The list of brackets to jump to is defined by `xah-left-brackets' and `xah-right-brackets' and `xah-ascii-quotes'"
   (interactive "p")
   (if (and φn (> 0 φn))
-      (xah-forward-open-bracket (- 0 φn))
-    (search-backward-regexp (eval-when-compile (regexp-opt (append xah-brackets-open xah-brackets-close xah-ascii-quotes ))) nil t φn)))
+      (xah-forward-left-bracket (- 0 φn))
+    (search-backward-regexp (eval-when-compile (regexp-opt (append xah-left-brackets xah-right-brackets xah-ascii-quotes ))) nil t φn)))
 
-(defun xah-forward-open-bracket (&optional φn)
-  "Move cursor to the next occurrence of left bracket or quotation mark.
-With prefix ΦN, move forward to the next ΦN left bracket or quotation mark.
-With a negative prefix ΦN, move backward to the previous ΦN left bracket or quotation mark."
-  (interactive "p")
-  (if (and φn (> 0 φn))
-      (xah-backward-open-bracket (- 0 φn))
-    (forward-char 1)
-    (search-forward-regexp (eval-when-compile (regexp-opt xah-brackets-open)) nil t φn)
-    (backward-char 1)))
+(defun xah-backward-left-bracket ()
+  "Move cursor to the previous occurrence of left bracket.
+The list of brackets to jump to is defined by `xah-left-brackets'."
+  (interactive)
+  (search-backward-regexp (eval-when-compile (regexp-opt xah-left-brackets)) nil t))
 
-(defun xah-backward-open-bracket (&optional φn)
-  "Move cursor to the previous occurrence of left bracket or quotation mark.
-With prefix argument ΦN, move backward ΦN open brackets.
-With a negative prefix ΦN, move forward ΦN open brackets.
+(defun xah-forward-right-bracket ()
+  "Move cursor to the next occurrence of right bracket.
+The list of brackets to jump to is defined by `xah-right-brackets'."
+  (interactive)
+  (search-forward-regexp (eval-when-compile (regexp-opt xah-right-brackets)) nil t))
 
-The list of brackets to jump to is defined by `xah-brackets-open'."
-  (interactive "p")
-  (if (and φn (> 0 φn))
-      (xah-forward-open-bracket (- 0 φn))
-    (search-backward-regexp (eval-when-compile (regexp-opt xah-brackets-open)) nil t φn)))
+(defun xah-forward-quote ()
+  "Move cursor to the next occurrence of ASCII quotation mark.
+The list of quotes to jump to is defined by `xah-ascii-quotes'.
+See also: `xah-backward-quote'."
+  (interactive)
+  (search-forward-regexp (eval-when-compile (regexp-opt xah-ascii-quotes)) nil t))
 
-(defun xah-forward-close-bracket (&optional φn)
-  "Move cursor to the next occurrence of right bracket or quotation mark.
-With a prefix argument ΦN, move forward ΦN closed bracket.
-With a negative prefix argument ΦN, move backward ΦN closed brackets.
-
-The list of brackets to jump to is defined by `xah-brackets-close'."
-  (interactive "p")
-  (if (and φn
-           (> 0 φn))
-      (xah-backward-close-bracket (- 0 φn))
-    (search-forward-regexp
-     (eval-when-compile
-       (regexp-opt xah-brackets-close)) nil t φn)))
-
-(defun xah-backward-close-bracket (&optional φn)
-  "Move cursor to the previous occurrence of right bracket or quotation mark.
-With a prefix argument ΦN, move backward ΦN closed brackets.
-With a negative prefix argument ΦN, move forward ΦN closed brackets.
-
-The list of brackets to jump to is defined by `xah-brackets-close'."
-  (interactive "p")
-  (if (and φn (> 0 φn))
-      (xah-forward-close-bracket (- 0 φn))
-    (backward-char 1)
-    (search-backward-regexp (eval-when-compile (regexp-opt xah-brackets-close)) nil t φn)
-    (forward-char 1)))
-
-(defun xah-forward-quote (&optional φn)
-  "Move cursor to the next occurrence of ASCII quotation mark, single or double.
-With prefix ΦN, move forward to the next ΦN quotation mark.
-With a negative prefix ΦN, move backward to the previous ΦN quotation mark.
-
-The list of quotes to jump to is defined by `xah-ascii-quotes'."
-  (interactive "p")
-  (if (and φn (> 0 φn))
-      (xah-forward-quote (- 0 φn))
-    (search-forward-regexp (eval-when-compile (regexp-opt xah-ascii-quotes)) nil t φn)
-    ))
-
-(defun xah-backward-quote (&optional φn)
-  "Move cursor to the previous occurrence of ASCII quotation mark, single or double.
-With prefix argument ΦN, move backward ΦN quotation mark.
-With a negative prefix ΦN, move forward ΦN quotation mark.
-
-The list of quotes to jump to is defined by `xah-ascii-quotes'."
-  (interactive "p")
-  (if (and φn (> 0 φn)) (xah-backward-quote (- 0 φn))
-    (search-backward-regexp (eval-when-compile (regexp-opt xah-ascii-quotes)) nil t φn)))
+(defun xah-backward-quote ()
+  "Move cursor to the previous occurrence of ASCII quotation mark.
+See `xah-forward-quote'."
+  (interactive)
+  (search-backward-regexp (eval-when-compile (regexp-opt xah-ascii-quotes)) nil t))
 
 ;; (defun forward-section ()
 ;;   "Move cursor forward to next occurrence of the SECTION SIGN § char (unicode 167)."
