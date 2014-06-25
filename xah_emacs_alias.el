@@ -14,6 +14,8 @@
 (defalias 'snf 'sort-numeric-fields)
 (defalias 'g 'grep)
 (defalias 'ds 'desktop-save)
+(defalias 'dt 'desktop-save)
+(defalias 'dtm 'desktop-mode)
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
@@ -24,8 +26,8 @@
 
 (defalias 'ssm 'shell-script-mode)
 
-(defalias 'tpu-edt 'nil)
-(defalias 'TPU-EDT 'nil)
+(defalias 'tpu-edt 'forward-char)
+(defalias 'tpu-edt-on 'tpu-edt-off) ; fuck tpu-edt
 
 
 

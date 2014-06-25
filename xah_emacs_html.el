@@ -32,15 +32,15 @@ If there's a text selection, wrap p around each text block (separated by 2 newli
     (xhm-wrap-html-tag "span" "ref")
     ) )
 
-(defun xah-mark-unicode (p1)
+(defun xah-mark-unicode (φp1)
   "Wrap 「<mark class=\"unicode\" title=\"U+…: ‹NAME›\"></mark>」 around current character.
-When called in elisp program, wrap the tag at cursor position p1."
+When called in elisp program, wrap the tag at cursor position φp1."
   (interactive (list (point)))
   (let* (
-         (ξcodepoint (string-to-char (buffer-substring-no-properties p1 (1+ p1))) )
+         (ξcodepoint (string-to-char (buffer-substring-no-properties φp1 (1+ φp1))) )
          (ξname (get-char-code-property ξcodepoint 'name))
          )
-    (goto-char p1)
+    (goto-char φp1)
     (insert (format "<mark class=\"unicode\" title=\"U+%X: %s\">" ξcodepoint ξname) )
     (forward-char 1)
     (insert (format "</mark>") )
@@ -87,7 +87,7 @@ Add today's date to the byline tag of current file, also delete the last one if 
         ))
        ) )
 
-(defun xahsite-update-page-tag-old (p1 p2)
+(defun xahsite-update-page-tag-old (φp1 φp2)
   "Update HTML page navigation tags.
 
 The input is a text selection.
@@ -103,10 +103,10 @@ combowords-4.html”"
   (interactive "r")
   (let (filez pageNavStr (i 1))
     (setq filez
-          (split-string (buffer-substring-no-properties p1 p2) "\n" t)
+          (split-string (buffer-substring-no-properties φp1 φp2) "\n" t)
           )
 
-    (delete-region p1 p2)
+    (delete-region φp1 φp2)
 
     ;; generate the page nav string
     (setq pageNavStr "<div class=\"pgs\">")
@@ -164,12 +164,12 @@ words-4.html
 "
   (interactive)
   (require 'sgml-mode)
-  (let (bds p1 p2 inputStr fileList pageNavStr )
+  (let (bds ξp1 ξp2 inputStr fileList pageNavStr )
     (setq bds (get-selection-or-unit 'block))
-    (setq inputStr (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
-    (setq fileList (split-string (buffer-substring-no-properties p1 p2) "\n" t) )
+    (setq inputStr (elt bds 0) ξp1 (elt bds 1) ξp2 (elt bds 2)  )
+    (setq fileList (split-string (buffer-substring-no-properties ξp1 ξp2) "\n" t) )
 
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
 
     ;; generate the page nav string
     (setq pageNavStr (format "<nav class=\"page\">\n%s</nav>"

@@ -61,14 +61,14 @@ See also: `xah-copy-to-register-1', `insert-register'."
 
 
 
-(defun xah-copy-rectangle-to-clipboard (p1 p2)
+(defun xah-copy-rectangle-to-clipboard (φp1 φp2)
   "Copy region as column (rectangle) to operating system's clipboard.
 This command will also put the text in register 0.
 
 See also: `kill-rectangle', `copy-to-register'."
   (interactive "r")
   (let ((x-select-enable-clipboard t))
-    (copy-rectangle-to-register ?0 p1 p2)
+    (copy-rectangle-to-register ?0 φp1 φp2)
     (kill-new
      (with-temp-buffer
        (insert-register ?0)

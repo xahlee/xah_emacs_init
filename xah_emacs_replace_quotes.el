@@ -44,9 +44,9 @@
 ;;     ))
 
 ;; incomplete
-;; (defun camel-case-to-understore-interactive (p1 p2)
+;; (defun camel-case-to-understore-interactive (φp1 φp2)
 ;;   "query replace camelCase to camel_case words in current text block.
-;; When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the p1 p2 are region positions."
+;; When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the φp1 φp2 are region positions."
 ;;   (interactive
 ;;    (cond
 ;;     ((equal current-prefix-arg nil)    ; universal-argument not called
@@ -56,7 +56,7 @@
 ;; (let ((case-fold-search nil))
 ;;  (save-excursion
 ;;     (save-restriction
-;;       (narrow-to-region p1 p2)
+;;       (narrow-to-region φp1 φp2)
 ;;       (goto-char (point-min))
 ;;       (while (search-forward-regexp "\\b\\([A-Z][a-z]+\\)\\b" nil t)
 ;;         (if (y-or-n-p "Replace this one?")
@@ -64,9 +64,9 @@
 ;; )
 ;;    )
 
-(defun xah-corner-bracket→html-i (p1 p2)
+(defun xah-corner-bracket→html-i (φp1 φp2)
   "Replace all 「…」 to <code>…</code> in current text block.
-When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the p1 p2 are region positions."
+When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the φp1 φp2 are region positions."
   (interactive
    (cond
     ((equal current-prefix-arg nil)    ; universal-argument not called
@@ -75,13 +75,13 @@ When called with `universal-argument', work on visible portion of whole buffer (
      (list (point-min) (point-max) )) ) )
   (save-excursion
     (save-restriction
-      (narrow-to-region p1 p2)
+      (narrow-to-region φp1 φp2)
       (goto-char (point-min))
       (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
         (if (y-or-n-p "Replace this one?")
             (replace-match "<code>\\1</code>" t) ) ) )) )
 
-(defun xah-bracket→html (p1 p2)
+(defun xah-bracket→html (φp1 φp2)
   "Replace all 「…」 to <code>…</code> and others.
 
 • 「…」 → <code>…</code>
@@ -91,7 +91,7 @@ When called with `universal-argument', work on visible portion of whole buffer (
 
 Work on text selection or current text block.
 
-When called in lisp program, the arguments p1 p2 are region positions.
+When called in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
   (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ) )
@@ -100,7 +100,7 @@ Generate a report of the replaced strings in a separate buffer."
 
     (save-excursion
       (save-restriction
-        (narrow-to-region p1 p2)
+        (narrow-to-region φp1 φp2)
 
         (goto-char (point-min))
         (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
@@ -130,13 +130,13 @@ Generate a report of the replaced strings in a separate buffer."
          (princ "\n") )
        (reverse changedItems) ) ) ))
 
-(defun xah-title-bracket→html (p1 p2)
+(defun xah-title-bracket→html (φp1 φp2)
   "Replace all 〈…〉 to <cite>…</cite>.
 Also replace 《…》 to <cite class=\"book\">…</span>.
 
 If there's no text selection, work on current text block, else, on text selection.
 
-When call in lisp program, the arguments p1 p2 are region positions.
+When call in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
   (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ) )
@@ -147,7 +147,7 @@ Generate a report of the replaced strings in a separate buffer."
 
     (save-excursion
       (save-restriction
-        (narrow-to-region p1 p2)
+        (narrow-to-region φp1 φp2)
         (goto-char (point-min))
         (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
           ;; (puthash (match-string 1) "t" changedItems)

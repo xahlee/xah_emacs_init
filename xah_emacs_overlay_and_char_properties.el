@@ -73,11 +73,11 @@ print the list result.
     (print ξols)
     ))
 
-(defun xah-invisible-region (p1 p2 hide-p)
-  "Hide or show region P1 to P2, according to HIDE-P."
-  (remove-overlays p1 p2 'invisible 'xah)
+(defun xah-invisible-region (φp1 φp2 hide-p)
+  "Hide or show region ΦP1 to ΦP2, according to HIDE-P."
+  (remove-overlays φp1 φp2 'invisible 'xah)
   (when hide-p
-    (let ((ovly (make-overlay p1 p2 nil 'front-advance)))
+    (let ((ovly (make-overlay φp1 φp2 nil 'front-advance)))
       (overlay-put ovly 'evaporate t)
       (overlay-put ovly 'invisible 'xah)
       (overlay-put ovly 'isearch-open-invisible 'xah-isearch-open-invisible)
@@ -89,14 +89,14 @@ print the list result.
 
 ;; (add-to-invisibility-spec '(outline . t))
 
-(defun xhide (p1 p2)
+(defun xhide (φp1 φp2)
   "DOCSTRING"
   (interactive "r")
   (let ()
     (xah-invisible-region 50 100 t)
   ))
 
-(defun xshow (p1 p2)
+(defun xshow (φp1 φp2)
   "DOCSTRING"
   (interactive "r")
   (let ()
