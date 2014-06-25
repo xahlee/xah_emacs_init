@@ -20,7 +20,7 @@
 If `narrow-to-region' is in effect, then copy that region only."
   (interactive)
   (kill-new (buffer-string))
-  (message "Buffer content copied copy-region-as-kill"))
+  (message "Buffer content copied."))
 
 (defun xah-cut-all ()
   "Cut the whole buffer content into the `kill-ring'.
