@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;; 2014-01-29
-;; emacs keybinding for special keys 
+;; emacs keybinding for special keys
 ;; Xah Lee
 
 ;; 〈Mac OS X: Keyboard Layout, Keymapping, Keybinding, Software ⌨〉
@@ -75,7 +75,6 @@
 (global-set-key (kbd "<XF86Paste>") 'yank)
 (global-set-key (kbd "C-<XF86Paste>") 'yank-pop)
 (global-set-key (kbd "<XF86Close>") 'xah-close-current-buffer)
-
 
 (progn
   (define-prefix-command 'xah-menu-f10-keymap)

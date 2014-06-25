@@ -29,19 +29,13 @@
 A text block is separated by blank lines.
 In most major modes, this is similar to `forward-paragraph', but this command's behavior is the same regardless of syntax table."
   (interactive "p")
-  (if (search-forward-regexp "\n[[:blank:]\n]*\n+" nil "NOERROR" φn)
-      (progn (backward-char 1) (point))
-    (progn (goto-char (point-max)))))
+  (search-forward-regexp "\n[\t\n ]*\n+" nil "NOERROR" φn))
 
 (defun xah-backward-block (&optional φn)
   "Move cursor backward to previous text block.
 See: `xah-forward-block'"
   (interactive)
-  (if (search-backward-regexp "\n[\t\n ]*\n+" nil "NOERROR" φn)
-      (progn
-        (skip-chars-backward "\n\t ")
-        (forward-char 1))
-    (progn (goto-char (point-min)))))
+  (search-backward-regexp "\n[\t\n ]*\n+" nil "NOERROR" φn))
 
 (defun xah-beginning-of-line-or-block (&optional φn)
   "Move cursor to beginning of line, or beginning of current or previous text block.

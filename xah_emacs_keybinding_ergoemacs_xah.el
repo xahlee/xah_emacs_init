@@ -86,9 +86,7 @@
     (global-set-key (kbd "w") 'self-insert-command)
     (global-set-key (kbd "x") 'self-insert-command)
     (global-set-key (kbd "y") 'self-insert-command)
-    (global-set-key (kbd "z") 'self-insert-command)
-    )
-  )
+    (global-set-key (kbd "z") 'self-insert-command)))
 
 (defun eex-command-mode-init ()
   "set command mode keys"
@@ -134,34 +132,28 @@
     (global-set-key (kbd "w") 'eex-insert-mode-activate)
     (global-set-key (kbd "x") 'xah-cycle-hyphen-underscore-space)
     (global-set-key (kbd "y") 'set-mark-command)
-    (global-set-key (kbd "z") 'comment-dwim)
-    )
-  )
+    (global-set-key (kbd "z") 'comment-dwim)))
 
 (defun eex-mode-toggle ()
   "Switch between {insertion, command} modes."
   (interactive)
   (if eex-insert-state-q
       (eex-command-mode-activate)
-    (eex-insert-mode-activate)
-    )
-  )
+    (eex-insert-mode-activate)))
 
 (defun eex-command-mode-activate ()
   "Activate command mode."
   (interactive)
   (modify-all-frames-parameters (list (cons 'cursor-type 'box)))
   (setq eex-insert-state-q nil )
-  (eex-command-mode-init)
-  )
+  (eex-command-mode-init))
 
 (defun eex-insert-mode-activate ()
   "Activate insertion mode."
   (interactive)
   (modify-all-frames-parameters (list (cons 'cursor-type 'bar)))
   (setq eex-insert-state-q t )
-  (eex-insert-mode-init)
-  )
+  (eex-insert-mode-init))
 
 ;; when in going into minibuffer, switch to insertion mode.
 (add-hook 'minibuffer-setup-hook 'eex-insert-mode-activate)
@@ -192,6 +184,9 @@
 ;; 1128    0.76%  xah-shrink-whitespaces
 
 ;;  911    0.61%  other-window
+
+;; 766    0.52%  delete-other-windows
+;; 266    0.18%  split-window-vertically
 
 ;;  276    0.19%  kill-line
 

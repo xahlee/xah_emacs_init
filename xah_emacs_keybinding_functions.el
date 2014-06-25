@@ -159,23 +159,6 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   (while (looking-back "\\\\\"")
     (search-forward "\"" nil t)))
 
-;; (defun xah-select-text-in-quote ()
-;;   "Select text between \"double\" quotes."
-;;   (interactive)
-;;   (let (p1 p2)
-;;     (if (nth 3 (syntax-ppss))
-;;         (progn
-;;           (xah--backward-real-double-quote)
-;;           (forward-char)
-;;           (setq p1 (point))
-;;           (xah--forward-real-double-quote)
-;;           (backward-char 1)
-;;           (setq p2 (point))
-;;           (goto-char p1)
-;;           (set-mark p2))
-;;       (progn
-;;         (error "Cursor not inside quote")))))
-
 (defun xah-select-text-in-quote ()
   "Select text between ASCII quotes, single or double."
   (interactive)
@@ -211,23 +194,8 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
         (xah-select-text-in-quote)
       (xah-select-text-in-bracket)))
 
-;; (progn (goto-char pos)
-;;            (xah--backward-real-double-quote)
-;;            (setq ξquote-p1 (1+ (point)))
-;;            (goto-char pos)
-;;            (xah--forward-real-double-quote)
-;;            (setq ξquote-p2 (1- (point))))
-
-;; (if (and
-;;          (> ξquote-p1 p1)
-;;          (< ξquote-p1 pos)
-;;          (< ξquote-p2 p2)
-;;          (> ξquote-p2 pos))
-;;         (progn (goto-char ξquote-p1) (set-mark ξquote-p2))
-;;       (progn (goto-char p1) (set-mark p2)))
-
 (defun xah-select-current-line ()
-  "Select the current line"
+  "Select the current line."
   (interactive)
   (end-of-line)
   (set-mark (line-beginning-position)))
