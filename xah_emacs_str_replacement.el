@@ -1,19 +1,19 @@
 ;; -*- coding: utf-8 -*-
 
-(defun xah-replace-mathematica-symbols-region (p1 p2)
+(defun xah-replace-mathematica-symbols-region (φp1 φp2)
   "Replace Mathematica's special char encoding to Unicode of the same semantics.
 For example:
  \\=\\[Infinity] ⇒ ∞
  \\=\\[Equal] ⇒ =="
   (interactive "r")
-  (replace-pairs-region p1 p2 '(
+  (replace-pairs-region φp1 φp2 '(
  ["\\[Infinity]" "∞"]
  ["\\[Equal]" "=="])))
 
-(defun xah-replace-greek-region (p1 p2)
+(defun xah-replace-greek-region (φp1 φp2)
   "Replace math symbols. e.g. alpha to α."
   (interactive "r")
-(replace-pairs-region p1 p2 '(
+(replace-pairs-region φp1 φp2 '(
 ["alpha" "α"]
 ["beta" "β"]
 ["gamma" "γ"]
@@ -24,10 +24,10 @@ For example:
 ["omega" "ω"]
 ["Pi" "π"])))
 
-(defun xah-replace-tex-region (p1 p2)
+(defun xah-replace-tex-region (φp1 φp2)
   "Replace some math function names or symbols by their LaTeX markup."
   (interactive "r")
-(replace-pairs-region p1 p2 '(
+(replace-pairs-region φp1 φp2 '(
 ["*" "\\ "]
 ["cos(" "\\cos("]
 ["sin(" "\\sin("]
@@ -36,13 +36,13 @@ For example:
 ["R^2" "\\mathbb{R}^2"]
 ["R^3" "\\mathbb{R}^3"])))
 
-(defun mathematica-to-lsl-region (p1 p2)
+(defun mathematica-to-lsl-region (φp1 φp2)
   "Change Mathematica syntax to LSL syntax on region.
 
 LSL is Linden Scripting Language.
 This command does simple string replacement only."
   (interactive "r")
-(replace-pairs-region p1 p2 '(
+(replace-pairs-region φp1 φp2 '(
 ["Cos[" "llCos("]
 ["Sin[" "llSin("]
 ["Tan[" "llTan("]
