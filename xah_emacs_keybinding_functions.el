@@ -178,21 +178,66 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   "Select text between the nearest brackets.
 ⁖  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩."
   (interactive)
-  (let (pos p1 p2)
-    (setq pos (point))
-    (search-backward-regexp "\\s(" nil t )
-    (setq p1 (point))
-    (forward-sexp 1)
-    (setq p2 (point))
-    (goto-char (1+ p1))
-    (set-mark (1- p2))))
+  (with-syntax-table (standard-syntax-table)
+    (modify-syntax-entry ?\« "(»")
+    (modify-syntax-entry ?\» ")«")
+    (modify-syntax-entry ?\‹ "(›")
+    (modify-syntax-entry ?\› ")‹")
+    (modify-syntax-entry ?\“ "(”")
+    (modify-syntax-entry ?\” ")“")
+    (modify-syntax-entry ?\‘ "(’")
+    (modify-syntax-entry ?\’ ")‘")
+    (let (pos p1 p2)
+      (setq pos (point))
+      (search-backward-regexp "\\s(" nil t )
+      (setq p1 (point))
+      (forward-sexp 1)
+      (setq p2 (point))
+      (goto-char (1+ p1))
+      (set-mark (1- p2)))))
 
 (defun xah-select-text-in-bracket-or-quote ()
   "Select text between the nearest brackets or quote."
   (interactive)
   (if (nth 3 (syntax-ppss))
-        (xah-select-text-in-quote)
-      (xah-select-text-in-bracket)))
+      (xah-select-text-in-quote)
+    (if  
+        (or  
+         (string= major-mode "xah-html-mode")
+         (string= major-mode "xml-mode")
+         (string= major-mode "nxml-mode")
+         (string= major-mode "html-mode"))
+        (xah-select-text-in-html-bracket)
+      (xah-select-text-in-bracket))))
+
+(defun xah-select-text-in-html-bracket ()
+  "Select text between <…> or >…<."
+  (interactive)
+  (let (p0 p1< p1> p2< p2> 
+           distance-p1<
+           distance-p1>
+           )
+    (setq p0 (point))
+    (search-backward "<" nil "NOERROR" )
+    (setq p1< (point))
+    (goto-char p0)
+    (search-backward ">" nil "NOERROR" )
+    (setq p1> (point))
+    (setq distance-p1< (abs (- p0 p1<)))
+    (setq distance-p1> (abs (- p1> p0)))
+    (if (< distance-p1< distance-p1>)
+        (progn 
+          (goto-char p0)
+          (search-forward ">" nil "NOERROR" )
+          (setq p2> (point))
+          (goto-char (1+ p1<))
+          (set-mark (1- p2>)))
+      (progn 
+        (goto-char p0)
+        (search-forward "<" nil "NOERROR" )
+        (setq p2< (point))
+        (goto-char (1+ p1>))
+        (set-mark (1- p2<))))))
 
 (defun xah-select-current-line ()
   "Select the current line."

@@ -24,27 +24,12 @@ If there's a text selection, wrap p around each text block (separated by 2 newli
   (interactive)
   (let (bds p1 p2 inputText)
     (setq bds (get-selection-or-unit 'line))
-    (setq inputText (elt bds 0) )
-    (setq p1 (elt bds 1) )
-    (setq p2 (elt bds 2) )
+    (setq inputText (elt bds 0))
+    (setq p1 (elt bds 1))
+    (setq p2 (elt bds 2))
     (set-mark p1)
     (goto-char p2)
-    (xhm-wrap-html-tag "span" "ref")
-    ) )
-
-(defun xah-mark-unicode (φp1)
-  "Wrap 「<mark class=\"unicode\" title=\"U+…: ‹NAME›\"></mark>」 around current character.
-When called in elisp program, wrap the tag at cursor position φp1."
-  (interactive (list (point)))
-  (let* (
-         (ξcodepoint (string-to-char (buffer-substring-no-properties φp1 (1+ φp1))) )
-         (ξname (get-char-code-property ξcodepoint 'name))
-         )
-    (goto-char φp1)
-    (insert (format "<mark class=\"unicode\" title=\"U+%X: %s\">" ξcodepoint ξname) )
-    (forward-char 1)
-    (insert (format "</mark>") )
-    ) )
+    (xhm-wrap-html-tag "span" "ref")))
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
@@ -54,24 +39,23 @@ Add today's date to the byline tag of current file, also delete the last one if 
     (progn
       (goto-char 1)
       (when (search-forward "<div class=\"byline\">" nil)
-        (setq p1 (point) )
+        (setq p1 (point))
         (backward-char 1)
         (sgml-skip-tag-forward 1)
         ;; (search-forward "</time></div>")
-        (setq p2 (point) )
+        (setq p2 (point))
 
-        (setq ξnum (count-matches "<time>" p1 p2 ) )
+        (setq ξnum (count-matches "<time>" p1 p2 ))
 
         ;; if there are more than 1 “time” tag, delete the last one
         (when (> ξnum 1)
           (let (p3 p4)
             (goto-char p2)
             (search-backward "</time>")
-            (setq p4 (+ (point) 7) )
+            (setq p4 (+ (point) 7))
             (search-backward "<time>")
-            (setq p3 (point) )
-            (delete-region p3 p4 )
-            ) )
+            (setq p3 (point))
+            (delete-region p3 p4 )))
 
         ;; insert new time
         (goto-char p2)
@@ -83,9 +67,7 @@ Add today's date to the byline tag of current file, also delete the last one if 
         (replace-pairs-region p1 (line-end-position) [ ["</time>, <time>" "</time>, …, <time>"] ])
 
         (message "%s" (buffer-substring-no-properties p1 (line-end-position)))
-        (search-backward "<time>")
-        ))
-       ) )
+        (search-backward "<time>")))))
 
 (defun xahsite-update-page-tag-old (φp1 φp2)
   "Update HTML page navigation tags.
@@ -235,7 +217,7 @@ google_ad_client")
          (+ (match-beginning 0) 3)
          (match-end 0)
          'face (list :background
- (concat "#" (mapconcat 'identity 
+ (concat "#" (mapconcat 'identity
                         (mapcar
                          (lambda (x) (format "%02x" (round (* x 255))))
                          (color-hsl-to-rgb
@@ -248,7 +230,7 @@ google_ad_client")
   (font-lock-fontify-buffer)
   )
 
-;; (concat "#" (mapconcat 'identity 
+;; (concat "#" (mapconcat 'identity
 ;;                         (mapcar
 ;;                          (lambda (x) (format "%x" (round (* x 255))))
 ;;                          (color-hsl-to-rgb

@@ -7,15 +7,7 @@
 
 ;; inserts generic fixed strings
 
-(defun insert-javascript-tag ()
-  "Insert a javascript tag."
-  (interactive)
-  (insert "<script src=\".js\"></script>")
-  (backward-char 14)
-  )
-
-
-(defun insert-keywords-tag ()
+(defun xah-html-insert-keywords-tag ()
 "Insert the HTML keywords meta tag."
 (interactive)
 (insert "<meta name=\"keywords\" content=\"ttt\" />\n")
@@ -26,25 +18,25 @@
 
 ;; inserts fixed strings, particular to xahsite
 
-(defun insert-lyrics-header ()
+(defun xah-html-insert-lyrics-header ()
   "Insert a XahLee.org customized lyrics meta data tag."
   (interactive)
   (insert "<pre class=\"lyrics-info\">
-Title: 
-Date: 
-Singer: 
-Lyrics: 
-Music: 
+Title:
+Date:
+Singer:
+Lyrics:
+Music:
 English translation: 李杀 (Xah Lee)
 </pre>")
   (search-backward "Singer")
   (backward-char)
   )
 
-(defun insert-lyrics-table ()
+(defun xah-html-insert-lyrics-table ()
   "Insert a HTML 2-columns table for holding english chinese lyrics."
   (interactive)
-  (insert 
+  (insert
 "<table>
 <tr>
 <td>
@@ -64,7 +56,7 @@ English translation: 李杀 (Xah Lee)
   (search-backward "�")
   )
 
-(defun insert-screen-filler ()
+(defun xah-html-insert-screen-filler ()
 "Insert a custome HTML <div> tag."
 (interactive)
 (insert "<hr style=\"height:60em;border-left:dashed gray\" />")
@@ -72,7 +64,7 @@ English translation: 李杀 (Xah Lee)
 
 
 
-(defun insert-date-tag ()
+(defun xah-html-insert-date-tag ()
   "Insert a date tag."
   (interactive)
   (when (region-active-p)
@@ -84,7 +76,7 @@ English translation: 李杀 (Xah Lee)
 
 
 
-(defun insert-midi ()
+(defun xah-html-insert-midi ()
   "Insert a midi audio markup."
   (interactive)
   (insert "<div class=\"obj\">
@@ -97,5 +89,4 @@ English translation: 李杀 (Xah Lee)
 </div>
 ")
   )
-
 

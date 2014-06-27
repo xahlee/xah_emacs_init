@@ -60,33 +60,38 @@ For `isearch-mode-hook'."
 
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
-;; • 〈Dvorak Keyboard Layout〉 http://xahlee.info/comp/dvorak_keyboard_layout.html
 
-  (local-set-key (kbd "<tab> 4") 'xahsite-update-article-timestamp)
-  (local-set-key (kbd "<tab> 5") 'xah-mark-unicode)
-  (local-set-key (kbd "<tab> a") 'xwe-annotate)
-  (local-set-key (kbd "<tab> b") 'make-blogger-entry)
-  (local-set-key (kbd "<tab> d") 'insert-date-tag)
+  (local-set-key (kbd "<menu> e SPC b") 'xah-title-bracket→html)
+  (local-set-key (kbd "<menu> e SPC c") 'xwe-chinese-linkify)
+  (local-set-key (kbd "<menu> e SPC d") 'perldoc-ref-linkify)
+  (local-set-key (kbd "<menu> e SPC e") 'emacs-ref-linkify)
+  (local-set-key (kbd "<menu> e SPC f") 'full-size-img-linkify)
+  (local-set-key (kbd "<menu> e SPC j") 'image-file-to-html-figure-tag)
+  (local-set-key (kbd "<menu> e SPC p") 'php-ref-linkify)
+  (local-set-key (kbd "<menu> e SPC r") 'xah-add-to-related-links)
+  (local-set-key (kbd "<menu> e SPC t") 'xwe-word-etymology-linkify)
+  (local-set-key (kbd "<menu> e SPC z") 'amazon-linkify)
 
-  (local-set-key (kbd "<tab> f") 'xah-copy-url-current-file)
-  (local-set-key (kbd "<tab> g") 'xah-browse-url-of-buffer) ; 5401    0.33%  xah-browse-url-of-buffer
+  (local-set-key (kbd "<menu> e 4") 'xahsite-update-article-timestamp)
+  (local-set-key (kbd "<menu> e 5") 'xhm-mark-unicode)
 
-  (local-set-key (kbd "<tab> h") 'xah-all-linkify)
-  (local-set-key (kbd "<tab> i") 'image-linkify)
-  (local-set-key (kbd "<tab> l c") 'xwe-chinese-linkify)
+  (local-set-key (kbd "<menu> e a") 'xwe-annotate)
+  (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
+  (local-set-key (kbd "<menu> e c") 'xah-bracket→html)
+  (local-set-key (kbd "<menu> e d") 'xah-html-insert-date-tag)
+  (local-set-key (kbd "<menu> e e") 'xah-make-atom-entry)
+  (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
+  (local-set-key (kbd "<menu> e g") 'xah-browse-url-of-buffer) ; 5401    0.33%  xah-browse-url-of-buffer
+  (local-set-key (kbd "<menu> e h") 'xah-all-linkify)
+  (local-set-key (kbd "<menu> e i") 'xah-html-image-linkify)
+  (local-set-key (kbd "<menu> e n") 'xah-ref-span-tag)
 
-  (local-set-key (kbd "<tab> l d") 'perldoc-ref-linkify)
-  (local-set-key (kbd "<tab> l e") 'emacs-ref-linkify)
-  (local-set-key (kbd "<tab> l f") 'full-size-img-linkify)
-  (local-set-key (kbd "<tab> l j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<tab> l p") 'php-ref-linkify)
-  (local-set-key (kbd "<tab> l t") 'xwe-word-etymology-linkify)
-  (local-set-key (kbd "<tab> l z") 'amazon-linkify)
-  (local-set-key (kbd "<tab> n") 'xah-ref-span-tag)
-  (local-set-key (kbd "<tab> r c") 'xah-bracket→html)
-  (local-set-key (kbd "<tab> r t") 'xah-title-bracket→html)
-  (local-set-key (kbd "<tab> t a") 'xah-make-atom-entry)
-  (local-set-key (kbd "<tab> t l") 'xah-add-to-related-links)
+  (local-set-key (kbd "<menu> e z a") 'xah-html-insert-keywords-tag)
+  (local-set-key (kbd "<menu> e z b") 'xah-html-insert-lyrics-header)
+  (local-set-key (kbd "<menu> e z c") 'xah-html-insert-lyrics-table)
+  (local-set-key (kbd "<menu> e z d") 'xah-html-insert-screen-filler)
+  (local-set-key (kbd "<menu> e z e") 'xah-html-insert-date-tag)
+  (local-set-key (kbd "<menu> e z f") 'xah-html-insert-midi)
 
 )
 
@@ -123,6 +128,9 @@ For `isearch-mode-hook'."
     (set-buffer "*Help*" )
     (local-unset-key (kbd "r"))
     (local-unset-key (kbd "8"))
+    (local-unset-key (kbd "2"))
+    (local-unset-key (kbd "3"))
+    (local-unset-key (kbd "4"))
     ) )
 (add-hook 'help-mode-hook 'xah-help-mode-setup)
 (remove-hook 'help-mode-hook 'xah-help-mode-keys)

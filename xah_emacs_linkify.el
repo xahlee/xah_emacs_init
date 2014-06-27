@@ -5,7 +5,7 @@
 
 
 
-(defun image-linkify ()
+(defun xah-html-image-linkify ()
   "Replace a image file's path under cursor with a HTML img tag,
 If there's a text selection, use that as path.
 
@@ -76,10 +76,10 @@ Example, if cursor is on the word “i/cat.png”, then it will became
 
 If there's a text selection, use that as image path.
 
-This function calls `image-linkify' to do its work."
+This function calls `xah-html-image-linkify' to do its work."
   (interactive)
   (let (myStr)
-    (image-linkify)
+    (xah-html-image-linkify)
     (search-backward "<")
     (insert "<figure>\n")
     (search-forward ">")
