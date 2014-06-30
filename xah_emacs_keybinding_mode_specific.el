@@ -61,27 +61,30 @@ For `isearch-mode-hook'."
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
 
-  (local-set-key (kbd "<menu> e SPC b") 'xah-title-bracket→html)
+  (local-set-key (kbd "<menu> e SPC b") 'xah-angle-brackets-to-html)
   (local-set-key (kbd "<menu> e SPC c") 'xwe-chinese-linkify)
-  (local-set-key (kbd "<menu> e SPC d") 'perldoc-ref-linkify)
-  (local-set-key (kbd "<menu> e SPC e") 'emacs-ref-linkify)
-  (local-set-key (kbd "<menu> e SPC f") 'full-size-img-linkify)
+  (local-set-key (kbd "<menu> e SPC d") 'xah-html-perldoc-ref-linkify)
+  (local-set-key (kbd "<menu> e SPC e") 'xah-html-emacs-ref-linkify)
+  (local-set-key (kbd "<menu> e SPC f") 'xah-html-full-size-img-linkify)
   (local-set-key (kbd "<menu> e SPC j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<menu> e SPC p") 'php-ref-linkify)
+  (local-set-key (kbd "<menu> e SPC p") 'xah-html-php-ref-linkify)
   (local-set-key (kbd "<menu> e SPC r") 'xah-add-to-related-links)
   (local-set-key (kbd "<menu> e SPC t") 'xwe-word-etymology-linkify)
   (local-set-key (kbd "<menu> e SPC z") 'amazon-linkify)
+
+  ;; . p  g c
+  ;; e u  h t
 
   (local-set-key (kbd "<menu> e 4") 'xahsite-update-article-timestamp)
   (local-set-key (kbd "<menu> e 5") 'xhm-mark-unicode)
 
   (local-set-key (kbd "<menu> e a") 'xwe-annotate)
   (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
-  (local-set-key (kbd "<menu> e c") 'xah-bracket→html)
+  (local-set-key (kbd "<menu> e c") 'xah-brackets-to-html)
   (local-set-key (kbd "<menu> e d") 'xah-html-insert-date-tag)
   (local-set-key (kbd "<menu> e e") 'xah-make-atom-entry)
   (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
-  (local-set-key (kbd "<menu> e g") 'xah-browse-url-of-buffer) ; 5401    0.33%  xah-browse-url-of-buffer
+  (local-set-key (kbd "<menu> e g") 'xah-browse-url-of-buffer)
   (local-set-key (kbd "<menu> e h") 'xah-all-linkify)
   (local-set-key (kbd "<menu> e i") 'xah-html-image-linkify)
   (local-set-key (kbd "<menu> e n") 'xah-ref-span-tag)
@@ -90,7 +93,6 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "<menu> e z b") 'xah-html-insert-lyrics-header)
   (local-set-key (kbd "<menu> e z c") 'xah-html-insert-lyrics-table)
   (local-set-key (kbd "<menu> e z d") 'xah-html-insert-screen-filler)
-  (local-set-key (kbd "<menu> e z e") 'xah-html-insert-date-tag)
   (local-set-key (kbd "<menu> e z f") 'xah-html-insert-midi)
 
 )
@@ -179,9 +181,6 @@ For `isearch-mode-hook'."
   (local-set-key (kbd "g") 'backward-word)
 )
 (add-hook 'help-mode-hook 'xah-help-mode-keys)
-
-;; (unload-feature 'sgml-mode)
-;; (remove-hook 'html-mode-hook 'xah-html-mode-keys)
 
 
 

@@ -1,6 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;; 2013-11-09
 ;; meta key bindings
+;; raw ergoemacs-mode key setup for Dvorak
 ;; http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html
 
 (global-set-key (kbd "M-'") 'xah-compact-uncompact-block)
@@ -13,7 +14,6 @@
 (global-set-key (kbd "M-9") 'xah-select-text-in-quote)
 
 (global-set-key (kbd "M-SPC") 'set-mark-command)
-(global-set-key (kbd "M-\"") 'xah-compact-uncompact-Block)
 (global-set-key (kbd "M-`") 'other-frame)
 (global-set-key (kbd "M-b") 'xah-toggle-letter-case)
 (global-set-key (kbd "M-c") 'previous-line)

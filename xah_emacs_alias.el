@@ -16,6 +16,7 @@
 (defalias 'ds 'desktop-save)
 (defalias 'dt 'desktop-save)
 (defalias 'dtm 'desktop-mode)
+(defalias 'dsm 'delete-selection-mode)
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
@@ -27,8 +28,7 @@
 (defalias 'ssm 'shell-script-mode)
 
 (defalias 'tpu-edt 'forward-char)
-(defalias 'tpu-edt-on 'tpu-edt-off) ; fuck tpu-edt
-
+(defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
 
 
 ;; xah personal
@@ -44,6 +44,3 @@
 ;; (defalias 'cp 'xah-copy-to-register-1)
 ;; (defalias 'pt 'insert-register-content-1)
 
-
-
-(defalias 'ffap 'xah-open-file-at-cursor)

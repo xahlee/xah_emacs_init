@@ -3,7 +3,7 @@
 
 ;; Replace “…” to one of 〔…〕, 「…」, 【…】 or HTML tag. Or other similar text processing.
 
-;; (defun xah-bracket→html ()
+;; (defun xah-brackets-to-html ()
 ;;   "Replace all 「…」 to <code>…</code> in current buffer."
 ;;   (interactive)
 ;;   (let (changedItems)
@@ -81,7 +81,7 @@ When called with `universal-argument', work on visible portion of whole buffer (
         (if (y-or-n-p "Replace this one?")
             (replace-match "<code>\\1</code>" t) ) ) )) )
 
-(defun xah-bracket→html (φp1 φp2)
+(defun xah-brackets-to-html (φp1 φp2)
   "Replace all 「…」 to <code>…</code> and others.
 
 • 「…」 → <code>…</code>
@@ -94,7 +94,7 @@ Work on text selection or current text block.
 When called in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-  (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ) )
+  (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2))))
   (let (changedItems)
     (setq changedItems '())
 
@@ -104,33 +104,32 @@ Generate a report of the replaced strings in a separate buffer."
 
         (goto-char (point-min))
         (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ) )
-          (replace-match "<code>\\1</code>" t) )
+          (setq changedItems (cons (match-string 1) changedItems ))
+          (replace-match "<code>\\1</code>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "‹\\([^›]+?\\)›" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ) )
-          (replace-match "<var class=\"d\">\\1</var>" t) )
+          (setq changedItems (cons (match-string 1) changedItems ))
+          (replace-match "<var class=\"d\">\\1</var>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〔<a href=" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ) )
-          (replace-match "〔☛ <a href=" t) )
+          (setq changedItems (cons (match-string 1) changedItems ))
+          (replace-match "〔☛ <a href=" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z0-9]+?\\)〕" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ) )
-          (replace-match "<code class=\"path-α\">\\1</code>" t) )
-        ) )
+          (setq changedItems (cons (match-string 1) changedItems ))
+          (replace-match "<code class=\"path-α\">\\1</code>" t))))
     
     (with-output-to-temp-buffer "*changed brackets*"
       (mapcar
        (lambda (innerText)
          (princ innerText)
-         (princ "\n") )
-       (reverse changedItems) ) ) ))
+         (princ "\n"))
+       (reverse changedItems)))))
 
-(defun xah-title-bracket→html (φp1 φp2)
+(defun xah-angle-brackets-to-html (φp1 φp2)
   "Replace all 〈…〉 to <cite>…</cite>.
 Also replace 《…》 to <cite class=\"book\">…</span>.
 

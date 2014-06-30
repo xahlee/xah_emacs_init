@@ -21,8 +21,8 @@
     ("ipv6" "IPv6" nil :system t)
     ("msw" "Microsoft Windows" nil :system t)
     ("ms" "Microsoft" nil :system t)
-    ("ex" "Example:" nil :system t)
-    ("fex" "For example:" nil :system t)
+    ("ex" "example" nil :system t)
+    ("fex" "for example" nil :system t)
     ("jq" "jQuery" nil :system t)
 
 
@@ -46,28 +46,28 @@
     ("comm" "communication" nil :system t)
 
     ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
- ;("t" "the") ; 1
+  ;("t" "the") ; 1
 ;;; ("t" "be") ; 2
- ;("2" "to")
+  ;("2" "to")
 ;;; ("t" "of") ; 4
- ;("n" "and")
+  ;("n" "and")
 ;;; ("t" "a") ; 6
 ;;; ("t" "in") ; 7
- ;("h" "that")
- ;("v" "have")
+  ;("h" "that")
+  ;("v" "have")
 ;;; ("t" "I") ; 10
 ;;; ("t" "it") ; 11
- ;("4" "for")
- ;("8" "not")
+  ;("4" "for")
+  ;("8" "not")
     ;; ("t" "on") ; 14
- ;("w" "with") ; 15
+  ;("w" "with") ; 15
     ;; ("t" "he") ; 16
     ;; ("t" "as") ; 17
- ;("u" "you") ; 18
+  ;("u" "you") ; 18
     ;; ("t" "do") ; 19
     ;; ("t" "at") ; 20
     ;; ("t" "this") ; 21
- ;("b" "but") ; 22
+  ;("b" "but") ; 22
     ;; ("t" "his") ; 23
     ;; ("t" "by") ; 24
     ;; ("t" "from") ; 25
@@ -106,7 +106,7 @@
     ;; ("t" "him") ; 58
     ;; ("t" "know") ; 59
     ;; ("t" "take") ; 60
- ;("pp" "people") ; 61
+  ;("pp" "people") ; 61
     ;; ("t" "into") ; 62
     ;; ("t" "year") ; 63
     ;; ("t" "your") ; 64
@@ -139,17 +139,17 @@
     ;; ("t" "even") ; 91
     ;; ("t" "new") ; 92
     ;; ("t" "want") ; 93
- ;("bc" "because")
+  ;("bc" "because")
     ;; ("t" "any") ; 95
     ;; ("t" "these") ; 96
- ; ("t" "give") ; 97
- ; ("t" "day") ; 98
- ; ("t" "most") ; 99
- ; ("t" "us") ; 100
+  ; ("t" "give") ; 97
+  ; ("t" "day") ; 98
+  ; ("t" "most") ; 99
+  ; ("t" "us") ; 100
 
- ; ("tm" "time")
- ; ("g" "good")
- ; ("ipt" "important")
+  ; ("tm" "time")
+  ; ("g" "good")
+  ; ("ipt" "important")
 
     ("trad" "traditional" nil :system t)
     ("addr" "address" nil :system t)
@@ -160,7 +160,7 @@
     ("btw" "by the way" nil :system t)
     ("afaik" "As far as i know" nil :system t)
     ("intro" "introduction" nil :system t)
-    ("b" "because" nil :system t)
+    ("8b" "because" nil :system t)
     ("pls" "please" nil :system t)
     ("atm" "at the moment" nil :system t)
     ("q" "question" nil :system t)
@@ -208,15 +208,15 @@
     ("sl" "Second Life" nil :system t)
     ("bb" "Backbone" nil :system t)
     ("lsl" "Linden Scripting Language" nil :system t)
-    ("ll" "Linden Labs" nil :system t)
+    ("8ll" "Linden Labs" nil :system t)
     ("fb" "Facebook" nil :system t)
     ("ahk" "AutoHotkey" nil :system t)
     ("pr" "POV-Ray" nil :system t)
     ("ps" "PowerShell" nil :system t)
-    ("m" "Mathematica" nil :system t)
+    ("mma" "Mathematica" nil :system t)
     ("wl" "Wolfram Language" nil :system t)
     ("cl" "Common Lisp" nil :system t)
-    ("e" "emacs" nil :system t)
+    ("8e" "emacs" nil :system t)
     ("js" "JavaScript" nil :system t)
     ("vb" "Visual Basic" nil :system t)
     ("pp" "PayPal" nil :system t)
@@ -253,7 +253,7 @@
     ("vars" "variables" nil :system t)
     ("ev" "environment variable" nil :system t)
     ("evs" "environment variables" nil :system t)
-    ("eg" "ergonomic" nil :system t)
+    ("egn" "ergonomic" nil :system t)
     ("fp" "functional programing" nil :system t)
     ("fl" "functional language" nil :system t)
     ("ca" "cellular automata" nil :system t)
@@ -282,37 +282,8 @@
     ("u" "-*- coding: utf-8 -*-" nil :system t)
     ("ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" nil :system t)
 
-    ;; css
-    ("white" "#ffffff" nil :system t)
-    ("silver" "#c0c0c0" nil :system t)
-    ("gray" "#808080" nil :system t)
-    ("black" "#000000" nil :system t)
-    ("red" "#ff0000" nil :system t)
-    ("maroon" "#800000" nil :system t)
-    ("yellow" "#ffff00" nil :system t)
-    ("olive" "#808000" nil :system t)
-    ("lime" "#00ff00" nil :system t)
-    ("green" "#008000" nil :system t)
-    ("aqua" "#00ffff" nil :system t)
-    ("teal" "#008080" nil :system t)
-    ("blue" "#0000ff" nil :system t)
-    ("navy" "#000080" nil :system t)
-    ("fuchsia" "#ff00ff" nil :system t)
-    ("purple" "#800080" nil :system t)
-    ("orange" "#ffa500" nil :system t)
-    ("hsl" "hsl(0,100%,50%)" nil :system t)
-
     ("php" "<?php\n\n?>" nil :system t)
-    ("sb" "<div class=\"section\">⁂</div>" nil :system t)
 
-    ("c" "class=\"\"" nil :system t)
-    ("bq" "blockquote" nil :system t)
-    ("w" "width" nil :system t)
-    ("h" "height" nil :system t)
-    ("bgc" "background-color" nil :system t)
-
-    ("fg" "<figure>\n<figcaption>\n</figcaption>\n</figure>" nil :system t)
-    ("fc" "<figcaption>\n</figcaption>" nil :system t)
     ("faq" "<div class=\"a\">
 <p class=\"q\">How to do this?</p>
 <p>this way</p>
@@ -325,15 +296,15 @@
     
 ;;; unix shell
 
- ; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/
+  ; rsync -r -v -t --chmod=Dugo+x --chmod=ugo+r --delete --exclude="**/My *" --rsh="ssh -l xah" /media/HP/Users/xah/Documents /media/HP/Users/xah/web /media/HP/Users/xah/Pictures /media/HP/Users/xah/Shared /media/HP/Users/xah/cinse_pixra3 xah@192.168.1.6:~/
 
- ; rsync -r -v -t --delete --rsh="ssh -l xah" ~/web/ xah@169.254.153.147:~/web/
+  ; rsync -r -v -t --delete --rsh="ssh -l xah" ~/web/ xah@169.254.153.147:~/web/
 
- ; rsync -r -v -t --delete --exclude="**/My *" --rsh="ssh -l xah" ~/Documents/ xah@169.254.153.147:~/Documents/
+  ; rsync -r -v -t --delete --exclude="**/My *" --rsh="ssh -l xah" ~/Documents/ xah@169.254.153.147:~/Documents/
 
- ; unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web
- ; sftp u40651120@s168753655.onlinehome.us
- ;
+  ; unison -servercmd /usr/bin/unison c:/Users/xah/web ssh://xah@169.254.145.104//Users/xah/web
+  ; sftp u40651120@s168753655.onlinehome.us
+  ;
 
     
 ;;; xah personal

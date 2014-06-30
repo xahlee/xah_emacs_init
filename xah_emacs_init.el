@@ -38,6 +38,7 @@ To solve this problem, when your code only knows the relative path of another fi
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-fullpath-relative-to-caller ""))
 
+(add-to-list 'load-path "~/git/xah-fly-keys/")
 (add-to-list 'load-path "~/git/xah-elisp-mode/")
 (add-to-list 'load-path "~/git/xah-comment.el/")
 (add-to-list 'load-path "~/git/xah-css-mode/")
@@ -63,8 +64,9 @@ To solve this problem, when your code only knows the relative path of another fi
 (if (boundp 'xah-load-xahkeys-q)
     (when xah-load-xahkeys-q
       ;; (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_unset_keys.el"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_ergoemacs_xah"))
-      ;; (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_ergoemacs_raw"))
+
+      (require 'xah-fly-keys)
+
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_meta"))
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_special_keys"))
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding"))
@@ -80,8 +82,7 @@ To solve this problem, when your code only knows the relative path of another fi
       )
   (progn
     nil
-    )
-  )
+    ))
 
 (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_functions"))
 (load (xah-fullpath-relative-to-caller "xah_emacs_cursor_movement"))

@@ -24,7 +24,7 @@ For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/eli
      ((string-match "(emacs)" φinfo-node-str ) (format "%s%s%s.html" domainStr "emacs_manual/emacs/" tempPath))
      (t (user-error "φinfo-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" φinfo-node-str)) ) ) )
 
-(defun emacs-ref-linkify ()
+(defun xah-html-emacs-ref-linkify ()
   "Make the current line or selection into a emacs reference link.
 For example, if the cursor is any one of the line:
 
@@ -108,7 +108,7 @@ Then it'll become:
       (error "Generated local ξfPath 「%s」 does not point to a file" ξfPath)))
 )
 
-(defun php-ref-linkify ()
+(defun xah-html-php-ref-linkify ()
 	"Make the current line into a PHP reference link.
 If there's a text selection, use that.
 For example, if the cursor is on the word:
@@ -156,7 +156,7 @@ The input string can be the URL to the official Java API, Java Language Spec, th
      ((string-match "jls" ξurl)
       (insert "<span class=\"ref\"><a href=\"" ξurl "\">Java Lang Spec: " kword "</a></span>")))))
 
-(defun perldoc-ref-linkify ()
+(defun xah-html-perldoc-ref-linkify ()
   "Make the current line into a link to Perl's doc site.
 For example, if the cursor is on the line:
 

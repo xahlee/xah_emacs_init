@@ -92,7 +92,7 @@ This function calls `xah-html-image-linkify' to do its work."
     (backward-char)
     ))
 
-(defun full-size-img-linkify ()
+(defun xah-html-full-size-img-linkify ()
   "Make image file path at cursor point into a img link.
 
 Example:
@@ -719,7 +719,7 @@ If there is text selection, use it as input."
      ((string-match-p "\\`http://wordy-english\.blogspot\.com/" myPath) (blogger-linkify))
      ((string-match-p "www\.amazon\.com/" myPath) (amazon-linkify))
      ((string-match-p "www\.youtube\.com/watch" myPath) (youtube-linkify))
-     ((string-match-p "/emacs_manual/" myPath) (emacs-ref-linkify))
+     ((string-match-p "/emacs_manual/" myPath) (xah-html-emacs-ref-linkify))
      ((string-match-p "/node_api/" myPath) (nodejs-ref-linkify))
      ((string-match-p "\\.js\\'" myPath) (javascript-linkify))
      ((string-match-p "\\.css\\'" myPath) (css-linkify))

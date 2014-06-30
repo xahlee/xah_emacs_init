@@ -37,31 +37,26 @@ If current line is a single space, remove that space.
 
 Calling this command 3 times will always result in no whitespaces around cursor."
   (interactive)
-  (let (cursor-point
-        line-has-meat-p  ; current line contains non-white space chars
+  (let ((pos (point))
+        line-has-meat-p ; current line contains non-white space chars
         space-tab-neighbor-p
         whitespace-begin whitespace-end
         space-or-tab-begin space-or-tab-end
-        line-begin-pos line-end-pos)
+        )
     (save-excursion
       ;; todo: might consider whitespace as defined by syntax table, and also consider whitespace chars in unicode if syntax table doesn't already considered it.
-      (setq cursor-point (point))
-
       (setq space-tab-neighbor-p (if (or (looking-at " \\|\t") (looking-back " \\|\t")) t nil))
-      (move-beginning-of-line 1) (setq line-begin-pos (point))
-      (move-end-of-line 1) (setq line-end-pos (point))
-      ;;       (re-search-backward "\n$") (setq line-begin-pos (point) )
-      ;;       (re-search-forward "\n$") (setq line-end-pos (point) )
-      (setq line-has-meat-p (if (< 0 (count-matches "[[:graph:]]" line-begin-pos line-end-pos)) t nil))
-      (goto-char cursor-point)
+      (beginning-of-line) 
+      (setq line-has-meat-p (search-forward-regexp "[[:graph:]]" (line-end-position) t))
 
+      (goto-char pos)
       (skip-chars-backward "\t ")
       (setq space-or-tab-begin (point))
 
       (skip-chars-backward "\t \n")
       (setq whitespace-begin (point))
 
-      (goto-char cursor-point)
+      (goto-char pos)
       (skip-chars-forward "\t ")
       (setq space-or-tab-end (point))
       (skip-chars-forward "\t \n")
@@ -78,13 +73,27 @@ Calling this command 3 times will always result in no whitespaces around cursor.
                 (insert " "))))
 
       (progn
+        (delete-blank-lines)
         ;; (delete-region whitespace-begin whitespace-end)
-        ;; (insert "\n")
-        (delete-blank-lines))
-      ;; todo: possibly code my own delete-blank-lines here for better efficiency, because delete-blank-lines seems complex.
+        ;; (insert "\n\n")
+        ))))
+
+(defun xah-shrink-whitespaces2 ()
+  "Remove white spaces around cursor to just one."
+  (interactive)
+  (let ((pos (point))
+        p1 p2 )
+    (save-excursion 
+      (skip-chars-backward " \t\n"  )
+      (setq p1 (point))
+      (goto-char pos)
+      (skip-chars-forward " \t\n"   )
+      (setq p2 (point))
+      (delete-region p1 p2)
+      (insert " ")
       )))
 
-(defun xah-compact-uncompact-block ()
+ (defun xah-compact-uncompact-block ()
   "Remove or add line ending chars on current paragraph.
 This command is similar to a toggle of `fill-paragraph'.
 When there is a text selection, act on the region."
@@ -413,59 +422,6 @@ Else it is a user buffer."
   (describe-function major-mode))
 
 
-
-(defun xah-open-in-external-app (&optional φfile)
-  "Open the current φfile or dired marked files in external app.
-
-The app is chosen from your OS's preference."
-  (interactive)
-  (let ( ξdoIt
-         (ξfileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((not φfile) (list (buffer-file-name)))
-           (φfile (list φfile)))))
-
-    (setq ξdoIt (if (<= (length ξfileList) 5)
-                   t
-                 (y-or-n-p "Open more than 5 files? ") ) )
-
-    (when ξdoIt
-      (cond
-       ((string-equal system-type "windows-nt")
-        (mapc (lambda (fPath) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" fPath t t)) ) ξfileList))
-       ((string-equal system-type "darwin")
-        (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)) )  ξfileList) )
-       ((string-equal system-type "gnu/linux")
-        (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath)) ) ξfileList) ) ) ) ) )
-
-(defun xah-open-in-desktop ()
-  "Show current file in desktop (OS's file manager)."
-  (interactive)
-  (cond
-   ((string-equal system-type "windows-nt")
-    (w32-shell-execute "explore" (replace-regexp-in-string "/" "\\" default-directory t t)))
-   ((string-equal system-type "darwin") (shell-command "open ."))
-   ((string-equal system-type "gnu/linux")
-    (let ((process-connection-type nil)) (start-process "" nil "xdg-open" "."))
-    ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
-    ) ))
-
-(defun xah-new-empty-buffer ()
-  "Open a new empty buffer."
-  (interactive)
-  (let ((buf (generate-new-buffer "untitled")))
-    (switch-to-buffer buf)
-    (funcall (and initial-major-mode))
-    (setq buffer-offer-save t)))
-;; note: emacs won't offer to save a buffer that's
-;; not associated with a file,
-;; even if buffer-modified-p is true.
-;; One work around is to define your own my-kill-buffer function
-;; that wraps around kill-buffer, and check on the buffer modification
-;; status to offer save
-;; This custome kill buffer is close-current-buffer.
-
 (defun xah-click-to-search (φclick)
   "Mouse click to start `isearch-forward-symbol-at-point' (emacs 24.4) at clicked point."
   (interactive "e")

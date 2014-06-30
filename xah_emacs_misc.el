@@ -140,6 +140,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("perl" . "~/web/xahlee_info/perl/perl_index.html")
 
         ("projection" . "~/git/mercury/emacs-projection-mode/")
+        ("update_ergoemacs.sh" . "~/git/xahscripts/update_ergoemacs.sh")
 
         ("php" . "~/web/xahlee_info/php/php_basics.html")
         ("python" . "~/web/xahlee_info/perl-python/index.html")
@@ -200,9 +201,9 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
 
     (if (= (length ξs) 0)
         (progn (message "no path obtained"))
-      (progn 
+      (progn
         (setq ξs (remove-uri-fragment ξs))
-        
+
         ;; convenience. if the input string start with a xah domain name, make it a url string
         (setq ξs
               (cond
