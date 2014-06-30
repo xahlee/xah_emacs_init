@@ -4,14 +4,14 @@
 (defun xah-cut-line-or-region ()
   "Cut the current line, or text selection."
   (interactive)
-  (if (region-active-p)
+  (if (use-region-p)
       (kill-region (region-beginning) (region-end))
     (kill-region (line-beginning-position) (line-beginning-position 2))))
 
 (defun xah-copy-line-or-region ()
   "Copy current line, or text selection."
   (interactive)
-  (if (region-active-p)
+  (if (use-region-p)
       (kill-ring-save (region-beginning) (region-end))
     (kill-ring-save (line-beginning-position) (line-beginning-position 2))))
 
@@ -110,7 +110,7 @@ When there is a text selection, act on the region."
                 (get this-command 'stateIsCompact-p)
               (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil)))
 
-      (if (region-active-p)
+      (if (use-region-p)
           (if currentStateIsCompact
               (fill-region (region-beginning) (region-end))
             (let ((fill-column bigFillColumnVal))
@@ -128,7 +128,7 @@ Toggles between: “all lower”, “Init Caps”, “ALL CAPS”."
   (interactive)
 
   (let (p1 p2 (deactivate-mark nil) (case-fold-search nil))
-    (if (region-active-p)
+    (if (use-region-p)
         (setq p1 (region-beginning) p2 (region-end))
       (let ((bds (bounds-of-thing-at-point 'symbol)))
         (setq p1 (car bds) p2 (cdr bds))))

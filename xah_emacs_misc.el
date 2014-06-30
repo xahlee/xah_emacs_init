@@ -382,7 +382,7 @@ When there is a text selection, act on the the selection, else, act on a block o
                 (get this-command 'stateIsCompact-p)
               (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil) ))
 
-      (if (region-active-p)
+      (if (use-region-p)
           (if currentStateIsCompact
               (fill-region (region-beginning) (region-end))
             (let ((fill-column bigFillColumnVal))
@@ -428,7 +428,7 @@ When there is a text selection, act on the region."
                 (get this-command 'stateIsCompact-p)
               (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil) ) )
 
-      (if (region-active-p)
+      (if (use-region-p)
           (if currentStateIsCompact
               (fill-region (region-beginning) (region-end))
             (save-restriction

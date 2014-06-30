@@ -173,7 +173,7 @@ If there's a text selection, use that for input."
   (interactive)
   (let ( ξchar p1 p2 big5Code templateStr resultStr)
 
-    (if (region-active-p)
+    (if (use-region-p)
         (progn
           (setq p1 (region-beginning) )
           (setq p2 (region-end) )

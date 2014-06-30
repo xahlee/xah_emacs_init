@@ -364,7 +364,7 @@ s = “software”
 There are other amazon categories, but not supported by this function."
   (interactive)
   (let (p1 p2 mainText tmplist sstr pcato pcc)
-    (if (region-active-p)
+    (if (use-region-p)
         (setq p1 (region-beginning) p2 (region-end))
       (progn
         (setq p1 (line-beginning-position) )
@@ -457,7 +457,7 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 ;;  (interactive)
 ;;  (let (myPath bounds tempBuff x1 x2 titleText resultStr)
 ;;    (setq myPath
-;;          (if (region-active-p)
+;;          (if (use-region-p)
 ;;              (buffer-substring-no-properties (region-beginning) (region-end))
 ;;            (thing-at-point 'filename)
 ;;            ))

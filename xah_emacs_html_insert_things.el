@@ -67,7 +67,7 @@ English translation: 李杀 (Xah Lee)
 (defun xah-html-insert-date-tag ()
   "Insert a date tag."
   (interactive)
-  (when (region-active-p)
+  (when (use-region-p)
     (delete-region (region-beginning) (region-end) )
     )
   (insert (concat "<div class=\"date-α\"><time>" (format-time-string "%Y-%m-%d") "</time></div>\n\n\n" ))

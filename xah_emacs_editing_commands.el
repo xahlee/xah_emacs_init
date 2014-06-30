@@ -54,7 +54,7 @@ See also: `xah-paste-from-register-1', `copy-to-register'."
   "Paste text from register 1.
 See also: `xah-copy-to-register-1', `insert-register'."
   (interactive)
-  (when (region-active-p)
+  (when (use-region-p)
     (delete-region (region-beginning) (region-end) )
     )
   (insert-register ?1 t))

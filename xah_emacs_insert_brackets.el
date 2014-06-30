@@ -21,7 +21,7 @@ If there's no text selection:
 Alphanumeric char here includes hyphen and underscore.
 
 The argument φleft-bracket φright-bracket are strings."
-  (if (region-active-p)
+  (if (use-region-p)
       (progn
         (let (
               (p1 (region-beginning))

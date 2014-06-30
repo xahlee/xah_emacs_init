@@ -293,7 +293,7 @@ When called interactively, work on current text block or text selection. (a “t
 
 When called in lisp code, if φstring is non-nil, returns a changed string.  If φstring nil, change the text in the region between positions φfrom φto."
   (interactive
-   (if (region-active-p)
+   (if (use-region-p)
        (list nil (region-beginning) (region-end))
      (let ((bds (get-selection-or-unit 'block)) )
        (list nil (elt bds 1) (elt bds 2)) ) ) )
