@@ -43,7 +43,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xah-comment.el/")
 (add-to-list 'load-path "~/git/xah-css-mode/")
 (add-to-list 'load-path "~/git/xah_file_util.el/")
-(add-to-list 'load-path "~/git/xah_find_replace/")
 (add-to-list 'load-path "~/git/xah-html6-mode.el/")
 (add-to-list 'load-path "~/git/xah-html-mode.el/")
 (add-to-list 'load-path "~/git/xah-insert-random-id.el/")
@@ -55,6 +54,12 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xeu_elisp_util.el/")
 (add-to-list 'load-path "~/git/xfrp_find_replace_pairs.el/")
 (add-to-list 'load-path "~/git/xub-mode.el/")
+
+(load "xeu_elisp_util")
+(load "xah_file_util")
+(load "xfrp_find_replace_pairs")
+
+
 
 (require 'package)
 (package-initialize)
@@ -68,6 +73,8 @@ To solve this problem, when your code only knows the relative path of another fi
       (require 'xah-fly-keys)
 
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_meta"))
+      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_super"))
+
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_special_keys"))
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding"))
       (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_control_key"))

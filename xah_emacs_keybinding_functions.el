@@ -290,7 +290,7 @@ Subsequent calls expands the selection to larger semantic unit.
 
 This command works mostly in lisp syntax."
   (interactive (list (prefix-numeric-value current-prefix-arg)
-                     (or (and transient-mark-mode mark-active)
+                     (or (use-region-p)
                          (eq last-command this-command))))
   (if incremental
       (progn
