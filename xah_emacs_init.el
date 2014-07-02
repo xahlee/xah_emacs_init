@@ -92,7 +92,6 @@ To solve this problem, when your code only knows the relative path of another fi
     ))
 
 (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_functions"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_cursor_movement"))
 
 (load (xah-fullpath-relative-to-caller "xah_emacs_alias"))
 (load (xah-fullpath-relative-to-caller "xah_emacs_abbr"))

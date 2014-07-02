@@ -279,7 +279,7 @@
     ("8song" "singer ❀ 〈title〉" nil :system t)
 
     ("li" "────────── ────────── ────────── ────────── ──────────" nil :system t)
-    ("u" "-*- coding: utf-8 -*-" nil :system t)
+    ("utf" "-*- coding: utf-8 -*-" nil :system t)
     ("ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" nil :system t)
 
     ("php" "<?php\n\n?>" nil :system t)

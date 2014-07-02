@@ -25,7 +25,8 @@
 ;; the keys are now hardcoded for dvorak.
 
 ;; some design principles
-;; • each key sequence should have 2 or 3 keys, no more. (counting the lead key) some command may have 4 or more keys, but any command used daily have max of 3 keys.
+;; • each key sequence should have 2 or 3 keys. (counting the lead key) some command may have 4 keys, but any command used daily have max of 3 keys.
+
 ;; • the keys:
 
 ;; .p gc
@@ -33,7 +34,9 @@
 
 ;; should be the most frequently used. Each is 3-keys sequence. ⁖ 【menu e 3】, 【menu u h】,
 
-;; basically, after the menu key, there are a total of 6 keys to start. These keys are on the home row or the row above, and are pressed by 2nd 3rd 4th fingers. (thumb is 1st finger) like this:
+;; of these 8 keys, the {. p g} are special. Each used for 2 key sequences, for 3 of the most frequently used commands. 【menu .】 is for universal-argument. 【menu p】 is for query-replace. 【menu g】 is isearch.
+
+;; basically, after the menu key, there are a total of 12 keys to start, 6 for each hand. These keys are on the home row or the row above, and are pressed by 2nd 3rd 4th fingers. (thumb is 1st finger) like this:
 
 ;; ,.p gcr
 ;; oeu htn
@@ -43,12 +46,13 @@
 ;; • the 【menu u ‹key›】 space is for inserting brackets (){}[]""''“”‘’ and other brackets, and for inserting “=” “+” any unicode chars.
 ;; • the 【menu p】 is for query-replace
 ;; • the 【menu g】 is for isearch
+;; • the 【menu .】 is for universal-argument.
 ;; • 【menu enter】 is for execute-extended-command
 ;; • 【menu menu】  is undecided.
 
 ;; • the last key can be a number. ⁖ 【menu 8】, 【menu e 3】. For numbers, 3 4 and 7 8 are easiest. (pressed by 2nd ＆ 3rd fingers)
 
-;; • can a key ends 【enter】 or 【space】 ? Yes, absolutely. These are top easy keys. There should be some scheme for them to make commands with such key sharing some theme/characteristics. ⁖ commands with keys ending in them should prompt… or they are all related to…
+;; • can a key ends with 【enter】 or 【space】 ? Yes, absolutely. These are top easy keys. There should be some scheme for them to make commands with such key sharing some theme/characteristics. ⁖ commands with keys ending in them should prompt… or they are all related to…
 ;; • can a key ends in 【menu】 key? I think so, but undecided.
 
 ;; • note: the binding should be based on command frequency and the key's ease.
@@ -58,6 +62,8 @@
 ;; • none of the key sequence should be mapped to a fast-repeat command.
 ;; Emacs: Fast-repeat vs Non-fast-repeat Commands ＆ Keys
 ;; http://xahlee.info/kbd/repeatable_vs_non-repeatable_keys_commands.html
+
+;; the above is the sketch of the design. However, i realized that some exceptions is ok, or even optimal. One thing i learned is that a strict regularity or rule may not be optimal, as some exception or irregularity sometimes makes it more convenient, easier to remember, or make your fingers good because they don't always use the same keys. These reasoning may be fallacy, I don't have a solid analysis on it yet.
 
 (when (string-equal system-type "windows-nt")
   (define-key key-translation-map (kbd "<apps>") (kbd "<menu>")))

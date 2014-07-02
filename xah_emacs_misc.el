@@ -360,57 +360,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
 
 
 
-(defun xah-compact-uncompact-block ()
-  "Remove or insert newline characters on the current block of text.
-This is similar to a toggle for `fill-paragraph' and `unfill-paragraph'.
 
-When there is a text selection, act on the the selection, else, act on a block of text separated by newlines."
-  (interactive)
-
-  ;; This command symbol has a property “'stateIsCompact-p”, the possible values are t and nil. This property is used to easily determine whether to compact or uncompact, when this command is called again
-
-  (let ( currentStateIsCompact
-         (deactivate-mark nil)
-         (bigFillColumnVal 4333999)
-         (myWhiteSpaces "\n[ \t]*\n")
-         )
-
-    (save-excursion
-
-      ;; Determine whether the text is currently compact.
-      (setq currentStateIsCompact
-            (if (eq last-command this-command)
-                (get this-command 'stateIsCompact-p)
-              (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil) ))
-
-      (if (use-region-p)
-          (if currentStateIsCompact
-              (fill-region (region-beginning) (region-end))
-            (let ((fill-column bigFillColumnVal))
-              (fill-region (region-beginning) (region-end)))
-            )
-
-        (let (p1 p2)
-          (progn
-            ;; set p1 p2 as boundary of text block
-            (if (re-search-backward myWhiteSpaces nil "move")
-                (progn (re-search-forward myWhiteSpaces)
-                       (setq p1 (point) ) )
-              (setq p1 (point) )
-              )
-            (if (re-search-forward myWhiteSpaces nil "move")
-                (progn (re-search-backward myWhiteSpaces)
-                       (setq p2 (point) ))
-              (setq p2 (point) ) ) )
-
-          (if currentStateIsCompact
-              (fill-region p1 p2)
-            (let ((fill-column bigFillColumnVal))
-              (fill-region p1 p2))
-            )
-          ) )
-
-      (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )
 
 (defun compact-uncompact-block-chinese ()
   "Remove or add line ending chars on current text block.
