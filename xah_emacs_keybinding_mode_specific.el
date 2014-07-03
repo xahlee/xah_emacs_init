@@ -116,13 +116,11 @@ For `isearch-mode-hook'."
   (define-key dired-mode-map (kbd "4") 'split-window-vertically)
 
   (when (>= emacs-major-version 23)
- ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
- ;;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
+    ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
+    ;;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
     ;; (define-key dired-mode-map (kbd "<tab>") (make-keymap))
-    (define-key dired-mode-map (kbd "<tab>") nil)
-    (define-key dired-mode-map (kbd "<tab> 8") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
-    )
-  )
+    (define-key dired-mode-map (kbd "<menu> e t") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
+    ))
 
 (defun xah-help-mode-setup ()
   "for help-mode-hook."

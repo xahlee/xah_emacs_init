@@ -151,6 +151,12 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("py2doc" . "~/web/xahlee_info/python_doc_2.7.6/index.html")
         ("py3doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
 
+        ("comp lang" . "~/web/xahlee_info/comp/comp_lang.html")
+        
+        ("hacker" . "~/web/xahlee_info/comp/comp_index.html")
+
+        ("netiquette" . "~/web/xahlee_info/Netiquette_dir/troll.html")
+
         ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")))
 
 (defun xah-open-file-fast (φopen-code)
@@ -359,8 +365,6 @@ This is Xah Lee's personal command assuming a particular dir structure."
   )
 
 
-
-
 
 (defun compact-uncompact-block-chinese ()
   "Remove or add line ending chars on current text block.

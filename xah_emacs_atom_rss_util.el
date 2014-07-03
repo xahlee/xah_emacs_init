@@ -119,7 +119,7 @@ Other files paths for blogs are:
            (if (>= (length myurls) 1)
                (progn
                  (setq firstLink1 (elt myurls 0))
-                 (if (string-match-p "\\`http://" firstLink1)
+                 (if (string-match-p "\\`https?://" firstLink1)
                      (if (xahsite-url-is-xah-website-p firstLink1)
                          (xahsite-filepath-to-href-value (xahsite-url-to-filepath firstLink1 "addFileName") currentFilePath)
                        firstLink1
