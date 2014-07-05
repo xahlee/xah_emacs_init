@@ -142,15 +142,16 @@ For `isearch-mode-hook'."
 )
 (add-hook 'cperl-mode-hook 'xah-perl-modes-keys)
 
-(defun xah-magit-mode-keys ()
-  "Modify keymaps."
-  ;; (local-set-key (kbd "o") 'magit-status-mode)
-  (local-set-key (kbd "1") 'xah-previous-user-buffer)
-  (local-set-key (kbd "2") 'delete-window)
-  (local-set-key (kbd "3") 'delete-other-windows)
-  (local-set-key (kbd "4") 'split-window-vertically)
-)
-(add-hook 'magit-mode-hook 'xah-magit-mode-keys)
+;; (defun xah-magit-mode-keys ()
+;;   "Modify keymaps."
+;;   ;; (local-set-key (kbd "o") 'magit-status-mode)
+;;   (local-set-key (kbd "1") 'xah-previous-user-buffer)
+;;   (local-set-key (kbd "2") 'delete-window)
+;;   (local-set-key (kbd "3") 'delete-other-windows)
+;;   (local-set-key (kbd "4") 'split-window-vertically)
+;; )
+;; (add-hook 'magit-mode-hook 'xah-magit-mode-keys)
+;; (remove-hook 'magit-mode-hook 'xah-magit-mode-keys)
 
 (defun xah-Man-mode-keys ()
   "my keybindings."

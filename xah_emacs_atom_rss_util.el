@@ -71,7 +71,7 @@ This command leaves the file unsaved."
 (defun xah-make-atom-entry ()
   "Create a Atom (RSS) entry of the current blog file.
 
-Use current text block (between empty lines) or selected text as input, and update the Atom file's overall “updated” tag.
+Use current text block (between blank lines) or selected text as input, and update the Atom file's overall “updated” tag.
 
 If the current file is〔‹path›.html〕, then ATOM file updated will be 〔‹path›.xml〕.
 Exception: 〔c:/Users/h3/web/wordyenglish_com/words/new.html〕 goes to 〔~/web/wordyenglish_com/lit/blog.xml〕

@@ -13,6 +13,7 @@
 (define-abbrev-table 'global-abbrev-table 
   '(
 
+
     ("eg" "⁖")
     ("mac" "Mac")
     ("osx" "OS X")
@@ -30,7 +31,8 @@
 
     ("hearts" "♥ 💕 💓 💔 💖 💗 💘 💝 💞 💟 💙 💚 💛 💜")
 
-    ("rsi" "Repetitive Strain Injury")
+
+
 
     ;; ;    ("t" "the")                         ; problem with “doesn't ”
     ;; ;    ("2" "to")                          ; problem with just enter a number
@@ -42,8 +44,6 @@
     ;;     ("u" "you")
     ;;     ("w" "with")
     ;;     ("b" "but")
-
-    ("comm" "communication")
 
     ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
   ;("t" "the") ; 1
@@ -151,6 +151,9 @@
   ; ("g" "good")
   ; ("ipt" "important")
 
+    ("comm" "communication")
+    ("rsi" "Repetitive Strain Injury")
+    ("disc" "discussion")
     ("trad" "traditional")
     ("addr" "address")
     ("dict" "dictionary")
@@ -290,8 +293,6 @@
 </div>
 
 ")
-    ("css" "<link rel=\"stylesheet\" href=\"../../lbasic.css\" />")
-    ("css2" "<style type=\"text/css\">\np {line-height:130%}\n</style>")
 
     
 ;;; unix shell

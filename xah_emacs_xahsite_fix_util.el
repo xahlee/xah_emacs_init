@@ -289,7 +289,7 @@ This function is specific to xahlee.org. 2008-05-10."
 (defun xah-fix-ellipsis (φstring &optional φfrom φto)
   "Change “...” to “…”.
 
-When called interactively, work on current text block or text selection. (a “text block” is text between empty lines)
+When called interactively, work on current text block or text selection. (a “text block” is text between blank lines)
 
 When called in lisp code, if φstring is non-nil, returns a changed string.  If φstring nil, change the text in the region between positions φfrom φto."
   (interactive

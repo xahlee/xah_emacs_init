@@ -228,7 +228,7 @@ create a Geogebra file (.ggb),
 create a HTML file that embed the ggb applet,
 and insert a link to the HTML file in the current buffer.
 
-The cursor must be on 2 lines separated by empty lines.
+The cursor must be on 2 lines separated by blank lines.
 The lines are:
 
 fileCoreName
