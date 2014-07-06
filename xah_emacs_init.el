@@ -5,11 +5,11 @@
 
 ; loading custom commands and functions
 
-(defun xah-fullpath-relative-to-caller (φfile-relative-path)
+(defun xah-get-fullpath (φfile-relative-path)
   "Return the full path of ΦFILE-RELATIVE-PATH, relative to caller's file location.
 
 Example: If you have this line
- (xah-fullpath-relative-to-caller \"../xyz.el\")
+ (xah-get-fullpath \"../xyz.el\")
 in the file at
  /home/mary/emacs/emacs_lib.el
 then the return value is
@@ -36,7 +36,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 
 ; add the dir of this file to load path
-(add-to-list 'load-path (xah-fullpath-relative-to-caller ""))
+(add-to-list 'load-path (xah-get-fullpath ""))
 
 (add-to-list 'load-path "~/git/xah-fly-keys/")
 (add-to-list 'load-path "~/git/xah-elisp-mode/")
@@ -64,87 +64,91 @@ To solve this problem, when your code only knows the relative path of another fi
 (require 'package)
 (package-initialize)
 
-(when (string-equal system-type "windows-nt") (load (xah-fullpath-relative-to-caller "xah_emacs_ms_windows")))
+(when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
 
 (if (boundp 'xah-load-xahkeys-q)
     (when xah-load-xahkeys-q
-      ;; (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_unset_keys.el"))
+      ;; (load (xah-get-fullpath "xah_emacs_keybinding_unset_keys.el"))
 
       (require 'xah-fly-keys)
 
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_meta"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_super"))
 
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_special_keys"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_control_key"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_mode_specific"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_unicode_input"))
-      ;; (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_shift_switch"))
-      ;; (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_number_pad"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_number_pad_number"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_mouse_binding"))
-      (load (xah-fullpath-relative-to-caller "xah_emacs_hyper_super_setup"))
-      ;; (load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_truly_ergonomic"))
+      ;; (load (xah-get-fullpath "xah_emacs_keybinding_meta"))
+      (load (xah-get-fullpath "xah_emacs_keybinding_super"))
+
+      (load (xah-get-fullpath "xah_emacs_keybinding_special_keys"))
+
+      (load (xah-get-fullpath "xah_emacs_keybinding"))
+      (load (xah-get-fullpath "xah_emacs_keybinding_xah"))
+
+      (load (xah-get-fullpath "xah_emacs_keybinding_control_key"))
+      (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
+      (load (xah-get-fullpath "xah_emacs_unicode_input"))
+      ;; (load (xah-get-fullpath "xah_emacs_keybinding_shift_switch"))
+      ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
+      (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
+      (load (xah-get-fullpath "xah_emacs_mouse_binding"))
+      (load (xah-get-fullpath "xah_emacs_hyper_super_setup"))
+      ;; (load (xah-get-fullpath "xah_emacs_keybinding_truly_ergonomic"))
       )
   (progn
     nil
     ))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_keybinding_functions"))
+(load (xah-get-fullpath "xah_emacs_keybinding_functions"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_alias"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_abbr"))
+(load (xah-get-fullpath "xah_emacs_alias"))
+(load (xah-get-fullpath "xah_emacs_abbr"))
 
-(load (xah-fullpath-relative-to-caller "xah_elisp_util"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_xahsite_path_lisp_util"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_insert_brackets"))
+(load (xah-get-fullpath "xah_elisp_util"))
+(load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
+(load (xah-get-fullpath "xah_emacs_insert_brackets"))
 
 (load "~/Dropbox/xah-emacs-private_b53d8d39")
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_editing_commands"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_dired_commands"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_generic"))
+(load (xah-get-fullpath "xah_emacs_editing_commands"))
+(load (xah-get-fullpath "xah_emacs_dired_commands"))
+(load (xah-get-fullpath "xah_emacs_generic"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_html"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_html_insert_things"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_linkify"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_ref_linkify"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_vid_linkify"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_google_earth"))
+(load (xah-get-fullpath "xah_emacs_html"))
+(load (xah-get-fullpath "xah_emacs_html_insert_things"))
+(load (xah-get-fullpath "xah_emacs_linkify"))
+(load (xah-get-fullpath "xah_emacs_ref_linkify"))
+(load (xah-get-fullpath "xah_emacs_vid_linkify"))
+(load (xah-get-fullpath "xah_emacs_google_earth"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_str_insertion"))
+(load (xah-get-fullpath "xah_emacs_str_insertion"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_str_replacement"))
+(load (xah-get-fullpath "xah_emacs_str_replacement"))
 (require 'xah-misc-commands)
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_str_rep_func"))
+(load (xah-get-fullpath "xah_emacs_str_rep_func"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_font"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_misc"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_browse_url"))
+(load (xah-get-fullpath "xah_emacs_font"))
+(load (xah-get-fullpath "xah_emacs_misc"))
+(load (xah-get-fullpath "xah_emacs_browse_url"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_atom_rss_util"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_blogger_util"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_xahsite_fix_util"))
+(load (xah-get-fullpath "xah_emacs_atom_rss_util"))
+(load (xah-get-fullpath "xah_emacs_blogger_util"))
+(load (xah-get-fullpath "xah_emacs_xahsite_fix_util"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_wordyenglish"))
+(load (xah-get-fullpath "xah_emacs_wordyenglish"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_settings"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_settings_external_packages"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_file_association"))
+(load (xah-get-fullpath "xah_emacs_settings"))
+(load (xah-get-fullpath "xah_emacs_settings_external_packages"))
+(load (xah-get-fullpath "xah_emacs_file_association"))
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_load_misc"))
+(load (xah-get-fullpath "xah_emacs_load_misc"))
 
 (when (string-equal system-type "darwin")
-  (load (xah-fullpath-relative-to-caller "xah_emacs_mac_os_x"))
+  (load (xah-get-fullpath "xah_emacs_mac_os_x"))
   )
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_replace_quotes"))
+(load (xah-get-fullpath "xah_emacs_replace_quotes"))
 
 ;; (server-force-delete)
 ;; ;; (server-start "LEAVE-DEAD" "INHIBIT-PROMPT")
 ;; (server-start )
 
-(load (xah-fullpath-relative-to-caller "xah_emacs_syntax_parse"))
-(load (xah-fullpath-relative-to-caller "xah_emacs_overlay_and_char_properties"))
+(load (xah-get-fullpath "xah_emacs_syntax_parse"))
+(load (xah-get-fullpath "xah_emacs_overlay_and_char_properties"))

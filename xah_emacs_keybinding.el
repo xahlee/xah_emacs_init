@@ -87,12 +87,6 @@
   )
 
 (progn
-  (define-prefix-command 'xah-delete-keymap)
-  (global-set-key (kbd "<delete>") xah-delete-keymap)
-  (define-key 'xah-delete-keymap (kbd "t") 'xah-open-file-fast)
-  )
-
-(progn
   (define-prefix-command 'xah-menu-tab-keymap)
   (global-set-key (kbd "<menu> <tab>") xah-menu-tab-keymap)
   (global-set-key (kbd "<menu> <tab> y") 'yas-expand)
@@ -174,12 +168,7 @@
 
   (global-set-key (kbd "<menu> d") 'beginning-of-buffer)
 
-(progn
-  ;; this is mode-specific
-  (define-prefix-command 'xah-menu-e-keymap)
-  (global-set-key (kbd "<menu> e") xah-menu-e-keymap)
-
-  )
+  ;; (kbd "<menu> e") is mode-specific
 
 (global-set-key (kbd "<menu> f") nil)
 
@@ -291,11 +280,14 @@
   (define-key xah-harmless-keymap (kbd "c") 'toggle-case-fold-search)
   (define-key xah-harmless-keymap (kbd "e") 'eshell)
   (define-key xah-harmless-keymap (kbd "h") 'widen)
+
+  (define-key xah-harmless-keymap (kbd "f") ctl-x-5-map) ; frame
+
   (define-key xah-harmless-keymap (kbd "n") 'narrow-to-region)
   (define-key xah-harmless-keymap (kbd "s") 'flyspell-buffer)
   (define-key xah-harmless-keymap (kbd "t") 'narrow-to-defun)
 
-  )
+ )
 
 (progn
   (define-prefix-command 'xah-menu-o-keymap)
@@ -502,9 +494,18 @@
   (global-set-key (kbd "<f10> <f11>") nil)
   (global-set-key (kbd "<f10> <f12>") nil)
 
-  (global-set-key (kbd "<f10> a") nil)
-  (global-set-key (kbd "<f10> b") nil)
+  (global-set-key (kbd "<f10> <left>") 'xah-goto-previous-overlay)
+  (global-set-key (kbd "<f10> <right>") 'xah-goto-next-overlay)
+  (global-set-key (kbd "<f10> <backspace>") 'xah-remove-overlays-region)
+  (global-set-key (kbd "<f10> <return>") 'xah-show-overlay-at-point)
+
+  (global-set-key (kbd "<f10> 7") 'xah-syntax-bracket-backward)
+  (global-set-key (kbd "<f10> 8") 'xah-syntax-bracket-forward)
+
+  (global-set-key (kbd "<f10> a") 'xah-show-all-overlays)
+  (global-set-key (kbd "<f10> b") 'xah-make-overlay-bold-region)
   (global-set-key (kbd "<f10> c") 'xah-css-mode)
+  (global-set-key (kbd "<f10> c") 'xah-forward-comment)
   (global-set-key (kbd "<f10> d") nil)
   (global-set-key (kbd "<f10> e") 'xah-elisp-mode)
   (global-set-key (kbd "<f10> f") nil)
@@ -513,13 +514,16 @@
   (global-set-key (kbd "<f10> i") nil)
   (global-set-key (kbd "<f10> j") 'xah-js-mode)
   (global-set-key (kbd "<f10> k") nil)
+  (global-set-key (kbd "<f10> l") 'xah-scan-list)
   (global-set-key (kbd "<f10> l") nil)
   (global-set-key (kbd "<f10> m") nil)
   (global-set-key (kbd "<f10> n") nil)
   (global-set-key (kbd "<f10> o") nil)
+  (global-set-key (kbd "<f10> p") 'xah-parse-partial-sexp)
   (global-set-key (kbd "<f10> p") nil)
   (global-set-key (kbd "<f10> q") nil)
   (global-set-key (kbd "<f10> r") nil)
+  (global-set-key (kbd "<f10> s") 'xah-scan-sexps)
   (global-set-key (kbd "<f10> s") nil)
   (global-set-key (kbd "<f10> t") nil)
   (global-set-key (kbd "<f10> u") nil)
@@ -528,7 +532,13 @@
   (global-set-key (kbd "<f10> x") nil)
   (global-set-key (kbd "<f10> y") nil)
   (global-set-key (kbd "<f10> z") nil)
+
   )
+
+
+(substitute-key-definition 'find-file-at-point 'xah-open-file-at-cursor (current-global-map))
+
+
 
 ;; C-x C-p	mark-page
 
@@ -641,19 +651,6 @@
 ;; C-x 4 m	compose-mail-other-window
 ;; C-x 4 r	find-file-read-only-other-window
 
-;; C-x 5 C-f	find-file-other-frame
-;; C-x 5 C-o	display-buffer-other-frame
-;; C-x 5 .	find-tag-other-frame
-;; C-x 5 0	delete-frame
-;; C-x 5 1	delete-other-frames
-;; C-x 5 2	make-frame-command
-;; C-x 5 b	switch-to-buffer-other-frame
-;; C-x 5 d	dired-other-frame
-;; C-x 5 f	find-file-other-frame
-;; C-x 5 m	compose-mail-other-frame
-;; C-x 5 o	other-frame
-;; C-x 5 r	find-file-read-only-other-frame
-
 ;; C-x 6 2	2C-two-columns
 ;; C-x 6 b	2C-associate-buffer
 ;; C-x 6 s	2C-split
@@ -728,67 +725,3 @@ The app is chosen from your OS's preference."
 ;; status to offer save
 ;; This custome kill buffer is close-current-buffer.
 
-
-;; personal
-
-(progn
-  ;; this should reserved for user-defined keys
-  (define-prefix-command 'xah-user-keymap)
-  (global-set-key (kbd "<menu> SPC") xah-user-keymap)
-
-  (define-key xah-user-keymap (kbd "<menu>") 'xah-open-file-fast)
-  (define-key xah-user-keymap (kbd "<return>") 'xah-run-current-file)
-  (define-key xah-user-keymap (kbd "<backspace>") 'xah-delete-current-file)
-  (define-key xah-user-keymap (kbd "<tab>") nil)
-  (define-key xah-user-keymap (kbd "<delete>") nil)
-  (define-key xah-user-keymap (kbd "<home>") nil)
-  (define-key xah-user-keymap (kbd "<end>") nil)
-
-  (define-key xah-user-keymap (kbd "-") 'xah-insert-form-feed)
-  (define-key xah-user-keymap (kbd ".") 'title-case-string-region-or-line)
-
-  (define-key xah-user-keymap (kbd "1") 'xah-copy-to-register-1)
-  (define-key xah-user-keymap (kbd "2") 'xah-paste-from-register-1)
-  (define-key xah-user-keymap (kbd "3") nil)
-  (define-key xah-user-keymap (kbd "4") nil)
-  (define-key xah-user-keymap (kbd "7") nil)
-  (define-key xah-user-keymap (kbd "8") nil)
-
-  (define-key xah-user-keymap (kbd "a") 'ace-jump-mode-pop-mark)
-  (define-key xah-user-keymap (kbd "b") 'xah-shell-commands)
-  (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  (define-key xah-user-keymap (kbd "d") 'insert-date)
-  (define-key xah-user-keymap (kbd "e") nil)
-  (define-key xah-user-keymap (kbd "f") 'xah-find-text)
-  (define-key xah-user-keymap (kbd "g") 'ace-jump-mode)
-
-  (define-key xah-user-keymap (kbd "h") nil)
-  (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-number)
-  (define-key xah-user-keymap (kbd "i s") 'xah-insert-random-string)
-  (define-key xah-user-keymap (kbd "i u") 'xah-insert-random-uuid)
-  (define-key xah-user-keymap (kbd "i x") 'xah-insert-random-hex)
-  (define-key xah-user-keymap (kbd "j") nil)
-  (define-key xah-user-keymap (kbd "k") nil)
-  (define-key xah-user-keymap (kbd "l") nil)
-  (define-key xah-user-keymap (kbd "m") 'magit-status)
-  (define-key xah-user-keymap (kbd "n") 'xah-make-backup)
-  (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
-  (define-key xah-user-keymap (kbd "p") 'xah-copy-file-path)
-  (define-key xah-user-keymap (kbd "q") nil)
-  (define-key xah-user-keymap (kbd "r c") 'xah-escape-quotes)
-  (define-key xah-user-keymap (kbd "r '") 'xah-replace-straight-quotes)
-  (define-key xah-user-keymap (kbd "r ,") 'xah-remove-punctuation-trailing-redundant-space)
-  (define-key xah-user-keymap (kbd "r .") 'xah-convert-english-chinese-punctuation)
-  (define-key xah-user-keymap (kbd "r [") 'xah-remove-square-brackets)
-  (define-key xah-user-keymap (kbd "r g") 'xah-convert-latin-alphabet-gothic)
-  (define-key xah-user-keymap (kbd "r p") 'xah-convert-asian/ascii-space)
-  (define-key xah-user-keymap (kbd "r w") 'xah-convert-fullwidth-chars)
-  (define-key xah-user-keymap (kbd "s") nil)
-  (define-key xah-user-keymap (kbd "t") nil)
-  (define-key xah-user-keymap (kbd "u") 'xah-find-replace-text)
-  (define-key xah-user-keymap (kbd "v") nil)
-  (define-key xah-user-keymap (kbd "w") nil)
-  (define-key xah-user-keymap (kbd "y") nil)
-  (define-key xah-user-keymap (kbd "z") 'xah-toggle-read-novel-mode))
-
-(substitute-key-definition 'find-file-at-point 'xah-open-file-at-cursor (current-global-map))

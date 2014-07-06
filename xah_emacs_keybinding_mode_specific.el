@@ -61,39 +61,61 @@ For `isearch-mode-hook'."
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
 
-  (local-set-key (kbd "<menu> e SPC b") 'xah-angle-brackets-to-html)
-  (local-set-key (kbd "<menu> e SPC c") 'xwe-chinese-linkify)
-  (local-set-key (kbd "<menu> e SPC d") 'xah-html-perldoc-ref-linkify)
-  (local-set-key (kbd "<menu> e SPC e") 'xah-html-emacs-ref-linkify)
-  (local-set-key (kbd "<menu> e SPC f") 'xah-html-full-size-img-linkify)
-  (local-set-key (kbd "<menu> e SPC j") 'image-file-to-html-figure-tag)
-  (local-set-key (kbd "<menu> e SPC p") 'xah-html-php-ref-linkify)
-  (local-set-key (kbd "<menu> e SPC r") 'xah-add-to-related-links)
-  (local-set-key (kbd "<menu> e SPC t") 'xwe-word-etymology-linkify)
-  (local-set-key (kbd "<menu> e SPC z") 'amazon-linkify)
+  (local-set-key (kbd "<backspace>") 'delete-backward-char)
 
-  ;; . p  g c
-  ;; e u  h t
+  (local-set-key (kbd "<delete> <backspace>") 'xhm-remove-html-tags)
+  (local-set-key (kbd "<delete> .") 'xhm-lines-to-html-list)
 
-  (local-set-key (kbd "<menu> e 4") 'xahsite-update-article-timestamp)
-  (local-set-key (kbd "<menu> e 5") 'xhm-mark-unicode)
+  (local-set-key (kbd "<delete> 3") 'xhm-update-title)
+  (local-set-key (kbd "<delete> 4") 'xahsite-update-article-timestamp)
+  (local-set-key (kbd "<delete> 5") 'xhm-mark-unicode)
+  (local-set-key (kbd "<delete> 6") 'xhm-html-to-text)
+  (local-set-key (kbd "<delete> 7") 'xhm-toggle-syntax-coloring-markup)
+  (local-set-key (kbd "<delete> 8") 'xhm-get-precode-make-new-file)
+  (local-set-key (kbd "<delete> 9") 'xhm-redo-syntax-coloring-buffer)
 
-  (local-set-key (kbd "<menu> e a") 'xwe-annotate)
-  (local-set-key (kbd "<menu> e b") 'make-blogger-entry)
-  (local-set-key (kbd "<menu> e c") 'xah-brackets-to-html)
-  (local-set-key (kbd "<menu> e d") 'xah-html-insert-date-tag)
-  (local-set-key (kbd "<menu> e e") 'xah-make-atom-entry)
-  (local-set-key (kbd "<menu> e f") 'xah-copy-url-current-file)
-  (local-set-key (kbd "<menu> e g") 'xah-browse-url-of-buffer)
-  (local-set-key (kbd "<menu> e h") 'xah-all-linkify)
-  (local-set-key (kbd "<menu> e i") 'xah-html-image-linkify)
-  (local-set-key (kbd "<menu> e n") 'xah-ref-span-tag)
+  (local-set-key (kbd "<delete> SPC b") 'xah-angle-brackets-to-html)
+  (local-set-key (kbd "<delete> SPC c") 'xwe-chinese-linkify)
+  (local-set-key (kbd "<delete> SPC d") 'xah-html-perldoc-ref-linkify)
+  (local-set-key (kbd "<delete> SPC e") 'xah-html-emacs-ref-linkify)
+  (local-set-key (kbd "<delete> SPC f") 'xah-html-full-size-img-linkify)
+  (local-set-key (kbd "<delete> SPC j") 'image-file-to-html-figure-tag)
+  (local-set-key (kbd "<delete> SPC p") 'xah-html-php-ref-linkify)
+  (local-set-key (kbd "<delete> SPC r") 'xah-add-to-related-links)
+  (local-set-key (kbd "<delete> SPC t") 'xwe-word-etymology-linkify)
+  (local-set-key (kbd "<delete> SPC z") 'amazon-linkify)
 
-  (local-set-key (kbd "<menu> e z a") 'xah-html-insert-keywords-tag)
-  (local-set-key (kbd "<menu> e z b") 'xah-html-insert-lyrics-header)
-  (local-set-key (kbd "<menu> e z c") 'xah-html-insert-lyrics-table)
-  (local-set-key (kbd "<menu> e z d") 'xah-html-insert-screen-filler)
-  (local-set-key (kbd "<menu> e z f") 'xah-html-insert-midi)
+  (local-set-key (kbd "<delete> a") 'xwe-annotate)
+  (local-set-key (kbd "<delete> b") 'make-blogger-entry)
+  (local-set-key (kbd "<delete> c") 'xah-brackets-to-html)
+  (local-set-key (kbd "<delete> d") 'xah-html-insert-date-tag)
+  (local-set-key (kbd "<delete> e") 'xah-make-atom-entry)
+  (local-set-key (kbd "<delete> f") 'xah-copy-url-current-file)
+  (local-set-key (kbd "<delete> g") 'xah-browse-url-of-buffer)
+  (local-set-key (kbd "<delete> h") 'xah-all-linkify)
+  (local-set-key (kbd "<delete> i") 'xah-html-image-linkify)
+  (local-set-key (kbd "<delete> k") 'xhm-htmlize-keyboard-shortcut-notation)
+  (local-set-key (kbd "<delete> l 3") 'xhm-source-url-linkify)
+  (local-set-key (kbd "<delete> l s") 'xhm-make-link-defunct)
+  (local-set-key (kbd "<delete> l u") 'xhm-wrap-url)
+  (local-set-key (kbd "<delete> l w") 'xhm-wikipedia-linkify)
+  (local-set-key (kbd "<delete> m") 'xhm-pre-source-code)
+  (local-set-key (kbd "<delete> n") 'xah-ref-span-tag)
+  (local-set-key (kbd "<delete> p") 'xhm-wrap-p-tag)
+  (local-set-key (kbd "<delete> r ,") 'xhm-replace-html-chars-to-unicode)
+  (local-set-key (kbd "<delete> r .") 'xhm-replace-html-&<>-to-entities)
+  (local-set-key (kbd "<delete> r e") 'xhm-htmlize-elisp-keywords)
+  (local-set-key (kbd "<delete> r k") 'xhm-emacs-to-windows-kbd-notation)
+  (local-set-key (kbd "<delete> r m") 'xhm-make-html-table)
+  (local-set-key (kbd "<delete> r v") 'xhm-make-html-table-undo)
+  (local-set-key (kbd "<delete> t u") 'xhm-extract-url)
+  (local-set-key (kbd "<delete> x") 'xhm-rename-html-inline-image)
+  (local-set-key (kbd "<delete> y") 'xhm-make-citation)
+  (local-set-key (kbd "<delete> z a") 'xah-html-insert-keywords-tag)
+  (local-set-key (kbd "<delete> z b") 'xah-html-insert-lyrics-header)
+  (local-set-key (kbd "<delete> z c") 'xah-html-insert-lyrics-table)
+  (local-set-key (kbd "<delete> z d") 'xah-html-insert-screen-filler)
+  (local-set-key (kbd "<delete> z f") 'xah-html-insert-midi)
 
 )
 
@@ -119,11 +141,12 @@ For `isearch-mode-hook'."
     ;;    (define-key dired-mode-map (kbd "M-s") 'isearch-forward)
     ;;    (define-key dired-mode-map (kbd "M-S") 'isearch-backward)
     ;; (define-key dired-mode-map (kbd "<tab>") (make-keymap))
-    (define-key dired-mode-map (kbd "<menu> e t") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
+    (define-key dired-mode-map (kbd "<delete> t") 'wdired-change-to-wdired-mode) ; emacs 23 or later only
     ))
 
 (defun xah-help-mode-setup ()
   "for help-mode-hook."
+  (local-set-key (kbd "g") 'backward-word)
   (save-current-buffer
     (set-buffer "*Help*" )
     (local-unset-key (kbd "r"))
@@ -133,25 +156,6 @@ For `isearch-mode-hook'."
     (local-unset-key (kbd "4"))
     ) )
 (add-hook 'help-mode-hook 'xah-help-mode-setup)
-(remove-hook 'help-mode-hook 'xah-help-mode-keys)
-
-(defun xah-perl-modes-keys ()
-  "Modify keymaps."
-  ;; (local-set-key (kbd "o") 'magit-status-mode)
-  ;; if in command mode, make ; do undo
-)
-(add-hook 'cperl-mode-hook 'xah-perl-modes-keys)
-
-;; (defun xah-magit-mode-keys ()
-;;   "Modify keymaps."
-;;   ;; (local-set-key (kbd "o") 'magit-status-mode)
-;;   (local-set-key (kbd "1") 'xah-previous-user-buffer)
-;;   (local-set-key (kbd "2") 'delete-window)
-;;   (local-set-key (kbd "3") 'delete-other-windows)
-;;   (local-set-key (kbd "4") 'split-window-vertically)
-;; )
-;; (add-hook 'magit-mode-hook 'xah-magit-mode-keys)
-;; (remove-hook 'magit-mode-hook 'xah-magit-mode-keys)
 
 (defun xah-Man-mode-keys ()
   "my keybindings."
@@ -164,22 +168,9 @@ For `isearch-mode-hook'."
   )
 (add-hook 'Man-mode-hook 'xah-Man-mode-keys)
 
-;; ;(setq mybuf (get-buffer-create "*show commands*"))
-;; (defun xx ()
-;;   "tttttt"
-;;   (let ()
-;;     (princ (format "%s\n" last-command) mybuf )
-;;     )
-;;   ;;(message "%s" last-command)
-;;   )
-;; (add-hook 'post-command-hook 'xx)
-;; (remove-hook 'post-command-hook 'xx)
 
-(defun xah-help-mode-keys ()
-  "Modify keymaps"
-  (local-set-key (kbd "g") 'backward-word)
-)
-(add-hook 'help-mode-hook 'xah-help-mode-keys)
+
+
 
 
 
@@ -191,23 +182,10 @@ For `rcirc-mode-hook'."
   )
 (add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
 
-(defun xah-org-mode-keys ()
-  "Modify keybindings for `org-mode'.
-For `org-mode-hook'."
-  (local-set-key (kbd "<M-up>") 'org-metaup)
-  (local-set-key (kbd "<M-down>") 'org-metadown)
-  (local-set-key (kbd "<M-left>") 'org-metaleft)
-  (local-set-key (kbd "<M-right>") 'org-metaright)
-  (local-set-key (kbd "M-h") 'backward-char)
-  (local-set-key (kbd "C-a") 'mark-whole-buffer)
-
-  )
-(add-hook 'org-mode-hook 'xah-org-mode-keys)
-
 (defun xah-Info-mode-keys ()
   "Modify keybindings for `Info-mode'.
 For `Info-mode-hook'."
-  (local-set-key (kbd "<menu> e g") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<delete> g") 'xah-view-emacs-manual-in-browser)
   (local-set-key (kbd "<mouse-8>") 'Info-history-back)
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
