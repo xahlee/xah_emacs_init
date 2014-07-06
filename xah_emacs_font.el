@@ -23,25 +23,11 @@
   "Set current buffer to use variable-width font."
   (variable-pitch-mode 1)
   ;; (text-scale-increase 0.5 )
-)
+  )
 
 (add-hook 'html-mode-hook 'xah-font-change)
 (add-hook 'xah-html-mode-hook 'xah-font-change)
 (add-hook 'nxml-mode-hook 'xah-font-change)
-
-
-
-(defun xah-set-font-to-monospace ()
-  "Change font in current window to a monospaced font."
-  (interactive)
-  (set-frame-font "DejaVu Sans Mono" t)
-  )
-
-(defun xah-set-font-to-variable-width ()
-  "Change font in current window to a variable-width font."
-  (interactive)
-  (set-frame-font "DejaVu Sans" t)
-  )
 
 
 
@@ -62,9 +48,7 @@
     (setq fontToUse (nth stateAfter ξ-font-list))
     ;; (set-frame-font fontToUse t)
     (set-frame-parameter nil 'font fontToUse)
-    (message "Current font is: %s" fontToUse )
-    )
-  )
+    (message "Current font is: %s" fontToUse )))
 
 
 
@@ -81,22 +65,19 @@
 
                  "DejaVu Sans-10"
                  "Lucida Sans Unicode-10"
-                 )
-               )
+                 ))
               ((string-equal system-type "gnu/linux")
                '(
                  "DejaVu Sans Mono-9"
                  "DejaVu Sans-9"
                  "Symbola-13"
-                 )
-               )
+                 ))
               ((string-equal system-type "darwin") ; Mac
                '(
                  "DejaVu Sans Mono-9"
                  "DejaVu Sans-9"
                  "Symbola-13"
-                 ) ) )
-             )
+                 ))))
 
 (defun xah-cycle-font (φn)
   "Change font in current frame.
@@ -114,37 +95,26 @@ See also `xah-cycle-font-next', `xah-cycle-font-previous'."
     (set-frame-font fontToUse t)
     ;; (set-frame-parameter nil 'font fontToUse)
     (message "Current font is: %s" fontToUse )
-    (put 'xah-cycle-font 'state stateAfter) ) )
+    (put 'xah-cycle-font 'state stateAfter)))
 
 (defun xah-cycle-font-next ()
   "Switch to the next font, in current window.
 See `xah-cycle-font'."
   (interactive)
-  (xah-cycle-font 1) )
+  (xah-cycle-font 1))
 
 (defun xah-cycle-font-previous ()
   "Switch to the previous font, in current window.
 See `xah-cycle-font'."
   (interactive)
-  (xah-cycle-font -1) )
+  (xah-cycle-font -1))
 
 
-
-(defun xah-unfontify-selection-or-block ()
-  "Unfontify text selection or current block of text.
-See also: `font-lock-fontify-block', `font-lock-fontify-buffer'."
-  (interactive)
-  (let (bds p1 p2 )
-    (setq bds (get-selection-or-unit 'block))
-    (setq p1 (elt bds 1) p2 (elt bds 2)  )
-    (font-lock-unfontify-region p1 p2)
-    )
-  )
 
 (defun xah-toggle-line-spacing ()
   "Toggle line spacing between no extra space to extra half line height."
   (interactive)
-  (if (eq line-spacing nil)
+  (if (null line-spacing)
       (setq line-spacing 0.5) ; add 0.5 height between lines
     (setq line-spacing nil)   ; no extra heigh between lines
     )
@@ -154,7 +124,7 @@ See also: `font-lock-fontify-block', `font-lock-fontify-buffer'."
   "Toggle the right margin between `fill-column' or window width.
 This command is convenient when reading novel, documentation."
   (interactive)
-  (if (eq (cdr (window-margins)) nil)
+  (if (null (cdr (window-margins)))
       (set-window-margins nil 0 (- (window-body-width) fill-column))
     (set-window-margins nil 0 0) ) )
 
@@ -168,27 +138,24 @@ This command is convenient when reading novel, documentation."
 
 Call again to toggle back."
   (interactive)
-  (if (eq (get this-command 'state-on-p) nil)
+  (if (null (get this-command 'state-on-p))
       (progn
         (set-window-margins nil 0 
-                            (if (> fill-column (window-body-width) )
+                            (if (> fill-column (window-body-width))
                                 0
                               (progn
-                                (- (window-body-width) fill-column) )  
-                              ))
+                                (- (window-body-width) fill-column))))
         (variable-pitch-mode 1)
         (setq line-spacing 0.4)
         (setq word-wrap t)
-        (put this-command 'state-on-p t)
-        )
+        (put this-command 'state-on-p t))
     (progn
       (set-window-margins nil 0 0)
       (variable-pitch-mode 0)
       (setq line-spacing nil)
       (setq word-wrap nil)
-      (put this-command 'state-on-p nil)
-      ) )
-  (redraw-frame (selected-frame)) )
+      (put this-command 'state-on-p nil)))
+  (redraw-frame (selected-frame)))
 
 ;; correct syntax for some fonts (tested on Windows Vista)
 ;; "-*-Courier New-normal-r-*-*-14-112-96-96-c-*-iso8859-1"
