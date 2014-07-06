@@ -339,31 +339,32 @@ This is Xah Lee's personal command assuming a particular dir structure."
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'glyphs ))
-         (inputStr (elt bds 0) )
-         (p1 (elt bds 1) )
-         (p2 (elt bds 2) )
-         myFile myTitle
+         (inputStr (elt bds 0))
+         (p1 (elt bds 1))
+         (p2 (elt bds 2))
+         (myFile (xahsite-web-path-to-filepath inputStr))
+         myTitle
          )
-    (setq myFile (xahsite-web-path-to-filepath inputStr))
-    (setq myTitle
-          (if (string-match-p ".+html\\'" myFile)
-              (xhm-get-html-file-title myFile)
-            (file-name-nondirectory myFile)))
-    (setq myTitle (replace-pairs-in-string myTitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]) )
 
-    (delete-region p1 p2)
-    (insert myTitle "\n" (xahsite-filepath-to-url myFile))
-    ))
+    (if (file-exists-p myFile)
+        (progn 
+          (setq myTitle
+                (if (string-match-p ".+html\\'" myFile)
+                    (xhm-get-html-file-title myFile)
+                  (file-name-nondirectory myFile)))
+          (setq myTitle (replace-pairs-in-string myTitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
+
+          (delete-region p1 p2)
+          (insert myTitle "\n" (xahsite-filepath-to-url myFile)))
+      (progn (user-error "file doesn't exist.")))))
 
 (defun xah-copy-url-current-file ()
   "Put the current file's URL into the kill-ring."
   (interactive)
   (let (ξurl)
-    (setq ξurl (xahsite-filepath-to-url (buffer-file-name)) )
+    (setq ξurl (xahsite-filepath-to-url (buffer-file-name)))
     (kill-new ξurl)
-    (message "URL copied %s" ξurl)
-    )
-  )
+    (message "URL copied %s" ξurl)))
 
 
 
