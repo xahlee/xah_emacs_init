@@ -10,9 +10,8 @@
 
 (clear-abbrev-table global-abbrev-table)
 
-(define-abbrev-table 'global-abbrev-table 
+(define-abbrev-table 'global-abbrev-table
   '(
-
 
     ("eg" "⁖")
     ("mac" "Mac")
@@ -26,13 +25,9 @@
     ("fex" "for example")
     ("jq" "jQuery")
 
-
     ("arrows" "➵ ➙ ► ▻ ☛ ☞ 👆 👇 👈 👉 ⇰ ➛ ➜ ➝ ➞ ➟ ➠ ➢ ➣ ➤ ➥ ➦ ➧ ➨ ➲ ➺ ➻ ➼ ➽ ➾")
 
     ("hearts" "♥ 💕 💓 💔 💖 💗 💘 💝 💞 💟 💙 💚 💛 💜")
-
-
-
 
     ;; ;    ("t" "the")                         ; problem with “doesn't ”
     ;; ;    ("2" "to")                          ; problem with just enter a number

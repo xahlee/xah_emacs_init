@@ -12,6 +12,7 @@
 
 (global-set-key (kbd "C-w") 'xah-close-current-buffer)
 (global-set-key (kbd "C-o") 'find-file)
+(global-set-key (kbd "C-a") 'mark-whole-buffer)
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-n") 'xah-new-empty-buffer)
 (global-set-key (kbd "C-S-s") 'write-file)
