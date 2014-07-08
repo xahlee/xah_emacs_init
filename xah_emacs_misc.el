@@ -249,26 +249,22 @@ The clipboard should contain a file path or url to xah site. Open that file in e
         (ξs
          (with-temp-buffer
            (yank)
-           (buffer-string) ) )
+           (buffer-string)))
         fpath
         )
 
     (if (string-match-p "\\`http://" ξs)
         (progn
-          (setq fpath (xahsite-url-to-filepath ξs "addFileName") )
+          (setq fpath (xahsite-url-to-filepath ξs "addFileName"))
           (if (file-exists-p fpath)
-              (progn (find-file fpath) )
-            (progn (error "file doesn't exist 「%s」" fpath))
-            )
-          )
+              (progn (find-file fpath))
+            (progn (error "file doesn't exist 「%s」" fpath))))
       (progn ; not starting “http://”
-        (setq ξs (remove-uri-fragment ξs) )
-        (setq fpath (xahsite-web-path-to-filepath ξs default-directory) )
+        (setq ξs (remove-uri-fragment ξs))
+        (setq fpath (xahsite-web-path-to-filepath ξs default-directory))
         (if (file-exists-p fpath)
-            (progn (find-file fpath) )
-          (progn (error "file doesn't exist 「%s」" fpath))
-          )
-        ) ) ))
+            (progn (find-file fpath))
+          (progn (user-error "file doesn't exist 「%s」" fpath)))))))
 
 (defun xah-browse-url-at-point ()
 "Switch to web browser and load the URL at cursor position.

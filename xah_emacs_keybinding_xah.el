@@ -5,7 +5,7 @@
   (define-prefix-command 'xah-user-keymap)
 
   (define-key xah-user-keymap (kbd "<menu>") nil)
-  (define-key xah-user-keymap (kbd "SPC") 'ace-jump-mode)
+  (define-key xah-user-keymap (kbd "SPC") nil)
   (define-key xah-user-keymap (kbd "<return>") 'xah-run-current-file)
   (define-key xah-user-keymap (kbd "<backspace>") 'xah-delete-current-file)
   (define-key xah-user-keymap (kbd "<tab>") nil)
@@ -20,8 +20,12 @@
   (define-key xah-user-keymap (kbd "2") 'xah-paste-from-register-1)
   (define-key xah-user-keymap (kbd "3") nil)
   (define-key xah-user-keymap (kbd "4") nil)
+  (define-key xah-user-keymap (kbd "5") 'ace-jump-mode)
+  (define-key xah-user-keymap (kbd "6") nil)
   (define-key xah-user-keymap (kbd "7") nil)
   (define-key xah-user-keymap (kbd "8") nil)
+  (define-key xah-user-keymap (kbd "9") nil)
+  (define-key xah-user-keymap (kbd "0") nil)
 
   (define-key xah-user-keymap (kbd "a") 'ace-jump-mode-pop-mark)
   (define-key xah-user-keymap (kbd "b") 'xah-shell-commands)
@@ -52,6 +56,9 @@
   (define-key xah-user-keymap (kbd "r g") 'xah-convert-latin-alphabet-gothic)
   (define-key xah-user-keymap (kbd "r p") 'xah-convert-asian/ascii-space)
   (define-key xah-user-keymap (kbd "r w") 'xah-convert-fullwidth-chars)
+  (define-key xah-user-keymap (kbd "r p") 'xah-replace-profanity)
+  (define-key xah-user-keymap (kbd "r t") 'xah-twitterfy)
+
   (define-key xah-user-keymap (kbd "s") nil)
   (define-key xah-user-keymap (kbd "t") nil)
   (define-key xah-user-keymap (kbd "u") 'xah-find-replace-text)

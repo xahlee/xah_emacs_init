@@ -68,7 +68,10 @@
 (when (string-equal system-type "windows-nt")
   (define-key key-translation-map (kbd "<apps>") (kbd "<menu>")))
 
-(define-key key-translation-map (kbd "C-p") (kbd "<menu>")) ; Mac OS X don't do menu/app key.
+(when (string-equal system-type "darwin")
+  ;; Mac OS X  doesn't have menu, even if using pc keyboard
+  (define-key key-translation-map (kbd "C-p") (kbd "<menu>")))
+
 
 (define-prefix-command 'xah-menu-keymap)
 (global-set-key (kbd "<menu>") 'xah-menu-keymap)
@@ -686,17 +689,17 @@ The app is chosen from your OS's preference."
            (φfile (list φfile)))))
 
     (setq ξdoIt (if (<= (length ξfileList) 5)
-                   t
-                 (y-or-n-p "Open more than 5 files? ") ) )
+                    t
+                  (y-or-n-p "Open more than 5 files? ")))
 
     (when ξdoIt
       (cond
        ((string-equal system-type "windows-nt")
-        (mapc (lambda (fPath) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" fPath t t)) ) ξfileList))
+        (mapc (lambda (fPath) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" fPath t t))) ξfileList))
        ((string-equal system-type "darwin")
-        (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)) )  ξfileList) )
+        (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)))  ξfileList))
        ((string-equal system-type "gnu/linux")
-        (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath)) ) ξfileList) ) ) ) ) )
+        (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) ξfileList))))))
 
 (defun xah-open-in-desktop ()
   "Show current file in desktop (OS's file manager)."
@@ -708,7 +711,7 @@ The app is chosen from your OS's preference."
    ((string-equal system-type "gnu/linux")
     (let ((process-connection-type nil)) (start-process "" nil "xdg-open" "."))
     ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
-    ) ))
+    )))
 
 (defun xah-new-empty-buffer ()
   "Open a new empty buffer."

@@ -11,48 +11,32 @@
 
 (require 'browse-url)
 
-;(defun forword-word-camelCase ()
-;  "DOCSTRING"
-;  (interactive)
-;  (let (p1 p2 ξtext)
-;    (forward-word)
-;    (setq p1 (point) )
-;    (backward-word )
-;    (setq p2 (point) )
-;    (setq ξtext (buffer-substring-no-properties p1 p2) )
-;    (if 
-;        (let ((case-fold-search nil))
-;          (string-match "[a-z]+[A-Z]" ξtext)
-;          )
-;        (progn (search-forward "[A-Z]" nil "NOERROR")
-;               )
-;      (progn )
-;      )
-;    ))
-
-(defun xah-delete-current-file (φno-backup-p)
+(defun xah-delete-current-file (&optional φno-backup-p)
   "Delete the file associated with the current buffer.
 
-Also close the current buffer.  If no file is associated, just close buffer without prompt for save.
+Also close the current buffer.  If no file is associated, just close buffer.
 
-A backup file is created with filename appended “~‹date time stamp›~”. Existing file of the same name is overwritten.
+A backup file is created with filename appended “~‹date time stamp›~”. Existing file of the same name is overwritten. If the file is not associated with buffer, the backup file name starts with “xx_”.
 
 When called with `universal-argument', don't create backup."
   (interactive "P")
   (let* (
          (fName (buffer-file-name)) 
-        (backupName (concat fName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
-    (when fName ; buffer is associated with a file
-      (save-buffer fName)
-      (if φno-backup-p
-          (progn )
-        (copy-file fName backupName t)
-        )
-      (delete-file fName)
-      (message "deleted and backup created at 「%s」." backupName)
-      )
-    (kill-buffer (current-buffer))
-    ) )
+         (bufferIsFile-p (if (null fName) nil t ))
+         (backupName (concat fName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
+    (if bufferIsFile-p
+        (progn 
+          (save-buffer fName)
+          (if φno-backup-p
+              nil
+            (copy-file fName backupName t))
+          (delete-file fName)
+          (message "deleted and backup created at 「%s」." backupName))
+      (progn 
+        (if φno-backup-p
+            nil
+          (write-region (point-min) (point-max) (concat "xx_~" (format-time-string "%Y%m%d_%H%M%S") "~")))))
+    (kill-buffer (current-buffer))))
 
 (defun xah-make-backup ()
   "Make a backup copy of current file.
