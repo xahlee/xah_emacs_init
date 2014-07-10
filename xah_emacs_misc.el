@@ -158,7 +158,12 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
         ("netiquette index" . "~/web/xahlee_info/Netiquette_dir/troll.html")
 
-        ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")))
+        ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")
+
+        ("xx webdev blog" . "~/web/xahlee_info/js/xx_webdev_blog.html")
+        ("xx comp blog" . "~/web/xahlee_info/comp/xx_comp_blog.html")
+        ("xx emacs blog" . "~/web/ergoemacs_org/emacs/xx_emacs_blog.html")
+))
 
 (defun xah-open-file-fast (φopen-code)
   "Prompt to open a file from a pre-defined set."
@@ -343,7 +348,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
          )
 
     (if (file-exists-p myFile)
-        (progn 
+        (progn
           (setq myTitle
                 (if (string-match-p ".+html\\'" myFile)
                     (xhm-get-html-file-title myFile)

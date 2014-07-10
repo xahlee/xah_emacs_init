@@ -276,7 +276,7 @@
     ("8key" "【Alt+f】")
     ("8song" "singer ❀ 〈title〉")
 
-    ("li" "────────── ────────── ────────── ────────── ──────────")
+    ("8l" "────────── ────────── ────────── ────────── ──────────")
     ("utf" "-*- coding: utf-8 -*-")
     ("ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
