@@ -163,6 +163,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx webdev blog" . "~/web/xahlee_info/js/xx_webdev_blog.html")
         ("xx comp blog" . "~/web/xahlee_info/comp/xx_comp_blog.html")
         ("xx emacs blog" . "~/web/ergoemacs_org/emacs/xx_emacs_blog.html")
+        ("xx pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/xx_pd_blog.html")
+
 ))
 
 (defun xah-open-file-fast (φopen-code)

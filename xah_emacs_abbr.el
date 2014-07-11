@@ -146,6 +146,7 @@
   ; ("g" "good")
   ; ("ipt" "important")
 
+    ("bt" "between")
     ("comm" "communication")
     ("rsi" "Repetitive Strain Injury")
     ("disc" "discussion")
