@@ -90,18 +90,18 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 (defvar xah-filelist nil "alist for files i need to open frequently. Key is a short abbrev, Value is file path.")
 (setq xah-filelist
       '(
-        ("3emacs_blog" . "~/web/ergoemacs_org/emacs/blog.html" )
-        ("4comp_blog" . "~/web/xahlee_info/comp/blog.html" )
-        ("web_blog" . "~/web/xahlee_info/js/blog.html" )
+        ("3emacs blog" . "~/web/ergoemacs_org/emacs/blog.html" )
+        ("4comp blog" . "~/web/xahlee_info/comp/blog.html" )
+        ("web blog" . "~/web/xahlee_info/js/blog.html" )
 
-        ("math_blog" . "~/web/xahlee_info/math/blog.html" )
-        ("linguistics_blog" . "~/web/wordyenglish_com/lit/blog.html" )
-        ("chinese_blog" . "~/web/wordyenglish_com/chinese/blog.html" )
-        ("music_blog" . "~/web/xahmusic_org/music/blog.html" )
-        ("arts_blog" . "~/web/xaharts_org/arts/blog.html" )
-        ("sl_blog" . "~/web/xahsl_org/sl/blog.html" )
-        ("pd_blog" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
-        ("sex_blog" . "~/web/xahlee_org/sex/blog.html" )
+        ("math blog" . "~/web/xahlee_info/math/blog.html" )
+        ("linguistics blog" . "~/web/wordyenglish_com/lit/blog.html" )
+        ("chinese blog" . "~/web/wordyenglish_com/chinese/blog.html" )
+        ("music blog" . "~/web/xahmusic_org/music/blog.html" )
+        ("arts blog" . "~/web/xaharts_org/arts/blog.html" )
+        ("sl blog" . "~/web/xahsl_org/sl/blog.html" )
+        ("pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
+        ("sex blog" . "~/web/xahlee_org/sex/blog.html" )
 
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
         ("keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
@@ -114,16 +114,16 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
         ("git" . "~/git/" )
         ("Ubuntu One" . "~/Ubuntu One/")
-        ("Xah_Lee_Resume.html" . "~/web/xahlee_org/PageTwo_dir/Personal_dir/Xah_Lee_Resume.html")
+        ("Xah Lee Resume.html" . "~/web/xahlee_org/PageTwo_dir/Personal_dir/Xah_Lee_Resume.html")
         ("bavlamdei.txt" . "~/Dropbox/cabdei/bavlamdei.txt")
-        ("check_local_links.pl" . "~/git/xahscripts/validate_website/check_local_links.pl")
+        ("check local links.pl" . "~/git/xahscripts/validate_website/check_local_links.pl")
 
-        ("emacs_tutorial_update_emails" . "~/Dropbox/cabdei/emacs_tutorial_update_emails.txt")
-        ("xahleeinfo_update_emails" . "~/Dropbox/cabdei/xahlee.info_update_emails.txt")
-        ("xah_js_tutorial_update_emails" . "~/Dropbox/cabdei/xah_js_tutorial_update_emails.txt")
-        ("xah_python_tutorial_update_emails" . "~/Dropbox/cabdei/xah_python_tutorial_update_emails.txt")
+        ("emacs tutorial update emails" . "~/Dropbox/cabdei/emacs_tutorial_update_emails.txt")
+        ("xahleeinfo update emails" . "~/Dropbox/cabdei/xahlee.info_update_emails.txt")
+        ("xah js tutorial update emails" . "~/Dropbox/cabdei/xah_js_tutorial_update_emails.txt")
+        ("xah python tutorial update emails" . "~/Dropbox/cabdei/xah_python_tutorial_update_emails.txt")
 
-        ("find-replace.py3" . "~/git/xah_find_replace/find-replace.py3")
+        ("find replace.py3" . "~/git/xah_find_replace/find-replace.py3")
         ("mipri" . "~/Dropbox/zekri_open/mipri/")
         ("second life" . "/media/OS/Users/xah/Google Drive/second life/")
         ("google drive" . "/media/OS/Users/xah/Google Drive/")
@@ -133,10 +133,10 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("emacs init" . "~/.emacs.d/init.el")
         ("windows pictures" . "/media/OS/Users/xah/Pictures/")
         ("book" . "/media/OS/Users/xah/SkyDrive/books/")
-        ("css-index" . "~/web/xahlee_info/js/css_index.html")
+        ("css index" . "~/web/xahlee_info/js/css_index.html")
 
-        ("emacs_tutorial" . "~/web/ergoemacs_org/emacs/emacs.html")
-        ("elisp_tutorial" . "~/web/ergoemacs_org/emacs/elisp.html")
+        ("emacs tutorial" . "~/web/ergoemacs_org/emacs/emacs.html")
+        ("elisp tutorial" . "~/web/ergoemacs_org/emacs/elisp.html")
         ("js" . "~/web/xahlee_info/js/js.html" )
         ("perl" . "~/web/xahlee_info/perl/perl_index.html")
 
@@ -164,6 +164,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx comp blog" . "~/web/xahlee_info/comp/xx_comp_blog.html")
         ("xx emacs blog" . "~/web/ergoemacs_org/emacs/xx_emacs_blog.html")
         ("xx pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/xx_pd_blog.html")
+        ("xx lit blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
 
 ))
 

@@ -29,40 +29,32 @@
 
     ("hearts" "♥ 💕 💓 💔 💖 💗 💘 💝 💞 💟 💙 💚 💛 💜")
 
-    ;; ;    ("t" "the")                         ; problem with “doesn't ”
-    ;; ;    ("2" "to")                          ; problem with just enter a number
-    ;;     ("o" "of")
-    ;;     ("n" "and")
-    ;;     ("ta" "that")
-    ;;     ("h" "have")
-    ;; ;    ("4" "for")
-    ;;     ("u" "you")
-    ;;     ("w" "with")
-    ;;     ("b" "but")
-
     ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
-  ;("t" "the") ; 1
-;;; ("t" "be") ; 2
-  ;("2" "to")
-;;; ("t" "of") ; 4
-  ;("n" "and")
+
+  ("dt" "doesn't") ; 1 problem with “doesn't”
+
+  ("3" "the") ; 1 problem with “doesn't”
+;; ("t" "be") ; 2
+    ;; ("2" "to")                          ; problem with just enter a number
+;; ("t" "of") ; 4
+        ("n" "and") ;3
 ;;; ("t" "a") ; 6
 ;;; ("t" "in") ; 7
-  ;("h" "that")
-  ;("v" "have")
+  ;("h" "that") ; 8
+  ("h" "have") ; 9
 ;;; ("t" "I") ; 10
 ;;; ("t" "it") ; 11
-  ;("4" "for")
+       ("4" "for") ; 12
   ;("8" "not")
     ;; ("t" "on") ; 14
-  ;("w" "with") ; 15
+  ("w" "with") ; 15
     ;; ("t" "he") ; 16
     ;; ("t" "as") ; 17
-  ;("u" "you") ; 18
+  ("u" "you") ; 18
     ;; ("t" "do") ; 19
     ;; ("t" "at") ; 20
     ;; ("t" "this") ; 21
-  ;("b" "but") ; 22
+  ("b" "but") ; 22
     ;; ("t" "his") ; 23
     ;; ("t" "by") ; 24
     ;; ("t" "from") ; 25
@@ -91,7 +83,7 @@
     ;; ("t" "which") ; 48
     ;; ("t" "go") ; 49
     ;; ("t" "me") ; 50
-    ;; ("t" "when") ; 51
+    ;; ("w" "when") ; 51
     ;; ("t" "make") ; 52
     ;; ("t" "can") ; 53
     ;; ("t" "like") ; 54
@@ -134,7 +126,7 @@
     ;; ("t" "even") ; 91
     ;; ("t" "new") ; 92
     ;; ("t" "want") ; 93
-  ;("bc" "because")
+  ("bc" "because") ; 94
     ;; ("t" "any") ; 95
     ;; ("t" "these") ; 96
   ; ("t" "give") ; 97
@@ -159,7 +151,6 @@
     ("btw" "by the way")
     ("afaik" "As far as i know")
     ("intro" "introduction")
-    ("8b" "because")
     ("pls" "please")
     ("atm" "at the moment")
     ("q" "question")
