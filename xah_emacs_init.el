@@ -54,12 +54,20 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xeu_elisp_util.el/")
 (add-to-list 'load-path "~/git/xfrp_find_replace_pairs.el/")
 (add-to-list 'load-path "~/git/xub-mode.el/")
+(add-to-list 'load-path "~/git/lookup-word-on-internet/")
 
-(load "xeu_elisp_util")
-(load "xah_file_util")
-(load "xfrp_find_replace_pairs")
-
-
+(require 'xah_file_util)
+(require 'xah-html-mode)
+(require 'xah-comment)
+(require 'xah-elisp-mode)
+(require 'xah-js-mode)
+(require 'xah-php-mode)
+(require 'xah-css-mode)
+(require 'xah-insert-random-id)
+(require 'lookup-word-on-internet)
+(require 'xfrp_find_replace_pairs)
+(require 'xeu_elisp_util)
+(require 'xah-misc-commands)
 
 (require 'package)
 (package-initialize)
@@ -71,7 +79,6 @@ To solve this problem, when your code only knows the relative path of another fi
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_unset_keys.el"))
 
       (require 'xah-fly-keys)
-
 
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_meta"))
       (load (xah-get-fullpath "xah_emacs_keybinding_super"))
@@ -120,7 +127,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_str_insertion"))
 
 (load (xah-get-fullpath "xah_emacs_str_replacement"))
-(require 'xah-misc-commands)
 
 (load (xah-get-fullpath "xah_emacs_str_rep_func"))
 
