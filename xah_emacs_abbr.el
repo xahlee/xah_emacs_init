@@ -32,14 +32,16 @@
     ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
 
   ("dt" "doesn't") ; 1 problem with “doesn't”
+  ("dnt" "don't") ; 1 problem with “doesn't”
 
-  ("3" "the") ; 1 problem with “doesn't”
+  ("t" "the") ; 1 problem with “doesn't”
 ;; ("t" "be") ; 2
     ;; ("2" "to")                          ; problem with just enter a number
 ;; ("t" "of") ; 4
         ("n" "and") ;3
 ;;; ("t" "a") ; 6
 ;;; ("t" "in") ; 7
+
   ;("h" "that") ; 8
   ("h" "have") ; 9
 ;;; ("t" "I") ; 10

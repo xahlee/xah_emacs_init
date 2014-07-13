@@ -72,7 +72,6 @@
   ;; Mac OS X  doesn't have menu, even if using pc keyboard
   (define-key key-translation-map (kbd "C-p") (kbd "<menu>")))
 
-
 (define-prefix-command 'xah-menu-keymap)
 (global-set-key (kbd "<menu>") 'xah-menu-keymap)
 
@@ -316,6 +315,8 @@
   (define-key xah-edit-cmds-keymap (kbd "8") 'delete-matching-lines)
   (define-key xah-edit-cmds-keymap (kbd "9") 'delete-non-matching-lines)
   (define-key xah-edit-cmds-keymap (kbd "0") 'delete-duplicate-lines)
+
+  (define-key xah-edit-cmds-keymap (kbd "e") 'call-last-kbd-macro)
 
   (define-key xah-edit-cmds-keymap (kbd "SPC") 'rectangle-mark-mode)
   (define-key xah-edit-cmds-keymap (kbd "c") 'replace-rectangle)

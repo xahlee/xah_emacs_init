@@ -1,9 +1,7 @@
 ;;-*- coding: utf-8 -*-
 ;; 2013-09-02
 
-(defun xah-isearch-mode-keys ()
-  "xah keybindings for `isearch-mode'.
-For `isearch-mode-hook'."
+(progn
   (define-key isearch-mode-map (kbd "M-f") 'isearch-repeat-forward)
   (define-key isearch-mode-map (kbd "M-F") 'isearch-repeat-backward)
 ;  (define-key isearch-mode-map (kbd "<escape>") 'minibuffer-keyboard-quit)
@@ -12,7 +10,6 @@ For `isearch-mode-hook'."
   (define-key isearch-mode-map (kbd "<next>") 'isearch-repeat-forward)
   (define-key isearch-mode-map (kbd "<prior>") 'isearch-repeat-backward)
   )
-(add-hook 'isearch-mode-hook 'xah-isearch-mode-keys )
 
 (defun xah-comint-keys ()
   "xah keybindings for `comint-mode-hook'."

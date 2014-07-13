@@ -158,7 +158,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
         ("netiquette index" . "~/web/xahlee_info/Netiquette_dir/troll.html")
 
-        ("unicode" . "~/web/xahlee_info/comp/unicode_6_emoticons_list.html")
+        ("unicode" . "~/web/xahlee_info/comp/unicode_index.html")
+        ("elisp" . "~/web/ergoemacs_org/emacs/elisp.html")
 
         ("xx webdev blog" . "~/web/xahlee_info/js/xx_webdev_blog.html")
         ("xx comp blog" . "~/web/xahlee_info/comp/xx_comp_blog.html")
