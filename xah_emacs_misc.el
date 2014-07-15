@@ -167,6 +167,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/xx_pd_blog.html")
         ("xx lit blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
 
+        ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
+
 ))
 
 (defun xah-open-file-fast (φopen-code)

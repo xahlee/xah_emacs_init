@@ -269,6 +269,7 @@
   (define-key xah-harmless-keymap (kbd "SPC") nil)
   (define-key xah-harmless-keymap (kbd "<return>") nil)
 
+  (define-key xah-harmless-keymap (kbd "2") 'global-hl-line-mode)
   (define-key xah-harmless-keymap (kbd "3") 'whitespace-mode)
   (define-key xah-harmless-keymap (kbd "4") 'linum-mode)
   (define-key xah-harmless-keymap (kbd "5") 'visual-line-mode)

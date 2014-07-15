@@ -164,7 +164,8 @@
     ("temp" "temperature")
     ("gvn" "government")
     ("auto" "automatically")
-    ("math" "mathematics")
+    ("mathe" "mathematics")
+    ("dibt" "difference between")
     ("diff" "difference")
     ("comp" "computer")
     ("l" "language")
@@ -265,23 +266,11 @@
     ("8tag" "\\([</>=\" A-Za-z0-9]+\\)")
     ("8az" "\\([A-Za-z0-9]+\\)")
 
-    ("tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
-    ("8menu" "〖a ▸ b ▸ c〗")
-    ("8key" "【Alt+f】")
-    ("8song" "singer ❀ 〈title〉")
-
     ("8l" "────────── ────────── ────────── ────────── ──────────")
     ("utf" "-*- coding: utf-8 -*-")
     ("ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
     ("php" "<?php\n\n?>")
-
-    ("faq" "<div class=\"a\">
-<p class=\"q\">How to do this?</p>
-<p>this way</p>
-</div>
-
-")
 
     
 ;;; unix shell
