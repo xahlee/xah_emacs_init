@@ -107,6 +107,19 @@
     ) )
 (add-hook 'help-mode-hook 'xah-help-mode-setup)
 
+(defun xah-help-mode-setup ()
+  "for help-mode-hook."
+  (local-set-key (kbd "g") 'backward-word)
+  (save-current-buffer
+    (set-buffer "*Help*" )
+    (local-unset-key (kbd "r"))
+    (local-unset-key (kbd "8"))
+    (local-unset-key (kbd "2"))
+    (local-unset-key (kbd "3"))
+    (local-unset-key (kbd "4"))
+    ) )
+(add-hook 'help-mode-hook 'xah-help-mode-setup)
+
 (defun xah-Man-mode-keys ()
   "my keybindings."
   (local-set-key (kbd "1") 'xah-previous-user-buffer)

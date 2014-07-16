@@ -128,7 +128,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("second life" . "/media/OS/Users/xah/Google Drive/second life/")
         ("google drive" . "/media/OS/Users/xah/Google Drive/")
         ("skydrive" . "/media/OS/Users/xah/SkyDrive/")
-        ("sitemove" . "~/git/xahscripts/elisp/xah_site_move.el")
         ("ergoemacs init" . "~/git/ergoemacs/ergoemacs/")
         ("emacs init" . "~/.emacs.d/init.el")
         ("windows pictures" . "/media/OS/Users/xah/Pictures/")
@@ -168,6 +167,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx lit blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
 
         ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
+        ("xah site move" . "~/git/xahscripts/elisp/xah_site_move.el")
 
 ))
 
