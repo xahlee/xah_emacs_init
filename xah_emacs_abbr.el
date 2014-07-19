@@ -31,8 +31,8 @@
 
     ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
 
-  ("dt" "doesn't") ; 1 problem with “doesn't”
-  ("dnt" "don't") ; 1 problem with “doesn't”
+  ("dsnt" "doesn't")
+  ("dnt" "don't")
 
   ("t" "the") ; 1 problem with “doesn't”
 ;; ("t" "be") ; 2

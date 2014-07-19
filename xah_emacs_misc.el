@@ -103,6 +103,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
         ("sex blog" . "~/web/xahlee_org/sex/blog.html" )
 
+        ("linux" . "~/web/xahlee_info/linux/linux_index.html" )
+
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
         ("keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
         ("fly keys" . "~/git/xah-fly-keys/xah-fly-keys.el")
@@ -163,6 +165,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx webdev blog" . "~/web/xahlee_info/js/xx_webdev_blog.html")
         ("xx comp blog" . "~/web/xahlee_info/comp/xx_comp_blog.html")
         ("xx emacs blog" . "~/web/ergoemacs_org/emacs/xx_emacs_blog.html")
+        ("xx math blog" . "~/web/xahlee_info/math/xx_math_blog.html")
         ("xx pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/xx_pd_blog.html")
         ("xx lit blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
 
