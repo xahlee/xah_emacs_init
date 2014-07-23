@@ -380,7 +380,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
 
 (defun compact-uncompact-block-chinese ()
   "Remove or add line ending chars on current text block.
- (text block is delimited by line endings; similar to a paragraph)
+ (text block is delimited by blank lines)
 This command is similar to a toggle of `fill-paragraph'.
 When there is a text selection, act on the region."
   (interactive)
@@ -393,34 +393,33 @@ When there is a text selection, act on the region."
       (setq currentStateIsCompact
             (if (eq last-command this-command)
                 (get this-command 'stateIsCompact-p)
-              (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil) ) )
+              (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil)))
 
       (if (use-region-p)
           (if currentStateIsCompact
               (fill-region (region-beginning) (region-end))
             (save-restriction
-                (narrow-to-region (region-beginning) (region-end))
-                (goto-char (point-min))
-                (while (search-forward "\n" nil t) (replace-match "" nil t)) ) )
+              (narrow-to-region (region-beginning) (region-end))
+              (goto-char (point-min))
+              (while (search-forward "\n" nil t) (replace-match "" nil t))))
         (if currentStateIsCompact
             (fill-paragraph nil)
           (let (p1 p2) ; p1 and p2 are beginning/end of text block
             (progn
               (if (re-search-backward "\n[ \t]*\n" nil "move")
                   (progn (re-search-forward "\n[ \t]*\n")
-                         (setq p1 (point) ) )
-                (setq p1 (point) )
-                )
+                         (setq p1 (point)))
+                (setq p1 (point)))
               (if (re-search-forward "\n[ \t]*\n" nil "move")
                   (progn (re-search-backward "\n[ \t]*\n")
-                         (setq p2 (point) ))
-                (setq p2 (point) ) ) )
+                         (setq p2 (point)))
+                (setq p2 (point))))
             (save-restriction
               (narrow-to-region p1 p2)
               (goto-char (point-min))
-              (while (search-forward "\n" nil t) (replace-match "" nil t)) )) ) )
+              (while (search-forward "\n" nil t) (replace-match "" nil t))))))
 
-      (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)) ) ) )
+      (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)))))
 
 (defcustom xah-shell-abbrev-alist nil "alist of xah's shell abbrevs" :group 'xah)
 (setq xah-shell-abbrev-alist

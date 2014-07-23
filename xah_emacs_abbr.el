@@ -33,6 +33,7 @@
 
   ("dsnt" "doesn't")
   ("dnt" "don't")
+  ("isnt" "isn't")
 
   ("t" "the") ; 1 problem with “doesn't”
 ;; ("t" "be") ; 2
