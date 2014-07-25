@@ -91,32 +91,28 @@ If the file is emacs lisp, run the byte compiled version if exist."
             ("py" . "python")
             ("py3" . ,(if (string-equal system-type "windows-nt") "c:/Python32/python.exe" "python3"))
             ("rb" . "ruby")
-            ("js" . "node")             ; node.js
+            ("js" . "node") ; node.js
             ("sh" . "bash")
             ("ml" . "ocaml")
             ("vbs" . "cscript")
             ;; ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
-            )
-          )
+            ))
          (fName (buffer-file-name))
          (fSuffix (file-name-extension fName))
          (progName (cdr (assoc fSuffix suffixMap)))
-         (cmdStr (concat progName " \""   fName "\""))
-         )
+         (cmdStr (concat progName " \""   fName "\"")))
 
     (when (buffer-modified-p)
       (when (y-or-n-p "Buffer modified. Do you want to save first?")
-          (save-buffer) ) )
+        (save-buffer)))
 
     (if (string-equal fSuffix "el") ; special case for emacs lisp
         (load (file-name-sans-extension fName))
       (if progName
           (progn
             (message "Running…")
-            (shell-command cmdStr "*xah-run-current-file output*" )
-            )
-        (message "No recognized program file suffix for this file.")
-        ) ) ))
+            (shell-command cmdStr "*xah-run-current-file output*" ))
+        (message "No recognized program file suffix for this file.")))))
 
 (defun xah-run-current-java-file ()
   "Execute the current file's class with Java.
