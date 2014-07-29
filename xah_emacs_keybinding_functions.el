@@ -1,13 +1,12 @@
 ;; -*- coding: utf-8 -*-
 ;; 2014-01-05
 
-
 (defun xah-shrink-whitespaces2 ()
   "Remove white spaces around cursor to just one."
   (interactive)
   (let ((pos (point))
         p1 p2 )
-    (save-excursion 
+    (save-excursion
       (skip-chars-backward " \t\n"  )
       (setq p1 (point))
       (goto-char pos)
@@ -30,7 +29,6 @@
   (search-forward "\"" nil t)
   (while (looking-back "\\\\\"")
     (search-forward "\"" nil t)))
-
 
 
 
@@ -73,7 +71,7 @@ Emacs buffers are those whose name starts with *."
 
 
 (defvar xah-recently-closed-buffers (cons nil nil) "A list of recently closed buffers. The max number to track is controlled by the variable `xah-recently-closed-buffers-max'.")
-(defvar xah-recently-closed-buffers-max 30 "The maximum length for `xah-recently-closed-buffers'.")
+(defvar xah-recently-closed-buffers-max 40 "The maximum length for `xah-recently-closed-buffers'.")
 
 (defun xah-close-current-buffer ()
   "Close the current buffer.
@@ -138,6 +136,19 @@ Else it is a user buffer."
   "Open the last closed file."
   (interactive)
   (find-file (cdr (pop xah-recently-closed-buffers)) ) )
+
+(defun xah-list-recently-closed ()
+  "List recently closed file."
+  (interactive)
+  (let ((buf (generate-new-buffer "*recently closed*")))
+    (switch-to-buffer buf)
+    (mapc (lambda (f) (insert (cdr f) "\n") )
+          xah-recently-closed-buffers)))
+
+(defun xah-open-recently-closed ()
+  "Open recently closed file."
+  (interactive)
+  (find-file (ido-completing-read "open:" (mapcar (lambda (f) (cdr f)) xah-recently-closed-buffers))))
 
 
 

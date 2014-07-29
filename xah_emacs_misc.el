@@ -144,6 +144,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("unicode" . "~/web/xahlee_info/comp/unicode_index.html")
         ("linux" . "~/web/xahlee_info/linux/linux_index.html" )
         ("js" . "~/web/xahlee_info/js/js.html" )
+        ("svg" . "~/web/xahlee_info/js/svg.html")
         ("html" . "~/web/xahlee_info/js/index.html")
         ("css index" . "~/web/xahlee_info/js/css_index.html")
         ("comp lang index" . "~/web/xahlee_info/comp/comp_lang.html")

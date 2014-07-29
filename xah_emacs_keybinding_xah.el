@@ -1,15 +1,15 @@
 ;; -*- coding: utf-8 -*-
 
-(require 'xmsi-math-symbols-input)
-(define-key xmsi-keymap (kbd "S-SPC") nil)
-;; (define-key xmsi-keymap (kbd "<end> SPC") 'xmsi-change-to-symbol)
+;; (require 'xmsi-math-symbols-input)
+;; (define-key xmsi-keymap (kbd "S-SPC") nil)
+;; ;; (define-key xmsi-keymap (kbd "<end> SPC") 'xmsi-change-to-symbol)
 
 (progn
   ;; this should reserved for user-defined keys
   (define-prefix-command 'xah-user-keymap)
 
   (define-key xah-user-keymap (kbd "<menu>") nil)
-  (define-key xah-user-keymap (kbd "SPC") 'xmsi-change-to-symbol)
+  (define-key xah-user-keymap (kbd "SPC") nil)
   (define-key xah-user-keymap (kbd "<return>") 'xah-run-current-file)
   (define-key xah-user-keymap (kbd "<backspace>") 'xah-delete-current-file)
   (define-key xah-user-keymap (kbd "<tab>") nil)
@@ -69,7 +69,7 @@
   (define-key xah-user-keymap (kbd "t") nil)
   (define-key xah-user-keymap (kbd "u") 'xah-find-replace-text)
   (define-key xah-user-keymap (kbd "v") nil)
-  (define-key xah-user-keymap (kbd "w") nil)
+  (define-key xah-user-keymap (kbd "w") 'xah-angle-brackets-to-html)
   (define-key xah-user-keymap (kbd "y") 'xah-open-last-closed)
   (define-key xah-user-keymap (kbd "z") 'xah-toggle-read-novel-mode)
 
