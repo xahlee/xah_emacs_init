@@ -34,6 +34,8 @@
   ("dsnt" "doesn't")
   ("dnt" "don't")
   ("isnt" "isn't")
+  ("cnt" "can't")
+  ("wnt" "won't")
 
   ("t" "the") ; 1 problem with “doesn't”
 ;; ("t" "be") ; 2

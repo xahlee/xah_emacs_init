@@ -573,10 +573,42 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/en_US/all.js#xfbml=1\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>"
 ""]
 
+;; ["<div class=\"showlove\">
+;; Like what you read?
+;; <div class=\"ppp8745\"><a href=\"buy_xah_emacs_tutorial.html\">Buy Xah Emacs Tutorial</a>
+;; <form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
+;; <input type=\"hidden\" name=\"cmd\" value=\"_xclick\" />
+;; <input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\" />
+;; <input type=\"hidden\" name=\"lc\" value=\"US\" />
+;; <input type=\"hidden\" name=\"item_name\" value=\"xah emacs tutorial\" />
+;; <input type=\"hidden\" name=\"amount\" value=\"15.00\" />
+;; <input type=\"hidden\" name=\"currency_code\" value=\"USD\" />
+;; <input type=\"hidden\" name=\"button_subtype\" value=\"services\" />
+;; <input type=\"hidden\" name=\"no_note\" value=\"0\" />
+;; <input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\" />
+;; <input type=\"hidden\" name=\"no_shipping\" value=\"1\" />
+;; <input type=\"hidden\" name=\"shipping\" value=\"0.00\" />
+;; <input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\" />
+;; <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal\" />
+;; </form>
+;; </div>
+;; or share some <span style=\"color:red;font-size:xx-large\">♥</span>
+;; <div id=\"share-buttons-97729\"><div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div></div><script defer src=\"http://xahlee.info/share_widgets.js\"></script>
+;; </div>"
+;; ""]
+
 ;; paypal
 ["<div class=\"paypal-donate-60910\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"8127788\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif\" name=\"submit\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>
 <p>thank you <a href=\"http://xahlee.org/thanks.html\" rel=\"nofollow\">donors</a></p>
 <br />"
+""]
+
+  ;; Paypal donate
+  [
+   "<div class=\"ppp8745\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"Y4V2F8TA949M2\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" name=\"submit\" alt=\"PayPal\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>"
+   ""]
+
+["<section class=\"buy-book\">Master emacs+lisp, benefit for life. <a href=\"user_comments.html\">Testimonials</a>. Thank you for support. <form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_xclick\" /> <input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\" /> <input type=\"hidden\" name=\"lc\" value=\"US\" /> <input type=\"hidden\" name=\"item_name\" value=\"xah emacs tutorial\" /> <input type=\"hidden\" name=\"amount\" value=\"15.00\" /> <input type=\"hidden\" name=\"currency_code\" value=\"USD\" /> <input type=\"hidden\" name=\"button_subtype\" value=\"services\" /> <input type=\"hidden\" name=\"no_note\" value=\"0\" /> <input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\" /> <input type=\"hidden\" name=\"no_shipping\" value=\"1\" /> <input type=\"hidden\" name=\"shipping\" value=\"0.00\" /> <input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\" /> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal\" /> </form></section>"
 ""]
 
   ;; Disqus code
@@ -587,14 +619,6 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 
   ;; amazon ad
 ["<iframe src=\"http://rcm-na.amazon-adsystem.com/e/cm?t=xahhome-20&o=1&p=8&l=as1&asins=B00COR29XI&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr\" style=\"width:120px;height:240px;\" scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" frameborder=\"0\"></iframe><br />" ""]
-
-  ;; gitcafe ad
-["<div><a href=\"https://gitcafe.com/\" rel=\"nofollow\">中文 git GitCafe.com</a></div>" ""]
-
-  ;; Paypal donate
-  [
-   "<div class=\"ppp8745\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"Y4V2F8TA949M2\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" name=\"submit\" alt=\"PayPal\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>"
-   ""]
 
 [
 "<div class=\"job-α\"><a href=\"http://xahlee.org/PageTwo_dir/Personal_dir/Xah_Lee_Resume.html\">Programer for Hire</a></div>"
@@ -615,6 +639,10 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 
     (replace-regexp-pairs-region 1 (point-max)
  [
+
+["<div class=\"showlove\">[[:ascii:][:nonascii:]]+<script defer src=\"http://xahlee.info/share_widgets.js\"></script>
+</div>"
+""]
 
 ["<div class=\"ad66704\">[\n ]*</div>" ""]
 
@@ -637,10 +665,45 @@ amazon_ad_tag .+?</script>
 <script src=\"http://www.assoc-amazon.com/s/ads.js\"></script>"
  ""]
 
+;; ["<div class=\"showlove\">
+;; Like what you read\\?
+;; <div class=\"ppp8745\"><a href=\"buy_xah_emacs_tutorial.html\">Buy Xah Emacs Tutorial</a>
+;; <form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
+;; <input type=\"hidden\" name=\"cmd\" value=\"_xclick\" />
+;; <input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\" />
+;; <input type=\"hidden\" name=\"lc\" value=\"US\" />
+;; <input type=\"hidden\" name=\"item_name\" value=\"xah emacs tutorial\" />
+;; <input type=\"hidden\" name=\"amount\" value=\"15.00\" />
+;; <input type=\"hidden\" name=\"currency_code\" value=\"USD\" />
+;; <input type=\"hidden\" name=\"button_subtype\" value=\"services\" />
+;; <input type=\"hidden\" name=\"no_note\" value=\"0\" />
+;; <input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\" />
+;; <input type=\"hidden\" name=\"no_shipping\" value=\"1\" />
+;; <input type=\"hidden\" name=\"shipping\" value=\"0.00\" />
+;; <input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\" />
+;; <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal\" />
+;; </form>
+;; </div>
+;; or share some <span style=\"color:red;font-size:xx-large\">♥</span>
+;; <div id=\"share-buttons-97729\"><div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div></div><script defer src=\"http://xahlee.info/share_widgets.js\"></script>
+;; </div>"
+;; ""]
+
+
+
 ;; ["<div id=\"disqus_thread\"></div><script>.+?</script><a href.+Disqus</span></a>" ""]
 ;; ["<footer>.+?</footer>" ""]
 
 ]
 "FIXEDCASE" "LITERAL")
     )
+
+;; (replace-pairs-region 1 (point-max)
+;;  [
+;; ;; paypal
+;; ["9158656425"
+;; ""]
+;; ]
+;;  )
+
 )
