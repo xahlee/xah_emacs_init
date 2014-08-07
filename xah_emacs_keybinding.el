@@ -381,8 +381,6 @@
   (global-set-key (kbd "<menu> u .") 'xah-insert-unicode)
   (global-set-key (kbd "<menu> u ,") nil)
 
-  (define-key key-translation-map (kbd "<menu> u 3") (kbd "φ"))
-  (define-key key-translation-map (kbd "<menu> u 4") (kbd "ξ"))
   (define-key key-translation-map (kbd "<menu> u 6") (kbd "ƒ"))
   (define-key key-translation-map (kbd "<menu> u 7") (kbd "＆"))
   (define-key key-translation-map (kbd "<menu> u 8") (kbd "•"))

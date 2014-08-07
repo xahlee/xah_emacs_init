@@ -1,21 +1,24 @@
 ;; -*- coding: utf-8 -*-
 
-;; (require 'xmsi-math-symbols-input)
-;; (define-key xmsi-keymap (kbd "S-SPC") nil)
-;; ;; (define-key xmsi-keymap (kbd "<end> SPC") 'xmsi-change-to-symbol)
+(require 'xmsi-math-symbols-input)
+(define-key xmsi-keymap (kbd "S-SPC") nil)
+(define-key xmsi-keymap (kbd "<end> <menu>") 'xmsi-change-to-symbol)
 
 (progn
   ;; this should reserved for user-defined keys
   (define-prefix-command 'xah-user-keymap)
 
   (define-key xah-user-keymap (kbd "<menu>") nil)
-  (define-key xah-user-keymap (kbd "SPC") nil)
   (define-key xah-user-keymap (kbd "<return>") 'xah-run-current-file)
   (define-key xah-user-keymap (kbd "<backspace>") 'xah-delete-current-file)
   (define-key xah-user-keymap (kbd "<tab>") nil)
   (define-key xah-user-keymap (kbd "<delete>") nil)
   (define-key xah-user-keymap (kbd "<home>") nil)
   (define-key xah-user-keymap (kbd "<end>") nil)
+
+  (define-key key-translation-map (kbd "<end> 3") (kbd "φ"))
+  (define-key key-translation-map (kbd "<end> 4") (kbd "ξ"))
+  (define-key key-translation-map (kbd "<end> SPC") (kbd "_"))
 
   (define-key xah-user-keymap (kbd "-") 'xah-insert-form-feed)
   (define-key xah-user-keymap (kbd ".") 'title-case-string-region-or-line)
