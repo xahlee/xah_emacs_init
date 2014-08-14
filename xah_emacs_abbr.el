@@ -270,7 +270,7 @@
     ("8az" "\\([A-Za-z0-9]+\\)")
 
     ("8l" "────────── ────────── ────────── ────────── ──────────")
-    ("utf" "-*- coding: utf-8 -*-")
+    ("utf8" "-*- coding: utf-8 -*-")
     ("ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
     ("php" "<?php\n\n?>")

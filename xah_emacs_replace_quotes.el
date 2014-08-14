@@ -85,9 +85,10 @@ When called with `universal-argument', work on visible portion of whole buffer (
   "Replace all 「…」 to <code>…</code> and others.
 
 • 「…」 → <code>…</code>
+• 〈…〉 → <cite>…</cite>
 • 〔…〕 → <code class=\"path-α\">\\1</code>
 •  ‹…› → <var class=\"d\">…</var>
-• 〔<…〕 → 〔☛ <…〕
+• 〔<…〕 → 〔➤ <…〕
 
 Work on text selection or current text block.
 
@@ -108,6 +109,11 @@ Generate a report of the replaced strings in a separate buffer."
           (replace-match "<code>\\1</code>" t))
 
         (goto-char (point-min))
+        (while (search-forward-regexp "〈\\([^」]+?\\)〉" nil t)
+          (setq changedItems (cons (match-string 1) changedItems ))
+          (replace-match "<cite>\\1</cite>" t))
+
+        (goto-char (point-min))
         (while (search-forward-regexp "‹\\([^›]+?\\)›" nil t)
           (setq changedItems (cons (match-string 1) changedItems ))
           (replace-match "<var class=\"d\">\\1</var>" t))
@@ -115,7 +121,7 @@ Generate a report of the replaced strings in a separate buffer."
         (goto-char (point-min))
         (while (search-forward-regexp "〔<a href=" nil t)
           (setq changedItems (cons (match-string 1) changedItems ))
-          (replace-match "〔☛ <a href=" t))
+          (replace-match "〔➤ <a href=" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z0-9]+?\\)〕" nil t)

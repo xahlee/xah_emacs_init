@@ -102,6 +102,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("sl blog" . "~/web/xahsl_org/sl/blog.html" )
         ("pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
         ("sex blog" . "~/web/xahlee_org/sex/blog.html" )
+        ("porn blog" . "~/web/xahporn_org/porn/blog.html" )
 
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
         ("keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
@@ -149,6 +150,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("css index" . "~/web/xahlee_info/js/css_index.html")
         ("comp lang index" . "~/web/xahlee_info/comp/comp_lang.html")
         ("keyboard index" . "~/web/xahlee_info/kbd/keyboarding.html")
+        ("mouse index" . "~/web/xahlee_info/kbd/mouse_index.html")
+
         ("hacker cult" . "~/web/xahlee_info/comp/comp_index.html")
         ("netiquette index" . "~/web/xahlee_info/Netiquette_dir/troll.html")
 
@@ -327,7 +330,15 @@ use FireFox to visit it as local file (construct the proper URL)."
              (progn (error "logic error. The file 「%s」 doesn't exist, it should already." ξtoPath))
              )
            )
-         ) ) (xahsite-domain-names))
+         ) ) [
+   "ergoemacs.org"
+   "wordyenglish.com"
+   "xaharts.org"
+   "xahlee.info"
+   "xahlee.org"
+   "xahmusic.org"
+   "xahsl.org"
+   ])
 ))
 
 (defun xah-cite ()

@@ -287,6 +287,7 @@
   (define-key xah-harmless-keymap (kbd "f") ctl-x-5-map) ; frame
 
   (define-key xah-harmless-keymap (kbd "n") 'narrow-to-region)
+  (define-key xah-harmless-keymap (kbd "r") 'read-only-mode)
   (define-key xah-harmless-keymap (kbd "s") 'flyspell-buffer)
   (define-key xah-harmless-keymap (kbd "t") 'narrow-to-defun)
 
