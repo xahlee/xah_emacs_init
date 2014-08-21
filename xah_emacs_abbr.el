@@ -31,35 +31,36 @@
 
     ;; http://oxforddictionaries.com/words/the-oec-facts-about-the-language
 
-  ("dsnt" "doesn't")
-  ("dnt" "don't")
-  ("isnt" "isn't")
-  ("cnt" "can't")
-  ("wnt" "won't")
+    ("dsnt" "doesn't")
+    ("dnt" "don't")
+    ("isnt" "isn't")
+    ("cnt" "can't")
+    ("wnt" "won't")
+    ("hnt" "haven't")
 
-  ("t" "the") ; 1 problem with “doesn't”
-;; ("t" "be") ; 2
+    ("t" "the") ; 1 problem with “doesn't”
+    ;; ("t" "be") ; 2
     ;; ("2" "to")                          ; problem with just enter a number
-;; ("t" "of") ; 4
-        ("n" "and") ;3
+    ;; ("t" "of") ; 4
+    ("n" "and") ;3
 ;;; ("t" "a") ; 6
 ;;; ("t" "in") ; 7
 
   ;("h" "that") ; 8
-  ("h" "have") ; 9
+    ("h" "have")   ; 9
 ;;; ("t" "I") ; 10
 ;;; ("t" "it") ; 11
-       ("4" "for") ; 12
+    ("f" "for")    ; 12
   ;("8" "not")
     ;; ("t" "on") ; 14
-  ("w" "with") ; 15
+    ("w" "with")   ; 15
     ;; ("t" "he") ; 16
     ;; ("t" "as") ; 17
-  ("u" "you") ; 18
+    ("u" "you")    ; 18
     ;; ("t" "do") ; 19
     ;; ("t" "at") ; 20
     ;; ("t" "this") ; 21
-  ("b" "but") ; 22
+    ("b" "but")    ; 22
     ;; ("t" "his") ; 23
     ;; ("t" "by") ; 24
     ;; ("t" "from") ; 25
@@ -131,7 +132,7 @@
     ;; ("t" "even") ; 91
     ;; ("t" "new") ; 92
     ;; ("t" "want") ; 93
-  ("bc" "because") ; 94
+    ("bc" "because") ; 94
     ;; ("t" "any") ; 95
     ;; ("t" "these") ; 96
   ; ("t" "give") ; 97
@@ -144,6 +145,7 @@
   ; ("ipt" "important")
 
     ("bt" "between")
+    ("uns" "understand")
     ("comm" "communication")
     ("rsi" "Repetitive Strain Injury")
     ("disc" "discussion")
@@ -167,9 +169,10 @@
     ("temp" "temperature")
     ("gvn" "government")
     ("auto" "automatically")
-    ("mathe" "mathematics")
-    ("dibt" "difference between")
-    ("diff" "difference")
+    ("maths" "mathematics")
+    ("dfb" "difference between")
+    ("dfc" "difference")
+    ("dft" "different")
     ("comp" "computer")
     ("l" "language")
     ("ls" "languages")
@@ -253,7 +256,7 @@
     ("fp" "functional programing")
     ("fl" "functional language")
     ("ca" "cellular automata")
-    ("f" "function")
+    ("fu" "function")
     ("pm" "parameter")
     ("prog" "programing")
     ("db" "database")

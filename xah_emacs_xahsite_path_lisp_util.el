@@ -38,11 +38,19 @@ Non local link may start with these:
  irc:
  ftp:
  javascript:
-
-The current implementation simply check if “:” occur. If not, consider it local link."
-  ;;
+ //
+"
   ;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" φhref-value) )
-  (not (string-match-p ":" φhref-value)))
+  
+  (cond
+   ((string-match-p "^//" φhref-value) nil)
+   ((string-match-p "^http://" φhref-value) nil)
+   ((string-match-p "^https://" φhref-value) nil)
+   ((string-match-p "^mailto:" φhref-value) nil)
+   ((string-match-p "^irc:" φhref-value) nil)
+   ((string-match-p "^ftp:" φhref-value) nil)
+   ((string-match-p "^javascript:" φhref-value) nil)
+   (t t)))
 
 (defun xahsite-url-is-xah-website-p (φurl)
   "Returns t if φurl is a xah website, else nil.
