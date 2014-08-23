@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;; emacs abbrev def
 ;; Xah Lee
-;; 2007-06, …, 2013-01-13
+;; 2007-06
 ;; ∑ http://xahlee.org/
 
 ; load my abbreviations file
@@ -38,7 +38,7 @@
     ("wnt" "won't")
     ("hnt" "haven't")
 
-    ("t" "the") ; 1 problem with “doesn't”
+    ("t" "the")
     ;; ("t" "be") ; 2
     ;; ("2" "to")                          ; problem with just enter a number
     ;; ("t" "of") ; 4
@@ -170,6 +170,7 @@
     ("gvn" "government")
     ("auto" "automatically")
     ("maths" "mathematics")
+    ("wtdb" "what's the difference between")
     ("dfb" "difference between")
     ("dfc" "difference")
     ("dft" "different")
@@ -229,6 +230,8 @@
     ("ui" "user interface")
     ("gui" "graphical user interface")
     ("alt" "alternative")
+
+    ("wb" "web development")
     ("dev" "develop")
     ("p" "program")
     ("pl" "programing language")
