@@ -1,8 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;; emacs abbrev def
-;; Xah Lee
-;; 2007-06
-;; ∑ http://xahlee.org/
+;; 〈Using Emacs Abbrev Mode for Abbreviation〉 http://ergoemacs.org/emacs/emacs_abbrev_mode.html
 
 ; load my abbreviations file
 ;(read-abbrev-file "emacs_abbrev")
