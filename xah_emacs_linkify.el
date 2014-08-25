@@ -40,7 +40,7 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
                 (setq ξwh
                       (cond
                        ((string-match "\.svg$" ξfp) (get-image-dimensions ξfp))
-                       
+
 (t (get-image-dimensions ξfp))
 ;; (t (get-image-dimensions-imk ξfp))
  ) )
@@ -511,8 +511,6 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
          )
 
-
-
     (if (file-exists-p fPath)
         (progn
           (setq titleText
@@ -535,7 +533,6 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
           )
       (progn (message (format "Cannot locate the file: 「%s」" fPath) )) ) ) )
 
-
 (defun nodejs-get-title (φfName φfragPart)
   "Return the file frag part function title.
  (nodejs-get-title \"/home/xah/web/xahlee_info/node_api/net.html\" \"#net_server_listen_port_host_backlog_callback\" )
@@ -552,7 +549,7 @@ returns
               (progn (buffer-substring-no-properties
                       (point)
                       (-  (search-forward "<span>") 6)) )
-            (progn 
+            (progn
               (goto-char 1)
               (buffer-substring-no-properties
                (search-forward "<title>")
@@ -630,7 +627,7 @@ linkText
          (inputStr (elt bds 0) )
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
-         fPath 
+         fPath
          )
     (setq fPath (file-relative-name inputStr) )
     (delete-region p1 p2)
@@ -640,7 +637,7 @@ linkText
 
 (defun css-linkify ()
   "Make the path under cursor into a HTML link.
- ⁖ 
+ ⁖
 /home/xah/web/xahlee_org/lit.css
 →
 <link rel=\"stylesheet\" href=\"../lit.css\" />
@@ -651,7 +648,7 @@ linkText
          (inputStr (elt bds 0) )
          (p1 (aref bds 1) )
          (p2 (aref bds 2) )
-         fPath 
+         fPath
          )
     (setq fPath (file-relative-name inputStr) )
     (delete-region p1 p2)
@@ -723,6 +720,8 @@ If there is text selection, use it as input."
      ((string-match-p "/node_api/" myPath) (nodejs-ref-linkify))
      ((string-match-p "\\.js\\'" myPath) (javascript-linkify))
      ((string-match-p "\\.css\\'" myPath) (css-linkify))
+
+     ((string-match-p "javascript_ecma-262_5.1_2011" myPath) (xah-file-linkify) (xah-ref-span-tag))
 
      ((xahsite-url-is-xah-website-p myPath) (xah-file-linkify))
      ((string-match-p "wikipedia.org/" myPath)

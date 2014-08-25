@@ -19,8 +19,7 @@
   )
 
 (defun xah-ref-span-tag ()
-  "Add <p>…</p> tag to current text block or text selection.
-If there's a text selection, wrap p around each text block (separated by 2 newline chars.)"
+  "Add <span class=\"ref\">…</span> tag to current line or text selection."
   (interactive)
   (let (bds p1 p2 inputText)
     (setq bds (get-selection-or-unit 'line))

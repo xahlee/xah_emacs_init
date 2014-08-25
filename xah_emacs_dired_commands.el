@@ -136,3 +136,18 @@ Requires ImageMagick shell tool."
      (list myFileList) )
    )
   (xah-process-image φfile-list "" "-2" ".jpg" ))
+
+
+(defun xah-dired-crop-image (φfile-list)
+  " .......
+Requires ImageMagick shell tool."
+  (interactive
+   (let (
+         (myFileList
+          (cond
+           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
+           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
+           (t (list (read-from-minibuffer "file name:") )) ) ) )
+     (list myFileList) )
+   )
+  (xah-process-image φfile-list "-crop 690x520+220+165" "_n" ".png" ))
