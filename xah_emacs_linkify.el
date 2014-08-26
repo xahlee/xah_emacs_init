@@ -710,7 +710,7 @@ They will be changed into a HTML link in various formats, depending on the input
 
 If there is text selection, use it as input."
   (interactive)
-  (let* ((myPath (elt (get-selection-or-unit 'filepath ) 0) ))
+  (let* ((myPath (elt (get-selection-or-unit 'filepath ) 0)))
     (cond
      ((string-match-p "\\`http://xahlee\.blogspot\.com/" myPath) (blogger-linkify))
      ((string-match-p "\\`http://wordy-english\.blogspot\.com/" myPath) (blogger-linkify))
@@ -728,11 +728,10 @@ If there is text selection, use it as input."
       (let ((case-fold-search nil))
         (if (path-ends-in-image-suffix-p myPath)
             (xhm-source-url-linkify 0)
-          (call-interactively 'xhm-wikipedia-url-linkify) ) ) )
+          (call-interactively 'xhm-wikipedia-url-linkify))))
 
      ((and (string-match-p "\\`https?://" myPath)) (xhm-source-url-linkify 0)) ; generic URL
 
      ((path-ends-in-image-suffix-p myPath) (image-file-to-html-figure-tag))
 
-     (t (xah-file-linkify))
-     ) ))
+     (t (xah-file-linkify)))))

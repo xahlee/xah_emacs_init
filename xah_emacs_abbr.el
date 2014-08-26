@@ -35,6 +35,8 @@
     ("cnt" "can't")
     ("wnt" "won't")
     ("hnt" "haven't")
+    ("r" "are")
+    ("ur" "you are")
 
     ("t" "the")
     ;; ("t" "be") ; 2
@@ -45,16 +47,17 @@
 ;;; ("t" "in") ; 7
 
   ;("h" "that") ; 8
-    ("h" "have")     ; 9
+    ("h" "have") ; 9
 ;;; ("t" "I") ; 10
 ;;; ("t" "it") ; 11
-    ("f" "for")      ; 12
+    ("f" "for")  ; 12
   ;("8" "not")
     ;; ("t" "on") ; 14
-    ("w" "with")     ; 15
+    ("w" "with") ; 15
     ;; ("t" "he") ; 16
     ;; ("t" "as") ; 17
-    ("u" "you")      ; 18
+    ("u" "you") ; 18
+
     ;; ("t" "do") ; 19
     ;; ("t" "at") ; 20
     ;; ("t" "this") ; 21
@@ -367,9 +370,7 @@ Second Life: Xah Toll
     ("ups" "http://xahlee.info/powershell/index.html")
     ("umma" "http://xahlee.info/M/index.html")
     ("ujava" "http://xahlee.info/java-a-day/java.html")
-    ("utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")
-
-    ))
+    ("utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")))
 
 ;; 
 ;; ;;; stop asking whether to save newly added abbrev when quitting emacs
