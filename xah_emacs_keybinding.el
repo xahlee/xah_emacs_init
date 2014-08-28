@@ -485,59 +485,9 @@
 
 
 
-(progn
-  ;; command dump. temp, rare, or whatever. put them here to have a key anyway
-  (define-prefix-command 'xah-f10-keymap)
-  (global-set-key (kbd "<f10>") 'xah-f10-keymap)
-
-  (global-set-key (kbd "<f10> SPC") nil)
-  (global-set-key (kbd "<f10> <return>") nil)
-
-  (global-set-key (kbd "<f10> <f9>") nil)
-  (global-set-key (kbd "<f10> <f10>") nil)
-  (global-set-key (kbd "<f10> <f11>") nil)
-  (global-set-key (kbd "<f10> <f12>") nil)
-
-  (global-set-key (kbd "<f10> <left>") 'xah-goto-previous-overlay)
-  (global-set-key (kbd "<f10> <right>") 'xah-goto-next-overlay)
-  (global-set-key (kbd "<f10> <backspace>") 'xah-remove-overlays-region)
-  (global-set-key (kbd "<f10> <return>") 'xah-show-overlay-at-point)
-
-  (global-set-key (kbd "<f10> 7") 'xah-syntax-bracket-backward)
-  (global-set-key (kbd "<f10> 8") 'xah-syntax-bracket-forward)
-
-  (global-set-key (kbd "<f10> a") 'xah-show-all-overlays)
-  (global-set-key (kbd "<f10> b") 'xah-make-overlay-bold-region)
-  (global-set-key (kbd "<f10> c") 'xah-css-mode)
-  (global-set-key (kbd "<f10> c") 'xah-forward-comment)
-  (global-set-key (kbd "<f10> d") nil)
-  (global-set-key (kbd "<f10> e") 'xah-elisp-mode)
-  (global-set-key (kbd "<f10> f") nil)
-  (global-set-key (kbd "<f10> g") nil)
-  (global-set-key (kbd "<f10> h") 'xah-html-mode)
-  (global-set-key (kbd "<f10> i") nil)
-  (global-set-key (kbd "<f10> j") 'xah-js-mode)
-  (global-set-key (kbd "<f10> k") nil)
-  (global-set-key (kbd "<f10> l") 'xah-scan-list)
-  (global-set-key (kbd "<f10> l") nil)
-  (global-set-key (kbd "<f10> m") nil)
-  (global-set-key (kbd "<f10> n") nil)
-  (global-set-key (kbd "<f10> o") nil)
-  (global-set-key (kbd "<f10> p") 'xah-parse-partial-sexp)
-  (global-set-key (kbd "<f10> p") nil)
-  (global-set-key (kbd "<f10> q") nil)
-  (global-set-key (kbd "<f10> r") nil)
-  (global-set-key (kbd "<f10> s") 'xah-scan-sexps)
-  (global-set-key (kbd "<f10> s") nil)
-  (global-set-key (kbd "<f10> t") nil)
-  (global-set-key (kbd "<f10> u") nil)
-  (global-set-key (kbd "<f10> v") nil)
-  (global-set-key (kbd "<f10> w") nil)
-  (global-set-key (kbd "<f10> x") nil)
-  (global-set-key (kbd "<f10> y") nil)
-  (global-set-key (kbd "<f10> z") nil)
-
-  )
+  (global-set-key (kbd "<menu> SPC") 'xah-dump-keymap)
+  (global-set-key (kbd "<menu> <end>") 'xah-user-keymap)
+(global-set-key (kbd "<end>") 'xah-user-keymap)
 
 
 (substitute-key-definition 'find-file-at-point 'xah-open-file-at-cursor (current-global-map))

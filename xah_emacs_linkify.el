@@ -722,6 +722,7 @@ If there is text selection, use it as input."
      ((string-match-p "\\.css\\'" myPath) (css-linkify))
 
      ((string-match-p "javascript_ecma-262_5.1_2011" myPath) (xah-file-linkify) (xah-ref-span-tag))
+     ((string-match-p "css_transitions/CSS_Transitions.html" myPath) (xah-file-linkify) (xah-ref-span-tag))
 
      ((xahsite-url-is-xah-website-p myPath) (xah-file-linkify))
      ((string-match-p "wikipedia.org/" myPath)

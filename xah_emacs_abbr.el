@@ -232,7 +232,7 @@
     ("gui" "graphical user interface")
     ("alt" "alternative")
 
-    ("wb" "web development")
+    ("wd" "web development")
     ("dev" "develop")
     ("p" "program")
     ("pl" "programing language")
@@ -345,7 +345,8 @@ Second Life: Xah Toll
     ("uelisp" "http://ergoemacs.org/emacs/elisp.html")
     ("uahk" "http://xahlee.info/mswin/autohotkey.html")
     ("ueek" "http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html")
-    ("uhtml" "http://xahlee.info/js/index.html")
+    ("uhtml" "http://xahlee.info/js/html_index.html")
+    ("uwd" "http://xahlee.info/js/index.html")
     ("uem" "http://ergoemacs.github.io/ergoemacs-mode/")
 
     ("ulang" "<a href=\"../java-a-day/java.html\">Java</a>
