@@ -106,6 +106,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
         ("emacs keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
+        ("abbrev" . "~/git/xah_emacs_init/xah_emacs_abbr.el" )
         ("fly keys" . "~/git/xah-fly-keys/xah-fly-keys.el")
         ("ahk" . "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
 

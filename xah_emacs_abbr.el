@@ -35,6 +35,7 @@
     ("cnt" "can't")
     ("wnt" "won't")
     ("hnt" "haven't")
+    ("shnt" "shouldn't")
     ("r" "are")
     ("ur" "you are")
 

@@ -157,6 +157,7 @@
 
   (global-set-key (kbd "<menu> c o") 'xah-open-in-desktop)
   (global-set-key (kbd "<menu> c c") 'bookmark-bmenu-list)
+  (global-set-key (kbd "<menu> c r") 'bookmark-set)
   (global-set-key (kbd "<menu> c u") 'find-file-at-point)
   (global-set-key (kbd "<menu> c e") 'dired-jump)
   (global-set-key (kbd "<menu> c g") 'ido-switch-buffer)
@@ -290,8 +291,9 @@
   (define-key xah-harmless-keymap (kbd "r") 'read-only-mode)
   (define-key xah-harmless-keymap (kbd "s") 'flyspell-buffer)
   (define-key xah-harmless-keymap (kbd "t") 'narrow-to-defun)
+  ; C-x n p	narrow-to-page
 
- )
+  )
 
 (progn
   (define-prefix-command 'xah-menu-o-keymap)
@@ -610,10 +612,8 @@
 ;; C-x 6 s	2C-split
 ;; C-x 6 <f2>	2C-two-columns
 
-;; C-x n p	narrow-to-page
-
 ;; C-x r b	bookmark-jump
-;; C-x r m	bookmark-set
+
 
 ;; ;; todo
 ;; select all, copy all, open, those standard keys
