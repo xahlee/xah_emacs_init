@@ -184,6 +184,7 @@
     ("cs" "computer science")
     ("ai" "artificial intelligence")
     ("fs" "fullscreen")
+    ("vid" "video")
 
     ("ch" "Chinese")
     ("eng" "English")
@@ -226,6 +227,7 @@
     ("wm" "Window Manager")
     ("el" "emacs lisp")
     ("os" "Operating System")
+    ("cli" "command line interface")
 
     ;; for programers
     ("hex" "hexadecimal")

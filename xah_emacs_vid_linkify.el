@@ -198,21 +198,19 @@ it becomes
 
 (defun redtube-linkify ()
   "Make the current line into a embeded HTML video object.
-The line can be a youtube ID or full URL.
+The line can be a redtube ID or full URL.
 Examples of input line syntax:
 
 http://redtube.com/25635
 25635
 
-The current line is the line the cursor is on, that is enclosed by “\n”.
-
 Here's a example result:
-
-<object type=\"application/x-shockwave-flash\" data=\"http://embed.redtube.com/player/?id=25635&amp;style=redtube\" width=\"651\" height=\"462\"><param name=\"FlashVars\" value=\"id=25635&amp;style=redtube\"><param name=\"movie\" value=\"http://embed.redtube.com/player/?id=25635&amp;style=redtube\"></object>"
-	(interactive)
-	(let (p1 p2 inputStr tmp vID fixedurl)
-    (setq p1 (line-beginning-position) )
-    (setq p2 (line-end-position) )
+<iframe src=\"http://embed.redtube.com/?id=25635\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>
+"
+  (interactive)
+  (let (p1 p2 inputStr tmp vID fixedurl)
+    (setq p1 (line-beginning-position))
+    (setq p2 (line-end-position))
     (setq inputStr (buffer-substring-no-properties p1 p2))
     (setq tmp (replace-regexp-in-string "http://redtube\\.com/" "" inputStr))
     (setq tmp (replace-regexp-in-string "http://www\\.redtube\\.com/" "" tmp))
@@ -221,20 +219,9 @@ Here's a example result:
     (setq fixedurl "http://embed.redtube.com/player/?id=")
 
     (delete-region p1 p2)
-    (insert
-     (concat
-      "<object type=\"application/x-shockwave-flash\" data=\""
-      fixedurl
-      vID "&amp;style=redtube"
-      "\" width=\"651\" height=\"462\">"
-      "<param name=\"FlashVars\" value=\"id="
-      vID "&amp;style=redtube"
-      "\">"
-      "<param name=\"movie\" value=\"" fixedurl
-      vID "&amp;style=redtube"
-      "\">"
-      "</object>"
-      )) ))
+
+    (insert (format "<iframe src=\"http://embed.redtube.com/?id=%s\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>" vID))
+    ))
 
 ;; (defun get-current-line-or-region ()
 ;;   "Return current line or text selection if there's one."

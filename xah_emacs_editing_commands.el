@@ -5,20 +5,18 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(defun xah-copy-file-path (&optional φdirPathOnly-p)
+(defun xah-copy-file-path (&optional φdir-path-only-p)
   "Copy the current buffer's file path or dired path to `kill-ring'.
 If `universal-argument' is called, copy only the dir path."
   (interactive "P")
   (let ((fPath
          (if (equal major-mode 'dired-mode)
              default-directory
-           (buffer-file-name)
-           )))
+           (buffer-file-name))))
     (kill-new
-     (if (equal φdirPathOnly-p nil)
+     (if (equal φdir-path-only-p nil)
          fPath
-       (file-name-directory fPath)
-       )))
+       (file-name-directory fPath))))
   (message "File path copied."))
 
 (defun xah-delete-text-block ()
@@ -32,10 +30,10 @@ If `universal-argument' is called, copy only the dir path."
         (setq p1 (point)))
       (if (re-search-forward "\n[ \t]*\n" nil "NOERROR")
           (progn (re-search-backward "\n[ \t]*\n")
-                 (setq p2 (point) ))
-        (setq p2 (point))) )
+                 (setq p2 (point)))
+        (setq p2 (point))))
     (kill-region p1 p2)
-    (delete-blank-lines) ))
+    (delete-blank-lines)))
 
 (defun xah-copy-to-register-1 ()
   "Copy current line or text selection to register 1.

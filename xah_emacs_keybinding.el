@@ -157,7 +157,8 @@
 
   (global-set-key (kbd "<menu> c o") 'xah-open-in-desktop)
   (global-set-key (kbd "<menu> c c") 'bookmark-bmenu-list)
-  (global-set-key (kbd "<menu> c r") 'bookmark-set)
+  (global-set-key (kbd "<menu> c l") 'bookmark-set)
+  (global-set-key (kbd "<menu> c r") 'bookmark-jump)
   (global-set-key (kbd "<menu> c u") 'find-file-at-point)
   (global-set-key (kbd "<menu> c e") 'dired-jump)
   (global-set-key (kbd "<menu> c g") 'ido-switch-buffer)
@@ -612,7 +613,7 @@
 ;; C-x 6 s	2C-split
 ;; C-x 6 <f2>	2C-two-columns
 
-;; C-x r b	bookmark-jump
+
 
 
 ;; ;; todo
