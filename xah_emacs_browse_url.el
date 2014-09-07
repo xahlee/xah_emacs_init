@@ -19,24 +19,21 @@ default browser will be launched and opening this URL:
     (setq myURL
           (if current-prefix-arg
               (xahsite-filepath-to-url (buffer-file-name))
-            (buffer-file-name) ) )
+            (buffer-file-name)))
 
-    (when (buffer-modified-p ) (xah-clean-whitespace) (save-buffer) )
+    (when (buffer-modified-p ) 
+      (xah-clean-whitespace 1 (point-max))
+      (save-buffer))
 
     (cond
      ((string-equal system-type "windows-nt") ; Windows
       (when (string-match "^c:/" myURL) (setq myURL (concat "file:///" myURL)))
-      (browse-url-firefox myURL)
-      )
+      (browse-url-firefox myURL))
      ((string-equal system-type "gnu/linux")
-      (browse-url-firefox myURL)
-      )
+      (browse-url-firefox myURL))
      ((string-equal system-type "darwin") ; Mac
       ;; (browse-url-firefox myURL)
-      (browse-url myURL )
-      ) )
-    )
-  )
+      (browse-url myURL )))))
 
 (defun xah-browse-url-of-buffer-firefox ()
   "Same as `browse-url-of-buffer' but using Firefox.

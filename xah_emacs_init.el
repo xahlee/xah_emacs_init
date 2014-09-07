@@ -89,6 +89,7 @@ To solve this problem, when your code only knows the relative path of another fi
       (load (xah-get-fullpath "xah_emacs_keybinding_xahlee"))
 
       (load (xah-get-fullpath "xah_emacs_keybinding_control_key"))
+
       (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
       (load (xah-get-fullpath "xah_emacs_unicode_input"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_shift_switch"))

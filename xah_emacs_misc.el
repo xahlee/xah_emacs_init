@@ -441,6 +441,7 @@ When there is a text selection, act on the region."
             ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
 
             ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
+            ("firefox" . "setsid firefox &")
 
             ("rm empty" . "find . -type f -empty")
             ("chmod file" . "find . -type f -exec chmod 644 {} ';'")

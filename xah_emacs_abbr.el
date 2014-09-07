@@ -350,7 +350,7 @@ Second Life: Xah Toll
     ("ueek" "http://ergoemacs.org/emacs/ergonomic_emacs_keybinding.html")
     ("uhtml" "http://xahlee.info/js/html_index.html")
     ("uwd" "http://xahlee.info/js/index.html")
-    ("uem" "http://ergoemacs.github.io/ergoemacs-mode/")
+    ("uem" "http://ergoemacs.github.io/")
 
     ("ulang" "<a href=\"../java-a-day/java.html\">Java</a>
 <a href=\"../python/python3_basics.html\">Python</a>
