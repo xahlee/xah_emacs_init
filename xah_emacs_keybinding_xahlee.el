@@ -54,7 +54,7 @@
   (define-key xah-user-keymap (kbd "n") 'xah-make-backup)
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
   (define-key xah-user-keymap (kbd "p") 'xah-copy-file-path)
-  (define-key xah-user-keymap (kbd "q") nil)
+  (define-key xah-user-keymap (kbd "q") 'xah-replace-BOM-mark-etc)
   (define-key xah-user-keymap (kbd "r c") 'xah-escape-quotes)
   (define-key xah-user-keymap (kbd "r '") 'xah-replace-straight-quotes)
   (define-key xah-user-keymap (kbd "r ,") 'xah-remove-punctuation-trailing-redundant-space)
@@ -78,7 +78,6 @@
   (define-key xah-user-keymap (kbd "z") 'xah-toggle-read-novel-mode)
 
   )
-
 
 (progn
   ;; command dump. temp, rare, or whatever. put them here to have a key anyway

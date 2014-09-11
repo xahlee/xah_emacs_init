@@ -445,7 +445,8 @@ When there is a text selection, act on the region."
 
             ("rm empty" . "find . -type f -empty")
             ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-            ("rm emacs backup~" . "find . -name \"*~\" -exec rm {} ';'")
+            ;; ("rm emacs backup~" . "find . -name \"*~\" -exec rm {} ';'")
+            ("rm emacs backup~" . "find . -name \"*~\" -delete")
             ("findEmptyDir" . "find . -depth -empty -type d")
             ("rmEmptyDir" . "find . -depth -empty -type d -exec rmdir {} ';'")
             ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
