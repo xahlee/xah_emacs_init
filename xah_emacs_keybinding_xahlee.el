@@ -40,7 +40,12 @@
   (define-key xah-user-keymap (kbd "d") 'insert-date)
   (define-key xah-user-keymap (kbd "e") 'xah-open-file-fast)
   (define-key xah-user-keymap (kbd "f") 'xah-find-text)
-  (define-key xah-user-keymap (kbd "g") nil)
+  (define-key xah-user-keymap (kbd "g g") 'xah-dired-scale-image)
+  (define-key xah-user-keymap (kbd "g r") 'xah-dired-2png)
+  (define-key xah-user-keymap (kbd "g c") 'xah-dired-2jpg)
+  (define-key xah-user-keymap (kbd "g b") 'xah-dired-crop-image)
+  (define-key xah-user-keymap (kbd "g d") 'xah-dired-image-autocrop)
+  (define-key xah-user-keymap (kbd "g f") 'xah-dired-2drawing)
 
   (define-key xah-user-keymap (kbd "h") nil)
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-number)

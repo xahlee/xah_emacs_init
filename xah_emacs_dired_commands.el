@@ -4,7 +4,6 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-
 (defun xah-dired-2zip ()
   "Zip the current file in `dired'.
 If multiple files are marked, only zip the first one.
@@ -64,7 +63,7 @@ Requires ImageMagick unix shell tool."
                        (format "-scale %s%% -quality 85%% %s " φscale-percentage sharpenOrNo)
                        "-s" outputSuffix )))
 
-(defun xah-image-autocrop (φfile-list φoutput-image-type-suffix)
+(defun xah-dired-image-autocrop (φfile-list φoutput-image-type-suffix)
   "Create a new auto-cropped version of images of marked files in dired.
 Requires ImageMagick shell tool.
 
@@ -129,7 +128,6 @@ Requires ImageMagick shell tool."
      (list myFileList) )
    )
   (xah-process-image φfile-list "" "-2" ".jpg" ))
-
 
 (defun xah-dired-crop-image (φfile-list)
   " .......
