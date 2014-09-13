@@ -161,12 +161,14 @@
   (global-set-key (kbd "<menu> c r") 'bookmark-jump)
   (global-set-key (kbd "<menu> c u") 'find-file-at-point)
   (global-set-key (kbd "<menu> c e") 'dired-jump)
+  (global-set-key (kbd "<menu> c f") 'make-frame-command)
   (global-set-key (kbd "<menu> c g") 'ido-switch-buffer)
   (global-set-key (kbd "<menu> c h") 'recentf-open-files)
   (global-set-key (kbd "<menu> c n") 'xah-new-empty-buffer)
   (global-set-key (kbd "<menu> c s") 'xah-open-in-external-app)
   (global-set-key (kbd "<menu> c t") 'ibuffer)
-  (global-set-key (kbd "<menu> c p") 'find-file)
+  (global-set-key (kbd "<menu> c .") 'find-file)
+  (global-set-key (kbd "<menu> c p") 'xah-open-last-closed)
 
   )
 
@@ -336,6 +338,8 @@
   )
 
 (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
+
+(global-set-key (kbd "<menu> S") 'write-file) 
 
 (progn
   (define-prefix-command 'xah-menu-t-keymap)
