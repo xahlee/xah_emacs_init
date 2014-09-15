@@ -31,6 +31,7 @@
 
     ("dsnt" "doesn't")
     ("dnt" "don't")
+    ("ddnt" "didn't")
     ("isnt" "isn't")
     ("cnt" "can't")
     ("wnt" "won't")

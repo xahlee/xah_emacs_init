@@ -152,6 +152,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("comp lang index" . "~/web/xahlee_info/comp/comp_lang.html")
         ("keyboard index" . "~/web/xahlee_info/kbd/keyboarding.html")
         ("mouse index" . "~/web/xahlee_info/kbd/mouse_index.html")
+        ("plane curves site" . "~/web/xahlee_info/SpecialPlaneCurves_dir/specialPlaneCurves.html")
 
         ("hacker cult" . "~/web/xahlee_info/comp/comp_index.html")
         ("netiquette index" . "~/web/xahlee_info/Netiquette_dir/troll.html")
