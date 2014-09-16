@@ -151,25 +151,6 @@ this command calls python3's script 「2to3」."
       )
     ))
 
-(defun xah-count-words-region-or-line ()
-  "Print number of words and chars in text selection or line.
-In emacs 24, you can use `count-words'."
-  (interactive)
-  (let (bds p1 p2 )
-    (setq bds (get-selection-or-unit 'line))
-    (setq p1 (elt bds 1) )
-    (setq p2 (elt bds 2) )
-
-    (save-excursion
-      (let (wCnt charCnt)
-        (setq wCnt 0)
-        (setq charCnt (- p2 p1))
-        (goto-char p1)
-        (while (and (< (point) p2) (re-search-forward "\\w+\\W*" p2 t))
-          (setq wCnt (1+ wCnt)))
-
-        (message "Words: %d. Chars: %d." wCnt charCnt) )) ) )
-
 (defun xah-change-file-line-ending (φfpath φline-ending-style)
   "Change file's newline character.
  「φfpath」 is full path to file.

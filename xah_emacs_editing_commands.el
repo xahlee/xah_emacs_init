@@ -35,24 +35,11 @@ If `universal-argument' is called, copy only the dir path."
     (kill-region p1 p2)
     (delete-blank-lines)))
 
-;; (defun xah-copy-to-register-1-old ()
-;;   "Copy current line or text selection to register 1.
-;; See also: `xah-paste-from-register-1', `copy-to-register'."
-;;   (interactive)
-;;   (let* (
-;;          (bds (get-selection-or-unit 'line ))
-;;          (inputStr (elt bds 0) )
-;;          (p1 (elt bds 1) )
-;;          (p2 (elt bds 2)))
-;;     (copy-to-register ?1 p1 p2)
-;;     (message "copied to register 1: 「%s」." inputStr)
-;; ))
-
 (defun xah-copy-to-register-1 ()
   "Copy current line or text selection to register 1.
 See also: `xah-paste-from-register-1', `copy-to-register'."
   (interactive)
-  (let* (p1 p2)
+  (let (p1 p2)
     (if (region-active-p)
         (progn (setq p1 (region-beginning))
                (setq p2 (region-end)))
