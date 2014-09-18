@@ -578,59 +578,71 @@ file:///home/xah/web/xahlee_info/node_api/process.html#process_process_execpath
 <span class=\"ref\"><a href=\"../node_api/process.html#process_process_execpath\">Node doc process.execpath</a></span>
 
 linkText
-
 "
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'filepath))
-         (inputStr (elt bds 0) )
-         (p1 (aref bds 1) )
-         (p2 (aref bds 2) )
+         (inputStr (elt bds 0))
+         (p1 (aref bds 1))
+         (p2 (aref bds 2))
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
-         (temp87318 (split-uri-hashmark inputStr) )
-         (urlMainPart (elt temp87318 0) )
-         (urlFragPart (elt temp87318 1) )
-         (fPath (xahsite-web-path-to-filepath urlMainPart default-directory) )
+         (temp87318 (split-uri-hashmark inputStr))
+         (urlMainPart (elt temp87318 0))
+         (urlFragPart (elt temp87318 1))
+         (fPath (xahsite-web-path-to-filepath urlMainPart default-directory))
          rltvPath titleText resultStr
          )
 
     (if (file-exists-p fPath)
         (progn
-          (setq titleText (concat "⬢ " (nodejs-get-title fPath urlFragPart) ))
+          (setq titleText (concat "⬢ " (nodejs-get-title fPath urlFragPart)))
           (setq resultStr
                 (if (string-equal
                      (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
-                     (xahsite-get-domain-of-local-file-path fPath)
-                     )
+                     (xahsite-get-domain-of-local-file-path fPath))
                     (progn
                       (setq rltvPath (file-relative-name fPath currentBufferFileDir))
                       (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" rltvPath urlFragPart titleText))
                   (progn
-                    (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url fPath) urlFragPart titleText)) ) )
+                    (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url fPath) urlFragPart titleText))))
           (delete-region p1 p2)
-          (insert resultStr)
-          )
-      (progn (message (format "Cannot locate the file: 「%s」" fPath) )) ) ) )
+          (insert resultStr))
+      (progn (message (format "Cannot locate the file: 「%s」" fPath))))))
 
 (defun javascript-linkify ()
   "Make the path under cursor into a HTML link.
- ⁖ <script src=\"xyz.js\"></script>
-"
+ ⁖ <script src=\"xyz.js\"></script>"
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'filepath))
-         (inputStr (elt bds 0) )
-         (p1 (aref bds 1) )
-         (p2 (aref bds 2) )
+         (inputStr (elt bds 0))
+         (p1 (aref bds 1))
+         (p2 (aref bds 2))
          fPath
          )
-    (setq fPath (file-relative-name inputStr) )
+    (setq fPath (file-relative-name inputStr))
     (delete-region p1 p2)
-    (insert (format "<script defer src=\"%s\"></script>" fPath)
-            )
-    ) )
+    (insert (format "<script defer src=\"%s\"></script>" fPath))))
+
+(defun xah-audio-file-linkify ()
+  "Make the path under cursor into a HTML link.
+ ⁖
+ xyz.mp3
+becomes
+ <audio src=\"xyz.mp3\"></audio>"
+  (interactive)
+  (let* (
+         (bds (get-selection-or-unit 'filepath))
+         (inputStr (elt bds 0))
+         (p1 (aref bds 1))
+         (p2 (aref bds 2))
+         fPath
+         )
+    (setq fPath (file-relative-name inputStr))
+    (delete-region p1 p2)
+    (insert (format "<audio src=\"%s\" controls></audio>" fPath))))
 
 (defun css-linkify ()
   "Make the path under cursor into a HTML link.
@@ -717,6 +729,8 @@ If there is text selection, use it as input."
      ((string-match-p "/node_api/" myPath) (nodejs-ref-linkify))
      ((string-match-p "\\.js\\'" myPath) (javascript-linkify))
      ((string-match-p "\\.css\\'" myPath) (css-linkify))
+     ((string-match-p "\\.mp3\\'" myPath) (xah-audio-file-linkify))
+     ((string-match-p "\\.ogg\\'" myPath) (xah-audio-file-linkify))
 
      ((string-match-p "javascript_ecma-262_5.1_2011" myPath) (xah-file-linkify) (xah-ref-span-tag))
      ((string-match-p "css_transitions/CSS_Transitions.html" myPath) (xah-file-linkify) (xah-ref-span-tag))

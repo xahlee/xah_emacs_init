@@ -8,7 +8,7 @@
 (global-set-key (kbd "C-6") 'tags-loop-continue)
 (global-set-key (kbd "C-7") 'xah-backward-punct)
 (global-set-key (kbd "C-8") 'xah-forward-punct)
-(global-set-key (kbd "C-9") 'xah-close-current-buffer)
+(global-set-key (kbd "C-9") 'hippie-expand)
 
 (global-set-key (kbd "C-w") 'xah-close-current-buffer)
 ;; (global-set-key (kbd "C-o") 'find-file)

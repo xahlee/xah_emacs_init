@@ -95,7 +95,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("web blog" . "~/web/xahlee_info/js/blog.html" )
 
         ("math blog" . "~/web/xahlee_info/math/blog.html" )
-        ("linguistics blog" . "~/web/wordyenglish_com/lit/blog.html" )
+        ("wordy english blog" . "~/web/wordyenglish_com/lit/blog.html" )
         ("chinese blog" . "~/web/wordyenglish_com/chinese/blog.html" )
         ("music blog" . "~/web/xahmusic_org/music/blog.html" )
         ("arts blog" . "~/web/xaharts_org/arts/blog.html" )
@@ -168,7 +168,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx emacs blog" . "~/web/ergoemacs_org/emacs/xx_emacs_blog.html")
         ("xx math blog" . "~/web/xahlee_info/math/xx_math_blog.html")
         ("xx pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/xx_pd_blog.html")
-        ("xx lit blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
+        ("xx wordy english blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
 
         ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
         ("xah site move" . "~/git/xahscripts/elisp/xah_site_move.el")
