@@ -48,7 +48,6 @@
 
 (global-set-key (kbd "<f14>") 'xah-close-current-buffer) ;truely ergo keyboard, upper right key
 
-
 (global-set-key (kbd "<XF86Launch5>") 'xah-close-current-buffer) ; F14 upper right corner
 
 (global-set-key (kbd "<XF86Cut>") 'xah-cut-line-or-region)
@@ -56,6 +55,4 @@
 (global-set-key (kbd "<XF86Paste>") 'yank)
 (global-set-key (kbd "C-<XF86Paste>") 'yank-pop)
 (global-set-key (kbd "<XF86Close>") 'xah-close-current-buffer)
-
-
 

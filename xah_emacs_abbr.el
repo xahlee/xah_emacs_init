@@ -35,6 +35,7 @@
     ("isnt" "isn't")
     ("cnt" "can't")
     ("wnt" "won't")
+    ("wsnt" "wasn't")
     ("hnt" "haven't")
     ("shnt" "shouldn't")
     ("r" "are")
@@ -149,6 +150,7 @@
 
     ("bt" "between")
     ("uns" "understand")
+    ("esp" "especially")
     ("comm" "communication")
     ("rsi" "Repetitive Strain Injury")
     ("disc" "discussion")

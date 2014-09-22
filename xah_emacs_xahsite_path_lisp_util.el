@@ -616,7 +616,31 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
    "<div class=\"ppp8745\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"Y4V2F8TA949M2\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" name=\"submit\" alt=\"PayPal\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>"
    ""]
 
-["<section class=\"buy-book\">Master emacs+lisp, benefit for life. <a href=\"user_comments.html\">Testimonials</a>. Thank you for support. <form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_xclick\" /> <input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\" /> <input type=\"hidden\" name=\"lc\" value=\"US\" /> <input type=\"hidden\" name=\"item_name\" value=\"xah emacs tutorial\" /> <input type=\"hidden\" name=\"amount\" value=\"15.00\" /> <input type=\"hidden\" name=\"currency_code\" value=\"USD\" /> <input type=\"hidden\" name=\"button_subtype\" value=\"services\" /> <input type=\"hidden\" name=\"no_note\" value=\"0\" /> <input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\" /> <input type=\"hidden\" name=\"no_shipping\" value=\"1\" /> <input type=\"hidden\" name=\"shipping\" value=\"0.00\" /> <input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\" /> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal\" /> </form></section>"
+["<section class=\"buy-book\">Buy <a href=\"buy_xah_emacs_tutorial.html\">Xah Emacs Tutorial</a>. Master emacs benefits for life.
+<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
+<input type=\"hidden\" name=\"cmd\" value=\"_xclick\" />
+<input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\" />
+<input type=\"hidden\" name=\"lc\" value=\"US\" />
+<input type=\"hidden\" name=\"item_name\" value=\"xah emacs tutorial\" />
+<input type=\"hidden\" name=\"amount\" value=\"15.00\" />
+<input type=\"hidden\" name=\"currency_code\" value=\"USD\" />
+<input type=\"hidden\" name=\"button_subtype\" value=\"services\" />
+<input type=\"hidden\" name=\"no_note\" value=\"0\" />
+<input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\" />
+<input type=\"hidden\" name=\"no_shipping\" value=\"1\" />
+<input type=\"hidden\" name=\"shipping\" value=\"0.00\" />
+<input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\" />
+<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal\" />
+</form></section>"
+""]
+
+["<li><a href=\"buy_xah_emacs_tutorial.html\">Buy</a></li>"
+""]
+
+["<li><a href=\"../emacs/buy_xah_emacs_tutorial.html\">Buy</a></li>"
+""]
+
+["<li><a href=\"emacs/buy_xah_emacs_tutorial.html\">Buy</a></li>"
 ""]
 
   ;; Disqus code
