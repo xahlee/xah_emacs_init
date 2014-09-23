@@ -72,6 +72,8 @@
   ;; Mac OS X  doesn't have menu, even if using pc keyboard
   (define-key key-translation-map (kbd "C-p") (kbd "<menu>")))
 
+(global-set-key (kbd "<end>") 'xah-user-keymap)
+
 (define-prefix-command 'xah-menu-keymap)
 (global-set-key (kbd "<menu>") 'xah-menu-keymap)
 
@@ -99,23 +101,20 @@
   (global-set-key (kbd "<menu> <tab> e") 'expand-abbrev)
   )
 
+  (global-set-key (kbd "<menu> SPC") 'xah-insert-keymap)
+
+  (global-set-key (kbd "<menu> <end>") 'xah-user-keymap)
+
 (global-set-key (kbd "<menu> .") 'universal-argument)
 (global-set-key (kbd "<menu> '") 'quoted-insert)
-
-(progn
-  (define-prefix-command 'xah-menu-comma-keymap)
-  (global-set-key (kbd "<menu> ,") xah-menu-comma-keymap)
-  )
-
+(global-set-key (kbd "<menu> ,") nil)
 (global-set-key (kbd "<menu> -") nil)
-
 (global-set-key (kbd "<menu> /") nil)
 (global-set-key (kbd "<menu> ;") nil)
 (global-set-key (kbd "<menu> =") nil)
 (global-set-key (kbd "<menu> [") nil)
 (global-set-key (kbd "<menu> \\") nil)
 (global-set-key (kbd "<menu> `") nil)
-
 (global-set-key (kbd "<menu> 1") nil)
 (global-set-key (kbd "<menu> 2") 'delete-window)
 (global-set-key (kbd "<menu> 3") 'delete-other-windows)
@@ -180,56 +179,7 @@
 
 (global-set-key (kbd "<menu> g") 'isearch-forward)
 
-(progn
-  (define-prefix-command 'xah-help-keymap)
-
-  (global-set-key (kbd "<menu> h") xah-help-keymap)
-
-  (define-key xah-help-keymap (kbd "1") nil)
-  (define-key xah-help-keymap (kbd "2") nil)
-  (define-key xah-help-keymap (kbd "3") 'man)
-
-  (define-key xah-help-keymap (kbd "4") 'elisp-index-search)
-  (define-key xah-help-keymap (kbd "5") 'apropos-variable)
-  (define-key xah-help-keymap (kbd "6") 'apropos-value)
-  (define-key xah-help-keymap (kbd "7") 'lookup-google)
-  (define-key xah-help-keymap (kbd "8") 'lookup-wikipedia)
-  (define-key xah-help-keymap (kbd "9") 'lookup-word-definition)
-  (define-key xah-help-keymap (kbd "0") 'lookup-all-dictionaries)
-
-  (define-key xah-help-keymap (kbd "a") 'apropos-command)
-  (define-key xah-help-keymap (kbd "b") 'describe-bindings)
-  (define-key xah-help-keymap (kbd "c") 'describe-char)
-  (define-key xah-help-keymap (kbd "C") 'describe-coding-system)
-  (define-key xah-help-keymap (kbd "d") 'apropos-documentation)
-  (define-key xah-help-keymap (kbd "e") 'view-echo-area-messages)
-  (define-key xah-help-keymap (kbd "f") 'describe-function)
-  (define-key xah-help-keymap (kbd "F") 'Info-goto-emacs-command-node)
-  (define-key xah-help-keymap (kbd "g") nil)
-  (define-key xah-help-keymap (kbd "h") 'describe-face)
-  (define-key xah-help-keymap (kbd "i") 'info)
-  (define-key xah-help-keymap (kbd "I") 'describe-input-method)
-  (define-key xah-help-keymap (kbd "j") nil)
-  (define-key xah-help-keymap (kbd "k") 'describe-key)
-  (define-key xah-help-keymap (kbd "K") 'Info-goto-emacs-key-command-node)
-  (define-key xah-help-keymap (kbd "l") 'view-lossage)
-  (define-key xah-help-keymap (kbd "L") 'describe-language-environment)
-  (define-key xah-help-keymap (kbd "m") 'xah-describe-major-mode)
-  (define-key xah-help-keymap (kbd "n") nil)
-  (define-key xah-help-keymap (kbd "o") nil)
-  (define-key xah-help-keymap (kbd "p") 'finder-by-keyword)
-  (define-key xah-help-keymap (kbd "q") nil)
-  (define-key xah-help-keymap (kbd "r") nil)
-  (define-key xah-help-keymap (kbd "s") 'describe-syntax)
-  (define-key xah-help-keymap (kbd "S") 'info-lookup-symbol)
-  (define-key xah-help-keymap (kbd "t") nil)
-  (define-key xah-help-keymap (kbd "u") nil)
-  (define-key xah-help-keymap (kbd "v") 'describe-variable)
-  (define-key xah-help-keymap (kbd "w") nil)
-  (define-key xah-help-keymap (kbd "x") nil)
-  (define-key xah-help-keymap (kbd "y") nil)
-  (define-key xah-help-keymap (kbd "z") nil)
-  )
+(global-set-key (kbd "<menu> h") xah-help-keymap)
 
 (progn
   (define-prefix-command 'xah-menu-i-keymap) ; commands in goto-map
@@ -285,6 +235,7 @@
 
   (define-key xah-harmless-keymap (kbd "b") 'toggle-debug-on-error)
   (define-key xah-harmless-keymap (kbd "c") 'toggle-case-fold-search)
+  (define-key xah-harmless-keymap (kbd "d") 'narrow-to-page)
   (define-key xah-harmless-keymap (kbd "e") 'eshell)
   (define-key xah-harmless-keymap (kbd "h") 'widen)
 
@@ -294,8 +245,6 @@
   (define-key xah-harmless-keymap (kbd "r") 'read-only-mode)
   (define-key xah-harmless-keymap (kbd "s") 'flyspell-buffer)
   (define-key xah-harmless-keymap (kbd "t") 'narrow-to-defun)
-  ; C-x n p	narrow-to-page
-
   )
 
 (progn
@@ -339,7 +288,7 @@
 
 (global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
 
-(global-set-key (kbd "<menu> S") 'write-file) 
+(global-set-key (kbd "<menu> S") 'write-file)
 
 (progn
   (define-prefix-command 'xah-menu-t-keymap)
@@ -360,8 +309,8 @@
   (global-set-key (kbd "<menu> t j") 'xah-copy-line-or-region)
   (global-set-key (kbd "<menu> t k") 'yank)
 
-  (global-set-key (kbd "<menu> t t") 'repeat-complex-command)
-  (global-set-key (kbd "<menu> t h") 'repeat)
+  (global-set-key (kbd "<menu> t t") 'repeat)
+  (global-set-key (kbd "<menu> t h") 'repeat-complex-command)
 
   (global-set-key (kbd "<menu> t f") 'frame-configuration-to-register)
   (global-set-key (kbd "<menu> t r") 'copy-rectangle-to-register)
@@ -370,59 +319,7 @@
 
   )
 
-(progn
-
-  (define-prefix-command 'xah-insert-keymap)
-  (global-set-key (kbd "<menu> u") 'xah-insert-keymap)
-
-  (define-key key-translation-map (kbd "<menu> u SPC") (kbd "_")) ; low line (underscore)
-  (global-set-key (kbd "<menu> u RET") 'ucs-insert)
-
-  (define-key key-translation-map (kbd "<menu> u .") nil)
-
-  (define-key key-translation-map (kbd "<menu> u <down>") (kbd "↓"))
-  (define-key key-translation-map (kbd "<menu> u <left>") (kbd "←"))
-  (define-key key-translation-map (kbd "<menu> u <right>") (kbd "→"))
-  (define-key key-translation-map (kbd "<menu> u <up>") (kbd "↑"))
-  (define-key key-translation-map (kbd "<menu> u \\") (kbd "、")) ; IDEOGRAPHIC COMMA
-
-  (global-set-key (kbd "<menu> u .") 'xah-insert-unicode)
-  (global-set-key (kbd "<menu> u ,") nil)
-
-  (define-key key-translation-map (kbd "<menu> u 6") (kbd "ƒ"))
-  (define-key key-translation-map (kbd "<menu> u 7") (kbd "＆"))
-  (define-key key-translation-map (kbd "<menu> u 8") (kbd "•"))
-  (define-key key-translation-map (kbd "<menu> u 9") (kbd "—")) ; EM DASH
-
-  (global-set-key (kbd "<menu> u a") nil)
-  (global-set-key (kbd "<menu> u b") 'xah-insert-black-lenticular-bracket【】)
-  (global-set-key (kbd "<menu> u c") 'xah-insert-ascii-single-quote)
-  (global-set-key (kbd "<menu> u d") 'xah-insert-double-curly-quote“”)
-  (global-set-key (kbd "<menu> u e") 'xah-insert-greater-less)
-  (global-set-key (kbd "<menu> u f") 'xah-insert-emacs-quote)
-  (global-set-key (kbd "<menu> u g") 'xah-insert-ascii-double-quote)
-  (global-set-key (kbd "<menu> u h") 'xah-insert-brace)              ;{}
-  (global-set-key (kbd "<menu> u i") 'xah-insert-curly-single-quote‘’)
-  (global-set-key (kbd "<menu> u j") nil)
-  (global-set-key (kbd "<menu> u k") nil)
-  (define-key key-translation-map (kbd "<menu> u l") (kbd "…")) ; HORIZONTAL ELLIPSIS
-  (global-set-key (kbd "<menu> u m") 'xah-insert-corner-bracket「」)
-  (global-set-key (kbd "<menu> u n") 'xah-insert-bracket)            ;[]
-  (global-set-key (kbd "<menu> u o") nil)
-  (global-set-key (kbd "<menu> u p") 'xah-insert-single-angle-quote‹›)
-  (global-set-key (kbd "<menu> u q") nil)
-  (global-set-key (kbd "<menu> u r") 'xah-insert-tortoise-shell-bracket〔〕)
-  (global-set-key (kbd "<menu> u s") nil)
-  (global-set-key (kbd "<menu> u t") 'xah-insert-paren)
-  (define-key key-translation-map (kbd "<menu> u u") (kbd "-")) ; minus
-
-  (global-set-key (kbd "<menu> u v") nil)
-  (global-set-key (kbd "<menu> u w") 'xah-insert-angle-bracket〈〉)
-  (global-set-key (kbd "<menu> u x") nil)
-  (global-set-key (kbd "<menu> u y") 'xah-insert-double-angle-quote«»)
-  (global-set-key (kbd "<menu> u z") nil)
-
-  )
+  (global-set-key (kbd "<menu> u") 'xah-dump-keymap)
 
 (progn
   (define-prefix-command 'xah-menu-v-keymap)
@@ -489,12 +386,6 @@
 ;; all should be sequence of single keys. 2 to 3 keys. All should start with F7. And all commands should be globally useful.
 ;; • 2 keys vs 3 keys
 ;; • whether the key ends in a digit key 0 to 9. These probably should be most frequently used, or immediate effect.
-
-
-
-  (global-set-key (kbd "<menu> SPC") 'xah-dump-keymap)
-  (global-set-key (kbd "<menu> <end>") 'xah-user-keymap)
-(global-set-key (kbd "<end>") 'xah-user-keymap)
 
 
 (substitute-key-definition 'find-file-at-point 'xah-open-file-at-cursor (current-global-map))
@@ -616,9 +507,6 @@
 ;; C-x 6 b	2C-associate-buffer
 ;; C-x 6 s	2C-split
 ;; C-x 6 <f2>	2C-two-columns
-
-
-
 
 ;; ;; todo
 ;; select all, copy all, open, those standard keys

@@ -10,7 +10,7 @@
 (global-set-key (kbd "C-8") 'xah-forward-punct)
 (global-set-key (kbd "C-9") 'hippie-expand)
 
-(global-set-key (kbd "C-w") 'xah-close-current-buffer)
+;; (global-set-key (kbd "C-w") 'xah-close-current-buffer)
 ;; (global-set-key (kbd "C-o") 'find-file)
 ;; (global-set-key (kbd "C-a") 'mark-whole-buffer)
 ;; (global-set-key (kbd "C-s") 'save-buffer)
@@ -19,16 +19,8 @@
 ;; (global-set-key (kbd "C-S-s") 'write-file)
 ;; (global-set-key (kbd "C-S-t") 'xah-open-last-closed)
 
-;;
 ;; cut x C-x
 ;; copy c C-c
 ;; paste p prev line
 ;; undo z suspend frame
 ;; redo y yank
-
-
-
-(global-set-key (kbd "<C-f9>") 'xah-syntax-bracket-backward)
-(global-set-key (kbd "<C-f10>") 'xah-syntax-bracket-forward)
-(global-set-key (kbd "<C-f7>") 'xah-goto-previous-overlay)
-(global-set-key (kbd "<C-f8>") 'xah-goto-next-overlay)
