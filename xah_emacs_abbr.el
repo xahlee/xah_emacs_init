@@ -181,8 +181,8 @@
     ("dft" "different")
     ("comp" "computer")
     ("l" "language")
-    ("ls" "languages")
-    ("exp" "experience")
+    ("expe" "experience")
+    ("expr" "expression")
     ("tech" "technology")
     ("cs" "computer science")
     ("ai" "artificial intelligence")
@@ -269,6 +269,7 @@
     ("fu" "function")
     ("pm" "parameter")
     ("prog" "programing")
+    ("dt" "data type")
     ("db" "database")
     ("oop" "object oriented programing")
 

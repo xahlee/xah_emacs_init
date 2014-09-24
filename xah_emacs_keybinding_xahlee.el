@@ -57,6 +57,7 @@
   ;; this should reserved for user-defined keys
   (define-prefix-command 'xah-user-keymap)
 
+  (define-key xah-user-keymap (kbd "SPC") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "<menu>") nil)
   (define-key xah-user-keymap (kbd "<return>") 'xah-run-current-file)
   (define-key xah-user-keymap (kbd "<backspace>") 'xah-delete-current-file)

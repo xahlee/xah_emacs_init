@@ -252,7 +252,7 @@
   (global-set-key (kbd "<menu> o") xah-menu-o-keymap)
   )
 
-(global-set-key (kbd "<menu> p") 'query-replace) ; 2746    0.17%  query-replace
+(global-set-key (kbd "<menu> p") 'query-replace)
 
 (global-set-key (kbd "<menu> q") 'xah-cut-all)
 
