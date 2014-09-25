@@ -682,3 +682,12 @@ then call this command."
                )
               (insert (format "<mark class=\"unicode\" title=\"%s: %s\">%c</mark>\n" ξu-notation ξname ξchar))))))
 
+
+;; (defun xah-dired-sort-timme-accessed ()
+;;   "DOCSTRING"
+;;   (interactive)
+;;   (let ()
+;; (setq dired-listing-switches "-Al --si --time-style long-iso")
+;; (dired-sort-other)
+;;   ))
+

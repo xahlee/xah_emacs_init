@@ -259,6 +259,7 @@
     ("kbd" "keybinding")
     ("env" "environment")
     ("v" "variable")
+    ("str" "string")
     ("vars" "variables")
     ("ev" "environment variable")
     ("evs" "environment variables")
