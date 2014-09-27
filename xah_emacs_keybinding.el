@@ -286,7 +286,7 @@
 
   )
 
-(global-set-key (kbd "<menu> s") 'save-buffer) ; 25468    1.58%  save-buffer
+(global-set-key (kbd "<menu> s") 'save-buffer)
 
 (global-set-key (kbd "<menu> S") 'write-file)
 
