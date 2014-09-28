@@ -25,7 +25,7 @@
   ;; (text-scale-increase 0.5 )
   )
 
-(add-hook 'xah-html-mode-hook 'xah-font-change)
+;; (add-hook 'xah-html-mode-hook 'xah-font-change)
 
 
 

@@ -657,7 +657,7 @@ Test cases
 
 
 
-(defun xah-uncode-chars-html ()
+(defun xah-unicode-chars-html ()
   "temp. print a list of unicode with special html markup.
 
 example: put cursor on this word
@@ -682,12 +682,21 @@ then call this command."
                )
               (insert (format "<mark class=\"unicode\" title=\"%s: %s\">%c</mark>\n" ξu-notation ξname ξchar))))))
 
-
-;; (defun xah-dired-sort-timme-accessed ()
+;; (defun xah-dired-sort-time-accessed ()
 ;;   "DOCSTRING"
 ;;   (interactive)
 ;;   (let ()
-;; (setq dired-listing-switches "-Al --si --time-style long-iso")
-;; (dired-sort-other)
-;;   ))
+;;     (setq dired-listing-switches "-Al --si --time-style long-iso")
+;;     (dired-sort-other "-Al --si --time-style long-iso -t") ;;by mod time
+;;     (dired-sort-other "-Al --si --time-style long-iso -tc") ;;by file metadata mod time
+;;     (dired-sort-other "-Al --si --time-style long-iso -tu") ;;by access time
+;;     (dired-sort-other "-Al --si --time-style long-iso -S") ;;by file size
+;;     (dired-sort-other "-Al --si --time-style long-iso -X") ;; by by extension
+;;     ))
 
+(defun xah-unfontify-region-or-buffer ()
+  "Unfontify text selection or buffer."
+  (interactive)
+  (if (region-active-p)
+      (font-lock-unfontify-region (region-beginning) (region-end))
+    (font-lock-unfontify-buffer)))
