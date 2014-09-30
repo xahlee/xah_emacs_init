@@ -3,23 +3,25 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(math-symbol-input-mode 1)
+(when (fboundp 'math-symbol-input-mode)
+    (math-symbol-input-mode 1)
+)
 
 ;; (eval-when-compile
 ;;   (when (boundp 'tabbar-mode)
 ;;     (tabbar-mode 0)
 ;;     ))
 
-(setq yas/indent-line nil)
-(yas-global-mode 0)
-(global-auto-complete-mode 0)
+;; (setq yas/indent-line nil)
+;; (yas-global-mode 0)
 
-
+(when (fboundp 'global-auto-complete-mode)
+    (global-auto-complete-mode 0)
+)
 
 ;; (when (boundp 'ido-vertical-mode)
 ;;     (ido-vertical-mode 1)
 ;; )
-
 
 ;; (defun turn-spell-checking-on ()
 ;;   "Turn speck-mode or flyspell-mode on."

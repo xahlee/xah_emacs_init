@@ -93,7 +93,6 @@
 (progn
   (define-prefix-command 'xah-menu-tab-keymap)
   (global-set-key (kbd "<menu> <tab>") xah-menu-tab-keymap)
-  (global-set-key (kbd "<menu> <tab> y") 'yas-expand)
   (global-set-key (kbd "<menu> <tab> <tab>") 'indent-for-tab-command)
   (global-set-key (kbd "<menu> <tab> i") 'complete-symbol)
   (global-set-key (kbd "<menu> <tab> g") 'indent-rigidly)

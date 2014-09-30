@@ -188,8 +188,6 @@
 
   (define-prefix-command 'xah-insert-keymap)
 
-  (define-key key-translation-map (kbd "<menu> SPC SPC") (kbd "_")) ; low line (underscore)
-
   (define-key xah-insert-keymap (kbd "RET") 'ucs-insert)
 
   (define-key key-translation-map (kbd "<menu> SPC .") nil)
