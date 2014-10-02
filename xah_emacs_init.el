@@ -6,7 +6,7 @@
 ; loading custom commands and functions
 
 (defun xah-get-fullpath (φfile-relative-path)
-  "Return the full path of ΦFILE-RELATIVE-PATH, relative to caller's file location.
+  "Return the full path of φfile-relative-path, relative to caller's file location.
 
 Example: If you have this line
  (xah-get-fullpath \"../xyz.el\")
