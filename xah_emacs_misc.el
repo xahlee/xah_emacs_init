@@ -170,6 +170,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/xx_pd_blog.html")
         ("xx wordy english blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
         ("xx xah arts blog" . "~/web/xaharts_org/arts/xx_art_blog.html")
+        ("xx music" . "~/web/xahmusic_org/music/xx-music_blog.html")
 
         ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
         ("xah site move" . "~/git/xahscripts/elisp/xah_site_move.el")
@@ -212,26 +213,83 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 (defun xah-open-file-at-cursor ()
   "Open the file path under cursor.
-
 If there is text selection, uses the text selection for path.
+If the path starts with “http://”, open the URL in browser.
+Input path can be {relative, full path, URL}.
+Path may have a trailing “:‹n›” that indicates line number. If so, jump to that line number.
+If path does not have a file extention, automatically try with “.el” for elisp files.
+This command is similar to `find-file-at-point' but without prompting for confirmation.
 
-If the path is starts with “http://”, launch browser vistiting that URL, or open the corresponding file, if it's xah site.
+URL `http://ergoemacs.org/emacs/emacs_open_file_path_fast.html'"
+  (interactive)
+  (let ((ξpath (if (use-region-p)
+                   (buffer-substring-no-properties (region-beginning) (region-end))
+                 (let (p0 p1 p2)
+                   (setq p0 (point))
+                   ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+                   (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+                   (setq p1 (point))
+                   (goto-char p0)
+                   (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+                   (setq p2 (point))
+                   (goto-char p0)
+                   (buffer-substring-no-properties p1 p2)))))
+    (if (string-match-p "\\`https?://" ξpath)
+        (browse-url ξpath)
+      (progn ; not starting “http://”
+        (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" ξpath)
+            (progn
+              (let (
+                    (ξfpath (match-string 1 ξpath))
+                    (ξline-num (string-to-number (match-string 2 ξpath))))
+                (if (file-exists-p ξfpath)
+                    (progn
+                      (find-file ξfpath)
+                      (goto-char 1)
+                      (forward-line (1- ξline-num)))
+                  (progn
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfpath))
+                      (find-file ξfpath))))))
+          (progn
+            (if (file-exists-p ξpath)
+                (find-file ξpath)
+              (if (file-exists-p (concat ξpath ".el"))
+                  (find-file (concat ξpath ".el"))
+                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξpath))
+                  (find-file ξpath ))))))))))
+
+(defun xah-open-file-path-under-cursor ()
+  "Open the file path under cursor.
+If there is text selection, use the text selection for path.
+If path starts with “http://”, launch browser vistiting that URL, or open the corresponding file, if it's xah site.
 
 Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported."
   (interactive)
   (let (
-        (ξs (elt (get-selection-or-unit 'filepath) 0))
+        (ξs
+         (xah-remove-uri-fragment
+          (if (use-region-p)
+              (buffer-substring-no-properties (region-beginning) (region-end))
+            (let (p0 p1 p2)
+              (setq p0 (point))
+              ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+              (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+              (setq p1 (point))
+              (goto-char p0)
+              (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+              (setq p2 (point))
+              (goto-char p0)
+              (buffer-substring-no-properties p1 p2)))))
         fPath )
 
-    (if (= (length ξs) 0)
-        (progn (message "no path obtained"))
+    (if (string-equal ξs "")
+        (progn (message "No path under cursor"))
       (progn
-        (setq ξs (remove-uri-fragment ξs))
 
         ;; convenience. if the input string start with a xah domain name, make it a url string
-        (setq ξs
+        (setq ξp
               (cond
-               ((string-match "\\`//" ξs ) (concat "http:" ξs)) ; relative http protocal, used in css
+               ((string-match "\\`//" ξs ) (concat "http:" ξs)) ; relative http protocol, used in css
                ((string-match "\\`ergoemacs\\.org" ξs ) (concat "http://" ξs))
                ((string-match "\\`wordyenglish\\.com" ξs ) (concat "http://" ξs))
                ((string-match "\\`xaharts\\.org" ξs ) (concat "http://" ξs))
@@ -242,15 +300,15 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
                ((string-match "\\`xahsl\\.org" ξs ) (concat "http://" ξs))
                (t ξs)))
 
-        (if (string-match-p "\\`https?://" ξs)
-            (if (xahsite-url-is-xah-website-p ξs)
-                (let ((ξfp (xahsite-url-to-filepath ξs )))
+        (if (string-match-p "\\`https?://" ξp)
+            (if (xahsite-url-is-xah-website-p ξp)
+                (let ((ξfp (xahsite-url-to-filepath ξp )))
                   (if (file-exists-p ξfp)
-                      (progn (find-file ξfp ))
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp)) (find-file ξs ))))
-              (progn (browse-url ξs)))
+                      (find-file ξfp)
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp)) (find-file ξfp))))
+              (browse-url ξp))
           (progn ; not starting “http://”
-            (let ((ξfff (xahsite-web-path-to-filepath ξs default-directory)))
+            (let ((ξfff (xahsite-web-path-to-filepath ξp default-directory)))
               (if (file-exists-p ξfff)
                   (progn (find-file ξfff))
                 (if (file-exists-p (concat ξfff ".el"))
@@ -276,7 +334,7 @@ The clipboard should contain a file path or url to xah site. Open that file in e
               (progn (find-file fpath))
             (progn (error "file doesn't exist 「%s」" fpath))))
       (progn ; not starting “http://”
-        (setq ξs (remove-uri-fragment ξs))
+        (setq ξs (xah-remove-uri-fragment ξs))
         (setq fpath (xahsite-web-path-to-filepath ξs default-directory))
         (if (file-exists-p fpath)
             (progn (find-file fpath))

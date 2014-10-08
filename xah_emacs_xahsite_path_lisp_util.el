@@ -82,17 +82,16 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
 
-(defun xahsite-is-link-to-xahsite-p (φ-href-value)
-  "Returns true if φ-href-value points to a xah website, else false.
+(defun xahsite-is-link-to-xahsite-p (φhref-value)
+  "Returns true if φhref-value points to a xah website, else false.
+φhref-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
 
-φ-href-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
-
-Technically, returns true if φ-href-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
+Technically, returns true if φhref-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
 
 See: `xahsite-local-link-p', `xahsite-url-is-xah-website-p'."
-  (if (xahsite-local-link-p φ-href-value)
+  (if (xahsite-local-link-p φhref-value)
       t
-    (xahsite-url-is-xah-website-p φ-href-value)))
+    (xahsite-url-is-xah-website-p φhref-value)))
 
 
 
@@ -181,10 +180,10 @@ This function does not check input is actually a URL, nor if the result path fil
   ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
 
   (let ((ξurl φxahsiteURL) ξfPath)
-    (setq ξurl (remove-uri-fragment ξurl)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
+    (setq ξurl (xah-remove-uri-fragment ξurl)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
     (when φredirect (setq ξurl (xahsite-url-remap ξurl)))
     (when φ-add-file-name (setq ξurl (replace-regexp-in-string "/\\'" "/index.html" ξurl)))
-    ;; (replace-regexp-in-string "%27" "'" (remove-uri-fragment ξurl))
+    ;; (replace-regexp-in-string "%27" "'" (xah-remove-uri-fragment ξurl))
 
     (setq ξfPath
           (format "%s%s" (xahsite-server-root-path)
@@ -325,15 +324,15 @@ This function is not complete. i.e. it not contain complete url redirects as spe
     ξs
     ))
 
-(defun remove-uri-fragment (φhref-value)
+(defun xah-remove-uri-fragment (φhref-value)
   "remove URL φhref-value fragment, anything after first 「#」 char, including it.
 See also `split-uri-hashmark'"
   ;; test
-  ;; (remove-uri-fragment "a#b") ; "a"
-  ;; (remove-uri-fragment "#3")  ; ""
-  ;; (remove-uri-fragment "4")  ; "4"
-  ;; (remove-uri-fragment "#")   ; ""
-  ;; (remove-uri-fragment "")  ; ""
+  ;; (xah-remove-uri-fragment "a#b") ; "a"
+  ;; (xah-remove-uri-fragment "#3")  ; ""
+  ;; (xah-remove-uri-fragment "4")  ; "4"
+  ;; (xah-remove-uri-fragment "#")   ; ""
+  ;; (xah-remove-uri-fragment "")  ; ""
   (let ((ξx (string-match-p "#" φhref-value )))
     (if ξx
         (substring φhref-value 0 ξx)
@@ -351,7 +350,7 @@ Examples:
  「4」 ⇒  「4」 「」
  「」 ⇒  「」 「」
 
-See also: `remove-uri-fragment'"
+See also: `xah-remove-uri-fragment'"
   ;; test
   ;; (split-uri-hashmark "a#b") ; ["a" "#b"]
   ;; (split-uri-hashmark "#3")  ; ["" "#3"]

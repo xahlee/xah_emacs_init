@@ -12,11 +12,6 @@
 ;; http://ergoemacs.org/emacs/emacs_switching_fonts.html
 
 
-;; specify font for all unicode characters
-(when (member "Symbola" (font-family-list))
-  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-
-
 
 ;; use variable-width font for some modes
 (defun xah-font-change ()

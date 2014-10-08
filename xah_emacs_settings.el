@@ -93,8 +93,10 @@
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 
-(setq page-break-lines-modes (quote (emacs-lisp-mode xah-elisp-mode compilation-mode fundamental-mode text-mode org-mode ruby-mode python-mode xah-html-mode html-mode nxml-mode )) )
-
+
+;; specify font for all unicode characters
+(when (member "Symbola" (font-family-list))
+  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
 
 
 ;; 2009-09-29 see http://groups.google.com/group/ergoemacs/msg/9eec3b455cab3ff1 and http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start

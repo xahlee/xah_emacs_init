@@ -1,6 +1,6 @@
 ;; 2014-05-30
 
-(defun xah-inside-string? (&optional φpos)
+(defun xah-inside-string-p (&optional φpos)
   "Return true if inside string, else false.
 This depends on major mode having setup syntax table properly."
   (interactive)
@@ -8,7 +8,7 @@ This depends on major mode having setup syntax table properly."
     (print ξresult)
     ξresult))
 
-(defun xah-inside-comment? (&optional φpos)
+(defun xah-inside-comment-p (&optional φpos)
   "Return true if inside comment, else false.
 This depends on major mode having setup syntax table properly."
  (interactive)

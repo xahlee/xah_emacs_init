@@ -21,6 +21,12 @@
 (global-set-key (kbd "<f5>") 'undo)
 (global-set-key (kbd "<C-f5>") 'redo)
 
+(global-set-key (kbd "<f11>") 'xah-previous-user-buffer)
+(global-set-key (kbd "<f12>") 'xah-next-user-buffer)
+
+(global-set-key (kbd "<S-f11>") 'xah-previous-emacs-buffer)
+(global-set-key (kbd "<S-f12>") 'xah-next-emacs-buffer)
+
 
 
 (global-set-key (kbd "<C-prior>") 'xah-previous-user-buffer) ; page up

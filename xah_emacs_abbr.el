@@ -173,7 +173,8 @@
     ("ref" "reference")
     ("temp" "temperature")
     ("gvn" "government")
-    ("auto" "automatically")
+    ("atmt" "automatic")
+    ("atmty" "automatically")
     ("maths" "mathematics")
     ("wtdb" "what's the difference between")
     ("dfb" "difference between")
@@ -187,6 +188,7 @@
     ("cs" "computer science")
     ("ai" "artificial intelligence")
     ("fs" "fullscreen")
+    ("ss" "screenshot")
     ("vid" "video")
 
     ("ch" "Chinese")
