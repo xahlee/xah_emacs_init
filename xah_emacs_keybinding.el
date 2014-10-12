@@ -1,2 +1,2 @@
 ;; -*- coding: utf-8 -*-
-;; file merged with https://github.com/xahlee/xah-fly-keys
+;; file moved to xah fly keys http://ergoemacs.org/misc/ergoemacs_vi_mode.html

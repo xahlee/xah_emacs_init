@@ -82,15 +82,10 @@ To solve this problem, when your code only knows the relative path of another fi
 
       (load (xah-get-fullpath "xah_emacs_keybinding_meta"))
       (load (xah-get-fullpath "xah_emacs_keybinding_super"))
-
       (load (xah-get-fullpath "xah_emacs_keybinding_special_keys"))
-
-      (load (xah-get-fullpath "xah_emacs_keybinding"))
-
       (load (xah-get-fullpath "xah_emacs_keybinding_control_key"))
 
       (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
-      (load (xah-get-fullpath "xah_emacs_unicode_input"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_shift_switch"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
       (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
@@ -109,12 +104,9 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_elisp_util"))
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
-(load (xah-get-fullpath "xah_emacs_insert_brackets"))
 
 (load "~/Dropbox/xah-emacs-private_b53d8d39")
 
-(load (xah-get-fullpath "xah_emacs_editing_commands"))
-(load (xah-get-fullpath "xah_emacs_dired_commands"))
 (load (xah-get-fullpath "xah_emacs_generic"))
 
 (load (xah-get-fullpath "xah_emacs_html"))
@@ -123,10 +115,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_ref_linkify"))
 (load (xah-get-fullpath "xah_emacs_vid_linkify"))
 (load (xah-get-fullpath "xah_emacs_google_earth"))
-
-(load (xah-get-fullpath "xah_emacs_str_insertion"))
-
-(load (xah-get-fullpath "xah_emacs_str_replacement"))
 
 (load (xah-get-fullpath "xah_emacs_str_rep_func"))
 

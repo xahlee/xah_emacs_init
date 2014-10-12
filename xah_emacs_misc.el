@@ -107,7 +107,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
         ("emacs keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
         ("abbrev" . "~/git/xah_emacs_init/xah_emacs_abbr.el" )
-        ("fly keys" . "~/git/xah-fly-keys/xah-fly-keys.el")
+        ("xah fly keys git" . "~/git/xah-fly-keys/xah-fly-keys.el")
+        ("xah fly keys site" . "~/web/ergoemacs_org/misc/ergoemacs_vi_mode.html")
         ("ahk" . "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
 
         ("download" . "~/Downloads/" )
@@ -172,6 +173,10 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx xah arts blog" . "~/web/xaharts_org/arts/xx_art_blog.html")
         ("xx music" . "~/web/xahmusic_org/music/xx-music_blog.html")
 
+
+        ("web design" . "~/web/xahlee_info/js/web_design_index.html")
+        ("web index" . "~/web/xahlee_info/js/index.html")
+
         ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
         ("xah site move" . "~/git/xahscripts/elisp/xah_site_move.el")
 
@@ -210,162 +215,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 ;;            )
 ;;           )
 ;;     (find-file ξfile ) ) )
-
-(defun xah-open-file-at-cursor ()
-  "Open the file path under cursor.
-If there is text selection, uses the text selection for path.
-If the path starts with “http://”, open the URL in browser.
-Input path can be {relative, full path, URL}.
-Path may have a trailing “:‹n›” that indicates line number. If so, jump to that line number.
-If path does not have a file extention, automatically try with “.el” for elisp files.
-This command is similar to `find-file-at-point' but without prompting for confirmation.
-
-URL `http://ergoemacs.org/emacs/emacs_open_file_path_fast.html'"
-  (interactive)
-  (let ((ξpath (if (use-region-p)
-                   (buffer-substring-no-properties (region-beginning) (region-end))
-                 (let (p0 p1 p2)
-                   (setq p0 (point))
-                   ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-                   (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-                   (setq p1 (point))
-                   (goto-char p0)
-                   (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-                   (setq p2 (point))
-                   (goto-char p0)
-                   (buffer-substring-no-properties p1 p2)))))
-    (if (string-match-p "\\`https?://" ξpath)
-        (browse-url ξpath)
-      (progn ; not starting “http://”
-        (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" ξpath)
-            (progn
-              (let (
-                    (ξfpath (match-string 1 ξpath))
-                    (ξline-num (string-to-number (match-string 2 ξpath))))
-                (if (file-exists-p ξfpath)
-                    (progn
-                      (find-file ξfpath)
-                      (goto-char 1)
-                      (forward-line (1- ξline-num)))
-                  (progn
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfpath))
-                      (find-file ξfpath))))))
-          (progn
-            (if (file-exists-p ξpath)
-                (find-file ξpath)
-              (if (file-exists-p (concat ξpath ".el"))
-                  (find-file (concat ξpath ".el"))
-                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξpath))
-                  (find-file ξpath ))))))))))
-
-(defun xah-open-file-path-under-cursor ()
-  "Open the file path under cursor.
-If there is text selection, use the text selection for path.
-If path starts with “http://”, launch browser vistiting that URL, or open the corresponding file, if it's xah site.
-
-Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported."
-  (interactive)
-  (let (
-        (ξs
-         (xah-remove-uri-fragment
-          (if (use-region-p)
-              (buffer-substring-no-properties (region-beginning) (region-end))
-            (let (p0 p1 p2)
-              (setq p0 (point))
-              ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-              (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-              (setq p1 (point))
-              (goto-char p0)
-              (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-              (setq p2 (point))
-              (goto-char p0)
-              (buffer-substring-no-properties p1 p2)))))
-        fPath )
-
-    (if (string-equal ξs "")
-        (progn (message "No path under cursor"))
-      (progn
-
-        ;; convenience. if the input string start with a xah domain name, make it a url string
-        (setq ξp
-              (cond
-               ((string-match "\\`//" ξs ) (concat "http:" ξs)) ; relative http protocol, used in css
-               ((string-match "\\`ergoemacs\\.org" ξs ) (concat "http://" ξs))
-               ((string-match "\\`wordyenglish\\.com" ξs ) (concat "http://" ξs))
-               ((string-match "\\`xaharts\\.org" ξs ) (concat "http://" ξs))
-               ((string-match "\\`xahlee\\.info" ξs ) (concat "http://" ξs))
-               ((string-match "\\`xahlee\\.org" ξs ) (concat "http://" ξs))
-               ((string-match "\\`xahmusic\\.org" ξs ) (concat "http://" ξs))
-               ((string-match "\\`xahporn\\.org" ξs ) (concat "http://" ξs))
-               ((string-match "\\`xahsl\\.org" ξs ) (concat "http://" ξs))
-               (t ξs)))
-
-        (if (string-match-p "\\`https?://" ξp)
-            (if (xahsite-url-is-xah-website-p ξp)
-                (let ((ξfp (xahsite-url-to-filepath ξp )))
-                  (if (file-exists-p ξfp)
-                      (find-file ξfp)
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp)) (find-file ξfp))))
-              (browse-url ξp))
-          (progn ; not starting “http://”
-            (let ((ξfff (xahsite-web-path-to-filepath ξp default-directory)))
-              (if (file-exists-p ξfff)
-                  (progn (find-file ξfff))
-                (if (file-exists-p (concat ξfff ".el"))
-                    (progn (find-file (concat ξfff ".el")))
-                  (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfff)) (find-file ξfff )))))))))))
-
-(defun xah-open-file-from-clipboard ()
-  "Open the file path from OS's clipboard.
-The clipboard should contain a file path or url to xah site. Open that file in emacs."
-  (interactive)
-  (let (
-        (ξs
-         (with-temp-buffer
-           (yank)
-           (buffer-string)))
-        fpath
-        )
-
-    (if (string-match-p "\\`http://" ξs)
-        (progn
-          (setq fpath (xahsite-url-to-filepath ξs "addFileName"))
-          (if (file-exists-p fpath)
-              (progn (find-file fpath))
-            (progn (error "file doesn't exist 「%s」" fpath))))
-      (progn ; not starting “http://”
-        (setq ξs (xah-remove-uri-fragment ξs))
-        (setq fpath (xahsite-web-path-to-filepath ξs default-directory))
-        (if (file-exists-p fpath)
-            (progn (find-file fpath))
-          (progn (user-error "file doesn't exist 「%s」" fpath)))))))
-
-(defun xah-browse-url-at-point ()
-"Switch to web browser and load the URL at cursor position.
-This code is designed to work on Mac OS X only.
-
-If the cursor is on a URL, visit it
-http://mathforum.org/library/topics/conic_g/
-for certain domain, use particular browser.
-
-If the cursor is on like one of the following
- /somedir/somefile.html or
-~/web/somedir/somefile.html
-use FireFox to visit it as local file (construct the proper URL)."
- (interactive)
- (let ((myStr (elt (get-selection-or-unit 'url) 0) ))
- (setq myStr (replace-regexp-in-string "&amp;" "&" myStr))
-
-   ;; on Mac, map specific links to particular browser
-   ;; (cond
-   ;;  ((string-match "flickr.com/" myStr) (shell-command (concat "open -a safari " "\"" myStr "\"")))
-   ;;  ((string-match "blogspot.com/" myStr) (shell-command (concat "open -a safari " "\"" myStr "\"")))
-   ;;  ((string-match "livejournal.com/" myStr) (shell-command (concat "open -a safari " "\"" myStr "\"")))
-   ;;  ((string-match "yahoo.com/" myStr) (shell-command (concat "open -a safari " "\"" myStr "\"")))
-   ;;  (t (browse-url myStr)))
-
-   (browse-url myStr)
-   ))
 
 
 
@@ -758,3 +607,56 @@ then call this command."
   (if (region-active-p)
       (font-lock-unfontify-region (region-beginning) (region-end))
     (font-lock-unfontify-buffer)))
+
+;; (defun overlay-key-binding (key)
+;; 2014-10-11 from http://stackoverflow.com/questions/18801018/how-to-find-in-which-map-a-key-binding-is-from-programatically-in-emacs
+;;   (mapcar (lambda (keymap) (lookup-key keymap key))
+;;           (cl-remove-if-not
+;;            #'keymapp
+;;            (mapcar (lambda (overlay)
+;;                      (overlay-get overlay 'keymap))
+;;                    (overlays-at (point))))))
+
+;; (defun xah-find-keybinding-source (φkey)
+;; " 2014-10-11 from http://stackoverflow.com/questions/18801018/how-to-find-in-which-map-a-key-binding-is-from-programatically-in-emacs"
+;;   (list
+;;    (minor-mode-key-binding φkey)
+;;    (local-key-binding φkey)
+;;    (global-key-binding φkey)
+;;    ;; (overlay-key-binding φkey)
+;;    ))
+
+;; (xah-find-keybinding-source (kbd "<end> q"))
+
+(defun locate-key-binding (key)
+  "Determine in which keymap KEY is defined.
+2014-10-11 http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-a-key-is-bound"
+  (interactive "kPress key: ")
+  (let ((ret
+         (list
+          (key-binding-at-point key)
+          (minor-mode-key-binding key)
+          (local-key-binding key)
+          (global-key-binding key))))
+    (when (called-interactively-p 'any)
+      (message "At Point: %s\nMinor-mode: %s\nLocal: %s\nGlobal: %s"
+               (or (nth 0 ret) "")
+               (or (mapconcat (lambda (x) (format "%s: %s" (car x) (cdr x)))
+                              (nth 1 ret) "\n             ")
+                   "")
+               (or (nth 2 ret) "")
+               (or (nth 3 ret) "")))
+    ret))
+
+(defun key-binding-at-point (key)
+"2014-10-11
+http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-a-key-is-bound"
+  (mapcar (lambda (keymap) (lookup-key keymap key))
+          (cl-remove-if-not
+           #'keymapp
+           (append
+            (mapcar (lambda (overlay)
+                      (overlay-get overlay 'keymap))
+                    (overlays-at (point)))
+            (get-text-property (point) 'keymap)
+            (get-text-property (point) 'local-map)))))
