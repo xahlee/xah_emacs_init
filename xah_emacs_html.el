@@ -32,41 +32,42 @@
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
-Add today's date to the byline tag of current file, also delete the last one if there are more than one."
+Add today's date to the byline tag of current file, also delete the last one if there are more than one.
+WARNING: This command saves buffer if it's a file."
   (interactive)
   (let (p1 p2 ξnum )
-    (progn
-      (goto-char 1)
-      (when (search-forward "<div class=\"byline\">" nil)
-        (setq p1 (point))
-        (backward-char 1)
-        (sgml-skip-tag-forward 1)
-        ;; (search-forward "</time></div>")
-        (setq p2 (point))
+    (goto-char 1)
+    (when (search-forward "<div class=\"byline\">" nil)
+      (setq p1 (point))
+      (backward-char 1)
+      (sgml-skip-tag-forward 1)
+      ;; (search-forward "</time></div>")
+      (setq p2 (point))
 
-        (setq ξnum (count-matches "<time>" p1 p2 ))
+      (setq ξnum (count-matches "<time>" p1 p2 ))
 
-        ;; if there are more than 1 “time” tag, delete the last one
-        (when (> ξnum 1)
-          (let (p3 p4)
-            (goto-char p2)
-            (search-backward "</time>")
-            (setq p4 (+ (point) 7))
-            (search-backward "<time>")
-            (setq p3 (point))
-            (delete-region p3 p4 )))
+      ;; if there are more than 1 “time” tag, delete the last one
+      (when (> ξnum 1)
+        (let (p3 p4)
+          (goto-char p2)
+          (search-backward "</time>")
+          (setq p4 (+ (point) 7))
+          (search-backward "<time>")
+          (setq p3 (point))
+          (delete-region p3 p4 )))
 
-        ;; insert new time
-        (goto-char p2)
-        (search-backward "</div>")
-        (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
+      ;; insert new time
+      (goto-char p2)
+      (search-backward "</div>")
+      (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
 
-        ;; remove repeated comma separator
-        (replace-pairs-region p1 (line-end-position) [ [", , " ", "] ])
-        (replace-pairs-region p1 (line-end-position) [ ["</time>, <time>" "</time>, …, <time>"] ])
+      ;; remove repeated comma separator
+      (replace-pairs-region p1 (line-end-position) [ [", , " ", "] ])
+      (replace-pairs-region p1 (line-end-position) [ ["</time>, <time>" "</time>, …, <time>"] ])
 
-        (message "%s" (buffer-substring-no-properties p1 (line-end-position)))
-        (search-backward "<time>")))))
+      (message "%s" (buffer-substring-no-properties p1 (line-end-position)))
+      (search-backward "<time>")
+      (when (buffer-file-name) (save-buffer)))))
 
 (defun xahsite-update-page-tag-old (φp1 φp2)
   "Update HTML page navigation tags.

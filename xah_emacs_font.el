@@ -13,35 +13,23 @@
 
 
 
-;; use variable-width font for some modes
-(defun xah-font-change ()
-  "Set current buffer to use variable-width font."
-  (variable-pitch-mode 1)
-  ;; (text-scale-increase 0.5 )
-  )
-
-;; (add-hook 'xah-html-mode-hook 'xah-font-change)
-
-
-
 (defun xah-cycle-font-2 (φn)
   "Change font in current window between 2 fonts."
   (interactive "p")
-  ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
+  ;; this function sets a property “state”. It is a integer. Possible values are 0 to length of ξ-font-list
   (let (
-        (ξ-font-list (list "DejaVu Sans Mono-10" "DejaVu Sans-10" ))
-        fontToUse
-        stateBefore
-        stateAfter )
+        (ξ-font-list '("DejaVu Sans Mono-10" "DejaVu Sans-10"))
+        ξfontToUse
+        ξstateBefore
+        ξstateAfter)
 
-    (setq stateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
-    (setq stateAfter (% (+ stateBefore (length ξ-font-list) φn) (length ξ-font-list)))
-    (put 'xah-cycle-font-2 'state stateAfter)
+    (setq ξstateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
+    (setq ξstateAfter (% (+ ξstateBefore (length ξ-font-list) φn) (length ξ-font-list)))
+    (put 'xah-cycle-font-2 'state ξstateAfter)
 
-    (setq fontToUse (nth stateAfter ξ-font-list))
-    ;; (set-frame-font fontToUse t)
-    (set-frame-parameter nil 'font fontToUse)
-    (message "Current font is: %s" fontToUse )))
+    (setq ξfontToUse (nth ξstateAfter ξ-font-list))
+    (set-frame-parameter nil 'font ξfontToUse)
+    (message "Font set to: %s" ξfontToUse)))
 
 
 
@@ -80,15 +68,15 @@ If φn is -1, cycle backward.
 See also `xah-cycle-font-next', `xah-cycle-font-previous'."
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
-  (let (fontToUse stateBefore stateAfter )
-    (setq stateBefore (if (get 'xah-cycle-font 'state) (get 'xah-cycle-font 'state) 0))
-    (setq stateAfter (% (+ stateBefore (length ξ-font-list) φn) (length ξ-font-list)))
+  (let (ξfontToUse ξstateBefore ξstateAfter )
+    (setq ξstateBefore (if (get 'xah-cycle-font 'state) (get 'xah-cycle-font 'state) 0))
+    (setq ξstateAfter (% (+ ξstateBefore (length ξ-font-list) φn) (length ξ-font-list)))
 
-    (setq fontToUse (nth stateAfter ξ-font-list))
-    (set-frame-font fontToUse t)
-    ;; (set-frame-parameter nil 'font fontToUse)
-    (message "Current font is: %s" fontToUse )
-    (put 'xah-cycle-font 'state stateAfter)))
+    (setq ξfontToUse (nth ξstateAfter ξ-font-list))
+    (set-frame-font ξfontToUse t)
+    ;; (set-frame-parameter nil 'font ξfontToUse)
+    (message "Current font is: %s" ξfontToUse )
+    (put 'xah-cycle-font 'state ξstateAfter)))
 
 (defun xah-cycle-font-next ()
   "Switch to the next font, in current window.
@@ -124,7 +112,7 @@ This command is convenient when reading novel, documentation."
 (defun xah-toggle-read-novel-mode ()
   "Setup current window to be suitable for reading long novel/article text.
 
-• Line wrap at word boundaries. 
+• Line wrap at word boundaries.
 • Set a right margin.
 • line spacing is increased.
 • variable width font is used.
@@ -133,7 +121,7 @@ Call again to toggle back."
   (interactive)
   (if (null (get this-command 'state-on-p))
       (progn
-        (set-window-margins nil 0 
+        (set-window-margins nil 0
                             (if (> fill-column (window-body-width))
                                 0
                               (progn
