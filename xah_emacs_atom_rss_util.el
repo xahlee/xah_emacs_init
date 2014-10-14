@@ -94,7 +94,7 @@ Other files paths for blogs are:
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'block))
-         (inputStr (elt bds 0))
+         (ξinputStr (elt bds 0))
          (p1 (elt bds 1))
          (p2 (elt bds 2))
          (p3)
@@ -105,25 +105,25 @@ Other files paths for blogs are:
               (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" currentFilePath "FIXEDCASE" "LITERAL")
             (replace-regexp-in-string "\\.html\\'" ".xml" currentFilePath "FIXEDCASE" "LITERAL")))
          (titleText
-          (if (string-match "<h3>\\([^<]+?\\)</h3>" inputStr)
-              (progn (match-string 1 inputStr ))
+          (if (string-match "<h3>\\([^<]+?\\)</h3>" ξinputStr)
+              (progn (match-string 1 ξinputStr ))
             (progn
-              (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" inputStr)
-                  (progn (match-string 2 inputStr))
+              (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" ξinputStr)
+                  (progn (match-string 2 ξinputStr))
                 (progn "�")))))
 
          (altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
-          (let ( (myurls (xhm-extract-url inputStr)) firstLink1)
+          (let ( (myurls (xhm-extract-url ξinputStr)) ξfirstLink1)
             (if (>= (length myurls) 1)
                 (progn
-                  (setq firstLink1 (elt myurls 0))
-                  (if (string-match-p "\\`https?://" firstLink1)
-                      (if (xahsite-url-is-xah-website-p firstLink1)
-                          (xahsite-filepath-to-href-value (xahsite-url-to-filepath firstLink1 "addFileName") currentFilePath)
-                        firstLink1
+                  (setq ξfirstLink1 (elt myurls 0))
+                  (if (string-match-p "\\`https?://" ξfirstLink1)
+                      (if (xahsite-url-is-xah-website-p ξfirstLink1)
+                          (xahsite-filepath-to-href-value (xahsite-url-to-filepath ξfirstLink1 "addFileName") currentFilePath)
+                        ξfirstLink1
                         )
                     (xahsite-filepath-to-href-value
-                     (expand-file-name firstLink1 (file-name-directory currentFilePath ))
+                     (expand-file-name ξfirstLink1 (file-name-directory currentFilePath ))
                      currentFilePath)))
               (xahsite-filepath-to-url currentFilePath)))))
 
@@ -135,7 +135,7 @@ Other files paths for blogs are:
     (search-forward "<entry>" nil t)
     (beginning-of-line)
     (setq p3 (point))
-    (insert-atom-entry titleText (new-atom-id-tag) summaryText inputStr altURL)
+    (insert-atom-entry titleText (new-atom-id-tag) summaryText ξinputStr altURL)
     (search-backward "</summary>")
 
   ;    (when (not (search-forward "�" nil t) ) (progn (goto-char p3)))

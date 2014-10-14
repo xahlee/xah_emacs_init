@@ -1,6 +1,5 @@
 ;; -*- coding: utf-8 -*-
 ;; emacs customization for command aliases
-;;
 ;; Xah Lee ; 2007-06
 
 ; shortening of often used commands
@@ -37,10 +36,3 @@
 (defalias '8d 'xwe-add-definition)
 (defalias '8s 'xwe-add-source)
 (defalias '8c 'xwe-add-comment)
-
-(defalias 'ip 'insert-php-tag)
-
-(defalias 'wc 'xah-count-words-region-or-line)
-;; (defalias 'cp 'xah-copy-to-register-1)
-;; (defalias 'pt 'insert-register-content-1)
-
