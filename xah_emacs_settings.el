@@ -36,6 +36,7 @@
         (tool-bar-lines . 0)
         (width . 92)
         (height . 52)
+        (background-color . "honeydew")
         ))
 
 ;; set default font
@@ -134,9 +135,6 @@
 ;;  ;; '(xlsl-mode-format-style 1)
 ;;  ;; '(xlsl-reference-url "http://lslwiki.net/lslwiki/wakka.php?wakka=")
 ;; )
-
-
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

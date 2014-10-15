@@ -246,7 +246,8 @@
     ("alt" "alternative")
 
     ("wd" "web development")
-    ("dev" "develop")
+    ("dvp" "develop")
+    ("dev" "development")
     ("p" "program")
     ("pl" "programing language")
     ("paren" "parenthesis")
