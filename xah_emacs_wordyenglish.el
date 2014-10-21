@@ -90,7 +90,7 @@ Using current word or text selection."
     (setq bds (get-selection-or-unit 'word))
     (setq ξstr (elt bds 0) )
 
-    (setq str2 (asciify-text ξstr) )
+    (setq str2 (xah-asciify-string ξstr) )
     (search-forward "\n\n" nil t)
     (search-backward "</div>")
     (insert "<div class=\"def\"></div>\n")

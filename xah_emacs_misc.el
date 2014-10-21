@@ -172,7 +172,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("xx wordy english blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
         ("xx xah arts blog" . "~/web/xaharts_org/arts/xx_art_blog.html")
         ("xx music" . "~/web/xahmusic_org/music/xx-music_blog.html")
-
+        ("piano" . "~/web/xahmusic_org/piano/index.html")
 
         ("web design" . "~/web/xahlee_info/js/web_design_index.html")
         ("web index" . "~/web/xahlee_info/js/index.html")

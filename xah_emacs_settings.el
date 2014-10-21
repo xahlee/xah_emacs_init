@@ -59,6 +59,10 @@
   )
  )
 
+;; specify font for all unicode characters
+(when (member "Symbola" (font-family-list))
+  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+
 ;; Emacs Lisp: Determine OS, Emacs Version, Machine Host Name
 ;; http://ergoemacs.org/emacs/elisp_determine_OS_version.html
 
@@ -93,11 +97,6 @@
 
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
-
-
-;; specify font for all unicode characters
-(when (member "Symbola" (font-family-list))
-  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
 
 
 ;; 2009-09-29 see http://groups.google.com/group/ergoemacs/msg/9eec3b455cab3ff1 and http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start

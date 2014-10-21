@@ -103,27 +103,27 @@ Example call:
    )
   )
 
-(defun dailymotion-video-linkify ()
-  "Make the current line into a embeded HTML video object.
+;; (defun dailymotion-video-linkify ()
+;;   "Make the current line into a embeded HTML video object.
 
-Example, if the current line is:
-http://www.dailymotion.com/video/xz3am_white-rabbit-jefferson-airplane-li_music
+;; Example, if the current line is:
+;; http://www.dailymotion.com/video/xz3am_white-rabbit-jefferson-airplane-li_music
 
-it becomes
-<object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/xz3am\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/xz3am\"><param name=\"allowFullScreen\" value=\"true\"></object>"
-	(interactive)
-	(let (p1 p2 inputStr tmp vID)
-    (setq p1 (line-beginning-position) )
-    (setq p2 (line-end-position) )
-    (setq inputStr (buffer-substring-no-properties p1 p2))
+;; it becomes
+;; <object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/xz3am\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/xz3am\"><param name=\"allowFullScreen\" value=\"true\"></object>"
+;; 	(interactive)
+;; 	(let (p1 p2 inputStr tmp vID)
+;;     (setq p1 (line-beginning-position) )
+;;     (setq p2 (line-end-position) )
+;;     (setq inputStr (buffer-substring-no-properties p1 p2))
 
-    (setq tmp (replace-regexp-in-string "http://www\\.dailymotion\\.com/video/" "" inputStr))
-    (setq tmp (car (split-string tmp "_")))
-    (setq vID tmp)
+;;     (setq tmp (replace-regexp-in-string "http://www\\.dailymotion\\.com/video/" "" inputStr))
+;;     (setq tmp (car (split-string tmp "_")))
+;;     (setq vID tmp)
 
-    (delete-region p1 p2)
-    (insert (dailymotion-video-string vID)
-            ) ))
+;;     (delete-region p1 p2)
+;;     (insert (dailymotion-video-string vID)
+;;             ) ))
 
 (defun vimeo-linkify ()
   "Make the current line into a embeded HTML video object.

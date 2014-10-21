@@ -34,25 +34,6 @@ This command is dumb, it'll not ignore brackets inside comment or string."
     (backward-char 1)
   ))
 
-(defun xah-forward-comment (φcount)
-  "Call `forward-comment' interactively.
-
-when called interactively with no argument, call
- (forward-comment 1)
-Or with argument from `universal-argument'.
-
-Note: a comment is considered a unit, starting with comment char and end with comment end char.
-The command ignore whether cursor is currently inside a comment, also ignore if cursor is inside a string (stupid). It just go forward (when φcount is positive) and look for commet start char.
-
-test cases:
-
-\"so ▮; x\"
-"
-  (interactive "p")
-  (progn
-    (prin1 (forward-comment φcount))
-  ))
-
 (defun xah-scan-list (φcount φcurrent-depth)
   "Call `scan-lists' interactively.
 scan-list basically move by n number of bracket groups.
@@ -144,3 +125,21 @@ Note:
     ξstate
 
     ))
+
+(defun xah-forward-comment (φcount)
+  "Call `forward-comment' interactively.
+
+when called interactively with no argument, call
+ (forward-comment 1)
+Or with argument from `universal-argument'.
+
+Note: a comment is considered a unit, starting with comment char and end with comment end char.
+The command ignore whether cursor is currently inside a comment, also ignore if cursor is inside a string (stupid). It just go forward (when φcount is positive) and look for commet start char.
+
+test cases:
+
+\"so ▮; x\"
+"
+  (interactive "p")
+  (progn
+    (prin1 (forward-comment φcount))))

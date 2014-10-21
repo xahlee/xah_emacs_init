@@ -296,7 +296,7 @@
     ("utf8" "-*- coding: utf-8 -*-")
     ("ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
-    ("php" "<?php\n\n?>")
+    ("8php" "<?php\n\n?>")
 
     
 ;;; unix shell
