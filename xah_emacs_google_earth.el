@@ -162,14 +162,6 @@ becomes 「[37.44345 -6.253966666666667]」"
 
 ;;     ))
 
-(defun xah-trim-string (φstring)
-  "Remove white spaces in beginning and ending of φstring.
-White space here is any of: space, tab, emacs newline (line feed, ASCII 10).
-
-Note: in emacs GNU Emacs 24.4+ and later, there's `string-trim' function. You need to (require 'subr-x).
-"
-  (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" "" φstring)))
-
 (defun make-google-earth ()
 "Create a KML file and replace the current line as a link to it.
 
@@ -195,8 +187,8 @@ The KML file will be created at:
        (kmlDirRoot (concat (xahsite-server-root-path) "xaharts_org/kml/"))
        (titleCoordList (split-string inputStr "/"))
        (kmlFileTitle (elt titleCoordList 0))
-       (coord-y (trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 1))))
-       (coord-x (trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 2))))
+       (coord-y (xah-trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 1))))
+       (coord-x (xah-trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 2))))
        (kmlFilePath (concat kmlDirRoot (xah-asciify-string (replace-pairs-in-string (xah-trim-string (elt (split-string kmlFileTitle ",") 0)) [[" " "_"] ["," "_"]])) ".kml"))
        doit-p
        )

@@ -42,7 +42,7 @@ Then it'll become:
   (interactive)
   (let* (
     (bds (get-selection-or-unit 'line))
-    (ξinput (trim-string (elt bds 0)) )
+    (ξinput (xah-trim-string (elt bds 0)) )
     (p1 (elt bds 1) )
     (p2 (elt bds 2) )
     ξinfoStr linkText
