@@ -85,6 +85,13 @@
 (setq org-startup-folded nil)
 (setq org-return-follows-link t)
 
+(when (fboundp 'eww)
+  (progn
+    (defun xah-rename-eww-hook ()
+      "Rename eww browser's buffer so sites open in new page."
+      (rename-buffer "eww" t))
+    (add-hook 'eww-mode-hook 'xah-rename-eww-hook)))
+
 
 
 ;; (which-function-mode 1) ; show current function in mode line

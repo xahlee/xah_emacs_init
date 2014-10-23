@@ -14,8 +14,7 @@
 (defalias 'g 'grep)
 (defalias 'ds 'desktop-save)
 (defalias 'dt 'desktop-save)
-(defalias 'dtm 'desktop-mode)
-(defalias 'dsm 'delete-selection-mode)
+(defalias 'dsm 'desktop-save-mode)
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)

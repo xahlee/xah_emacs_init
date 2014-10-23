@@ -105,7 +105,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("porn blog" . "~/web/xahporn_org/porn/blog.html" )
 
         ("twitter" . "~/Dropbox/twitter tweets.txt" )
-        ("emacs keys" . "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
         ("abbrev" . "~/git/xah_emacs_init/xah_emacs_abbr.el" )
         ("xah fly keys git" . "~/git/xah-fly-keys/xah-fly-keys.el")
         ("xah fly keys site" . "~/web/ergoemacs_org/misc/ergoemacs_vi_mode.html")
@@ -138,6 +137,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
         ("emacs tutorial" . "~/web/ergoemacs_org/emacs/emacs.html")
         ("elisp tutorial" . "~/web/ergoemacs_org/emacs/elisp.html")
+        ("emacs how to bindkey" . "~/web/ergoemacs_org/emacs/keyboard_shortcuts.html" )
         ("perl" . "~/web/xahlee_info/perl/perl_index.html")
         ("php" . "~/web/xahlee_info/php/php_basics.html")
         ("python" . "~/web/xahlee_info/perl-python/index.html")
@@ -628,7 +628,7 @@ then call this command."
 
 ;; (xah-find-keybinding-source (kbd "<end> q"))
 
-(defun locate-key-binding (key)
+(defun xxlocate-key-binding (key)
   "Determine in which keymap KEY is defined.
 2014-10-11 http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-a-key-is-bound"
   (interactive "kPress key: ")
@@ -648,7 +648,7 @@ then call this command."
                (or (nth 3 ret) "")))
     ret))
 
-(defun key-binding-at-point (key)
+(defun xxkey-binding-at-point (key)
 "2014-10-11
 http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-a-key-is-bound"
   (mapcar (lambda (keymap) (lookup-key keymap key))
