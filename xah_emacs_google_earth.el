@@ -59,19 +59,19 @@ Here's a sample inserted text:
   (interactive)
   (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if φfilePath (xahsite-filepath-to-url φfilePath) "�") (if φtitle φtitle "�") )) )
 
-(defun insert-kml (&optional φ-kml-title φ-lon-lat φ-source-fpath)
+(defun insert-kml (&optional φkml-title φlon-lat φsource-fpath)
   "Insert a simple Google Earth KML markup template.
  ΞKMLTITLE is the name to use for the <name> tag.
-φ-lon-lat is a vector [longitude latitude]. They must be real numbers.
+φlon-lat is a vector [longitude latitude]. They must be real numbers.
  SOURCEFILEPATH is the file that links to this kml file,
 used in the <description> tag."
   (interactive)
   (let (coord-x coord-y)
-    (when (not φ-kml-title) (setq φ-kml-title "�"))
-    (if φ-lon-lat
+    (when (not φkml-title) (setq φkml-title "�"))
+    (if φlon-lat
         (progn
-          (setq coord-x (elt φ-lon-lat 0))
-          (setq coord-y (elt φ-lon-lat 1))
+          (setq coord-x (elt φlon-lat 0))
+          (setq coord-y (elt φlon-lat 1))
           )
       (progn
         (setq coord-x 0)
@@ -90,8 +90,8 @@ used in the <description> tag."
 </Placemark>
 </kml>
 "
-             φ-kml-title
-             (if φ-source-fpath (format "See: %s" (xahsite-filepath-to-url φ-source-fpath)) "")
+             φkml-title
+             (if φsource-fpath (format "See: %s" (xahsite-filepath-to-url φsource-fpath)) "")
              (number-to-string coord-x)
              (number-to-string coord-y) ) )))
 
@@ -215,10 +215,10 @@ The KML file will be created at:
 
 
 
-(defun insert-ggb-link (φ-file-core-name φ-file-title)
+(defun insert-ggb-link (φfile-core-name φfile-title)
   "Insert HTML link to GeoGebra (“.ggb”) file."
   (interactive)
-  (insert "<a class=\"ggb\" href=\"../ggb/" φ-file-core-name ".html\">" φ-file-title "</a>"))
+  (insert "<a class=\"ggb\" href=\"../ggb/" φfile-core-name ".html\">" φfile-title "</a>"))
 
 (defun make-ggb ()
 "Create a Geogebra file set and link.

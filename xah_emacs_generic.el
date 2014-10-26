@@ -35,12 +35,10 @@ This command works on unixes only."
 For example, if the current buffer is the file x.java,
 then it'll call “java x” in a shell."
   (interactive)
-  (let (fnm prog-name cmd-str)
-    (setq fnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
-    (setq prog-name "java")
-    (setq cmd-str (concat prog-name " " fnm " &"))
-    (shell-command cmd-str))
-  )
+  (let* (
+         (fnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
+         (prog-name "java"))
+    (shell-command (concat prog-name " " fnm " &"))))
 
 (defun xah-python-2to3-current-file ()
   "Convert current buffer from python 2 to python 3.

@@ -150,11 +150,11 @@ For reverse, see `xahsite-href-value-to-filepath'.
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/index.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" )
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" "c:/Users/h3/web/ergoemacs_org/index.html" )
 
-(defun xahsite-href-value-to-filepath (φhref-value φ-host-file-path)
+(defun xahsite-href-value-to-filepath (φhref-value φhost-file-path)
   "Returns the file path of a link to xah website.
 
 φhref-value is the link string, in 「href=\"…\"」. The value can be a URL to xahsite or relative path.
-φ-host-file-path is a full path of the host file name or its dir.
+φhost-file-path is a full path of the host file name or its dir.
 
 For reverse, see `xahsite-filepath-to-href-value'.
 See also: `xahsite-url-to-filepath'
@@ -162,14 +162,14 @@ See also: `xahsite-url-to-filepath'
   (if (string-match-p "\\`http://" φhref-value)
       (progn (xahsite-url-to-filepath φhref-value "addFileName"))
     (progn
-      (expand-file-name φhref-value (file-name-directory φ-host-file-path )))))
+      (expand-file-name φhref-value (file-name-directory φhost-file-path )))))
 ;; test
 ;; (xahsite-href-value-to-filepath "http://xahlee.org/Netiquette_dir/death_of_a_troll.html" "c:/Users/h3/web/xahlee_info/comp/Google_Tech_Talk_Lisp_At_JPL_by_Ron_Garret.html")
 
-(defun xahsite-url-to-filepath (φxahsiteURL &optional φ-add-file-name φredirect)
+(defun xahsite-url-to-filepath (φxahsiteURL &optional φadd-file-name φredirect)
   "Returns the file path of a xah website URL φxahsiteURL.
 
-If the optional argument φ-add-file-name is true, then append “index.html” if the resulting path is a dir.
+If the optional argument φadd-file-name is true, then append “index.html” if the resulting path is a dir.
 If the optional argument φredirect is true, then also consider result of http redirect.
 
 This function does not check input is actually a URL, nor if the result path file exists."
@@ -182,7 +182,7 @@ This function does not check input is actually a URL, nor if the result path fil
   (let ((ξurl φxahsiteURL) ξfPath)
     (setq ξurl (xah-remove-uri-fragment ξurl)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
     (when φredirect (setq ξurl (xahsite-url-remap ξurl)))
-    (when φ-add-file-name (setq ξurl (replace-regexp-in-string "/\\'" "/index.html" ξurl)))
+    (when φadd-file-name (setq ξurl (replace-regexp-in-string "/\\'" "/index.html" ξurl)))
     ;; (replace-regexp-in-string "%27" "'" (xah-remove-uri-fragment ξurl))
 
     (setq ξfPath
@@ -463,18 +463,18 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
   "Returns t if φpath ends in .jpg .png .gif .svg, else nil."
   (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" φpath))
 
-(defun xahsite-generate-sitemap (φ-domain-name)
+(defun xahsite-generate-sitemap (φdomain-name)
   "Generate a sitemap.xml.gz file of xahsite at doc root.
-φ-domain-name must match a existing one."
+φdomain-name must match a existing one."
   (interactive
    (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" ))))
   (let (
         (ξ-sitemapFileName "sitemap" )
-        (ξ-websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" φ-domain-name "FIXEDCASE" "LITERAL") "/")))
+        (ξ-websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" φdomain-name "FIXEDCASE" "LITERAL") "/")))
 
     (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
 
-    ;; rename file to backup ~ if already exist
+    ;; rename sitemap file to backup ~ if already exist
     (let* (
            (f1 (concat ξ-websiteDocRootPath ξ-sitemapFileName ".xml"))
            (f2 (concat f1 ".gz")))
@@ -508,7 +508,7 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
              (when (not (search-forward "<meta http-equiv=\"refresh\"" nil "noerror"))
                (with-current-buffer ξsitemapBuffer
                  (insert "<url><loc>")
-                 (insert (concat "http://" φ-domain-name "/" (substring ξf (length ξ-websiteDocRootPath))))
+                 (insert (concat "http://" φdomain-name "/" (substring ξf (length ξ-websiteDocRootPath))))
                  (insert "</loc></url>\n"))))))
        (find-lisp-find-files ξ-websiteDocRootPath "\\.html$"))
 
