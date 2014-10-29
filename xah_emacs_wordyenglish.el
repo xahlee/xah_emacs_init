@@ -15,9 +15,9 @@
 (defun xwe-move-word-to-page (φmoveCode)
   "take current selection or block of text, ask which page to move it to."
   (interactive "sEnter a character: [s]sat [g]gre [w]writer [e]easy [a]arcane [l]slang [i]informal [h]hyphen [c]combo [n]noun [t]noun things [8]noun abstract [p]poesy [f]foreign [3]special:")
-  (let (p1 p2 bds ξfile ξwordText)
-    (setq bds (get-selection-or-unit 'block))
-    (setq ξwordText (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
+  (let (p1 p2 ξbds ξfile ξwordText)
+    (setq ξbds (get-selection-or-unit 'block))
+    (setq ξwordText (elt ξbds 0) p1 (elt ξbds 1) p2 (elt ξbds 2))
 
     (cond
      ((string= φmoveCode "3") (setq ξfile "specialwords.html" ))
@@ -36,12 +36,11 @@
      ((string= φmoveCode "s") (setq ξfile "satwords.html" ))
      ((string= φmoveCode "w") (setq ξfile "writerwords.html" ))
 
-     (t (user-error "Your letter 「%s」 is not one of the allowed" φmoveCode ))
-     )
+     (t (user-error "Your letter 「%s」 is not one of the allowed" φmoveCode )))
 
     (delete-region p1 p2 )
 
-    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξfile) )
+    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξfile))
     (goto-char 1)
     (search-forward "<section class=\"word-α\">") (search-backward "<")
     (insert ξwordText "\n\n")
@@ -50,22 +49,21 @@
     (message "Word moved to 「%s」" ξfile)
 
     (let*
-      ;; save the working buffer, but make backup first
-          ((currentFileName (buffer-file-name))
-           (backupFileName (concat currentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~")) )
-        (copy-file currentFileName backupFileName t)
-        (save-buffer ) ) ) )
+        ;; save the working buffer, but make backup first
+        ((currentFileName (buffer-file-name))
+         (backupFileName (concat currentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
+      (copy-file currentFileName backupFileName t)
+      (save-buffer ))))
 
 (defun xwe-new-word-entry ()
   "Insert a blank a-word-a-day HTML template in a paritcular file."
   (interactive)
 
-  (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/new.html") )
+  (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/new.html"))
   (goto-char 1)
   (search-forward "<section class=\"word-α\">") (search-backward "<")
   (insert "\n\n")
-  (xwe-insert-word-entry)
-  )
+  (xwe-insert-word-entry))
 
 (defun xwe-insert-word-entry ()
   "Insert a blank a-word-a-day HTML template."
@@ -79,52 +77,48 @@
 </div>\n</section>\n\n")
   (re-search-backward "class=\"bdy\">" nil t)
   (forward-char 12)
-  (yank)
-)
+  (yank))
 
 (defun xwe-add-definition ()
   "Insert a word definition entry template.
 Using current word or text selection."
   (interactive)
-  (let (bds p1 p2 ξstr str2)
-    (setq bds (get-selection-or-unit 'word))
-    (setq ξstr (elt bds 0) )
+  (let (ξbds p1 p2 ξstr str2)
+    (setq ξbds (get-selection-or-unit 'word))
+    (setq ξstr (elt ξbds 0))
 
-    (setq str2 (xah-asciify-string ξstr) )
+    (setq str2 (xah-asciify-string ξstr))
     (search-forward "\n\n" nil t)
     (search-backward "</div>")
     (insert "<div class=\"def\"></div>\n")
     (search-backward "</div>")
-    (insert ξstr " = ")
-    ))
+    (insert ξstr " = ")))
 
 (defun xwe-add-source ()
   "Insert a word definition entry template.
 Using current word or text selection."
   (interactive)
-  (let (bds p1 p2)
+  (let (ξbds p1 p2)
     (require 'sgml-mode) ; for sgml-skip-tag-forward
     (search-backward "<section class=\"word-α\">")
     (search-forward "<div class=\"bdy\">")
     (backward-char 1)
     (sgml-skip-tag-forward 1)
     (insert "\n<div class=\"src\"></div>")
-    (backward-char 6)
-    ))
+    (backward-char 6)))
 
 (defun xwe-add-comment ()
   "Insert a comment entry in wordy-english."
   (interactive)
-  (let ()
+  (progn
     (search-backward "\n\n")
     (search-forward "<div class=\"src\">" nil t)
     (search-forward "</div>" nil t)
     (insert "\n"
-"<div class=\"cmt\">"
-"</div>"
-)
-    (backward-char 6)
-    ))
+            "<div class=\"cmt\">"
+            "</div>"
+            )
+    (backward-char 6)))
 
 (defun xwe-search-next-unbold ()
   "search the next word block that isn't bolded.
@@ -171,56 +165,53 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
   "Make the current Chinese character into several Chinese dictionary links.
 If there's a text selection, use that for input."
   (interactive)
-  (let ( ξchar p1 p2 big5Code templateStr resultStr)
+  (let ( ξchar p1 p2 big5Code templateStr ξresultStr)
 
     (if (use-region-p)
         (progn
-          (setq p1 (region-beginning) )
-          (setq p2 (region-end) )
-          )
+          (setq p1 (region-beginning))
+          (setq p2 (region-end)))
       (progn
-        (setq p1 (point) )
-        (setq p2 (1+ (point)) ) ) )
+        (setq p1 (point))
+        (setq p2 (1+ (point)))))
 
     (setq ξchar (buffer-substring-no-properties p1 p2))
 
     ;; (setq big5Code (encode-char (string-to-char ξchar) 'big5) )
 
     (setq templateStr
-          "<div class=\"cδ\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
+          "<div class=\"chinese-etymology-96656\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
           )
 
-    (setq resultStr (replace-regexp-in-string "�" ξchar templateStr))
+    (setq ξresultStr (replace-regexp-in-string "�" ξchar templateStr))
     (delete-region p1 p2)
-    (insert resultStr) ))
+    (insert ξresultStr)))
 
 (defun xwe-annotate ()
   "Create a annotation in HTML.
 Wrap HTML “span” tag around current word or text selection, then
 insert a div tag above the current paragraph."
   (interactive)
-  (let (bds inputText)
-    (setq bds (get-selection-or-unit 'word))
-    (setq inputText (elt bds 0) )
+  (let (ξbds ξinputText)
+    (setq ξbds (get-selection-or-unit 'word))
+    (setq ξinputText (elt ξbds 0))
     (xhm-wrap-html-tag "span" "xnt")
     (search-backward "<p")
     (insert "<div class=\"xnote\"></div>\n\n")
     (search-backward "</div>")
-    (insert (format "<b class=\"x3nt\">%s</b> " inputText)  )
-    )
-  )
+    (insert (format "<b class=\"x3nt\">%s</b> " ξinputText))))
 
 (defun xwe-word-etymology-linkify ()
   "Make the current word into a etymology reference link.
 ."
   (interactive)
-  (let ( bds p1 p2 inputstr resultStr)
+  (let (ξbds p1 p2 ξinputstr ξresultStr)
 
-    (setq bds (get-selection-or-unit 'line))
-    (setq inputstr (elt bds 0) p1 (elt bds 1) p2 (elt bds 2)  )
-    (setq resultStr (concat "<span class=\"cδe\"><a href=\"http://www.etymonline.com/index.php?search=" inputstr "\">" inputstr "</a></span>") )
+    (setq ξbds (get-selection-or-unit 'line))
+    (setq ξinputstr (elt ξbds 0) p1 (elt ξbds 1) p2 (elt ξbds 2))
+    (setq ξresultStr (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" ξinputstr "\">" ξinputstr "</a></span>"))
     (delete-region p1 p2)
-    (insert resultStr) ))
+    (insert ξresultStr)))
 
 (defun xwe-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.
@@ -228,15 +219,14 @@ Search forward a word enclosed by “<p class=\"wd\">” and “</p>”,
 then search forward it inside the example body, only if it is not
 already bold. Then, ask user whether that should be bold."
   (interactive)
-  (let ()
+  (progn
     (goto-char (point-min))
     (while (search-forward-regexp "<p class=\"wd\">\\([^\<]+\\)</p>" nil t)
       (search-forward-regexp (match-string 1))
       (when (y-or-n-p "Do you want to bold the word?")
         (xhm-wrap-html-tag "span" "w")
         ;;(replace-match "<span class=\"x-w\">\\1</span>" t)
-        ))
-    ))
+        ))))
 
 (defun xwe-find-word-usage (φword)
   "Grep a dir for a word's usage."

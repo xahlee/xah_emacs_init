@@ -176,6 +176,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
         ("web design" . "~/web/xahlee_info/js/web_design_index.html")
         ("web index" . "~/web/xahlee_info/js/index.html")
+        ("clojure" . "~/web/xahlee_info/clojure/clojure_index.html")
 
         ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
         ("xah site move" . "~/git/xahscripts/elisp/xah_site_move.el")
