@@ -11,6 +11,14 @@
     (global-auto-complete-mode 0)
 )
 
+(when (fboundp 'global-company-mode)
+    (global-company-mode 1)
+)
+
+;; (when (fboundp 'projectile-global-mode)
+;;     (projectile-global-mode)
+;; )
+
 ;; (eval-when-compile
 ;;   (when (boundp 'tabbar-mode)
 ;;     (tabbar-mode 0)

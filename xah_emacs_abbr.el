@@ -255,7 +255,7 @@
     ("dirs" "directories")
     ("subdir" "sub-directory")
     ("subdirs" "sub-directories")
-    ("doc" "documentation")
+    ("docm" "documentation")
     ("dl" "download")
     ("char" "character")
     ("chars" "characters")

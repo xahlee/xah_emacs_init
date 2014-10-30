@@ -85,6 +85,8 @@
 (setq org-startup-folded nil)
 (setq org-return-follows-link t)
 
+(add-to-list 'auto-mode-alist '("\\.visi\\'" . clojure-mode))
+
 (when (fboundp 'eww)
   (progn
     (defun xah-rename-eww-hook ()

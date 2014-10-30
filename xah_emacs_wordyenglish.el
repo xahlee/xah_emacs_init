@@ -162,10 +162,10 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
       )))
 
 (defun xwe-chinese-linkify ()
-  "Make the current Chinese character into several Chinese dictionary links.
+  "Make the Chinese char under cursor into Chinese dictionary reference links.
 If there's a text selection, use that for input."
   (interactive)
-  (let ( ξchar p1 p2 big5Code templateStr ξresultStr)
+  (let ( ξchar p1 p2  ξtemplate ξresult)
 
     (if (use-region-p)
         (progn
@@ -177,15 +177,13 @@ If there's a text selection, use that for input."
 
     (setq ξchar (buffer-substring-no-properties p1 p2))
 
-    ;; (setq big5Code (encode-char (string-to-char ξchar) 'big5) )
-
-    (setq templateStr
+    (setq ξtemplate
           "<div class=\"chinese-etymology-96656\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
           )
 
-    (setq ξresultStr (replace-regexp-in-string "�" ξchar templateStr))
+    (setq ξresult (replace-regexp-in-string "�" ξchar ξtemplate))
     (delete-region p1 p2)
-    (insert ξresultStr)))
+    (insert ξresult)))
 
 (defun xwe-annotate ()
   "Create a annotation in HTML.
@@ -205,13 +203,13 @@ insert a div tag above the current paragraph."
   "Make the current word into a etymology reference link.
 ."
   (interactive)
-  (let (ξbds p1 p2 ξinputstr ξresultStr)
+  (let (ξbds p1 p2 ξinput ξresult)
 
     (setq ξbds (get-selection-or-unit 'line))
-    (setq ξinputstr (elt ξbds 0) p1 (elt ξbds 1) p2 (elt ξbds 2))
-    (setq ξresultStr (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" ξinputstr "\">" ξinputstr "</a></span>"))
+    (setq ξinput (elt ξbds 0) p1 (elt ξbds 1) p2 (elt ξbds 2))
+    (setq ξresult (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" ξinput "\">" ξinput "</a></span>"))
     (delete-region p1 p2)
-    (insert ξresultStr)))
+    (insert ξresult)))
 
 (defun xwe-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.
