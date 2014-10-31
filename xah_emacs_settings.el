@@ -98,8 +98,8 @@
 
 ;; (which-function-mode 1) ; show current function in mode line
 
-;; hog emacs down when you happened to open a large file with thousands of lines
-(global-linum-mode 0)
+;; emacs crawls when you open a file with tens thousands lines
+(global-linum-mode 1)
 
 ;; (setq auto-save-default t)
 ;; (setq auto-save-visited-file-name t )
