@@ -60,7 +60,7 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
         (delete-region p1 p2)
         (insert "<img src=\"" ξfp "\" alt=\"" altText "\">")))))
 
-(defun image-file-to-html-figure-tag ()
+(defun xah-image-file-to-html-figure-tag ()
   "Replace a image file's path under cursor with a HTML img tag,
 and wrap it with “figure” and “figcaption” tags.
 
@@ -160,7 +160,7 @@ WARNING: the decoding is incomplete.
 See also: `url-percent-encode-string'."
   (replace-pairs-in-string φstring (mapcar (lambda (ξx) (vector (elt ξx 1) (elt ξx 0))) ξurl-encode-chars-pairs) ))
 
-(defun blogger-linkify ()
+(defun xah-blogger-linkify ()
   "Make URL at cursor point into a HTML link.
 
 Example: http://xahlee.blogspot.com/2010/03/some.html
@@ -390,7 +390,7 @@ There are other amazon categories, but not supported by this function."
     (insert  (amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
 
-(defun amazon-linkify ()
+(defun xah-amazon-linkify ()
   "Make the current URL or text selection into a Amazon.com link.
 
 Examples of Amazon product URL formats
@@ -452,8 +452,8 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 
 ;; If a region is active, use the region as file path."
 ;;  (interactive)
-;;  (let (myPath bounds tempBuff x1 x2 titleText resultStr)
-;;    (setq myPath
+;;  (let (ξpath bounds tempBuff x1 x2 titleText resultStr)
+;;    (setq ξpath
 ;;          (if (use-region-p)
 ;;              (buffer-substring-no-properties (region-beginning) (region-end))
 ;;            (thing-at-point 'filename)
@@ -462,20 +462,20 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 
 ;;    (setq tempBuff (generate-new-buffer-name " temp"))
 
-;;    (when (file-exists-p myPath)
+;;    (when (file-exists-p ξpath)
 ;;        (progn
 ;;          (save-current-buffer
-;;            (message myPath)
+;;            (message ξpath)
 ;;            (set-buffer (get-buffer-create tempBuff))
 ;;            (goto-char (point-min))
-;;            (insert-file-contents myPath nil nil nil t)
+;;            (insert-file-contents ξpath nil nil nil t)
 ;;            (setq x1 (search-forward "<title>"))
 ;;            (search-forward "</title>")
 ;;            (setq x2 (search-backward "<"))
 ;;            (setq titleText (buffer-substring-no-properties x1 x2))
 ;;            (kill-buffer tempBuff))
 
-;;          (setq resultStr (concat "<a href=\"" myPath "\">" titleText "</a>"))
+;;          (setq resultStr (concat "<a href=\"" ξpath "\">" titleText "</a>"))
 ;;          (save-excursion
 ;;            (delete-region (car bounds) (cdr bounds))
 ;;            (insert resultStr))))
@@ -558,7 +558,27 @@ returns
          (-  (search-forward "</a>") 4))  )
       ) ))
 
-(defun nodejs-ref-linkify ()
+(defun xah-clojure-word-ref-linkify ()
+  "Make the path under cursor into a HTML link for xah site.
+2014-10-31
+"
+  (interactive)
+  (let ( p1 p2 ξwd )
+
+    (let ((wordcharset "-A-Za-z0-9ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ"))
+      (skip-chars-backward wordcharset)
+      (setq p1 (point))
+      (skip-chars-forward wordcharset)
+      (setq p2 (point)))
+
+    (setq ξwd (buffer-substring-no-properties p1 p2))
+
+    (delete-region p1 p2)
+    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.6/clojure.core-api.html#clojure.core/" ξwd "\">clojure.core/" ξwd "</a></span>"))
+
+    ))
+
+(defun xah-nodejs-ref-linkify ()
   "Make the path under cursor into a HTML link for xah site.
 
 For Example, if you cursor is on the text “../emacs/emacs.html”,
@@ -611,7 +631,7 @@ linkText
           (insert resultStr))
       (progn (message (format "Cannot locate the file: 「%s」" fPath))))))
 
-(defun javascript-linkify ()
+(defun xah-javascript-linkify ()
   "Make the path under cursor into a HTML link.
  ⁖ <script src=\"xyz.js\"></script>"
   (interactive)
@@ -644,7 +664,7 @@ becomes
     (delete-region p1 p2)
     (insert (format "<audio src=\"%s\" controls></audio>" fPath))))
 
-(defun css-linkify ()
+(defun xah-css-linkify ()
   "Make the path under cursor into a HTML link.
  ⁖
 /home/xah/web/xahlee_org/lit.css
@@ -719,31 +739,48 @@ They will be changed into a HTML link in various formats, depending on the input
 
 If there is text selection, use it as input."
   (interactive)
-  (let* ((myPath (elt (get-selection-or-unit 'filepath ) 0)))
+  (let (
+        p1 p2
+        ξpath
+        ;; (ξpath (elt (get-selection-or-unit 'filepath ) 0))
+        )
+
+    (if (use-region-p)
+        (setq p1 (region-beginning) p2 (region-end))
+      (let (p0)
+        (setq p0 (point))
+        ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+        (skip-chars-backward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+        (setq p1 (point))
+        (goto-char p0)
+        (skip-chars-forward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+        (setq p2 (point))))
+
+    (setq ξpath (buffer-substring-no-properties p1 p2))
+
     (cond
-     ((string-match-p "\\`http://xahlee\.blogspot\.com/" myPath) (blogger-linkify))
-     ((string-match-p "\\`http://wordy-english\.blogspot\.com/" myPath) (blogger-linkify))
-     ((string-match-p "www\.amazon\.com/" myPath) (amazon-linkify))
-     ((string-match-p "www\.youtube\.com/watch" myPath) (youtube-linkify))
-     ((string-match-p "/emacs_manual/" myPath) (xah-html-emacs-ref-linkify))
-     ((string-match-p "/node_api/" myPath) (nodejs-ref-linkify))
-     ((string-match-p "\\.js\\'" myPath) (javascript-linkify))
-     ((string-match-p "\\.css\\'" myPath) (css-linkify))
-     ((string-match-p "\\.mp3\\'" myPath) (xah-audio-file-linkify))
-     ((string-match-p "\\.ogg\\'" myPath) (xah-audio-file-linkify))
+     ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" ξpath) (xah-blogger-linkify))
+     ((string-match-p "www\.amazon\.com/" ξpath) (xah-amazon-linkify))
+     ((string-match-p "www\.youtube\.com/watch" ξpath) (xah-youtube-linkify))
+     ((string-match-p "/emacs_manual/" ξpath) (xah-html-emacs-ref-linkify))
+     ((string-match-p "/node_api/" ξpath) (xah-nodejs-ref-linkify))
+     ((string-match-p "\\.js\\'" ξpath) (xah-javascript-linkify))
+     ((string-match-p "\\.css\\'" ξpath) (xah-css-linkify))
+     ((string-match-p "\\.mp3\\'" ξpath) (xah-audio-file-linkify))
+     ((string-match-p "\\.ogg\\'" ξpath) (xah-audio-file-linkify))
 
-     ((string-match-p "javascript_ecma-262_5.1_2011" myPath) (xah-file-linkify) (xah-ref-span-tag))
-     ((string-match-p "css_transitions/CSS_Transitions.html" myPath) (xah-file-linkify) (xah-ref-span-tag))
+     ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify) (xah-ref-span-tag))
+     ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify) (xah-ref-span-tag))
 
-     ((xahsite-url-is-xah-website-p myPath) (xah-file-linkify))
-     ((string-match-p "wikipedia.org/" myPath)
+     ((xahsite-url-is-xah-website-p ξpath) (xah-file-linkify))
+     ((string-match-p "wikipedia.org/" ξpath)
       (let ((case-fold-search nil))
-        (if (path-ends-in-image-suffix-p myPath)
+        (if (xah-path-ends-in-image-suffix-p ξpath)
             (xhm-source-url-linkify 0)
           (call-interactively 'xhm-wikipedia-url-linkify))))
 
-     ((and (string-match-p "\\`https?://" myPath)) (xhm-source-url-linkify 0)) ; generic URL
+     ((and (string-match-p "\\`https?://" ξpath)) (xhm-source-url-linkify 0)) ; generic URL
 
-     ((path-ends-in-image-suffix-p myPath) (image-file-to-html-figure-tag))
+     ((xah-path-ends-in-image-suffix-p ξpath) (xah-image-file-to-html-figure-tag))
 
      (t (xah-file-linkify)))))

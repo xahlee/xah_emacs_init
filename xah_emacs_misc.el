@@ -605,7 +605,7 @@ then call this command."
 (defun xah-unfontify-region-or-buffer ()
   "Unfontify text selection or buffer."
   (interactive)
-  (if (region-active-p)
+  (if (use-region-p)
       (font-lock-unfontify-region (region-beginning) (region-end))
     (font-lock-unfontify-buffer)))
 

@@ -40,6 +40,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (add-to-list 'load-path "~/git/xah-fly-keys/")
 (add-to-list 'load-path "~/git/xah-elisp-mode/")
+(add-to-list 'load-path "~/git/xah-clojure-mode/")
 (add-to-list 'load-path "~/git/xah-comment.el/")
 (add-to-list 'load-path "~/git/xah-css-mode/")
 (add-to-list 'load-path "~/git/xah_file_util.el/")
@@ -56,10 +57,13 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xub-mode.el/")
 (add-to-list 'load-path "~/git/lookup-word-on-internet/")
 
+
+
 (load "xah_file_util")
 (load "xah-html-mode")
 (load "xah-comment")
 (load "xah-elisp-mode")
+(load "xah-clojure-mode")
 (load "xah-js-mode")
 (load "xah-php-mode")
 (load "xah-css-mode")

@@ -256,6 +256,8 @@
     ("subdir" "sub-directory")
     ("subdirs" "sub-directories")
     ("docm" "documentation")
+    ("impl" "implementation")
+    ("implt" "implement")
     ("dl" "download")
     ("char" "character")
     ("chars" "characters")

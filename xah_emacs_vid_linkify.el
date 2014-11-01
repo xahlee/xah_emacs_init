@@ -12,7 +12,7 @@ Example call:
 
   (concat "<iframe width=\"640\" height=\"480\" src=\"http://www.youtube.com/embed/" φvideo-id "?rel=0\"></iframe>"))
 
-(defun youtube-linkify ()
+(defun xah-youtube-linkify ()
   "Make the current line into a embeded HTML video object.
 The line can be a youtube ID or full URL.
 Examples of lines:

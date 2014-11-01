@@ -459,7 +459,7 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
     ξs
     ))
 
-(defun path-ends-in-image-suffix-p (φpath)
+(defun xah-path-ends-in-image-suffix-p (φpath)
   "Returns t if φpath ends in .jpg .png .gif .svg, else nil."
   (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" φpath))
 
