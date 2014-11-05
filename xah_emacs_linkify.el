@@ -560,23 +560,19 @@ returns
 
 (defun xah-clojure-word-ref-linkify ()
   "Make the path under cursor into a HTML link for xah site.
-2014-10-31
-"
+Version 2014-10-31"
   (interactive)
   (let ( p1 p2 ξwd )
-
-    (let ((wordcharset "-A-Za-z0-9ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ"))
-      (skip-chars-backward wordcharset)
-      (setq p1 (point))
-      (skip-chars-forward wordcharset)
-      (setq p2 (point)))
-
+    (if (use-region-p)
+        (setq p1 (region-beginning) p2 (region-end))
+      (progn
+        (skip-chars-backward "-A-Za-z0-9*+!-_?")
+        (setq p1 (point))
+        (skip-chars-forward "-A-Za-z0-9*+!-_?")
+        (setq p2 (point))))
     (setq ξwd (buffer-substring-no-properties p1 p2))
-
     (delete-region p1 p2)
-    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.6/clojure.core-api.html#clojure.core/" ξwd "\">clojure.core/" ξwd "</a></span>"))
-
-    ))
+    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.6/clojure.core-api.html#clojure.core/" ξwd "\">clojure.core/" ξwd "</a></span>"))))
 
 (defun xah-nodejs-ref-linkify ()
   "Make the path under cursor into a HTML link for xah site.

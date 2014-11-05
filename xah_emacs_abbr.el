@@ -219,7 +219,6 @@
     ("gcd" "googlecode")
     ("ff" "Firefox")
     ("sl" "Second Life")
-    ("bb" "Backbone")
     ("lsl" "Linden Scripting Language")
     ("8ll" "Linden Labs")
     ("fb" "Facebook")

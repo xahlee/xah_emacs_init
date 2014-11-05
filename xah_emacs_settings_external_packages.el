@@ -15,6 +15,8 @@
     (global-company-mode 1)
 )
 
+(setq company-idle-delay 2)
+
 ;; (when (fboundp 'projectile-global-mode)
 ;;     (projectile-global-mode)
 ;; )
