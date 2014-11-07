@@ -9,8 +9,7 @@ When called with `universal-argument', work on visible portion of whole buffer (
        (interactive
         (cond
          ((equal current-prefix-arg nil) ; universal-argument not called
-          (let ((bds ;; (get-selection-or-unit 'block)
-                 (let (pt1 pt2)
+          (let (pt1 pt2)
                    (save-excursion
                      (if (re-search-backward "\n[ \t]*\n" nil "move")
                          (progn (re-search-forward "\n[ \t]*\n")
@@ -20,7 +19,7 @@ When called with `universal-argument', work on visible portion of whole buffer (
                          (progn (re-search-backward "\n[ \t]*\n")
                                 (setq pt2 (point)))
                        (setq pt2 (point)))
-                     (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))) (list (elt bds 1) (elt bds 2))))
+                     (list pt1 pt2))))
          (t ; all other cases
           (list (point-min) (point-max)))))
        (save-excursion
@@ -46,19 +45,18 @@ Work on text selection or current text block.
 When called in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-  (interactive (let ((bds ;; (get-selection-or-unit 'block)
-                      (let (pt1 pt2)
-                        (save-excursion
-                          (if (re-search-backward "\n[ \t]*\n" nil "move")
-                              (progn (re-search-forward "\n[ \t]*\n")
-                                     (setq pt1 (point)))
-                            (setq pt1 (point)))
-                          (if (re-search-forward "\n[ \t]*\n" nil "move")
-                              (progn (re-search-backward "\n[ \t]*\n")
-                                     (setq pt2 (point)))
-                            (setq pt2 (point)))
-                          (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))))
-                 (list (elt bds 1) (elt bds 2))))
+  (interactive
+   (let (p1 p2)
+     (save-excursion
+       (if (re-search-backward "\n[ \t]*\n" nil "move")
+           (progn (re-search-forward "\n[ \t]*\n")
+                  (setq p1 (point)))
+         (setq p1 (point)))
+       (if (re-search-forward "\n[ \t]*\n" nil "move")
+           (progn (re-search-backward "\n[ \t]*\n")
+                  (setq p2 (point)))
+         (setq p2 (point))))
+     (list p1 p2)))
   (let ((ξchangedItems '()))
 
     (save-excursion
@@ -102,9 +100,7 @@ Generate a report of the replaced strings in a separate buffer."
     ;;      (terpri))
     ;;    (reverse ξchangedItems)))
 
-    (message "%S" ξchangedItems)
-
-    ))
+    (message "%S" ξchangedItems)))
 
 (defun xah-angle-brackets-to-html (φp1 φp2)
   "Replace all 〈…〉 to <cite>…</cite>.
@@ -115,19 +111,18 @@ If there's no text selection, work on current text block, else, on text selectio
 When call in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-  (interactive (let ((bds ;; (get-selection-or-unit 'block)
-                      (let (pt1 pt2)
-                        (save-excursion
-                          (if (re-search-backward "\n[ \t]*\n" nil "move")
-                              (progn (re-search-forward "\n[ \t]*\n")
-                                     (setq pt1 (point)))
-                            (setq pt1 (point)))
-                          (if (re-search-forward "\n[ \t]*\n" nil "move")
-                              (progn (re-search-backward "\n[ \t]*\n")
-                                     (setq pt2 (point)))
-                            (setq pt2 (point)))
-                          (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))))
-                 (list (elt bds 1) (elt bds 2))))
+  (interactive
+   (let (p1 p2)
+     (save-excursion
+       (if (re-search-backward "\n[ \t]*\n" nil "move")
+           (progn (re-search-forward "\n[ \t]*\n")
+                  (setq p1 (point)))
+         (setq p1 (point)))
+       (if (re-search-forward "\n[ \t]*\n" nil "move")
+           (progn (re-search-backward "\n[ \t]*\n")
+                  (setq p2 (point)))
+         (setq p2 (point))))
+     (list p1 p2)))
   (let (ξchangedItems)
 
     ;; (setq ξchangedItems (make-hash-table :test 'equal))

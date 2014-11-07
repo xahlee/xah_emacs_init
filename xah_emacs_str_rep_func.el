@@ -78,20 +78,18 @@ becomes
  「… was officially announced as Blu-ray Disc, and …」."
   (interactive)
 
-  (let (bds p1 p2 ξinputStr ξresultStr ξchangedItems)
-    (setq bds ;; (get-selection-or-unit 'block)
-          (let (pt1 pt2)
-            (save-excursion 
-              (if (re-search-backward "\n[ \t]*\n" nil "move")
-                  (progn (re-search-forward "\n[ \t]*\n")
-                         (setq pt1 (point)))
-                (setq pt1 (point)))
-              (if (re-search-forward "\n[ \t]*\n" nil "move")
-                  (progn (re-search-backward "\n[ \t]*\n")
-                         (setq pt2 (point)))
-                (setq pt2 (point)))
-              (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))
-    (setq ξinputStr (elt bds 0) p1 (elt bds 1) p2 (elt bds 2))
+  (let (p1 p2 ξinputStr ξresultStr ξchangedItems)
+    (save-excursion ; set p1 p2
+      (if (re-search-backward "\n[ \t]*\n" nil "move")
+          (progn (re-search-forward "\n[ \t]*\n")
+                 (setq p1 (point)))
+        (setq p1 (point)))
+      (if (re-search-forward "\n[ \t]*\n" nil "move")
+          (progn (re-search-backward "\n[ \t]*\n")
+                 (setq p2 (point)))
+        (setq p2 (point))))
+
+    (setq ξinputStr p1 p2 )
 
     (setq ξchangedItems '())
 

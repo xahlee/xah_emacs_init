@@ -87,20 +87,17 @@ words-4.html
   (interactive)
   (require 'sgml-mode)
   (let* (
-         (bds ;; (get-selection-or-unit 'block)
-          (let (pt1 pt2)
-            (save-excursion
-              (if (re-search-backward "\n[ \t]*\n" nil "move")
-                  (progn (re-search-forward "\n[ \t]*\n")
-                         (setq pt1 (point)))
-                (setq pt1 (point)))
-              (if (re-search-forward "\n[ \t]*\n" nil "move")
-                  (progn (re-search-backward "\n[ \t]*\n")
-                         (setq pt2 (point)))
-                (setq pt2 (point)))
-              (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))
-         (ξp1 (aref bds 1))
-         (ξp2 (aref bds 2))
+         ξp1 ξp2
+         (_setBoundary
+          (save-excursion 
+            (if (re-search-backward "\n[ \t]*\n" nil "move")
+                (progn (re-search-forward "\n[ \t]*\n")
+                       (setq ξp1 (point)))
+              (setq ξp1 (point)))
+            (if (re-search-forward "\n[ \t]*\n" nil "move")
+                (progn (re-search-backward "\n[ \t]*\n")
+                       (setq ξp2 (point)))
+              (setq ξp2 (point)))))
          (ξfileList (split-string (buffer-substring-no-properties ξp1 ξp2) "\n" t))
          ξpageNavStr )
 
@@ -109,11 +106,11 @@ words-4.html
     ;; generate the page nav string
     (setq ξpageNavStr
           (format "<nav class=\"page\">\n%s</nav>"
-                  (let (ξresult linkPath fTitle (ξi 0))
+                  (let (ξresult ξlinkPath ξfTitle (ξi 0))
                     (while (< ξi (length ξfileList))
-                      (setq linkPath (elt ξfileList ξi))
-                      (setq fTitle (xhm-get-html-file-title linkPath))
-                      (setq ξresult (concat ξresult "<a href=\"" linkPath "\" title=\"" fTitle "\">" (number-to-string (1+ ξi)) "</a>\n"))
+                      (setq ξlinkPath (elt ξfileList ξi))
+                      (setq ξfTitle (xhm-get-html-file-title ξlinkPath))
+                      (setq ξresult (concat ξresult "<a href=\"" ξlinkPath "\" title=\"" ξfTitle "\">" (number-to-string (1+ ξi)) "</a>\n"))
                       (setq ξi (1+ ξi)))
                     ξresult
                     )))

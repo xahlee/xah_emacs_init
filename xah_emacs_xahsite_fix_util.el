@@ -15,20 +15,17 @@ When called in lisp program, φsource-file-path and φdest-file-path should be f
   (interactive
    (let* (
           (bds (get-selection-or-unit 'line))
-          (p1 (elt bds 1) )
-          (p2 (elt bds 2) )
-          )
+          (p1 (elt bds 1))
+          (p2 (elt bds 2)))
      (list (buffer-file-name)
-           (xahsite-href-value-to-filepath (thing-at-point 'filename) (buffer-file-name)) )
-     )
-   )
+           (xahsite-href-value-to-filepath (thing-at-point 'filename) (buffer-file-name)))))
   (let ( ξtitle ξnewHrefValue ξbuffer )
-    (setq ξbuffer (find-file φdest-file-path ) )
+    (setq ξbuffer (find-file φdest-file-path ))
     (goto-char 1)
-    (setq ξnewHrefValue (xahsite-filepath-to-href-value φsource-file-path φdest-file-path) )
+    (setq ξnewHrefValue (xahsite-filepath-to-href-value φsource-file-path φdest-file-path))
     (if (search-forward ξnewHrefValue nil t)
         (progn
-          (when (called-interactively-p 'interactive) (message (format "Link 「%s」 already exists at 「%s」."  ξnewHrefValue φdest-file-path) ) )
+          (when (called-interactively-p 'interactive) (message (format "Link 「%s」 already exists at 「%s」."  ξnewHrefValue φdest-file-path)))
           (kill-buffer ξbuffer)
           nil)
       (progn
@@ -36,9 +33,8 @@ When called in lisp program, φsource-file-path and φdest-file-path should be f
         (goto-char 1)
         (if (search-forward "<div class=\"rltd\">" nil t)
             (progn (search-forward "<ul>" nil t)
-                   (insert "\n" (format "<li><a href=\"%s\">%s</a></li>" ξnewHrefValue ξtitle))
-                   )
-          (progn 
+                   (insert "\n" (format "<li><a href=\"%s\">%s</a></li>" ξnewHrefValue ξtitle)))
+          (progn
             (goto-char (point-max))
             (search-backward "<div id=\"disqus_thread\">")
             (insert (format "<div class=\"rltd\">
@@ -47,13 +43,12 @@ When called in lisp program, φsource-file-path and φdest-file-path should be f
 </ul>
 </div>
 
-" ξnewHrefValue ξtitle)) ) )
-        (when (not (called-interactively-p 'interactive) )
+" ξnewHrefValue ξtitle))))
+        (when (not (called-interactively-p 'interactive))
           (write-region (point-min) (point-max) φdest-file-path)
-          (kill-buffer)
-          )
+          (kill-buffer))
         t
-        ) ) ) )
+        ))))
 
 (defun xahsite-update-related-links (φfilePath φdestFileList)
   "Update related links tags.
@@ -75,27 +70,28 @@ The related pages are HTML “div.rltd” element, having this form
 </div>"
   (interactive
    (let (bds p1 p2)
-     (setq bds 
-;; (get-selection-or-unit 'block)
-(let (pt1 pt2)
-  (save-excursion 
-    (if (re-search-backward "\n[ \t]*\n" nil "move")
-        (progn (re-search-forward "\n[ \t]*\n")
-               (setq pt1 (point)))
-      (setq pt1 (point)))
-    (if (re-search-forward "\n[ \t]*\n" nil "move")
-        (progn (re-search-backward "\n[ \t]*\n")
-               (setq pt2 (point)))
-      (setq pt2 (point)))
-    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
-)
-     (setq p1 (elt bds 1) )
-     (setq p2 (elt bds 2) )
+     (setq bds
+           ;; (get-selection-or-unit 'block)
+           (if (use-region-p)
+               (vector (buffer-substring-no-properties (region-beginning) (region-end)) (region-beginning) (region-end))
+             (progn (let (pt1 pt2)
+                      (save-excursion
+                        (if (re-search-backward "\n[ \t]*\n" nil "move")
+                            (progn (re-search-forward "\n[ \t]*\n")
+                                   (setq pt1 (point)))
+                          (setq pt1 (point)))
+                        (if (re-search-forward "\n[ \t]*\n" nil "move")
+                            (progn (re-search-backward "\n[ \t]*\n")
+                                   (setq pt2 (point)))
+                          (setq pt2 (point)))
+                        (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))))
+     (setq p1 (aref bds 1))
+     (setq p2 (aref bds 2))
      (list
       (buffer-file-name)
-      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)) )) (xhm-extract-url (elt bds 0))) ) ) )
+      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)))) (xhm-extract-url (aref bds 0))))))
 
-  (let (p3 p4 currentUrlList)
+  (let (p3 p4)
     (mapc
      (lambda (ξy)
        (xah-add-to-related-links φfilePath ξy)
@@ -135,9 +131,7 @@ This code is specific to xahlee.org ."
     (narrow-to-region φstart φend)
     (while
         (search-forward-regexp "“<span class=\"code\">\\([^<]+?\\)</span>”" nil t)
-      (replace-match "<span class=\"code\">\\1</span>" t))
-    )
-  )
+      (replace-match "<span class=\"code\">\\1</span>" t))))
 
 (defun xah-fix-to-html4strict (&optional φfName)
   "Change buffer content from HTML4 trans to HTML4 strict,
@@ -148,7 +142,7 @@ If FNAME is given, then process that file.
 The change is based on few simple regex replacements. So, there may be errors.
  (this function is for Xah only because it assums some specific HTML formatting style)
 
-todo: 
+todo:
 • consecutive img tags should have single div wrap, not on each.
 • img wrapped by “a href” should be wraped, not inside the img tag
 This function is specific to xahlee.org. 2008-05-10."
@@ -200,32 +194,31 @@ This function is specific to xahlee.org. 2008-05-10."
   "Change current buffer's <div class=\"img\"> to <figure> and <p class=\"cpt\"> to <figcaption>."
   (interactive)
 
-  (save-excursion 
-    (let (p1 p2 p3 p4 
-             mystr
+  (save-excursion
+    (let (p1 p2 p3 p4
+             ξstr
              ξchanges
-             (changedItems '())
-             (mybuff (current-buffer))
-             )
+             (ξchangedItems '())
+             (ξbuff (current-buffer)))
 
       (goto-char (point-min)) ;; in case buffer already open
       (while (search-forward "<div class=\"img\">" nil t)
         (progn
-          (setq p2 (point) )
+          (setq p2 (point))
           (backward-char 17)
-          (setq p1 (point) )
+          (setq p1 (point))
 
           (forward-char 1)
           (sgml-skip-tag-forward 1)
-          (setq p4 (point) )
+          (setq p4 (point))
           (backward-char 6)
-          (setq p3 (point) )
+          (setq p3 (point))
 
           (when t
-            (setq mystr (buffer-substring-no-properties p1 p4))
-            (setq changedItems (cons mystr changedItems ) )
-            
-            (progn 
+            (setq ξstr (buffer-substring-no-properties p1 p4))
+            (setq ξchangedItems (cons ξstr ξchangedItems ))
+
+            (progn
               (delete-region p3 p4 )
               (goto-char p3)
               (insert "</figure>")
@@ -233,27 +226,26 @@ This function is specific to xahlee.org. 2008-05-10."
               (delete-region p1 p2 )
               (goto-char p1)
               (insert "<figure>")
-              (widen) )
-            ) ) )
+              (widen)))))
 
       (goto-char (point-min)) ;; in case buffer already open
       (while (search-forward "<div class=\"obj\">" nil t)
         (progn
-          (setq p2 (point) )
+          (setq p2 (point))
           (backward-char 17)
-          (setq p1 (point) )
+          (setq p1 (point))
 
           (forward-char 1)
           (sgml-skip-tag-forward 1)
-          (setq p4 (point) )
+          (setq p4 (point))
           (backward-char 6)
-          (setq p3 (point) )
+          (setq p3 (point))
 
           (when t
-            (setq mystr (buffer-substring-no-properties p1 p4))
-            (setq changedItems (cons mystr changedItems ) )
-            
-            (progn 
+            (setq ξstr (buffer-substring-no-properties p1 p4))
+            (setq ξchangedItems (cons ξstr ξchangedItems ))
+
+            (progn
               (delete-region p3 p4 )
               (goto-char p3)
               (insert "</figure>")
@@ -261,27 +253,26 @@ This function is specific to xahlee.org. 2008-05-10."
               (delete-region p1 p2 )
               (goto-char p1)
               (insert "<figure>")
-              (widen) )
-            ) ) )
+              (widen)))))
 
       (goto-char (point-min)) ;; in case buffer already open
       (while (search-forward "<p class=\"cpt\">" nil t)
         (progn
-          (setq p2 (point) )
+          (setq p2 (point))
           (backward-char 15)
-          (setq p1 (point) )
+          (setq p1 (point))
 
           (forward-char 1)
           (sgml-skip-tag-forward 1)
-          (setq p4 (point) )
+          (setq p4 (point))
           (backward-char 4)
-          (setq p3 (point) )
+          (setq p3 (point))
 
           (when t
-            (setq mystr (buffer-substring-no-properties p1 p4))
-            (setq changedItems (cons mystr changedItems ) )
-            
-            (progn 
+            (setq ξstr (buffer-substring-no-properties p1 p4))
+            (setq ξchangedItems (cons ξstr ξchangedItems ))
+
+            (progn
               (delete-region p3 p4 )
               (goto-char p3)
               (insert "</figcaption>")
@@ -289,15 +280,13 @@ This function is specific to xahlee.org. 2008-05-10."
               (delete-region p1 p2 )
               (goto-char p1)
               (insert "<figcaption>")
-              (widen) )
-            ) ) )
+              (widen)))))
 
-      (with-output-to-temp-buffer "*changed items*" 
-        (mapc (lambda ( ξchanges) (princ ξchanges) (princ "\n\n") ) changedItems)
+      (with-output-to-temp-buffer "*changed items*"
+        (mapc (lambda ( ξchanges) (princ ξchanges) (princ "\n\n")) ξchangedItems)
         (set-buffer "*changed items*")
         (funcall 'html-mode)
-        (set-buffer mybuff)
-        ) )) )
+        (set-buffer ξbuff)))))
 
 (defun xah-fix-ellipsis (φstring &optional φfrom φto)
   "Change “...” to “…”.
@@ -308,111 +297,96 @@ When called in lisp code, if φstring is non-nil, returns a changed string.  If 
   (interactive
    (if (use-region-p)
        (list nil (region-beginning) (region-end))
-     (let ((bds 
-;; (get-selection-or-unit 'block)
-(let (pt1 pt2)
-  (save-excursion 
-    (if (re-search-backward "\n[ \t]*\n" nil "move")
-        (progn (re-search-forward "\n[ \t]*\n")
-               (setq pt1 (point)))
-      (setq pt1 (point)))
-    (if (re-search-forward "\n[ \t]*\n" nil "move")
-        (progn (re-search-backward "\n[ \t]*\n")
-               (setq pt2 (point)))
-      (setq pt2 (point)))
-    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
-) )
-       (list nil (elt bds 1) (elt bds 2)) ) ) )
+     (let (pt1 pt2)
+       (save-excursion
+         (if (re-search-backward "\n[ \t]*\n" nil "move")
+             (progn (re-search-forward "\n[ \t]*\n")
+                    (setq pt1 (point)))
+           (setq pt1 (point)))
+         (if (re-search-forward "\n[ \t]*\n" nil "move")
+             (progn (re-search-backward "\n[ \t]*\n")
+                    (setq pt2 (point)))
+           (setq pt2 (point)))
+         (list nil pt1 pt2)))))
 
-  (let (workOnStringP inputStr outputStr)
-    (setq workOnStringP (if φstring t nil))
-    (setq inputStr (if workOnStringP φstring (buffer-substring-no-properties φfrom φto)))
-    (setq outputStr (replace-regexp-in-string "\\.\\.\\." "…" inputStr))
+  (let (ξworkOnStringP ξinputStr ξoutputStr)
+    (setq ξworkOnStringP (if φstring t nil))
+    (setq ξinputStr (if ξworkOnStringP φstring (buffer-substring-no-properties φfrom φto)))
+    (setq ξoutputStr (replace-regexp-in-string "\\.\\.\\." "…" ξinputStr))
 
-    (if workOnStringP
-        outputStr
+    (if ξworkOnStringP
+        ξoutputStr
       (save-excursion
         (delete-region φfrom φto)
         (goto-char φfrom)
-        (insert outputStr) )) )
-  )
+        (insert ξoutputStr)))))
 
 (defun xah-fix-number-items-block  ()
-    "Change “(1)” to “①” etc in current region or text block.
+  "Change “(1)” to “①” etc in current region or text block.
 Also change 「<li>1. 」 to 「<li>① 」."
   (interactive)
-  (let (bds p3 p4 inputStr resultStr myPairs (case-fold-search nil) (case-replace nil))
-    (setq bds 
-;; (get-selection-or-unit 'block)
-(let (pt1 pt2)
-  (save-excursion 
-    (if (re-search-backward "\n[ \t]*\n" nil "move")
-        (progn (re-search-forward "\n[ \t]*\n")
-               (setq pt1 (point)))
-      (setq pt1 (point)))
-    (if (re-search-forward "\n[ \t]*\n" nil "move")
-        (progn (re-search-backward "\n[ \t]*\n")
-               (setq pt2 (point)))
-      (setq pt2 (point)))
-    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
-)
-    (setq inputStr (elt bds 0) )
-    (setq p3 (elt bds 1) )
-    (setq p4 (elt bds 2) )
+  (let* (
+         p1 p2
+         (_setp1p2
+          (save-excursion
+            (if (re-search-backward "\n[ \t]*\n" nil "move")
+                (progn (re-search-forward "\n[ \t]*\n")
+                       (setq p1 (point)))
+              (setq p1 (point)))
+            (if (re-search-forward "\n[ \t]*\n" nil "move")
+                (progn (re-search-backward "\n[ \t]*\n")
+                       (setq p2 (point)))
+              (setq p2 (point)))))
+         (ξinputStr (buffer-substring-no-properties p1 p2))
+         (ξpairs '(
+                   ["(0)" "⓪"]
+                   ["(1)" "①"]
+                   ["(2)" "②"]
+                   ["(3)" "③"]
+                   ["(4)" "④"]
+                   ["(5)" "⑤"]
+                   ["(6)" "⑥"]
+                   ["(7)" "⑦"]
+                   ["(8)" "⑧"]
+                   ["(9)" "⑨"]
 
-(setq myPairs '(
-["(0)" "⓪"]
-["(1)" "①"]
-["(2)" "②"]
-["(3)" "③"]
-["(4)" "④"]
-["(5)" "⑤"]
-["(6)" "⑥"]
-["(7)" "⑦"]
-["(8)" "⑧"]
-["(9)" "⑨"]
+                   ["0. " "⓪ "]
+                   ["1. " "① "]
+                   ["2. " "② "]
+                   ["3. " "③ "]
+                   ["4. " "④ "]
+                   ["5. " "⑤ "]
+                   ["6. " "⑥ "]
+                   ["7. " "⑦ "]
+                   ["8. " "⑧ "]
+                   ["9. " "⑨ "]
 
-["0. " "⓪ "]
-["1. " "① "]
-["2. " "② "]
-["3. " "③ "]
-["4. " "④ "]
-["5. " "⑤ "]
-["6. " "⑥ "]
-["7. " "⑦ "]
-["8. " "⑧ "]
-["9. " "⑨ "]
+                   ["(A)" "Ⓐ"]
+                   ["(B)" "Ⓑ"]
+                   ["(C)" "Ⓒ"]
+                   ["(D)" "Ⓓ"]
+                   ["(E)" "Ⓔ"]
+                   ["(F)" "Ⓕ"]
+                   ["(G)" "Ⓖ"]
+                   ["(H)" "Ⓗ"]
+                   ["(I)" "Ⓘ"]
+                   ["(J)" "Ⓙ"]
 
-["(A)" "Ⓐ"]
-["(B)" "Ⓑ"]
-["(C)" "Ⓒ"]
-["(D)" "Ⓓ"]
-["(E)" "Ⓔ"]
-["(F)" "Ⓕ"]
-["(G)" "Ⓖ"]
-["(H)" "Ⓗ"]
-["(I)" "Ⓘ"]
-["(J)" "Ⓙ"]
-
-["(a)" "ⓐ"]
-["(b)" "ⓑ"]
-["(c)" "ⓒ"]
-["(d)" "ⓓ"]
-["(e)" "ⓔ"]
-["(f)" "ⓕ"]
-["(g)" "ⓖ"]
-["(h)" "ⓗ"]
-["(i)" "ⓘ"]
-["(j)" "ⓙ"]
-))
-
-(setq resultStr (replace-pairs-in-string inputStr myPairs))
-
-(delete-region p3 p4)
-(insert resultStr)
-    )
-  )
-
+                   ["(a)" "ⓐ"]
+                   ["(b)" "ⓑ"]
+                   ["(c)" "ⓒ"]
+                   ["(d)" "ⓓ"]
+                   ["(e)" "ⓔ"]
+                   ["(f)" "ⓕ"]
+                   ["(g)" "ⓖ"]
+                   ["(h)" "ⓗ"]
+                   ["(i)" "ⓘ"]
+                   ["(j)" "ⓙ"]
+                   ))
+         (case-fold-search nil)
+         (case-replace nil))
+    (delete-region p1 p2)
+    (insert (replace-pairs-in-string ξinputStr ξpairs))))
 
 ;; ;; macro to search and fix next occurrence of “alt=""”
 ;; ;; search for alt="", then fix it
@@ -423,8 +397,8 @@ Also change 「<li>1. 」 to 「<li>① 」."
   "Insert a file creation date like
 “<div class=\"dstp\">2008-12.</div>”
 to file at ΦFPATH."
-(let (mybuffer)
-    (setq mybuffer (find-file φfpath))
+(let (ξbuffer)
+    (setq ξbuffer (find-file φfpath))
 
     (xah-put-dstp)
 
@@ -433,7 +407,7 @@ to file at ΦFPATH."
 ;;     (insert "<div class=\"dstp\">1997</div>\n")
 
 ;;    (save-buffer)
-;;    (kill-buffer mybuffer)
+;;    (kill-buffer ξbuffer)
 ))
 
 (defun xah-put-dstp ()
@@ -443,13 +417,13 @@ in the appropriate footer location of the current XahLee.org HTML file.
 
 This command requires the GetFileInfo command line util in OS X."
   (interactive)
-  (let (cmdStr resultStr mydate)
-    (setq cmdStr (concat "GetFileInfo -d " (buffer-file-name)))
-    (setq resultStr (shell-command-to-string cmdStr))
-    (setq mydate (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" resultStr))
+  (let (ξcmdStr ξresultStr ξdate)
+    (setq ξcmdStr (concat "GetFileInfo -d " (buffer-file-name)))
+    (setq ξresultStr (shell-command-to-string ξcmdStr))
+    (setq ξdate (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" ξresultStr))
     (goto-char (point-max))
     (search-backward "<div class=\"cpr\">")
-    (insert "<div class=\"dstp\">" mydate "</div>\n")))
+    (insert "<div class=\"dstp\">" ξdate "</div>\n")))
 
 (defun xah-insert-dstp ()
   "Insert the file creation date in this format:
@@ -458,11 +432,11 @@ at cursor position.
 
 This command requires the GetFileInfo command line util in OS X."
   (interactive)
-  (let (cmdStr resultStr mydate)
-    (setq cmdStr (concat "GetFileInfo -d " (buffer-file-name)))
-    (setq resultStr (shell-command-to-string cmdStr))
-    (setq mydate (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" resultStr))
-    (insert "<div class=\"dstp\">" mydate "</div>")))
+  (let (ξcmdStr ξresultStr ξdate)
+    (setq ξcmdStr (concat "GetFileInfo -d " (buffer-file-name)))
+    (setq ξresultStr (shell-command-to-string ξcmdStr))
+    (setq ξdate (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" ξresultStr))
+    (insert "<div class=\"dstp\">" ξdate "</div>")))
 
 (defun xah-fix-dstp ()
   "Remove the dstp tag and insert a xahlee at top if not exist.
@@ -473,37 +447,33 @@ Insert at top
 <p class=\"αuth\"><a rel=\"author\" href=\"http://xahlee.org/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>, 2011-03-03</p>
 "
   (interactive)
-  (let (mybuffer ξdate p1 p2 p3ins)
+  (let (ξdate p1 p2 ξp3ins)
     (goto-char (point-min))
     (if
         (search-forward-regexp "<div class=\"dstp\">\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-?[0-9]?[0-9]?\\)</div>" nil t)
-        (progn 
-          (setq ξdate (match-string 1) )
-          (setq p1 (line-beginning-position) )
-          (setq p2 (line-end-position) )
+        (progn
+          (setq ξdate (match-string 1))
+          (setq p1 (line-beginning-position))
+          (setq p2 (line-end-position))
 
           (goto-char (point-min))
           (if (search-forward-regexp "<p class=\"αuth\"><a rel=\"author\" href=\"\\([^/]+?\\)/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>" nil t)
-              (progn 
+              (progn
                 (kill-new ξdate)
                 (delete-region p1 p2)
-                (message "“<p>Xah Lee, ” exits. dstp is: %s. Copied to clipboard." ξdate)
-                )
+                (message "“<p>Xah Lee, ” exits. dstp is: %s. Copied to clipboard." ξdate))
             (progn
               (goto-char (point-min))
-              (if 
+              (if
                   (search-forward "<div class=\"adbnr\"><a href=\"http://xahlee.org/ads.html\">YOUR<br>AD<br>HERE</a></div>" nil t)
-                  (setq p3ins (point) )
+                  (setq ξp3ins (point))
                 (progn
                   (goto-char (point-min))
                   (search-forward "</h1>")
-                  (setq p3ins (point) )
-                  )
-                )
+                  (setq ξp3ins (point))))
 
               (delete-region p1 p2)
-              (insert "\n\n<p class=\"αuth\"><a rel=\"author\" href=\"http://xahlee.org/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>, " ξdate "</p>\n" ) ) )
-          )
+              (insert "\n\n<p class=\"αuth\"><a rel=\"author\" href=\"http://xahlee.org/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>, " ξdate "</p>\n" ))))
       (progn
-        (message "%s" "no dstp") ) ) ))
+        (message "%s" "no dstp")))))
 

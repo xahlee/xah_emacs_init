@@ -33,17 +33,19 @@
                                          "writerwords"))))
 
   (let* ((ξbds ;; (get-selection-or-unit 'block)
-          (let (pt1 pt2)
-            (save-excursion
-              (if (re-search-backward "\n[ \t]*\n" nil "move")
-                  (progn (re-search-forward "\n[ \t]*\n")
+          (if (use-region-p)
+              (vector (buffer-substring-no-properties (region-beginning) (region-end)) (region-beginning) (region-end) )
+            (progn (let (pt1 pt2)
+                     (save-excursion 
+                       (if (re-search-backward "\n[ \t]*\n" nil "move")
+                           (progn (re-search-forward "\n[ \t]*\n")
+                                  (setq pt1 (point)))
                          (setq pt1 (point)))
-                (setq pt1 (point)))
-              (if (re-search-forward "\n[ \t]*\n" nil "move")
-                  (progn (re-search-backward "\n[ \t]*\n")
+                       (if (re-search-forward "\n[ \t]*\n" nil "move")
+                           (progn (re-search-backward "\n[ \t]*\n")
+                                  (setq pt2 (point)))
                          (setq pt2 (point)))
-                (setq pt2 (point)))
-              (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))
+                       (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))))
          (ξwordText (aref ξbds 0))
          (p1 (aref ξbds 1))
          (p2 (aref ξbds 2))
@@ -64,9 +66,7 @@
         ((ξcurrentFileName (buffer-file-name))
          (ξbackupFileName (concat ξcurrentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
       (copy-file ξcurrentFileName ξbackupFileName t)
-      (save-buffer ))
-
-    ))
+      (save-buffer ))))
 
 (defun xwe-new-word-entry ()
   "Insert a blank a-word-a-day HTML template in a paritcular file."
