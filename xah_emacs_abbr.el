@@ -22,6 +22,9 @@
     ("ex" "example")
     ("fex" "for example")
     ("jq" "jQuery")
+    ("jvm" "Java Virtual Machine")
+
+    ("catface" "😸")
 
     ("arrows" "➵➙►▻☛☞👉⇰➛➜➝➞➟➠➢➣➤➥➦➧➨➲➺➻➼➽➾")
 
