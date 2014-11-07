@@ -27,6 +27,7 @@
       '(
         (width . 92)
         (height . 54)
+        (background-color . "honeydew")
         ) )
 
 (setq default-frame-alist
@@ -36,7 +37,7 @@
         (tool-bar-lines . 0)
         (width . 92)
         (height . 52)
-        (background-color . "honeydew")
+        (background-color . "seashell")
         ))
 
 ;; set default font

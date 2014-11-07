@@ -69,66 +69,6 @@ WARNING: This command saves buffer if it's a file."
       (search-backward "<time>")
       (when (buffer-file-name) (save-buffer)))))
 
-(defun xahsite-update-page-tag-old (φp1 φp2)
-  "Update HTML page navigation tags.
-
-The input is a text selection.
-Each line should a file name
-Update each file's page navigation tag.
-
-Each file name is a file path without dir, and relative to current dir.
-Sample text selection for input:
-“combowords.html
-combowords-2.html
-combowords-3.html
-combowords-4.html”"
-  (interactive "r")
-  (let (filez pageNavStr (i 1))
-    (setq filez
-          (split-string (buffer-substring-no-properties φp1 φp2) "\n" t)
-          )
-
-    (delete-region φp1 φp2)
-
-    ;; generate the page nav string
-    (setq pageNavStr "<div class=\"pgs\">")
-
-    (while (<= i (length filez))
-      (setq pageNavStr
-            (concat pageNavStr
-                    "<a href=\""
-                    (nth (- i 1) filez)
-                    "\">"
-                    (number-to-string i)
-                    "</a>, ")
-            )
-      (setq i (1+ i))
-      )
-
-    (setq pageNavStr (substring pageNavStr 0 -2) ) ; remove the last ", "
-    (setq pageNavStr (concat pageNavStr "</div>"))
-
-    ;; open each file, insert the page nav string, remove link in the
-    ;; nav string that's the current page
-    (mapc
-     (lambda (thisFile)
-       (message "%s" thisFile)
-       (find-file thisFile)
-       (goto-char (point-min))
-       (search-forward "<div class=\"pgs\">")
-       (beginning-of-line)
-       (kill-line 1)
-       (insert pageNavStr "\n")
-       (search-backward (file-name-nondirectory buffer-file-name))
-
-       (require 'sgml-mode)
-       (sgml-delete-tag 1)
-       ;;        (save-buffer)
-       ;;        (kill-buffer)
-       )
-     filez)
-    ))
-
 (defun xahsite-update-page-tag ()
   "Update HTML page navigation tags.
 
@@ -146,37 +86,37 @@ words-4.html
 "
   (interactive)
   (require 'sgml-mode)
-  (let (bds ξp1 ξp2 inputStr fileList pageNavStr )
-    (setq bds 
-;; (get-selection-or-unit 'block)
-(let (pt1 pt2)
-  (save-excursion 
-    (if (re-search-backward "\n[ \t]*\n" nil "move")
-        (progn (re-search-forward "\n[ \t]*\n")
-               (setq pt1 (point)))
-      (setq pt1 (point)))
-    (if (re-search-forward "\n[ \t]*\n" nil "move")
-        (progn (re-search-backward "\n[ \t]*\n")
-               (setq pt2 (point)))
-      (setq pt2 (point)))
-    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
-)
-    (setq inputStr (elt bds 0) ξp1 (elt bds 1) ξp2 (elt bds 2)  )
-    (setq fileList (split-string (buffer-substring-no-properties ξp1 ξp2) "\n" t) )
+  (let* (
+         (bds ;; (get-selection-or-unit 'block)
+          (let (pt1 pt2)
+            (save-excursion
+              (if (re-search-backward "\n[ \t]*\n" nil "move")
+                  (progn (re-search-forward "\n[ \t]*\n")
+                         (setq pt1 (point)))
+                (setq pt1 (point)))
+              (if (re-search-forward "\n[ \t]*\n" nil "move")
+                  (progn (re-search-backward "\n[ \t]*\n")
+                         (setq pt2 (point)))
+                (setq pt2 (point)))
+              (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))
+         (ξp1 (aref bds 1))
+         (ξp2 (aref bds 2))
+         (ξfileList (split-string (buffer-substring-no-properties ξp1 ξp2) "\n" t))
+         ξpageNavStr )
 
     (delete-region ξp1 ξp2)
 
     ;; generate the page nav string
-    (setq pageNavStr (format "<nav class=\"page\">\n%s</nav>"
-                             (let (ξresult linkPath fTitle (ξi 0) )
-                               (while (< ξi (length fileList))
-                                 (setq linkPath (elt fileList ξi) )
-                                 (setq fTitle (xhm-get-html-file-title linkPath) )
-                                 (setq ξresult (concat ξresult "<a href=\"" linkPath "\" title=\"" fTitle "\">" (number-to-string (1+ ξi)) "</a>\n") )
-                                 (setq ξi (1+ ξi))
-                                 )
-                               ξresult
-                               )))
+    (setq ξpageNavStr
+          (format "<nav class=\"page\">\n%s</nav>"
+                  (let (ξresult linkPath fTitle (ξi 0))
+                    (while (< ξi (length ξfileList))
+                      (setq linkPath (elt ξfileList ξi))
+                      (setq fTitle (xhm-get-html-file-title linkPath))
+                      (setq ξresult (concat ξresult "<a href=\"" linkPath "\" title=\"" fTitle "\">" (number-to-string (1+ ξi)) "</a>\n"))
+                      (setq ξi (1+ ξi)))
+                    ξresult
+                    )))
 
     ;; open each file, insert the page nav string
     (mapc
@@ -193,19 +133,14 @@ words-4.html
              (sgml-skip-tag-forward 1)
              (setq p4 (point))
              (delete-region p3 p4)
-             (insert pageNavStr)
-             )
+             (insert ξpageNavStr))
          (progn
            (search-forward "<script><!--
 google_ad_client")
            (progn
              (search-backward "<script>")
-             (insert pageNavStr "\n\n")
-             ) ) )
-
-       )
-     fileList)
-    ))
+             (insert ξpageNavStr "\n\n")))))
+     ξfileList)))
 
 (defun xah-syntax-color-hex ()
 "Syntax color hex color spec ⁖ 「#ff1100」 in current buffer."

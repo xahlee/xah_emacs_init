@@ -12,45 +12,43 @@
 ;; 〈Wordy English — the Making of Belles-Lettres〉
 ;; http://wordyenglish.com/words/vocabulary.html
 
-(defun xwe-move-word-to-page (φmoveCode)
+(defun xwe-move-word-to-page (φcategory)
   "take current selection or block of text, ask which page to move it to."
-  (interactive "sEnter a character: [s]sat [g]gre [w]writer [e]easy [a]arcane [l]slang [i]informal [h]hyphen [c]combo [n]noun [t]noun things [8]noun abstract [p]poesy [f]foreign [3]special:")
-  (let (p1 p2 ξbds ξfile ξwordText)
-    (setq ξbds 
-;; (get-selection-or-unit 'block)
-(let (pt1 pt2)
-  (save-excursion 
-    (if (re-search-backward "\n[ \t]*\n" nil "move")
-        (progn (re-search-forward "\n[ \t]*\n")
-               (setq pt1 (point)))
-      (setq pt1 (point)))
-    (if (re-search-forward "\n[ \t]*\n" nil "move")
-        (progn (re-search-backward "\n[ \t]*\n")
-               (setq pt2 (point)))
-      (setq pt2 (point)))
-    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
-)
-    (setq ξwordText (elt ξbds 0) p1 (elt ξbds 1) p2 (elt ξbds 2))
 
-    (cond
-     ((string= φmoveCode "3") (setq ξfile "specialwords.html" ))
-     ((string= φmoveCode "a") (setq ξfile "arcane.html" ))
-     ((string= φmoveCode "c") (setq ξfile "combowords.html" ))
-     ((string= φmoveCode "e") (setq ξfile "easy.html" ))
-     ((string= φmoveCode "f") (setq ξfile "foreignwords.html" ))
-     ((string= φmoveCode "g") (setq ξfile "gre.html" ))
-     ((string= φmoveCode "h") (setq ξfile "hyphwords.html" ))
-     ((string= φmoveCode "i") (setq ξfile "informal.html" ))
-     ((string= φmoveCode "l") (setq ξfile "slang.html" ))
-     ((string= φmoveCode "n") (setq ξfile "noun.html" ))
-     ((string= φmoveCode "t") (setq ξfile "noun_things.html" ))
-     ((string= φmoveCode "8") (setq ξfile "noun_abs.html" ))
-     ((string= φmoveCode "p") (setq ξfile "poesy.html" ))
-     ((string= φmoveCode "s") (setq ξfile "satwords.html" ))
-     ((string= φmoveCode "w") (setq ξfile "writerwords.html" ))
+  (interactive
+   (list (ido-completing-read "which:" '("specialwords"
+                                         "arcane"
+                                         "combowords"
+                                         "easy"
+                                         "foreignwords"
+                                         "gre"
+                                         "hyphwords"
+                                         "informal"
+                                         "slang"
+                                         "noun"
+                                         "noun_things"
+                                         "noun_abs"
+                                         "poesy"
+                                         "satwords"
+                                         "writerwords"))))
 
-     (t (user-error "Your letter 「%s」 is not one of the allowed" φmoveCode )))
-
+  (let* ((ξbds ;; (get-selection-or-unit 'block)
+          (let (pt1 pt2)
+            (save-excursion
+              (if (re-search-backward "\n[ \t]*\n" nil "move")
+                  (progn (re-search-forward "\n[ \t]*\n")
+                         (setq pt1 (point)))
+                (setq pt1 (point)))
+              (if (re-search-forward "\n[ \t]*\n" nil "move")
+                  (progn (re-search-backward "\n[ \t]*\n")
+                         (setq pt2 (point)))
+                (setq pt2 (point)))
+              (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))
+         (ξwordText (aref ξbds 0))
+         (p1 (aref ξbds 1))
+         (p2 (aref ξbds 2))
+         (ξfile (concat φcategory ".html")))
+   
     (delete-region p1 p2 )
 
     (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξfile))
@@ -63,10 +61,12 @@
 
     (let*
         ;; save the working buffer, but make backup first
-        ((currentFileName (buffer-file-name))
-         (backupFileName (concat currentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
-      (copy-file currentFileName backupFileName t)
-      (save-buffer ))))
+        ((ξcurrentFileName (buffer-file-name))
+         (ξbackupFileName (concat ξcurrentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
+      (copy-file ξcurrentFileName ξbackupFileName t)
+      (save-buffer ))
+
+    ))
 
 (defun xwe-new-word-entry ()
   "Insert a blank a-word-a-day HTML template in a paritcular file."
@@ -98,7 +98,7 @@ Using current word or text selection."
   (interactive)
   (let (ξbds p1 p2 ξstr str2)
     (setq ξbds (get-selection-or-unit 'word))
-    (setq ξstr (elt ξbds 0))
+    (setq ξstr (aref ξbds 0))
 
     (setq str2 (xah-asciify-string ξstr))
     (search-forward "\n\n" nil t)
@@ -139,7 +139,7 @@ Used for the files in
 FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
   (interactive)
 
-  (let ( wd egText p1 p2 p3 p4 notBolded-p)
+  (let (wd egText p1 p2 p3 p4 notBolded-p)
     ;; grab the word
     (search-forward "<p class=\"wd\">")
     (setq p1 (point))
@@ -205,7 +205,7 @@ insert a div tag above the current paragraph."
   (interactive)
   (let (ξbds ξinputText)
     (setq ξbds (get-selection-or-unit 'word))
-    (setq ξinputText (elt ξbds 0))
+    (setq ξinputText (aref ξbds 0))
     (xhm-wrap-html-tag "span" "xnt")
     (search-backward "<p")
     (insert "<div class=\"xnote\"></div>\n\n")
@@ -219,7 +219,7 @@ insert a div tag above the current paragraph."
   (let (ξbds p1 p2 ξinput ξresult)
 
     (setq ξbds (get-selection-or-unit 'line))
-    (setq ξinput (elt ξbds 0) p1 (elt ξbds 1) p2 (elt ξbds 2))
+    (setq ξinput (aref ξbds 0) p1 (aref ξbds 1) p2 (aref ξbds 2))
     (setq ξresult (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" ξinput "\">" ξinput "</a></span>"))
     (delete-region p1 p2)
     (insert ξresult)))
