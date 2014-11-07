@@ -6,40 +6,40 @@
 ;; (defun xah-brackets-to-html ()
 ;;   "Replace all 「…」 to <code>…</code> in current buffer."
 ;;   (interactive)
-;;   (let (changedItems)
-;;     ;; (setq changedItems (make-hash-table :test 'equal))
-;;     (setq changedItems '())
+;;   (let (ξchangedItems)
+;;     ;; (setq ξchangedItems (make-hash-table :test 'equal))
+;;     (setq ξchangedItems '())
 
 ;;     (save-excursion
 ;;       (goto-char (point-min))
 ;;       (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
-;;         ;; (puthash (match-string 1) "t" changedItems)
-;;         (setq changedItems (cons (match-string 1) changedItems ) )
+;;         ;; (puthash (match-string 1) "t" ξchangedItems)
+;;         (setq ξchangedItems (cons (match-string 1) ξchangedItems ) )
 ;;         (replace-match "<span class=\"bktl\">\\1</span>" t)
 ;;         )
 
 ;;       (goto-char (point-min))
 ;;       (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
-;;         ;; (puthash (match-string 1) "t" changedItems)
-;;         (setq changedItems (cons (match-string 1) changedItems ) )
+;;         ;; (puthash (match-string 1) "t" ξchangedItems)
+;;         (setq ξchangedItems (cons (match-string 1) ξchangedItems ) )
 ;;         (replace-match "<span class=\"atlt\">\\1</span>" t)
 ;;         )
 ;;       )
 
 ;;     (with-output-to-temp-buffer "*changed items*"
 ;;       ;; (maphash
-;;       ;;  (lambda (myTitle myKey)
-;;       ;;    (princ myTitle)
+;;       ;;  (lambda (ξtitle ξkey)
+;;       ;;    (princ ξtitle)
 ;;       ;;    (princ "\n")
 ;;       ;;    )
-;;       ;;  changedItems)
+;;       ;;  ξchangedItems)
 
 ;;       (mapcar
-;;        (lambda (myTitle)
-;;          (princ myTitle)
+;;        (lambda (ξtitle)
+;;          (princ ξtitle)
 ;;          (princ "\n")
 ;;          )
-;;        changedItems)
+;;        ξchangedItems)
 ;;       )
 ;;     ))
 
@@ -86,6 +86,7 @@ When called with `universal-argument', work on visible portion of whole buffer (
 
 • 「…」 → <code>…</code>
 • 〈…〉 → <cite>…</cite>
+• 《…》 → <cite class=\"book\">…</cite>
 • 〔…〕 → <code class=\"path-α\">\\1</code>
 •  ‹…› → <var class=\"d\">…</var>
 • 〔<…〕 → 〔➤ <…〕
@@ -96,8 +97,7 @@ When called in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
   (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2))))
-  (let (changedItems)
-    (setq changedItems '())
+  (let ((ξchangedItems '()))
 
     (save-excursion
       (save-restriction
@@ -105,35 +105,40 @@ Generate a report of the replaced strings in a separate buffer."
 
         (goto-char (point-min))
         (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ))
+          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
           (replace-match "<code>\\1</code>" t))
 
         (goto-char (point-min))
-        (while (search-forward-regexp "〈\\([^」]+?\\)〉" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ))
+        (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
+          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
           (replace-match "<cite>\\1</cite>" t))
 
         (goto-char (point-min))
+        (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
+          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          (replace-match "<cite class=\"book\">\\1</cite>" t))
+
+        (goto-char (point-min))
         (while (search-forward-regexp "‹\\([^›]+?\\)›" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ))
+          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
           (replace-match "<var class=\"d\">\\1</var>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〔<a href=" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ))
+          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
           (replace-match "〔➤ <a href=" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z0-9]+?\\)〕" nil t)
-          (setq changedItems (cons (match-string 1) changedItems ))
+          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
           (replace-match "<code class=\"path-α\">\\1</code>" t))))
-    
+
     (with-output-to-temp-buffer "*changed brackets*"
       (mapcar
-       (lambda (innerText)
-         (princ innerText)
-         (princ "\n"))
-       (reverse changedItems)))))
+       (lambda (ξinnerText)
+         (princ ξinnerText)
+         (terpri))
+       (reverse ξchangedItems)))))
 
 (defun xah-angle-brackets-to-html (φp1 φp2)
   "Replace all 〈…〉 to <cite>…</cite>.
@@ -144,47 +149,41 @@ If there's no text selection, work on current text block, else, on text selectio
 When call in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-  (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ) )
-  (let (changedItems)
+  (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2))))
+  (let (ξchangedItems)
 
-    ;; (setq changedItems (make-hash-table :test 'equal))
-    (setq changedItems '())
+    ;; (setq ξchangedItems (make-hash-table :test 'equal))
+    (setq ξchangedItems '())
 
     (save-excursion
       (save-restriction
         (narrow-to-region φp1 φp2)
         (goto-char (point-min))
         (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
-          ;; (puthash (match-string 1) "t" changedItems)
-          (setq changedItems (cons (match-string 1) changedItems ) )
+          ;; (puthash (match-string 1) "t" ξchangedItems)
+          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
           ;;       (setq case-fold-search nil)
-          (replace-match "<cite class=\"book\">\\1</cite>" t)
-          )
+          (replace-match "<cite class=\"book\">\\1</cite>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
-          ;; (puthash (match-string 1) "t" changedItems)
-          (setq changedItems (cons (match-string 1) changedItems ) )
-          (replace-match "<cite>\\1</cite>" t)
-          )
-        ))
+          ;; (puthash (match-string 1) "t" ξchangedItems)
+          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          (replace-match "<cite>\\1</cite>" t))))
 
     (with-output-to-temp-buffer "*changed items*"
       ;; (maphash
-      ;;  (lambda (myTitle myKey)
-      ;;    (princ myTitle)
-      ;;    (princ "\n")
+      ;;  (lambda (ξtitle ξkey)
+      ;;    (princ ξtitle)
+      ;;    (terpri)
       ;;    )
-      ;;  changedItems)
+      ;;  ξchangedItems)
 
       (mapcar
-       (lambda (myTitle)
-         (princ myTitle)
-         (princ "\n")
-         )
-       changedItems)
-      )
-    ))
+       (lambda (ξtitle)
+         (princ ξtitle)
+         (terpri))
+       ξchangedItems))))
 
 
 (defun xah-curly-quotes→bracket (φleft-bracket φright-bracket)
