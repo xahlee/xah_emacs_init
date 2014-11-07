@@ -75,7 +75,20 @@ The related pages are HTML “div.rltd” element, having this form
 </div>"
   (interactive
    (let (bds p1 p2)
-     (setq bds (get-selection-or-unit 'block))
+     (setq bds 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+)
      (setq p1 (elt bds 1) )
      (setq p2 (elt bds 2) )
      (list
@@ -295,7 +308,20 @@ When called in lisp code, if φstring is non-nil, returns a changed string.  If 
   (interactive
    (if (use-region-p)
        (list nil (region-beginning) (region-end))
-     (let ((bds (get-selection-or-unit 'block)) )
+     (let ((bds 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+) )
        (list nil (elt bds 1) (elt bds 2)) ) ) )
 
   (let (workOnStringP inputStr outputStr)
@@ -316,7 +342,20 @@ When called in lisp code, if φstring is non-nil, returns a changed string.  If 
 Also change 「<li>1. 」 to 「<li>① 」."
   (interactive)
   (let (bds p3 p4 inputStr resultStr myPairs (case-fold-search nil) (case-replace nil))
-    (setq bds (get-selection-or-unit 'block))
+    (setq bds 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+)
     (setq inputStr (elt bds 0) )
     (setq p3 (elt bds 1) )
     (setq p4 (elt bds 2) )

@@ -16,7 +16,20 @@
   "take current selection or block of text, ask which page to move it to."
   (interactive "sEnter a character: [s]sat [g]gre [w]writer [e]easy [a]arcane [l]slang [i]informal [h]hyphen [c]combo [n]noun [t]noun things [8]noun abstract [p]poesy [f]foreign [3]special:")
   (let (p1 p2 ξbds ξfile ξwordText)
-    (setq ξbds (get-selection-or-unit 'block))
+    (setq ξbds 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+)
     (setq ξwordText (elt ξbds 0) p1 (elt ξbds 1) p2 (elt ξbds 2))
 
     (cond

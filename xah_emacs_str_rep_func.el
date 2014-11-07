@@ -82,7 +82,20 @@ becomes
   (interactive)
 
   (let (bds p1 p2 inputStr resultStr changedItems)
-    (setq bds (get-selection-or-unit 'block) )
+    (setq bds 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+ )
     (setq inputStr (elt bds 0) p1 (elt bds 1) p2 (elt bds 2) )
 
     (setq changedItems '())

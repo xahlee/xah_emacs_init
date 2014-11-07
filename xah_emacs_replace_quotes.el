@@ -13,15 +13,15 @@
 ;;     (save-excursion
 ;;       (goto-char (point-min))
 ;;       (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
-;;         ;; (puthash (match-string 1) "t" ξchangedItems)
-;;         (setq ξchangedItems (cons (match-string 1) ξchangedItems ) )
+;;         ;; (puthash (match-string-no-properties 1) "t" ξchangedItems)
+;;         (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ) )
 ;;         (replace-match "<span class=\"bktl\">\\1</span>" t)
 ;;         )
 
 ;;       (goto-char (point-min))
 ;;       (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
-;;         ;; (puthash (match-string 1) "t" ξchangedItems)
-;;         (setq ξchangedItems (cons (match-string 1) ξchangedItems ) )
+;;         ;; (puthash (match-string-no-properties 1) "t" ξchangedItems)
+;;         (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ) )
 ;;         (replace-match "<span class=\"atlt\">\\1</span>" t)
 ;;         )
 ;;       )
@@ -50,7 +50,8 @@
 ;;   (interactive
 ;;    (cond
 ;;     ((equal current-prefix-arg nil)    ; universal-argument not called
-;;      (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
+;;      (let ((bds 
+;; (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
 ;;     (t                                  ; all other cases
 ;;      (list (point-min) (point-max) )) ) )
 ;; (let ((case-fold-search nil))
@@ -70,7 +71,20 @@ When called with `universal-argument', work on visible portion of whole buffer (
   (interactive
    (cond
     ((equal current-prefix-arg nil)    ; universal-argument not called
-     (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2) ) ))
+     (let ((bds 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+)) (list (elt bds 1) (elt bds 2) ) ))
     (t                                  ; all other cases
      (list (point-min) (point-max) )) ) )
   (save-excursion
@@ -96,7 +110,34 @@ Work on text selection or current text block.
 When called in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-  (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2))))
+  (interactive (let ((bds 
+;; 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+)
+) (list (elt bds 1) (elt bds 2))))
   (let ((ξchangedItems '()))
 
     (save-excursion
@@ -105,40 +146,44 @@ Generate a report of the replaced strings in a separate buffer."
 
         (goto-char (point-min))
         (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
-          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           (replace-match "<code>\\1</code>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
-          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           (replace-match "<cite>\\1</cite>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
-          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           (replace-match "<cite class=\"book\">\\1</cite>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "‹\\([^›]+?\\)›" nil t)
-          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           (replace-match "<var class=\"d\">\\1</var>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〔<a href=" nil t)
-          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           (replace-match "〔➤ <a href=" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z0-9]+?\\)〕" nil t)
-          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           (replace-match "<code class=\"path-α\">\\1</code>" t))))
 
-    (with-output-to-temp-buffer "*changed brackets*"
-      (mapcar
-       (lambda (ξinnerText)
-         (princ ξinnerText)
-         (terpri))
-       (reverse ξchangedItems)))))
+    ;; (with-output-to-temp-buffer "*changed brackets*"
+    ;;   (mapcar
+    ;;    (lambda (ξinnerText)
+    ;;      (princ ξinnerText)
+    ;;      (terpri))
+    ;;    (reverse ξchangedItems)))
+
+(message "%S" ξchangedItems)
+
+))
 
 (defun xah-angle-brackets-to-html (φp1 φp2)
   "Replace all 〈…〉 to <cite>…</cite>.
@@ -149,7 +194,20 @@ If there's no text selection, work on current text block, else, on text selectio
 When call in lisp program, the arguments φp1 φp2 are region positions.
 
 Generate a report of the replaced strings in a separate buffer."
-  (interactive (let ((bds (get-selection-or-unit 'block))) (list (elt bds 1) (elt bds 2))))
+  (interactive (let ((bds 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+)) (list (elt bds 1) (elt bds 2))))
   (let (ξchangedItems)
 
     ;; (setq ξchangedItems (make-hash-table :test 'equal))
@@ -160,15 +218,15 @@ Generate a report of the replaced strings in a separate buffer."
         (narrow-to-region φp1 φp2)
         (goto-char (point-min))
         (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
-          ;; (puthash (match-string 1) "t" ξchangedItems)
-          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          ;; (puthash (match-string-no-properties 1) "t" ξchangedItems)
+          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           ;;       (setq case-fold-search nil)
           (replace-match "<cite class=\"book\">\\1</cite>" t))
 
         (goto-char (point-min))
         (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
-          ;; (puthash (match-string 1) "t" ξchangedItems)
-          (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+          ;; (puthash (match-string-no-properties 1) "t" ξchangedItems)
+          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           (replace-match "<cite>\\1</cite>" t))))
 
     (with-output-to-temp-buffer "*changed items*"
@@ -280,15 +338,15 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
 
 ;;     (cond
 ;;      ((or
-;;        (string-match "^Ctrl" (match-string 1 ) )
-;;        (string-match "^Alt" (match-string 1 ) )
-;;        (string-match "^Win" (match-string 1 ) )
-;;        (string-match "^Menu" (match-string 1 ) )
-;;        (string-match "^Meta" (match-string 1 ) )
-;;        (string-match "^Cmd" (match-string 1 ) )
-;;        (string-match "^Opt" (match-string 1 ) )
-;;        (string-match "^Super" (match-string 1 ) )
-;;        (string-match "^Hyper" (match-string 1 ) )
+;;        (string-match "^Ctrl" (match-string-no-properties 1 ) )
+;;        (string-match "^Alt" (match-string-no-properties 1 ) )
+;;        (string-match "^Win" (match-string-no-properties 1 ) )
+;;        (string-match "^Menu" (match-string-no-properties 1 ) )
+;;        (string-match "^Meta" (match-string-no-properties 1 ) )
+;;        (string-match "^Cmd" (match-string-no-properties 1 ) )
+;;        (string-match "^Opt" (match-string-no-properties 1 ) )
+;;        (string-match "^Super" (match-string-no-properties 1 ) )
+;;        (string-match "^Hyper" (match-string-no-properties 1 ) )
 ;;        )
 ;;       (setq replacePattern "【\1】" )
 ;;       )

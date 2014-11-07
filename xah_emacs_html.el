@@ -147,7 +147,20 @@ words-4.html
   (interactive)
   (require 'sgml-mode)
   (let (bds ξp1 ξp2 inputStr fileList pageNavStr )
-    (setq bds (get-selection-or-unit 'block))
+    (setq bds 
+;; (get-selection-or-unit 'block)
+(let (pt1 pt2)
+  (save-excursion 
+    (if (re-search-backward "\n[ \t]*\n" nil "move")
+        (progn (re-search-forward "\n[ \t]*\n")
+               (setq pt1 (point)))
+      (setq pt1 (point)))
+    (if (re-search-forward "\n[ \t]*\n" nil "move")
+        (progn (re-search-backward "\n[ \t]*\n")
+               (setq pt2 (point)))
+      (setq pt2 (point)))
+    (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2)))
+)
     (setq inputStr (elt bds 0) ξp1 (elt bds 1) ξp2 (elt bds 2)  )
     (setq fileList (split-string (buffer-substring-no-properties ξp1 ξp2) "\n" t) )
 
