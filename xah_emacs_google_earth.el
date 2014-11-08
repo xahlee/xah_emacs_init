@@ -100,14 +100,14 @@ Returns a vector.
 For example: 「\"37°26′36.42″N 06°15′14.28″W\"」
 becomes 「[37.44345 -6.253966666666667]」"
   (interactive)
-  (let (ξtmpPair (tt2 φlatlon) ξlatStr ξlatNum ξlonStr ξlonNum
-                 ξdeg ξmin ξsec ξsign (ξc (/ 1.0 60.0)))
+  (let ((ξtmpPair
+         (split-string
+          (replace-regexp-in-string "'" "′"
+                                    (replace-regexp-in-string "\"" "″"
+                                                              (replace-regexp-in-string "''" "″" φlatlon t t) t t) t t)
+          " +"))
+        ξlatStr ξlatNum ξlonStr ξlonNum ξdeg ξmin ξsec ξsign (ξc (/ 1.0 60.0)))
 
-    (setq tt2 (replace-regexp-in-string "''" "″" tt2 t t))
-    (setq tt2 (replace-regexp-in-string "\"" "″" tt2 t t))
-    (setq tt2 (replace-regexp-in-string "'" "′" tt2 t t))
-
-    (setq ξtmpPair (split-string tt2 " +"))
     (when (not (equal (length ξtmpPair) 2)) (user-error "Error: input can contain only one space"))
 
     (setq ξlatStr (elt ξtmpPair 0))

@@ -13,10 +13,9 @@
 ;; http://wordyenglish.com/words/vocabulary.html
 
 (defun xwe-move-word-to-page (φcategory)
-  "take current selection or block of text, ask which page to move it to."
-
+  "Take current selection or block of text, ask which page to move it to."
   (interactive
-   (list (ido-completing-read "which:" '("specialwords"
+   (list (ido-completing-read "Which:" '("specialwords"
                                          "arcane"
                                          "combowords"
                                          "easy"
@@ -31,41 +30,41 @@
                                          "poesy"
                                          "satwords"
                                          "writerwords"))))
+  (let (
+        p1
+        p2
+        ξwordText
+        (ξdestFile (concat φcategory ".html")))
+    (if (use-region-p)
+        (progn
+          (setq p1 (region-beginning))
+          (setq p2 (region-end)))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n")
+                   (setq p1 (point)))
+          (setq p1 (point)))
+        (if (re-search-forward "\n[ \t]*\n" nil "move")
+            (progn (re-search-backward "\n[ \t]*\n")
+                   (setq p2 (point)))
+          (setq p2 (point)))))
 
-  (let* ((ξbds ;; (get-selection-or-unit 'block)
-          (if (use-region-p)
-              (vector (buffer-substring-no-properties (region-beginning) (region-end)) (region-beginning) (region-end) )
-            (progn (let (pt1 pt2)
-                     (save-excursion 
-                       (if (re-search-backward "\n[ \t]*\n" nil "move")
-                           (progn (re-search-forward "\n[ \t]*\n")
-                                  (setq pt1 (point)))
-                         (setq pt1 (point)))
-                       (if (re-search-forward "\n[ \t]*\n" nil "move")
-                           (progn (re-search-backward "\n[ \t]*\n")
-                                  (setq pt2 (point)))
-                         (setq pt2 (point)))
-                       (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))))
-         (ξwordText (aref ξbds 0))
-         (p1 (aref ξbds 1))
-         (p2 (aref ξbds 2))
-         (ξfile (concat φcategory ".html")))
-   
+    (setq ξwordText (buffer-substring-no-properties p1 p2))
     (delete-region p1 p2 )
 
-    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξfile))
+    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξdestFile))
     (goto-char 1)
     (search-forward "<section class=\"word-α\">") (search-backward "<")
     (insert ξwordText "\n\n")
     (save-buffer )
     (kill-buffer )
-    (message "Word moved to 「%s」" ξfile)
+    (message "Word moved to 「%s」" ξdestFile)
 
     (let*
         ;; save the working buffer, but make backup first
-        ((ξcurrentFileName (buffer-file-name))
-         (ξbackupFileName (concat ξcurrentFileName "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
-      (copy-file ξcurrentFileName ξbackupFileName t)
+        ((ξfname (buffer-file-name))
+         (ξbackupName (concat ξfname "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
+      (copy-file ξfname ξbackupName t)
       (save-buffer ))))
 
 (defun xwe-new-word-entry ()
