@@ -6,7 +6,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
 
-(add-to-list 'auto-mode-alist '("\\.clj\\'" . xah-clojure-mode))
+;; (add-to-list 'auto-mode-alist '("\\.clj\\'" . xah-clojure-mode))
 
 ;; (autoload 'xah-js-mode "xah-js-mode" "load xah-js-mode for JavaScript file" t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . xah-js-mode))
