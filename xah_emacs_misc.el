@@ -355,10 +355,9 @@ When there is a text selection, act on the region."
 
             ("rm empty" . "find . -type f -empty")
             ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-            ;; ("rm emacs backup~" . "find . -name \"*~\" -exec rm {} ';'")
             ("rm emacs backup~" . "find . -name \"*~\" -delete")
             ("findEmptyDir" . "find . -depth -empty -type d")
-            ("rmEmptyDir" . "find . -depth -empty -type d -exec rmdir {} ';'")
+            ("rmEmptyDir" . "find . -depth -empty -type d -delete")
             ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
             ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
             ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
