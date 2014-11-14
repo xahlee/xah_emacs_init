@@ -181,6 +181,8 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
         ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
         ("xah site move" . "~/git/xahscripts/elisp/xah_site_move.el")
 
+        ("gorilla" . "~/git/gorilla-repl/src/gorilla_repl/")
+
 ))
 
 (defun xah-open-file-fast (φopen-code)
