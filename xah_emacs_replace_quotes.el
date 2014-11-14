@@ -181,7 +181,7 @@ Version 2014-11-14"
                  (setq p2 (point)))
         (setq p2 (point))))
 
-    (setq ξinputStr p1 p2 )
+    (setq ξinputStr (buffer-substring-no-properties p1 p2))
 
     (setq ξchangedItems '())
 
@@ -201,7 +201,7 @@ Version 2014-11-14"
               (delete-char 17))
 
             (buffer-string)))
-
+    
     (if (> (length ξchangedItems) 0)
         (progn
           (delete-region p1 p2)
