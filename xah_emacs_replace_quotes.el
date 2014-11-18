@@ -89,9 +89,15 @@ Generate a report of the replaced strings in a separate buffer."
           (replace-match "〔➤ <a href=" t))
 
         (goto-char (point-min))
-        (while (search-forward-regexp "〔\\([-_/\\:~.A-Za-z0-9]+?\\)〕" nil t)
+        (while (search-forward-regexp "〔\\([ -_/\\:~.A-Za-z0-9%]+?\\)〕" nil t)
           (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
           (replace-match "<code class=\"path-α\">\\1</code>" t))))
+
+    (mapcar
+     (lambda (ξx)
+       (princ ξx)
+       (terpri))
+     (reverse ξchangedItems))
 
     ;; (with-output-to-temp-buffer "*changed brackets*"
     ;;   (mapcar
@@ -100,7 +106,7 @@ Generate a report of the replaced strings in a separate buffer."
     ;;      (terpri))
     ;;    (reverse ξchangedItems)))
 
-    (message "%S" ξchangedItems)))
+    ))
 
 (defun xah-angle-brackets-to-html (φp1 φp2)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span>.

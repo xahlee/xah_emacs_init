@@ -256,7 +256,7 @@
     ("dirs" "directories")
     ("subdir" "sub-directory")
     ("subdirs" "sub-directories")
-    ("doc8" "documentation")
+    ("doc" "documentation")
     ("impl" "implementation")
     ("implt" "implement")
     ("dl" "download")
