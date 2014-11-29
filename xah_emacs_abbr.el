@@ -46,33 +46,33 @@
     ("wsnt" "wasn't")
     ("hnt" "haven't")
     ("shnt" "shouldn't")
-    ("r" "are")
+    ;; ("r" "are")
     ("ur" "you are")
 
-    ("t" "the")
+    ;; ("t" "the")
     ;; ("t" "be") ; 2
     ;; ("2" "to")                          ; problem with just enter a number
     ;; ("t" "of") ; 4
-    ("n" "and") ;3
+    ;; ("n" "and") ;3
 ;;; ("t" "a") ; 6
 ;;; ("t" "in") ; 7
 
   ;("h" "that") ; 8
-    ("h" "have") ; 9
+    ;; ("h" "have") ; 9
 ;;; ("t" "I") ; 10
 ;;; ("t" "it") ; 11
-    ("f" "for")  ; 12
+    ;; ("f" "for")  ; 12
   ;("8" "not")
     ;; ("t" "on") ; 14
-    ("w" "with") ; 15
+    ;; ("w" "with") ; 15
     ;; ("t" "he") ; 16
     ;; ("t" "as") ; 17
-    ("u" "you") ; 18
+    ;; ("u" "you") ; 18
 
     ;; ("t" "do") ; 19
     ;; ("t" "at") ; 20
     ;; ("t" "this") ; 21
-    ("b" "but")      ; 22
+    ;; ("b" "but")      ; 22
     ;; ("t" "his") ; 23
     ;; ("t" "by") ; 24
     ;; ("t" "from") ; 25
@@ -184,7 +184,7 @@
     ("atmt" "automatic")
     ("atmtl" "automatically")
     ("maths" "mathematics")
-    ("wtdb" "what's the difference between")
+    ("wtdb" "What's the difference between")
     ("dfb" "difference between")
     ("dfc" "difference")
     ("dft" "different")
@@ -232,6 +232,7 @@
     ("wl" "Wolfram Language")
     ("cl" "Common Lisp")
     ("js" "JavaScript")
+    ("cj" "Clojure")
     ("vb" "Visual Basic")
     ("pp" "PayPal")
     ("ahd" "American Heritage Dictionary")
@@ -249,7 +250,7 @@
     ("wd" "web development")
     ("dvp" "develop")
     ("dev" "development")
-    ("p" "program")
+    ("8p" "program")
     ("pl" "programing language")
     ("paren" "parenthesis")
     ("dir" "directory")

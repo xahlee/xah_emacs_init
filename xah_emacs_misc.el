@@ -662,3 +662,22 @@ http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-
                     (overlays-at (point)))
             (get-text-property (point) 'keymap)
             (get-text-property (point) 'local-map)))))
+
+
+(defvar gitgrep-history nil)
+
+(defun gitgrep (φsearch-string)
+"call git grep to search symbols in a project.
+
+2014-11-19 by “Left Right” https://plus.google.com/113859563190964307534/posts/CyEsoyhkTVe
+"
+  (interactive
+   (let ((ξsym (thing-at-point 'symbol)))
+     (list
+      (completing-read
+       "String to search for: "
+       (list ξsym
+             (buffer-name)
+             (buffer-file-name))
+       'identity nil ξsym gitgrep-history ξsym))))
+  (grep (format "git --no-pager grep -P -n '%s'" φsearch-string)))

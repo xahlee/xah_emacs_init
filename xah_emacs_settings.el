@@ -37,15 +37,15 @@
         (tool-bar-lines . 0)
         (width . 92)
         (height . 52)
-        (background-color . "seashell")
+        (background-color . "#eeeedd")
         ))
 
 ;; set default font
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (when (member "DejaVu Sans Mono" (font-family-list))
-    (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
+    (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-12"))
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-12"))
     )
   )
  ((string-equal system-type "darwin")   ; Mac OS X

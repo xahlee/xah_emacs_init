@@ -21,16 +21,17 @@
 
   (global-set-key (kbd "<mouse-3>") 'xah-click-describe-char) ; right button
 
-  (global-set-key (kbd "<mouse-9>") 'xah-close-current-buffer) ; next page button
-
   (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
   (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
 
-  (global-set-key (kbd "<S-mouse-4>") 'xah-beginning-of-line-or-block)          
-  (global-set-key (kbd "<S-mouse-5>") 'xah-end-of-line-or-block)
+  (global-set-key (kbd "<S-mouse-4>") 'xah-previous-user-buffer)
+  (global-set-key (kbd "<S-mouse-5>") 'xah-next-user-buffer)
 
-  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+  (global-set-key (kbd "<C-mouse-4>") 'xah-beginning-of-line-or-block)
+  (global-set-key (kbd "<C-mouse-5>") 'xah-end-of-line-or-block)
+
+  ;; (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+  ;; (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
   )
 
