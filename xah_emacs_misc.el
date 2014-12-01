@@ -87,137 +87,13 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 
-(defvar xah-filelist nil "alist for files i need to open frequently. Key is a short abbrev, Value is file path.")
-(setq xah-filelist
-      '(
-        ("3emacs blog" . "~/web/ergoemacs_org/emacs/blog.html" )
-        ("4comp blog" . "~/web/xahlee_info/comp/blog.html" )
-        ("web blog" . "~/web/xahlee_info/js/blog.html" )
-
-        ("math blog" . "~/web/xahlee_info/math/blog.html" )
-        ("wordy english blog" . "~/web/wordyenglish_com/lit/blog.html" )
-        ("chinese blog" . "~/web/wordyenglish_com/chinese/blog.html" )
-        ("music blog" . "~/web/xahmusic_org/music/blog.html" )
-        ("arts blog" . "~/web/xaharts_org/arts/blog.html" )
-        ("sl blog" . "~/web/xahsl_org/sl/blog.html" )
-        ("pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
-        ("sex blog" . "~/web/xahlee_org/sex/blog.html" )
-        ("porn blog" . "~/web/xahporn_org/porn/blog.html" )
-
-        ("twitter" . "~/Dropbox/twitter tweets.txt" )
-        ("abbrev" . "~/git/xah_emacs_init/xah_emacs_abbr.el" )
-        ("xah fly keys git" . "~/git/xah-fly-keys/xah-fly-keys.el")
-        ("xah fly keys site" . "~/web/ergoemacs_org/misc/ergoemacs_vi_mode.html")
-        ("ahk" . "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
-
-        ("download" . "~/Downloads/" )
-        ("pictures" . "~/Pictures/" )
-        ("document" . "~/Documents/" )
-
-        ("git" . "~/git/" )
-        ("Ubuntu One" . "~/Ubuntu One/")
-        ("Xah Lee Resume.html" . "~/web/xahlee_org/PageTwo_dir/Personal_dir/Xah_Lee_Resume.html")
-        ("bavlamdei.txt" . "~/Dropbox/cabdei/bavlamdei.txt")
-        ("check local links.pl" . "~/git/xahscripts/validate_website/check_local_links.pl")
-
-        ("emacs tutorial update emails" . "~/Dropbox/cabdei/emacs_tutorial_update_emails.txt")
-        ("xahleeinfo update emails" . "~/Dropbox/cabdei/xahlee.info_update_emails.txt")
-        ("xah js tutorial update emails" . "~/Dropbox/cabdei/xah_js_tutorial_update_emails.txt")
-        ("xah python tutorial update emails" . "~/Dropbox/cabdei/xah_python_tutorial_update_emails.txt")
-
-        ("find replace.py3" . "~/git/xah_find_replace/find-replace.py3")
-        ("mipri" . "~/Dropbox/zekri_open/mipri/")
-        ("second life" . "/media/OS/Users/xah/Google Drive/second life/")
-        ("google drive" . "/media/OS/Users/xah/Google Drive/")
-        ("skydrive" . "/media/OS/Users/xah/SkyDrive/")
-        ("ergoemacs init" . "~/git/ergoemacs/ergoemacs/")
-        ("emacs init" . "~/.emacs.d/init.el")
-        ("windows pictures" . "/media/OS/Users/xah/Pictures/")
-        ("book" . "/media/OS/Users/xah/SkyDrive/books/")
-
-        ("emacs tutorial" . "~/web/ergoemacs_org/emacs/emacs.html")
-        ("elisp tutorial" . "~/web/ergoemacs_org/emacs/elisp.html")
-        ("emacs how to bindkey" . "~/web/ergoemacs_org/emacs/keyboard_shortcuts.html" )
-        ("perl" . "~/web/xahlee_info/perl/perl_index.html")
-        ("php" . "~/web/xahlee_info/php/php_basics.html")
-        ("python" . "~/web/xahlee_info/perl-python/index.html")
-        ("python3" . "~/web/xahlee_info/python/python3_basics.html")
-        ("ruby" . "~/web/xahlee_info/ruby/ruby_index.html")
-        ("java" . "~/web/xahlee_info/java-a-day/java.html")
-        ("unicode" . "~/web/xahlee_info/comp/unicode_index.html")
-        ("linux" . "~/web/xahlee_info/linux/linux_index.html" )
-        ("js" . "~/web/xahlee_info/js/js.html" )
-        ("svg" . "~/web/xahlee_info/js/svg.html")
-        ("html" . "~/web/xahlee_info/js/index.html")
-        ("css index" . "~/web/xahlee_info/js/css_index.html")
-        ("comp lang index" . "~/web/xahlee_info/comp/comp_lang.html")
-        ("keyboard index" . "~/web/xahlee_info/kbd/keyboarding.html")
-        ("mouse index" . "~/web/xahlee_info/kbd/mouse_index.html")
-        ("plane curves site" . "~/web/xahlee_info/SpecialPlaneCurves_dir/specialPlaneCurves.html")
-
-        ("hacker cult" . "~/web/xahlee_info/comp/comp_index.html")
-        ("netiquette index" . "~/web/xahlee_info/Netiquette_dir/troll.html")
-
-        ("projection" . "~/git/mercury/emacs-projection-mode/")
-        ("update_ergoemacs.sh" . "~/git/xahscripts/update_ergoemacs.sh")
-
-        ("py2doc" . "~/web/xahlee_info/python_doc_2.7.6/index.html")
-        ("py3doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
-
-        ("xx webdev blog" . "~/web/xahlee_info/js/xx_webdev_blog.html")
-        ("xx comp blog" . "~/web/xahlee_info/comp/xx_comp_blog.html")
-        ("xx emacs blog" . "~/web/ergoemacs_org/emacs/xx_emacs_blog.html")
-        ("xx math blog" . "~/web/xahlee_info/math/xx_math_blog.html")
-        ("xx pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/xx_pd_blog.html")
-        ("xx wordy english blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
-        ("xx xah arts blog" . "~/web/xaharts_org/arts/xx_art_blog.html")
-        ("xx music" . "~/web/xahmusic_org/music/xx-music_blog.html")
-        ("piano" . "~/web/xahmusic_org/piano/index.html")
-
-        ("web design" . "~/web/xahlee_info/js/web_design_index.html")
-        ("web index" . "~/web/xahlee_info/js/index.html")
-        ("clojure" . "~/web/xahlee_info/clojure/clojure_index.html")
-
-        ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
-        ("xah site move" . "~/git/xahscripts/elisp/xah_site_move.el")
-
-        ("gorilla" . "~/git/gorilla-repl/src/gorilla_repl/")
-
-))
+(defvar xah-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
 (defun xah-open-file-fast (φopen-code)
   "Prompt to open a file from a pre-defined set."
   (interactive
    (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-filelist))))
   (find-file (cdr (assoc φopen-code xah-filelist))))
-
-;; (defun xah-open-file-fast (φopen-code)
-;;   "Prompt to open a file from a pre-defined set."
-;;   (interactive "sOpen file: [3]emacs [4]comp [j]js [m]math [l]lit [c]chinese [u]music [a]art [sl]sl [x]sex [pd]pd [k]key [h]ahk [kbd]kbd [t]tweets [uk]kbd [d]dl:")
-;;   (let (ξfile )
-;;     (setq ξfile
-;;           (cond
-;;            ((string= φopen-code "3") "~/web/ergoemacs_org/emacs/blog.html" )
-;;            ((string= φopen-code "4") "~/web/xahlee_info/comp/blog.html" )
-;;            ((string= φopen-code "j") "~/web/xahlee_info/js/blog.html" )
-;;            ((string= φopen-code "m") "~/web/xahlee_info/math/blog.html" )
-;;            ((string= φopen-code "l") "~/web/wordyenglish_com/lit/blog.html" )
-;;            ((string= φopen-code "c") "~/web/wordyenglish_com/chinese/blog.html" )
-;;            ((string= φopen-code "u") "~/web/xahmusic_org/music/blog.html" )
-;;            ((string= φopen-code "a") "~/web/xaharts_org/arts/blog.html" )
-;;            ((string= φopen-code "sl") "~/web/xahsl_org/sl/blog.html" )
-;;            ((string= φopen-code "t") "~/Dropbox/twitter tweets.txt" )
-;;            ((string= φopen-code "x") "~/web/xahlee_org/sex/blog.html" )
-;;            ((string= φopen-code "pd") "~/web/xahlee_org/Periodic_dosage_dir/pd.html" )
-;;            ((string= φopen-code "k") "~/git/xah_emacs_init/xah_emacs_keybinding.el" )
-;;            ((string= φopen-code "h") "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
-;;            ((string= φopen-code "kbd") "~/web/xahlee_info/kbd/keyboarding.html" )
-;;            ((string= φopen-code "uk") "~/web/xahlee_info/kbd/keyboarding.html" )
-;;            ((string= φopen-code "d") "~/Downloads/" )
-;;            (t (user-error "You typed 「%s」, it doesn't associate with a file." φopen-code ))
-;;            )
-;;           )
-;;     (find-file ξfile ) ) )
 
 
 
