@@ -182,7 +182,7 @@
     ("8temp" "temperature")
     ("gvn" "government")
     ("atmt" "automatic")
-    ("atmtl" "automatically")
+    ("atmtcl" "automatically")
     ("maths" "mathematics")
     ("wtdb" "What's the difference between")
     ("dfb" "difference between")
@@ -257,20 +257,20 @@
     ("dirs" "directories")
     ("subdir" "sub-directory")
     ("subdirs" "sub-directories")
-    ("doc" "documentation")
+    ("8doc" "documentation")
     ("impl" "implementation")
     ("implt" "implement")
     ("dl" "download")
-    ("char" "character")
-    ("chars" "characters")
-    ("def" "definition")
+    ("8char" "character")
+    ("8chars" "characters")
+    ("8defn" "definition")
     ("bg" "background")
     ("kw" "keyword")
     ("kb" "keyboard")
     ("kbs" "keyboards")
     ("kbd" "keybinding")
     ("env" "environment")
-    ("v" "variable")
+    ("8v" "variable")
     ("str" "string")
     ("vars" "variables")
     ("ev" "environment variable")
@@ -298,7 +298,7 @@
 
     ("8l" "────────── ────────── ────────── ────────── ──────────")
     ("utf8" "-*- coding: utf-8 -*-")
-    ("ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
+    ("8ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 
     ("8php" "<?php\n\n?>")
 
@@ -330,7 +330,7 @@ AIM: xahlee
 Yahoo: P0lyglut
 MSN: p0lyglut@yahoo.com or xahlee
 Second Life: Xah Toll
-")
+QQ: http://user.qzone.qq.com/2609322939")
 
     ;; xah url
     ("xs" " Xah Lee

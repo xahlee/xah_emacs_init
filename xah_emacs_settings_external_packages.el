@@ -12,7 +12,7 @@
 )
 
 (when (fboundp 'global-company-mode)
-    (global-company-mode 1)
+    (global-company-mode nil)
 )
 
 (setq company-idle-delay 2)

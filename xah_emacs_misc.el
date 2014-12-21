@@ -28,20 +28,21 @@ C-u 2 → set to 'chinese-py-b5."
 
 
 
-(defun xah-color-me-yellow ()
-  "Change background color of current window to light yellow."
-  (interactive)
-  (set-background-color "cornsilk"))
+(defvar xah-background-colors  nil "alist of color values suitable for frame background. Key is a convenient name, value is a elisp color.")
 
-(defun xah-color-me-pinky ()
-  "Change background color of current window to light pink."
-  (interactive)
-  (set-background-color "lavender blush"))
+(setq xah-background-colors '(
+                              ("cornsilk" . "#fff8dc")
+                              ("lavender" . "#e6e6fa")
+                              ("lavender blush" . "#fff0f5")
+                              ("seashell" . "#fff5ee")
+                              ("honeydew" . "#f0fff0")
+                              ))
 
-(defun xah-color-me-honeydew ()
-  "Change background color of current window to honeydew."
-  (interactive)
-  (set-background-color "honeydew"))
+(defun xah-set-background-color (φbg-color)
+  "Interactively set frame background color."
+  (interactive
+   (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-background-colors))))
+  (set-background-color φbg-color))
 
 (defun xah-list-matching-lines2 ()
   "Show lines in the current buffer matching current word or text selection.
@@ -538,7 +539,6 @@ http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-
                     (overlays-at (point)))
             (get-text-property (point) 'keymap)
             (get-text-property (point) 'local-map)))))
-
 
 (defvar gitgrep-history nil)
 

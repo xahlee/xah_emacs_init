@@ -26,6 +26,26 @@ e.g. c:/Users/h3/web/"
    ]
   )
 
+(defun xahsite-xahlee-info-external-docs ()
+  "a list of dir under xahlee.info that are external docs"
+  [
+
+   "clojure-doc-1.6/"
+   "css_2.1_spec/"
+   "dom3-core/"
+   "dom3-load_save/"
+   "dom3-validation/"
+   "dom-whatwg/"
+   "git-bottomup/"
+   "javascript_ecma-262_5.1_2011/"
+   "jquery_doc/"
+   "python_doc_2.7.6/"
+   "python_doc_3.3.3/"
+   "REC-SVG11-20110816/"
+
+   ]
+  )
+
 
 (defun xahsite-local-link-p (φhref-value)
   "Return true if it's a local file link, else false.
@@ -537,6 +557,11 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
     (replace-pairs-region 1 (point-max)
  [
 
+[
+"<address class=\"author\"><a href=\"https://plus.google.com/112757647855302148298?rel=author\" rel=\"author\">Xah Lee</a></address>"
+"Xah Lee"
+]
+
   ;; google analytics tracker
 ["<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-1','xahlee.info');ga('send','pageview');</script>" ""]
 
@@ -685,7 +710,7 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 
 ["<div class=\"ads-bottom-65900\">[\n ]*</div>" ""]
 
-["<aside id=\"id1\">[[:ascii:]]+?</aside>" ""]
+;; ["<aside id=\"id1\">[[:ascii:]]+?</aside>" ""]
 
 ["<div class=\"share-buttons\">[\n ]*</div>" ""]
 
