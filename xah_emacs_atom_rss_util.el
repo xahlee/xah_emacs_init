@@ -118,7 +118,7 @@ Other files paths for blogs are:
               (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" currentFilePath "FIXEDCASE" "LITERAL")
             (replace-regexp-in-string "\\.html\\'" ".xml" currentFilePath "FIXEDCASE" "LITERAL")))
          (titleText
-          (if (string-match "<h3>\\([^<]+?\\)</h3>" ξinputStr)
+          (if (string-match "<h3>\\(.+?\\)</h3>" ξinputStr)
               (progn (match-string 1 ξinputStr ))
             (progn
               (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" ξinputStr)

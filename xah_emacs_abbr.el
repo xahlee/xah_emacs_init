@@ -284,7 +284,9 @@
     ("prog" "programing")
     ("dt" "data type")
     ("db" "database")
-    ("oop" "object oriented programing")
+    ("8oop" "object oriented programing")
+    ("8lhs" "left-hand-side")
+    ("8rhs" "right-hand-side")
 
     ;; emacs lisp
     ("8date" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)")
