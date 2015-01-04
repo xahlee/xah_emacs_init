@@ -27,11 +27,11 @@
   (global-set-key (kbd "<S-mouse-4>") 'xah-previous-user-buffer)
   (global-set-key (kbd "<S-mouse-5>") 'xah-next-user-buffer)
 
-  (global-set-key (kbd "<C-mouse-4>") 'xah-beginning-of-line-or-block)
-  (global-set-key (kbd "<C-mouse-5>") 'xah-end-of-line-or-block)
+  ;; (global-set-key (kbd "<C-mouse-4>") 'xah-beginning-of-line-or-block)
+  ;; (global-set-key (kbd "<C-mouse-5>") 'xah-end-of-line-or-block)
 
-  ;; (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-  ;; (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
   )
 

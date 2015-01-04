@@ -47,15 +47,20 @@ When called in lisp program, the arguments φp1 φp2 are region positions.
 Generate a report of the replaced strings in a separate buffer."
   (interactive
    (let (p1 p2)
-     (save-excursion
-       (if (re-search-backward "\n[ \t]*\n" nil "move")
-           (progn (re-search-forward "\n[ \t]*\n")
-                  (setq p1 (point)))
-         (setq p1 (point)))
-       (if (re-search-forward "\n[ \t]*\n" nil "move")
-           (progn (re-search-backward "\n[ \t]*\n")
-                  (setq p2 (point)))
-         (setq p2 (point))))
+     (if (use-region-p)
+         (progn 
+           (setq p1 (region-beginning))
+           (setq p2 (region-end)))
+       (progn 
+         (save-excursion
+           (if (re-search-backward "\n[ \t]*\n" nil "move")
+               (progn (re-search-forward "\n[ \t]*\n")
+                      (setq p1 (point)))
+             (setq p1 (point)))
+           (if (re-search-forward "\n[ \t]*\n" nil "move")
+               (progn (re-search-backward "\n[ \t]*\n")
+                      (setq p2 (point)))
+             (setq p2 (point))))))
      (list p1 p2)))
   (let ((ξchangedItems '()))
 
