@@ -237,9 +237,9 @@
     ("pp" "PayPal")
     ("ahd" "American Heritage Dictionary")
     ("wm" "Window Manager")
-    ("el" "emacs lisp")
-    ("os" "Operating System")
-    ("cli" "command line interface")
+    ("8el" "emacs lisp")
+    ("8os" "Operating System")
+    ("8cli" "command line interface")
 
     ;; for programers
     ("hex" "hexadecimal")
