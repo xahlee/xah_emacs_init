@@ -67,11 +67,11 @@
 
 ;; specify font for all unicode characters
 (when (member "Symbola" (font-family-list))
-  (set-fontset-font t 'unicode "Symbola" ))
+  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
 
-;; ;; specify font for chinese characters using default chinese font on linux
-;; (when (member "WenQuanYi Micro Hei" (font-family-list))
-;;   (set-fontset-font t 'gb18030 "WenQuanYi Micro Hei" ))
+;; specify font for chinese characters using default chinese font on linux
+(when (member "WenQuanYi Micro Hei" (font-family-list))
+  (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
 
 ;; 西游记，第一回：灵根育孕源流出，心性修持大道生 (页1)
 ;; http://wordyenglish.com/monkey_king/x001-1.html

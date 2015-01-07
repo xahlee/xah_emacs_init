@@ -277,27 +277,6 @@ When there is a text selection, act on the region."
 ;; (call-interactively 'xhm-htmlize-or-de-precode)
  ) )
 
-(defun xah-decode-percent-encoded-uri (φp1 φp2)
-  "Percent decode URI for text selection."
-  (interactive "r")
-  (let ((myStr (buffer-substring-no-properties φp1 φp2)))
-    (save-excursion
-      (save-restriction
-        (delete-region φp1 φp2 )
-        (insert (decode-coding-string (url-unhex-string myStr ) 'utf-8))
-        ) ) ))
-
-(defun xah-decode-percent-encoded-uri-js (φp1 φp2)
-  "percent decode uri for text selection
-Requires a node.js script. See code."
-  (interactive "r")
-  (let (scriptName)
-    (save-excursion
-      (setq scriptName (concat "/usr/bin/node ~/git/xahscripts/emacs_uri_decode.js") )
-      (shell-command-on-region φp1 φp2 scriptName nil "REPLACE" nil t)
-      )
-    ))
-
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.
 Linux only. Requires 「feh」 image viewer.
