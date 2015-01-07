@@ -4,6 +4,7 @@
 ;; ∑ http://xahlee.org/
 
 
+(require 'url-util)
 
 (defun xah-html-image-linkify ()
   "Replace a image file's path under cursor with a HTML img tag,
@@ -128,37 +129,7 @@ If there's a text selection, use that region as file name."
     (delete-region p3 p4)
     (insert resultStr)))
 
-(defvar ξurl-encode-chars-pairs nil "A list of pairs of chars that needs to be percent encoded. WARNING: a hack. Incomplete.")
-(setq ξurl-encode-chars-pairs
-[
-                              ["'" "%27"]
-                              ["(" "%28"]
-                              [")" "%29"]
-                              ["–" "%E2%80%93"]
-                              ["&" "&amp;"]
-                              ["," "%2C"]
-                              ["\"" "%22"]
-                              ]
- )
-
-(defun url-percent-encode-string (φstring)
-  "Returns URL percent-encoded
-Example:
- http://en.wikipedia.org/wiki/Python_(programming_language)
-⇒
- http://en.wikipedia.org/wiki/Python_%28programming_language%29
-WARNING: the encoding is incomplete.
-See also: `url-percent-decode-string'."
-(progn
-    (replace-pairs-in-string φstring ξurl-encode-chars-pairs)
-    ))
-
-(defun url-percent-decode-string (φstring)
-  "Decode URL percent-encoded string.
-e.g. 「%28」 ⇒ 「'」.
-WARNING: the decoding is incomplete.
-See also: `url-percent-encode-string'."
-  (replace-pairs-in-string φstring (mapcar (lambda (ξx) (vector (elt ξx 1) (elt ξx 0))) ξurl-encode-chars-pairs) ))
+
 
 (defun xah-blogger-linkify ()
   "Make URL at cursor point into a HTML link.
@@ -175,7 +146,7 @@ becomes
     (setq p8 (elt bds 2) )
 
     (delete-region p7 p8)
-    (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-percent-encode-string ξurl) "\">✍</a></div>"))))
+    (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url ξurl) "\">✍</a></div>"))))
 
 
 
@@ -236,7 +207,7 @@ This command is called by `video-search-linkify'."
   (let (strEncoded)
     (setq strEncoded φsearchString )
     (setq strEncoded (replace-regexp-in-string " " "+" strEncoded ) )
-    (setq strEncoded (url-percent-encode-string strEncoded ) )
+    (setq strEncoded (url-encode-url strEncoded ) )
     (concat "http://www.google.com/search?tbs=vid%3A1&q=" strEncoded)
     ))
 
