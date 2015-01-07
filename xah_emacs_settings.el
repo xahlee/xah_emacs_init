@@ -67,16 +67,10 @@
 
 ;; specify font for all unicode characters
 (when (member "Symbola" (font-family-list))
-  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+  (set-fontset-font t 'unicode "Symbola"))
 
 (when (member "WenQuanYi Micro Hei" (font-family-list))
-  (set-fontset-font nil '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" nil 'prepend))
-
-;; (when (member "DejaVu Sans Mono" (font-family-list))
-;;   (set-fontset-font nil '(#x4e00 . #x9fff) "DejaVu Sans Mono" nil 'prepend))
-
-;; (when (member "fangsong ti" (font-family-list))
-;;   (set-fontset-font nil '(#x4e00 . #x9fff) "fangsong ti" nil 'prepend))
+  (set-fontset-font nil '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
 
 ;; 提笔写忧伤，落笔映惆怅！无奈花落时，唯有独哀殇！
 
