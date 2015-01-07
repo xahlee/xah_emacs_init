@@ -67,13 +67,231 @@
 
 ;; specify font for all unicode characters
 (when (member "Symbola" (font-family-list))
-  (set-fontset-font t 'unicode "Symbola"))
+  (set-fontset-font t 'unicode "Symbola" ))
 
-(when (member "WenQuanYi Micro Hei" (font-family-list))
-  (set-fontset-font nil '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
+;; ;; specify font for chinese characters using default chinese font on linux
+;; (when (member "WenQuanYi Micro Hei" (font-family-list))
+;;   (set-fontset-font t 'gb18030 "WenQuanYi Micro Hei" ))
 
-;; 提笔写忧伤，落笔映惆怅！无奈花落时，唯有独哀殇！
+;; 西游记，第一回：灵根育孕源流出，心性修持大道生 (页1)
+;; http://wordyenglish.com/monkey_king/x001-1.html
 
+;; range of Chinese chars in Unicode BMP plane
+;; '(#x4e00 . #x9fff)
+
+;; Unicode Emoticons, Faces 😃 😄 😱 😸 👸 👽 👍
+;; http://xahlee.info/comp/unicode_6_emoticons_list.html
+
+;; list-fontsets
+;; Fontset: -unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-fontset-auto1
+;; Fontset: -unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-fontset-auto2
+;; Fontset: -*-*-*-*-*-*-*-*-*-*-*-*-fontset-default
+;; Fontset: -*-fixed-medium-r-normal-*-16-*-*-*-*-*-fontset-standard
+;; Fontset: -unknown-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-fontset-startup
+
+;; call describe-fontset then press tab to list fontset
+;; -*-*-*-*-*-*-*-*-*-*-*-*-fontset-default
+;; -*-fixed-medium-r-normal-*-16-*-*-*-*-*-fontset-standard
+;; -unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-fontset-auto1
+;; -unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-fontset-auto2
+;; -unknown-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-fontset-startup
+;; -unknown-dejavu sans mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1
+;; -unknown-ubuntu mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1
+;; fontset-auto1 	fontset-auto2
+;; fontset-default 	fontset-standard
+;; fontset-startup
+
+;; call describe-character-set then press tab to list all charsets
+;; adobe-standard-encoding
+;; alternativnyj
+;; arabic-1-column
+;; arabic-2-column
+;; arabic-digit
+;; arabic-iso8859-6
+;; ascii
+;; assamese-cdac
+;; bengali-akruti
+;; bengali-cdac
+;; big5
+;; big5-hkscs
+;; chinese-big5-1
+;; chinese-big5-2
+;; chinese-cns11643-1
+;; chinese-cns11643-15
+;; chinese-cns11643-2
+;; chinese-cns11643-3
+;; chinese-cns11643-4
+;; chinese-cns11643-5
+;; chinese-cns11643-6
+;; chinese-cns11643-7
+;; chinese-gb2312
+;; chinese-gbk
+;; chinese-sisheng
+;; control-1
+;; cp00858
+;; cp1047
+;; cp1125
+;; cp1250
+;; cp1251
+;; cp1252
+;; cp1253
+;; cp1254
+;; cp1255
+;; cp1256
+;; cp1257
+;; cp1258
+;; cp154
+;; cp437
+;; cp720
+;; cp737
+;; cp775
+;; cp850
+;; cp851
+;; cp852
+;; cp855
+;; cp857
+;; cp858
+;; cp860
+;; cp861
+;; cp862
+;; cp863
+;; cp864
+;; cp865
+;; cp866
+;; cp866u
+;; cp869
+;; cp874
+;; cp932
+;; cp932-2-byte
+;; cp936
+;; cp949
+;; cp949-2-byte
+;; cyrillic-iso8859-5
+;; devanagari-akruti
+;; devanagari-cdac
+;; ebcdic-uk
+;; ebcdic-us
+;; eight-bit
+;; eight-bit-control
+;; eight-bit-graphic
+;; emacs
+;; ethiopic
+;; gb18030
+;; gb18030-2-byte
+;; gb18030-4-byte-bmp
+;; gb18030-4-byte-ext-1
+;; gb18030-4-byte-ext-2
+;; gb18030-4-byte-smp
+;; georgian-academy
+;; georgian-ps
+;; greek-iso8859-7
+;; gujarati-akruti
+;; gujarati-cdac
+;; hebrew-iso8859-8
+;; hp-roman8
+;; ibm1047
+;; ibm850
+;; ibm866
+;; indian-1-column
+;; indian-2-column
+;; indian-glyph
+;; indian-is13194
+;; ipa
+;; iso-8859-1
+;; iso-8859-10
+;; iso-8859-11
+;; iso-8859-13
+;; iso-8859-14
+;; iso-8859-15
+;; iso-8859-16
+;; iso-8859-2
+;; iso-8859-3
+;; iso-8859-4
+;; iso-8859-5
+;; iso-8859-6
+;; iso-8859-7
+;; iso-8859-8
+;; iso-8859-9
+;; japanese-jisx0208
+;; japanese-jisx0208-1978
+;; japanese-jisx0212
+;; japanese-jisx0213-1
+;; japanese-jisx0213-2
+;; japanese-jisx0213-a
+;; japanese-jisx0213.2004-1
+;; jisx0201
+;; kannada-akruti
+;; kannada-cdac
+;; katakana-jisx0201
+;; katakana-sjis
+;; koi8
+;; koi8-r
+;; koi8-t
+;; koi8-u
+;; korean-ksc5601
+;; lao
+;; latin-iso8859-1
+;; latin-iso8859-10
+;; latin-iso8859-13
+;; latin-iso8859-14
+;; latin-iso8859-15
+;; latin-iso8859-16
+;; latin-iso8859-2
+;; latin-iso8859-3
+;; latin-iso8859-4
+;; latin-iso8859-9
+;; latin-jisx0201
+;; mac-roman
+;; malayalam-akruti
+;; malayalam-cdac
+;; mik
+;; mule-lao
+;; mule-unicode-0100-24ff
+;; mule-unicode-2500-33ff
+;; mule-unicode-e000-ffff
+;; next
+;; oriya-akruti
+;; oriya-cdac
+;; pt154
+;; ptcp154
+;; punjabi-akruti
+;; punjabi-cdac
+;; ruscii
+;; sanskrit-cdac
+;; symbol
+;; tamil-akruti
+;; tamil-cdac
+;; tcvn-5712
+;; telugu-akruti
+;; telugu-cdac
+;; thai-iso8859-11
+;; thai-tis620
+;; tibetan
+;; tibetan-1-column
+;; tis620-2533
+;; ucs
+;; unicode
+;; unicode-bmp
+;; unicode-sip
+;; unicode-smp
+;; unicode-ssp
+;; vietnamese-viscii-lower
+;; vietnamese-viscii-upper
+;; viscii
+;; vscii
+;; vscii-2
+;; windows-1250
+;; windows-1251
+;; windows-1252
+;; windows-1253
+;; windows-1254
+;; windows-1255
+;; windows-1256
+;; windows-1257
+;; windows-1258
+;; windows-936
+
+;; fonts
 ;; ("newspaper"
 ;; "gothic"
 ;; "mincho"
