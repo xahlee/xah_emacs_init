@@ -126,6 +126,8 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_wordyenglish"))
 
 (load (xah-get-fullpath "xah_emacs_settings"))
+(load (xah-get-fullpath "xah_emacs_settings_font"))
+
 (load (xah-get-fullpath "xah_emacs_settings_external_packages"))
 (load (xah-get-fullpath "xah_emacs_file_association"))
 

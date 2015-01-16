@@ -220,29 +220,29 @@ When there is a text selection, act on the region."
 
 (defcustom xah-shell-abbrev-alist nil "alist of xah's shell abbrevs" :group 'xah)
 (setq xah-shell-abbrev-alist
-          '(
-            ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
-            ("ssh" . "ssh -l u40651120 xahlee.org ")
-            ("img1" . "convert -quality 85% ")
-            ("imgScale" . "convert -scale 50% -quality 85% ")
-            ("img256" . "convert +dither -colors 256 ")
-            ("imgBatch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
-            ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
+      '(
+        ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+        ("ssh" . "ssh -l u40651120 xahlee.org ")
+        ("img1" . "convert -quality 85% ")
+        ("imgScale" . "convert -scale 50% -quality 85% ")
+        ("img256" . "convert +dither -colors 256 ")
+        ("imgBatch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
+        ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
 
-            ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
-            ("firefox" . "setsid firefox &")
+        ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
+        ("firefox" . "setsid firefox &")
 
-            ("rm empty" . "find . -type f -empty")
-            ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-            ("rm emacs backup~" . "find . -name \"*~\" -delete")
-            ("findEmptyDir" . "find . -depth -empty -type d")
-            ("rmEmptyDir" . "find . -depth -empty -type d -delete")
-            ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
-            ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
-            ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
-            ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")
-            )
-          )
+        ("rm empty" . "find . -type f -empty")
+        ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
+        ("rm emacs backup~" . "find . -name \"*~\" -delete")
+        ("findEmptyDir" . "find . -depth -empty -type d")
+        ("rmEmptyDir" . "find . -depth -empty -type d -delete")
+        ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
+        ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
+        ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
+
+        ("clojure" . "java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
+        ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")))
 
 (defun xah-shell-commands (φcmd-abbrev)
   "insert shell command from a list of abbrevs."
