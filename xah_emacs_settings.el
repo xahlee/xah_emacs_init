@@ -142,7 +142,7 @@
 
 (setq scroll-error-top-bottom t )
 
-(setq tab-width 1)   ; width for display tabs. emacs 23.1 default is 8
+(setq tab-width 4)   ; width for display tabs. emacs 23.1 default is 8
 (set-default 'abbrev-mode t)
 
 (setq shift-select-mode nil)

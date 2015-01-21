@@ -4,8 +4,6 @@
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
 
-  ;; (define-key xhm-keymap (kbd "<delete>") xhm-single-keys-keymap)
-
   (define-key xhm-single-keys-keymap (kbd "4") 'xahsite-update-article-timestamp)
   (define-key xhm-single-keys-keymap (kbd "5") 'xhm-mark-unicode)
 
@@ -37,6 +35,7 @@
   (define-key xhm-single-keys-keymap (kbd "z d") 'xah-html-insert-screen-filler)
   (define-key xhm-single-keys-keymap (kbd "z f") 'xah-html-insert-midi)
 
+  (define-key xhm-keymap (kbd "<delete>") xhm-single-keys-keymap)
 )
 
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
@@ -45,9 +44,32 @@
 
 (defun xah-css-mode-setup ()
   "Modify keymaps used by `xah-css-mode'."
-  (local-set-key (kbd "<menu> e s") 'xah-sync-css))
+  (require 'xah-css-mode)
+  (define-key xcm-single-keys-keymap (kbd "s") 'xah-sync-css)
+  (define-key xcm-keymap (kbd "<delete>") xcm-single-keys-keymap)
+  )
 
+(defun xah-css-mode-setup ()
+  "Modify keymaps used by `xah-css-mode'."
+  (require 'xah-css-mode)
+  (define-key xcm-single-keys-keymap (kbd "s") 'xah-sync-css)
+  (define-key xcm-keymap (kbd "<delete>") xcm-single-keys-keymap)
+  )
 (add-hook 'xah-css-mode-hook 'xah-css-mode-setup)
+
+(defun xah-elisp-mode-setup ()
+  "Modify keymaps used by `xah-elisp-mode'."
+  (require 'xah-elisp-mode)
+  (define-key xem-keymap (kbd "<delete>") xem-single-keys-keymap)
+  )
+(add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-setup)
+
+(defun xah-clojure-mode-setup ()
+  "Modify keymaps used by `xah-clojure-mode'."
+  (define-key xcj-keymap (kbd "<delete>") xcj-single-keys-keymap)
+)
+
+(add-hook 'xah-clojure-mode-hook 'xah-clojure-mode-setup)
 
 
 
@@ -63,6 +85,7 @@ For `rcirc-mode-hook'."
   "Modify keybindings for `Info-mode'.
 For `Info-mode-hook'."
   (local-set-key (kbd "<menu> e g") 'xah-view-emacs-manual-in-browser)
+  (local-set-key (kbd "<delete> e g") 'xah-view-emacs-manual-in-browser)
   (local-set-key (kbd "<mouse-8>") 'Info-history-back)
   )
 (add-hook 'Info-mode-hook 'xah-Info-mode-keys)
