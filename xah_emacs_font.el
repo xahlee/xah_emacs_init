@@ -92,52 +92,6 @@ See `xah-cycle-font'."
 
 
 
-(defun xah-toggle-line-spacing ()
-  "Toggle line spacing between no extra space to extra half line height."
-  (interactive)
-  (if (null line-spacing)
-      (setq line-spacing 0.5) ; add 0.5 height between lines
-    (setq line-spacing nil)   ; no extra heigh between lines
-    )
-  (redraw-frame (selected-frame)))
-
-(defun xah-toggle-margin-right ()
-  "Toggle the right margin between `fill-column' or window width.
-This command is convenient when reading novel, documentation."
-  (interactive)
-  (if (null (cdr (window-margins)))
-      (set-window-margins nil 0 (- (window-body-width) fill-column))
-    (set-window-margins nil 0 0) ) )
-
-(defun xah-toggle-read-novel-mode ()
-  "Setup current window to be suitable for reading long novel/article text.
-
-• Line wrap at word boundaries.
-• Set a right margin.
-• line spacing is increased.
-• variable width font is used.
-
-Call again to toggle back."
-  (interactive)
-  (if (null (get this-command 'state-on-p))
-      (progn
-        (set-window-margins nil 0
-                            (if (> fill-column (window-body-width))
-                                0
-                              (progn
-                                (- (window-body-width) fill-column))))
-        (variable-pitch-mode 1)
-        (setq line-spacing 0.4)
-        (setq word-wrap t)
-        (put this-command 'state-on-p t))
-    (progn
-      (set-window-margins nil 0 0)
-      (variable-pitch-mode 0)
-      (setq line-spacing nil)
-      (setq word-wrap nil)
-      (put this-command 'state-on-p nil)))
-  (redraw-frame (selected-frame)))
-
 ;; correct syntax for some fonts (tested on Windows Vista)
 ;; "-*-Courier New-normal-r-*-*-14-112-96-96-c-*-iso8859-1"
 ;; "-outline-Lucida Sans Unicode-normal-normal-normal-sans-13-*-*-*-p-*-iso8859-1"
