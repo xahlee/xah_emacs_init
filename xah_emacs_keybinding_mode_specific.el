@@ -3,8 +3,13 @@
 
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
+  (define-key xhm-keymap (kbd "<delete>") xhm-single-keys-keymap)
 
-  (define-key xhm-single-keys-keymap (kbd "SPC 4") 'xahsite-update-article-timestamp)
+  (define-key xhm-single-keys-keymap (kbd "e") 'xah-make-atom-entry)
+  (define-key xhm-single-keys-keymap (kbd "g") 'xah-browse-url-of-buffer)
+  (define-key xhm-single-keys-keymap (kbd "h") 'xah-all-linkify)
+
+  (define-key xhm-single-keys-keymap (kbd "SPC 7") 'xahsite-update-article-timestamp)
   (define-key xhm-single-keys-keymap (kbd "SPC SPC a") 'xwe-annotate)
   (define-key xhm-single-keys-keymap (kbd "SPC SPC b") 'make-blogger-entry)
   (define-key xhm-single-keys-keymap (kbd "SPC c") 'xah-brackets-to-html)
@@ -30,10 +35,6 @@
   (define-key xhm-single-keys-keymap (kbd "SPC z d") 'xah-html-insert-screen-filler)
   (define-key xhm-single-keys-keymap (kbd "SPC z f") 'xah-html-insert-midi)
 
-  (define-key xhm-single-keys-keymap (kbd "e") 'xah-make-atom-entry)
-  (define-key xhm-single-keys-keymap (kbd "g") 'xah-browse-url-of-buffer)
-  (define-key xhm-single-keys-keymap (kbd "h") 'xah-all-linkify)
-  (define-key xhm-keymap (kbd "<delete>") xhm-single-keys-keymap)
   )
 
 (add-hook 'html-mode-hook 'xah-html-mode-keys)
