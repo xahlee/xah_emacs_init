@@ -245,7 +245,10 @@ When there is a text selection, act on the region."
         ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")))
 
 (defun xah-shell-commands (φcmd-abbrev)
-  "insert shell command from a list of abbrevs."
+  "insert shell command from a list of abbrevs.
+
+URL `http://ergoemacs.org/misc/emacs_abbrev_shell_elisp.html'
+version 2015-02-05"
   (interactive
    (list
       (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH") ) )
