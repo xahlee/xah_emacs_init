@@ -4,7 +4,7 @@
 ;; Xah Lee,
 ;; ∑ http://xahlee.org/
 
-(defun make-blogger-entry ()
+(defun xah-make-blogger-entry ()
   "Make a blogger entry.
 
 Copy the current buffer or text selection.
