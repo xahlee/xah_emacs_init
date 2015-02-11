@@ -12,7 +12,7 @@
 
   (define-key xhm-single-keys-keymap (kbd "SPC a") 'xwe-annotate)
   (define-key xhm-single-keys-keymap (kbd "SPC b") 'xah-make-blogger-entry)
-  (define-key xhm-single-keys-keymap (kbd "SPC c") 'xah-brackets-to-html)
+  (define-key xhm-single-keys-keymap (kbd "SPC c") 'xah-angle-brackets-to-html)
   (define-key xhm-single-keys-keymap (kbd "SPC d") 'xah-html-insert-date-tag)
   (define-key xhm-single-keys-keymap (kbd "SPC f") 'xah-copy-url-current-file)
   (define-key xhm-single-keys-keymap (kbd "SPC i") 'xah-html-image-linkify)
@@ -27,7 +27,7 @@
   (define-key xhm-single-keys-keymap (kbd "SPC r r") 'xah-add-to-related-links)
   (define-key xhm-single-keys-keymap (kbd "SPC r t") 'xwe-word-etymology-linkify)
   (define-key xhm-single-keys-keymap (kbd "SPC r z") 'xah-amazon-linkify)
-  (define-key xhm-single-keys-keymap (kbd "SPC t") 'xah-angle-brackets-to-html)
+  (define-key xhm-single-keys-keymap (kbd "SPC t") 'xah-brackets-to-html)
   (define-key xhm-single-keys-keymap (kbd "SPC z a") 'xah-html-insert-keywords-tag)
   (define-key xhm-single-keys-keymap (kbd "SPC z b") 'xah-html-insert-lyrics-header)
   (define-key xhm-single-keys-keymap (kbd "SPC z c") 'xah-html-insert-lyrics-table)

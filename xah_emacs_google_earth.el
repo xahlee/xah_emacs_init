@@ -32,11 +32,13 @@ each line does not include the newline character."
   "Insert HTML link to Google Map.
 
 φtitle is the title attribute for the HTML link.
-φlat-lon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number.
+φlat-lon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
 
 Example of inserted text:
  <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Map 🗻🌐🌍🌎🌏</a>
-version 2014-11-06
+
+URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
+Version 2014-11-06
 "
   (interactive)
   (let (ξtitle ξy ξx)
@@ -96,9 +98,12 @@ used in the <description> tag."
 (defun xah-latitude-longitude-decimalize (φlatlon)
   "Convert latitude longitude string φlatlon in minutes second format to decimal.
 Returns a vector.
- (Note: latitude is y-axis, longitude is x-axis)
 For example: 「\"37°26′36.42″N 06°15′14.28″W\"」
-becomes 「[37.44345 -6.253966666666667]」"
+becomes 「[37.44345 -6.253966666666667]」
+(Note: latitude is “horizontal lines”, longitude is “vertical lines”)
+
+URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
+Version 2015-02-08"
   (interactive)
   (let ((ξtmpPair
          (split-string
@@ -209,16 +214,17 @@ The current line must be one of the following format:
  40°42′46″N 74°00′21″W
  40.71277777777778 -74.00583333333333
 
-This is ‹latitude› ‹longitude›
-That's New York City
-(Note: latitude is y-axis, longitude is x-axis)
+The above is ‹latitude› ‹longitude›
+ (That's New York City)
+ (Note: latitude is y-axis, longitude is x-axis)
+
+If there's a text selection, use that as input.
 
 Sample result:
  <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Map 🗻🌐🌍🌎🌏</a>
 
-If there's a selection, use that as input.
-
-version 2014-11-06"
+URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
+Version 2014-11-06"
   (interactive)
   (let (p1 p2 ξinput
            ξcoord-x
