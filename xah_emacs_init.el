@@ -83,6 +83,7 @@ To solve this problem, when your code only knows the relative path of another fi
       (require 'xah-fly-keys)
 
       (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
+      (load (xah-get-fullpath "xah_emacs_keybinding_meta_key"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_shift_switch"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
       (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))

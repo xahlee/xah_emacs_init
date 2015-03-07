@@ -5,7 +5,7 @@
   "Modify keymaps used by `html-mode'."
   (define-key xhm-keymap (kbd "<delete>") xhm-single-keys-keymap)
 
-  (define-key xhm-single-keys-keymap (kbd "4") 'xahsite-update-article-timestamp)
+  (define-key xhm-single-keys-keymap (kbd "d") 'xahsite-update-article-timestamp)
   (define-key xhm-single-keys-keymap (kbd "e") 'xah-make-atom-entry)
   (define-key xhm-single-keys-keymap (kbd "g") 'xah-browse-url-of-buffer)
   (define-key xhm-single-keys-keymap (kbd "h") 'xah-all-linkify)

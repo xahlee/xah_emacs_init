@@ -144,14 +144,26 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 
 This is Xah Lee's personal command assuming a particular dir structure."
   (interactive)
-  (let* (
-         (bds (get-selection-or-unit 'glyphs ))
-         (inputStr (elt bds 0))
-         (p1 (elt bds 1))
-         (p2 (elt bds 2))
-         (myFile (xahsite-web-path-to-filepath inputStr))
+  (let (
+         p1 p2
+         inputStr
+         myFile
          myTitle
          )
+
+    (if (use-region-p)
+        (setq p1 (region-beginning) p2 (region-end))
+      (let (p0)
+        (setq p0 (point))
+        ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+        (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+        (setq p1 (point))
+        (goto-char p0)
+        (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+        (setq p2 (point))))
+
+    (setq inputStr (buffer-substring-no-properties p1 p2))
+    (setq myFile (xahsite-web-path-to-filepath inputStr))
 
     (if (file-exists-p myFile)
         (progn

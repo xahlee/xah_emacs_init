@@ -581,6 +581,16 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 ""
 ]
 
+["<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
+<!-- side300x600 -->
+<ins class=\"adsbygoogle\"
+     style=\"display:inline-block;width:300px;height:600px\"
+     data-ad-client=\"ca-pub-5125343095650532\"
+     data-ad-slot=\"7031204381\"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>" ""]
+
 ;; Google Plus
 ["<div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div>" ""]
 
@@ -682,9 +692,23 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
   ;; amazon ad
 ["<iframe src=\"http://rcm-na.amazon-adsystem.com/e/cm?t=xahhome-20&o=1&p=8&l=as1&asins=B00COR29XI&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr\" style=\"width:120px;height:240px;\" scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" frameborder=\"0\"></iframe><br />" ""]
 
-[
-"<div class=\"job-α\"><a href=\"http://xahlee.org/PageTwo_dir/Personal_dir/Xah_Lee_Resume.html\">Programer for Hire</a></div>"
-""]
+
+["<script charset=\"utf-8\" type=\"text/javascript\">
+amzn_assoc_ad_type = \"responsive_search_widget\";
+amzn_assoc_tracking_id = \"xahhome-20\";
+amzn_assoc_marketplace = \"amazon\";
+amzn_assoc_region = \"US\";
+amzn_assoc_placement = \"\";
+amzn_assoc_search_type = \"search_widget\";
+amzn_assoc_width = \"auto\";
+amzn_assoc_height = \"auto\";
+amzn_assoc_default_search_category = \"\";
+amzn_assoc_default_search_key = \"\";
+amzn_assoc_theme = \"light\";
+amzn_assoc_bg_color = \"FFFFFF\";
+</script>" ""]
+
+["<script src=\"http://z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&MarketPlace=US\"></script>" ""]
 
   ;; 1and1 web hosting
   [
