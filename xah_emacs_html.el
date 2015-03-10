@@ -78,6 +78,9 @@ WARNING: This command saves buffer if it's a file."
           (when (search-forward "</time>, <time>" (point-max) "NOERROR")
             (replace-match "</time>, …, <time>"))
 
+          (when (buffer-file-name)
+            (save-buffer))
+
           (message "%s\nchanged to\n%s" bufferTextOrig (buffer-string )))))))
 
 (defun xahsite-update-page-tag ()
