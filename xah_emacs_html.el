@@ -21,9 +21,10 @@
 (defun xah-add-reference-span-tag ()
   "Add <span class=\"ref\">…</span> tag to current line or text selection."
   (interactive)
-  (let (bds ξp1 ξp2 inputText)
+  (require 'xah-html-mode)
+  (let (bds ξp1 ξp2 ξinputText)
     (setq bds (get-selection-or-unit 'line))
-    (setq inputText (elt bds 0))
+    (setq ξinputText (elt bds 0))
     (setq ξp1 (elt bds 1))
     (setq ξp2 (elt bds 2))
     (set-mark ξp1)
@@ -35,8 +36,8 @@
 Add today's date to the byline tag of current file, also delete the last one if there are more than one.
 WARNING: This command saves buffer if it's a file."
   (interactive)
+  (require 'sgml-mode)
   (let (ξp1 ξp2 ξnum bufferTextOrig)
-
     (save-excursion
       (goto-char 1)
       (when (search-forward "<div class=\"byline\">" nil)
@@ -56,13 +57,13 @@ WARNING: This command saves buffer if it's a file."
 
           ;; if there are more than 1 “time” tag, delete the last one
           (when (> ξnum 1)
-            (let (p3 p4)
+            (let (ξp3 ξp4)
               (goto-char (point-max))
               (search-backward "</time>")
-              (setq p4 (+ (point) 7))
+              (setq ξp4 (+ (point) 7))
               (search-backward "<time>")
-              (setq p3 (point))
-              (delete-region p3 p4 )))
+              (setq ξp3 (point))
+              (delete-region ξp3 ξp4 )))
 
           ;; insert new time
           (goto-char (point-max))
@@ -138,12 +139,12 @@ words-4.html
 
        (if
            (search-forward "<nav class=\"page\">" nil t)
-           (let (p3 p4 )
+           (let (ξp3 ξp4 )
              (search-backward "<")
-             (setq p3 (point))
+             (setq ξp3 (point))
              (sgml-skip-tag-forward 1)
-             (setq p4 (point))
-             (delete-region p3 p4)
+             (setq ξp4 (point))
+             (delete-region ξp3 ξp4)
              (insert ξpageNavStr))
          (progn
            (search-forward "<script><!--
