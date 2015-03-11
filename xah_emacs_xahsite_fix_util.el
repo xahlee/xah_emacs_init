@@ -94,10 +94,8 @@ The related pages are HTML “div.rltd” element, having this form
   (let (p3 p4)
     (mapc
      (lambda (ξy)
-       (xah-add-to-related-links φfilePath ξy)
-       )
-     φdestFileList)
-    ))
+       (xah-add-to-related-links φfilePath ξy))
+     φdestFileList)))
 
 (defun xah-fix-add-alts ()
   "Add the alt attribute to image tags in current file.
@@ -111,17 +109,15 @@ This code is specific to xahlee.org ."
       (sgml-delete-tag 1)
       (insert fn)
       (xah-html-image-linkify)
-      (insert "\n")
-      )
+      (insert "\n"))
     (while (search-forward "png\" width=\"" nil t)
       (search-backward "png")
       (setq fn (thing-at-point 'filename))
       (sgml-delete-tag 1)
       (insert fn)
       (xah-html-image-linkify)
-      (insert "\n")
-      )
-))
+      (insert "\n"))
+    ))
 
 (defun xah-fix-rm-span-quote (φstart φend)
   "remove “” around <span class=\"code\"></span> tags in current buffer."

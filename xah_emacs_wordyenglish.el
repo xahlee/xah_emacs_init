@@ -12,6 +12,14 @@
 ;; 〈Wordy English — the Making of Belles-Lettres〉
 ;; http://wordyenglish.com/words/vocabulary.html
 
+(defun xwe-bold-word ()
+  "wrap b tag with class w.
+personal to xahlee.org's vocabulary pages.
+Version 2015-03-11"
+  (interactive)
+  (progn
+    (xhm-wrap-html-tag "b" "w")))
+
 (defun xwe-move-word-to-page (φcategory)
   "Take current selection or block of text, ask which page to move it to."
   (interactive

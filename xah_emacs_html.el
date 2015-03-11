@@ -18,16 +18,16 @@
   ;; (forward-char-char 2)
   )
 
-(defun xah-ref-span-tag ()
+(defun xah-add-reference-span-tag ()
   "Add <span class=\"ref\">…</span> tag to current line or text selection."
   (interactive)
-  (let (bds p1 p2 inputText)
+  (let (bds ξp1 ξp2 inputText)
     (setq bds (get-selection-or-unit 'line))
     (setq inputText (elt bds 0))
-    (setq p1 (elt bds 1))
-    (setq p2 (elt bds 2))
-    (set-mark p1)
-    (goto-char p2)
+    (setq ξp1 (elt bds 1))
+    (setq ξp2 (elt bds 2))
+    (set-mark ξp1)
+    (goto-char ξp2)
     (xhm-wrap-html-tag "span" "ref")))
 
 (defun xahsite-update-article-timestamp ()
@@ -35,21 +35,21 @@
 Add today's date to the byline tag of current file, also delete the last one if there are more than one.
 WARNING: This command saves buffer if it's a file."
   (interactive)
-  (let (p1 p2 ξnum bufferTextOrig)
+  (let (ξp1 ξp2 ξnum bufferTextOrig)
 
     (save-excursion
       (goto-char 1)
       (when (search-forward "<div class=\"byline\">" nil)
 
         (progn
-          (setq p1 (point))
+          (setq ξp1 (point))
           (backward-char 1)
           (sgml-skip-tag-forward 1)
           ;; (search-forward "</time></div>")
-          (setq p2 (point)))
+          (setq ξp2 (point)))
 
         (save-restriction
-          (narrow-to-region p1 p2)
+          (narrow-to-region ξp1 ξp2)
 
           (setq bufferTextOrig (buffer-string ))
           (setq ξnum (count-matches "<time>" (point-min) (point-max)))
@@ -217,9 +217,7 @@ The path is relative to current file. The link text is the linked file's title, 
 Requires a python script. See code."
   (interactive)
   (let (scriptName bds)
-    (setq bds (bounds-of-thing-at-point 'filename) )
+    (setq bds (bounds-of-thing-at-point 'filename))
     (save-excursion
-      (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)) )
-      (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t)
-      )
-    ))
+      (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)))
+      (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t))))
