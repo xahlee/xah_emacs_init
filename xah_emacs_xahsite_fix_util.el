@@ -89,7 +89,7 @@ The related pages are HTML “div.rltd” element, having this form
      (setq p2 (aref bds 2))
      (list
       (buffer-file-name)
-      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)))) (xhm-extract-url (aref bds 0))))))
+      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)))) (xhm-extract-url p1 p2)))))
 
   (let (p3 p4)
     (mapc

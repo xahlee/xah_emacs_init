@@ -499,8 +499,6 @@ then call this command."
 ;;    ;; (overlay-key-binding φkey)
 ;;    ))
 
-;; (xah-find-keybinding-source (kbd "<end> q"))
-
 (defun xxlocate-key-binding (key)
   "Determine in which keymap KEY is defined.
 2014-10-11 http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-a-key-is-bound"
