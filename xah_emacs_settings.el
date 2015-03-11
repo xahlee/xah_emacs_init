@@ -216,7 +216,4 @@
  '(completions-common-part ((t (:inherit default :foreground "red"))))
  '(diredp-compressed-file-suffix ((t (:foreground "#7b68ee"))))
  '(diredp-ignored-file-name ((t (:foreground "#aaaaaa"))))
-
-;; '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
-
  )
