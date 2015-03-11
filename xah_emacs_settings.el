@@ -217,15 +217,6 @@
  '(diredp-compressed-file-suffix ((t (:foreground "#7b68ee"))))
  '(diredp-ignored-file-name ((t (:foreground "#aaaaaa"))))
 
- '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "black"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "blue"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "blue"))))
- '(rainbow-delimiters-depth-5-face ((t (:foreground "red"))))
- '(rainbow-delimiters-depth-6-face ((t (:foreground "red"))))
- '(rainbow-delimiters-depth-7-face ((t (:foreground "gray"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "gray"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "gray"))))
- '(rainbow-delimiters-unmatched-face ((t (:foreground "green"))))
+;; '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
 
- '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
+ )
