@@ -20,7 +20,7 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
  </div>
  </content>" φcontentHTML-text)
   "") )
-         (ξupdatedStr (current-date-time-string))
+         (ξupdatedStr (xah-current-date-time-string))
          (ξaltLink (if φaltLinkUrl φaltLinkUrl (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
          )
     (insert (format "<entry>
@@ -65,7 +65,7 @@ This command leaves the file unsaved."
       (setq p2 (- (point) 10) )
       (delete-region p1 p2 )
       (goto-char p1)
-      (insert (current-date-time-string)))
+      (insert (xah-current-date-time-string)))
  )
 
 (defun xah-make-atom-entry ()
