@@ -20,8 +20,8 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
   (let* (
          (bds (get-selection-or-unit 'filepath))
          (ξinputPath (elt bds 0))
-         (p1 (aref bds 1))
-         (p2 (aref bds 2))
+         (ξp1 (aref bds 1))
+         (ξp2 (aref bds 2))
          (ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
          (ξfp (expand-file-name (xahsite-web-path-to-filepath ξinputPath) ξcurrentDir )) ;full path
          ;; (setq ξfp (windows-style-path-to-unix (local-url-to-file-path ξfp)))
@@ -51,14 +51,14 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
                       (if (string-match "\.svg$" ξfp)
                           ""
                         (format "width=\"%s\" height=\"%s\"" ξw ξh)))
-                (delete-region p1 p2)
+                (delete-region ξp1 ξp2)
                 (insert
                  (format "<img src=\"%s\" alt=\"%s\" %s />"
                          (xahsite-filepath-to-href-value ξfp (or (buffer-file-name) default-directory))
                          altText ξwhStr )))
             (error "File does not exist 「%s」" ξfp )))
       (progn
-        (delete-region p1 p2)
+        (delete-region ξp1 ξp2)
         (insert "<img src=\"" ξfp "\" alt=\"" altText "\">")))))
 
 (defun xah-image-file-to-html-figure-tag ()
@@ -157,16 +157,19 @@ anal
 Then it'll become
 \(YouPorn video: <a href=\"http://www.youporn.com/search?query=anal\">anal</a>\)"
   (interactive)
-  (let (bds p1 p2 ξword ξurl)
+  (let (ξp1 ξp2 ξword ξurl)
 
-    (setq bds (get-selection-or-unit 'line))
-    (setq ξword (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
+    (if (use-region-p)
+        (progn (setq ξp1 (region-beginning))
+               (setq ξp2 (region-end)))
+      (progn (setq ξp1 (line-beginning-position))
+             (setq ξp2 (line-end-position))))
 
+    (setq ξword (buffer-substring-no-properties ξp1 ξp2) )
+    
     (setq ξurl (concat "http://www.youporn.com/search?query=" ξword) )
     (setq ξurl (replace-regexp-in-string " " "+" ξurl ) )
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert "(YouPorn video: <a href=\"" ξurl "\">" ξword "</a>)\n")))
 
 (defun youtube-search-linkify ()
@@ -183,17 +186,19 @@ Note: old version returns this form:
 <span class=\"utb\"><a href=\"http://youtube.com/results?search_query=David+Bowie&amp;search=Search\">David Bowie</a></span>
 "
   (interactive)
-  (let (bds p1 p2 ξword ξurl)
+  (let (ξp1 ξp2 ξword ξurl)
+    (if (use-region-p)
+        (progn (setq ξp1 (region-beginning))
+               (setq ξp2 (region-end)))
+      (progn (setq ξp1 (line-beginning-position))
+             (setq ξp2 (line-end-position))))
+    
+    (setq ξword (buffer-substring-no-properties ξp1 ξp2))
 
-    (setq bds (get-selection-or-unit 'line))
-    (setq ξword (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
-
-    (setq ξurl (concat "http://youtube.com/results?search_query=" ξword "&amp;search=Search") )
-    (setq ξurl (replace-regexp-in-string " " "+" ξurl ) )
-    (setq ξurl (replace-regexp-in-string "," "%2C" ξurl ) )
-    (delete-region p1 p2)
+    (setq ξurl (concat "http://youtube.com/results?search_query=" ξword "&amp;search=Search"))
+    (setq ξurl (replace-regexp-in-string " " "+" ξurl ))
+    (setq ξurl (replace-regexp-in-string "," "%2C" ξurl ))
+    (delete-region ξp1 ξp2)
     (insert "<a class=\"utb\" href=\"" ξurl "\">" ξword "</a>")))
 
 (defun video-search-string (φsearchString)
@@ -226,15 +231,15 @@ Warning: the line must end in a line return char else the result is wrong.
 
 This command calls `video-search-string'"
   (interactive)
-  (let (bds p1 p2 ξword ξurl)
-
-    (setq bds (get-selection-or-unit 'line))
-    (setq ξword (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
-
-    (setq ξurl (video-search-string ξword) )
-    (delete-region p1 p2)
+  (let (ξp1 ξp2 ξword ξurl)
+    (if (use-region-p)
+        (progn (setq ξp1 (region-beginning))
+               (setq ξp2 (region-end)))
+      (progn (setq ξp1 (line-beginning-position))
+             (setq ξp2 (line-end-position))))
+    (setq ξword (buffer-substring-no-properties ξp1 ξp2))
+    (setq ξurl (video-search-string ξword))
+    (delete-region ξp1 ξp2)
     (insert "<a class=\"gvidsr\" href=\"" ξurl "\">" ξword "</a>")))
 
 (defun google-search-linkify ()
@@ -249,16 +254,19 @@ Then it'll become
 
 Warning: the line must end in a line return char else the result is wrong."
   (interactive)
-  (let (bds p1 p2 ξword ξurl)
+  (let (ξp1 ξp2 ξword ξurl)
 
-    (setq bds (get-selection-or-unit 'line))
-    (setq ξword (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
+(if (use-region-p)
+        (progn (setq ξp1 (region-beginning))
+               (setq ξp2 (region-end)))
+      (progn (setq ξp1 (line-beginning-position))
+             (setq ξp2 (line-end-position))))
+    
+        (setq ξword (buffer-substring-no-properties ξp1 ξp2))
 
     (setq ξurl (concat "http://www.google.com/search?q=" ξword))
     (setq ξurl (replace-regexp-in-string " " "+" ξurl ) )
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert "<p>Google search: <a href=\"" ξurl "\">" ξword "</a>.</p>\n")))
 
 
@@ -270,21 +278,21 @@ For Example, if you cursor is on the word “p123”, then
 it becomes
 “<a href=\"http://www.wolframscience.com/nksonline/page-123\">p123</a>”"
   (interactive)
-  (let (bds p1 p2 inputStr pagenum myresult)
+  (let (bds ξp1 ξp2 inputStr pageNum myResult)
 
     (setq bds (get-selection-or-unit 'glyphs))
     (setq inputStr (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
+    (setq ξp1 (aref bds 1) )
+    (setq ξp2 (aref bds 2) )
 
-    (setq pagenum (substring inputStr 1) )
-    (setq myresult
+    (setq pageNum (substring inputStr 1) )
+    (setq myResult
           (concat
            "<a href=\"http://www.wolframscience.com/nksonline/page-"
-           pagenum "\">p" pagenum "</a>"))
+           pageNum "\">p" pageNum "</a>"))
 
-    (delete-region p1 p2)
-    (insert myresult)
+    (delete-region ξp1 ξp2)
+    (insert myResult)
     ))
 
 
@@ -331,15 +339,15 @@ m = “music”
 s = “software”
 There are other amazon categories, but not supported by this function."
   (interactive)
-  (let (p1 p2 mainText tmplist sstr pcato pcc)
+  (let (ξp1 ξp2 mainText tmplist sstr pcato pcc)
     (if (use-region-p)
-        (setq p1 (region-beginning) p2 (region-end))
+        (setq ξp1 (region-beginning) ξp2 (region-end))
       (progn
-        (setq p1 (line-beginning-position) )
-        (setq p2 (line-end-position) )
+        (setq ξp1 (line-beginning-position) )
+        (setq ξp2 (line-end-position) )
         ))
     ;; get the text
-    (setq mainText (buffer-substring-no-properties p1 p2) )
+    (setq mainText (buffer-substring-no-properties ξp1 ξp2) )
     (setq tmplist (split-string mainText ";") )
     (setq sstr (nth 0 tmplist ) )
     (setq pcato (nth 1 tmplist ) )
@@ -357,7 +365,7 @@ There are other amazon categories, but not supported by this function."
      (t (error "Code does not match"))
      )
 
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert  (amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
 
@@ -376,12 +384,12 @@ Example output:
 
 For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number'"
   (interactive)
-  (let (bds p1 p2 mainText asin productName )
+  (let (bds ξp1 ξp2 mainText asin productName )
 
     (setq bds (get-selection-or-unit 'url))
     (setq mainText (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
+    (setq ξp1 (aref bds 1) )
+    (setq ξp2 (aref bds 2) )
 
     ;; extract the id from text
     (cond
@@ -407,7 +415,7 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
     ;; replace dash to space in productName
     (setq productName (replace-regexp-in-string "-" " " productName) )
 
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert
      "<a class=\"amz\" href=\"http://www.amazon.com/dp/"
      asin "/?tag=xahh-20\" title=\"" productName "\">amazon</a>")
@@ -468,8 +476,8 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
   (let* (
          (bds (get-selection-or-unit 'filepath))
          (inputStr (elt bds 0) )
-         (p1 (aref bds 1) )
-         (p2 (aref bds 2) )
+         (ξp1 (aref bds 1) )
+         (ξp2 (aref bds 2) )
          (inputStParts (split-uri-hashmark inputStr) )
          (pt1 (aref inputStParts 0) )
          (fragPart (aref inputStParts 1) )
@@ -496,7 +504,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
                   (progn
                     (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url fPath) fragPart) titleText)) )
                 )
-          (delete-region p1 p2)
+          (delete-region ξp1 ξp2)
           (insert resultStr)
           )
       (progn (message (format "Cannot locate the file: 「%s」" fPath) )) ) ) )
@@ -533,16 +541,16 @@ returns
   "Make the path under cursor into a HTML link for xah site.
 Version 2014-10-31"
   (interactive)
-  (let ( p1 p2 ξwd )
+  (let ( ξp1 ξp2 ξwd )
     (if (use-region-p)
-        (setq p1 (region-beginning) p2 (region-end))
+        (setq ξp1 (region-beginning) ξp2 (region-end))
       (progn
         (skip-chars-backward "-A-Za-z0-9*+!-_?")
-        (setq p1 (point))
+        (setq ξp1 (point))
         (skip-chars-forward "-A-Za-z0-9*+!-_?")
-        (setq p2 (point))))
-    (setq ξwd (buffer-substring-no-properties p1 p2))
-    (delete-region p1 p2)
+        (setq ξp2 (point))))
+    (setq ξwd (buffer-substring-no-properties ξp1 ξp2))
+    (delete-region ξp1 ξp2)
     (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.6/clojure.core-api.html#clojure.core/" ξwd "\">clojure.core/" ξwd "</a></span>"))))
 
 (defun xah-nodejs-ref-linkify ()
@@ -570,8 +578,8 @@ linkText
   (let* (
          (bds (get-selection-or-unit 'filepath))
          (inputStr (elt bds 0))
-         (p1 (aref bds 1))
-         (p2 (aref bds 2))
+         (ξp1 (aref bds 1))
+         (ξp2 (aref bds 2))
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
@@ -594,7 +602,7 @@ linkText
                       (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" rltvPath urlFragPart titleText))
                   (progn
                     (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url fPath) urlFragPart titleText))))
-          (delete-region p1 p2)
+          (delete-region ξp1 ξp2)
           (insert resultStr))
       (progn (message (format "Cannot locate the file: 「%s」" fPath))))))
 
@@ -605,12 +613,12 @@ linkText
   (let* (
          (bds (get-selection-or-unit 'filepath))
          (inputStr (elt bds 0))
-         (p1 (aref bds 1))
-         (p2 (aref bds 2))
+         (ξp1 (aref bds 1))
+         (ξp2 (aref bds 2))
          fPath
          )
     (setq fPath (file-relative-name inputStr))
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert (format "<script defer src=\"%s\"></script>" fPath))))
 
 (defun xah-audio-file-linkify ()
@@ -623,12 +631,12 @@ becomes
   (let* (
          (bds (get-selection-or-unit 'filepath))
          (inputStr (elt bds 0))
-         (p1 (aref bds 1))
-         (p2 (aref bds 2))
+         (ξp1 (aref bds 1))
+         (ξp2 (aref bds 2))
          fPath
          )
     (setq fPath (file-relative-name inputStr))
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert (format "<audio src=\"%s\" controls></audio>" fPath))))
 
 (defun xah-css-linkify ()
@@ -642,12 +650,12 @@ becomes
   (let* (
          (bds (get-selection-or-unit 'filepath))
          (inputStr (elt bds 0) )
-         (p1 (aref bds 1) )
-         (p2 (aref bds 2) )
+         (ξp1 (aref bds 1) )
+         (ξp2 (aref bds 2) )
          fPath
          )
     (setq fPath (file-relative-name inputStr) )
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" fPath)
             )
     ) )
@@ -663,12 +671,12 @@ This function works on Xah Lee's website only.
 The directory to search includes:
 “SpecialPlaneCurves_dir” and “surface”."
   (interactive)
-  (let (bds p1 p2 cursorWord wordPath ξi testPaths ξfound-p rPath linkWord)
+  (let (bds ξp1 ξp2 cursorWord wordPath ξi testPaths ξfound-p rPath linkWord)
 
     (setq bds (get-selection-or-unit 'glyphs))
     (setq cursorWord (elt bds 0) )
-    (setq p1 (aref bds 1) )
-    (setq p2 (aref bds 2) )
+    (setq ξp1 (aref bds 1) )
+    (setq ξp2 (aref bds 2) )
 
     ;; word for constructing possible dir
     (setq wordPath (replace-regexp-in-string " " "_" (downcase cursorWord)))
@@ -690,7 +698,7 @@ The directory to search includes:
     (if ξfound-p
         (progn
           (setq linkWord (replace-regexp-in-string "_" " " cursorWord))
-          (delete-region p1 p2)
+          (delete-region ξp1 ξp2)
           (insert (concat "<a href=\"" (file-relative-name rPath) "\">" linkWord "</a>")))
       (progn (beep) (message "No file found")))))
 
@@ -707,23 +715,23 @@ They will be changed into a HTML link in various formats, depending on the input
 If there is text selection, use it as input."
   (interactive)
   (let (
-        p1 p2
+        ξp1 ξp2
         ξpath
         ;; (ξpath (elt (get-selection-or-unit 'filepath ) 0))
         )
 
     (if (use-region-p)
-        (setq p1 (region-beginning) p2 (region-end))
-      (let (p0)
-        (setq p0 (point))
+        (setq ξp1 (region-beginning) ξp2 (region-end))
+      (let (ξp0)
+        (setq ξp0 (point))
         ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
         (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-        (setq p1 (point))
-        (goto-char p0)
+        (setq ξp1 (point))
+        (goto-char ξp0)
         (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-        (setq p2 (point))))
+        (setq ξp2 (point))))
 
-    (setq ξpath (buffer-substring-no-properties p1 p2))
+    (setq ξpath (buffer-substring-no-properties ξp1 ξp2))
 
     (cond
      ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" ξpath) (xah-blogger-linkify))
