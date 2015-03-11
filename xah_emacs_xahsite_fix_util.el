@@ -13,10 +13,12 @@ When called interactively, the buffer for φdest-file-path is left unsaved and a
 
 When called in lisp program, φsource-file-path and φdest-file-path should be file full paths. If changes are made to φdest-file-path, it returns t, else nil."
   (interactive
-   (let* (
-          (bds (get-selection-or-unit 'line))
-          (p1 (elt bds 1))
-          (p2 (elt bds 2)))
+   (let ( p1 p2  )
+     (if (use-region-p)
+         (progn (setq p1 (region-beginning))
+                (setq p2 (region-end)))
+       (progn (setq p1 (line-beginning-position))
+              (setq p2 (line-end-position))))
      (list (buffer-file-name)
            (xahsite-href-value-to-filepath (thing-at-point 'filename) (buffer-file-name)))))
   (let ( ξtitle ξnewHrefValue ξbuffer )
