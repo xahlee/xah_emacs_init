@@ -39,26 +39,26 @@ Version 2015-03-11"
                                          "satwords"
                                          "writerwords"))))
   (let (
-        p1
-        p2
+        ξp1
+        ξp2
         ξwordText
         (ξdestFile (concat φcategory ".html")))
     (if (use-region-p)
         (progn
-          (setq p1 (region-beginning))
-          (setq p2 (region-end)))
+          (setq ξp1 (region-beginning))
+          (setq ξp2 (region-end)))
       (save-excursion
         (if (re-search-backward "\n[ \t]*\n" nil "move")
             (progn (re-search-forward "\n[ \t]*\n")
-                   (setq p1 (point)))
-          (setq p1 (point)))
+                   (setq ξp1 (point)))
+          (setq ξp1 (point)))
         (if (re-search-forward "\n[ \t]*\n" nil "move")
             (progn (re-search-backward "\n[ \t]*\n")
-                   (setq p2 (point)))
-          (setq p2 (point)))))
+                   (setq ξp2 (point)))
+          (setq ξp2 (point)))))
 
-    (setq ξwordText (buffer-substring-no-properties p1 p2))
-    (delete-region p1 p2 )
+    (setq ξwordText (buffer-substring-no-properties ξp1 ξp2))
+    (delete-region ξp1 ξp2 )
 
     (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξdestFile))
     (goto-char 1)
@@ -103,11 +103,11 @@ Version 2015-03-11"
   "Insert a word definition entry template.
 Using current word or text selection."
   (interactive)
-  (let (ξbds p1 p2 ξstr str2)
-    (setq ξbds (get-selection-or-unit 'word))
-    (setq ξstr (aref ξbds 0))
-
-    (setq str2 (xah-asciify-string ξstr))
+  (let* ((ξbds (get-selection-or-unit 'word))
+         (ξstr1 (aref ξbds 0))
+         ξstr2)
+    
+    (setq ξstr2 (xah-asciify-string ξstr1))
     (search-forward "\n\n" nil t)
     (search-backward "</div>")
     (insert "<div class=\"def\"></div>\n")
@@ -118,7 +118,7 @@ Using current word or text selection."
   "Insert a word definition entry template.
 Using current word or text selection."
   (interactive)
-  (let (ξbds p1 p2)
+  (let ()
     (require 'sgml-mode) ; for sgml-skip-tag-forward
     (search-backward "<section class=\"word-α\">")
     (search-forward "<div class=\"bdy\">")
@@ -146,14 +146,14 @@ Used for the files in
 FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
   (interactive)
 
-  (let (wd egText p1 p2 p3 p4 notBolded-p)
+  (let (wd egText ξp1 ξp2 p3 p4 notBolded-p)
     ;; grab the word
     (search-forward "<p class=\"wd\">")
-    (setq p1 (point))
+    (setq ξp1 (point))
     (search-forward "</p>")
     (backward-char 4)
-    (setq p2 (point))
-    (setq wd (buffer-substring-no-properties p1 p2))
+    (setq ξp2 (point))
+    (setq wd (buffer-substring-no-properties ξp1 ξp2))
 
     ;; grab the example text
     (search-forward "<div class=\"bdy\">")
@@ -185,24 +185,24 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
   "Make the Chinese char under cursor into Chinese dictionary reference links.
 If there's a text selection, use that for input."
   (interactive)
-  (let ( ξchar p1 p2  ξtemplate ξresult)
+  (let ( ξchar ξp1 ξp2  ξtemplate ξresult)
 
     (if (use-region-p)
         (progn
-          (setq p1 (region-beginning))
-          (setq p2 (region-end)))
+          (setq ξp1 (region-beginning))
+          (setq ξp2 (region-end)))
       (progn
-        (setq p1 (point))
-        (setq p2 (1+ (point)))))
+        (setq ξp1 (point))
+        (setq ξp2 (1+ (point)))))
 
-    (setq ξchar (buffer-substring-no-properties p1 p2))
+    (setq ξchar (buffer-substring-no-properties ξp1 ξp2))
 
     (setq ξtemplate
           "<div class=\"chinese-etymology-96656\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
           )
 
     (setq ξresult (replace-regexp-in-string "�" ξchar ξtemplate))
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert ξresult)))
 
 (defun xwe-annotate ()
@@ -220,15 +220,17 @@ insert a div tag above the current paragraph."
     (insert (format "<b class=\"x3nt\">%s</b> " ξinputText))))
 
 (defun xwe-word-etymology-linkify ()
-  "Make the current word into a etymology reference link.
-."
+  "Make the current word into a etymology reference link."
   (interactive)
-  (let (ξbds p1 p2 ξinput ξresult)
-
-    (setq ξbds (get-selection-or-unit 'line))
-    (setq ξinput (aref ξbds 0) p1 (aref ξbds 1) p2 (aref ξbds 2))
+  (let (ξp1 ξp2 ξinput ξresult)
+    (if (use-region-p)
+        (progn (setq ξp1 (region-beginning))
+               (setq ξp2 (region-end)))
+      (progn (setq ξp1 (line-beginning-position))
+             (setq ξp2 (line-end-position))))
+    (setq ξinput (buffer-substring-no-properties ξp1 ξp2))
     (setq ξresult (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" ξinput "\">" ξinput "</a></span>"))
-    (delete-region p1 p2)
+    (delete-region ξp1 ξp2)
     (insert ξresult)))
 
 (defun xwe-query-find-then-bold ()
