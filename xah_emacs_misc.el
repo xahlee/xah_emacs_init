@@ -44,7 +44,7 @@ C-u 2 → set to 'chinese-py-b5."
    (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-background-colors))))
   (set-background-color φbg-color))
 
-(defun xah-list-matching-lines2 ()
+(defun xah-list-matching-lines-no-regex ()
   "Show lines in the current buffer matching current word or text selection.
 This command is the similar to `list-matching-lines'.
 The differences are:
@@ -52,13 +52,15 @@ The differences are:
 • If there is a text selection, that is used as input.
 • The input is plain text, not regex."
   (interactive)
-  (let (bds p1 p2 myStr )
-    (setq bds (get-selection-or-unit 'glyphs))
-    (setq myStr (elt bds 0))
-    (setq p1 (elt bds 1))
-    (setq p2 (elt bds 2))
-
-    (list-matching-lines (regexp-quote myStr))))
+  (let (ξp1 ξp2 ξsearchStr )
+    (if (use-region-p)
+        (progn
+          (setq ξp1 (region-beginning))
+          (setq ξp2 (region-end))
+          (setq ξsearchStr (buffer-substring-no-properties ξp1 ξp2)))
+      (progn
+        (setq ξsearchStr (word-at-point))))
+    (list-matching-lines (regexp-quote ξsearchStr))))
 
 (defun xah-make-lojban-entry ()
   "Insert a blank a-lojban-a-day HTML template in a paritcular file."
@@ -145,25 +147,25 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 This is Xah Lee's personal command assuming a particular dir structure."
   (interactive)
   (let (
-         p1 p2
-         inputStr
-         myFile
-         myTitle
-         )
+        ξp1 ξp2
+        ξinputStr
+        myFile
+        myTitle
+        (ξpathDelimitorChars "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+        )
 
     (if (use-region-p)
-        (setq p1 (region-beginning) p2 (region-end))
+        (setq ξp1 (region-beginning) ξp2 (region-end))
       (let (p0)
         (setq p0 (point))
-        ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-        (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-        (setq p1 (point))
+        (skip-chars-backward ξpathDelimitorChars)
+        (setq ξp1 (point))
         (goto-char p0)
-        (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-        (setq p2 (point))))
+        (skip-chars-forward ξpathDelimitorChars)
+        (setq ξp2 (point))))
 
-    (setq inputStr (buffer-substring-no-properties p1 p2))
-    (setq myFile (xahsite-web-path-to-filepath inputStr))
+    (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
+    (setq myFile (xahsite-web-path-to-filepath ξinputStr))
 
     (if (file-exists-p myFile)
         (progn
@@ -173,7 +175,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
                   (file-name-nondirectory myFile)))
           (setq myTitle (replace-pairs-in-string myTitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
-          (delete-region p1 p2)
+          (delete-region ξp1 ξp2)
           (insert myTitle "\n" (xahsite-filepath-to-url myFile)))
       (progn (user-error "file doesn't exist.")))))
 
@@ -213,18 +215,18 @@ When there is a text selection, act on the region."
               (while (search-forward "\n" nil t) (replace-match "" nil t))))
         (if currentStateIsCompact
             (fill-paragraph nil)
-          (let (p1 p2) ; p1 and p2 are beginning/end of text block
+          (let (ξp1 ξp2) ; ξp1 and ξp2 are beginning/end of text block
             (progn
               (if (re-search-backward "\n[ \t]*\n" nil "move")
                   (progn (re-search-forward "\n[ \t]*\n")
-                         (setq p1 (point)))
-                (setq p1 (point)))
+                         (setq ξp1 (point)))
+                (setq ξp1 (point)))
               (if (re-search-forward "\n[ \t]*\n" nil "move")
                   (progn (re-search-backward "\n[ \t]*\n")
-                         (setq p2 (point)))
-                (setq p2 (point))))
+                         (setq ξp2 (point)))
+                (setq ξp2 (point))))
             (save-restriction
-              (narrow-to-region p1 p2)
+              (narrow-to-region ξp1 ξp2)
               (goto-char (point-min))
               (while (search-forward "\n" nil t) (replace-match "" nil t))))))
 
@@ -280,12 +282,12 @@ version 2015-02-05"
     (let* (
           ( ξxx (xhm-get-precode-langCode))
           (langCode (elt ξxx 0))
-          (p1 (elt ξxx 1))
-          (p2 (elt ξxx 2))
+          (ξp1 (elt ξxx 1))
+          (ξp2 (elt ξxx 2))
           )
 
-      (xhm-remove-span-tag-region p1 p2)
-      (goto-char p1)
+      (xhm-remove-span-tag-region ξp1 ξp2)
+      (goto-char ξp1)
       (xhm-htmlize-precode xhm-lang-name-map)
        )
 
@@ -365,13 +367,13 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
 "FIXEDCASE" "LITERAL")
 
 (let* (
-         (bds (get-selection-or-unit 'buffer))
-         (p1 (elt bds 1))
-         (p2 (elt bds 2))
+         (ξboundaries (get-selection-or-unit 'buffer))
+         (ξp1 (elt ξboundaries 1))
+         (ξp2 (elt ξboundaries 2))
          )
     (save-excursion
       (save-restriction
-        (narrow-to-region p1 p2)
+        (narrow-to-region ξp1 ξp2)
         (progn
           (goto-char (point-min))
           (while (search-forward-regexp "[ \t]+\n" nil "noerror")
@@ -414,26 +416,26 @@ Test cases
   100 200 300   400 500 600"
   (interactive )
 
-  (let (inputStr tempStr p1 p2
+  (let (ξinputStr ξtempStr ξp1 ξp2
                  (case-fold-search t) )
     (save-excursion
       ;; (skip-chars-backward "0123456789abcdef")
       ;; (search-backward-regexp "[[:xdigit:]]+" nil t)
       (search-backward-regexp "[0123456789abcdef]+" nil t)
-      (setq p1 (point) )
+      (setq ξp1 (point) )
       (search-forward-regexp "[0123456789abcdef]+" nil t)
-      (setq p2 (point) )
+      (setq ξp2 (point) )
 
-      (setq inputStr (buffer-substring-no-properties p1 p2) )
+      (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2) )
 
       (let ((case-fold-search nil) )
-        (setq tempStr (replace-regexp-in-string "\\`0x" "" inputStr )) ; C, Perl, …
-        (setq tempStr (replace-regexp-in-string "\\`#x" "" tempStr )) ; elisp …
-        (setq tempStr (replace-regexp-in-string "\\`#" "" tempStr ))  ; CSS …
+        (setq ξtempStr (replace-regexp-in-string "\\`0x" "" ξinputStr )) ; C, Perl, …
+        (setq ξtempStr (replace-regexp-in-string "\\`#x" "" ξtempStr )) ; elisp …
+        (setq ξtempStr (replace-regexp-in-string "\\`#" "" ξtempStr ))  ; CSS …
         )
 
-      ;; (message "Hex 「%s」 is 「%d」" tempStr (string-to-number tempStr 16))
-      (message "input 「%s」 Hex 「%s」 is 「%d」" inputStr tempStr (string-to-number tempStr 16)))))
+      ;; (message "Hex 「%s」 is 「%d」" ξtempStr (string-to-number ξtempStr 16))
+      (message "input 「%s」 Hex 「%s」 is 「%d」" ξinputStr ξtempStr (string-to-number ξtempStr 16)))))
 
 
 
@@ -445,10 +447,10 @@ U+1D400
 then call this command."
   (interactive)
   (let* (
-        (bds (get-selection-or-unit 'glyphs))
-        (ξinput (elt bds 0) )
-        (p1 (elt bds 1))
-        (p2 (elt bds 2))
+        (ξboundaries (get-selection-or-unit 'glyphs))
+        (ξinput (elt ξboundaries 0) )
+        (ξp1 (elt ξboundaries 1))
+        (ξp2 (elt ξboundaries 2))
         (ξcodepoint (string-to-number (replace-regexp-in-string "U\\+" "" ξinput "FIXEDCASE" "LITERAL") 16) )
         )
 

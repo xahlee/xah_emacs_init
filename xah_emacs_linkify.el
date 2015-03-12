@@ -101,14 +101,14 @@ becomes
 If there's a text selection, use that region as file name."
   (interactive)
   (let
-      (bds p3 p4 inputStr imgPath
+      (bds p3 p4 ξinputStr imgPath
            ;; imgFileName linkText
            ξdimension ξwidth ξheight resultStr)
 
     (setq bds (get-selection-or-unit 'filepath))
-    (setq inputStr (elt bds 0) p3 (elt bds 1) p4 (elt bds 2) )
+    (setq ξinputStr (elt bds 0) p3 (elt bds 1) p4 (elt bds 2) )
 
-    (setq imgPath (local-url-to-file-path inputStr))
+    (setq imgPath (local-url-to-file-path ξinputStr))
     ;; (setq imgPath (windows-style-path-to-unix imgPath))
 
     ;; (message "ttt is : %s" imgPath)
@@ -278,14 +278,14 @@ For Example, if you cursor is on the word “p123”, then
 it becomes
 “<a href=\"http://www.wolframscience.com/nksonline/page-123\">p123</a>”"
   (interactive)
-  (let (bds ξp1 ξp2 inputStr pageNum myResult)
+  (let (bds ξp1 ξp2 ξinputStr pageNum myResult)
 
     (setq bds (get-selection-or-unit 'glyphs))
-    (setq inputStr (elt bds 0) )
+    (setq ξinputStr (elt bds 0) )
     (setq ξp1 (aref bds 1) )
     (setq ξp2 (aref bds 2) )
 
-    (setq pageNum (substring inputStr 1) )
+    (setq pageNum (substring ξinputStr 1) )
     (setq myResult
           (concat
            "<a href=\"http://www.wolframscience.com/nksonline/page-"
@@ -475,10 +475,10 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'filepath))
-         (inputStr (elt bds 0) )
+         (ξinputStr (elt bds 0) )
          (ξp1 (aref bds 1) )
          (ξp2 (aref bds 2) )
-         (inputStParts (split-uri-hashmark inputStr) )
+         (inputStParts (split-uri-hashmark ξinputStr) )
          (pt1 (aref inputStParts 0) )
          (fragPart (aref inputStParts 1) )
          (fPath (xahsite-web-path-to-filepath pt1 default-directory) )
@@ -577,13 +577,13 @@ linkText
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'filepath))
-         (inputStr (elt bds 0))
+         (ξinputStr (elt bds 0))
          (ξp1 (aref bds 1))
          (ξp2 (aref bds 2))
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
-         (temp87318 (split-uri-hashmark inputStr))
+         (temp87318 (split-uri-hashmark ξinputStr))
          (urlMainPart (elt temp87318 0))
          (urlFragPart (elt temp87318 1))
          (fPath (xahsite-web-path-to-filepath urlMainPart default-directory))
@@ -612,12 +612,12 @@ linkText
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'filepath))
-         (inputStr (elt bds 0))
+         (ξinputStr (elt bds 0))
          (ξp1 (aref bds 1))
          (ξp2 (aref bds 2))
          fPath
          )
-    (setq fPath (file-relative-name inputStr))
+    (setq fPath (file-relative-name ξinputStr))
     (delete-region ξp1 ξp2)
     (insert (format "<script defer src=\"%s\"></script>" fPath))))
 
@@ -630,12 +630,12 @@ becomes
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'filepath))
-         (inputStr (elt bds 0))
+         (ξinputStr (elt bds 0))
          (ξp1 (aref bds 1))
          (ξp2 (aref bds 2))
          fPath
          )
-    (setq fPath (file-relative-name inputStr))
+    (setq fPath (file-relative-name ξinputStr))
     (delete-region ξp1 ξp2)
     (insert (format "<audio src=\"%s\" controls></audio>" fPath))))
 
@@ -649,12 +649,12 @@ becomes
   (interactive)
   (let* (
          (bds (get-selection-or-unit 'filepath))
-         (inputStr (elt bds 0) )
+         (ξinputStr (elt bds 0) )
          (ξp1 (aref bds 1) )
          (ξp2 (aref bds 2) )
          fPath
          )
-    (setq fPath (file-relative-name inputStr) )
+    (setq fPath (file-relative-name ξinputStr) )
     (delete-region ξp1 ξp2)
     (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" fPath)
             )
