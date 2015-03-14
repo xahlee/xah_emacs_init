@@ -39,7 +39,7 @@ WARNING: This command saves buffer if it's a file."
   (interactive)
   (require 'sgml-mode)
   (let (ξp1 ξp2 ξnum bufferTextOrig)
-    (save-excursion
+    (progn
       (goto-char 1)
       (when (search-forward "<div class=\"byline\">" nil)
 

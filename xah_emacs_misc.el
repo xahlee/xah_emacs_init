@@ -149,34 +149,34 @@ This is Xah Lee's personal command assuming a particular dir structure."
   (let (
         ξp1 ξp2
         ξinputStr
-        myFile
-        myTitle
-        (ξpathDelimitorChars "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+        ξfile
+        ξtitle
+        (ξpathDelimitors "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
         )
 
     (if (use-region-p)
         (setq ξp1 (region-beginning) ξp2 (region-end))
-      (let (p0)
-        (setq p0 (point))
-        (skip-chars-backward ξpathDelimitorChars)
+      (let (ξp0)
+        (setq ξp0 (point))
+        (skip-chars-backward ξpathDelimitors)
         (setq ξp1 (point))
-        (goto-char p0)
-        (skip-chars-forward ξpathDelimitorChars)
+        (goto-char ξp0)
+        (skip-chars-forward ξpathDelimitors)
         (setq ξp2 (point))))
 
     (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
-    (setq myFile (xahsite-web-path-to-filepath ξinputStr))
+    (setq ξfile (xahsite-web-path-to-filepath ξinputStr))
 
-    (if (file-exists-p myFile)
+    (if (file-exists-p ξfile)
         (progn
-          (setq myTitle
-                (if (string-match-p ".+html\\'" myFile)
-                    (xhm-get-html-file-title myFile)
-                  (file-name-nondirectory myFile)))
-          (setq myTitle (replace-pairs-in-string myTitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
+          (setq ξtitle
+                (if (string-match-p ".+html\\'" ξfile)
+                    (xhm-get-html-file-title ξfile)
+                  (file-name-nondirectory ξfile)))
+          (setq ξtitle (replace-pairs-in-string ξtitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
           (delete-region ξp1 ξp2)
-          (insert myTitle "\n" (xahsite-filepath-to-url myFile)))
+          (insert ξtitle "\n" (xahsite-filepath-to-url ξfile)))
       (progn (user-error "file doesn't exist.")))))
 
 (defun xah-copy-url-current-file ()
