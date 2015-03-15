@@ -6,7 +6,7 @@
 
 (require 'url-util)
 
-(defun xah-html-image-linkify ()
+(defun xah-html-image-linkify ( &optional φp1 φp2)
   "Replace a image file's path under cursor with a HTML img tag,
 If there's a text selection, use that as path.
 
@@ -17,49 +17,73 @@ then it will became
 
 Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .svg}. If it is URL (starting with “http”), then no “width” and “height” attribute will be added."
   (interactive)
-  (let* (
-         (bds (get-selection-or-unit 'filepath))
-         (ξinputPath (elt bds 0))
-         (ξp1 (aref bds 1))
-         (ξp2 (aref bds 2))
-         (ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
-         (ξfp (expand-file-name (xahsite-web-path-to-filepath ξinputPath) ξcurrentDir )) ;full path
-         ;; (setq ξfp (windows-style-path-to-unix (local-url-to-file-path ξfp)))
-         altText
-         )
+  (let (
+        ξp0
+        ξp1
+        ξp2
+        ξinputPath
+        ξcurrentDir
+        ξfullPath
+        ;; (setq ξfullPath (windows-style-path-to-unix (local-url-to-file-path ξfullPath)))
+        ξaltText
+        )
 
-    ;; (message "ooo %s" ξfp)
-
-    (setq altText (file-name-sans-extension (file-name-nondirectory ξfp)))
-    (setq altText (replace-regexp-in-string "_" " " altText t t))
-    (setq altText (replace-regexp-in-string "-s$" "" altText))
-
-    (if (xahsite-is-link-to-xahsite-p (file-relative-name ξfp (or (buffer-file-name) default-directory)))
+    ;; sets ξp1 ξp2
+    (if φp1
         (progn
-          (if (file-exists-p ξfp)
+          (setq ξp1 φp1)
+          (setq ξp2 φp2))
+      (if (use-region-p)
+          (progn
+            (setq ξp1 (region-beginning))
+            (setq ξp2 (region-end)))
+        (save-excursion
+          (setq ξp0 (point))
+          ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+          (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+          (setq ξp1 (point))
+          (goto-char ξp0)
+          (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+          (setq ξp2 (point)))))
+
+    (progn
+      (setq ξinputPath (buffer-substring-no-properties ξp1 ξp2))
+      (setq ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
+      (setq ξfullPath (expand-file-name (xahsite-web-path-to-filepath ξinputPath) ξcurrentDir )) ;full path
+      )
+
+    ;; (message "ooo %s" ξfullPath)
+
+    (setq ξaltText (file-name-sans-extension (file-name-nondirectory ξfullPath)))
+    (setq ξaltText (replace-regexp-in-string "_" " " ξaltText t t))
+    (setq ξaltText (replace-regexp-in-string "-s$" "" ξaltText))
+
+    (if (xahsite-is-link-to-xahsite-p (file-relative-name ξfullPath (or (buffer-file-name) default-directory)))
+        (progn
+          (if (file-exists-p ξfullPath)
               (let (ξwh ξw ξh ξwhStr)
                 (setq ξwh
                       (cond
-                       ((string-match "\.svg$" ξfp) (get-image-dimensions ξfp))
+                       ((string-match "\.svg$" ξfullPath) (get-image-dimensions ξfullPath))
 
-                       (t (get-image-dimensions ξfp))
-                       ;; (t (get-image-dimensions-imk ξfp))
+                       (t (get-image-dimensions ξfullPath))
+                       ;; (t (get-image-dimensions-imk ξfullPath))
                        ))
                 (setq ξw (number-to-string (elt ξwh 0)))
                 (setq ξh (number-to-string (elt ξwh 1)))
                 (setq ξwhStr
-                      (if (string-match "\.svg$" ξfp)
+                      (if (string-match "\.svg$" ξfullPath)
                           ""
                         (format "width=\"%s\" height=\"%s\"" ξw ξh)))
                 (delete-region ξp1 ξp2)
                 (insert
                  (format "<img src=\"%s\" alt=\"%s\" %s />"
-                         (xahsite-filepath-to-href-value ξfp (or (buffer-file-name) default-directory))
-                         altText ξwhStr )))
-            (error "File does not exist 「%s」" ξfp )))
+                         (xahsite-filepath-to-href-value ξfullPath (or (buffer-file-name) default-directory))
+                         ξaltText ξwhStr )))
+            (error "File does not exist 「%s」" ξfullPath )))
       (progn
         (delete-region ξp1 ξp2)
-        (insert "<img src=\"" ξfp "\" alt=\"" altText "\">")))))
+        (insert "<img src=\"" ξfullPath "\" alt=\"" ξaltText "\">")))))
 
 (defun xah-image-file-to-html-figure-tag ()
   "Replace a image file's path under cursor with a HTML img tag,
@@ -101,12 +125,12 @@ becomes
 If there's a text selection, use that region as file name."
   (interactive)
   (let
-      (bds p3 p4 ξinputStr imgPath
+      (ξbds p3 p4 ξinputStr imgPath
            ;; imgFileName linkText
            ξdimension ξwidth ξheight resultStr)
 
-    (setq bds (get-selection-or-unit 'filepath))
-    (setq ξinputStr (elt bds 0) p3 (elt bds 1) p4 (elt bds 2) )
+    (setq ξbds (get-selection-or-unit 'filepath))
+    (setq ξinputStr (elt ξbds 0) p3 (elt ξbds 1) p4 (elt ξbds 2) )
 
     (setq imgPath (local-url-to-file-path ξinputStr))
     ;; (setq imgPath (windows-style-path-to-unix imgPath))
@@ -139,11 +163,11 @@ becomes
 
 <div class=\"blgcmt\"><a href=\"http://xahlee.blogspot.com/2010/03/some.html\">✍</a></div>"
   (interactive)
-  (let (bds p7 p8 ξurl)
-    (setq bds (get-selection-or-unit 'url))
-    (setq ξurl (elt bds 0) )
-    (setq p7 (elt bds 1) )
-    (setq p8 (elt bds 2) )
+  (let (ξbds p7 p8 ξurl)
+    (setq ξbds (get-selection-or-unit 'url))
+    (setq ξurl (elt ξbds 0) )
+    (setq p7 (elt ξbds 1) )
+    (setq p8 (elt ξbds 2) )
 
     (delete-region p7 p8)
     (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url ξurl) "\">✍</a></div>"))))
@@ -166,7 +190,7 @@ Then it'll become
              (setq ξp2 (line-end-position))))
 
     (setq ξword (buffer-substring-no-properties ξp1 ξp2) )
-    
+
     (setq ξurl (concat "http://www.youporn.com/search?query=" ξword) )
     (setq ξurl (replace-regexp-in-string " " "+" ξurl ) )
     (delete-region ξp1 ξp2)
@@ -192,7 +216,7 @@ Note: old version returns this form:
                (setq ξp2 (region-end)))
       (progn (setq ξp1 (line-beginning-position))
              (setq ξp2 (line-end-position))))
-    
+
     (setq ξword (buffer-substring-no-properties ξp1 ξp2))
 
     (setq ξurl (concat "http://youtube.com/results?search_query=" ξword "&amp;search=Search"))
@@ -261,7 +285,7 @@ Warning: the line must end in a line return char else the result is wrong."
                (setq ξp2 (region-end)))
       (progn (setq ξp1 (line-beginning-position))
              (setq ξp2 (line-end-position))))
-    
+
         (setq ξword (buffer-substring-no-properties ξp1 ξp2))
 
     (setq ξurl (concat "http://www.google.com/search?q=" ξword))
@@ -278,12 +302,12 @@ For Example, if you cursor is on the word “p123”, then
 it becomes
 “<a href=\"http://www.wolframscience.com/nksonline/page-123\">p123</a>”"
   (interactive)
-  (let (bds ξp1 ξp2 ξinputStr pageNum myResult)
+  (let (ξbds ξp1 ξp2 ξinputStr pageNum myResult)
 
-    (setq bds (get-selection-or-unit 'glyphs))
-    (setq ξinputStr (elt bds 0) )
-    (setq ξp1 (aref bds 1) )
-    (setq ξp2 (aref bds 2) )
+    (setq ξbds (get-selection-or-unit 'glyphs))
+    (setq ξinputStr (elt ξbds 0) )
+    (setq ξp1 (aref ξbds 1) )
+    (setq ξp2 (aref ξbds 2) )
 
     (setq pageNum (substring ξinputStr 1) )
     (setq myResult
@@ -384,12 +408,12 @@ Example output:
 
 For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number'"
   (interactive)
-  (let (bds ξp1 ξp2 mainText asin productName )
+  (let (ξbds ξp1 ξp2 mainText asin productName )
 
-    (setq bds (get-selection-or-unit 'url))
-    (setq mainText (elt bds 0) )
-    (setq ξp1 (aref bds 1) )
-    (setq ξp2 (aref bds 2) )
+    (setq ξbds (get-selection-or-unit 'url))
+    (setq mainText (elt ξbds 0) )
+    (setq ξp1 (aref ξbds 1) )
+    (setq ξp2 (aref ξbds 2) )
 
     ;; extract the id from text
     (cond
@@ -460,54 +484,62 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 ;;            (insert resultStr))))
 ;;    ))
 
-(defun xah-file-linkify ()
+(defun xah-file-linkify (&optional φp1 φp2)
   "Make the path under cursor into a HTML link for xah site.
 
 For Example, if you cursor is on the text “../emacs/emacs.html”,
 then it'll become:
 “<a href=\"../emacs/emacs.html\">Xah's Emacs Tutorial</a>”.
-The link text is pulled from the file's <h1> tag.
+The link text is pulled from the file's <title> tag.
 
 If there is text selection, use it as file path.
 
 The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath'.
 "
-  (interactive)
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (save-excursion
+       (let (p0 p1 p2)
+         (setq p0 (point))
+         ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+         (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+         (setq p1 (point))
+         (goto-char p0)
+         (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+         (setq p2 (point))
+         (list p1 p2)))))
   (let* (
-         (bds (get-selection-or-unit 'filepath))
-         (ξinputStr (elt bds 0) )
-         (ξp1 (aref bds 1) )
-         (ξp2 (aref bds 2) )
-         (inputStParts (split-uri-hashmark ξinputStr) )
-         (pt1 (aref inputStParts 0) )
-         (fragPart (aref inputStParts 1) )
-         (fPath (xahsite-web-path-to-filepath pt1 default-directory) )
+         (ξinputStr (buffer-substring-no-properties φp1 φp2))
+         (inputStParts (split-uri-hashmark ξinputStr))
+         (pt1 (aref inputStParts 0))
+         (fragPart (aref inputStParts 1))
+         (fPath (xahsite-web-path-to-filepath pt1 default-directory))
          rltvPath titleText resultStr
          (currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
-         (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
-         )
+         (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
 
     (if (file-exists-p fPath)
         (progn
           (setq titleText
                 (if (string-match-p ".+html\\'" fPath)
-                    (concat (xhm-get-html-file-title fPath) fragPart)
+                    (concat (xhm-get-html-file-title fPath "noerror") fragPart)
                   (file-name-nondirectory fPath)))
           (setq resultStr
                 (if (string-equal
                      (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
-                     (xahsite-get-domain-of-local-file-path fPath)
-                     )
+                     (xahsite-get-domain-of-local-file-path fPath))
                     (progn
                       (setq rltvPath (file-relative-name fPath currentBufferFileDir))
-                      (format "<a href=\"%s\">%s</a>" (concat rltvPath fragPart) titleText))
+(message "title is 「%S」" titleText)
+                      (format "<a href=\"%s\">%s</a>"
+                              (concat rltvPath fragPart)
+                              (if (string-equal titleText "") rltvPath titleText )))
                   (progn
-                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url fPath) fragPart) titleText)) )
-                )
-          (delete-region ξp1 ξp2)
-          (insert resultStr)
-          )
-      (progn (message (format "Cannot locate the file: 「%s」" fPath) )) ) ) )
+                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url fPath) fragPart) titleText))))
+          (delete-region φp1 φp2)
+          (insert resultStr))
+      (progn (message (format "Cannot locate the file: 「%s」" fPath))))))
 
 (defun nodejs-get-title (φfName φfragPart)
   "Return the file frag part function title.
@@ -576,10 +608,10 @@ linkText
 "
   (interactive)
   (let* (
-         (bds (get-selection-or-unit 'filepath))
-         (ξinputStr (elt bds 0))
-         (ξp1 (aref bds 1))
-         (ξp2 (aref bds 2))
+         (ξbds (get-selection-or-unit 'filepath))
+         (ξinputStr (elt ξbds 0))
+         (ξp1 (aref ξbds 1))
+         (ξp2 (aref ξbds 2))
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
@@ -611,10 +643,10 @@ linkText
  ⁖ <script src=\"xyz.js\"></script>"
   (interactive)
   (let* (
-         (bds (get-selection-or-unit 'filepath))
-         (ξinputStr (elt bds 0))
-         (ξp1 (aref bds 1))
-         (ξp2 (aref bds 2))
+         (ξbds (get-selection-or-unit 'filepath))
+         (ξinputStr (elt ξbds 0))
+         (ξp1 (aref ξbds 1))
+         (ξp2 (aref ξbds 2))
          fPath
          )
     (setq fPath (file-relative-name ξinputStr))
@@ -629,10 +661,10 @@ becomes
  <audio src=\"xyz.mp3\"></audio>"
   (interactive)
   (let* (
-         (bds (get-selection-or-unit 'filepath))
-         (ξinputStr (elt bds 0))
-         (ξp1 (aref bds 1))
-         (ξp2 (aref bds 2))
+         (ξbds (get-selection-or-unit 'filepath))
+         (ξinputStr (elt ξbds 0))
+         (ξp1 (aref ξbds 1))
+         (ξp2 (aref ξbds 2))
          fPath
          )
     (setq fPath (file-relative-name ξinputStr))
@@ -648,10 +680,10 @@ becomes
 "
   (interactive)
   (let* (
-         (bds (get-selection-or-unit 'filepath))
-         (ξinputStr (elt bds 0) )
-         (ξp1 (aref bds 1) )
-         (ξp2 (aref bds 2) )
+         (ξbds (get-selection-or-unit 'filepath))
+         (ξinputStr (elt ξbds 0) )
+         (ξp1 (aref ξbds 1) )
+         (ξp2 (aref ξbds 2) )
          fPath
          )
     (setq fPath (file-relative-name ξinputStr) )
@@ -671,12 +703,12 @@ This function works on Xah Lee's website only.
 The directory to search includes:
 “SpecialPlaneCurves_dir” and “surface”."
   (interactive)
-  (let (bds ξp1 ξp2 cursorWord wordPath ξi testPaths ξfound-p rPath linkWord)
+  (let (ξbds ξp1 ξp2 cursorWord wordPath ξi testPaths ξfound-p rPath linkWord)
 
-    (setq bds (get-selection-or-unit 'glyphs))
-    (setq cursorWord (elt bds 0) )
-    (setq ξp1 (aref bds 1) )
-    (setq ξp2 (aref bds 2) )
+    (setq ξbds (get-selection-or-unit 'glyphs))
+    (setq cursorWord (elt ξbds 0) )
+    (setq ξp1 (aref ξbds 1) )
+    (setq ξp2 (aref ξbds 2) )
 
     ;; word for constructing possible dir
     (setq wordPath (replace-regexp-in-string " " "_" (downcase cursorWord)))
@@ -717,7 +749,6 @@ If there is text selection, use it as input."
   (let (
         ξp1 ξp2
         ξpath
-        ;; (ξpath (elt (get-selection-or-unit 'filepath ) 0))
         )
 
     (if (use-region-p)
@@ -744,10 +775,10 @@ If there is text selection, use it as input."
      ((string-match-p "\\.mp3\\'" ξpath) (xah-audio-file-linkify))
      ((string-match-p "\\.ogg\\'" ξpath) (xah-audio-file-linkify))
 
-     ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify) (xah-add-reference-span-tag))
-     ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify) (xah-add-reference-span-tag))
+     ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
 
-     ((xahsite-url-is-xah-website-p ξpath) (xah-file-linkify))
+     ((xahsite-url-is-xah-website-p ξpath) (xah-file-linkify ξp1 ξp2))
      ((string-match-p "wikipedia.org/" ξpath)
       (let ((case-fold-search nil))
         (if (xah-path-ends-in-image-suffix-p ξpath)
@@ -758,4 +789,4 @@ If there is text selection, use it as input."
 
      ((xah-path-ends-in-image-suffix-p ξpath) (xah-image-file-to-html-figure-tag))
 
-     (t (xah-file-linkify)))))
+     (t (xah-file-linkify ξp1 ξp2)))))
