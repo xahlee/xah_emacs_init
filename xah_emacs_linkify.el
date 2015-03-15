@@ -100,7 +100,7 @@ If there's a text selection, use that as image path.
 
 This function calls `xah-html-image-linkify' to do its work."
   (interactive)
-  (let (myStr)
+  (progn
     (xah-html-image-linkify)
     (search-backward "<")
     (insert "<figure>\n")
@@ -111,10 +111,9 @@ This function calls `xah-html-image-linkify' to do its work."
 </figure>
 ")
     (search-backward "</figcaption>")
-    (backward-char)
-    ))
+    (backward-char)))
 
-(defun xah-html-full-size-img-linkify ()
+(defun xah-html-full-size-img-linkify (&optional φp1 φp2)
   "Make image file path at cursor point into a img link.
 
 Example:
@@ -125,33 +124,34 @@ becomes
 If there's a text selection, use that region as file name."
   (interactive)
   (let
-      (ξbds p3 p4 ξinputStr imgPath
-           ;; imgFileName linkText
-           ξdimension ξwidth ξheight resultStr)
+      (ξp1 ξp2 ξinputStr ξimgPath ξdimension ξwidth ξheight ξresultStr)
+    (if φp1
+        (progn
+          (setq ξp1 φp1)
+          (setq ξp2 φp2))
+      (if (use-region-p)
+          (progn
+            (setq ξp1 (region-beginning))
+            (setq ξp2 (region-end)))
+        (save-excursion
+          (setq ξp0 (point))
+          ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+          (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+          (setq ξp1 (point))
+          (goto-char ξp0)
+          (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+          (setq ξp2 (point)))))
 
-    (setq ξbds (get-selection-or-unit 'filepath))
-    (setq ξinputStr (elt ξbds 0) p3 (elt ξbds 1) p4 (elt ξbds 2) )
-
-    (setq imgPath (local-url-to-file-path ξinputStr))
-    ;; (setq imgPath (windows-style-path-to-unix imgPath))
-
-    ;; (message "ttt is : %s" imgPath)
-
-    ;; (setq imgFileName (file-name-nondirectory imgPath))
-    ;; (setq linkText
-    ;;           (if (< (length imgFileName) 20)
-    ;;               imgFileName
-    ;;             (concat  (substring imgFileName 0 5)  "…" (substring imgFileName -6)  ) ))
-
-    (setq ξdimension (get-image-dimensions-imk imgPath))
+    (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
+    (setq ξimgPath (local-url-to-file-path ξinputStr))
+    (setq ξdimension (get-image-dimensions-imk ξimgPath))
     (setq ξwidth (number-to-string (elt ξdimension 0)))
     (setq ξheight (number-to-string (elt ξdimension 1)))
-    (setq resultStr
-          (concat "<a class=\"big-i\" href=\"" (file-relative-name imgPath) "\" target=\"_blank\">" ξwidth "×" ξheight "</a>")
-)
+    (setq ξresultStr
+          (concat "<a class=\"big-i\" href=\"" (file-relative-name ξimgPath) "\" target=\"_blank\">" ξwidth "×" ξheight "</a>"))
 
     (delete-region p3 p4)
-    (insert resultStr)))
+    (insert ξresultStr)))
 
 
 
@@ -455,7 +455,7 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 
 ;; If a region is active, use the region as file path."
 ;;  (interactive)
-;;  (let (ξpath bounds tempBuff x1 x2 titleText resultStr)
+;;  (let (ξpath bounds tempBuff x1 x2 titleText ξresultStr)
 ;;    (setq ξpath
 ;;          (if (use-region-p)
 ;;              (buffer-substring-no-properties (region-beginning) (region-end))
@@ -478,10 +478,10 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 ;;            (setq titleText (buffer-substring-no-properties x1 x2))
 ;;            (kill-buffer tempBuff))
 
-;;          (setq resultStr (concat "<a href=\"" ξpath "\">" titleText "</a>"))
+;;          (setq ξresultStr (concat "<a href=\"" ξpath "\">" titleText "</a>"))
 ;;          (save-excursion
 ;;            (delete-region (car bounds) (cdr bounds))
-;;            (insert resultStr))))
+;;            (insert ξresultStr))))
 ;;    ))
 
 (defun xah-file-linkify (&optional φp1 φp2)
@@ -515,7 +515,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
          (pt1 (aref inputStParts 0))
          (fragPart (aref inputStParts 1))
          (fPath (xahsite-web-path-to-filepath pt1 default-directory))
-         rltvPath titleText resultStr
+         rltvPath titleText ξresultStr
          (currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
 
@@ -525,7 +525,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
                 (if (string-match-p ".+html\\'" fPath)
                     (concat (xhm-get-html-file-title fPath "noerror") fragPart)
                   (file-name-nondirectory fPath)))
-          (setq resultStr
+          (setq ξresultStr
                 (if (string-equal
                      (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
                      (xahsite-get-domain-of-local-file-path fPath))
@@ -538,7 +538,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
                   (progn
                     (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url fPath) fragPart) titleText))))
           (delete-region φp1 φp2)
-          (insert resultStr))
+          (insert ξresultStr))
       (progn (message (format "Cannot locate the file: 「%s」" fPath))))))
 
 (defun nodejs-get-title (φfName φfragPart)
@@ -619,13 +619,13 @@ linkText
          (urlMainPart (elt temp87318 0))
          (urlFragPart (elt temp87318 1))
          (fPath (xahsite-web-path-to-filepath urlMainPart default-directory))
-         rltvPath titleText resultStr
+         rltvPath titleText ξresultStr
          )
 
     (if (file-exists-p fPath)
         (progn
           (setq titleText (concat "⬢ " (nodejs-get-title fPath urlFragPart)))
-          (setq resultStr
+          (setq ξresultStr
                 (if (string-equal
                      (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
                      (xahsite-get-domain-of-local-file-path fPath))
@@ -635,7 +635,7 @@ linkText
                   (progn
                     (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url fPath) urlFragPart titleText))))
           (delete-region ξp1 ξp2)
-          (insert resultStr))
+          (insert ξresultStr))
       (progn (message (format "Cannot locate the file: 「%s」" fPath))))))
 
 (defun xah-javascript-linkify ()
