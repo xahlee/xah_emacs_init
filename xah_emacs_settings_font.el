@@ -33,7 +33,7 @@
 (when (member "WenQuanYi Micro Hei" (font-family-list))
   (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
 
-;; 西游记，第一回：灵根育孕源流出，心性修持大道生 (页1)
+;; 西游记，第一回：灵根育孕源流出，心性修持大道生
 ;; http://wordyenglish.com/monkey_king/x001-1.html
 
 ;; range of Chinese chars in Unicode BMP plane
