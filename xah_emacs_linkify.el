@@ -440,14 +440,14 @@ Version 2015-03-18"
              (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" ξinputText))
             ξinputText)
            (t (error "no amazon ASIN found"))))
-    
+
     (setq
-     ξproductName 
+     ξproductName
      (replace-regexp-in-string
-      "-" " " 
+      "-" " "
       (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" ξinputText)
           (progn (match-string 1 ξinputText))
-        (progn 
+        (progn
           (message "no product name found" ))
         ""
         )))
@@ -715,9 +715,12 @@ The directory to search includes:
 Version 2015-03-18"
   (interactive)
   (let* (
+         (ξbds (bounds-of-thing-at-point 'symbol))
+         (ξp1 (car ξbds))
+         (ξp2 (cdr ξbds))
          (ξinputWord (if (use-region-p)
-              (progn (buffer-substring-no-properties (region-beginning) (region-end)))
-            (progn (thing-at-point 'symbol))))
+                         (progn (buffer-substring-no-properties (region-beginning) (region-end)))
+                       (progn (buffer-substring-no-properties ξp1 ξp2))))
          (ξwordPath (replace-regexp-in-string " " "_" (downcase ξinputWord))) ; word for constructing possible dir
          (ξpathsToTest
           (vector
