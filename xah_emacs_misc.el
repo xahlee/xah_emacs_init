@@ -101,37 +101,33 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 (defun xah-sync-css ()
-  "copy current file to all other xahsite dirs."
+  "Save current file and copy to all other xahsite dirs."
   (interactive)
   (let* (
          (ξfromPath (buffer-file-name))
          (ξfromFileName (file-name-nondirectory ξfromPath ))
          ξtoPath
          )
+    (save-buffer)
     (mapc
      (lambda (ξx)
-       (let (   )
+       (progn
          (setq ξtoPath (concat (xahsite-url-to-filepath (format "http://%s/" ξx)) ξfromFileName))
          (when (not (string= ξfromPath ξtoPath ))
            (if (file-exists-p ξtoPath)
                (progn
                  (copy-file ξtoPath (concat ξtoPath "~" (format-time-string "%Y%m%d_%H%M%S") "~") "OK-IF-ALREADY-EXISTS") ;backup
                  (copy-file ξfromPath ξtoPath "OK-IF-ALREADY-EXISTS")
-                 (message "wrote to 「%s」." ξtoPath)
-                 )
-             (progn (error "logic error. The file 「%s」 doesn't exist, it should already." ξtoPath))
-             )
-           )
-         ) ) [
-   "ergoemacs.org"
-   "wordyenglish.com"
-   "xaharts.org"
-   "xahlee.info"
-   "xahlee.org"
-   "xahmusic.org"
-   "xahsl.org"
-   ])
-))
+                 (message "wrote to 「%s」." ξtoPath))
+             (progn (error "logic error. The file 「%s」 doesn't exist, it should already." ξtoPath)))))) [
+       "ergoemacs.org"
+       "wordyenglish.com"
+       "xaharts.org"
+       "xahlee.info"
+       "xahlee.org"
+       "xahmusic.org"
+       "xahsl.org"
+       ])))
 
 (defun xah-cite ()
   "Change the file path under cursor into title and URL.
