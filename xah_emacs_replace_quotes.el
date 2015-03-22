@@ -31,7 +31,7 @@ When called with `universal-argument', work on visible portion of whole buffer (
                  (replace-match "<code>\\1</code>" t) ) ) )) )
 
 (defun xah-brackets-to-html (φp1 φp2)
-  "Replace all 「…」 to <code>…</code> and others.
+  "Replace bracketed text to HTML markup in current block on text selection.
 
 • 「…」 → <code>…</code>
 • 〈…〉 → <cite>…</cite>
@@ -40,28 +40,24 @@ When called with `universal-argument', work on visible portion of whole buffer (
 •  ‹…› → <var class=\"d\">…</var>
 • 〔<…〕 → 〔➤ <…〕
 
-Work on text selection or current text block.
-
-When called in lisp program, the arguments φp1 φp2 are region positions.
-
-Generate a report of the replaced strings in a separate buffer."
+When called in lisp program, the arguments φp1 φp2 are region positions."
   (interactive
-   (let (p1 p2)
+   (let (ξ1 ξ2)
      (if (use-region-p)
-         (progn 
-           (setq p1 (region-beginning))
-           (setq p2 (region-end)))
-       (progn 
+         (progn
+           (setq ξ1 (region-beginning))
+           (setq ξ2 (region-end)))
+       (progn
          (save-excursion
            (if (re-search-backward "\n[ \t]*\n" nil "move")
                (progn (re-search-forward "\n[ \t]*\n")
-                      (setq p1 (point)))
-             (setq p1 (point)))
+                      (setq ξ1 (point)))
+             (setq ξ1 (point)))
            (if (re-search-forward "\n[ \t]*\n" nil "move")
                (progn (re-search-backward "\n[ \t]*\n")
-                      (setq p2 (point)))
-             (setq p2 (point))))))
-     (list p1 p2)))
+                      (setq ξ2 (point)))
+             (setq ξ2 (point))))))
+     (list ξ1 ξ2)))
   (let ((ξchangedItems '()))
 
     (save-excursion
@@ -102,16 +98,7 @@ Generate a report of the replaced strings in a separate buffer."
      (lambda (ξx)
        (princ ξx)
        (terpri))
-     (reverse ξchangedItems))
-
-    ;; (with-output-to-temp-buffer "*changed brackets*"
-    ;;   (mapcar
-    ;;    (lambda (ξinnerText)
-    ;;      (princ ξinnerText)
-    ;;      (terpri))
-    ;;    (reverse ξchangedItems)))
-
-    ))
+     (reverse ξchangedItems))))
 
 (defun xah-angle-brackets-to-html (φp1 φp2)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span>.
@@ -124,17 +111,17 @@ URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 version 2014-11-14
 "
   (interactive
-   (let (p1 p2)
+   (let (ξ1 ξ2)
      (save-excursion
        (if (re-search-backward "\n[ \t]*\n" nil "move")
            (progn (re-search-forward "\n[ \t]*\n")
-                  (setq p1 (point)))
-         (setq p1 (point)))
+                  (setq ξ1 (point)))
+         (setq ξ1 (point)))
        (if (re-search-forward "\n[ \t]*\n" nil "move")
            (progn (re-search-backward "\n[ \t]*\n")
-                  (setq p2 (point)))
-         (setq p2 (point))))
-     (list p1 p2)))
+                  (setq ξ2 (point)))
+         (setq ξ2 (point))))
+     (list ξ1 ξ2)))
 
   (let ((ξchangedItems '())
         (ξinputStr (buffer-substring-no-properties φp1 φp2))
@@ -212,7 +199,7 @@ Version 2014-11-14"
               (delete-char 17))
 
             (buffer-string)))
-    
+
     (if (> (length ξchangedItems) 0)
         (progn
           (delete-region p1 p2)
