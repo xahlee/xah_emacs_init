@@ -7,6 +7,7 @@
 
 
 
+;; (set-selection-coding-system nil)
 ;; (set-selection-coding-system 'utf-8)
 ;; (set-selection-coding-system 'chinese-gb18030)
 ;; (set-selection-coding-system 'gb18030)
@@ -104,10 +105,12 @@
 (setq inhibit-splash-screen t)
 
 
-(setq x-select-enable-clipboard-manager nil)
+;; (setq x-select-enable-clipboard-manager t)
 
 ;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
 ;; ;; (setq ediff-split-window-function 'split-window-horizontally)
+
+(setq mouse-wheel-progressive-speed nil)
 
 
 ;; initial window and default window
