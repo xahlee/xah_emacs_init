@@ -62,7 +62,7 @@ Version 2015-03-11"
 
     (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξdestFile))
     (goto-char 1)
-    (search-forward "<section class=\"word-α\">") (search-backward "<")
+    (search-forward "<section class=\"word88\">") (search-backward "<")
     (insert ξwordText "\n\n")
     (save-buffer )
     (kill-buffer )
@@ -81,7 +81,7 @@ Version 2015-03-11"
 
   (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/new.html"))
   (goto-char 1)
-  (search-forward "<section class=\"word-α\">") (search-backward "<")
+  (search-forward "<section class=\"word88\">") (search-backward "<")
   (insert "\n\n")
   (xwe-insert-word-entry))
 
@@ -89,7 +89,7 @@ Version 2015-03-11"
   "Insert a blank a-word-a-day HTML template."
   (interactive)
   (insert
-   "<section class=\"word-α\">
+   "<section class=\"word88\">
 <p class=\"wd\"></p>
 <div class=\"ex\">
 <div class=\"bdy\"></div>
@@ -120,7 +120,7 @@ Using current word or text selection."
   (interactive)
   (let ()
     (require 'sgml-mode) ; for sgml-skip-tag-forward
-    (search-backward "<section class=\"word-α\">")
+    (search-backward "<section class=\"word88\">")
     (search-forward "<div class=\"bdy\">")
     (backward-char 1)
     (sgml-skip-tag-forward 1)
