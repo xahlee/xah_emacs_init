@@ -426,7 +426,7 @@ For example, the following string shown in browser URL field:
  〔/media/HP/Users/xah/web/xahlee_org/index.html〕
 "
   (let ((case-fold-search nil))
-    (replace-regexp-pairs-in-string φlocal-file-url
+    (xah-replace-regexp-pairs-in-string φlocal-file-url
                                     [
                                      ["\\`file://localhost" ""]
                                      ["\\`file://" ""]
