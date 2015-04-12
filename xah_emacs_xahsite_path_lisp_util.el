@@ -723,7 +723,7 @@ amzn_assoc_bg_color = \"FFFFFF\";
                            ]
                           )
 
-    (replace-regexp-pairs-region 1 (point-max)
+    (xah-replace-regexp-pairs-region 1 (point-max)
  [
 
 ["<div class=\"showlove\">[[:ascii:][:nonascii:]]+<script defer src=\"http://xahlee.info/share_widgets.js\"></script>

@@ -70,7 +70,7 @@ This new content is ready to be posted to blogger."
     (xah-replace-pairs-region 1 (point-max) [["?tag=xahh-20" "?tag=xahblg-20"]] )
 
 ;; remove header, author, etc.
-(replace-regexp-pairs-region 1 (point-max)
+(xah-replace-regexp-pairs-region 1 (point-max)
 [
 ["<nav id=\"t5\">[ \n[:graph:]]+</nav>" ""]
 ["<article>" ""]
@@ -123,7 +123,7 @@ This new content is ready to be posted to blogger."
     (goto-char 1)
     (insert cssStr "\n\n")
 
-(replace-regexp-pairs-region 1 (point-max) [["\n\n+" "\n\n"]])
+(xah-replace-regexp-pairs-region 1 (point-max) [["\n\n+" "\n\n"]])
 
     (goto-char 1)
 

@@ -345,7 +345,7 @@ None provided" ""]
 ["----------------------------------------------------------------" ""]
                            ]
                           )
-(replace-regexp-pairs-region 1 (point-max)
+(xah-replace-regexp-pairs-region 1 (point-max)
  [
 
 ["Get the details
