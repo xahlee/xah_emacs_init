@@ -384,7 +384,7 @@ Also change 「<li>1. 」 to 「<li>① 」."
          (case-fold-search nil)
          (case-replace nil))
     (delete-region p1 p2)
-    (insert (replace-pairs-in-string ξinputStr ξpairs))))
+    (insert (xah-replace-pairs-in-string ξinputStr ξpairs))))
 
 ;; ;; macro to search and fix next occurrence of “alt=""”
 ;; ;; search for alt="", then fix it

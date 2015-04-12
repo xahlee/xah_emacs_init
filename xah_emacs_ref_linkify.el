@@ -14,7 +14,7 @@ For example: if current node is 「(elisp) The Mark」, switch to browser and lo
 For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
   (let ((domainStr "http://ergoemacs.org/")
         (tempPath
-         (replace-pairs-in-string φinfo-node-str [["(elisp) " ""]
+         (xah-replace-pairs-in-string φinfo-node-str [["(elisp) " ""]
                                                ["(emacs) " ""]
                                                ["-" "_002d"]
                                                [" " "-"] ] ) ) )
@@ -87,7 +87,7 @@ Then it'll become:
     ;; generate relative file path
     (setq ξlinkStrURL
           (concat 
-           (replace-pairs-in-string ξinfoStr
+           (xah-replace-pairs-in-string ξinfoStr
                                     [
                                      ["(elisp) " "http://ergoemacs.org/emacs_manual/elisp/"]
                                      ["(emacs) " "http://ergoemacs.org/emacs_manual/emacs/"]

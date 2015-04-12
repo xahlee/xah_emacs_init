@@ -17,7 +17,7 @@ e.g. 「%28」 ⇒ 「'」.
 WARNING: the decoding is incomplete.
 2015-01-07 http://ergoemacs.org/emacs/elisp_decode_uri_percent_encoding.html
 "
-  (replace-pairs-in-string φstring (mapcar (lambda (ξx) (vector (elt ξx 1) (elt ξx 0))) ξurl-encode-chars-pairs)))
+  (xah-replace-pairs-in-string φstring (mapcar (lambda (ξx) (vector (elt ξx 1) (elt ξx 0))) ξurl-encode-chars-pairs)))
 
 (defun xah-url-percent-encode-string (φstring)
   "Returns URL percent-encoded
@@ -29,4 +29,4 @@ WARNING: the encoding is incomplete.
 2015-01-07 http://ergoemacs.org/emacs/elisp_decode_uri_percent_encoding.html
 "
 (progn
-    (replace-pairs-in-string φstring ξurl-encode-chars-pairs)))
+    (xah-replace-pairs-in-string φstring ξurl-encode-chars-pairs)))

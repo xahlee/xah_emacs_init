@@ -554,7 +554,7 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
   (save-restriction
     (narrow-to-region φp1 φp2)
 
-    (replace-pairs-region 1 (point-max)
+    (xah-replace-pairs-region 1 (point-max)
  [
 
 [
@@ -782,7 +782,7 @@ amazon_ad_tag .+?</script>
 "FIXEDCASE" "LITERAL")
     )
 
-;; (replace-pairs-region 1 (point-max)
+;; (xah-replace-pairs-region 1 (point-max)
 ;;  [
 ;; ;; paypal
 ;; ["9158656425"

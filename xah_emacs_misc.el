@@ -169,7 +169,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
                 (if (string-match-p ".+html\\'" ξfile)
                     (xhm-get-html-file-title ξfile)
                   (file-name-nondirectory ξfile)))
-          (setq ξtitle (replace-pairs-in-string ξtitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
+          (setq ξtitle (xah-replace-pairs-in-string ξtitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
           (delete-region ξp1 ξp2)
           (insert ξtitle "\n" (xahsite-filepath-to-url ξfile)))
@@ -303,7 +303,7 @@ Linux only. Requires 「feh」 image viewer.
   "..."
   (interactive)
   (let ()
-(replace-pairs-region 1 (point-max)
+(xah-replace-pairs-region 1 (point-max)
  [
 ["Dear Xah Lee," ""]
 ["Hello Xah Lee," ""]

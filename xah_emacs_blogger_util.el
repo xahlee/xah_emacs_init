@@ -67,7 +67,7 @@ This new content is ready to be posted to blogger."
     (xahsite-remove-ads 1 (point-max))
 
     ;; change amazong ad id
-    (replace-pairs-region 1 (point-max) [["?tag=xahh-20" "?tag=xahblg-20"]] )
+    (xah-replace-pairs-region 1 (point-max) [["?tag=xahh-20" "?tag=xahblg-20"]] )
 
 ;; remove header, author, etc.
 (replace-regexp-pairs-region 1 (point-max)

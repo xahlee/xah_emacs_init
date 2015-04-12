@@ -31,15 +31,6 @@
     (search-forward "\"" nil t)))
 
 
-
-(defun xah-describe-major-mode ()
-  "Show inline doc for current major-mode."
-  ;; code by Kevin Rodgers. 2009-02-25.
-  ;; Modified to translate keybindings (2013)
-  (interactive)
-  (describe-function major-mode))
-
-
 (defun xah-click-to-search (φclick)
   "Mouse click to start `isearch-forward-symbol-at-point' (emacs 24.4) at clicked point."
   (interactive "e")

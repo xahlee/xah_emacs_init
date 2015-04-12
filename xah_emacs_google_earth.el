@@ -186,7 +186,7 @@ The KML file will be created at:
          (kmlFileTitle (elt titleCoordList 0))
          (coord-y (xah-trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 1))))
          (coord-x (xah-trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 2))))
-         (kmlFilePath (concat kmlDirRoot (xah-asciify-string (replace-pairs-in-string (xah-trim-string (elt (split-string kmlFileTitle ",") 0)) [[" " "_"] ["," "_"]])) ".kml"))
+         (kmlFilePath (concat kmlDirRoot (xah-asciify-string (xah-replace-pairs-in-string (xah-trim-string (elt (split-string kmlFileTitle ",") 0)) [[" " "_"] ["," "_"]])) ".kml"))
          doit-p
          )
 
