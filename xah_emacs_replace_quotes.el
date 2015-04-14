@@ -101,114 +101,92 @@ When called in lisp program, the arguments φp1 φp2 are region positions."
      (reverse ξchangedItems))))
 
 (defun xah-angle-brackets-to-html (φp1 φp2)
-  "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span>.
+  "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span> in current text block or selection.
 
-If there's no text selection, work on current text block, else, on text selection.
-
-When call in lisp program, the arguments φp1 φp2 are region positions.
+When called in lisp program, φp1 φp2 are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
-version 2014-11-14
-"
+version 2015-04-13"
   (interactive
-   (let (ξ1 ξ2)
+   (let (ξp1 ξp2)
      (save-excursion
        (if (re-search-backward "\n[ \t]*\n" nil "move")
            (progn (re-search-forward "\n[ \t]*\n")
-                  (setq ξ1 (point)))
-         (setq ξ1 (point)))
+                  (setq ξp1 (point)))
+         (setq ξp1 (point)))
        (if (re-search-forward "\n[ \t]*\n" nil "move")
            (progn (re-search-backward "\n[ \t]*\n")
-                  (setq ξ2 (point)))
-         (setq ξ2 (point))))
-     (list ξ1 ξ2)))
+                  (setq ξp2 (point)))
+         (setq ξp2 (point))))
+     (list ξp1 ξp2)))
 
   (let ((ξchangedItems '())
-        (ξinputStr (buffer-substring-no-properties φp1 φp2))
-        ξresultStr
         (case-fold-search nil))
+    (save-restriction
+      (narrow-to-region φp1 φp2)
 
-    (setq ξresultStr
-          (with-temp-buffer
-            (insert ξinputStr)
+      (goto-char (point-min))
+      (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
+        (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
+        (replace-match "<cite class=\"book\">\\1</cite>" "FIXEDCASE"))
 
-            (goto-char 1)
-            (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
-              (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
-              (replace-match "<cite class=\"book\">\\1</cite>" "FIXEDCASE"))
-
-            (goto-char 1)
-            (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
-              (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
-              (replace-match "<cite>\\1</cite>" t))
-
-            (buffer-string)))
+      (goto-char (point-min))
+      (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
+        (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
+        (replace-match "<cite>\\1</cite>" t)))
 
     (if (> (length ξchangedItems) 0)
-        (progn
-          (delete-region φp1 φp2)
-          (insert ξresultStr)
-
-          (mapcar
-           (lambda (ξx)
-             (princ ξx)
-             (terpri))
-           (reverse ξchangedItems)))
+        (mapcar
+         (lambda (ξx)
+           (princ ξx)
+           (terpri))
+         (reverse ξchangedItems))
       (message "No change needed."))))
 
-(defun xah-remove-square-brackets ()
-  "Delete any text of the form “[‹n›]”, ⁖ [1], [2], ….
-Works on text selection or current text block.
+(defun xah-remove-square-brackets (φp1 φp2)
+  "Delete any text of the form “[‹n›]”, ⁖ [1], [2], … in current text block or selection.
 
 For example
  「… announced as Blu-ray Disc [11][12], and …」
 becomes
  「… announced as Blu-ray Disc, and …」.
 
+When called in lisp program, φp1 φp2 are region positions.
+
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
-Version 2014-11-14"
-  (interactive)
-  (let (p1 p2 ξinputStr ξresultStr ξchangedItems)
-    (save-excursion ; set p1 p2
-      (if (re-search-backward "\n[ \t]*\n" nil "move")
-          (progn (re-search-forward "\n[ \t]*\n")
-                 (setq p1 (point)))
-        (setq p1 (point)))
-      (if (re-search-forward "\n[ \t]*\n" nil "move")
-          (progn (re-search-backward "\n[ \t]*\n")
-                 (setq p2 (point)))
-        (setq p2 (point))))
+Version 2015-04-13"
+  (interactive
+   (let (ξp1 ξp2)
+     (save-excursion
+       (if (re-search-backward "\n[ \t]*\n" nil "move")
+           (progn (re-search-forward "\n[ \t]*\n")
+                  (setq ξp1 (point)))
+         (setq ξp1 (point)))
+       (if (re-search-forward "\n[ \t]*\n" nil "move")
+           (progn (re-search-backward "\n[ \t]*\n")
+                  (setq ξp2 (point)))
+         (setq ξp2 (point))))
+     (list ξp1 ξp2)))
+  (let (ξchangedItems)
+    (save-restriction
+      (narrow-to-region φp1 φp2)
+      (goto-char 1)
+      (while (search-forward-regexp "\\(\\[[0-9]+?\\]\\)" nil t)
+        (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
+        (replace-match "" t))
 
-    (setq ξinputStr (buffer-substring-no-properties p1 p2))
-
-    (setq ξchangedItems '())
-
-    (setq ξresultStr
-          (with-temp-buffer
-            (insert ξinputStr)
-
-            (goto-char 1)
-            (while (search-forward-regexp "\\(\\[[0-9]+?\\]\\)" nil t)
-              (setq ξchangedItems (cons (match-string 1) ξchangedItems ))
-              (replace-match "" t))
-
-            (goto-char 1)
-            (while (search-forward "[citation needed]" nil t)
-              (setq ξchangedItems (cons "[citation needed]" ξchangedItems ))
-              (backward-char 17)
-              (delete-char 17))
-
-            (buffer-string)))
+      (goto-char 1)
+      (while (search-forward "[citation needed]" nil t)
+        (setq ξchangedItems (cons "[citation needed]" ξchangedItems ))
+        (backward-char 17)
+        (delete-char 17)))
 
     (if (> (length ξchangedItems) 0)
-        (progn
-          (delete-region p1 p2)
-          (insert ξresultStr)
-          (mapcar
-           (lambda (ξx)
-             (princ ξx)
-             (terpri))
-           (reverse ξchangedItems)))
+        (mapcar
+         (lambda (ξx)
+           (princ ξx)
+           (terpri))
+         (reverse ξchangedItems))
       (message "No change needed."))))
 
 
