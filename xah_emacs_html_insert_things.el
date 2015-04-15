@@ -40,12 +40,12 @@ English translation: 李杀 (Xah Lee)
 "<table>
 <tr>
 <td>
-<pre class=\"lyrics-03347\">
+<pre class=\"lyrics88\">
 �
 </pre>
 </td>
 <td>
-<pre class=\"lyrics-03347\">
+<pre class=\"lyrics88\">
 �
 </pre>
 </td>
