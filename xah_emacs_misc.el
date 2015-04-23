@@ -92,11 +92,14 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 (defvar xah-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
-(defun xah-open-file-fast (φopen-code)
-  "Prompt to open a file from a pre-defined set."
-  (interactive
-   (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-filelist))))
-  (find-file (cdr (assoc φopen-code xah-filelist))))
+(defun xah-open-file-fast ()
+  "Prompt to open a file from `xah-filelist'.
+URL `http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
+Version 2015-04-23"
+  (interactive)
+  (let ((ξabbrevCode
+         (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) xah-filelist))))
+    (find-file (cdr (assoc ξabbrevCode xah-filelist)))))
 
 
 
