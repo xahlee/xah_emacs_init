@@ -272,6 +272,7 @@
     ("kbd" "keybinding")
     ("env" "environment")
     ("8v" "variable")
+    ("ver" "version")
     ("8vs" "variables")
     ("8s" "string")
     ("8ev" "environment variable")
