@@ -3,9 +3,7 @@
 
 (defun xah-html-mode-keys ()
   "Modify keymaps used by `html-mode'."
-  (define-key xhm-keymap (kbd "<delete>") xhm-single-keys-keymap)
 
-  (define-key xhm-single-keys-keymap (kbd "d") 'xahsite-update-article-timestamp)
   (define-key xhm-single-keys-keymap (kbd "e") 'xah-make-atom-entry)
   (define-key xhm-single-keys-keymap (kbd "g") 'xah-browse-url-of-buffer)
   (define-key xhm-single-keys-keymap (kbd "h") 'xah-all-linkify)
@@ -37,7 +35,7 @@
   (define-key xhm-single-keys-keymap (kbd "SPC r z") 'xah-amazon-linkify)
   (define-key xhm-single-keys-keymap (kbd "SPC s") nil)
   (define-key xhm-single-keys-keymap (kbd "SPC t") 'xah-brackets-to-html)
-  (define-key xhm-single-keys-keymap (kbd "SPC u") nil)
+  (define-key xhm-single-keys-keymap (kbd "SPC u") 'xahsite-update-article-timestamp)
   (define-key xhm-single-keys-keymap (kbd "SPC v") nil)
   (define-key xhm-single-keys-keymap (kbd "SPC w") nil)
   (define-key xhm-single-keys-keymap (kbd "SPC x") nil)
@@ -67,38 +65,14 @@
 
   )
 
-(add-hook 'html-mode-hook 'xah-html-mode-keys)
 (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)
-(add-hook 'nxml-mode-hook 'xah-html-mode-keys)
 
 (defun xah-css-mode-setup ()
   "Modify keymaps used by `xah-css-mode'."
   (require 'xah-css-mode)
   (define-key xcm-single-keys-keymap (kbd "s") 'xah-sync-css)
-  (define-key xcm-keymap (kbd "<delete>") xcm-single-keys-keymap)
-  )
-
-(defun xah-css-mode-setup ()
-  "Modify keymaps used by `xah-css-mode'."
-  (require 'xah-css-mode)
-  (define-key xcm-single-keys-keymap (kbd "s") 'xah-sync-css)
-  (define-key xcm-keymap (kbd "<delete>") xcm-single-keys-keymap)
   )
 (add-hook 'xah-css-mode-hook 'xah-css-mode-setup)
-
-(defun xah-elisp-mode-setup ()
-  "Modify keymaps used by `xah-elisp-mode'."
-  (require 'xah-elisp-mode)
-  (define-key xem-keymap (kbd "<delete>") xem-single-keys-keymap)
-  )
-(add-hook 'xah-elisp-mode-hook 'xah-elisp-mode-setup)
-
-(defun xah-clojure-mode-setup ()
-  "Modify keymaps used by `xah-clojure-mode'."
-  (define-key xcj-keymap (kbd "<delete>") xcj-single-keys-keymap)
-)
-
-(add-hook 'xah-clojure-mode-hook 'xah-clojure-mode-setup)
 
 
 
