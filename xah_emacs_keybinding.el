@@ -5,3 +5,4 @@
 (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)
 
+(setq xfk-major-mode-lead-key (kbd "<delete>"))
