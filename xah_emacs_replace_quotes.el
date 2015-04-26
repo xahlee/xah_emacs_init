@@ -30,76 +30,6 @@ When called with `universal-argument', work on visible portion of whole buffer (
              (if (y-or-n-p "Replace this one?")
                  (replace-match "<code>\\1</code>" t) ) ) )) )
 
-(defun xah-brackets-to-html (φp1 φp2)
-  "Replace bracketed text to HTML markup in current block on text selection.
-
-• 「…」 → <code>…</code>
-• 〈…〉 → <cite>…</cite>
-• 《…》 → <cite class=\"book\">…</cite>
-• 〔…〕 → <code class=\"path-α\">\\1</code>
-•  ‹…› → <var class=\"d\">…</var>
-• 〔<…〕 → 〔➤ <…〕
-
-When called in lisp program, the arguments φp1 φp2 are region positions."
-  (interactive
-   (let (ξ1 ξ2)
-     (if (use-region-p)
-         (progn
-           (setq ξ1 (region-beginning))
-           (setq ξ2 (region-end)))
-       (progn
-         (save-excursion
-           (if (re-search-backward "\n[ \t]*\n" nil "move")
-               (progn (re-search-forward "\n[ \t]*\n")
-                      (setq ξ1 (point)))
-             (setq ξ1 (point)))
-           (if (re-search-forward "\n[ \t]*\n" nil "move")
-               (progn (re-search-backward "\n[ \t]*\n")
-                      (setq ξ2 (point)))
-             (setq ξ2 (point))))))
-     (list ξ1 ξ2)))
-  (let ((ξchangedItems '()))
-
-    (save-excursion
-      (save-restriction
-        (narrow-to-region φp1 φp2)
-
-        (goto-char (point-min))
-        (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
-          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
-          (replace-match "<code>\\1</code>" t))
-
-        (goto-char (point-min))
-        (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
-          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
-          (replace-match "<cite>\\1</cite>" t))
-
-        (goto-char (point-min))
-        (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
-          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
-          (replace-match "<cite class=\"book\">\\1</cite>" t))
-
-        (goto-char (point-min))
-        (while (search-forward-regexp "‹\\([^›]+?\\)›" nil t)
-          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
-          (replace-match "<var class=\"d\">\\1</var>" t))
-
-        (goto-char (point-min))
-        (while (search-forward-regexp "〔<a href=" nil t)
-          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
-          (replace-match "〔➤ <a href=" t))
-
-        (goto-char (point-min))
-        (while (search-forward-regexp "〔\\([ -_/\\:~.A-Za-z0-9%]+?\\)〕" nil t)
-          (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
-          (replace-match "<code class=\"path-α\">\\1</code>" t))))
-
-    (mapcar
-     (lambda (ξx)
-       (princ ξx)
-       (terpri))
-     (reverse ξchangedItems))))
-
 (defun xah-angle-brackets-to-html (φp1 φp2)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span> in current text block or selection.
 
@@ -127,12 +57,12 @@ version 2015-04-13"
 
       (goto-char (point-min))
       (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
-        (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
+        (push (match-string-no-properties 1) ξchangedItems)
         (replace-match "<cite class=\"book\">\\1</cite>" "FIXEDCASE"))
 
       (goto-char (point-min))
       (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
-        (setq ξchangedItems (cons (match-string-no-properties 1) ξchangedItems ))
+        (push (match-string-no-properties 1) ξchangedItems)
         (replace-match "<cite>\\1</cite>" t)))
 
     (if (> (length ξchangedItems) 0)

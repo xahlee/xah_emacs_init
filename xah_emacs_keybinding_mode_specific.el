@@ -34,7 +34,6 @@
   (define-key xhm-single-keys-keymap (kbd "SPC r r") 'xah-add-to-related-links)
   (define-key xhm-single-keys-keymap (kbd "SPC r z") 'xah-amazon-linkify)
   (define-key xhm-single-keys-keymap (kbd "SPC s") nil)
-  (define-key xhm-single-keys-keymap (kbd "SPC t") 'xah-brackets-to-html)
   (define-key xhm-single-keys-keymap (kbd "SPC u") 'xahsite-update-article-timestamp)
   (define-key xhm-single-keys-keymap (kbd "SPC v") nil)
   (define-key xhm-single-keys-keymap (kbd "SPC w") nil)
