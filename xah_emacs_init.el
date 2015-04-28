@@ -53,7 +53,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xah-php-mode.el/")
 (add-to-list 'load-path "~/git/xbbcode-mode.el/")
 (add-to-list 'load-path "~/git/xeu_elisp_util.el/")
-(add-to-list 'load-path "~/git/xfrp_find_replace_pairs.el/")
+(add-to-list 'load-path "~/git/xah-replace-pairs/")
 (add-to-list 'load-path "~/git/xub-mode.el/")
 (add-to-list 'load-path "~/git/lookup-word-on-internet/")
 
@@ -67,7 +67,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (load "xah-css-mode")
 (load "xah-insert-random-id")
 (load "lookup-word-on-internet")
-(load "xfrp_find_replace_pairs")
+(load "xah-replace-pairs")
 (load "xeu_elisp_util")
 (load "xah-misc-commands")
 
