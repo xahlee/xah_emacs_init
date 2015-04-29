@@ -545,14 +545,14 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
 
     (print (concat "finished: " (format-time-string "%Y-%m-%dT%T")))))
 
-(defun xahsite-remove-ads (φp1 φp2)
-  "Remove all ads of in region φp1 φp2.
+(defun xahsite-remove-ads (φbegin φend)
+  "Remove all ads of in region φbegin φend.
 
 Remove Google adds, Amazon ads, and other ads, Google Analytics
  Tracker code, Disqus code, …."
 
   (save-restriction
-    (narrow-to-region φp1 φp2)
+    (narrow-to-region φbegin φend)
 
     (xah-replace-pairs-region 1 (point-max)
  [

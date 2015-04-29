@@ -3,9 +3,9 @@
 
 ;; Replace “…” to one of 〔…〕, 「…」, 【…】 or HTML tag. Or other similar text processing.
 
-(defun xah-corner-bracket→html-i (φp1 φp2)
+(defun xah-corner-bracket→html-i (φbegin φend)
        "Replace all 「…」 to <code>…</code> in current text block.
-When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the φp1 φp2 are region positions."
+When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the φbegin φend are region positions."
        (interactive
         (cond
          ((equal current-prefix-arg nil) ; universal-argument not called
@@ -24,16 +24,16 @@ When called with `universal-argument', work on visible portion of whole buffer (
           (list (point-min) (point-max)))))
        (save-excursion
          (save-restriction
-           (narrow-to-region φp1 φp2)
+           (narrow-to-region φbegin φend)
            (goto-char (point-min))
            (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
              (if (y-or-n-p "Replace this one?")
                  (replace-match "<code>\\1</code>" t) ) ) )) )
 
-(defun xah-angle-brackets-to-html (φp1 φp2)
+(defun xah-angle-brackets-to-html (φbegin φend)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span> in current text block or selection.
 
-When called in lisp program, φp1 φp2 are region positions.
+When called in lisp program, φbegin φend are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 version 2015-04-13"
@@ -53,7 +53,7 @@ version 2015-04-13"
   (let ((ξchangedItems '())
         (case-fold-search nil))
     (save-restriction
-      (narrow-to-region φp1 φp2)
+      (narrow-to-region φbegin φend)
 
       (goto-char (point-min))
       (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
@@ -73,7 +73,7 @@ version 2015-04-13"
          (reverse ξchangedItems))
       (message "No change needed."))))
 
-(defun xah-remove-square-brackets (φp1 φp2)
+(defun xah-remove-square-brackets (φbegin φend)
   "Delete any text of the form “[‹n›]”, ⁖ [1], [2], … in current text block or selection.
 
 For example
@@ -81,7 +81,7 @@ For example
 becomes
  「… announced as Blu-ray Disc, and …」.
 
-When called in lisp program, φp1 φp2 are region positions.
+When called in lisp program, φbegin φend are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 Version 2015-04-13"
@@ -99,7 +99,7 @@ Version 2015-04-13"
      (list ξp1 ξp2)))
   (let (ξchangedItems)
     (save-restriction
-      (narrow-to-region φp1 φp2)
+      (narrow-to-region φbegin φend)
       (goto-char 1)
       (while (search-forward-regexp "\\(\\[[0-9]+?\\]\\)" nil t)
         (setq ξchangedItems (cons (match-string 1) ξchangedItems ))

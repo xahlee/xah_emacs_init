@@ -6,23 +6,23 @@
 
 ;; mark with transient on also seems to set a overlay
 
-(defun xah-make-overlay-bold-region (φp1 φp2)
+(defun xah-make-overlay-bold-region (φbegin φend)
   "make the region bold, using overlay.
 Calls `make-overlay' and `overlay-put'. This:
- (overlay-put (make-overlay φp1 φp2) 'face 'bold)
+ (overlay-put (make-overlay φbegin φend) 'face 'bold)
 "
   (interactive "r")
   (let ()
-    (overlay-put (make-overlay φp1 φp2) 'face 'bold)
+    (overlay-put (make-overlay φbegin φend) 'face 'bold)
     (setq mark-active nil )
     ))
 
-(defun xah-remove-overlays-region (φp1 φp2)
+(defun xah-remove-overlays-region (φbegin φend)
   "Call `remove-overlays' interactively.
-Call (remove-overlays φp1 φp2)"
+Call (remove-overlays φbegin φend)"
   (interactive "r")
   (let ()
-    (remove-overlays φp1 φp2)
+    (remove-overlays φbegin φend)
   ))
 
 (defun xah-show-overlay-at-point ()
@@ -73,11 +73,11 @@ print the list result.
     (print ξols)
     ))
 
-(defun xah-invisible-region (φp1 φp2 hide-p)
-  "Hide or show region ΦP1 to ΦP2, according to HIDE-P."
-  (remove-overlays φp1 φp2 'invisible 'xah)
+(defun xah-invisible-region (φbegin φend hide-p)
+  "Hide or show region ΦBEGIN to ΦEND, according to HIDE-P."
+  (remove-overlays φbegin φend 'invisible 'xah)
   (when hide-p
-    (let ((ovly (make-overlay φp1 φp2 nil 'front-advance)))
+    (let ((ovly (make-overlay φbegin φend nil 'front-advance)))
       (overlay-put ovly 'evaporate t)
       (overlay-put ovly 'invisible 'xah)
       (overlay-put ovly 'isearch-open-invisible 'xah-isearch-open-invisible)
@@ -89,14 +89,14 @@ print the list result.
 
 ;; (add-to-invisibility-spec '(outline . t))
 
-(defun xhide (φp1 φp2)
+(defun xhide (φbegin φend)
   "DOCSTRING"
   (interactive "r")
   (let ()
     (xah-invisible-region 50 100 t)
   ))
 
-(defun xshow (φp1 φp2)
+(defun xshow (φbegin φend)
   "DOCSTRING"
   (interactive "r")
   (let ()

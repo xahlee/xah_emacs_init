@@ -6,7 +6,7 @@
 
 (require 'url-util)
 
-(defun xah-html-image-linkify ( &optional φp1 φp2)
+(defun xah-html-image-linkify ( &optional φbegin φend)
   "Replace a image file's path under cursor with a HTML img tag,
 If there's a text selection, use that as path.
 
@@ -29,10 +29,10 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
         )
 
     (progn ; sets ξp1 ξp2
-      (if φp1
+      (if φbegin
           (progn
-            (setq ξp1 φp1)
-            (setq ξp2 φp2))
+            (setq ξp1 φbegin)
+            (setq ξp2 φend))
         (if (use-region-p)
             (progn
               (setq ξp1 (region-beginning))
@@ -113,7 +113,7 @@ This function calls `xah-html-image-linkify' to do its work."
     (search-backward "</figcaption>")
     (backward-char)))
 
-(defun xah-html-full-size-img-linkify (&optional φp1 φp2)
+(defun xah-html-full-size-img-linkify (&optional φbegin φend)
   "Make image file path at cursor point into a img link.
 
 Example:
@@ -126,10 +126,10 @@ If there's a text selection, use that region as file name."
   (let
       (ξp0 ξp1 ξp2 ξinputStr ξimgPath ξdimension ξwidth ξheight ξresultStr)
     (progn ; sets ξp1 ξp2
-      (if φp1
+      (if φbegin
           (progn
-            (setq ξp1 φp1)
-            (setq ξp2 φp2))
+            (setq ξp1 φbegin)
+            (setq ξp2 φend))
         (if (use-region-p)
             (progn
               (setq ξp1 (region-beginning))
@@ -496,7 +496,7 @@ Version 2015-03-18"
 ;;            (insert ξresultStr))))
 ;;    ))
 
-(defun xah-file-linkify (&optional φp1 φp2)
+(defun xah-file-linkify (&optional φbegin φend)
   "Make the path under cursor into a HTML link for xah site.
 
 For Example, if you cursor is on the text “../emacs/emacs.html”,
@@ -522,7 +522,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
          (setq p2 (point))
          (list p1 p2)))))
   (let* (
-         (ξinputStr (buffer-substring-no-properties φp1 φp2))
+         (ξinputStr (buffer-substring-no-properties φbegin φend))
          (inputStParts (split-uri-hashmark ξinputStr))
          (pt1 (aref inputStParts 0))
          (fragPart (aref inputStParts 1))
@@ -549,7 +549,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
                               (if (string-equal titleText "") rltvPath titleText )))
                   (progn
                     (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url ξfPath) fragPart) titleText))))
-          (delete-region φp1 φp2)
+          (delete-region φbegin φend)
           (insert ξresultStr))
       (progn (message (format "Cannot locate the file: 「%s」" ξfPath))))))
 
