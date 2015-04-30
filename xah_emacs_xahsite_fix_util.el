@@ -31,7 +31,7 @@ When called in lisp program, φsource-file-path and φdest-file-path should be f
           (kill-buffer ξbuffer)
           nil)
       (progn
-        (setq ξtitle (xhm-get-html-file-title φsource-file-path))
+        (setq ξtitle (xah-html-get-html-file-title φsource-file-path))
         (goto-char 1)
         (if (search-forward "<div class=\"rltd\">" nil t)
             (progn (search-forward "<ul>" nil t)
@@ -91,7 +91,7 @@ The related pages are HTML “div.rltd” element, having this form
      (setq p2 (aref bds 2))
      (list
       (buffer-file-name)
-      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)))) (xhm-extract-url p1 p2)))))
+      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)))) (xah-html-extract-url p1 p2)))))
 
   (let (p3 p4)
     (mapc

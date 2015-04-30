@@ -535,7 +535,7 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
         (progn
           (setq titleText
                 (if (string-match-p ".+html\\'" ξfPath)
-                    (concat (xhm-get-html-file-title ξfPath "noerror") fragPart)
+                    (concat (xah-html-get-html-file-title ξfPath "noerror") fragPart)
                   (file-name-nondirectory ξfPath)))
           (setq ξresultStr
                 (if (string-equal
@@ -791,10 +791,10 @@ If there is text selection, use it as input."
      ((string-match-p "wikipedia.org/" ξpath)
       (let ((case-fold-search nil))
         (if (xah-path-ends-in-image-suffix-p ξpath)
-            (xhm-source-url-linkify 0)
-          (call-interactively 'xhm-wikipedia-url-linkify))))
+            (xah-html-source-url-linkify 0)
+          (call-interactively 'xah-html-wikipedia-url-linkify))))
 
-     ((and (string-match-p "\\`https?://" ξpath)) (xhm-source-url-linkify 0)) ; generic URL
+     ((and (string-match-p "\\`https?://" ξpath)) (xah-html-source-url-linkify 0)) ; generic URL
 
      ((xah-path-ends-in-image-suffix-p ξpath) (xah-image-file-to-html-figure-tag))
 

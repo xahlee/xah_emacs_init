@@ -100,7 +100,7 @@
   "Process the file at path FPATH …"
   (with-temp-buffer
     (insert-file-contents fPath)
-    (xhm-redo-syntax-coloring-buffer)
+    (xah-html-redo-syntax-coloring-buffer)
     (write-region 1 (point-max) fPath)))
 
 (require 'find-lisp)

@@ -135,7 +135,8 @@
         ))
 
 
-
+(setq visible-bell t)
+
 (winner-mode 0)
 (electric-pair-mode 0)
 (blink-cursor-mode 0 )

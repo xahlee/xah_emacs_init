@@ -126,7 +126,7 @@ Other files paths for blogs are:
                 (progn "�")))))
 
          (altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
-          (let ( (myurls (xhm-extract-url p1 p2)) ξfirstLink1)
+          (let ( (myurls (xah-html-extract-url p1 p2)) ξfirstLink1)
             (if (>= (length myurls) 1)
                 (progn
                   (setq ξfirstLink1 (elt myurls 0))

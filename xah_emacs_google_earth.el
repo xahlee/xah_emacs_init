@@ -303,7 +303,7 @@ Finally, the 2 input lines will be replaced by this link:
 
     ;; returns this "../Ellipse_dir/ellipse.html"
     (setq linkBackRelativePath (concat ".." (substring (buffer-file-name) 37)))
-    (setq linkBackTitle (xhm-get-html-file-title (buffer-file-name)))
+    (setq linkBackTitle (xah-html-get-html-file-title (buffer-file-name)))
     (setq dirPath "~/web/SpecialPlaneCurves_dir/ggb/")
     (setq ggbFileName (concat dirPath fileCoreName ".ggb"))
     (setq htmlFileName (concat dirPath fileCoreName ".html"))

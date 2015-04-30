@@ -30,7 +30,7 @@
              (setq ξp2 (line-end-position))))
     (set-mark ξp1)
     (goto-char ξp2)
-    (xhm-wrap-html-tag "span" "ref")))
+    (xah-html-wrap-html-tag "span" "ref")))
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
@@ -125,7 +125,7 @@ words-4.html
                   (let (ξresult ξlinkPath ξfTitle (ξi 0))
                     (while (< ξi (length ξfileList))
                       (setq ξlinkPath (elt ξfileList ξi))
-                      (setq ξfTitle (xhm-get-html-file-title ξlinkPath))
+                      (setq ξfTitle (xah-html-get-html-file-title ξlinkPath))
                       (setq ξresult (concat ξresult "<a href=\"" ξlinkPath "\" title=\"" ξfTitle "\">" (number-to-string (1+ ξi)) "</a>\n"))
                       (setq ξi (1+ ξi)))
                     ξresult

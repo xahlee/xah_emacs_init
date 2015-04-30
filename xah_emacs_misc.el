@@ -170,7 +170,7 @@ This is Xah Lee's personal command assuming a particular dir structure."
         (progn
           (setq ξtitle
                 (if (string-match-p ".+html\\'" ξfile)
-                    (xhm-get-html-file-title ξfile)
+                    (xah-html-get-html-file-title ξfile)
                   (file-name-nondirectory ξfile)))
           (setq ξtitle (xah-replace-pairs-in-string ξtitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
@@ -279,18 +279,18 @@ version 2015-02-05"
     (replace-match "<pre class=\"emacs-lisp\">" "FIXEDCASE" "LITERAL" )
 
     (let* (
-          ( ξxx (xhm-get-precode-langCode))
+          ( ξxx (xah-html-get-precode-langCode))
           (langCode (elt ξxx 0))
           (ξp1 (elt ξxx 1))
           (ξp2 (elt ξxx 2))
           )
 
-      (xhm-remove-span-tag-region ξp1 ξp2)
+      (xah-html-remove-span-tag-region ξp1 ξp2)
       (goto-char ξp1)
-      (xhm-htmlize-precode xhm-lang-name-map)
+      (xah-html-htmlize-precode xah-html-lang-name-map)
        )
 
-;; (call-interactively 'xhm-htmlize-or-de-precode)
+;; (call-interactively 'xah-html-htmlize-or-de-precode)
  ) )
 
 (defun xah-slide-show ()

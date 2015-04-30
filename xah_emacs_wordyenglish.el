@@ -18,7 +18,7 @@ personal to xahlee.org's vocabulary pages.
 Version 2015-03-11"
   (interactive)
   (progn
-    (xhm-wrap-html-tag "b" "w")))
+    (xah-html-wrap-html-tag "b" "w")))
 
 (defun xwe-move-word-to-page (φcategory)
   "Take current selection or block of text, ask which page to move it to."
@@ -213,7 +213,7 @@ insert a div tag above the current paragraph."
   (let (ξbds ξinputText)
     (setq ξbds (get-selection-or-unit 'word))
     (setq ξinputText (aref ξbds 0))
-    (xhm-wrap-html-tag "span" "xnt")
+    (xah-html-wrap-html-tag "span" "xnt")
     (search-backward "<p")
     (insert "<div class=\"xnote\"></div>\n\n")
     (search-backward "</div>")
@@ -244,7 +244,7 @@ already bold. Then, ask user whether that should be bold."
     (while (search-forward-regexp "<p class=\"wd\">\\([^\<]+\\)</p>" nil t)
       (search-forward-regexp (match-string 1))
       (when (y-or-n-p "Do you want to bold the word?")
-        (xhm-wrap-html-tag "span" "w")
+        (xah-html-wrap-html-tag "span" "w")
         ;;(replace-match "<span class=\"x-w\">\\1</span>" t)
         ))))
 
