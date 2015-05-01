@@ -110,7 +110,7 @@
 ;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
 ;; ;; (setq ediff-split-window-function 'split-window-horizontally)
 
-(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-progressive-speed t)
 
 
 ;; initial window and default window

@@ -322,8 +322,9 @@
 
     
 ;;; xah personal
-    ("ee" "ErgoEmacs")
-    ("em" "ergoemacs-mode")
+    ("ee" "ErgoEm acs")
+    ("eem" "ergoemacs-mode")
+    ("xfk" "xah-fly-keys")
     ("vdspc" "Visual Dictionary of Special Plane Curves")
     ("xl" "Xah Lee")
     ("xim" "Twitter: @xah_lee

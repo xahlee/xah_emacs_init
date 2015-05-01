@@ -19,8 +19,8 @@
 
   (global-set-key (kbd "<mouse-3>") 'xah-click-to-search) ; right button
 
-  (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
-  (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
+  ;; (global-set-key (kbd "<mouse-4>") 'mwheel-scroll) ; wheel up
+  ;; (global-set-key (kbd "<mouse-5>") 'mwheel-scroll) ; wheel down
 
   (global-set-key (kbd "<S-mouse-4>") 'xah-previous-user-buffer)
   (global-set-key (kbd "<S-mouse-5>") 'xah-next-user-buffer)
