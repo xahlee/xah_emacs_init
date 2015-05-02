@@ -12,7 +12,20 @@
 ;; 〈Wordy English — the Making of Belles-Lettres〉
 ;; http://wordyenglish.com/words/vocabulary.html
 
-(defun xwe-bold-word ()
+(defun xah-words-chinese-linkify ()
+  "Make the Chinese character before cursor into Chinese dictionary reference links.
+URL `http://ergoemacs.org/emacs/elisp_chinese_char_linkify.html'
+Version 2015-05-01"
+  (interactive)
+  (let ( 
+        (ξtemplate
+         "<div class=\"chinese-etymology-96656\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
+         )
+        (ξchar (buffer-substring-no-properties (- (point) 1) (point))))
+    (delete-char -1)
+    (insert (replace-regexp-in-string "�" ξchar ξtemplate))))
+
+(defun xah-words-bold-word ()
   "wrap b tag with class w.
 personal to xahlee.org's vocabulary pages.
 Version 2015-03-11"
@@ -20,7 +33,7 @@ Version 2015-03-11"
   (progn
     (xah-html-wrap-html-tag "b" "w")))
 
-(defun xwe-move-word-to-page (φcategory)
+(defun xah-words-move-word-to-page (φcategory)
   "Take current selection or block of text, ask which page to move it to."
   (interactive
    (list (ido-completing-read "Which:" '("specialwords"
@@ -75,7 +88,7 @@ Version 2015-03-11"
       (copy-file ξfname ξbackupName t)
       (save-buffer ))))
 
-(defun xwe-new-word-entry ()
+(defun xah-words-new-word-entry ()
   "Insert a blank a-word-a-day HTML template in a paritcular file."
   (interactive)
 
@@ -83,9 +96,9 @@ Version 2015-03-11"
   (goto-char 1)
   (search-forward "<section class=\"word88\">") (search-backward "<")
   (insert "\n\n")
-  (xwe-insert-word-entry))
+  (xah-words-insert-word-entry))
 
-(defun xwe-insert-word-entry ()
+(defun xah-words-insert-word-entry ()
   "Insert a blank a-word-a-day HTML template."
   (interactive)
   (insert
@@ -99,14 +112,14 @@ Version 2015-03-11"
   (forward-char 12)
   (yank))
 
-(defun xwe-add-definition ()
+(defun xah-words-add-definition ()
   "Insert a word definition entry template.
 Using current word or text selection."
   (interactive)
   (let* ((ξbds (get-selection-or-unit 'word))
          (ξstr1 (aref ξbds 0))
          ξstr2)
-    
+
     (setq ξstr2 (xah-asciify-string ξstr1))
     (search-forward "\n\n" nil t)
     (search-backward "</div>")
@@ -114,7 +127,7 @@ Using current word or text selection."
     (search-backward "</div>")
     (insert ξstr " = ")))
 
-(defun xwe-add-source ()
+(defun xah-words-add-source ()
   "Insert a word definition entry template.
 Using current word or text selection."
   (interactive)
@@ -127,7 +140,7 @@ Using current word or text selection."
     (insert "\n<div class=\"src\"></div>")
     (backward-char 6)))
 
-(defun xwe-add-comment ()
+(defun xah-words-add-comment ()
   "Insert a comment entry in wordy-english."
   (interactive)
   (progn
@@ -140,7 +153,7 @@ Using current word or text selection."
             )
     (backward-char 6)))
 
-(defun xwe-search-next-unbold ()
+(defun xah-words-search-next-unbold ()
   "search the next word block that isn't bolded.
 Used for the files in
 FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
@@ -170,7 +183,7 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
     (if notBolded-p
         (progn (goto-char p3)
                (search-forward wd p4))
-      (xwe-search-next-unbold)
+      (xah-words-search-next-unbold)
       ;; (when (y-or-n-p "Do you want to bold it?")
       ;;         (goto-char p3)
       ;;         (search-forward wd p4)
@@ -181,31 +194,7 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
       ;;         )
       )))
 
-(defun xwe-chinese-linkify ()
-  "Make the Chinese char under cursor into Chinese dictionary reference links.
-If there's a text selection, use that for input."
-  (interactive)
-  (let ( ξchar ξp1 ξp2  ξtemplate ξresult)
-
-    (if (use-region-p)
-        (progn
-          (setq ξp1 (region-beginning))
-          (setq ξp2 (region-end)))
-      (progn
-        (setq ξp1 (point))
-        (setq ξp2 (1+ (point)))))
-
-    (setq ξchar (buffer-substring-no-properties ξp1 ξp2))
-
-    (setq ξtemplate
-          "<div class=\"chinese-etymology-96656\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
-          )
-
-    (setq ξresult (replace-regexp-in-string "�" ξchar ξtemplate))
-    (delete-region ξp1 ξp2)
-    (insert ξresult)))
-
-(defun xwe-annotate ()
+(defun xah-words-annotate ()
   "Create a annotation in HTML.
 Wrap HTML “span” tag around current word or text selection, then
 insert a div tag above the current paragraph."
@@ -219,7 +208,7 @@ insert a div tag above the current paragraph."
     (search-backward "</div>")
     (insert (format "<b class=\"x3nt\">%s</b> " ξinputText))))
 
-(defun xwe-word-etymology-linkify ()
+(defun xah-words-word-etymology-linkify ()
   "Make the current word into a etymology reference link."
   (interactive)
   (let (ξp1 ξp2 ξinput ξresult)
@@ -233,7 +222,7 @@ insert a div tag above the current paragraph."
     (delete-region ξp1 ξp2)
     (insert ξresult)))
 
-(defun xwe-query-find-then-bold ()
+(defun xah-words-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.
 Search forward a word enclosed by “<p class=\"wd\">” and “</p>”,
 then search forward it inside the example body, only if it is not
@@ -248,7 +237,7 @@ already bold. Then, ask user whether that should be bold."
         ;;(replace-match "<span class=\"x-w\">\\1</span>" t)
         ))))
 
-(defun xwe-find-word-usage (φword)
+(defun xah-words-find-word-usage (φword)
   "Grep a dir for a word's usage."
   (interactive "sWord to search: ")
   (require 'grep)

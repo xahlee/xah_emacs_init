@@ -31,7 +31,7 @@
 
 ;; xah personal
 
-(defalias '8w 'xwe-new-word-entry)
-(defalias '8d 'xwe-add-definition)
-(defalias '8s 'xwe-add-source)
-(defalias '8c 'xwe-add-comment)
+(defalias '8w 'xah-words-new-word-entry)
+(defalias '8d 'xah-words-add-definition)
+(defalias '8s 'xah-words-add-source)
+(defalias '8c 'xah-words-add-comment)

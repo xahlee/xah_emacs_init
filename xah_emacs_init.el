@@ -66,7 +66,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (load "xah-php-mode")
 (load "xah-css-mode")
 (load "xah-insert-random-id")
-(load "xah-lookup-word-on-internet")
+(load "xah-lookup")
 (load "xah-replace-pairs")
 (load "xeu_elisp_util")
 (load "xah-misc-commands")
