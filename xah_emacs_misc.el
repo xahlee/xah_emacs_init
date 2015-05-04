@@ -28,22 +28,6 @@ C-u 2 → set to 'chinese-py-b5."
 
 
 
-(defvar xah-background-colors  nil "alist of color values suitable for frame background. Key is a convenient name, value is a elisp color.")
-
-(setq xah-background-colors '(
-                              ("cornsilk" . "#fff8dc")
-                              ("lavender" . "#e6e6fa")
-                              ("lavender blush" . "#fff0f5")
-                              ("seashell" . "#fff5ee")
-                              ("honeydew" . "#f0fff0")
-                              ))
-
-(defun xah-set-background-color (φbg-color)
-  "Interactively set frame background color."
-  (interactive
-   (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x)) xah-background-colors))))
-  (set-background-color φbg-color))
-
 (defun xah-list-matching-lines-no-regex ()
   "Show lines in the current buffer matching current word or text selection.
 This command is the similar to `list-matching-lines'.
