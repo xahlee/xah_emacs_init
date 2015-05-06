@@ -43,32 +43,26 @@ e.g.
 On Mac OS X, you don't need to. This command makes this shell call:
  「open -a Firefox.app http://example.com/」"
   (interactive)
-  (let ()
+  (progn
     (cond
      ((string-equal system-type "windows-nt") ; Windows
-      (shell-command (concat "firefox file://" buffer-file-name))
-      )
+      (shell-command (concat "firefox file://" buffer-file-name)))
      ((string-equal system-type "gnu/linux")
-      (shell-command (concat "firefox file://" buffer-file-name))
-      )
+      (shell-command (concat "firefox file://" buffer-file-name)))
      ((string-equal system-type "darwin") ; Mac
-      (shell-command (concat "open -a Firefox.app file://" buffer-file-name))
-       ) )
-    ))
+      (shell-command (concat "open -a Firefox.app file://" buffer-file-name))))))
 
 (defun xah-browse-url-Google-Chrome (φuri)
   "Same as `browse-url' but using Google Chrome."
   (interactive)
-  (let ()
-    (shell-command (concat "chrome " φuri))
-    ))
+  (progn
+    (shell-command (concat "chrome " φuri))))
 
 (defun xah-browse-url-of-buffer-firefox-2 ()
   "Same as `browse-url-of-buffer' but using Firefox.
 You need to have the firefox path in `exec-path'. e.g.:
  (add-to-list 'exec-path \"c:/Program Files (x86)/Mozilla Firefox/\")"
   (interactive)
-  (let ()
+  (progn
     (require 'browse-url)
-    (browse-url-firefox (concat "file:///" buffer-file-name))
-    ))
+    (browse-url-firefox (concat "file:///" buffer-file-name))))

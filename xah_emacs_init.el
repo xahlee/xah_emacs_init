@@ -57,6 +57,8 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/lookup-word-on-internet/")
 (add-to-list 'load-path "~/git/xahk-mode.el/")
 
+(autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
+
 (load "xah_file_util")
 (load "xah-html-mode")
 (load "xah-comment")
