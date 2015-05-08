@@ -27,7 +27,12 @@ When called in lisp program, φsource-file-path and φdest-file-path should be f
     (setq ξnewHrefValue (xahsite-filepath-to-href-value φsource-file-path φdest-file-path))
     (if (search-forward ξnewHrefValue nil t)
         (progn
-          (when (called-interactively-p 'interactive) (message (format "Link 「%s」 already exists at 「%s」."  ξnewHrefValue φdest-file-path)))
+          (when (called-interactively-p 'interactive)
+            (message
+             (format
+              "Already exists: 「%s」  at 「%s」"
+              (file-name-nondirectory ξnewHrefValue)
+              (file-name-nondirectory φdest-file-path))))
           (kill-buffer ξbuffer)
           nil)
       (progn
