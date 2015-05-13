@@ -246,7 +246,7 @@
 (global-subword-mode 1)
 
 ;; make typing delete/overwrites selected text
-;; (delete-selection-mode 1)
+(delete-selection-mode 1)
 
 ;; set highlighting brackets
 (show-paren-mode 1)

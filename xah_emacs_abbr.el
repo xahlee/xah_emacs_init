@@ -323,7 +323,7 @@
 
     
 ;;; xah personal
-    ("ee" "ErgoEm acs")
+    ("ee" "ErgoEmacs")
     ("eem" "ergoemacs-mode")
     ("xfk" "xah-fly-keys")
     ("vdspc" "Visual Dictionary of Special Plane Curves")
