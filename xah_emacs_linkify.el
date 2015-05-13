@@ -7,15 +7,17 @@
 (require 'url-util)
 
 (defun xah-html-image-linkify ( &optional φbegin φend)
-  "Replace a image file's path under cursor with a HTML img tag,
+  "Replace a image file's path under cursor with a HTML img tag.
 If there's a text selection, use that as path.
 
-For example, if cursor is on the string
-i/cat.png
-then it will became
-<img src=\"i/cat.png\" alt=\"cat\" width=\"707\" height=\"517\" />
+For example,
+ i/cat.png
+becames
+ <img src=\"i/cat.png\" alt=\"cat\" width=\"707\" height=\"517\" />
 
-Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .svg}. If it is URL (starting with “http”), then no “width” and “height” attribute will be added."
+Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .svg}. If path starts with “http”, then no “width” and “height” attribute will be added.
+URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
+Version 2015-05-12"
   (interactive)
   (let (
         ξp0
@@ -24,7 +26,6 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
         ξinputPath
         ξcurrentDir
         ξfullPath
-        ;; (setq ξfullPath (windows-style-path-to-unix (local-url-to-file-path ξfullPath)))
         ξaltText
         )
 
@@ -49,14 +50,18 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
     (progn
       (setq ξinputPath (buffer-substring-no-properties ξp1 ξp2))
       (setq ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
-      (setq ξfullPath (expand-file-name (xahsite-web-path-to-filepath ξinputPath) ξcurrentDir )) ;full path
-      )
+      (setq ξfullPath (expand-file-name (xah-local-url-to-file-path ξinputPath) ξcurrentDir )))
 
-    ;; (message "ooo %s" ξfullPath)
-
-    (setq ξaltText (file-name-sans-extension (file-name-nondirectory ξfullPath)))
-    (setq ξaltText (replace-regexp-in-string "_" " " ξaltText t t))
-    (setq ξaltText (replace-regexp-in-string "-s$" "" ξaltText))
+    (setq ξaltText (replace-regexp-in-string
+                    "-s$"
+                    ""
+                    (replace-regexp-in-string
+                     "_"
+                     " "
+                     (file-name-sans-extension
+                      (file-name-nondirectory ξfullPath))
+                     t
+                     t)))
 
     (if (xahsite-is-link-to-xahsite-p (file-relative-name ξfullPath (or (buffer-file-name) default-directory)))
         (progn
@@ -64,10 +69,10 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
               (let (ξwh ξw ξh ξwhStr)
                 (setq ξwh
                       (cond
-                       ((string-match "\.svg$" ξfullPath) (get-image-dimensions ξfullPath))
+                       ((string-match "\.svg$" ξfullPath) (xah-get-image-dimensions ξfullPath))
 
-                       (t (get-image-dimensions ξfullPath))
-                       ;; (t (get-image-dimensions-imk ξfullPath))
+                       (t (xah-get-image-dimensions ξfullPath))
+                       ;; (t (xah-get-image-dimensions-imk ξfullPath))
                        ))
                 (setq ξw (number-to-string (elt ξwh 0)))
                 (setq ξh (number-to-string (elt ξwh 1)))
@@ -144,8 +149,8 @@ If there's a text selection, use that region as file name."
             (setq ξp2 (point))))))
 
     (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξimgPath (local-url-to-file-path ξinputStr))
-    (setq ξdimension (get-image-dimensions-imk ξimgPath))
+    (setq ξimgPath (xah-local-url-to-file-path ξinputStr))
+    (setq ξdimension (xah-get-image-dimensions-imk ξimgPath))
     (setq ξwidth (number-to-string (elt ξdimension 0)))
     (setq ξheight (number-to-string (elt ξdimension 1)))
     (setq ξresultStr
@@ -395,7 +400,7 @@ There are other amazon categories, but not supported by this function."
     ))
 
 (defun xah-amazon-linkify ()
-  "Make the current amazon URL or text selection into a amazon.com link.
+  "Make the current amazon URL or selection into a link.
 
 Examples of amazon product URL formats
 http://www.amazon.com/Cyborg-R-T-Gaming-Mouse/dp/B003CP0BHM/ref=pd_sim_e_1
@@ -403,6 +408,7 @@ http://www.amazon.com/gp/product/B003CP0BHM
 http://www.amazon.com/exec/obidos/ASIN/B003CP0BHM/xahh-20
 http://www.amazon.com/exec/obidos/tg/detail/-/B003CP0BHM/
 http://www.amazon.com/dp/B003CP0BHM?tag=xahhome-20
+http://amzn.to/1F5M1hA
 
 Example output:
 <a class=\"amz\" href=\"http://www.amazon.com/dp/B003CP0BHM/?tag=xahh-20\" title=\"Cyborg R T Gaming Mouse\">amazon</a>
@@ -417,46 +423,52 @@ Version 2015-03-18"
           (setq ξp1 (region-beginning))
           (setq ξp2 (region-end)))
       (save-excursion
-        (let (p0
-              (ξallowedChars "!\"#$%&'*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~"))
-          (setq p0 (point))
-          (skip-chars-backward ξallowedChars)
+        (let ((p0 (point)))
+          (skip-chars-backward "^ \n\t")
           (setq ξp1 (point))
           (goto-char p0)
-          (skip-chars-forward ξallowedChars)
+          (skip-chars-forward "^ \n\t")
           (setq ξp2 (point)))))
 
     (setq ξinputText (buffer-substring-no-properties ξp1 ξp2))
 
-    (setq ξasin
-          (cond
-           ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" ξinputText) (match-string 1 ξinputText))
-           ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" ξinputText) (match-string 1 ξinputText))
-           ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" ξinputText) (match-string 1 ξinputText))
-           ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" ξinputText) (match-string 1 ξinputText))
-           ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" ξinputText) (match-string 1 ξinputText))
-           ((and
-             (equal 10 (length ξinputText ))
-             (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" ξinputText))
-            ξinputText)
-           (t (error "no amazon ASIN found"))))
-
-    (setq
-     ξproductName
-     (replace-regexp-in-string
-      "-" " "
-      (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" ξinputText)
-          (progn (match-string 1 ξinputText))
+    (if (string-match "//amzn.to/" ξinputText)
         (progn
-          (message "no product name found" ))
-        ""
-        )))
+          (delete-region ξp1 ξp2)
+          (insert
+           (format
+            "<a class=\"amzlnk\" href=\"%s\">amazon</a>"
+            ξinputText)))
+      (progn
+        (setq ξasin
+              (cond
+               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" ξinputText) (match-string 1 ξinputText))
+               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" ξinputText) (match-string 1 ξinputText))
+               ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" ξinputText) (match-string 1 ξinputText))
+               ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" ξinputText) (match-string 1 ξinputText))
+               ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" ξinputText) (match-string 1 ξinputText))
+               ((and
+                 (equal 10 (length ξinputText ))
+                 (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" ξinputText))
+                ξinputText)
+               (t (error "no amazon ASIN found"))))
 
-    (delete-region ξp1 ξp2)
-    (insert
-     "<a class=\"amz\" href=\"http://www.amazon.com/dp/"
-     ξasin "/?tag=xahh-20\" title=\"" ξproductName "\">amazon</a>")
-    (search-backward "\">")))
+        (setq
+         ξproductName
+         (replace-regexp-in-string
+          "-" " "
+          (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" ξinputText)
+              (progn (match-string 1 ξinputText))
+            (progn
+              (message "no product name found" ))
+            ""
+            )))
+
+        (delete-region ξp1 ξp2)
+        (insert
+         "<a class=\"amz\" href=\"http://www.amazon.com/dp/"
+         ξasin "/?tag=xahh-20\" title=\"" ξproductName "\">amazon</a>")
+        (search-backward "\">")))))
 
 ;; (defun local-linkify ()
 ;; "Make the path under cursor into a local link.\n
@@ -776,6 +788,7 @@ If there is text selection, use it as input."
     (cond
      ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" ξpath) (xah-blogger-linkify))
      ((string-match-p "www\.amazon\.com/" ξpath) (xah-amazon-linkify))
+     ((string-match-p "//amzn\.to/" ξpath) (xah-amazon-linkify))
      ((string-match-p "www\.youtube\.com/watch" ξpath) (xah-youtube-linkify))
      ((string-match-p "/emacs_manual/" ξpath) (xah-html-emacs-ref-linkify))
      ((string-match-p "/node_api/" ξpath) (xah-nodejs-ref-linkify))

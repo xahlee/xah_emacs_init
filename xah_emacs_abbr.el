@@ -229,6 +229,7 @@
     ("lsl" "Linden Scripting Language")
     ("fb" "Facebook")
     ("ahk" "AutoHotkey")
+    ("msvs" "Microsoft Visual Studio")
     ("mma" "Mathematica")
     ("wl" "Wolfram Language")
     ("cl" "Common Lisp")
@@ -341,12 +342,9 @@ QQ: http://user.qzone.qq.com/2609322939")
     ;; xah url
     ("xs" " Xah Lee
  xahlee@gmail.com
- 408 470 0213
  http://xahlee.org/
  US citizen.
  Mountain View, CA.")
-
-    ("wec" "wordyenglish_com")
 
     ("uwe" "http://wordyenglish.com/")
     ("uxa" "http://xaharts.org/")

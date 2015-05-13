@@ -46,7 +46,7 @@ here's old version output
     ;; (setq tmp (replace-regexp-in-string "^http://www\\.youtube\\.com/watch\\?v=" "" tmp))
     ;; (setq vID tmp)
 
-    (message "%s" vID)
+    (message "YouTube id 「%s」" vID)
     (delete-region p1 p2)
 
     (insert "<figure>\n")

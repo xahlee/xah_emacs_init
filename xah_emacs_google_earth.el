@@ -35,11 +35,10 @@ each line does not include the newline character."
 φlat-lon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
 
 Example of inserted text:
- <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Map 🗻🌐🌍🌎🌏</a>
+ <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Google Map</a>
 
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
-Version 2014-11-06
-"
+Version 2015-05-12"
   (interactive)
   (let (ξtitle ξy ξx)
     (setq ξtitle (if φtitle φtitle ""))
@@ -50,7 +49,7 @@ Version 2014-11-06
       (progn
         (setq ξy "y�")
         (setq ξx "x�")))
-    (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string ξy) "%2C" (number-to-string ξx) "\" title=\"" ξtitle "\" target=\"_blank\">Map 🗻🌐🌍🌎🌏</a>\n")))
+    (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string ξy) "%2C" (number-to-string ξx) "\" title=\"" ξtitle "\" target=\"_blank\">Google Map</a>\n")))
 
 (defun xah-insert-google-earth-link (&optional φtitle φfilePath)
   "Insert a HTML markup for link to a local Goole Earth file.
@@ -221,10 +220,10 @@ The above is ‹latitude› ‹longitude›
 If there's a text selection, use that as input.
 
 Sample result:
- <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Map 🗻🌐🌍🌎🌏</a>
+ <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Google Map</a>
 
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
-Version 2014-11-06"
+Version 2015-05-12"
   (interactive)
   (let (p1 p2 ξinput
            ξcoord-x

@@ -68,7 +68,7 @@ Then it'll become:
               ;; convert local URL to file path
               (setq ξfpath
                     (cond
-                     ((string-match "^file" ξinput) (local-url-to-file-path ξinput))
+                     ((string-match "^file" ξinput) (xah-local-url-to-file-path ξinput))
                      ((string-match "^http" ξinput) (xahsite-url-to-filepath ξinput))
                      (t ξinput)))
 

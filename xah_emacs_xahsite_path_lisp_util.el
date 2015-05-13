@@ -401,7 +401,7 @@ Technically, if any string in φmoved-dirs is a prefix of φfpath."
 ;; (file-moved-p "abc/d/e" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d/e” is subdir of “abc/d”
 ;; (file-moved-p "abc/" ["abc/d" "don/" "12/3/"] ) ; false, because “abc/” isn't in any of the moved dirs
 
-(defun local-url-to-file-path (φlocal-file-url)
+(defun xah-local-url-to-file-path (φlocal-file-url)
   "Turn a localhost file URL LOCALFILEURL into a file full path.
 
 φlocal-file-url must be a full path.
@@ -437,7 +437,7 @@ For example, the following string shown in browser URL field:
                                     "FIXEDCASE"
                                     )))
 
-(defun windows-style-path-to-unix  (φfpath)
+(defun xah-windows-style-path-to-unix  (φfpath)
   "Turn a MS Windows style full path ΦFPATH to unix style.
 Note: This drops the drive letter.
 
@@ -460,7 +460,7 @@ TODO: The drive letter is removed. Not sure whether that should be part of this 
  /cygdrive/c/Users/h3/web/ergoemacs_org/a/x.html (Cygwin)
  /Users/xah/web/ergoemacs_org/a/x.html (unix style)
  ~/web/ergoemacs_org/a/x.html
- file://… (file URL. See: `local-url-to-file-path')
+ file://… (file URL. See: `xah-local-url-to-file-path')
  http://ergoemacs.org/a/x.html (URL)
 
 if the φinput-str is a relative path, φdefault-dir is used to resolve to full path."
@@ -472,8 +472,8 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
     (if (string-match-p "\\`https?://" ξs)
         (progn (setq ξs (xahsite-url-to-filepath ξs "addFileName")))
       (progn
-        (when (string-match-p "\\`file://" ξs) (setq ξs (local-url-to-file-path ξs)))
-        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" ξs) (setq ξs (windows-style-path-to-unix ξs)))
+        (when (string-match-p "\\`file://" ξs) (setq ξs (xah-local-url-to-file-path ξs)))
+        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" ξs) (setq ξs (xah-windows-style-path-to-unix ξs)))
         (setq ξs (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" ξs))
         (setq ξs (expand-file-name ξs φdefault-dir))))
     ξs
