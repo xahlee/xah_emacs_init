@@ -223,3 +223,24 @@ Requires a python script. See code."
     (save-excursion
       (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)))
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t))))
+
+(defun xah-html-rename-html-inline-image ()
+  "Replace current HTML inline image's file name.
+This command is for interactive use only.
+When cursor is in HTML link file path, e.g.  <img src=\"gki/macosxlogo.png\" > and this command is called, it'll prompt user for a new name. The link path will be changed to the new name, the corresponding file will also be renamed. The operation is aborted if a name exists.
+Version 2015-05-13"
+  (interactive)
+  (let* (
+         (ξbounds (bounds-of-thing-at-point 'filename))
+         (ξinputPath (buffer-substring-no-properties (car ξbounds) (cdr ξbounds)))
+         (ξexpandedPath (expand-file-name ξinputPath (file-name-directory (or (buffer-file-name) default-directory ))))
+         (ξnewPath (list (read-string "New name: " ξexpandedPath nil ξexpandedPath )))
+
+         )
+    (if (file-exists-p ξnewPath)
+        (progn (user-error "file 「%s」 exist." ξnewPath ))
+      (progn
+        (rename-file ξexpandedPath ξnewPath)
+        (message "rename to %s" ξnewPath)
+        (delete-region (car ξbounds) (cdr ξbounds))
+        (insert (xahsite-filepath-to-href-value ξnewPath (or (buffer-file-name) default-directory)))))))

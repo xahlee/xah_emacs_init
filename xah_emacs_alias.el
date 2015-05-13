@@ -4,6 +4,8 @@
 
 ; shortening of often used commands
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (defalias 'fd 'find-dired)
 (defalias 'gf 'grep-find)
 (defalias 'lcd 'list-colors-display)
@@ -18,10 +20,6 @@
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
-(defalias 'acm 'auto-complete-mode)
-(defalias 'cm 'company-mode)
-(defalias 'jsm 'js-mode)
-(defalias 'js2 'js2-mode)
 
 (defalias 'ssm 'shell-script-mode)
 

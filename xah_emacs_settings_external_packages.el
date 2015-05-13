@@ -3,19 +3,37 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(when (fboundp 'math-symbol-input-mode)
-    (math-symbol-input-mode 1)
-)
+;; (when (fboundp 'undo-tree-redo)
+;;   ;; enhanced execute-extended-command
+;;   (defalias 'redo 'undo-tree-redo)
+;;   (global-undo-tree-mode 1))
+
+(when (fboundp 'smex)
+  ;; enhanced execute-extended-command
+  (require 'smex)
+  (smex-initialize))
+
+;; ;;; make the formfeed char (^L) display as a line
+;; (require 'page-break-lines)
+;; (global-page-break-lines-mode 1)
+
+(when (fboundp 'xah-math-input-mode)
+  (xah-math-input-mode 1))
 
 (when (fboundp 'global-auto-complete-mode)
-    (global-auto-complete-mode 0)
-)
+  (global-auto-complete-mode 0))
 
 (when (fboundp 'global-company-mode)
-    (global-company-mode nil)
-)
+  (global-company-mode nil)
+  (setq company-idle-delay 2))
 
-(setq company-idle-delay 2)
+(when (fboundp 'keyfreq-mode)
+  ;; record command call statistics
+  (require 'keyfreq)
+  (setq keyfreq-file "~/.emacs.d/.emacs.keyfreq")
+  (setq keyfreq-file-lock "~/.emacs.d/.emacs.keyfreq.lock")
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1))
 
 ;; (when (fboundp 'projectile-global-mode)
 ;;     (projectile-global-mode)

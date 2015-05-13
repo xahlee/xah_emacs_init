@@ -7,6 +7,12 @@
 
 
 
+;; UTF-8 as default encoding
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8-unix)
+;; (setenv "LANG" "en_US.UTF-8" )
+;; (setenv "LC_ALL" "en_US.UTF-8" )
+
 ;; (set-selection-coding-system nil)
 ;; (set-selection-coding-system 'utf-8)
 ;; (set-selection-coding-system 'chinese-gb18030)
@@ -97,7 +103,44 @@
 ;; utf-8-with-signature-mac
 ;; utf-8-with-signature-unix
 
-(set-default-coding-systems 'utf-8-unix)
+
+(setq initial-major-mode 'fundamental-mode)
+
+(setq mark-ring-max 5)
+
+;; don't create backup~ or #auto-save# files
+(setq backup-by-copying t)
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
+
+(progn
+  ;; seems pointless to warn. There's always undo.
+  (put 'narrow-to-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+  (put 'erase-buffer 'disabled nil)
+  (put 'scroll-left 'disabled nil)
+  (put 'dired-find-alternate-file 'disabled nil)
+)
+
+;; dired
+
+(progn 
+
+  (require 'dired-x)
+
+  ;; make dired suggest target dir (for copy, move, …) that's in the other dired pane
+  (setq dired-dwim-target t)
+
+  ;; make dired list not inclued 「.」 and 「..」, and use metric prefix for file size
+  (setq dired-listing-switches "-Al --si --time-style long-iso")
+
+  ;; make dired allow deleting/copy whole dir
+  (setq dired-recursive-copies (quote always))
+  (setq dired-recursive-deletes (quote top))
+  )
+
 
 
 
@@ -135,6 +178,11 @@
         ))
 
 
+(require 'recentf)
+(recentf-mode 1)
+
+(desktop-save-mode)
+
 (winner-mode 0)
 (electric-pair-mode 0)
 (blink-cursor-mode 0 )
@@ -143,9 +191,6 @@
 (global-auto-revert-mode 1)
 
 (setq scroll-error-top-bottom t )
-
-(setq tab-width 4)   ; width for display tabs. emacs 23.1 default is 8
-(set-default 'abbrev-mode t)
 
 (setq shift-select-mode nil)
 
@@ -172,6 +217,99 @@
 
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
+
+
+;; minibuffer
+
+;; Save minibuffer history
+(savehist-mode 1)
+
+;; don't let the cursor go into minibuffer prompt
+(setq minibuffer-prompt-properties (quote (read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)))
+
+
+
+;; turn on save place so that when opening a file, the cursor will be at the last position.
+(require 'saveplace)
+(setq save-place-file (concat user-emacs-directory "saveplace.el") ) ; use standard emacs dir
+(setq-default save-place t)
+
+;; (setq enable-recursive-minibuffers t )
+
+;; apache per dir config file
+(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-unix-mode))
+
+
+;;; editing related
+
+;; make cursor movement stop in between camelCase words.
+(global-subword-mode 1)
+
+;; make typing delete/overwrites selected text
+;; (delete-selection-mode 1)
+
+;; set highlighting brackets
+(show-paren-mode 1)
+(setq show-paren-style 'expression)
+
+(progn
+  ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.
+  (icomplete-mode 1)
+  ;; make icomplete prettier
+  (setq icomplete-separator " ")
+  ;; (setq icomplete-separator "\n")
+  (setq icomplete-hide-common-prefix nil)
+  (setq icomplete-in-buffer t))
+
+(progn
+  ;; make buffer switch command do suggestions, also for find-file command
+  (ido-mode 1)
+  (setq ido-separator "\n")
+  (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
+)
+
+;; majority of code formatting conventions do no recommend mixed tabs and spaces. So, here.
+(setq-default indent-tabs-mode nil) ; gnu emacs 23.1, 24.4.1 default is t
+
+;; 4 is more popular than 8.
+(setq tab-width 4) ; width for display tabs. emacs 23.1 default is 8
+
+(set-default 'abbrev-mode t)
+
+
+
+(progn
+  ;; org-mode
+  ;; make “org-mode” syntax color code sections
+  (setq org-src-fontify-natively t))
+
+
+
+
+;; load emacs 24's package system. Add MELPA repository.
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list
+   'package-archives 
+   ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
+   '("melpa" . "http://melpa.milkbox.net/packages/")
+   t))
+
+
+
+(progn
+  ;; Make whitespace-mode with very basic background coloring for whitespaces.
+  ;; http://ergoemacs.org/emacs/whitespace-mode.html
+  (setq whitespace-style (quote ( spaces tabs newline space-mark tab-mark newline-mark )))
+
+  ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line char and “▷” for tab.
+  (setq whitespace-display-mappings
+        ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
+        '(
+          (space-mark 32 [183] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+          (newline-mark 10 [182 10]) ; LINE FEED,
+          (tab-mark 9 [9655 9] [92 9]) ; tab
+          )))
 
 
 ;; 2009-09-29 see http://groups.google.com/group/ergoemacs/msg/9eec3b455cab3ff1 and http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start
@@ -215,7 +353,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(completions-common-part ((t (:inherit default :foreground "red"))))
- '(diredp-compressed-file-suffix ((t (:foreground "#7b68ee"))))
- '(diredp-ignored-file-name ((t (:foreground "#aaaaaa"))))
+ '(completions-common-part ((t (:inherit default :foreground "gray50"))))
+ '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
  )

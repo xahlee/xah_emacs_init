@@ -2,6 +2,9 @@
 ;; 2007-06, 2012-09-24
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 
+(require 'package)
+(package-initialize)
+
 
 ; loading custom commands and functions
 
@@ -29,9 +32,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 
 
-(setenv "LANG" "en_US.UTF-8" )
-(setenv "LC_ALL" "en_US.UTF-8" )
-(setenv "ERGOEMACS_KEYBOARD_LAYOUT" "dv") ; US Dvorak (Ergonomic)
+(load (xah-get-fullpath "xah_emacs_settings"))
 
 
 
@@ -56,6 +57,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xub-mode.el/")
 (add-to-list 'load-path "~/git/lookup-word-on-internet/")
 (add-to-list 'load-path "~/git/xahk-mode.el/")
+(add-to-list 'load-path "~/git/xah-math-input/")
 
 (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
 
@@ -73,13 +75,15 @@ To solve this problem, when your code only knows the relative path of another fi
 (load "xeu_elisp_util")
 (load "xah-misc-commands")
 (load "xbbcode-mode")
+(load "xah-math-input")
 
 (defalias 'bbcode-mode 'xbbcode-mode)
 
-(require 'package)
-(package-initialize)
+
 
 (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
+
+(setq xah-load-xahkeys-q t)
 
 (if (boundp 'xah-load-xahkeys-q)
     (when xah-load-xahkeys-q
@@ -132,7 +136,6 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_wordyenglish"))
 
-(load (xah-get-fullpath "xah_emacs_settings"))
 (load (xah-get-fullpath "xah_emacs_settings_font"))
 
 (load (xah-get-fullpath "xah_emacs_settings_external_packages"))

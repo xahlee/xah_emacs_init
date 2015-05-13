@@ -437,19 +437,6 @@ For example, the following string shown in browser URL field:
                                     "FIXEDCASE"
                                     )))
 
-(defun xah-windows-style-path-to-unix  (φfpath)
-  "Turn a MS Windows style full path ΦFPATH to unix style.
-Note: This drops the drive letter.
-
-For example:
- C:\\Users\\xah\\web\\emacs\\emacs.html
-becomes
- /Users/xah/web/emacs/emacs.html
-
-TODO: The drive letter is removed. Not sure whether that should be part of this function. But emacs 23.2's `file-relative-name' has a bug. It does not work when there's a drive letter is capitalized."
-  (replace-regexp-in-string "\\`[A-Za-z]:" ""
-                            (replace-regexp-in-string "\\\\" "/" φfpath t t)))
-
 (defun xahsite-web-path-to-filepath (φinput-str &optional φdefault-dir)
   "Returns a file full path of φinput-str.
 φinput-str can have any of these form:
@@ -473,7 +460,8 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
         (progn (setq ξs (xahsite-url-to-filepath ξs "addFileName")))
       (progn
         (when (string-match-p "\\`file://" ξs) (setq ξs (xah-local-url-to-file-path ξs)))
-        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" ξs) (setq ξs (xah-windows-style-path-to-unix ξs)))
+        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" ξs) ; change Microsoft Windows style path to unix
+          (setq ξs (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" ξs t t))))
         (setq ξs (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" ξs))
         (setq ξs (expand-file-name ξs φdefault-dir))))
     ξs
@@ -691,7 +679,6 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 
   ;; amazon ad
 ["<iframe src=\"http://rcm-na.amazon-adsystem.com/e/cm?t=xahhome-20&o=1&p=8&l=as1&asins=B00COR29XI&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr\" style=\"width:120px;height:240px;\" scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" frameborder=\"0\"></iframe><br />" ""]
-
 
 ["<script charset=\"utf-8\" type=\"text/javascript\">
 amzn_assoc_ad_type = \"responsive_search_widget\";

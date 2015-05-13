@@ -1,0 +1,16 @@
+-*- coding: utf-8 -*-
+
+Created 2012-08-13
+
+Xah Lee's emacs init files.
+
+This is not good for public use, because they are only for my own workflow, and change randomly every week.
+
+For public, i recommend http://ergoemacs.github.io/ergoemacs-mode/
+
+Tricks in my init has a corresponding page at
+
+* Xah Emacs Tutorial http://ergoemacs.org/emacs/emacs.html
+* Xah Emacs Lisp Tutorial http://ergoemacs.org/emacs/elisp.html
+
+Use the search box there.

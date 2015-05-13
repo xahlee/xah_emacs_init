@@ -6,7 +6,42 @@
 
 (require 'url-util)
 
-(defun xah-html-image-linkify ( &optional φbegin φend)
+(defun xah-html-image-linkify ()
+  "Replace a path to image file with a HTML img tag.
+Example, if cursor is on the word “emacs_logo.png”, then it will became
+<img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\">
+
+This function requires the “identify” command from ImageMagick."
+  (interactive)
+  (let (pathBoundaries imgPath altText imgDimen iWidth iHeight myResult)
+    (setq pathBoundaries (bounds-of-thing-at-point 'filename))
+    (setq imgPath (buffer-substring-no-properties (car pathBoundaries) (cdr pathBoundaries)))
+    (setq altText
+          (replace-regexp-in-string
+           "_"
+           " "
+           (replace-regexp-in-string
+            "\\.[A-Za-z]\\{3,4\\}$"
+            ""
+            imgPath
+            t
+            t)
+           t
+           t))
+
+    (setq imgDimen (xah-get-image-dimensions imgPath))
+    (setq iWidth (number-to-string (elt imgDimen 0)))
+    (setq iHeight (number-to-string (elt imgDimen 1)))
+    (setq myResult (concat "<img src=\"" imgPath "\""
+                           " "
+                           "alt=\"" altText "\""
+                           " "
+                           "width=\"" iWidth "\" "
+                           "height=\"" iHeight "\">"))
+    (delete-region (car pathBoundaries) (cdr pathBoundaries))
+    (insert myResult)))
+
+(defun xahsite-html-image-linkify ( &optional φbegin φend)
   "Replace a image file's path under cursor with a HTML img tag.
 If there's a text selection, use that as path.
 
@@ -19,25 +54,12 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
 Version 2015-05-12"
   (interactive)
-  (let (
-        ξp0
-        ξp1
-        ξp2
-        ξinputPath
-        ξcurrentDir
-        ξfullPath
-        ξaltText
-        )
-
+  (let ( ξp0 ξp1 ξp2 ξinputPath ξcurrentDir ξfullPath ξaltText )
     (progn ; sets ξp1 ξp2
       (if φbegin
-          (progn
-            (setq ξp1 φbegin)
-            (setq ξp2 φend))
+          (progn (setq ξp1 φbegin) (setq ξp2 φend))
         (if (use-region-p)
-            (progn
-              (setq ξp1 (region-beginning))
-              (setq ξp2 (region-end)))
+            (progn (setq ξp1 (region-beginning)) (setq ξp2 (region-end)))
           (save-excursion
             (setq ξp0 (point))
             ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
@@ -50,18 +72,8 @@ Version 2015-05-12"
     (progn
       (setq ξinputPath (buffer-substring-no-properties ξp1 ξp2))
       (setq ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
-      (setq ξfullPath (expand-file-name (xah-local-url-to-file-path ξinputPath) ξcurrentDir )))
-
-    (setq ξaltText (replace-regexp-in-string
-                    "-s$"
-                    ""
-                    (replace-regexp-in-string
-                     "_"
-                     " "
-                     (file-name-sans-extension
-                      (file-name-nondirectory ξfullPath))
-                     t
-                     t)))
+      (setq ξfullPath (expand-file-name (xah-local-url-to-file-path ξinputPath) ξcurrentDir ))
+      (setq ξaltText (replace-regexp-in-string "-s$" "" (replace-regexp-in-string "_" " " (file-name-sans-extension (file-name-nondirectory ξfullPath)) t t))))
 
     (if (xahsite-is-link-to-xahsite-p (file-relative-name ξfullPath (or (buffer-file-name) default-directory)))
         (progn
@@ -70,10 +82,7 @@ Version 2015-05-12"
                 (setq ξwh
                       (cond
                        ((string-match "\.svg$" ξfullPath) (xah-get-image-dimensions ξfullPath))
-
-                       (t (xah-get-image-dimensions ξfullPath))
-                       ;; (t (xah-get-image-dimensions-imk ξfullPath))
-                       ))
+                       (t (xah-get-image-dimensions ξfullPath))))
                 (setq ξw (number-to-string (elt ξwh 0)))
                 (setq ξh (number-to-string (elt ξwh 1)))
                 (setq ξwhStr
