@@ -248,10 +248,9 @@ URL `http://ergoemacs.org/misc/emacs_abbrev_shell_elisp.html'
 version 2015-02-05"
   (interactive
    (list
-      (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH") ) )
+    (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH")))
   (progn
-    (insert (cdr (assoc φcmd-abbrev xah-shell-abbrev-alist)))
-    ))
+    (insert (cdr (assoc φcmd-abbrev xah-shell-abbrev-alist)))))
 
 (defun xah-to-xah-elisp-mode  ()
   "redo my tutorial's code elisp markup"
@@ -263,19 +262,17 @@ version 2015-02-05"
     (replace-match "<pre class=\"emacs-lisp\">" "FIXEDCASE" "LITERAL" )
 
     (let* (
-          ( ξxx (xah-html-get-precode-langCode))
-          (langCode (elt ξxx 0))
-          (ξp1 (elt ξxx 1))
-          (ξp2 (elt ξxx 2))
-          )
+           ( ξxx (xah-html-get-precode-langCode))
+           (langCode (elt ξxx 0))
+           (ξp1 (elt ξxx 1))
+           (ξp2 (elt ξxx 2)))
 
       (xah-html-remove-span-tag-region ξp1 ξp2)
       (goto-char ξp1)
-      (xah-html-htmlize-precode xah-html-lang-name-map)
-       )
+      (xah-html-htmlize-precode xah-html-lang-name-map))
 
-;; (call-interactively 'xah-html-htmlize-or-de-precode)
- ) )
+    ;; (call-interactively 'xah-html-htmlize-or-de-precode)
+    ))
 
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.

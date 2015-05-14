@@ -26,7 +26,10 @@
 
 (when (fboundp 'global-page-break-lines-mode)
   ;; make the formfeed char (^L) display as a line
-  (global-page-break-lines-mode 1))
+  (global-page-break-lines-mode 1)
+
+  (setq page-break-lines-modes '(emacs-lisp-mode lisp-mode scheme-mode compilation-mode outline-mode help-mode xah-elisp-mode
+)))
 
 ;; (eval-when-compile
 ;;   (when (boundp 'tabbar-mode)
