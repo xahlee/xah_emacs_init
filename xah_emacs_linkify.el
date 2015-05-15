@@ -11,7 +11,7 @@
 Example:
  emacs_logo.png
 become
- <img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\">
+ <img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\" />
 
 This function requires the 「identify」 command from ImageMagick.
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
@@ -38,7 +38,7 @@ Version 2015-05-15"
      (concat
       "<img src=\""
       ξhrefValue
-      "\"" " " "alt=\"" ξaltText "\"" " " "width=\"" ξwidth "\" " "height=\"" ξheight "\">"))))
+      "\"" " " "alt=\"" ξaltText "\"" " " "width=\"" ξwidth "\" " "height=\"" ξheight "\" />"))))
 
 (defun xahsite-html-image-linkify ( &optional φbegin φend)
   "Replace a image file's path under cursor with a HTML img tag.

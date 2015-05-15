@@ -3,10 +3,9 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-;; (when (fboundp 'undo-tree-redo)
-;;   ;; enhanced execute-extended-command
-;;   (defalias 'redo 'undo-tree-redo)
-;;   (global-undo-tree-mode 1))
+(when (fboundp 'undo-tree-redo)
+  (defalias 'redo 'undo-tree-redo)
+  (global-undo-tree-mode 1))
 
 (when (fboundp 'smex)
   ;; enhanced execute-extended-command
@@ -27,7 +26,11 @@
 (when (fboundp 'global-page-break-lines-mode)
   ;; make the formfeed char (^L) display as a line
   (global-page-break-lines-mode 1)
-  (setq page-break-lines-modes '(emacs-lisp-mode lisp-mode scheme-mode compilation-mode outline-mode help-mode xah-elisp-mode)))
+  (setq page-break-lines-modes
+        '(emacs-lisp-mode lisp-mode scheme-mode compilation-mode outline-mode help-mode
+                          fundamental-mode text-mode org-mode ruby-mode python-mode html-mode nxml-mode
+                          xah-html-mode xah-elisp-mode
+                          )))
 
 (when (fboundp 'htmlize-region)
   ;; htmlize.el
