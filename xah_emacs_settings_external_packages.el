@@ -27,5 +27,11 @@
 (when (fboundp 'global-page-break-lines-mode)
   ;; make the formfeed char (^L) display as a line
   (global-page-break-lines-mode 1)
-
   (setq page-break-lines-modes '(emacs-lisp-mode lisp-mode scheme-mode compilation-mode outline-mode help-mode xah-elisp-mode)))
+
+(when (fboundp 'htmlize-region)
+  ;; htmlize.el
+  ;; make htmlize generate unicode directly instead of html entities
+  (setq htmlize-convert-nonascii-to-entities nil)
+  ; make the output html use utf-8 charset
+  (setq htmlize-html-charset "utf-8"))
