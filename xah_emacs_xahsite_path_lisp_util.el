@@ -163,8 +163,8 @@ For reverse, see `xahsite-href-value-to-filepath'.
 "
   (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path φlinkFilePath) (xahsite-get-domain-of-local-file-path φcurrentFilePathOrDir))))
     (if sameDomain-p
-        (progn (file-relative-name-emacs24.1.1-fix φlinkFilePath (file-name-directory φcurrentFilePathOrDir)))
-      (progn (xahsite-filepath-to-url φlinkFilePath)))))
+        (xah-file-relative-name-emacs24.1.1-fix φlinkFilePath (file-name-directory φcurrentFilePathOrDir))
+      (xahsite-filepath-to-url φlinkFilePath))))
 ;; test
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/xahlee_org/arts/blog.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html")
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/index.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" )

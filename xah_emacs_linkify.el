@@ -9,42 +9,32 @@
 (defun xah-html-image-linkify ()
   "Replace a path to image file with a HTML img tag.
 Example, if cursor is on the word “emacs_logo.png”, then it will became
-<img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\">
+ <img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\">
 
-This function requires the “identify” command from ImageMagick."
+This function requires the 「identify」 command from ImageMagick.
+
+URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
+Version 2015-05-15"
   (interactive)
-  (let (pathBoundaries imgPath altText imgDimen iWidth iHeight myResult)
-    (setq pathBoundaries (bounds-of-thing-at-point 'filename))
-    (setq imgPath (buffer-substring-no-properties (car pathBoundaries) (cdr pathBoundaries)))
-    (setq altText
-          (replace-regexp-in-string
-           "_"
-           " "
-           (replace-regexp-in-string
-            "\\.[A-Za-z]\\{3,4\\}$"
-            ""
-            imgPath
-            t
-            t)
-           t
-           t))
-
-    (setq imgDimen (xah-get-image-dimensions imgPath))
-    (setq iWidth (number-to-string (elt imgDimen 0)))
-    (setq iHeight (number-to-string (elt imgDimen 1)))
-    (setq myResult (concat "<img src=\"" imgPath "\""
-                           " "
-                           "alt=\"" altText "\""
-                           " "
-                           "width=\"" iWidth "\" "
-                           "height=\"" iHeight "\">"))
-    (delete-region (car pathBoundaries) (cdr pathBoundaries))
-    (insert myResult)))
+  (let* ((ξbounds (bounds-of-thing-at-point 'filename))
+         (ξp1 (car ξbounds))
+         (ξp2 (cdr ξbounds))
+         (ξimgPath (buffer-substring-no-properties ξp1 ξp2 ))
+         (altText (replace-regexp-in-string "_" " " (replace-regexp-in-string "\\.[A-Za-z]\\{3,4\\}$" "" ξimgPath t t) t t))
+         (imgDimen (xah-get-image-dimensions ξimgPath))
+         (iWidth (number-to-string (elt imgDimen 0)))
+         (iHeight (number-to-string (elt imgDimen 1))))
+    (delete-region ξp1 ξp2)
+    (insert
+     (concat
+      "<img src=\""
+      (file-relative-name ξimgPath
+                          (file-name-directory (or (buffer-file-name) default-directory)))
+      "\"" " " "alt=\"" altText "\"" " " "width=\"" iWidth "\" " "height=\"" iHeight "\">"))))
 
 (defun xahsite-html-image-linkify ( &optional φbegin φend)
   "Replace a image file's path under cursor with a HTML img tag.
 If there's a text selection, use that as path.
-
 For example,
  i/cat.png
 becames
@@ -294,17 +284,14 @@ Then it'll become
 Warning: the line must end in a line return char else the result is wrong."
   (interactive)
   (let (ξp1 ξp2 ξword ξurl)
-
-(if (use-region-p)
+    (if (use-region-p)
         (progn (setq ξp1 (region-beginning))
                (setq ξp2 (region-end)))
       (progn (setq ξp1 (line-beginning-position))
              (setq ξp2 (line-end-position))))
-
-        (setq ξword (buffer-substring-no-properties ξp1 ξp2))
-
+    (setq ξword (buffer-substring-no-properties ξp1 ξp2))
     (setq ξurl (concat "http://www.google.com/search?q=" ξword))
-    (setq ξurl (replace-regexp-in-string " " "+" ξurl ) )
+    (setq ξurl (replace-regexp-in-string " " "+" ξurl ))
     (delete-region ξp1 ξp2)
     (insert "<p>Google search: <a href=\"" ξurl "\">" ξword "</a>.</p>\n")))
 
@@ -313,26 +300,21 @@ Warning: the line must end in a line return char else the result is wrong."
 
 (defun nks-linkify ()
   "Make the current word into into a link to Wolfram Science site.
-For Example, if you cursor is on the word “p123”, then
+For Example, if you cursor is on the word 「p123」, then
 it becomes
-“<a href=\"http://www.wolframscience.com/nksonline/page-123\">p123</a>”"
+ 「<a href=\"http://www.wolframscience.com/nksonline/page-123\">p123</a>」
+Version 2015-05-15"
   (interactive)
-  (let (ξbds ξp1 ξp2 ξinputStr pageNum myResult)
-
-    (setq ξbds (get-selection-or-unit 'glyphs))
-    (setq ξinputStr (elt ξbds 0) )
-    (setq ξp1 (aref ξbds 1) )
-    (setq ξp2 (aref ξbds 2) )
-
-    (setq pageNum (substring ξinputStr 1) )
-    (setq myResult
-          (concat
-           "<a href=\"http://www.wolframscience.com/nksonline/page-"
-           pageNum "\">p" pageNum "</a>"))
-
+  (let* ((ξbounds (bounds-of-thing-at-point 'word))
+         (ξp1 (car ξbounds))
+         (ξp2 (cdr ξbounds))
+         (ξinputStr (buffer-substring-no-properties ξp1 ξp2))
+         (ξpageNum (substring ξinputStr 1)))
     (delete-region ξp1 ξp2)
-    (insert myResult)
-    ))
+    (insert
+     (concat
+      "<a href=\"http://www.wolframscience.com/nksonline/page-"
+      ξpageNum "\">p" ξpageNum "</a>"))))
 
 
 ;; more specific to Xah Lee

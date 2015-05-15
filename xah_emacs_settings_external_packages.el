@@ -28,22 +28,4 @@
   ;; make the formfeed char (^L) display as a line
   (global-page-break-lines-mode 1)
 
-  (setq page-break-lines-modes '(emacs-lisp-mode lisp-mode scheme-mode compilation-mode outline-mode help-mode xah-elisp-mode
-)))
-
-;; (eval-when-compile
-;;   (when (boundp 'tabbar-mode)
-;;     (tabbar-mode 0)
-;;     ))
-
-;; (setq yas/indent-line nil)
-;; (yas-global-mode 0)
-
-;; (defun turn-spell-checking-on ()
-;;   "Turn speck-mode or flyspell-mode on."
-;;   (speck-mode 1)
-;; ;  (flyspell-mode 1)
-;;   )
-
-;; (add-hook 'text-mode-hook 'turn-spell-checking-on)
-;; (remove-hook 'text-mode-hook 'turn-spell-checking-on)
+  (setq page-break-lines-modes '(emacs-lisp-mode lisp-mode scheme-mode compilation-mode outline-mode help-mode xah-elisp-mode)))
