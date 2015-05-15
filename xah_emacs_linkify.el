@@ -8,11 +8,12 @@
 
 (defun xah-html-image-linkify ()
   "Replace a path to image file with a HTML img tag.
-Example, if cursor is on the word “emacs_logo.png”, then it will became
+Example:
+ emacs_logo.png
+become
  <img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\">
 
 This function requires the 「identify」 command from ImageMagick.
-
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
 Version 2015-05-15"
   (interactive)
@@ -20,17 +21,18 @@ Version 2015-05-15"
          (ξp1 (car ξbounds))
          (ξp2 (cdr ξbounds))
          (ξimgPath (buffer-substring-no-properties ξp1 ξp2 ))
-         (altText (replace-regexp-in-string "_" " " (replace-regexp-in-string "\\.[A-Za-z]\\{3,4\\}$" "" ξimgPath t t) t t))
-         (imgDimen (xah-get-image-dimensions ξimgPath))
-         (iWidth (number-to-string (elt imgDimen 0)))
-         (iHeight (number-to-string (elt imgDimen 1))))
+         (ξhrefValue (file-relative-name ξimgPath
+                                         (file-name-directory (or (buffer-file-name) default-directory))))
+         (ξaltText (replace-regexp-in-string "_" " " (replace-regexp-in-string "\\.[A-Za-z]\\{3,4\\}$" "" ξhrefValue t t) t t))
+         (ξimgWH (xah-get-image-dimensions ξimgPath))
+         (ξwidth (number-to-string (elt ξimgWH 0)))
+         (ξheight (number-to-string (elt ξimgWH 1))))
     (delete-region ξp1 ξp2)
     (insert
      (concat
       "<img src=\""
-      (file-relative-name ξimgPath
-                          (file-name-directory (or (buffer-file-name) default-directory)))
-      "\"" " " "alt=\"" altText "\"" " " "width=\"" iWidth "\" " "height=\"" iHeight "\">"))))
+      ξhrefValue
+      "\"" " " "alt=\"" ξaltText "\"" " " "width=\"" ξwidth "\" " "height=\"" ξheight "\">"))))
 
 (defun xahsite-html-image-linkify ( &optional φbegin φend)
   "Replace a image file's path under cursor with a HTML img tag.
