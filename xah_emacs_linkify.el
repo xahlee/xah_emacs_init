@@ -21,9 +21,15 @@ Version 2015-05-15"
          (ξp1 (car ξbounds))
          (ξp2 (cdr ξbounds))
          (ξimgPath (buffer-substring-no-properties ξp1 ξp2 ))
-         (ξhrefValue (file-relative-name ξimgPath
-                                         (file-name-directory (or (buffer-file-name) default-directory))))
-         (ξaltText (replace-regexp-in-string "_" " " (replace-regexp-in-string "\\.[A-Za-z]\\{3,4\\}$" "" ξhrefValue t t) t t))
+         (ξhrefValue
+          (file-relative-name
+           ξimgPath
+           (file-name-directory (or (buffer-file-name) default-directory))))
+         (ξaltText
+          (replace-regexp-in-string
+           "_" " "
+           (replace-regexp-in-string
+            "\\.[A-Za-z]\\{3,4\\}$" "" (file-name-nondirectory ξimgPath) t t) t t))
          (ξimgWH (xah-get-image-dimensions ξimgPath))
          (ξwidth (number-to-string (elt ξimgWH 0)))
          (ξheight (number-to-string (elt ξimgWH 1))))
