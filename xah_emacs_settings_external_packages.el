@@ -3,9 +3,9 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(when (fboundp 'undo-tree-redo)
-  (defalias 'redo 'undo-tree-redo)
-  (global-undo-tree-mode 1))
+(when (fboundp 'global-undo-tree-mode)
+  (global-undo-tree-mode 1)
+  (defalias 'redo 'undo-tree-redo))
 
 (when (fboundp 'smex)
   ;; enhanced execute-extended-command
