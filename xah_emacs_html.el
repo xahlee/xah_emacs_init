@@ -38,22 +38,18 @@ Add today's date to the byline tag of current file, also delete the last one if 
 WARNING: This command saves buffer if it's a file."
   (interactive)
   (require 'sgml-mode)
-  (let (ξp1 ξp2 ξnum bufferTextOrig)
+  (let (ξp1 ξp2 ξnum ξbufferTextOrig)
     (progn
       (goto-char 1)
       (when (search-forward "<div class=\"byline\">" nil)
 
-        (progn
-          (setq ξp1 (point))
-          (backward-char 1)
-          (sgml-skip-tag-forward 1)
-          ;; (search-forward "</time></div>")
-          (setq ξp2 (point)))
+        ;; set ξp1 ξp2. they are boundaries of inner text
+        (progn (setq ξp1 (point)) (backward-char 1) (sgml-skip-tag-forward 1) (search-backward "</div>") (setq ξp2 (point)))
 
         (save-restriction
           (narrow-to-region ξp1 ξp2)
 
-          (setq bufferTextOrig (buffer-string ))
+          (setq ξbufferTextOrig (buffer-string ))
           (setq ξnum (count-matches "<time>" (point-min) (point-max)))
 
           ;; if there are more than 1 “time” tag, delete the last one
@@ -68,7 +64,6 @@ WARNING: This command saves buffer if it's a file."
 
           ;; insert new time
           (goto-char (point-max))
-          (search-backward "</div>")
           (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
 
           ;; remove repeated comma separator
@@ -80,10 +75,13 @@ WARNING: This command saves buffer if it's a file."
           (when (search-forward "</time>, <time>" (point-max) "NOERROR")
             (replace-match "</time>, …, <time>"))
 
+          (goto-char (point-max))
+          (search-backward "<time>")
+
           (when (buffer-file-name)
             (save-buffer))
 
-          (message "%s\nchanged to\n%s" bufferTextOrig (buffer-string )))))))
+          (message "%s\nchanged to\n%s" ξbufferTextOrig (buffer-string )))))))
 
 (defun xahsite-update-page-tag ()
   "Update HTML page navigation tags.
