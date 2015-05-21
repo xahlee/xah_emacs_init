@@ -44,7 +44,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xah-clojure-mode/")
 (add-to-list 'load-path "~/git/xah-comment.el/")
 (add-to-list 'load-path "~/git/xah-css-mode/")
-(add-to-list 'load-path "~/git/xah_file_util.el/")
+(add-to-list 'load-path "~/git/xah-find/")
 (add-to-list 'load-path "~/git/xah-html6-mode.el/")
 (add-to-list 'load-path "~/git/xah-html-mode.el/")
 (add-to-list 'load-path "~/git/xah-insert-random-id.el/")
@@ -61,7 +61,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
 
-(load "xah_file_util")
+(load "xah-find")
 (load "xah-html-mode")
 (load "xah-comment")
 (load "xah-elisp-mode")
