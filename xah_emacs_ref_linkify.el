@@ -6,23 +6,29 @@
 For example: if current node is 「(elisp) The Mark」, switch to browser and load 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
   (interactive)
   (browse-url
-(xahsite-url-to-filepath (emacs-info-node-string-to-url (Info-copy-current-node-name)))
- ) )
+   (xahsite-url-to-filepath
+    (emacs-info-node-string-to-url
+     (Info-copy-current-node-name)))))
 
 (defun emacs-info-node-string-to-url (φinfo-node-str)
-  "Make the current line or selection into a emacs reference link.
+  "change the φinfo-node-str into a xah emacs doc link.
 For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
   (let ((domainStr "http://ergoemacs.org/")
         (tempPath
-         (xah-replace-pairs-in-string φinfo-node-str [["(elisp) " ""]
-                                               ["(emacs) " ""]
-                                               ["-" "_002d"]
-                                               [" " "-"] ] ) ) )
+         (xah-replace-pairs-in-string
+          φinfo-node-str
+          [["(elisp) " ""]
+           ["(emacs) " ""]
+           ["-" "_002d"]
+           [" " "-"] ] )))
 
     (cond
-     ((string-match "(elisp)" φinfo-node-str )  (format "%s%s%s.html" domainStr "emacs_manual/elisp/" tempPath))
-     ((string-match "(emacs)" φinfo-node-str ) (format "%s%s%s.html" domainStr "emacs_manual/emacs/" tempPath))
-     (t (user-error "φinfo-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" φinfo-node-str)) ) ) )
+     ((string-match "(elisp)" φinfo-node-str )
+      (format "%s%s%s.html" domainStr "emacs_manual/elisp/" tempPath))
+     ((string-match "(emacs)" φinfo-node-str )
+      (format "%s%s%s.html" domainStr "emacs_manual/emacs/" tempPath))
+     (t
+      (user-error "φinfo-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" φinfo-node-str)))))
 
 (defun xah-html-emacs-ref-linkify ()
   "Make the current line or selection into a emacs reference link.
@@ -86,7 +92,7 @@ Then it'll become:
 
     ;; generate relative file path
     (setq ξlinkStrURL
-          (concat 
+          (concat
            (xah-replace-pairs-in-string ξinfoStr
                                     [
                                      ["(elisp) " "http://ergoemacs.org/emacs_manual/elisp/"]
@@ -112,55 +118,18 @@ Then it'll become:
   )
 
 (defun xah-html-php-ref-linkify ()
-	"Make the current line into a PHP reference link.
+  "Make the current line into a PHP reference link.
 If there's a text selection, use that.
 For example, if the cursor is on the word:
 echo
 Then it'll become
 <span class=\"ref\"><a href=\"http://us.php.net/echo\">echo</a></span>"
-	(interactive)
-	(let (bds ξp1 ξp2 swd ξurl)
-
-    (setq bds (get-selection-or-unit 'glyphs))
-    (setq swd (elt bds 0) )
-    (setq ξp1 (elt bds 1) )
-    (setq ξp2 (elt bds 2) )
-
-    (setq ξurl (concat "http://us.php.net/" swd) )
-    (delete-region ξp1 ξp2)
-    (insert "<span class=\"ref\"><a href=\"" ξurl "\">" swd "</a></span>")))
-
-
-(defun java-ref-linkify ()
-	"Make the current line into a Java reference link.
-If there's a text selection, use that.
-For example, if the cursor is on the line:
-http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html
-Then it'll become
-<span class=\"ref\"><a href=\"http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html\">Java Doc: String</a></span>
-
-The input string can be the URL to the official Java API, Java Language Spec, the Java Tutorial."
-	(interactive)
-	(let (bds ξp1 ξp2 ξurl kword)
-
-    (setq bds (get-selection-or-unit 'glyphs))
-    (setq ξurl (elt bds 0) )
-    (setq ξp1 (elt bds 1) )
-    (setq ξp2 (elt bds 2) )
-
-    (setq kword (file-name-sans-extension (file-name-nondirectory ξurl)))
-    (delete-region ξp1 ξp2)
-
-    (cond
-     ((string-match "j2se/1.5" ξurl)
-      (insert "<span class=\"ref\"><a href=\"" ξurl "\">Java Doc: " kword "</a></span>"))
-     ((string-match "tutorial" ξurl)
-      (insert "<span class=\"ref\"><a href=\"" ξurl "\">Java Tutorial: " kword "</a></span>"))
-     ((string-match "jls" ξurl)
-      (insert "<span class=\"ref\"><a href=\"" ξurl "\">Java Lang Spec: " kword "</a></span>")))))
+  (interactive)
+  (let ()
+    (message "todo needs rewrite" )))
 
 (defun xah-html-perldoc-ref-linkify ()
-  "Make the current line into a link to Perl's doc site.
+  "Make the current line or selection into a link to Perl's doc site.
 For example, if the cursor is on the line:
 
 perlop
@@ -168,33 +137,37 @@ perlop
 Then it'll become
 
 <span class=\"ref\"><a href=\"http://perldoc.perl.org/perlop.html\">perldoc perlop</a></span>"
-	(interactive)
-	(let (bds ξp1 ξp2 swd ξurl)
-    (setq bds (get-selection-or-unit 'glyphs))
-    (setq swd (elt bds 0) )
-    (setq ξp1 (elt bds 1) )
-    (setq ξp2 (elt bds 2) )
+  (interactive)
+  (let (ξp1 ξp2 swd ξurl)
+    (if (use-region-p)
+        (progn
+          (setq ξp1 (region-beginning))
+          (setq ξp2 (region-end)))
+      (progn
+        (setq ξp1 (line-beginning-position))
+        (setq ξp2 (line-end-position))))
 
-    (setq ξurl (concat "http://perldoc.perl.org/" swd ".html") )
-    (setq ξurl (replace-regexp-in-string "::" "/" ξurl ))
-    (setq ξurl (replace-regexp-in-string "-f " "functions/" ξurl ))
+    (setq swd (buffer-substring-no-properties ξp1 ξp2))
+    (setq ξurl (replace-regexp-in-string
+                "-f " "functions/"
+                (replace-regexp-in-string
+                 "::" "/"
+                 (concat "http://perldoc.perl.org/" swd ".html"))))
     (delete-region ξp1 ξp2)
     (insert "<span class=\"ref\"><a href=\"" ξurl "\">" "perldoc " swd "</a></span>")))
 
 (defun mathematica-ref-linkify ()
-	"Make the current line into a link to Mathematica ref site.
-If there's a text selection, use that.
+  "Make the current word into a link to Mathematica ref site.
 For example, if the cursor is on the line:
 Table
 Then it'll become:
 <span class=\"ref\"><a href=\"http://reference.wolfram.com/mathematica/ref/Table.html\">Mathematica Ref: Table</a></span>"
-	(interactive)
-	(let (bds ξp1 ξp2 swd ξurl)
-
-    (setq bds (get-selection-or-unit 'glyphs))
-    (setq swd (elt bds 0) )
-    (setq ξp1 (elt bds 1) )
-    (setq ξp2 (elt bds 2) )
-    (setq ξurl (concat "http://reference.wolfram.com/mathematica/ref/" swd ".html") )
+  (interactive)
+  (let (bds ξp1 ξp2 swd ξurl)
+    (setq bds (thing-at-point 'word))
+    (setq ξp1 (car bds))
+    (setq ξp2 (cdr bds))
+    (setq swd (buffer-substring-no-properties ξp1 ξp2))
+    (setq ξurl (concat "http://reference.wolfram.com/mathematica/ref/" swd ".html"))
     (delete-region ξp1 ξp2)
     (insert "<span class=\"ref\"><a href=\"" ξurl "\">" "Mathematica: " swd "</a></span>")))

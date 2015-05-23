@@ -17,7 +17,7 @@
 URL `http://ergoemacs.org/emacs/elisp_chinese_char_linkify.html'
 Version 2015-05-01"
   (interactive)
-  (let ( 
+  (let (
         (ξtemplate
          "<div class=\"chinese-etymology-96656\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> ◇ <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> ◇ <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
          )
@@ -114,13 +114,12 @@ Version 2015-03-11"
 
 (defun xah-words-add-definition ()
   "Insert a word definition entry template.
-Using current word or text selection."
+Using current word or selection."
   (interactive)
-  (let* ((ξbds (get-selection-or-unit 'word))
-         (ξstr1 (aref ξbds 0))
-         ξstr2)
-
-    (setq ξstr2 (xah-asciify-string ξstr1))
+  (let ((ξstr1
+         (if (use-region-p)
+             (progn (buffer-substring-no-properties (region-beginning) (region-end)))
+           (progn (thing-at-point 'word)))))
     (search-forward "\n\n" nil t)
     (search-backward "</div>")
     (insert "<div class=\"def\"></div>\n")
@@ -128,8 +127,7 @@ Using current word or text selection."
     (insert ξstr " = ")))
 
 (defun xah-words-add-source ()
-  "Insert a word definition entry template.
-Using current word or text selection."
+  "Insert a word definition entry template."
   (interactive)
   (let ()
     (require 'sgml-mode) ; for sgml-skip-tag-forward
@@ -199,9 +197,10 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
 Wrap HTML “span” tag around current word or text selection, then
 insert a div tag above the current paragraph."
   (interactive)
-  (let (ξbds ξinputText)
-    (setq ξbds (get-selection-or-unit 'word))
-    (setq ξinputText (aref ξbds 0))
+  (let ( (ξinputText
+          (if (use-region-p)
+              (progn (buffer-substring-no-properties (region-beginning) (region-end)))
+            (progn (thing-at-point 'word)))))    
     (xah-html-wrap-html-tag "span" "xnt")
     (search-backward "<p")
     (insert "<div class=\"xnote\"></div>\n\n")

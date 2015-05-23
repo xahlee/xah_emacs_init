@@ -176,12 +176,10 @@ becomes
 
 <div class=\"blgcmt\"><a href=\"http://xahlee.blogspot.com/2010/03/some.html\">✍</a></div>"
   (interactive)
-  (let (ξbds p7 p8 ξurl)
-    (setq ξbds (get-selection-or-unit 'url))
-    (setq ξurl (elt ξbds 0) )
-    (setq p7 (elt ξbds 1) )
-    (setq p8 (elt ξbds 2) )
-
+  (let* ((ξbds (bounds-of-thing-at-point 'url))
+         (p7 (car ξbds))
+         (p8 (cdr ξbds))
+         (ξurl (buffer-substring-no-properties p7 p8)))
     (delete-region p7 p8)
     (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url ξurl) "\">✍</a></div>"))))
 
@@ -631,7 +629,7 @@ linkText
 "
   (interactive)
   (let* (
-         (ξbds (get-selection-or-unit 'filepath))
+         (ξbds (xah-get-thing-or-selection 'filepath))
          (ξinputStr (elt ξbds 0))
          (ξp1 (aref ξbds 1))
          (ξp2 (aref ξbds 2))
@@ -666,7 +664,7 @@ linkText
  ⁖ <script src=\"xyz.js\"></script>"
   (interactive)
   (let* (
-         (ξbds (get-selection-or-unit 'filepath))
+         (ξbds (xah-get-thing-or-selection 'filepath))
          (ξinputStr (elt ξbds 0))
          (ξp1 (aref ξbds 1))
          (ξp2 (aref ξbds 2))
@@ -684,7 +682,7 @@ becomes
  <audio src=\"xyz.mp3\"></audio>"
   (interactive)
   (let* (
-         (ξbds (get-selection-or-unit 'filepath))
+         (ξbds (xah-get-thing-or-selection 'filepath))
          (ξinputStr (elt ξbds 0))
          (ξp1 (aref ξbds 1))
          (ξp2 (aref ξbds 2))
@@ -703,7 +701,7 @@ becomes
 "
   (interactive)
   (let* (
-         (ξbds (get-selection-or-unit 'filepath))
+         (ξbds (xah-get-thing-or-selection 'filepath))
          (ξinputStr (elt ξbds 0))
          (ξp1 (aref ξbds 1))
          (ξp2 (aref ξbds 2))

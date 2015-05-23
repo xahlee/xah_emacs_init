@@ -347,9 +347,8 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
 "FIXEDCASE" "LITERAL")
 
 (let* (
-         (ξboundaries (get-selection-or-unit 'buffer))
-         (ξp1 (elt ξboundaries 1))
-         (ξp2 (elt ξboundaries 2))
+         (ξp1 (point-min) )
+         (ξp2 (point-max) )
          )
     (save-excursion
       (save-restriction
@@ -418,31 +417,6 @@ Test cases
       (message "input 「%s」 Hex 「%s」 is 「%d」" ξinputStr ξtempStr (string-to-number ξtempStr 16)))))
 
 
-
-(defun xah-unicode-chars-html ()
-  "temp. print a list of unicode with special html markup.
-
-example: put cursor on this word
-U+1D400
-then call this command."
-  (interactive)
-  (let* (
-        (ξboundaries (get-selection-or-unit 'glyphs))
-        (ξinput (elt ξboundaries 0) )
-        (ξp1 (elt ξboundaries 1))
-        (ξp2 (elt ξboundaries 2))
-        (ξcodepoint (string-to-number (replace-regexp-in-string "U\\+" "" ξinput "FIXEDCASE" "LITERAL") 16) )
-        )
-
-    (insert "\n")
-
-    (dotimes (i 26)
-        (let* (
-               (ξchar (+ ξcodepoint i))
-               (ξu-notation (format "U+%X" ξchar) )
-               (ξname (get-char-code-property ξchar 'name))
-               )
-              (insert (format "<mark class=\"unicode\" title=\"%s: %s\">%c</mark>\n" ξu-notation ξname ξchar))))))
 
 ;; (defun xah-dired-sort-time-accessed ()
 ;;   "DOCSTRING"

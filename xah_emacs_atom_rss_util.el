@@ -93,11 +93,13 @@ Other files paths for blogs are:
 "
   (interactive)
   (let* (
-         (bds ;; (get-selection-or-unit 'block)
+         (bds
           (if (use-region-p)
-              (vector (buffer-substring-no-properties (region-beginning) (region-end)) (region-beginning) (region-end) )
+              (vector
+               (buffer-substring-no-properties (region-beginning) (region-end))
+               (region-beginning) (region-end))
             (progn (let (pt1 pt2)
-                     (save-excursion 
+                     (save-excursion
                        (if (re-search-backward "\n[ \t]*\n" nil "move")
                            (progn (re-search-forward "\n[ \t]*\n")
                                   (setq pt1 (point)))

@@ -78,7 +78,6 @@ The related pages are HTML “div.rltd” element, having this form
   (interactive
    (let (bds p1 p2)
      (setq bds
-           ;; (get-selection-or-unit 'block)
            (if (use-region-p)
                (vector (buffer-substring-no-properties (region-beginning) (region-end)) (region-beginning) (region-end))
              (progn (let (pt1 pt2)
