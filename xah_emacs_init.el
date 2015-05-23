@@ -59,8 +59,11 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xahk-mode.el/")
 (add-to-list 'load-path "~/git/xah-math-input/")
 
+(add-to-list 'load-path "~/git/xah-get-thing-or-selection/")
+
 (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
 
+(load "xah-get-thing")
 (load "xah-find")
 (load "xah-html-mode")
 (load "xah-comment")
@@ -78,8 +81,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load "xah-math-input")
 
 (defalias 'bbcode-mode 'xbbcode-mode)
-
-
 
 (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
 

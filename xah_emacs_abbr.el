@@ -263,7 +263,7 @@
     ("impl" "implementation")
     ("implt" "implement")
     ("dl" "download")
-    ("8char" "character")
+    ("8c" "character")
     ("8chars" "characters")
     ("8defn" "definition")
     ("bg" "background")
