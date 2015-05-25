@@ -7,6 +7,13 @@
   (global-undo-tree-mode 1)
   (defalias 'redo 'undo-tree-redo))
 
+(when (fboundp 'xah-lookup-google)
+  (when (or
+         (string-equal system-type "gnu/linux")
+         (string-equal system-type "darwin"))
+    (require 'eww)
+    (setq xah-lookup-dictionary-browser-function 'eww)))
+
 (when (fboundp 'smex)
   ;; enhanced execute-extended-command
   (require 'smex)
