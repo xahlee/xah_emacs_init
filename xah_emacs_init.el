@@ -114,8 +114,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_elisp_util"))
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
 
-(load "~/Dropbox/xah-emacs-private_b53d8d39")
-
 (load (xah-get-fullpath "xah_emacs_generic"))
 
 (load (xah-get-fullpath "xah_emacs_html"))
@@ -156,3 +154,4 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_syntax_parse"))
 (load (xah-get-fullpath "xah_emacs_overlay_and_char_properties"))
+(load "~/Dropbox/xah-emacs-private_b53d8d39")
