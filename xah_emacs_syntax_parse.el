@@ -90,19 +90,15 @@ Note:
 "
   (interactive)
   (let* ((parse-sexp-ignore-comments t)
-        (parse-sexp-lookup-properties parse-sexp-lookup-properties)
-        (ξstate
-         (if current-prefix-arg
-             (progn (message "parse-partial-sexp called")
-                    (parse-partial-sexp (point-min) (point))
-                    )
-           (progn (message "syntax-ppss called")
-                  (syntax-ppss (point))
-                  )
-           ) ) )
-
+         (parse-sexp-lookup-properties parse-sexp-lookup-properties)
+         (ξstate
+          (if current-prefix-arg
+              (progn (message "parse-partial-sexp called")
+                     (parse-partial-sexp (point-min) (point)))
+            (progn (message "syntax-ppss called")
+                   (syntax-ppss (point))))))
     (print (format
-"0 depth: %S
+            "0 depth: %S
 1 innermost open bracket: %S
  2 last start complete sexp: %S
 3 inside string: %S
@@ -119,11 +115,8 @@ Note:
             (nth 5 ξstate )
             (nth 6 ξstate )
             (nth 7 ξstate )
-            (nth 8 ξstate ))
-           )
-
+            (nth 8 ξstate )))
     ξstate
-
     ))
 
 (defun xah-forward-comment (φcount)

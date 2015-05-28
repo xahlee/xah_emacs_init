@@ -154,7 +154,7 @@ google_ad_client")
      ξfileList)))
 
 (defun xah-syntax-color-hex ()
-"Syntax color hex color spec ⁖ 「#ff1100」 in current buffer."
+  "Syntax color text of the form 「#ff1100」 in current buffer."
   (interactive)
   (font-lock-add-keywords
    nil
@@ -163,8 +163,7 @@ google_ad_client")
           (match-beginning 0)
           (match-end 0)
           'face (list :background (match-string-no-properties 0)))))))
-  (font-lock-fontify-buffer)
-  )
+  (font-lock-fontify-buffer))
 
 (defun xah-syntax-color-hsl ()
   "Syntax color CSS's HSL color spec ⁖ 「hsl(0,90%,41%)」 in current buffer."
