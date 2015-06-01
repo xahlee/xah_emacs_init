@@ -1,17 +1,29 @@
 ;; -*- coding: utf-8 -*-
 ;; 2014-05-29
 
-;; (put-text-property 1 20 'face (list :background 'yellow))
-;; (put-text-property 1 20 'face 'highlight)
+;; (put-text-property 1 20 'face 'highlight) ; works
+;; (put-text-property 1 20 'face (list :background "#ff4433")) ; works
+;; (put-text-property 1 20 'face (list :background "yellow")) ; works
 
+;; (add-text-properties 1 20 '(mouse-face highlight help-echo "mouse-2: open this file in other window")) ; works
 
-;; (defface page-break-lines
+;; (add-text-properties 1 20 '(face highlight)) ; works
+;; (add-text-properties 1 20 '(face highlight fontified t )) ; works
+;; (add-text-properties 1 20 '(font-lock-face highlight fontified t)) ; works
+
+;; (set-text-properties 1 20 nil)
+;; (get-text-property 2 'face)
+;; (propertize "foo" 'face 'italic 'mouse-face 'bold-italic)
+
+(defun xah-show-text-properties ()
+  "print properties of the char after `point'"
+  (interactive)
+  (message "%s" (text-properties-at (point))))
+
+;; (defface xah-xx
 ;;   '((t :inherit font-lock-comment-face :bold nil :italic nil))
-;;   "Face used to colorize page break lines.
-;; If using :bold or :italic, please ensure `page-break-lines-char'
-;; is available in that variant of your font, otherwise it may be
-;; displayed as a junk character."
-;;   :group 'page-break-lines)
+;;   "Face my face."
+;;   :group 'xah-xx)
 
 ;; how to test if something is overlay?
 ;; just copy it, paste it in new buffer. if the highlighting etc disappears, than it's overlay
@@ -23,18 +35,6 @@
 ;;   (interactive)
 ;;   (let ()
 ;;     (get-char-property-and-overlay (point) PROP &optional)))
-
-;; (defun xah-syntax-color-hex ()
-;;   "Syntax color text of the form 「#ff1100」 in current buffer."
-;;   (interactive)
-;;   (font-lock-add-keywords
-;;    nil
-;;    '(("#[abcdef[:digit:]]\\{6\\}"
-;;       (0 (put-text-property
-;;           (match-beginning 0)
-;;           (match-end 0)
-;;           'face (list :background (match-string-no-properties 0)))))))
-;;   (font-lock-fontify-buffer))
 
 (defun xah-make-overlay-bold-region (φbegin φend)
   "make the region bold, using overlay.
