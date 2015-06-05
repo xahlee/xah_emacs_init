@@ -7,15 +7,14 @@
 (require 'url-util)
 
 (defun xah-html-image-linkify ()
-  "Replace a path to image file with a HTML img tag.
+  "Replace image file path under cursor to HTML img inline link.
 Example:
  emacs_logo.png
 become
  <img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\" />
 
-This function requires the 「identify」 command from ImageMagick.
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
-Version 2015-05-15"
+Version 2015-06-05"
   (interactive)
   (let* ((ξbounds (bounds-of-thing-at-point 'filename))
          (ξp1 (car ξbounds))

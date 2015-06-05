@@ -84,7 +84,7 @@ becomes
 When called in lisp program, φbegin φend are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
-Version 2015-04-13"
+Version 2015-06-04"
   (interactive
    (let (ξp1 ξp2)
      (save-excursion

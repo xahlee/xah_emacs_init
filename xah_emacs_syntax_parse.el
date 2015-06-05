@@ -20,10 +20,9 @@ This depends on major mode having setup syntax table properly."
   "Move cursor to the 1st closing bracket, according to current syntax table.
 This command is dumb, it'll not ignore brackets inside comment or string."
   (interactive)
-  (let ((ξdist (skip-syntax-forward "^)")) )
+  (let ((ξdist (skip-syntax-forward "^)")))
     (message "Distance traveled: %s" ξdist)
-    (forward-char 1)
-  ))
+    (forward-char 1)))
 
 (defun xah-syntax-bracket-backward ()
   "Move cursor to previous opening bracket, according to current syntax table.
@@ -31,8 +30,7 @@ This command is dumb, it'll not ignore brackets inside comment or string."
   (interactive)
   (let ((ξdist (skip-syntax-backward "^(")))
     (message "Distance traveled: %s" ξdist)
-    (backward-char 1)
-  ))
+    (backward-char 1)))
 
 (defun xah-scan-list (φcount φcurrent-depth)
   "Call `scan-lists' interactively.
@@ -41,8 +39,7 @@ it's similar to `forward-sexp', except that forward-sexp also consider atoms (th
 "
   (interactive "nCount:\nnDepth:")
   (let ((parse-sexp-ignore-comments t))
-    (goto-char (scan-lists (point) φcount φcurrent-depth))
-  ))
+    (goto-char (scan-lists (point) φcount φcurrent-depth))))
 
 (defun xah-scan-sexps ()
   "Call `scan-sexps' interactively.
@@ -71,8 +68,7 @@ scan-sexps will error if encounting on unmatched paren, ⁖
 "
   (interactive)
   (let ((parse-sexp-ignore-comments t))
-    (goto-char (scan-sexps (point) 1))
-  ))
+    (goto-char (scan-sexps (point) 1))))
 
 (defun xah-parse-partial-sexp ()
   "Call `syntax-ppss' or `parse-partial-sexp'.
