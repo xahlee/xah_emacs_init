@@ -154,7 +154,9 @@ google_ad_client")
      ξfileList)))
 
 (defun xah-syntax-color-hex ()
-  "Syntax color text of the form 「#ff1100」 in current buffer."
+  "Syntax color text of the form 「#ff1100」 in current buffer.
+URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
+Version 2015-06-11"
   (interactive)
   (font-lock-add-keywords
    nil
@@ -166,27 +168,32 @@ google_ad_client")
   (font-lock-fontify-buffer))
 
 (defun xah-syntax-color-hsl ()
-  "Syntax color CSS's HSL color spec ⁖ 「hsl(0,90%,41%)」 in current buffer."
+  "Syntax color CSS's HSL color spec ⁖ 「hsl(0,90%,41%)」 in current buffer.
+URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
+Version 2015-06-11"
   (interactive)
   (font-lock-add-keywords
    nil
-  '(("hsl( *\\([0-9]\\{1,3\\}\\) *, *\\([0-9]\\{1,3\\}\\)% *, *\\([0-9]\\{1,3\\}\\)% *)"
-     (0 (put-text-property
-         (+ (match-beginning 0) 3)
-         (match-end 0)
-         'face (list :background
- (concat "#" (mapconcat 'identity
-                        (mapcar
-                         (lambda (x) (format "%02x" (round (* x 255))))
-                         (color-hsl-to-rgb
-                          (/ (string-to-number (match-string-no-properties 1)) 360.0)
-                          (/ (string-to-number (match-string-no-properties 2)) 100.0)
-                          (/ (string-to-number (match-string-no-properties 3)) 100.0)
-                          ) )
-                        "" )) ;  "#00aa00"
-                      ))))) )
-  (font-lock-fontify-buffer)
-  )
+   '(("hsl( *\\([0-9]\\{1,3\\}\\) *, *\\([0-9]\\{1,3\\}\\)% *, *\\([0-9]\\{1,3\\}\\)% *)"
+      (0 (put-text-property
+          (+ (match-beginning 0) 3)
+          (match-end 0)
+          'face 
+          (list
+           :background
+           (concat
+            "#" 
+            (mapconcat
+             'identity
+             (mapcar
+              (lambda (x) (format "%02x" (round (* x 255))))
+              (color-hsl-to-rgb
+               (/ (string-to-number (match-string-no-properties 1)) 360.0)
+               (/ (string-to-number (match-string-no-properties 2)) 100.0)
+               (/ (string-to-number (match-string-no-properties 3)) 100.0)))
+             "" )) ;  "#00aa00"
+           ))))))
+  (font-lock-fontify-buffer))
 
 ;; (concat "#" (mapconcat 'identity
 ;;                         (mapcar

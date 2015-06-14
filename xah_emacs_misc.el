@@ -74,112 +74,13 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 
-(defvar xah-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
-
-(setq xah-filelist
-      '(
-        ("3emacs blog" . "~/web/ergoemacs_org/emacs/blog.html" )
-        ("xah fly keys xs" . "~/web/ergoemacs_org/misc/ergoemacs_vi_mode.html")
-        ("xahmodes xs" . "~/web/ergoemacs_org/emacs/xah_emacs_modes.html" )
-        ("emacs xs" . "~/web/ergoemacs_org/emacs/emacs.html")
-        ("emacs keyboard xs" . "~/web/ergoemacs_org/emacs/emacs_keys_index.html")
-        ("emacs keybinding xs" . "~/web/ergoemacs_org/emacs/keyboard_shortcuts.html" )
-        ("emacs essay xs" . "~/web/ergoemacs_org/emacs/emacs_essays_index.html")
-        ("emacs best keyboard xs" . "~/web/ergoemacs_org/emacs/emacs_best_keyboard.html")
-        ("elisp xs" . "~/web/ergoemacs_org/emacs/elisp.html")
-
-        ("4comp blog" . "~/web/xahlee_info/comp/blog.html" )
-        ("web blog" . "~/web/xahlee_info/js/blog.html" )
-
-        ("math blog" . "~/web/xahlee_info/math/blog.html" )
-        ("wordy english blog" . "~/web/wordyenglish_com/lit/blog.html" )
-        ("chinese blog" . "~/web/wordyenglish_com/chinese/blog.html" )
-        ("music blog" . "~/web/xahmusic_org/music/blog.html" )
-        ("arts blog" . "~/web/xaharts_org/arts/blog.html" )
-        ("sl blog" . "~/web/xahsl_org/sl/blog.html" )
-
-        ("python xs" . "~/web/xahlee_info/perl-python/index.html")
-        ("python3 xs" . "~/web/xahlee_info/python/python3_basics.html")
-        ("php xs" . "~/web/xahlee_info/php/index.html")
-        ("perl xs" . "~/web/xahlee_info/perl/perl_index.html")
-        ("ruby xs" . "~/web/xahlee_info/ruby/ruby_index.html")
-        ("java xs" . "~/web/xahlee_info/java-a-day/java.html")
-        ("clojure xs" . "~/web/xahlee_info/clojure/clojure_index.html")
-        ("mathematica" . "~/web/xahlee_info/M/index.html")
-        ("comp lang index xs" . "~/web/xahlee_info/comp/comp_lang.html")
-
-        ("linux xs" . "~/web/xahlee_info/linux/linux_index.html" )
-        ("git xs" . "~/web/xahlee_info/linux/git_index.html" )
-
-        ("math index xs" . "~/web/xahlee_info/math/math_index.html")
-        ("unicode xs" . "~/web/xahlee_info/comp/unicode_index.html")
-        ("logo xs" . "~/web/xahlee_info/logo_design/index.html" )
-
-        ("js xs" . "~/web/xahlee_info/js/js.html" )
-        ("js web index xs" . "~/web/xahlee_info/js/scripting_web_index.html")
-        ("css xs" . "~/web/xahlee_info/js/css_index.html")
-        ("svg xs" . "~/web/xahlee_info/js/svg.html")
-        ("webdev xs" . "~/web/xahlee_info/js/index.html")
-        ("html xs" . "~/web/xahlee_info/js/html_index.html")
-        ("web design xs" . "~/web/xahlee_info/js/web_design_index.html")
-
-        ("keyboard index xs" . "~/web/xahlee_info/kbd/keyboarding.html")
-        ("keyboard reviews xs" . "~/web/xahlee_info/kbd/keyboard_review_gallery.html")
-        ("keyboard design xs" . "~/web/xahlee_info/kbd/keyboard_design.html")
-        ("keyboard layout xs" . "~/web/xahlee_info/kbd/keyboard_layout_keybinding.html")
-        ("keyboard binding xs" . "~/web/xahlee_info/kbd/keyboard_key_layout_keybinding_tools.html")
-        ("truly ergonomic keyboard" . "~/web/xahlee_info/kbd/Truly_Ergonomic_keyboard.html")
-        ("mouse index xs" . "~/web/xahlee_info/kbd/mouse_index.html")
-
-        ("math curves xs" . "~/web/xahlee_info/SpecialPlaneCurves_dir/specialPlaneCurves.html")
-        ("hacker cult index xs" . "~/web/xahlee_info/comp/comp_index.html")
-        ("netiquette index xs" . "~/web/xahlee_info/Netiquette_dir/troll.html")
-
-        ("lojban xs" . "~/web/wordyenglish_com/lojban/lojban.html")
-        ("chinese index xs" . "~/web/wordyenglish_com/lit/chinese_index.html")
-        ("vocabulary xs" . "~/web/wordyenglish_com/words/vocabulary.html" )
-
-        ("parser xs" . "~/web/xahlee_info/parser/formal_language_grammar_parser_index.html")
-        ("regex xs" . "~/web/xahlee_info/comp/regex_parsing_index.html")
-
-        ("python2 doc" . "~/web/xahlee_info/python_doc_2.7.6/index.html")
-        ("python3 doc" . "~/web/xahlee_info/python_doc_3.3.3/index.html")
-
-        ("download" . "~/Downloads/" )
-        ("pictures" . "~/Pictures/" )
-        ("document" . "~/Documents/" )
-        ("trash" . "~/.local/share/Trash/")
-
-        ("git" . "~/git/" )
-        ("abbrev" . "~/git/xah_emacs_init/xah_emacs_abbr.el" )
-        ("emacs init" . "~/git/xah_emacs_init/xah_emacs_init.el" )
-        ("xah fly keys git" . "~/git/xah-fly-keys/xah-fly-keys.el")
-        ("ahk" . "~/git/xah_autohotkey_scripts/xah autohotkeys.ahk" )
-        ("find replace.py3" . "~/git/xah_find_replace/find-replace.py3")
-        ("ergoemacs init" . "~/git/ergoemacs/ergoemacs/")
-        ("update_ergoemacs.sh" . "~/git/xahscripts/update_ergoemacs.sh")
-        ("make download copy" . "~/git/xahscripts/make_download_copy/make_download_copy.el")
-        ("xah site move" . "~/git/xahscripts/elisp/xah_site_move.el")
-        ("gorilla" . "~/git/gorilla-repl/src/gorilla_repl/")
-        ("xah clojure play" . "~/git/xah-clojure-play/")
-
-        ("emacs init" . "~/.emacs.d/init.el")
-
-        ("x emacs blog" . "~/web/ergoemacs_org/emacs/xx_emacs_blog.html")
-        ("x webdev blog" . "~/web/xahlee_info/js/xx_webdev_blog.html")
-        ("x comp blog" . "~/web/xahlee_info/comp/xx_comp_blog.html")
-        ("x math blog" . "~/web/xahlee_info/math/xx_math_blog.html")
-        ("x pd blog" . "~/web/xahlee_org/Periodic_dosage_dir/xx_pd_blog.html")
-        ("x wordy english blog" . "~/web/wordyenglish_com/lit/xx_lit_blog.html")
-        ("x xah arts blog" . "~/web/xaharts_org/arts/xx_art_blog.html")
-        ("x chinese blog" . "~/web/wordyenglish_com/chinese/xx_chinese_blog.html")
-        ("x music" . "~/web/xahmusic_org/music/xx-music_blog.html")
-
-        ("piano" . "~/web/xahmusic_org/piano/index.html")
-        ("diklo" . "~/web/xahlee_org/diklo/")
-
-        ("xah lee proflie" . "~/web/xahlee_org/Periodic_dosage_dir/t1/presences.html")
-        ))
+(defvar xah-filelist 
+  '(
+    ("3emacs blog" . "~/web/ergoemacs_org/emacs/blog.html" )
+    ("xah fly keys xs" . "~/web/ergoemacs_org/misc/ergoemacs_vi_mode.html")
+    ("xahmodes xs" . "~/web/ergoemacs_org/emacs/xah_emacs_modes.html" )
+    ("emacs xs" . "~/web/ergoemacs_org/emacs/emacs.html"))
+  "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
 (defun xah-open-file-fast ()
   "Prompt to open a file from `xah-filelist'.

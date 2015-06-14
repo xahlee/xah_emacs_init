@@ -14,7 +14,7 @@ become
  <img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\" />
 
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
-Version 2015-06-05"
+Version 2015-06-13"
   (interactive)
   (let* ((ξbounds (bounds-of-thing-at-point 'filename))
          (ξp1 (car ξbounds))
@@ -34,10 +34,17 @@ Version 2015-06-05"
          (ξheight (number-to-string (elt ξimgWH 1))))
     (delete-region ξp1 ξp2)
     (insert
-     (concat
-      "<img src=\""
-      ξhrefValue
-      "\"" " " "alt=\"" ξaltText "\"" " " "width=\"" ξwidth "\" " "height=\"" ξheight "\" />"))))
+     (if (or (equal ξwidth "0") (equal ξheight "0"))
+         (concat
+          "<img src=\""
+          ξhrefValue
+          "\"" " " "alt=\"" ξaltText "\"" " />")
+       (concat
+        "<img src=\""
+        ξhrefValue
+        "\"" " " "alt=\"" ξaltText "\""
+        " width=\"" ξwidth "\""
+        " height=\"" ξheight "\" />")))))
 
 (defun xahsite-html-image-linkify ( &optional φbegin φend)
   "Replace a image file's path under cursor with a HTML img tag.
@@ -411,30 +418,17 @@ Example output:
 
 For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number'
 URL `http://ergoemacs.org/emacs/elisp_amazon-linkify.html'
-Version 2015-03-18"
+Version 2015-06-07"
   (interactive)
-  (let (ξp1 ξp2 ξinputText ξasin ξproductName )
+  (let ((ξbds (bounds-of-thing-at-point 'url))
+        ξp1 ξp2 ξinputText ξasin ξproductName )
     (if (use-region-p)
-        (progn
-          (setq ξp1 (region-beginning))
-          (setq ξp2 (region-end)))
-      (save-excursion
-        (let ((p0 (point)))
-          (skip-chars-backward "^ \n\t")
-          (setq ξp1 (point))
-          (goto-char p0)
-          (skip-chars-forward "^ \n\t")
-          (setq ξp2 (point)))))
-
+        (progn (setq ξp1 (region-beginning)) (setq ξp2 (region-end)))
+      (progn (setq ξp1 (car ξbds)) (setq ξp2 (cdr ξbds))))
     (setq ξinputText (buffer-substring-no-properties ξp1 ξp2))
-
     (if (string-match "//amzn.to/" ξinputText)
-        (progn
-          (delete-region ξp1 ξp2)
-          (insert
-           (format
-            "<a class=\"amzlnk\" href=\"%s\">amazon</a>"
-            ξinputText)))
+        (progn (delete-region ξp1 ξp2)
+               (insert (format "<a class=\"amzlnk\" href=\"%s\">amazon</a>" ξinputText)))
       (progn
         (setq ξasin
               (cond

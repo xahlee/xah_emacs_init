@@ -612,30 +612,6 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 ["<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/en_US/all.js#xfbml=1\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>"
 ""]
 
-;; ["<div class=\"showlove\">
-;; Like what you read?
-;; <div class=\"ppp8745\"><a href=\"buy_xah_emacs_tutorial.html\">Buy Xah Emacs Tutorial</a>
-;; <form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
-;; <input type=\"hidden\" name=\"cmd\" value=\"_xclick\" />
-;; <input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\" />
-;; <input type=\"hidden\" name=\"lc\" value=\"US\" />
-;; <input type=\"hidden\" name=\"item_name\" value=\"xah emacs tutorial\" />
-;; <input type=\"hidden\" name=\"amount\" value=\"15.00\" />
-;; <input type=\"hidden\" name=\"currency_code\" value=\"USD\" />
-;; <input type=\"hidden\" name=\"button_subtype\" value=\"services\" />
-;; <input type=\"hidden\" name=\"no_note\" value=\"0\" />
-;; <input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\" />
-;; <input type=\"hidden\" name=\"no_shipping\" value=\"1\" />
-;; <input type=\"hidden\" name=\"shipping\" value=\"0.00\" />
-;; <input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\" />
-;; <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal\" />
-;; </form>
-;; </div>
-;; or share some <span style=\"color:red;font-size:xx-large\">♥</span>
-;; <div id=\"share-buttons-97729\"><div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div></div><script defer src=\"http://xahlee.info/share_widgets.js\"></script>
-;; </div>"
-;; ""]
-
 ;; paypal
 ["<div class=\"paypal-donate-60910\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"8127788\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif\" name=\"submit\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>
 <p>thank you <a href=\"http://xahlee.org/thanks.html\" rel=\"nofollow\">donors</a></p>
@@ -669,6 +645,9 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
 ""]
 
 ["<li><a href=\"../emacs/buy_xah_emacs_tutorial.html\">Buy</a></li>"
+""]
+
+["<li><a href=\"../../emacs/buy_xah_emacs_tutorial.html\">Buy</a></li>"
 ""]
 
 ["<li><a href=\"emacs/buy_xah_emacs_tutorial.html\">Buy</a></li>"
@@ -735,6 +714,10 @@ amzn_assoc_bg_color = \"FFFFFF\";
 [ "<script charset=\"utf-8\" src=\"http://ws.amazon.com[^<]+?</script>" ""]
 
 ["<div class=\"¤tla\"><a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a></div>" ""]
+
+[
+"<a href=\"[./a-z0-9]*blog.xml\"><img src=\"[./a-z0-9]*rss_icon.svg\" alt=\"rss icon\" style=\"width:36px;height:36px\" /></a>"
+""]
 
 ["<script><!--
 amazon_ad_tag .+?</script>
