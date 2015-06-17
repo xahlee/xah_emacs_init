@@ -6,6 +6,9 @@
 
   (define-key xah-html-keymap (kbd "<f5>") 'xah-browse-url-of-buffer)
 
+  (define-key xah-html-single-keys-keymap (kbd "1") 'xah-html-get-precode-make-new-file)
+  (define-key xah-html-single-keys-keymap (kbd "2") 'xah-html-toggle-syntax-coloring-markup)
+
   (define-key xah-html-single-keys-keymap (kbd "e") 'xah-make-atom-entry)
   (define-key xah-html-single-keys-keymap (kbd "g") 'xah-browse-url-of-buffer)
   (define-key xah-html-single-keys-keymap (kbd "h") 'xah-all-linkify)
