@@ -323,6 +323,19 @@
 
     
 ;;; xah personal
+
+
+    ("tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
+    ("1menu" "〖a ▸ b ▸ c〗")
+    ("1key" "【Alt+f】")
+    ("1song" "singer ♪《title》")
+    ("1faq" "<div class=\"question-box32371\">
+<p class=\"q\">How to do this?</p>
+<p>this way</p>
+</div>
+
+")
+
     ("ee" "ErgoEmacs")
     ("eem" "ergoemacs-mode")
     ("xfk" "xah-fly-keys")

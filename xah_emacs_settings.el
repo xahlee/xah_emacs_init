@@ -184,6 +184,8 @@
 
 (desktop-save-mode)
 
+(setq switch-to-visible-buffer nil)
+
 (winner-mode 0)
 (electric-pair-mode 0)
 (blink-cursor-mode 0 )
