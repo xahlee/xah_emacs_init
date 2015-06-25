@@ -74,7 +74,7 @@
 (defun xah-css-mode-setup ()
   "Modify keymaps used by `xah-css-mode'."
   (require 'xah-css-mode)
-  (define-key xah-css-single-keys-keymap (kbd "s") 'xah-sync-css)
+  (define-key xah-css-single-keys-map (kbd "s") 'xah-sync-css)
   )
 (add-hook 'xah-css-mode-hook 'xah-css-mode-setup)
 

@@ -184,7 +184,7 @@
 
 (desktop-save-mode)
 
-(setq switch-to-visible-buffer nil)
+(setq switch-to-visible-buffer t)
 
 (winner-mode 0)
 (electric-pair-mode 0)

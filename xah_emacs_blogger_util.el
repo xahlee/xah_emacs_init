@@ -14,16 +14,26 @@ Remove the header and footer.
 Fix all relative links to http://xahlee.org/ links.
 add a “Perm URL with updates: ‹link›” sentence at top.
 
-This new content is ready to be posted to blogger."
+This new content is ready to be posted to blogger.
+Version 2015-06-21"
   (interactive)
   (let* (
-         (p1 (point-min))
-         (p2 (point-max))
-         (mainText (buffer-string))
+         p1 p2
+         mainText
          (thisFilePath (or (buffer-file-name) default-directory))
          (currentDir (file-name-directory thisFilePath))
          (newBuff (generate-new-buffer "*blogger temp*"))
          cssStr permLink)
+
+    (if (use-region-p)
+        (progn
+          (setq p1 (region-beginning))
+          (setq p2 (region-end)))
+      (progn
+        (setq p1 (point-min))
+        (setq p2 (point-max))))
+
+    (setq mainText (buffer-substring-no-properties p1 p2))
 
     (switch-to-buffer newBuff)
     (html-mode)
@@ -104,12 +114,10 @@ This new content is ready to be posted to blogger."
     ;; insert perm link at top
     (when (and
            (not (string-match "blog\.html$" thisFilePath))
-           (not (string-match "Vocabulary_dir" thisFilePath))
-           )
+           (not (string-match "Vocabulary_dir" thisFilePath)))
       (goto-char 1)
       (setq permLink (xahsite-filepath-to-url thisFilePath))
-      (insert "<p>Perm URL with updates: " "<a href=\"" permLink "\">" permLink "</a>" "</p>\n\n")
-      )
+      (insert "<p>Perm URL with updates: " "<a href=\"" permLink "\">" permLink "</a>" "</p>\n\n"))
 
     ;; insert css string
     (goto-char 1)
