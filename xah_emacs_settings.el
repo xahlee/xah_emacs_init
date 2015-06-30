@@ -112,7 +112,7 @@
 (setq backup-by-copying t)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
-
+(setq save-interprogram-paste-before-kill t)
 (setq enable-recursive-minibuffers t)
 
 (progn
@@ -197,8 +197,7 @@
 
 (setq shift-select-mode nil)
 
-(setq org-startup-folded nil)
-(setq org-return-follows-link t)
+
 
 (when (fboundp 'eww)
   (progn
@@ -284,7 +283,10 @@
 (progn
   ;; org-mode
   ;; make “org-mode” syntax color code sections
-  (setq org-src-fontify-natively t))
+  (setq org-src-fontify-natively t)
+  (setq org-startup-folded nil)
+  (setq org-return-follows-link t)
+  (setq org-startup-truncated nil))
 
 
 
