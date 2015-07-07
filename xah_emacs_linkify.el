@@ -788,6 +788,9 @@ If there is text selection, use it as input."
      ((string-match-p "\\.ogg\\'" ξpath) (xah-audio-file-linkify))
 
      ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+
+     ((string-match-p "javascript_es6" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+
      ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
 
      ((xahsite-url-is-xah-website-p ξpath) (xah-file-linkify ξp1 ξp2))

@@ -115,6 +115,10 @@
 (setq save-interprogram-paste-before-kill t)
 (setq enable-recursive-minibuffers t)
 
+;; 2015-07-04 bug of pasting in emacs.
+;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
+ (setq x-selection-timeout 300)
+
 (progn
   ;; seems pointless to warn. There's always undo.
   (put 'narrow-to-region 'disabled nil)
@@ -127,7 +131,7 @@
 
 ;; dired
 
-(progn 
+(progn
 
   (require 'dired-x)
 
@@ -141,7 +145,6 @@
   (setq dired-recursive-copies (quote always))
   (setq dired-recursive-deletes (quote top))
   )
-
 
 
 
@@ -197,8 +200,6 @@
 
 (setq shift-select-mode nil)
 
-
-
 (when (fboundp 'eww)
   (progn
     (defun xah-rename-eww-hook ()
@@ -252,7 +253,8 @@
 
 ;; set highlighting brackets
 (show-paren-mode 1)
-(setq show-paren-style 'expression)
+;; (setq show-paren-style 'expression)
+(setq show-paren-style 'parenthesis)
 
 (progn
   ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.
@@ -290,12 +292,11 @@
 
 
 
-
 ;; load emacs 24's package system. Add MELPA repository.
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
-   'package-archives 
+   'package-archives
    ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
    '("melpa" . "http://melpa.milkbox.net/packages/")
    t))
@@ -359,5 +360,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(completions-common-part ((t (:inherit default :foreground "gray50"))))
- '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
+ ;; '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
  )
