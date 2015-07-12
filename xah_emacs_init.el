@@ -118,7 +118,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_html"))
 (load (xah-get-fullpath "xah_emacs_html_insert_things"))
-(load (xah-get-fullpath "xah_emacs_linkify"))
+(load (xah-get-fullpath "xah_emacs_html_linkify"))
 (load (xah-get-fullpath "xah_emacs_ref_linkify"))
 (load (xah-get-fullpath "xah_emacs_vid_linkify"))
 (load (xah-get-fullpath "xah_emacs_google_earth"))

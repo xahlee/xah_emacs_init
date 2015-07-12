@@ -354,11 +354,11 @@
 ;;  ;; '(xlsl-reference-url "http://lslwiki.net/lslwiki/wakka.php?wakka=")
 ;; )
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(completions-common-part ((t (:inherit default :foreground "gray50"))))
- ;; '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
- )
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(completions-common-part ((t (:inherit default :foreground "gray50"))))
+;;  ;; '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
+;;  )

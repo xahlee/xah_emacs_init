@@ -172,8 +172,6 @@ If there's a text selection, use that region as file name."
     (delete-region ξp1 ξp2)
     (insert ξresultStr)))
 
-
-
 (defun xah-blogger-linkify ()
   "Make URL at cursor point into a HTML link.
 
@@ -189,7 +187,35 @@ becomes
     (delete-region p7 p8)
     (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url ξurl) "\">✍</a></div>"))))
 
-
+;; (defun xah-site-topic-linkify ()
+;;   "Make word at cursor point into a HTML link to xah site
+;; 2015-07-12 incomplete
+;; python
+;; becomes
+;; <a href=\"../perl-python/index.html\">Xah {Python, Perl, Ruby} Tutorial</a>
+;; The relative link may be different.
+;; Version 2015-07-12"
+;;   (interactive)
+;;   (let (
+;;         ξp1
+;;         ξp2
+;;         ξinput-str
+;;         ξword
+;;         )
+
+;;     (progn
+;;       (progn
+;;         (setq ξboundary (xah-get-thing-or-selection 'word))
+;;         (setq
+;;          ξinput-str (elt ξboundary 0)
+;;          ξp1 (elt ξboundary 1)
+;;          ξp2 (elt ξboundary 2))
+;;         (setq ξword (downcase ξinputWord)))
+
+;;       (progn
+;;         (cond
+;;          (CONDITION  BODY)
+;;          (CONDITION BODY))))))
 
 (defun youporn-search-linkify ()
   "Make the current line into a YouPorn.com link.
