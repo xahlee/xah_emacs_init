@@ -65,47 +65,51 @@ this command calls python3's script 「2to3」."
       )
     ))
 
-(defun xah-change-file-line-ending (φfpath φline-ending-style)
-  "Change file's newline character.
- 「φfpath」 is full path to file.
- 「φline-ending-style」 is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
-
-If the file is already opened, it will be saved after this command.
-"
-  (let (mybuffer
-        (bufferOpened-p (get-file-buffer φfpath))
-        )
-    (if bufferOpened-p
-        (progn (with-current-buffer bufferOpened-p (set-buffer-file-coding-system φline-ending-style) (save-buffer) ))
-      (progn
-        (setq mybuffer (find-file φfpath))
-        (set-buffer-file-coding-system φline-ending-style)
-        (save-buffer)
-        (kill-buffer mybuffer) ) ) ) )
-
 (defun xah-change-file-line-ending-style (φfile-list φline-ending-style)
   "Change current file or dired marked file's newline convention.
-When called in lisp program, “φline-ending-style” is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+
+When called non-interactively, φline-ending-style is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
+Version 2015-07-24
 "
   (interactive
    (list
     (if (eq major-mode 'dired-mode )
         (dired-get-marked-files)
-      (list (buffer-file-name)) )
-    (ido-completing-read "Style:" '("Unix" "Mac OS 9" "Windows") "PREDICATE" "REQUIRE-MATCH"))
-   )
+      (list (buffer-file-name)))
+    (ido-completing-read "Line ending:" '("Linux/MacOSX/Unix" "MacOS9" "Windows") "PREDICATE" "REQUIRE-MATCH")))
   (let* (
-         (nlStyle
+         (ξcodingSystem
           (cond
            ((equal φline-ending-style "Unix") 'unix)
            ((equal φline-ending-style "Mac OS 9") 'mac)
            ((equal φline-ending-style "Windows") 'dos)
-           (t (error "code logic error 65327. Expect one of it." ))
-           ))
-         )
+           (t (error "code logic error 65327. Expect one of it." )))))
     (mapc
-     (lambda (ff) (xah-change-file-line-ending ff nlStyle))
-     φfile-list)) )
+     (lambda (x) (xah-convert-file-coding-system x ξcodingSystem))
+     φfile-list)))
+
+(defun xah-convert-file-coding-system (φfpath φcoding-system)
+  "Convert file's encoding.
+ φfpath is full path to file.
+ φcoding-system is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+
+If the file is already opened, it will be saved after this command.
+URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
+Version 2015-07-24
+"
+  (let (ξbuffer
+        (ξbufferOpened-p (get-file-buffer φfpath)))
+    (if ξbufferOpened-p
+        (progn
+          (with-current-buffer ξbufferOpened-p
+            (set-buffer-file-coding-system φcoding-system)
+            (save-buffer)))
+      (progn
+        (setq ξbuffer (find-file φfpath))
+        (set-buffer-file-coding-system φcoding-system)
+        (save-buffer)
+        (kill-buffer ξbuffer)))))
 
 
 ;; don't use much anymore

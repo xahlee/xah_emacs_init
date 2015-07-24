@@ -33,7 +33,7 @@ When called with `universal-argument', work on visible portion of whole buffer (
 (defun xah-angle-brackets-to-html (φbegin φend)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span> in current text block or selection.
 
-When called in lisp program, φbegin φend are region positions.
+When called non-interactively, φbegin φend are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 version 2015-04-13"
@@ -81,7 +81,7 @@ For example
 becomes
  「… announced as Blu-ray Disc, and …」.
 
-When called in lisp program, φbegin φend are region positions.
+When called non-interactively, φbegin φend are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 Version 2015-06-04"

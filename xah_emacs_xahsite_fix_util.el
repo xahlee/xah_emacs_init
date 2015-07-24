@@ -11,7 +11,7 @@ When called interactively, φsource-file-path is the path of current buffer, and
 
 When called interactively, the buffer for φdest-file-path is left unsaved and as current.
 
-When called in lisp program, φsource-file-path and φdest-file-path should be file full paths. If changes are made to φdest-file-path, it returns t, else nil."
+When called non-interactively, φsource-file-path and φdest-file-path should be file full paths. If changes are made to φdest-file-path, it returns t, else nil."
   (interactive
    (let ( p1 p2  )
      (if (use-region-p)
@@ -64,7 +64,7 @@ Add the current page (φfilePath) as link to the “related pages” section at 
 
 When called interactively, φfilePath is the current file. φdestFileList is file paths extracted from current text block or text selection.
 
-When called in lisp program, φfilePath is a string. φdestFileList is list of filenames. All paths should be absolute path.
+When called non-interactively, φfilePath is a string. φdestFileList is list of filenames. All paths should be absolute path.
 
 The related pages are HTML “div.rltd” element, having this form
 
@@ -295,7 +295,7 @@ This function is specific to xahlee.org. 2008-05-10."
 
 When called interactively, work on current text block or text selection. (a “text block” is text between blank lines)
 
-When called in lisp code, if φstring is non-nil, returns a changed string.  If φstring nil, change the text in the region between positions φfrom φto."
+When called non-interactively, if φstring is non-nil, returns a changed string.  If φstring nil, change the text in the region between positions φfrom φto."
   (interactive
    (if (use-region-p)
        (list nil (region-beginning) (region-end))
