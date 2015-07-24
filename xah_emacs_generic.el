@@ -47,23 +47,18 @@ this command calls python3's script 「2to3」."
   (interactive)
   (let* (
          (fName (buffer-file-name))
-         (fSuffix (file-name-extension fName))
-         )
+         (fSuffix (file-name-extension fName)))
     (when (buffer-modified-p)
       (progn
         (when (y-or-n-p "Buffer modified. Do you want to save first?")
-          (save-buffer) ) ) )
+          (save-buffer))))
 
-    (if (or (string-equal fSuffix "py") (string-equal fSuffix "py3") )
+    (if (or (string-equal fSuffix "py") (string-equal fSuffix "py3"))
         (progn
           (shell-command (format "2to3 -w %s" fName))
-          (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES")
-          )
+          (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES"))
       (progn
-            (error "file 「%s」 doesn't end in “.py” or “.py3”." fName)
-            )
-      )
-    ))
+        (error "file 「%s」 doesn't end in “.py” or “.py3”." fName)))))
 
 (defun xah-change-file-line-ending-style (φfile-list φline-ending-style)
   "Change current file or dired marked file's newline convention.
@@ -81,8 +76,8 @@ Version 2015-07-24
   (let* (
          (ξcodingSystem
           (cond
-           ((equal φline-ending-style "Unix") 'unix)
-           ((equal φline-ending-style "Mac OS 9") 'mac)
+           ((equal φline-ending-style "Linux/MacOSX/Unix") 'unix)
+           ((equal φline-ending-style "MacOS9") 'mac)
            ((equal φline-ending-style "Windows") 'dos)
            (t (error "code logic error 65327. Expect one of it." )))))
     (mapc
