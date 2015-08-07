@@ -265,7 +265,7 @@
     ("dl" "download")
     ("1c" "character")
     ("1chars" "characters")
-    ("1defn" "definition")
+    ("1def" "definition")
     ("bg" "background")
     ("kw" "keyword")
     ("kb" "keyboard")

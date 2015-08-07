@@ -94,12 +94,10 @@ To solve this problem, when your code only knows the relative path of another fi
 
       (load (xah-get-fullpath "xah_emacs_keybinding"))
       (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
-      (load (xah-get-fullpath "xah_emacs_keybinding_meta_key"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_shift_switch"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
       (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
       (load (xah-get-fullpath "xah_emacs_mouse_binding"))
-      (load (xah-get-fullpath "xah_emacs_hyper_super_setup"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_truly_ergonomic"))
       )
   (progn

@@ -28,11 +28,10 @@ default browser will be launched and opening this URL:
     (cond
      ((string-equal system-type "windows-nt") ; Windows
       (when (string-match "^c:/" myURL) (setq myURL (concat "file:///" myURL)))
-      (browse-url-firefox myURL))
+      (browse-url myURL))
      ((string-equal system-type "gnu/linux")
-      (browse-url-firefox myURL))
+      (browse-url myURL))
      ((string-equal system-type "darwin") ; Mac
-      ;; (browse-url-firefox myURL)
       (browse-url myURL )))))
 
 (defun xah-browse-url-of-buffer-firefox ()

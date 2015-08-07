@@ -231,16 +231,14 @@ Requires a python script. See code."
 (defun xah-html-rename-html-inline-image ()
   "Replace current HTML inline image's file name.
 This command is for interactive use only.
-When cursor is in HTML link file path, e.g.  <img src=\"gki/macosxlogo.png\" > and this command is called, it'll prompt user for a new name. The link path will be changed to the new name, the corresponding file will also be renamed. The operation is aborted if a name exists.
-Version 2015-05-13"
+When cursor is in HTML link file path, e.g.  <img src=\"img/emacs_logo.png\" > and this command is called, it'll prompt user for a new name. The link path will be changed to the new name, the corresponding file will also be renamed. The operation is aborted if a name exists.
+Version 2015-08-07"
   (interactive)
   (let* (
          (ξbounds (bounds-of-thing-at-point 'filename))
          (ξinputPath (buffer-substring-no-properties (car ξbounds) (cdr ξbounds)))
          (ξexpandedPath (expand-file-name ξinputPath (file-name-directory (or (buffer-file-name) default-directory ))))
-         (ξnewPath (list (read-string "New name: " ξexpandedPath nil ξexpandedPath )))
-
-         )
+         (ξnewPath (read-string "New name: " ξexpandedPath nil ξexpandedPath )))
     (if (file-exists-p ξnewPath)
         (progn (user-error "file 「%s」 exist." ξnewPath ))
       (progn

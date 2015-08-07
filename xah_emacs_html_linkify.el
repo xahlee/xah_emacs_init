@@ -802,6 +802,10 @@ If there is text selection, use it as input."
     (setq ξpath (buffer-substring-no-properties ξp1 ξp2))
 
     (cond
+     ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "javascript_es6" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "REC-SVG11-20110816" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" ξpath) (xah-blogger-linkify))
      ((string-match-p "www\.amazon\.com/" ξpath) (xah-amazon-linkify))
      ((string-match-p "//amzn\.to/" ξpath) (xah-amazon-linkify))
@@ -812,12 +816,6 @@ If there is text selection, use it as input."
      ((string-match-p "\\.css\\'" ξpath) (xah-css-linkify))
      ((string-match-p "\\.mp3\\'" ξpath) (xah-audio-file-linkify))
      ((string-match-p "\\.ogg\\'" ξpath) (xah-audio-file-linkify))
-
-     ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-
-     ((string-match-p "javascript_es6" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-
-     ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
 
      ((xahsite-url-is-xah-website-p ξpath) (xah-file-linkify ξp1 ξp2))
      ((string-match-p "wikipedia.org/" ξpath)
