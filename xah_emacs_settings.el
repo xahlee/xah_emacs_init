@@ -129,10 +129,9 @@
   (put 'dired-find-alternate-file 'disabled nil)
 )
 
-;; dired
 
 (progn
-
+;; dired
   (require 'dired-x)
 
   ;; make dired suggest target dir (for copy, move, …) that's in the other dired pane
@@ -184,9 +183,9 @@
 
 (require 'recentf)
 (recentf-mode 1)
+(cua-mode 1)
 
 (desktop-save-mode)
-
 (setq switch-to-visible-buffer t)
 
 (winner-mode 0)

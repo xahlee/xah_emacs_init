@@ -19,18 +19,24 @@
   )
 
 (defun xah-add-reference-span-tag ()
-  "Add <span class=\"ref\">…</span> tag to current line or text selection."
+  "Add <span class=\"ref\">…</span> tag to current HTML element or text selection.
+Version 2015-08-12"
   (interactive)
   (require 'xah-html-mode)
   (let ( ξp1 ξp2 )
     (if (use-region-p)
         (progn (setq ξp1 (region-beginning))
                (setq ξp2 (region-end)))
-      (progn (setq ξp1 (line-beginning-position))
-             (setq ξp2 (line-end-position))))
+      (progn
+        (xah-html-skip-tag-backward)
+        (setq ξp1 (point))
+        (xah-html-skip-tag-forward)
+        (setq ξp2 (point))))
     (set-mark ξp1)
     (goto-char ξp2)
-    (xah-html-wrap-html-tag "span" "ref")))
+    (xah-html-add-open-close-tags "span" "ref" ξp1 ξp2)
+    ;; (xah-html-wrap-html-tag "span" "ref")
+    ))
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
