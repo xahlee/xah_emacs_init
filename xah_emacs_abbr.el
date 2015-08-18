@@ -290,6 +290,7 @@
     ("1oop" "object oriented programing")
     ("1lhs" "left-hand-side")
     ("1rhs" "right-hand-side")
+    ("1is" "image source")
     ("1md" "metadata")
 
     ;; emacs lisp

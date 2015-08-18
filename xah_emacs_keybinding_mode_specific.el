@@ -78,6 +78,11 @@
   )
 (add-hook 'xah-css-mode-hook 'xah-css-mode-setup)
 
+(defun xah-org-mode-setup ()
+  "Modify keymaps used by `org-mode'."
+  (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
+(add-hook 'org-mode-hook 'xah-org-mode-setup)
+
 
 
 (defun xah-rcirc-mode-keys ()
