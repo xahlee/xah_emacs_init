@@ -183,7 +183,7 @@
 
 (require 'recentf)
 (recentf-mode 1)
-(cua-mode 1)
+;; (cua-mode 0)
 
 (desktop-save-mode)
 (setq switch-to-visible-buffer t)
