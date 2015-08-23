@@ -113,6 +113,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
 
 (load (xah-get-fullpath "xah_emacs_generic"))
+(load (xah-get-fullpath "xah_emacs_mouse_commands"))
 
 (load (xah-get-fullpath "xah_emacs_html"))
 (load (xah-get-fullpath "xah_emacs_html_insert_things"))

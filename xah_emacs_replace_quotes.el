@@ -22,10 +22,7 @@
 ;;  xah-fix-datetime-stamp
 
 ;; 2015-08-22 removed
-;; (load (xah-fly--get-fullpath "xah-fly-keys-replace-commands.el"))
-
-;; 2015-08-22 removed
-;; xah-fly-keys-misc-commands2.el
+;; xah-fly-keys-replace-commands.el xah-fly-keys-misc-commands2.el
 
 ;; 2015-08-22 
 ;; removed dependencies to xeu_elisp_util.el xah-get-thing.el xah-find.el xah-replace-pairs.el
