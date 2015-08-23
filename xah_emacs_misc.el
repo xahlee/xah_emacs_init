@@ -1,11 +1,86 @@
 ;; -*- coding: utf-8 -*-
 ;; part of Xah Lee's emacs init file.
-;; 2007-06, 2011-01-24
+;; 2007-06
 ;; Xah Lee,
 ;; ∑ http://xahlee.org/
 
-; some functions personal to working on XahLee.org's website
-; many of these opens a particular file and insert a string
+(defun xah-make-backup ()
+  "Make a backup copy of current file or dired marked files.
+If in dired, backup current file or marked files.
+The backup file name is
+ ‹name›~‹timestamp›~
+example:
+ file.html~20150721T014457~
+in the same dir. If such a file already exist, it's overwritten.
+If the current buffer is not associated with a file, nothing's done.
+URL `http://ergoemacs.org/emacs/elisp_make-backup.html'
+Version 2015-08-17"
+  (interactive)
+  (let (
+        (ξfile-list
+         (if (string-equal major-mode "dired-mode")
+             (dired-get-marked-files)
+           (list (buffer-file-name)))))
+    (mapc (lambda (ξfname)
+            (let ((ξbackup-name
+                   (concat ξfname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
+              (copy-file ξfname ξbackup-name t)
+              (message (concat "Backup saved at: " ξbackup-name))))
+          ξfile-list)))
+
+
+(defun xah-describe-major-mode ()
+  "Display inline doc for current `major-mode'."
+  (interactive)
+  (describe-function major-mode))
+
+
+
+(defun xah-toggle-margin-right ()
+  "Toggle the right margin between `fill-column' or window width.
+This command is convenient when reading novel, documentation."
+  (interactive)
+  (if (null (cdr (window-margins)))
+      (set-window-margins nil 0 (- (window-body-width) fill-column))
+    (set-window-margins nil 0 0)))
+
+(defun xah-toggle-line-spacing ()
+  "Toggle line spacing between no extra space to extra half line height."
+  (interactive)
+  (if (null line-spacing)
+      (setq line-spacing 0.5) ; add 0.5 height between lines
+    (setq line-spacing nil)   ; no extra heigh between lines
+    )
+  (redraw-frame (selected-frame)))
+
+(defun xah-toggle-read-novel-mode ()
+  "Setup current window to be suitable for reading long novel/article text.
+
+• Line wrap at word boundaries.
+• Set a right margin.
+• line spacing is increased.
+• variable width font is used.
+
+Call again to toggle back."
+  (interactive)
+  (if (null (get this-command 'state-on-p))
+      (progn
+        (set-window-margins nil 0
+                            (if (> fill-column (window-body-width))
+                                0
+                              (progn
+                                (- (window-body-width) fill-column))))
+        (variable-pitch-mode 1)
+        (setq line-spacing 0.4)
+        (setq word-wrap t)
+        (put this-command 'state-on-p t))
+    (progn
+      (set-window-margins nil 0 0)
+      (variable-pitch-mode 0)
+      (setq line-spacing nil)
+      (setq word-wrap nil)
+      (put this-command 'state-on-p nil)))
+  (redraw-frame (selected-frame)))
 
 
 
