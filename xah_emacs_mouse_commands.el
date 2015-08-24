@@ -1,5 +1,66 @@
 ;; -*- coding: utf-8 -*-
 
+(defun xah-scroll-down-10-lines ()
+  "scroll down 10 lines"
+  (interactive)
+  (scroll-down 10))
+
+(defun xah-scroll-up-10-lines ()
+  "scroll up 10 lines"
+  (interactive)
+  (scroll-up 10))
+
+(defun xah-cursor-down-50-lines ()
+  "Move cursor down 50 logical lines.
+Version 2015-07-06"
+  (interactive)
+  (forward-line 50))
+
+(defun xah-cursor-up-50-lines ()
+  "Move cursor up 50 logical lines.
+Version 2015-07-06"
+  (interactive)
+  (forward-line -50))
+
+(defun xah-cursor-down-25-lines ()
+  "Move cursor down 25 logical lines.
+Version 2015-07-06"
+  (interactive)
+  (forward-line 25))
+
+(defun xah-cursor-up-25-lines ()
+  "Move cursor up 25 logical lines.
+Version 2015-07-06"
+  (interactive)
+  (forward-line -25))
+
+(defvar xah-forward-n-words 4 "integer used by `xah-forward-n-words'")
+(setq xah-forward-n-words 4)
+
+(defun xah-forward-n-words ()
+  "`forward-word' `xah-forward-n-words' times."
+  (interactive)
+  (forward-word xah-forward-n-words))
+
+(defun xah-backward-n-words ()
+  "`backward-word' `xah-forward-n-words' times."
+  (interactive)
+  (backward-word xah-forward-n-words))
+
+(defvar xah-forward-n-chars 50 "a integer used by `xah-forward-n-chars'")
+(setq xah-forward-n-chars 50)
+
+(defun xah-forward-n-chars ()
+  "`forward-char' `xah-forward-n-chars' times."
+  (interactive)
+  (forward-char xah-forward-n-chars))
+
+(defun xah-backward-n-chars ()
+  "`backward-char' `xah-forward-n-chars' times."
+  (interactive)
+  (backward-char xah-forward-n-chars))
+
+
 (defun xah-mouse-click-to-search (φclick)
   "Mouse click to start `isearch-forward-symbol-at-point' (emacs 24.4) at clicked point.
 URL `http://ergoemacs.org/emacs/emacs_mouse_click_highlight_word.html'
