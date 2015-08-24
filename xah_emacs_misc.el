@@ -4,6 +4,146 @@
 ;; Xah Lee,
 ;; ∑ http://xahlee.org/
 
+
+
+(defun xah-open-file-from-clipboard ()
+  "Open the file path from OS's clipboard.
+The clipboard should contain a file path or url to xah site. Open that file in emacs."
+  (interactive)
+  (let (
+        (ξinputStr
+         (with-temp-buffer
+           (yank)
+           (buffer-string)))
+        ξfpath
+        )
+
+    (if (string-match-p "\\`http://" ξinputStr)
+        (progn
+          (setq ξfpath (xahsite-url-to-filepath ξinputStr "addFileName"))
+          (if (file-exists-p ξfpath)
+              (progn (find-file ξfpath))
+            (progn (error "file doesn't exist 「%s」" ξfpath))))
+      (progn ; not starting “http://”
+        (setq ξinputStr (xah-remove-uri-fragment ξinputStr))
+        (setq ξfpath (xahsite-web-path-to-filepath ξinputStr default-directory))
+        (if (file-exists-p ξfpath)
+            (progn (find-file ξfpath))
+          (progn (user-error "file doesn't exist 「%s」" ξfpath)))))))
+
+(defalias 'ffap 'xah-open-file-path-under-cursor)
+
+(defun xah-open-file-at-cursor ()
+  "Open the file path under cursor.
+If there is text selection, uses the text selection for path.
+If the path starts with “http://”, open the URL in browser.
+Input path can be {relative, full path, URL}.
+Path may have a trailing “:‹n›” that indicates line number. If so, jump to that line number.
+If path does not have a file extention, automatically try with “.el” for elisp files.
+This command is similar to `find-file-at-point' but without prompting for confirmation.
+
+URL `http://ergoemacs.org/emacs/emacs_open_file_path_fast.html'
+Version 2015-03-20"
+  (interactive)
+  (let* ((ξinputStr (if (use-region-p)
+                 (buffer-substring-no-properties (region-beginning) (region-end))
+               (let (ξp0 ξp1 ξp2
+                         (ξcharSkipRegex "^  \"\t\n`':|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`"))
+                 (setq ξp0 (point))
+                 ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+                 (skip-chars-backward ξcharSkipRegex)
+                 (setq ξp1 (point))
+                 (goto-char ξp0)
+                 (skip-chars-forward ξcharSkipRegex)
+                 (setq ξp2 (point))
+                 (goto-char ξp0)
+                 (buffer-substring-no-properties ξp1 ξp2))))
+         (ξpath (replace-regexp-in-string ":\\'" "" ξinputStr)))
+    (if (string-match-p "\\`https?://" ξpath)
+        (browse-url ξpath)
+      (progn ; not starting “http://”
+        (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" ξpath)
+            (progn
+              (let (
+                    (ξfpath (match-string 1 ξpath))
+                    (ξline-num (string-to-number (match-string 2 ξpath))))
+                (if (file-exists-p ξfpath)
+                    (progn
+                      (find-file ξfpath)
+                      (goto-char 1)
+                      (forward-line (1- ξline-num)))
+                  (progn
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfpath))
+                      (find-file ξfpath))))))
+          (progn
+            (if (file-exists-p ξpath)
+                (find-file ξpath)
+              (if (file-exists-p (concat ξpath ".el"))
+                  (find-file (concat ξpath ".el"))
+                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξpath))
+                  (find-file ξpath ))))))))))
+
+(defun xah-open-file-path-under-cursor ()
+  "Open the file path under cursor.
+If there is text selection, use the text selection for path.
+If path starts with “http://”, launch browser vistiting that URL, or open the corresponding file, if it's xah site.
+
+Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported.
+
+Version 2015-06-12"
+  (interactive)
+  (let* (
+         (ξinputStr1
+          (xah-remove-uri-fragment
+           (if (use-region-p)
+               (buffer-substring-no-properties (region-beginning) (region-end))
+             (let (ξp0 ξp1 ξp2
+                       (ξcharSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`"))
+               (setq ξp0 (point))
+               ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+               (skip-chars-backward ξcharSkipRegex)
+               (setq ξp1 (point))
+               (goto-char ξp0)
+               (skip-chars-forward ξcharSkipRegex)
+               (setq ξp2 (point))
+               (goto-char ξp0)
+               (buffer-substring-no-properties ξp1 ξp2)))))
+         (ξinputStr2 (replace-regexp-in-string ":\\'" "" ξinputStr1))
+          )
+    (if (string-equal ξinputStr2 "")
+        (progn (user-error "No path under cursor" ))
+      (progn
+        ;; convenience. if the input string start with a xah domain name, make it a url string
+        (setq ξp
+              (cond
+               ((string-match "\\`//" ξinputStr2 ) (concat "http:" ξinputStr2)) ; relative http protocol, used in css
+               ((string-match "\\`ergoemacs\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
+               ((string-match "\\`wordyenglish\\.com" ξinputStr2 ) (concat "http://" ξinputStr2))
+               ((string-match "\\`xaharts\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
+               ((string-match "\\`xahlee\\.info" ξinputStr2 ) (concat "http://" ξinputStr2))
+               ((string-match "\\`xahlee\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
+               ((string-match "\\`xahmusic\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
+               ((string-match "\\`xahporn\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
+               ((string-match "\\`xahsl\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
+               (t ξinputStr2)))
+
+        (if (string-match-p "\\`https?://" ξp)
+            (if (xahsite-url-is-xah-website-p ξp)
+                (let ((ξfp (xahsite-url-to-filepath ξp )))
+                  (if (file-exists-p ξfp)
+                      (find-file ξfp)
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp)) (find-file ξfp))))
+              (browse-url ξp))
+          (progn ; not starting “http://”
+            (let ((ξfff (xahsite-web-path-to-filepath ξp default-directory)))
+              (if (file-exists-p ξfff)
+                  (progn (find-file ξfff))
+                (if (file-exists-p (concat ξfff ".el"))
+                    (progn (find-file (concat ξfff ".el")))
+                  (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfff)) (find-file ξfff )))))))))))
+
+
+
 (defun xah-make-backup ()
   "Make a backup copy of current file or dired marked files.
 If in dired, backup current file or marked files.
@@ -149,7 +289,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 
-(defvar xah-filelist 
+(defvar xah-filelist
   '(
     ("3emacs blog" . "~/web/ergoemacs_org/emacs/blog.html" )
     ("xah fly keys xs" . "~/web/ergoemacs_org/misc/ergoemacs_vi_mode.html")
