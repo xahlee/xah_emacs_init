@@ -6,6 +6,35 @@
 
 
 
+(defun xah-select-text-in-html-bracket ()
+  "Select text between <…> or >…<."
+  (interactive)
+  (let (ξp0 ξp1< ξp1> ξp2< ξp2>
+           distance-p1<
+           distance-p1>
+           )
+    (setq ξp0 (point))
+    (search-backward "<" nil "NOERROR" )
+    (setq ξp1< (point))
+    (goto-char ξp0)
+    (search-backward ">" nil "NOERROR" )
+    (setq ξp1> (point))
+    (setq distance-p1< (abs (- ξp0 ξp1<)))
+    (setq distance-p1> (abs (- ξp1> ξp0)))
+    (if (< distance-p1< distance-p1>)
+        (progn
+          (goto-char ξp0)
+          (search-forward ">" nil "NOERROR" )
+          (setq ξp2> (point))
+          (goto-char (1+ ξp1<))
+          (set-mark (1- ξp2>)))
+      (progn
+        (goto-char ξp0)
+        (search-forward "<" nil "NOERROR" )
+        (setq ξp2< (point))
+        (goto-char (1+ ξp1>))
+        (set-mark (1- ξp2<))))))
+
 (defun xah-open-file-from-clipboard ()
   "Open the file path from OS's clipboard.
 The clipboard should contain a file path or url to xah site. Open that file in emacs."
@@ -109,7 +138,8 @@ Version 2015-06-12"
                (goto-char ξp0)
                (buffer-substring-no-properties ξp1 ξp2)))))
          (ξinputStr2 (replace-regexp-in-string ":\\'" "" ξinputStr1))
-          )
+         ξp
+         )
     (if (string-equal ξinputStr2 "")
         (progn (user-error "No path under cursor" ))
       (progn
@@ -675,39 +705,6 @@ Test cases
 ;;    (global-key-binding φkey)
 ;;    ;; (overlay-key-binding φkey)
 ;;    ))
-
-(defun xxlocate-key-binding (key)
-  "Determine in which keymap KEY is defined.
-2014-10-11 http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-a-key-is-bound"
-  (interactive "kPress key: ")
-  (let ((ret
-         (list
-          (key-binding-at-point key)
-          (minor-mode-key-binding key)
-          (local-key-binding key)
-          (global-key-binding key))))
-    (when (called-interactively-p 'any)
-      (message "At Point: %s\nMinor-mode: %s\nLocal: %s\nGlobal: %s"
-               (or (nth 0 ret) "")
-               (or (mapconcat (lambda (x) (format "%s: %s" (car x) (cdr x)))
-                              (nth 1 ret) "\n             ")
-                   "")
-               (or (nth 2 ret) "")
-               (or (nth 3 ret) "")))
-    ret))
-
-(defun xxkey-binding-at-point (key)
-"2014-10-11
-http://emacs.stackexchange.com/questions/653/how-can-i-find-out-in-which-keymap-a-key-is-bound"
-  (mapcar (lambda (keymap) (lookup-key keymap key))
-          (cl-remove-if-not
-           #'keymapp
-           (append
-            (mapcar (lambda (overlay)
-                      (overlay-get overlay 'keymap))
-                    (overlays-at (point)))
-            (get-text-property (point) 'keymap)
-            (get-text-property (point) 'local-map)))))
 
 (defvar gitgrep-history nil)
 
