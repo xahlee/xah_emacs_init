@@ -459,9 +459,9 @@ Version 2015-08-22"
     (xah-replace-pairs-region
      p1 p2
      '(
-       ["fuck" "f��k"]
+       ["fuck" "f�ck"]
        ["shit" "sh�t"]
-       ["motherfucker" "momf��ker"]
+       ["motherfuck" "m�th�rf�ck"]
        ))))
 
 (defun xah-replace-slanted-apostrophe ()
