@@ -112,6 +112,8 @@
 (setq backup-by-copying t)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq auto-save-visited-file-name t )
+
 (setq save-interprogram-paste-before-kill t)
 (setq enable-recursive-minibuffers t)
 
@@ -147,7 +149,7 @@
 
 
 
-(set-background-color "honeydew")
+;; (set-background-color "honeydew")
 (setq inhibit-splash-screen t)
 
 
@@ -167,8 +169,7 @@
       '(
         (width . 92)
         (height . 54)
-        (background-color . "honeydew")
-        ) )
+        (background-color . "honeydew")))
 
 (setq default-frame-alist
       '((menu-bar-lines . 1)
@@ -177,8 +178,7 @@
         (tool-bar-lines . 0)
         (width . 92)
         (height . 52)
-        (background-color . "#eeeedd")
-        ))
+        (background-color . "honeydew")))
 
 
 (require 'recentf)
@@ -208,14 +208,7 @@
 
 
 
-;; (which-function-mode 1) ; show current function in mode line
-
-;; emacs slows down when you open a file with tens thousands lines
-;; emacs freezes
-(global-linum-mode 0)
-
-;; (setq auto-save-default t)
-;; (setq auto-save-visited-file-name t )
+(which-function-mode 1) ; show current function in mode line
 
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
@@ -331,7 +324,6 @@
 ;;   ;; Your init file should contain only one such instance.
 ;;   ;; If there is more than one, they won't work right.
 ;;  '(abbrev-mode t)
-;;  ;; '(auto-save-default nil)
 ;;  ;; '(initial-major-mode (quote text-mode))
 ;;  ;; '(initial-scratch-message "")
 ;;  ;; '(line-number-display-limit-width 500)
