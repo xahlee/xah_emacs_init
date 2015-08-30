@@ -2,8 +2,7 @@
 
 ;; xah-fly-keys move to http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 
-(global-set-key (kbd "<menu> <end>") 'xah-user-keymap)
-(define-key xah-fly-leader-key-map (kbd "<home>") 'xah-fly-keys)
+(global-set-key (kbd "<end>") 'xah-user-keymap)
 
 (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)
