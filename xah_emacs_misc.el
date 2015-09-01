@@ -339,7 +339,8 @@ Version 2015-04-23"
 
 
 (defun xah-sync-css ()
-  "Save current file and copy to all other xahsite dirs."
+  "Save current file and copy to all other xahsite dirs.
+Version 2015-08-31"
   (interactive)
   (let* (
          (ξfromPath (buffer-file-name))
@@ -365,6 +366,7 @@ Version 2015-04-23"
        "xahlee.org"
        "xahmusic.org"
        "xahsl.org"
+       "xahporn.org"
        ])))
 
 (defun xah-cite ()

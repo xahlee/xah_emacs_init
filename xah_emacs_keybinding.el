@@ -4,6 +4,8 @@
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
+(define-key xah-fly-leader-key-map (kbd "RET") nil)
+
 (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)
 
@@ -37,7 +39,7 @@
   (define-prefix-command 'xah-user-keymap)
 
   (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
-  (define-key xah-user-keymap (kbd "RET") 'xah-shell-commands)
+  (define-key xah-user-keymap (kbd "RET") nil)
 
   (define-key xah-user-keymap (kbd "-") 'xah-insert-form-feed)
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
@@ -76,19 +78,7 @@
   (define-key xah-user-keymap (kbd "i u") 'xah-insert-random-uuid)
   (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-hex)
 
-  (define-key xah-user-keymap (kbd "j") nil)
-  (define-key xah-user-keymap (kbd "j c") 'xah-words-add-comment)
-  (define-key xah-user-keymap (kbd "j d") 'xah-words-add-definition)
-  (define-key xah-user-keymap (kbd "j e") 'xah-words-word-etymology-linkify)
-  (define-key xah-user-keymap (kbd "j f") 'xah-words-find-word-usage)
-  (define-key xah-user-keymap (kbd "j h") 'xah-words-annotate)
-  (define-key xah-user-keymap (kbd "j i") 'xah-words-insert-word-entry)
-  (define-key xah-user-keymap (kbd "j m") 'xah-words-move-word-to-page)
-  (define-key xah-user-keymap (kbd "j n") 'xah-words-new-word-entry)
-  (define-key xah-user-keymap (kbd "j q") 'xah-words-query-find-then-bold)
-  (define-key xah-user-keymap (kbd "j s") 'xah-words-add-source)
-  (define-key xah-user-keymap (kbd "j t") 'xah-words-chinese-linkify)
-  (define-key xah-user-keymap (kbd "j u") 'xah-words-search-next-unbold)
+  (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
 
   (define-key xah-user-keymap (kbd "k") 'xah-clean-whitespace-and-save)
   (define-key xah-user-keymap (kbd "l") nil)
@@ -120,7 +110,21 @@
   (define-key xah-user-keymap (kbd "u") 'xah-find-replace-text)
   (define-key xah-user-keymap (kbd "v") nil)
   (define-key xah-user-keymap (kbd "w") nil)
-  (define-key xah-user-keymap (kbd "y") 'xah-open-last-closed)
+  (define-key xah-user-keymap (kbd "y") nil)
+
+  (define-key xah-user-keymap (kbd "y c") 'xah-words-add-comment)
+  (define-key xah-user-keymap (kbd "y d") 'xah-words-add-definition)
+  (define-key xah-user-keymap (kbd "y e") 'xah-words-word-etymology-linkify)
+  (define-key xah-user-keymap (kbd "y f") 'xah-words-find-word-usage)
+  (define-key xah-user-keymap (kbd "y h") 'xah-words-annotate)
+  (define-key xah-user-keymap (kbd "y i") 'xah-words-insert-word-entry)
+  (define-key xah-user-keymap (kbd "y m") 'xah-words-move-word-to-page)
+  (define-key xah-user-keymap (kbd "y n") 'xah-words-new-word-entry)
+  (define-key xah-user-keymap (kbd "y q") 'xah-words-query-find-then-bold)
+  (define-key xah-user-keymap (kbd "y s") 'xah-words-add-source)
+  (define-key xah-user-keymap (kbd "y t") 'xah-words-chinese-linkify)
+  (define-key xah-user-keymap (kbd "y u") 'xah-words-search-next-unbold)
+
   (define-key xah-user-keymap (kbd "z") nil))
 
 (progn

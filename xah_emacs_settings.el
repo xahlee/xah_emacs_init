@@ -119,7 +119,8 @@
 
 ;; 2015-07-04 bug of pasting in emacs.
 ;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
- (setq x-selection-timeout 300)
+;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
+(setq x-selection-timeout 300)
 
 (progn
   ;; seems pointless to warn. There's always undo.
