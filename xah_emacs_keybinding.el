@@ -15,6 +15,7 @@
 (global-set-key (kbd "<f14>") 'xah-close-current-buffer)
 
 (global-set-key (kbd "C-w") 'xah-close-current-buffer)
+(global-set-key (kbd "C-z") 'undo)
 
 (setq xfk-major-mode-lead-key (kbd "<delete>"))
 

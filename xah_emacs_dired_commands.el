@@ -13,7 +13,6 @@ Version 2015-06-16"
          (ξdo-it-p (if (<= (length ξfile-list) 5)
                        t
                      (y-or-n-p "Open more than 5 files? "))))
-
     (when ξdo-it-p
       (cond
        ((string-equal system-type "windows-nt")

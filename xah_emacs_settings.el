@@ -263,7 +263,7 @@
   (ido-mode 1)
   (setq ido-separator "\n")
   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
-)
+  )
 
 ;; majority of code formatting conventions do no recommend mixed tabs and spaces. So, here.
 (setq-default indent-tabs-mode nil) ; gnu emacs 23.1, 24.4.1 default is t
