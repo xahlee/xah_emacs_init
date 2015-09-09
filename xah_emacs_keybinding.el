@@ -16,6 +16,7 @@
 
 (global-set-key (kbd "C-w") 'xah-close-current-buffer)
 (global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "C-,") 'flyspell-goto-next-error)
 
 (setq xfk-major-mode-lead-key (kbd "<delete>"))
 

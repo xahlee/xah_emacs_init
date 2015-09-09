@@ -40,12 +40,16 @@ Version 2015-08-12"
 
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
-Add today's date to the byline tag of current file, also delete the last one if there are more than one.
-WARNING: This command saves buffer if it's a file."
+Add today's date to the “byline” tag of current file, also delete the last one if there are more than one.
+Also, move cursor there.
+Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
+WARNING: This command saves buffer if it's a file.
+Version 2015-09-08"
   (interactive)
   (require 'sgml-mode)
   (let (ξp1 ξp2 ξnum ξbufferTextOrig)
-    (save-excursion
+    (push-mark)
+    (progn
       (goto-char 1)
       (when (search-forward "<div class=\"byline\">" nil)
 
