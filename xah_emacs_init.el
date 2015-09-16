@@ -88,17 +88,14 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (if (boundp 'xah-load-xahkeys-q)
     (when xah-load-xahkeys-q
-      ;; (load (xah-get-fullpath "xah_emacs_keybinding_unset_keys.el"))
       (setq xah-fly-swapped-1827-p t)
       (require 'xah-fly-keys)
 
       (load (xah-get-fullpath "xah_emacs_keybinding"))
       (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
-      ;; (load (xah-get-fullpath "xah_emacs_keybinding_shift_switch"))
       ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
-      (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
+      ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
       (load (xah-get-fullpath "xah_emacs_mouse_binding"))
-      ;; (load (xah-get-fullpath "xah_emacs_keybinding_truly_ergonomic"))
       )
   (progn
     nil
@@ -110,7 +107,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_alias"))
 (load (xah-get-fullpath "xah_emacs_abbr"))
 
-(load (xah-get-fullpath "xah_elisp_util"))
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
 
 (load (xah-get-fullpath "xah_emacs_generic"))
@@ -139,8 +135,6 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_settings_external_packages"))
 (load (xah-get-fullpath "xah_emacs_file_association"))
-
-(load (xah-get-fullpath "xah_emacs_load_misc"))
 
 (when (string-equal system-type "darwin")
   (load (xah-get-fullpath "xah_emacs_mac_os_x"))

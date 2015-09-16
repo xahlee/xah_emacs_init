@@ -6,14 +6,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(defalias 'fd 'find-dired)
-(defalias 'gf 'grep-find)
 (defalias 'lcd 'list-colors-display)
-(defalias 'rb 'revert-buffer)
-(defalias 'rs 'replace-string)
 (defalias 'sl 'sort-lines)
-(defalias 'snf 'sort-numeric-fields)
-(defalias 'g 'grep)
 (defalias 'ds 'desktop-save)
 (defalias 'dt 'desktop-save)
 (defalias 'dsm 'desktop-save-mode)
@@ -29,7 +23,7 @@
 
 ;; xah personal
 
-(defalias '8w 'xah-words-new-word-entry)
-(defalias '8d 'xah-words-add-definition)
-(defalias '8s 'xah-words-add-source)
-(defalias '8c 'xah-words-add-comment)
+(defalias '1w 'xah-words-new-word-entry)
+(defalias '1d 'xah-words-add-definition)
+(defalias '1s 'xah-words-add-source)
+(defalias '1c 'xah-words-add-comment)

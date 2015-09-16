@@ -136,3 +136,9 @@ image (image-mode)."
   (when (equal major-mode 'image-mode)
     (text-mode))
   (erase-buffer))
+
+(defun xah-dec-to-bin (decStr)
+  "convert the decimal number string decStr into a binary (string)"
+  (require 'calc-bin)
+  (let ((calc-number-radix 2))
+    (math-format-radix (string-to-number decStr))))

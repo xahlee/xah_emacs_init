@@ -11,8 +11,8 @@
 ;; xah-get-file-lines
 ;; xah-delete-files-by-regex
 ;; xah-file-relative-name-emacs24.1.1-fix
-;; trim-string
-;; substract-path
+;; xah-trim-string
+;; xah-substract-path
 ;; xah-hash-to-list
 ;;  xah-asciify-text
 ;; xah-asciify-string
@@ -1087,7 +1087,6 @@ Version 2015-08-22"
           [" ;)" " 😉"]
           ["e.g. " "⁖ "]
           ["~=" "≈"]
-          ["  —  " " — "] ; rid of extra space in em-dash
           [" , " ", "]
           ;; fix GNU style ASCII quotes
           ["``" "“"]
@@ -1111,6 +1110,12 @@ Version 2015-08-22"
           ["?\"" "?”"]
           ["\"<" "”<"]
           ["\"\n" "”\n"]
+          ] )
+
+        (xah-replace-pairs-region
+         (point-min) (point-max)
+         [
+          ["  —  " " — "] ; rid of extra space in em-dash
           ] )
 
         ;; fix straight double quotes by regex

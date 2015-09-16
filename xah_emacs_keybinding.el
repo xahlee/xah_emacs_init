@@ -13,6 +13,15 @@
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 (global-set-key (kbd "<f14>") 'xah-close-current-buffer)
+(global-set-key (kbd "C-t") 'toggle-input-method)
+
+  ;; (define-key xah-fly-key-map (kbd "C-6") 'xah-toggle-letter-case)
+  ;; (define-key xah-fly-key-map (kbd "C-3") 'hippie-expand)
+  ;; (define-key xah-fly-key-map (kbd "C-4") 'xah-cycle-hyphen-underscore-space)
+
+  (define-key xah-fly-key-map (kbd "M-t") 'xah-toggle-letter-case)
+  (define-key xah-fly-key-map (kbd "M-c") 'hippie-expand)
+  (define-key xah-fly-key-map (kbd "M-r") 'xah-cycle-hyphen-underscore-space )
 
 (global-set-key (kbd "C-w") 'xah-close-current-buffer)
 (global-set-key (kbd "C-z") 'undo)

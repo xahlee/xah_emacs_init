@@ -130,7 +130,7 @@ e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「ergoemacs.org」.
 
 This function depends on `xahsite-server-root-path'."
-  (let ((case-fold-search nil) ξstr (ξpathPart (substract-path (downcase φabs-path) (downcase (xahsite-server-root-path)))))
+  (let ((case-fold-search nil) ξstr (ξpathPart (xah-substract-path (downcase φabs-path) (downcase (xahsite-server-root-path)))))
     (if (string-match "\\`\\([^/]+?\\)/" ξpathPart )
         (progn
           (setq ξstr (match-string 1 ξpathPart))
