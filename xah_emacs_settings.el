@@ -310,6 +310,22 @@
           (tab-mark 9 [9655 9] [92 9]) ; tab
           )))
 
+(progn
+  ;; use variable-width font for some modes
+
+  (defun xah-use-variable-width-font ()
+    "Set current buffer to use variable-width font."
+    (variable-pitch-mode 1)
+    ;; (text-scale-increase 0.5 )
+    )
+
+  (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+  )
+
 
 ;; 2009-09-29 see http://groups.google.com/group/ergoemacs/msg/9eec3b455cab3ff1 and http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start
 ; (and (= emacs-major-version 23) (defun server-ensure-safe-dir (dir) "Noop" t))

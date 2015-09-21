@@ -330,7 +330,7 @@
     ("1menu" "〖a ▸ b ▸ c〗")
     ("1key" "【Alt+f】")
     ("1song" "singer ♪《title》")
-    ("1faq" "<div class=\"question-box32371\">
+    ("faq" "<div class=\"question-box32371\">
 <p class=\"q\">How to do this?</p>
 <p>this way</p>
 </div>

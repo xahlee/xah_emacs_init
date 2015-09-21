@@ -215,7 +215,9 @@ This command is convenient when reading novel, documentation."
     (set-window-margins nil 0 0)))
 
 (defun xah-toggle-line-spacing ()
-  "Toggle line spacing between no extra space to extra half line height."
+  "Toggle line spacing between no extra space to extra half line height.
+URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
+Version 2015-09-21"
   (interactive)
   (if (null line-spacing)
       (setq line-spacing 0.5) ; add 0.5 height between lines

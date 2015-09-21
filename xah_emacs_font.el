@@ -5,37 +5,32 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-;; Emacs: How to List ＆ Set Font
-;; http://ergoemacs.org/emacs/emacs_list_and_set_font.html
-
-;; Emacs: How to Quickly Switch Fonts
-;; http://ergoemacs.org/emacs/emacs_switching_fonts.html
-
 
 
 (defun xah-cycle-font-2 (φn)
-  "Change font in current window between 2 fonts."
+  "Change font in current window between 2 fonts.
+URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
+Version 2015-09-21"
   (interactive "p")
-  ;; this function sets a property “state”. It is a integer. Possible values are 0 to length of ξ-font-list
+  ;; this function sets a property “state”. It is a integer. Possible values are 0 to length of ξfontList
   (let (
-        (ξ-font-list '("DejaVu Sans Mono-10" "DejaVu Sans-10"))
+        (ξfontList '("DejaVu Sans Mono-10" "DejaVu Sans-10"))
         ξfontToUse
         ξstateBefore
         ξstateAfter)
 
     (setq ξstateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
-    (setq ξstateAfter (% (+ ξstateBefore (length ξ-font-list) φn) (length ξ-font-list)))
+    (setq ξstateAfter (% (+ ξstateBefore (length ξfontList) φn) (length ξfontList)))
     (put 'xah-cycle-font-2 'state ξstateAfter)
 
-    (setq ξfontToUse (nth ξstateAfter ξ-font-list))
+    (setq ξfontToUse (nth ξstateAfter ξfontList))
     (set-frame-parameter nil 'font ξfontToUse)
     (message "Font set to: %s" ξfontToUse)))
 
 
 
-(defcustom ξ-font-list nil "A list of fonts for `xah-cycle-font' to cycle from." :group 'font)
-
-(set-default 'ξ-font-list
+(defcustom xah-font-list nil "A list of fonts for `xah-cycle-font' to cycle from." :group 'font)
+(set-default 'xah-font-list
              (cond
               ((string-equal system-type "windows-nt") ; Windows
                '(
@@ -43,7 +38,6 @@
                  "DejaVu Sans Mono-9"
                  "Lucida Console-10"
                  "Segoe UI Symbol-12"
-
                  "DejaVu Sans-10"
                  "Lucida Sans Unicode-10"
                  ))
@@ -62,17 +56,18 @@
 
 (defun xah-cycle-font (φn)
   "Change font in current frame.
-Each time this is called, font cycles thru a predefined list of fonts in the variable `ξ-font-list' .
+Each time this is called, font cycles thru a predefined list of fonts in the variable `xah-font-list' .
 If φn is 1, cycle forward.
 If φn is -1, cycle backward.
-See also `xah-cycle-font-next', `xah-cycle-font-previous'."
+See also `xah-cycle-font-next', `xah-cycle-font-previous'.
+URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
+Version 2015-09-21"
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
   (let (ξfontToUse ξstateBefore ξstateAfter )
     (setq ξstateBefore (if (get 'xah-cycle-font 'state) (get 'xah-cycle-font 'state) 0))
-    (setq ξstateAfter (% (+ ξstateBefore (length ξ-font-list) φn) (length ξ-font-list)))
-
-    (setq ξfontToUse (nth ξstateAfter ξ-font-list))
+    (setq ξstateAfter (% (+ ξstateBefore (length xah-font-list) φn) (length xah-font-list)))
+    (setq ξfontToUse (nth ξstateAfter xah-font-list))
     (set-frame-font ξfontToUse t)
     ;; (set-frame-parameter nil 'font ξfontToUse)
     (message "Current font is: %s" ξfontToUse )
