@@ -184,7 +184,6 @@
 
 (require 'recentf)
 (recentf-mode 1)
-;; (cua-mode 0)
 
 (desktop-save-mode)
 (setq switch-to-visible-buffer t)
@@ -206,6 +205,13 @@
       "Rename eww browser's buffer so sites open in new page."
       (rename-buffer "eww" t))
     (add-hook 'eww-mode-hook 'xah-rename-eww-hook)))
+
+(progn
+  ;; this shit not working
+  (defun xah-turn-on-line-number ()
+    "Turn on line number on margin."
+    (linum-mode 1))
+  (add-hook 'text-mode-hook 'xah-turn-on-line-number))
 
 
 

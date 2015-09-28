@@ -178,6 +178,7 @@
 ;; 'xah-toggle-line-spacing
 
 (progn
+  (define-key key-translation-map (kbd "<end> <menu>") (kbd "_"))
   (define-key key-translation-map (kbd "<menu> SPC <up>") (kbd "↑"))
   (define-key key-translation-map (kbd "<menu> SPC <down>") (kbd "↓"))
   (define-key key-translation-map (kbd "<menu> SPC <left>") (kbd "←"))

@@ -174,6 +174,7 @@
     ("pls" "please")
     ("atm" "at the moment")
     ("q" "question")
+    ("faq" "frequently asked questions")
     ("i18n" "international")
     ("1org" "organization")
     ("ia" "interactive")
@@ -276,7 +277,7 @@
     ("ver" "version")
     ("1vs" "variables")
     ("1s" "string")
-    ("1ev" "environment variable")
+    ("ev" "environment variable")
     ("evs" "environment variables")
     ("1ergo" "ergonomic")
     ("1fp" "functional programing")
@@ -330,7 +331,7 @@
     ("1menu" "〖a ▸ b ▸ c〗")
     ("1key" "【Alt+f】")
     ("1song" "singer ♪《title》")
-    ("faq" "<div class=\"question-box32371\">
+    ("1faq" "<div class=\"question-box32371\">
 <p class=\"q\">How to do this?</p>
 <p>this way</p>
 </div>
