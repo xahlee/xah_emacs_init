@@ -237,6 +237,8 @@
 
 (which-function-mode 1) ; show current function in mode line
 
+(setq set-mark-command-repeat-pop t)
+
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 
