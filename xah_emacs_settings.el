@@ -108,6 +108,8 @@
 
 (setq mark-ring-max 5)
 
+
+
 ;; don't create backup~ or #auto-save# files
 (setq backup-by-copying t)
 (setq make-backup-files nil)
@@ -159,7 +161,7 @@
 ;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
 ;; ;; (setq ediff-split-window-function 'split-window-horizontally)
 
-(setq mouse-wheel-progressive-speed t)
+(setq mouse-wheel-progressive-speed nil)
 
 
 ;; initial window and default window
@@ -193,6 +195,9 @@
 (blink-cursor-mode 0 )
 (setq sentence-end-double-space nil )
 (electric-indent-mode 0) ; default is on in emacs 24.4
+
+(set-default 'tab-always-indent 'complete)
+ 
 (global-auto-revert-mode 1)
 
 (setq scroll-error-top-bottom t )

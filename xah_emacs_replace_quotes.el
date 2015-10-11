@@ -347,7 +347,7 @@ When called in lisp code, φbegin φend are region begin/end positions. φto-dir
 See also: `xah-remove-punctuation-trailing-redundant-space'.
 
 URL `http://ergoemacs.org/emacs/elisp_convert_chinese_punctuation.html'
-Version 2015-04-29"
+Version 2015-10-05"
   (interactive
    (let (ξp1 ξp2)
      (if (use-region-p)
@@ -355,8 +355,8 @@ Version 2015-04-29"
            (setq ξp1 (region-beginning))
            (setq ξp2 (region-end)))
        (progn
-         (setq ξp1 (line-beginning-position) )
-         (setq ξp2 (line-end-position) )))
+         (setq ξp1 (line-beginning-position))
+         (setq ξp2 (line-end-position))))
      (list
       ξp1
       ξp2
@@ -385,6 +385,7 @@ Version 2015-04-29"
           [".</" "。</"]
           ["?</" "？</"]
           [":</" "：</"]
+          [" " "　"]
           ]
          ))
 
@@ -392,10 +393,12 @@ Version 2015-04-29"
       (setq
        φto-direction
        (if
-           (or (string-match "。" ξinput-str)
-               (string-match "，" ξinput-str)
-               (string-match "？" ξinput-str)
-               (string-match "！" ξinput-str))
+           (or 
+            (string-match "　" ξinput-str)
+            (string-match "。" ξinput-str)
+            (string-match "，" ξinput-str)
+            (string-match "？" ξinput-str)
+            (string-match "！" ξinput-str))
            "english"
          "chinese")))
     (save-excursion

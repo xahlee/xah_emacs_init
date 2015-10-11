@@ -90,14 +90,21 @@
   (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
 (add-hook 'org-mode-hook 'xah-org-mode-setup)
 
+;; (defun xah-racket-mode-setup ()
+;;   ""
+;;   (local-set-key (kbd "<tab>") 'complete-symbol))
+;; (add-hook 'racket-mode-hook 'xah-racket-mode-setup)
+
 
 
 (defun xah-rcirc-mode-keys ()
   "Modify keybindings for `rcirc'.
 For `rcirc-mode-hook'."
-  (local-set-key (kbd "<f11>") 'rcirc-insert-prev-input)
-  (local-set-key (kbd "<f12>") 'rcirc-insert-next-input))
+  (local-set-key (kbd "<M-f11>") 'rcirc-insert-prev-input)
+  (local-set-key (kbd "<M-f12>") 'rcirc-insert-next-input))
 (add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
+
+(setq rcirc-default-nick "mid2")
 
 
 
