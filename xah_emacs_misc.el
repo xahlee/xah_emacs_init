@@ -619,17 +619,32 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
 ))
 
 (defun xah-replace-BOM-mark-etc ()
-  "Query replace Unicode some invisible Unicode chars.
+  "Query replace some invisible Unicode chars.
 The chars to be searched are:
- RIGHT-TO-LEFT MARK 8207 x200f
- ZERO WIDTH NO-BREAK SPACE 65279 xfeff
+ ZERO WIDTH NO-BREAK SPACE (codepoint 65279, #xfeff)
+ RIGHT-TO-LEFT MARK (codepoint 8207, #x200f)
+ RIGHT-TO-LEFT OVERRIDE (codepoint 8238, #x202e)
 
-start on cursor position to end.
-    "
+Search begins at buffer beginning (respects `narrow-to-region').
+
+This is useful for text copied from twitter or Google Plus, because they often contain BOM mark. See URL `http://xahlee.info/comp/unicode_BOM_byte_orde_mark.html'
+
+URL `http://ergoemacs.org/emacs/elisp_unicode_replace_invisible_chars.html'
+Version 2015-10-11"
   (interactive)
-  (let ()
-    (query-replace-regexp "\u200f\\|\ufeff" "")
-    ))
+  (progn
+    (goto-char (point-min))
+    (query-replace-regexp "\u200f\\|\u202e\\|\ufeff" "")))
+
+(defun xah-replace-BOM-mark-dir ()
+  "temp hack. replace some invisible Unicode chars.
+see `xah-replace-BOM-mark-etc'
+Version 2015-10-11"
+  (interactive)
+  (require 'xah-find)
+  (let (ξdir)
+    (setq ξdir (ido-read-directory-name "Directory: " default-directory default-directory "MUSTMATCH"))
+    (xah-find-replace-text (char-to-string 65279) "" ξdir "\\.html\\'" t t t t)))
 
 (defun xah-show-hexadecimal-value ()
   "Prints the decimal value of a hexadecimal string under cursor.
