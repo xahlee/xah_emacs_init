@@ -224,19 +224,19 @@
   (add-hook 'xah-clojure-mode-hook 'xah-turn-on-line-number)
   (add-hook 'xah-php-mode-hook 'xah-turn-on-line-number))
 
-;; (progn
-;;   ;; use variable-width font for some modes
-;;   (defun xah-use-variable-width-font ()
-;;     "Set current buffer to use variable-width font."
-;;     (variable-pitch-mode 1)
-;;     ;; (text-scale-increase 0.5 )
-;;     )
-;;   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
-;;   )
+(progn
+  ;; use variable-width font for some modes
+  (defun xah-use-variable-width-font ()
+    "Set current buffer to use variable-width font."
+    (variable-pitch-mode 1)
+    ;; (text-scale-increase 0.5 )
+    )
+  (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+  )
 
 
 

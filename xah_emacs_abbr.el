@@ -327,6 +327,8 @@
 ;;; xah personal
 
 
+    ("lr" "#lang racket")
+
     ("tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
     ("1menu" "〖a ▸ b ▸ c〗")
     ("1key" "【Alt+f】")
