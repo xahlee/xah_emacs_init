@@ -94,7 +94,7 @@
   (define-key xah-user-keymap (kbd "k") 'xah-clean-whitespace-and-save)
   (define-key xah-user-keymap (kbd "l") nil)
   (define-key xah-user-keymap (kbd "m") 'magit-status)
-  (define-key xah-user-keymap (kbd "n") 'xah-make-backup)
+  (define-key xah-user-keymap (kbd "n") 'xah-make-backup-and-save)
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
   (define-key xah-user-keymap (kbd "p") 'xah-copy-file-path)
   (define-key xah-user-keymap (kbd "q") 'xah-replace-BOM-mark-etc)

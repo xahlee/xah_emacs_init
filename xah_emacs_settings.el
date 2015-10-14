@@ -108,11 +108,11 @@
 
 (setq mark-ring-max 5)
 
+;; backup in one place. flat, no tree structure
+(setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))
 
-
-;; don't create backup~ or #auto-save# files
 (setq backup-by-copying t)
-(setq make-backup-files nil)
+;; (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq auto-save-visited-file-name t )
 
@@ -197,7 +197,7 @@
 (electric-indent-mode 0) ; default is on in emacs 24.4
 
 (set-default 'tab-always-indent 'complete)
- 
+
 (global-auto-revert-mode 1)
 
 (setq scroll-error-top-bottom t )
@@ -222,7 +222,9 @@
   (add-hook 'xah-js-mode-hook 'xah-turn-on-line-number)
   (add-hook 'xah-xahk-mode-hook 'xah-turn-on-line-number)
   (add-hook 'xah-clojure-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'xah-php-mode-hook 'xah-turn-on-line-number))
+  (add-hook 'xah-php-mode-hook 'xah-turn-on-line-number)
+  (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
+)
 
 (progn
   ;; use variable-width font for some modes
@@ -232,7 +234,7 @@
     ;; (text-scale-increase 0.5 )
     )
   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
+  ;; (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
@@ -279,7 +281,7 @@
 
 ;; set highlighting brackets
 (show-paren-mode 1)
-;; (setq show-paren-style 'expression)
+(setq show-paren-style 'expression)
 (setq show-paren-style 'parenthesis)
 
 (progn
@@ -294,6 +296,7 @@
 (progn
   ;; make buffer switch command do suggestions, also for find-file command
   (ido-mode 1)
+ ;; (ido-everywhere 1)
   (setq ido-separator "\n")
   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
   )
@@ -379,11 +382,11 @@
 ;;  ;; '(xlsl-reference-url "http://lslwiki.net/lslwiki/wakka.php?wakka=")
 ;; )
 
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(completions-common-part ((t (:inherit default :foreground "gray50"))))
-;;  ;; '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
-;;  )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(completions-common-part ((t (:inherit default :foreground "gray50"))))
+ '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
+ )

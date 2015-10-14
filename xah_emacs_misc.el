@@ -184,19 +184,38 @@ example:
 in the same dir. If such a file already exist, it's overwritten.
 If the current buffer is not associated with a file, nothing's done.
 URL `http://ergoemacs.org/emacs/elisp_make-backup.html'
-Version 2015-08-17"
+Version 2015-10-14"
   (interactive)
-  (let (
-        (ξfile-list
-         (if (string-equal major-mode "dired-mode")
-             (dired-get-marked-files)
-           (list (buffer-file-name)))))
-    (mapc (lambda (ξfname)
-            (let ((ξbackup-name
-                   (concat ξfname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
-              (copy-file ξfname ξbackup-name t)
-              (message (concat "Backup saved at: " ξbackup-name))))
-          ξfile-list)))
+  (let ((ξfname (buffer-file-name)))
+    (if ξfname
+        (let ((ξbackup-name
+               (concat ξfname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
+          (copy-file ξfname ξbackup-name t)
+          (message (concat "Backup saved at: " ξbackup-name)))
+      (if (string-equal major-mode "dired-mode")
+          (progn
+            (mapc (lambda (ξx)
+                    (let ((ξbackup-name
+                           (concat ξx "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
+                      (copy-file ξx ξbackup-name t)))
+                  (dired-get-marked-files))
+            (message "marked files backed up"))
+        (user-error "buffer not file nor dired")))))
+
+(defun xah-make-backup-and-save ()
+  "backup of current file and save, or backup dired marked files.
+For detail, see `xah-make-backup'.
+If the current buffer is not associated with a file nor dired, nothing's done.
+URL `http://ergoemacs.org/emacs/elisp_make-backup.html'
+Version 2015-10-14"
+  (interactive)
+  (if (buffer-file-name)
+      (progn
+        (xah-make-backup)
+        (when (buffer-modified-p)
+          (save-buffer)))
+    (progn
+      (xah-make-backup))))
 
 
 (defun xah-describe-major-mode ()
