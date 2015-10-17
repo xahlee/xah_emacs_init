@@ -4,7 +4,7 @@
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
-(define-key xah-fly-leader-key-map (kbd "RET") nil)
+;; (define-key xah-fly-leader-key-map (kbd "RET") 'smex)
 
 (define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))

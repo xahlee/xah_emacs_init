@@ -548,17 +548,110 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
     (xah-replace-pairs-region 1 (point-max)
  [
 
+  ;; google analytics tracker
+["<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-10884311-1', 'auto');
+ga('send', 'pageview');
+</script>"
+""]
+
+["<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-10884311-3', 'auto');
+ga('send', 'pageview');
+</script>"
+""]
+
+["<section class=\"buy-book\">
+Buy <a href=\"buy_xah_js_tutorial.html\">Xah JavaScript Tutorial</a>.
+<div class=\"pp_xah_js_tutorial\">
+<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
+<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" />
+<input type=\"hidden\" name=\"hosted_button_id\" value=\"J3BC865C77JUC\" />
+<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\" />
+<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\" />
+</form>
+</div>
+</section>"
+""]
+
+["<div class=\"pp93653\">
+Buy xahlee.info for offline reading.
+<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
+<input type=\"hidden\" name=\"cmd\" value=\"_xclick\">
+<input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\">
+<input type=\"hidden\" name=\"lc\" value=\"US\">
+<input type=\"hidden\" name=\"item_name\" value=\"xahlee.info content\">
+<input type=\"hidden\" name=\"amount\" value=\"49.00\">
+<input type=\"hidden\" name=\"currency_code\" value=\"USD\">
+<input type=\"hidden\" name=\"button_subtype\" value=\"services\">
+<input type=\"hidden\" name=\"no_note\" value=\"0\">
+<input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\">
+<input type=\"hidden\" name=\"no_shipping\" value=\"1\">
+<input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\">
+<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">
+</form>
+</div>"
+""
+]
+
+["
+<script>
+amzn_assoc_ad_type = \"responsive_search_widget\";
+amzn_assoc_tracking_id = \"xahhome-20\";
+amzn_assoc_marketplace = \"amazon\";
+amzn_assoc_region = \"US\";
+amzn_assoc_placement = \"\";
+amzn_assoc_search_type = \"search_widget\";
+amzn_assoc_width = \"auto\";
+amzn_assoc_height = \"auto\";
+amzn_assoc_default_search_category = \"\";
+amzn_assoc_default_search_key = \"\";
+amzn_assoc_theme = \"light\";
+amzn_assoc_bg_color = \"FFFFFF\";
+</script>
+"
+""
+]
+
+["<nav id=\"t5\">
+<span class=\"xsignet\">∑</span><span class=\"xsignetxah\">XAH</span>
+<ul>
+<li><a href=\"../math/math_index.html\">Math</a></li>
+<li><a href=\"../comp/comp_index.html\">Programing</a></li>
+<li><a href=\"../comp/unicode_index.html\">Unicode ♥</a></li>
+<li><a href=\"../kbd/keyboarding.html\">Keyboard ⌨</a></li>
+</ul>
+<button id=\"i54391\" type=\"button\">Random Page</button><script async src=\"../random_page.js\"></script>
+• <a href=\"https://twitter.com/xah_lee\">Follow me on Twitter</a>
+• <a href=\"https://plus.google.com/+XahLee\">Follow me on g+</a>
+• <a class=\"rssfeed53141\" href=\"http://xahlee.info/math/blog.xml\">Math</a>
+• <a class=\"rssfeed53141\" href=\"http://xahlee.info/comp/blog.xml\">Programing</a>
+• <a class=\"rssfeed53141\" href=\"http://xahlee.info/js/blog.xml\">Web Dev</a>
+• <a class=\"buyxahjs83183\" href=\"http://xahlee.info/js/buy_xah_js_tutorial.html\">Buy Xah JavaScript Tutorial</a>
+<div class=\"xgcse\"><script>(function(){var cx='partner-pub-5125343095650532:1853288892';var gcse=document.createElement('script');gcse.type='text/javascript';gcse.async=true;gcse.src=(document.location.protocol=='https:'?'https:':'http:')+'//www.google.com/cse/cse.js?cx='+cx;var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse,s);})();</script><gcse:searchbox-only></gcse:searchbox-only></div>
+</nav>"
+
+"<nav id=\"t5\">
+<span class=\"xsignet\">∑</span><span class=\"xsignetxah\">XAH</span>
+<div class=\"xgcse\"><script>(function(){var cx='partner-pub-5125343095650532:1853288892';var gcse=document.createElement('script');gcse.type='text/javascript';gcse.async=true;gcse.src=(document.location.protocol=='https:'?'https:':'http:')+'//www.google.com/cse/cse.js?cx='+cx;var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse,s);})();</script><gcse:searchbox-only></gcse:searchbox-only></div>
+</nav>"
+]
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  older 2015-10-16
 [
 "<address class=\"author\"><a href=\"https://plus.google.com/112757647855302148298?rel=author\" rel=\"author\">Xah Lee</a></address>"
 "Xah Lee"
 ]
 
-  ;; google analytics tracker
-["<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-1','xahlee.info');ga('send','pageview');</script>" ""]
-
-["<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-3','ergoemacs.org');ga('send','pageview');</script>" ""]
-
-  ;; Google Ad
+ ;; Google Ad
 [
 "<script async src=\"http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
 <!-- 728x90, created 8/12/09 -->

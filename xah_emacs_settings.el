@@ -13,16 +13,21 @@
 ;; (setenv "LANG" "en_US.UTF-8" )
 ;; (setenv "LC_ALL" "en_US.UTF-8" )
 
+;; (set-selection-coding-system 'raw-text)
+;; (set-selection-coding-system 'utf-16-be)
+;; (set-selection-coding-system 'utf-16-le)
+;; (set-selection-coding-system 'gb18030)
 ;; (set-selection-coding-system nil)
 ;; (set-selection-coding-system 'utf-8)
-;; (set-selection-coding-system 'chinese-gb18030)
-;; (set-selection-coding-system 'gb18030)
-;; (set-selection-coding-system 'utf-16-le)
-;; (set-selection-coding-system 'utf-16le-dos)
-;; (set-selection-coding-system 'raw-text)
+
 ;; selection-coding-system
 
-;; 哈哈
+;; •
+;;           buffer code: #xE5 #x93 #x88 utf8
+;;             file code: #xB9 #xFE (encoded by coding system chinese-gb18030-unix)
+
+;㬻ᬠ⠤㥁㥾᭾䈨
+
 ;; emacs coding system
 ;; binary
 ;; chinese-gb18030
@@ -223,6 +228,7 @@
   (add-hook 'xah-xahk-mode-hook 'xah-turn-on-line-number)
   (add-hook 'xah-clojure-mode-hook 'xah-turn-on-line-number)
   (add-hook 'xah-php-mode-hook 'xah-turn-on-line-number)
+  (add-hook 'python-mode-hook 'xah-turn-on-line-number)
   (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
 )
 
@@ -281,7 +287,6 @@
 
 ;; set highlighting brackets
 (show-paren-mode 1)
-(setq show-paren-style 'expression)
 (setq show-paren-style 'parenthesis)
 
 (progn
@@ -382,11 +387,11 @@
 ;;  ;; '(xlsl-reference-url "http://lslwiki.net/lslwiki/wakka.php?wakka=")
 ;; )
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(completions-common-part ((t (:inherit default :foreground "gray50"))))
- '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
- )
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(completions-common-part ((t (:inherit default :foreground "gray50"))))
+;;  '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
+;;  )

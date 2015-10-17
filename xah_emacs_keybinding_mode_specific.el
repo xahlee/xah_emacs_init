@@ -90,10 +90,11 @@
   (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
 (add-hook 'org-mode-hook 'xah-org-mode-setup)
 
-;; (defun xah-racket-mode-setup ()
-;;   ""
-;;   (local-set-key (kbd "<tab>") 'complete-symbol))
-;; (add-hook 'racket-mode-hook 'xah-racket-mode-setup)
+(defun xah-racket-mode-setup ()
+  "for 'racket-mode-hook'"
+  (local-set-key (kbd "C-c C-g") 'racket-describe)
+)
+(add-hook 'racket-mode-hook 'xah-racket-mode-setup)
 
 
 

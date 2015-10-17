@@ -649,9 +649,9 @@ Search begins at buffer beginning (respects `narrow-to-region').
 This is useful for text copied from twitter or Google Plus, because they often contain BOM mark. See URL `http://xahlee.info/comp/unicode_BOM_byte_orde_mark.html'
 
 URL `http://ergoemacs.org/emacs/elisp_unicode_replace_invisible_chars.html'
-Version 2015-10-11"
+Version 2015-10-17"
   (interactive)
-  (progn
+  (save-excursion
     (goto-char (point-min))
     (query-replace-regexp "\u200f\\|\u202e\\|\ufeff" "")))
 
