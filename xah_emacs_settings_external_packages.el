@@ -48,6 +48,17 @@
   ; make the output html use utf-8 charset
   (setq htmlize-html-charset "utf-8"))
 
+;; (when (and (fboundp 'which-key-mode)
+;;            which-key-mode
+;;            )
+;;   ;; (which-key-setup-side-window-right)
+;;   ;; (setq which-key-popup-type 'side-window)
+;;   )
+
+;; (when (featurep 'guide-key)
+;;   (setq guide-key/guide-key-sequence '("C-x" "x" "<menu>" "<end>" "<delete>"))
+;;   (guide-key-mode 1))
+
 (when (fboundp 'xah-find-text)
   (setq
    xah-find-dir-ignore-regex-list
@@ -72,3 +83,18 @@
     "xahlee_info/clojure-doc-1.6/"
     ]))
 
+(when (fboundp 'elfeed)
+  (setq elfeed-feeds
+        '("http://nullprogram.com/feed/"
+          "http://www.terminally-incoherent.com/blog/feed/"
+          "http://ergoemacs.org/emacs/blog.xml"
+          "http://xahlee.info/comp/blog.xml"
+          "http://xahlee.info/js/blog.xml"
+          "http://xahlee.info/math/blog.xml"
+          "http://wordyenglish.com/lit/blog.xml"
+          "http://xahmusic.org/music/blog.xml"
+          "http://xaharts.org/arts/blog.xml"
+          "http://xahlee.org/sex/blog.xml"
+          "http://xahsl.org/sl/blog.xml"
+          "http://wordyenglish.com/chinese/blog.xml"
+          )))

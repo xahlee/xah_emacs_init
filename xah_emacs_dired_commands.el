@@ -43,29 +43,39 @@ Version 2015-07-30"
       (file-relative-name fileName)))))
 
 (defun xah-process-image (φfile-list φargs-str φnew-name-suffix φnew-name-file-suffix )
-  "Create a new image.
+  "Wrapper to ImageMagick's “convert” shell command.
 φfile-list is a list of image file paths.
 φargs-str is argument string passed to ImageMagick's “convert” command.
 φnew-name-suffix is the string appended to file. e.g. “_new” gets you “…_new.jpg”
 φnew-name-file-suffix is the new file's file extension. e.g. “.png”
-Requires ImageMagick shell command.
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-03-10"
+Version 2015-10-19"
   (require 'dired)
   (mapc
    (lambda (ξf)
      (let ( newName cmdStr )
-       (setq newName (concat (file-name-sans-extension ξf) φnew-name-suffix φnew-name-file-suffix) )
+       (setq newName
+             (concat
+              (file-name-sans-extension ξf)
+              φnew-name-suffix
+              φnew-name-file-suffix))
        (while (file-exists-p newName)
-         (setq newName (concat (file-name-sans-extension newName) φnew-name-suffix (file-name-extension newName t))) )
-
+         (setq newName
+               (concat
+                (file-name-sans-extension newName)
+                φnew-name-suffix
+                (file-name-extension newName t))))
        ;; relative paths used to get around Windows/Cygwin path remapping problem
        (setq cmdStr
-             (format "convert %s '%s' '%s'" φargs-str (file-relative-name ξf) (file-relative-name newName)) )
-       (shell-command cmdStr)
-       ))
-   φfile-list ))
+             (format
+              "convert %s '%s' '%s'"
+              φargs-str
+              (file-relative-name ξf)
+              (file-relative-name newName)))
+       (shell-command cmdStr)))
+   φfile-list )
+  (revert-buffer))
 
 (defun xah-dired-scale-image (φfile-list φscale-percentage φsharpen?)
   "Create a scaled version of images of marked files in dired.

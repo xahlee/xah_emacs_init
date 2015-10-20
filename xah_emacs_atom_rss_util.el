@@ -3,6 +3,8 @@
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 ;; 〈Emacs Lisp: Updating Atom Webfeed〉 http://ergoemacs.org/emacs/elisp_update_atom.html
 
+(require 'xah-get-thing)
+
 (defun insert-atom-entry (&optional φtitle φid φsummary φcontentHTML-text φaltLinkUrl)
   "Insert a Atom webfeed entry template,
  in the current buffer's cursor position.
@@ -93,22 +95,7 @@ Other files paths for blogs are:
 "
   (interactive)
   (let* (
-         (bds
-          (if (use-region-p)
-              (vector
-               (buffer-substring-no-properties (region-beginning) (region-end))
-               (region-beginning) (region-end))
-            (progn (let (pt1 pt2)
-                     (save-excursion
-                       (if (re-search-backward "\n[ \t]*\n" nil "move")
-                           (progn (re-search-forward "\n[ \t]*\n")
-                                  (setq pt1 (point)))
-                         (setq pt1 (point)))
-                       (if (re-search-forward "\n[ \t]*\n" nil "move")
-                           (progn (re-search-backward "\n[ \t]*\n")
-                                  (setq pt2 (point)))
-                         (setq pt2 (point)))
-                       (vector (buffer-substring-no-properties pt1 pt2) pt1 pt2))))))
+         (bds (xah-get-thing-or-selection 'block))
          (ξinputStr (elt bds 0))
          (p1 (elt bds 1))
          (p2 (elt bds 2))
@@ -128,18 +115,20 @@ Other files paths for blogs are:
                 (progn "�")))))
 
          (altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
-          (let ( (myurls (xah-html-extract-url p1 p2)) ξfirstLink1)
-            (if (>= (length myurls) 1)
+          (let ( (ξhrefValues (xah-html-extract-url p1 p2)) ξfirstLink1)
+            (if (>= (length ξhrefValues) 1)
                 (progn
-                  (setq ξfirstLink1 (elt myurls 0))
+                  (setq ξfirstLink1 (elt ξhrefValues 0))
                   (if (string-match-p "\\`https?://" ξfirstLink1)
-                      (if (xahsite-url-is-xah-website-p ξfirstLink1)
-                          (xahsite-filepath-to-href-value (xahsite-url-to-filepath ξfirstLink1 "addFileName") currentFilePath)
-                        ξfirstLink1
-                        )
-                    (xahsite-filepath-to-href-value
-                     (expand-file-name ξfirstLink1 (file-name-directory currentFilePath ))
-                     currentFilePath)))
+                      ξfirstLink1
+                    ;; (if (xahsite-url-is-xah-website-p ξfirstLink1)
+                    ;;     (xahsite-filepath-to-href-value
+                    ;;      (xahsite-url-to-filepath ξfirstLink1 "addFileName")
+                    ;;      currentFilePath)
+                    ;;   ξfirstLink1
+                    ;;   )
+                    (xahsite-filepath-to-url 
+                     (expand-file-name ξfirstLink1 (file-name-directory currentFilePath )))))
               (xahsite-filepath-to-url currentFilePath)))))
 
     (if (file-exists-p atomFilePath)

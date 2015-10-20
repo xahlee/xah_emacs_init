@@ -60,8 +60,6 @@ The clipboard should contain a file path or url to xah site. Open that file in e
             (progn (find-file ξfpath))
           (progn (user-error "file doesn't exist 「%s」" ξfpath)))))))
 
-(defalias 'ffap 'xah-open-file-path-under-cursor)
-
 (defun xah-open-file-at-cursor ()
   "Open the file path under cursor.
 If there is text selection, uses the text selection for path.

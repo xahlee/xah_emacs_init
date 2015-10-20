@@ -175,7 +175,7 @@
 
 (setq initial-frame-alist
       '(
-        (width . 92)
+        (width . 102)
         (height . 54)
         (background-color . "honeydew")))
 

@@ -92,7 +92,7 @@
 
 (defun xah-racket-mode-setup ()
   "for 'racket-mode-hook'"
-  (local-set-key (kbd "C-c C-g") 'racket-describe)
+  (local-set-key (kbd "C-c C-h") 'racket-describe)
 )
 (add-hook 'racket-mode-hook 'xah-racket-mode-setup)
 
