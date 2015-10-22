@@ -549,11 +549,12 @@ version 2015-02-05"
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.
 Linux only. Requires 「feh」 image viewer.
-"
+Version 2015-10-20"
   (interactive)
-  (let ()
-(shell-command (format "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%%f'\" --geometry 1600x1000 '%s'" (expand-file-name default-directory)) )
-  ))
+  (progn
+    (shell-command (format "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%%f'\" --geometry 1600x1000 '%s'" (expand-file-name default-directory)))
+    ;; (shell-command (format "gthumb --slideshow ." (expand-file-name default-directory)) )
+    ))
 
 (defun xah-remove-paypal-unimportant-text ()
   "..."

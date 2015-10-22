@@ -192,14 +192,10 @@
 (require 'recentf)
 (recentf-mode 1)
 
-(desktop-save-mode)
-(setq switch-to-visible-buffer t)
+(desktop-save-mode 1)
 
-(winner-mode 0)
-(electric-pair-mode 0)
 (blink-cursor-mode 0 )
-(setq sentence-end-double-space nil )
-(electric-indent-mode 0) ; default is on in emacs 24.4
+(setq shift-select-mode nil)
 
 (set-default 'tab-always-indent 'complete)
 
@@ -207,7 +203,15 @@
 
 (setq scroll-error-top-bottom t )
 
-(setq shift-select-mode nil)
+(which-function-mode 1) ; show current function in mode line
+(winner-mode 0)
+
+(setq sentence-end-double-space nil )
+(setq switch-to-visible-buffer t)
+(setq set-mark-command-repeat-pop t)
+
+;; set the fallback input method to Chinese for toggle-input-method
+(setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 
 (when (fboundp 'eww)
   (progn
@@ -247,15 +251,6 @@
   )
 
 
-
-(which-function-mode 1) ; show current function in mode line
-
-(setq set-mark-command-repeat-pop t)
-
-;; set the fallback input method to Chinese for toggle-input-method
-(setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
-
-
 ;; minibuffer
 
 ;; Save minibuffer history
@@ -266,7 +261,7 @@
 
 
 
-;; turn on save place so that when opening a file, the cursor will be at the last position.
+;; save cursor position
 (require 'saveplace)
 (setq save-place-file (concat user-emacs-directory "saveplace.el") ) ; use standard emacs dir
 (setq-default save-place t)
@@ -283,11 +278,13 @@
 (global-subword-mode 1)
 
 ;; make typing delete/overwrites selected text
-(delete-selection-mode 1)
+(delete-selection-mode 0)
 
 ;; set highlighting brackets
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
+
+(electric-pair-mode 0)
 
 (progn
   ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.
@@ -305,6 +302,8 @@
   (setq ido-separator "\n")
   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
   )
+
+(electric-indent-mode 0) ; default is on in emacs 24.4
 
 ;; majority of code formatting conventions do no recommend mixed tabs and spaces. So, here.
 (setq-default indent-tabs-mode nil) ; gnu emacs 23.1, 24.4.1 default is t

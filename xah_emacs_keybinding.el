@@ -11,6 +11,9 @@
 (define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
+;; kill habit
+(global-set-key (kbd "<menu> g") nil)
+
 (global-set-key (kbd "<f14>") 'xah-close-current-buffer)
 
 (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
@@ -51,7 +54,7 @@
 (progn
   (define-prefix-command 'xah-user-keymap)
 
-  (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
+  (define-key xah-user-keymap (kbd "<menu>") 'xah-dump-keymap)
   (define-key xah-user-keymap (kbd "RET") nil)
 
   (define-key xah-user-keymap (kbd "-") 'xah-insert-form-feed)
@@ -180,7 +183,7 @@
 ;; 'xah-toggle-line-spacing
 
 (progn
-  (define-key key-translation-map (kbd "<end> <menu>") (kbd "_"))
+  (define-key key-translation-map (kbd "<end> SPC") (kbd "_"))
   (define-key key-translation-map (kbd "<menu> SPC <up>") (kbd "↑"))
   (define-key key-translation-map (kbd "<menu> SPC <down>") (kbd "↓"))
   (define-key key-translation-map (kbd "<menu> SPC <left>") (kbd "←"))
