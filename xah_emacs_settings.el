@@ -132,6 +132,7 @@
 (progn
   ;; seems pointless to warn. There's always undo.
   (put 'narrow-to-region 'disabled nil)
+  (put 'narrow-to-page 'disabled nil)
   (put 'upcase-region 'disabled nil)
   (put 'downcase-region 'disabled nil)
   (put 'erase-buffer 'disabled nil)
@@ -195,7 +196,7 @@
 (desktop-save-mode 1)
 
 (blink-cursor-mode 0 )
-(setq shift-select-mode nil)
+(setq shift-select-mode 1)
 
 (set-default 'tab-always-indent 'complete)
 
@@ -278,7 +279,7 @@
 (global-subword-mode 1)
 
 ;; make typing delete/overwrites selected text
-(delete-selection-mode 0)
+(delete-selection-mode 1)
 
 ;; set highlighting brackets
 (show-paren-mode 1)

@@ -643,16 +643,14 @@ The chars to be searched are:
  RIGHT-TO-LEFT MARK (codepoint 8207, #x200f)
  RIGHT-TO-LEFT OVERRIDE (codepoint 8238, #x202e)
 
-Search begins at buffer beginning (respects `narrow-to-region').
+Search begins at cursor position. (respects `narrow-to-region')
 
 This is useful for text copied from twitter or Google Plus, because they often contain BOM mark. See URL `http://xahlee.info/comp/unicode_BOM_byte_orde_mark.html'
 
 URL `http://ergoemacs.org/emacs/elisp_unicode_replace_invisible_chars.html'
-Version 2015-10-17"
+Version 2015-10-25"
   (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (query-replace-regexp "\u200f\\|\u202e\\|\ufeff" "")))
+  (query-replace-regexp "\u200f\\|\u202e\\|\ufeff" ""))
 
 (defun xah-replace-BOM-mark-dir ()
   "temp hack. replace some invisible Unicode chars.

@@ -11,9 +11,6 @@
 (define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
-;; kill habit
-(global-set-key (kbd "<menu> g") nil)
-
 (global-set-key (kbd "<f14>") 'xah-close-current-buffer)
 
 (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
@@ -23,14 +20,6 @@
 (global-set-key (kbd "C-w") 'xah-close-current-buffer)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-,") 'flyspell-goto-next-error)
-
-  ;; (define-key xah-fly-key-map (kbd "C-6") 'xah-toggle-letter-case)
-  ;; (define-key xah-fly-key-map (kbd "C-3") 'hippie-expand)
-  ;; (define-key xah-fly-key-map (kbd "C-4") 'xah-cycle-hyphen-underscore-space)
-
-  (define-key xah-fly-key-map (kbd "M-t") 'xah-toggle-letter-case)
-  (define-key xah-fly-key-map (kbd "M-c") 'xah-cycle-hyphen-underscore-space)
-  (define-key xah-fly-key-map (kbd "M-r") 'hippie-expand )
 
 (setq xfk-major-mode-lead-key (kbd "<delete>"))
 

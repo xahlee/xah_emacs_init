@@ -326,7 +326,6 @@
     
 ;;; xah personal
 
-
     ("lr" "#lang racket")
 
     ("tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>")
@@ -412,7 +411,11 @@ QQ: http://user.qzone.qq.com/2609322939")
     ("ups" "http://xahlee.info/powershell/index.html")
     ("umma" "http://xahlee.info/M/index.html")
     ("ujava" "http://xahlee.info/java-a-day/java.html")
-    ("utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")))
+    ("utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html")
+
+  ;
+
+    ))
 
 ;; 
 ;; ;;; stop asking whether to save newly added abbrev when quitting emacs
