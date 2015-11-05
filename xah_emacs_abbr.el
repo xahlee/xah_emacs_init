@@ -225,7 +225,7 @@
     ("gc" "Google Chrome")
     ("gp" "Google Plus")
     ("gcd" "googlecode")
-    ("ff" "Firefox")
+    ("ffb" "Firefox")
     ("sl" "Second Life")
     ("lsl" "Linden Scripting Language")
     ("fb" "Facebook")
