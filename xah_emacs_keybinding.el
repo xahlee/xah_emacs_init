@@ -21,6 +21,10 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-,") 'flyspell-goto-next-error)
 
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-0") (lambda () (interactive) (text-scale-set 0)))
+
 (setq xfk-major-mode-lead-key (kbd "<delete>"))
 
 (progn

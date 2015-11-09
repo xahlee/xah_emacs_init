@@ -28,85 +28,7 @@
 
 ;㬻ᬠ⠤㥁㥾᭾䈨
 
-;; emacs coding system
-;; binary
-;; chinese-gb18030
-;; chinese-gb18030-dos
-;; chinese-gb18030-mac
-;; chinese-gb18030-unix
-;; dos
-;; emacs-internal
-;; gb18030
-;; gb18030-dos
-;; gb18030-mac
-;; gb18030-unix
-;; mac
-;; mule-utf-8
-;; mule-utf-8-dos
-;; mule-utf-8-mac
-;; mule-utf-8-unix
-;; no-conversion
-;; prefer-utf-8
-;; prefer-utf-8-dos
-;; prefer-utf-8-mac
-;; prefer-utf-8-unix
-;; raw-text
-;; raw-text-dos
-;; raw-text-mac
-;; raw-text-unix
-;; unix
-;; utf-16
-;; utf-16-be
-;; utf-16-be-dos
-;; utf-16-be-mac
-;; utf-16-be-unix
-;; utf-16-dos
-;; utf-16-le
-;; utf-16-le-dos
-;; utf-16-le-mac
-;; utf-16-le-unix
-;; utf-16-mac
-;; utf-16-unix
-;; utf-16be
-;; utf-16be-dos
-;; utf-16be-mac
-;; utf-16be-unix
-;; utf-16be-with-signature
-;; utf-16be-with-signature-dos
-;; utf-16be-with-signature-mac
-;; utf-16be-with-signature-unix
-;; utf-16le
-;; utf-16le-dos
-;; utf-16le-mac
-;; utf-16le-unix
-;; utf-16le-with-signature
-;; utf-16le-with-signature-dos
-;; utf-16le-with-signature-mac
-;; utf-16le-with-signature-unix
-;; utf-7
-;; utf-7-dos
-;; utf-7-imap
-;; utf-7-imap-dos
-;; utf-7-imap-mac
-;; utf-7-imap-unix
-;; utf-7-mac
-;; utf-7-unix
-;; utf-8
-;; utf-8-auto
-;; utf-8-auto-dos
-;; utf-8-auto-mac
-;; utf-8-auto-unix
-;; utf-8-dos
-;; utf-8-emacs
-;; utf-8-emacs-dos
-;; utf-8-emacs-mac
-;; utf-8-emacs-unix
-;; utf-8-mac
-;; utf-8-unix
-;; utf-8-with-signature
-;; utf-8-with-signature-dos
-;; utf-8-with-signature-mac
-;; utf-8-with-signature-unix
+
 
 
 (setq initial-major-mode 'fundamental-mode)
@@ -264,8 +186,7 @@
 
 ;; save cursor position
 (require 'saveplace)
-(setq save-place-file (concat user-emacs-directory "saveplace.el") ) ; use standard emacs dir
-(setq-default save-place t)
+(setq-default save-place nil)
 
 ;; (setq enable-recursive-minibuffers t )
 
