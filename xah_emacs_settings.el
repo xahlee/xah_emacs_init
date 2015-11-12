@@ -186,7 +186,7 @@
 
 ;; save cursor position
 (require 'saveplace)
-(setq-default save-place nil)
+(setq-default save-place t)
 
 ;; (setq enable-recursive-minibuffers t )
 

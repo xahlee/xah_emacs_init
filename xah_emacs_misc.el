@@ -501,11 +501,15 @@ When there is a text selection, act on the region."
         ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
         ("firefox" . "setsid firefox &")
 
+
         ("delete empty file" . "find . -type f -empty")
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
         ("delete emacs backup~" . "find . -name \"*~\" -delete")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
+
+        ("empty trash" . "rm -r /home/xah/.local/share/Trash")
+
         ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
         ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
         ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
