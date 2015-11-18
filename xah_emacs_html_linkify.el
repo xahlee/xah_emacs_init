@@ -804,6 +804,8 @@ If there is text selection, use it as input."
     (cond
      ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "javascript_es6" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "python_doc_2" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "python_doc_3" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "REC-SVG11-20110816" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" ξpath) (xah-blogger-linkify))

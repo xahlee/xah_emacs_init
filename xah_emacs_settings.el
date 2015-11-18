@@ -103,9 +103,7 @@
         (background-color . "honeydew")))
 
 (setq default-frame-alist
-      '((menu-bar-lines . 1)
-        (left-fringe)
-        (right-fringe)
+      '(
         (tool-bar-lines . 0)
         (width . 92)
         (height . 52)
@@ -143,21 +141,21 @@
       (rename-buffer "eww" t))
     (add-hook 'eww-mode-hook 'xah-rename-eww-hook)))
 
-(progn
-  (defun xah-turn-on-line-number ()
-    "Turn on line number on margin."
-    (linum-mode 1))
-  (add-hook 'text-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'xah-elisp-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'xah-css-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'xah-html-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'xah-js-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'xah-xahk-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'xah-clojure-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'xah-php-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'python-mode-hook 'xah-turn-on-line-number)
-  (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
-)
+;; (progn
+;;   (defun xah-turn-on-line-number ()
+;;     "Turn on line number on margin."
+;;     (linum-mode 1))
+;;   (add-hook 'text-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'xah-elisp-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'xah-css-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'xah-html-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'xah-js-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'xah-xahk-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'xah-clojure-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'xah-php-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'python-mode-hook 'xah-turn-on-line-number)
+;;   (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
+;; )
 
 (progn
   ;; use variable-width font for some modes
