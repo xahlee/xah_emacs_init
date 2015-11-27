@@ -15,8 +15,8 @@ then after calling this function,
 default browser will be launched and opening this URL:
  http://xahlee.info/index.html"
   (interactive)
-  (let (myURL)
-    (setq myURL
+  (let (ξurl)
+    (setq ξurl
           (if current-prefix-arg
               (xahsite-filepath-to-url (buffer-file-name))
             (buffer-file-name)))
@@ -24,15 +24,16 @@ default browser will be launched and opening this URL:
     (when (buffer-modified-p ) 
       (xah-clean-whitespace-and-save 1 (point-max))
       (save-buffer))
-
+    (message "browsing %s" ξurl)
     (cond
      ((string-equal system-type "windows-nt") ; Windows
-      (when (string-match "^c:/" myURL) (setq myURL (concat "file:///" myURL)))
-      (browse-url myURL))
+      (when (string-match "^c:/" ξurl) (setq ξurl (concat "file:///" ξurl)))
+      (browse-url ξurl))
      ((string-equal system-type "gnu/linux")
-      (browse-url myURL))
+      (browse-url ξurl))
+
      ((string-equal system-type "darwin") ; Mac
-      (browse-url myURL )))))
+      (browse-url ξurl )))))
 
 (defun xah-browse-url-of-buffer-firefox ()
   "Same as `browse-url-of-buffer' but using Firefox.

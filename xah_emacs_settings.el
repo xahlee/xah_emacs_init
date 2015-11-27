@@ -166,7 +166,7 @@
     )
   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
   ;; (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
+  ;; (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
   )
