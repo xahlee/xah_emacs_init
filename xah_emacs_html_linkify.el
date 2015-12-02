@@ -695,10 +695,9 @@ linkText
 
 (defun xah-audio-file-linkify ()
   "Make the path under cursor into a HTML link.
- ⁖
- xyz.mp3
+e.g. xyz.mp3
 becomes
- <audio src=\"xyz.mp3\"></audio>"
+<audio src=\"xyz.mp3\"></audio>"
   (interactive)
   (let* (
          (ξbds (xah-get-thing-or-selection 'filepath))
@@ -711,13 +710,28 @@ becomes
     (delete-region ξp1 ξp2)
     (insert (format "<audio src=\"%s\" controls></audio>" ξfPath))))
 
+(defun xah-video-file-linkify ()
+  "Make the path under cursor into a HTML link.
+e.g. xyz.webm
+becomes
+<video src=\"i/xyz.webm\" controls></video>"
+  (interactive)
+  (let* (
+         (ξbds (xah-get-thing-or-selection 'filepath))
+         (ξinputStr (elt ξbds 0))
+         (ξp1 (aref ξbds 1))
+         (ξp2 (aref ξbds 2))
+         ξfPath
+         )
+    (setq ξfPath (file-relative-name ξinputStr))
+    (delete-region ξp1 ξp2)
+    (insert (format "<video src=\"%s\" controls></video>" ξfPath))))
+
 (defun xah-css-linkify ()
   "Make the path under cursor into a HTML link.
- ⁖
-/home/xah/web/xahlee_org/lit.css
-→
-<link rel=\"stylesheet\" href=\"../lit.css\" />
-"
+ e.g. /home/xah/web/xahlee_org/lit.css
+becomes
+<link rel=\"stylesheet\" href=\"../lit.css\" />"
   (interactive)
   (let* (
          (ξbds (xah-get-thing-or-selection 'filepath))
@@ -808,6 +822,7 @@ If there is text selection, use it as input."
      ((string-match-p "python_doc_3" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "REC-SVG11-20110816" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "php-doc/" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" ξpath) (xah-blogger-linkify))
      ((string-match-p "www\.amazon\.com/" ξpath) (xah-amazon-linkify))
      ((string-match-p "//amzn\.to/" ξpath) (xah-amazon-linkify))
@@ -818,6 +833,8 @@ If there is text selection, use it as input."
      ((string-match-p "\\.css\\'" ξpath) (xah-css-linkify))
      ((string-match-p "\\.mp3\\'" ξpath) (xah-audio-file-linkify))
      ((string-match-p "\\.ogg\\'" ξpath) (xah-audio-file-linkify))
+     ((string-match-p "\\.mp4\\'" ξpath) (xah-video-file-linkify))
+     ((string-match-p "\\.webm\\'" ξpath) (xah-video-file-linkify))
 
      ((xahsite-url-is-xah-website-p ξpath) (xah-file-linkify ξp1 ξp2))
      ((string-match-p "wikipedia.org/" ξpath)
