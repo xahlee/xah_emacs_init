@@ -28,8 +28,6 @@
 
 ;㬻ᬠ⠤㥁㥾᭾䈨
 
-
-
 
 (setq initial-major-mode 'fundamental-mode)
 
@@ -269,6 +267,10 @@
           (newline-mark 10 [182 10]) ; LINE FEED,
           (tab-mark 9 [9655 9] [92 9]) ; tab
           )))
+
+
+
+(setq browse-url-browser-function 'browse-url-firefox)
 
 
 ;; 2009-09-29 see http://groups.google.com/group/ergoemacs/msg/9eec3b455cab3ff1 and http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start
