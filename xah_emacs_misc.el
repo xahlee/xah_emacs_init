@@ -250,15 +250,21 @@ Version 2015-09-21"
 • line spacing is increased.
 • variable width font is used.
 
-Call again to toggle back."
+Call again to toggle back.
+Version 2015-12-16"
   (interactive)
   (if (null (get this-command 'state-on-p))
       (progn
-        (set-window-margins nil 0
-                            (if (> fill-column (window-body-width))
-                                0
-                              (progn
-                                (- (window-body-width) fill-column))))
+
+        ;; (set-window-margins
+        ;;  nil 0
+        ;;  (if (> fill-column (window-body-width))
+        ;;      0
+        ;;    (progn
+        ;;      (- (window-body-width) fill-column))))
+
+        (set-window-margins nil 0 9)
+
         (variable-pitch-mode 1)
         (setq line-spacing 0.4)
         (setq word-wrap t)
@@ -500,7 +506,6 @@ When there is a text selection, act on the region."
 
         ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
         ("firefox" . "setsid firefox &")
-
 
         ("delete empty file" . "find . -type f -empty")
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
@@ -762,3 +767,40 @@ Test cases
              (buffer-file-name))
        'identity nil ξsym gitgrep-history ξsym))))
   (grep (format "git --no-pager grep -P -n '%s'" φsearch-string)))
+
+(defun xah-toggle-background-color ()
+  "Toggle background color between seashell and honeydew.
+URL `http://ergoemacs.org/emacs/elisp_toggle_command.html'
+Version 2015-12-17"
+  (interactive)
+  ;; use a property “state”. Value is t or nil
+  (if (get 'xah-cycle-background-color 'state)
+      (progn
+        (set-background-color "seashell")
+        (put 'xah-cycle-background-color 'state nil))
+    (progn
+      (set-background-color "honeydew")
+      (put 'xah-cycle-background-color 'state t))))
+
+(defun xah-cycle-background-color (φn)
+  "Cycle background color among a preset list.
+
+If `universal-argument' is called first, cycle n steps. Default is 1 step.
+
+URL `http://ergoemacs.org/emacs/elisp_toggle_command.html'
+Version 2015-12-17"
+  (interactive "p")
+  ;; uses a property “state”. Value is a integer.
+  (let* (
+         (ξvalues ["cornsilk" "pale green" "pale turquoise" "thistle" "seashell" "honeydew"])
+         (ξindex-before
+          (if (get 'xah-cycle-background-color 'state)
+              (get 'xah-cycle-background-color 'state)
+            0))
+         (ξindex-after (% (+ ξindex-before (length ξvalues) φn) (length ξvalues)))
+         (ξnext-value (aref ξvalues ξindex-after)))
+
+    (put 'xah-cycle-background-color 'state ξindex-after)
+
+    (set-background-color ξnext-value)
+    (message "background color changed to %s" ξnext-value)))

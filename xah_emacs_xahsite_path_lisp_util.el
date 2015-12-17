@@ -569,6 +569,16 @@ ga('send', 'pageview');
 </script>"
 ""]
 
+;; 2015-12-14
+["<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-7','wordyenglish.com');ga('send','pageview');</script>"
+""]
+
+;; 2015-12-14
+[
+"<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-9','xaharts.org');ga('send','pageview');</script>"
+""
+]
+
 ["<section class=\"buy-book\">
 Buy <a href=\"buy_xah_js_tutorial.html\">Xah JavaScript Tutorial</a>.
 <div class=\"pp_xah_js_tutorial\">
@@ -602,8 +612,7 @@ Buy xahlee.info for offline reading.
 ""
 ]
 
-["
-<script>
+["<script>
 amzn_assoc_ad_type = \"responsive_search_widget\";
 amzn_assoc_tracking_id = \"xahhome-20\";
 amzn_assoc_marketplace = \"amazon\";
@@ -616,8 +625,7 @@ amzn_assoc_default_search_category = \"\";
 amzn_assoc_default_search_key = \"\";
 amzn_assoc_theme = \"light\";
 amzn_assoc_bg_color = \"FFFFFF\";
-</script>
-"
+</script>"
 ""
 ]
 
