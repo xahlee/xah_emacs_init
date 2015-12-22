@@ -113,20 +113,15 @@
 
 (desktop-save-mode 1)
 
-(blink-cursor-mode 0 )
-(setq shift-select-mode 1)
+(blink-cursor-mode 0)
+(setq shift-select-mode nil)
 
 (set-default 'tab-always-indent 'complete)
 
 (global-auto-revert-mode 1)
 
-(setq scroll-error-top-bottom t )
-
-(which-function-mode 1) ; show current function in mode line
-(winner-mode 0)
-
 (setq sentence-end-double-space nil )
-(setq switch-to-visible-buffer t)
+;; (setq switch-to-visible-buffer nil)
 (setq set-mark-command-repeat-pop t)
 
 ;; set the fallback input method to Chinese for toggle-input-method

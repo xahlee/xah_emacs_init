@@ -233,8 +233,8 @@ This command is convenient when reading novel, documentation."
 
 (defun xah-toggle-line-spacing ()
   "Toggle line spacing between no extra space to extra half line height.
-URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
-Version 2015-09-21"
+URL `http://ergoemacs.org/emacs/emacs_toggle_line_spacing.html'
+Version 2015-12-17"
   (interactive)
   (if (null line-spacing)
       (setq line-spacing 0.5) ; add 0.5 height between lines
@@ -774,13 +774,13 @@ URL `http://ergoemacs.org/emacs/elisp_toggle_command.html'
 Version 2015-12-17"
   (interactive)
   ;; use a property “state”. Value is t or nil
-  (if (get 'xah-cycle-background-color 'state)
+  (if (get 'xah-toggle-background-color 'state)
       (progn
         (set-background-color "seashell")
-        (put 'xah-cycle-background-color 'state nil))
+        (put 'xah-toggle-background-color 'state nil))
     (progn
       (set-background-color "honeydew")
-      (put 'xah-cycle-background-color 'state t))))
+      (put 'xah-toggle-background-color 'state t))))
 
 (defun xah-cycle-background-color (φn)
   "Cycle background color among a preset list.
