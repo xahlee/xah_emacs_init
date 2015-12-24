@@ -118,8 +118,8 @@ Using current word or selection."
   (interactive)
   (let ((ξstr1
          (if (use-region-p)
-             (progn (buffer-substring-no-properties (region-beginning) (region-end)))
-           (progn (thing-at-point 'word)))))
+             (buffer-substring-no-properties (region-beginning) (region-end))
+           (current-word))))
     (search-forward "\n\n" nil t)
     (search-backward "</div>")
     (insert "<div class=\"def\"></div>\n")
@@ -129,7 +129,7 @@ Using current word or selection."
 (defun xah-words-add-source ()
   "Insert a word definition entry template."
   (interactive)
-  (let ()
+  (progn
     (require 'sgml-mode) ; for sgml-skip-tag-forward
     (search-backward "<section class=\"word88\">")
     (search-forward "<div class=\"bdy\">")
@@ -199,8 +199,8 @@ insert a div tag above the current paragraph."
   (interactive)
   (let ( (ξinputText
           (if (use-region-p)
-              (progn (buffer-substring-no-properties (region-beginning) (region-end)))
-            (progn (thing-at-point 'word)))))    
+              (buffer-substring-no-properties (region-beginning) (region-end))
+            (current-word))))    
     (xah-html-wrap-html-tag "span" "xnt")
     (search-backward "<p")
     (insert "<div class=\"xnote\"></div>\n\n")

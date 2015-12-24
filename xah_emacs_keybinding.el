@@ -12,7 +12,6 @@
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 (global-set-key (kbd "<f14>") 'xah-close-current-buffer)
-(global-set-key (kbd "<f16>") 'other-frame)
 
 (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)
@@ -21,7 +20,6 @@
 (global-set-key (kbd "C-w") 'xah-close-current-buffer)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-,") 'flyspell-goto-next-error)
-(global-set-key (kbd "C-r") 'other-frame)
 
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)

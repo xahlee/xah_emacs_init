@@ -14,24 +14,33 @@ become
  <img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\" />
 
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
-Version 2015-06-13"
+Version 2015-12-23"
   (interactive)
-  (let* ((ξbounds (bounds-of-thing-at-point 'filename))
-         (ξp1 (car ξbounds))
-         (ξp2 (cdr ξbounds))
-         (ξimgPath (buffer-substring-no-properties ξp1 ξp2 ))
-         (ξhrefValue
-          (file-relative-name
-           ξimgPath
-           (file-name-directory (or (buffer-file-name) default-directory))))
-         (ξaltText
-          (replace-regexp-in-string
-           "_" " "
-           (replace-regexp-in-string
-            "\\.[A-Za-z]\\{3,4\\}$" "" (file-name-nondirectory ξimgPath) t t) t t))
-         (ξimgWH (xah-get-image-dimensions ξimgPath))
-         (ξwidth (number-to-string (elt ξimgWH 0)))
-         (ξheight (number-to-string (elt ξimgWH 1))))
+  (let ( ξp1 ξp2 ξimgPath ξhrefValue ξaltText ξimgWH ξwidth ξheight)
+    (save-excursion
+      (let (ξp0)
+        (setq ξp0 (point))
+        ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+        (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+        (setq ξp1 (point))
+        (goto-char ξp0)
+        (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+        (setq ξp2 (point))
+        (goto-char ξp0))
+      (setq ξimgPath (buffer-substring-no-properties ξp1 ξp2 ))
+      (setq ξhrefValue
+            (file-relative-name
+             ξimgPath
+             (file-name-directory (or (buffer-file-name) default-directory))))
+      (setq ξaltText
+            (replace-regexp-in-string
+             "_" " "
+             (replace-regexp-in-string
+              "\\.[A-Za-z]\\{3,4\\}$" "" (file-name-nondirectory ξimgPath) t t) t t))
+      (setq ξimgWH (xah-get-image-dimensions ξimgPath))
+      (setq ξwidth (number-to-string (elt ξimgWH 0)))
+      (setq ξheight (number-to-string (elt ξimgWH 1))))
+
     (delete-region ξp1 ξp2)
     (insert
      (if (or (equal ξwidth "0") (equal ξheight "0"))
