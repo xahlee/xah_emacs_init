@@ -24,6 +24,8 @@
     ("jq" "jQuery")
     ("jvm" "Java Virtual Machine")
 
+    ("cfg" "context-free grammar")
+
     ("catface" "😸")
 
     ("1arrows" "➵➙►▻☛☞👉⇰➛➜➝➞➟➠➢➣➤➥➦➧➨➲➺➻➼➽➾")
@@ -241,7 +243,7 @@
     ("ahd" "American Heritage Dictionary")
     ("wm" "Window Manager")
     ("1el" "emacs lisp")
-    ("1os" "Operating System")
+    ("1os" "operating system")
     ("1cli" "command line interface")
 
     ;; for programers

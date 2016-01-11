@@ -6,12 +6,10 @@
 
 (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
 
-;; (define-key xah-fly-leader-key-map (kbd "RET") 'smex)
-
+(global-set-key (kbd "<f14>") 'xah-close-current-buffer)
+(global-set-key (kbd "<f16>") (lambda () (interactive) (other-frame 1)))
 (define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-
-(global-set-key (kbd "<f14>") 'xah-close-current-buffer)
 
 (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)
@@ -82,7 +80,7 @@
 
   (define-key xah-user-keymap (kbd "h") nil)
 
-  (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-number)
+  (define-key xah-user-keymap (kbd "i h") 'xah-insert-random-number)
   (define-key xah-user-keymap (kbd "i s") 'xah-insert-random-string)
   (define-key xah-user-keymap (kbd "i u") 'xah-insert-random-uuid)
   (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-hex)
