@@ -35,13 +35,11 @@
 
 (setq mark-ring-max 5)
 
-;; backup in one place. flat, no tree structure
-(setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))
-
+(setq make-backup-files nil)
 (setq backup-by-copying t)
-;; (setq make-backup-files nil)
+
 (setq auto-save-default nil)
-(setq auto-save-visited-file-name t )
+(setq auto-save-visited-file-name t)
 
 (setq save-interprogram-paste-before-kill t)
 (setq enable-recursive-minibuffers t)
@@ -163,7 +161,7 @@
   ;; (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
   ;; (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+  ;; (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
   )
 
 
