@@ -251,19 +251,19 @@ Version 2015-12-17"
 • variable width font is used.
 
 Call again to toggle back.
-Version 2015-12-16"
+Version 2016-01-16"
   (interactive)
   (if (null (get this-command 'state-on-p))
       (progn
 
-        ;; (set-window-margins
-        ;;  nil 0
-        ;;  (if (> fill-column (window-body-width))
-        ;;      0
-        ;;    (progn
-        ;;      (- (window-body-width) fill-column))))
+        (set-window-margins
+         nil 0
+         (if (> fill-column (window-body-width))
+             0
+           (progn
+             (- (window-body-width) fill-column))))
 
-        (set-window-margins nil 0 9)
+        ;; (set-window-margins nil 0 9)
 
         (variable-pitch-mode 1)
         (setq line-spacing 0.4)
