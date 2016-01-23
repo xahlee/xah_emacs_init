@@ -8,8 +8,11 @@
 
 (global-set-key (kbd "<f14>") 'xah-close-current-buffer)
 (global-set-key (kbd "<f16>") (lambda () (interactive) (other-frame 1)))
-(define-key key-translation-map (kbd "<f17>") (kbd "C-g"))
+
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+
+(global-set-key (kbd "M-t") 'xah-toggle-letter-case)
+(global-set-key (kbd "M-h") 'hippie-expand)
 
 (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)

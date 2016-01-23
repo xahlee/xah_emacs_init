@@ -5,6 +5,8 @@
   (require 'dired )
   (when (>= emacs-major-version 23)
     (define-key dired-mode-map (kbd "<delete> h") 'dired-hide-details-mode)
+    (define-key dired-mode-map (kbd "`") 'dired-hide-details-mode)
+    (define-key dired-mode-map (kbd "6") 'dired-up-directory)
     ))
 
 (defun xah-html-mode-keys ()

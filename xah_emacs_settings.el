@@ -39,7 +39,7 @@
 (setq backup-by-copying t)
 
 (setq auto-save-default nil)
-(setq auto-save-visited-file-name t)
+;; (setq auto-save-visited-file-name t)
 
 (setq save-interprogram-paste-before-kill t)
 (setq enable-recursive-minibuffers t)
@@ -78,7 +78,6 @@
 
 
 
-;; (set-background-color "honeydew")
 (setq inhibit-splash-screen t)
 
 

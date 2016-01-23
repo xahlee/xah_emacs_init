@@ -23,7 +23,6 @@
     ("fex" "for example")
     ("jq" "jQuery")
     ("jvm" "Java Virtual Machine")
-
     ("cfg" "context-free grammar")
 
     ("catface" "😸")
@@ -252,6 +251,7 @@
     ("gui" "graphical user interface")
     ("1alt" "alternative")
 
+    ("prof" "professor")
     ("wd" "web development")
     ("dvp" "develop")
     ("dev" "development")
