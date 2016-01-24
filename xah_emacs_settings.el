@@ -33,8 +33,6 @@
 
 (setq search-whitespace-regexp "[-_ \n]")
 
-(setq mark-ring-max 5)
-
 (setq make-backup-files nil)
 (setq backup-by-copying t)
 

@@ -5,32 +5,33 @@
 
 (require 'xah-get-thing)
 
-(defun insert-atom-entry (&optional φtitle φid φsummary φcontentHTML-text φaltLinkUrl)
+(defun insert-atom-entry (&optional φtitle φid φsummary φcontent-xml-text φalt-link)
   "Insert a Atom webfeed entry template,
  in the current buffer's cursor position.
 
-Optional argument φaltLinkUrl is used in the atom tag: <link rel=\"alternate\" href=\"…\"/>
+One of φsummary or φcontent-xml-text must not be `nil'.
+
+Optional argument φalt-link is used in the atom tag: <link rel=\"alternate\" href=\"…\"/>
 Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
   (interactive)
   (let* (
-         (ξtitle (if φtitle φtitle "�") )
+         (ξtitle (if φtitle (concat "<title>" φtitle "</title>") "�") )
          (ξid (if φid φid (new-atom-id-tag) ) )
-         (ξsummary (if φsummary φsummary "�") )
-         (ξcontent (if φcontentHTML-text (format " <content type=\"xhtml\">
+         (ξsummary (if φsummary (concat "<summary>" φsummary "</summary>\n") "") )
+         (ξcontent (if φcontent-xml-text (format " <content type=\"xhtml\">
  <div xmlns=\"http://www.w3.org/1999/xhtml\">
 %s
  </div>
- </content>" φcontentHTML-text)
+ </content>" φcontent-xml-text)
   "") )
          (ξupdatedStr (xah-current-date-time-string))
-         (ξaltLink (if φaltLinkUrl φaltLinkUrl (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
+         (ξaltLink (if φalt-link φalt-link (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
          )
     (insert (format "<entry>
-<title>%s</title>
+%s
 <id>%s</id>
 <updated>%s</updated>
-<summary>%s</summary>
-%s
+%s%s
 <link rel=\"alternate\" href=\"%s\"/>
 </entry>
 
@@ -43,30 +44,30 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
                     ξaltLink
                     )) ) )
 
-(defun new-atom-id-tag (&optional φdomainName)
+(defun new-atom-id-tag (&optional φdomain-name)
   "Returns a newly generated ATOM webfeed's “id” element string.
 Example of return value: 「tag:xahlee.org,2010-03-31:022128」
 
 If DOMAINNAME is given, use that for the domain name.
 Else, use “xahlee.org”."
-    (format "tag:%s%s" (if φdomainName φdomainName "xahlee.org") (format-time-string ",%Y-%m-%d:%H%M%S" (current-time) 1)) )
+    (format "tag:%s%s" (if φdomain-name φdomain-name "xahlee.org") (format-time-string ",%Y-%m-%d:%H%M%S" (current-time) 1)) )
 
-(defun update-atom-updated-tag (φfilePath)
-  "Update the <updated> tag of a ATOM webfeed file at φfilePath,
+(defun update-atom-updated-tag (φfile-path)
+  "Update the <updated> tag of a ATOM webfeed file at φfile-path,
 to current date/time stamp.
 This command leaves the file unsaved."
   (interactive
    (list (buffer-file-name))
    )
-    (let (p1 p2)
-      (find-file φfilePath)
+    (let (ξp1 ξp2)
+      (find-file φfile-path)
       (goto-char 1)
       (search-forward "<updated>")
-      (setq p1 (point) )
+      (setq ξp1 (point) )
       (search-forward "</updated>")
-      (setq p2 (- (point) 10) )
-      (delete-region p1 p2 )
-      (goto-char p1)
+      (setq ξp2 (- (point) 10) )
+      (delete-region ξp1 ξp2 )
+      (goto-char ξp1)
       (insert (xah-current-date-time-string)))
  )
 
@@ -95,18 +96,17 @@ Other files paths for blogs are:
 "
   (interactive)
   (let* (
-         (bds (xah-get-thing-or-selection 'block))
-         (ξinputStr (elt bds 0))
-         (p1 (elt bds 1))
-         (p2 (elt bds 2))
-         (p3)
-         (summaryText "…")
-         (currentFilePath (buffer-file-name))
-         (atomFilePath
-          (if (string-match-p "wordyenglish_com/words/new.html\\'" currentFilePath )
-              (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" currentFilePath "FIXEDCASE" "LITERAL")
-            (replace-regexp-in-string "\\.html\\'" ".xml" currentFilePath "FIXEDCASE" "LITERAL")))
-         (titleText
+         (ξbds (xah-get-thing-or-selection 'block))
+         (ξinputStr (elt ξbds 0))
+         (ξp1 (elt ξbds 1))
+         (ξp2 (elt ξbds 2))
+         (ξp3)
+         (ξcurrentFpath (buffer-file-name))
+         (ξatomFilePath
+          (if (string-match-p "wordyenglish_com/words/new.html\\'" ξcurrentFpath )
+              (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" ξcurrentFpath "FIXEDCASE" "LITERAL")
+            (replace-regexp-in-string "\\.html\\'" ".xml" ξcurrentFpath "FIXEDCASE" "LITERAL")))
+         (ξtitleText
           (if (string-match "<h3>\\(.+?\\)</h3>" ξinputStr)
               (progn (match-string 1 ξinputStr ))
             (progn
@@ -114,8 +114,8 @@ Other files paths for blogs are:
                   (progn (match-string 2 ξinputStr))
                 (progn "�")))))
 
-         (altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
-          (let ( (ξhrefValues (xah-html-extract-url p1 p2)) ξfirstLink1)
+         (ξaltURL ; if the meat contain just one link, use that as alt url, else, url of current file name
+          (let ( (ξhrefValues (xah-html-extract-url ξp1 ξp2)) ξfirstLink1)
             (if (>= (length ξhrefValues) 1)
                 (progn
                   (setq ξfirstLink1 (elt ξhrefValues 0))
@@ -124,23 +124,22 @@ Other files paths for blogs are:
                     ;; (if (xahsite-url-is-xah-website-p ξfirstLink1)
                     ;;     (xahsite-filepath-to-href-value
                     ;;      (xahsite-url-to-filepath ξfirstLink1 "addFileName")
-                    ;;      currentFilePath)
+                    ;;      ξcurrentFpath)
                     ;;   ξfirstLink1
                     ;;   )
                     (xahsite-filepath-to-url 
-                     (expand-file-name ξfirstLink1 (file-name-directory currentFilePath )))))
-              (xahsite-filepath-to-url currentFilePath)))))
+                     (expand-file-name ξfirstLink1 (file-name-directory ξcurrentFpath )))))
+              (xahsite-filepath-to-url ξcurrentFpath)))))
 
-    (if (file-exists-p atomFilePath)
-        (find-file atomFilePath)
-      (user-error "file doesn't exist：%s" atomFilePath))
+    (if (file-exists-p ξatomFilePath)
+        (find-file ξatomFilePath)
+      (user-error "file doesn't exist：%s" ξatomFilePath))
     (update-atom-updated-tag (buffer-file-name))
     (goto-char 1)
     (search-forward "<entry>" nil t)
     (beginning-of-line)
-    (setq p3 (point))
-    (insert-atom-entry titleText (new-atom-id-tag) summaryText ξinputStr altURL)
-    (search-backward "</summary>")
-
-  ;    (when (not (search-forward "�" nil t) ) (progn (goto-char p3)))
+    (setq ξp3 (point))
+    (insert-atom-entry ξtitleText (new-atom-id-tag) nil ξinputStr ξaltURL)
+    (search-backward "</title>")
+  ;    (when (not (search-forward "�" nil t) ) (progn (goto-char ξp3)))
     ))
