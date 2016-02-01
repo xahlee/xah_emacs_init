@@ -103,9 +103,7 @@ Version 2015-04-13"
 (defun xah-cycle-camel-style-case ()
   "Cyclically replace {camelStyle, camel_style} current word or text selection.
 actually, currently just change from camel to underscore. no cycle
-WARNING: this command is currently unstable.
-2016-01-05 FIXME. currently broken
-"
+WARNING: this command is currently unstable."
   (interactive)
   ;; this function sets a property 「'state」. Possible values are 0 to length of char_array.
   (let (input_text

@@ -88,6 +88,8 @@
 (when (fboundp 'elfeed)
   (setq elfeed-feeds
         '("http://nullprogram.com/feed/"
+          "http://sachachua.com/blog/category/emacs-news/feed/"
+          "http://irreal.org/blog/?feed=rss2"
           "http://www.terminally-incoherent.com/blog/feed/"
           "http://ergoemacs.org/emacs/blog.xml"
           "http://xahlee.info/comp/blog.xml"
