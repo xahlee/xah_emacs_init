@@ -97,6 +97,13 @@
 )
 (add-hook 'racket-mode-hook 'xah-racket-mode-setup)
 
+(defun xah-go-mode-setup ()
+  "for `go-mode'"
+  (local-set-key (kbd "<delete>") nil)
+  (local-set-key (kbd "<delete> <delete>") 'gofmt)
+)
+(add-hook 'go-mode-hook 'xah-go-mode-setup)
+
 
 
 (defun xah-rcirc-mode-keys ()

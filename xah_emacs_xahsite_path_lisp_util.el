@@ -548,6 +548,42 @@ Remove Google adds, Amazon ads, and other ads, Google Analytics
     (xah-replace-pairs-region 1 (point-max)
  [
 
+["<div class=\"buyxahemacs97449\">Like it? <a href=\"buy_xah_emacs_tutorial.html\">Buy Xah Emacs Tutorial</a>. <span style=\"color:red;font-size:xx-large\">♥</span></div>"
+""]
+
+[
+"<div class=\"xgcse\"><script> (function() { var cx = 'partner-pub-5125343095650532:8381157956'; var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true; gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s); })(); </script> <gcse:searchbox-only></gcse:searchbox-only></div>"
+""
+]
+
+[
+"• <a href=\"https://twitter.com/ErgoEmacs\">Follow me on Twitter</a>
+• <a href=\"https://plus.google.com/113859563190964307534/posts\">Follow me on g+</a>
+"
+""]
+
+["• <a class=\"buyxahemacs36183\" href=\"http://ergoemacs.org/emacs/buy_xah_emacs_tutorial.html\">Buy Xah Emacs Tutorial</a>"
+""]
+
+["• <a class=\"rssfeed53141\" href=\"blog.xml\">Subscribe Feed</a>"
+""
+]
+
+
+["• <a class=\"rssfeed53141\" href=\"../emacs/blog.xml\">Subscribe Feed</a>"
+""
+]
+
+["• <a class=\"rssfeed53141\" href=\"emacs/blog.xml\">Subscribe Feed</a>"
+""
+]
+
+
+[
+"<iframe src=\"http://astore.amazon.com/xahhome-20\" width=\"90%\" height=\"800\" frameborder=\"0\" scrolling=\"no\"></iframe>"
+""
+]
+
   ;; google analytics tracker
 ["<script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -756,7 +792,7 @@ amzn_assoc_bg_color = \"FFFFFF\";
 
   ;; Disqus code
   [
-   "<div id=\"disqus_thread\"></div><script>(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://xahlee.disqus.com/embed.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><a href=\"http://disqus.com\" class=\"dsq-brlink\">blog comments powered by <span class=\"logo-disqus\">Disqus</span></a>"
+"<div id=\"disqus_thread\"></div><script>(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://xahlee.disqus.com/embed.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>"
    ""
    ]
 
