@@ -36,29 +36,26 @@ For example, if the current buffer is the file x.java,
 then it'll call “java x” in a shell."
   (interactive)
   (let* (
-         (fnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
-         (prog-name "java"))
-    (shell-command (concat prog-name " " fnm " &"))))
+         (ξfnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
+         (ξprog-name "java"))
+    (shell-command (concat ξprog-name " " ξfnm " &"))))
 
 (defun xah-python-2to3-current-file ()
   "Convert current buffer from python 2 to python 3.
-
-this command calls python3's script 「2to3」."
+This command calls python3's script 「2to3」.
+URL `http://ergoemacs.org/emacs/elisp_python_2to3.html'
+Version 2016-02-16"
   (interactive)
   (let* (
-         (fName (buffer-file-name))
-         (fSuffix (file-name-extension fName)))
+         (ξfName (buffer-file-name))
+         (ξfSuffix (file-name-extension ξfName)))
     (when (buffer-modified-p)
-      (progn
-        (when (y-or-n-p "Buffer modified. Do you want to save first?")
-          (save-buffer))))
-
-    (if (or (string-equal fSuffix "py") (string-equal fSuffix "py3"))
+      (save-buffer))
+    (if (or (string-equal ξfSuffix "py") (string-equal ξfSuffix "py3"))
         (progn
-          (shell-command (format "2to3 -w %s" fName))
+          (shell-command (format "2to3 -w %s" ξfName))
           (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES"))
-      (progn
-        (error "file 「%s」 doesn't end in “.py” or “.py3”." fName)))))
+      (error "file 「%s」 doesn't end in “.py” or “.py3”." ξfName))))
 
 (defun xah-change-file-line-ending-style (φfile-list φline-ending-style)
   "Change current file or dired marked file's newline convention.

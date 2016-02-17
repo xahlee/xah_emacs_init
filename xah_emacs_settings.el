@@ -167,8 +167,11 @@
 ;; Save minibuffer history
 (savehist-mode 1)
 
-;; don't let the cursor go into minibuffer prompt
-(setq minibuffer-prompt-properties (quote (read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)))
+;; don't let the cursor go into minibuffer prompt. doesn't work in GNU Emacs 25.0.90.1 
+(setq minibuffer-prompt-properties '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
+
+;; default as of GNU Emacs 25.0.90.1 , 2016-02-07
+;; (read-only t face minibuffer-prompt)
 
 
 
