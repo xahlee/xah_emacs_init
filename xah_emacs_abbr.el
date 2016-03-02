@@ -24,6 +24,7 @@
     ("jq" "jQuery")
     ("jvm" "Java Virtual Machine")
     ("cfg" "context-free grammar")
+    ("sf" "San Francisco")
 
     ("catface" "😸")
 
@@ -174,7 +175,7 @@
     ("intro" "introduction")
     ("pls" "please")
     ("atm" "at the moment")
-    ("q" "question")
+    ("1q" "question")
     ("faq" "frequently asked questions")
     ("i18n" "international")
     ("1org" "organization")

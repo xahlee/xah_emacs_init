@@ -167,7 +167,7 @@
 ;; Save minibuffer history
 (savehist-mode 1)
 
-;; don't let the cursor go into minibuffer prompt. doesn't work in GNU Emacs 25.0.90.1 
+;; don't let the cursor go into minibuffer prompt. doesn't work in GNU Emacs 25.0.90.1
 (setq minibuffer-prompt-properties '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
 
 ;; default as of GNU Emacs 25.0.90.1 , 2016-02-07
@@ -175,9 +175,12 @@
 
 
 
-;; save cursor position
-(require 'saveplace)
-(setq-default save-place t)
+;; remember cursor position
+(if (version< emacs-version "25.0")
+    (progn
+      (require 'saveplace)
+      (setq-default save-place t))
+  (save-place-mode 1))
 
 ;; (setq enable-recursive-minibuffers t )
 

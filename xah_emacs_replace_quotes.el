@@ -188,7 +188,7 @@ WARNING: If region has comment or string, the code'd be fucked up."
 Works on whole buffer or text selection, respects `narrow-to-region'.
 
 URL `http://ergoemacs.org/emacs/elisp_compact_empty_lines.html'
-Version 2015-03-03"
+Version 2016-03-02"
   (interactive
    (if (region-active-p)
        (list (region-beginning) (region-end))
@@ -203,7 +203,12 @@ Version 2015-03-03"
       (progn
         (goto-char (point-min))
         (while (search-forward-regexp "\n\n\n+" nil "noerror")
-          (replace-match "\n\n")))))
+          (replace-match "\n\n")))
+
+      (goto-char (point-max))
+      ;; (delete-trailing-whitespace)
+
+      ))
   (when (buffer-file-name)
     (save-buffer)))
 
