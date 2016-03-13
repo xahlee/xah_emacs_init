@@ -81,7 +81,7 @@
     "xahlee_info/dom-whatwg/"
     "xahlee_info/html5_whatwg/"
     "xahlee_info/css_2.1_spec/"
-    "xahlee_info/clojure-doc-1.6/"
+    "xahlee_info/clojure-doc-1.8/"
     "ergoemacs_org/emacs_manual/"
     ]))
 

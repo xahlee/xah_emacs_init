@@ -20,7 +20,7 @@
 (add-to-list 'magic-mode-alist '("<\\?php" . xah-php-mode) )
 
 ;; open pdf files in hex mode
-(add-to-list 'auto-mode-alist '("\\.pdf\\'" . hexl-mode))
+(add-to-list 'auto-mode-alist '("\\.pdf\\'" . fundamental-mode))
 
 (autoload 'vimrc-mode "vimrc-mode" "loads vimrc-mode" "INTERACTIVE")
 

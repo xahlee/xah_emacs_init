@@ -620,7 +620,7 @@ returns
 
 (defun xah-clojure-word-ref-linkify ()
   "Make the path under cursor into a HTML link for xah site.
-Version 2014-10-31"
+Version 2016-03-07"
   (interactive)
   (let ( ξp1 ξp2 ξwd )
     (if (use-region-p)
@@ -632,7 +632,7 @@ Version 2014-10-31"
         (setq ξp2 (point))))
     (setq ξwd (buffer-substring-no-properties ξp1 ξp2))
     (delete-region ξp1 ξp2)
-    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.6/clojure.core-api.html#clojure.core/" ξwd "\">clojure.core/" ξwd "</a></span>"))))
+    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.8/clojure.core-api.html#clojure.core/" ξwd "\">clojure.core/" ξwd "</a></span>"))))
 
 (defun xah-nodejs-ref-linkify ()
   "Make the path under cursor into a HTML link for xah site.
@@ -712,12 +712,12 @@ becomes
          (ξbds (xah-get-thing-or-selection 'filepath))
          (ξinputStr (elt ξbds 0))
          (ξp1 (aref ξbds 1))
-         (ξp2 (aref ξbds 2))
-         ξfPath
-         )
-    (setq ξfPath (file-relative-name ξinputStr))
+         (ξp2 (aref ξbds 2)))
     (delete-region ξp1 ξp2)
-    (insert (format "<audio src=\"%s\" controls></audio>" ξfPath))))
+    (insert (format "<audio src=\"%s\" controls></audio>" 
+                    (if (string-match "^http" ξinputStr)
+                        ξinputStr
+                      (file-relative-name ξinputStr))))))
 
 (defun xah-video-file-linkify ()
   "Make the path under cursor into a HTML link.
@@ -825,6 +825,7 @@ If there is text selection, use it as input."
      ((string-match-p "javascript_es6" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "html_whatwg" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "html5_whatwg" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "clojure-doc-1.8" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "python_doc_2" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "python_doc_3" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "dom-whatwg/DOM_Standard.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
