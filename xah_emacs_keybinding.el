@@ -20,6 +20,10 @@
 (global-set-key (kbd "C-t") 'toggle-input-method)
 (global-set-key (kbd "C-w") 'xah-close-current-buffer)
 (global-set-key (kbd "C-z") 'undo)
+
+(global-set-key (kbd "C-o") 'find-file)
+(global-set-key (kbd "C-S-t") 'xah-open-last-closed)
+
 (global-set-key (kbd "C-,") 'flyspell-goto-next-error)
 
 (global-set-key (kbd "C-+") 'text-scale-increase)

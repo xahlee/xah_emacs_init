@@ -166,11 +166,11 @@ google_ad_client")
 (defun xah-syntax-color-hex ()
   "Syntax color text of the form 「#ff1100」 in current buffer.
 URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
-Version 2015-06-11"
+Version 2016-03-15"
   (interactive)
   (font-lock-add-keywords
    nil
-   '(("#[abcdef[:digit:]]\\{6\\}"
+   '(("#[ABCDEFabcdef[:digit:]]\\{6\\}"
       (0 (put-text-property
           (match-beginning 0)
           (match-end 0)

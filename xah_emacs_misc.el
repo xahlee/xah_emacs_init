@@ -216,12 +216,6 @@ Version 2015-10-14"
       (xah-make-backup))))
 
 
-(defun xah-describe-major-mode ()
-  "Display inline doc for current `major-mode'."
-  (interactive)
-  (describe-function major-mode))
-
-
 
 (defun xah-toggle-margin-right ()
   "Toggle the right margin between `fill-column' or window width.

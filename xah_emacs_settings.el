@@ -86,6 +86,8 @@
 
 (setq mouse-wheel-progressive-speed nil)
 
+(setq mouse-yank-at-point t)
+
 
 ;; initial window and default window
 

@@ -822,6 +822,7 @@ If there is text selection, use it as input."
 
     (cond
      ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "java8_doc" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "javascript_es6" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "html_whatwg" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "html5_whatwg" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
