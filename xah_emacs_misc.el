@@ -498,7 +498,7 @@ When there is a text selection, act on the region."
         ("imgBatch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
         ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
 
-        ("grep" . "grep -r -F 'xxx' --include='*html' ~/web")
+        ("grep" . "grep -r -F \"xxx\" --include='*html' ~/web")
         ("firefox" . "setsid firefox &")
 
         ("delete empty file" . "find . -type f -empty")

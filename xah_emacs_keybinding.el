@@ -11,24 +11,26 @@
 
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
-(global-set-key (kbd "M-t") 'xah-toggle-letter-case)
-(global-set-key (kbd "M-h") 'hippie-expand)
+;; (global-set-key (kbd "M-t") 'xah-toggle-letter-case)
+;; (global-set-key (kbd "M-h") 'hippie-expand)
 
-(global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
-(global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)
-(global-set-key (kbd "C-v") 'yank)
-(global-set-key (kbd "C-t") 'toggle-input-method)
-(global-set-key (kbd "C-w") 'xah-close-current-buffer)
-(global-set-key (kbd "C-z") 'undo)
+;; (global-set-key (kbd "<C-tab>") 'xah-next-user-buffer)
+;; (global-set-key (kbd "<C-S-iso-lefttab>") 'xah-previous-user-buffer)
+;; (global-set-key (kbd "C-v") 'yank)
+;; (global-set-key (kbd "C-t") 'toggle-input-method)
+;; (global-set-key (kbd "C-w") 'xah-close-current-buffer)
+;; (global-set-key (kbd "C-z") 'undo)
+;; (global-set-key (kbd "C-n") 'xah-new-empty-buffer)
+;; (global-set-key (kbd "C-o") 'find-file)
+;; (global-set-key (kbd "C-s") 'save-buffer)
+;; (global-set-key (kbd "C-S-s") 'write-file)
+;; (global-set-key (kbd "C-S-t") 'xah-open-last-closed)
 
-(global-set-key (kbd "C-o") 'find-file)
-(global-set-key (kbd "C-S-t") 'xah-open-last-closed)
+;; (global-set-key (kbd "C-,") 'flyspell-goto-next-error)
 
-(global-set-key (kbd "C-,") 'flyspell-goto-next-error)
-
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-(global-set-key (kbd "C-0") (lambda () (interactive) (text-scale-set 0)))
+;; (global-set-key (kbd "C-+") 'text-scale-increase)
+;; (global-set-key (kbd "C--") 'text-scale-decrease)
+;; (global-set-key (kbd "C-0") (lambda () (interactive) (text-scale-set 0)))
 
 (setq xfk-major-mode-lead-key (kbd "<delete>"))
 

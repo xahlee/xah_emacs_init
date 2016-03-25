@@ -67,7 +67,7 @@
   (setq dired-dwim-target t)
 
   ;; make dired list not inclued 「.」 and 「..」, and use metric prefix for file size
-  (setq dired-listing-switches "-Al --si --time-style long-iso")
+  ;; (setq dired-listing-switches "-Al --si --time-style long-iso") ;; problem on mac os x as of 2016-03-24. error "listing directory failed but `access-file' worked", probably because os x ls's lack switch
 
   ;; make dired allow deleting/copy whole dir
   (setq dired-recursive-copies (quote always))
