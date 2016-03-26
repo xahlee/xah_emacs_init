@@ -44,54 +44,50 @@ Add today's date to the “byline” tag of current file, also delete the last o
 Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 WARNING: This command saves buffer if it's a file.
-Version 2015-09-08"
+Version 2016-03-25"
   (interactive)
-  (require 'sgml-mode)
   (let (ξp1 ξp2 ξnum ξbufferTextOrig)
     (push-mark)
-    (progn
-      (goto-char 1)
-      (when (search-forward "<div class=\"byline\">" nil)
+    (goto-char 1)
+    (when (search-forward "<div class=\"byline\">" nil)
 
-        ;; set ξp1 ξp2. they are boundaries of inner text
-        (progn (setq ξp1 (point)) (backward-char 1) (sgml-skip-tag-forward 1) (search-backward "</div>") (setq ξp2 (point)))
+      ;; set ξp1 ξp2. they are boundaries of inner text
+      (progn (setq ξp1 (point))
+             (backward-char 1)
+             (search-forward "</div>" )
+             (backward-char 6)
+             (setq ξp2 (point)))
 
-        (save-restriction
-          (narrow-to-region ξp1 ξp2)
+      (let ((ξbylineText (buffer-substring-no-properties ξp1 ξp2)))
+        (when (> (length ξbylineText) 110)
+          (user-error "something's probably wrong. the length for the byline is long: 「%s」" ξbylineText )))
 
-          (setq ξbufferTextOrig (buffer-string ))
-          (setq ξnum (count-matches "<time>" (point-min) (point-max)))
+      (save-restriction
+        (narrow-to-region ξp1 ξp2)
 
-          ;; if there are more than 1 “time” tag, delete the last one
-          (when (> ξnum 1)
+        (setq ξbufferTextOrig (buffer-string ))
+        (setq ξnum (count-matches "<time>" (point-min) (point-max)))
+
+        (if (equal ξnum 1)
+            (progn
+              (goto-char (point-min))
+              (search-forward "</time>")
+              (insert ". Last updated: ")
+              (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
+              (insert "."))
+          (progn
+            ;; if there are more than 1 “time” tag, delete the last one
             (let (ξp3 ξp4)
               (goto-char (point-max))
               (search-backward "</time>")
-              (setq ξp4 (+ (point) 7))
+              (search-forward "</time>")
+              (setq ξp4 (point))
               (search-backward "<time>")
               (setq ξp3 (point))
-              (delete-region ξp3 ξp4 )))
-
-          ;; insert new time
-          (goto-char (point-max))
-          (insert (format ", <time>%s</time>" (format-time-string "%Y-%m-%d")))
-
-          ;; remove repeated comma separator
-          (goto-char (point-min))
-          (when (search-forward ", , " (point-max) "NOERROR")
-            (replace-match ", "))
-
-          (goto-char (point-min))
-          (when (search-forward "</time>, <time>" (point-max) "NOERROR")
-            (replace-match "</time>, …, <time>"))
-
-          (goto-char (point-max))
-          (search-backward "<time>")
-
-          (when (buffer-file-name)
-            (save-buffer))
-
-          (message "%s\nchanged to\n%s" ξbufferTextOrig (buffer-string )))))))
+              (delete-region ξp3 ξp4 ))
+            (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
+            (goto-char (point-max))))
+        (message "%s\nchanged to\n%s" ξbufferTextOrig (buffer-string ))))))
 
 (defun xahsite-update-page-tag ()
   "Update HTML page navigation tags.
@@ -188,11 +184,11 @@ Version 2015-06-11"
       (0 (put-text-property
           (+ (match-beginning 0) 3)
           (match-end 0)
-          'face 
+          'face
           (list
            :background
            (concat
-            "#" 
+            "#"
             (mapconcat
              'identity
              (mapcar
