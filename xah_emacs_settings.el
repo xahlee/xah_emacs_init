@@ -4,8 +4,26 @@
 ;; 2007-06
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
+
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(defalias 'lcd 'list-colors-display)
+(defalias 'sl 'sort-lines)
+(defalias 'ds 'desktop-save)
+(defalias 'dt 'desktop-save)
+(defalias 'dsm 'desktop-save-mode)
+
+(defalias 'elm 'emacs-lisp-mode)
+(defalias 'hm 'html-mode)
+
+(defalias 'ssm 'shell-script-mode)
+
+(defalias 'tpu-edt 'forward-char)
+(defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
 
 
+
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")

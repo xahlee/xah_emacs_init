@@ -104,7 +104,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_keybinding_functions"))
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
 
-(load (xah-get-fullpath "xah_emacs_alias"))
 (load (xah-get-fullpath "xah_emacs_abbr"))
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
