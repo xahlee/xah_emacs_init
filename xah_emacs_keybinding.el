@@ -2,6 +2,9 @@
 
 ;; xah-fly-keys move to http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 
+
+(define-key xah-fly-key-map (kbd "<menu>") xah-insertion-keymap)
+
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
 (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
@@ -181,15 +184,14 @@
 ;; 'xah-toggle-margin-right
 ;; 'xah-toggle-line-spacing
 
-(progn
-  (define-key key-translation-map (kbd "<end> SPC") (kbd "_"))
-  (define-key key-translation-map (kbd "<menu> SPC <up>") (kbd "↑"))
-  (define-key key-translation-map (kbd "<menu> SPC <down>") (kbd "↓"))
-  (define-key key-translation-map (kbd "<menu> SPC <left>") (kbd "←"))
-  (define-key key-translation-map (kbd "<menu> SPC <right>") (kbd "→"))
-  (define-key key-translation-map (kbd "<menu> SPC 4") (kbd "◆"))
-  (define-key key-translation-map (kbd "<menu> SPC 2") (kbd "＆"))
-  (define-key key-translation-map (kbd "<menu> SPC 1") (kbd "•"))
-  (define-key key-translation-map (kbd "<menu> SPC .") (kbd "…"))
-  (define-key key-translation-map (kbd "<menu> SPC 3") (kbd "ξ"))
-  (define-key key-translation-map (kbd "<menu> SPC 9") (kbd "φ")))
+;; (progn
+;;   (define-key key-translation-map (kbd "<menu> SPC <up>") (kbd "↑"))
+;;   (define-key key-translation-map (kbd "<menu> SPC <down>") (kbd "↓"))
+;;   (define-key key-translation-map (kbd "<menu> SPC <left>") (kbd "←"))
+;;   (define-key key-translation-map (kbd "<menu> SPC <right>") (kbd "→"))
+;;   (define-key key-translation-map (kbd "<menu> SPC 4") (kbd "◆"))
+;;   (define-key key-translation-map (kbd "<menu> SPC 2") (kbd "＆"))
+;;   (define-key key-translation-map (kbd "<menu> SPC 1") (kbd "•"))
+;;   (define-key key-translation-map (kbd "<menu> SPC .") (kbd "…"))
+;;   (define-key key-translation-map (kbd "<menu> SPC 3") (kbd "ξ"))
+;;   (define-key key-translation-map (kbd "<menu> SPC 9") (kbd "φ")))

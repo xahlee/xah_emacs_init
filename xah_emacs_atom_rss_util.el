@@ -93,11 +93,13 @@ Other files paths for blogs are:
 ~/web/xahlee_org/lit/blog.html
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
-"
+
+version 2016-04-03"
   (interactive)
   (let* (
          (ξbds (xah-get-thing-or-selection 'block))
-         (ξinputStr (elt ξbds 0))
+         (ξinputStr 
+          (replace-regexp-in-string " allowfullscreen" " " (elt ξbds 0) 'FIXEDCASE 'LITERAL ))
          (ξp1 (elt ξbds 1))
          (ξp2 (elt ξbds 2))
          (ξp3)

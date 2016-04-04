@@ -102,8 +102,6 @@
 ;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
 ;; ;; (setq ediff-split-window-function 'split-window-horizontally)
 
-(setq mouse-wheel-progressive-speed nil)
-
 (setq mouse-yank-at-point t)
 
 
@@ -220,7 +218,7 @@
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
 
-(electric-pair-mode 0)
+(electric-pair-mode 1)
 
 (progn
   ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.

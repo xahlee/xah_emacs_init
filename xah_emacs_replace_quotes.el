@@ -1067,7 +1067,7 @@ When called in lisp code, φbegin and φend are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2015-08-22"
+Version 2016-04-03"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
@@ -1090,10 +1090,10 @@ Version 2015-08-22"
           ["--" " — "]
           ["—" " — "]
           ["..." "…"]
+          [" & " " ＆ "]
           [" :)" " ☺"]
           [" :(" " ☹"]
           [" ;)" " 😉"]
-          ["e.g. " "⁖ "]
           ["~=" "≈"]
           [" , " ", "]
           ;; fix GNU style ASCII quotes
