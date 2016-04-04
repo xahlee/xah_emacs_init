@@ -103,6 +103,7 @@
 ;; ;; (setq ediff-split-window-function 'split-window-horizontally)
 
 (setq mouse-yank-at-point t)
+(setq mouse-wheel-progressive-speed nil)
 
 
 ;; initial window and default window
@@ -137,7 +138,10 @@
 
 (setq sentence-end-double-space nil )
 ;; (setq switch-to-visible-buffer nil)
+
 (setq set-mark-command-repeat-pop t)
+(setq mark-ring-max 6)
+(setq global-mark-ring-max 6)
 
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.

@@ -35,7 +35,7 @@
 ;; (global-set-key (kbd "C--") 'text-scale-decrease)
 ;; (global-set-key (kbd "C-0") (lambda () (interactive) (text-scale-set 0)))
 
-(setq xfk-major-mode-lead-key (kbd "<delete>"))
+(setq xah-major-mode-lead-key (kbd "<delete>"))
 
 (progn
   (define-key xah-help-keymap (kbd "2") 'xah-lookup-google)

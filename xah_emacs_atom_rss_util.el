@@ -99,7 +99,7 @@ version 2016-04-03"
   (let* (
          (ξbds (xah-get-thing-or-selection 'block))
          (ξinputStr 
-          (replace-regexp-in-string " allowfullscreen" " " (elt ξbds 0) 'FIXEDCASE 'LITERAL ))
+          (replace-regexp-in-string " allowfullscreen" " " (elt ξbds 0) 'FIXEDCASE 'LITERAL )) ; remove this from iframes from youtube and google map, they are invalid xml
          (ξp1 (elt ξbds 1))
          (ξp2 (elt ξbds 2))
          (ξp3)
