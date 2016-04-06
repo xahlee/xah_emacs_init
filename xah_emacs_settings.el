@@ -4,26 +4,28 @@
 ;; 2007-06
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
-
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-(defalias 'lcd 'list-colors-display)
-(defalias 'sl 'sort-lines)
-(defalias 'ds 'desktop-save)
-(defalias 'dt 'desktop-save)
-(defalias 'dsm 'desktop-save-mode)
-
-(defalias 'elm 'emacs-lisp-mode)
-(defalias 'hm 'html-mode)
-
-(defalias 'ssm 'shell-script-mode)
-
-(defalias 'tpu-edt 'forward-char)
-(defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
 
 
+;; initial window and default window
 
+(setq inhibit-splash-screen t)
+
+;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789
+
+(setq initial-frame-alist
+      '(
+        (width . 102)
+        (height . 54)
+        (background-color . "honeydew")))
+
+(setq default-frame-alist
+      '(
+        (tool-bar-lines . 0)
+        (width . 92)
+        (height . 52)
+        (background-color . "honeydew")))
+
+
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
@@ -93,10 +95,6 @@
   )
 
 
-
-(setq inhibit-splash-screen t)
-
-
 (setq x-select-enable-clipboard-manager nil)
 
 ;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
@@ -104,24 +102,6 @@
 
 (setq mouse-yank-at-point t)
 (setq mouse-wheel-progressive-speed nil)
-
-
-;; initial window and default window
-
-;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789
-
-(setq initial-frame-alist
-      '(
-        (width . 102)
-        (height . 54)
-        (background-color . "honeydew")))
-
-(setq default-frame-alist
-      '(
-        (tool-bar-lines . 0)
-        (width . 92)
-        (height . 52)
-        (background-color . "honeydew")))
 
 
 (require 'recentf)
@@ -336,3 +316,22 @@
 ;;  '(completions-common-part ((t (:inherit default :foreground "gray50"))))
 ;;  '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
 ;;  )
+
+
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(defalias 'lcd 'list-colors-display)
+(defalias 'sl 'sort-lines)
+(defalias 'ds 'desktop-save)
+(defalias 'dt 'desktop-save)
+(defalias 'dsm 'desktop-save-mode)
+
+(defalias 'elm 'emacs-lisp-mode)
+(defalias 'hm 'html-mode)
+
+(defalias 'ssm 'shell-script-mode)
+
+(defalias 'tpu-edt 'forward-char)
+(defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
+
