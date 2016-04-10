@@ -172,6 +172,8 @@
 ;; don't let the cursor go into minibuffer prompt. doesn't work in GNU Emacs 25.0.90.1
 (setq minibuffer-prompt-properties '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
 
+(setq max-mini-window-height 0.5)
+
 ;; default as of GNU Emacs 25.0.90.1 , 2016-02-07
 ;; (read-only t face minibuffer-prompt)
 

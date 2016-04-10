@@ -2,8 +2,9 @@
 
 ;; xah-fly-keys move to http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 
-
-(define-key xah-fly-key-map (kbd "<menu>") xah-insertion-keymap)
+(when (fboundp 'smex)
+  (define-key xah-fly-key-map (kbd "<menu>") 'smex)
+  )
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
@@ -13,6 +14,16 @@
 (global-set-key (kbd "<f16>") (lambda () (interactive) (other-frame 1)))
 
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+
+;; (current-input-mode)
+;; (t nil t 7)
+
+;; (let ((x (current-input-mode)))
+;;   (set-input-mode
+;;    (nth 0 x)
+;;    (nth 1 x)
+;;    (nth 2 x)
+;;    27))
 
 ;; (global-set-key (kbd "M-t") 'xah-toggle-letter-case)
 ;; (global-set-key (kbd "M-h") 'hippie-expand)
@@ -57,7 +68,7 @@
 (progn
   (define-prefix-command 'xah-user-keymap)
 
-  (define-key xah-user-keymap (kbd "<menu>") 'xah-dump-keymap)
+  (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
   (define-key xah-user-keymap (kbd "RET") nil)
 
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)

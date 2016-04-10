@@ -30,21 +30,23 @@ e.g. c:/Users/h3/web/"
   "a list of dir under xahlee.info that are external docs"
   [
 
-   "php-doc/"
-   "node_api/"
-   "java8_doc/"
-   "css_transitions/"
-   "css3_spec_bg/"
-   "css_3_color_spec/"
    "REC-SVG11-20110816/"
-   "python_doc_3.3.3/"
-   "python_doc_2.7.6/"
-   "jquery_doc/"
-   "javascript_ecma-262_5.1_2011/"
-   "git-bottomup/"
-   "dom-whatwg/"
+   "clojure-doc-1.8"
+   "css3_spec_bg/"
    "css_2.1_spec/"
-   "clojure-doc-1.6/"
+   "css_3_color_spec/"
+   "css_transitions/"
+   "dom-whatwg/"
+   "html5_whatwg/"
+   "java8_doc/"
+   "javascript_ecma-262_5.1_2011/"
+   "javascript_ecma-262_6_2015"
+   "javascript_es6"
+   "jquery_doc/"
+   "node_api/"
+   "php-doc/"
+   "python_doc_2.7.6/"
+   "python_doc_3.3.3/"
 
    ]
   )
@@ -509,6 +511,7 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
       (require 'find-lisp)
       (mapc
        (lambda (ξf)
+         ;; xahsite-xahlee-info-external-docs
          (when (not
                 (or
                  (string-match "/xx" ξf) ; ; dir/file starting with xx are not public
