@@ -109,13 +109,11 @@
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
 
   (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
-
-  (define-key xah-user-keymap (kbd "k") 'xah-clean-whitespace-and-save)
+  
   (define-key xah-user-keymap (kbd "l") nil)
   (define-key xah-user-keymap (kbd "m") 'magit-status)
   (define-key xah-user-keymap (kbd "n") nil)
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
-  (define-key xah-user-keymap (kbd "p") 'xah-copy-file-path)
   (define-key xah-user-keymap (kbd "q") 'xah-replace-BOM-mark-etc)
 
   (define-key xah-user-keymap (kbd "r '") 'xah-latex-to-unicode)
