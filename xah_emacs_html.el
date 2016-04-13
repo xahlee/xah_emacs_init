@@ -44,7 +44,7 @@ Add today's date to the “byline” tag of current file, also delete the last o
 Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 WARNING: This command saves buffer if it's a file.
-Version 2016-03-25"
+Version 2016-04-12"
   (interactive)
   (let (ξp1 ξp2 ξnum ξbufferTextOrig)
     (push-mark)
@@ -74,7 +74,8 @@ Version 2016-03-25"
               (search-forward "</time>")
               (insert ". Last updated: ")
               (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
-              (insert "."))
+              (when (not (looking-at "\\.")) (insert ".")))
+
           (progn
             ;; if there are more than 1 “time” tag, delete the last one
             (let (ξp3 ξp4)
@@ -85,7 +86,9 @@ Version 2016-03-25"
               (search-backward "<time>")
               (setq ξp3 (point))
               (delete-region ξp3 ξp4 ))
+
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
+            (when (not (looking-at "\\.")) (insert "."))
             (goto-char (point-max))))
         (message "%s\nchanged to\n%s" ξbufferTextOrig (buffer-string ))))))
 

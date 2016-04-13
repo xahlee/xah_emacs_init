@@ -88,7 +88,6 @@
   (define-key xah-user-keymap (kbd "a") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "b") nil)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  (define-key xah-user-keymap (kbd "d") 'xah-insert-date)
   (define-key xah-user-keymap (kbd "e") 'xah-open-file-fast)
   (define-key xah-user-keymap (kbd "g") 'xah-find-text)
   (define-key xah-user-keymap (kbd "f b") 'xah-dired-crop-image)
