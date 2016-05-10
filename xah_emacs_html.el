@@ -50,13 +50,13 @@ Version 2016-04-12"
     (push-mark)
     (goto-char 1)
     (when (search-forward "<div class=\"byline\">" nil)
-
-      ;; set ξp1 ξp2. they are boundaries of inner text
-      (progn (setq ξp1 (point))
-             (backward-char 1)
-             (search-forward "</div>" )
-             (backward-char 6)
-             (setq ξp2 (point)))
+      (progn
+        ;; set ξp1 ξp2. they are boundaries of inner text
+        (setq ξp1 (point))
+        (backward-char 1)
+        (search-forward "</div>" )
+        (backward-char 6)
+        (setq ξp2 (point)))
 
       (let ((ξbylineText (buffer-substring-no-properties ξp1 ξp2)))
         (when (> (length ξbylineText) 110)

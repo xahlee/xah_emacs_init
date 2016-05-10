@@ -22,7 +22,7 @@ default browser will be launched and opening this URL:
             (buffer-file-name)))
 
     (when (buffer-modified-p ) 
-      (xah-clean-whitespace-and-save 1 (point-max))
+      (xah-clean-whitespace-and-save (point-min) (point-max))
       (save-buffer))
     (message "browsing %s" ξurl)
     (cond

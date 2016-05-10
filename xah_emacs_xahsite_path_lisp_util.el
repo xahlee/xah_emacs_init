@@ -27,26 +27,26 @@ e.g. c:/Users/h3/web/"
   )
 
 (defun xahsite-xahlee-info-external-docs ()
-  "a list of dir under xahlee.info that are external docs"
+  "a vector of dir under xahlee.info that are external docs"
   [
 
-   "REC-SVG11-20110816/"
+   "REC-SVG11-20110816"
    "clojure-doc-1.8"
-   "css3_spec_bg/"
-   "css_2.1_spec/"
-   "css_3_color_spec/"
-   "css_transitions/"
-   "dom-whatwg/"
-   "html5_whatwg/"
-   "java8_doc/"
-   "javascript_ecma-262_5.1_2011/"
+   "css3_spec_bg"
+   "css_2.1_spec"
+   "css_3_color_spec"
+   "css_transitions"
+   "dom-whatwg"
+   "html5_whatwg"
+   "java8_doc"
+   "javascript_ecma-262_5.1_2011"
    "javascript_ecma-262_6_2015"
    "javascript_es6"
-   "jquery_doc/"
-   "node_api/"
-   "php-doc/"
-   "python_doc_2.7.6/"
-   "python_doc_3.3.3/"
+   "jquery_doc"
+   "node_api"
+   "php-doc"
+   "python_doc_2.7.6"
+   "python_doc_3.3.3"
 
    ]
   )
@@ -476,6 +476,47 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
   "Returns t if φpath ends in .jpg .png .gif .svg, else nil."
   (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" φpath))
 
+(defun xah-find-files-file-predicate-p (fname parentdir)
+  "DOCSTRING"
+  (interactive)
+  (and 
+   (string-match "\\.html$" fname)
+   (not (string-match "^xx" fname))
+   ))
+
+(defun xah-find-files-dir-predicate-p (fname parentdir)
+  "DOCSTRING"
+  (and 
+   (not
+    (or
+     (string-equal "java8_doc" fname)
+     (string-equal "REC-SVG11-20110816" fname)
+     (string-equal "clojure-doc-1.8" fname)
+     (string-equal "css3_spec_bg" fname)
+     (string-equal "css_2.1_spec" fname)
+     (string-equal "css_3_color_spec" fname)
+     (string-equal "css_transitions" fname)
+     (string-equal "dom-whatwg" fname)
+     (string-equal "html5_whatwg" fname)
+     (string-equal "javascript_ecma-262_5.1_2011" fname)
+     (string-equal "javascript_ecma-262_6_2015" fname)
+     (string-equal "javascript_es6" fname)
+     (string-equal "jquery_doc" fname)
+     (string-equal "node_api" fname)
+     (string-equal "php-doc" fname)
+     (string-equal "python_doc_2.7.6" fname)
+     (string-equal "python_doc_3.3.3" fname)
+     (string-match "^xx" fname)))
+   (find-lisp-default-directory-predicate fname parentdir)))
+
+(defun xahsite-traverse-dir-file-list (dirpath)
+  "a list of full paths to process"
+  (require 'find-lisp)
+  (find-lisp-find-files-internal
+    dirpath
+    'xah-find-files-file-predicate-p
+    'xah-find-files-dir-predicate-p))
+
 (defun xahsite-generate-sitemap (φdomain-name)
   "Generate a sitemap.xml.gz file of xahsite at doc root.
 φdomain-name must match a existing one."
@@ -507,8 +548,7 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
       (insert "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">
 ")
-
-      (require 'find-lisp)
+      
       (mapc
        (lambda (ξf)
          ;; xahsite-xahlee-info-external-docs
@@ -524,7 +564,7 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
                  (insert "<url><loc>")
                  (insert (concat "http://" φdomain-name "/" (substring ξf (length ξ-websiteDocRootPath))))
                  (insert "</loc></url>\n"))))))
-       (find-lisp-find-files ξ-websiteDocRootPath "\\.html$"))
+       (xahsite-traverse-dir-file-list ξ-websiteDocRootPath))
 
       (insert "</urlset>")
 
@@ -544,363 +584,5 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
 
 Remove Google adds, Amazon ads, and other ads, Google Analytics
  Tracker code, Disqus code, …."
-
-  (save-restriction
-    (narrow-to-region φbegin φend)
-
-    (xah-replace-pairs-region 1 (point-max)
- [
-
-["<div class=\"buyxahemacs97449\">Like it? <a href=\"buy_xah_emacs_tutorial.html\">Buy Xah Emacs Tutorial</a>. <span style=\"color:red;font-size:xx-large\">♥</span></div>"
-""]
-
-[
-"<div class=\"xgcse\"><script> (function() { var cx = 'partner-pub-5125343095650532:8381157956'; var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true; gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s); })(); </script> <gcse:searchbox-only></gcse:searchbox-only></div>"
-""
-]
-
-[
-"• <a href=\"https://twitter.com/ErgoEmacs\">Follow me on Twitter</a>
-• <a href=\"https://plus.google.com/113859563190964307534/posts\">Follow me on g+</a>
-"
-""]
-
-["• <a class=\"buyxahemacs36183\" href=\"http://ergoemacs.org/emacs/buy_xah_emacs_tutorial.html\">Buy Xah Emacs Tutorial</a>"
-""]
-
-["• <a class=\"rssfeed53141\" href=\"blog.xml\">Subscribe Feed</a>"
-""
-]
-
-
-["• <a class=\"rssfeed53141\" href=\"../emacs/blog.xml\">Subscribe Feed</a>"
-""
-]
-
-["• <a class=\"rssfeed53141\" href=\"emacs/blog.xml\">Subscribe Feed</a>"
-""
-]
-
-
-[
-"<iframe src=\"http://astore.amazon.com/xahhome-20\" width=\"90%\" height=\"800\" frameborder=\"0\" scrolling=\"no\"></iframe>"
-""
-]
-
-  ;; google analytics tracker
-["<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-10884311-1', 'auto');
-ga('send', 'pageview');
-</script>"
-""]
-
-["<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-10884311-3', 'auto');
-ga('send', 'pageview');
-</script>"
-""]
-
-;; 2015-12-14
-["<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-7','wordyenglish.com');ga('send','pageview');</script>"
-""]
-
-;; 2015-12-14
-[
-"<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-9','xaharts.org');ga('send','pageview');</script>"
-""
-]
-
-["<section class=\"buy-book\">
-Buy <a href=\"buy_xah_js_tutorial.html\">Xah JavaScript Tutorial</a>.
-<div class=\"pp_xah_js_tutorial\">
-<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
-<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" />
-<input type=\"hidden\" name=\"hosted_button_id\" value=\"J3BC865C77JUC\" />
-<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\" />
-<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\" />
-</form>
-</div>
-</section>"
-""]
-
-["<div class=\"pp93653\">
-Buy xahlee.info for offline reading.
-<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
-<input type=\"hidden\" name=\"cmd\" value=\"_xclick\">
-<input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\">
-<input type=\"hidden\" name=\"lc\" value=\"US\">
-<input type=\"hidden\" name=\"item_name\" value=\"xahlee.info content\">
-<input type=\"hidden\" name=\"amount\" value=\"49.00\">
-<input type=\"hidden\" name=\"currency_code\" value=\"USD\">
-<input type=\"hidden\" name=\"button_subtype\" value=\"services\">
-<input type=\"hidden\" name=\"no_note\" value=\"0\">
-<input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\">
-<input type=\"hidden\" name=\"no_shipping\" value=\"1\">
-<input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\">
-<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">
-</form>
-</div>"
-""
-]
-
-["<script>
-amzn_assoc_ad_type = \"responsive_search_widget\";
-amzn_assoc_tracking_id = \"xahhome-20\";
-amzn_assoc_marketplace = \"amazon\";
-amzn_assoc_region = \"US\";
-amzn_assoc_placement = \"\";
-amzn_assoc_search_type = \"search_widget\";
-amzn_assoc_width = \"auto\";
-amzn_assoc_height = \"auto\";
-amzn_assoc_default_search_category = \"\";
-amzn_assoc_default_search_key = \"\";
-amzn_assoc_theme = \"light\";
-amzn_assoc_bg_color = \"FFFFFF\";
-</script>"
-""
-]
-
-["<nav id=\"t5\">
-<span class=\"xsignet\">∑</span><span class=\"xsignetxah\">XAH</span>
-<ul>
-<li><a href=\"../math/math_index.html\">Math</a></li>
-<li><a href=\"../comp/comp_index.html\">Programing</a></li>
-<li><a href=\"../comp/unicode_index.html\">Unicode ♥</a></li>
-<li><a href=\"../kbd/keyboarding.html\">Keyboard ⌨</a></li>
-</ul>
-<button id=\"i54391\" type=\"button\">Random Page</button><script async src=\"../random_page.js\"></script>
-• <a href=\"https://twitter.com/xah_lee\">Follow me on Twitter</a>
-• <a href=\"https://plus.google.com/+XahLee\">Follow me on g+</a>
-• <a class=\"rssfeed53141\" href=\"http://xahlee.info/math/blog.xml\">Math</a>
-• <a class=\"rssfeed53141\" href=\"http://xahlee.info/comp/blog.xml\">Programing</a>
-• <a class=\"rssfeed53141\" href=\"http://xahlee.info/js/blog.xml\">Web Dev</a>
-• <a class=\"buyxahjs83183\" href=\"http://xahlee.info/js/buy_xah_js_tutorial.html\">Buy Xah JavaScript Tutorial</a>
-<div class=\"xgcse\"><script>(function(){var cx='partner-pub-5125343095650532:1853288892';var gcse=document.createElement('script');gcse.type='text/javascript';gcse.async=true;gcse.src=(document.location.protocol=='https:'?'https:':'http:')+'//www.google.com/cse/cse.js?cx='+cx;var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse,s);})();</script><gcse:searchbox-only></gcse:searchbox-only></div>
-</nav>"
-
-"<nav id=\"t5\">
-<span class=\"xsignet\">∑</span><span class=\"xsignetxah\">XAH</span>
-<div class=\"xgcse\"><script>(function(){var cx='partner-pub-5125343095650532:1853288892';var gcse=document.createElement('script');gcse.type='text/javascript';gcse.async=true;gcse.src=(document.location.protocol=='https:'?'https:':'http:')+'//www.google.com/cse/cse.js?cx='+cx;var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse,s);})();</script><gcse:searchbox-only></gcse:searchbox-only></div>
-</nav>"
-]
-
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  older 2015-10-16
-[
-"<address class=\"author\"><a href=\"https://plus.google.com/112757647855302148298?rel=author\" rel=\"author\">Xah Lee</a></address>"
-"Xah Lee"
-]
-
- ;; Google Ad
-[
-"<script async src=\"http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
-<!-- 728x90, created 8/12/09 -->
-<ins class=\"adsbygoogle\"
-     style=\"display:inline-block;width:728px;height:90px\"
-     data-ad-client=\"ca-pub-5125343095650532\"
-     data-ad-slot=\"8521101965\"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>"
-""
-]
-
-["<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
-<!-- side300x600 -->
-<ins class=\"adsbygoogle\"
-     style=\"display:inline-block;width:300px;height:600px\"
-     data-ad-client=\"ca-pub-5125343095650532\"
-     data-ad-slot=\"7031204381\"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>" ""]
-
-;; Google Plus
-["<div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div>" ""]
-
-;; social network links ergoemacs.org
-["<a href=\"https://twitter.com/ErgoEmacs\"> </a> <a href=\"https://plus.google.com/113859563190964307534/posts\"> </a> <a href=\"https://www.facebook.com/xahlee\"> </a>"
- ""]
-
-;; social network links xahlee.info
-["<a href=\"https://twitter.com/xah_lee\"> </a> <a href=\"https://plus.google.com/112757647855302148298\"> </a> <a href=\"http://www.facebook.com/xahlee\"> </a>" ""]
-
-;; twitter
-["<div class=\"twitter\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"xah_lee\" data-count=\"none\">Tweet</a></div>" ""]
-["<div class=\"twitter\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"ErgoEmacs\" data-count=\"none\">Tweet</a></div>" ""]
-["<div class=\"twitter\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-via=\"wordy_english\" data-count=\"none\">Tweet</a></div>" ""]
-
-;; facebook
-["<div class=\"fb-like\" data-send=\"false\" data-layout=\"button_count\" data-width=\"90\" data-show-faces=\"false\"></div>" ""]
-
-["<script>(function() { var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/plusone.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(po,s);})();</script>"
-""
-]
-
-["<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-<div id=\"fb-root\"></div>"
-""
-]
-
-["<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/en_US/all.js#xfbml=1\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>"
-""]
-
-;; paypal
-["<div class=\"paypal-donate-60910\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"8127788\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif\" name=\"submit\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>
-<p>thank you <a href=\"http://xahlee.org/thanks.html\" rel=\"nofollow\">donors</a></p>
-<br />"
-""]
-
-  ;; Paypal donate
-  [
-   "<div class=\"ppp8745\"><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\"><input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\" /><input type=\"hidden\" name=\"hosted_button_id\" value=\"Y4V2F8TA949M2\" /><input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" name=\"submit\" alt=\"PayPal\" /><img src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" alt=\"\" width=\"1\" height=\"1\" /></form></div>"
-   ""]
-
-["<section class=\"buy-book\">Buy <a href=\"buy_xah_emacs_tutorial.html\">Xah Emacs Tutorial</a>. Master emacs benefits for life.
-<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
-<input type=\"hidden\" name=\"cmd\" value=\"_xclick\" />
-<input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\" />
-<input type=\"hidden\" name=\"lc\" value=\"US\" />
-<input type=\"hidden\" name=\"item_name\" value=\"xah emacs tutorial\" />
-<input type=\"hidden\" name=\"amount\" value=\"15.00\" />
-<input type=\"hidden\" name=\"currency_code\" value=\"USD\" />
-<input type=\"hidden\" name=\"button_subtype\" value=\"services\" />
-<input type=\"hidden\" name=\"no_note\" value=\"0\" />
-<input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\" />
-<input type=\"hidden\" name=\"no_shipping\" value=\"1\" />
-<input type=\"hidden\" name=\"shipping\" value=\"0.00\" />
-<input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\" />
-<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal\" />
-</form></section>"
-""]
-
-["<li><a href=\"buy_xah_emacs_tutorial.html\">Buy</a></li>"
-""]
-
-["<li><a href=\"../emacs/buy_xah_emacs_tutorial.html\">Buy</a></li>"
-""]
-
-["<li><a href=\"../../emacs/buy_xah_emacs_tutorial.html\">Buy</a></li>"
-""]
-
-["<li><a href=\"emacs/buy_xah_emacs_tutorial.html\">Buy</a></li>"
-""]
-
-  ;; Disqus code
-  [
-"<div id=\"disqus_thread\"></div><script>(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='http://xahlee.disqus.com/embed.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script>"
-   ""
-   ]
-
-  ;; amazon ad
-["<iframe src=\"http://rcm-na.amazon-adsystem.com/e/cm?t=xahhome-20&o=1&p=8&l=as1&asins=B00COR29XI&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr\" style=\"width:120px;height:240px;\" scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" frameborder=\"0\"></iframe><br />" ""]
-
-["<script charset=\"utf-8\" type=\"text/javascript\">
-amzn_assoc_ad_type = \"responsive_search_widget\";
-amzn_assoc_tracking_id = \"xahhome-20\";
-amzn_assoc_marketplace = \"amazon\";
-amzn_assoc_region = \"US\";
-amzn_assoc_placement = \"\";
-amzn_assoc_search_type = \"search_widget\";
-amzn_assoc_width = \"auto\";
-amzn_assoc_height = \"auto\";
-amzn_assoc_default_search_category = \"\";
-amzn_assoc_default_search_key = \"\";
-amzn_assoc_theme = \"light\";
-amzn_assoc_bg_color = \"FFFFFF\";
-</script>" ""]
-
-["<script src=\"http://z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&MarketPlace=US\"></script>" ""]
-
-  ;; 1and1 web hosting
-  [
-"<a href=\"http://www.1and1.com/?k_id=10914806\" target=\"_blank\" rel=\"nofollow\"><img src=\"http://adimg.uimserv.net/1und1/Werbemittel_US/wh_an_180x150.gif\" width=\"180\" height=\"150\" border=\"0\"/></a>"
-   ""
-   ]
-
-[
-"<div class=\"¤\"><a href=\"http://ode-math.com/\" rel=\"nofollow\">Differential Equations, Mechanics, and Computation</a></div>"
-""]
-
-                           ]
-                          )
-
-    (xah-replace-regexp-pairs-region 1 (point-max)
- [
-
-["<div class=\"showlove\">[[:ascii:][:nonascii:]]+<script defer src=\"http://xahlee.info/share_widgets.js\"></script>
-</div>"
-""]
-
-["<div class=\"ad66704\">[\n ]*</div>" ""]
-
-["<div class=\"ads-bottom-65900\">[\n ]*</div>" ""]
-
-;; ["<aside id=\"id1\">[[:ascii:]]+?</aside>" ""]
-
-["<div class=\"share-buttons\">[\n ]*</div>" ""]
-
-["<div class=\"¤xd\">[^<]+?</div>" ""]
-
-["<div class=\"¤\">[^<]+?</div>" ""]
-
-[ "<script charset=\"utf-8\" src=\"http://ws.amazon.com[^<]+?</script>" ""]
-
-["<div class=\"¤tla\"><a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a></div>" ""]
-
-[
-"<a href=\"[./a-z0-9]*blog.xml\"><img src=\"[./a-z0-9]*rss_icon.svg\" alt=\"rss icon\" style=\"width:36px;height:36px\" /></a>"
-""]
-
-["<script><!--
-amazon_ad_tag .+?</script>
-<script src=\"http://www.assoc-amazon.com/s/ads.js\"></script>"
- ""]
-
-;; ["<div class=\"showlove\">
-;; Like what you read\\?
-;; <div class=\"ppp8745\"><a href=\"buy_xah_emacs_tutorial.html\">Buy Xah Emacs Tutorial</a>
-;; <form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
-;; <input type=\"hidden\" name=\"cmd\" value=\"_xclick\" />
-;; <input type=\"hidden\" name=\"business\" value=\"JPHAB7F7QZRPC\" />
-;; <input type=\"hidden\" name=\"lc\" value=\"US\" />
-;; <input type=\"hidden\" name=\"item_name\" value=\"xah emacs tutorial\" />
-;; <input type=\"hidden\" name=\"amount\" value=\"15.00\" />
-;; <input type=\"hidden\" name=\"currency_code\" value=\"USD\" />
-;; <input type=\"hidden\" name=\"button_subtype\" value=\"services\" />
-;; <input type=\"hidden\" name=\"no_note\" value=\"0\" />
-;; <input type=\"hidden\" name=\"cn\" value=\"Add special instructions to the seller:\" />
-;; <input type=\"hidden\" name=\"no_shipping\" value=\"1\" />
-;; <input type=\"hidden\" name=\"shipping\" value=\"0.00\" />
-;; <input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted\" />
-;; <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal\" />
-;; </form>
-;; </div>
-;; or share some <span style=\"color:red;font-size:xx-large\">♥</span>
-;; <div id=\"share-buttons-97729\"><div class=\"g-plusone\" data-size=\"medium\" data-annotation=\"none\"></div></div><script defer src=\"http://xahlee.info/share_widgets.js\"></script>
-;; </div>"
-;; ""]
-
-;; ["<div id=\"disqus_thread\"></div><script>.+?</script><a href.+Disqus</span></a>" ""]
-;; ["<footer>.+?</footer>" ""]
-
-]
-"FIXEDCASE" "LITERAL")
-    )
-
-;; (xah-replace-pairs-region 1 (point-max)
-;;  [
-;; ;; paypal
-;; ["9158656425"
-;; ""]
-;; ]
-;;  )
-
+"dummy"
 )

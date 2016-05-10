@@ -2,9 +2,17 @@
 
 ;; xah-fly-keys move to http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 
-(when (fboundp 'smex)
-  (define-key xah-fly-key-map (kbd "<menu>") 'smex)
-  )
+;; (when (fboundp 'smex)
+;;   (define-key xah-fly-key-map (kbd "<menu>") 'smex)
+;;   )
+
+;; (define-key xah-fly-key-map (kbd "<menu>") xah-insertion-keymap)
+(define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-command-mode-activate)
+;; (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-mode-toggle)
+;; (define-key xah-fly-key-map (kbd "<home>") nil)
+
+;; (define-key xah-fly-key-map (kbd "<home>") xah-insertion-keymap)
+(define-key xah-fly-key-map (kbd "<home>") 'xah-toggle-letter-case)
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
@@ -89,7 +97,6 @@
   (define-key xah-user-keymap (kbd "b") nil)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
   (define-key xah-user-keymap (kbd "e") 'xah-open-file-fast)
-  (define-key xah-user-keymap (kbd "g") 'xah-find-text)
   (define-key xah-user-keymap (kbd "f b") 'xah-dired-crop-image)
   (define-key xah-user-keymap (kbd "f c") 'xah-dired-2jpg)
   (define-key xah-user-keymap (kbd "f d") 'xah-dired-image-autocrop)
@@ -113,6 +120,7 @@
   (define-key xah-user-keymap (kbd "m") 'magit-status)
   (define-key xah-user-keymap (kbd "n") nil)
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
+  (define-key xah-user-keymap (kbd "p") 'xah-find-text)
   (define-key xah-user-keymap (kbd "q") 'xah-replace-BOM-mark-etc)
 
   (define-key xah-user-keymap (kbd "r '") 'xah-latex-to-unicode)

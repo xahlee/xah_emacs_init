@@ -337,3 +337,4 @@
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
 
+(setq save-abbrevs nil)
