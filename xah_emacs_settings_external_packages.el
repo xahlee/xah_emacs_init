@@ -102,3 +102,9 @@
           "http://xahsl.org/sl/blog.xml"
           "http://wordyenglish.com/chinese/blog.xml"
           )))
+
+;; (when (fboundp 'xah-find-replace-text)
+;; (setq xah-find-context-char-count-before 0)
+;; (setq xah-find-context-char-count-after 99) )
+
+
