@@ -90,7 +90,18 @@ Version 2016-04-12"
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
             (when (not (looking-at "\\.")) (insert "."))
             (goto-char (point-max))))
-        (message "%s\nchanged to\n%s" ξbufferTextOrig (buffer-string ))))))
+
+        ;; backup
+        (let ((ξfname (buffer-file-name)))
+          (if ξfname
+              (let ((ξbackup-name
+                     (concat ξfname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
+                (copy-file ξfname ξbackup-name t)
+                (message (concat "Backup saved at: " ξbackup-name)))))
+
+        (save-buffer)
+        (message "%s\nchanged to\n%s" ξbufferTextOrig (buffer-string )))
+      )))
 
 (defun xahsite-update-page-tag ()
   "Update HTML page navigation tags.

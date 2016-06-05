@@ -22,10 +22,10 @@
   (define-key xah-html-single-keys-keymap (kbd "u") 'xahsite-update-article-timestamp)
   (define-key xah-html-single-keys-keymap (kbd "n") 'xah-add-reference-span-tag)
   (define-key xah-html-single-keys-keymap (kbd "i") 'xah-html-insert-date-tag)
+  (define-key xah-html-single-keys-keymap (kbd "f") 'xah-html-image-linkify)
 
   (define-key xah-html-single-keys-keymap (kbd "SPC b") 'xah-make-blogger-entry)
   (define-key xah-html-single-keys-keymap (kbd "SPC c") 'xah-angle-brackets-to-html)
-  (define-key xah-html-single-keys-keymap (kbd "SPC h") 'xah-html-image-linkify)
   (define-key xah-html-single-keys-keymap (kbd "SPC p") 'xah-copy-url-current-file)
   (define-key xah-html-single-keys-keymap (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
   (define-key xah-html-single-keys-keymap (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
