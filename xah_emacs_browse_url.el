@@ -30,8 +30,15 @@ default browser will be launched and opening this URL:
       (when (string-match "^c:/" ξurl) (setq ξurl (concat "file:///" ξurl)))
       (browse-url ξurl))
      ((string-equal system-type "gnu/linux")
-      (browse-url ξurl))
-
+      (let ( (process-connection-type nil))
+        (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
+      ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
+      )
+     ;; ((string-equal system-type "gnu/linux")
+     ;;  (start-process "xahbrowse"
+     ;;                 nil "setsid"
+     ;;                 "firefox"
+     ;;                 (concat "file://" buffer-file-name )))
      ((string-equal system-type "darwin") ; Mac
       (browse-url ξurl )))))
 
@@ -48,7 +55,7 @@ On Mac OS X, you don't need to. This command makes this shell call:
      ((string-equal system-type "windows-nt") ; Windows
       (shell-command (concat "firefox file://" buffer-file-name)))
      ((string-equal system-type "gnu/linux")
-      (shell-command (concat "firefox file://" buffer-file-name)))
+      (shell-command (concat "setsid firefox file://" buffer-file-name " &")))
      ((string-equal system-type "darwin") ; Mac
       (shell-command (concat "open -a Firefox.app file://" buffer-file-name))))))
 
