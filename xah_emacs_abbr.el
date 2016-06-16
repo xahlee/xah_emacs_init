@@ -235,7 +235,7 @@
     ("mma" "Mathematica")
     ("wl" "Wolfram Language")
     ("cl" "Common Lisp")
-    ("js" "JavaScript")
+    ("1js" "JavaScript")
     ("cj" "Clojure")
     ("vb" "Visual Basic")
     ("pp" "PayPal")

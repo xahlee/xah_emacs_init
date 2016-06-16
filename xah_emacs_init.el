@@ -122,7 +122,6 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_font"))
 (load (xah-get-fullpath "xah_emacs_misc"))
-(load (xah-get-fullpath "xah_emacs_browse_url"))
 
 (load (xah-get-fullpath "xah_emacs_atom_rss_util"))
 (load (xah-get-fullpath "xah_emacs_blogger_util"))

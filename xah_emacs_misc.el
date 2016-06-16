@@ -70,12 +70,12 @@ If path does not have a file extention, automatically try with “.el” for eli
 This command is similar to `find-file-at-point' but without prompting for confirmation.
 
 URL `http://ergoemacs.org/emacs/emacs_open_file_path_fast.html'
-Version 2015-03-20"
+Version 2016-06-14"
   (interactive)
   (let* ((ξinputStr (if (use-region-p)
                  (buffer-substring-no-properties (region-beginning) (region-end))
                (let (ξp0 ξp1 ξp2
-                         (ξcharSkipRegex "^  \"\t\n`':|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`"))
+                         (ξcharSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
                  (setq ξp0 (point))
                  ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
                  (skip-chars-backward ξcharSkipRegex)
@@ -125,7 +125,7 @@ Version 2015-06-12"
            (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
              (let (ξp0 ξp1 ξp2
-                       (ξcharSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`"))
+                       (ξcharSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
                (setq ξp0 (point))
                ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
                (skip-chars-backward ξcharSkipRegex)
@@ -138,6 +138,7 @@ Version 2015-06-12"
          (ξinputStr2 (replace-regexp-in-string ":\\'" "" ξinputStr1))
          ξp
          )
+(message "%s" ξinputStr1)
     (if (string-equal ξinputStr2 "")
         (progn (user-error "No path under cursor" ))
       (progn
@@ -155,6 +156,7 @@ Version 2015-06-12"
                ((string-match "\\`xahsl\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
                (t ξinputStr2)))
 
+(message "ξp is %s" ξp)
         (if (string-match-p "\\`https?://" ξp)
             (if (xahsite-url-is-xah-website-p ξp)
                 (let ((ξfp (xahsite-url-to-filepath ξp )))
@@ -164,6 +166,7 @@ Version 2015-06-12"
               (browse-url ξp))
           (progn ; not starting “http://”
             (let ((ξfff (xahsite-web-path-to-filepath ξp default-directory)))
+(message "ξfff is %s" ξfff)
               (if (file-exists-p ξfff)
                   (progn (find-file ξfff))
                 (if (file-exists-p (concat ξfff ".el"))
@@ -753,4 +756,45 @@ Version 2015-12-17"
 
     (set-background-color ξnext-value)
     (message "background color changed to %s" ξnext-value)))
+
+
+
+(defun xah-browse-url-of-buffer ()
+  "Similar to `browse-url-of-buffer' but visit xahlee.org.
+
+save the file first.
+Then, if `universal-argument' is called, visit the corresponding xahsite URL.
+For example, if current buffer is of this file:
+ ~/web/xahlee_info/index.html
+then after calling this function,
+default browser will be launched and opening this URL:
+ http://xahlee.info/index.html
+version 2016-06-12"
+  (interactive)
+  (let (ξurl)
+    (setq ξurl
+          (if current-prefix-arg
+              (xahsite-filepath-to-url (buffer-file-name))
+            (buffer-file-name)))
+
+    (when (buffer-modified-p ) 
+      (xah-clean-whitespace-and-save (point-min) (point-max))
+      (save-buffer))
+    (message "browsing %s" ξurl)
+    (cond
+     ((string-equal system-type "windows-nt") ; Windows
+      (when (string-match "^c:/" ξurl) (setq ξurl (concat "file:///" ξurl)))
+      (browse-url ξurl))
+     ((string-equal system-type "gnu/linux")
+      (let ( (process-connection-type nil))
+        (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
+      ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
+      )
+     ;; ((string-equal system-type "gnu/linux")
+     ;;  (start-process "xahbrowse"
+     ;;                 nil "setsid"
+     ;;                 "firefox"
+     ;;                 (concat "file://" buffer-file-name )))
+     ((string-equal system-type "darwin") ; Mac
+      (browse-url ξurl )))))
 

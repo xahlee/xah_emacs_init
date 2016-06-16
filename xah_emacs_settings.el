@@ -257,7 +257,7 @@
 
 
 (progn
-  ;; Make whitespace-mode with very basic background coloring for whitespaces.
+ ;; Make whitespace-mode with very basic background coloring for whitespaces.
   ;; http://ergoemacs.org/emacs/whitespace-mode.html
   (setq whitespace-style (quote ( spaces tabs newline space-mark tab-mark newline-mark )))
 
