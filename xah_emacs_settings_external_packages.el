@@ -91,6 +91,7 @@
           "http://sachachua.com/blog/category/emacs-news/feed/"
           "http://irreal.org/blog/?feed=rss2"
           "http://www.terminally-incoherent.com/blog/feed/"
+          "http://ejohn.org/subscribe/"
           "http://ergoemacs.org/emacs/blog.xml"
           "http://xahlee.info/comp/blog.xml"
           "http://xahlee.info/js/blog.xml"

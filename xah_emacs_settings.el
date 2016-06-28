@@ -60,7 +60,6 @@
 ;; (setq auto-save-visited-file-name t)
 
 (setq save-interprogram-paste-before-kill t)
-(setq enable-recursive-minibuffers t)
 
 ;; 2015-07-04 bug of pasting in emacs.
 ;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
@@ -120,8 +119,8 @@
 ;; (setq switch-to-visible-buffer nil)
 
 (setq set-mark-command-repeat-pop t)
-(setq mark-ring-max 6)
-(setq global-mark-ring-max 6)
+(setq mark-ring-max 9)
+(setq global-mark-ring-max 9)
 
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
@@ -166,16 +165,17 @@
 
 ;; minibuffer
 
+(setq enable-recursive-minibuffers t)
+
 ;; Save minibuffer history
 (savehist-mode 1)
 
-;; don't let the cursor go into minibuffer prompt. doesn't work in GNU Emacs 25.0.90.1
-(setq minibuffer-prompt-properties '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
-
 (setq max-mini-window-height 0.5)
 
-;; default as of GNU Emacs 25.0.90.1 , 2016-02-07
-;; (read-only t face minibuffer-prompt)
+;; minibuffer, stop cursor going into prompt
+(customize-set-variable
+ 'minibuffer-prompt-properties
+ (quote (read-only t cursor-intangible t face minibuffer-prompt)))
 
 
 
@@ -185,11 +185,6 @@
       (require 'saveplace)
       (setq-default save-place t))
   (save-place-mode 1))
-
-;; (setq enable-recursive-minibuffers t )
-
-;; apache per dir config file
-(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-unix-mode))
 
 
 ;;; editing related
@@ -225,7 +220,7 @@
 
 (electric-indent-mode 0) ; default is on in emacs 24.4
 
-;; majority of code formatting conventions do no recommend mixed tabs and spaces. So, here.
+;; no mixed tabs and spaces
 (setq-default indent-tabs-mode nil) ; gnu emacs 23.1, 24.4.1 default is t
 
 ;; 4 is more popular than 8.

@@ -195,7 +195,7 @@ Version 2015-12-17"
   (redraw-frame (selected-frame)))
 
 (defun xah-toggle-read-novel-mode ()
-  "Setup current window to be suitable for reading long novel/article text.
+  "Setup current buffer to be suitable for reading long novel/article text.
 
 • Line wrap at word boundaries.
 • Set a right margin.
@@ -203,20 +203,17 @@ Version 2015-12-17"
 • variable width font is used.
 
 Call again to toggle back.
+URL `http://ergoemacs.org/emacs/emacs_novel_reading_mode.html'
 Version 2016-01-16"
   (interactive)
   (if (null (get this-command 'state-on-p))
       (progn
-
         (set-window-margins
          nil 0
          (if (> fill-column (window-body-width))
              0
            (progn
              (- (window-body-width) fill-column))))
-
-        ;; (set-window-margins nil 0 9)
-
         (variable-pitch-mode 1)
         (setq line-spacing 0.4)
         (setq word-wrap t)
@@ -461,7 +458,7 @@ When there is a text selection, act on the region."
 
         ("delete empty file" . "find . -type f -empty")
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-        ("delete emacs backup~" . "find . -name \"*~\" -delete")
+        ("delete emacs backup~" . "find ~/web/ -name \"*~\" -delete")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
 

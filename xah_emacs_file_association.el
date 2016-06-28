@@ -27,3 +27,6 @@
 (when (fboundp 'vimrc-mode)
   (add-to-list 'auto-mode-alist '(".vim\\(rc\\)?$" . vimrc-mode))
 )
+
+;; apache per dir config file
+(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . conf-unix-mode))
