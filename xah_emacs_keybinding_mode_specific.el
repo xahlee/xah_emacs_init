@@ -97,16 +97,3 @@ For `rcirc-mode-hook'."
 
 (setq rcirc-default-nick "mid2")
 
-
-
-(defun xah-eval-defun ()
-  "like `eval-defun' but doesn't need proper indentation for it to work.
-Still, the code isn't 100% correct.
-"
-  (interactive)
-  (save-excursion
-    (search-backward "(defun")
-    ;;    (mark-sexp)
-    ;;    (eval-region (region-beginning) (region-end))
-    (forward-sexp)
-    (call-interactively 'eval-last-sexp)))

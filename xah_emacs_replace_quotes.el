@@ -1,26 +1,6 @@
 ;; -*- coding: utf-8 -*-
 ;; 2010-09-03
 
-;; 2015-08-22 stuff in xeu_elisp_util
-;; xah-filter-list
-;; xah-string-match-in-list-p
-;; xah-windows-style-path-to-unix
-;; xah-get-image-dimensions
-;; xah-get-image-dimensions-imk
-;; xah-get-string-from-file
-;; xah-get-file-lines
-;; xah-delete-files-by-regex
-;; xah-file-relative-name-emacs24.1.1-fix
-;; xah-trim-string
-;; xah-substract-path
-;; xah-hash-to-list
-;;  xah-asciify-text
-;; xah-asciify-string
-;;  xah-insert-date
-;; xah-current-date-time-string
-;; xah-is-datetimestamp-p
-;;  xah-fix-datetime-stamp
-
 ;; 2015-08-22 removed
 ;; xah-fly-keys-replace-commands.el xah-fly-keys-misc-commands2.el
 

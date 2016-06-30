@@ -158,6 +158,25 @@ Version 2015-02-08"
 
 ;;     ))
 
+
+
+
+(defsubst string-trim-left (string)
+  "Remove leading whitespace from STRING."
+  (if (string-match "\\`[ \t\n\r]+" string)
+      (replace-match "" t t string)
+    string))
+
+(defsubst string-trim-right (string)
+  "Remove trailing whitespace from STRING."
+  (if (string-match "[ \t\n\r]+\\'" string)
+      (replace-match "" t t string)
+    string))
+
+(defsubst string-trim (string)
+  "Remove leading and trailing whitespace from STRING."
+  (string-trim-left (string-trim-right string)))
+
 (defun xah-make-google-earth ()
   "Create a KML file and replace the current line as a link to it.
 
@@ -183,9 +202,9 @@ The KML file will be created at:
          (kmlDirRoot (concat (xahsite-server-root-path) "xaharts_org/kml/"))
          (titleCoordList (split-string inputStr "/"))
          (kmlFileTitle (elt titleCoordList 0))
-         (coord-y (xah-trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 1))))
-         (coord-x (xah-trim-string (replace-regexp-in-string "°" "" (elt titleCoordList 2))))
-         (kmlFilePath (concat kmlDirRoot (xah-asciify-string (xah-replace-pairs-in-string (xah-trim-string (elt (split-string kmlFileTitle ",") 0)) [[" " "_"] ["," "_"]])) ".kml"))
+         (coord-y (string-trim (replace-regexp-in-string "°" "" (elt titleCoordList 1))))
+         (coord-x (string-trim (replace-regexp-in-string "°" "" (elt titleCoordList 2))))
+         (kmlFilePath (concat kmlDirRoot (xah-asciify-string (xah-replace-pairs-in-string (string-trim (elt (split-string kmlFileTitle ",") 0)) [[" " "_"] ["," "_"]])) ".kml"))
          doit-p
          )
 

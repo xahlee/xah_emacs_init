@@ -812,10 +812,10 @@ If there is text selection, use it as input."
       (let (ξp0)
         (setq ξp0 (point))
         ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-        (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+        (skip-chars-backward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
         (setq ξp1 (point))
         (goto-char ξp0)
-        (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+        (skip-chars-forward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
         (setq ξp2 (point))))
 
     (setq ξpath (buffer-substring-no-properties ξp1 ξp2))
@@ -847,11 +847,12 @@ If there is text selection, use it as input."
      ((string-match-p "\\.webm\\'" ξpath) (xah-video-file-linkify))
 
      ((xahsite-url-is-xah-website-p ξpath) (xah-file-linkify ξp1 ξp2))
-     ((string-match-p "wikipedia.org/" ξpath)
+     ((or (string-match-p "wikipedia.org/" ξpath)
+          (string-match-p "wiktionary.org/" ξpath))
       (let ((case-fold-search nil))
         (if (xah-path-ends-in-image-suffix-p ξpath)
             (xah-html-source-url-linkify 0)
-          (call-interactively 'xah-html-wikipedia-url-linkify))))
+          (xah-html-wikipedia-url-linkify ))))
 
      ((and (string-match-p "\\`https?://" ξpath)) (xah-html-source-url-linkify 0)) ; generic URL
 

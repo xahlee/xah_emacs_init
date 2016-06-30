@@ -499,10 +499,7 @@ version 2015-02-05"
 
       (xah-html-remove-span-tag-region ξp1 ξp2)
       (goto-char ξp1)
-      (xah-html-htmlize-precode xah-html-lang-name-map))
-
-    ;; (call-interactively 'xah-html-htmlize-or-de-precode)
-    ))
+      (xah-html-htmlize-precode xah-html-lang-name-map))))
 
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.

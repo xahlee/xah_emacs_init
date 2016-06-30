@@ -1,6 +1,22 @@
 ;; 2010-06-07
 ;; ∑ http://xahlee.org/
 
+(defsubst string-trim-left (string)
+  "Remove leading whitespace from STRING."
+  (if (string-match "\\`[ \t\n\r]+" string)
+      (replace-match "" t t string)
+    string))
+
+(defsubst string-trim-right (string)
+  "Remove trailing whitespace from STRING."
+  (if (string-match "[ \t\n\r]+\\'" string)
+      (replace-match "" t t string)
+    string))
+
+(defsubst string-trim (string)
+  "Remove leading and trailing whitespace from STRING."
+  (string-trim-left (string-trim-right string)))
+
 (defun xah-view-emacs-manual-in-browser ()
   "When in `Info-mode', view the current page in browser
 For example: if current node is 「(elisp) The Mark」, switch to browser and load 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
@@ -61,7 +77,8 @@ Then it'll become:
       (progn (setq ξp1 (line-beginning-position))
              (setq ξp2 (line-end-position))))
 
-    (setq ξinput (xah-trim-string (buffer-substring-no-properties ξp1 ξp2)))
+    ;; trim whitespaces
+    (setq ξinput (string-trim (buffer-substring-no-properties ξp1 ξp2)))
 
     ;; generate ξinfoStr. A info string is like this: “(elisp) The Mark”
     (setq ξinfoStr
@@ -94,12 +111,12 @@ Then it'll become:
     (setq ξlinkStrURL
           (concat
            (xah-replace-pairs-in-string ξinfoStr
-                                    [
-                                     ["(elisp) " "http://ergoemacs.org/emacs_manual/elisp/"]
-                                     ["(emacs) " "http://ergoemacs.org/emacs_manual/emacs/"]
-                                     [" " "-"]
-                                     ["-" "_002d"]
-                                     ] )
+                                        [
+                                         ["(elisp) " "http://ergoemacs.org/emacs_manual/elisp/"]
+                                         ["(emacs) " "http://ergoemacs.org/emacs_manual/emacs/"]
+                                         [" " "-"]
+                                         ["-" "_002d"]
+                                         ] )
            ".html" ))
 
     ;; (cond
@@ -114,8 +131,7 @@ Then it'll become:
         (progn
           (delete-region ξp1 ξp2)
           (insert "<span class=\"ref\"><a href=\"" (xahsite-filepath-to-href-value ξfPath (buffer-file-name)) "\">" linkText "</a></span>"))
-      (error "Generated local ξfPath 「%s」 does not point to a file" ξfPath)))
-  )
+      (error "Generated local ξfPath 「%s」 does not point to a file" ξfPath))))
 
 (defun xah-html-php-ref-linkify ()
   "Make the current line into a PHP reference link.

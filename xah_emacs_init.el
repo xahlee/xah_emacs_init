@@ -134,10 +134,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_settings_external_packages"))
 (load (xah-get-fullpath "xah_emacs_file_association"))
 
-(when (string-equal system-type "darwin")
-  (load (xah-get-fullpath "xah_emacs_mac_os_x"))
-  )
-
 (load (xah-get-fullpath "xah_emacs_replace_quotes"))
 
 ;; (server-force-delete)
