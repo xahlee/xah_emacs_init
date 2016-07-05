@@ -214,7 +214,6 @@
     ("ipa" "IP address")
     ("wp" "Wikipedia")
     ("ms" "Microsoft")
-    ("qt" "QuickTime")
     ("1it" "IntelliType")
     ("win" "window")
     ("ie" "Internet Explorer")

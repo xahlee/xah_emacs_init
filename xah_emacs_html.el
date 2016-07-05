@@ -174,13 +174,24 @@ google_ad_client")
      ξfileList)))
 
 (defun xah-syntax-color-hex ()
-  "Syntax color text of the form 「#ff1100」 in current buffer.
+  "Syntax color text of the form 「#ff1100」 and 「#abc」 in current buffer.
 URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
-Version 2016-03-15"
+Version 2016-07-04"
   (interactive)
   (font-lock-add-keywords
    nil
-   '(("#[ABCDEFabcdef[:digit:]]\\{6\\}"
+   '(("#[ABCDEFabcdef[:digit:]]\\{3\\}"
+      (0 (put-text-property
+          (match-beginning 0)
+          (match-end 0)
+          'face (list :background
+                      (let* (
+                       (ms (match-string-no-properties 0))
+                       (r (substring ms 1 2))
+                       (g (substring ms 2 3))
+                       (b (substring ms 3 4)))
+                  (concat "#" r r g g b b))))))
+     ("#[ABCDEFabcdef[:digit:]]\\{6\\}"
       (0 (put-text-property
           (match-beginning 0)
           (match-end 0)
@@ -266,3 +277,57 @@ Version 2015-08-07"
         (message "rename to %s" ξnewPath)
         (delete-region (car ξbounds) (cdr ξbounds))
         (insert (xahsite-filepath-to-href-value ξnewPath (or (buffer-file-name) default-directory)))))))
+
+(defun xah-move-image-file (dirName fileName)
+  "move image file at
+~/Downloads/xx.jpg
+to current dir of subdir i
+and rename file to current line's text.
+2016-07-01"
+  (interactive "DMove to dir:
+sNew file name:")
+  (let ( moveToPath )
+    (setq moveToPath (concat dirName fileName ".jpg"))
+    (if (file-exists-p moveToPath)
+        (message "move to path exist: %s" moveToPath)
+      (progn
+        (rename-file (expand-file-name "~/Downloads/xx.jpg") moveToPath)
+        (find-file moveToPath )
+        (message "move to path: %s" moveToPath)))))
+
+(defun xah-youtube-get-image ()
+  "
+given a youtube url, get its image.
+the url is taken from current line
+tttttttttttttttttttttttttttttttt
+todo
+2016-07-01"
+  (interactive)
+  (let* (
+         (p1 (line-beginning-position))
+         (p2 (line-end-position))
+         (lineStr (buffer-substring-no-properties p1 p2))
+         id
+         shellCmd
+         (fileName (read-file-name "name:")))
+    (setq id (replace-regexp-in-string "https://www.youtube.com/watch\\?v=" "" lineStr 'FIXEDCASE 'LITERAL ))
+    (setq id (replace-regexp-in-string "http://www.youtube.com/watch\\?v=" "" id 'FIXEDCASE 'LITERAL ))
+
+    (setq shellCmd
+          (concat "wget " "https://i.ytimg.com/vi/" id "/maxresdefault.jpg"
+                  " -O "
+                  fileName
+                  ".jpg "
+                  ))
+
+    (shell-command shellCmd)
+
+    ;; (replace-regexp-in-string "https://www.youtube.com/watch\\?v=" "" "https://www.youtube.com/watch?v=aa8jTf7Xg3E" 'FIXEDCASE 'LITERAL )
+
+    ;; https://www.youtube.com/watch?v=aa8jTf7Xg3E
+    ;; https://i.ytimg.com/vi/aa8jTf7Xg3E/maxresdefault.jpg
+
+    ;; https://www.youtube.com/watch?v=zdD_QygwRuY
+
+    ))
+

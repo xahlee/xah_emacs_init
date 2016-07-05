@@ -791,4 +791,3 @@ version 2016-06-12"
      ;;                 (concat "file://" buffer-file-name )))
      ((string-equal system-type "darwin") ; Mac
       (browse-url ξurl )))))
-

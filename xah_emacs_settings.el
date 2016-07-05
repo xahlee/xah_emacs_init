@@ -116,6 +116,7 @@
 (global-auto-revert-mode 1)
 
 (setq sentence-end-double-space nil )
+
 ;; (setq switch-to-visible-buffer nil)
 
 (setq set-mark-command-repeat-pop t)
@@ -198,8 +199,6 @@
 ;; set highlighting brackets
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
-
-(electric-pair-mode 1)
 
 (progn
   ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.

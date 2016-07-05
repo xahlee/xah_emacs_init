@@ -30,25 +30,43 @@ e.g. c:/Users/h3/web/"
   "a vector of dir under xahlee.info that are external docs"
   [
 
-   "REC-SVG11-20110816"
-   "clojure-doc-1.8"
-   "css3_spec_bg"
-   "css_2.1_spec"
-   "css_3_color_spec"
-   "css_transitions"
-   "dom-whatwg"
-   "html5_whatwg"
-   "java8_doc"
-   "javascript_ecma-262_5.1_2011"
-   "javascript_ecma-262_6_2015"
-   "javascript_es6"
-   "jquery_doc"
-   "node_api"
-   "php-doc"
-   "python_doc_2.7.6"
-   "python_doc_3.3.3"
+ "REC-SVG11-20110816"
+ "clojure-doc-1.8"
+ "css3_spec_bg"
+ "css_2.1_spec"
+ "css_3_color_spec"
+ "css_transitions"
+ "dom-whatwg"
+ "html5_whatwg"
+ "java8_doc"
+ "javascript_ecma-262_5.1_2011"
+ "javascript_ecma-262_6_2015"
+ "javascript_es6"
+ "jquery_doc"
+ "node_api"
+ "php-doc"
+ "python_doc_2.7.6"
+ "python_doc_3.3.3"
 
-   ]
+;; grep -r -F "REC-SVG11-20110816" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "clojure-doc-1.8" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "css3_spec_bg" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "css_2.1_spec" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "css_3_color_spec" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "css_transitions" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "dom-whatwg" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "html5_whatwg" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "java8_doc" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "javascript_ecma-262_5.1_2011" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "javascript_ecma-262_6_2015" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "javascript_es6" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "jquery_doc" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "node_api" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "php-doc" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "python_doc_2.7.6" --include='*html' ~/web/xahlee_info >> xx33
+;; grep -r -F "python_doc_3.3.3" --include='*html' ~/web/xahlee_info >> xx33
+
+ ]
   )
 
 

@@ -8,14 +8,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.clj\\'" . xah-clojure-mode))
 
-;; (autoload 'xah-js-mode "xah-js-mode" "load xah-js-mode for JavaScript file" t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . xah-js-mode))
-
-;(autoload 'xah-css-mode "xah-css-mode" "load xah-css-mode for CSS file" t)
-(add-to-list 'auto-mode-alist '("\\.css\\'" . xah-css-mode))
-
-(add-to-list 'auto-mode-alist '("\\.html\\'" . xah-html-mode))
-
 (add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))
 (add-to-list 'magic-mode-alist '("<\\?php" . xah-php-mode) )
 

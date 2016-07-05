@@ -826,6 +826,8 @@ If there is text selection, use it as input."
      ((string-match-p "javascript_es6" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "html_whatwg" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "html5_whatwg" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "css_2.1_spec" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
+     ((string-match-p "css_3_color_spec" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "clojure-doc-1.8" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "python_doc_2" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
      ((string-match-p "python_doc_3" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
