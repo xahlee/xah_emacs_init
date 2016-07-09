@@ -4,7 +4,7 @@
 ;; 2015-08-22 removed
 ;; xah-fly-keys-replace-commands.el xah-fly-keys-misc-commands2.el
 
-;; 2015-08-22 
+;; 2015-08-22
 ;; removed dependencies to xeu_elisp_util.el xah-get-thing.el xah-find.el xah-replace-pairs.el
 
 (defun xah-replace-newline-whitespaces-to-space (&optional φbegin φend φabsolute-p)
@@ -349,7 +349,7 @@ Version 2015-10-05"
       (setq
        φto-direction
        (if
-           (or 
+           (or
             (string-match "　" ξinput-str)
             (string-match "。" ξinput-str)
             (string-match "，" ξinput-str)
@@ -736,32 +736,33 @@ Version 2015-08-12"
           (while (search-forward "  " nil t)
             (replace-match " " 'FIXEDCASE 'LITERAL)))))))
 
-(defun xah-change-bracket-pairs (φbegin φend φfromType φtoType)
+(defun xah-change-bracket-pairs ( φfromType φtoType &optional φbegin φend)
   "Change bracket pairs from one type to another on current line or selection.
 For example, change all parenthesis () to square brackets [].
 
 When called in lisp program, φbegin φend are region begin/end position, φfromType or φtoType is a string of a bracket pair. ⁖ \"()\",  \"[]\", etc.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2015-04-12"
+Version 2016-07-06"
   (interactive
    (let ((ξbracketsList
           '("()" "{}" "[]" "<>" "“”" "‘’" "‹›" "«»" "「」" "『』" "【】" "〖〗" "〈〉" "《》" "〔〕" "⦅⦆" "〚〛" "⦃⦄" "〈〉" "⦑⦒" "⧼⧽" "⟦⟧" "⟨⟩" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱")))
-     (if (use-region-p)
-         (progn (list
-                 (region-beginning)
-                 (region-end)
-                 (ido-completing-read "Replace this:" ξbracketsList )
-                 (ido-completing-read "To:" ξbracketsList )))
-       (progn
-         (list
-          (line-beginning-position)
-          (line-end-position)
-          (ido-completing-read "Replace this:" ξbracketsList )
-          (ido-completing-read "To:" ξbracketsList ))))))
+     (list
+      (ido-completing-read "Replace this:" ξbracketsList )
+      (ido-completing-read "To:" ξbracketsList )
+      ;; These are done separately here
+      ;; so that command-history will record these expressions
+      ;; rather than the values they had this time.
+      ;; 2016-07-06 am still not sure exactly how they work. note, if you add a else, it won't work
+      (if (use-region-p) (region-beginning))                 
+      (if (use-region-p) (region-end)))))
+
+  (if (null φbegin) (setq φbegin (line-beginning-position)))
+  (if (null φend) (setq φend (line-end-position)))
+
   (let ((ξfindReplaceMap
-          (vector
-           (vector (char-to-string (elt φfromType 0)) (char-to-string (elt φtoType 0)))
-           (vector (char-to-string (elt φfromType 1)) (char-to-string (elt φtoType 1))))))
+         (vector
+          (vector (char-to-string (elt φfromType 0)) (char-to-string (elt φtoType 0)))
+          (vector (char-to-string (elt φfromType 1)) (char-to-string (elt φtoType 1))))))
     (save-excursion
       (save-restriction
         (narrow-to-region φbegin φend)

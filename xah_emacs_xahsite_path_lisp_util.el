@@ -4,6 +4,8 @@
 ; Xah Lee,
 ; ∑ http://xahlee.org/
 
+(require 'subr-x)
+
 (defun xahsite-server-root-path ()
   "Returns the full path of xah lee website local file web root.
 Ends in a slash.
@@ -150,7 +152,12 @@ e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「ergoemacs.org」.
 
 This function depends on `xahsite-server-root-path'."
-  (let ((case-fold-search nil) ξstr (ξpathPart (xah-substract-path (downcase φabs-path) (downcase (xahsite-server-root-path)))))
+  (let ((case-fold-search nil)
+        ξstr
+        (ξpathPart
+         (string-remove-prefix
+          (downcase (xahsite-server-root-path))
+          (downcase φabs-path))))
     (if (string-match "\\`\\([^/]+?\\)/" ξpathPart )
         (progn
           (setq ξstr (match-string 1 ξpathPart))
@@ -495,16 +502,18 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
   (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" φpath))
 
 (defun xah-find-files-file-predicate-p (fname parentdir)
-  "DOCSTRING"
+  "return t if fname is what we want. Else nil.
+2016-07-09"
   (interactive)
-  (and 
+  (and
    (string-match "\\.html$" fname)
    (not (string-match "^xx" fname))
    ))
 
 (defun xah-find-files-dir-predicate-p (fname parentdir)
-  "DOCSTRING"
-  (and 
+  "return t if fname is what we want. Else nil.
+2016-07-09"
+  (and
    (not
     (or
      (string-equal "java8_doc" fname)
@@ -566,7 +575,7 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
       (insert "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">
 ")
-      
+
       (mapc
        (lambda (ξf)
          ;; xahsite-xahlee-info-external-docs

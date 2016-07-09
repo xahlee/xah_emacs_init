@@ -138,7 +138,6 @@ Version 2015-06-12"
          (ξinputStr2 (replace-regexp-in-string ":\\'" "" ξinputStr1))
          ξp
          )
-(message "%s" ξinputStr1)
     (if (string-equal ξinputStr2 "")
         (progn (user-error "No path under cursor" ))
       (progn
@@ -155,8 +154,6 @@ Version 2015-06-12"
                ((string-match "\\`xahporn\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
                ((string-match "\\`xahsl\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
                (t ξinputStr2)))
-
-(message "ξp is %s" ξp)
         (if (string-match-p "\\`https?://" ξp)
             (if (xahsite-url-is-xah-website-p ξp)
                 (let ((ξfp (xahsite-url-to-filepath ξp )))
@@ -166,7 +163,6 @@ Version 2015-06-12"
               (browse-url ξp))
           (progn ; not starting “http://”
             (let ((ξfff (xahsite-web-path-to-filepath ξp default-directory)))
-(message "ξfff is %s" ξfff)
               (if (file-exists-p ξfff)
                   (progn (find-file ξfff))
                 (if (file-exists-p (concat ξfff ".el"))
@@ -791,3 +787,67 @@ version 2016-06-12"
      ;;                 (concat "file://" buffer-file-name )))
      ((string-equal system-type "darwin") ; Mac
       (browse-url ξurl )))))
+
+
+
+(defun list-non-matching-lines ()
+  "Show lines *not* matching the regexp."
+  (interactive)
+  (let ((orig-buf (current-buffer))
+        (new-buf "*List Non-matching Lines*"))
+    (switch-to-buffer new-buf nil :force-same-window)
+    (insert-buffer-substring orig-buf)
+    (goto-char (point-min))
+    (let ((inhibit-read-only t)) ; Always make the buffer editable
+      (call-interactively #'flush-lines))
+    (special-mode)))
+ ; Make the new buffer read-only; also allowing bindings like `q'
+
+
+
+
+(require 'cl-lib)
+
+(defun invert-occur (regexp)
+  "Find all lines not matching REGEXP."
+  (interactive "sInverting match regexp: ")
+  (invert-occur--publish (invert-occur--find regexp)))
+
+(defun invert-occur--find (regexp)
+  (save-excursion
+    (setf (point) (point-min))
+    (cl-loop while (< (point) (point-max))
+             for line upfrom 1
+             for beg = (point)
+             for end = (line-end-position)
+             unless (re-search-forward regexp end :noerror)
+             collect (list line beg end)
+             do (setf (point) (1+ end)))))
+
+(define-derived-mode invert-occur-mode special-mode "ioccur"
+  "Major more for displaying `invert-occur' results.")
+(define-key invert-occur-mode-map (kbd "RET") #'invert-occur--follow)
+(define-key invert-occur-mode-map [mouse-2] #'invert-occur--follow)
+
+(defun invert-occur--publish (results)
+  (let ((source-buffer (current-buffer))
+        (inhibit-read-only t))
+    (with-current-buffer (get-buffer-create "*invert-occur*")
+      (invert-occur-mode)
+      (erase-buffer)
+      (cl-loop for (line beg end) in results
+               for marker = (set-marker (make-marker) beg source-buffer)
+               for button = (propertize (format "% 3d " line)
+                                        'mouse-face '(highlight)
+                                        'target marker)
+               do (insert button)
+               do (insert-buffer-substring source-buffer beg end)
+               do (insert "\n"))
+      (setf (point) (point-min))
+      (pop-to-buffer (current-buffer)))))
+
+(defun invert-occur--follow ()
+  (interactive)
+  (let ((marker (get-text-property (point) 'target)))
+    (pop-to-buffer (marker-buffer marker))
+    (setf (point) (marker-position marker))))

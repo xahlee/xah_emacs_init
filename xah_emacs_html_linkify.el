@@ -544,7 +544,7 @@ The link text is pulled from the file's <title> tag.
 If there is text selection, use it as file path.
 
 The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath'.
-"
+Version 2016-07-07"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
@@ -560,32 +560,31 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
          (list p1 p2)))))
   (let* (
          (ξinputStr (buffer-substring-no-properties φbegin φend))
-         (inputStParts (split-uri-hashmark ξinputStr))
-         (pt1 (aref inputStParts 0))
-         (fragPart (aref inputStParts 1))
+         (ξinputStParts (split-uri-hashmark ξinputStr))
+         (pt1 (aref ξinputStParts 0))
+         (ξfragPart (aref ξinputStParts 1))
          (ξfPath (xahsite-web-path-to-filepath pt1 default-directory))
-         rltvPath titleText ξresultStr
-         (currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
-         (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
+         ξrltvPath ξtitleText ξresultStr
+         (ξcurrentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
+         (ξcurrentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
 
     (if (file-exists-p ξfPath)
         (progn
-          (setq titleText
+          (setq ξtitleText
                 (if (string-match-p ".+html\\'" ξfPath)
-                    (concat (xah-html-get-html-file-title ξfPath "noerror") fragPart)
+                    (concat (xah-html-get-html-file-title ξfPath "noerror") ξfragPart)
                   (file-name-nondirectory ξfPath)))
           (setq ξresultStr
                 (if (string-equal
-                     (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
+                     (xahsite-get-domain-of-local-file-path ξcurrentBufferFilePathOrDir)
                      (xahsite-get-domain-of-local-file-path ξfPath))
                     (progn
-                      (setq rltvPath (file-relative-name ξfPath currentBufferFileDir))
-(message "title is 「%S」" titleText)
+                      (setq ξrltvPath (file-relative-name ξfPath ξcurrentBufferFileDir))
                       (format "<a href=\"%s\">%s</a>"
-                              (concat rltvPath fragPart)
-                              (if (string-equal titleText "") rltvPath titleText )))
+                              (concat ξrltvPath ξfragPart)
+                              (if (string-equal ξtitleText "") ξrltvPath ξtitleText )))
                   (progn
-                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url ξfPath) fragPart) titleText))))
+                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url ξfPath) ξfragPart) ξtitleText))))
           (delete-region φbegin φend)
           (insert ξresultStr))
       (progn (message (format "Cannot locate the file: 「%s」" ξfPath))))))
