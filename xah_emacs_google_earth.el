@@ -158,24 +158,7 @@ Version 2015-02-08"
 
 ;;     ))
 
-
-
-
-(defsubst string-trim-left (string)
-  "Remove leading whitespace from STRING."
-  (if (string-match "\\`[ \t\n\r]+" string)
-      (replace-match "" t t string)
-    string))
-
-(defsubst string-trim-right (string)
-  "Remove trailing whitespace from STRING."
-  (if (string-match "[ \t\n\r]+\\'" string)
-      (replace-match "" t t string)
-    string))
-
-(defsubst string-trim (string)
-  "Remove leading and trailing whitespace from STRING."
-  (string-trim-left (string-trim-right string)))
+(require 'subr-x) ; for string-trim
 
 (defun xah-make-google-earth ()
   "Create a KML file and replace the current line as a link to it.

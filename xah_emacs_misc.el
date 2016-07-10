@@ -551,6 +551,7 @@ The buyer hasn't entered any instructions." ""]
 ["Instructions from buyer:
 None provided" ""]
 ["----------------------------------------------------------------" ""]
+["Copyright © 1999-2016 PayPal. All rights reserved." ""]
                            ]
                           )
 (xah-replace-regexp-pairs-region 1 (point-max)
