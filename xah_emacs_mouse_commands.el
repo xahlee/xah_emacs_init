@@ -61,21 +61,21 @@ Version 2015-07-06"
   (backward-char xah-forward-n-chars))
 
 
-(defun xah-mouse-click-to-search (φclick)
+(defun xah-mouse-click-to-search (_click)
   "Mouse click to start `isearch-forward-symbol-at-point' (emacs 24.4) at clicked point.
 URL `http://ergoemacs.org/emacs/emacs_mouse_click_highlight_word.html'
 Version 2015-04-22"
   (interactive "e")
-  (let ((p1 (posn-point (event-start φclick))))
+  (let ((p1 (posn-point (event-start _click))))
     (goto-char p1)
     (isearch-forward-symbol-at-point)))
 
-(defun xah-click-describe-char (φclick)
+(defun xah-click-describe-char (_click)
   "Mouse click to `describe-char' at clicked point.
 URL `http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html'
 Version 2015-04-22"
   (interactive "e")
-  (let ((p1 (posn-point (event-start φclick))))
+  (let ((p1 (posn-point (event-start _click))))
     (goto-char p1)
     (describe-char p1)))
 
@@ -140,18 +140,18 @@ Version 2015-07-06"
 This command will prompt you.
 When emacs is idle for 10 seconds, the normal wheel behavior will be restored."
   (interactive)
-  (let (ξmode
-        (ξmouse-wheel-modes
+  (let (-mode
+        (-mouse-wheel-modes
          '(
            "50 lines"
            "block"
            "normal"
            )))
-    (setq ξmode (ido-completing-read "set wheel mode to:" ξmouse-wheel-modes))
+    (setq -mode (ido-completing-read "set wheel mode to:" -mouse-wheel-modes))
     (cond
-     ((string-equal ξmode "normal") (xah-set-mouse-wheel-normal))
-     ((string-equal ξmode "block") (xah-set-mouse-scroll-by-block))
-     ((string-equal ξmode "50 lines") (xah-set-mouse-scroll-by-50-line))
+     ((string-equal -mode "normal") (xah-set-mouse-wheel-normal))
+     ((string-equal -mode "block") (xah-set-mouse-scroll-by-block))
+     ((string-equal -mode "50 lines") (xah-set-mouse-scroll-by-50-line))
      (t (error "%s" "program logic error. No choice found")))
 
     (message "Wheel behavior will revert back to normal 10 seconds after idle.")

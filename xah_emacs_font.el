@@ -7,25 +7,25 @@
 
 
 
-(defun xah-cycle-font-2 (φn)
+(defun xah-cycle-font-2 (_n)
   "Change font in current window between 2 fonts.
 URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
 Version 2015-09-21"
   (interactive "p")
-  ;; this function sets a property “state”. It is a integer. Possible values are 0 to length of ξfontList
+  ;; this function sets a property “state”. It is a integer. Possible values are 0 to length of -fontList
   (let (
-        (ξfontList '("DejaVu Sans Mono-10" "DejaVu Sans-10"))
-        ξfontToUse
-        ξstateBefore
-        ξstateAfter)
+        (-fontList '("DejaVu Sans Mono-10" "DejaVu Sans-10"))
+        -fontToUse
+        -stateBefore
+        -stateAfter)
 
-    (setq ξstateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
-    (setq ξstateAfter (% (+ ξstateBefore (length ξfontList) φn) (length ξfontList)))
-    (put 'xah-cycle-font-2 'state ξstateAfter)
+    (setq -stateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
+    (setq -stateAfter (% (+ -stateBefore (length -fontList) _n) (length -fontList)))
+    (put 'xah-cycle-font-2 'state -stateAfter)
 
-    (setq ξfontToUse (nth ξstateAfter ξfontList))
-    (set-frame-parameter nil 'font ξfontToUse)
-    (message "Font set to: %s" ξfontToUse)))
+    (setq -fontToUse (nth -stateAfter -fontList))
+    (set-frame-parameter nil 'font -fontToUse)
+    (message "Font set to: %s" -fontToUse)))
 
 
 
@@ -54,24 +54,24 @@ Version 2015-09-21"
                  "Symbola-13"
                  ))))
 
-(defun xah-cycle-font (φn)
+(defun xah-cycle-font (_n)
   "Change font in current frame.
 Each time this is called, font cycles thru a predefined list of fonts in the variable `xah-font-list' .
-If φn is 1, cycle forward.
-If φn is -1, cycle backward.
+If _n is 1, cycle forward.
+If _n is -1, cycle backward.
 See also `xah-cycle-font-next', `xah-cycle-font-previous'.
 URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
 Version 2015-09-21"
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
-  (let (ξfontToUse ξstateBefore ξstateAfter )
-    (setq ξstateBefore (if (get 'xah-cycle-font 'state) (get 'xah-cycle-font 'state) 0))
-    (setq ξstateAfter (% (+ ξstateBefore (length xah-font-list) φn) (length xah-font-list)))
-    (setq ξfontToUse (nth ξstateAfter xah-font-list))
-    (set-frame-font ξfontToUse t)
-    ;; (set-frame-parameter nil 'font ξfontToUse)
-    (message "Current font is: %s" ξfontToUse )
-    (put 'xah-cycle-font 'state ξstateAfter)))
+  (let (-fontToUse -stateBefore -stateAfter )
+    (setq -stateBefore (if (get 'xah-cycle-font 'state) (get 'xah-cycle-font 'state) 0))
+    (setq -stateAfter (% (+ -stateBefore (length xah-font-list) _n) (length xah-font-list)))
+    (setq -fontToUse (nth -stateAfter xah-font-list))
+    (set-frame-font -fontToUse t)
+    ;; (set-frame-parameter nil 'font -fontToUse)
+    (message "Current font is: %s" -fontToUse )
+    (put 'xah-cycle-font 'state -stateAfter)))
 
 (defun xah-cycle-font-next ()
   "Switch to the next font, in current window.

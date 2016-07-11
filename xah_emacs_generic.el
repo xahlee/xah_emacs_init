@@ -36,9 +36,9 @@ For example, if the current buffer is the file x.java,
 then it'll call “java x” in a shell."
   (interactive)
   (let* (
-         (ξfnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
-         (ξprog-name "java"))
-    (shell-command (concat ξprog-name " " ξfnm " &"))))
+         (-fnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
+         (-prog-name "java"))
+    (shell-command (concat -prog-name " " -fnm " &"))))
 
 (defun xah-python-2to3-current-file ()
   "Convert current buffer from python 2 to python 3.
@@ -47,20 +47,20 @@ URL `http://ergoemacs.org/emacs/elisp_python_2to3.html'
 Version 2016-02-16"
   (interactive)
   (let* (
-         (ξfName (buffer-file-name))
-         (ξfSuffix (file-name-extension ξfName)))
+         (-fName (buffer-file-name))
+         (-fSuffix (file-name-extension -fName)))
     (when (buffer-modified-p)
       (save-buffer))
-    (if (or (string-equal ξfSuffix "py") (string-equal ξfSuffix "py3"))
+    (if (or (string-equal -fSuffix "py") (string-equal -fSuffix "py3"))
         (progn
-          (shell-command (format "2to3 -w %s" ξfName))
+          (shell-command (format "2to3 -w %s" -fName))
           (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES"))
-      (error "file 「%s」 doesn't end in “.py” or “.py3”." ξfName))))
+      (error "file 「%s」 doesn't end in “.py” or “.py3”." -fName))))
 
-(defun xah-change-file-line-ending-style (φfile-list φline-ending-style)
+(defun xah-change-file-line-ending-style (_file-list _line-ending-style)
   "Change current file or dired marked file's newline convention.
 
-When called non-interactively, φline-ending-style is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+When called non-interactively, _line-ending-style is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
 Version 2015-07-24
 "
@@ -71,37 +71,37 @@ Version 2015-07-24
       (list (buffer-file-name)))
     (ido-completing-read "Line ending:" '("Linux/MacOSX/Unix" "MacOS9" "Windows") "PREDICATE" "REQUIRE-MATCH")))
   (let* (
-         (ξcodingSystem
+         (-codingSystem
           (cond
-           ((equal φline-ending-style "Linux/MacOSX/Unix") 'unix)
-           ((equal φline-ending-style "MacOS9") 'mac)
-           ((equal φline-ending-style "Windows") 'dos)
+           ((equal _line-ending-style "Linux/MacOSX/Unix") 'unix)
+           ((equal _line-ending-style "MacOS9") 'mac)
+           ((equal _line-ending-style "Windows") 'dos)
            (t (error "code logic error 65327. Expect one of it." )))))
     (mapc
-     (lambda (x) (xah-convert-file-coding-system x ξcodingSystem))
-     φfile-list)))
+     (lambda (x) (xah-convert-file-coding-system x -codingSystem))
+     _file-list)))
 
-(defun xah-convert-file-coding-system (φfpath φcoding-system)
+(defun xah-convert-file-coding-system (_fpath _coding-system)
   "Convert file's encoding.
- φfpath is full path to file.
- φcoding-system is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+ _fpath is full path to file.
+ _coding-system is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 
 If the file is already opened, it will be saved after this command.
 URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
 Version 2015-07-24
 "
-  (let (ξbuffer
-        (ξbufferOpened-p (get-file-buffer φfpath)))
-    (if ξbufferOpened-p
+  (let (-buffer
+        (-bufferOpened-p (get-file-buffer _fpath)))
+    (if -bufferOpened-p
         (progn
-          (with-current-buffer ξbufferOpened-p
-            (set-buffer-file-coding-system φcoding-system)
+          (with-current-buffer -bufferOpened-p
+            (set-buffer-file-coding-system _coding-system)
             (save-buffer)))
       (progn
-        (setq ξbuffer (find-file φfpath))
-        (set-buffer-file-coding-system φcoding-system)
+        (setq -buffer (find-file _fpath))
+        (set-buffer-file-coding-system _coding-system)
         (save-buffer)
-        (kill-buffer ξbuffer)))))
+        (kill-buffer -buffer)))))
 
 
 ;; don't use much anymore

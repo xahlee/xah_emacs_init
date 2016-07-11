@@ -9,56 +9,56 @@
 (defun xah-select-text-in-html-bracket ()
   "Select text between <…> or >…<."
   (interactive)
-  (let (ξp0 ξp1< ξp1> ξp2< ξp2>
+  (let (-p0 -p1< -p1> -p2< -p2>
            distance-p1<
            distance-p1>
            )
-    (setq ξp0 (point))
+    (setq -p0 (point))
     (search-backward "<" nil "NOERROR" )
-    (setq ξp1< (point))
-    (goto-char ξp0)
+    (setq -p1< (point))
+    (goto-char -p0)
     (search-backward ">" nil "NOERROR" )
-    (setq ξp1> (point))
-    (setq distance-p1< (abs (- ξp0 ξp1<)))
-    (setq distance-p1> (abs (- ξp1> ξp0)))
+    (setq -p1> (point))
+    (setq distance-p1< (abs (- -p0 -p1<)))
+    (setq distance-p1> (abs (- -p1> -p0)))
     (if (< distance-p1< distance-p1>)
         (progn
-          (goto-char ξp0)
+          (goto-char -p0)
           (search-forward ">" nil "NOERROR" )
-          (setq ξp2> (point))
-          (goto-char (1+ ξp1<))
-          (set-mark (1- ξp2>)))
+          (setq -p2> (point))
+          (goto-char (1+ -p1<))
+          (set-mark (1- -p2>)))
       (progn
-        (goto-char ξp0)
+        (goto-char -p0)
         (search-forward "<" nil "NOERROR" )
-        (setq ξp2< (point))
-        (goto-char (1+ ξp1>))
-        (set-mark (1- ξp2<))))))
+        (setq -p2< (point))
+        (goto-char (1+ -p1>))
+        (set-mark (1- -p2<))))))
 
 (defun xah-open-file-from-clipboard ()
   "Open the file path from OS's clipboard.
 The clipboard should contain a file path or url to xah site. Open that file in emacs."
   (interactive)
   (let (
-        (ξinputStr
+        (-inputStr
          (with-temp-buffer
            (yank)
            (buffer-string)))
-        ξfpath
+        -fpath
         )
 
-    (if (string-match-p "\\`http://" ξinputStr)
+    (if (string-match-p "\\`http://" -inputStr)
         (progn
-          (setq ξfpath (xahsite-url-to-filepath ξinputStr "addFileName"))
-          (if (file-exists-p ξfpath)
-              (progn (find-file ξfpath))
-            (progn (error "file doesn't exist 「%s」" ξfpath))))
+          (setq -fpath (xahsite-url-to-filepath -inputStr "addFileName"))
+          (if (file-exists-p -fpath)
+              (progn (find-file -fpath))
+            (progn (error "file doesn't exist 「%s」" -fpath))))
       (progn ; not starting “http://”
-        (setq ξinputStr (xah-remove-uri-fragment ξinputStr))
-        (setq ξfpath (xahsite-web-path-to-filepath ξinputStr default-directory))
-        (if (file-exists-p ξfpath)
-            (progn (find-file ξfpath))
-          (progn (user-error "file doesn't exist 「%s」" ξfpath)))))))
+        (setq -inputStr (xah-remove-uri-fragment -inputStr))
+        (setq -fpath (xahsite-web-path-to-filepath -inputStr default-directory))
+        (if (file-exists-p -fpath)
+            (progn (find-file -fpath))
+          (progn (user-error "file doesn't exist 「%s」" -fpath)))))))
 
 (defun xah-open-file-at-cursor ()
   "Open the file path under cursor.
@@ -72,43 +72,43 @@ This command is similar to `find-file-at-point' but without prompting for confir
 URL `http://ergoemacs.org/emacs/emacs_open_file_path_fast.html'
 Version 2016-06-14"
   (interactive)
-  (let* ((ξinputStr (if (use-region-p)
+  (let* ((-inputStr (if (use-region-p)
                  (buffer-substring-no-properties (region-beginning) (region-end))
-               (let (ξp0 ξp1 ξp2
-                         (ξcharSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
-                 (setq ξp0 (point))
+               (let (-p0 -p1 -p2
+                         (-charSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
+                 (setq -p0 (point))
                  ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-                 (skip-chars-backward ξcharSkipRegex)
-                 (setq ξp1 (point))
-                 (goto-char ξp0)
-                 (skip-chars-forward ξcharSkipRegex)
-                 (setq ξp2 (point))
-                 (goto-char ξp0)
-                 (buffer-substring-no-properties ξp1 ξp2))))
-         (ξpath (replace-regexp-in-string ":\\'" "" ξinputStr)))
-    (if (string-match-p "\\`https?://" ξpath)
-        (browse-url ξpath)
+                 (skip-chars-backward -charSkipRegex)
+                 (setq -p1 (point))
+                 (goto-char -p0)
+                 (skip-chars-forward -charSkipRegex)
+                 (setq -p2 (point))
+                 (goto-char -p0)
+                 (buffer-substring-no-properties -p1 -p2))))
+         (-path (replace-regexp-in-string ":\\'" "" -inputStr)))
+    (if (string-match-p "\\`https?://" -path)
+        (browse-url -path)
       (progn ; not starting “http://”
-        (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" ξpath)
+        (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" -path)
             (progn
               (let (
-                    (ξfpath (match-string 1 ξpath))
-                    (ξline-num (string-to-number (match-string 2 ξpath))))
-                (if (file-exists-p ξfpath)
+                    (-fpath (match-string 1 -path))
+                    (-line-num (string-to-number (match-string 2 -path))))
+                (if (file-exists-p -fpath)
                     (progn
-                      (find-file ξfpath)
+                      (find-file -fpath)
                       (goto-char 1)
-                      (forward-line (1- ξline-num)))
+                      (forward-line (1- -line-num)))
                   (progn
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfpath))
-                      (find-file ξfpath))))))
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fpath))
+                      (find-file -fpath))))))
           (progn
-            (if (file-exists-p ξpath)
-                (find-file ξpath)
-              (if (file-exists-p (concat ξpath ".el"))
-                  (find-file (concat ξpath ".el"))
-                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξpath))
-                  (find-file ξpath ))))))))))
+            (if (file-exists-p -path)
+                (find-file -path)
+              (if (file-exists-p (concat -path ".el"))
+                  (find-file (concat -path ".el"))
+                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -path))
+                  (find-file -path ))))))))))
 
 (defun xah-open-file-path-under-cursor ()
   "Open the file path under cursor.
@@ -120,54 +120,54 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
 Version 2015-06-12"
   (interactive)
   (let* (
-         (ξinputStr1
+         (-inputStr1
           (xah-remove-uri-fragment
            (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
-             (let (ξp0 ξp1 ξp2
-                       (ξcharSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
-               (setq ξp0 (point))
+             (let (-p0 -p1 -p2
+                       (-charSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
+               (setq -p0 (point))
                ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-               (skip-chars-backward ξcharSkipRegex)
-               (setq ξp1 (point))
-               (goto-char ξp0)
-               (skip-chars-forward ξcharSkipRegex)
-               (setq ξp2 (point))
-               (goto-char ξp0)
-               (buffer-substring-no-properties ξp1 ξp2)))))
-         (ξinputStr2 (replace-regexp-in-string ":\\'" "" ξinputStr1))
-         ξp
+               (skip-chars-backward -charSkipRegex)
+               (setq -p1 (point))
+               (goto-char -p0)
+               (skip-chars-forward -charSkipRegex)
+               (setq -p2 (point))
+               (goto-char -p0)
+               (buffer-substring-no-properties -p1 -p2)))))
+         (-inputStr2 (replace-regexp-in-string ":\\'" "" -inputStr1))
+         -p
          )
-    (if (string-equal ξinputStr2 "")
+    (if (string-equal -inputStr2 "")
         (progn (user-error "No path under cursor" ))
       (progn
         ;; convenience. if the input string start with a xah domain name, make it a url string
-        (setq ξp
+        (setq -p
               (cond
-               ((string-match "\\`//" ξinputStr2 ) (concat "http:" ξinputStr2)) ; relative http protocol, used in css
-               ((string-match "\\`ergoemacs\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
-               ((string-match "\\`wordyenglish\\.com" ξinputStr2 ) (concat "http://" ξinputStr2))
-               ((string-match "\\`xaharts\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
-               ((string-match "\\`xahlee\\.info" ξinputStr2 ) (concat "http://" ξinputStr2))
-               ((string-match "\\`xahlee\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
-               ((string-match "\\`xahmusic\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
-               ((string-match "\\`xahporn\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
-               ((string-match "\\`xahsl\\.org" ξinputStr2 ) (concat "http://" ξinputStr2))
-               (t ξinputStr2)))
-        (if (string-match-p "\\`https?://" ξp)
-            (if (xahsite-url-is-xah-website-p ξp)
-                (let ((ξfp (xahsite-url-to-filepath ξp )))
-                  (if (file-exists-p ξfp)
-                      (find-file ξfp)
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfp)) (find-file ξfp))))
-              (browse-url ξp))
+               ((string-match "\\`//" -inputStr2 ) (concat "http:" -inputStr2)) ; relative http protocol, used in css
+               ((string-match "\\`ergoemacs\\.org" -inputStr2 ) (concat "http://" -inputStr2))
+               ((string-match "\\`wordyenglish\\.com" -inputStr2 ) (concat "http://" -inputStr2))
+               ((string-match "\\`xaharts\\.org" -inputStr2 ) (concat "http://" -inputStr2))
+               ((string-match "\\`xahlee\\.info" -inputStr2 ) (concat "http://" -inputStr2))
+               ((string-match "\\`xahlee\\.org" -inputStr2 ) (concat "http://" -inputStr2))
+               ((string-match "\\`xahmusic\\.org" -inputStr2 ) (concat "http://" -inputStr2))
+               ((string-match "\\`xahporn\\.org" -inputStr2 ) (concat "http://" -inputStr2))
+               ((string-match "\\`xahsl\\.org" -inputStr2 ) (concat "http://" -inputStr2))
+               (t -inputStr2)))
+        (if (string-match-p "\\`https?://" -p)
+            (if (xahsite-url-is-xah-website-p -p)
+                (let ((-fp (xahsite-url-to-filepath -p )))
+                  (if (file-exists-p -fp)
+                      (find-file -fp)
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fp)) (find-file -fp))))
+              (browse-url -p))
           (progn ; not starting “http://”
-            (let ((ξfff (xahsite-web-path-to-filepath ξp default-directory)))
-              (if (file-exists-p ξfff)
-                  (progn (find-file ξfff))
-                (if (file-exists-p (concat ξfff ".el"))
-                    (progn (find-file (concat ξfff ".el")))
-                  (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" ξfff)) (find-file ξfff )))))))))))
+            (let ((-fff (xahsite-web-path-to-filepath -p default-directory)))
+              (if (file-exists-p -fff)
+                  (progn (find-file -fff))
+                (if (file-exists-p (concat -fff ".el"))
+                    (progn (find-file (concat -fff ".el")))
+                  (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fff)) (find-file -fff )))))))))))
 
 
 
@@ -224,7 +224,7 @@ Version 2016-01-16"
 
 
 
-(defun xah-set-input-method-to-chinese (φn)
+(defun xah-set-input-method-to-chinese (_n)
   "Set input method to Chinese.
 
 Normally, set to 'chinese-py.
@@ -232,11 +232,11 @@ C-u → set to 'chinese-tonepy-punct.
 C-u 2 → set to 'chinese-py-b5."
 (interactive "P")
   (cond
-    ((equal φn nil)     ; universal-argument not called
+    ((equal _n nil)     ; universal-argument not called
      (set-input-method 'chinese-py))
-    ((equal φn '(4))    ; C-u
+    ((equal _n '(4))    ; C-u
      (set-input-method 'chinese-tonepy-punct))
-    ((equal φn 2)       ; C-u 2
+    ((equal _n 2)       ; C-u 2
      (set-input-method 'chinese-py-b5))
     (t                                  ; all other cases
      (set-input-method 'chinese-py))))
@@ -251,15 +251,15 @@ The differences are:
 • If there is a text selection, that is used as input.
 • The input is plain text, not regex."
   (interactive)
-  (let (ξp1 ξp2 ξsearchStr )
+  (let (-p1 -p2 -searchStr )
     (if (use-region-p)
         (progn
-          (setq ξp1 (region-beginning))
-          (setq ξp2 (region-end))
-          (setq ξsearchStr (buffer-substring-no-properties ξp1 ξp2)))
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end))
+          (setq -searchStr (buffer-substring-no-properties -p1 -p2)))
       (progn
-        (setq ξsearchStr (word-at-point))))
-    (list-matching-lines (regexp-quote ξsearchStr))))
+        (setq -searchStr (word-at-point))))
+    (list-matching-lines (regexp-quote -searchStr))))
 
 (defun xah-make-lojban-entry ()
   "Insert a blank a-lojban-a-day HTML template in a paritcular file."
@@ -302,9 +302,9 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 URL `http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
 Version 2015-04-23"
   (interactive)
-  (let ((ξabbrevCode
-         (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) xah-filelist))))
-    (find-file (cdr (assoc ξabbrevCode xah-filelist)))))
+  (let ((-abbrevCode
+         (ido-completing-read "Open:" (mapcar (lambda (-x) (car -x)) xah-filelist))))
+    (find-file (cdr (assoc -abbrevCode xah-filelist)))))
 
 
 
@@ -313,22 +313,22 @@ Version 2015-04-23"
 Version 2015-08-31"
   (interactive)
   (let* (
-         (ξfromPath (buffer-file-name))
-         (ξfromFileName (file-name-nondirectory ξfromPath ))
-         ξtoPath
+         (-fromPath (buffer-file-name))
+         (-fromFileName (file-name-nondirectory -fromPath ))
+         -toPath
          )
     (save-buffer)
     (mapc
-     (lambda (ξx)
+     (lambda (-x)
        (progn
-         (setq ξtoPath (concat (xahsite-url-to-filepath (format "http://%s/" ξx)) ξfromFileName))
-         (when (not (string= ξfromPath ξtoPath ))
-           (if (file-exists-p ξtoPath)
+         (setq -toPath (concat (xahsite-url-to-filepath (format "http://%s/" -x)) -fromFileName))
+         (when (not (string= -fromPath -toPath ))
+           (if (file-exists-p -toPath)
                (progn
-                 (copy-file ξtoPath (concat ξtoPath "~" (format-time-string "%Y%m%d_%H%M%S") "~") "OK-IF-ALREADY-EXISTS") ;backup
-                 (copy-file ξfromPath ξtoPath "OK-IF-ALREADY-EXISTS")
-                 (message "wrote to 「%s」." ξtoPath))
-             (progn (error "logic error. The file 「%s」 doesn't exist, it should already." ξtoPath)))))) [
+                 (copy-file -toPath (concat -toPath "~" (format-time-string "%Y%m%d_%H%M%S") "~") "OK-IF-ALREADY-EXISTS") ;backup
+                 (copy-file -fromPath -toPath "OK-IF-ALREADY-EXISTS")
+                 (message "wrote to 「%s」." -toPath))
+             (progn (error "logic error. The file 「%s」 doesn't exist, it should already." -toPath)))))) [
        "ergoemacs.org"
        "wordyenglish.com"
        "xaharts.org"
@@ -353,45 +353,45 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 This is Xah Lee's personal command assuming a particular dir structure."
   (interactive)
   (let (
-        ξp1 ξp2
-        ξinputStr
-        ξfile
-        ξtitle
-        (ξpathDelimitors "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+        -p1 -p2
+        -inputStr
+        -file
+        -title
+        (-pathDelimitors "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
         )
 
     (if (use-region-p)
-        (setq ξp1 (region-beginning) ξp2 (region-end))
-      (let (ξp0)
-        (setq ξp0 (point))
-        (skip-chars-backward ξpathDelimitors)
-        (setq ξp1 (point))
-        (goto-char ξp0)
-        (skip-chars-forward ξpathDelimitors)
-        (setq ξp2 (point))))
+        (setq -p1 (region-beginning) -p2 (region-end))
+      (let (-p0)
+        (setq -p0 (point))
+        (skip-chars-backward -pathDelimitors)
+        (setq -p1 (point))
+        (goto-char -p0)
+        (skip-chars-forward -pathDelimitors)
+        (setq -p2 (point))))
 
-    (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξfile (xahsite-web-path-to-filepath ξinputStr))
+    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
+    (setq -file (xahsite-web-path-to-filepath -inputStr))
 
-    (if (file-exists-p ξfile)
+    (if (file-exists-p -file)
         (progn
-          (setq ξtitle
-                (if (string-match-p ".+html\\'" ξfile)
-                    (xah-html-get-html-file-title ξfile)
-                  (file-name-nondirectory ξfile)))
-          (setq ξtitle (xah-replace-pairs-in-string ξtitle [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
+          (setq -title
+                (if (string-match-p ".+html\\'" -file)
+                    (xah-html-get-html-file-title -file)
+                  (file-name-nondirectory -file)))
+          (setq -title (xah-replace-pairs-in-string -title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
-          (delete-region ξp1 ξp2)
-          (insert ξtitle "\n" (xahsite-filepath-to-url ξfile)))
+          (delete-region -p1 -p2)
+          (insert -title "\n" (xahsite-filepath-to-url -file)))
       (progn (user-error "file doesn't exist.")))))
 
 (defun xah-copy-url-current-file ()
   "Put the current file's URL into the kill-ring."
   (interactive)
-  (let (ξurl)
-    (setq ξurl (xahsite-filepath-to-url (buffer-file-name)))
-    (kill-new ξurl)
-    (message "URL copied %s" ξurl)))
+  (let (-url)
+    (setq -url (xahsite-filepath-to-url (buffer-file-name)))
+    (kill-new -url)
+    (message "URL copied %s" -url)))
 
 
 
@@ -421,18 +421,18 @@ When there is a text selection, act on the region."
               (while (search-forward "\n" nil t) (replace-match "" nil t))))
         (if currentStateIsCompact
             (fill-paragraph nil)
-          (let (ξp1 ξp2) ; ξp1 and ξp2 are beginning/end of text block
+          (let (-p1 -p2) ; -p1 and -p2 are beginning/end of text block
             (progn
               (if (re-search-backward "\n[ \t]*\n" nil "move")
                   (progn (re-search-forward "\n[ \t]*\n")
-                         (setq ξp1 (point)))
-                (setq ξp1 (point)))
+                         (setq -p1 (point)))
+                (setq -p1 (point)))
               (if (re-search-forward "\n[ \t]*\n" nil "move")
                   (progn (re-search-backward "\n[ \t]*\n")
-                         (setq ξp2 (point)))
-                (setq ξp2 (point))))
+                         (setq -p2 (point)))
+                (setq -p2 (point))))
             (save-restriction
-              (narrow-to-region ξp1 ξp2)
+              (narrow-to-region -p1 -p2)
               (goto-char (point-min))
               (while (search-forward "\n" nil t) (replace-match "" nil t))))))
 
@@ -467,7 +467,7 @@ When there is a text selection, act on the region."
         ("clojure" . "java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
         ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")))
 
-(defun xah-shell-commands (φcmd-abbrev)
+(defun xah-shell-commands (_cmd-abbrev)
   "insert shell command from a list of abbrevs.
 
 URL `http://ergoemacs.org/misc/emacs_abbrev_shell_elisp.html'
@@ -476,7 +476,7 @@ version 2015-02-05"
    (list
     (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH")))
   (progn
-    (insert (cdr (assoc φcmd-abbrev xah-shell-abbrev-alist)))))
+    (insert (cdr (assoc _cmd-abbrev xah-shell-abbrev-alist)))))
 
 (defun xah-to-xah-elisp-mode  ()
   "redo my tutorial's code elisp markup"
@@ -488,13 +488,13 @@ version 2015-02-05"
     (replace-match "<pre class=\"emacs-lisp\">" "FIXEDCASE" "LITERAL" )
 
     (let* (
-           ( ξxx (xah-html-get-precode-langCode))
-           (langCode (elt ξxx 0))
-           (ξp1 (elt ξxx 1))
-           (ξp2 (elt ξxx 2)))
+           ( -xx (xah-html-get-precode-langCode))
+           (langCode (elt -xx 0))
+           (-p1 (elt -xx 1))
+           (-p2 (elt -xx 2)))
 
-      (xah-html-remove-span-tag-region ξp1 ξp2)
-      (goto-char ξp1)
+      (xah-html-remove-span-tag-region -p1 -p2)
+      (goto-char -p1)
       (xah-html-htmlize-precode xah-html-lang-name-map))))
 
 (defun xah-slide-show ()
@@ -572,12 +572,12 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
 "FIXEDCASE" "LITERAL")
 
 (let* (
-         (ξp1 (point-min) )
-         (ξp2 (point-max) )
+         (-p1 (point-min) )
+         (-p2 (point-max) )
          )
     (save-excursion
       (save-restriction
-        (narrow-to-region ξp1 ξp2)
+        (narrow-to-region -p1 -p2)
         (progn
           (goto-char (point-min))
           (while (search-forward-regexp "[ \t]+\n" nil "noerror")
@@ -610,9 +610,9 @@ see `xah-replace-BOM-mark-etc'
 Version 2015-10-11"
   (interactive)
   (require 'xah-find)
-  (let (ξdir)
-    (setq ξdir (ido-read-directory-name "Directory: " default-directory default-directory "MUSTMATCH"))
-    (xah-find-replace-text (char-to-string 65279) "" ξdir "\\.html\\'" t t t t)))
+  (let (-dir)
+    (setq -dir (ido-read-directory-name "Directory: " default-directory default-directory "MUSTMATCH"))
+    (xah-find-replace-text (char-to-string 65279) "" -dir "\\.html\\'" t t t t)))
 
 (defun xah-show-hexadecimal-value ()
   "Prints the decimal value of a hexadecimal string under cursor.
@@ -633,26 +633,26 @@ Test cases
   100 200 300   400 500 600"
   (interactive )
 
-  (let (ξinputStr ξtempStr ξp1 ξp2
+  (let (-inputStr -tempStr -p1 -p2
                  (case-fold-search t) )
     (save-excursion
       ;; (skip-chars-backward "0123456789abcdef")
       ;; (search-backward-regexp "[[:xdigit:]]+" nil t)
       (search-backward-regexp "[0123456789abcdef]+" nil t)
-      (setq ξp1 (point) )
+      (setq -p1 (point) )
       (search-forward-regexp "[0123456789abcdef]+" nil t)
-      (setq ξp2 (point) )
+      (setq -p2 (point) )
 
-      (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2) )
+      (setq -inputStr (buffer-substring-no-properties -p1 -p2) )
 
       (let ((case-fold-search nil) )
-        (setq ξtempStr (replace-regexp-in-string "\\`0x" "" ξinputStr )) ; C, Perl, …
-        (setq ξtempStr (replace-regexp-in-string "\\`#x" "" ξtempStr )) ; elisp …
-        (setq ξtempStr (replace-regexp-in-string "\\`#" "" ξtempStr ))  ; CSS …
+        (setq -tempStr (replace-regexp-in-string "\\`0x" "" -inputStr )) ; C, Perl, …
+        (setq -tempStr (replace-regexp-in-string "\\`#x" "" -tempStr )) ; elisp …
+        (setq -tempStr (replace-regexp-in-string "\\`#" "" -tempStr ))  ; CSS …
         )
 
-      ;; (message "Hex 「%s」 is 「%d」" ξtempStr (string-to-number ξtempStr 16))
-      (message "input 「%s」 Hex 「%s」 is 「%d」" ξinputStr ξtempStr (string-to-number ξtempStr 16)))))
+      ;; (message "Hex 「%s」 is 「%d」" -tempStr (string-to-number -tempStr 16))
+      (message "input 「%s」 Hex 「%s」 is 「%d」" -inputStr -tempStr (string-to-number -tempStr 16)))))
 
 
 
@@ -684,32 +684,32 @@ Test cases
 ;;                      (overlay-get overlay 'keymap))
 ;;                    (overlays-at (point))))))
 
-;; (defun xah-find-keybinding-source (φkey)
+;; (defun xah-find-keybinding-source (_key)
 ;; " 2014-10-11 from http://stackoverflow.com/questions/18801018/how-to-find-in-which-map-a-key-binding-is-from-programatically-in-emacs"
 ;;   (list
-;;    (minor-mode-key-binding φkey)
-;;    (local-key-binding φkey)
-;;    (global-key-binding φkey)
-;;    ;; (overlay-key-binding φkey)
+;;    (minor-mode-key-binding _key)
+;;    (local-key-binding _key)
+;;    (global-key-binding _key)
+;;    ;; (overlay-key-binding _key)
 ;;    ))
 
 (defvar gitgrep-history nil)
 
-(defun gitgrep (φsearch-string)
+(defun gitgrep (_search-string)
 "call git grep to search symbols in a project.
 
 2014-11-19 by “Left Right” https://plus.google.com/113859563190964307534/posts/CyEsoyhkTVe
 "
   (interactive
-   (let ((ξsym (thing-at-point 'symbol)))
+   (let ((-sym (thing-at-point 'symbol)))
      (list
       (completing-read
        "String to search for: "
-       (list ξsym
+       (list -sym
              (buffer-name)
              (buffer-file-name))
-       'identity nil ξsym gitgrep-history ξsym))))
-  (grep (format "git --no-pager grep -P -n '%s'" φsearch-string)))
+       'identity nil -sym gitgrep-history -sym))))
+  (grep (format "git --no-pager grep -P -n '%s'" _search-string)))
 
 (defun xah-toggle-background-color ()
   "Toggle background color between seashell and honeydew.
@@ -725,7 +725,7 @@ Version 2015-12-17"
       (set-background-color "honeydew")
       (put 'xah-toggle-background-color 'state t))))
 
-(defun xah-cycle-background-color (φn)
+(defun xah-cycle-background-color (_n)
   "Cycle background color among a preset list.
 
 If `universal-argument' is called first, cycle n steps. Default is 1 step.
@@ -735,18 +735,18 @@ Version 2015-12-17"
   (interactive "p")
   ;; uses a property “state”. Value is a integer.
   (let* (
-         (ξvalues ["cornsilk" "pale green" "pale turquoise" "thistle" "seashell" "honeydew"])
-         (ξindex-before
+         (-values ["cornsilk" "pale green" "pale turquoise" "thistle" "seashell" "honeydew"])
+         (-index-before
           (if (get 'xah-cycle-background-color 'state)
               (get 'xah-cycle-background-color 'state)
             0))
-         (ξindex-after (% (+ ξindex-before (length ξvalues) φn) (length ξvalues)))
-         (ξnext-value (aref ξvalues ξindex-after)))
+         (-index-after (% (+ -index-before (length -values) _n) (length -values)))
+         (-next-value (aref -values -index-after)))
 
-    (put 'xah-cycle-background-color 'state ξindex-after)
+    (put 'xah-cycle-background-color 'state -index-after)
 
-    (set-background-color ξnext-value)
-    (message "background color changed to %s" ξnext-value)))
+    (set-background-color -next-value)
+    (message "background color changed to %s" -next-value)))
 
 
 
@@ -762,8 +762,8 @@ default browser will be launched and opening this URL:
  http://xahlee.info/index.html
 version 2016-06-12"
   (interactive)
-  (let (ξurl)
-    (setq ξurl
+  (let (-url)
+    (setq -url
           (if current-prefix-arg
               (xahsite-filepath-to-url (buffer-file-name))
             (buffer-file-name)))
@@ -771,11 +771,11 @@ version 2016-06-12"
     (when (buffer-modified-p ) 
       (xah-clean-whitespace-and-save (point-min) (point-max))
       (save-buffer))
-    (message "browsing %s" ξurl)
+    (message "browsing %s" -url)
     (cond
      ((string-equal system-type "windows-nt") ; Windows
-      (when (string-match "^c:/" ξurl) (setq ξurl (concat "file:///" ξurl)))
-      (browse-url ξurl))
+      (when (string-match "^c:/" -url) (setq -url (concat "file:///" -url)))
+      (browse-url -url))
      ((string-equal system-type "gnu/linux")
       (let ( (process-connection-type nil))
         (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
@@ -787,7 +787,7 @@ version 2016-06-12"
      ;;                 "firefox"
      ;;                 (concat "file://" buffer-file-name )))
      ((string-equal system-type "darwin") ; Mac
-      (browse-url ξurl )))))
+      (browse-url -url )))))
 
 
 

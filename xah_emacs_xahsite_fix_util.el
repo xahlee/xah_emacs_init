@@ -4,14 +4,14 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(defun xah-add-to-related-links (φsource-file-path φdest-file-path)
+(defun xah-add-to-related-links (_source-file-path _dest-file-path)
   "Add current file as a link to the related links section of filename at point.
 
-When called interactively, φsource-file-path is the path of current buffer, and φdest-file-path is the path/url under cursor.
+When called interactively, _source-file-path is the path of current buffer, and _dest-file-path is the path/url under cursor.
 
-When called interactively, the buffer for φdest-file-path is left unsaved and as current.
+When called interactively, the buffer for _dest-file-path is left unsaved and as current.
 
-When called non-interactively, φsource-file-path and φdest-file-path should be file full paths. If changes are made to φdest-file-path, it returns t, else nil."
+When called non-interactively, _source-file-path and _dest-file-path should be file full paths. If changes are made to _dest-file-path, it returns t, else nil."
   (interactive
    (let ( p1 p2  )
      (if (use-region-p)
@@ -21,26 +21,26 @@ When called non-interactively, φsource-file-path and φdest-file-path should be
               (setq p2 (line-end-position))))
      (list (buffer-file-name)
            (xahsite-href-value-to-filepath (thing-at-point 'filename) (buffer-file-name)))))
-  (let ( ξtitle ξnewHrefValue ξbuffer )
-    (setq ξbuffer (find-file φdest-file-path ))
+  (let ( -title -newHrefValue -buffer )
+    (setq -buffer (find-file _dest-file-path ))
     (goto-char 1)
-    (setq ξnewHrefValue (xahsite-filepath-to-href-value φsource-file-path φdest-file-path))
-    (if (search-forward ξnewHrefValue nil t)
+    (setq -newHrefValue (xahsite-filepath-to-href-value _source-file-path _dest-file-path))
+    (if (search-forward -newHrefValue nil t)
         (progn
           (when (called-interactively-p 'interactive)
             (message
              (format
               "Already exists: 「%s」  at 「%s」"
-              (file-name-nondirectory ξnewHrefValue)
-              (file-name-nondirectory φdest-file-path))))
-          (kill-buffer ξbuffer)
+              (file-name-nondirectory -newHrefValue)
+              (file-name-nondirectory _dest-file-path))))
+          (kill-buffer -buffer)
           nil)
       (progn
-        (setq ξtitle (xah-html-get-html-file-title φsource-file-path))
+        (setq -title (xah-html-get-html-file-title _source-file-path))
         (goto-char 1)
         (if (search-forward "<div class=\"rltd\">" nil t)
             (progn (search-forward "<ul>" nil t)
-                   (insert "\n" (format "<li><a href=\"%s\">%s</a></li>" ξnewHrefValue ξtitle)))
+                   (insert "\n" (format "<li><a href=\"%s\">%s</a></li>" -newHrefValue -title)))
           (progn
             (goto-char (point-max))
             (search-backward "<div id=\"disqus_thread\">")
@@ -50,21 +50,21 @@ When called non-interactively, φsource-file-path and φdest-file-path should be
 </ul>
 </div>
 
-" ξnewHrefValue ξtitle))))
+" -newHrefValue -title))))
         (when (not (called-interactively-p 'interactive))
-          (write-region (point-min) (point-max) φdest-file-path)
+          (write-region (point-min) (point-max) _dest-file-path)
           (kill-buffer))
         t
         ))))
 
-(defun xahsite-update-related-links (φfilePath φdestFileList)
+(defun xahsite-update-related-links (_filePath _destFileList)
   "Update related links tags.
 
-Add the current page (φfilePath) as link to the “related pages” section at φdestFileList.
+Add the current page (_filePath) as link to the “related pages” section at _destFileList.
 
-When called interactively, φfilePath is the current file. φdestFileList is file paths extracted from current text block or text selection.
+When called interactively, _filePath is the current file. _destFileList is file paths extracted from current text block or text selection.
 
-When called non-interactively, φfilePath is a string. φdestFileList is list of filenames. All paths should be absolute path.
+When called non-interactively, _filePath is a string. _destFileList is list of filenames. All paths should be absolute path.
 
 The related pages are HTML “div.rltd” element, having this form
 
@@ -95,13 +95,13 @@ The related pages are HTML “div.rltd” element, having this form
      (setq p2 (aref bds 2))
      (list
       (buffer-file-name)
-      (mapcar (lambda (ξx) (expand-file-name ξx (file-name-directory (buffer-file-name)))) (xah-html-extract-url p1 p2)))))
+      (mapcar (lambda (-x) (expand-file-name -x (file-name-directory (buffer-file-name)))) (xah-html-extract-url p1 p2)))))
 
   (let (p3 p4)
     (mapc
-     (lambda (ξy)
-       (xah-add-to-related-links φfilePath ξy))
-     φdestFileList)))
+     (lambda (-y)
+       (xah-add-to-related-links _filePath -y))
+     _destFileList)))
 
 (defun xah-fix-add-alts ()
   "Add the alt attribute to image tags in current file.
@@ -125,17 +125,17 @@ This code is specific to xahlee.org ."
       (insert "\n"))
     ))
 
-(defun xah-fix-rm-span-quote (φstart φend)
+(defun xah-fix-rm-span-quote (_start _end)
   "remove “” around <span class=\"code\"></span> tags in current buffer."
   (interactive "r")
 
   (save-excursion
-    (narrow-to-region φstart φend)
+    (narrow-to-region _start _end)
     (while
         (search-forward-regexp "“<span class=\"code\">\\([^<]+?\\)</span>”" nil t)
       (replace-match "<span class=\"code\">\\1</span>" t))))
 
-(defun xah-fix-to-html4strict (&optional φfName)
+(defun xah-fix-to-html4strict (&optional _fName)
   "Change buffer content from HTML4 trans to HTML4 strict,
 by performing some custome set of find-replace operations.
 
@@ -150,7 +150,7 @@ todo:
 This function is specific to xahlee.org. 2008-05-10."
   (interactive)
 
-  (when φfName (find-file φfName))
+  (when _fName (find-file _fName))
 
 ;; wrap div.img to “<img …>”
   (goto-char (point-min))
@@ -198,10 +198,10 @@ This function is specific to xahlee.org. 2008-05-10."
 
   (save-excursion
     (let (p1 p2 p3 p4
-             ξstr
-             ξchanges
-             (ξchangedItems '())
-             (ξbuff (current-buffer)))
+             -str
+             -changes
+             (-changedItems '())
+             (-buff (current-buffer)))
 
       (goto-char (point-min)) ;; in case buffer already open
       (while (search-forward "<div class=\"img\">" nil t)
@@ -217,8 +217,8 @@ This function is specific to xahlee.org. 2008-05-10."
           (setq p3 (point))
 
           (when t
-            (setq ξstr (buffer-substring-no-properties p1 p4))
-            (setq ξchangedItems (cons ξstr ξchangedItems ))
+            (setq -str (buffer-substring-no-properties p1 p4))
+            (setq -changedItems (cons -str -changedItems ))
 
             (progn
               (delete-region p3 p4 )
@@ -244,8 +244,8 @@ This function is specific to xahlee.org. 2008-05-10."
           (setq p3 (point))
 
           (when t
-            (setq ξstr (buffer-substring-no-properties p1 p4))
-            (setq ξchangedItems (cons ξstr ξchangedItems ))
+            (setq -str (buffer-substring-no-properties p1 p4))
+            (setq -changedItems (cons -str -changedItems ))
 
             (progn
               (delete-region p3 p4 )
@@ -271,8 +271,8 @@ This function is specific to xahlee.org. 2008-05-10."
           (setq p3 (point))
 
           (when t
-            (setq ξstr (buffer-substring-no-properties p1 p4))
-            (setq ξchangedItems (cons ξstr ξchangedItems ))
+            (setq -str (buffer-substring-no-properties p1 p4))
+            (setq -changedItems (cons -str -changedItems ))
 
             (progn
               (delete-region p3 p4 )
@@ -285,17 +285,17 @@ This function is specific to xahlee.org. 2008-05-10."
               (widen)))))
 
       (with-output-to-temp-buffer "*changed items*"
-        (mapc (lambda ( ξchanges) (princ ξchanges) (princ "\n\n")) ξchangedItems)
+        (mapc (lambda ( -changes) (princ -changes) (princ "\n\n")) -changedItems)
         (set-buffer "*changed items*")
         (funcall 'html-mode)
-        (set-buffer ξbuff)))))
+        (set-buffer -buff)))))
 
-(defun xah-fix-ellipsis (φstring &optional φfrom φto)
+(defun xah-fix-ellipsis (_string &optional _from _to)
   "Change “...” to “…”.
 
 When called interactively, work on current text block or text selection. (a “text block” is text between blank lines)
 
-When called non-interactively, if φstring is non-nil, returns a changed string.  If φstring nil, change the text in the region between positions φfrom φto."
+When called non-interactively, if _string is non-nil, returns a changed string.  If _string nil, change the text in the region between positions _from _to."
   (interactive
    (if (use-region-p)
        (list nil (region-beginning) (region-end))
@@ -311,17 +311,17 @@ When called non-interactively, if φstring is non-nil, returns a changed string.
            (setq pt2 (point)))
          (list nil pt1 pt2)))))
 
-  (let (ξworkOnStringP ξinputStr ξoutputStr)
-    (setq ξworkOnStringP (if φstring t nil))
-    (setq ξinputStr (if ξworkOnStringP φstring (buffer-substring-no-properties φfrom φto)))
-    (setq ξoutputStr (replace-regexp-in-string "\\.\\.\\." "…" ξinputStr))
+  (let (-workOnStringP -inputStr -outputStr)
+    (setq -workOnStringP (if _string t nil))
+    (setq -inputStr (if -workOnStringP _string (buffer-substring-no-properties _from _to)))
+    (setq -outputStr (replace-regexp-in-string "\\.\\.\\." "…" -inputStr))
 
-    (if ξworkOnStringP
-        ξoutputStr
+    (if -workOnStringP
+        -outputStr
       (save-excursion
-        (delete-region φfrom φto)
-        (goto-char φfrom)
-        (insert ξoutputStr)))))
+        (delete-region _from _to)
+        (goto-char _from)
+        (insert -outputStr)))))
 
 (defun xah-fix-number-items-block  ()
   "Change “(1)” to “①” etc in current region or text block.
@@ -339,8 +339,8 @@ Also change 「<li>1. 」 to 「<li>① 」."
                 (progn (re-search-backward "\n[ \t]*\n")
                        (setq p2 (point)))
               (setq p2 (point)))))
-         (ξinputStr (buffer-substring-no-properties p1 p2))
-         (ξpairs '(
+         (-inputStr (buffer-substring-no-properties p1 p2))
+         (-pairs '(
                    ["(0)" "⓪"]
                    ["(1)" "①"]
                    ["(2)" "②"]
@@ -388,19 +388,19 @@ Also change 「<li>1. 」 to 「<li>① 」."
          (case-fold-search nil)
          (case-replace nil))
     (delete-region p1 p2)
-    (insert (xah-replace-pairs-in-string ξinputStr ξpairs))))
+    (insert (xah-replace-pairs-in-string -inputStr -pairs))))
 
 ;; ;; macro to search and fix next occurrence of “alt=""”
 ;; ;; search for alt="", then fix it
 ;; (fset 'xah-fix-img-alt
 ;;    "\363alt=\"\"\C-m\347\347\252\361\344\353\351\C-ci")
 
-(defun xah-add-dstp (φfpath)
+(defun xah-add-dstp (_fpath)
   "Insert a file creation date like
 “<div class=\"dstp\">2008-12.</div>”
 to file at ΦFPATH."
-(let (ξbuffer)
-    (setq ξbuffer (find-file φfpath))
+(let (-buffer)
+    (setq -buffer (find-file _fpath))
 
     (xah-put-dstp)
 
@@ -409,7 +409,7 @@ to file at ΦFPATH."
 ;;     (insert "<div class=\"dstp\">1997</div>\n")
 
 ;;    (save-buffer)
-;;    (kill-buffer ξbuffer)
+;;    (kill-buffer -buffer)
 ))
 
 (defun xah-put-dstp ()
@@ -419,13 +419,13 @@ in the appropriate footer location of the current XahLee.org HTML file.
 
 This command requires the GetFileInfo command line util in OS X."
   (interactive)
-  (let (ξcmdStr ξresultStr ξdate)
-    (setq ξcmdStr (concat "GetFileInfo -d " (buffer-file-name)))
-    (setq ξresultStr (shell-command-to-string ξcmdStr))
-    (setq ξdate (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" ξresultStr))
+  (let (-cmdStr -resultStr -date)
+    (setq -cmdStr (concat "GetFileInfo -d " (buffer-file-name)))
+    (setq -resultStr (shell-command-to-string -cmdStr))
+    (setq -date (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" -resultStr))
     (goto-char (point-max))
     (search-backward "<div class=\"cpr\">")
-    (insert "<div class=\"dstp\">" ξdate "</div>\n")))
+    (insert "<div class=\"dstp\">" -date "</div>\n")))
 
 (defun xah-insert-dstp ()
   "Insert the file creation date in this format:
@@ -434,11 +434,11 @@ at cursor position.
 
 This command requires the GetFileInfo command line util in OS X."
   (interactive)
-  (let (ξcmdStr ξresultStr ξdate)
-    (setq ξcmdStr (concat "GetFileInfo -d " (buffer-file-name)))
-    (setq ξresultStr (shell-command-to-string ξcmdStr))
-    (setq ξdate (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" ξresultStr))
-    (insert "<div class=\"dstp\">" ξdate "</div>")))
+  (let (-cmdStr -resultStr -date)
+    (setq -cmdStr (concat "GetFileInfo -d " (buffer-file-name)))
+    (setq -resultStr (shell-command-to-string -cmdStr))
+    (setq -date (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" -resultStr))
+    (insert "<div class=\"dstp\">" -date "</div>")))
 
 (defun xah-fix-dstp ()
   "Remove the dstp tag and insert a xahlee at top if not exist.
@@ -449,33 +449,33 @@ Insert at top
 <p class=\"αuth\"><a rel=\"author\" href=\"http://xahlee.org/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>, 2011-03-03</p>
 "
   (interactive)
-  (let (ξdate p1 p2 ξp3ins)
+  (let (-date p1 p2 -p3ins)
     (goto-char (point-min))
     (if
         (search-forward-regexp "<div class=\"dstp\">\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-?[0-9]?[0-9]?\\)</div>" nil t)
         (progn
-          (setq ξdate (match-string 1))
+          (setq -date (match-string 1))
           (setq p1 (line-beginning-position))
           (setq p2 (line-end-position))
 
           (goto-char (point-min))
           (if (search-forward-regexp "<p class=\"αuth\"><a rel=\"author\" href=\"\\([^/]+?\\)/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>" nil t)
               (progn
-                (kill-new ξdate)
+                (kill-new -date)
                 (delete-region p1 p2)
-                (message "“<p>Xah Lee, ” exits. dstp is: %s. Copied to clipboard." ξdate))
+                (message "“<p>Xah Lee, ” exits. dstp is: %s. Copied to clipboard." -date))
             (progn
               (goto-char (point-min))
               (if
                   (search-forward "<div class=\"adbnr\"><a href=\"http://xahlee.org/ads.html\">YOUR<br>AD<br>HERE</a></div>" nil t)
-                  (setq ξp3ins (point))
+                  (setq -p3ins (point))
                 (progn
                   (goto-char (point-min))
                   (search-forward "</h1>")
-                  (setq ξp3ins (point))))
+                  (setq -p3ins (point))))
 
               (delete-region p1 p2)
-              (insert "\n\n<p class=\"αuth\"><a rel=\"author\" href=\"http://xahlee.org/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>, " ξdate "</p>\n" ))))
+              (insert "\n\n<p class=\"αuth\"><a rel=\"author\" href=\"http://xahlee.org/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>, " -date "</p>\n" ))))
       (progn
         (message "%s" "no dstp")))))
 

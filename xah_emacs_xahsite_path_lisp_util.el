@@ -72,7 +72,7 @@ e.g. c:/Users/h3/web/"
   )
 
 
-(defun xahsite-local-link-p (φhref-value)
+(defun xahsite-local-link-p (_href-value)
   "Return true if it's a local file link, else false.
 
 Non local link may start with these:
@@ -85,20 +85,20 @@ Non local link may start with these:
  javascript:
  //
 "
-  ;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" φhref-value) )
+  ;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" _href-value) )
 
   (cond
-   ((string-match-p "^//" φhref-value) nil)
-   ((string-match-p "^http://" φhref-value) nil)
-   ((string-match-p "^https://" φhref-value) nil)
-   ((string-match-p "^mailto:" φhref-value) nil)
-   ((string-match-p "^irc:" φhref-value) nil)
-   ((string-match-p "^ftp:" φhref-value) nil)
-   ((string-match-p "^javascript:" φhref-value) nil)
+   ((string-match-p "^//" _href-value) nil)
+   ((string-match-p "^http://" _href-value) nil)
+   ((string-match-p "^https://" _href-value) nil)
+   ((string-match-p "^mailto:" _href-value) nil)
+   ((string-match-p "^irc:" _href-value) nil)
+   ((string-match-p "^ftp:" _href-value) nil)
+   ((string-match-p "^javascript:" _href-value) nil)
    (t t)))
 
-(defun xahsite-url-is-xah-website-p (φurl)
-  "Returns t if φurl is a xah website, else nil.
+(defun xahsite-url-is-xah-website-p (_url)
+  "Returns t if _url is a xah website, else nil.
 
 yahoo.com                 ⇒ nil. not xah site.
 http://yahoo.com          ⇒ nil. not xah site.
@@ -112,7 +112,7 @@ http://www.ergoemacs.org/ ⇒ t
 See: `xahsite-domain-names'."
   (catch 'myloop
     (mapc (lambda (x)
-            (when (string-match-p (format "\\`http://\\(www\\.\\)*%s\.*/*" (regexp-quote x)) φurl)
+            (when (string-match-p (format "\\`http://\\(www\\.\\)*%s\.*/*" (regexp-quote x)) _url)
               (throw 'myloop t)))
           (xahsite-domain-names))
     nil
@@ -127,53 +127,53 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
 
-(defun xahsite-is-link-to-xahsite-p (φhref-value)
-  "Returns true if φhref-value points to a xah website, else false.
-φhref-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
+(defun xahsite-is-link-to-xahsite-p (_href-value)
+  "Returns true if _href-value points to a xah website, else false.
+_href-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
 
-Technically, returns true if φhref-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
+Technically, returns true if _href-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
 
 See: `xahsite-local-link-p', `xahsite-url-is-xah-website-p'."
-  (if (xahsite-local-link-p φhref-value)
+  (if (xahsite-local-link-p _href-value)
       t
-    (xahsite-url-is-xah-website-p φhref-value)))
+    (xahsite-url-is-xah-website-p _href-value)))
 
 
 
-(defun xahsite-url-to-domain-name (φurl)
+(defun xahsite-url-to-domain-name (_url)
   "Returns the domain name of a xah site.
 e.g. http://ergoemacs.org/emacs/emacs.html ⇒ ergoemacs.org
 "
-(replace-regexp-in-string "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/.+" "\\2.\\3" φurl) )
+(replace-regexp-in-string "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/.+" "\\2.\\3" _url) )
 
-(defun xahsite-get-domain-of-local-file-path (φabs-path)
-  "Returns the domain name of full path φabs-path belong to.
+(defun xahsite-get-domain-of-local-file-path (_abs-path)
+  "Returns the domain name of full path _abs-path belong to.
 e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「ergoemacs.org」.
 
 This function depends on `xahsite-server-root-path'."
   (let ((case-fold-search nil)
-        ξstr
-        (ξpathPart
+        -str
+        (-pathPart
          (string-remove-prefix
           (downcase (xahsite-server-root-path))
-          (downcase φabs-path))))
-    (if (string-match "\\`\\([^/]+?\\)/" ξpathPart )
+          (downcase _abs-path))))
+    (if (string-match "\\`\\([^/]+?\\)/" -pathPart )
         (progn
-          (setq ξstr (match-string 1 ξpathPart))
-          (replace-regexp-in-string "_" "." ξstr "FIXEDCASE" "LITERAL"))
-      (error "「%s」 is not a full path for xah site." φabs-path ))))
+          (setq -str (match-string 1 -pathPart))
+          (replace-regexp-in-string "_" "." -str "FIXEDCASE" "LITERAL"))
+      (error "「%s」 is not a full path for xah site." _abs-path ))))
 
-(defun xahsite-get-path-relative-to-domain (φfpath)
+(defun xahsite-get-path-relative-to-domain (_fpath)
   "Returns the path relative to that file's domain's root dir.
 e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「emacs/xyz.html」"
   (let ((case-fold-search nil))
     (string-match (format "\\`%s[^/]+?/\\(.+\\)" (regexp-quote (xahsite-server-root-path)))
-                  (replace-regexp-in-string "\\`C:/" "c:/" φfpath  "FIXEDCASE" "LITERAL"))
-    (match-string 1 φfpath)))
+                  (replace-regexp-in-string "\\`C:/" "c:/" _fpath  "FIXEDCASE" "LITERAL"))
+    (match-string 1 _fpath)))
 
-(defun xahsite-filepath-to-url (φwebpath)
+(defun xahsite-filepath-to-url (_webpath)
   "Turn my website path ΦWEBPATH to my site's URL.
 For example, the following path:
  C:/Users/xah/web/ergoemacs_org/emacs/emacs.html
@@ -181,9 +181,9 @@ or
  /Users/xah/web/ergoemacs_org/emacs/emacs.html
 will become:
  http://ergoemacs.org/emacs/emacs.html"
-  (format "http://%s/%s" (xahsite-get-domain-of-local-file-path φwebpath) (xahsite-get-path-relative-to-domain φwebpath)))
+  (format "http://%s/%s" (xahsite-get-domain-of-local-file-path _webpath) (xahsite-get-path-relative-to-domain _webpath)))
 
-(defun xahsite-filepath-to-href-value (φlinkFilePath φcurrentFilePathOrDir)
+(defun xahsite-filepath-to-href-value (_linkFilePath _currentFilePathOrDir)
   "Return a URL or relative path.
 All arguments should all be full paths.
 If the two paths are in different domain, then return a URL (string starts with “http://”).
@@ -191,36 +191,36 @@ Else, return a relative path.
 
 For reverse, see `xahsite-href-value-to-filepath'.
 "
-  (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path φlinkFilePath) (xahsite-get-domain-of-local-file-path φcurrentFilePathOrDir))))
+  (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path _linkFilePath) (xahsite-get-domain-of-local-file-path _currentFilePathOrDir))))
     (if sameDomain-p
-        (xah-file-relative-name-emacs24.1.1-fix φlinkFilePath (file-name-directory φcurrentFilePathOrDir))
-      (xahsite-filepath-to-url φlinkFilePath))))
+        (xah-file-relative-name-emacs24.1.1-fix _linkFilePath (file-name-directory _currentFilePathOrDir))
+      (xahsite-filepath-to-url _linkFilePath))))
 ;; test
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/xahlee_org/arts/blog.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html")
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/index.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" )
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" "c:/Users/h3/web/ergoemacs_org/index.html" )
 
-(defun xahsite-href-value-to-filepath (φhref-value φhost-file-path)
+(defun xahsite-href-value-to-filepath (_href-value _host-file-path)
   "Returns the file path of a link to xah website.
 
-φhref-value is the link string, in 「href=\"…\"」. The value can be a URL to xahsite or relative path.
-φhost-file-path is a full path of the host file name or its dir.
+_href-value is the link string, in 「href=\"…\"」. The value can be a URL to xahsite or relative path.
+_host-file-path is a full path of the host file name or its dir.
 
 For reverse, see `xahsite-filepath-to-href-value'.
 See also: `xahsite-url-to-filepath'
 "
-  (if (string-match-p "\\`http://" φhref-value)
-      (progn (xahsite-url-to-filepath φhref-value "addFileName"))
+  (if (string-match-p "\\`http://" _href-value)
+      (progn (xahsite-url-to-filepath _href-value "addFileName"))
     (progn
-      (expand-file-name φhref-value (file-name-directory φhost-file-path )))))
+      (expand-file-name _href-value (file-name-directory _host-file-path )))))
 ;; test
 ;; (xahsite-href-value-to-filepath "http://xahlee.org/Netiquette_dir/death_of_a_troll.html" "c:/Users/h3/web/xahlee_info/comp/Google_Tech_Talk_Lisp_At_JPL_by_Ron_Garret.html")
 
-(defun xahsite-url-to-filepath (φxahsiteURL &optional φadd-file-name φredirect)
-  "Returns the file path of a xah website URL φxahsiteURL.
+(defun xahsite-url-to-filepath (_xahsiteURL &optional _add-file-name _redirect)
+  "Returns the file path of a xah website URL _xahsiteURL.
 
-If the optional argument φadd-file-name is true, then append “index.html” if the resulting path is a dir.
-If the optional argument φredirect is true, then also consider result of http redirect.
+If the optional argument _add-file-name is true, then append “index.html” if the resulting path is a dir.
+If the optional argument _redirect is true, then also consider result of http redirect.
 
 This function does not check input is actually a URL, nor if the result path file exists."
   ;; test cases:
@@ -229,19 +229,19 @@ This function does not check input is actually a URL, nor if the result path fil
   ;; (xahsite-url-to-filepath "http://abc.org/x.html") ; ⇒ "c:/Users/h3/web/abc_org/x.html"
   ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
 
-  (let ((ξurl φxahsiteURL) ξfPath)
-    (setq ξurl (xah-remove-uri-fragment ξurl)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
-    (when φredirect (setq ξurl (xahsite-url-remap ξurl)))
-    (when φadd-file-name (setq ξurl (replace-regexp-in-string "/\\'" "/index.html" ξurl)))
-    ;; (replace-regexp-in-string "%27" "'" (xah-remove-uri-fragment ξurl))
+  (let ((-url _xahsiteURL) -fPath)
+    (setq -url (xah-remove-uri-fragment -url)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
+    (when _redirect (setq -url (xahsite-url-remap -url)))
+    (when _add-file-name (setq -url (replace-regexp-in-string "/\\'" "/index.html" -url)))
+    ;; (replace-regexp-in-string "%27" "'" (xah-remove-uri-fragment -url))
 
-    (setq ξfPath
+    (setq -fPath
           (format "%s%s" (xahsite-server-root-path)
                   ;; remove www
                   (replace-regexp-in-string
                    "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)"
-                   "\\2_\\3/\\4" ξurl)))
-    ξfPath
+                   "\\2_\\3/\\4" -url)))
+    -fPath
     ))
 
 (defvar xahsite-xahlee-org-redirect nil "root dir map from xahlee.org to ergoemacs.org")
@@ -280,102 +280,102 @@ This function does not check input is actually a URL, nor if the result path fil
 "w"
 ] )
 
-;; (defun xahsite-url-remap (φxahsite-url)
-;;   "Returns a redirected url for a xah website URL φxahsite-url.
+;; (defun xahsite-url-remap (_xahsite-url)
+;;   "Returns a redirected url for a xah website URL _xahsite-url.
 
 ;; This function is not complete. i.e. it not contain complete url redirects as specified in web server."
 ;;   (let (
-;;         ξdomain
-;;         ξpath
-;;         (ξs φxahsite-url)
-;;         (ξstop nil)
+;;         -domain
+;;         -path
+;;         (-s _xahsite-url)
+;;         (-stop nil)
 ;;         )
-;;     (string-match "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)" ξs)
-;;     (setq ξdomain (match-string "\\2.\\3" ξs ) )
-;;     (setq ξpath (match-string "\\4" ξs ) )
+;;     (string-match "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)" -s)
+;;     (setq -domain (match-string "\\2.\\3" -s ) )
+;;     (setq -path (match-string "\\4" -s ) )
 
 ;;     (cond
-;;      ((string-match-p "xahlee.org" ξdomain)
+;;      ((string-match-p "xahlee.org" -domain)
 ;;       (let (
-;;             (ξi 0)
-;;             (ξlen (length xahsite-xahlee-org-redirect))
-;;             (ξpathFirstPart (replace-regexp-in-string "\\`\\([^/]+?\\)/" "\\1" ξpath) )
+;;             (-i 0)
+;;             (-len (length xahsite-xahlee-org-redirect))
+;;             (-pathFirstPart (replace-regexp-in-string "\\`\\([^/]+?\\)/" "\\1" -path) )
 ;;             )
-;;         (while (and (not ξstop) (< ξi ξlen) )
-;;           (if (string= (elt xahsite-xahlee-org-redirect ξi) ξpathFirstPart)
+;;         (while (and (not -stop) (< -i -len) )
+;;           (if (string= (elt xahsite-xahlee-org-redirect -i) -pathFirstPart)
 ;;               (progn
 ;;                 ;; ...
-;;                 (setq ξstop t ))
+;;                 (setq -stop t ))
 ;;             (progn )
 ;;             )
-;;           (setq ξi (1+ ξi))
+;;           (setq -i (1+ -i))
 ;;           )
 ;;         )
 ;;       )
 ;;      ;; ...
 ;;      )
 
-;;     (setq ξs (replace-regexp-in-string "/Periodic_dosage_dir/sanga_pemci/" "/music/" ξs "FIXEDCASE" "LITERAL"))
-;;     (setq ξs (replace-regexp-in-string "xahlee.org/emacs/" "ergoemacs.org/emacs/" ξs "FIXEDCASE" "LITERAL"))
+;;     (setq -s (replace-regexp-in-string "/Periodic_dosage_dir/sanga_pemci/" "/music/" -s "FIXEDCASE" "LITERAL"))
+;;     (setq -s (replace-regexp-in-string "xahlee.org/emacs/" "ergoemacs.org/emacs/" -s "FIXEDCASE" "LITERAL"))
 ;;  ) )
 
-(defun xahsite-url-remap (φxahsite-url)
-  "Returns a redirected url for a xah website URL φxahsite-url.
+(defun xahsite-url-remap (_xahsite-url)
+  "Returns a redirected url for a xah website URL _xahsite-url.
 
 This function is not complete. i.e. it not contain complete url redirects as specified in web server."
-  (let ((ξs φxahsite-url)
+  (let ((-s _xahsite-url)
         (case-fold-search nil))
-    (setq ξs
+    (setq -s
           (cond
 
-           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/cmaci_girzu.html" ξs) "http://xahlee.info/math/math_index.html" )
-           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/keyboarding.html" ξs) "http://xahlee.info/kbd/keyboarding.html" )
-           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/unicode.html" ξs) "http://xahlee.info/comp/unicode_index.html" )
-           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/skami_prosa.html" ξs) "http://xahlee.info/comp/comp_index.html" )
+           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/cmaci_girzu.html" -s) "http://xahlee.info/math/math_index.html" )
+           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/keyboarding.html" -s) "http://xahlee.info/kbd/keyboarding.html" )
+           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/unicode.html" -s) "http://xahlee.info/comp/unicode_index.html" )
+           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/skami_prosa.html" -s) "http://xahlee.info/comp/comp_index.html" )
 
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(emacs\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "ergoemacs.org" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(emacs_manual\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "ergoemacs.org" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(M\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(MathGraphicsGallery_dir\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(MathematicaPrograming_dir\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(PerlMathematica_dir\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(SpecialPlaneCurves_dir\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(UnixResource_dir\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(Wallpaper_dir\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(cmaci\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(comp\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(complex\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(coq\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(haskell\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(java-a-day\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(js\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(kbd\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(linux\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(math\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(mswin\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(ocaml\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(pascal\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(perl-python\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(php\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(powershell\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(prog\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(projective_geometry\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(ruby\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(surface\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(tiling\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(tree\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(visual_basic\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(w\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 ξs) (match-string 3 ξs)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(emacs\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "ergoemacs.org" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(emacs_manual\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "ergoemacs.org" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(M\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(MathGraphicsGallery_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(MathematicaPrograming_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(PerlMathematica_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(SpecialPlaneCurves_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(UnixResource_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(Wallpaper_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(cmaci\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(comp\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(complex\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(coq\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(haskell\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(java-a-day\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(js\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(kbd\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(linux\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(math\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(mswin\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(ocaml\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(pascal\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(perl-python\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(php\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(powershell\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(prog\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(projective_geometry\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(ruby\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(surface\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(tiling\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(tree\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(visual_basic\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(w\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
 
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(music\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "xahmusic.org" (match-string 2 ξs) (match-string 3 ξs)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(lit\\)/\\(.*\\)" ξs) (format "http://%s/%s/%s" "wordyenglish.com" (match-string 2 ξs) (match-string 3 ξs)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(music\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahmusic.org" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(lit\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "wordyenglish.com" (match-string 2 -s) (match-string 3 -s)))
 
-           (t ξs )))
-    ξs
+           (t -s )))
+    -s
     ))
 
-(defun xah-remove-uri-fragment (φhref-value)
-  "remove URL φhref-value fragment, anything after first 「#」 char, including it.
+(defun xah-remove-uri-fragment (_href-value)
+  "remove URL _href-value fragment, anything after first 「#」 char, including it.
 See also `split-uri-hashmark'"
   ;; test
   ;; (xah-remove-uri-fragment "a#b") ; "a"
@@ -383,13 +383,13 @@ See also `split-uri-hashmark'"
   ;; (xah-remove-uri-fragment "4")  ; "4"
   ;; (xah-remove-uri-fragment "#")   ; ""
   ;; (xah-remove-uri-fragment "")  ; ""
-  (let ((ξx (string-match-p "#" φhref-value )))
-    (if ξx
-        (substring φhref-value 0 ξx)
-      φhref-value )))
+  (let ((-x (string-match-p "#" _href-value )))
+    (if -x
+        (substring _href-value 0 -x)
+      _href-value )))
 
-(defun split-uri-hashmark (φhref-value)
-  "Split a URL φhref-value by 「#」 char, return a vector.
+(defun split-uri-hashmark (_href-value)
+  "Split a URL _href-value by 「#」 char, return a vector.
  e.g. \"y.html#z\" ⇒ [\"y.html\", \"#z\"]
 
 Examples:
@@ -407,34 +407,34 @@ See also: `xah-remove-uri-fragment'"
   ;; (split-uri-hashmark "#")   ; ["" "#"]
   ;; (split-uri-hashmark "4")  ; ["4" ""]
   ;; (split-uri-hashmark "")  ; ["" ""]
-  (let ((ξx (string-match-p "#" φhref-value )))
-    (if ξx
-        (vector (substring φhref-value 0 ξx) (substring φhref-value ξx))
-      (vector φhref-value "" ))))
+  (let ((-x (string-match-p "#" _href-value )))
+    (if -x
+        (vector (substring _href-value 0 -x) (substring _href-value -x))
+      (vector _href-value "" ))))
 
 
 
-(defun file-moved-p (φfpath φmoved-dirs )
-  "Return true if either paths are in φmoved-dirs list or as a subdir.
-φfpath is a full path to a file.
-φmoved-dirs is a list/sequence of file full paths.
-Return true if φfpath is in φmoved-dirs or is a subdir of φmoved-dirs.
-Technically, if any string in φmoved-dirs is a prefix of φfpath."
-  (let ( ( ξfound nil) ( ξi 0))
-    (while (and (not ξfound) (< ξi (length φmoved-dirs)))
-      (setq ξfound (string-match-p (concat "\\`" (regexp-quote (elt φmoved-dirs ξi))) φfpath ))
-      (setq ξi (1+ ξi)))
-    ξfound
+(defun file-moved-p (_fpath _moved-dirs )
+  "Return true if either paths are in _moved-dirs list or as a subdir.
+_fpath is a full path to a file.
+_moved-dirs is a list/sequence of file full paths.
+Return true if _fpath is in _moved-dirs or is a subdir of _moved-dirs.
+Technically, if any string in _moved-dirs is a prefix of _fpath."
+  (let ( ( -found nil) ( -i 0))
+    (while (and (not -found) (< -i (length _moved-dirs)))
+      (setq -found (string-match-p (concat "\\`" (regexp-quote (elt _moved-dirs -i))) _fpath ))
+      (setq -i (1+ -i)))
+    -found
     ))
 ;; test
 ;; (file-moved-p "abc/d" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d” equal to one of the moved dir
 ;; (file-moved-p "abc/d/e" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d/e” is subdir of “abc/d”
 ;; (file-moved-p "abc/" ["abc/d" "don/" "12/3/"] ) ; false, because “abc/” isn't in any of the moved dirs
 
-(defun xah-local-url-to-file-path (φlocal-file-url)
+(defun xah-local-url-to-file-path (_local-file-url)
   "Turn a localhost file URL LOCALFILEURL into a file full path.
 
-φlocal-file-url must be a full path.
+_local-file-url must be a full path.
 
 For example, the following string shown in browser URL field:
 ; On Windows Vista 2009-06
@@ -456,7 +456,7 @@ For example, the following string shown in browser URL field:
  〔/media/HP/Users/xah/web/xahlee_org/index.html〕
 "
   (let ((case-fold-search nil))
-    (xah-replace-regexp-pairs-in-string φlocal-file-url
+    (xah-replace-regexp-pairs-in-string _local-file-url
                                     [
                                      ["\\`file://localhost" ""]
                                      ["\\`file://" ""]
@@ -467,9 +467,9 @@ For example, the following string shown in browser URL field:
                                     "FIXEDCASE"
                                     )))
 
-(defun xahsite-web-path-to-filepath (φinput-str &optional φdefault-dir)
-  "Returns a file full path of φinput-str.
-φinput-str can have any of these form:
+(defun xahsite-web-path-to-filepath (_input-str &optional _default-dir)
+  "Returns a file full path of _input-str.
+_input-str can have any of these form:
 
  x.html (relative path)
  c:/Users/h3/web/ergoemacs_org/a/x.html (Windows style)
@@ -480,26 +480,26 @@ For example, the following string shown in browser URL field:
  file://… (file URL. See: `xah-local-url-to-file-path')
  http://ergoemacs.org/a/x.html (URL)
 
-if the φinput-str is a relative path, φdefault-dir is used to resolve to full path."
-  (let ( (ξs φinput-str))
+if the _input-str is a relative path, _default-dir is used to resolve to full path."
+  (let ( (-s _input-str))
 
-    ;; (setq ξs (replace-regexp-in-string "^file:///" "" ξs "FIXEDCASE" "LITERAL" ) )
-    ;; (setq ξs (replace-regexp-in-string "^/media/OS/Users/h3" "~" ξs "FIXEDCASE" "LITERAL" ) )
+    ;; (setq -s (replace-regexp-in-string "^file:///" "" -s "FIXEDCASE" "LITERAL" ) )
+    ;; (setq -s (replace-regexp-in-string "^/media/OS/Users/h3" "~" -s "FIXEDCASE" "LITERAL" ) )
 
-    (if (string-match-p "\\`https?://" ξs)
-        (progn (setq ξs (xahsite-url-to-filepath ξs "addFileName")))
+    (if (string-match-p "\\`https?://" -s)
+        (progn (setq -s (xahsite-url-to-filepath -s "addFileName")))
       (progn
-        (when (string-match-p "\\`file://" ξs) (setq ξs (xah-local-url-to-file-path ξs)))
-        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" ξs) ; change Microsoft Windows style path to unix
-          (setq ξs (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" ξs t t))))
-        (setq ξs (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" ξs))
-        (setq ξs (expand-file-name ξs φdefault-dir))))
-    ξs
+        (when (string-match-p "\\`file://" -s) (setq -s (xah-local-url-to-file-path -s)))
+        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" -s) ; change Microsoft Windows style path to unix
+          (setq -s (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" -s t t))))
+        (setq -s (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" -s))
+        (setq -s (expand-file-name -s _default-dir))))
+    -s
     ))
 
-(defun xah-path-ends-in-image-suffix-p (φpath)
-  "Returns t if φpath ends in .jpg .png .gif .svg, else nil."
-  (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" φpath))
+(defun xah-path-ends-in-image-suffix-p (_path)
+  "Returns t if _path ends in .jpg .png .gif .svg, else nil."
+  (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" _path))
 
 (defun xah-find-files-file-predicate-p (fname parentdir)
   "return t if fname is what we want. Else nil.
@@ -544,20 +544,20 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
     'xah-find-files-file-predicate-p
     'xah-find-files-dir-predicate-p))
 
-(defun xahsite-generate-sitemap (φdomain-name)
+(defun xahsite-generate-sitemap (_domain-name)
   "Generate a sitemap.xml.gz file of xahsite at doc root.
-φdomain-name must match a existing one."
+_domain-name must match a existing one."
   (interactive
    (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" ))))
   (let (
-        (ξ-sitemapFileName "sitemap" )
-        (ξ-websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" φdomain-name "FIXEDCASE" "LITERAL") "/")))
+        (--sitemapFileName "sitemap" )
+        (--websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" _domain-name "FIXEDCASE" "LITERAL") "/")))
 
     (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
 
     ;; rename sitemap file to backup ~ if already exist
     (let* (
-           (f1 (concat ξ-websiteDocRootPath ξ-sitemapFileName ".xml"))
+           (f1 (concat --websiteDocRootPath --sitemapFileName ".xml"))
            (f2 (concat f1 ".gz")))
       (when (file-exists-p f1)
         (rename-file f1 (concat f1 "~") t))
@@ -566,10 +566,10 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
 
     ;; create sitemap buffer
     (let (
-          (ξfilePath (concat ξ-websiteDocRootPath ξ-sitemapFileName ".xml"))
-          ξsitemapBuffer
+          (-filePath (concat --websiteDocRootPath --sitemapFileName ".xml"))
+          -sitemapBuffer
           )
-      (setq ξsitemapBuffer (find-file ξfilePath))
+      (setq -sitemapBuffer (find-file -filePath))
       (erase-buffer)
       (set-buffer-file-coding-system 'unix)
       (insert "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
@@ -577,37 +577,37 @@ if the φinput-str is a relative path, φdefault-dir is used to resolve to full 
 ")
 
       (mapc
-       (lambda (ξf)
+       (lambda (-f)
          ;; xahsite-xahlee-info-external-docs
          (when (not
                 (or
-                 (string-match "/xx" ξf) ; ; dir/file starting with xx are not public
-                 (string-match "403error.html" ξf)
-                 (string-match "404error.html" ξf)))
+                 (string-match "/xx" -f) ; ; dir/file starting with xx are not public
+                 (string-match "403error.html" -f)
+                 (string-match "404error.html" -f)))
            (with-temp-buffer
-             (insert-file-contents ξf)
+             (insert-file-contents -f)
              (when (not (search-forward "<meta http-equiv=\"refresh\"" nil "noerror"))
-               (with-current-buffer ξsitemapBuffer
+               (with-current-buffer -sitemapBuffer
                  (insert "<url><loc>")
-                 (insert (concat "http://" φdomain-name "/" (substring ξf (length ξ-websiteDocRootPath))))
+                 (insert (concat "http://" _domain-name "/" (substring -f (length --websiteDocRootPath))))
                  (insert "</loc></url>\n"))))))
-       (xahsite-traverse-dir-file-list ξ-websiteDocRootPath))
+       (xahsite-traverse-dir-file-list --websiteDocRootPath))
 
       (insert "</urlset>")
 
       (save-buffer)
-      (kill-buffer ξsitemapBuffer)
+      (kill-buffer -sitemapBuffer)
 
       (if "zip it"
           (progn
-            (shell-command (concat "gzip " ξfilePath))
-            (find-file (concat ξfilePath ".gz")))
-        (progn (find-file ξfilePath ))))
+            (shell-command (concat "gzip " -filePath))
+            (find-file (concat -filePath ".gz")))
+        (progn (find-file -filePath ))))
 
     (print (concat "finished: " (format-time-string "%Y-%m-%dT%T")))))
 
-(defun xahsite-remove-ads (φbegin φend)
-  "Remove all ads of in region φbegin φend.
+(defun xahsite-remove-ads (_begin _end)
+  "Remove all ads of in region _begin _end.
 
 Remove Google adds, Amazon ads, and other ads, Google Analytics
  Tracker code, Disqus code, …."

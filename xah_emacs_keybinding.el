@@ -33,6 +33,7 @@
 ;;    (nth 2 x)
 ;;    27))
 
+
 (setq xah-major-mode-lead-key (kbd "<delete>"))
 
 (progn
@@ -189,5 +190,5 @@
 ;;   (define-key key-translation-map (kbd "<menu> SPC 2") (kbd "＆"))
 ;;   (define-key key-translation-map (kbd "<menu> SPC 1") (kbd "•"))
 ;;   (define-key key-translation-map (kbd "<menu> SPC .") (kbd "…"))
-;;   (define-key key-translation-map (kbd "<menu> SPC 3") (kbd "ξ"))
-;;   (define-key key-translation-map (kbd "<menu> SPC 9") (kbd "φ")))
+;;   (define-key key-translation-map (kbd "<menu> SPC 3") (kbd "-"))
+;;   (define-key key-translation-map (kbd "<menu> SPC 9") (kbd "_")))

@@ -12,25 +12,25 @@ For example: if current node is 「(elisp) The Mark」, switch to browser and lo
     (emacs-info-node-string-to-url
      (Info-copy-current-node-name)))))
 
-(defun emacs-info-node-string-to-url (φinfo-node-str)
-  "change the φinfo-node-str into a xah emacs doc link.
+(defun emacs-info-node-string-to-url (_info-node-str)
+  "change the _info-node-str into a xah emacs doc link.
 For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
-  (let ((domainStr "http://ergoemacs.org/")
-        (tempPath
+  (let ((-domainStr "http://ergoemacs.org/")
+        (-tempPath
          (xah-replace-pairs-in-string
-          φinfo-node-str
+          _info-node-str
           [["(elisp) " ""]
            ["(emacs) " ""]
            ["-" "_002d"]
            [" " "-"] ] )))
 
     (cond
-     ((string-match "(elisp)" φinfo-node-str )
-      (format "%s%s%s.html" domainStr "emacs_manual/elisp/" tempPath))
-     ((string-match "(emacs)" φinfo-node-str )
-      (format "%s%s%s.html" domainStr "emacs_manual/emacs/" tempPath))
+     ((string-match "(elisp)" _info-node-str )
+      (format "%s%s%s.html" -domainStr "emacs_manual/elisp/" -tempPath))
+     ((string-match "(emacs)" _info-node-str )
+      (format "%s%s%s.html" -domainStr "emacs_manual/emacs/" -tempPath))
      (t
-      (user-error "φinfo-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" φinfo-node-str)))))
+      (user-error "_info-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" _info-node-str)))))
 
 (defun xah-html-emacs-ref-linkify ()
   "Make the current line or selection into a emacs reference link.
@@ -49,54 +49,54 @@ Then it'll become:
 <span class=\"ref\"><a href=\"../emacs_manual/elisp/The-Mark.html\">(info \"(elisp) The Mark\")</a></span>"
   (interactive)
   (let* (
-         ξp1
-         ξp2
-         ξinput
-         ξinfoStr linkText
-         ξfPath
-         ξlinkStrURL ; link string
+         -p1
+         -p2
+         -input
+         -infoStr -linkText
+         -fPath
+         -linkStrURL ; link string
          )
 
     (if (use-region-p)
-        (progn (setq ξp1 (region-beginning))
-               (setq ξp2 (region-end)))
-      (progn (setq ξp1 (line-beginning-position))
-             (setq ξp2 (line-end-position))))
+        (progn (setq -p1 (region-beginning))
+               (setq -p2 (region-end)))
+      (progn (setq -p1 (line-beginning-position))
+             (setq -p2 (line-end-position))))
 
     ;; trim whitespaces
-    (setq ξinput (string-trim (buffer-substring-no-properties ξp1 ξp2)))
+    (setq -input (string-trim (buffer-substring-no-properties -p1 -p2)))
 
-    ;; generate ξinfoStr. A info string is like this: “(elisp) The Mark”
-    (setq ξinfoStr
+    ;; generate -infoStr. A info string is like this: “(elisp) The Mark”
+    (setq -infoStr
           (if
               (or
-               (string-match "(emacs)" ξinput)
-               (string-match "(elisp)" ξinput))
-              (setq ξinfoStr ξinput)
-            (let (ξfpath ξtemp)
+               (string-match "(emacs)" -input)
+               (string-match "(elisp)" -input))
+              (setq -infoStr -input)
+            (let (-fpath -temp)
               ;; convert local URL to file path
-              (setq ξfpath
+              (setq -fpath
                     (cond
-                     ((string-match "^file" ξinput) (xah-local-url-to-file-path ξinput))
-                     ((string-match "^http" ξinput) (xahsite-url-to-filepath ξinput))
-                     (t ξinput)))
+                     ((string-match "^file" -input) (xah-local-url-to-file-path -input))
+                     ((string-match "^http" -input) (xahsite-url-to-filepath -input))
+                     (t -input)))
 
               ;; convert file path to info node syntax
               (concat
                (cond
-                ((string-match "emacs_manual/elisp" ξfpath ) "(elisp) ")
-                ((string-match "emacs_manual/emacs" ξfpath ) "(emacs) ")
-                (t (error "ξfpath 「%s」 doesn't match “elisp” or “emacs”" ξfpath)))
+                ((string-match "emacs_manual/elisp" -fpath ) "(elisp) ")
+                ((string-match "emacs_manual/emacs" -fpath ) "(emacs) ")
+                (t (error "-fpath 「%s」 doesn't match “elisp” or “emacs”" -fpath)))
 
-               (replace-regexp-in-string "_002d" "-" (replace-regexp-in-string "-" " " (file-name-sans-extension (file-name-nondirectory ξfpath))))))))
+               (replace-regexp-in-string "_002d" "-" (replace-regexp-in-string "-" " " (file-name-sans-extension (file-name-nondirectory -fpath))))))))
 
     ;; generate link text
-    (setq linkText (concat "(info \"" ξinfoStr "\")"))
+    (setq -linkText (concat "(info \"" -infoStr "\")"))
 
     ;; generate relative file path
-    (setq ξlinkStrURL
+    (setq -linkStrURL
           (concat
-           (xah-replace-pairs-in-string ξinfoStr
+           (xah-replace-pairs-in-string -infoStr
                                         [
                                          ["(elisp) " "http://ergoemacs.org/emacs_manual/elisp/"]
                                          ["(emacs) " "http://ergoemacs.org/emacs_manual/emacs/"]
@@ -106,18 +106,18 @@ Then it'll become:
            ".html" ))
 
     ;; (cond
-    ;;  ((string-match "(elisp)" ξinfoStr ) (setq ξlinkStrURL (concat "../emacs_manual/elisp/" ξlinkStrURL ".html")))
-    ;;  ((string-match "(emacs)" ξinfoStr ) (setq ξlinkStrURL (concat "../emacs_manual/emacs/" ξlinkStrURL ".html")))
-    ;;  (t (error "ξinfoStr doesn't match “(elisp)” or “(emacs)”: %s"  ξinfoStr))
+    ;;  ((string-match "(elisp)" -infoStr ) (setq -linkStrURL (concat "../emacs_manual/elisp/" -linkStrURL ".html")))
+    ;;  ((string-match "(emacs)" -infoStr ) (setq -linkStrURL (concat "../emacs_manual/emacs/" -linkStrURL ".html")))
+    ;;  (t (error "-infoStr doesn't match “(elisp)” or “(emacs)”: %s"  -infoStr))
     ;;  )
 
-    (setq ξfPath (xahsite-url-to-filepath ξlinkStrURL))
+    (setq -fPath (xahsite-url-to-filepath -linkStrURL))
 
-    (if (file-exists-p ξfPath )
+    (if (file-exists-p -fPath )
         (progn
-          (delete-region ξp1 ξp2)
-          (insert "<span class=\"ref\"><a href=\"" (xahsite-filepath-to-href-value ξfPath (buffer-file-name)) "\">" linkText "</a></span>"))
-      (error "Generated local ξfPath 「%s」 does not point to a file" ξfPath))))
+          (delete-region -p1 -p2)
+          (insert "<span class=\"ref\"><a href=\"" (xahsite-filepath-to-href-value -fPath (buffer-file-name)) "\">" -linkText "</a></span>"))
+      (error "Generated local -fPath 「%s」 does not point to a file" -fPath))))
 
 (defun xah-html-php-ref-linkify ()
   "Make the current line into a PHP reference link.
@@ -140,23 +140,23 @@ Then it'll become
 
 <span class=\"ref\"><a href=\"http://perldoc.perl.org/perlop.html\">perldoc perlop</a></span>"
   (interactive)
-  (let (ξp1 ξp2 swd ξurl)
+  (let (-p1 -p2 -swd -url)
     (if (use-region-p)
         (progn
-          (setq ξp1 (region-beginning))
-          (setq ξp2 (region-end)))
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
       (progn
-        (setq ξp1 (line-beginning-position))
-        (setq ξp2 (line-end-position))))
+        (setq -p1 (line-beginning-position))
+        (setq -p2 (line-end-position))))
 
-    (setq swd (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξurl (replace-regexp-in-string
+    (setq -swd (buffer-substring-no-properties -p1 -p2))
+    (setq -url (replace-regexp-in-string
                 "-f " "functions/"
                 (replace-regexp-in-string
                  "::" "/"
-                 (concat "http://perldoc.perl.org/" swd ".html"))))
-    (delete-region ξp1 ξp2)
-    (insert "<span class=\"ref\"><a href=\"" ξurl "\">" "perldoc " swd "</a></span>")))
+                 (concat "http://perldoc.perl.org/" -swd ".html"))))
+    (delete-region -p1 -p2)
+    (insert "<span class=\"ref\"><a href=\"" -url "\">" "perldoc " -swd "</a></span>")))
 
 (defun mathematica-ref-linkify ()
   "Make the current word into a link to Mathematica ref site.
@@ -165,11 +165,11 @@ Table
 Then it'll become:
 <span class=\"ref\"><a href=\"http://reference.wolfram.com/mathematica/ref/Table.html\">Mathematica Ref: Table</a></span>"
   (interactive)
-  (let (bds ξp1 ξp2 swd ξurl)
-    (setq bds (thing-at-point 'word))
-    (setq ξp1 (car bds))
-    (setq ξp2 (cdr bds))
-    (setq swd (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξurl (concat "http://reference.wolfram.com/mathematica/ref/" swd ".html"))
-    (delete-region ξp1 ξp2)
-    (insert "<span class=\"ref\"><a href=\"" ξurl "\">" "Mathematica: " swd "</a></span>")))
+  (let (-bds -p1 -p2 -swd -url)
+    (setq -bds (thing-at-point 'word))
+    (setq -p1 (car -bds))
+    (setq -p2 (cdr -bds))
+    (setq -swd (buffer-substring-no-properties -p1 -p2))
+    (setq -url (concat "http://reference.wolfram.com/mathematica/ref/" -swd ".html"))
+    (delete-region -p1 -p2)
+    (insert "<span class=\"ref\"><a href=\"" -url "\">" "Mathematica: " -swd "</a></span>")))

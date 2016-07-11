@@ -10,7 +10,7 @@
 ;; ✈ 🌎
 ;; ⊕ 🌐
 
-(defun xah-grab-lines (φn)
+(defun xah-grab-lines (_n)
   "Delete the next n lines and return a list
 Where each element is a line.
 each line does not include the newline character."
@@ -18,21 +18,21 @@ each line does not include the newline character."
   (beginning-of-line)
   (let ((p1 (point))
         p2
-        (ξlines '()))
-    (dotimes (ξi (- φn 1)) (forward-line))
+        (-lines '()))
+    (dotimes (-i (- _n 1)) (forward-line))
     (end-of-line)
     (setq p2 (point))
-    (setq ξlines (split-string (buffer-substring-no-properties p1 p2) "\n" ))
+    (setq -lines (split-string (buffer-substring-no-properties p1 p2) "\n" ))
     (delete-region p1 p2)
     (delete-char 1)
-    ;; (print ξlines)
-    ξlines))
+    ;; (print -lines)
+    -lines))
 
-(defun xah-insert-google-map-link (&optional φtitle φlat-lon)
+(defun xah-insert-google-map-link (&optional _title _lat-lon)
   "Insert HTML link to Google Map.
 
-φtitle is the title attribute for the HTML link.
-φlat-lon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
+_title is the title attribute for the HTML link.
+_lat-lon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
 
 Example of inserted text:
  <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Google Map</a>
@@ -40,39 +40,39 @@ Example of inserted text:
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2015-05-12"
   (interactive)
-  (let (ξtitle ξy ξx)
-    (setq ξtitle (if φtitle φtitle ""))
-    (if φlat-lon
+  (let (-title -y -x)
+    (setq -title (if _title _title ""))
+    (if _lat-lon
         (progn
-          (setq ξy (elt φlat-lon 0))
-          (setq ξx (elt φlat-lon 1)))
+          (setq -y (elt _lat-lon 0))
+          (setq -x (elt _lat-lon 1)))
       (progn
-        (setq ξy "y�")
-        (setq ξx "x�")))
-    (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string ξy) "%2C" (number-to-string ξx) "\" title=\"" ξtitle "\" target=\"_blank\">Google Map</a>\n")))
+        (setq -y "y�")
+        (setq -x "x�")))
+    (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string -y) "%2C" (number-to-string -x) "\" title=\"" -title "\" target=\"_blank\">Google Map</a>\n")))
 
-(defun xah-insert-google-earth-link (&optional φtitle φfilePath)
+(defun xah-insert-google-earth-link (&optional _title _filePath)
   "Insert a HTML markup for link to a local Goole Earth file.
- “φtitle” is the “title” attribute in the anchor link.
+ “_title” is the “title” attribute in the anchor link.
  “file-path” is the full path to the KML file.
 Here's a sample inserted text:
 <a href=\"../kml/las_vegas.kmz\" title=\"Las Vegas\">🌎</a>"
   (interactive)
-  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if φfilePath (xahsite-filepath-to-url φfilePath) "�") (if φtitle φtitle "�") )) )
+  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if _filePath (xahsite-filepath-to-url _filePath) "�") (if _title _title "�") )) )
 
-(defun xah-insert-kml (&optional φkml-title φlon-lat φsource-fpath)
+(defun xah-insert-kml (&optional _kml-title _lon-lat _source-fpath)
   "Insert a simple Google Earth KML markup template.
- ξkmltitle is the name to use for the <name> tag.
-φlon-lat is a vector [longitude latitude]. They must be real numbers.
- φsource-fpath is the file that links to this kml file,
+ -kmltitle is the name to use for the <name> tag.
+_lon-lat is a vector [longitude latitude]. They must be real numbers.
+ _source-fpath is the file that links to this kml file,
 used in the <description> tag."
   (interactive)
   (let (coord-x coord-y)
-    (when (not φkml-title) (setq φkml-title "�"))
-    (if φlon-lat
+    (when (not _kml-title) (setq _kml-title "�"))
+    (if _lon-lat
         (progn
-          (setq coord-x (elt φlon-lat 0))
-          (setq coord-y (elt φlon-lat 1)))
+          (setq coord-x (elt _lon-lat 0))
+          (setq coord-y (elt _lon-lat 1)))
       (progn
         (setq coord-x 0)
         (setq coord-y 0)))
@@ -89,13 +89,13 @@ used in the <description> tag."
 </Placemark>
 </kml>
 "
-             φkml-title
-             (if φsource-fpath (format "See: %s" (xahsite-filepath-to-url φsource-fpath)) "")
+             _kml-title
+             (if _source-fpath (format "See: %s" (xahsite-filepath-to-url _source-fpath)) "")
              (number-to-string coord-x)
              (number-to-string coord-y)))))
 
-(defun xah-latitude-longitude-decimalize (φlatlon)
-  "Convert latitude longitude string φlatlon in minutes second format to decimal.
+(defun xah-latitude-longitude-decimalize (_latlon)
+  "Convert latitude longitude string _latlon in minutes second format to decimal.
 Returns a vector.
 For example: 「\"37°26′36.42″N 06°15′14.28″W\"」
 becomes 「[37.44345 -6.253966666666667]」
@@ -104,48 +104,48 @@ becomes 「[37.44345 -6.253966666666667]」
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2015-02-08"
   (interactive)
-  (let ((ξtmpPair
+  (let ((-tmpPair
          (split-string
           (replace-regexp-in-string "'" "′"
                                     (replace-regexp-in-string "\"" "″"
-                                                              (replace-regexp-in-string "''" "″" φlatlon t t) t t) t t)
+                                                              (replace-regexp-in-string "''" "″" _latlon t t) t t) t t)
           " +"))
-        ξlatStr ξlatNum ξlonStr ξlonNum ξdeg ξmin ξsec ξsign (ξc (/ 1.0 60.0)))
+        -latStr -latNum -lonStr -lonNum -deg -min -sec -sign (-c (/ 1.0 60.0)))
 
-    (when (not (equal (length ξtmpPair) 2)) (user-error "Error: input can contain only one space"))
+    (when (not (equal (length -tmpPair) 2)) (user-error "Error: input can contain only one space"))
 
-    (setq ξlatStr (elt ξtmpPair 0))
-    (setq ξlonStr (elt ξtmpPair 1))
-    (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" ξlatStr )
+    (setq -latStr (elt -tmpPair 0))
+    (setq -lonStr (elt -tmpPair 1))
+    (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" -latStr )
         (progn
-          (setq ξdeg  (string-to-number (match-string 1 ξlatStr)))
-          (setq ξmin  (string-to-number (match-string 2 ξlatStr)))
-          (setq ξsec  (string-to-number (match-string 3 ξlatStr)))
-          (setq ξsign (match-string 4 ξlatStr))
-          (setq ξlatNum (+ ξdeg (* (+ ξmin (* ξsec ξc)) ξc)))
+          (setq -deg  (string-to-number (match-string 1 -latStr)))
+          (setq -min  (string-to-number (match-string 2 -latStr)))
+          (setq -sec  (string-to-number (match-string 3 -latStr)))
+          (setq -sign (match-string 4 -latStr))
+          (setq -latNum (+ -deg (* (+ -min (* -sec -c)) -c)))
           (cond
-           ((string= (downcase ξsign) "n") nil)
-           ((string= ξsign "") nil)
-           ((string= (downcase ξsign) "s") (setq ξlatNum (* -1 ξlatNum)))
+           ((string= (downcase -sign) "n") nil)
+           ((string= -sign "") nil)
+           ((string= (downcase -sign) "s") (setq -latNum (* -1 -latNum)))
            (t (user-error "Your input is malformed. Your latitude ends with a char that's not N or S"))))
       (progn (user-error "Your latitude is malformed")))
 
-    (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" ξlonStr )
+    (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" -lonStr )
         (progn
-          (setq ξdeg  (string-to-number (match-string 1 ξlonStr)))
-          (setq ξmin  (string-to-number (match-string 2 ξlonStr)))
-          (setq ξsec  (string-to-number (match-string 3 ξlonStr)))
-          (setq ξsign (match-string 4 ξlonStr))
-          (setq ξlonNum (+ ξdeg (* (+ ξmin (* ξsec ξc)) ξc)))
+          (setq -deg  (string-to-number (match-string 1 -lonStr)))
+          (setq -min  (string-to-number (match-string 2 -lonStr)))
+          (setq -sec  (string-to-number (match-string 3 -lonStr)))
+          (setq -sign (match-string 4 -lonStr))
+          (setq -lonNum (+ -deg (* (+ -min (* -sec -c)) -c)))
           (cond
-           ((string= (downcase ξsign) "e") nil)
-           ((string= ξsign "") nil)
-           ((string= (downcase ξsign) "w") (setq ξlonNum (* -1 ξlonNum)))
+           ((string= (downcase -sign) "e") nil)
+           ((string= -sign "") nil)
+           ((string= (downcase -sign) "w") (setq -lonNum (* -1 -lonNum)))
            (t (user-error "Your input is malformed. Your longitude ends with a char that's not E or W"))))
       (progn (user-error "Your longitude is malformed")))
-    (vector ξlatNum ξlonNum)))
+    (vector -latNum -lonNum)))
 
-;; (defun minsec-to-dec (φlatlong)
+;; (defun minsec-to-dec (_latlong)
 ;;   "Convert latitude longitude string ΦLATLONG in minutes second format to decimal.
 
 ;; For example: 「37°26′36.42″N 06°15′14.28″W」
@@ -227,10 +227,10 @@ Sample result:
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2015-05-12"
   (interactive)
-  (let (p1 p2 ξinput
-           ξcoord-x
-           ξcoord-y
-           ξcoord-y-x
+  (let (p1 p2 -input
+           -coord-x
+           -coord-y
+           -coord-y-x
            )
     (if (use-region-p)
         (progn
@@ -240,26 +240,26 @@ Version 2015-05-12"
         (setq p1 (line-beginning-position))
         (setq p2 (line-end-position))))
 
-    (setq ξinput (buffer-substring-no-properties p1 p2))
-    (if (string-match-p "°" ξinput)
+    (setq -input (buffer-substring-no-properties p1 p2))
+    (if (string-match-p "°" -input)
         (progn
-          (setq ξcoord-y-x (xah-latitude-longitude-decimalize ξinput))
-          (setq ξcoord-y (aref ξcoord-y-x 0))
-          (setq ξcoord-x (aref ξcoord-y-x 1)))
+          (setq -coord-y-x (xah-latitude-longitude-decimalize -input))
+          (setq -coord-y (aref -coord-y-x 0))
+          (setq -coord-x (aref -coord-y-x 1)))
       (progn
-        (let ( (ξxx (split-string ξinput  " " "OMIT-NULLS")))
-          (setq ξcoord-y (string-to-number (nth 0 ξxx)))
-          (setq ξcoord-x (string-to-number (nth 1 ξxx)))
-          (setq ξcoord-y-x (vector ξcoord-y ξcoord-x)))))
+        (let ( (-xx (split-string -input  " " "OMIT-NULLS")))
+          (setq -coord-y (string-to-number (nth 0 -xx)))
+          (setq -coord-x (string-to-number (nth 1 -xx)))
+          (setq -coord-y-x (vector -coord-y -coord-x)))))
     (delete-region p1 p2)
-    (xah-insert-google-map-link "�" ξcoord-y-x)))
+    (xah-insert-google-map-link "�" -coord-y-x)))
 
 
 
-(defun xah-insert-ggb-link (φfile-core-name φfile-title)
+(defun xah-insert-ggb-link (_file-core-name _file-title)
   "Insert HTML link to GeoGebra (“.ggb”) file."
   (interactive)
-  (insert "<a class=\"ggb\" href=\"../ggb/" φfile-core-name ".html\">" φfile-title "</a>"))
+  (insert "<a class=\"ggb\" href=\"../ggb/" _file-core-name ".html\">" _file-title "</a>"))
 
 (defun xah-make-ggb ()
   "Create a Geogebra file set and link.

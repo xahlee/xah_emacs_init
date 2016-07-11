@@ -23,18 +23,18 @@
 Version 2015-08-12"
   (interactive)
   (require 'xah-html-mode)
-  (let ( ξp1 ξp2 )
+  (let ( -p1 -p2 )
     (if (use-region-p)
-        (progn (setq ξp1 (region-beginning))
-               (setq ξp2 (region-end)))
+        (progn (setq -p1 (region-beginning))
+               (setq -p2 (region-end)))
       (progn
         (xah-html-skip-tag-backward)
-        (setq ξp1 (point))
+        (setq -p1 (point))
         (xah-html-skip-tag-forward)
-        (setq ξp2 (point))))
-    (set-mark ξp1)
-    (goto-char ξp2)
-    (xah-html-add-open-close-tags "span" "ref" ξp1 ξp2)
+        (setq -p2 (point))))
+    (set-mark -p1)
+    (goto-char -p2)
+    (xah-html-add-open-close-tags "span" "ref" -p1 -p2)
     ;; (xah-html-wrap-html-tag "span" "ref")
     ))
 
@@ -46,29 +46,29 @@ Also, pushes mark. You can go back to previous location `exchange-point-and-mark
 WARNING: This command saves buffer if it's a file.
 Version 2016-04-12"
   (interactive)
-  (let (ξp1 ξp2 ξnum ξbufferTextOrig)
+  (let (-p1 -p2 -num -bufferTextOrig)
     (push-mark)
     (goto-char 1)
     (when (search-forward "<div class=\"byline\">" nil)
       (progn
-        ;; set ξp1 ξp2. they are boundaries of inner text
-        (setq ξp1 (point))
+        ;; set -p1 -p2. they are boundaries of inner text
+        (setq -p1 (point))
         (backward-char 1)
         (search-forward "</div>" )
         (backward-char 6)
-        (setq ξp2 (point)))
+        (setq -p2 (point)))
 
-      (let ((ξbylineText (buffer-substring-no-properties ξp1 ξp2)))
-        (when (> (length ξbylineText) 110)
-          (user-error "something's probably wrong. the length for the byline is long: 「%s」" ξbylineText )))
+      (let ((-bylineText (buffer-substring-no-properties -p1 -p2)))
+        (when (> (length -bylineText) 110)
+          (user-error "something's probably wrong. the length for the byline is long: 「%s」" -bylineText )))
 
       (save-restriction
-        (narrow-to-region ξp1 ξp2)
+        (narrow-to-region -p1 -p2)
 
-        (setq ξbufferTextOrig (buffer-string ))
-        (setq ξnum (count-matches "<time>" (point-min) (point-max)))
+        (setq -bufferTextOrig (buffer-string ))
+        (setq -num (count-matches "<time>" (point-min) (point-max)))
 
-        (if (equal ξnum 1)
+        (if (equal -num 1)
             (progn
               (goto-char (point-min))
               (search-forward "</time>")
@@ -78,29 +78,29 @@ Version 2016-04-12"
 
           (progn
             ;; if there are more than 1 “time” tag, delete the last one
-            (let (ξp3 ξp4)
+            (let (-p3 -p4)
               (goto-char (point-max))
               (search-backward "</time>")
               (search-forward "</time>")
-              (setq ξp4 (point))
+              (setq -p4 (point))
               (search-backward "<time>")
-              (setq ξp3 (point))
-              (delete-region ξp3 ξp4 ))
+              (setq -p3 (point))
+              (delete-region -p3 -p4 ))
 
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
             (when (not (looking-at "\\.")) (insert "."))
             (goto-char (point-max))))
 
         ;; backup
-        (let ((ξfname (buffer-file-name)))
-          (if ξfname
-              (let ((ξbackup-name
-                     (concat ξfname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
-                (copy-file ξfname ξbackup-name t)
-                (message (concat "Backup saved at: " ξbackup-name)))))
+        (let ((-fname (buffer-file-name)))
+          (if -fname
+              (let ((-backup-name
+                     (concat -fname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
+                (copy-file -fname -backup-name t)
+                (message (concat "Backup saved at: " -backup-name)))))
 
         (save-buffer)
-        (message "%s\nchanged to\n%s" ξbufferTextOrig (buffer-string )))
+        (message "%s\nchanged to\n%s" -bufferTextOrig (buffer-string )))
       )))
 
 (defun xahsite-update-page-tag ()
@@ -121,32 +121,32 @@ words-4.html
   (interactive)
   (require 'sgml-mode)
   (let* (
-         ξp1 ξp2
+         -p1 -p2
          (_setBoundary
           (save-excursion
             (if (re-search-backward "\n[ \t]*\n" nil "move")
                 (progn (re-search-forward "\n[ \t]*\n")
-                       (setq ξp1 (point)))
-              (setq ξp1 (point)))
+                       (setq -p1 (point)))
+              (setq -p1 (point)))
             (if (re-search-forward "\n[ \t]*\n" nil "move")
                 (progn (re-search-backward "\n[ \t]*\n")
-                       (setq ξp2 (point)))
-              (setq ξp2 (point)))))
-         (ξfileList (split-string (buffer-substring-no-properties ξp1 ξp2) "\n" t))
-         ξpageNavStr )
+                       (setq -p2 (point)))
+              (setq -p2 (point)))))
+         (-fileList (split-string (buffer-substring-no-properties -p1 -p2) "\n" t))
+         -pageNavStr )
 
-    (delete-region ξp1 ξp2)
+    (delete-region -p1 -p2)
 
     ;; generate the page nav string
-    (setq ξpageNavStr
+    (setq -pageNavStr
           (format "<nav class=\"page\">\n%s</nav>"
-                  (let (ξresult ξlinkPath ξfTitle (ξi 0))
-                    (while (< ξi (length ξfileList))
-                      (setq ξlinkPath (elt ξfileList ξi))
-                      (setq ξfTitle (xah-html-get-html-file-title ξlinkPath))
-                      (setq ξresult (concat ξresult "<a href=\"" ξlinkPath "\" title=\"" ξfTitle "\">" (number-to-string (1+ ξi)) "</a>\n"))
-                      (setq ξi (1+ ξi)))
-                    ξresult
+                  (let (-result -linkPath -fTitle (-i 0))
+                    (while (< -i (length -fileList))
+                      (setq -linkPath (elt -fileList -i))
+                      (setq -fTitle (xah-html-get-html-file-title -linkPath))
+                      (setq -result (concat -result "<a href=\"" -linkPath "\" title=\"" -fTitle "\">" (number-to-string (1+ -i)) "</a>\n"))
+                      (setq -i (1+ -i)))
+                    -result
                     )))
 
     ;; open each file, insert the page nav string
@@ -158,20 +158,20 @@ words-4.html
 
        (if
            (search-forward "<nav class=\"page\">" nil t)
-           (let (ξp3 ξp4 )
+           (let (-p3 -p4 )
              (search-backward "<")
-             (setq ξp3 (point))
+             (setq -p3 (point))
              (sgml-skip-tag-forward 1)
-             (setq ξp4 (point))
-             (delete-region ξp3 ξp4)
-             (insert ξpageNavStr))
+             (setq -p4 (point))
+             (delete-region -p3 -p4)
+             (insert -pageNavStr))
          (progn
            (search-forward "<script><!--
 google_ad_client")
            (progn
              (search-backward "<script>")
-             (insert ξpageNavStr "\n\n")))))
-     ξfileList)))
+             (insert -pageNavStr "\n\n")))))
+     -fileList)))
 
 (defun xah-syntax-color-hex ()
   "Syntax color text of the form 「#ff1100」 and 「#abc」 in current buffer.
@@ -266,17 +266,17 @@ When cursor is in HTML link file path, e.g.  <img src=\"img/emacs_logo.png\" > a
 Version 2015-08-07"
   (interactive)
   (let* (
-         (ξbounds (bounds-of-thing-at-point 'filename))
-         (ξinputPath (buffer-substring-no-properties (car ξbounds) (cdr ξbounds)))
-         (ξexpandedPath (expand-file-name ξinputPath (file-name-directory (or (buffer-file-name) default-directory ))))
-         (ξnewPath (read-string "New name: " ξexpandedPath nil ξexpandedPath )))
-    (if (file-exists-p ξnewPath)
-        (progn (user-error "file 「%s」 exist." ξnewPath ))
+         (-bounds (bounds-of-thing-at-point 'filename))
+         (-inputPath (buffer-substring-no-properties (car -bounds) (cdr -bounds)))
+         (-expandedPath (expand-file-name -inputPath (file-name-directory (or (buffer-file-name) default-directory ))))
+         (-newPath (read-string "New name: " -expandedPath nil -expandedPath )))
+    (if (file-exists-p -newPath)
+        (progn (user-error "file 「%s」 exist." -newPath ))
       (progn
-        (rename-file ξexpandedPath ξnewPath)
-        (message "rename to %s" ξnewPath)
-        (delete-region (car ξbounds) (cdr ξbounds))
-        (insert (xahsite-filepath-to-href-value ξnewPath (or (buffer-file-name) default-directory)))))))
+        (rename-file -expandedPath -newPath)
+        (message "rename to %s" -newPath)
+        (delete-region (car -bounds) (cdr -bounds))
+        (insert (xahsite-filepath-to-href-value -newPath (or (buffer-file-name) default-directory)))))))
 
 (defun xah-move-image-file (dirName fileName)
   "move image file at

@@ -4,9 +4,9 @@
   "Select text between ASCII quotes, single or double."
   (interactive)
   (let (p1 p2 (parse-sexp-lookup-properties nil)
-           (ξtemp-syn-table (make-syntax-table)))
-    (modify-syntax-entry ?\" "\"" ξtemp-syn-table)
-    (with-syntax-table ξtemp-syn-table
+           (-temp-syn-table (make-syntax-table)))
+    (modify-syntax-entry ?\" "\"" -temp-syn-table)
+    (with-syntax-table -temp-syn-table
       (if (nth 3 (syntax-ppss))
           (progn
             (if (>= emacs-major-version 25)
@@ -24,23 +24,23 @@
   "Select text between the nearest brackets or quote."
   (interactive)
   (let (pos p1 p2 (parse-sexp-lookup-properties nil)
-            (ξtemp-syn-table (make-syntax-table)))
-    (modify-syntax-entry ?\" "\"" ξtemp-syn-table)
-    (modify-syntax-entry ?\« "(»" ξtemp-syn-table)
-    (modify-syntax-entry ?\» ")«" ξtemp-syn-table)
-    (modify-syntax-entry ?\‹ "(›" ξtemp-syn-table)
-    (modify-syntax-entry ?\› ")‹" ξtemp-syn-table)
-    (modify-syntax-entry ?\“ "(”" ξtemp-syn-table)
-    (modify-syntax-entry ?\” ")“" ξtemp-syn-table)
+            (-temp-syn-table (make-syntax-table)))
+    (modify-syntax-entry ?\" "\"" -temp-syn-table)
+    (modify-syntax-entry ?\« "(»" -temp-syn-table)
+    (modify-syntax-entry ?\» ")«" -temp-syn-table)
+    (modify-syntax-entry ?\‹ "(›" -temp-syn-table)
+    (modify-syntax-entry ?\› ")‹" -temp-syn-table)
+    (modify-syntax-entry ?\“ "(”" -temp-syn-table)
+    (modify-syntax-entry ?\” ")“" -temp-syn-table)
     (when (or
            (string= major-mode "xah-html-mode")
            (string= major-mode "xml-mode")
            (string= major-mode "nxml-mode")
            (string= major-mode "html-mode"))
-      (modify-syntax-entry ?\> "(<" ξtemp-syn-table)
-      (modify-syntax-entry ?\< ")>" ξtemp-syn-table))
+      (modify-syntax-entry ?\> "(<" -temp-syn-table)
+      (modify-syntax-entry ?\< ")>" -temp-syn-table))
 
-    (with-syntax-table ξtemp-syn-table
+    (with-syntax-table -temp-syn-table
       (if (nth 3 (syntax-ppss))
           (xah-select-text-in-quote-by-syntax-table)
         (xah-select-text-in-bracket-by-syntax-table)))))
@@ -50,23 +50,23 @@
 ⁖  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩."
   (interactive)
   (let (pos p1 p2 (parse-sexp-lookup-properties nil)
-            (ξtemp-syn-table (make-syntax-table)))
-    (modify-syntax-entry ?\" "\"" ξtemp-syn-table)
-    (modify-syntax-entry ?\« "(»" ξtemp-syn-table)
-    (modify-syntax-entry ?\» ")«" ξtemp-syn-table)
-    (modify-syntax-entry ?\‹ "(›" ξtemp-syn-table)
-    (modify-syntax-entry ?\› ")‹" ξtemp-syn-table)
-    (modify-syntax-entry ?\“ "(”" ξtemp-syn-table)
-    (modify-syntax-entry ?\” ")“" ξtemp-syn-table)
+            (-temp-syn-table (make-syntax-table)))
+    (modify-syntax-entry ?\" "\"" -temp-syn-table)
+    (modify-syntax-entry ?\« "(»" -temp-syn-table)
+    (modify-syntax-entry ?\» ")«" -temp-syn-table)
+    (modify-syntax-entry ?\‹ "(›" -temp-syn-table)
+    (modify-syntax-entry ?\› ")‹" -temp-syn-table)
+    (modify-syntax-entry ?\“ "(”" -temp-syn-table)
+    (modify-syntax-entry ?\” ")“" -temp-syn-table)
     (when (or
            (string= major-mode "xah-html-mode")
            (string= major-mode "xml-mode")
            (string= major-mode "nxml-mode")
            (string= major-mode "html-mode"))
-      (modify-syntax-entry ?\> "(<" ξtemp-syn-table)
-      (modify-syntax-entry ?\< ")>" ξtemp-syn-table))
+      (modify-syntax-entry ?\> "(<" -temp-syn-table)
+      (modify-syntax-entry ?\< ")>" -temp-syn-table))
 
-    (with-syntax-table ξtemp-syn-table
+    (with-syntax-table -temp-syn-table
       (setq pos (point))
       (search-backward-regexp "\\s(" nil t )
       (setq p1 (point))

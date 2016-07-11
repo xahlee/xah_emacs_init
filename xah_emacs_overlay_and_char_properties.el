@@ -36,31 +36,31 @@
 ;;   (let ()
 ;;     (get-char-property-and-overlay (point) PROP &optional)))
 
-(defun xah-make-overlay-bold-region (φbegin φend)
+(defun xah-make-overlay-bold-region (_begin _end)
   "make the region bold, using overlay.
 Calls `make-overlay' and `overlay-put'. This:
- (overlay-put (make-overlay φbegin φend) 'face 'bold)"
+ (overlay-put (make-overlay _begin _end) 'face 'bold)"
   (interactive "r")
   (progn
-    (overlay-put (make-overlay φbegin φend) 'face 'bold)
+    (overlay-put (make-overlay _begin _end) 'face 'bold)
     (setq mark-active nil )))
 
-(defun xah-remove-overlays-region (φbegin φend)
+(defun xah-remove-overlays-region (_begin _end)
   "Call `remove-overlays' interactively.
-Call (remove-overlays φbegin φend)"
+Call (remove-overlays _begin _end)"
   (interactive "r")
-  (remove-overlays φbegin φend))
+  (remove-overlays _begin _end))
 
 (defun xah-show-overlay-at-point ()
   "Show the overlay at cursor position (if any).
 Move cursor to begining of first overlay, mark at the overlay's end. And print the overlay object to message buffer."
   (interactive)
-  (let ((ξoverlays (overlays-at (point))))
-    (if ξoverlays
+  (let ((-overlays (overlays-at (point))))
+    (if -overlays
         (progn
-          (goto-char (overlay-start (nth 0 ξoverlays)))
-          (push-mark (overlay-end (nth 0 ξoverlays)))
-          (print (overlay-properties (nth 0 ξoverlays))))
+          (goto-char (overlay-start (nth 0 -overlays)))
+          (push-mark (overlay-end (nth 0 -overlays)))
+          (print (overlay-properties (nth 0 -overlays))))
       (progn (message "No overlay found.")))))
 
 (defun xah-goto-next-overlay ()
@@ -69,32 +69,32 @@ call `next-overlay-change'.
 move cursor there.
 note: it seems `linum-mode' sets a overlay on every line, i think."
   (interactive)
-  (let* ((ξol-pos (next-overlay-change (point))))
-    (goto-char ξol-pos )))
+  (let* ((-ol-pos (next-overlay-change (point))))
+    (goto-char -ol-pos )))
 
 (defun xah-goto-previous-overlay ()
   "Goto next overlay.
 call `next-overlay-change'."
   (interactive)
-  (let* ((ξol-pos (previous-overlay-change (point))))
-    (goto-char ξol-pos)))
+  (let* ((-ol-pos (previous-overlay-change (point))))
+    (goto-char -ol-pos)))
 
 (defun xah-show-all-overlays ()
   "Call `overlay-in'.
  (overlays-in (point-min) (point-max))
 print the list result."
   (interactive)
-  (let* ((ξols (overlays-in (point-min) (point-max))))
-    (print ξols)))
+  (let* ((-ols (overlays-in (point-min) (point-max))))
+    (print -ols)))
 
-(defun xah-invisible-region (φbegin φend hide-p)
+(defun xah-invisible-region (_begin _end hide-p)
   "Hide or show region ΦBEGIN to ΦEND, according to HIDE-P."
-  (remove-overlays φbegin φend 'invisible 'xah)
+  (remove-overlays _begin _end 'invisible 'xah)
   (when hide-p
-    (let ((ξovly (make-overlay φbegin φend nil 'front-advance)))
-      (overlay-put ξovly 'evaporate t)
-      (overlay-put ξovly 'invisible 'xah)
-      (overlay-put ξovly 'isearch-open-invisible 'xah-isearch-open-invisible))))
+    (let ((-ovly (make-overlay _begin _end nil 'front-advance)))
+      (overlay-put -ovly 'evaporate t)
+      (overlay-put -ovly 'invisible 'xah)
+      (overlay-put -ovly 'isearch-open-invisible 'xah-isearch-open-invisible))))
 
 ;; add-to-invisibility-spec
 ;; remove-from-invisibility-spec
@@ -102,13 +102,13 @@ print the list result."
 
 ;; (add-to-invisibility-spec '(outline . t))
 
-(defun xhide (φbegin φend)
+(defun xhide (_begin _end)
   "DOCSTRING"
   (interactive "r")
   (progn
     (xah-invisible-region 50 100 t)))
 
-(defun xshow (φbegin φend)
+(defun xshow (_begin _end)
   "DOCSTRING"
   (interactive "r")
   (progn

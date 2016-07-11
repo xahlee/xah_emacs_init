@@ -9,38 +9,38 @@ Example:
 <object type=\"application/x-shockwave-flash\" data=\"http://video.google.com/googleplayer.swf?docid=3685846746009919856&amp;fs=true\" width=\"400\" height=\"326\"><param name=\"movie\" value=\"http://video.google.com/googleplayer.swf?docid=3685846746009919856&amp;fs=true\"><param name=\"allowFullScreen\" value=\"true\"><param name=\"allowScriptAccess\" value=\"always\"></object>
 "
   (interactive)
-  (let (ξp1 ξp2 ξvID ξinputStr)
-    (setq ξp1 (line-beginning-position))
-    (setq ξp2 (line-end-position))
-    (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
+  (let (-p1 -p2 -vID -inputStr)
+    (setq -p1 (line-beginning-position))
+    (setq -p2 (line-end-position))
+    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
 
-    (string-match "docid=\\(.\\{19\\}\\)" ξinputStr)
-    (setq ξvID (match-string 1 ξinputStr))
+    (string-match "docid=\\(.\\{19\\}\\)" -inputStr)
+    (setq -vID (match-string 1 -inputStr))
 
-    ;; (setq ξvID (replace-regexp-in-string "^http://video\\.google\\.com/videoplay\\?docid=" "" ξvID))
-    ;; (setq ξvID (replace-regexp-in-string "&.+" "" ξvID))
-    ;; (setq ξvID (replace-regexp-in-string "#$" "" ξvID))
+    ;; (setq -vID (replace-regexp-in-string "^http://video\\.google\\.com/videoplay\\?docid=" "" -vID))
+    ;; (setq -vID (replace-regexp-in-string "&.+" "" -vID))
+    ;; (setq -vID (replace-regexp-in-string "#$" "" -vID))
 
-    (delete-region ξp1 ξp2)
-    (insert (google-video-string ξvID))))
+    (delete-region -p1 -p2)
+    (insert (google-video-string -vID))))
 
-(defun google-video-string (φvideo-id)
-  "Return HTML code for embedding video of Google Video's φvideo-id.
+(defun google-video-string (_video-id)
+  "Return HTML code for embedding video of Google Video's _video-id.
 Example call:
  (google-video-string \"2336889538700185341\")"
-  (let (ξurl)
+  (let (-url)
 
-    (setq ξurl (concat "http://video\.google\.com/googleplayer\.swf\?docid=" φvideo-id "&amp;fs=true" ))
+    (setq -url (concat "http://video\.google\.com/googleplayer\.swf\?docid=" _video-id "&amp;fs=true" ))
     (concat
-     "<object type=\"application/x-shockwave-flash\" data=\"" ξurl
-     "\" width=\"400\" height=\"326\"><param name=\"movie\" value=\"" ξurl "\"><param name=\"allowFullScreen\" value=\"true\"><param name=\"allowScriptAccess\" value=\"always\"></object>")))
+     "<object type=\"application/x-shockwave-flash\" data=\"" -url
+     "\" width=\"400\" height=\"326\"><param name=\"movie\" value=\"" -url "\"><param name=\"allowFullScreen\" value=\"true\"><param name=\"allowScriptAccess\" value=\"always\"></object>")))
 
-(defun dailymotion-video-string (φvideo-id)
-  "Return HTML code for embedding video of dailymotion.com's φvideo-id.
+(defun dailymotion-video-string (_video-id)
+  "Return HTML code for embedding video of dailymotion.com's _video-id.
 Example call:
  (dailymotion-linkify \"x1af0v\")"
   (concat
-   "<object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/" φvideo-id "\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/" φvideo-id "\"><param name=\"allowFullScreen\" value=\"true\"></object>"
+   "<object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/" _video-id "\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/" _video-id "\"><param name=\"allowFullScreen\" value=\"true\"></object>"
    ))
 
 ;; (defun dailymotion-video-linkify ()
@@ -52,17 +52,17 @@ Example call:
 ;; it becomes
 ;; <object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/xz3am\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/xz3am\"><param name=\"allowFullScreen\" value=\"true\"></object>"
 ;; 	(interactive)
-;; 	(let (ξp1 ξp2 ξinputStr ξtmp ξvID)
-;;     (setq ξp1 (line-beginning-position) )
-;;     (setq ξp2 (line-end-position) )
-;;     (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
+;; 	(let (-p1 -p2 -inputStr -tmp -vID)
+;;     (setq -p1 (line-beginning-position) )
+;;     (setq -p2 (line-end-position) )
+;;     (setq -inputStr (buffer-substring-no-properties -p1 -p2))
 
-;;     (setq ξtmp (replace-regexp-in-string "http://www\\.dailymotion\\.com/video/" "" ξinputStr))
-;;     (setq ξtmp (car (split-string ξtmp "_")))
-;;     (setq ξvID ξtmp)
+;;     (setq -tmp (replace-regexp-in-string "http://www\\.dailymotion\\.com/video/" "" -inputStr))
+;;     (setq -tmp (car (split-string -tmp "_")))
+;;     (setq -vID -tmp)
 
-;;     (delete-region ξp1 ξp2)
-;;     (insert (dailymotion-video-string ξvID)
+;;     (delete-region -p1 -p2)
+;;     (insert (dailymotion-video-string -vID)
 ;;             ) ))
 
 (defun vimeo-linkify ()
@@ -80,36 +80,36 @@ it becomes
 </figure>
 "
   (interactive)
-  (let (ξp1 ξp2 ξinputStr ξvID)
-    (setq ξp1 (line-beginning-position))
-    (setq ξp2 (line-end-position))
-    (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
+  (let (-p1 -p2 -inputStr -vID)
+    (setq -p1 (line-beginning-position))
+    (setq -p2 (line-end-position))
+    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
 
     ;; http://player.vimeo.com/video/5228616
 
-    (setq ξvID
-          (if (string-match "vimeo.com/video/" ξinputStr)
-              (progn (string-match "https*://.*vimeo.com/video/\\([0-9]+\\)" ξinputStr)
-                     (match-string 1 ξinputStr))
-            (progn (string-match "https*://vimeo.com/\\([0-9]+\\)" ξinputStr)
-                   (match-string 1 ξinputStr))))
+    (setq -vID
+          (if (string-match "vimeo.com/video/" -inputStr)
+              (progn (string-match "https*://.*vimeo.com/video/\\([0-9]+\\)" -inputStr)
+                     (match-string 1 -inputStr))
+            (progn (string-match "https*://vimeo.com/\\([0-9]+\\)" -inputStr)
+                   (match-string 1 -inputStr))))
 
-    (delete-region ξp1 ξp2)
+    (delete-region -p1 -p2)
     (insert (concat
              "<figure>\n"
-             "<iframe src=\"http://player.vimeo.com/video/" ξvID "\" width=\"650\" height=\"365\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>\n"
+             "<iframe src=\"http://player.vimeo.com/video/" -vID "\" width=\"650\" height=\"365\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>\n"
              "<figcaption>
 </figcaption>
 </figure>"
              ))
     (search-backward "</figcaption>")))
 
-(defun tudou-video-string (φvideo-id)
-  "Return HTML code for embedding video of tudou.com's φvideo-id.
+(defun tudou-video-string (_video-id)
+  "Return HTML code for embedding video of tudou.com's _video-id.
 Example call:
  (tudou-video-string \"9OoINUl31dQ\")"
-  (let ((ξurl (concat "http://www.tudou.com/v/" φvideo-id "/v.swf" )))
-    (concat "<object type=\"application/x-shockwave-flash\" data=\"" ξurl "\" width=\"480\" height=\"400\"><param name=\"movie\" value=\"" ξurl "\"></object>" )))
+  (let ((-url (concat "http://www.tudou.com/v/" _video-id "/v.swf" )))
+    (concat "<object type=\"application/x-shockwave-flash\" data=\"" -url "\" width=\"480\" height=\"400\"><param name=\"movie\" value=\"" -url "\"></object>" )))
 
 (defun tudou-video-linkify ()
   "Make the current line into a embeded HTML video object.
@@ -121,16 +121,16 @@ it becomes
 <object type=\"application/x-shockwave-flash\" data=\"http://www.tudou.com/v/9OoINUl31dQ/v.swf\" width=\"480\" height=\"400\"><param name=\"movie\" value=\"http://www.tudou.com/v/9OoINUl31dQ/v.swf\"></object>"
 
   (interactive)
-  (let (ξp1 ξp2 ξinputStr ξtmp ξvID)
-    (setq ξp1 (line-beginning-position))
-    (setq ξp2 (line-end-position))
-    (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξtmp (replace-regexp-in-string "http://www\\.tudou\\.com/programs/view/" "" ξinputStr))
-    (setq ξtmp (replace-regexp-in-string "/" "" ξtmp))
-    (setq ξvID ξtmp)
+  (let (-p1 -p2 -inputStr -tmp -vID)
+    (setq -p1 (line-beginning-position))
+    (setq -p2 (line-end-position))
+    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
+    (setq -tmp (replace-regexp-in-string "http://www\\.tudou\\.com/programs/view/" "" -inputStr))
+    (setq -tmp (replace-regexp-in-string "/" "" -tmp))
+    (setq -vID -tmp)
 
-    (delete-region ξp1 ξp2)
-    (insert (tudou-video-string ξvID))))
+    (delete-region -p1 -p2)
+    (insert (tudou-video-string -vID))))
 
 (defun break-video-linkify ()
   "Make the current line into a embeded HTML video object.
@@ -147,46 +147,46 @@ This is valid HTML.
 
 See: URL  `http://xahlee.info/js/html_embed_video.html'"
   (interactive)
-  (let (ξp1 ξp2 ξtmp ξwidth ξheight ξvID ξclassid ξhashcode)
-    (setq ξp1 (line-beginning-position))
-    (setq ξp2 (line-end-position))
+  (let (-p1 -p2 -tmp -width -height -vID -classid -hashcode)
+    (setq -p1 (line-beginning-position))
+    (setq -p2 (line-end-position))
 
-    (setq ξtmp (buffer-substring-no-properties ξp1 ξp2))
+    (setq -tmp (buffer-substring-no-properties -p1 -p2))
 
     (with-temp-buffer
       (insert 
-       (replace-regexp-in-string "\"" "†" ξtmp) ; change double quote to something else to avoid tooth pick syndrom in regex
+       (replace-regexp-in-string "\"" "†" -tmp) ; change double quote to something else to avoid tooth pick syndrom in regex
        )
       (goto-char (point-min))
       (search-forward-regexp "width=†\\([[:digit:]]+\\)†")
-      (setq ξwidth (match-string 1))
+      (setq -width (match-string 1))
 
       (search-forward-regexp "height=†\\([[:digit:]]+\\)†")
-      (setq ξheight (match-string 1))
+      (setq -height (match-string 1))
 
       (search-forward-regexp "id=†\\([[:digit:]]+\\)†")
-      (setq ξvID (match-string 1))
+      (setq -vID (match-string 1))
 
       (search-forward-regexp "classid=†\\([^†]+\\)†")
-      (setq ξclassid (match-string 1))
+      (setq -classid (match-string 1))
 
       (search-forward-regexp "http://embed\\.break\\.com/\\([^†]+\\)†")
-      (setq ξhashcode (match-string 1)))
+      (setq -hashcode (match-string 1)))
 
-    (delete-region ξp1 ξp2)
+    (delete-region -p1 -p2)
     (insert
      (concat
       "<object type=\"application/x-shockwave-flash\" data=\"http://embed.break.com/"
-      ξhashcode
+      -hashcode
       "\" width=\""
-      ξwidth
+      -width
       "\" height=\""
-      ξheight
+      -height
       "\"><param name=\"movie\" value=\"http://embed.break.com/"
-      ξhashcode
+      -hashcode
       "\"><param name=\"allowScriptAccess\" value=\"always\"><param name=\"id\" value=\""
-      ξvID
+      -vID
       "\"><param name=\"classid=\" value=\""
-      ξclassid
+      -classid
       "\"></object>"))))
 

@@ -18,12 +18,12 @@ URL `http://ergoemacs.org/emacs/elisp_chinese_char_linkify.html'
 Version 2016-01-18"
   (interactive)
   (let (
-        (ξtemplate
+        (-template
          "<div class=\"chinese-etymology-96656\"><b class=\"w\">�</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|�\">Translate</a> • <a href=\"http://en.wiktionary.org/wiki/�\">Wiktionary</a> • <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=�\">history</a></span></div>"
          )
-        (ξchar (buffer-substring-no-properties (- (point) 1) (point))))
+        (-char (buffer-substring-no-properties (- (point) 1) (point))))
     (delete-char -1)
-    (insert (replace-regexp-in-string "�" ξchar ξtemplate))))
+    (insert (replace-regexp-in-string "�" -char -template))))
 
 (defun xah-words-bold-word ()
   "wrap b tag with class w.
@@ -33,7 +33,7 @@ Version 2015-03-11"
   (progn
     (xah-html-wrap-html-tag "b" "w")))
 
-(defun xah-words-move-word-to-page (φcategory)
+(defun xah-words-move-word-to-page (_category)
   "Take current selection or block of text, ask which page to move it to."
   (interactive
    (list (ido-completing-read "Which:" '("specialwords"
@@ -52,40 +52,40 @@ Version 2015-03-11"
                                          "satwords"
                                          "writerwords"))))
   (let (
-        ξp1
-        ξp2
-        ξwordText
-        (ξdestFile (concat φcategory ".html")))
+        -p1
+        -p2
+        -wordText
+        (-destFile (concat _category ".html")))
     (if (use-region-p)
         (progn
-          (setq ξp1 (region-beginning))
-          (setq ξp2 (region-end)))
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
       (save-excursion
         (if (re-search-backward "\n[ \t]*\n" nil "move")
             (progn (re-search-forward "\n[ \t]*\n")
-                   (setq ξp1 (point)))
-          (setq ξp1 (point)))
+                   (setq -p1 (point)))
+          (setq -p1 (point)))
         (if (re-search-forward "\n[ \t]*\n" nil "move")
             (progn (re-search-backward "\n[ \t]*\n")
-                   (setq ξp2 (point)))
-          (setq ξp2 (point)))))
+                   (setq -p2 (point)))
+          (setq -p2 (point)))))
 
-    (setq ξwordText (buffer-substring-no-properties ξp1 ξp2))
-    (delete-region ξp1 ξp2 )
+    (setq -wordText (buffer-substring-no-properties -p1 -p2))
+    (delete-region -p1 -p2 )
 
-    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" ξdestFile))
+    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" -destFile))
     (goto-char 1)
     (search-forward "<section class=\"word88\">") (search-backward "<")
-    (insert ξwordText "\n\n")
+    (insert -wordText "\n\n")
     (save-buffer )
     (kill-buffer )
-    (message "Word moved to 「%s」" ξdestFile)
+    (message "Word moved to 「%s」" -destFile)
 
     (let*
         ;; save the working buffer, but make backup first
-        ((ξfname (buffer-file-name))
-         (ξbackupName (concat ξfname "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
-      (copy-file ξfname ξbackupName t)
+        ((-fname (buffer-file-name))
+         (-backupName (concat -fname "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
+      (copy-file -fname -backupName t)
       (save-buffer ))))
 
 (defun xah-words-new-word-entry ()
@@ -116,7 +116,7 @@ Version 2015-03-11"
   "Insert a word definition entry template.
 Using current word or selection."
   (interactive)
-  (let ((ξstr1
+  (let ((-str1
          (if (use-region-p)
              (buffer-substring-no-properties (region-beginning) (region-end))
            (current-word))))
@@ -124,7 +124,7 @@ Using current word or selection."
     (search-backward "</div>")
     (insert "<div class=\"def\"></div>\n")
     (search-backward "</div>")
-    (insert ξstr " = ")))
+    (insert -str " = ")))
 
 (defun xah-words-add-source ()
   "Insert a word definition entry template."
@@ -157,14 +157,14 @@ Used for the files in
 FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
   (interactive)
 
-  (let (wd egText ξp1 ξp2 p3 p4 notBolded-p)
+  (let (wd egText -p1 -p2 p3 p4 notBolded-p)
     ;; grab the word
     (search-forward "<p class=\"wd\">")
-    (setq ξp1 (point))
+    (setq -p1 (point))
     (search-forward "</p>")
     (backward-char 4)
-    (setq ξp2 (point))
-    (setq wd (buffer-substring-no-properties ξp1 ξp2))
+    (setq -p2 (point))
+    (setq wd (buffer-substring-no-properties -p1 -p2))
 
     ;; grab the example text
     (search-forward "<div class=\"bdy\">")
@@ -197,7 +197,7 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
 Wrap HTML “span” tag around current word or text selection, then
 insert a div tag above the current paragraph."
   (interactive)
-  (let ( (ξinputText
+  (let ( (-inputText
           (if (use-region-p)
               (buffer-substring-no-properties (region-beginning) (region-end))
             (current-word))))    
@@ -205,21 +205,21 @@ insert a div tag above the current paragraph."
     (search-backward "<p")
     (insert "<div class=\"xnote\"></div>\n\n")
     (search-backward "</div>")
-    (insert (format "<b class=\"x3nt\">%s</b> " ξinputText))))
+    (insert (format "<b class=\"x3nt\">%s</b> " -inputText))))
 
 (defun xah-words-word-etymology-linkify ()
   "Make the current word into a etymology reference link."
   (interactive)
-  (let (ξp1 ξp2 ξinput ξresult)
+  (let (-p1 -p2 -input -result)
     (if (use-region-p)
-        (progn (setq ξp1 (region-beginning))
-               (setq ξp2 (region-end)))
-      (progn (setq ξp1 (line-beginning-position))
-             (setq ξp2 (line-end-position))))
-    (setq ξinput (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξresult (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" ξinput "\">" ξinput "</a></span>"))
-    (delete-region ξp1 ξp2)
-    (insert ξresult)))
+        (progn (setq -p1 (region-beginning))
+               (setq -p2 (region-end)))
+      (progn (setq -p1 (line-beginning-position))
+             (setq -p2 (line-end-position))))
+    (setq -input (buffer-substring-no-properties -p1 -p2))
+    (setq -result (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" -input "\">" -input "</a></span>"))
+    (delete-region -p1 -p2)
+    (insert -result)))
 
 (defun xah-words-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.
@@ -236,12 +236,12 @@ already bold. Then, ask user whether that should be bold."
         ;;(replace-match "<span class=\"x-w\">\\1</span>" t)
         ))))
 
-(defun xah-words-find-word-usage (φword)
+(defun xah-words-find-word-usage (_word)
   "Grep a dir for a word's usage."
   (interactive "sWord to search: ")
   (require 'grep)
   (grep-compute-defaults)
-  (rgrep φword "*html" "~/web/p")
+  (rgrep _word "*html" "~/web/p")
 ;; ~/web/p
 ;; ~/web/flatland/
 ;; ~/web/Periodic_dosage_dir/_p2/russell-lecture.html

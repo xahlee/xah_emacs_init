@@ -26,17 +26,17 @@ The regex to be used for this function is:
 
 To use a function in query-replace-regexp, do “\\,(xah-wikipedia-link-replacement)”.
 ."
-  (let (langCode articlePath linkText linkText2 ξreturnText)
+  (let (langCode articlePath linkText linkText2 -returnText)
     (setq langCode (buffer-substring (match-beginning 1) (match-end 1)))
     (setq articlePath (buffer-substring (match-beginning 2) (match-end 2)))
     (setq linkText (buffer-substring (match-beginning 3) (match-end 3)))
     (setq linkText2
           (replace-regexp-in-string "_" " " articlePath))
-    (setq ξreturnText
+    (setq -returnText
           (concat "<a href=\"http://"
                   langCode ".wikipedia.org/wiki/"
                   articlePath "\">" linkText2 "</a>" ))
-    ξreturnText
+    -returnText
     )
   )
 

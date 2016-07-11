@@ -8,8 +8,8 @@
 
 ; loading custom commands and functions
 
-(defun xah-get-fullpath (φfile-relative-path)
-  "Return the full path of φfile-relative-path, relative to caller's file location.
+(defun xah-get-fullpath (_file-relative-path)
+  "Return the full path of _file-relative-path, relative to caller's file location.
 
 Example: If you have this line
  (xah-get-fullpath \"../xyz.el\")
@@ -27,7 +27,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ② To know the current file's full path, emacs has 2 ways: `load-file-name' and `buffer-file-name'. If the file is loaded by `load', then `load-file-name' works but `buffer-file-name' doesn't. If the file is called by `eval-buffer', then `load-file-name' is nil. You want to be able to get the current file's full path regardless the file is run by `load' or interactively by `eval-buffer'."
 
-  (concat (file-name-directory (or load-file-name buffer-file-name)) φfile-relative-path)
+  (concat (file-name-directory (or load-file-name buffer-file-name)) _file-relative-path)
 )
 
 
@@ -120,7 +120,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_str_rep_func"))
 
-(load (xah-get-fullpath "xah_emacs_font"))
+;; (load (xah-get-fullpath "xah_emacs_font"))
 (load (xah-get-fullpath "xah_emacs_misc"))
 
 (load (xah-get-fullpath "xah_emacs_atom_rss_util"))

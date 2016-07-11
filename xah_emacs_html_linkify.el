@@ -16,46 +16,46 @@ become
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
 Version 2015-12-23"
   (interactive)
-  (let ( ξp1 ξp2 ξimgPath ξhrefValue ξaltText ξimgWH ξwidth ξheight)
+  (let ( -p1 -p2 -imgPath -hrefValue -altText -imgWH -width -height)
     (save-excursion
-      (let (ξp0)
-        (setq ξp0 (point))
+      (let (-p0)
+        (setq -p0 (point))
         ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
         (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-        (setq ξp1 (point))
-        (goto-char ξp0)
+        (setq -p1 (point))
+        (goto-char -p0)
         (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-        (setq ξp2 (point))
-        (goto-char ξp0))
-      (setq ξimgPath (buffer-substring-no-properties ξp1 ξp2 ))
-      (setq ξhrefValue
+        (setq -p2 (point))
+        (goto-char -p0))
+      (setq -imgPath (buffer-substring-no-properties -p1 -p2 ))
+      (setq -hrefValue
             (file-relative-name
-             ξimgPath
+             -imgPath
              (file-name-directory (or (buffer-file-name) default-directory))))
-      (setq ξaltText
+      (setq -altText
             (replace-regexp-in-string
              "_" " "
              (replace-regexp-in-string
-              "\\.[A-Za-z]\\{3,4\\}$" "" (file-name-nondirectory ξimgPath) t t) t t))
-      (setq ξimgWH (xah-get-image-dimensions ξimgPath))
-      (setq ξwidth (number-to-string (elt ξimgWH 0)))
-      (setq ξheight (number-to-string (elt ξimgWH 1))))
+              "\\.[A-Za-z]\\{3,4\\}$" "" (file-name-nondirectory -imgPath) t t) t t))
+      (setq -imgWH (xah-get-image-dimensions -imgPath))
+      (setq -width (number-to-string (elt -imgWH 0)))
+      (setq -height (number-to-string (elt -imgWH 1))))
 
-    (delete-region ξp1 ξp2)
+    (delete-region -p1 -p2)
     (insert
-     (if (or (equal ξwidth "0") (equal ξheight "0"))
+     (if (or (equal -width "0") (equal -height "0"))
          (concat
           "<img src=\""
-          ξhrefValue
-          "\"" " " "alt=\"" ξaltText "\"" " />")
+          -hrefValue
+          "\"" " " "alt=\"" -altText "\"" " />")
        (concat
         "<img src=\""
-        ξhrefValue
-        "\"" " " "alt=\"" ξaltText "\""
-        " width=\"" ξwidth "\""
-        " height=\"" ξheight "\" />")))))
+        -hrefValue
+        "\"" " " "alt=\"" -altText "\""
+        " width=\"" -width "\""
+        " height=\"" -height "\" />")))))
 
-(defun xahsite-html-image-linkify ( &optional φbegin φend)
+(defun xahsite-html-image-linkify ( &optional _begin _end)
   "Replace a image file's path under cursor with a HTML img tag.
 If there's a text selection, use that as path.
 For example,
@@ -67,50 +67,50 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
 Version 2015-05-12"
   (interactive)
-  (let ( ξp0 ξp1 ξp2 ξinputPath ξcurrentDir ξfullPath ξaltText )
-    (progn ; sets ξp1 ξp2
-      (if φbegin
-          (progn (setq ξp1 φbegin) (setq ξp2 φend))
+  (let ( -p0 -p1 -p2 -inputPath -currentDir -fullPath -altText )
+    (progn ; sets -p1 -p2
+      (if _begin
+          (progn (setq -p1 _begin) (setq -p2 _end))
         (if (use-region-p)
-            (progn (setq ξp1 (region-beginning)) (setq ξp2 (region-end)))
+            (progn (setq -p1 (region-beginning)) (setq -p2 (region-end)))
           (save-excursion
-            (setq ξp0 (point))
+            (setq -p0 (point))
             ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
             (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-            (setq ξp1 (point))
-            (goto-char ξp0)
+            (setq -p1 (point))
+            (goto-char -p0)
             (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-            (setq ξp2 (point))))))
+            (setq -p2 (point))))))
 
     (progn
-      (setq ξinputPath (buffer-substring-no-properties ξp1 ξp2))
-      (setq ξcurrentDir (file-name-directory (or (buffer-file-name) default-directory )))
-      (setq ξfullPath (expand-file-name (xah-local-url-to-file-path ξinputPath) ξcurrentDir ))
-      (setq ξaltText (replace-regexp-in-string "-s$" "" (replace-regexp-in-string "_" " " (file-name-sans-extension (file-name-nondirectory ξfullPath)) t t))))
+      (setq -inputPath (buffer-substring-no-properties -p1 -p2))
+      (setq -currentDir (file-name-directory (or (buffer-file-name) default-directory )))
+      (setq -fullPath (expand-file-name (xah-local-url-to-file-path -inputPath) -currentDir ))
+      (setq -altText (replace-regexp-in-string "-s$" "" (replace-regexp-in-string "_" " " (file-name-sans-extension (file-name-nondirectory -fullPath)) t t))))
 
-    (if (xahsite-is-link-to-xahsite-p (file-relative-name ξfullPath (or (buffer-file-name) default-directory)))
+    (if (xahsite-is-link-to-xahsite-p (file-relative-name -fullPath (or (buffer-file-name) default-directory)))
         (progn
-          (if (file-exists-p ξfullPath)
-              (let (ξwh ξw ξh ξwhStr)
-                (setq ξwh
+          (if (file-exists-p -fullPath)
+              (let (-wh -w -h -whStr)
+                (setq -wh
                       (cond
-                       ((string-match "\.svg$" ξfullPath) (xah-get-image-dimensions ξfullPath))
-                       (t (xah-get-image-dimensions ξfullPath))))
-                (setq ξw (number-to-string (elt ξwh 0)))
-                (setq ξh (number-to-string (elt ξwh 1)))
-                (setq ξwhStr
-                      (if (string-match "\.svg$" ξfullPath)
+                       ((string-match "\.svg$" -fullPath) (xah-get-image-dimensions -fullPath))
+                       (t (xah-get-image-dimensions -fullPath))))
+                (setq -w (number-to-string (elt -wh 0)))
+                (setq -h (number-to-string (elt -wh 1)))
+                (setq -whStr
+                      (if (string-match "\.svg$" -fullPath)
                           ""
-                        (format "width=\"%s\" height=\"%s\"" ξw ξh)))
-                (delete-region ξp1 ξp2)
+                        (format "width=\"%s\" height=\"%s\"" -w -h)))
+                (delete-region -p1 -p2)
                 (insert
                  (format "<img src=\"%s\" alt=\"%s\" %s />"
-                         (xahsite-filepath-to-href-value ξfullPath (or (buffer-file-name) default-directory))
-                         ξaltText ξwhStr )))
-            (error "File does not exist 「%s」" ξfullPath )))
+                         (xahsite-filepath-to-href-value -fullPath (or (buffer-file-name) default-directory))
+                         -altText -whStr )))
+            (error "File does not exist 「%s」" -fullPath )))
       (progn
-        (delete-region ξp1 ξp2)
-        (insert "<img src=\"" ξfullPath "\" alt=\"" ξaltText "\">")))))
+        (delete-region -p1 -p2)
+        (insert "<img src=\"" -fullPath "\" alt=\"" -altText "\">")))))
 
 (defun xah-image-file-to-html-figure-tag ()
   "Replace a image file's path under cursor with a HTML img tag,
@@ -140,7 +140,7 @@ This function calls `xah-html-image-linkify' to do its work."
     (search-backward "</figcaption>")
     (backward-char)))
 
-(defun xah-html-full-size-img-linkify (&optional φbegin φend)
+(defun xah-html-full-size-img-linkify (&optional _begin _end)
   "Make image file path at cursor point into a img link.
 
 Example:
@@ -151,35 +151,35 @@ becomes
 If there's a text selection, use that region as file name."
   (interactive)
   (let
-      (ξp0 ξp1 ξp2 ξinputStr ξimgPath ξdimension ξwidth ξheight ξresultStr)
-    (progn ; sets ξp1 ξp2
-      (if φbegin
+      (-p0 -p1 -p2 -inputStr -imgPath -dimension -width -height -resultStr)
+    (progn ; sets -p1 -p2
+      (if _begin
           (progn
-            (setq ξp1 φbegin)
-            (setq ξp2 φend))
+            (setq -p1 _begin)
+            (setq -p2 _end))
         (if (use-region-p)
             (progn
-              (setq ξp1 (region-beginning))
-              (setq ξp2 (region-end)))
+              (setq -p1 (region-beginning))
+              (setq -p2 (region-end)))
           (save-excursion
-            (setq ξp0 (point))
+            (setq -p0 (point))
             ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
             (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-            (setq ξp1 (point))
-            (goto-char ξp0)
+            (setq -p1 (point))
+            (goto-char -p0)
             (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-            (setq ξp2 (point))))))
+            (setq -p2 (point))))))
 
-    (setq ξinputStr (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξimgPath (xah-local-url-to-file-path ξinputStr))
-    (setq ξdimension (xah-get-image-dimensions-imk ξimgPath))
-    (setq ξwidth (number-to-string (elt ξdimension 0)))
-    (setq ξheight (number-to-string (elt ξdimension 1)))
-    (setq ξresultStr
-          (concat "<a class=\"big-i\" href=\"" (file-relative-name ξimgPath) "\" target=\"_blank\">" ξwidth "×" ξheight "</a>"))
+    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
+    (setq -imgPath (xah-local-url-to-file-path -inputStr))
+    (setq -dimension (xah-get-image-dimensions-imk -imgPath))
+    (setq -width (number-to-string (elt -dimension 0)))
+    (setq -height (number-to-string (elt -dimension 1)))
+    (setq -resultStr
+          (concat "<a class=\"big-i\" href=\"" (file-relative-name -imgPath) "\" target=\"_blank\">" -width "×" -height "</a>"))
 
-    (delete-region ξp1 ξp2)
-    (insert ξresultStr)))
+    (delete-region -p1 -p2)
+    (insert -resultStr)))
 
 (defun xah-blogger-linkify ()
   "Make URL at cursor point into a HTML link.
@@ -189,12 +189,12 @@ becomes
 
 <div class=\"blgcmt\"><a href=\"http://xahlee.blogspot.com/2010/03/some.html\">✍</a></div>"
   (interactive)
-  (let* ((ξbds (bounds-of-thing-at-point 'url))
-         (p7 (car ξbds))
-         (p8 (cdr ξbds))
-         (ξurl (buffer-substring-no-properties p7 p8)))
+  (let* ((-bds (bounds-of-thing-at-point 'url))
+         (p7 (car -bds))
+         (p8 (cdr -bds))
+         (-url (buffer-substring-no-properties p7 p8)))
     (delete-region p7 p8)
-    (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url ξurl) "\">✍</a></div>"))))
+    (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url -url) "\">✍</a></div>"))))
 
 ;; (defun xah-site-topic-linkify ()
 ;;   "Make word at cursor point into a HTML link to xah site
@@ -206,20 +206,20 @@ becomes
 ;; Version 2015-07-12"
 ;;   (interactive)
 ;;   (let (
-;;         ξp1
-;;         ξp2
-;;         ξinput-str
-;;         ξword
+;;         -p1
+;;         -p2
+;;         -input-str
+;;         -word
 ;;         )
 
 ;;     (progn
 ;;       (progn
-;;         (setq ξboundary (xah-get-thing-or-selection 'word))
+;;         (setq -boundary (xah-get-thing-or-selection 'word))
 ;;         (setq
-;;          ξinput-str (elt ξboundary 0)
-;;          ξp1 (elt ξboundary 1)
-;;          ξp2 (elt ξboundary 2))
-;;         (setq ξword (downcase ξinputWord)))
+;;          -input-str (elt -boundary 0)
+;;          -p1 (elt -boundary 1)
+;;          -p2 (elt -boundary 2))
+;;         (setq -word (downcase -inputWord)))
 
 ;;       (progn
 ;;         (cond
@@ -233,20 +233,20 @@ anal
 Then it'll become
 \(YouPorn video: <a href=\"http://www.youporn.com/search?query=anal\">anal</a>\)"
   (interactive)
-  (let (ξp1 ξp2 ξword ξurl)
+  (let (-p1 -p2 -word -url)
 
     (if (use-region-p)
-        (progn (setq ξp1 (region-beginning))
-               (setq ξp2 (region-end)))
-      (progn (setq ξp1 (line-beginning-position))
-             (setq ξp2 (line-end-position))))
+        (progn (setq -p1 (region-beginning))
+               (setq -p2 (region-end)))
+      (progn (setq -p1 (line-beginning-position))
+             (setq -p2 (line-end-position))))
 
-    (setq ξword (buffer-substring-no-properties ξp1 ξp2) )
+    (setq -word (buffer-substring-no-properties -p1 -p2) )
 
-    (setq ξurl (concat "http://www.youporn.com/search?query=" ξword) )
-    (setq ξurl (replace-regexp-in-string " " "+" ξurl ) )
-    (delete-region ξp1 ξp2)
-    (insert "(YouPorn video: <a href=\"" ξurl "\">" ξword "</a>)\n")))
+    (setq -url (concat "http://www.youporn.com/search?query=" -word) )
+    (setq -url (replace-regexp-in-string " " "+" -url ) )
+    (delete-region -p1 -p2)
+    (insert "(YouPorn video: <a href=\"" -url "\">" -word "</a>)\n")))
 
 (defun youtube-search-linkify ()
   "Make the current line into a YouTube link.
@@ -262,22 +262,22 @@ Note: old version returns this form:
 <span class=\"utb\"><a href=\"http://youtube.com/results?search_query=David+Bowie&amp;search=Search\">David Bowie</a></span>
 "
   (interactive)
-  (let (ξp1 ξp2 ξword ξurl)
+  (let (-p1 -p2 -word -url)
     (if (use-region-p)
-        (progn (setq ξp1 (region-beginning))
-               (setq ξp2 (region-end)))
-      (progn (setq ξp1 (line-beginning-position))
-             (setq ξp2 (line-end-position))))
+        (progn (setq -p1 (region-beginning))
+               (setq -p2 (region-end)))
+      (progn (setq -p1 (line-beginning-position))
+             (setq -p2 (line-end-position))))
 
-    (setq ξword (buffer-substring-no-properties ξp1 ξp2))
+    (setq -word (buffer-substring-no-properties -p1 -p2))
 
-    (setq ξurl (concat "http://youtube.com/results?search_query=" ξword "&amp;search=Search"))
-    (setq ξurl (replace-regexp-in-string " " "+" ξurl ))
-    (setq ξurl (replace-regexp-in-string "," "%2C" ξurl ))
-    (delete-region ξp1 ξp2)
-    (insert "<a class=\"utb\" href=\"" ξurl "\">" ξword "</a>")))
+    (setq -url (concat "http://youtube.com/results?search_query=" -word "&amp;search=Search"))
+    (setq -url (replace-regexp-in-string " " "+" -url ))
+    (setq -url (replace-regexp-in-string "," "%2C" -url ))
+    (delete-region -p1 -p2)
+    (insert "<a class=\"utb\" href=\"" -url "\">" -word "</a>")))
 
-(defun video-search-string (φsearchString)
+(defun video-search-string (_searchString)
   "Return a Google video search string URL of SEARCHSTRING.
 
 Example:
@@ -286,7 +286,7 @@ Example:
 
 This command is called by `video-search-linkify'."
   (let (strEncoded)
-    (setq strEncoded φsearchString )
+    (setq strEncoded _searchString )
     (setq strEncoded (replace-regexp-in-string " " "+" strEncoded ) )
     (setq strEncoded (url-encode-url strEncoded ) )
     (concat "http://www.google.com/search?tbs=vid%3A1&q=" strEncoded)
@@ -307,16 +307,16 @@ Warning: the line must end in a line return char else the result is wrong.
 
 This command calls `video-search-string'"
   (interactive)
-  (let (ξp1 ξp2 ξword ξurl)
+  (let (-p1 -p2 -word -url)
     (if (use-region-p)
-        (progn (setq ξp1 (region-beginning))
-               (setq ξp2 (region-end)))
-      (progn (setq ξp1 (line-beginning-position))
-             (setq ξp2 (line-end-position))))
-    (setq ξword (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξurl (video-search-string ξword))
-    (delete-region ξp1 ξp2)
-    (insert "<a class=\"gvidsr\" href=\"" ξurl "\">" ξword "</a>")))
+        (progn (setq -p1 (region-beginning))
+               (setq -p2 (region-end)))
+      (progn (setq -p1 (line-beginning-position))
+             (setq -p2 (line-end-position))))
+    (setq -word (buffer-substring-no-properties -p1 -p2))
+    (setq -url (video-search-string -word))
+    (delete-region -p1 -p2)
+    (insert "<a class=\"gvidsr\" href=\"" -url "\">" -word "</a>")))
 
 (defun google-search-linkify ()
   "Make the current line into a Google search link.
@@ -330,17 +330,17 @@ Then it'll become
 
 Warning: the line must end in a line return char else the result is wrong."
   (interactive)
-  (let (ξp1 ξp2 ξword ξurl)
+  (let (-p1 -p2 -word -url)
     (if (use-region-p)
-        (progn (setq ξp1 (region-beginning))
-               (setq ξp2 (region-end)))
-      (progn (setq ξp1 (line-beginning-position))
-             (setq ξp2 (line-end-position))))
-    (setq ξword (buffer-substring-no-properties ξp1 ξp2))
-    (setq ξurl (concat "http://www.google.com/search?q=" ξword))
-    (setq ξurl (replace-regexp-in-string " " "+" ξurl ))
-    (delete-region ξp1 ξp2)
-    (insert "<p>Google search: <a href=\"" ξurl "\">" ξword "</a>.</p>\n")))
+        (progn (setq -p1 (region-beginning))
+               (setq -p2 (region-end)))
+      (progn (setq -p1 (line-beginning-position))
+             (setq -p2 (line-end-position))))
+    (setq -word (buffer-substring-no-properties -p1 -p2))
+    (setq -url (concat "http://www.google.com/search?q=" -word))
+    (setq -url (replace-regexp-in-string " " "+" -url ))
+    (delete-region -p1 -p2)
+    (insert "<p>Google search: <a href=\"" -url "\">" -word "</a>.</p>\n")))
 
 
 ;; some custom HTML markup and functions for working with HTML
@@ -352,30 +352,30 @@ it becomes
  「<a href=\"http://www.wolframscience.com/nksonline/page-123\">p123</a>」
 Version 2015-05-15"
   (interactive)
-  (let* ((ξbounds (bounds-of-thing-at-point 'word))
-         (ξp1 (car ξbounds))
-         (ξp2 (cdr ξbounds))
-         (ξinputStr (buffer-substring-no-properties ξp1 ξp2))
-         (ξpageNum (substring ξinputStr 1)))
-    (delete-region ξp1 ξp2)
+  (let* ((-bounds (bounds-of-thing-at-point 'word))
+         (-p1 (car -bounds))
+         (-p2 (cdr -bounds))
+         (-inputStr (buffer-substring-no-properties -p1 -p2))
+         (-pageNum (substring -inputStr 1)))
+    (delete-region -p1 -p2)
     (insert
      (concat
       "<a href=\"http://www.wolframscience.com/nksonline/page-"
-      ξpageNum "\">p" ξpageNum "</a>"))))
+      -pageNum "\">p" -pageNum "</a>"))))
 
 
 ;; more specific to Xah Lee
 
-(defun amazon-search-linkify-url (φsString φproductCat φassid)
+(defun amazon-search-linkify-url (_sString _productCat _assid)
   "Returns a URL of amazon search based on search string and product category.
-φsString is the search string. e.g. “deep throat”
-φproductCat is a short code for amazon's product category.
+_sString is the search string. e.g. “deep throat”
+_productCat is a short code for amazon's product category.
 See `amazon-search-linkify' for the possible code string.
 Sample call:
  (amazon-search-linkify-url \"debbie does dollas\" \"dvd\" \"xahh-20\")"
   (interactive)
   (let (sStrPercent)
-    (setq sStrPercent φsString)
+    (setq sStrPercent _sString)
     (setq sStrPercent (replace-regexp-in-string " " "%20" sStrPercent) )
     (setq sStrPercent (replace-regexp-in-string "," "%2c" sStrPercent) )
 
@@ -383,11 +383,11 @@ Sample call:
      "<a class=\"amzs\" href=\"http://www.amazon.com/gp/search?ie=UTF8&amp;keywords="
      sStrPercent
      "&amp;tag="
-     φassid
+     _assid
      "&amp;index="
-     φproductCat
+     _productCat
      "&amp;linkCode=ur2&amp;camp=1789&amp;creative=9325\">"
-     φsString
+     _sString
      "</a>"
      ) ) )
 
@@ -407,15 +407,15 @@ m = “music”
 s = “software”
 There are other amazon categories, but not supported by this function."
   (interactive)
-  (let (ξp1 ξp2 mainText tmplist sstr pcato pcc)
+  (let (-p1 -p2 mainText tmplist sstr pcato pcc)
     (if (use-region-p)
-        (setq ξp1 (region-beginning) ξp2 (region-end))
+        (setq -p1 (region-beginning) -p2 (region-end))
       (progn
-        (setq ξp1 (line-beginning-position) )
-        (setq ξp2 (line-end-position) )
+        (setq -p1 (line-beginning-position) )
+        (setq -p2 (line-end-position) )
         ))
     ;; get the text
-    (setq mainText (buffer-substring-no-properties ξp1 ξp2) )
+    (setq mainText (buffer-substring-no-properties -p1 -p2) )
     (setq tmplist (split-string mainText ";") )
     (setq sstr (nth 0 tmplist ) )
     (setq pcato (nth 1 tmplist ) )
@@ -433,7 +433,7 @@ There are other amazon categories, but not supported by this function."
      (t (error "Code does not match"))
      )
 
-    (delete-region ξp1 ξp2)
+    (delete-region -p1 -p2)
     (insert  (amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
 
@@ -455,44 +455,44 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 URL `http://ergoemacs.org/emacs/elisp_amazon-linkify.html'
 Version 2015-06-07"
   (interactive)
-  (let ((ξbds (bounds-of-thing-at-point 'url))
-        ξp1 ξp2 ξinputText ξasin ξproductName )
+  (let ((-bds (bounds-of-thing-at-point 'url))
+        -p1 -p2 -inputText -asin -productName )
     (if (use-region-p)
-        (progn (setq ξp1 (region-beginning)) (setq ξp2 (region-end)))
-      (progn (setq ξp1 (car ξbds)) (setq ξp2 (cdr ξbds))))
-    (setq ξinputText (buffer-substring-no-properties ξp1 ξp2))
-    (if (string-match "//amzn.to/" ξinputText)
-        (progn (delete-region ξp1 ξp2)
-               (insert (format "<a class=\"amzlnk\" href=\"%s\">amazon</a>" ξinputText)))
+        (progn (setq -p1 (region-beginning)) (setq -p2 (region-end)))
+      (progn (setq -p1 (car -bds)) (setq -p2 (cdr -bds))))
+    (setq -inputText (buffer-substring-no-properties -p1 -p2))
+    (if (string-match "//amzn.to/" -inputText)
+        (progn (delete-region -p1 -p2)
+               (insert (format "<a class=\"amzlnk\" href=\"%s\">amazon</a>" -inputText)))
       (progn
-        (setq ξasin
+        (setq -asin
               (cond
-               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" ξinputText) (match-string 1 ξinputText))
-               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" ξinputText) (match-string 1 ξinputText))
-               ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" ξinputText) (match-string 1 ξinputText))
-               ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" ξinputText) (match-string 1 ξinputText))
-               ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" ξinputText) (match-string 1 ξinputText))
+               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" -inputText) (match-string 1 -inputText))
+               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" -inputText) (match-string 1 -inputText))
+               ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" -inputText) (match-string 1 -inputText))
+               ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" -inputText) (match-string 1 -inputText))
+               ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" -inputText) (match-string 1 -inputText))
                ((and
-                 (equal 10 (length ξinputText ))
-                 (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" ξinputText))
-                ξinputText)
+                 (equal 10 (length -inputText ))
+                 (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" -inputText))
+                -inputText)
                (t (error "no amazon ASIN found"))))
 
         (setq
-         ξproductName
+         -productName
          (replace-regexp-in-string
           "-" " "
-          (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" ξinputText)
-              (progn (match-string 1 ξinputText))
+          (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" -inputText)
+              (progn (match-string 1 -inputText))
             (progn
               (message "no product name found" ))
             ""
             )))
 
-        (delete-region ξp1 ξp2)
+        (delete-region -p1 -p2)
         (insert
          "<a class=\"amz\" href=\"http://www.amazon.com/dp/"
-         ξasin "/?tag=xahh-20\" title=\"" ξproductName "\">amazon</a>")
+         -asin "/?tag=xahh-20\" title=\"" -productName "\">amazon</a>")
         (search-backward "\">")))))
 
 ;; (defun local-linkify ()
@@ -504,8 +504,8 @@ Version 2015-06-07"
 
 ;; If a region is active, use the region as file path."
 ;;  (interactive)
-;;  (let (ξpath bounds tempBuff x1 x2 titleText ξresultStr)
-;;    (setq ξpath
+;;  (let (-path bounds tempBuff x1 x2 titleText -resultStr)
+;;    (setq -path
 ;;          (if (use-region-p)
 ;;              (buffer-substring-no-properties (region-beginning) (region-end))
 ;;            (thing-at-point 'filename)
@@ -514,26 +514,26 @@ Version 2015-06-07"
 
 ;;    (setq tempBuff (generate-new-buffer-name " temp"))
 
-;;    (when (file-exists-p ξpath)
+;;    (when (file-exists-p -path)
 ;;        (progn
 ;;          (save-current-buffer
-;;            (message ξpath)
+;;            (message -path)
 ;;            (set-buffer (get-buffer-create tempBuff))
 ;;            (goto-char (point-min))
-;;            (insert-file-contents ξpath nil nil nil t)
+;;            (insert-file-contents -path nil nil nil t)
 ;;            (setq x1 (search-forward "<title>"))
 ;;            (search-forward "</title>")
 ;;            (setq x2 (search-backward "<"))
 ;;            (setq titleText (buffer-substring-no-properties x1 x2))
 ;;            (kill-buffer tempBuff))
 
-;;          (setq ξresultStr (concat "<a href=\"" ξpath "\">" titleText "</a>"))
+;;          (setq -resultStr (concat "<a href=\"" -path "\">" titleText "</a>"))
 ;;          (save-excursion
 ;;            (delete-region (car bounds) (cdr bounds))
-;;            (insert ξresultStr))))
+;;            (insert -resultStr))))
 ;;    ))
 
-(defun xah-file-linkify (&optional φbegin φend)
+(defun xah-file-linkify (&optional _begin _end)
   "Make the path under cursor into a HTML link for xah site.
 
 For Example, if you cursor is on the text “../emacs/emacs.html”,
@@ -559,46 +559,46 @@ Version 2016-07-07"
          (setq p2 (point))
          (list p1 p2)))))
   (let* (
-         (ξinputStr (buffer-substring-no-properties φbegin φend))
-         (ξinputStParts (split-uri-hashmark ξinputStr))
-         (pt1 (aref ξinputStParts 0))
-         (ξfragPart (aref ξinputStParts 1))
-         (ξfPath (xahsite-web-path-to-filepath pt1 default-directory))
-         ξrltvPath ξtitleText ξresultStr
-         (ξcurrentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
-         (ξcurrentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
+         (-inputStr (buffer-substring-no-properties _begin _end))
+         (-inputStParts (split-uri-hashmark -inputStr))
+         (pt1 (aref -inputStParts 0))
+         (-fragPart (aref -inputStParts 1))
+         (-fPath (xahsite-web-path-to-filepath pt1 default-directory))
+         -rltvPath -titleText -resultStr
+         (-currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
+         (-currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
 
-    (if (file-exists-p ξfPath)
+    (if (file-exists-p -fPath)
         (progn
-          (setq ξtitleText
-                (if (string-match-p ".+html\\'" ξfPath)
-                    (concat (xah-html-get-html-file-title ξfPath "noerror") ξfragPart)
-                  (file-name-nondirectory ξfPath)))
-          (setq ξresultStr
+          (setq -titleText
+                (if (string-match-p ".+html\\'" -fPath)
+                    (concat (xah-html-get-html-file-title -fPath "noerror") -fragPart)
+                  (file-name-nondirectory -fPath)))
+          (setq -resultStr
                 (if (string-equal
-                     (xahsite-get-domain-of-local-file-path ξcurrentBufferFilePathOrDir)
-                     (xahsite-get-domain-of-local-file-path ξfPath))
+                     (xahsite-get-domain-of-local-file-path -currentBufferFilePathOrDir)
+                     (xahsite-get-domain-of-local-file-path -fPath))
                     (progn
-                      (setq ξrltvPath (file-relative-name ξfPath ξcurrentBufferFileDir))
+                      (setq -rltvPath (file-relative-name -fPath -currentBufferFileDir))
                       (format "<a href=\"%s\">%s</a>"
-                              (concat ξrltvPath ξfragPart)
-                              (if (string-equal ξtitleText "") ξrltvPath ξtitleText )))
+                              (concat -rltvPath -fragPart)
+                              (if (string-equal -titleText "") -rltvPath -titleText )))
                   (progn
-                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url ξfPath) ξfragPart) ξtitleText))))
-          (delete-region φbegin φend)
-          (insert ξresultStr))
-      (progn (message (format "Cannot locate the file: 「%s」" ξfPath))))))
+                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url -fPath) -fragPart) -titleText))))
+          (delete-region _begin _end)
+          (insert -resultStr))
+      (progn (message (format "Cannot locate the file: 「%s」" -fPath))))))
 
-(defun nodejs-get-title (φfName φfragPart)
+(defun nodejs-get-title (_fName _fragPart)
   "Return the file frag part function title.
  (nodejs-get-title \"/home/xah/web/xahlee_info/node_api/net.html\" \"#net_server_listen_port_host_backlog_callback\" )
 returns
  \"server.listen(port, [host], [backlog], [callback])\"
 "
   (with-temp-buffer
-    (insert-file-contents φfName nil nil nil t)
+    (insert-file-contents _fName nil nil nil t)
     (goto-char 1)
-    (if (string= φfragPart "")
+    (if (string= _fragPart "")
         (progn
           (search-forward "<div id=\"apicontent\">")
           (if (search-forward "<h1>" nil "NOERROR")
@@ -611,7 +611,7 @@ returns
                (search-forward "<title>")
                (- (search-forward "</title>") 8)) ) ) )
       (progn
-        (search-forward φfragPart)
+        (search-forward _fragPart)
         (buffer-substring-no-properties
          (search-forward "\">")
          (-  (search-forward "</a>") 4))  )
@@ -621,17 +621,17 @@ returns
   "Make the path under cursor into a HTML link for xah site.
 Version 2016-03-07"
   (interactive)
-  (let ( ξp1 ξp2 ξwd )
+  (let ( -p1 -p2 -wd )
     (if (use-region-p)
-        (setq ξp1 (region-beginning) ξp2 (region-end))
+        (setq -p1 (region-beginning) -p2 (region-end))
       (progn
         (skip-chars-backward "-A-Za-z0-9*+!-_?")
-        (setq ξp1 (point))
+        (setq -p1 (point))
         (skip-chars-forward "-A-Za-z0-9*+!-_?")
-        (setq ξp2 (point))))
-    (setq ξwd (buffer-substring-no-properties ξp1 ξp2))
-    (delete-region ξp1 ξp2)
-    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.8/clojure.core-api.html#clojure.core/" ξwd "\">clojure.core/" ξwd "</a></span>"))))
+        (setq -p2 (point))))
+    (setq -wd (buffer-substring-no-properties -p1 -p2))
+    (delete-region -p1 -p2)
+    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.8/clojure.core-api.html#clojure.core/" -wd "\">clojure.core/" -wd "</a></span>"))))
 
 (defun xah-nodejs-ref-linkify ()
   "Make the path under cursor into a HTML link for xah site.
@@ -656,50 +656,50 @@ linkText
 "
   (interactive)
   (let* (
-         (ξbds (xah-get-thing-or-selection 'filepath))
-         (ξinputStr (elt ξbds 0))
-         (ξp1 (aref ξbds 1))
-         (ξp2 (aref ξbds 2))
+         (-bds (xah-get-thing-or-selection 'filepath))
+         (-inputStr (elt -bds 0))
+         (-p1 (aref -bds 1))
+         (-p2 (aref -bds 2))
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
-         (temp87318 (split-uri-hashmark ξinputStr))
+         (temp87318 (split-uri-hashmark -inputStr))
          (urlMainPart (elt temp87318 0))
          (urlFragPart (elt temp87318 1))
-         (ξfPath (xahsite-web-path-to-filepath urlMainPart default-directory))
-         rltvPath titleText ξresultStr
+         (-fPath (xahsite-web-path-to-filepath urlMainPart default-directory))
+         rltvPath titleText -resultStr
          )
 
-    (if (file-exists-p ξfPath)
+    (if (file-exists-p -fPath)
         (progn
-          (setq titleText (concat "⬢ " (nodejs-get-title ξfPath urlFragPart)))
-          (setq ξresultStr
+          (setq titleText (concat "⬢ " (nodejs-get-title -fPath urlFragPart)))
+          (setq -resultStr
                 (if (string-equal
                      (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
-                     (xahsite-get-domain-of-local-file-path ξfPath))
+                     (xahsite-get-domain-of-local-file-path -fPath))
                     (progn
-                      (setq rltvPath (file-relative-name ξfPath currentBufferFileDir))
+                      (setq rltvPath (file-relative-name -fPath currentBufferFileDir))
                       (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" rltvPath urlFragPart titleText))
                   (progn
-                    (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url ξfPath) urlFragPart titleText))))
-          (delete-region ξp1 ξp2)
-          (insert ξresultStr))
-      (progn (message (format "Cannot locate the file: 「%s」" ξfPath))))))
+                    (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url -fPath) urlFragPart titleText))))
+          (delete-region -p1 -p2)
+          (insert -resultStr))
+      (progn (message (format "Cannot locate the file: 「%s」" -fPath))))))
 
 (defun xah-javascript-linkify ()
   "Make the path under cursor into a HTML link.
  ⁖ <script src=\"xyz.js\"></script>"
   (interactive)
   (let* (
-         (ξbds (xah-get-thing-or-selection 'filepath))
-         (ξinputStr (elt ξbds 0))
-         (ξp1 (aref ξbds 1))
-         (ξp2 (aref ξbds 2))
-         ξfPath
+         (-bds (xah-get-thing-or-selection 'filepath))
+         (-inputStr (elt -bds 0))
+         (-p1 (aref -bds 1))
+         (-p2 (aref -bds 2))
+         -fPath
          )
-    (setq ξfPath (file-relative-name ξinputStr))
-    (delete-region ξp1 ξp2)
-    (insert (format "<script defer src=\"%s\"></script>" ξfPath))))
+    (setq -fPath (file-relative-name -inputStr))
+    (delete-region -p1 -p2)
+    (insert (format "<script defer src=\"%s\"></script>" -fPath))))
 
 (defun xah-audio-file-linkify ()
   "Make the path under cursor into a HTML link.
@@ -708,15 +708,15 @@ becomes
 <audio src=\"xyz.mp3\"></audio>"
   (interactive)
   (let* (
-         (ξbds (xah-get-thing-or-selection 'filepath))
-         (ξinputStr (elt ξbds 0))
-         (ξp1 (aref ξbds 1))
-         (ξp2 (aref ξbds 2)))
-    (delete-region ξp1 ξp2)
+         (-bds (xah-get-thing-or-selection 'filepath))
+         (-inputStr (elt -bds 0))
+         (-p1 (aref -bds 1))
+         (-p2 (aref -bds 2)))
+    (delete-region -p1 -p2)
     (insert (format "<audio src=\"%s\" controls></audio>" 
-                    (if (string-match "^http" ξinputStr)
-                        ξinputStr
-                      (file-relative-name ξinputStr))))))
+                    (if (string-match "^http" -inputStr)
+                        -inputStr
+                      (file-relative-name -inputStr))))))
 
 (defun xah-video-file-linkify ()
   "Make the path under cursor into a HTML link.
@@ -725,15 +725,15 @@ becomes
 <video src=\"i/xyz.webm\" controls></video>"
   (interactive)
   (let* (
-         (ξbds (xah-get-thing-or-selection 'filepath))
-         (ξinputStr (elt ξbds 0))
-         (ξp1 (aref ξbds 1))
-         (ξp2 (aref ξbds 2))
-         ξfPath
+         (-bds (xah-get-thing-or-selection 'filepath))
+         (-inputStr (elt -bds 0))
+         (-p1 (aref -bds 1))
+         (-p2 (aref -bds 2))
+         -fPath
          )
-    (setq ξfPath (file-relative-name ξinputStr))
-    (delete-region ξp1 ξp2)
-    (insert (format "<video src=\"%s\" controls></video>" ξfPath))))
+    (setq -fPath (file-relative-name -inputStr))
+    (delete-region -p1 -p2)
+    (insert (format "<video src=\"%s\" controls></video>" -fPath))))
 
 (defun xah-css-linkify ()
   "Make the path under cursor into a HTML link.
@@ -742,15 +742,15 @@ becomes
 <link rel=\"stylesheet\" href=\"../lit.css\" />"
   (interactive)
   (let* (
-         (ξbds (xah-get-thing-or-selection 'filepath))
-         (ξinputStr (elt ξbds 0))
-         (ξp1 (aref ξbds 1))
-         (ξp2 (aref ξbds 2))
-         ξfPath
+         (-bds (xah-get-thing-or-selection 'filepath))
+         (-inputStr (elt -bds 0))
+         (-p1 (aref -bds 1))
+         (-p2 (aref -bds 2))
+         -fPath
          )
-    (setq ξfPath (file-relative-name ξinputStr))
-    (delete-region ξp1 ξp2)
-    (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" ξfPath))))
+    (setq -fPath (file-relative-name -inputStr))
+    (delete-region -p1 -p2)
+    (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" -fPath))))
 
 (defun xah-curve-linkify ()
   "Make the current word or text selection into a HTML link.
@@ -765,32 +765,32 @@ The directory to search includes:
 Version 2015-03-18"
   (interactive)
   (let* (
-         (ξbds (bounds-of-thing-at-point 'symbol))
-         (ξp1 (car ξbds))
-         (ξp2 (cdr ξbds))
-         (ξinputWord (if (use-region-p)
+         (-bds (bounds-of-thing-at-point 'symbol))
+         (-p1 (car -bds))
+         (-p2 (cdr -bds))
+         (-inputWord (if (use-region-p)
                          (progn (buffer-substring-no-properties (region-beginning) (region-end)))
-                       (progn (buffer-substring-no-properties ξp1 ξp2))))
-         (ξwordPath (replace-regexp-in-string " " "_" (downcase ξinputWord))) ; word for constructing possible dir
-         (ξpathsToTest
+                       (progn (buffer-substring-no-properties -p1 -p2))))
+         (-wordPath (replace-regexp-in-string " " "_" (downcase -inputWord))) ; word for constructing possible dir
+         (-pathsToTest
           (vector
-           (concat "~/web/xahlee_info/SpecialPlaneCurves_dir/" (upcase-initials ξwordPath) "_dir/" ξwordPath ".html")
-           (concat "~/web/xahlee_info/surface/" ξwordPath "/" ξwordPath ".html")))
-         ξi  ξfound-p ξrPath ξlinkWord)
+           (concat "~/web/xahlee_info/SpecialPlaneCurves_dir/" (upcase-initials -wordPath) "_dir/" -wordPath ".html")
+           (concat "~/web/xahlee_info/surface/" -wordPath "/" -wordPath ".html")))
+         -i  -found-p -rPath -linkWord)
 
     ;; loop thru the paths until a file is found
-    (setq ξfound-p nil)
-    (setq ξi 0)
-    (while (and (not ξfound-p) (< ξi (length ξpathsToTest)))
-      (setq ξrPath (elt ξpathsToTest ξi))
-      (setq ξfound-p (file-exists-p ξrPath))
-      (setq ξi (1+ ξi)))
+    (setq -found-p nil)
+    (setq -i 0)
+    (while (and (not -found-p) (< -i (length -pathsToTest)))
+      (setq -rPath (elt -pathsToTest -i))
+      (setq -found-p (file-exists-p -rPath))
+      (setq -i (1+ -i)))
 
-    (if ξfound-p
+    (if -found-p
         (progn
-          (setq ξlinkWord (replace-regexp-in-string "_" " " ξinputWord))
-          (delete-region ξp1 ξp2)
-          (insert (concat "<a href=\"" (file-relative-name ξrPath) "\">" ξlinkWord "</a>")))
+          (setq -linkWord (replace-regexp-in-string "_" " " -inputWord))
+          (delete-region -p1 -p2)
+          (insert (concat "<a href=\"" (file-relative-name -rPath) "\">" -linkWord "</a>")))
       (progn (beep) (message "No file found")))))
 
 (defun xah-all-linkify ()
@@ -805,58 +805,58 @@ They will be changed into a HTML link in various formats, depending on the input
 
 If there is text selection, use it as input."
   (interactive)
-  (let ( ξp1 ξp2 ξpath )
+  (let ( -p1 -p2 -path )
     (if (use-region-p)
-        (setq ξp1 (region-beginning) ξp2 (region-end))
-      (let (ξp0)
-        (setq ξp0 (point))
+        (setq -p1 (region-beginning) -p2 (region-end))
+      (let (-p0)
+        (setq -p0 (point))
         ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
         (skip-chars-backward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-        (setq ξp1 (point))
-        (goto-char ξp0)
+        (setq -p1 (point))
+        (goto-char -p0)
         (skip-chars-forward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-        (setq ξp2 (point))))
+        (setq -p2 (point))))
 
-    (setq ξpath (buffer-substring-no-properties ξp1 ξp2))
+    (setq -path (buffer-substring-no-properties -p1 -p2))
 
     (cond
-     ((string-match-p "javascript_ecma-262_5.1_2011" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "java8_doc" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "javascript_es6" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "html_whatwg" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "html5_whatwg" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "css_2.1_spec" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "css_3_color_spec" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "clojure-doc-1.8" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "python_doc_2" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "python_doc_3" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "dom-whatwg/DOM_Standard.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "REC-SVG11-20110816" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "css_transitions/CSS_Transitions.html" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "php-doc/" ξpath) (xah-file-linkify ξp1 ξp2) (xah-add-reference-span-tag))
-     ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" ξpath) (xah-blogger-linkify))
-     ((string-match-p "www\.amazon\.com/" ξpath) (xah-amazon-linkify))
-     ((string-match-p "//amzn\.to/" ξpath) (xah-amazon-linkify))
-     ((string-match-p "www\.youtube\.com/watch" ξpath) (xah-youtube-linkify))
-     ((string-match-p "/emacs_manual/" ξpath) (xah-html-emacs-ref-linkify))
-     ((string-match-p "/node_api/" ξpath) (xah-nodejs-ref-linkify))
-     ((string-match-p "\\.js\\'" ξpath) (xah-javascript-linkify))
-     ((string-match-p "\\.css\\'" ξpath) (xah-css-linkify))
-     ((string-match-p "\\.mp3\\'" ξpath) (xah-audio-file-linkify))
-     ((string-match-p "\\.ogg\\'" ξpath) (xah-audio-file-linkify))
-     ((string-match-p "\\.mp4\\'" ξpath) (xah-video-file-linkify))
-     ((string-match-p "\\.webm\\'" ξpath) (xah-video-file-linkify))
+     ((string-match-p "javascript_ecma-262_5.1_2011" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "java8_doc" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "javascript_es6" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "html_whatwg" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "html5_whatwg" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "css_2.1_spec" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "css_3_color_spec" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "clojure-doc-1.8" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "python_doc_2" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "python_doc_3" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "dom-whatwg/DOM_Standard.html" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "REC-SVG11-20110816" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "css_transitions/CSS_Transitions.html" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "php-doc/" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" -path) (xah-blogger-linkify))
+     ((string-match-p "www\.amazon\.com/" -path) (xah-amazon-linkify))
+     ((string-match-p "//amzn\.to/" -path) (xah-amazon-linkify))
+     ((string-match-p "www\.youtube\.com/watch" -path) (xah-youtube-linkify))
+     ((string-match-p "/emacs_manual/" -path) (xah-html-emacs-ref-linkify))
+     ((string-match-p "/node_api/" -path) (xah-nodejs-ref-linkify))
+     ((string-match-p "\\.js\\'" -path) (xah-javascript-linkify))
+     ((string-match-p "\\.css\\'" -path) (xah-css-linkify))
+     ((string-match-p "\\.mp3\\'" -path) (xah-audio-file-linkify))
+     ((string-match-p "\\.ogg\\'" -path) (xah-audio-file-linkify))
+     ((string-match-p "\\.mp4\\'" -path) (xah-video-file-linkify))
+     ((string-match-p "\\.webm\\'" -path) (xah-video-file-linkify))
 
-     ((xahsite-url-is-xah-website-p ξpath) (xah-file-linkify ξp1 ξp2))
-     ((or (string-match-p "wikipedia.org/" ξpath)
-          (string-match-p "wiktionary.org/" ξpath))
+     ((xahsite-url-is-xah-website-p -path) (xah-file-linkify -p1 -p2))
+     ((or (string-match-p "wikipedia.org/" -path)
+          (string-match-p "wiktionary.org/" -path))
       (let ((case-fold-search nil))
-        (if (xah-path-ends-in-image-suffix-p ξpath)
+        (if (xah-path-ends-in-image-suffix-p -path)
             (xah-html-source-url-linkify 0)
           (xah-html-wikipedia-url-linkify ))))
 
-     ((and (string-match-p "\\`https?://" ξpath)) (xah-html-source-url-linkify 0)) ; generic URL
+     ((and (string-match-p "\\`https?://" -path)) (xah-html-source-url-linkify 0)) ; generic URL
 
-     ((xah-path-ends-in-image-suffix-p ξpath) (xah-image-file-to-html-figure-tag))
+     ((xah-path-ends-in-image-suffix-p -path) (xah-image-file-to-html-figure-tag))
 
-     (t (xah-file-linkify ξp1 ξp2)))))
+     (t (xah-file-linkify -p1 -p2)))))

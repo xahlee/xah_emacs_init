@@ -1,45 +1,45 @@
 ;; 2014-05-30
 
-(defun xah-inside-string-p (&optional φpos)
+(defun xah-inside-string-p (&optional _pos)
   "Return true if inside string, else false.
 This depends on major mode having setup syntax table properly."
   (interactive)
-  (let ((ξresult (nth 3 (syntax-ppss φpos))))
-    (print ξresult)
-    ξresult))
+  (let ((-result (nth 3 (syntax-ppss _pos))))
+    (print -result)
+    -result))
 
-(defun xah-inside-comment-p (&optional φpos)
+(defun xah-inside-comment-p (&optional _pos)
   "Return true if inside comment, else false.
 This depends on major mode having setup syntax table properly."
  (interactive)
- (let ((ξresult (nth 4 (syntax-ppss φpos))))
-    (print ξresult)
-    ξresult))
+ (let ((-result (nth 4 (syntax-ppss _pos))))
+    (print -result)
+    -result))
 
 (defun xah-syntax-bracket-forward ()
   "Move cursor to the 1st closing bracket, according to current syntax table.
 This command is dumb, it'll not ignore brackets inside comment or string."
   (interactive)
-  (let ((ξdist (skip-syntax-forward "^)")))
-    (message "Distance traveled: %s" ξdist)
+  (let ((-dist (skip-syntax-forward "^)")))
+    (message "Distance traveled: %s" -dist)
     (forward-char 1)))
 
 (defun xah-syntax-bracket-backward ()
   "Move cursor to previous opening bracket, according to current syntax table.
 This command is dumb, it'll not ignore brackets inside comment or string."
   (interactive)
-  (let ((ξdist (skip-syntax-backward "^(")))
-    (message "Distance traveled: %s" ξdist)
+  (let ((-dist (skip-syntax-backward "^(")))
+    (message "Distance traveled: %s" -dist)
     (backward-char 1)))
 
-(defun xah-scan-list (φcount φcurrent-depth)
+(defun xah-scan-list (_count _current-depth)
   "Call `scan-lists' interactively.
 scan-list basically move by n number of bracket groups.
 it's similar to `forward-sexp', except that forward-sexp also consider atoms (that is, sequence of chars not enclosed by paren, but scan-list only counts paren'd item.)
 "
   (interactive "nCount:\nnDepth:")
   (let ((parse-sexp-ignore-comments t))
-    (goto-char (scan-lists (point) φcount φcurrent-depth))))
+    (goto-char (scan-lists (point) _count _current-depth))))
 
 (defun xah-scan-sexps ()
   "Call `scan-sexps' interactively.
@@ -87,7 +87,7 @@ Note:
   (interactive)
   (let* ((parse-sexp-ignore-comments t)
          (parse-sexp-lookup-properties parse-sexp-lookup-properties)
-         (ξstate
+         (-state
           (if current-prefix-arg
               (progn (message "parse-partial-sexp called")
                      (parse-partial-sexp (point-min) (point)))
@@ -103,19 +103,19 @@ Note:
  6 min paren-depth: %S
 7 comment style: %S
 8 comment/string start: %S"
-            (nth 0 ξstate )
-            (nth 1 ξstate )
-            (nth 2 ξstate )
-            (nth 3 ξstate )
-            (nth 4 ξstate )
-            (nth 5 ξstate )
-            (nth 6 ξstate )
-            (nth 7 ξstate )
-            (nth 8 ξstate )))
-    ξstate
+            (nth 0 -state )
+            (nth 1 -state )
+            (nth 2 -state )
+            (nth 3 -state )
+            (nth 4 -state )
+            (nth 5 -state )
+            (nth 6 -state )
+            (nth 7 -state )
+            (nth 8 -state )))
+    -state
     ))
 
-(defun xah-forward-comment (φcount)
+(defun xah-forward-comment (_count)
   "Call `forward-comment' interactively.
 
 when called interactively with no argument, call
@@ -123,7 +123,7 @@ when called interactively with no argument, call
 Or with argument from `universal-argument'.
 
 Note: a comment is considered a unit, starting with comment char and end with comment end char.
-The command ignore whether cursor is currently inside a comment, also ignore if cursor is inside a string (stupid). It just go forward (when φcount is positive) and look for commet start char.
+The command ignore whether cursor is currently inside a comment, also ignore if cursor is inside a string (stupid). It just go forward (when _count is positive) and look for commet start char.
 
 test cases:
 
@@ -131,4 +131,4 @@ test cases:
 "
   (interactive "p")
   (progn
-    (prin1 (forward-comment φcount))))
+    (prin1 (forward-comment _count))))
