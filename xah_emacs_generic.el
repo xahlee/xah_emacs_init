@@ -57,10 +57,10 @@ Version 2016-02-16"
           (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES"))
       (error "file 「%s」 doesn't end in “.py” or “.py3”." -fName))))
 
-(defun xah-change-file-line-ending-style (_file-list _line-ending-style)
+(defun xah-change-file-line-ending-style (*file-list *line-ending-style)
   "Change current file or dired marked file's newline convention.
 
-When called non-interactively, _line-ending-style is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+When called non-interactively, *line-ending-style is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
 Version 2015-07-24
 "
@@ -73,33 +73,33 @@ Version 2015-07-24
   (let* (
          (-codingSystem
           (cond
-           ((equal _line-ending-style "Linux/MacOSX/Unix") 'unix)
-           ((equal _line-ending-style "MacOS9") 'mac)
-           ((equal _line-ending-style "Windows") 'dos)
+           ((equal *line-ending-style "Linux/MacOSX/Unix") 'unix)
+           ((equal *line-ending-style "MacOS9") 'mac)
+           ((equal *line-ending-style "Windows") 'dos)
            (t (error "code logic error 65327. Expect one of it." )))))
     (mapc
      (lambda (x) (xah-convert-file-coding-system x -codingSystem))
-     _file-list)))
+     *file-list)))
 
-(defun xah-convert-file-coding-system (_fpath _coding-system)
+(defun xah-convert-file-coding-system (*fpath *coding-system)
   "Convert file's encoding.
- _fpath is full path to file.
- _coding-system is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+ *fpath is full path to file.
+ *coding-system is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 
 If the file is already opened, it will be saved after this command.
 URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
 Version 2015-07-24
 "
   (let (-buffer
-        (-bufferOpened-p (get-file-buffer _fpath)))
+        (-bufferOpened-p (get-file-buffer *fpath)))
     (if -bufferOpened-p
         (progn
           (with-current-buffer -bufferOpened-p
-            (set-buffer-file-coding-system _coding-system)
+            (set-buffer-file-coding-system *coding-system)
             (save-buffer)))
       (progn
-        (setq -buffer (find-file _fpath))
-        (set-buffer-file-coding-system _coding-system)
+        (setq -buffer (find-file *fpath))
+        (set-buffer-file-coding-system *coding-system)
         (save-buffer)
         (kill-buffer -buffer)))))
 

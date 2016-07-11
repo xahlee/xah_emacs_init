@@ -224,7 +224,7 @@ Version 2016-01-16"
 
 
 
-(defun xah-set-input-method-to-chinese (_n)
+(defun xah-set-input-method-to-chinese (*n)
   "Set input method to Chinese.
 
 Normally, set to 'chinese-py.
@@ -232,11 +232,11 @@ C-u → set to 'chinese-tonepy-punct.
 C-u 2 → set to 'chinese-py-b5."
 (interactive "P")
   (cond
-    ((equal _n nil)     ; universal-argument not called
+    ((equal *n nil)     ; universal-argument not called
      (set-input-method 'chinese-py))
-    ((equal _n '(4))    ; C-u
+    ((equal *n '(4))    ; C-u
      (set-input-method 'chinese-tonepy-punct))
-    ((equal _n 2)       ; C-u 2
+    ((equal *n 2)       ; C-u 2
      (set-input-method 'chinese-py-b5))
     (t                                  ; all other cases
      (set-input-method 'chinese-py))))
@@ -467,7 +467,7 @@ When there is a text selection, act on the region."
         ("clojure" . "java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
         ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")))
 
-(defun xah-shell-commands (_cmd-abbrev)
+(defun xah-shell-commands (*cmd-abbrev)
   "insert shell command from a list of abbrevs.
 
 URL `http://ergoemacs.org/misc/emacs_abbrev_shell_elisp.html'
@@ -476,7 +476,7 @@ version 2015-02-05"
    (list
     (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH")))
   (progn
-    (insert (cdr (assoc _cmd-abbrev xah-shell-abbrev-alist)))))
+    (insert (cdr (assoc *cmd-abbrev xah-shell-abbrev-alist)))))
 
 (defun xah-to-xah-elisp-mode  ()
   "redo my tutorial's code elisp markup"
@@ -684,18 +684,18 @@ Test cases
 ;;                      (overlay-get overlay 'keymap))
 ;;                    (overlays-at (point))))))
 
-;; (defun xah-find-keybinding-source (_key)
+;; (defun xah-find-keybinding-source (*key)
 ;; " 2014-10-11 from http://stackoverflow.com/questions/18801018/how-to-find-in-which-map-a-key-binding-is-from-programatically-in-emacs"
 ;;   (list
-;;    (minor-mode-key-binding _key)
-;;    (local-key-binding _key)
-;;    (global-key-binding _key)
-;;    ;; (overlay-key-binding _key)
+;;    (minor-mode-key-binding *key)
+;;    (local-key-binding *key)
+;;    (global-key-binding *key)
+;;    ;; (overlay-key-binding *key)
 ;;    ))
 
 (defvar gitgrep-history nil)
 
-(defun gitgrep (_search-string)
+(defun gitgrep (*search-string)
 "call git grep to search symbols in a project.
 
 2014-11-19 by “Left Right” https://plus.google.com/113859563190964307534/posts/CyEsoyhkTVe
@@ -709,7 +709,7 @@ Test cases
              (buffer-name)
              (buffer-file-name))
        'identity nil -sym gitgrep-history -sym))))
-  (grep (format "git --no-pager grep -P -n '%s'" _search-string)))
+  (grep (format "git --no-pager grep -P -n '%s'" *search-string)))
 
 (defun xah-toggle-background-color ()
   "Toggle background color between seashell and honeydew.
@@ -725,7 +725,7 @@ Version 2015-12-17"
       (set-background-color "honeydew")
       (put 'xah-toggle-background-color 'state t))))
 
-(defun xah-cycle-background-color (_n)
+(defun xah-cycle-background-color (*n)
   "Cycle background color among a preset list.
 
 If `universal-argument' is called first, cycle n steps. Default is 1 step.
@@ -740,7 +740,7 @@ Version 2015-12-17"
           (if (get 'xah-cycle-background-color 'state)
               (get 'xah-cycle-background-color 'state)
             0))
-         (-index-after (% (+ -index-before (length -values) _n) (length -values)))
+         (-index-after (% (+ -index-before (length -values) *n) (length -values)))
          (-next-value (aref -values -index-after)))
 
     (put 'xah-cycle-background-color 'state -index-after)

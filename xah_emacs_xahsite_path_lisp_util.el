@@ -72,7 +72,7 @@ e.g. c:/Users/h3/web/"
   )
 
 
-(defun xahsite-local-link-p (_href-value)
+(defun xahsite-local-link-p (*href-value)
   "Return true if it's a local file link, else false.
 
 Non local link may start with these:
@@ -85,20 +85,20 @@ Non local link may start with these:
  javascript:
  //
 "
-  ;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" _href-value) )
+  ;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" *href-value) )
 
   (cond
-   ((string-match-p "^//" _href-value) nil)
-   ((string-match-p "^http://" _href-value) nil)
-   ((string-match-p "^https://" _href-value) nil)
-   ((string-match-p "^mailto:" _href-value) nil)
-   ((string-match-p "^irc:" _href-value) nil)
-   ((string-match-p "^ftp:" _href-value) nil)
-   ((string-match-p "^javascript:" _href-value) nil)
+   ((string-match-p "^//" *href-value) nil)
+   ((string-match-p "^http://" *href-value) nil)
+   ((string-match-p "^https://" *href-value) nil)
+   ((string-match-p "^mailto:" *href-value) nil)
+   ((string-match-p "^irc:" *href-value) nil)
+   ((string-match-p "^ftp:" *href-value) nil)
+   ((string-match-p "^javascript:" *href-value) nil)
    (t t)))
 
-(defun xahsite-url-is-xah-website-p (_url)
-  "Returns t if _url is a xah website, else nil.
+(defun xahsite-url-is-xah-website-p (*url)
+  "Returns t if *url is a xah website, else nil.
 
 yahoo.com                 ⇒ nil. not xah site.
 http://yahoo.com          ⇒ nil. not xah site.
@@ -112,7 +112,7 @@ http://www.ergoemacs.org/ ⇒ t
 See: `xahsite-domain-names'."
   (catch 'myloop
     (mapc (lambda (x)
-            (when (string-match-p (format "\\`http://\\(www\\.\\)*%s\.*/*" (regexp-quote x)) _url)
+            (when (string-match-p (format "\\`http://\\(www\\.\\)*%s\.*/*" (regexp-quote x)) *url)
               (throw 'myloop t)))
           (xahsite-domain-names))
     nil
@@ -127,27 +127,27 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
 
-(defun xahsite-is-link-to-xahsite-p (_href-value)
-  "Returns true if _href-value points to a xah website, else false.
-_href-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
+(defun xahsite-is-link-to-xahsite-p (*href-value)
+  "Returns true if *href-value points to a xah website, else false.
+*href-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
 
-Technically, returns true if _href-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
+Technically, returns true if *href-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
 
 See: `xahsite-local-link-p', `xahsite-url-is-xah-website-p'."
-  (if (xahsite-local-link-p _href-value)
+  (if (xahsite-local-link-p *href-value)
       t
-    (xahsite-url-is-xah-website-p _href-value)))
+    (xahsite-url-is-xah-website-p *href-value)))
 
 
 
-(defun xahsite-url-to-domain-name (_url)
+(defun xahsite-url-to-domain-name (*url)
   "Returns the domain name of a xah site.
 e.g. http://ergoemacs.org/emacs/emacs.html ⇒ ergoemacs.org
 "
-(replace-regexp-in-string "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/.+" "\\2.\\3" _url) )
+(replace-regexp-in-string "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/.+" "\\2.\\3" *url) )
 
-(defun xahsite-get-domain-of-local-file-path (_abs-path)
-  "Returns the domain name of full path _abs-path belong to.
+(defun xahsite-get-domain-of-local-file-path (*abs-path)
+  "Returns the domain name of full path *abs-path belong to.
 e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「ergoemacs.org」.
 
@@ -157,23 +157,23 @@ This function depends on `xahsite-server-root-path'."
         (-pathPart
          (string-remove-prefix
           (downcase (xahsite-server-root-path))
-          (downcase _abs-path))))
+          (downcase *abs-path))))
     (if (string-match "\\`\\([^/]+?\\)/" -pathPart )
         (progn
           (setq -str (match-string 1 -pathPart))
           (replace-regexp-in-string "_" "." -str "FIXEDCASE" "LITERAL"))
-      (error "「%s」 is not a full path for xah site." _abs-path ))))
+      (error "「%s」 is not a full path for xah site." *abs-path ))))
 
-(defun xahsite-get-path-relative-to-domain (_fpath)
+(defun xahsite-get-path-relative-to-domain (*fpath)
   "Returns the path relative to that file's domain's root dir.
 e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「emacs/xyz.html」"
   (let ((case-fold-search nil))
     (string-match (format "\\`%s[^/]+?/\\(.+\\)" (regexp-quote (xahsite-server-root-path)))
-                  (replace-regexp-in-string "\\`C:/" "c:/" _fpath  "FIXEDCASE" "LITERAL"))
-    (match-string 1 _fpath)))
+                  (replace-regexp-in-string "\\`C:/" "c:/" *fpath  "FIXEDCASE" "LITERAL"))
+    (match-string 1 *fpath)))
 
-(defun xahsite-filepath-to-url (_webpath)
+(defun xahsite-filepath-to-url (*webpath)
   "Turn my website path ΦWEBPATH to my site's URL.
 For example, the following path:
  C:/Users/xah/web/ergoemacs_org/emacs/emacs.html
@@ -181,9 +181,9 @@ or
  /Users/xah/web/ergoemacs_org/emacs/emacs.html
 will become:
  http://ergoemacs.org/emacs/emacs.html"
-  (format "http://%s/%s" (xahsite-get-domain-of-local-file-path _webpath) (xahsite-get-path-relative-to-domain _webpath)))
+  (format "http://%s/%s" (xahsite-get-domain-of-local-file-path *webpath) (xahsite-get-path-relative-to-domain *webpath)))
 
-(defun xahsite-filepath-to-href-value (_linkFilePath _currentFilePathOrDir)
+(defun xahsite-filepath-to-href-value (*linkFilePath *currentFilePathOrDir)
   "Return a URL or relative path.
 All arguments should all be full paths.
 If the two paths are in different domain, then return a URL (string starts with “http://”).
@@ -191,36 +191,36 @@ Else, return a relative path.
 
 For reverse, see `xahsite-href-value-to-filepath'.
 "
-  (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path _linkFilePath) (xahsite-get-domain-of-local-file-path _currentFilePathOrDir))))
+  (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path *linkFilePath) (xahsite-get-domain-of-local-file-path *currentFilePathOrDir))))
     (if sameDomain-p
-        (xah-file-relative-name-emacs24.1.1-fix _linkFilePath (file-name-directory _currentFilePathOrDir))
-      (xahsite-filepath-to-url _linkFilePath))))
+        (xah-file-relative-name-emacs24.1.1-fix *linkFilePath (file-name-directory *currentFilePathOrDir))
+      (xahsite-filepath-to-url *linkFilePath))))
 ;; test
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/xahlee_org/arts/blog.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html")
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/index.html" "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" )
 ;; (xahsite-filepath-to-href-value "c:/Users/h3/web/ergoemacs_org/emacs/emacs23_features.html" "c:/Users/h3/web/ergoemacs_org/index.html" )
 
-(defun xahsite-href-value-to-filepath (_href-value _host-file-path)
+(defun xahsite-href-value-to-filepath (*href-value *host-file-path)
   "Returns the file path of a link to xah website.
 
-_href-value is the link string, in 「href=\"…\"」. The value can be a URL to xahsite or relative path.
-_host-file-path is a full path of the host file name or its dir.
+*href-value is the link string, in 「href=\"…\"」. The value can be a URL to xahsite or relative path.
+*host-file-path is a full path of the host file name or its dir.
 
 For reverse, see `xahsite-filepath-to-href-value'.
 See also: `xahsite-url-to-filepath'
 "
-  (if (string-match-p "\\`http://" _href-value)
-      (progn (xahsite-url-to-filepath _href-value "addFileName"))
+  (if (string-match-p "\\`http://" *href-value)
+      (progn (xahsite-url-to-filepath *href-value "addFileName"))
     (progn
-      (expand-file-name _href-value (file-name-directory _host-file-path )))))
+      (expand-file-name *href-value (file-name-directory *host-file-path )))))
 ;; test
 ;; (xahsite-href-value-to-filepath "http://xahlee.org/Netiquette_dir/death_of_a_troll.html" "c:/Users/h3/web/xahlee_info/comp/Google_Tech_Talk_Lisp_At_JPL_by_Ron_Garret.html")
 
-(defun xahsite-url-to-filepath (_xahsiteURL &optional _add-file-name _redirect)
-  "Returns the file path of a xah website URL _xahsiteURL.
+(defun xahsite-url-to-filepath (*xahsiteURL &optional *add-file-name *redirect)
+  "Returns the file path of a xah website URL *xahsiteURL.
 
-If the optional argument _add-file-name is true, then append “index.html” if the resulting path is a dir.
-If the optional argument _redirect is true, then also consider result of http redirect.
+If the optional argument *add-file-name is true, then append “index.html” if the resulting path is a dir.
+If the optional argument *redirect is true, then also consider result of http redirect.
 
 This function does not check input is actually a URL, nor if the result path file exists."
   ;; test cases:
@@ -229,10 +229,10 @@ This function does not check input is actually a URL, nor if the result path fil
   ;; (xahsite-url-to-filepath "http://abc.org/x.html") ; ⇒ "c:/Users/h3/web/abc_org/x.html"
   ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
 
-  (let ((-url _xahsiteURL) -fPath)
+  (let ((-url *xahsiteURL) -fPath)
     (setq -url (xah-remove-uri-fragment -url)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
-    (when _redirect (setq -url (xahsite-url-remap -url)))
-    (when _add-file-name (setq -url (replace-regexp-in-string "/\\'" "/index.html" -url)))
+    (when *redirect (setq -url (xahsite-url-remap -url)))
+    (when *add-file-name (setq -url (replace-regexp-in-string "/\\'" "/index.html" -url)))
     ;; (replace-regexp-in-string "%27" "'" (xah-remove-uri-fragment -url))
 
     (setq -fPath
@@ -280,14 +280,14 @@ This function does not check input is actually a URL, nor if the result path fil
 "w"
 ] )
 
-;; (defun xahsite-url-remap (_xahsite-url)
-;;   "Returns a redirected url for a xah website URL _xahsite-url.
+;; (defun xahsite-url-remap (*xahsite-url)
+;;   "Returns a redirected url for a xah website URL *xahsite-url.
 
 ;; This function is not complete. i.e. it not contain complete url redirects as specified in web server."
 ;;   (let (
 ;;         -domain
 ;;         -path
-;;         (-s _xahsite-url)
+;;         (-s *xahsite-url)
 ;;         (-stop nil)
 ;;         )
 ;;     (string-match "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)" -s)
@@ -319,11 +319,11 @@ This function does not check input is actually a URL, nor if the result path fil
 ;;     (setq -s (replace-regexp-in-string "xahlee.org/emacs/" "ergoemacs.org/emacs/" -s "FIXEDCASE" "LITERAL"))
 ;;  ) )
 
-(defun xahsite-url-remap (_xahsite-url)
-  "Returns a redirected url for a xah website URL _xahsite-url.
+(defun xahsite-url-remap (*xahsite-url)
+  "Returns a redirected url for a xah website URL *xahsite-url.
 
 This function is not complete. i.e. it not contain complete url redirects as specified in web server."
-  (let ((-s _xahsite-url)
+  (let ((-s *xahsite-url)
         (case-fold-search nil))
     (setq -s
           (cond
@@ -374,8 +374,8 @@ This function is not complete. i.e. it not contain complete url redirects as spe
     -s
     ))
 
-(defun xah-remove-uri-fragment (_href-value)
-  "remove URL _href-value fragment, anything after first 「#」 char, including it.
+(defun xah-remove-uri-fragment (*href-value)
+  "remove URL *href-value fragment, anything after first 「#」 char, including it.
 See also `split-uri-hashmark'"
   ;; test
   ;; (xah-remove-uri-fragment "a#b") ; "a"
@@ -383,13 +383,13 @@ See also `split-uri-hashmark'"
   ;; (xah-remove-uri-fragment "4")  ; "4"
   ;; (xah-remove-uri-fragment "#")   ; ""
   ;; (xah-remove-uri-fragment "")  ; ""
-  (let ((-x (string-match-p "#" _href-value )))
+  (let ((-x (string-match-p "#" *href-value )))
     (if -x
-        (substring _href-value 0 -x)
-      _href-value )))
+        (substring *href-value 0 -x)
+      *href-value )))
 
-(defun split-uri-hashmark (_href-value)
-  "Split a URL _href-value by 「#」 char, return a vector.
+(defun split-uri-hashmark (*href-value)
+  "Split a URL *href-value by 「#」 char, return a vector.
  e.g. \"y.html#z\" ⇒ [\"y.html\", \"#z\"]
 
 Examples:
@@ -407,22 +407,22 @@ See also: `xah-remove-uri-fragment'"
   ;; (split-uri-hashmark "#")   ; ["" "#"]
   ;; (split-uri-hashmark "4")  ; ["4" ""]
   ;; (split-uri-hashmark "")  ; ["" ""]
-  (let ((-x (string-match-p "#" _href-value )))
+  (let ((-x (string-match-p "#" *href-value )))
     (if -x
-        (vector (substring _href-value 0 -x) (substring _href-value -x))
-      (vector _href-value "" ))))
+        (vector (substring *href-value 0 -x) (substring *href-value -x))
+      (vector *href-value "" ))))
 
 
 
-(defun file-moved-p (_fpath _moved-dirs )
-  "Return true if either paths are in _moved-dirs list or as a subdir.
-_fpath is a full path to a file.
-_moved-dirs is a list/sequence of file full paths.
-Return true if _fpath is in _moved-dirs or is a subdir of _moved-dirs.
-Technically, if any string in _moved-dirs is a prefix of _fpath."
+(defun file-moved-p (*fpath *moved-dirs )
+  "Return true if either paths are in *moved-dirs list or as a subdir.
+*fpath is a full path to a file.
+*moved-dirs is a list/sequence of file full paths.
+Return true if *fpath is in *moved-dirs or is a subdir of *moved-dirs.
+Technically, if any string in *moved-dirs is a prefix of *fpath."
   (let ( ( -found nil) ( -i 0))
-    (while (and (not -found) (< -i (length _moved-dirs)))
-      (setq -found (string-match-p (concat "\\`" (regexp-quote (elt _moved-dirs -i))) _fpath ))
+    (while (and (not -found) (< -i (length *moved-dirs)))
+      (setq -found (string-match-p (concat "\\`" (regexp-quote (elt *moved-dirs -i))) *fpath ))
       (setq -i (1+ -i)))
     -found
     ))
@@ -431,10 +431,10 @@ Technically, if any string in _moved-dirs is a prefix of _fpath."
 ;; (file-moved-p "abc/d/e" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d/e” is subdir of “abc/d”
 ;; (file-moved-p "abc/" ["abc/d" "don/" "12/3/"] ) ; false, because “abc/” isn't in any of the moved dirs
 
-(defun xah-local-url-to-file-path (_local-file-url)
+(defun xah-local-url-to-file-path (*local-file-url)
   "Turn a localhost file URL LOCALFILEURL into a file full path.
 
-_local-file-url must be a full path.
+*local-file-url must be a full path.
 
 For example, the following string shown in browser URL field:
 ; On Windows Vista 2009-06
@@ -456,7 +456,7 @@ For example, the following string shown in browser URL field:
  〔/media/HP/Users/xah/web/xahlee_org/index.html〕
 "
   (let ((case-fold-search nil))
-    (xah-replace-regexp-pairs-in-string _local-file-url
+    (xah-replace-regexp-pairs-in-string *local-file-url
                                     [
                                      ["\\`file://localhost" ""]
                                      ["\\`file://" ""]
@@ -467,9 +467,9 @@ For example, the following string shown in browser URL field:
                                     "FIXEDCASE"
                                     )))
 
-(defun xahsite-web-path-to-filepath (_input-str &optional _default-dir)
-  "Returns a file full path of _input-str.
-_input-str can have any of these form:
+(defun xahsite-web-path-to-filepath (*input-str &optional *default-dir)
+  "Returns a file full path of *input-str.
+*input-str can have any of these form:
 
  x.html (relative path)
  c:/Users/h3/web/ergoemacs_org/a/x.html (Windows style)
@@ -480,8 +480,8 @@ _input-str can have any of these form:
  file://… (file URL. See: `xah-local-url-to-file-path')
  http://ergoemacs.org/a/x.html (URL)
 
-if the _input-str is a relative path, _default-dir is used to resolve to full path."
-  (let ( (-s _input-str))
+if the *input-str is a relative path, *default-dir is used to resolve to full path."
+  (let ( (-s *input-str))
 
     ;; (setq -s (replace-regexp-in-string "^file:///" "" -s "FIXEDCASE" "LITERAL" ) )
     ;; (setq -s (replace-regexp-in-string "^/media/OS/Users/h3" "~" -s "FIXEDCASE" "LITERAL" ) )
@@ -493,13 +493,13 @@ if the _input-str is a relative path, _default-dir is used to resolve to full pa
         (when (string-match-p "\\`[A-Za-z]:\\|\\\\" -s) ; change Microsoft Windows style path to unix
           (setq -s (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" -s t t))))
         (setq -s (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" -s))
-        (setq -s (expand-file-name -s _default-dir))))
+        (setq -s (expand-file-name -s *default-dir))))
     -s
     ))
 
-(defun xah-path-ends-in-image-suffix-p (_path)
-  "Returns t if _path ends in .jpg .png .gif .svg, else nil."
-  (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" _path))
+(defun xah-path-ends-in-image-suffix-p (*path)
+  "Returns t if *path ends in .jpg .png .gif .svg, else nil."
+  (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" *path))
 
 (defun xah-find-files-file-predicate-p (fname parentdir)
   "return t if fname is what we want. Else nil.
@@ -544,14 +544,14 @@ if the _input-str is a relative path, _default-dir is used to resolve to full pa
     'xah-find-files-file-predicate-p
     'xah-find-files-dir-predicate-p))
 
-(defun xahsite-generate-sitemap (_domain-name)
+(defun xahsite-generate-sitemap (*domain-name)
   "Generate a sitemap.xml.gz file of xahsite at doc root.
-_domain-name must match a existing one."
+*domain-name must match a existing one."
   (interactive
    (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" ))))
   (let (
         (--sitemapFileName "sitemap" )
-        (--websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" _domain-name "FIXEDCASE" "LITERAL") "/")))
+        (--websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" *domain-name "FIXEDCASE" "LITERAL") "/")))
 
     (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
 
@@ -589,7 +589,7 @@ _domain-name must match a existing one."
              (when (not (search-forward "<meta http-equiv=\"refresh\"" nil "noerror"))
                (with-current-buffer -sitemapBuffer
                  (insert "<url><loc>")
-                 (insert (concat "http://" _domain-name "/" (substring -f (length --websiteDocRootPath))))
+                 (insert (concat "http://" *domain-name "/" (substring -f (length --websiteDocRootPath))))
                  (insert "</loc></url>\n"))))))
        (xahsite-traverse-dir-file-list --websiteDocRootPath))
 
@@ -606,8 +606,8 @@ _domain-name must match a existing one."
 
     (print (concat "finished: " (format-time-string "%Y-%m-%dT%T")))))
 
-(defun xahsite-remove-ads (_begin _end)
-  "Remove all ads of in region _begin _end.
+(defun xahsite-remove-ads (*begin *end)
+  "Remove all ads of in region *begin *end.
 
 Remove Google adds, Amazon ads, and other ads, Google Analytics
  Tracker code, Disqus code, …."

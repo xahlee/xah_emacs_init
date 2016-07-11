@@ -53,8 +53,7 @@
     (define-key xah-html-mode-no-chord-map (kbd "w c") 'xah-words-add-comment )
     (define-key xah-html-mode-no-chord-map (kbd "w g") 'xah-words-search-next-unbold )
     (define-key xah-html-mode-no-chord-map (kbd "w p") 'xah-words-query-find-then-bold )
-    (define-key xah-html-mode-no-chord-map (kbd "w u") 'xah-words-find-word-usage )
-
+    
     (define-key xah-html-mode-no-chord-map (kbd "SPC z a") 'xah-html-insert-keywords-tag)
     (define-key xah-html-mode-no-chord-map (kbd "SPC z b") 'xah-html-insert-lyrics-header)
     (define-key xah-html-mode-no-chord-map (kbd "SPC z c") 'xah-html-insert-lyrics-table)

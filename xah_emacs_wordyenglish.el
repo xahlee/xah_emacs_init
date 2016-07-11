@@ -33,7 +33,7 @@ Version 2015-03-11"
   (progn
     (xah-html-wrap-html-tag "b" "w")))
 
-(defun xah-words-move-word-to-page (_category)
+(defun xah-words-move-word-to-page (*category)
   "Take current selection or block of text, ask which page to move it to."
   (interactive
    (list (ido-completing-read "Which:" '("specialwords"
@@ -55,7 +55,7 @@ Version 2015-03-11"
         -p1
         -p2
         -wordText
-        (-destFile (concat _category ".html")))
+        (-destFile (concat *category ".html")))
     (if (use-region-p)
         (progn
           (setq -p1 (region-beginning))
@@ -235,15 +235,3 @@ already bold. Then, ask user whether that should be bold."
         (xah-html-wrap-html-tag "span" "w")
         ;;(replace-match "<span class=\"x-w\">\\1</span>" t)
         ))))
-
-(defun xah-words-find-word-usage (_word)
-  "Grep a dir for a word's usage."
-  (interactive "sWord to search: ")
-  (require 'grep)
-  (grep-compute-defaults)
-  (rgrep _word "*html" "~/web/p")
-;; ~/web/p
-;; ~/web/flatland/
-;; ~/web/Periodic_dosage_dir/_p2/russell-lecture.html
-;; ~/web/Periodic_dosage_dir/_p2/why_not_christian.html
-)

@@ -55,7 +55,7 @@ Version 2015-12-23"
         " width=\"" -width "\""
         " height=\"" -height "\" />")))))
 
-(defun xahsite-html-image-linkify ( &optional _begin _end)
+(defun xahsite-html-image-linkify ( &optional *begin *end)
   "Replace a image file's path under cursor with a HTML img tag.
 If there's a text selection, use that as path.
 For example,
@@ -69,8 +69,8 @@ Version 2015-05-12"
   (interactive)
   (let ( -p0 -p1 -p2 -inputPath -currentDir -fullPath -altText )
     (progn ; sets -p1 -p2
-      (if _begin
-          (progn (setq -p1 _begin) (setq -p2 _end))
+      (if *begin
+          (progn (setq -p1 *begin) (setq -p2 *end))
         (if (use-region-p)
             (progn (setq -p1 (region-beginning)) (setq -p2 (region-end)))
           (save-excursion
@@ -140,23 +140,23 @@ This function calls `xah-html-image-linkify' to do its work."
     (search-backward "</figcaption>")
     (backward-char)))
 
-(defun xah-html-full-size-img-linkify (&optional _begin _end)
+(defun xah-html-full-size-img-linkify (&optional *begin *end)
   "Make image file path at cursor point into a img link.
 
 Example:
 i/goddess.jpg
 becomes
-<a class=\"big-i\" href=\"i/goddess.jpg\" title=\"622×800\" target=\"_blank\">❐</a>
+<a class=\"big-i\" href=\"i/goddess.jpg\" title=\"622×800\" target=\"*blank\">❐</a>
 
 If there's a text selection, use that region as file name."
   (interactive)
   (let
       (-p0 -p1 -p2 -inputStr -imgPath -dimension -width -height -resultStr)
     (progn ; sets -p1 -p2
-      (if _begin
+      (if *begin
           (progn
-            (setq -p1 _begin)
-            (setq -p2 _end))
+            (setq -p1 *begin)
+            (setq -p2 *end))
         (if (use-region-p)
             (progn
               (setq -p1 (region-beginning))
@@ -176,7 +176,7 @@ If there's a text selection, use that region as file name."
     (setq -width (number-to-string (elt -dimension 0)))
     (setq -height (number-to-string (elt -dimension 1)))
     (setq -resultStr
-          (concat "<a class=\"big-i\" href=\"" (file-relative-name -imgPath) "\" target=\"_blank\">" -width "×" -height "</a>"))
+          (concat "<a class=\"big-i\" href=\"" (file-relative-name -imgPath) "\" target=\"*blank\">" -width "×" -height "</a>"))
 
     (delete-region -p1 -p2)
     (insert -resultStr)))
@@ -277,7 +277,7 @@ Note: old version returns this form:
     (delete-region -p1 -p2)
     (insert "<a class=\"utb\" href=\"" -url "\">" -word "</a>")))
 
-(defun video-search-string (_searchString)
+(defun video-search-string (*searchString)
   "Return a Google video search string URL of SEARCHSTRING.
 
 Example:
@@ -286,7 +286,7 @@ Example:
 
 This command is called by `video-search-linkify'."
   (let (strEncoded)
-    (setq strEncoded _searchString )
+    (setq strEncoded *searchString )
     (setq strEncoded (replace-regexp-in-string " " "+" strEncoded ) )
     (setq strEncoded (url-encode-url strEncoded ) )
     (concat "http://www.google.com/search?tbs=vid%3A1&q=" strEncoded)
@@ -366,16 +366,16 @@ Version 2015-05-15"
 
 ;; more specific to Xah Lee
 
-(defun amazon-search-linkify-url (_sString _productCat _assid)
+(defun amazon-search-linkify-url (*sString *productCat *assid)
   "Returns a URL of amazon search based on search string and product category.
-_sString is the search string. e.g. “deep throat”
-_productCat is a short code for amazon's product category.
+*sString is the search string. e.g. “deep throat”
+*productCat is a short code for amazon's product category.
 See `amazon-search-linkify' for the possible code string.
 Sample call:
  (amazon-search-linkify-url \"debbie does dollas\" \"dvd\" \"xahh-20\")"
   (interactive)
   (let (sStrPercent)
-    (setq sStrPercent _sString)
+    (setq sStrPercent *sString)
     (setq sStrPercent (replace-regexp-in-string " " "%20" sStrPercent) )
     (setq sStrPercent (replace-regexp-in-string "," "%2c" sStrPercent) )
 
@@ -383,11 +383,11 @@ Sample call:
      "<a class=\"amzs\" href=\"http://www.amazon.com/gp/search?ie=UTF8&amp;keywords="
      sStrPercent
      "&amp;tag="
-     _assid
+     *assid
      "&amp;index="
-     _productCat
+     *productCat
      "&amp;linkCode=ur2&amp;camp=1789&amp;creative=9325\">"
-     _sString
+     *sString
      "</a>"
      ) ) )
 
@@ -533,7 +533,7 @@ Version 2015-06-07"
 ;;            (insert -resultStr))))
 ;;    ))
 
-(defun xah-file-linkify (&optional _begin _end)
+(defun xah-file-linkify (&optional *begin *end)
   "Make the path under cursor into a HTML link for xah site.
 
 For Example, if you cursor is on the text “../emacs/emacs.html”,
@@ -559,7 +559,7 @@ Version 2016-07-07"
          (setq p2 (point))
          (list p1 p2)))))
   (let* (
-         (-inputStr (buffer-substring-no-properties _begin _end))
+         (-inputStr (buffer-substring-no-properties *begin *end))
          (-inputStParts (split-uri-hashmark -inputStr))
          (pt1 (aref -inputStParts 0))
          (-fragPart (aref -inputStParts 1))
@@ -585,20 +585,20 @@ Version 2016-07-07"
                               (if (string-equal -titleText "") -rltvPath -titleText )))
                   (progn
                     (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url -fPath) -fragPart) -titleText))))
-          (delete-region _begin _end)
+          (delete-region *begin *end)
           (insert -resultStr))
       (progn (message (format "Cannot locate the file: 「%s」" -fPath))))))
 
-(defun nodejs-get-title (_fName _fragPart)
+(defun nodejs-get-title (*fName *fragPart)
   "Return the file frag part function title.
  (nodejs-get-title \"/home/xah/web/xahlee_info/node_api/net.html\" \"#net_server_listen_port_host_backlog_callback\" )
 returns
  \"server.listen(port, [host], [backlog], [callback])\"
 "
   (with-temp-buffer
-    (insert-file-contents _fName nil nil nil t)
+    (insert-file-contents *fName nil nil nil t)
     (goto-char 1)
-    (if (string= _fragPart "")
+    (if (string= *fragPart "")
         (progn
           (search-forward "<div id=\"apicontent\">")
           (if (search-forward "<h1>" nil "NOERROR")
@@ -611,7 +611,7 @@ returns
                (search-forward "<title>")
                (- (search-forward "</title>") 8)) ) ) )
       (progn
-        (search-forward _fragPart)
+        (search-forward *fragPart)
         (buffer-substring-no-properties
          (search-forward "\">")
          (-  (search-forward "</a>") 4))  )

@@ -24,23 +24,23 @@ Example:
     (delete-region -p1 -p2)
     (insert (google-video-string -vID))))
 
-(defun google-video-string (_video-id)
-  "Return HTML code for embedding video of Google Video's _video-id.
+(defun google-video-string (*video-id)
+  "Return HTML code for embedding video of Google Video's *video-id.
 Example call:
  (google-video-string \"2336889538700185341\")"
   (let (-url)
 
-    (setq -url (concat "http://video\.google\.com/googleplayer\.swf\?docid=" _video-id "&amp;fs=true" ))
+    (setq -url (concat "http://video\.google\.com/googleplayer\.swf\?docid=" *video-id "&amp;fs=true" ))
     (concat
      "<object type=\"application/x-shockwave-flash\" data=\"" -url
      "\" width=\"400\" height=\"326\"><param name=\"movie\" value=\"" -url "\"><param name=\"allowFullScreen\" value=\"true\"><param name=\"allowScriptAccess\" value=\"always\"></object>")))
 
-(defun dailymotion-video-string (_video-id)
-  "Return HTML code for embedding video of dailymotion.com's _video-id.
+(defun dailymotion-video-string (*video-id)
+  "Return HTML code for embedding video of dailymotion.com's *video-id.
 Example call:
  (dailymotion-linkify \"x1af0v\")"
   (concat
-   "<object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/" _video-id "\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/" _video-id "\"><param name=\"allowFullScreen\" value=\"true\"></object>"
+   "<object type=\"application/x-shockwave-flash\" data=\"http://www.dailymotion.com/swf/" *video-id "\" width=\"480\" height=\"360\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/" *video-id "\"><param name=\"allowFullScreen\" value=\"true\"></object>"
    ))
 
 ;; (defun dailymotion-video-linkify ()
@@ -104,11 +104,11 @@ it becomes
              ))
     (search-backward "</figcaption>")))
 
-(defun tudou-video-string (_video-id)
-  "Return HTML code for embedding video of tudou.com's _video-id.
+(defun tudou-video-string (*video-id)
+  "Return HTML code for embedding video of tudou.com's *video-id.
 Example call:
  (tudou-video-string \"9OoINUl31dQ\")"
-  (let ((-url (concat "http://www.tudou.com/v/" _video-id "/v.swf" )))
+  (let ((-url (concat "http://www.tudou.com/v/" *video-id "/v.swf" )))
     (concat "<object type=\"application/x-shockwave-flash\" data=\"" -url "\" width=\"480\" height=\"400\"><param name=\"movie\" value=\"" -url "\"></object>" )))
 
 (defun tudou-video-linkify ()

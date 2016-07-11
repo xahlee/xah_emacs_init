@@ -127,19 +127,6 @@
   (define-key xah-user-keymap (kbd "w") nil)
   (define-key xah-user-keymap (kbd "y") nil)
 
-  (define-key xah-user-keymap (kbd "y c") 'xah-words-add-comment)
-  (define-key xah-user-keymap (kbd "y d") 'xah-words-add-definition)
-  (define-key xah-user-keymap (kbd "y e") 'xah-words-word-etymology-linkify)
-  (define-key xah-user-keymap (kbd "y f") 'xah-words-find-word-usage)
-  (define-key xah-user-keymap (kbd "y h") 'xah-words-annotate)
-  (define-key xah-user-keymap (kbd "y i") 'xah-words-insert-word-entry)
-  (define-key xah-user-keymap (kbd "y m") 'xah-words-move-word-to-page)
-  (define-key xah-user-keymap (kbd "y n") 'xah-words-new-word-entry)
-  (define-key xah-user-keymap (kbd "y q") 'xah-words-query-find-then-bold)
-  (define-key xah-user-keymap (kbd "y s") 'xah-words-add-source)
-  (define-key xah-user-keymap (kbd "y t") 'xah-words-chinese-linkify)
-  (define-key xah-user-keymap (kbd "y u") 'xah-words-search-next-unbold)
-
   (define-key xah-user-keymap (kbd "z") nil))
 
 (progn

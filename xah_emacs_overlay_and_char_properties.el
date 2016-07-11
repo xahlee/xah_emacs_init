@@ -36,20 +36,20 @@
 ;;   (let ()
 ;;     (get-char-property-and-overlay (point) PROP &optional)))
 
-(defun xah-make-overlay-bold-region (_begin _end)
+(defun xah-make-overlay-bold-region (*begin *end)
   "make the region bold, using overlay.
 Calls `make-overlay' and `overlay-put'. This:
- (overlay-put (make-overlay _begin _end) 'face 'bold)"
+ (overlay-put (make-overlay *begin *end) 'face 'bold)"
   (interactive "r")
   (progn
-    (overlay-put (make-overlay _begin _end) 'face 'bold)
+    (overlay-put (make-overlay *begin *end) 'face 'bold)
     (setq mark-active nil )))
 
-(defun xah-remove-overlays-region (_begin _end)
+(defun xah-remove-overlays-region (*begin *end)
   "Call `remove-overlays' interactively.
-Call (remove-overlays _begin _end)"
+Call (remove-overlays *begin *end)"
   (interactive "r")
-  (remove-overlays _begin _end))
+  (remove-overlays *begin *end))
 
 (defun xah-show-overlay-at-point ()
   "Show the overlay at cursor position (if any).
@@ -87,11 +87,11 @@ print the list result."
   (let* ((-ols (overlays-in (point-min) (point-max))))
     (print -ols)))
 
-(defun xah-invisible-region (_begin _end hide-p)
+(defun xah-invisible-region (*begin *end hide-p)
   "Hide or show region ΦBEGIN to ΦEND, according to HIDE-P."
-  (remove-overlays _begin _end 'invisible 'xah)
+  (remove-overlays *begin *end 'invisible 'xah)
   (when hide-p
-    (let ((-ovly (make-overlay _begin _end nil 'front-advance)))
+    (let ((-ovly (make-overlay *begin *end nil 'front-advance)))
       (overlay-put -ovly 'evaporate t)
       (overlay-put -ovly 'invisible 'xah)
       (overlay-put -ovly 'isearch-open-invisible 'xah-isearch-open-invisible))))
@@ -102,13 +102,13 @@ print the list result."
 
 ;; (add-to-invisibility-spec '(outline . t))
 
-(defun xhide (_begin _end)
+(defun xhide (*begin *end)
   "DOCSTRING"
   (interactive "r")
   (progn
     (xah-invisible-region 50 100 t)))
 
-(defun xshow (_begin _end)
+(defun xshow (*begin *end)
   "DOCSTRING"
   (interactive "r")
   (progn
