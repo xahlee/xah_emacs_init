@@ -126,7 +126,6 @@
   (define-key xah-user-keymap (kbd "v") nil)
   (define-key xah-user-keymap (kbd "w") nil)
   (define-key xah-user-keymap (kbd "y") nil)
-
   (define-key xah-user-keymap (kbd "z") nil))
 
 (progn

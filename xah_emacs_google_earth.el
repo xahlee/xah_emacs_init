@@ -28,11 +28,11 @@ each line does not include the newline character."
     ;; (print -lines)
     -lines))
 
-(defun xah-insert-google-map-link (&optional *title *lat-lon)
+(defun xah-insert-google-map-link (&optional *title *latlon)
   "Insert HTML link to Google Map.
 
 *title is the title attribute for the HTML link.
-*lat-lon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
+*latlon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
 
 Example of inserted text:
  <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Google Map</a>
@@ -42,10 +42,10 @@ Version 2015-05-12"
   (interactive)
   (let (-title -y -x)
     (setq -title (if *title *title ""))
-    (if *lat-lon
+    (if *latlon
         (progn
-          (setq -y (elt *lat-lon 0))
-          (setq -x (elt *lat-lon 1)))
+          (setq -y (elt *latlon 0))
+          (setq -x (elt *latlon 1)))
       (progn
         (setq -y "y�")
         (setq -x "x�")))
@@ -225,22 +225,22 @@ Sample result:
  <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Google Map</a>
 
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
-Version 2015-05-12"
+Version 2016-07-12"
   (interactive)
-  (let (p1 p2 -input
+  (let (-p1 -p2 -input
            -coord-x
            -coord-y
            -coord-y-x
            )
     (if (use-region-p)
         (progn
-          (setq p1 (region-beginning))
-          (setq p2 (region-end)))
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
       (progn
-        (setq p1 (line-beginning-position))
-        (setq p2 (line-end-position))))
+        (setq -p1 (line-beginning-position))
+        (setq -p2 (line-end-position))))
 
-    (setq -input (buffer-substring-no-properties p1 p2))
+    (setq -input (buffer-substring-no-properties -p1 -p2))
     (if (string-match-p "°" -input)
         (progn
           (setq -coord-y-x (xah-latitude-longitude-decimalize -input))
@@ -251,7 +251,7 @@ Version 2015-05-12"
           (setq -coord-y (string-to-number (nth 0 -xx)))
           (setq -coord-x (string-to-number (nth 1 -xx)))
           (setq -coord-y-x (vector -coord-y -coord-x)))))
-    (delete-region p1 p2)
+    (delete-region -p1 -p2)
     (xah-insert-google-map-link "�" -coord-y-x)))
 
 

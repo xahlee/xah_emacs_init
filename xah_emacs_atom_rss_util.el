@@ -97,18 +97,33 @@ Other files paths for blogs are:
 version 2016-04-03"
   (interactive)
   (let* (
-         (-bds (xah-get-thing-or-selection 'block))
-         (-inputStr 
-          (replace-regexp-in-string " allowfullscreen" " " (elt -bds 0) 'FIXEDCASE 'LITERAL )) ; remove this from iframes from youtube and google map, they are invalid xml
-         (-p1 (elt -bds 1))
-         (-p2 (elt -bds 2))
-         (-p3)
+         -p1 -p2 -p3
+         -inputStr
          (-currentFpath (buffer-file-name))
          (-atomFilePath
           (if (string-match-p "wordyenglish_com/words/new.html\\'" -currentFpath )
               (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" -currentFpath "FIXEDCASE" "LITERAL")
             (replace-regexp-in-string "\\.html\\'" ".xml" -currentFpath "FIXEDCASE" "LITERAL")))
-         (-titleText
+         -titleText
+         -altURL
+         )
+
+    (save-excursion
+      (search-backward "<section>" )
+      (search-forward ">" )
+      (setq -p1 (point))
+      (search-forward "</section>" )
+      (search-backward "<" )
+      (setq -p2 (point)))
+
+    (setq -inputStr
+          (replace-regexp-in-string
+           " allowfullscreen"
+           " "
+           (buffer-substring-no-properties -p1 -p2) 'FIXEDCASE 'LITERAL ))
+    ;; remove this from iframes from youtube and google map, they are invalid xml
+
+    (setq -titleText
           (if (string-match "<h3>\\(.+?\\)</h3>" -inputStr)
               (progn (match-string 1 -inputStr ))
             (progn
@@ -116,7 +131,7 @@ version 2016-04-03"
                   (progn (match-string 2 -inputStr))
                 (progn "�")))))
 
-         (-altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
+    (setq -altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
           (let ( (-hrefValues (xah-html-extract-url -p1 -p2)) -firstLink1)
             (if (>= (length -hrefValues) 1)
                 (progn
@@ -129,9 +144,9 @@ version 2016-04-03"
                     ;;      -currentFpath)
                     ;;   -firstLink1
                     ;;   )
-                    (xahsite-filepath-to-url 
+                    (xahsite-filepath-to-url
                      (expand-file-name -firstLink1 (file-name-directory -currentFpath )))))
-              (xahsite-filepath-to-url -currentFpath)))))
+              (xahsite-filepath-to-url -currentFpath))))
 
     (if (file-exists-p -atomFilePath)
         (find-file -atomFilePath)

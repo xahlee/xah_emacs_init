@@ -278,22 +278,48 @@ Version 2015-08-07"
         (delete-region (car -bounds) (cdr -bounds))
         (insert (xahsite-filepath-to-href-value -newPath (or (buffer-file-name) default-directory)))))))
 
-(defun xah-move-image-file (dirName fileName)
+(defun xah-move-image-file (*dir-name *file-name)
   "move image file at
 ~/Downloads/xx.jpg
 to current dir of subdir i
 and rename file to current line's text.
-2016-07-01"
+
+if xx.jpg doesn't exit, try xx.png. The dirs to try are
+ ~/Downloads/
+ ~/Pictures/
+ /tmp
+
+Version 2016-07-12"
   (interactive "DMove to dir:
 sNew file name:")
-  (let ( moveToPath )
-    (setq moveToPath (concat dirName fileName ".jpg"))
-    (if (file-exists-p moveToPath)
-        (message "move to path exist: %s" moveToPath)
+  (let (
+        -from-path
+        -to-path )
+
+    (setq -from-path
+          (cond
+           ((file-exists-p (expand-file-name "~/Downloads/xx.jpg"))
+            (expand-file-name "~/Downloads/xx.jpg"))
+           ((file-exists-p (expand-file-name "~/Downloads/xx.png"))
+            (expand-file-name "~/Downloads/xx.png"))
+           ((file-exists-p (expand-file-name "~/Pictures/xx.jpg"))
+            (expand-file-name "~/Pictures/xx.jpg"))
+           ((file-exists-p (expand-file-name "~/Pictures/xx.png"))
+            (expand-file-name "~/Pictures/xx.png"))
+           ((file-exists-p "/tmp/xx.jpg")
+            "/tmp/xx.jpg")
+           ((file-exists-p "/tmp/xx.png")
+            "/tmp/xx.png")
+
+           (t (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))))
+
+    (setq -to-path (concat *dir-name *file-name (file-name-extension -from-path )))
+    (if (file-exists-p -to-path)
+        (message "move to path exist: %s" -to-path)
       (progn
-        (rename-file (expand-file-name "~/Downloads/xx.jpg") moveToPath)
-        (find-file moveToPath )
-        (message "move to path: %s" moveToPath)))))
+        (rename-file -from-path -to-path)
+        (find-file -to-path )
+        (message "move to path: %s" -to-path)))))
 
 (defun xah-youtube-get-image ()
   "
