@@ -94,7 +94,7 @@ Other files paths for blogs are:
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
 
-version 2016-04-03"
+version 2016-07-12"
   (interactive)
   (let* (
          -p1 -p2 -p3
@@ -108,13 +108,18 @@ version 2016-04-03"
          -altURL
          )
 
-    (save-excursion
-      (search-backward "<section>" )
-      (search-forward ">" )
-      (setq -p1 (point))
-      (search-forward "</section>" )
-      (search-backward "<" )
-      (setq -p2 (point)))
+    (if (use-region-p)
+        (progn
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
+      (save-excursion
+        (search-backward "<section>" )
+        (search-forward ">" )
+        (forward-line 2) ; skip date stamp
+        (setq -p1 (point))
+        (search-forward "</section>" )
+        (search-backward "<" )
+        (setq -p2 (point))))
 
     (setq -inputStr
           (replace-regexp-in-string
