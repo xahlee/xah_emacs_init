@@ -398,7 +398,7 @@ Also change 「<li>1. 」 to 「<li>① 」."
 (defun xah-add-dstp (*fpath)
   "Insert a file creation date like
 “<div class=\"dstp\">2008-12.</div>”
-to file at ΦFPATH."
+to file at *fpath."
 (let (-buffer)
     (setq -buffer (find-file *fpath))
 

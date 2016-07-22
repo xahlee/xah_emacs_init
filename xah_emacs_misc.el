@@ -173,7 +173,8 @@ Version 2015-06-12"
 
 (defun xah-toggle-margin-right ()
   "Toggle the right margin between `fill-column' or window width.
-This command is convenient when reading novel, documentation."
+This command is convenient when reading novel, documentation.
+Version 2016-07-21"
   (interactive)
   (if (null (cdr (window-margins)))
       (set-window-margins nil 0 (- (window-body-width) fill-column))

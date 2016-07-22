@@ -11,6 +11,20 @@
 (define-abbrev-table 'global-abbrev-table
   '(
 
+    ("emoji" "😃😄😅😆
+😉😊😋😌
+😎😇😈
+😁😂😀
+😚😘😍😙😗
+😛😜😝
+😩😫😪😴
+😏😓😔😖😐😑😕
+😮😯😰😱😲😳😵😶😷
+😒😠😡
+😞😟😣😤😥😦😧😨😬
+😢😭
+😸😹😺😻😼😽😾😿🙀")
+
     ("mac" "Mac")
     ("osx" "OS X")
     ("macosx" "Mac OS X")
@@ -247,7 +261,7 @@
     ;; for programers
     ("hex" "hexadecimal")
     ("ui" "user interface")
-    ("gui" "graphical user interface")
+    ("1gui" "graphical user interface")
     ("1alt" "alternative")
 
     ("prof" "professor")

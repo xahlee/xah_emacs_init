@@ -6,7 +6,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
 
-(add-to-list 'auto-mode-alist '("\\.clj\\'" . xah-clojure-mode))
 
 (add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))
 (add-to-list 'magic-mode-alist '("<\\?php" . xah-php-mode) )

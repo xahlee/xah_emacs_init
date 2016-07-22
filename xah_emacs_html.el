@@ -122,7 +122,7 @@ words-4.html
   (require 'sgml-mode)
   (let* (
          -p1 -p2
-         (_setBoundary
+         (-setBoundary
           (save-excursion
             (if (re-search-backward "\n[ \t]*\n" nil "move")
                 (progn (re-search-forward "\n[ \t]*\n")
@@ -313,7 +313,7 @@ sNew file name:")
 
            (t (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))))
 
-    (setq -to-path (concat *dir-name *file-name (file-name-extension -from-path )))
+    (setq -to-path (concat *dir-name *file-name "." (file-name-extension -from-path )))
     (if (file-exists-p -to-path)
         (message "move to path exist: %s" -to-path)
       (progn

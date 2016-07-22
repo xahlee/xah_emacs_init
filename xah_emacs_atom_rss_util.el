@@ -19,9 +19,7 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
          (-id (if *id *id (new-atom-id-tag) ) )
          (-summary (if *summary (concat "<summary>" *summary "</summary>\n") "") )
          (-content (if *content-xml-text (format " <content type=\"xhtml\">
- <div xmlns=\"http://www.w3.org/1999/xhtml\">
-%s
- </div>
+ <div xmlns=\"http://www.w3.org/1999/xhtml\">%s</div>
  </content>" *content-xml-text)
   "") )
          (-updatedStr (xah-current-date-time-string))
@@ -94,7 +92,7 @@ Other files paths for blogs are:
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
 
-version 2016-07-12"
+version 2016-07-16"
   (interactive)
   (let* (
          -p1 -p2 -p3
@@ -119,6 +117,7 @@ version 2016-07-12"
         (setq -p1 (point))
         (search-forward "</section>" )
         (search-backward "<" )
+        ;; (delete-blank-lines)
         (setq -p2 (point))))
 
     (setq -inputStr
@@ -163,5 +162,5 @@ version 2016-07-12"
     (setq -p3 (point))
     (insert-atom-entry -titleText (new-atom-id-tag) nil -inputStr -altURL)
     (search-backward "</title>")
-  ;    (when (not (search-forward "�" nil t) ) (progn (goto-char -p3)))
+    (save-buffer )
     ))

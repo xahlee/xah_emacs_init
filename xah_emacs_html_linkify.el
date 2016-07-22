@@ -16,7 +16,8 @@ become
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
 Version 2015-12-23"
   (interactive)
-  (let ( -p1 -p2 -imgPath -hrefValue -altText -imgWH -width -height)
+  (let ( -p1 -p2 -imgPath
+             -hrefValue -altText -imgWH -width -height)
     (save-excursion
       (let (-p0)
         (setq -p0 (point))
@@ -27,7 +28,10 @@ Version 2015-12-23"
         (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
         (setq -p2 (point))
         (goto-char -p0))
-      (setq -imgPath (buffer-substring-no-properties -p1 -p2 ))
+      (setq -imgPath
+            (xahsite-web-path-to-filepath
+             (xah-local-url-to-file-path
+              (buffer-substring-no-properties -p1 -p2 ))))
       (setq -hrefValue
             (file-relative-name
              -imgPath
@@ -713,7 +717,7 @@ becomes
          (-p1 (aref -bds 1))
          (-p2 (aref -bds 2)))
     (delete-region -p1 -p2)
-    (insert (format "<audio src=\"%s\" controls></audio>" 
+    (insert (format "<audio src=\"%s\" controls></audio>"
                     (if (string-match "^http" -inputStr)
                         -inputStr
                       (file-relative-name -inputStr))))))

@@ -87,10 +87,10 @@ print the list result."
   (let* ((-ols (overlays-in (point-min) (point-max))))
     (print -ols)))
 
-(defun xah-invisible-region (*begin *end hide-p)
-  "Hide or show region ΦBEGIN to ΦEND, according to HIDE-P."
+(defun xah-invisible-region (*begin *end *hide-p)
+  "Hide or show region *begin to *end, according to *hide-p"
   (remove-overlays *begin *end 'invisible 'xah)
-  (when hide-p
+  (when *hide-p
     (let ((-ovly (make-overlay *begin *end nil 'front-advance)))
       (overlay-put -ovly 'evaporate t)
       (overlay-put -ovly 'invisible 'xah)

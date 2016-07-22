@@ -35,12 +35,12 @@ URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2015-07-30"
   (interactive)
   (require 'dired)
-  (let ( (fileName (elt (dired-get-marked-files) 0)))
+  (let ( (-fName (elt (dired-get-marked-files) 0)))
     (shell-command
      (format
       "zip -r '%s.zip' '%s'"
-      (file-relative-name fileName)
-      (file-relative-name fileName)))))
+      (file-relative-name -fName)
+      (file-relative-name -fName)))))
 
 (defun xah-process-image (*file-list *args-str *new-name-suffix *new-name-file-suffix )
   "Wrapper to ImageMagick's “convert” shell command.
@@ -50,30 +50,30 @@ Version 2015-07-30"
 *new-name-file-suffix is the new file's file extension. e.g. “.png”
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-10-19"
+Version 2016-07-19"
   (require 'dired)
   (mapc
    (lambda (-f)
-     (let ( newName cmdStr )
-       (setq newName
+     (let ( -newName -cmdStr )
+       (setq -newName
              (concat
               (file-name-sans-extension -f)
               *new-name-suffix
               *new-name-file-suffix))
-       (while (file-exists-p newName)
-         (setq newName
+       (while (file-exists-p -newName)
+         (setq -newName
                (concat
-                (file-name-sans-extension newName)
+                (file-name-sans-extension -newName)
                 *new-name-suffix
-                (file-name-extension newName t))))
+                (file-name-extension -newName t))))
        ;; relative paths used to get around Windows/Cygwin path remapping problem
-       (setq cmdStr
+       (setq -cmdStr
              (format
               "convert %s '%s' '%s'"
               *args-str
               (file-relative-name -f)
-              (file-relative-name newName)))
-       (shell-command cmdStr)))
+              (file-relative-name -newName)))
+       (shell-command -cmdStr)))
    *file-list )
   (revert-buffer))
 
@@ -81,7 +81,7 @@ Version 2015-10-19"
   "Create a scaled version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
-If `universal-argument' is given, output is PNG format. Else, JPG.
+If `universal-argument' is called first, output is PNG format. Else, JPG.
 
 When called in lisp code,
  *file-list is a list.
@@ -90,54 +90,54 @@ When called in lisp code,
 
 Requires ImageMagick unix shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-03-10"
+Version 2016-07-19"
   (interactive
    (let (
-         (-myFileList
+         (-fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -myFileList
+     (list -fileList
            (read-from-minibuffer "Scale %:")
            (y-or-n-p "Sharpen"))))
-  (let ((sharpenOrNo (if *sharpen? "-sharpen 1" "" ))
-        (outputSuffix (if current-prefix-arg ".png" ".jpg" )))
-    (xah-process-image *file-list
-                       (format "-scale %s%% -quality 85%% %s " *scale-percentage sharpenOrNo)
-                       "-s" outputSuffix )))
+  (let ( (-outputSuffix (if current-prefix-arg ".png" ".jpg" )))
+    (xah-process-image
+     *file-list
+     (format "-scale %s%% -quality 85%% %s " *scale-percentage (if *sharpen? "-sharpen 1" "" ))
+     "-s" -outputSuffix )))
 
 (defun xah-dired-image-autocrop (*file-list *output-image-type-suffix)
   "Create a new auto-cropped version of images of marked files in dired.
 Requires ImageMagick shell command.
 
-If `universal-argument' is given, output is PNG format. Else, JPG.
+If `universal-argument' is called first, output is PNG format. Else, JPG.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-03-10"
+Version 2016-07-19"
   (interactive
    (let (
-         (-myFileList
+         (-fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:")))))
          (*output-image-type-suffix (if current-prefix-arg ".png" ".jpg" )))
-     (list -myFileList *output-image-type-suffix)))
+     (list -fileList *output-image-type-suffix)))
   (xah-process-image *file-list "-trim" "-cropped" *output-image-type-suffix ))
 
 (defun xah-dired-2png (*file-list)
   "Create a png version of images of marked files in dired.
 Requires ImageMagick shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-03-10"
+Version 2016-07-19"
   (interactive
    (let (
-         (-myFileList
+         (-fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -myFileList)))
+     (list -fileList)))
   (xah-process-image *file-list "" "-2" ".png" ))
 
 (defun xah-dired-2drawing (*file-list *grayscale-p *max-colors-count)
@@ -148,12 +148,12 @@ Requires ImageMagick shell command.
 2015-07-09"
   (interactive
    (let (
-         (-myFileList
+         (-fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -myFileList
+     (list -fileList
            (setq *grayscale-p (yes-or-no-p "Grayscale?"))
            (ido-completing-read "Max number of colors:" '( "2" "4" "16" "256" )))))
   (xah-process-image *file-list
@@ -175,15 +175,15 @@ Requires ImageMagick shell command.
   "Create a JPG version of images of marked files in dired.
 Requires ImageMagick shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-04-30"
+Version 2016-07-19"
   (interactive
    (let (
-         (-myFileList
+         (-fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -myFileList)))
+     (list -fileList)))
   (xah-process-image *file-list "-quality 90%" "-2" ".jpg" ))
 
 (defun xah-dired-crop-image (*file-list)
@@ -191,12 +191,12 @@ Version 2015-04-30"
 Requires ImageMagick shell command."
   (interactive
    (let (
-         (-myFileList
+         (-fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -myFileList)))
+     (list -fileList)))
   (xah-process-image *file-list "-crop 690x520+220+165" "_n" ".png" ))
 
 (defun xah-dired-remove-all-metadata (*file-list)
@@ -206,22 +206,20 @@ URL `http://xahlee.info/img/metadata_in_image_files.html'
 Requires exiftool shell command.
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-03-10"
+Version 2016-07-19"
   (interactive
-   (let (
-         (-myFileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:"))))))
-     (list -myFileList)))
+   (list 
+    (cond
+     ((string-equal major-mode "dired-mode") (dired-get-marked-files))
+     ((string-equal major-mode "image-mode") (list (buffer-file-name)))
+     (t (list (read-from-minibuffer "file name:"))))))
   (if (y-or-n-p "Sure to remove all metadata?")
       (mapc
        (lambda (-f)
-         (let (cmdStr)
-           (setq cmdStr
+         (let (-cmdStr)
+           (setq -cmdStr
                  (format "exiftool -all= -overwrite_original '%s'" (file-relative-name -f))) ; relative paths used to get around Windows/Cygwin path remapping problem
-           (shell-command cmdStr)))
+           (shell-command -cmdStr)))
        *file-list )
     nil
     ))
@@ -232,21 +230,19 @@ Version 2015-03-10"
 URL `http://xahlee.info/img/metadata_in_image_files.html'
 Requires exiftool shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-03-10"
+Version 2016-07-19"
   (interactive
-   (let (
-         (-myFileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:"))))))
-     (list -myFileList)))
+   (list 
+    (cond
+     ((string-equal major-mode "dired-mode") (dired-get-marked-files))
+     ((string-equal major-mode "image-mode") (list (buffer-file-name)))
+     (t (list (read-from-minibuffer "file name:"))))))
   (mapc
    (lambda (-f)
-     (let (cmdStr)
-       (setq cmdStr
-             (format "exiftool '%s'" (file-relative-name -f))) ; relative paths used to get around Windows/Cygwin path remapping problem
-       (shell-command cmdStr)))
+     (shell-command 
+      (format "exiftool '%s'" (file-relative-name -f))
+      ;; relative paths used to get around Windows/Cygwin path remapping problem
+      ))
    *file-list ))
 
 (defun xah-dired-sort ()

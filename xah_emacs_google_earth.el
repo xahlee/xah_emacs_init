@@ -146,7 +146,7 @@ Version 2015-02-08"
     (vector -latNum -lonNum)))
 
 ;; (defun minsec-to-dec (*latlong)
-;;   "Convert latitude longitude string ΦLATLONG in minutes second format to decimal.
+;;   "Convert latitude longitude string *latlong in minutes second format to decimal.
 
 ;; For example: 「37°26′36.42″N 06°15′14.28″W」
 ;; becomes

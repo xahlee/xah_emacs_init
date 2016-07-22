@@ -67,6 +67,10 @@
   (define-key xah-css-mode-map xah-major-mode-lead-key xah-css-mode-no-chord-map)
   )
 
+(when (fboundp 'xah-clojure-mode)
+  (define-key xah-clojure-mode-map xah-major-mode-lead-key xah-clojure-mode-no-chord-map)
+  )
+
 (when (fboundp 'xah-elisp-mode)
   (define-key xah-elisp-mode-map xah-major-mode-lead-key xah-elisp-mode-no-chord-map)
   )

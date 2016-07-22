@@ -174,7 +174,7 @@ returns 「emacs/xyz.html」"
     (match-string 1 *fpath)))
 
 (defun xahsite-filepath-to-url (*webpath)
-  "Turn my website path ΦWEBPATH to my site's URL.
+  "Turn my website path *webpath to my site's URL.
 For example, the following path:
  C:/Users/xah/web/ergoemacs_org/emacs/emacs.html
 or
