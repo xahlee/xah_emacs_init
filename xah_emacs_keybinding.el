@@ -6,13 +6,11 @@
 ;;   (define-key xah-fly-key-map (kbd "<menu>") 'smex)
 ;;   )
 
-;; (define-key xah-fly-key-map (kbd "<menu>") xah-insertion-keymap)
-(define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-command-mode-activate)
 ;; (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-mode-toggle)
 ;; (define-key xah-fly-key-map (kbd "<home>") nil)
 
-;; (define-key xah-fly-key-map (kbd "<home>") xah-insertion-keymap)
-(define-key xah-fly-key-map (kbd "<home>") 'xah-toggle-letter-case)
+(define-key xah-fly-key-map (kbd "<home>") xah-insertion-keymap)
+(define-key xah-fly-key-map (kbd "DEL") nil)
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
@@ -32,7 +30,6 @@
 ;;    (nth 1 x)
 ;;    (nth 2 x)
 ;;    27))
-
 
 (setq xah-major-mode-lead-key (kbd "<delete>"))
 
@@ -96,7 +93,7 @@
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
 
   (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
-  
+
   (define-key xah-user-keymap (kbd "l") nil)
   (define-key xah-user-keymap (kbd "m") 'magit-status)
   (define-key xah-user-keymap (kbd "n") nil)

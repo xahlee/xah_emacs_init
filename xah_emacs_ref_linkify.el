@@ -5,7 +5,9 @@
 
 (defun xah-view-emacs-manual-in-browser ()
   "When in `Info-mode', view the current page in browser
-For example: if current node is 「(elisp) The Mark」, switch to browser and load 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
+For example: if current node is 「(elisp) The Mark」, switch to browser and load 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」
+
+2016-07-31"
   (interactive)
   (browse-url
    (xahsite-url-to-filepath

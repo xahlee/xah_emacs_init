@@ -9,6 +9,10 @@
     (define-key dired-mode-map (kbd "6") 'dired-up-directory)
     ))
 
+(progn
+  (require 'info )
+  (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser))
+
 (when (fboundp 'xah-html-mode)
   
   (define-key xah-html-mode-map xah-major-mode-lead-key xah-html-mode-no-chord-map)

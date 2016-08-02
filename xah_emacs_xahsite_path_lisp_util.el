@@ -4,7 +4,7 @@
 ; Xah Lee,
 ; ∑ http://xahlee.org/
 
-(require 'subr-x)
+(require 'subr-x) ; string-trim
 
 (defun xahsite-server-root-path ()
   "Returns the full path of xah lee website local file web root.

@@ -87,18 +87,18 @@ WARNING: this command is currently unstable."
   (interactive)
   ;; this function sets a property 「'state」. Possible values are 0 to length of char_array.
   (let (input_text
-        replace_text char_array p1 p2 current_state next_state changeFrom
+        replace_text char_array -p1 -p2 current_state next_state changeFrom
         changeTo startedWithRegion-p )
 
     (if (region-active-p)
         (progn
           (setq startedWithRegion-p t )
-          (setq p1 (region-beginning))
-          (setq p2 (region-end)))
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
       (let ((-boundary (bounds-of-thing-at-point 'word)))
         (setq startedWithRegion-p nil )
-        (setq p1 (car -boundary))
-        (setq p2 (cdr -boundary))))
+        (setq -p1 (car -boundary))
+        (setq -p2 (cdr -boundary))))
 
     (setq char_array [" " "_"])
 
@@ -111,7 +111,7 @@ WARNING: this command is currently unstable."
     (setq changeFrom (elt char_array current_state ))
     (setq changeTo (elt char_array next_state ))
 
-    (setq input_text (buffer-substring-no-properties p1 p2))
+    (setq input_text (buffer-substring-no-properties -p1 -p2))
 
     (let ((case-fold-search nil))
       (cond
@@ -126,7 +126,7 @@ WARNING: this command is currently unstable."
         )))
 
     (save-restriction
-      (narrow-to-region p1 p2)
+      (narrow-to-region -p1 -p2)
       (delete-region (point-min) (point-max))
       (insert replace_text))
 
@@ -387,17 +387,17 @@ Version 2015-04-29"
   "Remove the following letters: {a e i o u} in current line or text selection.
 Version 2015-08-22"
   (interactive)
-  (let (p1 p2 )
+  (let (-p1 -p2 )
     (if (use-region-p)
         (progn
-          (setq p1 (region-beginning))
-          (setq p2 (region-end)))
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
       (progn
-        (setq p1 (line-beginning-position))
-        (setq p2 (line-end-position))))
+        (setq -p1 (line-beginning-position))
+        (setq -p2 (line-end-position))))
     (save-excursion
       (save-restriction
-        (narrow-to-region p1 p2)
+        (narrow-to-region -p1 -p2)
         (let ( (case-fold-search nil))
           (goto-char (point-min))
           (while (search-forward-regexp "a\\|e\\|i\\|o\\|u" (point-max) 'NOERROR)
@@ -407,20 +407,20 @@ Version 2015-08-22"
   "Replace fuck shit scumbag … in current line or text selection.
 "
   (interactive)
-  (let ( p1 p2)
+  (let ( -p1 -p2)
     (if (use-region-p)
         (progn
-          (setq p1 (region-beginning))
-          (setq p2 (region-end)))
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
       (progn
-        (setq p1 (line-beginning-position))
-        (setq p2 (line-end-position))))
+        (setq -p1 (line-beginning-position))
+        (setq -p2 (line-end-position))))
     (xah-replace-pairs-region
-     p1 p2
+     -p1 -p2
      '(
-       ["fuck" "f�ck"]
-       ["shit" "sh�t"]
-       ["motherfuck" "m�th�rf�ck"]
+       ["fuck" "f￼ck"]
+       ["shit" "sh￼t"]
+       ["motherfuck" "m￼th￼rf￼ck"]
        ))))
 
 (defun xah-replace-slanted-apostrophe ()
@@ -428,16 +428,16 @@ Version 2015-08-22"
 Works on current line or text selection.
 Example: 「it’s」 ⇒ 「it's」."
   (interactive)
-  (let ( p1 p2)
+  (let ( -p1 -p2)
     (if (use-region-p)
         (progn
-          (setq p1 (region-beginning))
-          (setq p2 (region-end)))
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
       (progn
-        (setq p1 (line-beginning-position))
-        (setq p2 (line-end-position))))
+        (setq -p1 (line-beginning-position))
+        (setq -p2 (line-end-position))))
     (xah-replace-pairs-region
-     p1 p2
+     -p1 -p2
      '(
        ["‘tis" "'tis"]
        ["’s" "'s"]
@@ -466,15 +466,15 @@ When called in lisp code, *begin *end are region begin/end positions. *to-direct
 
 See also: `xah-remove-punctuation-trailing-redundant-space'."
   (interactive
-   (let (p1 p2)
+   (let (-p1 -p2)
      (if (use-region-p)
          (progn
-           (setq p1 (region-beginning))
-           (setq p2 (region-end)))
+           (setq -p1 (region-beginning))
+           (setq -p2 (region-end)))
        (progn
-         (setq p1 (line-beginning-position))
-         (setq p2 (line-end-position))))
-     (list p1 p2
+         (setq -p1 (line-beginning-position))
+         (setq -p2 (line-end-position))))
+     (list -p1 -p2
            (cond
             ((equal current-prefix-arg nil) "auto")
             ((equal current-prefix-arg '(4)) "ascii")

@@ -35,7 +35,7 @@ each line does not include the newline character."
 *latlon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
 
 Example of inserted text:
- <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Google Map</a>
+ <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"▮\" target=\"_blank\">Google Map</a>
 
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2015-05-12"
@@ -47,8 +47,8 @@ Version 2015-05-12"
           (setq -y (elt *latlon 0))
           (setq -x (elt *latlon 1)))
       (progn
-        (setq -y "y�")
-        (setq -x "x�")))
+        (setq -y "y▮")
+        (setq -x "x▮")))
     (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string -y) "%2C" (number-to-string -x) "\" title=\"" -title "\" target=\"_blank\">Google Map</a>\n")))
 
 (defun xah-insert-google-earth-link (&optional *title *filePath)
@@ -58,7 +58,7 @@ Version 2015-05-12"
 Here's a sample inserted text:
 <a href=\"../kml/las_vegas.kmz\" title=\"Las Vegas\">🌎</a>"
   (interactive)
-  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if *filePath (xahsite-filepath-to-url *filePath) "�") (if *title *title "�") )) )
+  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if *filePath (xahsite-filepath-to-url *filePath) "▮") (if *title *title "▮") )) )
 
 (defun xah-insert-kml (&optional *kml-title *lon-lat *source-fpath)
   "Insert a simple Google Earth KML markup template.
@@ -68,7 +68,7 @@ Here's a sample inserted text:
 used in the <description> tag."
   (interactive)
   (let (coord-x coord-y)
-    (when (not *kml-title) (setq *kml-title "�"))
+    (when (not *kml-title) (setq *kml-title "▮"))
     (if *lon-lat
         (progn
           (setq coord-x (elt *lon-lat 0))
@@ -222,7 +222,7 @@ The above is ‹latitude› ‹longitude›
 If there's a text selection, use that as input.
 
 Sample result:
- <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"�\" target=\"_blank\">Google Map</a>
+ <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"▮\" target=\"_blank\">Google Map</a>
 
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2016-07-12"
@@ -252,7 +252,7 @@ Version 2016-07-12"
           (setq -coord-x (string-to-number (nth 1 -xx)))
           (setq -coord-y-x (vector -coord-y -coord-x)))))
     (delete-region -p1 -p2)
-    (xah-insert-google-map-link "�" -coord-y-x)))
+    (xah-insert-google-map-link "▮" -coord-y-x)))
 
 
 

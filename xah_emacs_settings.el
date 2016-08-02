@@ -163,20 +163,22 @@
 ;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
 ;;   )
 
-
-;; minibuffer
 
-(setq enable-recursive-minibuffers t)
 
-;; Save minibuffer history
-(savehist-mode 1)
+(progn ; minibuffer
+  (setq enable-recursive-minibuffers t)
 
-(setq max-mini-window-height 0.5)
+  ;; Save minibuffer history
+  (savehist-mode 1)
 
-;; minibuffer, stop cursor going into prompt
-(customize-set-variable
- 'minibuffer-prompt-properties
- (quote (read-only t cursor-intangible t face minibuffer-prompt)))
+  (setq max-mini-window-height 0.5)
+
+  ;; minibuffer, stop cursor going into prompt
+  (customize-set-variable
+   'minibuffer-prompt-properties
+   (quote (read-only t cursor-intangible t face minibuffer-prompt))))
+
+
 
 
 
@@ -212,9 +214,11 @@
 (progn
   ;; make buffer switch command do suggestions, also for find-file command
   (ido-mode 1)
- ;; (ido-everywhere 1)
+  ;; (ido-everywhere 1)
   (setq ido-separator "\n")
   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
+  (setq ido-default-file-method 'selected-window)
+  (setq ido-default-buffer-method 'selected-window)
   )
 
 (electric-indent-mode 0) ; default is on in emacs 24.4

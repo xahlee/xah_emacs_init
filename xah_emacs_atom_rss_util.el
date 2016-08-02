@@ -3,6 +3,7 @@
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 ;; 〈Emacs Lisp: Updating Atom Webfeed〉 http://ergoemacs.org/emacs/elisp_update_atom.html
 
+(require 'subr-x) ; string-trim
 (require 'xah-get-thing)
 
 (defun insert-atom-entry (&optional *title *id *summary *content-xml-text *alt-link)
@@ -15,7 +16,7 @@ Optional argument *alt-link is used in the atom tag: <link rel=\"alternate\" hre
 Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
   (interactive)
   (let* (
-         (-title (if *title (concat "<title>" *title "</title>") "�") )
+         (-title (if *title (concat "<title>" *title "</title>") "▮") )
          (-id (if *id *id (new-atom-id-tag) ) )
          (-summary (if *summary (concat "<summary>" *summary "</summary>\n") "") )
          (-content (if *content-xml-text (format " <content type=\"xhtml\">
@@ -92,7 +93,7 @@ Other files paths for blogs are:
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
 
-version 2016-07-16"
+version 2016-07-30"
   (interactive)
   (let* (
          -p1 -p2 -p3
@@ -121,10 +122,15 @@ version 2016-07-16"
         (setq -p2 (point))))
 
     (setq -inputStr
-          (replace-regexp-in-string
-           " allowfullscreen"
-           " "
-           (buffer-substring-no-properties -p1 -p2) 'FIXEDCASE 'LITERAL ))
+          (concat
+           "\n"
+           (replace-regexp-in-string
+            " allowfullscreen"
+            " "
+            (string-trim (buffer-substring-no-properties -p1 -p2))
+            'FIXEDCASE 'LITERAL )
+           "\n"
+           ))
     ;; remove this from iframes from youtube and google map, they are invalid xml
 
     (setq -titleText
@@ -133,7 +139,7 @@ version 2016-07-16"
             (progn
               (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" -inputStr)
                   (progn (match-string 2 -inputStr))
-                (progn "�")))))
+                (progn "▮")))))
 
     (setq -altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
           (let ( (-hrefValues (xah-html-extract-url -p1 -p2)) -firstLink1)
@@ -161,6 +167,4 @@ version 2016-07-16"
     (beginning-of-line)
     (setq -p3 (point))
     (insert-atom-entry -titleText (new-atom-id-tag) nil -inputStr -altURL)
-    (search-backward "</title>")
-    (save-buffer )
-    ))
+    (search-backward "</title>")))

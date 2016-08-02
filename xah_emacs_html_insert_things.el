@@ -41,19 +41,19 @@ English translation: 李杀 (Xah Lee)
 <tr>
 <td>
 <pre class=\"lyrics88\">
-�
+▮
 </pre>
 </td>
 <td>
 <pre class=\"lyrics88\">
-�
+▮
 </pre>
 </td>
 </tr>
 </table>"
 )
-  (search-backward "�")
-  (search-backward "�")
+  (search-backward "▮")
+  (search-backward "▮")
   )
 
 (defun xah-html-insert-screen-filler ()

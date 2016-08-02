@@ -44,7 +44,7 @@ Add today's date to the “byline” tag of current file, also delete the last o
 Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 WARNING: This command saves buffer if it's a file.
-Version 2016-04-12"
+Version 2016-07-30"
   (interactive)
   (let (-p1 -p2 -num -bufferTextOrig)
     (push-mark)
@@ -91,15 +91,14 @@ Version 2016-04-12"
             (when (not (looking-at "\\.")) (insert "."))
             (goto-char (point-max))))
 
-        ;; backup
-        (let ((-fname (buffer-file-name)))
+        (let ; backup
+            ((-fname (buffer-file-name)))
           (if -fname
               (let ((-backup-name
                      (concat -fname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
                 (copy-file -fname -backup-name t)
                 (message (concat "Backup saved at: " -backup-name)))))
 
-        (save-buffer)
         (message "%s\nchanged to\n%s" -bufferTextOrig (buffer-string )))
       )))
 
