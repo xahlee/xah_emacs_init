@@ -665,31 +665,37 @@ The conversion direction is automatically determined.
 
 If `universal-argument' is called, ask for conversion direction.
 
-When called in lisp code, *begin *end are region begin/end positions. *to-direction must be one of the following values: 「\"auto\"」, 「\"twitterfy\"」, 「\"untwitterfy\"」.
+Note: calling this function twice in opposite direction does not necessarily return the origial, because the map is not one-to-one, also the string in the map overlaps.
+
+When called in lisp code, *begin *end are region begin/end positions. *to-direction must be one of the following values:
+ 'auto
+ 'shorten
+ 'lengthen
 
 URL `http://ergoemacs.org/emacs/elisp_twitterfy.html'
-Version 2015-08-12"
+Version 2016-08-02"
   (interactive
    (list
     (if (use-region-p) (region-beginning) (line-beginning-position))
     (if (use-region-p) (region-end) (line-end-position))
-    (if current-prefix-arg
-        (ido-completing-read
-         "Direction: "
-         '( "twitterfy"  "untwitterfy")
-         "PREDICATE"
-         "REQUIRE-MATCH")
-      "auto"
-      )))
-  (let ((-twitterfy-map
+    (intern
+     (if current-prefix-arg
+         (ido-completing-read
+          "Direction: "
+          '( "shorten"  "lengthen")
+          "PREDICATE"
+          "REQUIRE-MATCH")
+       "auto"
+       ))))
+  (let ((-shorten-map
          [
           [" are " " r "]
           [" are, " " r,"]
           [" you " " u "]
           [" you," " u,"]
           [" you." " u."]
-          [" to " " 2 "]
           [" you." " u。"]
+          [" to " " 2 "]
           [" your" " ur "]
           [" and " "＆"]
           ["because" "cuz"]
@@ -711,22 +717,21 @@ Version 2015-08-12"
     (save-excursion
       (save-restriction
         (narrow-to-region *begin *end)
-        (when (string= *to-direction "auto")
+        (when (string= *to-direction 'auto)
           (goto-char (point-min))
           (if
               (re-search-forward "。\\|，\\|？\\|！" nil 'NOERROR)
-              (setq *to-direction "untwitterfy")
-            (setq *to-direction "twitterfy")))
-
+              (setq *to-direction 'lengthen)
+            (setq *to-direction 'shorten)))
         (let ( (case-fold-search nil))
           (mapc
            (lambda (-x)
              (goto-char (point-min))
              (while (search-forward (elt -x 0) nil t)
                (replace-match (elt -x 1) 'FIXEDCASE 'LITERAL)))
-           (if (string= *to-direction "twitterfy")
-               -twitterfy-map
-             (mapcar (lambda (-pair) (vector (elt -pair 1) (elt -pair 0))) -twitterfy-map)))
+           (if (string= *to-direction 'shorten)
+               -shorten-map
+             (mapcar (lambda (-pair) (vector (elt -pair 1) (elt -pair 0))) -shorten-map)))
 
           (goto-char (point-min))
           (while (search-forward "  " nil t)
@@ -753,7 +758,7 @@ Version 2016-07-06"
       ;; so that command-history will record these expressions
       ;; rather than the values they had this time.
       ;; 2016-07-06 am still not sure exactly how they work. note, if you add a else, it won't work
-      (if (use-region-p) (region-beginning))                 
+      (if (use-region-p) (region-beginning))
       (if (use-region-p) (region-end)))))
 
   (if (null *begin) (setq *begin (line-beginning-position)))
