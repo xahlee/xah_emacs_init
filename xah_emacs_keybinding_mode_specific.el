@@ -32,6 +32,8 @@
     (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
     (define-key xah-html-mode-no-chord-map (kbd "f") 'xah-html-image-linkify)
 
+    (define-key xah-html-mode-no-chord-map (kbd "p") 'xah-browse-url-of-buffer)
+
     (define-key xah-html-mode-no-chord-map (kbd "SPC b") 'xah-make-blogger-entry)
     (define-key xah-html-mode-no-chord-map (kbd "SPC c") 'xah-angle-brackets-to-html)
     (define-key xah-html-mode-no-chord-map (kbd "SPC p") 'xah-copy-url-current-file)

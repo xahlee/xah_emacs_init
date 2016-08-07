@@ -7,12 +7,15 @@
 ;;   )
 
 ;; (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-mode-toggle)
-;; (define-key xah-fly-key-map (kbd "<home>") nil)
 
-(define-key xah-fly-key-map (kbd "<home>") xah-insertion-keymap)
-(define-key xah-fly-key-map (kbd "DEL") nil)
+;; (define-key xah-fly-key-map (kbd "<home>") xah-insertion-keymap)
+;; (define-key xah-fly-key-map (kbd "DEL") 'xah-fly-command-mode-activate)
+;; (define-key xah-fly-key-map (kbd "<backspace>") 'xah-fly-command-mode-activate)
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
+
+(global-set-key (kbd "<prior>") 'xah-previous-user-buffer)
+(global-set-key (kbd "<next>") 'xah-next-user-buffer)
 
 (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
 
@@ -55,7 +58,7 @@
 
   (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
   (define-key xah-user-keymap (kbd "<end>") "-")
-  (define-key xah-user-keymap (kbd "RET") nil)
+  (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
 
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
   (define-key xah-user-keymap (kbd "'") 'xah-replace-straight-quotes)
@@ -63,7 +66,6 @@
   (define-key xah-user-keymap (kbd "1") 'xah-copy-to-register-1)
   (define-key xah-user-keymap (kbd "2") 'xah-paste-from-register-1)
   (define-key xah-user-keymap (kbd "3") nil)
-  (define-key xah-user-keymap (kbd "4") 'xah-insert-word-3)
   (define-key xah-user-keymap (kbd "5") nil)
   (define-key xah-user-keymap (kbd "6") nil)
   (define-key xah-user-keymap (kbd "7") nil)
