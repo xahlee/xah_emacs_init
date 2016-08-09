@@ -51,6 +51,8 @@
 
 (setq initial-major-mode 'fundamental-mode)
 
+(setq abbrev-file-name "~/git/xah_emacs_init/xah_emacs_abbr.el" )
+
 (setq search-whitespace-regexp "[-_ \n]")
 
 (setq make-backup-files nil)

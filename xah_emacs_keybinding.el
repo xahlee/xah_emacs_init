@@ -14,13 +14,7 @@
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
-(global-set-key (kbd "<prior>") 'xah-previous-user-buffer)
-(global-set-key (kbd "<next>") 'xah-next-user-buffer)
-
 (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
-
-(global-set-key (kbd "<f14>") 'xah-close-current-buffer)
-(global-set-key (kbd "<f16>") (lambda () (interactive) (other-frame 1)))
 
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
@@ -34,13 +28,20 @@
 ;;    (nth 2 x)
 ;;    27))
 
-(setq xah-major-mode-lead-key (kbd "<delete>"))
+;; (setq xah-major-mode-lead-key (kbd "<delete>"))
+(setq xah-major-mode-lead-key (kbd "C-t"))
 
 (progn
   (define-key xah-help-keymap (kbd "2") 'xah-lookup-google)
   (define-key xah-help-keymap (kbd "1") 'xah-lookup-wikipedia)
   (define-key xah-help-keymap (kbd "9") 'xah-lookup-word-definition)
   (define-key xah-help-keymap (kbd "0") 'xah-lookup-all-dictionaries))
+
+;; (global-set-key (kbd "<prior>") 'xah-previous-user-buffer)
+;; (global-set-key (kbd "<next>") 'xah-next-user-buffer)
+
+(global-set-key (kbd "<prior>") 'scroll-down-command)
+(global-set-key (kbd "<next>") 'scroll-up-command)
 
 (global-set-key (kbd "<S-prior>") 'scroll-down) ; page up
 (global-set-key (kbd "<S-next>") 'scroll-up) ; page down
