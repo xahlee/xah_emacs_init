@@ -4,8 +4,6 @@
 (progn
   (require 'dired )
   (when (>= emacs-major-version 23)
-    (define-key dired-mode-map (kbd "<delete> h") 'dired-hide-details-mode)
-    (define-key dired-mode-map (kbd "`") 'dired-hide-details-mode)
     (define-key dired-mode-map (kbd "6") 'dired-up-directory)
     ))
 
@@ -32,7 +30,7 @@
     (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
     (define-key xah-html-mode-no-chord-map (kbd "f") 'xah-html-image-linkify)
 
-    (define-key xah-html-mode-no-chord-map (kbd "p") 'xah-browse-url-of-buffer)
+    (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
 
     (define-key xah-html-mode-no-chord-map (kbd "SPC b") 'xah-make-blogger-entry)
     (define-key xah-html-mode-no-chord-map (kbd "SPC c") 'xah-angle-brackets-to-html)

@@ -28,8 +28,8 @@
 ;;    (nth 2 x)
 ;;    27))
 
-;; (setq xah-major-mode-lead-key (kbd "<delete>"))
-(setq xah-major-mode-lead-key (kbd "C-t"))
+;; (setq xah-major-mode-lead-key (kbd "C-t"))
+(setq xah-major-mode-lead-key (kbd "<delete>"))
 
 (progn
   (define-key xah-help-keymap (kbd "2") 'xah-lookup-google)

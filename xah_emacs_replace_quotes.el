@@ -1010,7 +1010,7 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
 
 (defun xah-replace-straight-quotes (*begin *end)
   "Replace straight double quotes to curly ones, and others.
-Works on current line or text selection.
+Works on selection or current text block.
 
 Examples of changes:
  「\"…\"」 ⇒ 「“…”」
@@ -1024,16 +1024,24 @@ When called in lisp code, *begin and *end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2016-04-03"
+Version 2016-08-11"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
   ;; said "can’t have it, can’t, just can’t"
   ;; ‘I’ve can’t’
   (interactive
-   (if (use-region-p)
-       (list (region-beginning) (region-end))
-     (list (line-beginning-position) (line-end-position))))
+   (let (-p1 -p2)
+     (save-excursion
+       (if (re-search-backward "\n[ \t]*\n" nil "move")
+           (progn (re-search-forward "\n[ \t]*\n")
+                  (setq -p1 (point)))
+         (setq -p1 (point)))
+       (if (re-search-forward "\n[ \t]*\n" nil "move")
+           (progn (re-search-backward "\n[ \t]*\n")
+                  (setq -p2 (point)))
+         (setq -p2 (point))))
+     (list -p1 -p2)))
 
   (let ( (case-fold-search nil))
     (save-excursion
@@ -1112,6 +1120,8 @@ Version 2016-04-03"
           ["\\bcan’t\\b" "can't"]
           ["\\bdon’t\\b" "don't"]
           ["\\bdoesn’t\\b" "doesn't"]
+          ["\\bisn’t\\b" "isn't"]
+          ["\\baren’t\\b" "aren't"]
           ["\\bain’t\\b" "ain't"]
           ["\\bdidn’t\\b" "didn't"]
           ["\\baren’t\\b" "aren't"]

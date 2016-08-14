@@ -193,7 +193,8 @@ This function is specific to xahlee.org. 2008-05-10."
   )
 
 (defun xah-fix-wrap-img-figure ()
-  "Change current buffer's <div class=\"img\"> to <figure> and <p class=\"cpt\"> to <figcaption>."
+  "Change current buffer's <div class=\"img\"> to <figure> and <p class=\"cpt\"> to <figcaption>.
+version: ancient, 2010 perhaps."
   (interactive)
 
   (save-excursion
