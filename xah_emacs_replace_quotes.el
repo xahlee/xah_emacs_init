@@ -1024,24 +1024,26 @@ When called in lisp code, *begin and *end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2016-08-11"
+Version 2016-08-13"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
   ;; said "can’t have it, can’t, just can’t"
   ;; ‘I’ve can’t’
   (interactive
-   (let (-p1 -p2)
-     (save-excursion
-       (if (re-search-backward "\n[ \t]*\n" nil "move")
-           (progn (re-search-forward "\n[ \t]*\n")
-                  (setq -p1 (point)))
-         (setq -p1 (point)))
-       (if (re-search-forward "\n[ \t]*\n" nil "move")
-           (progn (re-search-backward "\n[ \t]*\n")
-                  (setq -p2 (point)))
-         (setq -p2 (point))))
-     (list -p1 -p2)))
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (let (-p1 -p2)
+       (save-excursion
+         (if (re-search-backward "\n[ \t]*\n" nil "move")
+             (progn (re-search-forward "\n[ \t]*\n")
+                    (setq -p1 (point)))
+           (setq -p1 (point)))
+         (if (re-search-forward "\n[ \t]*\n" nil "move")
+             (progn (re-search-backward "\n[ \t]*\n")
+                    (setq -p2 (point)))
+           (setq -p2 (point))))
+       (list -p1 -p2))))
 
   (let ( (case-fold-search nil))
     (save-excursion
