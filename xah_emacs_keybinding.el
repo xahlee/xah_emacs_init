@@ -59,6 +59,7 @@
 
   (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
   (define-key xah-user-keymap (kbd "<end>") "-")
+  (define-key xah-user-keymap (kbd "DEL") nil)
   (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
 
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)

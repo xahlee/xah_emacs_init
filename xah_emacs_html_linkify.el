@@ -19,6 +19,7 @@ Version 2015-12-23"
   (let ( -p1 -p2 -imgPath
              -hrefValue -altText -imgWH -width -height)
     (save-excursion
+      ;; get image file path begin end pos
       (let (-p0)
         (setq -p0 (point))
         ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
@@ -32,6 +33,9 @@ Version 2015-12-23"
             (xahsite-web-path-to-filepath
              (xah-local-url-to-file-path
               (buffer-substring-no-properties -p1 -p2 ))))
+      (when (not (file-exists-p -imgPath))
+        (user-error "file not exist at %s"  -imgPath))
+
       (setq -hrefValue
             (file-relative-name
              -imgPath

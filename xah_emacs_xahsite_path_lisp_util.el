@@ -544,6 +544,20 @@ if the *input-str is a relative path, *default-dir is used to resolve to full pa
     'xah-find-files-file-predicate-p
     'xah-find-files-dir-predicate-p))
 
+(defun xahsite-generate-sitemap-all ()
+  "do all
+2016-08-15"
+  (interactive)
+  (require 'find-lisp)
+  (xahsite-generate-sitemap "ergoemacs.org" )
+  (xahsite-generate-sitemap "wordyenglish.com" )
+  (xahsite-generate-sitemap "xaharts.org" )
+  (xahsite-generate-sitemap "xahlee.info" )
+  (xahsite-generate-sitemap "xahlee.org" )
+  (xahsite-generate-sitemap "xahmusic.org" )
+  (xahsite-generate-sitemap "xahporn.org" )
+  (xahsite-generate-sitemap "xahsl.org"  ))
+
 (defun xahsite-generate-sitemap (*domain-name)
   "Generate a sitemap.xml.gz file of xahsite at doc root.
 *domain-name must match a existing one."
