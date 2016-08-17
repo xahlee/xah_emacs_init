@@ -288,13 +288,12 @@ if xx.jpg doesn't exit, try xx.png. The dirs to try are
  ~/Pictures/
  /tmp
 
-Version 2016-07-12"
+Version 2016-08-17"
   (interactive "DMove to dir:
 sNew file name:")
   (let (
         -from-path
         -to-path )
-
     (setq -from-path
           (cond
            ((file-exists-p (expand-file-name "~/Downloads/xx.jpg"))
@@ -309,10 +308,11 @@ sNew file name:")
             "/tmp/xx.jpg")
            ((file-exists-p "/tmp/xx.png")
             "/tmp/xx.png")
-
            (t (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))))
-
-    (setq -to-path (concat *dir-name *file-name "." (file-name-extension -from-path )))
+    (setq -to-path (concat
+                    (file-name-as-directory *dir-name )
+                    *file-name "."
+                    (file-name-extension -from-path )))
     (if (file-exists-p -to-path)
         (message "move to path exist: %s" -to-path)
       (progn

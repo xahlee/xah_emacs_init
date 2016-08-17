@@ -52,6 +52,7 @@
 (setq initial-major-mode 'fundamental-mode)
 
 (setq abbrev-file-name "~/git/xah_emacs_init/xah_emacs_abbr.el" )
+(set-default 'abbrev-mode t)
 
 (setq search-whitespace-regexp "[-_ \n]")
 
@@ -231,7 +232,6 @@
 ;; 4 is more popular than 8.
 (setq tab-width 4) ; width for display tabs. emacs 23.1 default is 8
 
-(set-default 'abbrev-mode t)
 
 
 
@@ -337,4 +337,3 @@
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
 
-(setq save-abbrevs nil)

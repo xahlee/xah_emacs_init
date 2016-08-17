@@ -55,79 +55,6 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
-    ("1alt" "alternative" nil 0)
-    ("1arrows" "➵➙►▻☛☞👉⇰➛➜➝➞➟➠➢➣➤➥➦➧➨➲➺➻➼➽➾" nil 0)
-    ("1ascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" nil 0)
-    ("1auto" "automatic" nil 0)
-    ("1az" "\\([A-Za-z0-9]+\\)" nil 0)
-    ("1box" "┌─┬─┐
-│ │ │
-├─┼─┤
-│ │ │
-└─┴─┘" nil 0)
-    ("1bracket" "\\[\\([^]]+?\\)\\]" nil 0)
-    ("1c" "character" nil 0)
-    ("1ca" "cellular automata" nil 0)
-    ("1chars" "characters" nil 0)
-    ("1cli" "command line interface" nil 0)
-    ("1curly" "“\\([^”]+?\\)”" nil 0)
-    ("1d" "\\([0-9]+\\)" nil 0)
-    ("1date" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" nil 0)
-    ("1db" "database" nil 0)
-    ("1def" "definition" nil 0)
-    ("1df" "different" nil 0)
-    ("1dfc" "difference" nil 0)
-    ("1doc" "documentation" nil 0)
-    ("1dot" "\\(.\\)" nil 0)
-    ("1dt" "data type" nil 0)
-    ("1e" "emacs" nil 0)
-    ("1el" "emacs lisp" nil 0)
-    ("1ergo" "ergonomic" nil 0)
-    ("1expe" "experience" nil 0)
-    ("1expr" "expression" nil 0)
-    ("1f" "function" nil 0)
-    ("1faq" "<div class=\"question-box32371\">
-<p class=\"q\">How to do this?</p>
-<p>this way</p>
-</div>
-
-" nil 0)
-    ("1fl" "functional language" nil 0)
-    ("1fp" "functional programing" nil 0)
-    ("1g" "Google" nil 0)
-    ("1gui" "graphical user interface" nil 0)
-    ("1is" "image source" nil 0)
-    ("1it" "IntelliType" nil 0)
-    ("1js" "JavaScript" nil 0)
-    ("1key" "【Alt+f】" nil 0)
-    ("1l" "────────── ────────── ────────── ────────── ──────────" nil 0)
-    ("1lhs" "left-hand-side" nil 0)
-    ("1lib" "library" nil 0)
-    ("1libs" "libraries" nil 0)
-    ("1math" "mathematics" nil 0)
-    ("1md" "metadata" nil 0)
-    ("1menu" "〖a ▸ b ▸ c〗" nil 0)
-    ("1oop" "object oriented programing" nil 0)
-    ("1org" "organization" nil 0)
-    ("1os" "operating system" nil 0)
-    ("1p" "program" nil 0)
-    ("1php" "<?php
-
-?>" nil 0)
-    ("1pm" "parameter" nil 0)
-    ("1prog" "programing" nil 0)
-    ("1ps" "PowerShell" nil 0)
-    ("1q" "question" nil 0)
-    ("1rhs" "right-hand-side" nil 0)
-    ("1s" "string" nil 0)
-    ("1so" "StackOverflow" nil 0)
-    ("1song" "singer ♪《title》" nil 0)
-    ("1str" "\\([^\"]+?\\)" nil 0)
-    ("1tag" "\\([</>=\" A-Za-z0-9]+\\)" nil 0)
-    ("1temp" "temperature" nil 0)
-    ("1utf8" "-*- coding: utf-8 -*-" nil 0)
-    ("1v" "variable" nil 1)
-    ("1vs" "variables" nil 0)
     ("addr" "address" nil 0)
     ("afaik" "As far as i know" nil 0)
     ("ahd" "American Heritage Dictionary" nil 0)
@@ -316,6 +243,79 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
  US citizen.
  Mountain View, CA." nil 0)
     ("yt" "YouTube" nil 0)
+    ("zalt" "alternative" nil 0)
+    ("zarrows" "➵➙►▻☛☞👉⇰➛➜➝➞➟➠➢➣➤➥➦➧➨➲➺➻➼➽➾" nil 0)
+    ("zascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" nil 0)
+    ("zauto" "automatic" nil 0)
+    ("zaz" "\\([A-Za-z0-9]+\\)" nil 0)
+    ("zbox" "┌─┬─┐
+│ │ │
+├─┼─┤
+│ │ │
+└─┴─┘" nil 0)
+    ("zbracket" "\\[\\([^]]+?\\)\\]" nil 0)
+    ("zc" "character" nil 0)
+    ("zca" "cellular automata" nil 0)
+    ("zchars" "characters" nil 0)
+    ("zcli" "command line interface" nil 0)
+    ("zcurly" "“\\([^”]+?\\)”" nil 0)
+    ("zd" "\\([0-9]+\\)" nil 0)
+    ("zdate" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" nil 0)
+    ("zdb" "database" nil 0)
+    ("zdef" "definition" nil 0)
+    ("zdf" "different" nil 0)
+    ("zdfc" "difference" nil 0)
+    ("zdoc" "documentation" nil 0)
+    ("zdot" "\\(.\\)" nil 0)
+    ("zdt" "data type" nil 0)
+    ("ze" "emacs" nil 0)
+    ("zel" "emacs lisp" nil 0)
+    ("zergo" "ergonomic" nil 0)
+    ("zexpe" "experience" nil 0)
+    ("zexpr" "expression" nil 0)
+    ("zf" "function" nil 0)
+    ("zfaq" "<div class=\"question-box32371\">
+<p class=\"q\">How to do this?</p>
+<p>this way</p>
+</div>
+
+" nil 0)
+    ("zfl" "functional language" nil 0)
+    ("zfp" "functional programing" nil 0)
+    ("zg" "Google" nil 0)
+    ("zgui" "graphical user interface" nil 0)
+    ("zis" "image source" nil 1)
+    ("zit" "IntelliType" nil 0)
+    ("zjs" "JavaScript" nil 0)
+    ("zkey" "【Alt+f】" nil 0)
+    ("zl" "────────── ────────── ────────── ────────── ──────────" nil 0)
+    ("zlhs" "left-hand-side" nil 0)
+    ("zlib" "library" nil 0)
+    ("zlibs" "libraries" nil 0)
+    ("zmath" "mathematics" nil 0)
+    ("zmd" "metadata" nil 0)
+    ("zmenu" "〖a ▸ b ▸ c〗" nil 0)
+    ("zoop" "object oriented programing" nil 0)
+    ("zorg" "organization" nil 0)
+    ("zos" "operating system" nil 0)
+    ("zp" "program" nil 0)
+    ("zphp" "<?php
+
+?>" nil 0)
+    ("zpm" "parameter" nil 0)
+    ("zprog" "programing" nil 0)
+    ("zps" "PowerShell" nil 0)
+    ("zq" "question" nil 0)
+    ("zrhs" "right-hand-side" nil 0)
+    ("zs" "string" nil 0)
+    ("zso" "StackOverflow" nil 0)
+    ("zsong" "singer ♪《title》" nil 0)
+    ("zstr" "\\([^\"]+?\\)" nil 0)
+    ("ztag" "\\([</>=\" A-Za-z0-9]+\\)" nil 0)
+    ("ztemp" "temperature" nil 0)
+    ("zutf8" "-*- coding: utf-8 -*-" nil 0)
+    ("zv" "variable" nil 1)
+    ("zvs" "variables" nil 0)
    ))
 
 (define-abbrev-table 'grep-mode-abbrev-table '())
@@ -467,15 +467,15 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 
 (define-abbrev-table 'xah-html-mode-abbrev-table
   '(
-    ("1css" "<link rel=\"stylesheet\" href=\"lbasic.css\" />" nil 0)
-    ("1refresh" "<meta http-equiv=\"refresh\" content=\"0; url=http://example.com/\">" nil 0)
-    ("1style" "<style type=\"text/css\">
-p {line-height:130%}
-</style>" nil 0)
     ("br" "<br />" nil 0)
     ("hr" "<hr />" nil 0)
     ("iframe" "<iframe src=\"some.html\" width=\"200\" height=\"300\"></iframe>" nil 0)
     ("tt" "point" nil 5)
+    ("zcss" "<link rel=\"stylesheet\" href=\"lbasic.css\" />" nil 0)
+    ("zrefresh" "<meta http-equiv=\"refresh\" content=\"0; url=http://example.com/\">" nil 0)
+    ("zstyle" "<style type=\"text/css\">
+p {line-height:130%}
+</style>" nil 0)
    ))
 
 (define-abbrev-table 'xah-js-mode-abbrev-table
