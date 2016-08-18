@@ -89,6 +89,7 @@
   (define-key xah-user-keymap (kbd "f r") 'xah-dired-2png)
   (define-key xah-user-keymap (kbd "f u") 'xah-dired-remove-all-metadata)
 
+  (define-key xah-user-keymap (kbd "g") nil)
   (define-key xah-user-keymap (kbd "h") nil)
 
   (define-key xah-user-keymap (kbd "i c") 'xah-insert-random-number)
@@ -99,7 +100,7 @@
   (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
 
   (define-key xah-user-keymap (kbd "l") nil)
-  (define-key xah-user-keymap (kbd "m") 'magit-status)
+  (define-key xah-user-keymap (kbd "m") 'xah-move-image-file)
   (define-key xah-user-keymap (kbd "n") nil)
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
   (define-key xah-user-keymap (kbd "p") 'xah-find-text)

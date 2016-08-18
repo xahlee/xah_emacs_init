@@ -136,7 +136,7 @@
     ("jp" "Japanese" nil 0)
     ("jq" "jQuery" nil 0)
     ("jvm" "Java Virtual Machine" nil 0)
-    ("kb" "keyboard" nil 0)
+    ("kb" "keyboard" nil 3)
     ("kbd" "keybinding" nil 0)
     ("kbs" "keyboards" nil 0)
     ("kw" "keyword" nil 0)
@@ -224,7 +224,7 @@
     ("wnt" "won't" nil 0)
     ("wp" "Wikipedia" nil 0)
     ("wsnt" "wasn't" nil 0)
-    ("wtdb" "What's the difference between" nil 0)
+    ("wtdb" "What's the difference between" nil 1)
     ("xfk" "xah-fly-keys" nil 0)
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee
@@ -279,12 +279,12 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 <p>this way</p>
 </div>
 
-" nil 0)
+" nil 1)
     ("zfl" "functional language" nil 0)
     ("zfp" "functional programing" nil 0)
     ("zg" "Google" nil 0)
     ("zgui" "graphical user interface" nil 0)
-    ("zis" "image source" nil 1)
+    ("zis" "image source" nil 3)
     ("zit" "IntelliType" nil 0)
     ("zjs" "JavaScript" nil 0)
     ("zkey" "【Alt+f】" nil 0)
@@ -455,12 +455,6 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 
 (define-abbrev-table 'xah-css-mode-abbrev-table
   '(
-   ))
-
-(define-abbrev-table 'xah-elisp-mode-abbrev-table
-  '(
-    ("bounds-of-thing-at-point" "(bounds-of-thing-at-point 'symbol▮ 'filename 'word 'whitespace 'line)" nil 0)
-    ("thing-at-point" "(thing-at-point 'word▮ 'symbol 'list 'sexp 'defun 'filename 'url 'email 'sentence 'whitespace 'line 'number 'page)" nil 0)
    ))
 
 (define-abbrev-table 'xah-find-output-mode-abbrev-table '())

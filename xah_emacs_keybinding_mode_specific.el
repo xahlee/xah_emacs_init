@@ -12,7 +12,7 @@
   (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser))
 
 (when (fboundp 'xah-html-mode)
-  
+
   (define-key xah-html-mode-map xah-major-mode-lead-key xah-html-mode-no-chord-map)
 
   (defun xah-html-mode-keys ()
@@ -22,6 +22,8 @@
 
     (define-key xah-html-mode-no-chord-map (kbd "1") 'xah-html-get-precode-make-new-file)
     (define-key xah-html-mode-no-chord-map (kbd "2") 'xah-html-toggle-syntax-coloring-markup)
+
+    (define-key xah-html-mode-no-chord-map (kbd "a") 'xah-html-rename-html-inline-image)
 
     (define-key xah-html-mode-no-chord-map (kbd "e") 'xah-make-atom-entry)
     (define-key xah-html-mode-no-chord-map (kbd "h") 'xah-all-linkify)
@@ -57,7 +59,7 @@
     (define-key xah-html-mode-no-chord-map (kbd "w c") 'xah-words-add-comment )
     (define-key xah-html-mode-no-chord-map (kbd "w g") 'xah-words-search-next-unbold )
     (define-key xah-html-mode-no-chord-map (kbd "w p") 'xah-words-query-find-then-bold )
-    
+
     (define-key xah-html-mode-no-chord-map (kbd "SPC z a") 'xah-html-insert-keywords-tag)
     (define-key xah-html-mode-no-chord-map (kbd "SPC z b") 'xah-html-insert-lyrics-header)
     (define-key xah-html-mode-no-chord-map (kbd "SPC z c") 'xah-html-insert-lyrics-table)
