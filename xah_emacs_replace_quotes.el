@@ -1024,7 +1024,7 @@ When called in lisp code, *begin and *end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2016-08-13"
+Version 2016-08-22"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
@@ -1157,8 +1157,8 @@ Version 2016-08-13"
          (point-min) (point-max)
          [
           ["” \\([-a-z]+\\)="       "\" \\1="] ; any 「” some-thing=」
-          ["=\”" "=\""]
+          ["=”" "=\""]
           ["/” " "/\" "]
-          ["\"\\([0-9]+\\)” "     "\"\\1\" "]
+          ["\\([0-9]+\\)” "     "\\1\" "]
           ]
          )))))
