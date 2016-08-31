@@ -154,7 +154,7 @@ This function calls `xah-html-image-linkify' to do its work."
 Example:
 i/goddess.jpg
 becomes
-<a class=\"big-i\" href=\"i/goddess.jpg\" title=\"622×800\" target=\"*blank\">❐</a>
+<a class=\"big-i\" href=\"i/goddess.jpg\" title=\"622×800\" target=\"_blank\">❐</a>
 
 If there's a text selection, use that region as file name."
   (interactive)
@@ -184,7 +184,7 @@ If there's a text selection, use that region as file name."
     (setq -width (number-to-string (elt -dimension 0)))
     (setq -height (number-to-string (elt -dimension 1)))
     (setq -resultStr
-          (concat "<a class=\"big-i\" href=\"" (file-relative-name -imgPath) "\" target=\"*blank\">" -width "×" -height "</a>"))
+          (concat "<a class=\"big-i\" href=\"" (file-relative-name -imgPath) "\" target=\"_blank\">" -width "×" -height "</a>"))
 
     (delete-region -p1 -p2)
     (insert -resultStr)))

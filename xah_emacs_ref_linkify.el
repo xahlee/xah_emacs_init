@@ -118,7 +118,9 @@ Then it'll become:
     (if (file-exists-p -fPath )
         (progn
           (delete-region -p1 -p2)
-          (insert "<span class=\"ref\"><a href=\"" (xahsite-filepath-to-href-value -fPath (buffer-file-name)) "\">" -linkText "</a></span>"))
+          (insert "<span class=\"ref\"><a href=\"" 
+                  (xahsite-filepath-to-href-value -fPath (buffer-file-name))
+                  "\">" -linkText "</a></span>"))
       (error "Generated local -fPath 「%s」 does not point to a file" -fPath))))
 
 (defun xah-html-php-ref-linkify ()
