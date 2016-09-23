@@ -3,31 +3,29 @@
 
 (defun xah-youtube-linkify ()
   "Make the current line of youtube url into a embeded video.
-The line can be a youtube ID or full URL.
-Examples of lines:
 
-bFSS826ETlk
-http://www.youtube.com/watch?v=bFSS826ETlk
+The line can be a youtube ID “bFSS826ETlk” or full URL e.g. “http://www.youtube.com/watch?v=bFSS826ETlk”. URL with more parameters usually will work too.
 
-url with more parameters usually will work too.
+Here's sample result:
 
-The current line is the line the cursor is on, that is enclosed by “\n”.
+ <iframe width=\"640\" height=\"480\" src=\"https://www.youtube.com/embed/X7HmltUWXgs?rel=0\" allowfullscreen></iframe>
 
-Here's a example result:
-
-<iframe width=\"640\" height=\"480\" src=\"https://www.youtube.com/embed/X7HmltUWXgs?rel=0\" allowfullscreen></iframe>
-
-version 2016-02-10"
+version 2016-09-23"
   (interactive)
-  (let* (
-         (-p1 (line-beginning-position))
-         (-p2 (line-end-position))
-         (-inputStr (buffer-substring-no-properties -p1 -p2))
-         -vid)
+  (let ( -p1 -p2 -inputStr -vid
+             (-youtubeLinkChars "-_?.:/=A-Za-z0-9"))
+    (skip-chars-backward -youtubeLinkChars (min 1 (- (point) 50)))
+    (setq -p1 (point))
+
+    (skip-chars-forward -youtubeLinkChars (+ -p1 50))
+    (setq -p2 (point))
+
+    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
+
     (string-match "v=\\(.\\{11\\}\\)" -inputStr)
     (setq -vid (match-string 1 -inputStr))
     (delete-region -p1 -p2)
-    (insert "<figure>\n")
+    (insert "\n<figure>\n")
     (insert (concat "<iframe width=\"640\" height=\"480\" src=\"https://www.youtube.com/embed/" -vid "?rel=0\" allowfullscreen></iframe>"))
     (insert "\n<figcaption>\n")
     (insert "</figcaption>\n")

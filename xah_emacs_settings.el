@@ -12,18 +12,35 @@
 
 ;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789
 
-(setq initial-frame-alist
-      '(
-        (width . 102)
-        (height . 54)
-        (background-color . "honeydew")))
+;; (setq initial-frame-alist
+;;       '(
+;;         (width . 102)
+;;         (height . 54)
+;;         (background-color . "honeydew")))
 
 (setq default-frame-alist
       '(
         (tool-bar-lines . 0)
-        (width . 92)
-        (height . 52)
-        (background-color . "honeydew")))
+        (width . 106)
+        (height . 60)
+        (background-color . "honeydew")
+        (font . "DejaVu Sans Mono-10")
+        ))
+
+;; ;; set default font
+;; (cond
+;;  ((string-equal system-type "windows-nt") ; Microsoft Windows
+;;   (when (member "DejaVu Sans Mono" (font-family-list))
+;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-12"))
+;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-12"))))
+;;  ((string-equal system-type "darwin") ; Mac OS X
+;;   (when (member "DejaVu Sans Mono" (font-family-list))
+;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
+;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))))
+;;  ((string-equal system-type "gnu/linux") ; linux
+;;   (when (member "DejaVu Sans Mono" (font-family-list))
+;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
+;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))))
 
 
 
@@ -166,8 +183,6 @@
 ;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
 ;;   )
 
-
-
 (progn ; minibuffer
   (setq enable-recursive-minibuffers t)
 
@@ -180,8 +195,6 @@
   (customize-set-variable
    'minibuffer-prompt-properties
    (quote (read-only t cursor-intangible t face minibuffer-prompt))))
-
-
 
 
 
@@ -231,7 +244,6 @@
 
 ;; 4 is more popular than 8.
 (setq tab-width 4) ; width for display tabs. emacs 23.1 default is 8
-
 
 
 

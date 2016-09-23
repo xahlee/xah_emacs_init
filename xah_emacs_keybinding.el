@@ -14,6 +14,18 @@
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
+;; (setq visible-bell nil)
+
+;; ring-bell-function
+
+ ;; (setq ring-bell-function (lambda ()
+                            ;; (play-sound-file "/this/is/my/errorsound.au")))
+
+;; (setq ring-bell-function 'ding)
+
+;; (setq ring-bell-function nil)
+
+
 (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
 
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
@@ -58,7 +70,7 @@
   (define-prefix-command 'xah-user-keymap)
 
   (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
-  (define-key xah-user-keymap (kbd "<end>") "-")
+  (define-key xah-user-keymap (kbd "<end>") 'xah-insert-hyphen)
   (define-key xah-user-keymap (kbd "DEL") nil)
   (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
 
@@ -98,6 +110,7 @@
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
 
   (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
+  (define-key xah-user-keymap (kbd "k") xah-insertion-keymap)
 
   (define-key xah-user-keymap (kbd "l") nil)
   (define-key xah-user-keymap (kbd "m") 'xah-move-image-file)

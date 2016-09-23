@@ -501,46 +501,47 @@ if the *input-str is a relative path, *default-dir is used to resolve to full pa
   "Returns t if *path ends in .jpg .png .gif .svg, else nil."
   (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" *path))
 
-(defun xah-find-files-file-predicate-p (fname parentdir)
-  "return t if fname is what we want. Else nil.
+(defun xah-find-files-file-predicate-p (*fname *parentdir)
+  "return t if *fname is what we want. Else nil.
 2016-07-09"
   (interactive)
   (and
-   (string-match "\\.html$" fname)
-   (not (string-match "^xx" fname))
+   (string-match "\\.html$" *fname)
+   (not (string-match "^xx" *fname))
    ))
 
-(defun xah-find-files-dir-predicate-p (fname parentdir)
-  "return t if fname is what we want. Else nil.
-2016-07-09"
+(defun xah-find-files-dir-predicate-p (*fname *parentdir)
+  "return t if *fname is what we want. Else nil.
+2016-09-09"
   (and
    (not
     (or
-     (string-equal "java8_doc" fname)
-     (string-equal "REC-SVG11-20110816" fname)
-     (string-equal "clojure-doc-1.8" fname)
-     (string-equal "css3_spec_bg" fname)
-     (string-equal "css_2.1_spec" fname)
-     (string-equal "css_3_color_spec" fname)
-     (string-equal "css_transitions" fname)
-     (string-equal "dom-whatwg" fname)
-     (string-equal "html5_whatwg" fname)
-     (string-equal "javascript_ecma-262_5.1_2011" fname)
-     (string-equal "javascript_ecma-262_6_2015" fname)
-     (string-equal "javascript_es6" fname)
-     (string-equal "jquery_doc" fname)
-     (string-equal "node_api" fname)
-     (string-equal "php-doc" fname)
-     (string-equal "python_doc_2.7.6" fname)
-     (string-equal "python_doc_3.3.3" fname)
-     (string-match "^xx" fname)))
-   (find-lisp-default-directory-predicate fname parentdir)))
+     (string-equal "java8_doc" *fname)
+     (string-equal "REC-SVG11-20110816" *fname)
+     (string-equal "clojure-doc-1.8" *fname)
+     (string-equal "css3_spec_bg" *fname)
+     (string-equal "css_2.1_spec" *fname)
+     (string-equal "css_3_color_spec" *fname)
+     (string-equal "css_transitions" *fname)
+     (string-equal "dom-whatwg" *fname)
+     (string-equal "html5_whatwg" *fname)
+     (string-equal "javascript_ecma-262_5.1_2011" *fname)
+     (string-equal "javascript_ecma-262_6_2015" *fname)
+     (string-equal "ocaml_doc" *fname)
+     (string-equal "javascript_es6" *fname)
+     (string-equal "jquery_doc" *fname)
+     (string-equal "node_api" *fname)
+     (string-equal "php-doc" *fname)
+     (string-equal "python_doc_2.7.6" *fname)
+     (string-equal "python_doc_3.3.3" *fname)
+     (string-match "^xx" *fname)))
+   (find-lisp-default-directory-predicate *fname *parentdir)))
 
-(defun xahsite-traverse-dir-file-list (dirpath)
+(defun xahsite-traverse-dir-file-list (*dirpath)
   "a list of full paths to process"
   (require 'find-lisp)
   (find-lisp-find-files-internal
-    dirpath
+    *dirpath
     'xah-find-files-file-predicate-p
     'xah-find-files-dir-predicate-p))
 
