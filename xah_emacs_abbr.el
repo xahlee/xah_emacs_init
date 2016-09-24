@@ -74,7 +74,7 @@
     ("bg" "background" nil 0)
     ("bt" "between" nil 0)
     ("btw" "by the way" nil 8)
-    ("bu" "•" nil 11)
+    ("bu" "•" nil 12)
     ("catface" "😸" nil 0)
     ("cfg" "context-free grammar" nil 0)
     ("ch" "Chinese" nil 0)
@@ -83,7 +83,7 @@
     ("cnt" "can't" nil 0)
     ("comm" "communication" nil 1)
     ("comp" "computer" nil 0)
-    ("cs" "computer science" nil 2)
+    ("cs" "computer science" nil 3)
     ("ddnt" "didn't" nil 0)
     ("desc" "description" nil 0)
     ("dev" "development" nil 1)
@@ -99,7 +99,7 @@
     ("dvp" "develop" nil 0)
     ("ee" "ErgoEmacs" nil 0)
     ("eem" "ergoemacs-mode" nil 0)
-    ("eg" "e.g." nil 2)
+    ("eg" "e.g." nil 3)
     ("emoji" "😃😄😅😆
 😉😊😋😌
 😎😇😈
@@ -147,10 +147,10 @@
     ("jp" "Japanese" nil 0)
     ("jq" "jQuery" nil 0)
     ("jvm" "Java Virtual Machine" nil 1)
-    ("kb" "keyboard" nil 25)
-    ("kbd" "keybinding" nil 4)
+    ("kb" "keyboard" nil 31)
+    ("kbd" "keybinding" nil 5)
     ("kbs" "keyboards" nil 0)
-    ("kw" "keyword" nil 1)
+    ("kw" "keyword" nil 2)
     ("lr" "#lang racket" nil 0)
     ("lsl" "Linden Scripting Language" nil 0)
     ("mac" "Mac" nil 5)
@@ -246,7 +246,7 @@ Yahoo: P0lyglut
 MSN: p0lyglut@yahoo.com or xahlee
 Second Life: Xah Toll
 QQ: http://user.qzone.qq.com/2609322939" nil 0)
-    ("xl" "Xah Lee" nil 0)
+    ("xl" "Xah Lee" nil 3)
     ("xs" " Xah Lee
  xahlee@gmail.com
  http://xahlee.org/
@@ -298,7 +298,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
     ("zit" "IntelliType" nil 0)
     ("zjs" "JavaScript" nil 4)
     ("zkey" "【Alt+f】" nil 0)
-    ("zl" "language" nil 15)
+    ("zl" "language" nil 16)
     ("zlhs" "left-hand-side" nil 0)
     ("zlib" "library" nil 0)
     ("zlibs" "libraries" nil 0)
@@ -478,7 +478,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 (define-abbrev-table 'xah-elisp-mode-abbrev-table
   '(
     ("bounds-of-thing-at-point" "(bounds-of-thing-at-point 'symbol▮ 'filename 'word 'whitespace 'line)" :system 0)
-    ("thing-at-point" "(thing-at-point 'word▮ 'symbol 'list 'sexp 'defun 'filename 'url 'email 'sentence 'whitespace 'line 'number 'page)" :system 1)
+    ("thing-at-point" "(thing-at-point 'word▮ 'symbol 'list 'sexp 'defun 'filename 'url 'email 'sentence 'whitespace 'line 'number 'page)" :system 0)
    ))
 
 (define-abbrev-table 'xah-find-output-mode-abbrev-table '())
@@ -489,7 +489,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
     ("hr" "<hr />" nil 1)
     ("iframe" "<iframe src=\"some.html\" width=\"200\" height=\"300\"></iframe>" nil 0)
     ("zcss" "<link rel=\"stylesheet\" href=\"lbasic.css\" />" nil 0)
-    ("zrefresh" "<meta http-equiv=\"refresh\" content=\"0; url=http://example.com/\">" nil 0)
+    ("zrefresh" "<meta http-equiv=\"refresh\" content=\"0; url=http://example.com/\">" nil 1)
     ("zstyle" "<style type=\"text/css\">
 p {line-height:130%}
 </style>" nil 0)

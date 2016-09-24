@@ -10,8 +10,6 @@
 
 (setq inhibit-splash-screen t)
 
-;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789;123456789
-
 ;; (setq initial-frame-alist
 ;;       '(
 ;;         (width . 102)
@@ -27,21 +25,6 @@
         (font . "DejaVu Sans Mono-10")
         ))
 
-;; ;; set default font
-;; (cond
-;;  ((string-equal system-type "windows-nt") ; Microsoft Windows
-;;   (when (member "DejaVu Sans Mono" (font-family-list))
-;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-12"))
-;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-12"))))
-;;  ((string-equal system-type "darwin") ; Mac OS X
-;;   (when (member "DejaVu Sans Mono" (font-family-list))
-;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
-;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))))
-;;  ((string-equal system-type "gnu/linux") ; linux
-;;   (when (member "DejaVu Sans Mono" (font-family-list))
-;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
-;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))))
-
 
 
 ;; UTF-8 as default encoding
@@ -49,21 +32,6 @@
 (set-default-coding-systems 'utf-8-unix)
 ;; (setenv "LANG" "en_US.UTF-8" )
 ;; (setenv "LC_ALL" "en_US.UTF-8" )
-
-;; (set-selection-coding-system 'raw-text)
-;; (set-selection-coding-system 'utf-16-be)
-;; (set-selection-coding-system 'utf-16-le)
-;; (set-selection-coding-system 'gb18030)
-;; (set-selection-coding-system nil)
-;; (set-selection-coding-system 'utf-8)
-
-;; selection-coding-system
-
-;; •
-;;           buffer code: #xE5 #x93 #x88 utf8
-;;             file code: #xB9 #xFE (encoded by coding system chinese-gb18030-unix)
-
-;㬻ᬠ⠤㥁㥾᭾䈨
 
 
 (setq initial-major-mode 'fundamental-mode)
@@ -235,6 +203,7 @@
   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
   (setq ido-default-file-method 'selected-window)
   (setq ido-default-buffer-method 'selected-window)
+  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
   )
 
 (electric-indent-mode 0) ; default is on in emacs 24.4
