@@ -311,13 +311,17 @@ Version 2015-04-23"
 
 (defun xah-sync-css ()
   "Save current file and copy to all other xahsite dirs.
-Version 2015-08-31"
+Version 2016-10-01"
   (interactive)
   (let* (
          (-fromPath (buffer-file-name))
          (-fromFileName (file-name-nondirectory -fromPath ))
          -toPath
          )
+    (copy-file
+     -fromPath
+     (concat -fromPath "~" (format-time-string "%Y%m%d_%H%M%S") "~")
+     "OK-IF-ALREADY-EXISTS") ;backup
     (save-buffer)
     (mapc
      (lambda (-x)
@@ -326,7 +330,6 @@ Version 2015-08-31"
          (when (not (string= -fromPath -toPath ))
            (if (file-exists-p -toPath)
                (progn
-                 (copy-file -toPath (concat -toPath "~" (format-time-string "%Y%m%d_%H%M%S") "~") "OK-IF-ALREADY-EXISTS") ;backup
                  (copy-file -fromPath -toPath "OK-IF-ALREADY-EXISTS")
                  (message "wrote to 「%s」." -toPath))
              (progn (error "logic error. The file 「%s」 doesn't exist, it should already." -toPath)))))) [
@@ -351,7 +354,9 @@ becomes
 The title came from HTML file's title tag.
 File path must be a URL scheme, full path, or relative path. See: `xahsite-web-path-to-filepath'.
 
-This is Xah Lee's personal command assuming a particular dir structure."
+This is Xah Lee's personal command assuming a particular dir structure.
+
+Version 2016-09-25"
   (interactive)
   (let (
         -p1 -p2
@@ -378,8 +383,9 @@ This is Xah Lee's personal command assuming a particular dir structure."
         (progn
           (setq -title
                 (if (string-match-p ".+html\\'" -file)
-                    (xah-html-get-html-file-title -file)
+                    (xah-html-get-html-file-title -file "noerror")
                   (file-name-nondirectory -file)))
+          (setq -title (if (null -title) "" -title ))
           (setq -title (xah-replace-pairs-in-string -title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
           (delete-region -p1 -p2)
@@ -750,8 +756,6 @@ Version 2015-12-17"
     (set-background-color -next-value)
     (message "background color changed to %s" -next-value)))
 
-
-
 (defun xah-browse-url-of-buffer ()
   "Similar to `browse-url-of-buffer' but visit xahlee.org.
 
@@ -770,7 +774,7 @@ version 2016-06-12"
               (xahsite-filepath-to-url (buffer-file-name))
             (buffer-file-name)))
 
-    (when (buffer-modified-p ) 
+    (when (buffer-modified-p )
       (xah-clean-whitespace (point-min) (point-max))
       (save-buffer))
     (message "browsing %s" -url)
@@ -805,7 +809,6 @@ version 2016-06-12"
       (call-interactively #'flush-lines))
     (special-mode)))
  ; Make the new buffer read-only; also allowing bindings like `q'
-
 
 
 

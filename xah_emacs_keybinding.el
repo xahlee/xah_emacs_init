@@ -12,6 +12,9 @@
 ;; (define-key xah-fly-key-map (kbd "DEL") 'xah-fly-command-mode-activate)
 ;; (define-key xah-fly-key-map (kbd "<backspace>") 'xah-fly-command-mode-activate)
 
+;; (global-set-key (kbd "<prior>") 'xah-previous-user-buffer)
+;; (global-set-key (kbd "<next>") 'xah-next-user-buffer)
+
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
 ;; (setq visible-bell nil)
@@ -90,7 +93,7 @@
   (define-key xah-user-keymap (kbd "a") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "b") nil)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  (define-key xah-user-keymap (kbd "e") 'xah-open-file-fast)
+  (define-key xah-user-keymap (kbd "e") xah-insertion-keymap)
   (define-key xah-user-keymap (kbd "f b") 'xah-dired-crop-image)
   (define-key xah-user-keymap (kbd "f c") 'xah-dired-2jpg)
   (define-key xah-user-keymap (kbd "f d") 'xah-dired-image-autocrop)
@@ -110,7 +113,7 @@
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
 
   (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
-  (define-key xah-user-keymap (kbd "k") xah-insertion-keymap)
+  (define-key xah-user-keymap (kbd "k") 'xah-find-replace-text)
 
   (define-key xah-user-keymap (kbd "l") nil)
   (define-key xah-user-keymap (kbd "m") 'xah-move-image-file)
@@ -137,7 +140,7 @@
 
   (define-key xah-user-keymap (kbd "s") nil)
   (define-key xah-user-keymap (kbd "t") nil)
-  (define-key xah-user-keymap (kbd "u") 'xah-find-replace-text)
+  (define-key xah-user-keymap (kbd "u") 'xah-open-file-fast)
   (define-key xah-user-keymap (kbd "v") nil)
   (define-key xah-user-keymap (kbd "w") nil)
   (define-key xah-user-keymap (kbd "y") nil)

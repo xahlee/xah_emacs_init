@@ -17,7 +17,7 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
   (interactive)
   (let* (
          (-title (if *title (concat "<title>" *title "</title>") "▮") )
-         (-id (if *id *id (new-atom-id-tag) ) )
+         (-id (if *id *id (xah-new-atom-id-tag) ) )
          (-summary (if *summary (concat "<summary>" *summary "</summary>\n") "") )
          (-content (if *content-xml-text (format " <content type=\"xhtml\">
  <div xmlns=\"http://www.w3.org/1999/xhtml\">%s</div>
@@ -43,7 +43,7 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
                     -altLink
                     )) ) )
 
-(defun new-atom-id-tag (&optional *domain-name)
+(defun xah-new-atom-id-tag (&optional *domain-name)
   "Returns a newly generated ATOM webfeed's “id” element string.
 Example of return value: 「tag:xahlee.org,2010-03-31:022128」
 
@@ -93,7 +93,7 @@ Other files paths for blogs are:
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
 
-version 2016-07-30"
+version 2016-09-27"
   (interactive)
   (let* (
          -p1 -p2 -p3
@@ -143,7 +143,13 @@ version 2016-07-30"
 
     (setq -altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
           (let ( (-hrefValues (xah-html-extract-url -p1 -p2)) -firstLink1)
-            (if (>= (length -hrefValues) 1)
+            (if
+                (and ; 1 link only and 1 paragraph only
+                 (with-temp-buffer
+                   (insert -inputStr)
+                   (goto-char (point-min))
+                   (= (count-matches "<p>" (point-min) (point-max)) 1))
+                 (= (length -hrefValues) 1))
                 (progn
                   (setq -firstLink1 (elt -hrefValues 0))
                   (if (string-match-p "\\`https?://" -firstLink1)
@@ -166,5 +172,5 @@ version 2016-07-30"
     (search-forward "<entry>" nil t)
     (beginning-of-line)
     (setq -p3 (point))
-    (insert-atom-entry -titleText (new-atom-id-tag) nil -inputStr -altURL)
+    (insert-atom-entry -titleText (xah-new-atom-id-tag) nil -inputStr -altURL)
     (search-backward "</title>")))

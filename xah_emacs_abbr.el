@@ -35,6 +35,20 @@
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
 
+(define-abbrev-table 'conf-colon-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-javaprop-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-ppd-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-space-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-unix-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-windows-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-xdefaults-mode-abbrev-table '())
+
 (define-abbrev-table 'debugger-mode-abbrev-table '())
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
@@ -47,6 +61,10 @@
 
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
 
+(define-abbrev-table 'ert-results-mode-abbrev-table '())
+
+(define-abbrev-table 'ert-simple-view-mode-abbrev-table '())
+
 (define-abbrev-table 'eshell-mode-abbrev-table '())
 
 (define-abbrev-table 'eww-bookmark-mode-abbrev-table '())
@@ -56,6 +74,8 @@
 (define-abbrev-table 'eww-history-mode-abbrev-table '())
 
 (define-abbrev-table 'eww-mode-abbrev-table '())
+
+(define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
 
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
@@ -71,7 +91,7 @@
     ("ann" "announcement" nil 0)
     ("atm" "at the moment" nil 0)
     ("bc" "because" nil 0)
-    ("bg" "background" nil 0)
+    ("bg" "background" nil 3)
     ("bt" "between" nil 0)
     ("btw" "by the way" nil 8)
     ("bu" "•" nil 12)
@@ -99,7 +119,7 @@
     ("dvp" "develop" nil 0)
     ("ee" "ErgoEmacs" nil 0)
     ("eem" "ergoemacs-mode" nil 0)
-    ("eg" "e.g." nil 3)
+    ("eg" "e.g." nil 4)
     ("emoji" "😃😄😅😆
 😉😊😋😌
 😎😇😈
@@ -112,19 +132,19 @@
 😒😠😡
 😞😟😣😤😥😦😧😨😬
 😢😭
-😸😹😺😻😼😽😾😿🙀" nil 7)
+😸😹😺😻😼😽😾😿🙀" nil 8)
     ("eng" "English" nil 0)
-    ("env" "environment" nil 0)
+    ("env" "environment" nil 1)
     ("esp" "especially" nil 0)
     ("ev" "environment variable" nil 0)
     ("evs" "environment variables" nil 0)
     ("ex" "example" nil 1)
-    ("faq" "frequently asked questions" nil 0)
+    ("faq" "frequently asked questions" nil 1)
     ("fb" "Facebook" nil 0)
-    ("fex" "for example" nil 4)
+    ("fex" "for example," nil 7)
     ("fs" "fullscreen" nil 0)
     ("fx" "Firefox" nil 0)
-    ("gc" "Google Chrome" nil 1)
+    ("gc" "Google Chrome" nil 3)
     ("gcd" "googlecode" nil 0)
     ("ge" "Google Earth" nil 0)
     ("gh" "Google Hangout" nil 0)
@@ -136,7 +156,7 @@
     ("hnt" "haven't" nil 0)
     ("i18n" "international" nil 0)
     ("ia" "interactive" nil 1)
-    ("ie" "Internet Explorer" nil 0)
+    ("ie" "Internet Explorer" nil 1)
     ("impl" "implementation" nil 0)
     ("implt" "implement" nil 0)
     ("intro" "introduction" nil 3)
@@ -147,8 +167,8 @@
     ("jp" "Japanese" nil 0)
     ("jq" "jQuery" nil 0)
     ("jvm" "Java Virtual Machine" nil 1)
-    ("kb" "keyboard" nil 31)
-    ("kbd" "keybinding" nil 5)
+    ("kb" "keyboard" nil 38)
+    ("kbd" "keybinding" nil 7)
     ("kbs" "keyboards" nil 0)
     ("kw" "keyword" nil 2)
     ("lr" "#lang racket" nil 0)
@@ -158,13 +178,15 @@
     ("mma" "Mathematica" nil 1)
     ("ms" "Microsoft" nil 1)
     ("msvs" "Microsoft Visual Studio" nil 0)
-    ("msw" "Microsoft Windows" nil 6)
+    ("msw" "Microsoft Windows" nil 8)
+    ("omg" "😂" nil 2)
     ("osx" "OS X" nil 0)
     ("paren" "parenthesis" nil 3)
-    ("pl" "programing language" nil 2)
+    ("pl" "programing language" nil 3)
     ("pls" "please" nil 0)
     ("pp" "PayPal" nil 0)
     ("prof" "professor" nil 0)
+    ("ra" "→" nil 1)
     ("ref" "reference" nil 0)
     ("rsi" "Repetitive Strain Injury" nil 1)
     ("sf" "San Francisco" nil 0)
@@ -174,7 +196,6 @@
     ("subdir" "sub-directory" nil 0)
     ("subdirs" "sub-directories" nil 0)
     ("techn" "technology" nil 0)
-    ("tla" "<div class=\"¤tla\"><a href=\"url\">text</a></div>" nil 0)
     ("trad" "traditional" nil 0)
     ("ty" "thank you" nil 0)
     ("u3dxm" "http://3D-XplorMath.org/" nil 0)
@@ -218,7 +239,7 @@
     ("uwd" "http://xahlee.info/js/index.html" nil 0)
     ("uwe" "http://wordyenglish.com/" nil 0)
     ("uxa" "http://xaharts.org/" nil 0)
-    ("uxl" "http://xahlee.org/" nil 0)
+    ("uxl" "http://xahlee.org/" nil 1)
     ("uxli" "http://xahlee.info/" nil 0)
     ("uxm" "http://xahmusic.org/" nil 0)
     ("uxp" "http://xahporn.org/" nil 0)
@@ -229,13 +250,14 @@
     ("vid" "video" nil 0)
     ("wd" "web development" nil 0)
     ("win" "window" nil 0)
-    ("wl" "Wolfram Language" nil 1)
+    ("wl" "Wolfram Language" nil 3)
     ("wm" "Window Manager" nil 1)
     ("wnt" "won't" nil 0)
-    ("wp" "Wikipedia" nil 1)
+    ("wp" "Wikipedia" nil 7)
     ("wsnt" "wasn't" nil 0)
     ("wtdb" "What's the difference between" nil 1)
-    ("xfk" "xah-fly-keys" nil 1)
+    ("www" "whatthefucklongword" nil 1)
+    ("xfk" "xah-fly-keys" nil 7)
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee
 g+: https://plus.google.com/112757647855302148298/posts
@@ -264,7 +286,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 │ │ │
 └─┴─┘" nil 0)
     ("zbracket" "\\[\\([^]]+?\\)\\]" nil 0)
-    ("zc" "character" nil 5)
+    ("zc" "character" nil 7)
     ("zca" "cellular automata" nil 0)
     ("zchars" "characters" nil 0)
     ("zcli" "command line interface" nil 0)
@@ -281,7 +303,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
     ("ze" "emacs" nil 0)
     ("zel" "emacs lisp" nil 0)
     ("zergo" "ergonomic" nil 1)
-    ("zexpe" "experience" nil 0)
+    ("zexp" "experience" nil 0)
     ("zexpr" "expression" nil 0)
     ("zf" "function" nil 0)
     ("zfaq" "<div class=\"question-box32371\">
@@ -289,16 +311,16 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 <p>this way</p>
 </div>
 
-" nil 1)
+" nil 2)
     ("zfl" "functional language" nil 0)
     ("zfp" "functional programing" nil 0)
     ("zg" "Google" nil 0)
     ("zgui" "graphical user interface" nil 0)
-    ("zis" "image source" nil 6)
+    ("zis" "image source" nil 7)
     ("zit" "IntelliType" nil 0)
-    ("zjs" "JavaScript" nil 4)
+    ("zjs" "JavaScript" nil 6)
     ("zkey" "【Alt+f】" nil 0)
-    ("zl" "language" nil 16)
+    ("zl" "language" nil 18)
     ("zlhs" "left-hand-side" nil 0)
     ("zlib" "library" nil 0)
     ("zlibs" "libraries" nil 0)
@@ -326,7 +348,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
     ("ztek" "Truly Ergonomic keyboard" nil 2)
     ("ztemp" "temperature" nil 0)
     ("zutf8" "-*- coding: utf-8 -*-" nil 0)
-    ("zv" "variable" nil 2)
+    ("zv" "variable" nil 3)
     ("zvs" "variables" nil 0)
    ))
 
@@ -451,6 +473,8 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
 
+(define-abbrev-table 'tar-mode-abbrev-table '())
+
 (define-abbrev-table 'term-mode-abbrev-table '())
 
 (define-abbrev-table 'tex-mode-abbrev-table '())
@@ -485,11 +509,11 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 
 (define-abbrev-table 'xah-html-mode-abbrev-table
   '(
-    ("br" "<br />" nil 1)
-    ("hr" "<hr />" nil 1)
+    ("br" "<br />" nil 0)
+    ("hr" "<hr />" nil 0)
     ("iframe" "<iframe src=\"some.html\" width=\"200\" height=\"300\"></iframe>" nil 0)
     ("zcss" "<link rel=\"stylesheet\" href=\"lbasic.css\" />" nil 0)
-    ("zrefresh" "<meta http-equiv=\"refresh\" content=\"0; url=http://example.com/\">" nil 1)
+    ("zrefresh" "<meta http-equiv=\"refresh\" content=\"0; url=http://example.com/\">" nil 0)
     ("zstyle" "<style type=\"text/css\">
 p {line-height:130%}
 </style>" nil 0)
@@ -501,5 +525,13 @@ p {line-height:130%}
 
 (define-abbrev-table 'xah-php-mode-abbrev-table '())
 
+(define-abbrev-table 'xcpp-mode-abbrev-table '())
+
+(define-abbrev-table 'xjv-mode-abbrev-table '())
+
+(define-abbrev-table 'xpy-mode-abbrev-table '())
+
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'xwl-mode-abbrev-table '())
 

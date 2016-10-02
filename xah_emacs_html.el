@@ -288,7 +288,7 @@ if xx.jpg doesn't exit, try xx.png. The dirs to try are
  ~/Pictures/
  /tmp
 
-Version 2016-08-25"
+Version 2016-09-24"
   (interactive "DMove to dir:
 sNew file name:")
   (let (
@@ -306,6 +306,11 @@ sNew file name:")
             (expand-file-name "~/Pictures/xx.jpg"))
            ((file-exists-p (expand-file-name "~/Pictures/xx.png"))
             (expand-file-name "~/Pictures/xx.png"))
+           ((file-exists-p (expand-file-name "~/Pictures/xx.gif"))
+            (expand-file-name "~/Pictures/gif.png"))
+           ((file-exists-p (expand-file-name "~/Downloads/xx.gif"))
+            (expand-file-name "~/Downloads/xx.gif"))
+
            ((file-exists-p "/tmp/xx.jpg")
             "/tmp/xx.jpg")
            ((file-exists-p "/tmp/xx.png")

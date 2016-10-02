@@ -10,11 +10,11 @@
 
 (setq inhibit-splash-screen t)
 
-;; (setq initial-frame-alist
-;;       '(
-;;         (width . 102)
-;;         (height . 54)
-;;         (background-color . "honeydew")))
+(setq initial-frame-alist
+      '(
+        (width . 110)
+        (height . 60)
+        (background-color . "honeydew")))
 
 (setq default-frame-alist
       '(

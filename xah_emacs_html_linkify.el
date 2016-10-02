@@ -309,7 +309,7 @@ White Rabbit, Jefferson Airplane
 
 Then it'll become
 
-<a class=\"gvidsr\" href=\"http://www.google.com/search?tbs=vid%3A1&q=White+Rabbit%2C+Jefferson+Airplane\">White Rabbit, Jefferson Airplane</a>
+<a class=\"google-video-search-36645\" href=\"http://www.google.com/search?tbs=vid%3A1&q=White+Rabbit%2C+Jefferson+Airplane\">White Rabbit, Jefferson Airplane</a>
 
 Warning: the line must end in a line return char else the result is wrong.
 
@@ -324,7 +324,7 @@ This command calls `video-search-string'"
     (setq -word (buffer-substring-no-properties -p1 -p2))
     (setq -url (video-search-string -word))
     (delete-region -p1 -p2)
-    (insert "<a class=\"gvidsr\" href=\"" -url "\">" -word "</a>")))
+    (insert "<a class=\"google-video-search-36645\" href=\"" -url "\">" -word "</a>")))
 
 (defun google-search-linkify ()
   "Make the current line into a Google search link.
