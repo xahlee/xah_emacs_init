@@ -518,7 +518,7 @@ Version 2015-10-20"
   "..."
   (interactive)
   (let ()
-(xah-replace-pairs-region 1 (point-max)
+(xah-replace-pairs-region (point-min) (point-max)
  [
 ["Dear Xah Lee," ""]
 ["Hello Xah Lee," ""]

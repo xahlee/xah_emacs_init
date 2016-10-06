@@ -144,12 +144,13 @@ version 2016-09-27"
     (setq -altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
           (let ( (-hrefValues (xah-html-extract-url -p1 -p2)) -firstLink1)
             (if
-                (and ; 1 link only and 1 paragraph only
-                 (with-temp-buffer
+                (and
+                 (with-temp-buffer ; 1 paragraph only
                    (insert -inputStr)
                    (goto-char (point-min))
                    (= (count-matches "<p>" (point-min) (point-max)) 1))
-                 (= (length -hrefValues) 1))
+                 (progn ; 1 link only
+                   (= (length -hrefValues) 1)))
                 (progn
                   (setq -firstLink1 (elt -hrefValues 0))
                   (if (string-match-p "\\`https?://" -firstLink1)

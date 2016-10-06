@@ -8,13 +8,16 @@
 
 ;; initial window and default window
 
-(setq inhibit-splash-screen t)
+;; (setq inhibit-splash-screen t)
 
-(setq initial-frame-alist
-      '(
-        (width . 110)
-        (height . 60)
-        (background-color . "honeydew")))
+;; (setq initial-frame-alist
+;;       '(
+;;         (tool-bar-lines . 0)
+;;         (width . 106)
+;;         (height . 60)
+;;         (background-color . "honeydew")
+;;         (font . "DejaVu Sans Mono-10")
+;;         ))
 
 (setq default-frame-alist
       '(

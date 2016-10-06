@@ -189,7 +189,10 @@ Version 2015-04-28"
      ["\\omega" "ω"]
      ["\\cup" "∪"]
      ["\\in" "∈"]
-     )))
+     )
+   t
+   t
+   ))
 
 (defun xah-replace-text-to-latex-region (*begin *end)
   "Replace math function names or symbols by their LaTeX markup.
@@ -210,7 +213,7 @@ Version 2015-04-28"
      [" pi" "\\!\\pi"]
      ["R^2" "\\mathbb{R}^2"]
      ["R^3" "\\mathbb{R}^3"]
-     )))
+     ) 'REPORT 'HILIGHT ))
 
 (defun xah-replace-mathematica-symbols (*begin *end)
   "Replace Mathematica's special char markup to Unicode in current line or selection.
@@ -227,7 +230,7 @@ Version 2015-04-28"
    *end
    '(
      ["\\[Infinity]" "∞"]
-     ["\\[Equal]" "=="])))
+     ["\\[Equal]" "=="]) 'REPORT 'HILIGHT ))
 
 (defun xah-replace-greeks-to-symbols (*begin *end)
   "Replace alpha to α etc in current line or selection.
@@ -248,7 +251,7 @@ Version 2015-04-28"
      ["delta" "δ"]
      ["epsilon" "_"]
      ["omega" "ω"]
-     ["Pi" "π"])))
+     ["Pi" "π"]) 'REPORT 'HILIGHT ))
 
 (defun xah-replace-mathematica-to-lsl (*begin *end)
   "Change Mathematica syntax to LSL syntax on region.
@@ -269,7 +272,7 @@ Version 2015-04-28"
      ["Pi" "PI"]
      ["π" "PI"]
      ["{" "<"]
-     ["}" ">"])))
+     ["}" ">"]) 'REPORT 'HILIGHT ))
 
 (defun xah-clean-Mathematica-graphics-buffer ()
   "Remove whitespace, truncate numbers, of current buffer of Mathematica graphics file.
@@ -381,7 +384,11 @@ Version 2015-04-29"
        (list (region-beginning) (region-end) current-prefix-arg)
      (list (line-beginning-position) (line-end-position) current-prefix-arg)))
   (let* ((-numMap [["○" "0"] ["一" "1"] ["二" "2"] ["三" "3"] ["四" "4"] ["五" "5"] ["六" "6"] ["七" "7"] ["八" "8"] ["九" "9"] ]))
-    (xah-replace-pairs-region *begin *end (if *to-chinese (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) -numMap) -numMap ))))
+    (xah-replace-pairs-region
+     *begin *end
+     (if *to-chinese (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) -numMap) -numMap )
+     t t
+     )))
 
 (defun xah-remove-vowel ()
   "Remove the following letters: {a e i o u} in current line or text selection.
@@ -405,7 +412,7 @@ Version 2015-08-22"
 
 (defun xah-replace-profanity ()
   "Replace fuck shit scumbag … in current line or text selection.
-"
+Version 2016-10-05"
   (interactive)
   (let ( -p1 -p2)
     (if (use-region-p)
@@ -421,7 +428,7 @@ Version 2015-08-22"
        ["fuck" "f￼ck"]
        ["shit" "sh￼t"]
        ["motherfuck" "m￼th￼rf￼ck"]
-       ))))
+       ) 'REPORT 'HILIGHT )))
 
 (defun xah-replace-slanted-apostrophe ()
   "Replace some single curly apostrophe to straight version.
@@ -447,7 +454,7 @@ Example: 「it’s」 ⇒ 「it's」."
        ["’ll" "'ll"]
        ["’m" "'m"]
        ["’re" "'re"]
-       ["s’ " "s' "]))))
+       ["s’ " "s' "]) 'REPORT 'HILIGHT )))
 
 (defun xah-convert-fullwidth-chars (*begin *end &optional *to-direction)
   "Convert ASCII chars to/from Unicode fullwidth version.
@@ -464,7 +471,8 @@ If `universal-argument' is called:
 
 When called in lisp code, *begin *end are region begin/end positions. *to-direction must be any of the following values: 「\"unicode\"」, 「\"ascii\"」, 「\"auto\"」.
 
-See also: `xah-remove-punctuation-trailing-redundant-space'."
+See also: `xah-remove-punctuation-trailing-redundant-space'.
+Version 2016-10-05"
   (interactive
    (let (-p1 -p2)
      (if (use-region-p)
@@ -522,7 +530,8 @@ See also: `xah-remove-punctuation-trailing-redundant-space'."
                )
            --ascii-unicode-map
            ))
-        (t (user-error "Your 3rd argument 「%s」 isn't valid" *to-direction)))))
+        (t (user-error "Your 3rd argument 「%s」 isn't valid" *to-direction)))
+       t t ))
     (put 'xah-convert-fullwidth-chars 'state stateAfter)))
 
 (defun xah-remove-punctuation-trailing-redundant-space (*begin *end)
@@ -1085,13 +1094,13 @@ Version 2016-08-22"
           ["?\"" "?”"]
           ["\"<" "”<"]
           ["\"\n" "”\n"]
-          ] 'REPORT)
+          ] 'REPORT 'HILIGHT)
 
         (xah-replace-pairs-region
          (point-min) (point-max)
          [
           ["  —  " " — "] ; rid of extra space in em-dash
-          ] )
+          ] 'REPORT 'HILIGHT)
 
         ;; fix straight double quotes by regex
         (xah-replace-regexp-pairs-region
@@ -1114,7 +1123,7 @@ Version 2016-08-22"
           ["(\'" "(‘"]
           ["\')" "’)"]
           ["\']" "’]"]
-          ])
+          ] 'REPORT 'HILIGHT)
 
         (xah-replace-regexp-pairs-region
          (point-min) (point-max)
@@ -1150,7 +1159,7 @@ Version 2016-08-22"
          (point-min) (point-max)
          [
           ["\\”" "\\\""]
-          ])
+          ] 'REPORT 'HILIGHT)
 
         ;; fix back. quotes in HTML code
         (xah-replace-regexp-pairs-region

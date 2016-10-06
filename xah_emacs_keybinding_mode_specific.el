@@ -3,9 +3,8 @@
 
 (progn
   (require 'dired )
-  (when (>= emacs-major-version 23)
-    (define-key dired-mode-map (kbd "6") 'dired-up-directory)
-    ))
+  (define-key dired-mode-map (kbd "6") 'dired-up-directory)
+  (define-key dired-mode-map (kbd "_") 'xah-dired-rename-space-to-underscore))
 
 (progn
   (require 'info )
