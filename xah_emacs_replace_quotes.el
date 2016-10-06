@@ -7,6 +7,8 @@
 ;; 2015-08-22
 ;; removed dependencies to xeu_elisp_util.el xah-get-thing.el xah-find.el xah-replace-pairs.el
 
+(require 'xah-replace-pairs)
+
 (defun xah-replace-newline-whitespaces-to-space (&optional *begin *end *absolute-p)
   "Replace newline+tab char sequence to 1 just space, in current text block or selection.
 This is similar to `fill-region' but without being smart.
@@ -189,10 +191,7 @@ Version 2015-04-28"
      ["\\omega" "ω"]
      ["\\cup" "∪"]
      ["\\in" "∈"]
-     )
-   t
-   t
-   ))
+     ) 'REPORT 'HILIGHT ))
 
 (defun xah-replace-text-to-latex-region (*begin *end)
   "Replace math function names or symbols by their LaTeX markup.
@@ -232,26 +231,74 @@ Version 2015-04-28"
      ["\\[Infinity]" "∞"]
      ["\\[Equal]" "=="]) 'REPORT 'HILIGHT ))
 
-(defun xah-replace-greeks-to-symbols (*begin *end)
-  "Replace alpha to α etc in current line or selection.
-Version 2015-04-28"
+(defun xah-replace-greek-letter-name-to-symbol (*begin *end)
+  "Replace alpha to α, beta to β etc in current line or selection.
+
+URL `http://ergoemacs.org/emacs/elisp_replace_greeks_to_symbols.html'
+Version 2016-10-05"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-end-position))))
-  (xah-replace-pairs-region
-   *begin
-   *end
-   '(
-     ["alpha" "α"]
-     ["beta" "β"]
-     ["gamma" "γ"]
-     ["theta" "θ"]
-     ["lambda" "λ"]
-     ["delta" "δ"]
-     ["epsilon" "_"]
-     ["omega" "ω"]
-     ["Pi" "π"]) 'REPORT 'HILIGHT ))
+  (let ((case-fold-search nil))
+    (xah-replace-pairs-region
+     *begin
+     *end
+     '(
+       ["Alpha" "Α"]
+       ["Beta" "Β"]
+       ["Gamma" "Γ"]
+       ["Delta" "Δ"]
+       ["Epsilon" "Ε"]
+       ["Zeta" "Ζ"]
+       ["Eta" "Η"]
+       ["Theta" "Θ"]
+       ["Iota" "Ι"]
+       ["Kappa" "Κ"]
+       ["Lambda" "Λ"]
+       ["Mu" "Μ"]
+       ["Nu" "Ν"]
+       ["Xi" "Ξ"]
+       ["Omicron" "Ο"]
+       ["Pi" "Π"]
+       ["Rho" "Ρ"]
+       ["Sigma" "Σ"]
+       ["Tau" "Τ"]
+       ["Upsilon" "Υ"]
+       ["Phi" "Φ"]
+       ["Chi" "Χ"]
+       ["Psi" "Ψ"]
+       ["Omega" "Ω"]
+
+       ["alpha" "α"]
+       ["beta" "β"]
+       ["gamma" "γ"]
+       ["delta" "δ"]
+       ["epsilon" "ε"]
+       ["zeta" "ζ"]
+       ["eta" "η"]
+       ["theta" "θ"]
+       ["iota" "ι"]
+       ["kappa" "κ"]
+       ["lambda" "λ"]
+       ["mu" "μ"]
+       ["nu" "ν"]
+       ["xi" "ξ"]
+       ["omicron" "ο"]
+       ["pi" "π"]
+       ["rho" "ρ"]
+       ["sigmaf" "ς"]
+       ["sigma" "σ"]
+       ["tau" "τ"]
+       ["upsilon" "υ"]
+       ["phi" "φ"]
+       ["chi" "χ"]
+       ["psi" "ψ"]
+       ["omega" "ω"]
+       ["thetasym" "ϑ"]
+       ["upsih" "ϒ"]
+       ["piv" "ϖ"]
+       ) 'REPORT 'HILIGHT )))
 
 (defun xah-replace-mathematica-to-lsl (*begin *end)
   "Change Mathematica syntax to LSL syntax on region.
