@@ -90,6 +90,7 @@
     ("ai" "artificial intelligence" nil 0)
     ("ann" "announcement" nil 0)
     ("atm" "at the moment" nil 0)
+    ("autom" "automatic" nil 1)
     ("bc" "because" nil 0)
     ("bg" "background" nil 3)
     ("bt" "between" nil 0)

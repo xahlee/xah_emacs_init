@@ -17,6 +17,8 @@
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
+(define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
+
 ;; (setq visible-bell nil)
 
 ;; ring-bell-function
@@ -27,9 +29,6 @@
 ;; (setq ring-bell-function 'ding)
 
 ;; (setq ring-bell-function nil)
-
-
-(define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
 
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 

@@ -288,8 +288,8 @@ if xx.jpg doesn't exit, try xx.png. The dirs to try are
  ~/Pictures/
  /tmp
 
-Version 2016-09-24"
-  (interactive "DMove to dir:
+Version 2016-10-08"
+  (interactive "DMove xx img to dir:
 sNew file name:")
   (let (
         -from-path

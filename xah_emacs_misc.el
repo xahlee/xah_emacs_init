@@ -445,6 +445,24 @@ When there is a text selection, act on the region."
 
       (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)))))
 
+(defun xah-display-page-break-as-line ()
+  "Display the formfeed ^L char as line.
+Version 2016-10-11"
+  (interactive)
+  ;; 2016-10-11 thanks to Steve Purcell
+  (progn
+    (when (null buffer-display-table)
+      (setq buffer-display-table (make-display-table)))
+    (aset buffer-display-table ?\^L
+          (vconcat (make-list 70 (make-glyph-code ?─ 'font-lock-comment-face))))))
+
+;; (dolist (hook '(window-configuration-change-hook
+;;                 window-size-change-functions
+;;                 after-setting-font-hook))
+;;   (add-hook hook 'xah-display-page-break-as-line))
+
+
+
 (defcustom xah-shell-abbrev-alist nil "alist of xah's shell abbrevs" :group 'xah)
 (setq xah-shell-abbrev-alist
       '(
@@ -458,6 +476,7 @@ When there is a text selection, act on the region."
 
         ("grep" . "grep -r -F \"xxx\" --include='*html' ~/web")
         ("firefox" . "setsid firefox &")
+        ("giftowebm" . "avconv -f gif -i cat.gif cat.webm")
 
         ("delete empty file" . "find . -type f -empty")
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")

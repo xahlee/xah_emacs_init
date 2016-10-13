@@ -730,18 +730,17 @@ becomes
   "Make the path under cursor into a HTML link.
 e.g. xyz.webm
 becomes
-<video src=\"i/xyz.webm\" controls></video>"
+<video src=\"i/xyz.webm\" controls loop autoplay></video>
+Version 2016-10-12"
   (interactive)
   (let* (
-         (-bds (xah-get-thing-or-selection 'filepath))
-         (-inputStr (elt -bds 0))
-         (-p1 (aref -bds 1))
-         (-p2 (aref -bds 2))
-         -fPath
-         )
-    (setq -fPath (file-relative-name -inputStr))
+         (-bds (bounds-of-thing-at-point 'filename ))
+         (-p1 (car -bds))
+         (-p2 (cdr -bds))
+         (-inputStr (buffer-substring-no-properties -p1 -p2 ))
+         (-fPath (file-relative-name -inputStr)))
     (delete-region -p1 -p2)
-    (insert (format "<video src=\"%s\" controls></video>" -fPath))))
+    (insert (format "<video src=\"%s\" controls loop autoplay></video>" -fPath))))
 
 (defun xah-css-linkify ()
   "Make the path under cursor into a HTML link.
