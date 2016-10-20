@@ -10,14 +10,14 @@
 
 ;; (setq inhibit-splash-screen t)
 
-;; (setq initial-frame-alist
-;;       '(
-;;         (tool-bar-lines . 0)
-;;         (width . 106)
-;;         (height . 60)
-;;         (background-color . "honeydew")
-;;         (font . "DejaVu Sans Mono-10")
-;;         ))
+(setq initial-frame-alist
+      '(
+        (tool-bar-lines . 0)
+        (width . 106)
+        (height . 60)
+        (background-color . "honeydew")
+        (font . "DejaVu Sans Mono-10")
+        ))
 
 (setq default-frame-alist
       '(

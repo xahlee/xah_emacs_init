@@ -53,6 +53,8 @@
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
 
+(define-abbrev-table 'display-time-world-mode-abbrev-table '())
+
 (define-abbrev-table 'doctex-mode-abbrev-table '())
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
@@ -95,7 +97,7 @@
     ("bg" "background" nil 3)
     ("bt" "between" nil 0)
     ("btw" "by the way" nil 8)
-    ("bu" "•" nil 12)
+    ("bu" "•" nil 18)
     ("catface" "😸" nil 0)
     ("cfg" "context-free grammar" nil 0)
     ("ch" "Chinese" nil 0)
@@ -140,7 +142,7 @@
     ("esp" "especially" nil 0)
     ("ev" "environment variable" nil 0)
     ("evs" "environment variables" nil 0)
-    ("ex" "example" nil 1)
+    ("ex" "example" nil 2)
     ("faq" "frequently asked questions" nil 1)
     ("fb" "Facebook" nil 0)
     ("fex" "for example," nil 7)
@@ -181,7 +183,7 @@
     ("mma" "Mathematica" nil 1)
     ("ms" "Microsoft" nil 1)
     ("msvs" "Microsoft Visual Studio" nil 0)
-    ("msw" "Microsoft Windows" nil 10)
+    ("msw" "Microsoft Windows" nil 11)
     ("omg" "😂" nil 2)
     ("osx" "OS X" nil 0)
     ("paren" "parenthesis" nil 3)
@@ -299,7 +301,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
     ("zdate" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" nil 0)
     ("zdb" "database" nil 0)
     ("zdef" "definition" nil 0)
-    ("zdf" "different" nil 1)
+    ("zdf" "different" nil 2)
     ("zdfc" "difference" nil 0)
     ("zdoc" "documentation" nil 0)
     ("zdot" "\\(.\\)" nil 0)
@@ -320,11 +322,11 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
     ("zfp" "functional programing" nil 0)
     ("zg" "Google" nil 0)
     ("zgui" "graphical user interface" nil 0)
-    ("zis" "image source" nil 7)
+    ("zis" "image source" nil 9)
     ("zit" "IntelliType" nil 0)
     ("zjs" "JavaScript" nil 6)
     ("zkey" "【Alt+f】" nil 0)
-    ("zl" "language" nil 20)
+    ("zl" "language" nil 21)
     ("zlhs" "left-hand-side" nil 0)
     ("zlib" "library" nil 0)
     ("zlibs" "libraries" nil 0)
@@ -344,6 +346,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
     ("zq" "question" nil 0)
     ("zrhs" "right-hand-side" nil 0)
     ("zs" "string" nil 0)
+    ("zsc" "source code" nil 1)
     ("zsjw" "social justice warriors" nil 4)
     ("zso" "StackOverflow" nil 0)
     ("zsong" "singer ♪《title》" nil 0)
@@ -380,10 +383,7 @@ QQ: http://user.qzone.qq.com/2609322939" nil 0)
 
 (define-abbrev-table 'js-mode-abbrev-table '())
 
-(define-abbrev-table 'latex-mode-abbrev-table
-  '(
-    ("heart" "lambda" nil 0)
-   ))
+(define-abbrev-table 'latex-mode-abbrev-table '())
 
 (define-abbrev-table 'lisp-mode-abbrev-table '())
 
@@ -521,9 +521,7 @@ p {line-height:130%}
 </style>" nil 0)
    ))
 
-(define-abbrev-table 'xah-js-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'xah-js-mode-abbrev-table '())
 
 (define-abbrev-table 'xah-php-mode-abbrev-table '())
 

@@ -6,62 +6,7 @@
 
 (require 'url-util)
 
-(defun xah-html-image-linkify ()
-  "Replace image file path under cursor to HTML img inline link.
-Example:
- emacs_logo.png
-become
- <img src=\"emacs_logo.png\" alt=\"emacs logo\" width=\"123\" height=\"456\" />
 
-URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
-Version 2015-12-23"
-  (interactive)
-  (let ( -p1 -p2 -imgPath
-             -hrefValue -altText -imgWH -width -height)
-    (save-excursion
-      ;; get image file path begin end pos
-      (let (-p0)
-        (setq -p0 (point))
-        ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-        (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-        (setq -p1 (point))
-        (goto-char -p0)
-        (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-        (setq -p2 (point))
-        (goto-char -p0))
-      (setq -imgPath
-            (xahsite-web-path-to-filepath
-             (xah-local-url-to-file-path
-              (buffer-substring-no-properties -p1 -p2 ))))
-      (when (not (file-exists-p -imgPath))
-        (user-error "file not exist at %s"  -imgPath))
-
-      (setq -hrefValue
-            (file-relative-name
-             -imgPath
-             (file-name-directory (or (buffer-file-name) default-directory))))
-      (setq -altText
-            (replace-regexp-in-string
-             "_" " "
-             (replace-regexp-in-string
-              "\\.[A-Za-z]\\{3,4\\}$" "" (file-name-nondirectory -imgPath) t t) t t))
-      (setq -imgWH (xah-get-image-dimensions -imgPath))
-      (setq -width (number-to-string (elt -imgWH 0)))
-      (setq -height (number-to-string (elt -imgWH 1))))
-
-    (delete-region -p1 -p2)
-    (insert
-     (if (or (equal -width "0") (equal -height "0"))
-         (concat
-          "<img src=\""
-          -hrefValue
-          "\"" " " "alt=\"" -altText "\"" " />")
-       (concat
-        "<img src=\""
-        -hrefValue
-        "\"" " " "alt=\"" -altText "\""
-        " width=\"" -width "\""
-        " height=\"" -height "\" />")))))
 
 (defun xahsite-html-image-linkify ( &optional *begin *end)
   "Replace a image file's path under cursor with a HTML img tag.

@@ -114,7 +114,7 @@
   (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
   (define-key xah-user-keymap (kbd "k") 'xah-find-replace-text)
 
-  (define-key xah-user-keymap (kbd "l") nil)
+  (define-key xah-user-keymap (kbd "l") 'xah-display-page-break-as-line)
   (define-key xah-user-keymap (kbd "m") 'xah-move-image-file)
   (define-key xah-user-keymap (kbd "n") nil)
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)

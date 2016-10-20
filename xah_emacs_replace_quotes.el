@@ -1066,7 +1066,7 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
 
 (defun xah-replace-straight-quotes (*begin *end)
   "Replace straight double quotes to curly ones, and others.
-Works on selection or current text block.
+Works on current text block or selection.
 
 Examples of changes:
  「\"…\"」 ⇒ 「“…”」

@@ -39,44 +39,60 @@ To solve this problem, when your code only knows the relative path of another fi
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-get-fullpath ""))
 
-(add-to-list 'load-path "~/git/xah-fly-keys/")
-(add-to-list 'load-path "~/git/xah-elisp-mode/")
-(add-to-list 'load-path "~/git/xah-clojure-mode/")
-(add-to-list 'load-path "~/git/xah-comment.el/")
-(add-to-list 'load-path "~/git/xah-css-mode/")
-(add-to-list 'load-path "~/git/xah-find/")
-;; (add-to-list 'load-path "~/git/xah-html6-mode.el/")
-(add-to-list 'load-path "~/git/xah-html-mode.el/")
-(add-to-list 'load-path "~/git/xah-insert-random-id.el/")
-(add-to-list 'load-path "~/git/xah-js-mode.el/")
-(add-to-list 'load-path "~/git/xah-php-mode.el/")
-(add-to-list 'load-path "~/git/xbbcode-mode.el/")
-(add-to-list 'load-path "~/git/xeu_elisp_util.el/")
-(add-to-list 'load-path "~/git/xah-replace-pairs/")
-(add-to-list 'load-path "~/git/xub-mode.el/")
-(add-to-list 'load-path "~/git/lookup-word-on-internet/")
-(add-to-list 'load-path "~/git/xahk-mode.el/")
-(add-to-list 'load-path "~/git/xah-math-input/")
-
 (add-to-list 'load-path "~/git/xah-get-thing-or-selection/")
+(load "xah-get-thing")
 
+(add-to-list 'load-path "~/git/xah-replace-pairs/")
+(load "xah-replace-pairs")
+
+(add-to-list 'load-path "~/git/xeu_elisp_util.el/")
+(load "xeu_elisp_util")
+
+(add-to-list 'load-path "~/git/xah-fly-keys/")
+
+(add-to-list 'load-path "~/git/xah-elisp-mode/")
+(load "xah-elisp-mode")
+
+(add-to-list 'load-path "~/git/xah-clojure-mode/")
+(load "xah-clojure-mode")
+
+;; (add-to-list 'load-path "~/git/xah-comment.el/")
+(add-to-list 'load-path "~/git/xah-css-mode/")
+(load "xah-css-mode")
+
+(add-to-list 'load-path "~/git/xah-find/")
+(load "xah-find")
+
+;; (add-to-list 'load-path "~/git/xah-html6-mode.el/")
+
+(add-to-list 'load-path "~/git/xah-html-mode.el/")
+(load "xah-html-mode")
+
+(add-to-list 'load-path "~/git/xah-insert-random-id.el/")
+(load "xah-insert-random-id")
+
+(add-to-list 'load-path "~/git/xah-js-mode.el/")
+(load "xah-js-mode")
+
+(add-to-list 'load-path "~/git/xah-php-mode.el/")
+(load "xah-php-mode")
+
+;; (add-to-list 'load-path "~/git/xbbcode-mode.el/")
+;; (load "xbbcode-mode")
+
+(add-to-list 'load-path "~/git/xub-mode.el/")
+
+(add-to-list 'load-path "~/git/lookup-word-on-internet/")
+(load "xah-lookup")
+
+(add-to-list 'load-path "~/git/xahk-mode.el/")
 (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
 
-(load "xah-get-thing")
-(load "xah-find")
-(load "xah-html-mode")
-(load "xah-comment")
-(load "xah-elisp-mode")
-(load "xah-clojure-mode")
-(load "xah-js-mode")
-(load "xah-php-mode")
-(load "xah-css-mode")
-(load "xah-insert-random-id")
-(load "xah-lookup")
-(load "xah-replace-pairs")
-(load "xeu_elisp_util")
-(load "xbbcode-mode")
+(add-to-list 'load-path "~/git/xah-math-input/")
 (load "xah-math-input")
+
+
+;; (load "xah-comment")
 
 (defalias 'bbcode-mode 'xbbcode-mode)
 

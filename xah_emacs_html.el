@@ -258,25 +258,6 @@ Requires a python script. See code."
       (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)))
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t))))
 
-(defun xah-html-rename-html-inline-image ()
-  "Replace current HTML inline image's file name.
-This command is for interactive use only.
-When cursor is in HTML link file path, e.g.  <img src=\"img/emacs_logo.png\" > and this command is called, it'll prompt user for a new name. The link path will be changed to the new name, the corresponding file will also be renamed. The operation is aborted if a name exists.
-Version 2015-08-07"
-  (interactive)
-  (let* (
-         (-bounds (bounds-of-thing-at-point 'filename))
-         (-inputPath (buffer-substring-no-properties (car -bounds) (cdr -bounds)))
-         (-expandedPath (expand-file-name -inputPath (file-name-directory (or (buffer-file-name) default-directory ))))
-         (-newPath (read-string "New name: " -expandedPath nil -expandedPath )))
-    (if (file-exists-p -newPath)
-        (progn (user-error "file 「%s」 exist." -newPath ))
-      (progn
-        (rename-file -expandedPath -newPath)
-        (message "rename to %s" -newPath)
-        (delete-region (car -bounds) (cdr -bounds))
-        (insert (xahsite-filepath-to-href-value -newPath (or (buffer-file-name) default-directory)))))))
-
 (defun xah-move-image-file (*dir-name *file-name)
   "move image file at
 ~/Downloads/xx.jpg
