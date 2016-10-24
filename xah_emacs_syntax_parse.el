@@ -132,3 +132,17 @@ test cases:
   (interactive "p")
   (progn
     (prin1 (forward-comment *count))))
+
+
+
+;; 2016-10-24
+
+(defun xci ()
+  "DOCSTRING"
+  (interactive)
+  (message "%s" (current-indentation)))
+
+;; (indent-to COLUMN &optional MINIMUM)
+
+;; indent-tabs-mode
+

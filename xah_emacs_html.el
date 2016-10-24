@@ -44,7 +44,7 @@ Add today's date to the “byline” tag of current file, also delete the last o
 Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 WARNING: This command saves buffer if it's a file.
-Version 2016-07-30"
+Version 2016-10-23"
   (interactive)
   (let (-p1 -p2 -num -bufferTextOrig)
     (push-mark)
@@ -99,8 +99,15 @@ Version 2016-07-30"
                 (copy-file -fname -backup-name t)
                 (message (concat "Backup saved at: " -backup-name)))))
 
-        (message "%s\nchanged to\n%s" -bufferTextOrig (buffer-string )))
-      )))
+        (save-buffer )
+
+        (when (string-equal system-type "gnu/linux")
+          (let ( (process-connection-type nil))
+            (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
+          ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
+          )
+
+        (message "%s\nchanged to\n%s" -bufferTextOrig (buffer-string ))))))
 
 (defun xahsite-update-page-tag ()
   "Update HTML page navigation tags.

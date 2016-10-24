@@ -102,7 +102,6 @@
 (blink-cursor-mode 0)
 (setq shift-select-mode nil)
 
-(set-default 'tab-always-indent 'complete)
 
 (global-auto-revert-mode 1)
 
@@ -209,7 +208,12 @@
   (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
   )
 
+
+;; indentation, tab
+
 (electric-indent-mode 0) ; default is on in emacs 24.4
+
+(set-default 'tab-always-indent 'complete)
 
 ;; no mixed tabs and spaces
 (setq-default indent-tabs-mode nil) ; gnu emacs 23.1, 24.4.1 default is t

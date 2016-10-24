@@ -32,6 +32,11 @@
 
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
+;; (define-key key-translation-map (kbd "<delete>") (kbd "C-c C-c"))
+
+;; (setq xah-major-mode-lead-key (kbd "C-t"))
+(setq xah-major-mode-lead-key (kbd "<delete>"))
+
 ;; (current-input-mode)
 ;; (t nil t 7)
 
@@ -41,9 +46,6 @@
 ;;    (nth 1 x)
 ;;    (nth 2 x)
 ;;    27))
-
-;; (setq xah-major-mode-lead-key (kbd "C-t"))
-(setq xah-major-mode-lead-key (kbd "<delete>"))
 
 (progn
   (define-key xah-help-keymap (kbd "2") 'xah-lookup-google)
