@@ -39,62 +39,32 @@ To solve this problem, when your code only knows the relative path of another fi
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-get-fullpath ""))
 
-(add-to-list 'load-path "~/git/xah-get-thing-or-selection/")
-(load "xah-get-thing")
-
-(add-to-list 'load-path "~/git/xah-replace-pairs/")
-(load "xah-replace-pairs")
-
-(add-to-list 'load-path "~/git/xeu_elisp_util.el/")
-(load "xeu_elisp_util")
-
-(add-to-list 'load-path "~/git/xah-fly-keys/")
-
-(add-to-list 'load-path "~/git/xah-elisp-mode/")
-(load "xah-elisp-mode")
-
-(add-to-list 'load-path "~/git/xah-clojure-mode/")
-(load "xah-clojure-mode")
+(load "~/git/xah-get-thing-or-selection/xah-get-thing")
+(load "~/git/xah-replace-pairs/xah-replace-pairs")
+(load "~/git/xeu_elisp_util.el/xeu_elisp_util")
+(load "/home/xah/git/xah-fly-keys/xah-fly-keys.el")
+(load "~/git/xah-elisp-mode/xah-elisp-mode")
+(load "~/git/xah-clojure-mode/xah-clojure-mode")
+(load "~/git/xah-css-mode/xah-css-mode")
+(load "~/git/xah-find/xah-find")
+(load "~/git/xah-insert-random-id.el/xah-insert-random-id")
 
 ;; (add-to-list 'load-path "~/git/xah-comment.el/")
-(add-to-list 'load-path "~/git/xah-css-mode/")
-(load "xah-css-mode")
-
-(add-to-list 'load-path "~/git/xah-find/")
-(load "xah-find")
 
 ;; (add-to-list 'load-path "~/git/xah-html6-mode.el/")
 
-(add-to-list 'load-path "~/git/xah-html-mode.el/")
-(load "xah-html-mode")
-
-(add-to-list 'load-path "~/git/xah-insert-random-id.el/")
-(load "xah-insert-random-id")
-
-(add-to-list 'load-path "~/git/xah-js-mode.el/")
-(load "xah-js-mode")
-
-(add-to-list 'load-path "~/git/xah-php-mode.el/")
-(load "xah-php-mode")
-
-;; (add-to-list 'load-path "~/git/xbbcode-mode.el/")
-;; (load "xbbcode-mode")
-
-(add-to-list 'load-path "~/git/xub-mode.el/")
-
-(add-to-list 'load-path "~/git/lookup-word-on-internet/")
-(load "xah-lookup")
+(load "~/git/xah-html-mode.el/xah-html-mode")
+(load "~/git/xah-js-mode.el/xah-js-mode")
+(load "~/git/xah-php-mode.el/xah-php-mode")
+(load "~/git/xbbcode-mode.el/xbbcode-mode")
+(load "/home/xah/git/xub-mode.el/xub-mode.el")
+(load "~/git/lookup-word-on-internet/xah-lookup")
+(load "~/git/xah-math-input/xah-math-input")
 
 (add-to-list 'load-path "~/git/xahk-mode.el/")
 (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
 
-(add-to-list 'load-path "~/git/xah-math-input/")
-(load "xah-math-input")
-
-
 ;; (load "xah-comment")
-
-(defalias 'bbcode-mode 'xbbcode-mode)
 
 (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
 
@@ -121,6 +91,9 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; (load (xah-get-fullpath "xah_emacs_abbr"))
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
+
+(load "/home/xah/Dropbox/xlsl-mode.el")
+
 
 (load (xah-get-fullpath "xah_emacs_generic"))
 (load (xah-get-fullpath "xah_emacs_mouse_commands"))

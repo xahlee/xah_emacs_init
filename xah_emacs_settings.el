@@ -39,7 +39,6 @@
 
 (setq initial-major-mode 'fundamental-mode)
 
-(setq abbrev-file-name "~/git/xah_emacs_init/xah_emacs_abbr.el" )
 (set-default 'abbrev-mode t)
 
 (setq search-whitespace-regexp "[-_ \n]")
@@ -70,19 +69,19 @@
 
 
 (progn
-;; dired
+  ;; dired
   (require 'dired-x)
 
   ;; make dired suggest target dir (for copy, move, …) that's in the other dired pane
   (setq dired-dwim-target t)
 
-  ;; make dired list not inclued 「.」 and 「..」, and use metric prefix for file size
-  ;; (setq dired-listing-switches "-Al --si --time-style long-iso") ;; problem on mac os x as of 2016-03-24. error "listing directory failed but `access-file' worked", probably because os x ls's lack switch
+  ;; make dired not include 「.」 and 「..」, and use metric prefix for file size
+  (when (string-equal system-type "gnu/linux")
+    (setq dired-listing-switches "-Al --si --time-style long-iso"))
 
   ;; make dired allow deleting/copy whole dir
   (setq dired-recursive-copies (quote always))
-  (setq dired-recursive-deletes (quote top))
-  )
+  (setq dired-recursive-deletes (quote top)))
 
 
 (setq x-select-enable-clipboard-manager nil)

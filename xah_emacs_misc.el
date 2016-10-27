@@ -865,3 +865,16 @@ version 2016-06-12"
   (let ((marker (get-text-property (point) 'target)))
     (pop-to-buffer (marker-buffer marker))
     (setf (point) (marker-position marker))))
+
+
+(defun xah-abbrev-h-f ()
+  "Abbrev hook function, used for `define-abbrev'.
+ Our use is to prevent inserting the char that triggered expansion. Experimental.
+ the “ahf” stand for abbrev hook function.
+Version 2016-10-24"
+  t)
+
+(put 'xah-abbrev-h-f 'no-self-insert t)
+
+;; (abbrev-table-put global-abbrev-table :regexp "\\([_-0-9A-Za-z]+\\)")
+
