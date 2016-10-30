@@ -265,45 +265,97 @@ Requires a python script. See code."
       (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)))
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t))))
 
+;; (defun xah-move-image-file (*dir-name *file-name)
+;;   "move image file at
+;; ~/Downloads/xx.jpg
+;; to current dir of subdir i
+;; and rename file to current line's text.
+
+;; if xx.jpg doesn't exit, try xx.png. The dirs to try are
+;;  ~/Downloads/
+;;  ~/Pictures/
+;;  /tmp
+
+;; Version 2016-10-08"
+;;   (interactive "DMove xx img to dir:
+;; sNew file name:")
+;;   (let (
+;;         -from-path
+;;         -to-path )
+;;     (setq -from-path
+;;           (cond
+;;            ((file-exists-p (expand-file-name "~/Downloads/xx.jpg"))
+;;             (expand-file-name "~/Downloads/xx.jpg"))
+;;            ((file-exists-p (expand-file-name "~/Downloads/xx.JPG"))
+;;             (expand-file-name "~/Downloads/xx.JPG"))
+;;            ((file-exists-p (expand-file-name "~/Downloads/xx.png"))
+;;             (expand-file-name "~/Downloads/xx.png"))
+;;            ((file-exists-p (expand-file-name "~/Pictures/xx.jpg"))
+;;             (expand-file-name "~/Pictures/xx.jpg"))
+;;            ((file-exists-p (expand-file-name "~/Pictures/xx.png"))
+;;             (expand-file-name "~/Pictures/xx.png"))
+;;            ((file-exists-p (expand-file-name "~/Pictures/xx.gif"))
+;;             (expand-file-name "~/Pictures/gif.png"))
+;;            ((file-exists-p (expand-file-name "~/Downloads/xx.gif"))
+;;             (expand-file-name "~/Downloads/xx.gif"))
+
+;;            ((file-exists-p "/tmp/xx.jpg")
+;;             "/tmp/xx.jpg")
+;;            ((file-exists-p "/tmp/xx.png")
+;;             "/tmp/xx.png")
+;;            (t (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))))
+;;     (setq -to-path (concat
+;;                     (file-name-as-directory *dir-name )
+;;                     *file-name "."
+;;                     (downcase (file-name-extension -from-path ))))
+;;     (if (file-exists-p -to-path)
+;;         (message "move to path exist: %s" -to-path)
+;;       (progn
+;;         (rename-file -from-path -to-path)
+;;         (find-file -to-path )
+;;         (message "move to path: %s" -to-path)))))
+
 (defun xah-move-image-file (*dir-name *file-name)
   "move image file at
-~/Downloads/xx.jpg
-to current dir of subdir i
-and rename file to current line's text.
+~/Downloads/
+or
+~/Pictures/
 
-if xx.jpg doesn't exit, try xx.png. The dirs to try are
- ~/Downloads/
- ~/Pictures/
- /tmp
+named any of
+x.jpg
+x1.jpg
+x2.jpg
+etc.
+or with png extension.
 
-Version 2016-10-08"
-  (interactive "DMove xx img to dir:
+to a different dir and rename, prompting user.
+
+Version 2016-10-30"
+  (interactive "DMove x img to dir:
 sNew file name:")
   (let (
         -from-path
-        -to-path )
-    (setq -from-path
-          (cond
-           ((file-exists-p (expand-file-name "~/Downloads/xx.jpg"))
-            (expand-file-name "~/Downloads/xx.jpg"))
-           ((file-exists-p (expand-file-name "~/Downloads/xx.JPG"))
-            (expand-file-name "~/Downloads/xx.JPG"))
-           ((file-exists-p (expand-file-name "~/Downloads/xx.png"))
-            (expand-file-name "~/Downloads/xx.png"))
-           ((file-exists-p (expand-file-name "~/Pictures/xx.jpg"))
-            (expand-file-name "~/Pictures/xx.jpg"))
-           ((file-exists-p (expand-file-name "~/Pictures/xx.png"))
-            (expand-file-name "~/Pictures/xx.png"))
-           ((file-exists-p (expand-file-name "~/Pictures/xx.gif"))
-            (expand-file-name "~/Pictures/gif.png"))
-           ((file-exists-p (expand-file-name "~/Downloads/xx.gif"))
-            (expand-file-name "~/Downloads/xx.gif"))
+        -to-path
+        (-dirs '( "~/Downloads/" "~/Pictures/" "/tmp" ))
+        (-names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" ))
+        (-exts '("jpg" "png" "gif" "JPG" "PNG" "GIF" )))
 
-           ((file-exists-p "/tmp/xx.jpg")
-            "/tmp/xx.jpg")
-           ((file-exists-p "/tmp/xx.png")
-            "/tmp/xx.png")
-           (t (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))))
+    (setq -from-path
+          (let (-path)
+            (catch 'x42566
+              (dolist (-x-dir -dirs )
+                (dolist (-x-name -names )
+                  (dolist (-x-ext -exts )
+                    (setq -path (expand-file-name (concat -x-dir -x-name "." -x-ext)))
+                    (when (file-exists-p -path)
+                      (progn
+                        (throw 'x42566 -path))))))
+              nil
+              )))
+
+    (when (null -from-path)
+      (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))
+
     (setq -to-path (concat
                     (file-name-as-directory *dir-name )
                     *file-name "."

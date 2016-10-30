@@ -56,6 +56,8 @@
 ;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
 (setq x-selection-timeout 300)
 
+(setq time-stamp-active nil)
+
 (progn
   ;; seems pointless to warn. There's always undo.
   (put 'narrow-to-region 'disabled nil)
@@ -77,7 +79,7 @@
 
   ;; make dired not include 「.」 and 「..」, and use metric prefix for file size
   (when (string-equal system-type "gnu/linux")
-    (setq dired-listing-switches "-Al --si --time-style long-iso"))
+    (setq dired-listing-switches "-Al --time-style long-iso"))
 
   ;; make dired allow deleting/copy whole dir
   (setq dired-recursive-copies (quote always))
@@ -187,25 +189,30 @@
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
 
-(progn
-  ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.
-  (icomplete-mode 1)
-  ;; make icomplete prettier
-  (setq icomplete-separator " ")
-  ;; (setq icomplete-separator "\n")
-  (setq icomplete-hide-common-prefix nil)
-  (setq icomplete-in-buffer t))
+;; (progn
+;;   ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.
+;;   (icomplete-mode 1)
+;;   ;; make icomplete prettier
+;;   (setq icomplete-separator " ")
+;;   ;; (setq icomplete-separator "\n")
+;;   (setq icomplete-hide-common-prefix nil)
+;;   (setq icomplete-in-buffer t))
+
+;; (progn
+;;   ;; make buffer switch command do suggestions, also for find-file command
+;;   (ido-mode 1)
+;;   ;; (ido-everywhere 1)
+;;   (setq ido-separator "\n")
+;;   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
+;;   (setq ido-default-file-method 'selected-window)
+;;   (setq ido-default-buffer-method 'selected-window)
+;;   (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
+;;   )
 
 (progn
-  ;; make buffer switch command do suggestions, also for find-file command
-  (ido-mode 1)
-  ;; (ido-everywhere 1)
-  (setq ido-separator "\n")
-  (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
-  (setq ido-default-file-method 'selected-window)
-  (setq ido-default-buffer-method 'selected-window)
-  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
+  (ivy-mode 1)
   )
+
 
 
 ;; indentation, tab
