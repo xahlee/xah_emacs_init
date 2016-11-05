@@ -39,8 +39,6 @@
 
 (setq initial-major-mode 'fundamental-mode)
 
-(set-default 'abbrev-mode t)
-
 (setq search-whitespace-regexp "[-_ \n]")
 
 (setq make-backup-files nil)
@@ -54,7 +52,7 @@
 ;; 2015-07-04 bug of pasting in emacs.
 ;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
 ;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
-(setq x-selection-timeout 300)
+;; (setq x-selection-timeout 300)
 
 (setq time-stamp-active nil)
 
@@ -91,8 +89,8 @@
 ;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
 ;; ;; (setq ediff-split-window-function 'split-window-horizontally)
 
-(setq mouse-yank-at-point t)
-(setq mouse-wheel-progressive-speed t)
+;; (setq mouse-yank-at-point t)
+;; (setq mouse-wheel-progressive-speed t)
 
 
 (require 'recentf)
@@ -189,30 +187,29 @@
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
 
-;; (progn
-;;   ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.
-;;   (icomplete-mode 1)
-;;   ;; make icomplete prettier
-;;   (setq icomplete-separator " ")
-;;   ;; (setq icomplete-separator "\n")
-;;   (setq icomplete-hide-common-prefix nil)
-;;   (setq icomplete-in-buffer t))
-
-;; (progn
-;;   ;; make buffer switch command do suggestions, also for find-file command
-;;   (ido-mode 1)
-;;   ;; (ido-everywhere 1)
-;;   (setq ido-separator "\n")
-;;   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
-;;   (setq ido-default-file-method 'selected-window)
-;;   (setq ido-default-buffer-method 'selected-window)
-;;   (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
-;;   )
+(progn
+  ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.
+  (icomplete-mode 1)
+  ;; make icomplete prettier
+  (setq icomplete-separator " ")
+  ;; (setq icomplete-separator "\n")
+  (setq icomplete-hide-common-prefix nil)
+  (setq icomplete-in-buffer t))
 
 (progn
-  (ivy-mode 1)
+  ;; make buffer switch command do suggestions, also for find-file command
+  (ido-mode 1)
+  ;; (ido-everywhere 1)
+  (setq ido-separator "\n")
+  (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
+  (setq ido-default-file-method 'selected-window)
+  (setq ido-default-buffer-method 'selected-window)
+  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
   )
 
+;; (progn
+;;   (ivy-mode 1)
+;;   )
 
 
 ;; indentation, tab

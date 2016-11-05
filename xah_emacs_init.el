@@ -5,6 +5,9 @@
 (require 'package)
 (package-initialize)
 
+
+(require 'ido)
+
 
 ; loading custom commands and functions
 
@@ -90,7 +93,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_keybinding_functions"))
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
 
-;; (load (xah-get-fullpath "xah_emacs_abbr"))
+(load (xah-get-fullpath "xah_emacs_abbr"))
 
 
 (load (xah-get-fullpath "xah_emacs_generic"))

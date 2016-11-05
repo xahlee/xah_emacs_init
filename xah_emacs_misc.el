@@ -356,13 +356,15 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 
 This is Xah Lee's personal command assuming a particular dir structure.
 
-Version 2016-09-25"
+Version 2016-11-02"
   (interactive)
   (let (
         -p1 -p2
         -inputStr
         -file
         -title
+        -temp
+        -urlFragmentPart
         (-pathDelimitors "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
         )
 
@@ -377,7 +379,9 @@ Version 2016-09-25"
         (setq -p2 (point))))
 
     (setq -inputStr (buffer-substring-no-properties -p1 -p2))
-    (setq -file (xahsite-web-path-to-filepath -inputStr))
+    (setq -temp (split-uri-hashmark -inputStr))
+    (setq -file (xahsite-web-path-to-filepath (aref -temp 0)))
+    (setq -urlFragmentPart (aref -temp 1))
 
     (if (file-exists-p -file)
         (progn
@@ -389,7 +393,7 @@ Version 2016-09-25"
           (setq -title (xah-replace-pairs-in-string -title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
           (delete-region -p1 -p2)
-          (insert -title "\n" (xahsite-filepath-to-url -file)))
+          (insert -title "\n" (xahsite-filepath-to-url -file) -urlFragmentPart))
       (progn (user-error "file doesn't exist.")))))
 
 (defun xah-copy-url-current-file ()
@@ -865,16 +869,3 @@ version 2016-06-12"
   (let ((marker (get-text-property (point) 'target)))
     (pop-to-buffer (marker-buffer marker))
     (setf (point) (marker-position marker))))
-
-
-(defun xah-abbrev-h-f ()
-  "Abbrev hook function, used for `define-abbrev'.
- Our use is to prevent inserting the char that triggered expansion. Experimental.
- the “ahf” stand for abbrev hook function.
-Version 2016-10-24"
-  t)
-
-(put 'xah-abbrev-h-f 'no-self-insert t)
-
-;; (abbrev-table-put global-abbrev-table :regexp "\\([_-0-9A-Za-z]+\\)")
-

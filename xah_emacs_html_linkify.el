@@ -149,36 +149,6 @@ becomes
     (delete-region p7 p8)
     (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url -url) "\">✍</a></div>"))))
 
-;; (defun xah-site-topic-linkify ()
-;;   "Make word at cursor point into a HTML link to xah site
-;; 2015-07-12 incomplete
-;; python
-;; becomes
-;; <a href=\"../perl-python/index.html\">Xah {Python, Perl, Ruby} Tutorial</a>
-;; The relative link may be different.
-;; Version 2015-07-12"
-;;   (interactive)
-;;   (let (
-;;         -p1
-;;         -p2
-;;         -input-str
-;;         -word
-;;         )
-
-;;     (progn
-;;       (progn
-;;         (setq -boundary (xah-get-thing-or-selection 'word))
-;;         (setq
-;;          -input-str (elt -boundary 0)
-;;          -p1 (elt -boundary 1)
-;;          -p2 (elt -boundary 2))
-;;         (setq -word (downcase -inputWord)))
-
-;;       (progn
-;;         (cond
-;;          (CONDITION  BODY)
-;;          (CONDITION BODY))))))
-
 (defun youporn-search-linkify ()
   "Make the current line into a YouPorn.com link.
 For example, if the cursor is on the line:
@@ -606,13 +576,13 @@ file:///home/xah/web/xahlee_info/node_api/process.html#process_process_execpath
 <span class=\"ref\"><a href=\"../node_api/process.html#process_process_execpath\">Node doc process.execpath</a></span>
 
 linkText
-"
+Version 2016-10-31"
   (interactive)
   (let* (
-         (-bds (xah-get-thing-or-selection 'filepath))
-         (-inputStr (elt -bds 0))
-         (-p1 (aref -bds 1))
-         (-p2 (aref -bds 2))
+         (-bds (xah-get-bounds-of-thing-or-region 'filepath))
+         (-p1 (car -bds))
+         (-p2 (cdr -bds))
+         (-inputStr (buffer-substring-no-properties -p1 -p2))
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
@@ -641,18 +611,20 @@ linkText
 
 (defun xah-javascript-linkify ()
   "Make the path under cursor into a HTML link.
- ⁖ <script src=\"xyz.js\"></script>"
+ ⁖ <script src=\"xyz.js\"></script>
+Version 2016-10-31"
   (interactive)
   (let* (
-         (-bds (xah-get-thing-or-selection 'filepath))
-         (-inputStr (elt -bds 0))
-         (-p1 (aref -bds 1))
-         (-p2 (aref -bds 2))
-         -fPath
-         )
-    (setq -fPath (file-relative-name -inputStr))
+         (-bds (xah-get-bounds-of-thing-or-region 'filepath))
+         (-p1 (car -bds))
+         (-p2 (cdr -bds))
+         (-inputStr (buffer-substring-no-properties -p1 -p2))
+         (-src
+          (if (string-match "^http" -inputStr )
+              -inputStr
+            (file-relative-name -inputStr))))
     (delete-region -p1 -p2)
-    (insert (format "<script defer src=\"%s\"></script>" -fPath))))
+    (insert (format "<script defer src=\"%s\"></script>" -src))))
 
 (defun xah-audio-file-linkify ()
   "Make the path under cursor into a HTML link.
@@ -661,15 +633,16 @@ becomes
 <audio src=\"xyz.mp3\"></audio>"
   (interactive)
   (let* (
-         (-bds (xah-get-thing-or-selection 'filepath))
-         (-inputStr (elt -bds 0))
-         (-p1 (aref -bds 1))
-         (-p2 (aref -bds 2)))
+         (-bds (xah-get-bounds-of-thing-or-region 'filepath))
+         (-p1 (car -bds))
+         (-p2 (cdr -bds))
+         (-inputStr (buffer-substring-no-properties -p1 -p2))
+         (-src
+          (if (string-match "^http" -inputStr )
+              -inputStr
+            (file-relative-name -inputStr))))
     (delete-region -p1 -p2)
-    (insert (format "<audio src=\"%s\" controls></audio>"
-                    (if (string-match "^http" -inputStr)
-                        -inputStr
-                      (file-relative-name -inputStr))))))
+    (insert (format "<audio src=\"%s\" controls></audio>" -src))))
 
 (defun xah-video-file-linkify ()
   "Make the path under cursor into a HTML link.
@@ -683,26 +656,25 @@ Version 2016-10-12"
          (-p1 (car -bds))
          (-p2 (cdr -bds))
          (-inputStr (buffer-substring-no-properties -p1 -p2 ))
-         (-fPath (file-relative-name -inputStr)))
+         (-src (if (string-match "^http" -inputStr ) -inputStr (file-relative-name -inputStr))))
     (delete-region -p1 -p2)
-    (insert (format "<video src=\"%s\" controls loop autoplay></video>" -fPath))))
+    (insert (format "<video src=\"%s\" controls loop autoplay></video>" -src))))
 
 (defun xah-css-linkify ()
   "Make the path under cursor into a HTML link.
  e.g. /home/xah/web/xahlee_org/lit.css
 becomes
-<link rel=\"stylesheet\" href=\"../lit.css\" />"
+<link rel=\"stylesheet\" href=\"../lit.css\" />
+Version 2016-10-31"
   (interactive)
   (let* (
-         (-bds (xah-get-thing-or-selection 'filepath))
-         (-inputStr (elt -bds 0))
-         (-p1 (aref -bds 1))
-         (-p2 (aref -bds 2))
-         -fPath
-         )
-    (setq -fPath (file-relative-name -inputStr))
+         (-bds (xah-get-bounds-of-thing-or-region 'filepath))
+         (-p1 (car -bds))
+         (-p2 (cdr -bds))
+         (-inputStr (buffer-substring-no-properties -p1 -p2))
+         (-src (if (string-match "^http" -inputStr ) -inputStr (file-relative-name -inputStr))))
     (delete-region -p1 -p2)
-    (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" -fPath))))
+    (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" -src))))
 
 (defun xah-curve-linkify ()
   "Make the current word or text selection into a HTML link.
@@ -757,59 +729,53 @@ They will be changed into a HTML link in various formats, depending on the input
 
 If there is text selection, use it as input."
   (interactive)
-  (let ( -p1 -p2 -path )
-    (if (use-region-p)
-        (setq -p1 (region-beginning) -p2 (region-end))
-      (let (-p0)
-        (setq -p0 (point))
-        ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-        (skip-chars-backward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-        (setq -p1 (point))
-        (goto-char -p0)
-        (skip-chars-forward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-        (setq -p2 (point))))
-
-    (setq -path (buffer-substring-no-properties -p1 -p2))
-
+  (let* (
+         (-bds (xah-get-bounds-of-thing-or-region 'glyphs))
+         (-p1 (car -bds))
+         (-p2 (cdr -bds))
+         (-input (buffer-substring-no-properties -p1 -p2)))
+    ;; (if (string-match "%" -input )
+    ;;     (decode-coding-string (url-unhex-string "https://mysticsiva.wordpress.com/2016/11/04/%E3%82%AD%E3%83%BC%E3%82%AD%E3%83%A3%E3%83%83%E3%83%97%E4%BA%A4%E6%8F%9B3/") 'utf-8)
+    ;;   -input)
     (cond
-     ((string-match-p "javascript_ecma-262_5.1_2011" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "java8_doc" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "godoc" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "javascript_es6" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "html_whatwg" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "html5_whatwg" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "css_2.1_spec" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "css_3_color_spec" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "clojure-doc-1.8" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "python_doc_2" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "python_doc_3" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "dom-whatwg/DOM_Standard.html" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "REC-SVG11-20110816" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "css_transitions/CSS_Transitions.html" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "php-doc/" -path) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" -path) (xah-blogger-linkify))
-     ((string-match-p "www\.amazon\.com/" -path) (xah-amazon-linkify))
-     ((string-match-p "//amzn\.to/" -path) (xah-amazon-linkify))
-     ((string-match-p "www\.youtube\.com/watch" -path) (xah-youtube-linkify))
-     ((string-match-p "/emacs_manual/" -path) (xah-html-emacs-ref-linkify))
-     ((string-match-p "/node_api/" -path) (xah-nodejs-ref-linkify))
-     ((string-match-p "\\.js\\'" -path) (xah-javascript-linkify))
-     ((string-match-p "\\.css\\'" -path) (xah-css-linkify))
-     ((string-match-p "\\.mp3\\'" -path) (xah-audio-file-linkify))
-     ((string-match-p "\\.ogg\\'" -path) (xah-audio-file-linkify))
-     ((string-match-p "\\.mp4\\'" -path) (xah-video-file-linkify))
-     ((string-match-p "\\.webm\\'" -path) (xah-video-file-linkify))
+     ((string-match-p "javascript_ecma-262_5.1_2011" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "java8_doc" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "godoc" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "javascript_es6" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "html_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "html5_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "css_2.1_spec" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "css_3_color_spec" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "clojure-doc-1.8" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "python_doc_2" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "python_doc_3" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "dom-whatwg/DOM_Standard.html" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "REC-SVG11-20110816" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "css_transitions/CSS_Transitions.html" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "php-doc/" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" -input) (xah-blogger-linkify))
+     ((string-match-p "www\.amazon\.com/" -input) (xah-amazon-linkify))
+     ((string-match-p "//amzn\.to/" -input) (xah-amazon-linkify))
+     ((string-match-p "www\.youtube\.com/watch" -input) (xah-youtube-linkify))
+     ((string-match-p "/emacs_manual/" -input) (xah-html-emacs-ref-linkify))
+     ((string-match-p "/node_api/" -input) (xah-nodejs-ref-linkify))
+     ((string-match-p "\\.js\\'" -input) (xah-javascript-linkify))
+     ((string-match-p "\\.css\\'" -input) (xah-css-linkify))
+     ((string-match-p "\\.mp3\\'" -input) (xah-audio-file-linkify))
+     ((string-match-p "\\.ogg\\'" -input) (xah-audio-file-linkify))
+     ((string-match-p "\\.mp4\\'" -input) (xah-video-file-linkify))
+     ((string-match-p "\\.webm\\'" -input) (xah-video-file-linkify))
 
-     ((xahsite-url-is-xah-website-p -path) (xah-file-linkify -p1 -p2))
-     ((or (string-match-p "wikipedia.org/" -path)
-          (string-match-p "wiktionary.org/" -path))
+     ((xahsite-url-is-xah-website-p -input) (xah-file-linkify -p1 -p2))
+     ((or (string-match-p "wikipedia.org/" -input)
+          (string-match-p "wiktionary.org/" -input))
       (let ((case-fold-search nil))
-        (if (xah-path-ends-in-image-suffix-p -path)
+        (if (xah-path-ends-in-image-suffix-p -input)
             (xah-html-source-url-linkify 0)
           (xah-html-wikipedia-url-linkify ))))
 
-     ((and (string-match-p "\\`https?://" -path)) (xah-html-source-url-linkify 0)) ; generic URL
+     ((and (string-match-p "\\`https?://" -input)) (xah-html-source-url-linkify 0)) ; generic URL
 
-     ((xah-path-ends-in-image-suffix-p -path) (xah-image-file-to-html-figure-tag))
+     ((xah-path-ends-in-image-suffix-p -input) (xah-image-file-to-html-figure-tag))
 
      (t (xah-file-linkify -p1 -p2)))))

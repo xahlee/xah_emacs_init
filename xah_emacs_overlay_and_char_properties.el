@@ -38,22 +38,22 @@
 
 (defun xah-make-overlay-bold-region (*begin *end)
   "make the region bold, using overlay.
-Calls `make-overlay' and `overlay-put'. This:
- (overlay-put (make-overlay *begin *end) 'face 'bold)"
+Version 2016-11-01"
   (interactive "r")
   (progn
     (overlay-put (make-overlay *begin *end) 'face 'bold)
     (setq mark-active nil )))
 
 (defun xah-remove-overlays-region (*begin *end)
-  "Call `remove-overlays' interactively.
-Call (remove-overlays *begin *end)"
+  "Remove overlays.
+Version 2016-11-01"
   (interactive "r")
   (remove-overlays *begin *end))
 
 (defun xah-show-overlay-at-point ()
   "Show the overlay at cursor position (if any).
-Move cursor to begining of first overlay, mark at the overlay's end. And print the overlay object to message buffer."
+Move cursor to begining of first overlay, mark at the overlay's end. And print the overlay object to message buffer.
+Version 2016-11-01"
   (interactive)
   (let ((-overlays (overlays-at (point))))
     (if -overlays
@@ -102,17 +102,19 @@ print the list result."
 
 ;; (add-to-invisibility-spec '(outline . t))
 
-(defun xhide (*begin *end)
-  "DOCSTRING"
+(defun xah-hide-region (*begin *end)
+  "DOCSTRING
+Version 2016-11-01"
   (interactive "r")
   (progn
-    (xah-invisible-region 50 100 t)))
+    (xah-invisible-region 1 100 t)))
 
-(defun xshow (*begin *end)
-  "DOCSTRING"
+(defun xah-show-region (*begin *end)
+  "DOCSTRING
+Version 2016-11-01"
   (interactive "r")
   (progn
-    (xah-invisible-region 50 100 nil)))
+    (xah-invisible-region 1 100 nil)))
 
 ;; Move cursor to the next begin/end position of a overlay, make a text selection of its region.
 

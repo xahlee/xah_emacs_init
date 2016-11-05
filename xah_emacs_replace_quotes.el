@@ -680,40 +680,7 @@ Version 2015-04-12"
                (replace-match (elt -x 1) 'FIXEDCASE 'LITERAL)))
            -useMap))))))
 
-(defun xah-remove-quotes-or-brackets (*begin *end *bracketType)
-  "Remove quotes/brackets in current line or text selection.
 
-When called in lisp program, *begin *end are region begin/end position, *bracketType is a string of a bracket pair. ⁖ \"()\",  \"[]\", etc.
-URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2015-04-12"
-  (interactive
-   (let ((-bracketsList
-          '("()" "{}" "[]" "<>" "“”" "‘’" "‹›" "«»" "「」" "『』" "【】" "〖〗" "〈〉" "《》" "〔〕" "⦅⦆" "〚〛" "⦃⦄" "〈〉" "⦑⦒" "⧼⧽" "⟦⟧" "⟨⟩" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱")))
-     (if (use-region-p)
-         (progn (list
-                 (region-beginning)
-                 (region-end)
-                 (ido-completing-read "Remove:" -bracketsList )))
-       (progn
-         (list
-          (line-beginning-position)
-          (line-end-position)
-          (ido-completing-read "Remove:" -bracketsList ))))))
-  (let* (
-         (-findReplaceMap
-          (vector
-           (vector (char-to-string (elt *bracketType 0)) (char-to-string (elt *bracketType 0)))
-           (vector (char-to-string (elt *bracketType 1)) (char-to-string (elt *bracketType 1))))))
-    (save-excursion
-      (save-restriction
-        (narrow-to-region *begin *end)
-        (let ( (case-fold-search nil))
-          (mapc
-           (lambda (-x)
-             (goto-char (point-min))
-             (while (search-forward (elt -x 0) nil t)
-               (replace-match "" 'FIXEDCASE 'LITERAL)))
-           -findReplaceMap))))))
 
 (defun xah-twitterfy (*begin *end &optional *to-direction)
   "Shorten words for Twitter 140 char limit on current line or selection.
@@ -788,7 +755,6 @@ Version 2016-08-02"
            (if (string= *to-direction 'shorten)
                -shorten-map
              (mapcar (lambda (-pair) (vector (elt -pair 1) (elt -pair 0))) -shorten-map)))
-
           (goto-char (point-min))
           (while (search-forward "  " nil t)
             (replace-match " " 'FIXEDCASE 'LITERAL))
@@ -797,43 +763,137 @@ Version 2016-08-02"
           (while (search-forward "  " nil t)
             (replace-match " " 'FIXEDCASE 'LITERAL)))))))
 
-(defun xah-change-bracket-pairs ( *fromType *toType &optional *begin *end)
+(defun xah-remove-quotes-or-brackets (*begin *end *bracketType)
+  "Remove quotes/brackets in current line or text selection.
+
+When called in lisp program, *begin *end are region begin/end position, *bracketType is a string of a bracket pair. ⁖ \"()\",  \"[]\", etc.
+URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
+Version 2016-11-04"
+  (interactive
+   (list
+    (if (use-region-p) (region-beginning) (line-beginning-position))
+    (if (use-region-p) (region-end) (line-end-position))
+    (ido-completing-read
+     "Replace this:"
+     '("() paren"
+       "{} braces" "[] square"
+       "<> greater"
+       "“” curly quote"
+       "‘’ single"
+       "‹› french"
+       "«» double french"
+       "「」 corner"
+       "『』 double corner"
+       "【】 LENTICULAR"
+       "〖〗 white LENTICULAR"
+       "《》 double angle"
+       "〈〉 angle "
+       "〔〕 TORTOISE"
+       "⦅⦆ white paren"
+       "〚〛 white square"
+       "⦃⦄ white braces"
+       "〈〉"
+       "⦑⦒"
+       "⧼⧽"
+       "⟦⟧ math square"
+       "⟨⟩ math angle"
+       "⟪⟫"
+       "⟮⟯"
+       "⟬⟭"
+       "❛❜"
+       "❝❞"
+       "❨❩"
+       "❪❫"
+       "❴❵"
+       "❬❭"
+       "❮❯"
+       "❰❱"))))
+  (save-excursion
+    (save-restriction
+      (narrow-to-region *begin *end)
+      (let ( (case-fold-search nil))
+        (mapc
+         (lambda (x)
+           (goto-char (point-min))
+           (while (search-forward (char-to-string x)  nil t)
+             (replace-match "" 'FIXEDCASE 'LITERAL)))
+         (substring *bracketType 0 2))))))
+
+(defun xah-change-bracket-pairs ( *fromType *toType *begin *end)
   "Change bracket pairs from one type to another on current line or selection.
 For example, change all parenthesis () to square brackets [].
 
 When called in lisp program, *begin *end are region begin/end position, *fromType or *toType is a string of a bracket pair. ⁖ \"()\",  \"[]\", etc.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2016-07-06"
+Version 2016-11-04"
   (interactive
    (let ((-bracketsList
-          '("()" "{}" "[]" "<>" "“”" "‘’" "‹›" "«»" "「」" "『』" "【】" "〖〗" "〈〉" "《》" "〔〕" "⦅⦆" "〚〛" "⦃⦄" "〈〉" "⦑⦒" "⧼⧽" "⟦⟧" "⟨⟩" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱")))
+          '("() paren"
+            "{} braces" "[] square"
+            "<> greater"
+            "“” curly quote"
+            "‘’ single"
+            "‹› french"
+            "«» double french"
+            "「」 corner"
+            "『』 double corner"
+            "【】 LENTICULAR"
+            "〖〗 white LENTICULAR"
+            "《》 double angle"
+            "〈〉 angle "
+            "〔〕 TORTOISE"
+            "⦅⦆ white paren"
+            "〚〛 white square"
+            "⦃⦄ white braces"
+            "〈〉"
+            "⦑⦒"
+            "⧼⧽"
+            "⟦⟧ math square"
+            "⟨⟩ math angle"
+            "⟪⟫"
+            "⟮⟯"
+            "⟬⟭"
+            "❛❜"
+            "❝❞"
+            "❨❩"
+            "❪❫"
+            "❴❵"
+            "❬❭"
+            "❮❯"
+            "❰❱"
+            "   none"
+            )))
      (list
       (ido-completing-read "Replace this:" -bracketsList )
       (ido-completing-read "To:" -bracketsList )
-      ;; These are done separately here
-      ;; so that command-history will record these expressions
-      ;; rather than the values they had this time.
-      ;; 2016-07-06 am still not sure exactly how they work. note, if you add a else, it won't work
-      (if (use-region-p) (region-beginning))
-      (if (use-region-p) (region-end)))))
+      (if (use-region-p) (region-beginning) nil)
+      (if (use-region-p) (region-end) nil))))
+  (save-excursion
+    (save-restriction
+      (when (null *begin)
+        (setq *begin (line-beginning-position))
+        (setq *end (line-end-position)))
+      (narrow-to-region *begin *end)
+      (let ( (case-fold-search nil)
+             (-fromLeft (substring *fromType 0 1))
+             (-toLeft (if (string-equal (substring *toType 0 1) " ")
+                          (progn "")
+                        (substring *toType 0 1)))
+             (-fromRight (substring *fromType 1 2))
+             (-toRight (if (string-equal (substring *toType 1 2) " ")
+                           (progn "")
+                         (substring *toType 1 2))))
+        (progn
+          (goto-char (point-min))
+          (while (search-forward -fromLeft nil t)
+            (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+            (replace-match -toLeft 'FIXEDCASE 'LITERAL)))
+        (progn
+          (goto-char (point-min))
+          (while (search-forward -fromRight nil t)
+            (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+            (replace-match -toRight 'FIXEDCASE 'LITERAL)))))))
 
-  (if (null *begin) (setq *begin (line-beginning-position)))
-  (if (null *end) (setq *end (line-end-position)))
-
-  (let ((-findReplaceMap
-         (vector
-          (vector (char-to-string (elt *fromType 0)) (char-to-string (elt *toType 0)))
-          (vector (char-to-string (elt *fromType 1)) (char-to-string (elt *toType 1))))))
-    (save-excursion
-      (save-restriction
-        (narrow-to-region *begin *end)
-        (let ( (case-fold-search nil))
-          (mapc
-           (lambda (-x)
-             (goto-char (point-min))
-             (while (search-forward (elt -x 0) nil t)
-               (replace-match (elt -x 1) 'FIXEDCASE 'LITERAL)))
-           -findReplaceMap))))))
 
 (defun xah-corner-bracket→html-i (*begin *end)
        "Replace all 「…」 to <code>…</code> in current text block.

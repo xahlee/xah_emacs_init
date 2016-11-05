@@ -375,8 +375,9 @@ This function is not complete. i.e. it not contain complete url redirects as spe
     ))
 
 (defun xah-remove-uri-fragment (*href-value)
-  "remove URL *href-value fragment, anything after first 「#」 char, including it.
-See also `split-uri-hashmark'"
+  "remove URL *href-value fragment, anything after first 「#」 char, including the #.
+See also `split-uri-hashmark'
+Version 2016-11-02"
   ;; test
   ;; (xah-remove-uri-fragment "a#b") ; "a"
   ;; (xah-remove-uri-fragment "#3")  ; ""
@@ -400,7 +401,8 @@ Examples:
  「4」 ⇒  「4」 「」
  「」 ⇒  「」 「」
 
-See also: `xah-remove-uri-fragment'"
+See also: `xah-remove-uri-fragment'
+Version 2016-11-02"
   ;; test
   ;; (split-uri-hashmark "a#b") ; ["a" "#b"]
   ;; (split-uri-hashmark "#3")  ; ["" "#3"]
