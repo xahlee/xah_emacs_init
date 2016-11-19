@@ -48,7 +48,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load "/home/xah/git/xah-fly-keys/xah-fly-keys.el")
 (load "~/git/xah-elisp-mode/xah-elisp-mode")
 (load "~/git/xah-clojure-mode/xah-clojure-mode")
-(load "~/git/xah-css-mode/xah-css-mode")
 (load "~/git/xah-find/xah-find")
 (load "~/git/xah-insert-random-id.el/xah-insert-random-id")
 
@@ -56,6 +55,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; (add-to-list 'load-path "~/git/xah-html6-mode.el/")
 
+(load "~/git/xah-css-mode/xah-css-mode")
 (load "~/git/xah-html-mode.el/xah-html-mode")
 (load "~/git/xah-js-mode.el/xah-js-mode")
 (load "~/git/xah-php-mode.el/xah-php-mode")

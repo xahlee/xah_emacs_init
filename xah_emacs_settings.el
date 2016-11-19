@@ -138,19 +138,19 @@
 ;;   (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
 ;; )
 
-;; (progn
-;;   ;; use variable-width font for some modes
-;;   (defun xah-use-variable-width-font ()
-;;     "Set current buffer to use variable-width font."
-;;     (variable-pitch-mode 1)
-;;     ;; (text-scale-increase 0.5 )
-;;     )
-;;   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
-;;   )
+(progn
+  ;; use variable-width font for some modes
+  (defun xah-use-variable-width-font ()
+    "Set current buffer to use variable-width font."
+    (variable-pitch-mode 1)
+    ;; (text-scale-increase 0.5 )
+    )
+  (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+  )
 
 (progn ; minibuffer
   (setq enable-recursive-minibuffers t)
@@ -247,19 +247,19 @@
 
 
 
-(progn
- ;; Make whitespace-mode with very basic background coloring for whitespaces.
-  ;; http://ergoemacs.org/emacs/whitespace-mode.html
-  (setq whitespace-style (quote ( spaces tabs newline space-mark tab-mark newline-mark )))
+;; (progn
+;;  ;; Make whitespace-mode with very basic background coloring for whitespaces.
+;;   ;; http://ergoemacs.org/emacs/whitespace-mode.html
+;;   (setq whitespace-style (quote ( spaces tabs newline space-mark tab-mark newline-mark )))
 
-  ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line char and “▷” for tab.
-  (setq whitespace-display-mappings
-        ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
-        '(
-          (space-mark 32 [183] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
-          (newline-mark 10 [182 10]) ; LINE FEED,
-          (tab-mark 9 [9655 9] [92 9]) ; tab
-          )))
+;;   ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line char and “▷” for tab.
+;;   (setq whitespace-display-mappings
+;;         ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
+;;         '(
+;;           (space-mark 32 [183] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+;;           (newline-mark 10 [182 10]) ; LINE FEED,
+;;           (tab-mark 9 [9655 9] [92 9]) ; tab
+;;           )))
 
 
 

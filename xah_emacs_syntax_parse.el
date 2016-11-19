@@ -60,7 +60,7 @@ For example, the following are all 1 sexp.
  ▮\"\"
  ▮\"x\"
 
-scan-sexps will error if encounting on unmatched paren, ⁖
+scan-sexps will error if encounting on unmatched paren, eg
 
  ▮( x
  ▮ x )

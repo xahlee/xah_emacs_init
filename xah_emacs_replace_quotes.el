@@ -766,7 +766,7 @@ Version 2016-08-02"
 (defun xah-remove-quotes-or-brackets (*begin *end *bracketType)
   "Remove quotes/brackets in current line or text selection.
 
-When called in lisp program, *begin *end are region begin/end position, *bracketType is a string of a bracket pair. ⁖ \"()\",  \"[]\", etc.
+When called in lisp program, *begin *end are region begin/end position, *bracketType is a string of a bracket pair. eg \"()\",  \"[]\", etc.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
 Version 2016-11-04"
   (interactive
@@ -823,7 +823,7 @@ Version 2016-11-04"
   "Change bracket pairs from one type to another on current line or selection.
 For example, change all parenthesis () to square brackets [].
 
-When called in lisp program, *begin *end are region begin/end position, *fromType or *toType is a string of a bracket pair. ⁖ \"()\",  \"[]\", etc.
+When called in lisp program, *begin *end are region begin/end position, *fromType or *toType is a string of a bracket pair. eg \"()\",  \"[]\", etc.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
 Version 2016-11-04"
   (interactive
@@ -863,6 +863,27 @@ Version 2016-11-04"
             "❰❱"
             "   none"
             )))
+
+     ;; (let*
+     ;;     ;; 2016-11-06
+     ;;     ;; trying to auto find the replacement bracket by looking at char before or after
+     ;;     ;; problem is, then you need to find the matching bracket for replacement. need more tedious code. abandone for now
+     ;;     (
+     ;;      (-bracketsList '("() paren" "{} braces" "[] square" "<> greater" "“” curly quote" "‘’ single" "‹› french" "«» double french" "「」 corner" "『』 double corner" "【】 LENTICULAR" "〖〗 white LENTICULAR" "《》 double angle" "〈〉 angle " "〔〕 TORTOISE" "⦅⦆ white paren" "〚〛 white square" "⦃⦄ white braces" "〈〉" "⦑⦒" "⧼⧽" "⟦⟧ math square" "⟨⟩ math angle" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱" " none" ))
+
+     ;;      (-leftBrackets (mapcar (lambda (x) (substring x 0 1)) -bracketsList)))
+     ;;   (let ((-charBefore (char-before))
+     ;;         (-charAfter (char-after)))
+     ;;     (or
+     ;;      (catch 'found
+     ;;        (dolist (x -leftBrackets nil)
+     ;;          (when (eq (string-to-char x) -charBefore)
+     ;;            (progn (throw 'found x)))))
+     ;;      (catch 'found
+     ;;        (dolist (x -leftBrackets nil)
+     ;;          (when (eq (string-to-char x) -charAfter)
+     ;;            (progn (throw 'found x))))))))
+
      (list
       (ido-completing-read "Replace this:" -bracketsList )
       (ido-completing-read "To:" -bracketsList )
@@ -966,7 +987,7 @@ version 2015-04-13"
       (message "No change needed."))))
 
 (defun xah-remove-square-brackets (*begin *end)
-  "Delete any text of the form “[‹n›]”, ⁖ [1], [2], … in current text block or selection.
+  "Delete any text of the form “[‹n›]”, eg [1], [2], … in current text block or selection.
 
 For example
  「… announced as Blu-ray Disc [11][12], and …」

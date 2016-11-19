@@ -23,7 +23,7 @@
     (define-key xah-html-mode-no-chord-map (kbd "e") 'xah-make-atom-entry)
     (define-key xah-html-mode-no-chord-map (kbd "h") 'xah-all-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "u") 'xahsite-update-article-timestamp)
-    (define-key xah-html-mode-no-chord-map (kbd "n") 'xah-add-reference-span-tag)
+    (define-key xah-html-mode-no-chord-map (kbd "n") 'xah-insert-reference-span-tag)
     (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
 
     (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)

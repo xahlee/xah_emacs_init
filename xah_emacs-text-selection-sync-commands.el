@@ -47,7 +47,7 @@
 
 (defun xah-select-text-in-bracket-by-syntax-table ()
   "Select text between the nearest brackets.
-⁖  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩."
+eg  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩."
   (interactive)
   (let (pos p1 p2 (parse-sexp-lookup-properties nil)
             (-temp-syn-table (make-syntax-table)))

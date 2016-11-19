@@ -611,7 +611,7 @@ Version 2016-10-31"
 
 (defun xah-javascript-linkify ()
   "Make the path under cursor into a HTML link.
- ⁖ <script src=\"xyz.js\"></script>
+ eg <script src=\"xyz.js\"></script>
 Version 2016-10-31"
   (interactive)
   (let* (
@@ -727,32 +727,41 @@ text can be any of:
 
 They will be changed into a HTML link in various formats, depending on the input.
 
-If there is text selection, use it as input."
+If there is text selection, use it as input.
+Version 2016-11-06"
   (interactive)
-  (let* (
-         (-bds (xah-get-bounds-of-thing-or-region 'glyphs))
-         (-p1 (car -bds))
-         (-p2 (cdr -bds))
-         (-input (buffer-substring-no-properties -p1 -p2)))
+  (let* ( -p1 -p2 -input)
     ;; (if (string-match "%" -input )
     ;;     (decode-coding-string (url-unhex-string "https://mysticsiva.wordpress.com/2016/11/04/%E3%82%AD%E3%83%BC%E3%82%AD%E3%83%A3%E3%83%83%E3%83%97%E4%BA%A4%E6%8F%9B3/") 'utf-8)
     ;;   -input)
+    (if (use-region-p)
+        (setq -p1 (region-beginning) -p2 (region-end))
+      (save-excursion
+        (let (-p0)
+          (setq -p0 (point))
+          ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+          (skip-chars-backward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+          (setq -p1 (point))
+          (goto-char -p0)
+          (skip-chars-forward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+          (setq -p2 (point)))))
+    (setq -input (buffer-substring-no-properties -p1 -p2))
     (cond
-     ((string-match-p "javascript_ecma-262_5.1_2011" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "java8_doc" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "godoc" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "javascript_es6" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "html_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "html5_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "css_2.1_spec" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "css_3_color_spec" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "clojure-doc-1.8" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "python_doc_2" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "python_doc_3" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "dom-whatwg/DOM_Standard.html" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "REC-SVG11-20110816" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "css_transitions/CSS_Transitions.html" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
-     ((string-match-p "php-doc/" -input) (xah-file-linkify -p1 -p2) (xah-add-reference-span-tag))
+     ((string-match-p "javascript_ecma-262_5.1_2011" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "java8_doc" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "godoc" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "javascript_es6" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag)(message "reached" ))
+     ((string-match-p "html_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "html5_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "css_2.1_spec" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "css_3_color_spec" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "clojure-doc-1.8" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "python_doc_2" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "python_doc_3" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "dom-whatwg/DOM_Standard.html" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "REC-SVG11-20110816" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "css_transitions/CSS_Transitions.html" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "php-doc/" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" -input) (xah-blogger-linkify))
      ((string-match-p "www\.amazon\.com/" -input) (xah-amazon-linkify))
      ((string-match-p "//amzn\.to/" -input) (xah-amazon-linkify))

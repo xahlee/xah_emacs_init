@@ -797,7 +797,7 @@ version 2016-06-12"
      ((string-equal system-type "gnu/linux")
       (let ( (process-connection-type nil))
         (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
-      ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
+      ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
       )
      ;; ((string-equal system-type "gnu/linux")
      ;;  (start-process "xahbrowse"

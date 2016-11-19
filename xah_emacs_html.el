@@ -18,9 +18,9 @@
   ;; (forward-char-char 2)
   )
 
-(defun xah-add-reference-span-tag ()
+(defun xah-insert-reference-span-tag ()
   "Add <span class=\"ref\">…</span> tag to current HTML element or text selection.
-Version 2015-08-12"
+Version 2016-11-10"
   (interactive)
   (require 'xah-html-mode)
   (let ( -p1 -p2 )
@@ -34,7 +34,7 @@ Version 2015-08-12"
         (setq -p2 (point))))
     (set-mark -p1)
     (goto-char -p2)
-    (xah-html-add-open-close-tags "span" "ref" -p1 -p2)
+    (xah-html-insert-open-close-tags "span" "ref" -p1 -p2)
     ;; (xah-html-wrap-html-tag "span" "ref")
     ))
 
@@ -104,7 +104,7 @@ Version 2016-10-23"
         (when (string-equal system-type "gnu/linux")
           (let ( (process-connection-type nil))
             (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
-          ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
+          ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
           )
 
         (message "%s\nchanged to\n%s" -bufferTextOrig (buffer-string ))))))
@@ -205,7 +205,7 @@ Version 2016-07-04"
   (font-lock-fontify-buffer))
 
 (defun xah-syntax-color-hsl ()
-  "Syntax color CSS's HSL color spec ⁖ 「hsl(0,90%,41%)」 in current buffer.
+  "Syntax color CSS's HSL color spec eg 「hsl(0,90%,41%)」 in current buffer.
 URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
 Version 2015-06-11"
   (interactive)
