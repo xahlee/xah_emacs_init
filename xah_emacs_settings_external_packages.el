@@ -20,7 +20,7 @@
   (smex-initialize))
 
 (when (fboundp 'xah-math-input-mode)
-  (xah-math-input-mode 1))
+  (global-xah-math-input-mode 1))
 
 (when (fboundp 'keyfreq-mode)
   ;; record command call statistics
@@ -107,5 +107,4 @@
 ;; (when (fboundp 'xah-find-replace-text)
 ;; (setq xah-find-context-char-count-before 0)
 ;; (setq xah-find-context-char-count-after 99) )
-
 

@@ -45,7 +45,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (load "~/git/xah-get-thing-or-selection/xah-get-thing")
 (load "~/git/xah-replace-pairs/xah-replace-pairs")
 (load "~/git/xeu_elisp_util.el/xeu_elisp_util")
-(load "/home/xah/git/xah-fly-keys/xah-fly-keys.el")
+(load "~/git/xah-fly-keys/xah-fly-keys.el")
 (load "~/git/xah-elisp-mode/xah-elisp-mode")
 (load "~/git/xah-clojure-mode/xah-clojure-mode")
 (load "~/git/xah-find/xah-find")
@@ -60,11 +60,11 @@ To solve this problem, when your code only knows the relative path of another fi
 (load "~/git/xah-js-mode.el/xah-js-mode")
 (load "~/git/xah-php-mode.el/xah-php-mode")
 (load "~/git/xbbcode-mode.el/xbbcode-mode")
-(load "/home/xah/git/xub-mode.el/xub-mode.el")
+(load "~/git/xub-mode.el/xub-mode.el")
 (load "~/git/lookup-word-on-internet/xah-lookup")
 (load "~/git/xah-math-input/xah-math-input")
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
-(load "/home/xah/Dropbox/xlsl-mode.el")
+(load "~/Dropbox/xlsl-mode.el")
 
 (add-to-list 'load-path "~/git/xahk-mode.el/")
 (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
@@ -94,7 +94,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
 
 (load (xah-get-fullpath "xah_emacs_abbr"))
-
 
 (load (xah-get-fullpath "xah_emacs_generic"))
 (load (xah-get-fullpath "xah_emacs_mouse_commands"))

@@ -1,5 +1,3 @@
-;;-*-coding: utf-8;-*-
-
 ;; -*- coding: utf-8 -*-
 ;; emacs abbrev def
 ;; 〈Using Emacs Abbrev Mode for Abbreviation〉 http://ergoemacs.org/emacs/emacs_abbrev_mode.html
@@ -57,7 +55,7 @@ Version 2016-10-24"
     ("comm" "communication" )
     ("comp" "computer" )
     ("desc" "description" )
-    ("dev" "development" )
+    ("zdev" "development" )
     ("dict" "dictionary" )
     ("dicts" "dictionaries" )
     ("dir" "directory" )
@@ -70,6 +68,7 @@ Version 2016-10-24"
     ("ex" "example" )
     ("fex" "for example," )
     ("fu" "function" )
+    ("arg" "argument" )
     ("gvn" "government" )
     ("hex" "hexadecimal" )
     ("ia" "interactive" )
@@ -88,7 +87,7 @@ Version 2016-10-24"
     ("pls" "please" )
     ("prof" "professor" )
     ("ref" "reference" )
-    ("ss" "screenshot" )
+    ("scs" "screenshot" )
     ("tb" "trackball" )
     ("techn" "technology" )
     ("trad" "traditional" )
@@ -119,7 +118,6 @@ Version 2016-10-24"
     ("cl" "Common Lisp" )
     ("cs" "computer science" )
     ("ee" "ErgoEmacs" )
-
 
     ("ev" "environment variable" )
     ("evs" "environment variables" )

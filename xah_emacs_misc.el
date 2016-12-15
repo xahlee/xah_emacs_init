@@ -466,6 +466,8 @@ When there is a text selection, act on the region."
         ("img256" . "convert +dither -colors 256 ")
         ("imgBatch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
         ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
+        ("gif to webm" . "avconv -f gif -i cat.gif cat.webm")
+        ("gif to mp4" . "avconv -f gif -i cat.gif cat.mp4")
 
         ("grep" . "grep -r -F \"xxx\" --include='*html' ~/web")
         ("firefox" . "setsid firefox &")
@@ -785,7 +787,6 @@ version 2016-06-12"
           (if current-prefix-arg
               (xahsite-filepath-to-url (buffer-file-name))
             (buffer-file-name)))
-
     (when (buffer-modified-p )
       (xah-clean-whitespace (point-min) (point-max))
       (save-buffer))

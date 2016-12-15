@@ -93,7 +93,7 @@ Other files paths for blogs are:
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
 
-version 2016-09-27"
+version 2016-12-08"
   (interactive)
   (let* (
          -p1 -p2 -p3
@@ -121,17 +121,22 @@ version 2016-09-27"
         ;; (delete-blank-lines)
         (setq -p2 (point))))
 
+    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
     (setq -inputStr
-          (concat
-           "\n"
-           (replace-regexp-in-string
-            " allowfullscreen"
-            " "
-            (string-trim (buffer-substring-no-properties -p1 -p2))
-            'FIXEDCASE 'LITERAL )
-           "\n"
-           ))
-    ;; remove this from iframes from youtube and google map, they are invalid xml
+          ;; converct html boolean attributes to valid xml version. eg from iframes from youtube and google map
+          (with-temp-buffer
+            (insert -inputStr)
+            (goto-char (point-min))
+            (while (search-forward " allowfullscreen" (point-max) 'NOERROR)
+              (replace-match " " ))
+            (goto-char (point-min))
+            (while (search-forward " controls loop autoplay></video>" (point-max) 'NOERROR)
+              (replace-match " controls=\"\" loop=\"\" autoplay=\"\"></video>" ))
+            (goto-char (point-min))
+            (insert "\n")
+            (goto-char (point-max))
+            (insert "\n")
+            (buffer-string)))
 
     (setq -titleText
           (if (string-match "<h3>\\(.+?\\)</h3>" -inputStr)

@@ -20,8 +20,8 @@
  ((string-equal system-type "gnu/linux")
   (progn
 
-    (global-set-key (kbd "<S-mouse-4>") 'xah-backward-block)
-    (global-set-key (kbd "<S-mouse-5>") 'xah-forward-block)
+    (global-set-key (kbd "<S-mouse-4>") 'xah-previous-user-buffer)
+    (global-set-key (kbd "<S-mouse-5>") 'xah-next-user-buffer)
 
     (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
     (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)))

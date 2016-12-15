@@ -680,8 +680,6 @@ Version 2015-04-12"
                (replace-match (elt -x 1) 'FIXEDCASE 'LITERAL)))
            -useMap))))))
 
-
-
 (defun xah-twitterfy (*begin *end &optional *to-direction)
   "Shorten words for Twitter 140 char limit on current line or selection.
 The conversion direction is automatically determined.
@@ -696,7 +694,7 @@ When called in lisp code, *begin *end are region begin/end positions. *to-direct
  'lengthen
 
 URL `http://ergoemacs.org/emacs/elisp_twitterfy.html'
-Version 2016-08-02"
+Version 2016-12-13"
   (interactive
    (list
     (if (use-region-p) (region-beginning) (line-beginning-position))
@@ -730,6 +728,12 @@ Version 2016-08-02"
           [" four " " 4 "]
           [" zero " " 0 "]
           ["hexadecimal " "hex "]
+          ["Emacs: " "#emacs "]
+           ["JavaScript: " "#JavaScript "]
+           ["Python: " "#python "]
+           ["Ruby: " "#ruby "]
+           ["Perl: " "#perl "]
+           ["Emacs Lisp: " "#emacs #lisp "]
           [", " "，"]
           ["..." "…"]
           [". " "。"]
@@ -914,7 +918,6 @@ Version 2016-11-04"
           (while (search-forward -fromRight nil t)
             (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
             (replace-match -toRight 'FIXEDCASE 'LITERAL)))))))
-
 
 (defun xah-corner-bracket→html-i (*begin *end)
        "Replace all 「…」 to <code>…</code> in current text block.

@@ -43,31 +43,32 @@ Version 2016-11-10"
 Add today's date to the “byline” tag of current file, also delete the last one if there are more than one.
 Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
+Also, removes repeated empty lines.
 WARNING: This command saves buffer if it's a file.
-Version 2016-10-23"
+Version 2016-11-23"
   (interactive)
-  (let (-p1 -p2 -num -bufferTextOrig)
+  (save-excursion ; remove empty lines
+    (progn
+      (goto-char (point-min))
+      (while (search-forward-regexp "\n\n\n+" nil "noerror")
+        (replace-match (make-string 2 ?\n)))))
+  (let (-p1 -p2 -num -bufferTextOrig -reportText)
     (push-mark)
     (goto-char 1)
     (when (search-forward "<div class=\"byline\">" nil)
-      (progn
-        ;; set -p1 -p2. they are boundaries of inner text
+      (progn ;; set -p1 -p2. they are boundaries of inner text
         (setq -p1 (point))
         (backward-char 1)
         (search-forward "</div>" )
         (backward-char 6)
-        (setq -p2 (point)))
-
-      (let ((-bylineText (buffer-substring-no-properties -p1 -p2)))
-        (when (> (length -bylineText) 110)
-          (user-error "something's probably wrong. the length for the byline is long: 「%s」" -bylineText )))
-
-      (save-restriction
+        (setq -p2 (point))
+        (let ((-bylineText (buffer-substring-no-properties -p1 -p2)))
+          (when (> (length -bylineText) 110)
+            (user-error "something's probably wrong. the length for the byline is long: 「%s」" -bylineText ))))
+      (save-restriction ; update article timestamp
         (narrow-to-region -p1 -p2)
-
         (setq -bufferTextOrig (buffer-string ))
         (setq -num (count-matches "<time>" (point-min) (point-max)))
-
         (if (equal -num 1)
             (progn
               (goto-char (point-min))
@@ -75,9 +76,7 @@ Version 2016-10-23"
               (insert ". Last updated: ")
               (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
               (when (not (looking-at "\\.")) (insert ".")))
-
-          (progn
-            ;; if there are more than 1 “time” tag, delete the last one
+          (progn ;; if there are more than 1 “time” tag, delete the last one
             (let (-p3 -p4)
               (goto-char (point-max))
               (search-backward "</time>")
@@ -86,28 +85,24 @@ Version 2016-10-23"
               (search-backward "<time>")
               (setq -p3 (point))
               (delete-region -p3 -p4 ))
-
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
             (when (not (looking-at "\\.")) (insert "."))
-            (goto-char (point-max))))
-
-        (let ; backup
-            ((-fname (buffer-file-name)))
-          (if -fname
-              (let ((-backup-name
-                     (concat -fname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
-                (copy-file -fname -backup-name t)
-                (message (concat "Backup saved at: " -backup-name)))))
-
-        (save-buffer )
-
-        (when (string-equal system-type "gnu/linux")
-          (let ( (process-connection-type nil))
-            (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
-          ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
-          )
-
-        (message "%s\nchanged to\n%s" -bufferTextOrig (buffer-string ))))))
+            (goto-char (point-max)))))
+      (let ; backup
+          ((-fname (buffer-file-name)))
+        (if -fname
+            (let ((-backup-name
+                   (concat -fname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
+              (copy-file -fname -backup-name t)
+              (message (concat "Backup saved at: " -backup-name)))))
+      (save-buffer )
+      (message "old date line: 「%s」" -bufferTextOrig)
+      (when ;; open in browser
+          (string-equal system-type "gnu/linux")
+        (let ( (process-connection-type nil))
+          (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
+        ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
+        ))))
 
 (defun xahsite-update-page-tag ()
   "Update HTML page navigation tags.
@@ -140,9 +135,7 @@ words-4.html
               (setq -p2 (point)))))
          (-fileList (split-string (buffer-substring-no-properties -p1 -p2) "\n" t))
          -pageNavStr )
-
     (delete-region -p1 -p2)
-
     ;; generate the page nav string
     (setq -pageNavStr
           (format "<nav class=\"page\">\n%s</nav>"
@@ -154,16 +147,13 @@ words-4.html
                       (setq -i (1+ -i)))
                     -result
                     )))
-
     ;; open each file, insert the page nav string
     (mapc
      (lambda (thisFile)
        (message "%s" thisFile)
        (find-file thisFile)
        (goto-char 1)
-
-       (if
-           (search-forward "<nav class=\"page\">" nil t)
+       (if (search-forward "<nav class=\"page\">" nil t)
            (let (-p3 -p4 )
              (search-backward "<")
              (setq -p3 (point))
@@ -330,7 +320,7 @@ or with png extension.
 
 to a different dir and rename, prompting user.
 
-Version 2016-10-30"
+Version 2016-11-27"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -338,8 +328,7 @@ sNew file name:")
         -to-path
         (-dirs '( "~/Downloads/" "~/Pictures/" "/tmp" ))
         (-names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" ))
-        (-exts '("jpg" "png" "gif" "JPG" "PNG" "GIF" )))
-
+        (-exts '("jpg" "png" "gif" "JPG" "PNG" "GIF" "mp4" )))
     (setq -from-path
           (let (-path)
             (catch 'x42566
@@ -352,10 +341,8 @@ sNew file name:")
                         (throw 'x42566 -path))))))
               nil
               )))
-
     (when (null -from-path)
       (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))
-
     (setq -to-path (concat
                     (file-name-as-directory *dir-name )
                     *file-name "."

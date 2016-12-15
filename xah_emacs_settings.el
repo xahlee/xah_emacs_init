@@ -101,7 +101,6 @@
 (blink-cursor-mode 0)
 (setq shift-select-mode nil)
 
-
 (global-auto-revert-mode 1)
 
 (setq sentence-end-double-space nil )
@@ -158,7 +157,8 @@
   ;; Save minibuffer history
   (savehist-mode 1)
 
-  (setq max-mini-window-height 0.5)
+;; big minibuffer height, for ido to show choices vertically
+(setq max-mini-window-height 0.5)
 
   ;; minibuffer, stop cursor going into prompt
   (customize-set-variable
@@ -197,15 +197,22 @@
   (setq icomplete-in-buffer t))
 
 (progn
+  (require 'ido)
   ;; make buffer switch command do suggestions, also for find-file command
   (ido-mode 1)
   ;; (ido-everywhere 1)
-  (setq ido-separator "\n")
+  (if ; make ido display choices vertically
+      (version< emacs-version "25")
+      (progn
+        (make-local-variable 'ido-separator)
+        (setq ido-separator "\n"))
+    (progn
+      (make-local-variable 'ido-decorations)
+      (setf (nth 2 ido-decorations) "\n")))
   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
-  (setq ido-default-file-method 'selected-window)
-  (setq ido-default-buffer-method 'selected-window)
-  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
-  )
+  (setq ido-default-file-method 'selected-window) ; use current pane for newly opened file
+  (setq ido-default-buffer-method 'selected-window) ; use current pane for newly switched buffer
+  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
 
 ;; (progn
 ;;   (ivy-mode 1)
@@ -264,51 +271,6 @@
 
 
 (setq browse-url-browser-function 'browse-url-firefox)
-
-
-;; 2009-09-29 see http://groups.google.com/group/ergoemacs/msg/9eec3b455cab3ff1 and http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start
-; (and (= emacs-major-version 23) (defun server-ensure-safe-dir (dir) "Noop" t))
-
-
-
-;; (setcdr (assq 'continuation fringe-indicator-alist) '(nil right-curly-arrow))
-
-
-;; (custom-set-variables
-;;   ;; custom-set-variables was added by Custom.
-;;   ;; If you edit it by hand, you could mess it up, so be careful.
-;;   ;; Your init file should contain only one such instance.
-;;   ;; If there is more than one, they won't work right.
-;;  '(abbrev-mode t)
-;;  ;; '(initial-major-mode (quote text-mode))
-;;  ;; '(initial-scratch-message "")
-;;  ;; '(line-number-display-limit-width 500)
-;;  ;; '(mouse-buffer-menu-mode-mult 4)
-;;  ;; '(pov-run-high "+R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640 +i%s")
-;;  ;; '(recentf-exclude (quote ("/ftp")))
-;;  ;; '(recentf-max-menu-items 11)
-;;  ;; '(recentf-max-saved-items 31)
-;;  ;; '(report-emacs-bug-no-confirmation t)
-;;  ;; '(report-emacs-bug-no-explanations t)
-;;  ;; '(scalable-fonts-allowed t)
-;;  ;; '(user-full-name "Xah Lee")
-;;  ;; '(user-mail-address "xah@xahlee.org")
-;;  ;; '(w32shell-add-emacs-to-path t)
-;;  ;; '(w32shell-cygwin-bin "C:\\cygwin\\bin")
-;;  ;; '(w32shell-msys-bin "C:\\msys\\1.0\\bin")
-;;  ;; '(w32shell-shell (quote cygwin))
-;;  ;; '(xlsl-mode-format-style 1)
-;;  ;; '(xlsl-reference-url "http://lslwiki.net/lslwiki/wakka.php?wakka=")
-;; )
-
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(completions-common-part ((t (:inherit default :foreground "gray50"))))
-;;  '(show-paren-match ((((class color) (background light)) (:background "azure2"))))
-;;  )
 
 
 

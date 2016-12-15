@@ -750,7 +750,7 @@ Version 2016-11-06"
      ((string-match-p "javascript_ecma-262_5.1_2011" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "java8_doc" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "godoc" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "javascript_es6" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag)(message "reached" ))
+     ((string-match-p "javascript_es6" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "html_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "html5_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "css_2.1_spec" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
