@@ -1,4 +1,4 @@
-;;-*- coding: utf-8 -*-
+ ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 2013-09-02
 
 (progn

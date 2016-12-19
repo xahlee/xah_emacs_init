@@ -10,23 +10,23 @@ Here's sample result:
 
  <iframe width=\"640\" height=\"480\" src=\"https://www.youtube.com/embed/X7HmltUWXgs?rel=0\" allowfullscreen></iframe>
 
-version 2016-09-23"
+version 2016-12-17"
   (interactive)
-  (let ( -p1 -p2 -inputStr -vid
-             (-youtubeLinkChars "-_?.:/=A-Za-z0-9"))
-    (skip-chars-backward -youtubeLinkChars (min 1 (- (point) 50)))
+  (let ( -p1 -p2 -inputStr -id
+             (-youtubeLinkChars "-_?.:/=&A-Za-z0-9"))
+    (skip-chars-backward -youtubeLinkChars (min 1 (- (point) 100)))
     (setq -p1 (point))
 
-    (skip-chars-forward -youtubeLinkChars (+ -p1 50))
+    (skip-chars-forward -youtubeLinkChars (+ -p1 100))
     (setq -p2 (point))
 
     (setq -inputStr (buffer-substring-no-properties -p1 -p2))
 
     (string-match "v=\\(.\\{11\\}\\)" -inputStr)
-    (setq -vid (match-string 1 -inputStr))
+    (setq -id (match-string 1 -inputStr))
     (delete-region -p1 -p2)
     (insert "\n<figure>\n")
-    (insert (concat "<iframe width=\"640\" height=\"480\" src=\"https://www.youtube.com/embed/" -vid "?rel=0\" allowfullscreen></iframe>"))
+    (insert (concat "<iframe width=\"640\" height=\"480\" src=\"https://www.youtube.com/embed/" -id "?rel=0\" allowfullscreen></iframe>"))
     (insert "\n<figcaption>\n")
     (insert "</figcaption>\n")
     (insert "</figure>\n")
@@ -45,17 +45,17 @@ Here's a example result:
 <iframe src=\"http://embed.redtube.com/?id=25635\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>
 "
   (interactive)
-  (let (-p1 -p2 -inputStr -tmp -vid -fixedurl)
+  (let (-p1 -p2 -inputStr -tmp -id -fixedurl)
     (setq -p1 (line-beginning-position))
     (setq -p2 (line-end-position))
     (setq -inputStr (buffer-substring-no-properties -p1 -p2))
     (setq -tmp (replace-regexp-in-string "http://redtube\\.com/" "" -inputStr))
     (setq -tmp (replace-regexp-in-string "http://www\\.redtube\\.com/" "" -tmp))
     (setq -tmp (replace-regexp-in-string "http://embed\\.redtube\\.com/player/?id=" "" -tmp))
-    (setq -vid -tmp)
+    (setq -id -tmp)
     (setq -fixedurl "http://embed.redtube.com/player/?id=")
 
     (delete-region -p1 -p2)
 
-    (insert (format "<iframe src=\"http://embed.redtube.com/?id=%s\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>" -vid))
+    (insert (format "<iframe src=\"http://embed.redtube.com/?id=%s\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>" -id))
     ))

@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 2012-04-06
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 ;; 〈Emacs Lisp: Updating Atom Webfeed〉 http://ergoemacs.org/emacs/elisp_update_atom.html
@@ -96,7 +96,7 @@ Other files paths for blogs are:
 version 2016-12-08"
   (interactive)
   (let* (
-         -p1 -p2 -p3
+         -p1 -p2 
          -inputStr
          (-currentFpath (buffer-file-name))
          (-atomFilePath
@@ -177,6 +177,5 @@ version 2016-12-08"
     (goto-char 1)
     (search-forward "<entry>" nil t)
     (beginning-of-line)
-    (setq -p3 (point))
     (insert-atom-entry -titleText (xah-new-atom-id-tag) nil -inputStr -altURL)
     (search-backward "</title>")))

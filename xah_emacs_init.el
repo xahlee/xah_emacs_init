@@ -42,6 +42,9 @@ To solve this problem, when your code only knows the relative path of another fi
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-get-fullpath ""))
 
+
+;;; smex.el --- M-x interface with Ido-style fuzzy matching. -*- lexical-binding: t; -*-
+
 (load "~/git/xah-get-thing-or-selection/xah-get-thing")
 (load "~/git/xah-replace-pairs/xah-replace-pairs")
 (load "~/git/xeu_elisp_util.el/xeu_elisp_util")

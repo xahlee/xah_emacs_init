@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; part of Xah Lee's emacs init file.
 ;; 2011-05-28
 ;;   Xah Lee
@@ -11,16 +11,12 @@ When called interactively, *source-file-path is the path of current buffer, and 
 
 When called interactively, the buffer for *dest-file-path is left unsaved and as current.
 
-When called non-interactively, *source-file-path and *dest-file-path should be file full paths. If changes are made to *dest-file-path, it returns t, else nil."
+When called non-interactively, *source-file-path and *dest-file-path should be file full paths. If changes are made to *dest-file-path, it returns t, else nil.
+
+Version 2016-12-19"
   (interactive
-   (let ( p1 p2  )
-     (if (use-region-p)
-         (progn (setq p1 (region-beginning))
-                (setq p2 (region-end)))
-       (progn (setq p1 (line-beginning-position))
-              (setq p2 (line-end-position))))
-     (list (buffer-file-name)
-           (xahsite-href-value-to-filepath (thing-at-point 'filename) (buffer-file-name)))))
+   (list (buffer-file-name)
+         (xahsite-href-value-to-filepath (thing-at-point 'filename) (buffer-file-name))))
   (let ( -title -newHrefValue -buffer )
     (setq -buffer (find-file *dest-file-path ))
     (goto-char 1)
@@ -74,7 +70,8 @@ The related pages are HTML “div.rltd” element, having this form
 <li><a href=\"hunspell_spell_checking.html\">Hunspell Tutorial</a></li>
 <li><a href=\"../emacs/emacs_spell_checker_problems.html\">Emacs Spell Checker Problems</a></li>
 </ul>
-</div>"
+</div>
+2016-12-19"
   (interactive
    (let (bds p1 p2)
      (setq bds
@@ -97,11 +94,10 @@ The related pages are HTML “div.rltd” element, having this form
       (buffer-file-name)
       (mapcar (lambda (-x) (expand-file-name -x (file-name-directory (buffer-file-name)))) (xah-html-extract-url p1 p2)))))
 
-  (let (p3 p4)
-    (mapc
-     (lambda (-y)
-       (xah-add-to-related-links *filePath -y))
-     *destFileList)))
+  (mapc
+   (lambda (-y)
+     (xah-add-to-related-links *filePath -y))
+   *destFileList))
 
 (defun xah-fix-add-alts ()
   "Add the alt attribute to image tags in current file.
@@ -194,13 +190,12 @@ This function is specific to xahlee.org. 2008-05-10."
 
 (defun xah-fix-wrap-img-figure ()
   "Change current buffer's <div class=\"img\"> to <figure> and <p class=\"cpt\"> to <figcaption>.
-version: ancient, 2010 perhaps."
+version: ancient, 2010 perhaps. 2016-12-19"
   (interactive)
 
   (save-excursion
     (let (p1 p2 p3 p4
              -str
-             -changes
              (-changedItems '())
              (-buff (current-buffer)))
 
@@ -326,157 +321,38 @@ When called non-interactively, if *string is non-nil, returns a changed string. 
 
 (defun xah-fix-number-items-block  ()
   "Change “(1)” to “①” etc in current region or text block.
-Also change 「<li>1. 」 to 「<li>① 」."
+Also change 「<li>1. 」 to 「<li>① 」.
+ 2016-12-19"
   (interactive)
   (let* (
-         p1 p2
-         (*setp1p2
-          (save-excursion
-            (if (re-search-backward "\n[ \t]*\n" nil "move")
-                (progn (re-search-forward "\n[ \t]*\n")
-                       (setq p1 (point)))
-              (setq p1 (point)))
-            (if (re-search-forward "\n[ \t]*\n" nil "move")
-                (progn (re-search-backward "\n[ \t]*\n")
-                       (setq p2 (point)))
-              (setq p2 (point)))))
-         (-inputStr (buffer-substring-no-properties p1 p2))
-         (-pairs '(
-                   ["(0)" "⓪"]
-                   ["(1)" "①"]
-                   ["(2)" "②"]
-                   ["(3)" "③"]
-                   ["(4)" "④"]
-                   ["(5)" "⑤"]
-                   ["(6)" "⑥"]
-                   ["(7)" "⑦"]
-                   ["(8)" "⑧"]
-                   ["(9)" "⑨"]
-
-                   ["0. " "⓪ "]
-                   ["1. " "① "]
-                   ["2. " "② "]
-                   ["3. " "③ "]
-                   ["4. " "④ "]
-                   ["5. " "⑤ "]
-                   ["6. " "⑥ "]
-                   ["7. " "⑦ "]
-                   ["8. " "⑧ "]
-                   ["9. " "⑨ "]
-
-                   ["(A)" "Ⓐ"]
-                   ["(B)" "Ⓑ"]
-                   ["(C)" "Ⓒ"]
-                   ["(D)" "Ⓓ"]
-                   ["(E)" "Ⓔ"]
-                   ["(F)" "Ⓕ"]
-                   ["(G)" "Ⓖ"]
-                   ["(H)" "Ⓗ"]
-                   ["(I)" "Ⓘ"]
-                   ["(J)" "Ⓙ"]
-
-                   ["(a)" "ⓐ"]
-                   ["(b)" "ⓑ"]
-                   ["(c)" "ⓒ"]
-                   ["(d)" "ⓓ"]
-                   ["(e)" "ⓔ"]
-                   ["(f)" "ⓕ"]
-                   ["(g)" "ⓖ"]
-                   ["(h)" "ⓗ"]
-                   ["(i)" "ⓘ"]
-                   ["(j)" "ⓙ"]
-                   ))
+         -p1 -p2
+         -inputStr
+         (-pairs
+          '(
+            ["(0)" "⓪"] ["(1)" "①"] ["(2)" "②"] ["(3)" "③"] ["(4)" "④"] ["(5)" "⑤"] ["(6)" "⑥"] ["(7)" "⑦"] ["(8)" "⑧"] ["(9)" "⑨"]
+            ["0. " "⓪ "] ["1. " "① "] ["2. " "② "] ["3. " "③ "] ["4. " "④ "] ["5. " "⑤ "] ["6. " "⑥ "] ["7. " "⑦ "] ["8. " "⑧ "] ["9. " "⑨ "]
+            ["(A)" "Ⓐ"] ["(B)" "Ⓑ"] ["(C)" "Ⓒ"] ["(D)" "Ⓓ"] ["(E)" "Ⓔ"] ["(F)" "Ⓕ"] ["(G)" "Ⓖ"] ["(H)" "Ⓗ"] ["(I)" "Ⓘ"] ["(J)" "Ⓙ"]
+            ["(a)" "ⓐ"] ["(b)" "ⓑ"] ["(c)" "ⓒ"] ["(d)" "ⓓ"] ["(e)" "ⓔ"] ["(f)" "ⓕ"] ["(g)" "ⓖ"] ["(h)" "ⓗ"] ["(i)" "ⓘ"] ["(j)" "ⓙ"]
+            ))
          (case-fold-search nil)
          (case-replace nil))
-    (delete-region p1 p2)
+
+    (save-excursion
+      (if (re-search-backward "\n[ \t]*\n" nil "move")
+          (progn (re-search-forward "\n[ \t]*\n")
+                 (setq -p1 (point)))
+        (setq -p1 (point)))
+      (if (re-search-forward "\n[ \t]*\n" nil "move")
+          (progn (re-search-backward "\n[ \t]*\n")
+                 (setq -p2 (point)))
+        (setq -p2 (point))))
+
+    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
+
+    (delete-region -p1 -p2)
     (insert (xah-replace-pairs-in-string -inputStr -pairs))))
 
 ;; ;; macro to search and fix next occurrence of “alt=""”
 ;; ;; search for alt="", then fix it
 ;; (fset 'xah-fix-img-alt
 ;;    "\363alt=\"\"\C-m\347\347\252\361\344\353\351\C-ci")
-
-(defun xah-add-dstp (*fpath)
-  "Insert a file creation date like
-“<div class=\"dstp\">2008-12.</div>”
-to file at *fpath."
-(let (-buffer)
-    (setq -buffer (find-file *fpath))
-
-    (xah-put-dstp)
-
-;;     (goto-char (point-max))
-;;     (search-backward "<div class=\"cpr\">")
-;;     (insert "<div class=\"dstp\">1997</div>\n")
-
-;;    (save-buffer)
-;;    (kill-buffer -buffer)
-))
-
-(defun xah-put-dstp ()
-  "Insert a file creation date like
-“<div class=\"dstp\">2008-12.</div>”
-in the appropriate footer location of the current XahLee.org HTML file.
-
-This command requires the GetFileInfo command line util in OS X."
-  (interactive)
-  (let (-cmdStr -resultStr -date)
-    (setq -cmdStr (concat "GetFileInfo -d " (buffer-file-name)))
-    (setq -resultStr (shell-command-to-string -cmdStr))
-    (setq -date (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" -resultStr))
-    (goto-char (point-max))
-    (search-backward "<div class=\"cpr\">")
-    (insert "<div class=\"dstp\">" -date "</div>\n")))
-
-(defun xah-insert-dstp ()
-  "Insert the file creation date in this format:
-“<div class=\"dstp\">2008-12</div>”
-at cursor position.
-
-This command requires the GetFileInfo command line util in OS X."
-  (interactive)
-  (let (-cmdStr -resultStr -date)
-    (setq -cmdStr (concat "GetFileInfo -d " (buffer-file-name)))
-    (setq -resultStr (shell-command-to-string -cmdStr))
-    (setq -date (replace-regexp-in-string "\\([0-9][0-9]\\)/\\([0-9][0-9]\\)/\\([0-9][0-9][0-9][0-9]\\) .+\n" "\\3-\\1" -resultStr))
-    (insert "<div class=\"dstp\">" -date "</div>")))
-
-(defun xah-fix-dstp ()
-  "Remove the dstp tag and insert a xahlee at top if not exist.
-e.g. remove
-<div class=\"dstp\">2007-01-06</div>
-at bottom.
-Insert at top
-<p class=\"αuth\"><a rel=\"author\" href=\"http://xahlee.org/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>, 2011-03-03</p>
-"
-  (interactive)
-  (let (-date p1 p2 -p3ins)
-    (goto-char (point-min))
-    (if
-        (search-forward-regexp "<div class=\"dstp\">\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-?[0-9]?[0-9]?\\)</div>" nil t)
-        (progn
-          (setq -date (match-string 1))
-          (setq p1 (line-beginning-position))
-          (setq p2 (line-end-position))
-
-          (goto-char (point-min))
-          (if (search-forward-regexp "<p class=\"αuth\"><a rel=\"author\" href=\"\\([^/]+?\\)/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>" nil t)
-              (progn
-                (kill-new -date)
-                (delete-region p1 p2)
-                (message "“<p>Xah Lee, ” exits. dstp is: %s. Copied to clipboard." -date))
-            (progn
-              (goto-char (point-min))
-              (if
-                  (search-forward "<div class=\"adbnr\"><a href=\"http://xahlee.org/ads.html\">YOUR<br>AD<br>HERE</a></div>" nil t)
-                  (setq -p3ins (point))
-                (progn
-                  (goto-char (point-min))
-                  (search-forward "</h1>")
-                  (setq -p3ins (point))))
-
-              (delete-region p1 p2)
-              (insert "\n\n<p class=\"αuth\"><a rel=\"author\" href=\"http://xahlee.org/Periodic_dosage_dir/t1/presences.html\">Xah Lee</a>, " -date "</p>\n" ))))
-      (progn
-        (message "%s" "no dstp")))))
-

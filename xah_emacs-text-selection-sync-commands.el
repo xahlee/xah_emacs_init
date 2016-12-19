@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (defun xah-select-text-in-quote-by-syntax-table ()
   "Select text between ASCII quotes, single or double."
@@ -21,9 +21,10 @@
           (user-error "Cursor not inside quote"))))))
 
 (defun xah-select-text-in-bracket-or-quote-by-syntax-table ()
-  "Select text between the nearest brackets or quote."
+  "Select text between the nearest brackets or quote.
+ 2016-12-19"
   (interactive)
-  (let (pos p1 p2 (parse-sexp-lookup-properties nil)
+  (let ((parse-sexp-lookup-properties nil)
             (-temp-syn-table (make-syntax-table)))
     (modify-syntax-entry ?\" "\"" -temp-syn-table)
     (modify-syntax-entry ?\« "(»" -temp-syn-table)
@@ -49,7 +50,7 @@
   "Select text between the nearest brackets.
 eg  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙 ⦅⦆ 〚〛 ⦃⦄ ⟨⟩."
   (interactive)
-  (let (pos p1 p2 (parse-sexp-lookup-properties nil)
+  (let ( p1 p2 (parse-sexp-lookup-properties nil)
             (-temp-syn-table (make-syntax-table)))
     (modify-syntax-entry ?\" "\"" -temp-syn-table)
     (modify-syntax-entry ?\« "(»" -temp-syn-table)
@@ -67,7 +68,6 @@ eg  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》
       (modify-syntax-entry ?\< ")>" -temp-syn-table))
 
     (with-syntax-table -temp-syn-table
-      (setq pos (point))
       (search-backward-regexp "\\s(" nil t )
       (setq p1 (point))
       (forward-sexp 1)

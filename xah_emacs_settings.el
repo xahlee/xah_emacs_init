@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; Emacs settings for packages bundled with pure gnu emacs only
 
 ;; 2007-06
@@ -212,7 +212,8 @@
   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
   (setq ido-default-file-method 'selected-window) ; use current pane for newly opened file
   (setq ido-default-buffer-method 'selected-window) ; use current pane for newly switched buffer
-  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
+  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil) ; stop ido from suggesting when naming new file
+  )
 
 ;; (progn
 ;;   (ivy-mode 1)
@@ -289,4 +290,3 @@
 
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
-

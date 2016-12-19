@@ -1,8 +1,8 @@
-;-*- coding: utf-8 -*-
-; part of Xah Lee's emacs init file.
-; 2011-05-27
-; Xah Lee,
-; ∑ http://xahlee.org/
+;; -*- coding: utf-8; lexical-binding: t; -*-
+;; part of Xah Lee's emacs init file.
+;; 2011-05-27
+;; Xah Lee,
+;; ∑ http://xahlee.org/
 
 (require 'subr-x) ; string-trim
 

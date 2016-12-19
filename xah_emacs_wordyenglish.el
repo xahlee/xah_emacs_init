@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; part of Xah Lee's emacs init file.
 ;; 2007-06, 2011-01-24
 ;; Xah Lee,
@@ -116,7 +116,7 @@ Version 2015-03-11"
   "Insert a word definition entry template.
 Using current word or selection."
   (interactive)
-  (let ((-str1
+  (let ((-str
          (if (use-region-p)
              (buffer-substring-no-properties (region-beginning) (region-end))
            (current-word))))

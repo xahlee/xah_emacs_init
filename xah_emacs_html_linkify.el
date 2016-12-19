@@ -171,7 +171,7 @@ Then it'll become
     (delete-region -p1 -p2)
     (insert "(YouPorn video: <a href=\"" -url "\">" -word "</a>)\n")))
 
-(defun youtube-search-linkify ()
+(defun xah-youtube-search-linkify ()
   "Make the current line into a YouTube link.
 If there's a text selection, use that.
 For example, if the cursor is on the line:
@@ -200,14 +200,14 @@ Note: old version returns this form:
     (delete-region -p1 -p2)
     (insert "<a class=\"utb\" href=\"" -url "\">" -word "</a>")))
 
-(defun video-search-string (*searchString)
+(defun xah-video-search-string (*searchString)
   "Return a Google video search string URL of SEARCHSTRING.
 
 Example:
- 「(video-search-string \"White Rabbit, Jefferson Airplane\")」 ⇒
+ 「(xah-video-search-string \"White Rabbit, Jefferson Airplane\")」 ⇒
  「http://www.google.com/search?tbs=vid%3A1&q=White+Rabbit%2C+Jefferson+Airplane」
 
-This command is called by `video-search-linkify'."
+This command is called by `xah-video-search-linkify'."
   (let (strEncoded)
     (setq strEncoded *searchString )
     (setq strEncoded (replace-regexp-in-string " " "+" strEncoded ) )
@@ -215,7 +215,7 @@ This command is called by `video-search-linkify'."
     (concat "http://www.google.com/search?tbs=vid%3A1&q=" strEncoded)
     ))
 
-(defun video-search-linkify ()
+(defun xah-video-search-linkify ()
   "Make the current line into a Google video search link.
 If there's a text selection, use that.
 For example, if the cursor is on the line:
@@ -228,7 +228,7 @@ Then it'll become
 
 Warning: the line must end in a line return char else the result is wrong.
 
-This command calls `video-search-string'"
+This command calls `xah-video-search-string'"
   (interactive)
   (let (-p1 -p2 -word -url)
     (if (use-region-p)
@@ -237,7 +237,7 @@ This command calls `video-search-string'"
       (progn (setq -p1 (line-beginning-position))
              (setq -p2 (line-end-position))))
     (setq -word (buffer-substring-no-properties -p1 -p2))
-    (setq -url (video-search-string -word))
+    (setq -url (xah-video-search-string -word))
     (delete-region -p1 -p2)
     (insert "<a class=\"google-video-search-36645\" href=\"" -url "\">" -word "</a>")))
 
@@ -268,7 +268,7 @@ Warning: the line must end in a line return char else the result is wrong."
 
 ;; some custom HTML markup and functions for working with HTML
 
-(defun nks-linkify ()
+(defun xah-nks-linkify ()
   "Make the current word into into a link to Wolfram Science site.
 For Example, if you cursor is on the word 「p123」, then
 it becomes
@@ -289,13 +289,13 @@ Version 2015-05-15"
 
 ;; more specific to Xah Lee
 
-(defun amazon-search-linkify-url (*sString *productCat *assid)
+(defun xah-amazon-search-linkify-url (*sString *productCat *assid)
   "Returns a URL of amazon search based on search string and product category.
 *sString is the search string. e.g. “deep throat”
 *productCat is a short code for amazon's product category.
 See `amazon-search-linkify' for the possible code string.
 Sample call:
- (amazon-search-linkify-url \"debbie does dollas\" \"dvd\" \"xahh-20\")"
+ (xah-amazon-search-linkify-url \"debbie does dollas\" \"dvd\" \"xahh-20\")"
   (interactive)
   (let (sStrPercent)
     (setq sStrPercent *sString)
@@ -357,7 +357,7 @@ There are other amazon categories, but not supported by this function."
      )
 
     (delete-region -p1 -p2)
-    (insert  (amazon-search-linkify-url sstr pcc "xahh-20"))
+    (insert  (xah-amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
 
 (defun xah-amazon-linkify ()
