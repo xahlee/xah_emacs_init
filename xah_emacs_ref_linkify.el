@@ -1,7 +1,6 @@
 ;; 2010-06-07
 ;; ∑ http://xahlee.org/
 
-(require 'subr-x) ; for string-trim
 
 (defun xah-view-emacs-manual-in-browser ()
   "When in `Info-mode', view the current page in browser
@@ -48,26 +47,19 @@ For example, if the cursor is any one of the line:
                                ../emacs_manual/elisp/The-Mark.html
 
 Then it'll become:
-<span class=\"ref\"><a href=\"../emacs_manual/elisp/The-Mark.html\">(info \"(elisp) The Mark\")</a></span>"
+<span class=\"ref\"><a href=\"../emacs_manual/elisp/The-Mark.html\">(info \"(elisp) The Mark\")</a></span>
+Version 2016-12-22"
   (interactive)
+  (require 'subr-x) ; for string-trim
   (let* (
-         -p1
-         -p2
-         -input
+         (-bounds (xah-get-bounds-of-thing-or-region 'url))
+         (-p1 (car -bounds))
+         (-p2 (cdr -bounds))
+         ( -input (string-trim (buffer-substring-no-properties -p1 -p2)))
          -infoStr -linkText
          -fPath
          -linkStrURL ; link string
          )
-
-    (if (use-region-p)
-        (progn (setq -p1 (region-beginning))
-               (setq -p2 (region-end)))
-      (progn (setq -p1 (line-beginning-position))
-             (setq -p2 (line-end-position))))
-
-    ;; trim whitespaces
-    (setq -input (string-trim (buffer-substring-no-properties -p1 -p2)))
-
     ;; generate -infoStr. A info string is like this: “(elisp) The Mark”
     (setq -infoStr
           (if
@@ -118,7 +110,7 @@ Then it'll become:
     (if (file-exists-p -fPath )
         (progn
           (delete-region -p1 -p2)
-          (insert "<span class=\"ref\"><a href=\"" 
+          (insert "<span class=\"ref\"><a href=\""
                   (xahsite-filepath-to-href-value -fPath (buffer-file-name))
                   "\">" -linkText "</a></span>"))
       (error "Generated local -fPath 「%s」 does not point to a file" -fPath))))

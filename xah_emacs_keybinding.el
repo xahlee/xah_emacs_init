@@ -12,9 +12,6 @@
 ;; (define-key xah-fly-key-map (kbd "DEL") 'xah-fly-command-mode-activate)
 ;; (define-key xah-fly-key-map (kbd "<backspace>") 'xah-fly-command-mode-activate)
 
-;; (global-set-key (kbd "<prior>") 'xah-previous-user-buffer)
-;; (global-set-key (kbd "<next>") 'xah-next-user-buffer)
-
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
 (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
@@ -53,11 +50,14 @@
   (define-key xah-help-keymap (kbd "9") 'xah-lookup-word-definition)
   (define-key xah-help-keymap (kbd "0") 'xah-lookup-all-dictionaries))
 
-;; (global-set-key (kbd "<prior>") 'xah-previous-user-buffer)
-;; (global-set-key (kbd "<next>") 'xah-next-user-buffer)
+(global-set-key (kbd "<prior>") 'xah-previous-user-buffer)
+(global-set-key (kbd "<next>") 'xah-next-user-buffer)
 
-(global-set-key (kbd "<prior>") 'scroll-down-command)
-(global-set-key (kbd "<next>") 'scroll-up-command)
+;; (global-set-key (kbd "<prior>") 'scroll-down-command)
+;; (global-set-key (kbd "<next>") 'scroll-up-command)
+
+;; (global-set-key (kbd "<prior>") 'hippie-expand)
+;; (global-set-key (kbd "<next>") 'xah-toggle-letter-case)
 
 (global-set-key (kbd "<S-prior>") 'scroll-down) ; page up
 (global-set-key (kbd "<S-next>") 'scroll-up) ; page down
