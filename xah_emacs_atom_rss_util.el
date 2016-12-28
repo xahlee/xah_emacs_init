@@ -1,6 +1,5 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 2012-04-06
-;; http://ergoemacs.org/emacs/xah_emacs_init.html
 ;; 〈Emacs Lisp: Updating Atom Webfeed〉 http://ergoemacs.org/emacs/elisp_update_atom.html
 
 (require 'subr-x) ; string-trim
@@ -56,19 +55,17 @@ Else, use “xahlee.org”."
 to current date/time stamp.
 This command leaves the file unsaved."
   (interactive
-   (list (buffer-file-name))
-   )
-    (let (-p1 -p2)
-      (find-file *file-path)
-      (goto-char 1)
-      (search-forward "<updated>")
-      (setq -p1 (point) )
-      (search-forward "</updated>")
-      (setq -p2 (- (point) 10) )
-      (delete-region -p1 -p2 )
-      (goto-char -p1)
-      (insert (xah-current-date-time-string)))
- )
+   (list (buffer-file-name)))
+  (let (-p1 -p2)
+    (find-file *file-path)
+    (goto-char 1)
+    (search-forward "<updated>")
+    (setq -p1 (point))
+    (search-forward "</updated>")
+    (setq -p2 (- (point) 10))
+    (delete-region -p1 -p2 )
+    (goto-char -p1)
+    (insert (xah-current-date-time-string))))
 
 (defun xah-make-atom-entry ()
   "Create a Atom (RSS) entry of the current blog file.

@@ -223,6 +223,7 @@ Version 2016-10-24"
 " )
 
     ;; unicode
+    ("md" "—" )
     ("zarrows" "➵➙►▻☛☞👉⇰➛➜➝➞➟➠➢➣➤➥➦➧➨➲➺➻➼➽➾" )
     ("zascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("zbox" "┌─┬─┐

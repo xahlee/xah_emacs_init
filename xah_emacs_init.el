@@ -108,8 +108,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (load (xah-get-fullpath "xah_emacs_vid_linkify"))
 (load (xah-get-fullpath "xah_emacs_google_earth"))
 
-(load (xah-get-fullpath "xah_emacs_str_rep_func"))
-
 ;; (load (xah-get-fullpath "xah_emacs_font"))
 (load (xah-get-fullpath "xah_emacs_misc"))
 
