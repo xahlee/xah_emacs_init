@@ -320,7 +320,7 @@ or with png extension.
 
 to a different dir and rename, prompting user.
 
-Version 2016-12-22"
+Version 2017-01-01"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -352,7 +352,8 @@ sNew file name:")
       (progn
         (rename-file -from-path -to-path)
         (find-file -to-path )
-        (revert-buffer)
+        (when (equal major-mode 'dired-mode)
+          (revert-buffer))
         (message "move to path: %s" -to-path)))))
 
 (defun xah-youtube-get-image ()

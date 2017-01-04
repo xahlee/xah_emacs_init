@@ -195,8 +195,8 @@ Version 2016-10-24"
     ("ztek" "Truly Ergonomic keyboard" )
     ("ztemp" "temperature" )
     ("zts" "TypeScript" )
-    ("zv" "variable" )
-    ("zvs" "variables" )
+    ("va" "variable" )
+    ("vas" "variables" )
 
     ;; programing
     ("eq" "==" )

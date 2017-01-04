@@ -50,9 +50,6 @@
   (define-key xah-help-keymap (kbd "9") 'xah-lookup-word-definition)
   (define-key xah-help-keymap (kbd "0") 'xah-lookup-all-dictionaries))
 
-(global-set-key (kbd "<prior>") 'xah-previous-user-buffer)
-(global-set-key (kbd "<next>") 'xah-next-user-buffer)
-
 ;; (global-set-key (kbd "<prior>") 'scroll-down-command)
 ;; (global-set-key (kbd "<next>") 'scroll-up-command)
 

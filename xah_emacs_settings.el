@@ -99,7 +99,6 @@
 (desktop-save-mode 1)
 
 (blink-cursor-mode 0)
-(setq shift-select-mode nil)
 
 (global-auto-revert-mode 1)
 
@@ -182,6 +181,8 @@
 
 ;; make typing delete/overwrites selected text
 (delete-selection-mode 1)
+
+(setq shift-select-mode nil)
 
 ;; set highlighting brackets
 (show-paren-mode 1)
