@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; part of Xah Lee's emacs init file.
 ;; 2007-06
 ;; Xah Lee,
@@ -14,23 +14,23 @@
            distance-p1>
            )
     (setq -p0 (point))
-    (search-backward "<" nil "NOERROR" )
+    (search-backward "<" nil t )
     (setq -p1< (point))
     (goto-char -p0)
-    (search-backward ">" nil "NOERROR" )
+    (search-backward ">" nil t )
     (setq -p1> (point))
     (setq distance-p1< (abs (- -p0 -p1<)))
     (setq distance-p1> (abs (- -p1> -p0)))
     (if (< distance-p1< distance-p1>)
         (progn
           (goto-char -p0)
-          (search-forward ">" nil "NOERROR" )
+          (search-forward ">" nil t )
           (setq -p2> (point))
           (goto-char (1+ -p1<))
           (set-mark (1- -p2>)))
       (progn
         (goto-char -p0)
-        (search-forward "<" nil "NOERROR" )
+        (search-forward "<" nil t )
         (setq -p2< (point))
         (goto-char (1+ -p1>))
         (set-mark (1- -p2<))))))
@@ -387,7 +387,7 @@ Version 2016-11-02"
         (progn
           (setq -title
                 (if (string-match-p ".+html\\'" -file)
-                    (xah-html-get-html-file-title -file "noerror")
+                    (xah-html-get-html-file-title -file t)
                   (file-name-nondirectory -file)))
           (setq -title (if (null -title) "" -title ))
           (setq -title (xah-replace-pairs-in-string -title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
@@ -505,7 +505,7 @@ version 2015-02-05"
   (xah-make-backup)
   (goto-char 1)
   (while
-      (search-forward "<pre class=\"elisp\">" nil "NOERROR")
+      (search-forward "<pre class=\"elisp\">" nil t)
     (replace-match "<pre class=\"emacs-lisp\">" "FIXEDCASE" "LITERAL" )
 
     (let* (
@@ -601,11 +601,11 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
         (narrow-to-region -p1 -p2)
         (progn
           (goto-char (point-min))
-          (while (search-forward-regexp "[ \t]+\n" nil "noerror")
+          (while (search-forward-regexp "[ \t]+\n" nil t)
             (replace-match "\n") ))
         (progn
           (goto-char (point-min))
-          (while (search-forward-regexp "\n\n\n+" nil "noerror")
+          (while (search-forward-regexp "\n\n\n+" nil t)
             (replace-match "\n\n") )) )) )
 ))
 

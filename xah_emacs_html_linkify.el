@@ -495,7 +495,7 @@ Version 2016-07-07"
         (progn
           (setq -titleText
                 (if (string-match-p ".+html\\'" -fPath)
-                    (concat (xah-html-get-html-file-title -fPath "noerror") -fragPart)
+                    (concat (xah-html-get-html-file-title -fPath t) -fragPart)
                   (file-name-nondirectory -fPath)))
           (setq -resultStr
                 (if (string-equal
@@ -524,7 +524,7 @@ returns
     (if (string= *fragPart "")
         (progn
           (search-forward "<div id=\"apicontent\">")
-          (if (search-forward "<h1>" nil "NOERROR")
+          (if (search-forward "<h1>" nil t)
               (progn (buffer-substring-no-properties
                       (point)
                       (-  (search-forward "<span>") 6)) )

@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 ;; 2014-05-30
 ;;   Xah Lee

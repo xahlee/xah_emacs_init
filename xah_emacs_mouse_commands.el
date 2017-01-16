@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (defun xah-scroll-down-10-lines ()
   "scroll down 10 lines"
@@ -157,3 +157,14 @@ When emacs is idle for 10 seconds, the normal wheel behavior will be restored."
     (message "Wheel behavior will revert back to normal 10 seconds after idle.")
 
     (setq xah-fly-mouse-mode-timer-id (run-with-idle-timer 10 nil 'xah-set-mouse-wheel-normal))))
+
+
+;; (defun xah-mouse-yank-primary ()
+;;   "insert newline then call `mouse-yank-primary'"
+;;   (interactive)
+;;   (let ()
+;;     (insert "\n\n")
+;;     (mouse-yank-primary)
+;;     ))
+
+

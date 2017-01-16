@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; settings for packages that's not bundled with emacs
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/

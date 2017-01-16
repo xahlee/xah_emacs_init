@@ -10,7 +10,8 @@ For public, i recommend http://ergoemacs.github.io/ergoemacs-mode/
 
 Tricks in my init has a corresponding page at
 
-* Xah Emacs Tutorial http://ergoemacs.org/emacs/emacs.html
-* Xah Emacs Lisp Tutorial http://ergoemacs.org/emacs/elisp.html
+ Xah Emacs Tutorial http://ergoemacs.org/emacs/emacs.html
+
+ Xah Emacs Lisp Tutorial http://ergoemacs.org/emacs/elisp.html
 
 Use the search box there.

@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; mouse settings.
 ;; Xah Lee
 ;; created: 2011-11-13

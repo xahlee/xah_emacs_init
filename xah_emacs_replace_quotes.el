@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 2010-09-03
 
 ;; 2015-08-22 removed
@@ -19,11 +19,11 @@ Version 2015-06-09"
         (if (use-region-p)
             (progn (setq -begin (region-beginning)) (setq -end (region-end)))
           (save-excursion
-            (if (re-search-backward "\n[ \t]*\n" nil "NOERROR")
+            (if (re-search-backward "\n[ \t]*\n" nil t)
                 (progn (re-search-forward "\n[ \t]*\n")
                        (setq -begin (point)))
               (setq -begin (point)))
-            (if (re-search-forward "\n[ \t]*\n" nil "NOERROR")
+            (if (re-search-forward "\n[ \t]*\n" nil t)
                 (progn (re-search-backward "\n[ \t]*\n")
                        (setq -end (point)))
               (setq -end (point)))))
@@ -73,13 +73,13 @@ Version 2015-04-13"
         (progn
           (goto-char (point-min))
           (while
-              (search-forward-regexp "\\(.\\)\\([A-Z][a-z]+\\)" nil 'NOERROR)
-            (replace-match "\1_\2" 'FIXEDCASE)))
+              (search-forward-regexp "\\(.\\)\\([A-Z][a-z]+\\)" nil t)
+            (replace-match "\1_\2" "FIXEDCASE")))
         (progn
           (goto-char (point-min))
           (while
-              (search-forward-regexp "\\([a-z0-9][A-Z]+\\)" nil 'NOERROR)
-            (replace-match "\1_\2" 'FIXEDCASE)))))
+              (search-forward-regexp "\\([a-z0-9][A-Z]+\\)" nil t)
+            (replace-match "\1_\2" "FIXEDCASE")))))
     (put 'xah-cycle-hyphen-underscore-space 'state (% (+ -nowState 1) -length))))
 
 (defun xah-cycle-camel-style-case ()
@@ -414,7 +414,7 @@ Version 2015-10-05"
          (lambda (-x)
            (progn
              (goto-char (point-min))
-             (while (search-forward (aref -x 0) nil "noerror")
+             (while (search-forward (aref -x 0) nil t)
                (replace-match (aref -x 1)))))
          (cond
           ((string= *to-direction "chinese") -replacePairs)
@@ -439,7 +439,7 @@ Version 2015-04-29"
 
 (defun xah-remove-vowel ()
   "Remove the following letters: {a e i o u} in current line or text selection.
-Version 2015-08-22"
+Version 2017-01-11"
   (interactive)
   (let (-p1 -p2 )
     (if (use-region-p)
@@ -454,8 +454,8 @@ Version 2015-08-22"
         (narrow-to-region -p1 -p2)
         (let ( (case-fold-search nil))
           (goto-char (point-min))
-          (while (search-forward-regexp "a\\|e\\|i\\|o\\|u" (point-max) 'NOERROR)
-            (replace-match "" 'FIXEDCASE 'LITERAL)))))))
+          (while (search-forward-regexp "a\\|e\\|i\\|o\\|u" (point-max) t)
+            (replace-match "" "FIXEDCASE" "LITERAL")))))))
 
 (defun xah-replace-profanity ()
   "Replace fuck shit scumbag … in current line or text selection.
@@ -653,7 +653,7 @@ If any `universal-argument' is called first, reverse direction.
 When called in elisp, the *begin and *end are region begin/end positions to work on.
 
 URL `http://ergoemacs.org/misc/thou_shalt_use_emacs_lisp.html'
-Version 2015-04-12"
+Version 2017-01-11"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end) current-prefix-arg )
@@ -677,7 +677,7 @@ Version 2015-04-12"
            (lambda (-x)
              (goto-char (point-min))
              (while (search-forward (elt -x 0) nil t)
-               (replace-match (elt -x 1) 'FIXEDCASE 'LITERAL)))
+               (replace-match (elt -x 1) "FIXEDCASE" "LITERAL")))
            -useMap))))))
 
 (defun xah-twitterfy (*begin *end &optional *to-direction)
@@ -694,7 +694,7 @@ When called in lisp code, *begin *end are region begin/end positions. *to-direct
  'lengthen
 
 URL `http://ergoemacs.org/emacs/elisp_twitterfy.html'
-Version 2016-12-13"
+Version 2017-01-11"
   (interactive
    (list
     (if (use-region-p) (region-beginning) (line-beginning-position))
@@ -747,7 +747,7 @@ Version 2016-12-13"
         (when (string= *to-direction 'auto)
           (goto-char (point-min))
           (if
-              (re-search-forward "。\\|，\\|？\\|！" nil 'NOERROR)
+              (re-search-forward "。\\|，\\|？\\|！" nil t)
               (setq *to-direction 'lengthen)
             (setq *to-direction 'shorten)))
         (let ( (case-fold-search nil))
@@ -755,24 +755,24 @@ Version 2016-12-13"
            (lambda (-x)
              (goto-char (point-min))
              (while (search-forward (elt -x 0) nil t)
-               (replace-match (elt -x 1) 'FIXEDCASE 'LITERAL)))
+               (replace-match (elt -x 1) "FIXEDCASE" "LITERAL")))
            (if (string= *to-direction 'shorten)
                -shorten-map
              (mapcar (lambda (-pair) (vector (elt -pair 1) (elt -pair 0))) -shorten-map)))
           (goto-char (point-min))
           (while (search-forward "  " nil t)
-            (replace-match " " 'FIXEDCASE 'LITERAL))
+            (replace-match " " "FIXEDCASE" "LITERAL"))
 
           (goto-char (point-min))
           (while (search-forward "  " nil t)
-            (replace-match " " 'FIXEDCASE 'LITERAL)))))))
+            (replace-match " " "FIXEDCASE" "LITERAL")))))))
 
 (defun xah-remove-quotes-or-brackets (*begin *end *bracketType)
   "Remove quotes/brackets in current line or text selection.
 
 When called in lisp program, *begin *end are region begin/end position, *bracketType is a string of a bracket pair. eg \"()\",  \"[]\", etc.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2016-11-04"
+Version 2017-01-11"
   (interactive
    (list
     (if (use-region-p) (region-beginning) (line-beginning-position))
@@ -820,7 +820,7 @@ Version 2016-11-04"
          (lambda (x)
            (goto-char (point-min))
            (while (search-forward (char-to-string x)  nil t)
-             (replace-match "" 'FIXEDCASE 'LITERAL)))
+             (replace-match "" "FIXEDCASE" "LITERAL")))
          (substring *bracketType 0 2))))))
 
 (defun xah-change-bracket-pairs ( *fromType *toType *begin *end)
@@ -829,7 +829,7 @@ For example, change all parenthesis () to square brackets [].
 
 When called in lisp program, *begin *end are region begin/end position, *fromType or *toType is a string of a bracket pair. eg \"()\",  \"[]\", etc.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2016-11-04"
+Version 2017-01-11"
   (interactive
    (let ((-bracketsList
           '("() paren"
@@ -912,12 +912,12 @@ Version 2016-11-04"
           (goto-char (point-min))
           (while (search-forward -fromLeft nil t)
             (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-            (replace-match -toLeft 'FIXEDCASE 'LITERAL)))
+            (replace-match -toLeft "FIXEDCASE" "LITERAL")))
         (progn
           (goto-char (point-min))
           (while (search-forward -fromRight nil t)
             (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-            (replace-match -toRight 'FIXEDCASE 'LITERAL)))))))
+            (replace-match -toRight "FIXEDCASE" "LITERAL")))))))
 
 (defun xah-corner-bracket→html-i (*begin *end)
        "Replace all 「…」 to <code>…</code> in current text block.

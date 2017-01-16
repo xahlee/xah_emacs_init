@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 ;; xah-fly-keys move to http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 

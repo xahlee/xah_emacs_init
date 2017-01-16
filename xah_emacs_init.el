@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 2007-06, 2012-09-24
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 
@@ -45,34 +45,60 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;;; smex.el --- M-x interface with Ido-style fuzzy matching. -*- lexical-binding: t; -*-
 
-(load "~/git/xah-get-thing-or-selection/xah-get-thing")
-(load "~/git/xah-replace-pairs/xah-replace-pairs")
-(load "~/git/xeu_elisp_util.el/xeu_elisp_util")
-(load "~/git/xah-fly-keys/xah-fly-keys.el")
-(load "~/git/xah-elisp-mode/xah-elisp-mode")
-(load "~/git/xah-clojure-mode/xah-clojure-mode")
-(load "~/git/xah-find/xah-find")
-(load "~/git/xah-insert-random-id.el/xah-insert-random-id")
+;; (load "~/git/xah-get-thing-or-selection/xah-get-thing")
+;; (load "~/git/xah-replace-pairs/xah-replace-pairs")
+;; (load "~/git/xeu_elisp_util.el/xeu_elisp_util")
+;; (load "~/git/xah-fly-keys/xah-fly-keys.el")
+;; (load "~/git/xah-elisp-mode/xah-elisp-mode")
+;; (load "~/git/xah-clojure-mode/xah-clojure-mode")
+;; (load "~/git/xah-find/xah-find")
+;; (load "~/git/xah-insert-random-id.el/xah-insert-random-id")
+
+(add-to-list 'load-path "~/git/xah-get-thing-or-selection/")
+(require 'xah-get-thing)
+(add-to-list 'load-path "~/git/xah-replace-pairs/")
+(require 'xah-replace-pairs)
+(add-to-list 'load-path "~/git/xeu_elisp_util.el/")
+(require 'xeu_elisp_util)
+(add-to-list 'load-path "~/git/xah-fly-keys/")
+(require 'xah-fly-keys)
+(add-to-list 'load-path "~/git/xah-elisp-mode/")
+(require 'xah-elisp-mode)
+(add-to-list 'load-path "~/git/xah-clojure-mode/")
+(require 'xah-clojure-mode)
+(add-to-list 'load-path "~/git/xah-find/")
+(require 'xah-find)
+(add-to-list 'load-path "~/git/xah-insert-random-id.el/")
+(require 'xah-insert-random-id)
 
 ;; (add-to-list 'load-path "~/git/xah-comment.el/")
 
 ;; (add-to-list 'load-path "~/git/xah-html6-mode.el/")
 
-(load "~/git/xah-css-mode/xah-css-mode")
-(load "~/git/xah-html-mode.el/xah-html-mode")
-(load "~/git/xah-js-mode.el/xah-js-mode")
-(load "~/git/xah-php-mode.el/xah-php-mode")
-(load "~/git/xbbcode-mode.el/xbbcode-mode")
-(load "~/git/xub-mode.el/xub-mode.el")
-(load "~/git/lookup-word-on-internet/xah-lookup")
-(load "~/git/xah-math-input/xah-math-input")
+(add-to-list 'load-path "~/git/xah-css-mode/")
+(require 'xah-css-mode)
+(add-to-list 'load-path "~/git/xah-html-mode.el/")
+(require 'xah-html-mode)
+(add-to-list 'load-path "~/git/xah-js-mode.el/")
+(require 'xah-js-mode)
+(add-to-list 'load-path "~/git/xah-php-mode.el/")
+(require 'xah-php-mode)
+(add-to-list 'load-path "~/git/xbbcode-mode.el/")
+(require 'xbbcode-mode)
+(add-to-list 'load-path "~/git/xub-mode.el/")
+(require 'xub-mode)
+(add-to-list 'load-path "~/git/lookup-word-on-internet/")
+(require 'xah-lookup)
+(add-to-list 'load-path "~/git/xah-math-input/")
+(require 'xah-math-input)
+
+(add-to-list 'load-path "~/Dropbox/")
+(require 'xlsl-mode)
+
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
-(load "~/Dropbox/xlsl-mode.el")
 
 (add-to-list 'load-path "~/git/xahk-mode.el/")
 (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
-
-;; (load "xah-comment")
 
 (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
 

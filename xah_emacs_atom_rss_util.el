@@ -90,7 +90,7 @@ Other files paths for blogs are:
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
 
-version 2016-12-08"
+version 2017-01-11"
   (interactive)
   (let* (
          -p1 -p2 
@@ -124,10 +124,10 @@ version 2016-12-08"
           (with-temp-buffer
             (insert -inputStr)
             (goto-char (point-min))
-            (while (search-forward " allowfullscreen" (point-max) 'NOERROR)
+            (while (search-forward " allowfullscreen" (point-max) t)
               (replace-match " " ))
             (goto-char (point-min))
-            (while (search-forward " controls loop autoplay></video>" (point-max) 'NOERROR)
+            (while (search-forward " controls loop autoplay></video>" (point-max) t)
               (replace-match " controls=\"\" loop=\"\" autoplay=\"\"></video>" ))
             (goto-char (point-min))
             (insert "\n")

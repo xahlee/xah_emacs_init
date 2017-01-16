@@ -603,7 +603,7 @@ if the *input-str is a relative path, *default-dir is used to resolve to full pa
                  (string-match "404error.html" -f)))
            (with-temp-buffer
              (insert-file-contents -f)
-             (when (not (search-forward "<meta http-equiv=\"refresh\"" nil "noerror"))
+             (when (not (search-forward "<meta http-equiv=\"refresh\"" nil t))
                (with-current-buffer -sitemapBuffer
                  (insert "<url><loc>")
                  (insert (concat "http://" *domain-name "/" (substring -f (length --websiteDocRootPath))))

@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; part of Xah Lee's emacs init file.
 ;; 2011-05-28
 ;; Xah Lee,
@@ -55,7 +55,7 @@ Version 2015-06-21"
 
     ;; remove beginning to <body>
     (goto-char 1)
-    (when (search-forward "<body>" nil "NOERROR")
+    (when (search-forward "<body>" nil t)
       (delete-region 1 (point)))
 
     ;; remove footer to end

@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; stuff related to HTML
 ;; most things moved to xah-html-mode
 ;; ∑ http://xahlee.org/
@@ -50,7 +50,7 @@ Version 2016-11-23"
   (save-excursion ; remove empty lines
     (progn
       (goto-char (point-min))
-      (while (search-forward-regexp "\n\n\n+" nil "noerror")
+      (while (search-forward-regexp "\n\n\n+" nil t)
         (replace-match (make-string 2 ?\n)))))
   (let (-p1 -p2 -num -bufferTextOrig -reportText)
     (push-mark)
@@ -319,8 +319,10 @@ etc.
 or with png extension.
 
 to a different dir and rename, prompting user.
+Any space in filename is replaced by the low line char “_”.
+For files ending in png, 「optipng filename」 is called.
 
-Version 2017-01-01"
+Version 2017-01-09"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -345,16 +347,18 @@ sNew file name:")
       (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))
     (setq -to-path (concat
                     (file-name-as-directory *dir-name )
-                    *file-name "."
+                    (replace-regexp-in-string " " "_" *file-name)
+                    "."
                     (downcase (file-name-extension -from-path ))))
     (if (file-exists-p -to-path)
         (message "move to path exist: %s" -to-path)
       (progn
         (rename-file -from-path -to-path)
+        (when (string-equal (file-name-extension -to-path ) "png")
+          (shell-command (concat "optipng " -to-path)))
         (find-file -to-path )
         (when (equal major-mode 'dired-mode)
-          (revert-buffer))
-        (message "move to path: %s" -to-path)))))
+          (revert-buffer))))))
 
 (defun xah-youtube-get-image ()
   "
@@ -371,8 +375,8 @@ todo
          id
          shellCmd
          (fileName (read-file-name "name:")))
-    (setq id (replace-regexp-in-string "https://www.youtube.com/watch\\?v=" "" lineStr 'FIXEDCASE 'LITERAL ))
-    (setq id (replace-regexp-in-string "http://www.youtube.com/watch\\?v=" "" id 'FIXEDCASE 'LITERAL ))
+    (setq id (replace-regexp-in-string "https://www.youtube.com/watch\\?v=" "" lineStr "FIXEDCASE" "LITERAL" ))
+    (setq id (replace-regexp-in-string "http://www.youtube.com/watch\\?v=" "" id "FIXEDCASE" "LITERAL" ))
 
     (setq shellCmd
           (concat "wget " "https://i.ytimg.com/vi/" id "/maxresdefault.jpg"
@@ -383,7 +387,7 @@ todo
 
     (shell-command shellCmd)
 
-    ;; (replace-regexp-in-string "https://www.youtube.com/watch\\?v=" "" "https://www.youtube.com/watch?v=aa8jTf7Xg3E" 'FIXEDCASE 'LITERAL )
+    ;; (replace-regexp-in-string "https://www.youtube.com/watch\\?v=" "" "https://www.youtube.com/watch?v=aa8jTf7Xg3E" "FIXEDCASE" "LITERAL" )
 
     ;; https://www.youtube.com/watch?v=aa8jTf7Xg3E
     ;; https://i.ytimg.com/vi/aa8jTf7Xg3E/maxresdefault.jpg

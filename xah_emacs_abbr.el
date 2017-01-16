@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; emacs abbrev def
 ;; 〈Using Emacs Abbrev Mode for Abbreviation〉 http://ergoemacs.org/emacs/emacs_abbrev_mode.html
 
@@ -93,7 +93,6 @@ Version 2016-10-24"
     ("trad" "traditional" )
     ("ver" "version" )
     ("vid" "video" )
-    ("win" "window" )
     ("wp" "Wikipedia" )
     ("zalt" "alternative" )
     ("zauto" "automatic" )
@@ -196,6 +195,7 @@ Version 2016-10-24"
     ("ztemp" "temperature" )
     ("zts" "TypeScript" )
     ("va" "variable" )
+    ("nn" "non-nil" )
     ("vas" "variables" )
 
     ;; programing

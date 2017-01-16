@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; some general command definitions
 ;; their purpose can be useful for anyone
 ;; they don't depend on my setup, or any assumptions

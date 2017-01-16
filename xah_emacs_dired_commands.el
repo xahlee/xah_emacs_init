@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (defun xah-open-in-gimp ()
   "Open the current file or `dired' marked files in gimp.

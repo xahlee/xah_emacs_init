@@ -1,4 +1,4 @@
-;; -*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; some custome string functions for working with HTML
 ;; 2011-05-28
 ;;   Xah Lee
