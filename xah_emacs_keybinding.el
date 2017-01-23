@@ -77,13 +77,7 @@
 
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
   (define-key xah-user-keymap (kbd "'") 'xah-replace-straight-quotes)
-
-  (define-key xah-user-keymap (kbd "1") 'xah-copy-to-register-1)
-  (define-key xah-user-keymap (kbd "2") 'xah-paste-from-register-1)
-  (define-key xah-user-keymap (kbd "3") nil)
-  (define-key xah-user-keymap (kbd "5") nil)
-  (define-key xah-user-keymap (kbd "6") nil)
-  (define-key xah-user-keymap (kbd "7") nil)
+  
   (define-key xah-user-keymap (kbd "8") 'xah-find-count)
   (define-key xah-user-keymap (kbd "9") 'xah-find-replace-text-regex)
   (define-key xah-user-keymap (kbd "0") 'xah-find-text-regex)

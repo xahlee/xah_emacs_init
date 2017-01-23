@@ -106,7 +106,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (if (boundp 'xah-load-xahkeys-q)
     (when xah-load-xahkeys-q
-      (setq xah-fly-swapped-1827-p t)
+      (setq xah-fly-swapped-1-8-and-2-7-p t)
       (require 'xah-fly-keys)
 
       (load (xah-get-fullpath "xah_emacs_keybinding"))
