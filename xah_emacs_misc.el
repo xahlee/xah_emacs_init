@@ -6,6 +6,15 @@
 
 
 
+(defun xah-display-minor-mode-key-priority  ()
+  "Print out minor mode's key priority.
+URL `http://ergoemacs.org/emacs/minor_mode_key_priority.html'
+Version 2017-01-27"
+  (interactive)
+  (mapc
+   (lambda (x) (prin1 (car x)) (terpri))
+   minor-mode-map-alist))
+
 (defun xah-select-text-in-html-bracket ()
   "Select text between <…> or >…<."
   (interactive)

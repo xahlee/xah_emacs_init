@@ -45,8 +45,9 @@ Version 2016-10-24"
     ("sa" "See also:" )
 
     ;; english word abbrev
-
     ("ann" "announcement" )
+    ("r" "return" )
+    ("arg" "argument" )
     ("autom" "automatic" )
     ("bc" "because" )
     ("bg" "background" )
@@ -55,7 +56,6 @@ Version 2016-10-24"
     ("comm" "communication" )
     ("comp" "computer" )
     ("desc" "description" )
-    ("zdev" "development" )
     ("dict" "dictionary" )
     ("dicts" "dictionaries" )
     ("dir" "directory" )
@@ -68,7 +68,6 @@ Version 2016-10-24"
     ("ex" "example" )
     ("fex" "for example," )
     ("fu" "function" )
-    ("arg" "argument" )
     ("gvn" "government" )
     ("hex" "hexadecimal" )
     ("ia" "interactive" )
@@ -82,6 +81,8 @@ Version 2016-10-24"
     ("kbs" "keyboards" )
     ("kw" "keyword" )
     ("ob" "object" )
+    ("oc" "occur" )
+    ("occ" "occurrence" )
     ("paren" "parenthesis" )
     ("pl" "programing language" )
     ("pls" "please" )
@@ -98,6 +99,7 @@ Version 2016-10-24"
     ("zauto" "automatic" )
     ("zc" "character" )
     ("zchars" "characters" )
+    ("zdev" "development" )
     ("zergo" "ergonomic" )
     ("zexp" "experience" )
     ("zexpr" "expression" )

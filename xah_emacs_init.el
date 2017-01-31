@@ -5,7 +5,6 @@
 (require 'package)
 (package-initialize)
 
-
 (require 'ido)
 
 
@@ -42,17 +41,6 @@ To solve this problem, when your code only knows the relative path of another fi
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-get-fullpath ""))
 
-
-;;; smex.el --- M-x interface with Ido-style fuzzy matching. -*- lexical-binding: t; -*-
-
-;; (load "~/git/xah-get-thing-or-selection/xah-get-thing")
-;; (load "~/git/xah-replace-pairs/xah-replace-pairs")
-;; (load "~/git/xeu_elisp_util.el/xeu_elisp_util")
-;; (load "~/git/xah-fly-keys/xah-fly-keys.el")
-;; (load "~/git/xah-elisp-mode/xah-elisp-mode")
-;; (load "~/git/xah-clojure-mode/xah-clojure-mode")
-;; (load "~/git/xah-find/xah-find")
-;; (load "~/git/xah-insert-random-id.el/xah-insert-random-id")
 
 (add-to-list 'load-path "~/git/xah-get-thing-or-selection/")
 (require 'xah-get-thing)
@@ -104,20 +92,17 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (setq xah-load-xahkeys-q t)
 
-(if (boundp 'xah-load-xahkeys-q)
-    (when xah-load-xahkeys-q
-      (setq xah-fly-swapped-1-8-and-2-7-p t)
-      (require 'xah-fly-keys)
-
-      (load (xah-get-fullpath "xah_emacs_keybinding"))
-      (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
-      ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
-      ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
-      (load (xah-get-fullpath "xah_emacs_mouse_binding"))
-      )
-  (progn
-    nil
-    ))
+(when (boundp 'xah-load-xahkeys-q)
+  (when xah-load-xahkeys-q
+    (setq xah-fly-swapped-1-8-and-2-7-p t)
+    (require 'xah-fly-keys)
+    ;; (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
+    (xah-fly-keys 1)
+    (load (xah-get-fullpath "xah_emacs_keybinding"))
+    (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
+    ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
+    ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
+    (load (xah-get-fullpath "xah_emacs_mouse_binding"))))
 
 (load (xah-get-fullpath "xah_emacs_keybinding_functions"))
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
