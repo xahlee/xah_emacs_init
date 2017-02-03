@@ -419,19 +419,17 @@ Version 2016-11-02"
   "Remove or add line ending chars on current text block.
  (text block is delimited by blank lines)
 This command is similar to a toggle of `fill-paragraph'.
-When there is a text selection, act on the region."
+When there is a text selection, act on the region.
+Version 2017-02-02"
   (interactive)
-
   ;; This command symbol has a property “'stateIsCompact-p”.
-  (let (currentStateIsCompact (bigFillColumnVal 4333999) (deactivate-mark nil))
-
+  (let (currentStateIsCompact (deactivate-mark nil))
     (save-excursion
       ;; Determine whether the text is currently compact.
       (setq currentStateIsCompact
             (if (eq last-command this-command)
                 (get this-command 'stateIsCompact-p)
               (if (> (- (line-end-position) (line-beginning-position)) fill-column) t nil)))
-
       (if (use-region-p)
           (if currentStateIsCompact
               (fill-region (region-beginning) (region-end))
@@ -455,7 +453,6 @@ When there is a text selection, act on the region."
               (narrow-to-region -p1 -p2)
               (goto-char (point-min))
               (while (search-forward "\n" nil t) (replace-match "" nil t))))))
-
       (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)))))
 
 ;; (dolist (hook '(window-configuration-change-hook
@@ -507,25 +504,6 @@ version 2015-02-05"
     (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH")))
   (progn
     (insert (cdr (assoc *cmd-abbrev xah-shell-abbrev-alist)))))
-
-(defun xah-to-xah-elisp-mode  ()
-  "redo my tutorial's code elisp markup"
-  (interactive)
-  (xah-make-backup)
-  (goto-char 1)
-  (while
-      (search-forward "<pre class=\"elisp\">" nil t)
-    (replace-match "<pre class=\"emacs-lisp\">" "FIXEDCASE" "LITERAL" )
-
-    (let* (
-           ( -xx (xah-html-get-precode-langCode))
-           (langCode (elt -xx 0))
-           (-p1 (elt -xx 1))
-           (-p2 (elt -xx 2)))
-
-      (xah-html-remove-span-tag-region -p1 -p2)
-      (goto-char -p1)
-      (xah-html-htmlize-precode xah-html-lang-name-map))))
 
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.

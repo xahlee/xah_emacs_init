@@ -15,7 +15,7 @@ Fix all relative links to http://xahlee.org/ links.
 add a “Perm URL with updates: ‹link›” sentence at top.
 
 This new content is ready to be posted to blogger.
-Version 2015-06-21"
+Version 2017-02-02"
   (interactive)
   (let* (
          p1 p2
@@ -67,9 +67,7 @@ Version 2015-06-21"
     (goto-char (point-max))
     (when (search-backward "<div id=\"disqus_thread\">" nil t)
       (delete-region (point) (point-max)))
-
-    (xahsite-remove-ads 1 (point-max))
-
+    
     ;; change amazong ad id
     (xah-replace-pairs-region 1 (point-max) [["?tag=xahh-20" "?tag=xahblg-20"]] )
 

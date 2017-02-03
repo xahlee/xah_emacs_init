@@ -503,7 +503,7 @@ if the *input-str is a relative path, *default-dir is used to resolve to full pa
   "Returns t if *path ends in .jpg .png .gif .svg, else nil."
   (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" *path))
 
-(defun xah-find-files-file-predicate-p (*fname *parentdir)
+(defun xah-find-files-file-predicate-p (*fname)
   "return t if *fname is what we want. Else nil.
 2016-07-09"
   (interactive)
@@ -622,11 +622,3 @@ if the *input-str is a relative path, *default-dir is used to resolve to full pa
         (progn (find-file -filePath ))))
 
     (print (concat "finished: " (format-time-string "%Y-%m-%dT%T")))))
-
-(defun xahsite-remove-ads (*begin *end)
-  "Remove all ads of in region *begin *end.
-
-Remove Google adds, Amazon ads, and other ads, Google Analytics
- Tracker code, Disqus code, …."
-"dummy"
-)

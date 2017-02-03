@@ -60,7 +60,6 @@ Version 2015-07-06"
   (interactive)
   (backward-char xah-forward-n-chars))
 
-
 (defun xah-mouse-click-to-search (*click)
   "Mouse click to start `isearch-forward-symbol-at-point' (emacs 24.4) at clicked point.
 URL `http://ergoemacs.org/emacs/emacs_mouse_click_highlight_word.html'
@@ -138,7 +137,7 @@ Version 2015-07-06"
 (defun xah-set-mouse-wheel-mode ()
   "Set mouse wheel to move by line, block or other.
 This command will prompt you.
-When emacs is idle for 10 seconds, the normal wheel behavior will be restored."
+Version 2017-02-02"
   (interactive)
   (let (-mode
         (-mouse-wheel-modes
@@ -152,12 +151,7 @@ When emacs is idle for 10 seconds, the normal wheel behavior will be restored."
      ((string-equal -mode "normal") (xah-set-mouse-wheel-normal))
      ((string-equal -mode "block") (xah-set-mouse-scroll-by-block))
      ((string-equal -mode "50 lines") (xah-set-mouse-scroll-by-50-line))
-     (t (error "%s" "program logic error. No choice found")))
-
-    (message "Wheel behavior will revert back to normal 10 seconds after idle.")
-
-    (setq xah-fly-mouse-mode-timer-id (run-with-idle-timer 10 nil 'xah-set-mouse-wheel-normal))))
-
+     (t (error "%s" "program logic error. No choice found")))))
 
 ;; (defun xah-mouse-yank-primary ()
 ;;   "insert newline then call `mouse-yank-primary'"
@@ -166,5 +160,4 @@ When emacs is idle for 10 seconds, the normal wheel behavior will be restored."
 ;;     (insert "\n\n")
 ;;     (mouse-yank-primary)
 ;;     ))
-
 

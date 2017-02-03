@@ -145,7 +145,7 @@ Version 2016-07-19"
 Basically, make it grayscale, and reduce colors to any of {2, 4, 16, 256}.
 Requires ImageMagick shell command.
 
-2015-07-09"
+Version 2017-02-02"
   (interactive
    (let (
          (-fileList
@@ -154,7 +154,7 @@ Requires ImageMagick shell command.
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
      (list -fileList
-           (setq *grayscale-p (yes-or-no-p "Grayscale?"))
+           (yes-or-no-p "Grayscale?")
            (ido-completing-read "Max number of colors:" '( "2" "4" "16" "256" )))))
   (xah-process-image *file-list
                      (format "+dither %s -depth %s"
@@ -168,8 +168,7 @@ Requires ImageMagick shell command.
                               ((equal *max-colors-count "16") 4)
                               ((equal *max-colors-count "4") 2)
                               ((equal *max-colors-count "2") 1)
-                              (t (error "logic error 0444533051: impossible condition on *max-colors-count: %s" *max-colors-count)))
-                             *max-colors-count)  "-2" ".png" ))
+                              (t (error "logic error 0444533051: impossible condition on *max-colors-count: %s" *max-colors-count))))  "-2" ".png" ))
 
 (defun xah-dired-2jpg (*file-list)
   "Create a JPG version of images of marked files in dired.

@@ -126,7 +126,6 @@
   (define-key xah-user-keymap (kbd "r p") 'xah-convert-asian/ascii-space)
   (define-key xah-user-keymap (kbd "r p") 'xah-replace-profanity)
   (define-key xah-user-keymap (kbd "r t") 'xah-twitterfy)
-  (define-key xah-user-keymap (kbd "r u") 'xah-replace-newline-whitespaces-to-space)
   (define-key xah-user-keymap (kbd "r w") 'xah-convert-fullwidth-chars)
   (define-key xah-user-keymap (kbd "r x") 'xah-remove-quotes-or-brackets)
 

@@ -202,11 +202,8 @@
   ;; make buffer switch command do suggestions, also for find-file command
   (ido-mode 1)
   ;; (ido-everywhere 1)
-  (if ; make ido display choices vertically
-      (version< emacs-version "25")
-      (progn
-        (make-local-variable 'ido-separator)
-        (setq ido-separator "\n"))
+  (when ; make ido display choices vertically
+      (not (version< emacs-version "25"))
     (progn
       (make-local-variable 'ido-decorations)
       (setf (nth 2 ido-decorations) "\n")))
@@ -215,10 +212,6 @@
   (setq ido-default-buffer-method 'selected-window) ; use current pane for newly switched buffer
   (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil) ; stop ido from suggesting when naming new file
   )
-
-;; (progn
-;;   (ivy-mode 1)
-;;   )
 
 
 ;; indentation, tab

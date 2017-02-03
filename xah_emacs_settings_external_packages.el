@@ -30,16 +30,16 @@
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 
-(when (fboundp 'global-page-break-lines-mode)
-  ;; make the formfeed char (^L) display as a line
-  (global-page-break-lines-mode 1)
-  (setq
-   page-break-lines-modes
-   '(
-     emacs-lisp-mode lisp-mode scheme-mode compilation-mode outline-mode help-mode
-     fundamental-mode text-mode org-mode ruby-mode python-mode html-mode nxml-mode
-     xah-html-mode xah-elisp-mode
-     )))
+;; (when (fboundp 'global-page-break-lines-mode)
+;;   ;; make the formfeed char (^L) display as a line
+;;   (global-page-break-lines-mode 1)
+;;   (setq
+;;    page-break-lines-modes
+;;    '(
+;;      emacs-lisp-mode lisp-mode scheme-mode compilation-mode outline-mode help-mode
+;;      fundamental-mode text-mode org-mode ruby-mode python-mode html-mode nxml-mode
+;;      xah-html-mode xah-elisp-mode
+;;      )))
 
 (when (fboundp 'htmlize-region)
   ;; htmlize.el
@@ -85,24 +85,24 @@
     "ergoemacs_org/emacs_manual/"
     ]))
 
-(when (fboundp 'elfeed)
-  (setq elfeed-feeds
-        '("http://nullprogram.com/feed/"
-          "http://sachachua.com/blog/category/emacs-news/feed/"
-          "http://irreal.org/blog/?feed=rss2"
-          "http://www.terminally-incoherent.com/blog/feed/"
-          "http://ejohn.org/subscribe/"
-          "http://ergoemacs.org/emacs/blog.xml"
-          "http://xahlee.info/comp/blog.xml"
-          "http://xahlee.info/js/blog.xml"
-          "http://xahlee.info/math/blog.xml"
-          "http://wordyenglish.com/lit/blog.xml"
-          "http://xahmusic.org/music/blog.xml"
-          "http://xaharts.org/arts/blog.xml"
-          "http://xahlee.org/sex/blog.xml"
-          "http://xahsl.org/sl/blog.xml"
-          "http://wordyenglish.com/chinese/blog.xml"
-          )))
+;; (when (fboundp 'elfeed)
+;;   (setq elfeed-feeds
+;;         '("http://nullprogram.com/feed/"
+;;           "http://sachachua.com/blog/category/emacs-news/feed/"
+;;           "http://irreal.org/blog/?feed=rss2"
+;;           "http://www.terminally-incoherent.com/blog/feed/"
+;;           "http://ejohn.org/subscribe/"
+;;           "http://ergoemacs.org/emacs/blog.xml"
+;;           "http://xahlee.info/comp/blog.xml"
+;;           "http://xahlee.info/js/blog.xml"
+;;           "http://xahlee.info/math/blog.xml"
+;;           "http://wordyenglish.com/lit/blog.xml"
+;;           "http://xahmusic.org/music/blog.xml"
+;;           "http://xaharts.org/arts/blog.xml"
+;;           "http://xahlee.org/sex/blog.xml"
+;;           "http://xahsl.org/sl/blog.xml"
+;;           "http://wordyenglish.com/chinese/blog.xml"
+;;           )))
 
 ;; (when (fboundp 'xah-find-replace-text)
 ;; (setq xah-find-context-char-count-before 0)

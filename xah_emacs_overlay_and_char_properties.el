@@ -103,18 +103,16 @@ print the list result."
 ;; (add-to-invisibility-spec '(outline . t))
 
 (defun xah-hide-region (*begin *end)
-  "DOCSTRING
+  "Make region invisible.
 Version 2016-11-01"
   (interactive "r")
-  (progn
-    (xah-invisible-region 1 100 t)))
+  (xah-invisible-region *begin *end t))
 
 (defun xah-show-region (*begin *end)
-  "DOCSTRING
-Version 2016-11-01"
+  "Make region visible.
+Version 2017-02-02"
   (interactive "r")
-  (progn
-    (xah-invisible-region 1 100 nil)))
+  (xah-invisible-region *begin *end nil))
 
 ;; Move cursor to the next begin/end position of a overlay, make a text selection of its region.
 

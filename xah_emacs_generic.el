@@ -105,36 +105,8 @@ Version 2015-07-24"
 
 ;; don't use much anymore
 
-;; (xah-beep-for-n-min 1)
-(defun xah-beep-for-n-min (n)
-  "Make 1 beep sound per second for N minutes.
-WARNING: when beeping starts, emacs will freeze.
-Press \\[keyboard-quit] to cancel the beep."
-  (dotimes (i (* 60 n)) (progn (beep) (sleep-for 1)))
-  )
-
-(defun xah-set-alarm-after-n-min (n)
-  "Make a alarm clock beep alert after N minutes.
-The beep will last for 5 minutes.
-WARNING: when beeping starts, emacs will freeze.
-Press \\[keyboard-quit] to cancel the beep."
-  (interactive "nHow many minutes from now: ")
-  (run-with-timer
-   (* 60 n) nil
-   'xah-beep-for-n-min 5
-   ))
-
-(defun xah-erase-buffer ()
-  "Delete the entire contents of the current buffer.
-This command is similar to `erase-buffer', but also works if the buffer is
-image (image-mode)."
-  (interactive)
-  (when (equal major-mode 'image-mode)
-    (text-mode))
-  (erase-buffer))
-
-(defun xah-dec-to-bin (decStr)
-  "convert the decimal number string decStr into a binary (string)"
-  (require 'calc-bin)
-  (let ((calc-number-radix 2))
-    (math-format-radix (string-to-number decStr))))
+;; (defun xah-dec-to-bin (decStr)
+;;   "convert the decimal number string decStr into a binary (string)"
+;;   (require 'calc-bin)
+;;   (let ((calc-number-radix 2))
+;;     (math-format-radix (string-to-number decStr))))

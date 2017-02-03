@@ -45,14 +45,14 @@ Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 Also, removes repeated empty lines.
 WARNING: This command saves buffer if it's a file.
-Version 2016-11-23"
+Version 2017-02-02"
   (interactive)
   (save-excursion ; remove empty lines
     (progn
       (goto-char (point-min))
       (while (search-forward-regexp "\n\n\n+" nil t)
         (replace-match (make-string 2 ?\n)))))
-  (let (-p1 -p2 -num -bufferTextOrig -reportText)
+  (let (-p1 -p2 -num -bufferTextOrig )
     (push-mark)
     (goto-char 1)
     (when (search-forward "<div class=\"byline\">" nil)
@@ -118,21 +118,11 @@ words.html
 words-2.html
 words-3.html
 words-4.html
-"
+Version before 2012 or so"
   (interactive)
   (require 'sgml-mode)
   (let* (
          -p1 -p2
-         (-setBoundary
-          (save-excursion
-            (if (re-search-backward "\n[ \t]*\n" nil "move")
-                (progn (re-search-forward "\n[ \t]*\n")
-                       (setq -p1 (point)))
-              (setq -p1 (point)))
-            (if (re-search-forward "\n[ \t]*\n" nil "move")
-                (progn (re-search-backward "\n[ \t]*\n")
-                       (setq -p2 (point)))
-              (setq -p2 (point)))))
          (-fileList (split-string (buffer-substring-no-properties -p1 -p2) "\n" t))
          -pageNavStr )
     (delete-region -p1 -p2)
@@ -172,7 +162,7 @@ google_ad_client")
 (defun xah-syntax-color-hex ()
   "Syntax color text of the form 「#ff1100」 and 「#abc」 in current buffer.
 URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
-Version 2016-07-04"
+Version 2017-02-02"
   (interactive)
   (font-lock-add-keywords
    nil
@@ -182,23 +172,24 @@ Version 2016-07-04"
           (match-end 0)
           'face (list :background
                       (let* (
-                       (ms (match-string-no-properties 0))
-                       (r (substring ms 1 2))
-                       (g (substring ms 2 3))
-                       (b (substring ms 3 4)))
-                  (concat "#" r r g g b b))))))
+                             (ms (match-string-no-properties 0))
+                             (r (substring ms 1 2))
+                             (g (substring ms 2 3))
+                             (b (substring ms 3 4)))
+                        (concat "#" r r g g b b))))))
      ("#[ABCDEFabcdef[:digit:]]\\{6\\}"
       (0 (put-text-property
           (match-beginning 0)
           (match-end 0)
           'face (list :background (match-string-no-properties 0)))))))
-  (font-lock-fontify-buffer))
+  (font-lock-flush))
 
 (defun xah-syntax-color-hsl ()
   "Syntax color CSS's HSL color spec eg 「hsl(0,90%,41%)」 in current buffer.
 URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
-Version 2015-06-11"
+Version 2017-02-02"
   (interactive)
+  (require 'color)
   (font-lock-add-keywords
    nil
    '(("hsl( *\\([0-9]\\{1,3\\}\\) *, *\\([0-9]\\{1,3\\}\\)% *, *\\([0-9]\\{1,3\\}\\)% *)"
@@ -220,7 +211,7 @@ Version 2015-06-11"
                (/ (string-to-number (match-string-no-properties 3)) 100.0)))
              "" )) ;  "#00aa00"
            ))))))
-  (font-lock-fontify-buffer))
+  (font-lock-flush))
 
 ;; (concat "#" (mapconcat 'identity
 ;;                         (mapcar

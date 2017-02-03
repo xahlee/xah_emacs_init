@@ -44,18 +44,25 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (add-to-list 'load-path "~/git/xah-get-thing-or-selection/")
 (require 'xah-get-thing)
+
 (add-to-list 'load-path "~/git/xah-replace-pairs/")
 (require 'xah-replace-pairs)
+
 (add-to-list 'load-path "~/git/xeu_elisp_util.el/")
 (require 'xeu_elisp_util)
+
 (add-to-list 'load-path "~/git/xah-fly-keys/")
 (require 'xah-fly-keys)
+
 (add-to-list 'load-path "~/git/xah-elisp-mode/")
 (require 'xah-elisp-mode)
+
 (add-to-list 'load-path "~/git/xah-clojure-mode/")
 (require 'xah-clojure-mode)
+
 (add-to-list 'load-path "~/git/xah-find/")
 (require 'xah-find)
+
 (add-to-list 'load-path "~/git/xah-insert-random-id.el/")
 (require 'xah-insert-random-id)
 
@@ -65,18 +72,25 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (add-to-list 'load-path "~/git/xah-css-mode/")
 (require 'xah-css-mode)
+
 (add-to-list 'load-path "~/git/xah-html-mode.el/")
 (require 'xah-html-mode)
+
 (add-to-list 'load-path "~/git/xah-js-mode.el/")
 (require 'xah-js-mode)
+
 (add-to-list 'load-path "~/git/xah-php-mode.el/")
 (require 'xah-php-mode)
+
 (add-to-list 'load-path "~/git/xbbcode-mode.el/")
 (require 'xbbcode-mode)
+
 (add-to-list 'load-path "~/git/xub-mode.el/")
 (require 'xub-mode)
+
 (add-to-list 'load-path "~/git/lookup-word-on-internet/")
 (require 'xah-lookup)
+
 (add-to-list 'load-path "~/git/xah-math-input/")
 (require 'xah-math-input)
 
@@ -104,7 +118,6 @@ To solve this problem, when your code only knows the relative path of another fi
     ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
     (load (xah-get-fullpath "xah_emacs_mouse_binding"))))
 
-(load (xah-get-fullpath "xah_emacs_keybinding_functions"))
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
 
 (load (xah-get-fullpath "xah_emacs_abbr"))
