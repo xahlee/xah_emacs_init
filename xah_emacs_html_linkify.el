@@ -728,7 +728,7 @@ text can be any of:
 They will be changed into a HTML link in various formats, depending on the input.
 
 If there is text selection, use it as input.
-Version 2016-11-06"
+Version 2017-02-01"
   (interactive)
   (let* ( -p1 -p2 -input)
     ;; (if (string-match "%" -input )
@@ -747,10 +747,11 @@ Version 2016-11-06"
           (setq -p2 (point)))))
     (setq -input (buffer-substring-no-properties -p1 -p2))
     (cond
+     ((string-match-p "javascript_es2016/ECMAScript_2016" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
+     ((string-match-p "javascript_es6" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "javascript_ecma-262_5.1_2011" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "java8_doc" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "godoc" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "javascript_es6" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "html_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "html5_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
      ((string-match-p "css_2.1_spec" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))

@@ -46,7 +46,6 @@ Version 2016-10-24"
 
     ;; english word abbrev
     ("ann" "announcement" )
-    ("r" "return" )
     ("arg" "argument" )
     ("autom" "automatic" )
     ("bc" "because" )
@@ -87,6 +86,7 @@ Version 2016-10-24"
     ("pl" "programing language" )
     ("pls" "please" )
     ("prof" "professor" )
+    ("r" "return" )
     ("ref" "reference" )
     ("scs" "screenshot" )
     ("tb" "trackball" )
