@@ -57,9 +57,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xah-elisp-mode/")
 (require 'xah-elisp-mode)
 
-(add-to-list 'load-path "~/git/xah-clojure-mode/")
-(require 'xah-clojure-mode)
-
 (add-to-list 'load-path "~/git/xah-find/")
 (require 'xah-find)
 
@@ -77,25 +74,42 @@ To solve this problem, when your code only knows the relative path of another fi
 (require 'xah-html-mode)
 
 (add-to-list 'load-path "~/git/xah-js-mode.el/")
-(require 'xah-js-mode)
+;; (require 'xah-js-mode)
+(autoload 'xah-js-mode "xah-js-mode" )
+
+(add-to-list 'load-path "~/git/xah-clojure-mode/")
+;; (require 'xah-clojure-mode)
+(autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t)
 
 (add-to-list 'load-path "~/git/xah-php-mode.el/")
-(require 'xah-php-mode)
+;; (require 'xah-php-mode)
+(autoload 'xah-php-mode "xah-php-mode" "autoload the mode." t)
 
 (add-to-list 'load-path "~/git/xbbcode-mode.el/")
-(require 'xbbcode-mode)
+;; (require 'xbbcode-mode)
+(autoload 'xbbcode-mode "xbbcode-mode" "autoload the mode." t)
 
 (add-to-list 'load-path "~/git/xub-mode.el/")
-(require 'xub-mode)
+;; (require 'xub-mode)
+(autoload 'xub-mode "xub-mode" "autoload the mode." t)
 
 (add-to-list 'load-path "~/git/lookup-word-on-internet/")
-(require 'xah-lookup)
+;; (require 'xah-lookup)
+(autoload 'xah-lookup-google "xah-lookup" "Lookup in browser" t)
+(autoload 'xah-lookup-wikipedia "xah-lookup" "Lookup in browser" t)
+(autoload 'xah-lookup-word-dict-org "xah-lookup" "Lookup in browser" t)
+(autoload 'xah-lookup-word-definition "xah-lookup" "Lookup in browser" t)
+(autoload 'xah-lookup-wiktionary "xah-lookup" "Lookup in browser" t)
 
 (add-to-list 'load-path "~/git/xah-math-input/")
-(require 'xah-math-input)
+;; (require 'xah-math-input)
+(autoload 'xah-math-input-mode "xah-math-input" "autoload the mode." t)
+(autoload 'global-xah-math-input-mode "xah-math-input" "autoload the mode." t)
+(autoload 'xah-math-input-change-to-symbol "xah-math-input" "autoload the mode." t)
 
 (add-to-list 'load-path "~/Dropbox/")
-(require 'xlsl-mode)
+;; (require 'xlsl-mode)
+(autoload 'xlsl-mode "xlsl-mode" "autoload the mode." t)
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
 
@@ -104,19 +118,15 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
 
-(setq xah-load-xahkeys-q t)
-
-(when (boundp 'xah-load-xahkeys-q)
-  (when xah-load-xahkeys-q
+(when (fboundp 'xah-fly-keys)
     (setq xah-fly-swapped-1-8-and-2-7-p t)
-    (require 'xah-fly-keys)
     ;; (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
     (xah-fly-keys 1)
     (load (xah-get-fullpath "xah_emacs_keybinding"))
     (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
     ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
     ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
-    (load (xah-get-fullpath "xah_emacs_mouse_binding"))))
+    (load (xah-get-fullpath "xah_emacs_mouse_binding")))
 
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
 

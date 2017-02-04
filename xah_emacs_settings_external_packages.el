@@ -19,9 +19,6 @@
   (require 'smex)
   (smex-initialize))
 
-(when (fboundp 'xah-math-input-mode)
-  (global-xah-math-input-mode 1))
-
 (when (fboundp 'keyfreq-mode)
   ;; record command call statistics
   (require 'keyfreq)

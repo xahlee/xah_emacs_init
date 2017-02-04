@@ -56,42 +56,30 @@
     (define-key xah-html-mode-no-chord-map (kbd "j c") 'xah-words-add-comment )
     (define-key xah-html-mode-no-chord-map (kbd "j g") 'xah-words-search-next-unbold )
     (define-key xah-html-mode-no-chord-map (kbd "j p") 'xah-words-query-find-then-bold )
-    
+
     (define-key xah-html-mode-no-chord-map (kbd "SPC z b") 'xah-html-insert-lyrics-header)
     (define-key xah-html-mode-no-chord-map (kbd "SPC z f") 'xah-html-insert-midi))
 
   (add-hook 'xah-html-mode-hook 'xah-html-mode-keys))
 
-(when (fboundp 'xah-css-mode)
+(when (boundp 'xah-css-mode-no-chord-map)
   (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
   (define-key xah-css-mode-map xah-major-mode-lead-key xah-css-mode-no-chord-map)
   )
 
-(when (fboundp 'xah-clojure-mode)
+(when (boundp 'xah-clojure-mode-map)
   (define-key xah-clojure-mode-map xah-major-mode-lead-key xah-clojure-mode-no-chord-map)
   )
 
-(when (fboundp 'xah-elisp-mode)
+(when (boundp 'xah-elisp-mode-map)
   (define-key xah-elisp-mode-map xah-major-mode-lead-key xah-elisp-mode-no-chord-map)
   )
 
-(defun xah-org-mode-setup ()
-  "Modify keymaps used by `org-mode'."
-  (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
-(add-hook 'org-mode-hook 'xah-org-mode-setup)
-
-(defun xah-racket-mode-setup ()
-  "for 'racket-mode-hook'"
-  (local-set-key (kbd "C-c C-h") 'racket-describe)
-)
-(add-hook 'racket-mode-hook 'xah-racket-mode-setup)
-
-(defun xah-go-mode-setup ()
-  "for `go-mode'"
-  (local-set-key (kbd "<delete>") nil)
-  (local-set-key (kbd "<delete> <delete>") 'gofmt)
-)
-(add-hook 'go-mode-hook 'xah-go-mode-setup)
+(when (boundp 'org-mode-hook)
+  (defun xah-org-mode-setup ()
+    "Modify keymaps used by `org-mode'."
+    (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
+  (add-hook 'org-mode-hook 'xah-org-mode-setup))
 
 
 
