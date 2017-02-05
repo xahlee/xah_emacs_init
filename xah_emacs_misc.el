@@ -15,38 +15,10 @@ Version 2017-01-27"
    (lambda (x) (prin1 (car x)) (terpri))
    minor-mode-map-alist))
 
-(defun xah-select-text-in-html-bracket ()
-  "Select text between <…> or >…<."
-  (interactive)
-  (let (-p0 -p1< -p1> -p2< -p2>
-           distance-p1<
-           distance-p1>
-           )
-    (setq -p0 (point))
-    (search-backward "<" nil t )
-    (setq -p1< (point))
-    (goto-char -p0)
-    (search-backward ">" nil t )
-    (setq -p1> (point))
-    (setq distance-p1< (abs (- -p0 -p1<)))
-    (setq distance-p1> (abs (- -p1> -p0)))
-    (if (< distance-p1< distance-p1>)
-        (progn
-          (goto-char -p0)
-          (search-forward ">" nil t )
-          (setq -p2> (point))
-          (goto-char (1+ -p1<))
-          (set-mark (1- -p2>)))
-      (progn
-        (goto-char -p0)
-        (search-forward "<" nil t )
-        (setq -p2< (point))
-        (goto-char (1+ -p1>))
-        (set-mark (1- -p2<))))))
-
 (defun xah-open-file-from-clipboard ()
   "Open the file path from OS's clipboard.
-The clipboard should contain a file path or url to xah site. Open that file in emacs."
+The clipboard should contain a file path or url to xah site. Open that file in emacs.
+Version 2017-02-03"
   (interactive)
   (let (
         (-inputStr
@@ -55,7 +27,6 @@ The clipboard should contain a file path or url to xah site. Open that file in e
            (buffer-string)))
         -fpath
         )
-
     (if (string-match-p "\\`http://" -inputStr)
         (progn
           (setq -fpath (xahsite-url-to-filepath -inputStr "addFileName"))
@@ -665,60 +636,12 @@ Test cases
 
 
 
-;; (defun xah-dired-sort-time-accessed ()
-;;   "DOCSTRING"
-;;   (interactive)
-;;   (let ()
-;;     (setq dired-listing-switches "-Al --si --time-style long-iso")
-;;     (dired-sort-other "-Al --si --time-style long-iso -t") ;;by mod time
-;;     (dired-sort-other "-Al --si --time-style long-iso -tc") ;;by file metadata mod time
-;;     (dired-sort-other "-Al --si --time-style long-iso -tu") ;;by access time
-;;     (dired-sort-other "-Al --si --time-style long-iso -S") ;;by file size
-;;     (dired-sort-other "-Al --si --time-style long-iso -X") ;; by by extension
-;;     ))
-
 (defun xah-unfontify-region-or-buffer ()
   "Unfontify text selection or buffer."
   (interactive)
   (if (use-region-p)
       (font-lock-unfontify-region (region-beginning) (region-end))
     (font-lock-unfontify-buffer)))
-
-;; (defun overlay-key-binding (key)
-;; 2014-10-11 from http://stackoverflow.com/questions/18801018/how-to-find-in-which-map-a-key-binding-is-from-programatically-in-emacs
-;;   (mapcar (lambda (keymap) (lookup-key keymap key))
-;;           (cl-remove-if-not
-;;            #'keymapp
-;;            (mapcar (lambda (overlay)
-;;                      (overlay-get overlay 'keymap))
-;;                    (overlays-at (point))))))
-
-;; (defun xah-find-keybinding-source (*key)
-;; " 2014-10-11 from http://stackoverflow.com/questions/18801018/how-to-find-in-which-map-a-key-binding-is-from-programatically-in-emacs"
-;;   (list
-;;    (minor-mode-key-binding *key)
-;;    (local-key-binding *key)
-;;    (global-key-binding *key)
-;;    ;; (overlay-key-binding *key)
-;;    ))
-
-(defvar gitgrep-history nil)
-
-(defun gitgrep (*search-string)
-"call git grep to search symbols in a project.
-
-2014-11-19 by “Left Right” https://plus.google.com/113859563190964307534/posts/CyEsoyhkTVe
-"
-  (interactive
-   (let ((-sym (thing-at-point 'symbol)))
-     (list
-      (completing-read
-       "String to search for: "
-       (list -sym
-             (buffer-name)
-             (buffer-file-name))
-       'identity nil -sym gitgrep-history -sym))))
-  (grep (format "git --no-pager grep -P -n '%s'" *search-string)))
 
 (defun xah-toggle-background-color ()
   "Toggle background color between seashell and honeydew.
@@ -797,63 +720,90 @@ version 2016-06-12"
 
 
 
-(defun list-non-matching-lines ()
-  "Show lines *not* matching the regexp."
+;; from newsgroup gnu.emacs.help, by Richard Riley, 2009-08-02
+(defun xah-open-current-file-as-admin ()
+  "Open the current buffer as unix root.
+This command works on unixes only."
   (interactive)
-  (let ((orig-buf (current-buffer))
-        (new-buf "*List Non-matching Lines*"))
-    (switch-to-buffer new-buf nil :force-same-window)
-    (insert-buffer-substring orig-buf)
-    (goto-char (point-min))
-    (let ((inhibit-read-only t)) ; Always make the buffer editable
-      (call-interactively #'flush-lines))
-    (special-mode)))
- ; Make the new buffer read-only; also allowing bindings like `q'
+  (when buffer-file-name (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(defun xah-run-current-java-file ()
+  "Execute the current file's class with Java.
+For example, if the current buffer is the file x.java,
+then it'll call “java x” in a shell."
+  (interactive)
+  (let* (
+         (-fnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
+         (-prog-name "java"))
+    (shell-command (concat -prog-name " " -fnm " &"))))
+
+(defun xah-python-2to3-current-file ()
+  "Convert current buffer from python 2 to python 3.
+This command calls python3's script 「2to3」.
+URL `http://ergoemacs.org/emacs/elisp_python_2to3.html'
+Version 2016-02-16"
+  (interactive)
+  (let* (
+         (-fName (buffer-file-name))
+         (-fSuffix (file-name-extension -fName)))
+    (when (buffer-modified-p)
+      (save-buffer))
+    (if (or (string-equal -fSuffix "py") (string-equal -fSuffix "py3"))
+        (progn
+          (shell-command (format "2to3 -w %s" -fName))
+          (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES"))
+      (error "file 「%s」 doesn't end in “.py” or “.py3”." -fName))))
+
+(defun xah-change-file-line-ending-style (*files *style)
+  "Change current file or dired marked file's newline convention.
+
+When called non-interactively, *style is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+
+URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
+Version 2016-10-16"
+  (interactive
+   (list
+    (if (eq major-mode 'dired-mode )
+        (dired-get-marked-files)
+      (list (buffer-file-name)))
+    (ido-completing-read "Line ending:" '("Linux/MacOSX/Unix" "MacOS9" "Windows") "PREDICATE" "REQUIRE-MATCH")))
+  (let* (
+         (-codingSystem
+          (cond
+           ((equal *style "Linux/MacOSX/Unix") 'unix)
+           ((equal *style "MacOS9") 'mac)
+           ((equal *style "Windows") 'dos)
+           (t (error "code logic error 65327. Expect one of it." )))))
+    (mapc
+     (lambda (x) (xah-convert-file-coding-system x -codingSystem))
+     *files)))
+
+(defun xah-convert-file-coding-system (*fpath *coding-system)
+  "Convert file's encoding.
+ *fpath is full path to file.
+ *coding-system is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+
+If the file is already opened, it will be saved after this command.
+
+URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
+Version 2015-07-24"
+  (let (-buffer
+        (-bufferOpened-p (get-file-buffer *fpath)))
+    (if -bufferOpened-p
+        (with-current-buffer -bufferOpened-p
+          (set-buffer-file-coding-system *coding-system)
+          (save-buffer))
+      (progn
+        (setq -buffer (find-file *fpath))
+        (set-buffer-file-coding-system *coding-system)
+        (save-buffer)
+        (kill-buffer -buffer)))))
 
 
+;; don't use much anymore
 
-(require 'cl-lib)
-
-(defun invert-occur (regexp)
-  "Find all lines not matching REGEXP."
-  (interactive "sInverting match regexp: ")
-  (invert-occur--publish (invert-occur--find regexp)))
-
-(defun invert-occur--find (regexp)
-  (save-excursion
-    (setf (point) (point-min))
-    (cl-loop while (< (point) (point-max))
-             for line upfrom 1
-             for beg = (point)
-             for end = (line-end-position)
-             unless (re-search-forward regexp end :noerror)
-             collect (list line beg end)
-             do (setf (point) (1+ end)))))
-
-(define-derived-mode invert-occur-mode special-mode "ioccur"
-  "Major more for displaying `invert-occur' results.")
-(define-key invert-occur-mode-map (kbd "RET") #'invert-occur--follow)
-(define-key invert-occur-mode-map [mouse-2] #'invert-occur--follow)
-
-(defun invert-occur--publish (results)
-  (let ((source-buffer (current-buffer))
-        (inhibit-read-only t))
-    (with-current-buffer (get-buffer-create "*invert-occur*")
-      (invert-occur-mode)
-      (erase-buffer)
-      (cl-loop for (line beg end) in results
-               for marker = (set-marker (make-marker) beg source-buffer)
-               for button = (propertize (format "% 3d " line)
-                                        'mouse-face '(highlight)
-                                        'target marker)
-               do (insert button)
-               do (insert-buffer-substring source-buffer beg end)
-               do (insert "\n"))
-      (setf (point) (point-min))
-      (pop-to-buffer (current-buffer)))))
-
-(defun invert-occur--follow ()
-  (interactive)
-  (let ((marker (get-text-property (point) 'target)))
-    (pop-to-buffer (marker-buffer marker))
-    (setf (point) (marker-position marker))))
+;; (defun xah-dec-to-bin (decStr)
+;;   "convert the decimal number string decStr into a binary (string)"
+;;   (require 'calc-bin)
+;;   (let ((calc-number-radix 2))
+;;     (math-format-radix (string-to-number decStr))))

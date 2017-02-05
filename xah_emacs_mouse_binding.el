@@ -24,7 +24,11 @@
     (global-set-key (kbd "<S-mouse-5>") 'xah-next-user-buffer)
 
     (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-    (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)))
+    (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+
+    (global-set-key (kbd "<mouse-6>") 'xah-beginning-of-line-or-block)
+    (global-set-key (kbd "<mouse-7>") 'xah-end-of-line-or-block)))
+
  ((string-equal system-type "windows-nt") ; Windows
   (progn
     nil))

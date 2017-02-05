@@ -41,7 +41,6 @@ To solve this problem, when your code only knows the relative path of another fi
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-get-fullpath ""))
 
-
 (add-to-list 'load-path "~/git/xah-get-thing-or-selection/")
 (require 'xah-get-thing)
 
@@ -54,8 +53,13 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xah-fly-keys/")
 (require 'xah-fly-keys)
 
-(add-to-list 'load-path "~/git/xah-elisp-mode/")
-(require 'xah-elisp-mode)
+(progn
+  (add-to-list 'load-path "~/git/xah-elisp-mode/")
+  (require 'xah-elisp-mode)
+  (when (boundp 'xah-elisp-mode-map)
+    (define-key xah-elisp-mode-map
+      (kbd "<delete>")
+      xah-elisp-mode-no-chord-map)))
 
 (add-to-list 'load-path "~/git/xah-find/")
 (require 'xah-find)
@@ -67,8 +71,12 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; (add-to-list 'load-path "~/git/xah-html6-mode.el/")
 
-(add-to-list 'load-path "~/git/xah-css-mode/")
-(require 'xah-css-mode)
+(progn
+  (add-to-list 'load-path "~/git/xah-css-mode/")
+  (require 'xah-css-mode)
+  (when (boundp 'xah-css-mode-no-chord-map)
+    (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
+    (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map)))
 
 (add-to-list 'load-path "~/git/xah-html-mode.el/")
 (require 'xah-html-mode)
@@ -77,9 +85,12 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; (require 'xah-js-mode)
 (autoload 'xah-js-mode "xah-js-mode" )
 
-(add-to-list 'load-path "~/git/xah-clojure-mode/")
-;; (require 'xah-clojure-mode)
-(autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t)
+(progn
+  (add-to-list 'load-path "~/git/xah-clojure-mode/")
+  ;; (require 'xah-clojure-mode)
+  (autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t)
+  (when (boundp 'xah-clojure-mode-map)
+    (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map)))
 
 (add-to-list 'load-path "~/git/xah-php-mode.el/")
 ;; (require 'xah-php-mode)
@@ -101,11 +112,15 @@ To solve this problem, when your code only knows the relative path of another fi
 (autoload 'xah-lookup-word-definition "xah-lookup" "Lookup in browser" t)
 (autoload 'xah-lookup-wiktionary "xah-lookup" "Lookup in browser" t)
 
-(add-to-list 'load-path "~/git/xah-math-input/")
-;; (require 'xah-math-input)
-(autoload 'xah-math-input-mode "xah-math-input" "autoload the mode." t)
-(autoload 'global-xah-math-input-mode "xah-math-input" "autoload the mode." t)
-(autoload 'xah-math-input-change-to-symbol "xah-math-input" "autoload the mode." t)
+(progn
+  (add-to-list 'load-path "~/git/xah-math-input/")
+  ;; (require 'xah-math-input)
+  (autoload 'xah-math-input-mode "xah-math-input" "autoload the mode." t)
+  (autoload 'global-xah-math-input-mode "xah-math-input" "autoload the mode." t)
+  (autoload 'xah-math-input-change-to-symbol "xah-math-input" "autoload the mode." t)
+  (autoload 'xah-math-input-mode-on "xah-math-input" "autoload the mode." t)
+  ;;
+)
 
 (add-to-list 'load-path "~/Dropbox/")
 ;; (require 'xlsl-mode)
@@ -132,7 +147,6 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_abbr"))
 
-(load (xah-get-fullpath "xah_emacs_generic"))
 (load (xah-get-fullpath "xah_emacs_mouse_commands"))
 
 (load (xah-get-fullpath "xah_emacs_html"))

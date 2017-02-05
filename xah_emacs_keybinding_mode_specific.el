@@ -5,7 +5,7 @@
   (require 'dired )
   (define-key dired-mode-map (kbd "6") 'dired-up-directory)
   (define-key dired-mode-map (kbd "-") 'xah-dired-rename-space-to-underscore)
-  (when (fboundp 'xah-dired-sort) (define-key dired-mode-map (kbd "s") 'xah-dired-sort)))
+  (define-key dired-mode-map (kbd "s") 'xah-dired-sort))
 
 (progn
   (require 'info )
@@ -13,7 +13,7 @@
 
 (when (fboundp 'xah-html-mode)
 
-  (define-key xah-html-mode-map xah-major-mode-lead-key xah-html-mode-no-chord-map)
+  (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
 
   (defun xah-html-mode-keys ()
     "Modify keymaps used by `html-mode'."
@@ -61,19 +61,6 @@
     (define-key xah-html-mode-no-chord-map (kbd "SPC z f") 'xah-html-insert-midi))
 
   (add-hook 'xah-html-mode-hook 'xah-html-mode-keys))
-
-(when (boundp 'xah-css-mode-no-chord-map)
-  (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
-  (define-key xah-css-mode-map xah-major-mode-lead-key xah-css-mode-no-chord-map)
-  )
-
-(when (boundp 'xah-clojure-mode-map)
-  (define-key xah-clojure-mode-map xah-major-mode-lead-key xah-clojure-mode-no-chord-map)
-  )
-
-(when (boundp 'xah-elisp-mode-map)
-  (define-key xah-elisp-mode-map xah-major-mode-lead-key xah-elisp-mode-no-chord-map)
-  )
 
 (when (boundp 'org-mode-hook)
   (defun xah-org-mode-setup ()

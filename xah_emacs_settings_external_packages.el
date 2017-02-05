@@ -74,6 +74,7 @@
     "xahlee_info/javascript_ecma-262_5.1_2011/"
     "xahlee_info/javascript_ecma-262_6_2015/"
     "xahlee_info/javascript_es6/"
+    "xahlee_info/javascript_es2016/"
     "xahlee_info/git-bottomup/"
     "xahlee_info/dom-whatwg/"
     "xahlee_info/html5_whatwg/"

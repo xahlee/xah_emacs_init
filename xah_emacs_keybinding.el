@@ -31,9 +31,6 @@
 
 ;; (define-key key-translation-map (kbd "<delete>") (kbd "C-c C-c"))
 
-;; (setq xah-major-mode-lead-key (kbd "C-t"))
-(setq xah-major-mode-lead-key (kbd "<delete>"))
-
 ;; (current-input-mode)
 ;; (t nil t 7)
 
