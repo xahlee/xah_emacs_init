@@ -231,4 +231,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_syntax_parse"))
 (load (xah-get-fullpath "xah_emacs_overlay_and_char_properties"))
-(load "~/Dropbox/xah-emacs-private_b53d8d39")
+
+(when (file-exists-p "~/Dropbox/")
+  (progn
+    (load "~/Dropbox/xah-emacs-private_b53d8d39")))
