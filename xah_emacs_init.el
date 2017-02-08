@@ -78,8 +78,59 @@ To solve this problem, when your code only knows the relative path of another fi
     (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
     (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map)))
 
-(add-to-list 'load-path "~/git/xah-html-mode.el/")
-(require 'xah-html-mode)
+(progn
+  (add-to-list 'load-path "~/git/xah-html-mode.el/")
+  (require 'xah-html-mode)
+  (when (fboundp 'xah-html-mode)
+
+    (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
+
+    (defun xah-html-mode-keys ()
+      "Modify keymaps used by `html-mode'."
+
+      (define-key xah-html-mode-map (kbd "<f5>") 'xah-browse-url-of-buffer)
+
+      (define-key xah-html-mode-no-chord-map (kbd "e") 'xah-make-atom-entry)
+      (define-key xah-html-mode-no-chord-map (kbd "h") 'xah-all-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "u") 'xahsite-update-article-timestamp)
+      (define-key xah-html-mode-no-chord-map (kbd "n") 'xah-insert-reference-span-tag)
+      (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
+
+      (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC b") 'xah-make-blogger-entry)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC c") 'xah-angle-brackets-to-html)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC e") 'xah-html-full-size-img-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC p") 'xah-copy-url-current-file)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r j") 'xah-image-file-to-html-figure-tag)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r p") 'xah-html-php-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r r") 'xah-add-to-related-links)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r z") 'xah-amazon-linkify)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j") nil)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j a") 'xah-words-annotate)
+      (define-key xah-html-mode-no-chord-map (kbd "j e") 'xah-words-bold-word)
+      (define-key xah-html-mode-no-chord-map (kbd "j c") 'xah-words-chinese-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "j m") 'xah-words-move-word-to-page)
+      (define-key xah-html-mode-no-chord-map (kbd "j t") 'xah-words-word-etymology-linkify)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j n") 'xah-words-new-word-entry )
+      (define-key xah-html-mode-no-chord-map (kbd "j i") 'xah-words-insert-word-entry )
+      (define-key xah-html-mode-no-chord-map (kbd "j d") 'xah-words-add-definition )
+      (define-key xah-html-mode-no-chord-map (kbd "j s") 'xah-words-add-source )
+      (define-key xah-html-mode-no-chord-map (kbd "j c") 'xah-words-add-comment )
+      (define-key xah-html-mode-no-chord-map (kbd "j g") 'xah-words-search-next-unbold )
+      (define-key xah-html-mode-no-chord-map (kbd "j p") 'xah-words-query-find-then-bold )
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC z b") 'xah-html-insert-lyrics-header)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC z f") 'xah-html-insert-midi))
+
+    (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)))
 
 (add-to-list 'load-path "~/git/xah-js-mode.el/")
 ;; (require 'xah-js-mode)
@@ -122,9 +173,11 @@ To solve this problem, when your code only knows the relative path of another fi
   ;;
 )
 
-(add-to-list 'load-path "~/Dropbox/")
-;; (require 'xlsl-mode)
-(autoload 'xlsl-mode "xlsl-mode" "autoload the mode." t)
+(when (file-exists-p "~/Dropbox/")
+  (progn
+    (add-to-list 'load-path "~/Dropbox/")
+    ;; (require 'xlsl-mode)
+    (autoload 'xlsl-mode "xlsl-mode" "autoload the mode." t)))
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
 
