@@ -503,8 +503,9 @@ if the *input-str is a relative path, *default-dir is used to resolve to full pa
   "Returns t if *path ends in .jpg .png .gif .svg, else nil."
   (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" *path))
 
-(defun xah-find-files-file-predicate-p (*fname)
+(defun xah-find-files-file-predicate-p (*fname _parentdir)
   "return t if *fname is what we want. Else nil.
+The arg _parentdir is not used. It is there so that this function can be passed as 2nd arg to `find-lisp-find-files-internal', which requires 2 args.
 2016-07-09"
   (interactive)
   (and
@@ -603,7 +604,7 @@ if the *input-str is a relative path, *default-dir is used to resolve to full pa
                  (string-match "404error.html" -f)))
            (with-temp-buffer
              (insert-file-contents -f)
-             (when (not (search-forward "<meta http-equiv=\"refresh\"" nil t))
+             (when (not (search-forward "<p class=\"page_moved_64598\">" nil t))
                (with-current-buffer -sitemapBuffer
                  (insert "<url><loc>")
                  (insert (concat "http://" *domain-name "/" (substring -f (length --websiteDocRootPath))))
