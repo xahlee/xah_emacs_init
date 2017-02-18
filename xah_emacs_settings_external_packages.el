@@ -19,6 +19,10 @@
   (require 'smex)
   (smex-initialize))
 
+(when (fboundp 'magit-status)
+  (define-key magit-file-section-map (kbd "u") nil)
+  (define-key magit-file-section-map (kbd "a") nil))
+
 (when (fboundp 'keyfreq-mode)
   ;; record command call statistics
   (require 'keyfreq)

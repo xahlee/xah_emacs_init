@@ -252,7 +252,7 @@
 (progn
  ;; Make whitespace-mode with very basic background coloring for whitespaces.
   ;; http://ergoemacs.org/emacs/whitespace-mode.html
-  (setq whitespace-style (quote ( spaces tabs newline space-mark tab-mark newline-mark )))
+  (setq whitespace-style (quote (face spaces tabs newline space-mark tab-mark newline-mark )))
 
   ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line char and “▷” for tab.
   (setq whitespace-display-mappings

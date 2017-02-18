@@ -41,12 +41,6 @@
 ;;    (nth 2 x)
 ;;    27))
 
-(progn
-  (define-key xah-help-keymap (kbd "2") 'xah-lookup-google)
-  (define-key xah-help-keymap (kbd "1") 'xah-lookup-wikipedia)
-  (define-key xah-help-keymap (kbd "9") 'xah-lookup-word-definition)
-  (define-key xah-help-keymap (kbd "0") 'xah-lookup-all-dictionaries))
-
 ;; (global-set-key (kbd "<prior>") 'scroll-down-command)
 ;; (global-set-key (kbd "<next>") 'scroll-up-command)
 
@@ -63,6 +57,14 @@
 ;; 'xah-cycle-font-2
 ;; 'xah-cycle-font-next
 ;; 'xah-cycle-font-previous
+
+ (when (and
+       (fboundp 'xah-lookup-google)
+       (boundp 'xah-fly-h-keymap))
+  (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-google)
+  (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-wikipedia)
+  (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
+  (define-key xah-fly-h-keymap (kbd "0") 'xah-lookup-all-dictionaries))
 
 (progn
   (define-prefix-command 'xah-user-keymap)
@@ -82,7 +84,7 @@
   (define-key xah-user-keymap (kbd "a") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "b") nil)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  (define-key xah-user-keymap (kbd "e") xah-insertion-keymap)
+  (define-key xah-user-keymap (kbd "e") xah-fly-e-keymap)
   (define-key xah-user-keymap (kbd "f b") 'xah-dired-crop-image)
   (define-key xah-user-keymap (kbd "f c") 'xah-dired-2jpg)
   (define-key xah-user-keymap (kbd "f d") 'xah-dired-image-autocrop)

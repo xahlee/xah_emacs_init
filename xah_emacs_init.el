@@ -136,6 +136,10 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; (require 'xah-js-mode)
 (autoload 'xah-js-mode "xah-js-mode" )
 
+(add-to-list 'load-path "~/git/xah-typescript-mode/")
+(require 'xah-ts-mode)
+(autoload 'xah-ts-mode "xah-ts-mode" )
+
 (progn
   (add-to-list 'load-path "~/git/xah-clojure-mode/")
   ;; (require 'xah-clojure-mode)
@@ -156,22 +160,13 @@ To solve this problem, when your code only knows the relative path of another fi
 (autoload 'xub-mode "xub-mode" "autoload the mode." t)
 
 (add-to-list 'load-path "~/git/lookup-word-on-internet/")
-;; (require 'xah-lookup)
-(autoload 'xah-lookup-google "xah-lookup" "Lookup in browser" t)
-(autoload 'xah-lookup-wikipedia "xah-lookup" "Lookup in browser" t)
-(autoload 'xah-lookup-word-dict-org "xah-lookup" "Lookup in browser" t)
-(autoload 'xah-lookup-word-definition "xah-lookup" "Lookup in browser" t)
-(autoload 'xah-lookup-wiktionary "xah-lookup" "Lookup in browser" t)
+(require 'xah-lookup)
 
 (progn
   (add-to-list 'load-path "~/git/xah-math-input/")
-  ;; (require 'xah-math-input)
-  (autoload 'xah-math-input-mode "xah-math-input" "autoload the mode." t)
-  (autoload 'global-xah-math-input-mode "xah-math-input" "autoload the mode." t)
-  (autoload 'xah-math-input-change-to-symbol "xah-math-input" "autoload the mode." t)
-  (autoload 'xah-math-input-mode-on "xah-math-input" "autoload the mode." t)
-  ;;
-)
+  (require 'xah-math-input)
+  (global-xah-math-input-mode 1)
+  )
 
 (when (file-exists-p "~/Dropbox/")
   (progn

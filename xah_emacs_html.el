@@ -97,12 +97,16 @@ Version 2017-02-02"
               (message (concat "Backup saved at: " -backup-name)))))
       (save-buffer )
       (message "old date line: 「%s」" -bufferTextOrig)
+
       (when ;; open in browser
           (string-equal system-type "gnu/linux")
         (let ( (process-connection-type nil))
           (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
         ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
-        ))))
+        )
+
+      ;;
+      )))
 
 (defun xahsite-update-page-tag ()
   "Update HTML page navigation tags.

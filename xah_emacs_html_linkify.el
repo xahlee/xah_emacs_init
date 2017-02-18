@@ -645,18 +645,23 @@ becomes
     (insert (format "<audio src=\"%s\" controls></audio>" -src))))
 
 (defun xah-video-file-linkify ()
-  "Make the path under cursor into a HTML link.
+  "Make the path under cursor into a HTML video tag link.
 e.g. xyz.webm
 becomes
 <video src=\"i/xyz.webm\" controls loop autoplay></video>
-Version 2016-10-12"
+Version 2017-02-12"
   (interactive)
   (let* (
          (-bds (bounds-of-thing-at-point 'filename ))
          (-p1 (car -bds))
          (-p2 (cdr -bds))
          (-inputStr (buffer-substring-no-properties -p1 -p2 ))
-         (-src (if (string-match "^http" -inputStr ) -inputStr (file-relative-name -inputStr))))
+         (-src
+          (if (string-match "^http" -inputStr )
+              -inputStr
+            (if (file-exists-p -inputStr)
+                (file-relative-name -inputStr)
+              (user-error "file not found: 「%s」" -inputStr)))))
     (delete-region -p1 -p2)
     (insert (format "<video src=\"%s\" controls loop autoplay></video>" -src))))
 
@@ -728,7 +733,7 @@ text can be any of:
 They will be changed into a HTML link in various formats, depending on the input.
 
 If there is text selection, use it as input.
-Version 2017-02-01"
+Version 2017-02-12"
   (interactive)
   (let* ( -p1 -p2 -input)
     ;; (if (string-match "%" -input )
@@ -774,6 +779,7 @@ Version 2017-02-01"
      ((string-match-p "\\.mp3\\'" -input) (xah-audio-file-linkify))
      ((string-match-p "\\.ogg\\'" -input) (xah-audio-file-linkify))
      ((string-match-p "\\.mp4\\'" -input) (xah-video-file-linkify))
+     ((string-match-p "\\.mkv\\'" -input) (xah-video-file-linkify))
      ((string-match-p "\\.webm\\'" -input) (xah-video-file-linkify))
 
      ((xahsite-url-is-xah-website-p -input) (xah-file-linkify -p1 -p2))
