@@ -181,16 +181,11 @@ Version 2015-12-17"
 
 Call again to toggle back.
 URL `http://ergoemacs.org/emacs/emacs_novel_reading_mode.html'
-Version 2016-01-16"
+Version 2017-02-27"
   (interactive)
   (if (null (get this-command 'state-on-p))
       (progn
-        (set-window-margins
-         nil 0
-         (if (> fill-column (window-body-width))
-             0
-           (progn
-             (- (window-body-width) fill-column))))
+        (set-window-margins nil 0 9)
         (variable-pitch-mode 1)
         (setq line-spacing 0.4)
         (setq word-wrap t)

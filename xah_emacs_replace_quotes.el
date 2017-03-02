@@ -632,16 +632,14 @@ Version 2017-01-11"
           (while (search-forward "  " nil t)
             (replace-match " " "FIXEDCASE" "LITERAL")))))))
 
-(defun xah-remove-quotes-or-brackets (*begin *end *bracketType)
+(defun xah-remove-quotes-or-brackets (*bracket-chars)
   "Remove quotes/brackets in current line or text selection.
 
-When called in lisp program, *begin *end are region begin/end position, *bracketType is a string of a bracket pair. eg \"()\",  \"[]\", etc.
+When called in lisp program, *begin *end are region begin/end position, *bracket-chars is a string of a bracket pair. eg \"()\",  \"[]\", etc.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2017-01-11"
+Version 2017-03-02"
   (interactive
    (list
-    (if (use-region-p) (region-beginning) (line-beginning-position))
-    (if (use-region-p) (region-end) (line-end-position))
     (ido-completing-read
      "Replace this:"
      '("() paren"
@@ -677,24 +675,28 @@ Version 2017-01-11"
        "❬❭"
        "❮❯"
        "❰❱"))))
-  (save-excursion
-    (save-restriction
-      (narrow-to-region *begin *end)
-      (let ( (case-fold-search nil))
-        (mapc
-         (lambda (x)
-           (goto-char (point-min))
-           (while (search-forward (char-to-string x)  nil t)
-             (replace-match "" "FIXEDCASE" "LITERAL")))
-         (substring *bracketType 0 2))))))
+  (let (-begin -end)
+    (if (use-region-p)
+        (progn (setq -begin (region-beginning)) -end (region-end))
+      (progn (setq -begin (line-beginning-position) -end (line-end-position))))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region -begin -end)
+        (let ( (case-fold-search nil))
+          (mapc
+           (lambda (x)
+             (goto-char (point-min))
+             (while (search-forward (char-to-string x)  nil t)
+               (replace-match "" "FIXEDCASE" "LITERAL")))
+           (substring *bracket-chars 0 2)))))))
 
-(defun xah-change-bracket-pairs ( *fromType *toType *begin *end)
-  "Change bracket pairs from one type to another on current line or selection.
+(defun xah-change-bracket-pairs ( *from-chars *to-chars)
+  "Change bracket pairs from one type to another on current line or text selection.
 For example, change all parenthesis () to square brackets [].
 
-When called in lisp program, *begin *end are region begin/end position, *fromType or *toType is a string of a bracket pair. eg \"()\",  \"[]\", etc.
+When called in lisp program, *from-chars or *to-chars is a string of bracket pair. eg \"()\",  \"[]\", etc. If the string has length greater than 2, the rest are ignored.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2017-01-11"
+Version 2017-03-02"
   (interactive
    (let ((-bracketsList
           '("() paren"
@@ -755,34 +757,34 @@ Version 2017-01-11"
 
      (list
       (ido-completing-read "Replace this:" -bracketsList )
-      (ido-completing-read "To:" -bracketsList )
-      (if (use-region-p) (region-beginning) nil)
-      (if (use-region-p) (region-end) nil))))
-  (save-excursion
-    (save-restriction
-      (when (null *begin)
-        (setq *begin (line-beginning-position))
-        (setq *end (line-end-position)))
-      (narrow-to-region *begin *end)
-      (let ( (case-fold-search nil)
-             (-fromLeft (substring *fromType 0 1))
-             (-toLeft (if (string-equal (substring *toType 0 1) " ")
-                          (progn "")
-                        (substring *toType 0 1)))
-             (-fromRight (substring *fromType 1 2))
-             (-toRight (if (string-equal (substring *toType 1 2) " ")
-                           (progn "")
-                         (substring *toType 1 2))))
-        (progn
-          (goto-char (point-min))
-          (while (search-forward -fromLeft nil t)
-            (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-            (replace-match -toLeft "FIXEDCASE" "LITERAL")))
-        (progn
-          (goto-char (point-min))
-          (while (search-forward -fromRight nil t)
-            (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-            (replace-match -toRight "FIXEDCASE" "LITERAL")))))))
+      (ido-completing-read "To:" -bracketsList ))))
+
+  (let ( -begin -end )
+    (if (use-region-p)
+        (progn (setq -begin (region-beginning)) -end (region-end))
+      (progn (setq -begin (line-beginning-position) -end (line-end-position))))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region -begin -end)
+        (let ( (case-fold-search nil)
+               (-fromLeft (substring *from-chars 0 1))
+               (-toLeft (if (string-equal (substring *to-chars 0 1) " ")
+                            (progn "")
+                          (substring *to-chars 0 1)))
+               (-fromRight (substring *from-chars 1 2))
+               (-toRight (if (string-equal (substring *to-chars 1 2) " ")
+                             (progn "")
+                           (substring *to-chars 1 2))))
+          (progn
+            (goto-char (point-min))
+            (while (search-forward -fromLeft nil t)
+              (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+              (replace-match -toLeft "FIXEDCASE" "LITERAL")))
+          (progn
+            (goto-char (point-min))
+            (while (search-forward -fromRight nil t)
+              (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+              (replace-match -toRight "FIXEDCASE" "LITERAL"))))))))
 
 (defun xah-corner-bracket→html-i (*begin *end)
        "Replace all 「…」 to <code>…</code> in current text block.

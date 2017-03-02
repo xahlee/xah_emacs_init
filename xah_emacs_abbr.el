@@ -22,7 +22,7 @@ Version 2016-10-24"
   '(
 
     ;; phrase
-    ("afaik" "As far as i know" )
+    ("afaik" "as far as i know" )
     ("atm" "at the moment" )
     ("dfb" "difference between" )
     ("ty" "thank you" )

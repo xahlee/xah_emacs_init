@@ -376,7 +376,7 @@ Example output:
 
 For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number'
 URL `http://ergoemacs.org/emacs/elisp_amazon-linkify.html'
-Version 2015-06-07"
+Version 2017-02-18"
   (interactive)
   (let ((-bds (bounds-of-thing-at-point 'url))
         -p1 -p2 -inputText -asin -productName )
@@ -386,7 +386,7 @@ Version 2015-06-07"
     (setq -inputText (buffer-substring-no-properties -p1 -p2))
     (if (string-match "//amzn.to/" -inputText)
         (progn (delete-region -p1 -p2)
-               (insert (format "<a class=\"amzlnk\" href=\"%s\">amazon</a>" -inputText)))
+               (insert (format "<a class=\"amz_search\" href=\"%s\">amazon</a>" -inputText)))
       (progn
         (setq -asin
               (cond
@@ -415,7 +415,7 @@ Version 2015-06-07"
         (delete-region -p1 -p2)
         (insert
          "<a class=\"amz\" href=\"http://www.amazon.com/dp/"
-         -asin "/?tag=xahh-20\" title=\"" -productName "\">amazon</a>")
+         -asin "/?tag=xahh-20\" title=\"" -productName "\">Buy at amazon</a>")
         (search-backward "\">")))))
 
 ;; (defun local-linkify ()

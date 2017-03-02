@@ -7,21 +7,31 @@
 ;;   (global-undo-tree-mode 1)
 ;;   )
 
-(when (fboundp 'xah-lookup-google)
-  (when (or
-         (string-equal system-type "gnu/linux")
-         (string-equal system-type "darwin"))
-    (require 'eww)
-    (setq xah-lookup-dictionary-browser-function 'eww)))
+(when (and
+       (fboundp 'xah-lookup-google)
+       (boundp 'xah-fly-h-keymap))
+  (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-google)
+  (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-wikipedia)
+  (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
+
+  (define-key xah-fly-h-keymap (kbd "0") 'xah-lookup-all-dictionaries)
+
+  (define-key xah-fly-h-keymap (kbd "3") 'xah-lookup-word-dict-org)
+  (define-key xah-fly-h-keymap (kbd "4") 'xah-lookup-etymology)
+  (define-key xah-fly-h-keymap (kbd "5") 'xah-lookup-wiktionary)
+  (require 'eww)
+  (setq xah-lookup-dictionary-browser-function 'eww)
+  ;;
+  )
 
 (when (fboundp 'smex)
   ;; enhanced execute-extended-command
   (require 'smex)
   (smex-initialize))
 
-(when (fboundp 'magit-status)
-  (define-key magit-file-section-map (kbd "u") nil)
-  (define-key magit-file-section-map (kbd "a") nil))
+;; (when (fboundp 'magit-status)
+;;   (define-key magit-file-section-map (kbd "u") nil)
+;;   (define-key magit-file-section-map (kbd "a") nil))
 
 (when (fboundp 'keyfreq-mode)
   ;; record command call statistics

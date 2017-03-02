@@ -57,15 +57,7 @@
 ;; 'xah-cycle-font-2
 ;; 'xah-cycle-font-next
 ;; 'xah-cycle-font-previous
-
- (when (and
-       (fboundp 'xah-lookup-google)
-       (boundp 'xah-fly-h-keymap))
-  (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-google)
-  (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-wikipedia)
-  (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
-  (define-key xah-fly-h-keymap (kbd "0") 'xah-lookup-all-dictionaries))
-
+ 
 (progn
   (define-prefix-command 'xah-user-keymap)
 
