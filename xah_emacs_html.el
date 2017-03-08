@@ -301,12 +301,15 @@ Requires a python script. See code."
 ;;         (message "move to path: %s" -to-path)))))
 
 (defun xah-move-image-file (*dir-name *file-name)
-  "move image file at
-~/Downloads/
-or
-~/Pictures/
+  "Move image file to another dir.
 
-named any of
+from directories checked are:
+~/Downloads/
+~/Pictures/
+~/
+/tmp/
+
+File name checked are:
 x.jpg
 x1.jpg
 x2.jpg
@@ -321,13 +324,13 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-01-19"
+Version 2017-03-07"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
         -from-path
         -to-path
-        (-dirs '( "~/Downloads/" "~/Pictures/" "/tmp" ))
+        (-dirs '( "~/Downloads/" "~/Pictures/" "~/" "/tmp" ))
         (-names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" ))
         (-exts '("jpg" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" )))
     (setq -from-path

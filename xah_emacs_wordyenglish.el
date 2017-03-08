@@ -99,11 +99,12 @@ Version 2015-03-11"
   (xah-words-insert-word-entry))
 
 (defun xah-words-insert-word-entry ()
-  "Insert a blank a-word-a-day HTML template."
+  "Insert a blank a-word-a-day HTML template.
+Version 2017-03-08"
   (interactive)
   (insert
    "<section class=\"word88\">
-<p class=\"wd\"></p>
+<h3 class=\"wd\"></h3>
 <div class=\"ex\">
 <div class=\"bdy\"></div>
 <div class=\"src\"></div>
@@ -159,7 +160,7 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
 
   (let (wd egText -p1 -p2 p3 p4 notBolded-p)
     ;; grab the word
-    (search-forward "<p class=\"wd\">")
+    (search-forward "<h3 class=\"wd\">")
     (setq -p1 (point))
     (search-forward "</p>")
     (backward-char 4)
@@ -223,13 +224,13 @@ insert a div tag above the current paragraph."
 
 (defun xah-words-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.
-Search forward a word enclosed by “<p class=\"wd\">” and “</p>”,
+Search forward a word enclosed by “<h3 class=\"wd\">” and “</h3>”,
 then search forward it inside the example body, only if it is not
 already bold. Then, ask user whether that should be bold."
   (interactive)
   (progn
     (goto-char (point-min))
-    (while (search-forward-regexp "<p class=\"wd\">\\([^\<]+\\)</p>" nil t)
+    (while (search-forward-regexp "<h3 class=\"wd\">\\([^\<]+\\)</h3>" nil t)
       (search-forward-regexp (match-string 1))
       (when (y-or-n-p "Do you want to bold the word?")
         (xah-html-wrap-html-tag "span" "w")

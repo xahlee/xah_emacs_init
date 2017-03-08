@@ -637,7 +637,7 @@ Version 2017-01-11"
 
 When called in lisp program, *begin *end are region begin/end position, *bracket-chars is a string of a bracket pair. eg \"()\",  \"[]\", etc.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2017-03-02"
+Version 2017-03-03"
   (interactive
    (list
     (ido-completing-read
@@ -677,7 +677,7 @@ Version 2017-03-02"
        "❰❱"))))
   (let (-begin -end)
     (if (use-region-p)
-        (progn (setq -begin (region-beginning)) -end (region-end))
+        (progn (setq -begin (region-beginning) -end (region-end)))
       (progn (setq -begin (line-beginning-position) -end (line-end-position))))
     (save-excursion
       (save-restriction

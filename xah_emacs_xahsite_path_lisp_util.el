@@ -32,7 +32,9 @@ e.g. c:/Users/h3/web/"
   "A vector of dir names (not path, and no dir separator) under first dir level of xahlee.info that are external docs.
 2017-03-02"
   [
-   "emacs_manual"
+
+   ;;    "emacs_manual"
+
    "REC-SVG11-20110816"
    "clojure-doc-1.8"
    "css3_spec_bg"
@@ -48,10 +50,10 @@ e.g. c:/Users/h3/web/"
    "javascript_es6"
    "jquery_doc"
    "node_api"
+   "ocaml_doc"
    "php-doc"
    "python_doc_2.7.6"
    "python_doc_3.3.3"
-   "ocaml_doc"
 
    ;; grep -r -F "REC-SVG11-20110816" --include='*html' ~/web/xahlee_info >> xx33
    ;; grep -r -F "clojure-doc-1.8" --include='*html' ~/web/xahlee_info >> xx33
