@@ -321,7 +321,7 @@ Yahoo: P0lyglut
 MSN: p0lyglut@yahoo.com or xahlee
 Second Life: Xah Toll
 QQ: http://user.qzone.qq.com/2609322939" )
-    ("xl" "Xah Lee" )
+
     ("xs" " Xah Lee
  xahlee@gmail.com
  http://xahlee.org/

@@ -16,6 +16,8 @@
 
 (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
 
+(define-key xah-fly-leader-key-map (kbd "DEL") 'xah-fly-leader-key-map)
+
 ;; (setq visible-bell nil)
 
 ;; ring-bell-function
