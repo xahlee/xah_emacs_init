@@ -97,7 +97,7 @@ If path starts with “http://”, launch browser vistiting that URL, or open th
 
 Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported.
 
-Version 2015-06-12"
+Version 2017-03-19"
   (interactive)
   (let* (
          (-inputStr1
@@ -105,7 +105,7 @@ Version 2015-06-12"
            (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
              (let (-p0 -p1 -p2
-                       (-charSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
+                       (-charSkipRegex "^  \"\t\n`'|()[]{}「」<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
                (setq -p0 (point))
                ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
                (skip-chars-backward -charSkipRegex)

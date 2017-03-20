@@ -324,7 +324,7 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-03-07"
+Version 2017-03-19"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -358,9 +358,17 @@ sNew file name:")
         (rename-file -from-path -to-path)
         (when (string-equal (file-name-extension -to-path ) "png")
           (shell-command (concat "optipng " -to-path)))
-        (find-file -to-path )
-        (when (equal major-mode 'dired-mode)
-          (revert-buffer))))))
+
+        (when (string-equal major-mode "dired-mode")
+          (revert-buffer))
+
+        (when (string-equal major-mode "xah-html-mode")
+          (kill-new -to-path)
+          (insert "\n\n")
+          (insert -to-path)
+          (insert "\n\n")
+          (backward-word )
+          (xah-all-linkify))))))
 
 (defun xah-youtube-get-image ()
   "
