@@ -36,6 +36,7 @@ Version 2016-10-24"
     ("dsnt" "doesn't" )
     ("dvp" "develop" )
     ("eg" "e.g." )
+    ("ie" "i.e." )
     ("hnt" "haven't" )
     ("isnt" "isn't" )
     ("shnt" "shouldn't" )
@@ -85,6 +86,7 @@ Version 2016-10-24"
     ("paren" "parenthesis" )
     ("pl" "programing language" )
     ("pls" "please" )
+    ("prog" "program" )
     ("prof" "professor" )
     ("r" "return" )
     ("ref" "reference" )
@@ -95,48 +97,23 @@ Version 2016-10-24"
     ("ver" "version" )
     ("vid" "video" )
     ("wp" "Wikipedia" )
-    ("zalt" "alternative" )
-    ("zauto" "automatic" )
-    ("zc" "character" )
-    ("zchars" "characters" )
-    ("zdev" "development" )
-    ("zergo" "ergonomic" )
-    ("zexp" "experience" )
-    ("zexpr" "expression" )
-    ("zl" "language" )
-    ("zorg" "organization" )
-    ("zp" "program" )
-    ("zpm" "parameter" )
-    ("zprog" "programing" )
-    ("zq" "question" )
-    ("zs" "string" )
+    ("ualt" "alternative" )
+    ("uauto" "automatic" )
+    ("uc" "character" )
+    ("uchars" "characters" )
+    ("udev" "development" )
+    ("uergo" "ergonomic" )
+    ("uexp" "experience" )
+    ("uexpr" "expression" )
+    ("ul" "language" )
+    ("uorg" "organization" )
+    ("upm" "parameter" )
+    ("uprog" "programing" )
+    ("uq" "question" )
+    ("st" "string" )
 
-    ;; computing
-    ("ahd" "American Heritage Dictionary" )
-    ("ahk" "AutoHotkey" )
-    ("cfg" "context-free grammar" )
-    ("cj" "Clojure" )
-    ("cl" "Common Lisp" )
-    ("cs" "computer science" )
-    ("ee" "ErgoEmacs" )
-
-    ("ev" "environment variable" )
-    ("evs" "environment variables" )
-    ("faq" "frequently asked questions" )
-    ("fb" "Facebook" )
-    ("fs" "fullscreen" )
+    ;; tech company
     ("gc" "Google Chrome" )
-    ("gcd" "googlecode" )
-    ("ge" "Google Earth" )
-    ("gh" "Google Hangout" )
-    ("gm" "Google Map" )
-    ("gp" "Google Plus" )
-    ("ie" "Internet Explorer" )
-    ("ipa" "IP address" )
-    ("ipv4" "IPv4" )
-    ("ipv6" "IPv6" )
-    ("jq" "jQuery" )
-    ("jvm" "Java Virtual Machine" )
     ("lsl" "Linden Scripting Language" )
     ("mac" "Mac" )
     ("macosx" "Mac OS X" )
@@ -144,58 +121,75 @@ Version 2016-10-24"
     ("ms" "Microsoft" )
     ("msvs" "Microsoft Visual Studio" )
     ("msw" "Microsoft Windows" )
-
     ("osx" "OS X" )
     ("pp" "PayPal" )
+    ("sl" "Second Life" )
+    ("fb" "Facebook" )
+    ("wl" "Wolfram Language" )
+    ("yt" "YouTube" )
+    ("uff" "Firefox" )
+    ("uso" "StackOverflow" )
+    
+    ;; computing
+    ("ahd" "American Heritage Dictionary" )
+    ("ahk" "AutoHotkey" )
+    ("cfg" "context-free grammar" )
+    ("cj" "Clojure" )
+    ("cl" "Common Lisp" )
+    ("cs" "computer science" )
+    ("ee" "ergoemacs" )
+
+    ("ev" "environment variable" )
+    ("evs" "environment variables" )
+    ("faq" "frequently asked questions" )
+    ("fs" "fullscreen" )
+
+    ("ipa" "IP address" )
+    ("jq" "jQuery" )
+    ("jvm" "Java Virtual Machine" )
+
     ("rsi" "Repetitive Strain Injury" )
     ("sf" "San Francisco" )
-    ("sl" "Second Life" )
+
     ("subdir" "sub-directory" )
     ("subdirs" "sub-directories" )
 
     ("vb" "Visual Basic" )
     ("wd" "web development" )
-    ("wl" "Wolfram Language" )
     ("wm" "Window Manager" )
 
-    ("yt" "YouTube" )
 
-    ("zca" "cellular automata" )
-    ("zcli" "command line interface" )
+    ("uca" "cellular automata" )
+    ("ucli" "command line interface" )
 
-    ("zdb" "database" )
-    ("zdef" "definition" )
-    ("zdf" "different" )
-    ("zdfc" "difference" )
-    ("zdoc" "documentation" )
-    ("zdt" "data type" )
-    ("zel" "emacs lisp" )
+    ("udb" "database" )
+    ("udef" "definition" )
+    ("udf" "different" )
+    ("udfc" "difference" )
+    ("udoc" "documentation" )
+    ("udt" "data type" )
+    ("uel" "emacs lisp" )
 
-    ("zff" "Firefox" )
-    ("zfl" "functional language" )
-    ("zfp" "functional programing" )
-    ("zg" "Google" )
-    ("zgui" "graphical user interface" )
-    ("zis" "image source" )
-    ("zit" "IntelliType" )
-    ("zjs" "JavaScript" )
-    ("zlhs" "left-hand-side" )
-    ("zlib" "library" )
-    ("zlibs" "libraries" )
-    ("zmath" "mathematics" )
-    ("zmd" "metadata" )
-    ("zoop" "object oriented programing" )
-    ("zos" "operating system" )
+    ("ufl" "functional language" )
+    ("ufp" "functional programing" )
+    ("ugui" "graphical user interface" )
+    ("uis" "image source" )
+    ("ujs" "JavaScript" )
+    ("ulhs" "left-hand-side" )
+    ("ulib" "library" )
+    ("ulibs" "libraries" )
+    ("umath" "mathematics" )
+    ("umd" "metadata" )
+    ("uoop" "object oriented programing" )
+    ("uos" "operating system" )
+    
+    ("urhs" "right-hand-side" )
+    ("usc" "source code" )
+    ("usjw" "social justice warriors" )
 
-    ("zps" "PowerShell" )
-    ("zrhs" "right-hand-side" )
-    ("zsc" "source code" )
-    ("zsjw" "social justice warriors" )
-    ("zso" "StackOverflow" )
-
-    ("ztek" "Truly Ergonomic keyboard" )
-    ("ztemp" "temperature" )
-    ("zts" "TypeScript" )
+    ("utek" "Truly Ergonomic keyboard" )
+    ("utemp" "temperature" )
+    ("uts" "TypeScript" )
     ("va" "variable" )
     ("nn" "non-nil" )
     ("vas" "variables" )
@@ -204,20 +198,22 @@ Version 2016-10-24"
     ("eq" "==" )
     ("eqq" "===" )
 
+    ;; ("twittercard" "<meta name=\"twitter:image\" content=\"http://example.com/cat.jpg\">" )
+
     ;; regex
-    ("zaz" "\\([A-Za-z0-9]+\\)" )
-    ("zbracket" "\\[\\([^]]+?\\)\\]" )
-    ("zcurly" "“\\([^”]+?\\)”" )
-    ("zd" "\\([0-9]+\\)" )
-    ("zdate" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" )
-    ("zdot" "\\(.\\)" )
-    ("zstr" "\\([^\"]+?\\)" )
-    ("ztag" "\\([</>=\" A-Za-z0-9]+\\)" )
+    ("uaz" "\\([A-Za-z0-9]+\\)" )
+    ("ubracket" "\\[\\([^]]+?\\)\\]" )
+    ("ucurly" "“\\([^”]+?\\)”" )
+    ("ud" "\\([0-9]+\\)" )
+    ("udate" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" )
+    ("udot" "\\(.\\)" )
+    ("ustr" "\\([^\"]+?\\)" )
+    ("utag" "\\([</>=\" A-Za-z0-9]+\\)" )
 
     ;; html
-    ("zkey" "【Alt+f】" )
-    ("zmenu" "〖a ▸ b ▸ c〗" )
-    ("zfaq" "<div class=\"question-box32371\">
+    ("ukey" "【Alt+f】" )
+    ("umenu" "〖a ▸ b ▸ c〗" )
+    ("ufaq" "<div class=\"question-box32371\">
 <p class=\"q\">How to do this?</p>
 <p>this way</p>
 </div>
@@ -226,16 +222,10 @@ Version 2016-10-24"
 
     ;; unicode
     ("md" "—" )
-    ("zarrows" "➵➙►▻☛☞👉⇰➛➜➝➞➟➠➢➣➤➥➦➧➨➲➺➻➼➽➾" )
-    ("zascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
-    ("zbox" "┌─┬─┐
-│ │ │
-├─┼─┤
-│ │ │
-└─┴─┘" )
+    ("uascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
     ("catface" "😸" )
-    ("zemoji" "😃😄😅😆
+    ("uemoji" "😃😄😅😆
 😉😊😋😌
 😎😇😈
 😁😂😀
@@ -256,7 +246,7 @@ Version 2016-10-24"
     ("da" "↓" )
 
     ;; code
-    ("zutf8" "-*- coding: utf-8 -*-" )
+    ("uutf8" "-*- coding: utf-8 -*-" )
 
     ("vdspc" "Visual Dictionary of Special Plane Curves" )
     ("xfk" "xah-fly-keys" )
@@ -276,7 +266,6 @@ Version 2016-10-24"
     ("uhtml" "http://xahlee.info/js/html_index.html" )
     ("ui" "user interface" )
     ("ujava" "http://xahlee.info/java-a-day/java.html" )
-    ("ujs" "http://xahlee.info/js/javascript_basics.html" )
     ("ukinesis" "http://xahlee.info/kbd/keyboard_Kinesis.html" )
     ("ulang" "<a href=\"../java-a-day/java.html\">Java</a>
 <a href=\"../python/python3_basics.html\">Python</a>

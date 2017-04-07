@@ -324,7 +324,7 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-03-19"
+Version 2017-03-22"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -332,7 +332,7 @@ sNew file name:")
         -to-path
         (-dirs '( "~/Downloads/" "~/Pictures/" "~/" "/tmp" ))
         (-names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" ))
-        (-exts '("jpg" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" )))
+        (-exts '("jpg" "jpeg" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" )))
     (setq -from-path
           (let (-path)
             (catch 'x42566
@@ -352,10 +352,18 @@ sNew file name:")
                     (replace-regexp-in-string " " "_" *file-name)
                     "."
                     (downcase (file-name-extension -from-path ))))
+
+    (when (string-equal (file-name-extension -to-path ) "jpg-large")
+      (setq -to-path (concat (file-name-sans-extension -to-path) ".jpg")))
+
+    (when (string-equal (file-name-extension -to-path ) "jpeg")
+      (setq -to-path (concat (file-name-sans-extension -to-path) ".jpg")))
+
     (if (file-exists-p -to-path)
         (message "move to path exist: %s" -to-path)
       (progn
         (rename-file -from-path -to-path)
+
         (when (string-equal (file-name-extension -to-path ) "png")
           (shell-command (concat "optipng " -to-path)))
 
