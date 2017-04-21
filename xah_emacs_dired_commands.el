@@ -185,19 +185,6 @@ Version 2016-07-19"
      (list -fileList)))
   (xah-process-image *file-list "-quality 90%" "-2" ".jpg" ))
 
-(defun xah-dired-crop-image (*file-list)
-  " .......
-Requires ImageMagick shell command."
-  (interactive
-   (let (
-         (-fileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:"))))))
-     (list -fileList)))
-  (xah-process-image *file-list "-crop 690x520+220+165" "_n" ".png" ))
-
 (defun xah-dired-remove-all-metadata (*file-list)
   "Remove all metatata of buffer image file or marked files in dired.
  (typically image files)

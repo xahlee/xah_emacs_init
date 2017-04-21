@@ -315,7 +315,9 @@ x1.jpg
 x2.jpg
 etc.
 
-file can also end in
+file name can end in
+.jpg
+.jpg-large
 .png
 .svg
 .mp4
@@ -332,7 +334,7 @@ sNew file name:")
         -to-path
         (-dirs '( "~/Downloads/" "~/Pictures/" "~/" "/tmp" ))
         (-names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" ))
-        (-exts '("jpg" "jpeg" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" )))
+        (-exts '("jpg" "jpeg" "jpg-large" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" )))
     (setq -from-path
           (let (-path)
             (catch 'x42566

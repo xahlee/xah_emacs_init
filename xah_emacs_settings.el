@@ -300,3 +300,6 @@
         ;; try-expand-line
         ))
 
+(setq use-dialog-box nil)
+
+

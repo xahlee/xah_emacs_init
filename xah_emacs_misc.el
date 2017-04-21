@@ -97,7 +97,7 @@ If path starts with “http://”, launch browser vistiting that URL, or open th
 
 Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported.
 
-Version 2017-03-19"
+Version 2017-04-21"
   (interactive)
   (let* (
          (-inputStr1
@@ -105,7 +105,7 @@ Version 2017-03-19"
            (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
              (let (-p0 -p1 -p2
-                       (-charSkipRegex "^  \"\t\n`'|()[]{}「」<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
+                       (-charSkipRegex "^  \"\t\n`'|()[]{}「」<>〔〕“”〈〉《》【】〖〗«»‹›❮❯❬❭·。\\`"))
                (setq -p0 (point))
                ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
                (skip-chars-backward -charSkipRegex)
@@ -265,15 +265,27 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 
+;; (defun xah-open-file-fast ()
+;;   "Prompt to open a file from `xah-filelist'.
+;;  `xah-filelist' is a alist for files. Key is a short abbrev string, Value is file path string.
+;; URL `http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
+;; Version 2017-04-01"
+;;   (interactive)
+;;   (let ((-abbrevCode
+;;          (ido-completing-read "Open:" (mapcar (lambda (-x) (car -x)) xah-filelist))))
+;;     (find-file (cdr (assoc -abbrevCode xah-filelist)))))
+
 (defun xah-open-file-fast ()
-  "Prompt to open a file from `xah-filelist'.
- `xah-filelist' is a alist for files. Key is a short abbrev string, Value is file path string.
+  "Prompt to open a file from bookmark `bookmark-bmenu-list'.
+This command is similar to `bookmark-jump', but use ido interface.
 URL `http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
-Version 2017-04-01"
+Version 2017-04-11"
   (interactive)
-  (let ((-abbrevCode
-         (ido-completing-read "Open:" (mapcar (lambda (-x) (car -x)) xah-filelist))))
-    (find-file (cdr (assoc -abbrevCode xah-filelist)))))
+  (require 'bookmark)
+  (bookmark-maybe-load-default-file)
+  (let ((-this-bookmark
+         (ido-completing-read "Open:" (mapcar (lambda (-x) (car -x)) bookmark-alist))))
+    (bookmark-jump -this-bookmark)))
 
 
 
@@ -684,7 +696,7 @@ For example, if current buffer is of this file:
 then after calling this function,
 default browser will be launched and opening this URL:
  http://xahlee.info/index.html
-version 2016-06-12"
+version 2017-04-10"
   (interactive)
   (let (-url)
     (setq -url
@@ -700,10 +712,10 @@ version 2016-06-12"
       (when (string-match "^c:/" -url) (setq -url (concat "file:///" -url)))
       (browse-url -url))
      ((string-equal system-type "gnu/linux")
-      (let ( (process-connection-type nil))
-        (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
+      ;; (let ( (process-connection-type nil))
+      ;;   (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
       ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
-      )
+      (browse-url -url ))
      ;; ((string-equal system-type "gnu/linux")
      ;;  (start-process "xahbrowse"
      ;;                 nil "setsid"

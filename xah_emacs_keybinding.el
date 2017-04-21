@@ -62,7 +62,7 @@
   (define-prefix-command 'xah-user-keymap)
 
   (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
-  (define-key xah-user-keymap (kbd "<end>") 'xah-insert-hyphen)
+  (define-key xah-user-keymap (kbd "<end>") 'xah-insert-low-line)
   (define-key xah-user-keymap (kbd "DEL") nil)
   (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
 

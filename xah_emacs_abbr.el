@@ -45,8 +45,12 @@ Version 2016-10-24"
     ("wtdb" "What's the difference between" )
     ("sa" "See also:" )
 
-    ;; english word abbrev
+    ;; english
     ("ann" "announcement" )
+    ("maint" "maintenance" )
+    ("mtn" "mountain" )
+    ("qaa" "questions and answers" )
+    ("cvnt" "convenient" )
     ("arg" "argument" )
     ("autom" "automatic" )
     ("bc" "because" )
@@ -76,7 +80,9 @@ Version 2016-10-24"
     ("intn" "international" )
     ("intro" "introduction" )
     ("jp" "Japanese" )
+    ("sw" "software" )
     ("kb" "keyboard" )
+    ("kp" "keypad" )
     ("kbd" "keybinding" )
     ("kbs" "keyboards" )
     ("kw" "keyword" )
@@ -129,7 +135,7 @@ Version 2016-10-24"
     ("yt" "YouTube" )
     ("uff" "Firefox" )
     ("uso" "StackOverflow" )
-    
+
     ;; computing
     ("ahd" "American Heritage Dictionary" )
     ("ahk" "AutoHotkey" )
@@ -158,7 +164,6 @@ Version 2016-10-24"
     ("wd" "web development" )
     ("wm" "Window Manager" )
 
-
     ("uca" "cellular automata" )
     ("ucli" "command line interface" )
 
@@ -182,7 +187,7 @@ Version 2016-10-24"
     ("umd" "metadata" )
     ("uoop" "object oriented programing" )
     ("uos" "operating system" )
-    
+
     ("urhs" "right-hand-side" )
     ("usc" "source code" )
     ("usjw" "social justice warriors" )
@@ -212,6 +217,7 @@ Version 2016-10-24"
 
     ;; html
     ("ukey" "【Alt+f】" )
+    ("pmoved" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
     ("umenu" "〖a ▸ b ▸ c〗" )
     ("ufaq" "<div class=\"question-box32371\">
 <p class=\"q\">How to do this?</p>

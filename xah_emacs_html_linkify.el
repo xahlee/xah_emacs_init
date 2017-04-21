@@ -370,13 +370,14 @@ http://www.amazon.com/exec/obidos/ASIN/B003CP0BHM/xahh-20
 http://www.amazon.com/exec/obidos/tg/detail/-/B003CP0BHM/
 http://www.amazon.com/dp/B003CP0BHM?tag=xahhome-20
 http://amzn.to/1F5M1hA
+https://alexa.design/2okfMcj
 
 Example output:
 <a class=\"amz\" href=\"http://www.amazon.com/dp/B003CP0BHM/?tag=xahh-20\" title=\"Cyborg R T Gaming Mouse\">amazon</a>
 
 For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number'
 URL `http://ergoemacs.org/emacs/elisp_amazon-linkify.html'
-Version 2017-02-18"
+Version 2017-04-10"
   (interactive)
   (let ((-bds (bounds-of-thing-at-point 'url))
         -p1 -p2 -inputText -asin -productName )
@@ -384,7 +385,8 @@ Version 2017-02-18"
         (progn (setq -p1 (region-beginning)) (setq -p2 (region-end)))
       (progn (setq -p1 (car -bds)) (setq -p2 (cdr -bds))))
     (setq -inputText (buffer-substring-no-properties -p1 -p2))
-    (if (string-match "//amzn.to/" -inputText)
+    (if (or (string-match "//amzn.to/" -inputText)
+            (string-match "//alexa.design/" -inputText))
         (progn (delete-region -p1 -p2)
                (insert (format "<a class=\"amz_search\" href=\"%s\">amazon</a>" -inputText)))
       (progn
@@ -771,6 +773,7 @@ Version 2017-02-12"
      ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" -input) (xah-blogger-linkify))
      ((string-match-p "www\.amazon\.com/" -input) (xah-amazon-linkify))
      ((string-match-p "//amzn\.to/" -input) (xah-amazon-linkify))
+     ((string-match-p "alexa\.design/" -input) (xah-amazon-linkify))
      ((string-match-p "www\.youtube\.com/watch" -input) (xah-youtube-linkify))
      ((string-match-p "/emacs_manual/" -input) (xah-html-emacs-ref-linkify))
      ((string-match-p "/node_api/" -input) (xah-nodejs-ref-linkify))
