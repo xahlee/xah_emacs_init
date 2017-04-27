@@ -265,30 +265,6 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 
-;; (defun xah-open-file-fast ()
-;;   "Prompt to open a file from `xah-filelist'.
-;;  `xah-filelist' is a alist for files. Key is a short abbrev string, Value is file path string.
-;; URL `http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
-;; Version 2017-04-01"
-;;   (interactive)
-;;   (let ((-abbrevCode
-;;          (ido-completing-read "Open:" (mapcar (lambda (-x) (car -x)) xah-filelist))))
-;;     (find-file (cdr (assoc -abbrevCode xah-filelist)))))
-
-(defun xah-open-file-fast ()
-  "Prompt to open a file from bookmark `bookmark-bmenu-list'.
-This command is similar to `bookmark-jump', but use ido interface.
-URL `http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
-Version 2017-04-11"
-  (interactive)
-  (require 'bookmark)
-  (bookmark-maybe-load-default-file)
-  (let ((-this-bookmark
-         (ido-completing-read "Open:" (mapcar (lambda (-x) (car -x)) bookmark-alist))))
-    (bookmark-jump -this-bookmark)))
-
-
-
 (defun xah-sync-css ()
   "Save current file and copy to all other xahsite dirs.
 Version 2016-10-01"

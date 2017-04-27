@@ -136,19 +136,19 @@
 ;;   (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
 ;; )
 
-(progn
-  ;; use variable-width font for some modes
-  (defun xah-use-variable-width-font ()
-    "Set current buffer to use variable-width font."
-    (variable-pitch-mode 1)
-    ;; (text-scale-increase 0.5 )
-    )
-  (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
-  )
+;; (progn
+;;   ;; use variable-width font for some modes
+;;   (defun xah-use-variable-width-font ()
+;;     "Set current buffer to use variable-width font."
+;;     (variable-pitch-mode 1)
+;;     ;; (text-scale-increase 0.5 )
+;;     )
+;;   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+;;   )
 
 (progn ; minibuffer
   (setq enable-recursive-minibuffers t)
@@ -302,4 +302,44 @@
 
 (setq use-dialog-box nil)
 
+(defun xah-delete-backward-char-or-bracket-text2 ()
+  "Delete backward 1 character, but if it's a \"quote\" or bracket ()[]{}【】「」 etc, delete bracket and the inner text, push the deleted text to `kill-ring'.
 
+When cursor is inside a string or comment, just delete backward 1 char.
+
+If `universal-argument' is called first, do not delete inner text.
+
+URL `http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html'
+Version 2017-03-13"
+  (interactive)
+
+  (let ((-temp-syn-table (make-syntax-table)))
+
+    (modify-syntax-entry ?\« "(»" -temp-syn-table)
+    (modify-syntax-entry ?\» ")«" -temp-syn-table)
+    (modify-syntax-entry ?\‹ "(›" -temp-syn-table)
+    (modify-syntax-entry ?\› ")‹" -temp-syn-table)
+    (modify-syntax-entry ?\“ "(”" -temp-syn-table)
+    (modify-syntax-entry ?\” ")“" -temp-syn-table)
+
+    (with-syntax-table -temp-syn-table
+      (if (and delete-selection-mode (region-active-p))
+          (delete-region (region-beginning) (region-end))
+        (cond
+         ((looking-back "\\s)" 1)
+          (progn
+            (backward-sexp)
+            (xah-delete-matching-brackets (not current-prefix-arg))))
+         ((looking-back "\\s(" 1)
+          (progn
+            (backward-char )
+            (xah-delete-matching-brackets (not current-prefix-arg))))
+         ((looking-back "\\s\"" 1)
+          (if (nth 3 (syntax-ppss))
+              (progn
+                (backward-char )
+                (xah-delete-matching-brackets (not current-prefix-arg)))
+            (progn
+              (backward-sexp)
+              (xah-delete-matching-brackets (not current-prefix-arg)))))
+         (t (delete-char -1)))))))

@@ -4,6 +4,9 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
+
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . fundamental-mode))
+
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
 
 (add-to-list 'auto-mode-alist '("\\.php\\'" . xah-php-mode))

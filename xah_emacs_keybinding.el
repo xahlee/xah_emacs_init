@@ -122,7 +122,7 @@
 
   (define-key xah-user-keymap (kbd "s") nil)
   (define-key xah-user-keymap (kbd "t") nil)
-  (define-key xah-user-keymap (kbd "u") 'xah-open-file-fast)
+  (define-key xah-user-keymap (kbd "u") 'nil)
   (define-key xah-user-keymap (kbd "v") nil)
   (define-key xah-user-keymap (kbd "w") nil)
   (define-key xah-user-keymap (kbd "y") nil)
