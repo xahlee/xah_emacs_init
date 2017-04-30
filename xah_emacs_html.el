@@ -334,6 +334,7 @@ sNew file name:")
         -to-path
         (-dirs '( "~/Downloads/" "~/Pictures/" "~/" "/tmp" ))
         (-names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" ))
+
         (-exts '("jpg" "jpeg" "jpg-large" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" )))
     (setq -from-path
           (let (-path)
@@ -347,6 +348,12 @@ sNew file name:")
                         (throw 'x42566 -path))))))
               nil
               )))
+
+    ;; (if (null -from-path)
+    ;;     (let ((-name-regex "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)-\\([0-9]\\{6\\}\\)_\\([0-9]\\{3\\}\\)x\\([0-9]\\{3\\}\\)_scrot"))
+    ;;       3)
+    ;;   (progn ))
+
     (when (null -from-path)
       (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))
     (setq -to-path (concat

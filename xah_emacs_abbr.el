@@ -21,7 +21,7 @@ Version 2016-10-24"
 (define-abbrev-table 'global-abbrev-table
   '(
 
-    ;; phrase
+    ;; shortcuts
     ("afaik" "as far as i know" )
     ("atm" "at the moment" )
     ("dfb" "difference between" )
@@ -29,7 +29,8 @@ Version 2016-10-24"
 
     ("ai" "artificial intelligence" )
     ("btw" "by the way" )
-
+    ("ur" "you are" )
+    ("ull" "you'll" )
     ("cnt" "can't" )
     ("ddnt" "didn't" )
     ("dnt" "don't" )
@@ -44,6 +45,9 @@ Version 2016-10-24"
     ("wsnt" "wasn't" )
     ("wtdb" "What's the difference between" )
     ("sa" "See also:" )
+    ("ure" "return" )
+
+    ("upl" "+" )
 
     ;; english
     ("ann" "announcement" )
@@ -94,7 +98,6 @@ Version 2016-10-24"
     ("pls" "please" )
     ("prog" "program" )
     ("prof" "professor" )
-    ("r" "return" )
     ("ref" "reference" )
     ("scs" "screenshot" )
     ("tb" "trackball" )
@@ -210,7 +213,8 @@ Version 2016-10-24"
     ("ubracket" "\\[\\([^]]+?\\)\\]" )
     ("ucurly" "“\\([^”]+?\\)”" )
     ("ud" "\\([0-9]+\\)" )
-    ("udate" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" )
+    ;; ("udate" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" )
+    ("udate" "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)" )
     ("udot" "\\(.\\)" )
     ("ustr" "\\([^\"]+?\\)" )
     ("utag" "\\([</>=\" A-Za-z0-9]+\\)" )
@@ -227,7 +231,7 @@ Version 2016-10-24"
 " )
 
     ;; unicode
-    ("md" "—" )
+    ("emd" "—" )
     ("uascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
     ("catface" "😸" )
@@ -287,7 +291,6 @@ Version 2016-10-24"
     ("uphp" "http://xahlee.info/php/php_basics.html" )
     ("ups" "http://xahlee.info/powershell/index.html" )
     ("upython" "http://xahlee.info/python/python3_basics.html" )
-    ("ur" "you are" )
     ("uruby" "http://xahlee.info/ruby/ruby_basics.html" )
     ("ute" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html" )
     ("utek" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html" )

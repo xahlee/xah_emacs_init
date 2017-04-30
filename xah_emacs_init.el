@@ -53,6 +53,9 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-to-list 'load-path "~/git/xah-fly-keys/")
 (require 'xah-fly-keys)
 
+
+(require 'xah-text-mode)
+
 (progn
   (add-to-list 'load-path "~/git/xah-elisp-mode/")
   (require 'xah-elisp-mode)

@@ -57,7 +57,7 @@
 ;; 'xah-cycle-font-2
 ;; 'xah-cycle-font-next
 ;; 'xah-cycle-font-previous
- 
+
 (progn
   (define-prefix-command 'xah-user-keymap)
 
@@ -68,7 +68,7 @@
 
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
   (define-key xah-user-keymap (kbd "'") 'xah-replace-straight-quotes)
-  
+
   (define-key xah-user-keymap (kbd "8") 'xah-find-count)
   (define-key xah-user-keymap (kbd "9") 'xah-find-replace-text-regex)
   (define-key xah-user-keymap (kbd "0") 'xah-find-text-regex)
@@ -98,7 +98,6 @@
   (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
   (define-key xah-user-keymap (kbd "k") 'xah-find-replace-text)
 
-  (define-key xah-user-keymap (kbd "l") 'xah-display-page-break-as-line)
   (define-key xah-user-keymap (kbd "m") 'xah-move-image-file)
   (define-key xah-user-keymap (kbd "n") nil)
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
