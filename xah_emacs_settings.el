@@ -281,6 +281,7 @@
 (defalias 'hm 'html-mode)
 
 (defalias 'ssm 'shell-script-mode)
+(defalias 'rs 'replace-string)
 
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt

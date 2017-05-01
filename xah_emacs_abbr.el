@@ -47,7 +47,6 @@ Version 2016-10-24"
     ("sa" "See also:" )
     ("ure" "return" )
 
-    ("upl" "+" )
 
     ;; english
     ("ann" "announcement" )
@@ -111,7 +110,7 @@ Version 2016-10-24"
     ("uc" "character" )
     ("uchars" "characters" )
     ("udev" "development" )
-    ("uergo" "ergonomic" )
+    ("ueg" "ergonomic" )
     ("uexp" "experience" )
     ("uexpr" "expression" )
     ("ul" "language" )
@@ -203,8 +202,10 @@ Version 2016-10-24"
     ("vas" "variables" )
 
     ;; programing
+    ("upl" "+" )
     ("eq" "==" )
     ("eqq" "===" )
+    ("pb" "\n" )
 
     ;; ("twittercard" "<meta name=\"twitter:image\" content=\"http://example.com/cat.jpg\">" )
 

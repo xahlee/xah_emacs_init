@@ -696,7 +696,7 @@ For example, change all parenthesis () to square brackets [].
 
 When called in lisp program, *from-chars or *to-chars is a string of bracket pair. eg \"()\",  \"[]\", etc. If the string has length greater than 2, the rest are ignored.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2017-03-02"
+Version 2017-04-30"
   (interactive
    (let ((-bracketsList
           '("() paren"
@@ -761,8 +761,8 @@ Version 2017-03-02"
 
   (let ( -begin -end )
     (if (use-region-p)
-        (progn (setq -begin (region-beginning)) -end (region-end))
-      (progn (setq -begin (line-beginning-position) -end (line-end-position))))
+        (setq -begin (region-beginning) -end (region-end))
+      (setq -begin (line-beginning-position) -end (line-end-position)))
     (save-excursion
       (save-restriction
         (narrow-to-region -begin -end)

@@ -84,8 +84,12 @@ Version 2017-01-27"
         (modify-syntax-entry ?\» ")«" synTable)
         (modify-syntax-entry ?\‹ "(›" synTable)
         (modify-syntax-entry ?\› ")‹" synTable)
-        (modify-syntax-entry ?\“ "(”" synTable)
-        (modify-syntax-entry ?\” ")“" synTable)
+
+        ;; (modify-syntax-entry ?\“ "(”" synTable)
+        ;; (modify-syntax-entry ?\” ")“" synTable)
+
+        (modify-syntax-entry ?\“ "<" synTable)
+        (modify-syntax-entry ?\” ">" synTable)
 
         synTable))
 
@@ -118,7 +122,13 @@ Version 2017-01-27"
 v 2017-04-29
 \\{xah-text-mode-map}"
   (setq font-lock-defaults '((xah-text-font-lock-keywords)))
-(xah-text-display-page-break-as-line)
+
+  (setq-local comment-start "“")
+  (setq-local comment-start-skip "“")
+  (setq-local comment-end "”")
+  (setq-local comment-end-skip "”")
+
+  (xah-text-display-page-break-as-line)
   :group 'xah-text-mode
   )
 
