@@ -47,7 +47,6 @@ Version 2016-10-24"
     ("sa" "See also:" )
     ("ure" "return" )
 
-
     ;; english
     ("ann" "announcement" )
     ("maint" "maintenance" )
@@ -205,7 +204,6 @@ Version 2016-10-24"
     ("upl" "+" )
     ("eq" "==" )
     ("eqq" "===" )
-    ("pb" "\n" )
 
     ;; ("twittercard" "<meta name=\"twitter:image\" content=\"http://example.com/cat.jpg\">" )
 
@@ -290,7 +288,8 @@ Version 2016-10-24"
     ("uocaml" "http://xahlee.info/ocaml/ocaml.html" )
     ("uperl" "http://xahlee.info/perl-python/perl_basics.html" )
     ("uphp" "http://xahlee.info/php/php_basics.html" )
-    ("ups" "http://xahlee.info/powershell/index.html" )
+    ("uups" "http://xahlee.info/powershell/index.html" )
+    ("ups" "powershell" )
     ("upython" "http://xahlee.info/python/python3_basics.html" )
     ("uruby" "http://xahlee.info/ruby/ruby_basics.html" )
     ("ute" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html" )

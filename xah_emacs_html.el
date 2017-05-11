@@ -319,6 +319,7 @@ file name can end in
 .jpg
 .jpg-large
 .png
+.webp
 .svg
 .mp4
 
@@ -326,7 +327,7 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-03-22"
+Version 2017-05-09"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -335,7 +336,7 @@ sNew file name:")
         (-dirs '( "~/Downloads/" "~/Pictures/" "~/" "/tmp" ))
         (-names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" ))
 
-        (-exts '("jpg" "jpeg" "jpg-large" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" )))
+        (-exts '("jpg" "jpeg" "jpg-large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" )))
     (setq -from-path
           (let (-path)
             (catch 'x42566

@@ -37,7 +37,6 @@
 ;; (setenv "LC_ALL" "en_US.UTF-8" )
 
 
-(setq initial-major-mode 'fundamental-mode)
 
 (setq search-whitespace-regexp "[-_ \n]")
 

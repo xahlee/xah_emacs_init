@@ -5,7 +5,7 @@
 ;; ∑ http://xahlee.org/
 
 
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . fundamental-mode))
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . xah-text-mode))
 
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
 

@@ -56,7 +56,7 @@ Version 2015-04-28"
      ["\\omega" "ω"]
      ["\\cup" "∪"]
      ["\\in" "∈"]
-     ) 'REPORT 'HILIGHT ))
+     ) "REPORT" "HILIGHT" ))
 
 (defun xah-replace-text-to-latex-region (*begin *end)
   "Replace math function names or symbols by their LaTeX markup.
@@ -77,7 +77,7 @@ Version 2015-04-28"
      [" pi" "\\!\\pi"]
      ["R^2" "\\mathbb{R}^2"]
      ["R^3" "\\mathbb{R}^3"]
-     ) 'REPORT 'HILIGHT ))
+     ) "REPORT" "HILIGHT" ))
 
 (defun xah-replace-mathematica-symbols (*begin *end)
   "Replace Mathematica's special char markup to Unicode in current line or selection.
@@ -94,7 +94,7 @@ Version 2015-04-28"
    *end
    '(
      ["\\[Infinity]" "∞"]
-     ["\\[Equal]" "=="]) 'REPORT 'HILIGHT ))
+     ["\\[Equal]" "=="]) "REPORT" "HILIGHT" ))
 
 (defun xah-replace-greek-letter-name-to-symbol (*begin *end)
   "Replace alpha to α, beta to β etc in current line or selection.
@@ -163,7 +163,7 @@ Version 2016-10-05"
        ["thetasym" "ϑ"]
        ["upsih" "ϒ"]
        ["piv" "ϖ"]
-       ) 'REPORT 'HILIGHT )))
+       ) "REPORT" "HILIGHT" )))
 
 (defun xah-replace-mathematica-to-lsl (*begin *end)
   "Change Mathematica syntax to LSL syntax on region.
@@ -184,7 +184,7 @@ Version 2015-04-28"
      ["Pi" "PI"]
      ["π" "PI"]
      ["{" "<"]
-     ["}" ">"]) 'REPORT 'HILIGHT ))
+     ["}" ">"]) "REPORT" "HILIGHT" ))
 
 (defun xah-clean-Mathematica-graphics-buffer ()
   "Remove whitespace, truncate numbers, of current buffer of Mathematica graphics file.
@@ -340,7 +340,7 @@ Version 2016-10-05"
        ["fuck" "f￼ck"]
        ["shit" "sh￼t"]
        ["motherfuck" "m￼th￼rf￼ck"]
-       ) 'REPORT 'HILIGHT )))
+       ) "REPORT" "HILIGHT" )))
 
 (defun xah-replace-slanted-apostrophe ()
   "Replace some single curly apostrophe to straight version.
@@ -366,7 +366,7 @@ Example: 「it’s」 ⇒ 「it's」."
        ["’ll" "'ll"]
        ["’m" "'m"]
        ["’re" "'re"]
-       ["s’ " "s' "]) 'REPORT 'HILIGHT )))
+       ["s’ " "s' "]) "REPORT" "HILIGHT" )))
 
 (defun xah-convert-fullwidth-chars (*begin *end &optional *to-direction)
   "Convert ASCII chars to/from Unicode fullwidth version.
@@ -632,115 +632,12 @@ Version 2017-01-11"
           (while (search-forward "  " nil t)
             (replace-match " " "FIXEDCASE" "LITERAL")))))))
 
-(defun xah-remove-quotes-or-brackets (*bracket-chars)
-  "Remove quotes/brackets in current line or text selection.
-
-When called in lisp program, *begin *end are region begin/end position, *bracket-chars is a string of a bracket pair. eg \"()\",  \"[]\", etc.
-URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2017-03-03"
-  (interactive
-   (list
-    (ido-completing-read
-     "Replace this:"
-     '("() paren"
-       "{} braces" "[] square"
-       "<> greater"
-       "“” curly quote"
-       "‘’ single"
-       "‹› french"
-       "«» double french"
-       "「」 corner"
-       "『』 double corner"
-       "【】 LENTICULAR"
-       "〖〗 white LENTICULAR"
-       "《》 double angle"
-       "〈〉 angle "
-       "〔〕 TORTOISE"
-       "⦅⦆ white paren"
-       "〚〛 white square"
-       "⦃⦄ white braces"
-       "〈〉"
-       "⦑⦒"
-       "⧼⧽"
-       "⟦⟧ math square"
-       "⟨⟩ math angle"
-       "⟪⟫"
-       "⟮⟯"
-       "⟬⟭"
-       "❛❜"
-       "❝❞"
-       "❨❩"
-       "❪❫"
-       "❴❵"
-       "❬❭"
-       "❮❯"
-       "❰❱"))))
-  (let (-begin -end)
-    (if (use-region-p)
-        (progn (setq -begin (region-beginning) -end (region-end)))
-      (progn (setq -begin (line-beginning-position) -end (line-end-position))))
-    (save-excursion
-      (save-restriction
-        (narrow-to-region -begin -end)
-        (let ( (case-fold-search nil))
-          (mapc
-           (lambda (x)
-             (goto-char (point-min))
-             (while (search-forward (char-to-string x)  nil t)
-               (replace-match "" "FIXEDCASE" "LITERAL")))
-           (substring *bracket-chars 0 2)))))))
-
-(defun xah-change-bracket-pairs ( *from-chars *to-chars)
-  "Change bracket pairs from one type to another on current line or text selection.
-For example, change all parenthesis () to square brackets [].
-
-When called in lisp program, *from-chars or *to-chars is a string of bracket pair. eg \"()\",  \"[]\", etc. If the string has length greater than 2, the rest are ignored.
-URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2017-04-30"
-  (interactive
-   (let ((-bracketsList
-          '("() paren"
-            "{} braces" "[] square"
-            "<> greater"
-            "“” curly quote"
-            "‘’ single"
-            "‹› french"
-            "«» double french"
-            "「」 corner"
-            "『』 double corner"
-            "【】 LENTICULAR"
-            "〖〗 white LENTICULAR"
-            "《》 double angle"
-            "〈〉 angle "
-            "〔〕 TORTOISE"
-            "⦅⦆ white paren"
-            "〚〛 white square"
-            "⦃⦄ white braces"
-            "〈〉"
-            "⦑⦒"
-            "⧼⧽"
-            "⟦⟧ math square"
-            "⟨⟩ math angle"
-            "⟪⟫"
-            "⟮⟯"
-            "⟬⟭"
-            "❛❜"
-            "❝❞"
-            "❨❩"
-            "❪❫"
-            "❴❵"
-            "❬❭"
-            "❮❯"
-            "❰❱"
-            "   none"
-            )))
-
      ;; (let*
      ;;     ;; 2016-11-06
      ;;     ;; trying to auto find the replacement bracket by looking at char before or after
      ;;     ;; problem is, then you need to find the matching bracket for replacement. need more tedious code. abandone for now
      ;;     (
-     ;;      (-bracketsList '("() paren" "{} braces" "[] square" "<> greater" "“” curly quote" "‘’ single" "‹› french" "«» double french" "「」 corner" "『』 double corner" "【】 LENTICULAR" "〖〗 white LENTICULAR" "《》 double angle" "〈〉 angle " "〔〕 TORTOISE" "⦅⦆ white paren" "〚〛 white square" "⦃⦄ white braces" "〈〉" "⦑⦒" "⧼⧽" "⟦⟧ math square" "⟨⟩ math angle" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱" " none" ))
+     ;;      (-bracketsList '("() paren" "{} braces" "[] square" "<> greater" "“” curly quote" "‘’ single" "‹› french" "«» double french" "「」 corner" "『』 double corner" "【】 LENTICULAR" "〖〗 white LENTICULAR" "《》 double angle" "〈〉 angle " "〔〕 TORTOISE" "⦅⦆ white paren" "〚〛 white square" "⦃⦄ white braces" "〈〉" "⦑⦒" "⧼⧽" "⟦⟧ math square" "⟨⟩ math angle" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬t❭" "❮❯" "❰❱" " none" ))
 
      ;;      (-leftBrackets (mapcar (lambda (x) (substring x 0 1)) -bracketsList)))
      ;;   (let ((-charBefore (char-before))
@@ -755,10 +652,64 @@ Version 2017-04-30"
      ;;          (when (eq (string-to-char x) -charAfter)
      ;;            (progn (throw 'found x))))))))
 
+(defun xah-change-bracket-pairs ( *from-chars *to-chars)
+  "Change bracket pairs from one type to another on current line or text selection.
+For example, change all parenthesis () to square brackets [].
+
+When called in lisp program, *from-chars or *to-chars is a string of bracket pair. eg \"(paren)\",  \"[bracket]\", etc.
+The first and last characters are used.
+If the string contains “,2”, then the first 2 chars and last 2 chars are used, for example  \"[[bracket,2]]\".
+If *to-chars is equal to string “delete brackets”, the brackets are deleted.
+
+ If the string has length greater than 2, the rest are ignored.
+URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
+Version 2017-05-09"
+  (interactive
+   (let ((-bracketsList
+          '("(paren)"
+            "{brace}"
+            "[square]"
+            "<greater>"
+            "`emacs'"
+            "`markdown`"
+            "~tilde~"
+            "=equal="
+            "[[double square,2]]"
+            "“curly quote”"
+            "‘single quote’"
+            "‹angle quote›"
+            "«double angle quote»"
+            "「corner」"
+            "『white corner』"
+            "【LENTICULAR】"
+            "〖white LENTICULAR〗"
+            "〈angle bracket〉"
+            "《double angle bracket》"
+            "〔TORTOISE〕"
+            "⦅white paren⦆"
+            "〚white square〛"
+            "⦃white curly bracket⦄"
+            "〈angle bracket〉"
+            "⦑ANGLE BRACKET WITH DOT⦒"
+            "⧼CURVED ANGLE BRACKET⧽"
+            "⟦math square⟧"
+            "⟨math angle⟩"
+            "⟪math DOUBLE ANGLE BRACKET⟫"
+            "⟮math FLATTENED PARENTHESIS⟯"
+            "⟬math WHITE TORTOISE SHELL BRACKET⟭"
+            "❛HEAVY SINGLE QUOTATION MARK ORNAMENT❜"
+            "❝❞"
+            "❨❩"
+            "❪❫"
+            "❴❵"
+            "❬❭"
+            "❮❯"
+            "❰❱"
+            "delete brackets"
+            )))
      (list
       (ido-completing-read "Replace this:" -bracketsList )
       (ido-completing-read "To:" -bracketsList ))))
-
   (let ( -begin -end )
     (if (use-region-p)
         (setq -begin (region-beginning) -end (region-end))
@@ -767,24 +718,65 @@ Version 2017-04-30"
       (save-restriction
         (narrow-to-region -begin -end)
         (let ( (case-fold-search nil)
-               (-fromLeft (substring *from-chars 0 1))
-               (-toLeft (if (string-equal (substring *to-chars 0 1) " ")
-                            (progn "")
-                          (substring *to-chars 0 1)))
-               (-fromRight (substring *from-chars 1 2))
-               (-toRight (if (string-equal (substring *to-chars 1 2) " ")
-                             (progn "")
-                           (substring *to-chars 1 2))))
-          (progn
-            (goto-char (point-min))
-            (while (search-forward -fromLeft nil t)
-              (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-              (replace-match -toLeft "FIXEDCASE" "LITERAL")))
-          (progn
-            (goto-char (point-min))
-            (while (search-forward -fromRight nil t)
-              (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-              (replace-match -toRight "FIXEDCASE" "LITERAL"))))))))
+               -fromLeft
+               -fromRight
+               -toLeft
+               -toRight)
+          (cond
+           ((string-match ",2" *from-chars  )
+            (progn
+              (setq -fromLeft (substring *from-chars 0 2))
+              (setq -fromRight (substring *from-chars -2))))
+           (t
+            (progn
+              (setq -fromLeft (substring *from-chars 0 1))
+              (setq -fromRight (substring *from-chars -1)))))
+          (cond
+           ((string-match ",2" *to-chars)
+            (progn
+              (setq -toLeft (substring *to-chars 0 2))
+              (setq -toRight (substring *to-chars -2))))
+           ((string-match "delete brackets" *to-chars)
+            (progn
+              (setq -toLeft "")
+              (setq -toRight "")))
+           (t
+            (progn
+              (setq -toLeft (substring *to-chars 0 1))
+              (setq -toRight (substring *to-chars -1)))))
+          (cond
+           ((string-match "markdown" *from-chars)
+            (progn
+              (goto-char (point-min))
+              (while
+                  (re-search-forward "`\\([^`]+?\\)`" nil t)
+                (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
+           ((string-match "tilde" *from-chars)
+            (progn
+              (goto-char (point-min))
+              (while
+                  (re-search-forward "~\\([^~]+?\\)~" nil t)
+                (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
+           ((string-match "equal" *from-chars)
+            (progn
+              (goto-char (point-min))
+              (while
+                  (re-search-forward "=\\([^=]+?\\)=" nil t)
+                (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
+           (t (progn
+                (progn
+                  (goto-char (point-min))
+                  (while (search-forward -fromLeft nil t)
+                    (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                    (replace-match -toLeft "FIXEDCASE" "LITERAL")))
+                (progn
+                  (goto-char (point-min))
+                  (while (search-forward -fromRight nil t)
+                    (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                    (replace-match -toRight "FIXEDCASE" "LITERAL")))))))))))
 
 (defun xah-corner-bracket→html-i (*begin *end)
        "Replace all 「…」 to <code>…</code> in current text block.
@@ -1031,7 +1023,7 @@ When called in lisp code, *begin and *end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2016-08-22"
+Version 2017-05-11"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
@@ -1092,20 +1084,20 @@ Version 2016-08-22"
           ["?\"" "?”"]
           ["\"<" "”<"]
           ["\"\n" "”\n"]
-          ] 'REPORT 'HILIGHT)
+          ] "REPORT" "HILIGHT")
 
         (xah-replace-pairs-region
          (point-min) (point-max)
          [
           ["  —  " " — "] ; rid of extra space in em-dash
-          ] 'REPORT 'HILIGHT)
+          ] "REPORT" "HILIGHT")
 
         ;; fix straight double quotes by regex
         (xah-replace-regexp-pairs-region
          (point-min) (point-max)
          [
           ["\\`\"" "“"]
-          ])
+          ] "FIXEDCASE" "LITERAL-P" "HILIGHT")
 
         ;; fix single quotes to curly
         (xah-replace-pairs-region
@@ -1121,7 +1113,7 @@ Version 2016-08-22"
           ["(\'" "(‘"]
           ["\')" "’)"]
           ["\']" "’]"]
-          ] 'REPORT 'HILIGHT)
+          ] "REPORT" "HILIGHT")
 
         (xah-replace-regexp-pairs-region
          (point-min) (point-max)
@@ -1150,14 +1142,14 @@ Version 2016-08-22"
           ["s’\n" "s'\n"]
 
           ["\"$" "”"]
-          ])
+          ] "FIXEDCASE" "LITERAL-P" "HILIGHT")
 
         ;; fix back escaped quotes in code
         (xah-replace-pairs-region
          (point-min) (point-max)
          [
           ["\\”" "\\\""]
-          ] 'REPORT 'HILIGHT)
+          ] "REPORT" "HILIGHT")
 
         ;; fix back. quotes in HTML code
         (xah-replace-regexp-pairs-region
@@ -1167,6 +1159,6 @@ Version 2016-08-22"
           ["=”" "=\""]
           ["/” " "/\" "]
           ["\\([0-9]+\\)” "     "\\1\" "]
-          ]
+          ] "FIXEDCASE" "LITERAL-P" "HILIGHT"
          )))))
 

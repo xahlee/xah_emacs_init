@@ -90,10 +90,10 @@ Other files paths for blogs are:
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
 
-version 2017-01-11"
+version 2017-05-09"
   (interactive)
   (let* (
-         -p1 -p2 
+         -p1 -p2
          -inputStr
          (-currentFpath (buffer-file-name))
          (-atomFilePath
@@ -129,6 +129,13 @@ version 2017-01-11"
             (goto-char (point-min))
             (while (search-forward " controls loop autoplay></video>" (point-max) t)
               (replace-match " controls=\"\" loop=\"\" autoplay=\"\"></video>" ))
+
+            (while (search-forward " controls></video>" (point-max) t)
+              (replace-match " controls=\"\"></video>" ))
+
+            (while (search-forward " loop></video>" (point-max) t)
+              (replace-match " loop=\"\"></video>" ))
+
             (goto-char (point-min))
             (insert "\n")
             (goto-char (point-max))
