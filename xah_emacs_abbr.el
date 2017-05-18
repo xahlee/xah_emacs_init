@@ -309,6 +309,8 @@ Version 2016-10-24"
     ("uxsl" "http://xahsl.org/" )
 
     ;; xah lee
+    ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
+
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee
 g+: https://plus.google.com/112757647855302148298/posts

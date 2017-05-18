@@ -663,7 +663,7 @@ If *to-chars is equal to string “delete brackets”, the brackets are deleted.
 
  If the string has length greater than 2, the rest are ignored.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2017-05-09"
+Version 2017-05-17"
   (interactive
    (let ((-bracketsList
           '("(paren)"
@@ -674,6 +674,7 @@ Version 2017-05-09"
             "`markdown`"
             "~tilde~"
             "=equal="
+            "\"ascii quote\""
             "[[double square,2]]"
             "“curly quote”"
             "‘single quote’"
@@ -757,6 +758,13 @@ Version 2017-05-09"
               (goto-char (point-min))
               (while
                   (re-search-forward "~\\([^~]+?\\)~" nil t)
+                (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
+           ((string-match "ascii quote" *from-chars)
+            (progn
+              (goto-char (point-min))
+              (while
+                  (re-search-forward "\"\\([^\"]+?\\)\"" nil t)
                 (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
                 (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
            ((string-match "equal" *from-chars)

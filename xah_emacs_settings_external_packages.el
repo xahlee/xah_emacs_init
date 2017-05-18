@@ -7,23 +7,6 @@
 ;;   (global-undo-tree-mode 1)
 ;;   )
 
-(when (and
-       (fboundp 'xah-lookup-google)
-       (boundp 'xah-fly-h-keymap))
-  (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-google)
-  (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-wikipedia)
-  (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
-
-  (define-key xah-fly-h-keymap (kbd "0") 'xah-lookup-all-dictionaries)
-
-  (define-key xah-fly-h-keymap (kbd "3") 'xah-lookup-word-dict-org)
-  (define-key xah-fly-h-keymap (kbd "4") 'xah-lookup-etymology)
-  (define-key xah-fly-h-keymap (kbd "5") 'xah-lookup-wiktionary)
-  (require 'eww)
-  (setq xah-lookup-dictionary-browser-function 'eww)
-  ;;
-  )
-
 (when (fboundp 'smex)
   ;; enhanced execute-extended-command
   (require 'smex)
@@ -71,37 +54,7 @@
 ;;   (guide-key-mode 1))
 
 (when (fboundp 'xah-find-text)
-  (setq
-   xah-find-dir-ignore-regex-list
-   [
-    "\\.git/"
-
-    "/home/xah/web/xahlee_info/js/ex/"
-
-    "ergoemacs_org/emacs_manual/"
-
-    "xahlee_info/REC-SVG11-20110816/"
-    "xahlee_info/clojure-doc-1.8/"
-    "xahlee_info/css3_spec_bg/"
-    "xahlee_info/css_2.1_spec/"
-    "xahlee_info/css_3_color_spec/"
-    "xahlee_info/css_transitions/"
-    "xahlee_info/dom-whatwg/"
-    "xahlee_info/git-bottomup/"
-    "xahlee_info/html5_whatwg/"
-    "xahlee_info/java8_doc/"
-    "xahlee_info/javascript_ecma-262_5.1_2011/"
-    "xahlee_info/javascript_ecma-262_6_2015/"
-    "xahlee_info/javascript_es2016/"
-    "xahlee_info/javascript_es6/"
-    "xahlee_info/jquery_doc/"
-    "xahlee_info/node_api/"
-    "xahlee_info/ocaml_doc/"
-    "xahlee_info/php-doc/"
-    "xahlee_info/python_doc_2.7.6/"
-    "xahlee_info/python_doc_3.3.3/"
-
-    ]))
+  (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ])))
 
 ;; (when (fboundp 'elfeed)
 ;;   (setq elfeed-feeds

@@ -28,53 +28,7 @@ e.g. c:/Users/h3/web/"
    ]
   )
 
-(defun xahsite-xahlee-info-external-docs ()
-  "A vector of dir names (not path, and no dir separator) under first dir level of xahlee.info that are external docs.
-2017-03-02"
-  [
 
-   ;;    "emacs_manual"
-
-   "REC-SVG11-20110816"
-   "clojure-doc-1.8"
-   "css3_spec_bg"
-   "css_2.1_spec"
-   "css_3_color_spec"
-   "css_transitions"
-   "dom-whatwg"
-   "html5_whatwg"
-   "java8_doc"
-   "javascript_ecma-262_5.1_2011"
-   "javascript_ecma-262_6_2015"
-   "javascript_es2016"
-   "javascript_es6"
-   "jquery_doc"
-   "node_api"
-   "ocaml_doc"
-   "php-doc"
-   "python_doc_2.7.6"
-   "python_doc_3.3.3"
-
-   ;; grep -r -F "REC-SVG11-20110816" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "clojure-doc-1.8" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "css3_spec_bg" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "css_2.1_spec" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "css_3_color_spec" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "css_transitions" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "dom-whatwg" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "html5_whatwg" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "java8_doc" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "javascript_ecma-262_5.1_2011" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "javascript_ecma-262_6_2015" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "javascript_es6" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "jquery_doc" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "node_api" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "php-doc" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "python_doc_2.7.6" --include='*html' ~/web/xahlee_info >> xx33
-   ;; grep -r -F "python_doc_3.3.3" --include='*html' ~/web/xahlee_info >> xx33
-
-   ]
-  )
 
 
 (defun xahsite-local-link-p (*href-value)
@@ -248,6 +202,40 @@ This function does not check input is actually a URL, nor if the result path fil
                    "\\2_\\3/\\4" -url)))
     -fPath
     ))
+
+
+(defvar xahsite-external-docs nil "A vector of dir path of xah sites are external docs, mostly computer language docs. 
+Each element is a string, looks like this:
+“ergoemacs_org/emacs_manual/”
+2017-05-17")
+
+(setq
+ xahsite-external-docs
+ [
+
+  "ergoemacs_org/emacs_manual/"
+  "xahlee_info/REC-SVG11-20110816/"
+  "xahlee_info/clojure-doc-1.8/"
+  "xahlee_info/css3_spec_bg/"
+  "xahlee_info/css_2.1_spec/"
+  "xahlee_info/css_3_color_spec/"
+  "xahlee_info/css_transitions/"
+  "xahlee_info/dom-whatwg/"
+  "xahlee_info/html5_whatwg/"
+  "xahlee_info/java8_doc/"
+  "xahlee_info/javascript_ecma-262_5.1_2011/"
+  "xahlee_info/javascript_ecma-262_6_2015/"
+  "xahlee_info/javascript_es2016/"
+  "xahlee_info/javascript_es6/"
+  "xahlee_info/jquery_doc/"
+  "xahlee_info/node_api/"
+  "xahlee_info/ocaml_doc/"
+  "xahlee_info/php-doc/"
+  "xahlee_info/python_doc_2.7.6/"
+  "xahlee_info/python_doc_3.3.3/"
+  "wordyenglish_com/arabian_nights/xx_full_2017-05-13/"
+
+  ])
 
 (defvar xahsite-xahlee-org-redirect nil "root dir map from xahlee.org to ergoemacs.org")
 (setq xahsite-xahlee-org-redirect
@@ -601,7 +589,6 @@ The arg _parentdir is not used. It is there so that this function can be passed 
 
       (mapc
        (lambda (-f)
-         ;; xahsite-xahlee-info-external-docs
          (when (not
                 (or
                  (string-match "/xx" -f) ; ; dir/file starting with xx are not public
