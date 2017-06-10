@@ -226,12 +226,13 @@ insert a div tag above the current paragraph."
   "personal to xahlee.org's vocabulary pages.
 Search forward a word enclosed by “<h3 class=\"wd\">” and “</h3>”,
 then search forward it inside the example body, only if it is not
-already bold. Then, ask user whether that should be bold."
+already bold. Then, ask user whether that should be bold.
+adding date 2017-06-10"
   (interactive)
   (progn
     (goto-char (point-min))
-    (while (search-forward-regexp "<h3 class=\"wd\">\\([^\<]+\\)</h3>" nil t)
-      (search-forward-regexp (match-string 1))
+    (while (re-search-forward "<h3 class=\"wd\">\\([^\<]+\\)</h3>" nil t)
+      (re-search-forward (match-string 1))
       (when (y-or-n-p "Do you want to bold the word?")
         (xah-html-wrap-html-tag "span" "w")
         ;;(replace-match "<span class=\"x-w\">\\1</span>" t)

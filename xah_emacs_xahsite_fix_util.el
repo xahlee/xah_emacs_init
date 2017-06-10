@@ -128,7 +128,7 @@ This code is specific to xahlee.org ."
   (save-excursion
     (narrow-to-region *start *end)
     (while
-        (search-forward-regexp "“<span class=\"code\">\\([^<]+?\\)</span>”" nil t)
+        (re-search-forward "“<span class=\"code\">\\([^<]+?\\)</span>”" nil t)
       (replace-match "<span class=\"code\">\\1</span>" t))))
 
 (defun xah-fix-to-html4strict (&optional *fName)
@@ -150,7 +150,7 @@ This function is specific to xahlee.org. 2008-05-10."
 
 ;; wrap div.img to “<img …>”
   (goto-char (point-min))
-  (while (search-forward-regexp "
+  (while (re-search-forward "
 
 <img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?>" nil t)
     (replace-match "
@@ -159,33 +159,33 @@ This function is specific to xahlee.org. 2008-05-10."
 
 ;; fix “<a><div.img><img></div></a>” to “<div.img><a><img></a></div>”
   (goto-char (point-min))
-  (while (search-forward-regexp "<a href=\"\\([^\"]+\\)\"><div class=\"img\"><img src=\"\\([^\"]+\\)\" alt=\"\\([^\"]+\\)\" width=\"\\([0-9]+\\)\" height=\"\\([0-9]+\\)\"></div></a>" nil t)
+  (while (re-search-forward "<a href=\"\\([^\"]+\\)\"><div class=\"img\"><img src=\"\\([^\"]+\\)\" alt=\"\\([^\"]+\\)\" width=\"\\([0-9]+\\)\" height=\"\\([0-9]+\\)\"></div></a>" nil t)
     (replace-match "<div class=\"img\"><a href=\"\\1\"><img src=\"\\2\" alt=\"\\3\" width=\"\\4\" height=\"\\5\"></a></div>" t))
 
 ;; consecutive img should just have one div.img wrap, not on each.
 ;; remove “</div><div.img>”
   (goto-char (point-min))
-  (while (search-forward-regexp "height=\"\\([0-9]+\\)\"></div>
+  (while (re-search-forward "height=\"\\([0-9]+\\)\"></div>
 <div class=\"img\">" nil t)
     (replace-match "height=\"\\1\">
 " t))
 
 ;; change “<img…></div><p class="cpt">…</p>” to  “<img…><p class="cpt">…</p></div>”
   (goto-char (point-min))
-  (while (search-forward-regexp "<img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?></div>
+  (while (re-search-forward "<img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?></div>
 *<p class=\"cpt\">
 * *\\([^§]+?\\)</p>" nil t)
     (replace-match "<img src=\"\\1\" alt=\"\\2\" width=\"\\3\" height=\"\\4\"><p class=\"cpt\">\\5</p></div>" t))
 
 ;; wrap img tag to “<img…>\n<p>above:” pairs.
 ;;    (goto-char (point-min))
-;;    (while (search-forward-regexp "<img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?>\n*<p>\n*above ?: ?\n?\\([^§]+?\\)</p>" nil t) (replace-match "<div class=\"img\"><img src=\"\\1\" alt=\"\\2\" width=\"\\3\" height=\"\\4\"><p>above: \\5</p></div>" t))
+;;    (while (re-search-forward "<img +src=\"\\([^\"]+\\)\" +alt=\"\\([^\"]+\\)?\" +width=\"\\([0-9]+\\)\" +height=\"\\([0-9]+\\)\" ?>\n*<p>\n*above ?: ?\n?\\([^§]+?\\)</p>" nil t) (replace-match "<div class=\"img\"><img src=\"\\1\" alt=\"\\2\" width=\"\\3\" height=\"\\4\"><p>above: \\5</p></div>" t))
 
 ;;(goto-char (point-min))
-;;(while (search-forward-regexp "<blockquote>\n?«?\n?\\([^<]+\\)\n?»?\n?</blockquote>" nil t) (replace-match "<blockquote><p>\\1</p></blockquote>"))
+;;(while (re-search-forward "<blockquote>\n?«?\n?\\([^<]+\\)\n?»?\n?</blockquote>" nil t) (replace-match "<blockquote><p>\\1</p></blockquote>"))
 
 ;;     (goto-char (point-min))
-;;     (while (search-forward-regexp "</blockquote>\n+<blockquote>" nil t) (replace-match "" t t))
+;;     (while (re-search-forward "</blockquote>\n+<blockquote>" nil t) (replace-match "" t t))
   )
 
 (defun xah-fix-wrap-img-figure ()

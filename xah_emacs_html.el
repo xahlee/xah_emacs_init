@@ -50,7 +50,7 @@ Version 2017-02-02"
   (save-excursion ; remove empty lines
     (progn
       (goto-char (point-min))
-      (while (search-forward-regexp "\n\n\n+" nil t)
+      (while (re-search-forward "\n\n\n+" nil t)
         (replace-match (make-string 2 ?\n)))))
   (let (-p1 -p2 -num -bufferTextOrig )
     (push-mark)

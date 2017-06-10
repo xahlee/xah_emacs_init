@@ -198,13 +198,13 @@ Version 2015-04-28"
   (while (search-forward "\n" nil t) (replace-match "" nil t))
 
   (goto-char 1)
-  (while (search-forward-regexp "  +" nil t) (replace-match " " nil t))
+  (while (re-search-forward "  +" nil t) (replace-match " " nil t))
 
   (goto-char 1)
   (while (search-forward ", " nil t) (replace-match "," nil t))
 
   (goto-char 1)
-  (while (search-forward-regexp "\\([0-9]\\)\\.\\([0-9][0-9][0-9]\\)[0-9]+" nil t) (replace-match "\\1.\\2" t nil)))
+  (while (re-search-forward "\\([0-9]\\)\\.\\([0-9][0-9][0-9]\\)[0-9]+" nil t) (replace-match "\\1.\\2" t nil)))
 
 (defun xah-convert-english-chinese-punctuation (*begin *end &optional *to-direction)
   "Convert punctuation from/to English/Chinese characters.
@@ -319,7 +319,7 @@ Version 2017-01-11"
         (narrow-to-region -p1 -p2)
         (let ( (case-fold-search nil))
           (goto-char (point-min))
-          (while (search-forward-regexp "a\\|e\\|i\\|o\\|u" (point-max) t)
+          (while (re-search-forward "a\\|e\\|i\\|o\\|u" (point-max) t)
             (replace-match "" "FIXEDCASE" "LITERAL")))))))
 
 (defun xah-replace-profanity ()
@@ -809,45 +809,49 @@ When called with `universal-argument', work on visible portion of whole buffer (
          (save-restriction
            (narrow-to-region *begin *end)
            (goto-char (point-min))
-           (while (search-forward-regexp "「\\([^」]+?\\)」" nil t)
+           (while (re-search-forward "「\\([^」]+?\\)」" nil t)
              (if (y-or-n-p "Replace this one?")
                  (replace-match "<code>\\1</code>" t) ) ) )) )
 
-(defun xah-angle-brackets-to-html (*begin *end)
+(defun xah-angle-brackets-to-html (&optional *begin *end)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span> in current text block or selection.
 
 When called non-interactively, *begin *end are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
-version 2015-04-13"
-  (interactive
-   (let (-p1 -p2)
-     (save-excursion
-       (if (re-search-backward "\n[ \t]*\n" nil "move")
-           (progn (re-search-forward "\n[ \t]*\n")
-                  (setq -p1 (point)))
-         (setq -p1 (point)))
-       (if (re-search-forward "\n[ \t]*\n" nil "move")
-           (progn (re-search-backward "\n[ \t]*\n")
-                  (setq -p2 (point)))
-         (setq -p2 (point))))
-     (list -p1 -p2)))
-
+version 2017-06-10"
+  (interactive)
   (let ((-changedItems '())
-        (case-fold-search nil))
+        (case-fold-search nil)
+        -p1 -p2
+        )
+    (if (and *begin *end)
+        (progn
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
+      (if (use-region-p)
+          (progn
+            (setq -p1 (region-beginning))
+            (setq -p2 (region-end)))
+        (save-excursion
+          (if (re-search-backward "\n[ \t]*\n" nil "move")
+              (progn (re-search-forward "\n[ \t]*\n")
+                     (setq -p1 (point)))
+            (setq -p1 (point)))
+          (if (re-search-forward "\n[ \t]*\n" nil "move")
+              (progn (re-search-backward "\n[ \t]*\n")
+                     (setq -p2 (point)))
+            (setq -p2 (point))))))
     (save-restriction
-      (narrow-to-region *begin *end)
-
+      (narrow-to-region -p1 -p2)
       (goto-char (point-min))
-      (while (search-forward-regexp "《\\([^》]+?\\)》" nil t)
+      (while (re-search-forward "《\\([^》]+?\\)》" nil t)
         (push (match-string-no-properties 1) -changedItems)
         (replace-match "<cite class=\"book\">\\1</cite>" "FIXEDCASE"))
-
       (goto-char (point-min))
-      (while (search-forward-regexp "〈\\([^〉]+?\\)〉" nil t)
+      (while (re-search-forward "〈\\([^〉]+?\\)〉" nil t)
         (push (match-string-no-properties 1) -changedItems)
         (replace-match "<cite>\\1</cite>" t)))
-
     (if (> (length -changedItems) 0)
         (mapcar
          (lambda (-x)
@@ -856,7 +860,7 @@ version 2015-04-13"
          (reverse -changedItems))
       (message "No change needed."))))
 
-(defun xah-remove-square-brackets (*begin *end)
+(defun xah-remove-square-brackets (&optional *begin *end)
   "Delete any text of the form “[‹n›]”, eg [1], [2], … in current text block or selection.
 
 For example
@@ -867,33 +871,39 @@ becomes
 When called non-interactively, *begin *end are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
-Version 2015-06-04"
-  (interactive
-   (let (-p1 -p2)
-     (save-excursion
-       (if (re-search-backward "\n[ \t]*\n" nil "move")
-           (progn (re-search-forward "\n[ \t]*\n")
-                  (setq -p1 (point)))
-         (setq -p1 (point)))
-       (if (re-search-forward "\n[ \t]*\n" nil "move")
-           (progn (re-search-backward "\n[ \t]*\n")
-                  (setq -p2 (point)))
-         (setq -p2 (point))))
-     (list -p1 -p2)))
-  (let (-changedItems)
+Version 2017-06-10"
+  (interactive)
+  (let (-p1 -p2 -changedItems)
+    (if (and  *begin *end)
+        (progn
+          (setq -p1 (region-beginning))
+          (setq -p2 (region-end)))
+      (if (use-region-p)
+          (progn
+            (setq -p1 (region-beginning))
+            (setq -p2 (region-end)))
+        (save-excursion
+          (if (re-search-backward "\n[ \t]*\n" nil "move")
+              (progn (re-search-forward "\n[ \t]*\n")
+                     (setq -p1 (point)))
+            (setq -p1 (point)))
+          (if (re-search-forward "\n[ \t]*\n" nil "move")
+              (progn (re-search-backward "\n[ \t]*\n")
+                     (setq -p2 (point)))
+            (setq -p2 (point))))))
     (save-restriction
-      (narrow-to-region *begin *end)
-      (goto-char 1)
-      (while (search-forward-regexp "\\(\\[[0-9]+?\\]\\)" nil t)
-        (setq -changedItems (cons (match-string 1) -changedItems ))
-        (replace-match "" t))
-
-      (goto-char 1)
-      (while (search-forward "[citation needed]" nil t)
-        (setq -changedItems (cons "[citation needed]" -changedItems ))
-        (backward-char 17)
-        (delete-char 17)))
-
+      (narrow-to-region -p1 -p2)
+      (progn
+        (goto-char 1)
+        (while (re-search-forward "\\(\\[[0-9]+?\\]\\)" nil t)
+          (setq -changedItems (cons (match-string 1) -changedItems ))
+          (replace-match "" t)))
+      (progn
+        (goto-char 1)
+        (while (search-forward "[citation needed]" nil t)
+          (setq -changedItems (cons "[citation needed]" -changedItems ))
+          (backward-char 17)
+          (delete-char 17))))
     (if (> (length -changedItems) 0)
         (mapcar
          (lambda (-x)
@@ -983,37 +993,6 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
   (interactive)
   (xah-curly-quotes→bracket "〔" "〕")
 )
-
-;; (defun curly-quotes-replacement ()
-;;   "to be used …
-;; TODO
-
-;; Replace “…” to one of 〔…〕, 「…」, 【…】"
-;;   (interactive)
-;;   (let (replacePattern)
-
-;;     (goto-char 1)
-;;     (search-forward-regexp "“\\([^”]+?\\)”" nil t)
-
-;;     (cond
-;;      ((or
-;;        (string-match "^Ctrl" (match-string-no-properties 1 ) )
-;;        (string-match "^Alt" (match-string-no-properties 1 ) )
-;;        (string-match "^Win" (match-string-no-properties 1 ) )
-;;        (string-match "^Menu" (match-string-no-properties 1 ) )
-;;        (string-match "^Meta" (match-string-no-properties 1 ) )
-;;        (string-match "^Cmd" (match-string-no-properties 1 ) )
-;;        (string-match "^Opt" (match-string-no-properties 1 ) )
-;;        (string-match "^Super" (match-string-no-properties 1 ) )
-;;        (string-match "^Hyper" (match-string-no-properties 1 ) )
-;;        )
-;;       (setq replacePattern "【\1】" )
-;;       )
-;;      (CONDITION BODY)
-;;      )
-
-;;     )
-;;   )
 
 (defun xah-replace-straight-quotes (*begin *end)
   "Replace straight double quotes to curly ones, and others.

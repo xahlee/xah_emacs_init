@@ -541,11 +541,11 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
           (narrow-to-region -p1 -p2)
           (progn
             (goto-char (point-min))
-            (while (search-forward-regexp "[ \t]+\n" nil t)
+            (while (re-search-forward "[ \t]+\n" nil t)
               (replace-match "\n")))
           (progn
             (goto-char (point-min))
-            (while (search-forward-regexp "\n\n\n+" nil t)
+            (while (re-search-forward "\n\n\n+" nil t)
               (replace-match "\n\n"))))))))
 
 (defun xah-replace-BOM-mark-etc ()
@@ -601,7 +601,7 @@ Test cases
       ;; (search-backward-regexp "[[:xdigit:]]+" nil t)
       (search-backward-regexp "[0123456789abcdef]+" nil t)
       (setq -p1 (point) )
-      (search-forward-regexp "[0123456789abcdef]+" nil t)
+      (re-search-forward "[0123456789abcdef]+" nil t)
       (setq -p2 (point) )
 
       (setq -inputStr (buffer-substring-no-properties -p1 -p2) )
