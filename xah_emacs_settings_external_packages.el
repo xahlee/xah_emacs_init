@@ -54,7 +54,7 @@
 ;;   (guide-key-mode 1))
 
 (when (fboundp 'xah-find-text)
-  (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ])))
+  (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil)))
 
 ;; (when (fboundp 'elfeed)
 ;;   (setq elfeed-feeds

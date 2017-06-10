@@ -37,7 +37,6 @@ Version 2016-10-24"
     ("dsnt" "doesn't" )
     ("dvp" "develop" )
     ("eg" "e.g." )
-    ("ie" "i.e." )
     ("hnt" "haven't" )
     ("isnt" "isn't" )
     ("shnt" "shouldn't" )
@@ -135,6 +134,7 @@ Version 2016-10-24"
     ("wl" "Wolfram Language" )
     ("yt" "YouTube" )
     ("uff" "Firefox" )
+    ("ie" "Internet Explorer" )
     ("uso" "StackOverflow" )
 
     ;; computing
@@ -222,12 +222,17 @@ Version 2016-10-24"
     ("ukey" "【Alt+f】" )
     ("pmoved" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
     ("umenu" "〖a ▸ b ▸ c〗" )
-    ("ufaq" "<div class=\"question-box32371\">
-<p class=\"q\">How to do this?</p>
-<p>this way</p>
-</div>
+    ("ufaq" "<section class=\"qna_xl\">
+
+<h3 class=\"q\">How to ?</h3>
+
+<p>this</p>
+
+</section>
 
 " )
+
+;; question-box32371
 
     ;; unicode
     ("emd" "—" )

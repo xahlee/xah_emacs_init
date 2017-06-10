@@ -163,12 +163,11 @@ Version 2016-07-21"
 (defun xah-toggle-line-spacing ()
   "Toggle line spacing between no extra space to extra half line height.
 URL `http://ergoemacs.org/emacs/emacs_toggle_line_spacing.html'
-Version 2015-12-17"
+Version 2017-06-02"
   (interactive)
-  (if (null line-spacing)
-      (setq line-spacing 0.5) ; add 0.5 height between lines
-    (setq line-spacing nil)   ; no extra heigh between lines
-    )
+  (if line-spacing
+      (setq line-spacing nil)
+    (setq line-spacing 0.5))
   (redraw-frame (selected-frame)))
 
 (defun xah-toggle-read-novel-mode ()
@@ -444,8 +443,8 @@ Version 2017-02-02"
 (defun xah-shell-commands (*cmd-abbrev)
   "insert shell command from a list of abbrevs.
 
-URL `http://ergoemacs.org/misc/emacs_abbrev_shell_elisp.html'
-version 2015-02-05"
+URL `http://ergoemacs.org/emacs/emacs_interactive_abbrev.html'
+version 2017-06-07"
   (interactive
    (list
     (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH")))
@@ -619,7 +618,9 @@ Test cases
 
 
 (defun xah-unfontify-region-or-buffer ()
-  "Unfontify text selection or buffer."
+  "Unfontify text selection or buffer.
+URL `http://ergoemacs.org/emacs/elisp_uncolor_region.html'
+Version 2017-05-31"
   (interactive)
   (if (use-region-p)
       (font-lock-unfontify-region (region-beginning) (region-end))
@@ -780,6 +781,53 @@ Version 2015-07-24"
         (set-buffer-file-coding-system *coding-system)
         (save-buffer)
         (kill-buffer -buffer)))))
+
+ 
+(defun xah-remove-wikipedia-link ()
+  "delet wikipedia link at cursor position
+Version 2017-06-05"
+  (interactive)
+  (require 'xah-html-mode)
+  (let (p1
+        p2
+        deletedText
+        )
+    (when (search-forward "</a>")
+      (progn
+        (setq p2 (point))
+        (search-backward "<a href=\"http://en.wikipedia.org/wiki/")
+        (setq deletedText (buffer-substring (point) p2))
+        (xah-html-remove-html-tags (point) p2)
+        (message "%s" deletedText)
+        deletedText
+        ))))
+
+(global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
+
+(defun xah-remove-all-wikipedia-link ()
+  "delete all wikipedia links in a html file, except image links etc.
+Version 2017-06-05"
+  (interactive)
+  (require 'xah-html-mode)
+  (let (p1
+        p2 deletedText
+        (resultList '()))
+    (goto-char (point-min))
+    (while (search-forward "<a href=\"http://en.wikipedia.org/wiki/" nil t)
+      (progn
+        (search-backward "<a href" )
+        (setq p1 (point))
+        (search-forward "</a>")
+        (setq p2 (point))
+
+        (setq deletedText (buffer-substring p1 p2))
+        (push deletedText resultList)
+
+        (xah-html-remove-html-tags p1 p2)))
+
+    (message  (mapconcat 'princ resultList "\n"))))
+
+(global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
 
 
 ;; don't use much anymore

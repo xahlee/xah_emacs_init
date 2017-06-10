@@ -1031,7 +1031,7 @@ When called in lisp code, *begin and *end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2017-05-11"
+Version 2017-06-01"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
@@ -1086,6 +1086,9 @@ Version 2017-05-11"
           ["\":" "”:"]
           ["\")" "”)"]
           ["\"]" "”]"]
+
+          ;; ["\"[" "\”["]
+
           [".\"" ".”"]
           [",\"" ",”"]
           ["!\"" "!”"]
@@ -1159,14 +1162,16 @@ Version 2017-05-11"
           ["\\”" "\\\""]
           ] "REPORT" "HILIGHT")
 
-        ;; fix back. quotes in HTML code
-        (xah-replace-regexp-pairs-region
-         (point-min) (point-max)
-         [
-          ["” \\([-a-z]+\\)="       "\" \\1="] ; any 「” some-thing=」
-          ["=”" "=\""]
-          ["/” " "/\" "]
-          ["\\([0-9]+\\)” "     "\\1\" "]
-          ] "FIXEDCASE" "LITERAL-P" "HILIGHT"
-         )))))
+        ;; ;; fix back. quotes in HTML code
+        ;; (xah-replace-regexp-pairs-region
+        ;;  (point-min) (point-max)
+        ;;  [
+        ;;   ["” \\([-a-z]+\\)="       "\" \\1="] ; any 「” some-thing=」
+        ;;   ["=”" "=\""]
+        ;;   ["/” " "/\" "]
+        ;;   ["\\([0-9]+\\)” "     "\\1\" "]
+        ;;   ] "FIXEDCASE" "LITERAL-P" "HILIGHT"
+        ;;  )
+
+))))
 

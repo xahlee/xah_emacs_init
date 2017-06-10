@@ -89,7 +89,7 @@
 ;; ;; (setq ediff-split-window-function 'split-window-horizontally)
 
 ;; (setq mouse-yank-at-point t)
-(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-progressive-speed t)
 
 
 (require 'recentf)
@@ -198,7 +198,7 @@
 
 (progn
   (require 'ido)
-  ;; make buffer switch command do suggestions, also for find-file command
+  ;; make buffer switch command do auto suggestions, also for find-file command
   (ido-mode 1)
   ;; (ido-everywhere 1)
   (when ; make ido display choices vertically

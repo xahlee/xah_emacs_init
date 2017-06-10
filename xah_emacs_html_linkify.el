@@ -78,20 +78,31 @@ Example, if cursor is on the word “i/cat.png”, then it will became
 
 If there's a text selection, use that as image path.
 
-This function calls `xah-html-image-linkify' to do its work."
+This function calls `xah-html-image-linkify'.
+Version 2017-06-09"
   (interactive)
-  (progn
-    (xah-html-image-linkify)
-    (search-backward "<")
+  (let (-p1 -p2 -alt-str)
+    (setq -alt-str (xah-html-image-linkify))
+
+    ;; (search-backward "alt=\"")
+    ;; (forward-char 5)
+
+    ;; (progn
+    ;;   (setq -p1 (point))
+    ;;   (search-forward "\"")
+    ;;   (setq -p2 (- (point) 1) )
+    ;;   (setq -alt-str (buffer-substring -p1 -p2)))
+
+    (search-backward "<img ")
     (insert "<figure>\n")
     (search-forward ">")
-    (insert "
-<figcaption>
-</figcaption>
-</figure>
-")
-    (search-backward "</figcaption>")
-    (backward-char)))
+    (insert "\n<figcaption>\n")
+    (insert -alt-str "\n</figcaption>\n</figure>\n")
+
+    ;; (search-backward "</figcaption>")
+    ;; (backward-char)
+
+))
 
 (defun xah-html-full-size-img-linkify (&optional *begin *end)
   "Make image file path at cursor point into a img link.
