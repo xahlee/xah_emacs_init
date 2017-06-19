@@ -91,8 +91,8 @@
   (define-key xah-user-keymap (kbd "h") nil)
 
   (define-key xah-user-keymap (kbd "i c") 'xah-insert-random-number)
-  (define-key xah-user-keymap (kbd "i h") 'xah-insert-random-hex)
-  (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-string)
+  (define-key xah-user-keymap (kbd "i h") 'xah-insert-random-string)
+  (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-hex)
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
 
   (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)

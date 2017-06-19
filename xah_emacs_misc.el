@@ -837,3 +837,18 @@ Version 2017-06-05"
 ;;   (require 'calc-bin)
 ;;   (let ((calc-number-radix 2))
 ;;     (math-format-radix (string-to-number decStr))))
+
+
+
+(defun xah-display-control-l-as-line ()
+  "Display the formfeed ^L char as line.
+URL `http://ergoemacs.org/emacs/emacs_form_feed_section_paging.html'
+Version 2017-06-18"
+  (interactive)
+  ;; 2016-10-11 thanks to Steve Purcell's page-break-lines.el
+  (progn
+    (when (not buffer-display-table)
+      (setq buffer-display-table (make-display-table)))
+    (aset buffer-display-table ?\^L
+          (vconcat (make-list 70 (make-glyph-code ?─ 'font-lock-comment-face))))
+    (redraw-frame)))

@@ -198,10 +198,11 @@
 
 (progn
   (require 'ido)
-  ;; make buffer switch command do auto suggestions, also for find-file command
+
   (ido-mode 1)
-  ;; (ido-everywhere 1)
-  (when ; make ido display choices vertically
+
+  (when
+ ; make ido display choices vertically
       (not (version< emacs-version "25"))
     (progn
       (make-local-variable 'ido-decorations)
