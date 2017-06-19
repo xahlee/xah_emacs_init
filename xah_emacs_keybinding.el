@@ -95,7 +95,7 @@
   (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-hex)
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
 
-  (define-key xah-user-keymap (kbd "j") 'xah-shell-commands)
+  (define-key xah-user-keymap (kbd "j") 'xah-interactive-abbrev)
   (define-key xah-user-keymap (kbd "k") 'xah-find-replace-text)
 
   (define-key xah-user-keymap (kbd "m") 'xah-move-image-file)

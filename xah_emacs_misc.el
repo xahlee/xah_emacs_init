@@ -408,8 +408,9 @@ Version 2017-02-02"
 
 
 
-(defcustom xah-shell-abbrev-alist nil "alist of xah's shell abbrevs" :group 'xah)
-(setq xah-shell-abbrev-alist
+(defcustom xah-interactive-abbrev-alist nil "A alist for interactive abbreves. Key and value are strings. Key is for abbrev. Value is the text to be inserted." :group 'xah)
+
+(setq xah-interactive-abbrev-alist
       '(
         ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
         ("ssh" . "ssh -l u40651120 xahlee.org ")
@@ -423,7 +424,6 @@ Version 2017-02-02"
 
         ("grep" . "grep -r -F \"xxx\" --include='*html' ~/web")
         ("firefox" . "setsid firefox &")
-        ("giftowebm" . "avconv -f gif -i cat.gif cat.webm")
 
         ("delete empty file" . "find . -type f -empty")
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
@@ -440,16 +440,18 @@ Version 2017-02-02"
         ("clojure" . "java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
         ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")))
 
-(defun xah-shell-commands (*cmd-abbrev)
-  "insert shell command from a list of abbrevs.
+(defun xah-interactive-abbrev ()
+  "Prompt to insert string from a alist `xah-shell-abbrev-alist'.
 
 URL `http://ergoemacs.org/emacs/emacs_interactive_abbrev.html'
 version 2017-06-07"
-  (interactive
-   (list
-    (ido-completing-read "shell abbrevs:" (mapcar (lambda (x) (car x)) xah-shell-abbrev-alist) "PREDICATE" "REQUIRE-MATCH")))
-  (progn
-    (insert (cdr (assoc *cmd-abbrev xah-shell-abbrev-alist)))))
+  (interactive)
+  (let ((x
+         (ido-completing-read
+          "abbrevs:"
+          (mapcar (lambda (x) (car x)) xah-interactive-abbrev-alist)
+          "PREDICATE" "REQUIRE-MATCH")))
+    (insert (cdr (assoc x xah-interactive-abbrev-alist)))))
 
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.
@@ -782,7 +784,6 @@ Version 2015-07-24"
         (save-buffer)
         (kill-buffer -buffer)))))
 
- 
 (defun xah-remove-wikipedia-link ()
   "delet wikipedia link at cursor position
 Version 2017-06-05"
