@@ -789,8 +789,7 @@ Version 2015-07-24"
 Version 2017-06-05"
   (interactive)
   (require 'xah-html-mode)
-  (let (p1
-        p2
+  (let ( p2
         deletedText
         )
     (when (search-forward "</a>")
@@ -805,11 +804,12 @@ Version 2017-06-05"
 
 (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
 
+
+
 (defun xah-remove-all-wikipedia-link ()
   "delete all wikipedia links in a html file, except image links etc.
-Version 2017-06-05"
+Version 2017-06-19"
   (interactive)
-  (require 'xah-html-mode)
   (let (p1
         p2 deletedText
         (resultList '()))
@@ -818,15 +818,20 @@ Version 2017-06-05"
       (progn
         (search-backward "<a href" )
         (setq p1 (point))
-        (search-forward "</a>")
+        (search-forward ">")
         (setq p2 (point))
 
-        (setq deletedText (buffer-substring p1 p2))
+        (setq deletedText (buffer-substring-no-properties p1 p2))
         (push deletedText resultList)
+        (delete-region p1 p2)
 
-        (xah-html-remove-html-tags p1 p2)))
+        (search-forward "</a>")
+        (setq p2 (point))
+        (search-backward "</a>")
+        (setq p1 (point))
+        (delete-region p1 p2)))
 
-    (message  (mapconcat 'princ resultList "\n"))))
+    (mapc (lambda (x) (princ x) (terpri )) resultList)))
 
 (global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
 

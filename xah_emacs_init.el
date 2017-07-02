@@ -147,7 +147,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (progn
   (add-to-list 'load-path "~/git/xah-clojure-mode/")
-  ;; (require 'xah-clojure-mode)
+  (require 'xah-clojure-mode)
   (autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t)
   (when (boundp 'xah-clojure-mode-map)
     (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map)))

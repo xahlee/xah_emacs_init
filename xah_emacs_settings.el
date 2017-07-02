@@ -28,6 +28,24 @@
         (font . "DejaVu Sans Mono-10")
         ))
 
+;; (setq initial-frame-alist
+;;       '(
+;;         (tool-bar-lines . 0)
+;;         (width . 90)
+;;         (height . 50)
+;;         (background-color . "honeydew")
+;;         (font . "DejaVu Sans Mono-12")
+;;         ))
+
+;; (setq default-frame-alist
+;;       '(
+;;         (tool-bar-lines . 0)
+;;         (width . 90)
+;;         (height . 50)
+;;         (background-color . "honeydew")
+;;         (font . "DejaVu Sans Mono-12")
+;;         ))
+
 
 
 ;; UTF-8 as default encoding
@@ -38,6 +56,7 @@
 
 
 
+;; make space equivalent to hyphen and newline for isearch-forward
 (setq search-whitespace-regexp "[-_ \n]")
 
 (setq make-backup-files nil)
@@ -53,7 +72,7 @@
 ;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
 ;; (setq x-selection-timeout 300)
 
-(setq time-stamp-active nil)
+;; (setq time-stamp-active nil)
 
 (progn
   ;; seems pointless to warn. There's always undo.
@@ -65,6 +84,7 @@
   (put 'scroll-left 'disabled nil)
   (put 'dired-find-alternate-file 'disabled nil)
 )
+
 
 
 (progn
@@ -76,7 +96,7 @@
 
   ;; make dired not include 「.」 and 「..」, and use metric prefix for file size
   (when (string-equal system-type "gnu/linux")
-    (setq dired-listing-switches "-Al --time-style long-iso"))
+    (setq dired-listing-switches "-al --time-style long-iso"))
 
   ;; make dired allow deleting/copy whole dir
   (setq dired-recursive-copies (quote always))
@@ -238,14 +258,20 @@
 
 
 
-;; load emacs 24's package system. Add MELPA repository.
-(when (>= emacs-major-version 24)
+(progn
+  ;; load emacs 24's package system. Add MELPA repository.
   (require 'package)
-  (add-to-list
-   'package-archives
-   ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
-   '("melpa" . "http://melpa.milkbox.net/packages/")
-   t))
+
+  (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                      (not (gnutls-available-p))))
+         (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
+    (add-to-list 'package-archives '("melpa" . url) t))
+
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+  (package-initialize))
 
 
 
@@ -285,7 +311,6 @@
 
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
-
 
 (setq hippie-expand-try-functions-list
       '(

@@ -3,7 +3,7 @@
 ;; Copyright © 2017 by Xah Lee
 
 ;; Author: Xah Lee ( http://xahlee.info/ )
-;; Version: 0.1.0
+;; Version: 0.1.2 2017-06-23
 ;; Created: 29 April 2017
 ;; Package-Requires: ((emacs "25.1"))
 ;; Keywords: convenience
@@ -28,13 +28,13 @@
 (defface xah-text-fc1
   '(
     (t :foreground "firebrick" :weight bold))
-  "face for CSS ID selector “#…”."
+  "a face."
   :group 'xah-text-mode )
 
 (defface xah-text-fc2
   '(
     (t :weight bold))
-  "face for CSS class name selector “.…”."
+  "a face."
   :group 'xah-text-mode )
 
 ;; temp for debugging
@@ -52,11 +52,11 @@
  'face-defface-spec
  )
 
- 
+
 
-(defvar xah-text-kword nil "List of HTML5 tag names.") 
+(defvar xah-text-kword nil "List of words to highlight")
 
-(setq xah-text-kword '( "abbr" "address" "applet" "area" "article" "aside" "audio" ))
+(setq xah-text-kword '( ))
 
 
 
@@ -71,8 +71,6 @@ Version 2017-01-27"
     (aset buffer-display-table ?\^L
           (vconcat (make-list 70 (make-glyph-code ?─ 'font-lock-comment-face))))
     (redraw-frame)))
-
-
 
 
 ;; syntax table
@@ -99,11 +97,9 @@ Version 2017-01-27"
 (setq xah-text-font-lock-keywords
       (let ((-kw (regexp-opt xah-text-kword 'words)))
         `(
-          ("#[-_a-zA-Z]+[-_a-zA-Z0-9]*" . 'xah-text-fc1)
-          ("\\.[a-zA-Z]+[-_a-zA-Z0-9]*" . 'xah-text-fc2)
-            
+
           (,-kw . font-lock-function-name-face)
-          
+
           )))
 
 
@@ -119,7 +115,7 @@ Version 2017-01-27"
 ;;;###autoload
 (define-derived-mode xah-text-mode fundamental-mode "ξxt"
   "A major mode for plain text, some xah enhancement stuff
-v 2017-04-29
+Version 2017-06-23
 \\{xah-text-mode-map}"
   (setq font-lock-defaults '((xah-text-font-lock-keywords)))
 

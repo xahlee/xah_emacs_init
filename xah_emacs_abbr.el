@@ -48,6 +48,7 @@ Version 2016-10-24"
 
     ;; english
     ("ann" "announcement" )
+    ("und" "understand" )
     ("maint" "maintenance" )
     ("mtn" "mountain" )
     ("qaa" "questions and answers" )
@@ -117,6 +118,7 @@ Version 2016-10-24"
     ("uprog" "programing" )
     ("uq" "question" )
     ("st" "string" )
+    ("ei" "put this in your emacs init file:" )
 
     ;; tech company
     ("gc" "Google Chrome" )
@@ -259,6 +261,8 @@ Version 2016-10-24"
     ("ra" "→" )
     ("da" "↓" )
 
+    ("fn" "ƒ" )
+
     ;; code
     ("uutf8" "-*- coding: utf-8 -*-" )
 
@@ -281,15 +285,17 @@ Version 2016-10-24"
     ("ui" "user interface" )
     ("ujava" "http://xahlee.info/java-a-day/java.html" )
     ("ukinesis" "http://xahlee.info/kbd/keyboard_Kinesis.html" )
-    ("ulang" "<a href=\"../java-a-day/java.html\">Java</a>
-<a href=\"../python/python3_basics.html\">Python</a>
-<a href=\"../ruby/ruby_basics.html\">Ruby</a>
-<a href=\"../perl-python/perl_basics.html\">Perl</a>
-<a href=\"../php/php_basics.html\">PHP</a>
-<a href=\"http://ergoemacs.org/emacs/elisp.html\">Emacs Lisp</a>" )
+    ("ulang" "/home/xah/web/xahlee_info/js/javascript_basics.html
+/home/xah/web/xahlee_info/python/python3_basics.html
+/home/xah/web/xahlee_info/ruby/ruby_basics.html
+/home/xah/web/xahlee_info/perl/perl_basics_1.html
+/home/xah/web/xahlee_info/php/php_basics.html
+/home/xah/web/ergoemacs_org/emacs/elisp_basics.html
+/home/xah/web/xahlee_info/java-a-day/java.html
+/home/xah/web/xahlee_info/clojure/clojure_index.html
+"  )
     ("umaltron" "http://xahlee.info/kbd/Maltron_keyboard.html" )
     ("umma" "http://xahlee.info/M/index.html" )
-    ("uns" "understand" )
     ("uocaml" "http://xahlee.info/ocaml/ocaml.html" )
     ("uperl" "http://xahlee.info/perl-python/perl_basics.html" )
     ("uphp" "http://xahlee.info/php/php_basics.html" )
