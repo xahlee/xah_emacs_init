@@ -8,7 +8,7 @@
 
 ;; initial window and default window
 
-;; (setq inhibit-splash-screen t)
+;; (setq inhibit-startup-screen t)
 
 (setq initial-frame-alist
       '(
