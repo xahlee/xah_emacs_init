@@ -258,20 +258,14 @@
 
 
 
-(progn
-  ;; load emacs 24's package system. Add MELPA repository.
+;; load emacs 24's package system. Add MELPA repository.
+(when (>= emacs-major-version 24)
   (require 'package)
-
-  (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                      (not (gnutls-available-p))))
-         (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
-    (add-to-list 'package-archives '("melpa" . url) t))
-
-  (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-
-  (package-initialize))
+  (add-to-list
+   'package-archives
+   ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
+   '("melpa" . "http://melpa.milkbox.net/packages/")
+   t))
 
 
 
