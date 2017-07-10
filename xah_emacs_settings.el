@@ -206,12 +206,14 @@
 
   (ido-mode 1)
 
-  (when
- ; make ido display choices vertically
-      (not (version< emacs-version "25"))
+  (if (version< emacs-version "25")
+      (progn
+        (make-local-variable 'ido-separator)
+        (setq ido-separator "\n"))
     (progn
       (make-local-variable 'ido-decorations)
       (setf (nth 2 ido-decorations) "\n")))
+  
   (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
   (setq ido-default-file-method 'selected-window) ; use current pane for newly opened file
   (setq ido-default-buffer-method 'selected-window) ; use current pane for newly switched buffer
