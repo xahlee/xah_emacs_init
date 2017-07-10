@@ -113,7 +113,7 @@ Version 2017-01-27"
 
 
 ;;;###autoload
-(define-derived-mode xah-text-mode fundamental-mode "ξxt"
+(define-derived-mode xah-text-mode fundamental-mode "∑text"
   "A major mode for plain text, some xah enhancement stuff
 Version 2017-06-23
 \\{xah-text-mode-map}"

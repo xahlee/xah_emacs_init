@@ -21,13 +21,12 @@ Version 2016-10-24"
 (define-abbrev-table 'global-abbrev-table
   '(
 
-    ;; shortcuts
+    ;; english abbrev
     ("afaik" "as far as i know" )
     ("atm" "at the moment" )
     ("dfb" "difference between" )
     ("ty" "thank you" )
 
-    ("ai" "artificial intelligence" )
     ("btw" "by the way" )
     ("ur" "you are" )
     ("ull" "you'll" )
@@ -44,7 +43,7 @@ Version 2016-10-24"
     ("wsnt" "wasn't" )
     ("wtdb" "What's the difference between" )
     ("sa" "See also:" )
-    ("ure" "return" )
+    ("re3" "return" )
 
     ;; english
     ("ann" "announcement" )
@@ -73,6 +72,7 @@ Version 2016-10-24"
     ("esp" "especially" )
     ("ex" "example" )
     ("fex" "for example," )
+    ("fp" "functional programing" )
     ("fu" "function" )
     ("gvn" "government" )
     ("hex" "hexadecimal" )
@@ -104,23 +104,89 @@ Version 2016-10-24"
     ("ver" "version" )
     ("vid" "video" )
     ("wp" "Wikipedia" )
-    ("ualt" "alternative" )
-    ("uauto" "automatic" )
-    ("uc" "character" )
-    ("uchars" "characters" )
-    ("udev" "development" )
-    ("ueg" "ergonomic" )
-    ("uexp" "experience" )
-    ("uexpr" "expression" )
-    ("ul" "language" )
-    ("uorg" "organization" )
-    ("upm" "parameter" )
-    ("uprog" "programing" )
-    ("uq" "question" )
+    ("alt3" "alternative" )
+    ("auto3" "automatic" )
+    ("c3" "character" )
+    ("chars3" "characters" )
+    ("dev3" "development" )
+    ("eg3" "ergonomic" )
+    ("exp3" "experience" )
+    ("expr3" "expression" )
+    ("l3" "language" )
+    ("org3" "organization" )
+    ("pm3" "parameter" )
+    ("prog3" "programing" )
+    ("q3" "question" )
     ("st" "string" )
     ("ei" "put this in your emacs init file:" )
+    ("faq" "frequently asked questions" )
 
-    ;; tech company
+    ("def3" "definition" )
+    ("df3" "different" )
+    ("dfc3" "difference" )
+    ("doc3" "documentation" )
+    ("math3" "mathematics" )
+
+    ("sjw3" "social justice warriors" )
+    ("temp3" "temperature" )
+
+    ;; english, proper noun
+    ("sf" "San Francisco" )
+    ("ahd" "American Heritage Dictionary" )
+
+    ;; computing, general
+    ("ai" "artificial intelligence" )
+    ("ahk" "AutoHotkey" )
+    ("cfg" "context-free grammar" )
+    ("cj" "Clojure" )
+    ("cl" "Common Lisp" )
+    ("cs" "computer science" )
+    ("ee" "ergoemacs" )
+    ("ui3" "user interface" )
+
+    ("ev" "environment variable" )
+    ("evs" "environment variables" )
+
+    ("ca3" "cellular automata" )
+    ("cli" "command line interface" )
+    ("db3" "database" )
+    ("dt3" "data type" )
+    ("fs" "fullscreen" )
+
+    ("ipa" "IP address" )
+
+    ("rsi" "Repetitive Strain Injury" )
+
+    ("subdir" "sub-directory" )
+    ("subdirs" "sub-directories" )
+    ("wd" "web development" )
+    ("wm" "Window Manager" )
+    ("fl3" "functional language" )
+    ("fp3" "functional programing" )
+    ("gui3" "graphical user interface" )
+    ("is3" "image source" )
+    ("lhs3" "left-hand-side" )
+    ("rhs3" "right-hand-side" )
+    ("sc3" "source code" )
+
+    ("lib3" "library" )
+    ("libs3" "libraries" )
+
+    ("md3" "metadata" )
+    ("oop3" "object oriented programing" )
+    ("os3" "operating system" )
+    ("va" "variable" )
+    ("vas" "variables" )
+
+    ;; computing, proper noun
+
+    ("ts3" "TypeScript" )
+    ("nn" "non-nil" )
+    ("ps3" "powershell" )
+
+    ("tek3" "Truly Ergonomic keyboard" )
+    ("js3" "JavaScript" )
+
     ("gc" "Google Chrome" )
     ("lsl" "Linden Scripting Language" )
     ("mac" "Mac" )
@@ -135,96 +201,40 @@ Version 2016-10-24"
     ("fb" "Facebook" )
     ("wl" "Wolfram Language" )
     ("yt" "YouTube" )
-    ("uff" "Firefox" )
+    ("ff3" "Firefox" )
     ("ie" "Internet Explorer" )
-    ("uso" "StackOverflow" )
+    ("so3" "StackOverflow" )
 
-    ;; computing
-    ("ahd" "American Heritage Dictionary" )
-    ("ahk" "AutoHotkey" )
-    ("cfg" "context-free grammar" )
-    ("cj" "Clojure" )
-    ("cl" "Common Lisp" )
-    ("cs" "computer science" )
-    ("ee" "ergoemacs" )
-
-    ("ev" "environment variable" )
-    ("evs" "environment variables" )
-    ("faq" "frequently asked questions" )
-    ("fs" "fullscreen" )
-
-    ("ipa" "IP address" )
     ("jq" "jQuery" )
     ("jvm" "Java Virtual Machine" )
 
-    ("rsi" "Repetitive Strain Injury" )
-    ("sf" "San Francisco" )
-
-    ("subdir" "sub-directory" )
-    ("subdirs" "sub-directories" )
-
     ("vb" "Visual Basic" )
-    ("wd" "web development" )
-    ("wm" "Window Manager" )
 
-    ("uca" "cellular automata" )
-    ("ucli" "command line interface" )
-
-    ("udb" "database" )
-    ("udef" "definition" )
-    ("udf" "different" )
-    ("udfc" "difference" )
-    ("udoc" "documentation" )
-    ("udt" "data type" )
-    ("uel" "emacs lisp" )
-
-    ("ufl" "functional language" )
-    ("ufp" "functional programing" )
-    ("ugui" "graphical user interface" )
-    ("uis" "image source" )
-    ("ujs" "JavaScript" )
-    ("ulhs" "left-hand-side" )
-    ("ulib" "library" )
-    ("ulibs" "libraries" )
-    ("umath" "mathematics" )
-    ("umd" "metadata" )
-    ("uoop" "object oriented programing" )
-    ("uos" "operating system" )
-
-    ("urhs" "right-hand-side" )
-    ("usc" "source code" )
-    ("usjw" "social justice warriors" )
-
-    ("utek" "Truly Ergonomic keyboard" )
-    ("utemp" "temperature" )
-    ("uts" "TypeScript" )
-    ("va" "variable" )
-    ("nn" "non-nil" )
-    ("vas" "variables" )
+    ("el3" "emacs lisp" )
 
     ;; programing
-    ("upl" "+" )
+    ("pl3" "+" )
     ("eq" "==" )
     ("eqq" "===" )
 
     ;; ("twittercard" "<meta name=\"twitter:image\" content=\"http://example.com/cat.jpg\">" )
 
     ;; regex
-    ("uaz" "\\([A-Za-z0-9]+\\)" )
-    ("ubracket" "\\[\\([^]]+?\\)\\]" )
-    ("ucurly" "“\\([^”]+?\\)”" )
-    ("ud" "\\([0-9]+\\)" )
-    ;; ("udate" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" )
-    ("udate" "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)" )
-    ("udot" "\\(.\\)" )
-    ("ustr" "\\([^\"]+?\\)" )
-    ("utag" "\\([</>=\" A-Za-z0-9]+\\)" )
+    ("az3" "\\([A-Za-z0-9]+\\)" )
+    ("bracket3" "\\[\\([^]]+?\\)\\]" )
+    ("curly3" "“\\([^”]+?\\)”" )
+    ("d3" "\\([0-9]+\\)" )
+    ;; ("date3" "\\([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)" )
+    ("date3" "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)" )
+    ("dot3" "\\(.\\)" )
+    ("str3" "\\([^\"]+?\\)" )
+    ("tag3" "\\([</>=\" A-Za-z0-9]+\\)" )
 
     ;; html
-    ("ukey" "【Alt+f】" )
+    ("key3" "【Alt+f】" )
     ("pmoved" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
-    ("umenu" "〖a ▸ b ▸ c〗" )
-    ("ufaq" "<section class=\"qna_xl\">
+    ("menu3" "〖a ▸ b ▸ c〗" )
+    ("faq3" "<section class=\"qna_xl\">
 
 <h3 class=\"q\">How to ?</h3>
 
@@ -234,14 +244,12 @@ Version 2016-10-24"
 
 " )
 
-;; question-box32371
-
     ;; unicode
     ("emd" "—" )
-    ("uascii" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
+    ("ascii3" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
     ("catface" "😸" )
-    ("uemoji" "😃😄😅😆
+    ("emoji3" "😃😄😅😆
 😉😊😋😌
 😎😇😈
 😁😂😀
@@ -257,14 +265,14 @@ Version 2016-10-24"
     ("hearts" "♥💕💓💔💖💗💘💝💞💟💙💚💛💜" )
     ("omg" "😂" )
     ("la" "←" )
-    ("ua" "↑" )
+    ("a3" "↑" )
     ("ra" "→" )
     ("da" "↓" )
 
     ("fn" "ƒ" )
 
     ;; code
-    ("uutf8" "-*- coding: utf-8 -*-" )
+    ("utf83" "-*- coding: utf-8 -*-" )
 
     ("vdspc" "Visual Dictionary of Special Plane Curves" )
     ("xfk" "xah-fly-keys" )
@@ -282,7 +290,6 @@ Version 2016-10-24"
     ("uemacs" "http://ergoemacs.org/emacs/emacs.html" )
     ("uergodox" "http://xahlee.info/kbd/ergodox_keyboard.html" )
     ("uhtml" "http://xahlee.info/js/html_index.html" )
-    ("ui" "user interface" )
     ("ujava" "http://xahlee.info/java-a-day/java.html" )
     ("ukinesis" "http://xahlee.info/kbd/keyboard_Kinesis.html" )
     ("ulang" "/home/xah/web/xahlee_info/js/javascript_basics.html
@@ -300,7 +307,7 @@ Version 2016-10-24"
     ("uperl" "http://xahlee.info/perl-python/perl_basics.html" )
     ("uphp" "http://xahlee.info/php/php_basics.html" )
     ("uups" "http://xahlee.info/powershell/index.html" )
-    ("ups" "powershell" )
+
     ("upython" "http://xahlee.info/python/python3_basics.html" )
     ("uruby" "http://xahlee.info/ruby/ruby_basics.html" )
     ("ute" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html" )

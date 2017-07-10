@@ -52,6 +52,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (add-to-list 'load-path "~/git/xah-fly-keys/")
 (require 'xah-fly-keys)
+(add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
 
 
 (progn
@@ -218,7 +219,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (load (xah-get-fullpath "xah_emacs_wordyenglish"))
 
-(load (xah-get-fullpath "xah_emacs_settings_font"))
+
 
 (load (xah-get-fullpath "xah_emacs_settings_external_packages"))
 (load (xah-get-fullpath "xah_emacs_file_association"))
@@ -229,9 +230,8 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; ;; (server-start "LEAVE-DEAD" "INHIBIT-PROMPT")
 ;; (server-start )
 
-(load (xah-get-fullpath "xah_emacs_syntax_parse"))
-(load (xah-get-fullpath "xah_emacs_overlay_and_char_properties"))
-
 (when (file-exists-p "~/Dropbox/")
   (progn
     (load "~/Dropbox/xah-emacs-private_b53d8d39")))
+
+(setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")

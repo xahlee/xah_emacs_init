@@ -1,50 +1,35 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; Emacs settings for packages bundled with pure gnu emacs only
 
-;; 2007-06
-;;   Xah Lee
-;; ∑ http://xahlee.org/
-
 
 ;; initial window and default window
 
-;; (setq inhibit-startup-screen t)
+(setq inhibit-startup-screen t)
 
-(setq initial-frame-alist
-      '(
-        (tool-bar-lines . 0)
-        (width . 106)
-        (height . 60)
-        (background-color . "honeydew")
-        (font . "DejaVu Sans Mono-10")
-        ))
+(if (display-graphic-p)
+    (progn
+      (setq initial-frame-alist
+            '(
+              (tool-bar-lines . 0)
+              (width . 106)
+              (height . 60)
+              (background-color . "honeydew")
+              (font . "DejaVu Sans Mono-10")))
 
-(setq default-frame-alist
-      '(
-        (tool-bar-lines . 0)
-        (width . 106)
-        (height . 60)
-        (background-color . "honeydew")
-        (font . "DejaVu Sans Mono-10")
-        ))
-
-;; (setq initial-frame-alist
-;;       '(
-;;         (tool-bar-lines . 0)
-;;         (width . 90)
-;;         (height . 50)
-;;         (background-color . "honeydew")
-;;         (font . "DejaVu Sans Mono-12")
-;;         ))
-
-;; (setq default-frame-alist
-;;       '(
-;;         (tool-bar-lines . 0)
-;;         (width . 90)
-;;         (height . 50)
-;;         (background-color . "honeydew")
-;;         (font . "DejaVu Sans Mono-12")
-;;         ))
+      (setq default-frame-alist
+            '(
+              (tool-bar-lines . 0)
+              (width . 106)
+              (height . 60)
+              (background-color . "honeydew")
+              (font . "DejaVu Sans Mono-10"))))
+  (progn
+    (setq initial-frame-alist
+          '(
+            (tool-bar-lines . 0)))
+    (setq default-frame-alist
+          '(
+            (tool-bar-lines . 0)))))
 
 
 
@@ -64,13 +49,6 @@
 
 (setq auto-save-default nil)
 ;; (setq auto-save-visited-file-name t)
-
-(setq save-interprogram-paste-before-kill t)
-
-;; 2015-07-04 bug of pasting in emacs.
-;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
-;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
-;; (setq x-selection-timeout 300)
 
 ;; (setq time-stamp-active nil)
 
@@ -103,6 +81,13 @@
   (setq dired-recursive-deletes (quote top)))
 
 
+(setq save-interprogram-paste-before-kill t)
+
+;; 2015-07-04 bug of pasting in emacs.
+;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
+;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
+;; (setq x-selection-timeout 300)
+
 (setq x-select-enable-clipboard-manager nil)
 
 ;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
@@ -126,8 +111,8 @@
 ;; (setq switch-to-visible-buffer nil)
 
 (setq set-mark-command-repeat-pop t)
-(setq mark-ring-max 9)
-(setq global-mark-ring-max 9)
+(setq mark-ring-max 5)
+(setq global-mark-ring-max 5)
 
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
@@ -292,7 +277,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (defalias 'lcd 'list-colors-display)
-(defalias 'sl 'sort-lines)
 (defalias 'ds 'desktop-save)
 (defalias 'dt 'desktop-save)
 (defalias 'dsm 'desktop-save-mode)
@@ -322,44 +306,17 @@
 
 (setq use-dialog-box nil)
 
-(defun xah-delete-backward-char-or-bracket-text2 ()
-  "Delete backward 1 character, but if it's a \"quote\" or bracket ()[]{}【】「」 etc, delete bracket and the inner text, push the deleted text to `kill-ring'.
+
 
-When cursor is inside a string or comment, just delete backward 1 char.
+(progn
+  ;; set a default font
+  (when (member "DejaVu Sans Mono" (font-family-list))
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono"))
 
-If `universal-argument' is called first, do not delete inner text.
+  ;; specify font for all unicode characters
+  (when (member "Symbola" (font-family-list))
+    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
 
-URL `http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html'
-Version 2017-03-13"
-  (interactive)
-
-  (let ((-temp-syn-table (make-syntax-table)))
-
-    (modify-syntax-entry ?\« "(»" -temp-syn-table)
-    (modify-syntax-entry ?\» ")«" -temp-syn-table)
-    (modify-syntax-entry ?\‹ "(›" -temp-syn-table)
-    (modify-syntax-entry ?\› ")‹" -temp-syn-table)
-    (modify-syntax-entry ?\“ "(”" -temp-syn-table)
-    (modify-syntax-entry ?\” ")“" -temp-syn-table)
-
-    (with-syntax-table -temp-syn-table
-      (if (and delete-selection-mode (region-active-p))
-          (delete-region (region-beginning) (region-end))
-        (cond
-         ((looking-back "\\s)" 1)
-          (progn
-            (backward-sexp)
-            (xah-delete-matching-brackets (not current-prefix-arg))))
-         ((looking-back "\\s(" 1)
-          (progn
-            (backward-char )
-            (xah-delete-matching-brackets (not current-prefix-arg))))
-         ((looking-back "\\s\"" 1)
-          (if (nth 3 (syntax-ppss))
-              (progn
-                (backward-char )
-                (xah-delete-matching-brackets (not current-prefix-arg)))
-            (progn
-              (backward-sexp)
-              (xah-delete-matching-brackets (not current-prefix-arg)))))
-         (t (delete-char -1)))))))
+  ;; specify font for chinese characters using default chinese font on linux
+  (when (member "WenQuanYi Micro Hei" (font-family-list))
+    (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" )))
