@@ -118,7 +118,7 @@ Version 2016-10-24"
     ("prog3" "programing" )
     ("q3" "question" )
     ("st" "string" )
-    ("ei" "put this in your emacs init file:" )
+    ("ei" "Put this in your emacs init file:" )
     ("faq" "frequently asked questions" )
 
     ("def3" "definition" )
@@ -135,59 +135,51 @@ Version 2016-10-24"
     ("ahd" "American Heritage Dictionary" )
 
     ;; computing, general
-    ("ai" "artificial intelligence" )
     ("ahk" "AutoHotkey" )
-    ("cfg" "context-free grammar" )
-    ("cj" "Clojure" )
-    ("cl" "Common Lisp" )
-    ("cs" "computer science" )
-    ("ee" "ergoemacs" )
-    ("ui3" "user interface" )
-
-    ("ev" "environment variable" )
-    ("evs" "environment variables" )
-
+    ("ai" "artificial intelligence" )
     ("ca3" "cellular automata" )
+    ("cfg" "context-free grammar" )
     ("cli" "command line interface" )
+    ("cs" "computer science" )
     ("db3" "database" )
     ("dt3" "data type" )
-    ("fs" "fullscreen" )
-
-    ("ipa" "IP address" )
-
-    ("rsi" "Repetitive Strain Injury" )
-
-    ("subdir" "sub-directory" )
-    ("subdirs" "sub-directories" )
-    ("wd" "web development" )
-    ("wm" "Window Manager" )
+    ("ee" "ergoemacs" )
+    ("ev" "environment variable" )
+    ("evs" "environment variables" )
     ("fl3" "functional language" )
     ("fp3" "functional programing" )
+    ("fs" "fullscreen" )
     ("gui3" "graphical user interface" )
+    ("ipa" "IP address" )
     ("is3" "image source" )
     ("lhs3" "left-hand-side" )
-    ("rhs3" "right-hand-side" )
-    ("sc3" "source code" )
-
     ("lib3" "library" )
     ("libs3" "libraries" )
-
     ("md3" "metadata" )
     ("oop3" "object oriented programing" )
     ("os3" "operating system" )
+    ("rhs3" "right-hand-side" )
+    ("rsi" "Repetitive Strain Injury" )
+    ("sc3" "source code" )
+    ("subdir" "sub-directory" )
+    ("subdirs" "sub-directories" )
+    ("ui3" "user interface" )
     ("va" "variable" )
     ("vas" "variables" )
+    ("wd" "web development" )
+    ("wm" "Window Manager" )
 
     ;; computing, proper noun
-
-    ("ts3" "TypeScript" )
-    ("nn" "non-nil" )
-    ("ps3" "powershell" )
-
-    ("tek3" "Truly Ergonomic keyboard" )
-    ("js3" "JavaScript" )
-
+    ("cj" "Clojure" )
+    ("cl" "Common Lisp" )
+    ("el3" "emacs lisp" )
+    ("fb" "Facebook" )
+    ("ff3" "Firefox" )
     ("gc" "Google Chrome" )
+    ("ie" "Internet Explorer" )
+    ("jq" "jQuery" )
+    ("js3" "JavaScript" )
+    ("jvm" "Java Virtual Machine" )
     ("lsl" "Linden Scripting Language" )
     ("mac" "Mac" )
     ("macosx" "Mac OS X" )
@@ -195,27 +187,26 @@ Version 2016-10-24"
     ("ms" "Microsoft" )
     ("msvs" "Microsoft Visual Studio" )
     ("msw" "Microsoft Windows" )
+    ("nn" "non-nil" )
     ("osx" "OS X" )
     ("pp" "PayPal" )
+    ("ps3" "powershell" )
     ("sl" "Second Life" )
-    ("fb" "Facebook" )
+    ("so3" "StackOverflow" )
+    ("tek3" "Truly Ergonomic keyboard" )
+    ("ts3" "TypeScript" )
+    ("vb" "Visual Basic" )
     ("wl" "Wolfram Language" )
     ("yt" "YouTube" )
-    ("ff3" "Firefox" )
-    ("ie" "Internet Explorer" )
-    ("so3" "StackOverflow" )
-
-    ("jq" "jQuery" )
-    ("jvm" "Java Virtual Machine" )
-
-    ("vb" "Visual Basic" )
-
-    ("el3" "emacs lisp" )
 
     ;; programing
     ("pl3" "+" )
     ("eq" "==" )
     ("eqq" "===" )
+
+    ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
+
+    ("mx" "<kbd>Alt</kbd>+<kbd>x</kbd>")
 
     ;; ("twittercard" "<meta name=\"twitter:image\" content=\"http://example.com/cat.jpg\">" )
 
@@ -265,7 +256,7 @@ Version 2016-10-24"
     ("hearts" "♥💕💓💔💖💗💘💝💞💟💙💚💛💜" )
     ("omg" "😂" )
     ("la" "←" )
-    ("a3" "↑" )
+    ("ua" "↑" )
     ("ra" "→" )
     ("da" "↓" )
 
@@ -327,7 +318,6 @@ Version 2016-10-24"
     ("uxsl" "http://xahsl.org/" )
 
     ;; xah lee
-    ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
 
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee

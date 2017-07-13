@@ -193,19 +193,23 @@
 (setq show-paren-style 'parenthesis)
 
 (progn
-  ;; interactive name completion for describe-function, describe-variable, execute-extended-command, etc.
+  ;; minibuffer enhanced completion
+  (require 'icomplete)
   (icomplete-mode 1)
-  ;; make icomplete prettier
-  (setq icomplete-separator " ")
-  ;; (setq icomplete-separator "\n")
+  ;; show choices vertically
+  (setq icomplete-separator "\n")
   (setq icomplete-hide-common-prefix nil)
-  (setq icomplete-in-buffer t))
+  (setq icomplete-in-buffer t)
+
+  (define-key icomplete-minibuffer-map (kbd "<right>") 'icomplete-forward-completions)
+  (define-key icomplete-minibuffer-map (kbd "<left>") 'icomplete-backward-completions))
 
 (progn
+  ;; make buffer switch command do suggestions, also for find-file command
   (require 'ido)
-
   (ido-mode 1)
 
+  ;; show choices vertically
   (if (version< emacs-version "25")
       (progn
         (make-local-variable 'ido-separator)
@@ -213,12 +217,15 @@
     (progn
       (make-local-variable 'ido-decorations)
       (setf (nth 2 ido-decorations) "\n")))
-  
-  (setq ido-enable-flex-matching t) ; show any name that has the chars you typed
-  (setq ido-default-file-method 'selected-window) ; use current pane for newly opened file
-  (setq ido-default-buffer-method 'selected-window) ; use current pane for newly switched buffer
-  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil) ; stop ido from suggesting when naming new file
-  )
+
+  ;; show any name that has the chars you typed
+  (setq ido-enable-flex-matching t)
+  ;; use current pane for newly opened file
+  (setq ido-default-file-method 'selected-window)
+  ;; use current pane for newly switched buffer
+  (setq ido-default-buffer-method 'selected-window)
+  ;; stop ido from suggesting when naming new file
+  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
 
 
 ;; indentation, tab
@@ -322,3 +329,6 @@
   ;; specify font for chinese characters using default chinese font on linux
   (when (member "WenQuanYi Micro Hei" (font-family-list))
     (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" )))
+
+
+

@@ -331,59 +331,59 @@ Version 2017-06-08"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
-        -from-path
-        -to-path
-        (-dirs '( "~/Downloads/" "~/Pictures/" "~/" "/tmp" ))
-        (-names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" "xx" "xxx" "t" "tt" "ttt" ))
+        $fromPath
+        $toPath
+        ($dirs '( "~/Downloads/" "~/Pictures/" "~/" "/tmp" ))
+        ($names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" "xx" "xxx" "t" "tt" "ttt" ))
 
-        (-exts '("jpg" "jpeg" "jpg-large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" "pdf" )))
-    (setq -from-path
-          (let (-path)
+        ($exts '("jpg" "jpeg" "jpg-large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "svg" "pdf" )))
+    (setq $fromPath
+          (let (xpath)
             (catch 'x42566
-              (dolist (-x-dir -dirs )
-                (dolist (-x-name -names )
-                  (dolist (-x-ext -exts )
-                    (setq -path (expand-file-name (concat -x-dir -x-name "." -x-ext)))
-                    (when (file-exists-p -path)
+              (dolist (xdir $dirs )
+                (dolist (xname $names )
+                  (dolist (xext $exts )
+                    (setq xpath (expand-file-name (concat xdir xname "." xext)))
+                    (when (file-exists-p xpath)
                       (progn
-                        (throw 'x42566 -path))))))
+                        (throw 'x42566 xpath))))))
               nil
               )))
 
-    ;; (if (null -from-path)
+    ;; (if (null $fromPath)
     ;;     (let ((-name-regex "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)-\\([0-9]\\{6\\}\\)_\\([0-9]\\{3\\}\\)x\\([0-9]\\{3\\}\\)_scrot"))
     ;;       3)
     ;;   (progn ))
 
-    (when (null -from-path)
+    (when (null $fromPath)
       (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))
-    (setq -to-path (concat
+    (setq $toPath (concat
                     (file-name-as-directory *dir-name )
                     (replace-regexp-in-string " " "_" *file-name)
                     "."
-                    (downcase (file-name-extension -from-path ))))
+                    (downcase (file-name-extension $fromPath ))))
 
-    (when (string-equal (file-name-extension -to-path ) "jpg-large")
-      (setq -to-path (concat (file-name-sans-extension -to-path) ".jpg")))
+    (when (string-equal (file-name-extension $toPath ) "jpg-large")
+      (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
 
-    (when (string-equal (file-name-extension -to-path ) "jpeg")
-      (setq -to-path (concat (file-name-sans-extension -to-path) ".jpg")))
+    (when (string-equal (file-name-extension $toPath ) "jpeg")
+      (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
 
-    (if (file-exists-p -to-path)
-        (message "move to path exist: %s" -to-path)
+    (if (file-exists-p $toPath)
+        (message "move to path exist: %s" $toPath)
       (progn
-        (rename-file -from-path -to-path)
+        (rename-file $fromPath $toPath)
 
-        (when (string-equal (file-name-extension -to-path ) "png")
-          (shell-command (concat "optipng " -to-path)))
+        (when (string-equal (file-name-extension $toPath ) "png")
+          (shell-command (concat "optipng " $toPath)))
 
         (when (string-equal major-mode "dired-mode")
           (revert-buffer))
 
         (when (string-equal major-mode "xah-html-mode")
-          (kill-new -to-path)
+          (kill-new $toPath)
           (insert "\n\n")
-          (insert -to-path)
+          (insert $toPath)
           (insert "\n\n")
           (backward-word )
           (xah-all-linkify))))))
