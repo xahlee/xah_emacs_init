@@ -18,15 +18,15 @@ each line does not include the newline character."
   (beginning-of-line)
   (let ((p1 (point))
         p2
-        (-lines '()))
-    (dotimes (-i (- *n 1)) (forward-line))
+        ($lines '()))
+    (dotimes ($i (- *n 1)) (forward-line))
     (end-of-line)
     (setq p2 (point))
-    (setq -lines (split-string (buffer-substring-no-properties p1 p2) "\n" ))
+    (setq $lines (split-string (buffer-substring-no-properties p1 p2) "\n" ))
     (delete-region p1 p2)
     (delete-char 1)
-    ;; (print -lines)
-    -lines))
+    ;; (print $lines)
+    $lines))
 
 (defun xah-insert-google-map-link (&optional *title *latlon)
   "Insert HTML link to Google Map.
@@ -40,16 +40,16 @@ Example of inserted text:
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2015-05-12"
   (interactive)
-  (let (-title -y -x)
-    (setq -title (if *title *title ""))
+  (let ($title $y $x)
+    (setq $title (if *title *title ""))
     (if *latlon
         (progn
-          (setq -y (elt *latlon 0))
-          (setq -x (elt *latlon 1)))
+          (setq $y (elt *latlon 0))
+          (setq $x (elt *latlon 1)))
       (progn
-        (setq -y "y▮")
-        (setq -x "x▮")))
-    (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string -y) "%2C" (number-to-string -x) "\" title=\"" -title "\" target=\"_blank\">Google Map</a>\n")))
+        (setq $y "y▮")
+        (setq $x "x▮")))
+    (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string $y) "%2C" (number-to-string $x) "\" title=\"" $title "\" target=\"_blank\">Google Map</a>\n")))
 
 (defun xah-insert-google-earth-link (&optional *title *filePath)
   "Insert a HTML markup for link to a local Goole Earth file.
@@ -62,7 +62,7 @@ Here's a sample inserted text:
 
 (defun xah-insert-kml (&optional *kml-title *lon-lat *source-fpath)
   "Insert a simple Google Earth KML markup template.
- -kmltitle is the name to use for the <name> tag.
+ *kml-title is the name to use for the <name> tag.
 *lon-lat is a vector [longitude latitude]. They must be real numbers.
  *source-fpath is the file that links to this kml file,
 used in the <description> tag."
@@ -104,46 +104,46 @@ becomes 「[37.44345 -6.253966666666667]」
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2015-02-08"
   (interactive)
-  (let ((-tmpPair
+  (let (($tmpPair
          (split-string
           (replace-regexp-in-string "'" "′"
                                     (replace-regexp-in-string "\"" "″"
                                                               (replace-regexp-in-string "''" "″" *latlon t t) t t) t t)
           " +"))
-        -latStr -latNum -lonStr -lonNum -deg -min -sec -sign (-c (/ 1.0 60.0)))
+        $latStr $latNum $lonStr $lonNum $deg $min $sec $sign ($c (/ 1.0 60.0)))
 
-    (when (not (equal (length -tmpPair) 2)) (user-error "Error: input can contain only one space"))
+    (when (not (equal (length $tmpPair) 2)) (user-error "Error: input can contain only one space"))
 
-    (setq -latStr (elt -tmpPair 0))
-    (setq -lonStr (elt -tmpPair 1))
-    (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" -latStr )
+    (setq $latStr (elt $tmpPair 0))
+    (setq $lonStr (elt $tmpPair 1))
+    (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" $latStr )
         (progn
-          (setq -deg  (string-to-number (match-string 1 -latStr)))
-          (setq -min  (string-to-number (match-string 2 -latStr)))
-          (setq -sec  (string-to-number (match-string 3 -latStr)))
-          (setq -sign (match-string 4 -latStr))
-          (setq -latNum (+ -deg (* (+ -min (* -sec -c)) -c)))
+          (setq $deg  (string-to-number (match-string 1 $latStr)))
+          (setq $min  (string-to-number (match-string 2 $latStr)))
+          (setq $sec  (string-to-number (match-string 3 $latStr)))
+          (setq $sign (match-string 4 $latStr))
+          (setq $latNum (+ $deg (* (+ $min (* $sec $c)) $c)))
           (cond
-           ((string= (downcase -sign) "n") nil)
-           ((string= -sign "") nil)
-           ((string= (downcase -sign) "s") (setq -latNum (* -1 -latNum)))
+           ((string= (downcase $sign) "n") nil)
+           ((string= $sign "") nil)
+           ((string= (downcase $sign) "s") (setq $latNum (* -1 $latNum)))
            (t (user-error "Your input is malformed. Your latitude ends with a char that's not N or S"))))
       (progn (user-error "Your latitude is malformed")))
 
-    (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" -lonStr )
+    (if (string-match "\\`\\([0-9]+\\)°\\([0-9]+\\)′\\([.0-9]+\\)″\\(.?\\)\\'" $lonStr )
         (progn
-          (setq -deg  (string-to-number (match-string 1 -lonStr)))
-          (setq -min  (string-to-number (match-string 2 -lonStr)))
-          (setq -sec  (string-to-number (match-string 3 -lonStr)))
-          (setq -sign (match-string 4 -lonStr))
-          (setq -lonNum (+ -deg (* (+ -min (* -sec -c)) -c)))
+          (setq $deg  (string-to-number (match-string 1 $lonStr)))
+          (setq $min  (string-to-number (match-string 2 $lonStr)))
+          (setq $sec  (string-to-number (match-string 3 $lonStr)))
+          (setq $sign (match-string 4 $lonStr))
+          (setq $lonNum (+ $deg (* (+ $min (* $sec $c)) $c)))
           (cond
-           ((string= (downcase -sign) "e") nil)
-           ((string= -sign "") nil)
-           ((string= (downcase -sign) "w") (setq -lonNum (* -1 -lonNum)))
+           ((string= (downcase $sign) "e") nil)
+           ((string= $sign "") nil)
+           ((string= (downcase $sign) "w") (setq $lonNum (* -1 $lonNum)))
            (t (user-error "Your input is malformed. Your longitude ends with a char that's not E or W"))))
       (progn (user-error "Your longitude is malformed")))
-    (vector -latNum -lonNum)))
+    (vector $latNum $lonNum)))
 
 ;; (defun minsec-to-dec (*latlong)
 ;;   "Convert latitude longitude string *latlong in minutes second format to decimal.
@@ -227,32 +227,32 @@ Sample result:
 URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2016-07-12"
   (interactive)
-  (let (-p1 -p2 -input
-           -coord-x
-           -coord-y
-           -coord-y-x
+  (let ($p1 $p2 $input
+           $coord-x
+           $coord-y
+           $coord-y-x
            )
     (if (use-region-p)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (progn
-        (setq -p1 (line-beginning-position))
-        (setq -p2 (line-end-position))))
+        (setq $p1 (line-beginning-position))
+        (setq $p2 (line-end-position))))
 
-    (setq -input (buffer-substring-no-properties -p1 -p2))
-    (if (string-match-p "°" -input)
+    (setq $input (buffer-substring-no-properties $p1 $p2))
+    (if (string-match-p "°" $input)
         (progn
-          (setq -coord-y-x (xah-latitude-longitude-decimalize -input))
-          (setq -coord-y (aref -coord-y-x 0))
-          (setq -coord-x (aref -coord-y-x 1)))
+          (setq $coord-y-x (xah-latitude-longitude-decimalize $input))
+          (setq $coord-y (aref $coord-y-x 0))
+          (setq $coord-x (aref $coord-y-x 1)))
       (progn
-        (let ( (-xx (split-string -input  " " "OMIT-NULLS")))
-          (setq -coord-y (string-to-number (nth 0 -xx)))
-          (setq -coord-x (string-to-number (nth 1 -xx)))
-          (setq -coord-y-x (vector -coord-y -coord-x)))))
-    (delete-region -p1 -p2)
-    (xah-insert-google-map-link "▮" -coord-y-x)))
+        (let ( ($xx (split-string $input  " " "OMIT-NULLS")))
+          (setq $coord-y (string-to-number (nth 0 $xx)))
+          (setq $coord-x (string-to-number (nth 1 $xx)))
+          (setq $coord-y-x (vector $coord-y $coord-x)))))
+    (delete-region $p1 $p2)
+    (xah-insert-google-map-link "▮" $coord-y-x)))
 
 
 

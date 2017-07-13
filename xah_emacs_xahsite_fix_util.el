@@ -17,26 +17,26 @@ Version 2016-12-19"
   (interactive
    (list (buffer-file-name)
          (xahsite-href-value-to-filepath (thing-at-point 'filename) (buffer-file-name))))
-  (let ( -title -newHrefValue -buffer )
-    (setq -buffer (find-file *dest-file-path ))
+  (let ( $title $newHrefValue $buffer )
+    (setq $buffer (find-file *dest-file-path ))
     (goto-char 1)
-    (setq -newHrefValue (xahsite-filepath-to-href-value *source-file-path *dest-file-path))
-    (if (search-forward -newHrefValue nil t)
+    (setq $newHrefValue (xahsite-filepath-to-href-value *source-file-path *dest-file-path))
+    (if (search-forward $newHrefValue nil t)
         (progn
           (when (called-interactively-p 'interactive)
             (message
              (format
               "Already exists: 「%s」  at 「%s」"
-              (file-name-nondirectory -newHrefValue)
+              (file-name-nondirectory $newHrefValue)
               (file-name-nondirectory *dest-file-path))))
-          (kill-buffer -buffer)
+          (kill-buffer $buffer)
           nil)
       (progn
-        (setq -title (xah-html-get-html-file-title *source-file-path))
+        (setq $title (xah-html-get-html-file-title *source-file-path))
         (goto-char 1)
         (if (search-forward "<div class=\"rltd\">" nil t)
             (progn (search-forward "<ul>" nil t)
-                   (insert "\n" (format "<li><a href=\"%s\">%s</a></li>" -newHrefValue -title)))
+                   (insert "\n" (format "<li><a href=\"%s\">%s</a></li>" $newHrefValue $title)))
           (progn
             (goto-char (point-max))
             (search-backward "<div id=\"disqus_thread\">")
@@ -46,7 +46,7 @@ Version 2016-12-19"
 </ul>
 </div>
 
-" -newHrefValue -title))))
+" $newHrefValue $title))))
         (when (not (called-interactively-p 'interactive))
           (write-region (point-min) (point-max) *dest-file-path)
           (kill-buffer))
@@ -92,11 +92,11 @@ The related pages are HTML “div.rltd” element, having this form
      (setq p2 (aref bds 2))
      (list
       (buffer-file-name)
-      (mapcar (lambda (-x) (expand-file-name -x (file-name-directory (buffer-file-name)))) (xah-html-extract-url p1 p2)))))
+      (mapcar (lambda ($x) (expand-file-name $x (file-name-directory (buffer-file-name)))) (xah-html-extract-url p1 p2)))))
 
   (mapc
-   (lambda (-y)
-     (xah-add-to-related-links *filePath -y))
+   (lambda ($y)
+     (xah-add-to-related-links *filePath $y))
    *destFileList))
 
 (defun xah-fix-add-alts ()
@@ -195,9 +195,9 @@ version: ancient, 2010 perhaps. 2016-12-19"
 
   (save-excursion
     (let (p1 p2 p3 p4
-             -str
-             (-changedItems '())
-             (-buff (current-buffer)))
+             $str
+             ($changedItems '())
+             ($buff (current-buffer)))
 
       (goto-char (point-min)) ;; in case buffer already open
       (while (search-forward "<div class=\"img\">" nil t)
@@ -213,8 +213,8 @@ version: ancient, 2010 perhaps. 2016-12-19"
           (setq p3 (point))
 
           (when t
-            (setq -str (buffer-substring-no-properties p1 p4))
-            (setq -changedItems (cons -str -changedItems ))
+            (setq $str (buffer-substring-no-properties p1 p4))
+            (setq $changedItems (cons $str $changedItems ))
 
             (progn
               (delete-region p3 p4 )
@@ -240,8 +240,8 @@ version: ancient, 2010 perhaps. 2016-12-19"
           (setq p3 (point))
 
           (when t
-            (setq -str (buffer-substring-no-properties p1 p4))
-            (setq -changedItems (cons -str -changedItems ))
+            (setq $str (buffer-substring-no-properties p1 p4))
+            (setq $changedItems (cons $str $changedItems ))
 
             (progn
               (delete-region p3 p4 )
@@ -267,8 +267,8 @@ version: ancient, 2010 perhaps. 2016-12-19"
           (setq p3 (point))
 
           (when t
-            (setq -str (buffer-substring-no-properties p1 p4))
-            (setq -changedItems (cons -str -changedItems ))
+            (setq $str (buffer-substring-no-properties p1 p4))
+            (setq $changedItems (cons $str $changedItems ))
 
             (progn
               (delete-region p3 p4 )
@@ -281,10 +281,10 @@ version: ancient, 2010 perhaps. 2016-12-19"
               (widen)))))
 
       (with-output-to-temp-buffer "*changed items*"
-        (mapc (lambda ( -changes) (princ -changes) (princ "\n\n")) -changedItems)
+        (mapc (lambda ( $changes) (princ $changes) (princ "\n\n")) $changedItems)
         (set-buffer "*changed items*")
         (funcall 'html-mode)
-        (set-buffer -buff)))))
+        (set-buffer $buff)))))
 
 (defun xah-fix-ellipsis (*string &optional *from *to)
   "Change “...” to “…”.
@@ -307,17 +307,17 @@ When called non-interactively, if *string is non-nil, returns a changed string. 
            (setq pt2 (point)))
          (list nil pt1 pt2)))))
 
-  (let (-workOnStringP -inputStr -outputStr)
-    (setq -workOnStringP (if *string t nil))
-    (setq -inputStr (if -workOnStringP *string (buffer-substring-no-properties *from *to)))
-    (setq -outputStr (replace-regexp-in-string "\\.\\.\\." "…" -inputStr))
+  (let ($workOnStringP $inputStr $outputStr)
+    (setq $workOnStringP (if *string t nil))
+    (setq $inputStr (if $workOnStringP *string (buffer-substring-no-properties *from *to)))
+    (setq $outputStr (replace-regexp-in-string "\\.\\.\\." "…" $inputStr))
 
-    (if -workOnStringP
-        -outputStr
+    (if $workOnStringP
+        $outputStr
       (save-excursion
         (delete-region *from *to)
         (goto-char *from)
-        (insert -outputStr)))))
+        (insert $outputStr)))))
 
 (defun xah-fix-number-items-block  ()
   "Change “(1)” to “①” etc in current region or text block.
@@ -325,9 +325,9 @@ Also change 「<li>1. 」 to 「<li>① 」.
  2016-12-19"
   (interactive)
   (let* (
-         -p1 -p2
-         -inputStr
-         (-pairs
+         $p1 $p2
+         $inputStr
+         ($pairs
           '(
             ["(0)" "⓪"] ["(1)" "①"] ["(2)" "②"] ["(3)" "③"] ["(4)" "④"] ["(5)" "⑤"] ["(6)" "⑥"] ["(7)" "⑦"] ["(8)" "⑧"] ["(9)" "⑨"]
             ["0. " "⓪ "] ["1. " "① "] ["2. " "② "] ["3. " "③ "] ["4. " "④ "] ["5. " "⑤ "] ["6. " "⑥ "] ["7. " "⑦ "] ["8. " "⑧ "] ["9. " "⑨ "]
@@ -340,17 +340,17 @@ Also change 「<li>1. 」 to 「<li>① 」.
     (save-excursion
       (if (re-search-backward "\n[ \t]*\n" nil "move")
           (progn (re-search-forward "\n[ \t]*\n")
-                 (setq -p1 (point)))
-        (setq -p1 (point)))
+                 (setq $p1 (point)))
+        (setq $p1 (point)))
       (if (re-search-forward "\n[ \t]*\n" nil "move")
           (progn (re-search-backward "\n[ \t]*\n")
-                 (setq -p2 (point)))
-        (setq -p2 (point))))
+                 (setq $p2 (point)))
+        (setq $p2 (point))))
 
-    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
+    (setq $inputStr (buffer-substring-no-properties $p1 $p2))
 
-    (delete-region -p1 -p2)
-    (insert (xah-replace-pairs-in-string -inputStr -pairs))))
+    (delete-region $p1 $p2)
+    (insert (xah-replace-pairs-in-string $inputStr $pairs))))
 
 ;; ;; macro to search and fix next occurrence of “alt=""”
 ;; ;; search for alt="", then fix it

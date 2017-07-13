@@ -16,8 +16,8 @@ For example: if current node is 「(elisp) The Mark」, switch to browser and lo
 (defun emacs-info-node-string-to-url (*info-node-str)
   "change the *info-node-str into a xah emacs doc link.
 For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
-  (let ((-domainStr "http://ergoemacs.org/")
-        (-tempPath
+  (let (($domainStr "http://ergoemacs.org/")
+        ($tempPath
          (xah-replace-pairs-in-string
           *info-node-str
           [["(elisp) " ""]
@@ -27,9 +27,9 @@ For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/eli
 
     (cond
      ((string-match "(elisp)" *info-node-str )
-      (format "%s%s%s.html" -domainStr "emacs_manual/elisp/" -tempPath))
+      (format "%s%s%s.html" $domainStr "emacs_manual/elisp/" $tempPath))
      ((string-match "(emacs)" *info-node-str )
-      (format "%s%s%s.html" -domainStr "emacs_manual/emacs/" -tempPath))
+      (format "%s%s%s.html" $domainStr "emacs_manual/emacs/" $tempPath))
      (t
       (user-error "*info-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" *info-node-str)))))
 
@@ -52,45 +52,45 @@ Version 2016-12-22"
   (interactive)
   (require 'subr-x) ; for string-trim
   (let* (
-         (-bounds (xah-get-bounds-of-thing-or-region 'url))
-         (-p1 (car -bounds))
-         (-p2 (cdr -bounds))
-         ( -input (string-trim (buffer-substring-no-properties -p1 -p2)))
-         -infoStr -linkText
-         -fPath
-         -linkStrURL ; link string
+         ($bounds (xah-get-bounds-of-thing-or-region 'url))
+         ($p1 (car $bounds))
+         ($p2 (cdr $bounds))
+         ( $input (string-trim (buffer-substring-no-properties $p1 $p2)))
+         $infoStr $linkText
+         $fPath
+         $linkStrURL ; link string
          )
     ;; generate -infoStr. A info string is like this: “(elisp) The Mark”
-    (setq -infoStr
+    (setq $infoStr
           (if
               (or
-               (string-match "(emacs)" -input)
-               (string-match "(elisp)" -input))
-              (setq -infoStr -input)
-            (let (-fpath -temp)
+               (string-match "(emacs)" $input)
+               (string-match "(elisp)" $input))
+              (setq $infoStr $input)
+            (let ($fpath $temp)
               ;; convert local URL to file path
-              (setq -fpath
+              (setq $fpath
                     (cond
-                     ((string-match "^file" -input) (xah-local-url-to-file-path -input))
-                     ((string-match "^http" -input) (xahsite-url-to-filepath -input))
-                     (t -input)))
+                     ((string-match "^file" $input) (xah-local-url-to-file-path $input))
+                     ((string-match "^http" $input) (xahsite-url-to-filepath $input))
+                     (t $input)))
 
               ;; convert file path to info node syntax
               (concat
                (cond
-                ((string-match "emacs_manual/elisp" -fpath ) "(elisp) ")
-                ((string-match "emacs_manual/emacs" -fpath ) "(emacs) ")
-                (t (error "-fpath 「%s」 doesn't match “elisp” or “emacs”" -fpath)))
+                ((string-match "emacs_manual/elisp" $fpath ) "(elisp) ")
+                ((string-match "emacs_manual/emacs" $fpath ) "(emacs) ")
+                (t (error "$fpath 「%s」 doesn't match “elisp” or “emacs”" $fpath)))
 
-               (replace-regexp-in-string "_002d" "-" (replace-regexp-in-string "-" " " (file-name-sans-extension (file-name-nondirectory -fpath))))))))
+               (replace-regexp-in-string "_002d" "-" (replace-regexp-in-string "-" " " (file-name-sans-extension (file-name-nondirectory $fpath))))))))
 
     ;; generate link text
-    (setq -linkText (concat "(info \"" -infoStr "\")"))
+    (setq $linkText (concat "(info \"" $infoStr "\")"))
 
     ;; generate relative file path
-    (setq -linkStrURL
+    (setq $linkStrURL
           (concat
-           (xah-replace-pairs-in-string -infoStr
+           (xah-replace-pairs-in-string $infoStr
                                         [
                                          ["(elisp) " "http://ergoemacs.org/emacs_manual/elisp/"]
                                          ["(emacs) " "http://ergoemacs.org/emacs_manual/emacs/"]
@@ -100,20 +100,20 @@ Version 2016-12-22"
            ".html" ))
 
     ;; (cond
-    ;;  ((string-match "(elisp)" -infoStr ) (setq -linkStrURL (concat "../emacs_manual/elisp/" -linkStrURL ".html")))
-    ;;  ((string-match "(emacs)" -infoStr ) (setq -linkStrURL (concat "../emacs_manual/emacs/" -linkStrURL ".html")))
-    ;;  (t (error "-infoStr doesn't match “(elisp)” or “(emacs)”: %s"  -infoStr))
+    ;;  ((string-match "(elisp)" $infoStr ) (setq $linkStrURL (concat "../emacs_manual/elisp/" $linkStrURL ".html")))
+    ;;  ((string-match "(emacs)" $infoStr ) (setq $linkStrURL (concat "../emacs_manual/emacs/" $linkStrURL ".html")))
+    ;;  (t (error "$infoStr doesn't match “(elisp)” or “(emacs)”: %s"  $infoStr))
     ;;  )
 
-    (setq -fPath (xahsite-url-to-filepath -linkStrURL))
+    (setq $fPath (xahsite-url-to-filepath $linkStrURL))
 
-    (if (file-exists-p -fPath )
+    (if (file-exists-p $fPath )
         (progn
-          (delete-region -p1 -p2)
+          (delete-region $p1 $p2)
           (insert "<span class=\"ref\"><a href=\""
-                  (xahsite-filepath-to-href-value -fPath (buffer-file-name))
-                  "\">" -linkText "</a></span>"))
-      (error "Generated local -fPath 「%s」 does not point to a file" -fPath))))
+                  (xahsite-filepath-to-href-value $fPath (buffer-file-name))
+                  "\">" $linkText "</a></span>"))
+      (error "Generated local $fPath 「%s」 does not point to a file" $fPath))))
 
 (defun xah-html-php-ref-linkify ()
   "Make the current line into a PHP reference link.
@@ -136,23 +136,23 @@ Then it'll become
 
 <span class=\"ref\"><a href=\"http://perldoc.perl.org/perlop.html\">perldoc perlop</a></span>"
   (interactive)
-  (let (-p1 -p2 -swd -url)
+  (let ($p1 $p2 $swd $url)
     (if (use-region-p)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (progn
-        (setq -p1 (line-beginning-position))
-        (setq -p2 (line-end-position))))
+        (setq $p1 (line-beginning-position))
+        (setq $p2 (line-end-position))))
 
-    (setq -swd (buffer-substring-no-properties -p1 -p2))
-    (setq -url (replace-regexp-in-string
+    (setq $swd (buffer-substring-no-properties $p1 $p2))
+    (setq $url (replace-regexp-in-string
                 "-f " "functions/"
                 (replace-regexp-in-string
                  "::" "/"
-                 (concat "http://perldoc.perl.org/" -swd ".html"))))
-    (delete-region -p1 -p2)
-    (insert "<span class=\"ref\"><a href=\"" -url "\">" "perldoc " -swd "</a></span>")))
+                 (concat "http://perldoc.perl.org/" $swd ".html"))))
+    (delete-region $p1 $p2)
+    (insert "<span class=\"ref\"><a href=\"" $url "\">" "perldoc " $swd "</a></span>")))
 
 (defun mathematica-ref-linkify ()
   "Make the current word into a link to Mathematica ref site.
@@ -161,11 +161,11 @@ Table
 Then it'll become:
 <span class=\"ref\"><a href=\"http://reference.wolfram.com/mathematica/ref/Table.html\">Mathematica Ref: Table</a></span>"
   (interactive)
-  (let (-bds -p1 -p2 -swd -url)
-    (setq -bds (thing-at-point 'word))
-    (setq -p1 (car -bds))
-    (setq -p2 (cdr -bds))
-    (setq -swd (buffer-substring-no-properties -p1 -p2))
-    (setq -url (concat "http://reference.wolfram.com/mathematica/ref/" -swd ".html"))
-    (delete-region -p1 -p2)
-    (insert "<span class=\"ref\"><a href=\"" -url "\">" "Mathematica: " -swd "</a></span>")))
+  (let ($bds $p1 $p2 $swd $url)
+    (setq $bds (thing-at-point 'word))
+    (setq $p1 (car $bds))
+    (setq $p2 (cdr $bds))
+    (setq $swd (buffer-substring-no-properties $p1 $p2))
+    (setq $url (concat "http://reference.wolfram.com/mathematica/ref/" $swd ".html"))
+    (delete-region $p1 $p2)
+    (insert "<span class=\"ref\"><a href=\"" $url "\">" "Mathematica: " $swd "</a></span>")))

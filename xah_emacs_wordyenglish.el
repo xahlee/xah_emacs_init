@@ -18,12 +18,12 @@ URL `http://ergoemacs.org/emacs/elisp_chinese_char_linkify.html'
 Version 2016-01-18"
   (interactive)
   (let (
-        (-template
+        ($template
          "<div class=\"chinese-etymology-96656\"><b class=\"w\">▮</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|▮\">Translate</a> • <a href=\"http://en.wiktionary.org/wiki/▮\">Wiktionary</a> • <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=▮\">history</a></span></div>"
          )
-        (-char (buffer-substring-no-properties (- (point) 1) (point))))
+        ($char (buffer-substring-no-properties (- (point) 1) (point))))
     (delete-char -1)
-    (insert (replace-regexp-in-string "▮" -char -template))))
+    (insert (replace-regexp-in-string "▮" $char $template))))
 
 (defun xah-words-bold-word ()
   "wrap b tag with class w.
@@ -52,40 +52,40 @@ Version 2015-03-11"
                                          "satwords"
                                          "writerwords"))))
   (let (
-        -p1
-        -p2
-        -wordText
-        (-destFile (concat *category ".html")))
+        $p1
+        $p2
+        $wordText
+        ($destFile (concat *category ".html")))
     (if (use-region-p)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (save-excursion
         (if (re-search-backward "\n[ \t]*\n" nil "move")
             (progn (re-search-forward "\n[ \t]*\n")
-                   (setq -p1 (point)))
-          (setq -p1 (point)))
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
         (if (re-search-forward "\n[ \t]*\n" nil "move")
             (progn (re-search-backward "\n[ \t]*\n")
-                   (setq -p2 (point)))
-          (setq -p2 (point)))))
+                   (setq $p2 (point)))
+          (setq $p2 (point)))))
 
-    (setq -wordText (buffer-substring-no-properties -p1 -p2))
-    (delete-region -p1 -p2 )
+    (setq $wordText (buffer-substring-no-properties $p1 $p2))
+    (delete-region $p1 $p2 )
 
-    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" -destFile))
+    (find-file (concat (xahsite-server-root-path) "wordyenglish_com/words/" $destFile))
     (goto-char 1)
     (search-forward "<section class=\"word88\">") (search-backward "<")
-    (insert -wordText "\n\n")
+    (insert $wordText "\n\n")
     (save-buffer )
     (kill-buffer )
-    (message "Word moved to 「%s」" -destFile)
+    (message "Word moved to 「%s」" $destFile)
 
     (let*
         ;; save the working buffer, but make backup first
-        ((-fname (buffer-file-name))
-         (-backupName (concat -fname "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
-      (copy-file -fname -backupName t)
+        (($fname (buffer-file-name))
+         ($backupName (concat $fname "~" (format-time-string "%Y%m%d_%H%M%S") "~")))
+      (copy-file $fname $backupName t)
       (save-buffer ))))
 
 (defun xah-words-new-word-entry ()
@@ -117,7 +117,7 @@ Version 2017-03-08"
   "Insert a word definition entry template.
 Using current word or selection."
   (interactive)
-  (let ((-str
+  (let (($str
          (if (use-region-p)
              (buffer-substring-no-properties (region-beginning) (region-end))
            (current-word))))
@@ -125,7 +125,7 @@ Using current word or selection."
     (search-backward "</div>")
     (insert "<div class=\"def\"></div>\n")
     (search-backward "</div>")
-    (insert -str " = ")))
+    (insert $str " = ")))
 
 (defun xah-words-add-source ()
   "Insert a word definition entry template."
@@ -158,14 +158,14 @@ Used for the files in
 FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
   (interactive)
 
-  (let (wd egText -p1 -p2 p3 p4 notBolded-p)
+  (let (wd egText $p1 $p2 p3 p4 notBolded-p)
     ;; grab the word
     (search-forward "<h3 class=\"wd\">")
-    (setq -p1 (point))
+    (setq $p1 (point))
     (search-forward "</p>")
     (backward-char 4)
-    (setq -p2 (point))
-    (setq wd (buffer-substring-no-properties -p1 -p2))
+    (setq $p2 (point))
+    (setq wd (buffer-substring-no-properties $p1 $p2))
 
     ;; grab the example text
     (search-forward "<div class=\"bdy\">")
@@ -198,7 +198,7 @@ FILE `~/web/PageTwo_dir/Vocabulary_dir/'."
 Wrap HTML “span” tag around current word or text selection, then
 insert a div tag above the current paragraph."
   (interactive)
-  (let ( (-inputText
+  (let ( ($inputText
           (if (use-region-p)
               (buffer-substring-no-properties (region-beginning) (region-end))
             (current-word))))    
@@ -206,21 +206,21 @@ insert a div tag above the current paragraph."
     (search-backward "<p")
     (insert "<div class=\"xnote\"></div>\n\n")
     (search-backward "</div>")
-    (insert (format "<b class=\"x3nt\">%s</b> " -inputText))))
+    (insert (format "<b class=\"x3nt\">%s</b> " $inputText))))
 
 (defun xah-words-word-etymology-linkify ()
   "Make the current word into a etymology reference link."
   (interactive)
-  (let (-p1 -p2 -input -result)
+  (let ($p1 $p2 $input $result)
     (if (use-region-p)
-        (progn (setq -p1 (region-beginning))
-               (setq -p2 (region-end)))
-      (progn (setq -p1 (line-beginning-position))
-             (setq -p2 (line-end-position))))
-    (setq -input (buffer-substring-no-properties -p1 -p2))
-    (setq -result (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" -input "\">" -input "</a></span>"))
-    (delete-region -p1 -p2)
-    (insert -result)))
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
+    (setq $input (buffer-substring-no-properties $p1 $p2))
+    (setq $result (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" $input "\">" $input "</a></span>"))
+    (delete-region $p1 $p2)
+    (insert $result)))
 
 (defun xah-words-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.

@@ -20,50 +20,50 @@ Image path can be a URL or local file.  Supported file suffix are {.gif, .png, .
 URL `http://ergoemacs.org/emacs/elisp_image_tag.html'
 Version 2015-05-12"
   (interactive)
-  (let ( -p0 -p1 -p2 -inputPath -currentDir -fullPath -altText )
-    (progn ; sets -p1 -p2
+  (let ( $p0 $p1 $p2 $inputPath $currentDir $fullPath $altText )
+    (progn ; sets $p1 $p2
       (if *begin
-          (progn (setq -p1 *begin) (setq -p2 *end))
+          (progn (setq $p1 *begin) (setq $p2 *end))
         (if (use-region-p)
-            (progn (setq -p1 (region-beginning)) (setq -p2 (region-end)))
+            (progn (setq $p1 (region-beginning)) (setq $p2 (region-end)))
           (save-excursion
-            (setq -p0 (point))
+            (setq $p0 (point))
             ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
             (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-            (setq -p1 (point))
-            (goto-char -p0)
+            (setq $p1 (point))
+            (goto-char $p0)
             (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-            (setq -p2 (point))))))
+            (setq $p2 (point))))))
 
     (progn
-      (setq -inputPath (buffer-substring-no-properties -p1 -p2))
-      (setq -currentDir (file-name-directory (or (buffer-file-name) default-directory )))
-      (setq -fullPath (expand-file-name (xah-local-url-to-file-path -inputPath) -currentDir ))
-      (setq -altText (replace-regexp-in-string "-s$" "" (replace-regexp-in-string "_" " " (file-name-sans-extension (file-name-nondirectory -fullPath)) t t))))
+      (setq $inputPath (buffer-substring-no-properties $p1 $p2))
+      (setq $currentDir (file-name-directory (or (buffer-file-name) default-directory )))
+      (setq $fullPath (expand-file-name (xah-local-url-to-file-path $inputPath) $currentDir ))
+      (setq $altText (replace-regexp-in-string "-s$" "" (replace-regexp-in-string "_" " " (file-name-sans-extension (file-name-nondirectory $fullPath)) t t))))
 
-    (if (xahsite-is-link-to-xahsite-p (file-relative-name -fullPath (or (buffer-file-name) default-directory)))
+    (if (xahsite-is-link-to-xahsite-p (file-relative-name $fullPath (or (buffer-file-name) default-directory)))
         (progn
-          (if (file-exists-p -fullPath)
-              (let (-wh -w -h -whStr)
-                (setq -wh
+          (if (file-exists-p $fullPath)
+              (let ($wh $w $h $whStr)
+                (setq $wh
                       (cond
-                       ((string-match "\.svg$" -fullPath) (xah-get-image-dimensions -fullPath))
-                       (t (xah-get-image-dimensions -fullPath))))
-                (setq -w (number-to-string (elt -wh 0)))
-                (setq -h (number-to-string (elt -wh 1)))
-                (setq -whStr
-                      (if (string-match "\.svg$" -fullPath)
+                       ((string-match "\.svg$" $fullPath) (xah-get-image-dimensions $fullPath))
+                       (t (xah-get-image-dimensions $fullPath))))
+                (setq $w (number-to-string (elt $wh 0)))
+                (setq $h (number-to-string (elt $wh 1)))
+                (setq $whStr
+                      (if (string-match "\.svg$" $fullPath)
                           ""
-                        (format "width=\"%s\" height=\"%s\"" -w -h)))
-                (delete-region -p1 -p2)
+                        (format "width=\"%s\" height=\"%s\"" $w $h)))
+                (delete-region $p1 $p2)
                 (insert
                  (format "<img src=\"%s\" alt=\"%s\" %s />"
-                         (xahsite-filepath-to-href-value -fullPath (or (buffer-file-name) default-directory))
-                         -altText -whStr )))
-            (error "File does not exist 「%s」" -fullPath )))
+                         (xahsite-filepath-to-href-value $fullPath (or (buffer-file-name) default-directory))
+                         $altText $whStr )))
+            (error "File does not exist 「%s」" $fullPath )))
       (progn
-        (delete-region -p1 -p2)
-        (insert "<img src=\"" -fullPath "\" alt=\"" -altText "\">")))))
+        (delete-region $p1 $p2)
+        (insert "<img src=\"" $fullPath "\" alt=\"" $altText "\">")))))
 
 (defun xah-image-file-to-html-figure-tag ()
   "Replace a image file's path under cursor with a HTML img tag,
@@ -81,23 +81,23 @@ If there's a text selection, use that as image path.
 This function calls `xah-html-image-linkify'.
 Version 2017-06-09"
   (interactive)
-  (let (-p1 -p2 -alt-str)
-    (setq -alt-str (xah-html-image-linkify))
+  (let ($p1 $p2 $alt-str)
+    (setq $alt-str (xah-html-image-linkify))
 
     ;; (search-backward "alt=\"")
     ;; (forward-char 5)
 
     ;; (progn
-    ;;   (setq -p1 (point))
+    ;;   (setq $p1 (point))
     ;;   (search-forward "\"")
-    ;;   (setq -p2 (- (point) 1) )
-    ;;   (setq -alt-str (buffer-substring -p1 -p2)))
+    ;;   (setq $p2 (- (point) 1) )
+    ;;   (setq $alt-str (buffer-substring $p1 $p2)))
 
     (search-backward "<img ")
     (insert "<figure>\n")
     (search-forward ">")
     (insert "\n<figcaption>\n")
-    (insert -alt-str "\n</figcaption>\n</figure>\n")
+    (insert $alt-str "\n</figcaption>\n</figure>\n")
 
     ;; (search-backward "</figcaption>")
     ;; (backward-char)
@@ -115,35 +115,35 @@ becomes
 If there's a text selection, use that region as file name."
   (interactive)
   (let
-      (-p0 -p1 -p2 -inputStr -imgPath -dimension -width -height -resultStr)
-    (progn ; sets -p1 -p2
+      ($p0 $p1 $p2 $inputStr $imgPath $dimension $width $height $resultStr)
+    (progn ; sets $p1 $p2
       (if *begin
           (progn
-            (setq -p1 *begin)
-            (setq -p2 *end))
+            (setq $p1 *begin)
+            (setq $p2 *end))
         (if (use-region-p)
             (progn
-              (setq -p1 (region-beginning))
-              (setq -p2 (region-end)))
+              (setq $p1 (region-beginning))
+              (setq $p2 (region-end)))
           (save-excursion
-            (setq -p0 (point))
+            (setq $p0 (point))
             ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
             (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-            (setq -p1 (point))
-            (goto-char -p0)
+            (setq $p1 (point))
+            (goto-char $p0)
             (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-            (setq -p2 (point))))))
+            (setq $p2 (point))))))
 
-    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
-    (setq -imgPath (xah-local-url-to-file-path -inputStr))
-    (setq -dimension (xah-get-image-dimensions-imk -imgPath))
-    (setq -width (number-to-string (elt -dimension 0)))
-    (setq -height (number-to-string (elt -dimension 1)))
-    (setq -resultStr
-          (concat "<a class=\"big-i\" href=\"" (file-relative-name -imgPath) "\" target=\"_blank\">" -width "×" -height "</a>"))
+    (setq $inputStr (buffer-substring-no-properties $p1 $p2))
+    (setq $imgPath (xah-local-url-to-file-path $inputStr))
+    (setq $dimension (xah-get-image-dimensions-imk $imgPath))
+    (setq $width (number-to-string (elt $dimension 0)))
+    (setq $height (number-to-string (elt $dimension 1)))
+    (setq $resultStr
+          (concat "<a class=\"big-i\" href=\"" (file-relative-name $imgPath) "\" target=\"_blank\">" $width "×" $height "</a>"))
 
-    (delete-region -p1 -p2)
-    (insert -resultStr)))
+    (delete-region $p1 $p2)
+    (insert $resultStr)))
 
 (defun xah-blogger-linkify ()
   "Make URL at cursor point into a HTML link.
@@ -153,12 +153,12 @@ becomes
 
 <div class=\"blgcmt\"><a href=\"http://xahlee.blogspot.com/2010/03/some.html\">✍</a></div>"
   (interactive)
-  (let* ((-bds (bounds-of-thing-at-point 'url))
-         (p7 (car -bds))
-         (p8 (cdr -bds))
-         (-url (buffer-substring-no-properties p7 p8)))
+  (let* (($bds (bounds-of-thing-at-point 'url))
+         (p7 (car $bds))
+         (p8 (cdr $bds))
+         ($url (buffer-substring-no-properties p7 p8)))
     (delete-region p7 p8)
-    (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url -url) "\">✍</a></div>"))))
+    (insert (concat "<div class=\"blgcmt\"><a href=\"" (url-encode-url $url) "\">✍</a></div>"))))
 
 (defun youporn-search-linkify ()
   "Make the current line into a YouPorn.com link.
@@ -167,20 +167,20 @@ anal
 Then it'll become
 \(YouPorn video: <a href=\"http://www.youporn.com/search?query=anal\">anal</a>\)"
   (interactive)
-  (let (-p1 -p2 -word -url)
+  (let ($p1 $p2 $word $url)
 
     (if (use-region-p)
-        (progn (setq -p1 (region-beginning))
-               (setq -p2 (region-end)))
-      (progn (setq -p1 (line-beginning-position))
-             (setq -p2 (line-end-position))))
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
 
-    (setq -word (buffer-substring-no-properties -p1 -p2) )
+    (setq $word (buffer-substring-no-properties $p1 $p2) )
 
-    (setq -url (concat "http://www.youporn.com/search?query=" -word) )
-    (setq -url (replace-regexp-in-string " " "+" -url ) )
-    (delete-region -p1 -p2)
-    (insert "(YouPorn video: <a href=\"" -url "\">" -word "</a>)\n")))
+    (setq $url (concat "http://www.youporn.com/search?query=" $word) )
+    (setq $url (replace-regexp-in-string " " "+" $url ) )
+    (delete-region $p1 $p2)
+    (insert "(YouPorn video: <a href=\"" $url "\">" $word "</a>)\n")))
 
 (defun xah-youtube-search-linkify ()
   "Make the current line into a YouTube link.
@@ -196,20 +196,20 @@ Note: old version returns this form:
 <span class=\"utb\"><a href=\"http://youtube.com/results?search_query=David+Bowie&amp;search=Search\">David Bowie</a></span>
 "
   (interactive)
-  (let (-p1 -p2 -word -url)
+  (let ($p1 $p2 $word $url)
     (if (use-region-p)
-        (progn (setq -p1 (region-beginning))
-               (setq -p2 (region-end)))
-      (progn (setq -p1 (line-beginning-position))
-             (setq -p2 (line-end-position))))
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
 
-    (setq -word (buffer-substring-no-properties -p1 -p2))
+    (setq $word (buffer-substring-no-properties $p1 $p2))
 
-    (setq -url (concat "http://youtube.com/results?search_query=" -word "&amp;search=Search"))
-    (setq -url (replace-regexp-in-string " " "+" -url ))
-    (setq -url (replace-regexp-in-string "," "%2C" -url ))
-    (delete-region -p1 -p2)
-    (insert "<a class=\"utb\" href=\"" -url "\">" -word "</a>")))
+    (setq $url (concat "http://youtube.com/results?search_query=" $word "&amp;search=Search"))
+    (setq $url (replace-regexp-in-string " " "+" $url ))
+    (setq $url (replace-regexp-in-string "," "%2C" $url ))
+    (delete-region $p1 $p2)
+    (insert "<a class=\"utb\" href=\"" $url "\">" $word "</a>")))
 
 (defun xah-video-search-string (*searchString)
   "Return a Google video search string URL of SEARCHSTRING.
@@ -241,16 +241,16 @@ Warning: the line must end in a line return char else the result is wrong.
 
 This command calls `xah-video-search-string'"
   (interactive)
-  (let (-p1 -p2 -word -url)
+  (let ($p1 $p2 $word $url)
     (if (use-region-p)
-        (progn (setq -p1 (region-beginning))
-               (setq -p2 (region-end)))
-      (progn (setq -p1 (line-beginning-position))
-             (setq -p2 (line-end-position))))
-    (setq -word (buffer-substring-no-properties -p1 -p2))
-    (setq -url (xah-video-search-string -word))
-    (delete-region -p1 -p2)
-    (insert "<a class=\"google-video-search-36645\" href=\"" -url "\">" -word "</a>")))
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
+    (setq $word (buffer-substring-no-properties $p1 $p2))
+    (setq $url (xah-video-search-string $word))
+    (delete-region $p1 $p2)
+    (insert "<a class=\"google-video-search-36645\" href=\"" $url "\">" $word "</a>")))
 
 (defun google-search-linkify ()
   "Make the current line into a Google search link.
@@ -264,17 +264,17 @@ Then it'll become
 
 Warning: the line must end in a line return char else the result is wrong."
   (interactive)
-  (let (-p1 -p2 -word -url)
+  (let ($p1 $p2 $word $url)
     (if (use-region-p)
-        (progn (setq -p1 (region-beginning))
-               (setq -p2 (region-end)))
-      (progn (setq -p1 (line-beginning-position))
-             (setq -p2 (line-end-position))))
-    (setq -word (buffer-substring-no-properties -p1 -p2))
-    (setq -url (concat "http://www.google.com/search?q=" -word))
-    (setq -url (replace-regexp-in-string " " "+" -url ))
-    (delete-region -p1 -p2)
-    (insert "<p>Google search: <a href=\"" -url "\">" -word "</a>.</p>\n")))
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
+    (setq $word (buffer-substring-no-properties $p1 $p2))
+    (setq $url (concat "http://www.google.com/search?q=" $word))
+    (setq $url (replace-regexp-in-string " " "+" $url ))
+    (delete-region $p1 $p2)
+    (insert "<p>Google search: <a href=\"" $url "\">" $word "</a>.</p>\n")))
 
 
 ;; some custom HTML markup and functions for working with HTML
@@ -286,16 +286,16 @@ it becomes
  「<a href=\"http://www.wolframscience.com/nksonline/page-123\">p123</a>」
 Version 2015-05-15"
   (interactive)
-  (let* ((-bounds (bounds-of-thing-at-point 'word))
-         (-p1 (car -bounds))
-         (-p2 (cdr -bounds))
-         (-inputStr (buffer-substring-no-properties -p1 -p2))
-         (-pageNum (substring -inputStr 1)))
-    (delete-region -p1 -p2)
+  (let* (($bounds (bounds-of-thing-at-point 'word))
+         ($p1 (car $bounds))
+         ($p2 (cdr $bounds))
+         ($inputStr (buffer-substring-no-properties $p1 $p2))
+         ($pageNum (substring $inputStr 1)))
+    (delete-region $p1 $p2)
     (insert
      (concat
       "<a href=\"http://www.wolframscience.com/nksonline/page-"
-      -pageNum "\">p" -pageNum "</a>"))))
+      $pageNum "\">p" $pageNum "</a>"))))
 
 
 ;; more specific to Xah Lee
@@ -341,15 +341,15 @@ m = “music”
 s = “software”
 There are other amazon categories, but not supported by this function."
   (interactive)
-  (let (-p1 -p2 mainText tmplist sstr pcato pcc)
+  (let ($p1 $p2 mainText tmplist sstr pcato pcc)
     (if (use-region-p)
-        (setq -p1 (region-beginning) -p2 (region-end))
+        (setq $p1 (region-beginning) $p2 (region-end))
       (progn
-        (setq -p1 (line-beginning-position) )
-        (setq -p2 (line-end-position) )
+        (setq $p1 (line-beginning-position) )
+        (setq $p2 (line-end-position) )
         ))
     ;; get the text
-    (setq mainText (buffer-substring-no-properties -p1 -p2) )
+    (setq mainText (buffer-substring-no-properties $p1 $p2) )
     (setq tmplist (split-string mainText ";") )
     (setq sstr (nth 0 tmplist ) )
     (setq pcato (nth 1 tmplist ) )
@@ -367,7 +367,7 @@ There are other amazon categories, but not supported by this function."
      (t (error "Code does not match"))
      )
 
-    (delete-region -p1 -p2)
+    (delete-region $p1 $p2)
     (insert  (xah-amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
 
@@ -390,45 +390,45 @@ For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amaz
 URL `http://ergoemacs.org/emacs/elisp_amazon-linkify.html'
 Version 2017-04-10"
   (interactive)
-  (let ((-bds (bounds-of-thing-at-point 'url))
-        -p1 -p2 -inputText -asin -productName )
+  (let (($bds (bounds-of-thing-at-point 'url))
+        $p1 $p2 $inputText $asin $productName )
     (if (use-region-p)
-        (progn (setq -p1 (region-beginning)) (setq -p2 (region-end)))
-      (progn (setq -p1 (car -bds)) (setq -p2 (cdr -bds))))
-    (setq -inputText (buffer-substring-no-properties -p1 -p2))
-    (if (or (string-match "//amzn.to/" -inputText)
-            (string-match "//alexa.design/" -inputText))
-        (progn (delete-region -p1 -p2)
-               (insert (format "<a class=\"amz_search\" href=\"%s\">amazon</a>" -inputText)))
+        (progn (setq $p1 (region-beginning)) (setq $p2 (region-end)))
+      (progn (setq $p1 (car $bds)) (setq $p2 (cdr $bds))))
+    (setq $inputText (buffer-substring-no-properties $p1 $p2))
+    (if (or (string-match "//amzn.to/" $inputText)
+            (string-match "//alexa.design/" $inputText))
+        (progn (delete-region $p1 $p2)
+               (insert (format "<a class=\"amz_search\" href=\"%s\">amazon</a>" $inputText)))
       (progn
-        (setq -asin
+        (setq $asin
               (cond
-               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" -inputText) (match-string 1 -inputText))
-               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" -inputText) (match-string 1 -inputText))
-               ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" -inputText) (match-string 1 -inputText))
-               ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" -inputText) (match-string 1 -inputText))
-               ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" -inputText) (match-string 1 -inputText))
+               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" $inputText) (match-string 1 $inputText))
+               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" $inputText) (match-string 1 $inputText))
+               ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" $inputText) (match-string 1 $inputText))
+               ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" $inputText) (match-string 1 $inputText))
+               ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" $inputText) (match-string 1 $inputText))
                ((and
-                 (equal 10 (length -inputText ))
-                 (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" -inputText))
-                -inputText)
+                 (equal 10 (length $inputText ))
+                 (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" $inputText))
+                $inputText)
                (t (error "no amazon ASIN found"))))
 
         (setq
-         -productName
+         $productName
          (replace-regexp-in-string
           "-" " "
-          (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" -inputText)
-              (progn (match-string 1 -inputText))
+          (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" $inputText)
+              (progn (match-string 1 $inputText))
             (progn
               (message "no product name found" ))
             ""
             )))
 
-        (delete-region -p1 -p2)
+        (delete-region $p1 $p2)
         (insert
          "<a class=\"amz\" href=\"http://www.amazon.com/dp/"
-         -asin "/?tag=xahh-20\" title=\"" -productName "\">Buy at amazon</a>")
+         $asin "/?tag=xahh-20\" title=\"" $productName "\">Buy at amazon</a>")
         (search-backward "\">")))))
 
 ;; (defun local-linkify ()
@@ -440,8 +440,8 @@ Version 2017-04-10"
 
 ;; If a region is active, use the region as file path."
 ;;  (interactive)
-;;  (let (-path bounds tempBuff x1 x2 titleText -resultStr)
-;;    (setq -path
+;;  (let ($path bounds tempBuff x1 x2 titleText $resultStr)
+;;    (setq $path
 ;;          (if (use-region-p)
 ;;              (buffer-substring-no-properties (region-beginning) (region-end))
 ;;            (thing-at-point 'filename)
@@ -450,23 +450,23 @@ Version 2017-04-10"
 
 ;;    (setq tempBuff (generate-new-buffer-name " temp"))
 
-;;    (when (file-exists-p -path)
+;;    (when (file-exists-p $path)
 ;;        (progn
 ;;          (save-current-buffer
-;;            (message -path)
+;;            (message $path)
 ;;            (set-buffer (get-buffer-create tempBuff))
 ;;            (goto-char (point-min))
-;;            (insert-file-contents -path nil nil nil t)
+;;            (insert-file-contents $path nil nil nil t)
 ;;            (setq x1 (search-forward "<title>"))
 ;;            (search-forward "</title>")
 ;;            (setq x2 (search-backward "<"))
 ;;            (setq titleText (buffer-substring-no-properties x1 x2))
 ;;            (kill-buffer tempBuff))
 
-;;          (setq -resultStr (concat "<a href=\"" -path "\">" titleText "</a>"))
+;;          (setq $resultStr (concat "<a href=\"" $path "\">" titleText "</a>"))
 ;;          (save-excursion
 ;;            (delete-region (car bounds) (cdr bounds))
-;;            (insert -resultStr))))
+;;            (insert $resultStr))))
 ;;    ))
 
 (defun xah-file-linkify (&optional *begin *end)
@@ -495,35 +495,35 @@ Version 2016-07-07"
          (setq p2 (point))
          (list p1 p2)))))
   (let* (
-         (-inputStr (buffer-substring-no-properties *begin *end))
-         (-inputStParts (split-uri-hashmark -inputStr))
-         (pt1 (aref -inputStParts 0))
-         (-fragPart (aref -inputStParts 1))
-         (-fPath (xahsite-web-path-to-filepath pt1 default-directory))
-         -rltvPath -titleText -resultStr
-         (-currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
-         (-currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
+         ($inputStr (buffer-substring-no-properties *begin *end))
+         ($inputStParts (split-uri-hashmark $inputStr))
+         (pt1 (aref $inputStParts 0))
+         ($fragPart (aref $inputStParts 1))
+         ($fPath (xahsite-web-path-to-filepath pt1 default-directory))
+         $rltvPath $titleText $resultStr
+         ($currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
+         ($currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
 
-    (if (file-exists-p -fPath)
+    (if (file-exists-p $fPath)
         (progn
-          (setq -titleText
-                (if (string-match-p ".+html\\'" -fPath)
-                    (concat (xah-html-get-html-file-title -fPath t) -fragPart)
-                  (file-name-nondirectory -fPath)))
-          (setq -resultStr
+          (setq $titleText
+                (if (string-match-p ".+html\\'" $fPath)
+                    (concat (xah-html-get-html-file-title $fPath t) $fragPart)
+                  (file-name-nondirectory $fPath)))
+          (setq $resultStr
                 (if (string-equal
-                     (xahsite-get-domain-of-local-file-path -currentBufferFilePathOrDir)
-                     (xahsite-get-domain-of-local-file-path -fPath))
+                     (xahsite-get-domain-of-local-file-path $currentBufferFilePathOrDir)
+                     (xahsite-get-domain-of-local-file-path $fPath))
                     (progn
-                      (setq -rltvPath (file-relative-name -fPath -currentBufferFileDir))
+                      (setq $rltvPath (file-relative-name $fPath $currentBufferFileDir))
                       (format "<a href=\"%s\">%s</a>"
-                              (concat -rltvPath -fragPart)
-                              (if (string-equal -titleText "") -rltvPath -titleText )))
+                              (concat $rltvPath $fragPart)
+                              (if (string-equal $titleText "") $rltvPath $titleText )))
                   (progn
-                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url -fPath) -fragPart) -titleText))))
+                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url $fPath) $fragPart) $titleText))))
           (delete-region *begin *end)
-          (insert -resultStr))
-      (progn (message (format "Cannot locate the file: 「%s」" -fPath))))))
+          (insert $resultStr))
+      (progn (message (format "Cannot locate the file: 「%s」" $fPath))))))
 
 (defun nodejs-get-title (*fName *fragPart)
   "Return the file frag part function title.
@@ -557,17 +557,17 @@ returns
   "Make the path under cursor into a HTML link for xah site.
 Version 2016-03-07"
   (interactive)
-  (let ( -p1 -p2 -wd )
+  (let ( $p1 $p2 $wd )
     (if (use-region-p)
-        (setq -p1 (region-beginning) -p2 (region-end))
+        (setq $p1 (region-beginning) $p2 (region-end))
       (progn
         (skip-chars-backward "-A-Za-z0-9*+!-_?")
-        (setq -p1 (point))
+        (setq $p1 (point))
         (skip-chars-forward "-A-Za-z0-9*+!-_?")
-        (setq -p2 (point))))
-    (setq -wd (buffer-substring-no-properties -p1 -p2))
-    (delete-region -p1 -p2)
-    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.8/clojure.core-api.html#clojure.core/" -wd "\">clojure.core/" -wd "</a></span>"))))
+        (setq $p2 (point))))
+    (setq $wd (buffer-substring-no-properties $p1 $p2))
+    (delete-region $p1 $p2)
+    (insert (concat "<span class=\"ref\"><a href=\"../clojure-doc-1.8/clojure.core-api.html#clojure.core/" $wd "\">clojure.core/" $wd "</a></span>"))))
 
 (defun xah-nodejs-ref-linkify ()
   "Make the path under cursor into a HTML link for xah site.
@@ -592,35 +592,35 @@ linkText
 Version 2016-10-31"
   (interactive)
   (let* (
-         (-bds (xah-get-bounds-of-thing-or-region 'filepath))
-         (-p1 (car -bds))
-         (-p2 (cdr -bds))
-         (-inputStr (buffer-substring-no-properties -p1 -p2))
+         ($bds (xah-get-bounds-of-thing-or-region 'filepath))
+         ($p1 (car $bds))
+         ($p2 (cdr $bds))
+         ($inputStr (buffer-substring-no-properties $p1 $p2))
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
-         (temp87318 (split-uri-hashmark -inputStr))
+         (temp87318 (split-uri-hashmark $inputStr))
          (urlMainPart (elt temp87318 0))
          (urlFragPart (elt temp87318 1))
-         (-fPath (xahsite-web-path-to-filepath urlMainPart default-directory))
-         rltvPath titleText -resultStr
+         ($fPath (xahsite-web-path-to-filepath urlMainPart default-directory))
+         rltvPath titleText $resultStr
          )
 
-    (if (file-exists-p -fPath)
+    (if (file-exists-p $fPath)
         (progn
-          (setq titleText (concat "⬢ " (nodejs-get-title -fPath urlFragPart)))
-          (setq -resultStr
+          (setq titleText (concat "⬢ " (nodejs-get-title $fPath urlFragPart)))
+          (setq $resultStr
                 (if (string-equal
                      (xahsite-get-domain-of-local-file-path currentBufferFilePathOrDir)
-                     (xahsite-get-domain-of-local-file-path -fPath))
+                     (xahsite-get-domain-of-local-file-path $fPath))
                     (progn
-                      (setq rltvPath (file-relative-name -fPath currentBufferFileDir))
+                      (setq rltvPath (file-relative-name $fPath currentBufferFileDir))
                       (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" rltvPath urlFragPart titleText))
                   (progn
-                    (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url -fPath) urlFragPart titleText))))
-          (delete-region -p1 -p2)
-          (insert -resultStr))
-      (progn (message (format "Cannot locate the file: 「%s」" -fPath))))))
+                    (format "<span class=\"ref\"><a href=\"%s%s\">%s</a></span>" (xahsite-filepath-to-url $fPath) urlFragPart titleText))))
+          (delete-region $p1 $p2)
+          (insert $resultStr))
+      (progn (message (format "Cannot locate the file: 「%s」" $fPath))))))
 
 (defun xah-javascript-linkify ()
   "Make the path under cursor into a HTML link.
@@ -628,16 +628,16 @@ Version 2016-10-31"
 Version 2016-10-31"
   (interactive)
   (let* (
-         (-bds (xah-get-bounds-of-thing-or-region 'filepath))
-         (-p1 (car -bds))
-         (-p2 (cdr -bds))
-         (-inputStr (buffer-substring-no-properties -p1 -p2))
-         (-src
-          (if (string-match "^http" -inputStr )
-              -inputStr
-            (file-relative-name -inputStr))))
-    (delete-region -p1 -p2)
-    (insert (format "<script defer src=\"%s\"></script>" -src))))
+         ($bds (xah-get-bounds-of-thing-or-region 'filepath))
+         ($p1 (car $bds))
+         ($p2 (cdr $bds))
+         ($inputStr (buffer-substring-no-properties $p1 $p2))
+         ($src
+          (if (string-match "^http" $inputStr )
+              $inputStr
+            (file-relative-name $inputStr))))
+    (delete-region $p1 $p2)
+    (insert (format "<script defer src=\"%s\"></script>" $src))))
 
 (defun xah-audio-file-linkify ()
   "Make the path under cursor into a HTML link.
@@ -646,16 +646,16 @@ becomes
 <audio src=\"xyz.mp3\"></audio>"
   (interactive)
   (let* (
-         (-bds (xah-get-bounds-of-thing-or-region 'filepath))
-         (-p1 (car -bds))
-         (-p2 (cdr -bds))
-         (-inputStr (buffer-substring-no-properties -p1 -p2))
-         (-src
-          (if (string-match "^http" -inputStr )
-              -inputStr
-            (file-relative-name -inputStr))))
-    (delete-region -p1 -p2)
-    (insert (format "<audio src=\"%s\" controls></audio>" -src))))
+         ($bds (xah-get-bounds-of-thing-or-region 'filepath))
+         ($p1 (car $bds))
+         ($p2 (cdr $bds))
+         ($inputStr (buffer-substring-no-properties $p1 $p2))
+         ($src
+          (if (string-match "^http" $inputStr )
+              $inputStr
+            (file-relative-name $inputStr))))
+    (delete-region $p1 $p2)
+    (insert (format "<audio src=\"%s\" controls></audio>" $src))))
 
 (defun xah-video-file-linkify ()
   "Make the path under cursor into a HTML video tag link.
@@ -665,18 +665,18 @@ becomes
 Version 2017-02-12"
   (interactive)
   (let* (
-         (-bds (bounds-of-thing-at-point 'filename ))
-         (-p1 (car -bds))
-         (-p2 (cdr -bds))
-         (-inputStr (buffer-substring-no-properties -p1 -p2 ))
-         (-src
-          (if (string-match "^http" -inputStr )
-              -inputStr
-            (if (file-exists-p -inputStr)
-                (file-relative-name -inputStr)
-              (user-error "file not found: 「%s」" -inputStr)))))
-    (delete-region -p1 -p2)
-    (insert (format "<video src=\"%s\" controls loop autoplay></video>" -src))))
+         ($bds (bounds-of-thing-at-point 'filename ))
+         ($p1 (car $bds))
+         ($p2 (cdr $bds))
+         ($inputStr (buffer-substring-no-properties $p1 $p2 ))
+         ($src
+          (if (string-match "^http" $inputStr )
+              $inputStr
+            (if (file-exists-p $inputStr)
+                (file-relative-name $inputStr)
+              (user-error "file not found: 「%s」" $inputStr)))))
+    (delete-region $p1 $p2)
+    (insert (format "<video src=\"%s\" controls loop autoplay></video>" $src))))
 
 (defun xah-css-linkify ()
   "Make the path under cursor into a HTML link.
@@ -686,13 +686,13 @@ becomes
 Version 2016-10-31"
   (interactive)
   (let* (
-         (-bds (xah-get-bounds-of-thing-or-region 'filepath))
-         (-p1 (car -bds))
-         (-p2 (cdr -bds))
-         (-inputStr (buffer-substring-no-properties -p1 -p2))
-         (-src (if (string-match "^http" -inputStr ) -inputStr (file-relative-name -inputStr))))
-    (delete-region -p1 -p2)
-    (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" -src))))
+         ($bds (xah-get-bounds-of-thing-or-region 'filepath))
+         ($p1 (car $bds))
+         ($p2 (cdr $bds))
+         ($inputStr (buffer-substring-no-properties $p1 $p2))
+         ($src (if (string-match "^http" $inputStr ) $inputStr (file-relative-name $inputStr))))
+    (delete-region $p1 $p2)
+    (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" $src))))
 
 (defun xah-curve-linkify ()
   "Make the current word or text selection into a HTML link.
@@ -707,32 +707,32 @@ The directory to search includes:
 Version 2015-03-18"
   (interactive)
   (let* (
-         (-bds (bounds-of-thing-at-point 'symbol))
-         (-p1 (car -bds))
-         (-p2 (cdr -bds))
-         (-inputWord (if (use-region-p)
+         ($bds (bounds-of-thing-at-point 'symbol))
+         ($p1 (car $bds))
+         ($p2 (cdr $bds))
+         ($inputWord (if (use-region-p)
                          (progn (buffer-substring-no-properties (region-beginning) (region-end)))
-                       (progn (buffer-substring-no-properties -p1 -p2))))
-         (-wordPath (replace-regexp-in-string " " "_" (downcase -inputWord))) ; word for constructing possible dir
-         (-pathsToTest
+                       (progn (buffer-substring-no-properties $p1 $p2))))
+         ($wordPath (replace-regexp-in-string " " "_" (downcase $inputWord))) ; word for constructing possible dir
+         ($pathsToTest
           (vector
-           (concat "~/web/xahlee_info/SpecialPlaneCurves_dir/" (upcase-initials -wordPath) "_dir/" -wordPath ".html")
-           (concat "~/web/xahlee_info/surface/" -wordPath "/" -wordPath ".html")))
-         -i  -found-p -rPath -linkWord)
+           (concat "~/web/xahlee_info/SpecialPlaneCurves_dir/" (upcase-initials $wordPath) "_dir/" $wordPath ".html")
+           (concat "~/web/xahlee_info/surface/" $wordPath "/" $wordPath ".html")))
+         $i  $found-p $rPath $linkWord)
 
     ;; loop thru the paths until a file is found
-    (setq -found-p nil)
-    (setq -i 0)
-    (while (and (not -found-p) (< -i (length -pathsToTest)))
-      (setq -rPath (elt -pathsToTest -i))
-      (setq -found-p (file-exists-p -rPath))
-      (setq -i (1+ -i)))
+    (setq $found-p nil)
+    (setq $i 0)
+    (while (and (not $found-p) (< $i (length $pathsToTest)))
+      (setq $rPath (elt $pathsToTest $i))
+      (setq $found-p (file-exists-p $rPath))
+      (setq $i (1+ $i)))
 
-    (if -found-p
+    (if $found-p
         (progn
-          (setq -linkWord (replace-regexp-in-string "_" " " -inputWord))
-          (delete-region -p1 -p2)
-          (insert (concat "<a href=\"" (file-relative-name -rPath) "\">" -linkWord "</a>")))
+          (setq $linkWord (replace-regexp-in-string "_" " " $inputWord))
+          (delete-region $p1 $p2)
+          (insert (concat "<a href=\"" (file-relative-name $rPath) "\">" $linkWord "</a>")))
       (progn (beep) (message "No file found")))))
 
 (defun xah-all-linkify ()
@@ -748,64 +748,64 @@ They will be changed into a HTML link in various formats, depending on the input
 If there is text selection, use it as input.
 Version 2017-02-12"
   (interactive)
-  (let* ( -p1 -p2 -input)
-    ;; (if (string-match "%" -input )
+  (let* ( $p1 $p2 $input)
+    ;; (if (string-match "%" $input )
     ;;     (decode-coding-string (url-unhex-string "https://mysticsiva.wordpress.com/2016/11/04/%E3%82%AD%E3%83%BC%E3%82%AD%E3%83%A3%E3%83%83%E3%83%97%E4%BA%A4%E6%8F%9B3/") 'utf-8)
-    ;;   -input)
+    ;;   $input)
     (if (use-region-p)
-        (setq -p1 (region-beginning) -p2 (region-end))
+        (setq $p1 (region-beginning) $p2 (region-end))
       (save-excursion
-        (let (-p0)
-          (setq -p0 (point))
+        (let ($p0)
+          (setq $p0 (point))
           ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
           (skip-chars-backward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-          (setq -p1 (point))
-          (goto-char -p0)
+          (setq $p1 (point))
+          (goto-char $p0)
           (skip-chars-forward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-          (setq -p2 (point)))))
-    (setq -input (buffer-substring-no-properties -p1 -p2))
+          (setq $p2 (point)))))
+    (setq $input (buffer-substring-no-properties $p1 $p2))
     (cond
-     ((string-match-p "javascript_es2016/ECMAScript_2016" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "javascript_es6" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "javascript_ecma-262_5.1_2011" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "java8_doc" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "godoc" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "html_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "html5_whatwg" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "css_2.1_spec" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "css_3_color_spec" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "clojure-doc-1.8" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "python_doc_2" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "python_doc_3" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "dom-whatwg/DOM_Standard.html" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "REC-SVG11-20110816" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "css_transitions/CSS_Transitions.html" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "php-doc/" -input) (xah-file-linkify -p1 -p2) (xah-insert-reference-span-tag))
-     ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" -input) (xah-blogger-linkify))
-     ((string-match-p "www\.amazon\.com/" -input) (xah-amazon-linkify))
-     ((string-match-p "//amzn\.to/" -input) (xah-amazon-linkify))
-     ((string-match-p "alexa\.design/" -input) (xah-amazon-linkify))
-     ((string-match-p "www\.youtube\.com/watch" -input) (xah-youtube-linkify))
-     ((string-match-p "/emacs_manual/" -input) (xah-html-emacs-ref-linkify))
-     ((string-match-p "/node_api/" -input) (xah-nodejs-ref-linkify))
-     ((string-match-p "\\.js\\'" -input) (xah-javascript-linkify))
-     ((string-match-p "\\.css\\'" -input) (xah-css-linkify))
-     ((string-match-p "\\.mp3\\'" -input) (xah-audio-file-linkify))
-     ((string-match-p "\\.ogg\\'" -input) (xah-audio-file-linkify))
-     ((string-match-p "\\.mp4\\'" -input) (xah-video-file-linkify))
-     ((string-match-p "\\.mkv\\'" -input) (xah-video-file-linkify))
-     ((string-match-p "\\.webm\\'" -input) (xah-video-file-linkify))
+     ((string-match-p "javascript_es2016/ECMAScript_2016" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "javascript_es6" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "javascript_ecma-262_5.1_2011" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "java8_doc" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "godoc" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "html_whatwg" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "html5_whatwg" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "css_2.1_spec" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "css_3_color_spec" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "clojure-doc-1.8" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "python_doc_2" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "python_doc_3" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "dom-whatwg/DOM_Standard.html" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "REC-SVG11-20110816" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "css_transitions/CSS_Transitions.html" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "php-doc/" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+     ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" $input) (xah-blogger-linkify))
+     ((string-match-p "www\.amazon\.com/" $input) (xah-amazon-linkify))
+     ((string-match-p "//amzn\.to/" $input) (xah-amazon-linkify))
+     ((string-match-p "alexa\.design/" $input) (xah-amazon-linkify))
+     ((string-match-p "www\.youtube\.com/watch" $input) (xah-youtube-linkify))
+     ((string-match-p "/emacs_manual/" $input) (xah-html-emacs-ref-linkify))
+     ((string-match-p "/node_api/" $input) (xah-nodejs-ref-linkify))
+     ((string-match-p "\\.js\\'" $input) (xah-javascript-linkify))
+     ((string-match-p "\\.css\\'" $input) (xah-css-linkify))
+     ((string-match-p "\\.mp3\\'" $input) (xah-audio-file-linkify))
+     ((string-match-p "\\.ogg\\'" $input) (xah-audio-file-linkify))
+     ((string-match-p "\\.mp4\\'" $input) (xah-video-file-linkify))
+     ((string-match-p "\\.mkv\\'" $input) (xah-video-file-linkify))
+     ((string-match-p "\\.webm\\'" $input) (xah-video-file-linkify))
 
-     ((xahsite-url-is-xah-website-p -input) (xah-file-linkify -p1 -p2))
-     ((or (string-match-p "wikipedia.org/" -input)
-          (string-match-p "wiktionary.org/" -input))
+     ((xahsite-url-is-xah-website-p $input) (xah-file-linkify $p1 $p2))
+     ((or (string-match-p "wikipedia.org/" $input)
+          (string-match-p "wiktionary.org/" $input))
       (let ((case-fold-search nil))
-        (if (xah-path-ends-in-image-suffix-p -input)
+        (if (xah-path-ends-in-image-suffix-p $input)
             (xah-html-source-url-linkify 0)
           (xah-html-wikipedia-url-linkify ))))
 
-     ((and (string-match-p "\\`https?://" -input)) (xah-html-source-url-linkify 0)) ; generic URL
+     ((and (string-match-p "\\`https?://" $input)) (xah-html-source-url-linkify 0)) ; generic URL
 
-     ((xah-path-ends-in-image-suffix-p -input) (xah-image-file-to-html-figure-tag))
+     ((xah-path-ends-in-image-suffix-p $input) (xah-image-file-to-html-figure-tag))
 
-     (t (xah-file-linkify -p1 -p2)))))
+     (t (xah-file-linkify $p1 $p2)))))

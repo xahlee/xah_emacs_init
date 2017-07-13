@@ -81,7 +81,7 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://yahoo.com")      ; nil. not xah site.
 ;; (xahsite-url-is-xah-website-p "http://xahlee.org")     ; t
 ;; (xahsite-url-is-xah-website-p "xahlee.org")            ; nil. just domain name.
-;; (xahsite-url-is-xah-website-p "http://w.xahlee.org")   ; nil
+;; (xahsite-url-is-xah-website-p "http://w.xahlee.org") ; nil
 ;; (xahsite-url-is-xah-website-p "http://www.xahlee.org") ; t
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
@@ -112,15 +112,15 @@ returns 「ergoemacs.org」.
 
 This function depends on `xahsite-server-root-path'."
   (let ((case-fold-search nil)
-        -str
-        (-pathPart
+        $str
+        ($pathPart
          (string-remove-prefix
           (downcase (xahsite-server-root-path))
           (downcase *abs-path))))
-    (if (string-match "\\`\\([^/]+?\\)/" -pathPart )
+    (if (string-match "\\`\\([^/]+?\\)/" $pathPart )
         (progn
-          (setq -str (match-string 1 -pathPart))
-          (replace-regexp-in-string "_" "." -str "FIXEDCASE" "LITERAL"))
+          (setq $str (match-string 1 $pathPart))
+          (replace-regexp-in-string "_" "." $str "FIXEDCASE" "LITERAL"))
       (error "「%s」 is not a full path for xah site." *abs-path ))))
 
 (defun xahsite-get-path-relative-to-domain (*fpath)
@@ -188,19 +188,19 @@ This function does not check input is actually a URL, nor if the result path fil
   ;; (xahsite-url-to-filepath "http://abc.org/x.html") ; ⇒ "c:/Users/h3/web/abc_org/x.html"
   ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
 
-  (let ((-url *xahsiteURL) -fPath)
-    (setq -url (xah-remove-uri-fragment -url)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
-    (when *redirect (setq -url (xahsite-url-remap -url)))
-    (when *add-file-name (setq -url (replace-regexp-in-string "/\\'" "/index.html" -url)))
-    ;; (replace-regexp-in-string "%27" "'" (xah-remove-uri-fragment -url))
+  (let (($url *xahsiteURL) $fPath)
+    (setq $url (xah-remove-uri-fragment $url)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
+    (when *redirect (setq $url (xahsite-url-remap $url)))
+    (when *add-file-name (setq $url (replace-regexp-in-string "/\\'" "/index.html" $url)))
+    ;; (replace-regexp-in-string "%27" "'" (xah-remove-uri-fragment $url))
 
-    (setq -fPath
+    (setq $fPath
           (format "%s%s" (xahsite-server-root-path)
                   ;; remove www
                   (replace-regexp-in-string
                    "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)"
-                   "\\2_\\3/\\4" -url)))
-    -fPath
+                   "\\2_\\3/\\4" $url)))
+    $fPath
     ))
 
 
@@ -278,93 +278,93 @@ Each element is a string, looks like this:
 
 ;; This function is not complete. i.e. it not contain complete url redirects as specified in web server."
 ;;   (let (
-;;         -domain
-;;         -path
-;;         (-s *xahsite-url)
-;;         (-stop nil)
+;;         $domain
+;;         $path
+;;         ($s *xahsite-url)
+;;         ($stop nil)
 ;;         )
-;;     (string-match "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)" -s)
-;;     (setq -domain (match-string "\\2.\\3" -s ) )
-;;     (setq -path (match-string "\\4" -s ) )
+;;     (string-match "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)" $s)
+;;     (setq $domain (match-string "\\2.\\3" $s ) )
+;;     (setq $path (match-string "\\4" $s ) )
 
 ;;     (cond
-;;      ((string-match-p "xahlee.org" -domain)
+;;      ((string-match-p "xahlee.org" $domain)
 ;;       (let (
-;;             (-i 0)
-;;             (-len (length xahsite-xahlee-org-redirect))
-;;             (-pathFirstPart (replace-regexp-in-string "\\`\\([^/]+?\\)/" "\\1" -path) )
+;;             ($i 0)
+;;             ($len (length xahsite-xahlee-org-redirect))
+;;             ($pathFirstPart (replace-regexp-in-string "\\`\\([^/]+?\\)/" "\\1" $path) )
 ;;             )
-;;         (while (and (not -stop) (< -i -len) )
-;;           (if (string= (elt xahsite-xahlee-org-redirect -i) -pathFirstPart)
+;;         (while (and (not $stop) (< $i $len) )
+;;           (if (string= (elt xahsite-xahlee-org-redirect $i) $pathFirstPart)
 ;;               (progn
 ;;                 ;; ...
-;;                 (setq -stop t ))
+;;                 (setq $stop t ))
 ;;             (progn )
 ;;             )
-;;           (setq -i (1+ -i))
+;;           (setq $i (1+ $i))
 ;;           )
 ;;         )
 ;;       )
 ;;      ;; ...
 ;;      )
 
-;;     (setq -s (replace-regexp-in-string "/Periodic_dosage_dir/sanga_pemci/" "/music/" -s "FIXEDCASE" "LITERAL"))
-;;     (setq -s (replace-regexp-in-string "xahlee.org/emacs/" "ergoemacs.org/emacs/" -s "FIXEDCASE" "LITERAL"))
+;;     (setq $s (replace-regexp-in-string "/Periodic_dosage_dir/sanga_pemci/" "/music/" $s "FIXEDCASE" "LITERAL"))
+;;     (setq $s (replace-regexp-in-string "xahlee.org/emacs/" "ergoemacs.org/emacs/" $s "FIXEDCASE" "LITERAL"))
 ;;  ) )
 
 (defun xahsite-url-remap (*xahsite-url)
   "Returns a redirected url for a xah website URL *xahsite-url.
 
 This function is not complete. i.e. it not contain complete url redirects as specified in web server."
-  (let ((-s *xahsite-url)
+  (let (($s *xahsite-url)
         (case-fold-search nil))
-    (setq -s
+    (setq $s
           (cond
 
-           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/cmaci_girzu.html" -s) "http://xahlee.info/math/math_index.html" )
-           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/keyboarding.html" -s) "http://xahlee.info/kbd/keyboarding.html" )
-           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/unicode.html" -s) "http://xahlee.info/comp/unicode_index.html" )
-           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/skami_prosa.html" -s) "http://xahlee.info/comp/comp_index.html" )
+           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/cmaci_girzu.html" $s) "http://xahlee.info/math/math_index.html" )
+           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/keyboarding.html" $s) "http://xahlee.info/kbd/keyboarding.html" )
+           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/unicode.html" $s) "http://xahlee.info/comp/unicode_index.html" )
+           ((string-match-p "\\`http://xahlee\\.org/Periodic_dosage_dir/skami_prosa.html" $s) "http://xahlee.info/comp/comp_index.html" )
 
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(emacs\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "ergoemacs.org" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(emacs_manual\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "ergoemacs.org" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(M\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(MathGraphicsGallery_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(MathematicaPrograming_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(PerlMathematica_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(SpecialPlaneCurves_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(UnixResource_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(Wallpaper_dir\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(cmaci\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(comp\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(complex\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(coq\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(haskell\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(java-a-day\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(js\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(kbd\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(linux\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(math\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(mswin\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(ocaml\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(pascal\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(perl-python\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(php\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(powershell\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(prog\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(projective_geometry\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(ruby\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(surface\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(tiling\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(tree\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(visual_basic\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(w\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(emacs\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "ergoemacs.org" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(emacs_manual\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "ergoemacs.org" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(M\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(MathGraphicsGallery_dir\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(MathematicaPrograming_dir\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(PerlMathematica_dir\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(SpecialPlaneCurves_dir\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(UnixResource_dir\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(Wallpaper_dir\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(cmaci\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(comp\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(complex\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(coq\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(haskell\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(java-a-day\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(js\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(kbd\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(linux\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(math\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(mswin\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(ocaml\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(pascal\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(perl-python\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(php\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(powershell\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(prog\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(projective_geometry\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(ruby\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(surface\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(tiling\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(tree\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(visual_basic\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(w\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahlee.info" (match-string 2 $s) (match-string 3 $s)))
 
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(music\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "xahmusic.org" (match-string 2 -s) (match-string 3 -s)))
-           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(lit\\)/\\(.*\\)" -s) (format "http://%s/%s/%s" "wordyenglish.com" (match-string 2 -s) (match-string 3 -s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(music\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "xahmusic.org" (match-string 2 $s) (match-string 3 $s)))
+           ((string-match "\\`http://\\(xahlee\\.org\\)/\\(lit\\)/\\(.*\\)" $s) (format "http://%s/%s/%s" "wordyenglish.com" (match-string 2 $s) (match-string 3 $s)))
 
-           (t -s )))
-    -s
+           (t $s )))
+    $s
     ))
 
 (defun xah-remove-uri-fragment (*href-value)
@@ -373,13 +373,13 @@ See also `split-uri-hashmark'
 Version 2016-11-02"
   ;; test
   ;; (xah-remove-uri-fragment "a#b") ; "a"
-  ;; (xah-remove-uri-fragment "#3")  ; ""
-  ;; (xah-remove-uri-fragment "4")  ; "4"
-  ;; (xah-remove-uri-fragment "#")   ; ""
-  ;; (xah-remove-uri-fragment "")  ; ""
-  (let ((-x (string-match-p "#" *href-value )))
-    (if -x
-        (substring *href-value 0 -x)
+  ;; (xah-remove-uri-fragment "#3") ; ""
+  ;; (xah-remove-uri-fragment "4") ; "4"
+  ;; (xah-remove-uri-fragment "#") ; ""
+  ;; (xah-remove-uri-fragment "") ; ""
+  (let (($x (string-match-p "#" *href-value )))
+    (if $x
+        (substring *href-value 0 $x)
       *href-value )))
 
 (defun split-uri-hashmark (*href-value)
@@ -398,13 +398,13 @@ See also: `xah-remove-uri-fragment'
 Version 2016-11-02"
   ;; test
   ;; (split-uri-hashmark "a#b") ; ["a" "#b"]
-  ;; (split-uri-hashmark "#3")  ; ["" "#3"]
-  ;; (split-uri-hashmark "#")   ; ["" "#"]
-  ;; (split-uri-hashmark "4")  ; ["4" ""]
-  ;; (split-uri-hashmark "")  ; ["" ""]
-  (let ((-x (string-match-p "#" *href-value )))
-    (if -x
-        (vector (substring *href-value 0 -x) (substring *href-value -x))
+  ;; (split-uri-hashmark "#3") ; ["" "#3"]
+  ;; (split-uri-hashmark "#") ; ["" "#"]
+  ;; (split-uri-hashmark "4") ; ["4" ""]
+  ;; (split-uri-hashmark "") ; ["" ""]
+  (let (($x (string-match-p "#" *href-value )))
+    (if $x
+        (vector (substring *href-value 0 $x) (substring *href-value $x))
       (vector *href-value "" ))))
 
 
@@ -415,11 +415,11 @@ Version 2016-11-02"
 *moved-dirs is a list/sequence of file full paths.
 Return true if *fpath is in *moved-dirs or is a subdir of *moved-dirs.
 Technically, if any string in *moved-dirs is a prefix of *fpath."
-  (let ( ( -found nil) ( -i 0))
-    (while (and (not -found) (< -i (length *moved-dirs)))
-      (setq -found (string-match-p (concat "\\`" (regexp-quote (elt *moved-dirs -i))) *fpath ))
-      (setq -i (1+ -i)))
-    -found
+  (let ( ( $found nil) ( $i 0))
+    (while (and (not $found) (< $i (length *moved-dirs)))
+      (setq $found (string-match-p (concat "\\`" (regexp-quote (elt *moved-dirs $i))) *fpath ))
+      (setq $i (1+ $i)))
+    $found
     ))
 ;; test
 ;; (file-moved-p "abc/d" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d” equal to one of the moved dir
@@ -476,20 +476,20 @@ For example, the following string shown in browser URL field:
  http://ergoemacs.org/a/x.html (URL)
 
 if the *input-str is a relative path, *default-dir is used to resolve to full path."
-  (let ( (-s *input-str))
+  (let ( ($s *input-str))
 
-    ;; (setq -s (replace-regexp-in-string "^file:///" "" -s "FIXEDCASE" "LITERAL" ) )
-    ;; (setq -s (replace-regexp-in-string "^/media/OS/Users/h3" "~" -s "FIXEDCASE" "LITERAL" ) )
+    ;; (setq $s (replace-regexp-in-string "^file:///" "" $s "FIXEDCASE" "LITERAL" ) )
+    ;; (setq $s (replace-regexp-in-string "^/media/OS/Users/h3" "~" $s "FIXEDCASE" "LITERAL" ) )
 
-    (if (string-match-p "\\`https?://" -s)
-        (progn (setq -s (xahsite-url-to-filepath -s "addFileName")))
+    (if (string-match-p "\\`https?://" $s)
+        (progn (setq $s (xahsite-url-to-filepath $s "addFileName")))
       (progn
-        (when (string-match-p "\\`file://" -s) (setq -s (xah-local-url-to-file-path -s)))
-        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" -s) ; change Microsoft Windows style path to unix
-          (setq -s (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" -s t t))))
-        (setq -s (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" -s))
-        (setq -s (expand-file-name -s *default-dir))))
-    -s
+        (when (string-match-p "\\`file://" $s) (setq $s (xah-local-url-to-file-path $s)))
+        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" $s) ; change Microsoft Windows style path to unix
+          (setq $s (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" $s t t))))
+        (setq $s (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" $s))
+        (setq $s (expand-file-name $s *default-dir))))
+    $s
     ))
 
 (defun xah-path-ends-in-image-suffix-p (*path)
@@ -561,14 +561,14 @@ The arg _parentdir is not used. It is there so that this function can be passed 
   (interactive
    (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" ))))
   (let (
-        (--sitemapFileName "sitemap" )
-        (--websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" *domain-name "FIXEDCASE" "LITERAL") "/")))
+        ($sitemapFileName "sitemap" )
+        ($websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" *domain-name "FIXEDCASE" "LITERAL") "/")))
 
     (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
 
     ;; rename sitemap file to backup ~ if already exist
     (let* (
-           (f1 (concat --websiteDocRootPath --sitemapFileName ".xml"))
+           (f1 (concat $websiteDocRootPath $sitemapFileName ".xml"))
            (f2 (concat f1 ".gz")))
       (when (file-exists-p f1)
         (rename-file f1 (concat f1 "~") t))
@@ -577,10 +577,10 @@ The arg _parentdir is not used. It is there so that this function can be passed 
 
     ;; create sitemap buffer
     (let (
-          (-filePath (concat --websiteDocRootPath --sitemapFileName ".xml"))
-          -sitemapBuffer
+          ($filePath (concat $websiteDocRootPath $sitemapFileName ".xml"))
+          $sitemapBuffer
           )
-      (setq -sitemapBuffer (find-file -filePath))
+      (setq $sitemapBuffer (find-file $filePath))
       (erase-buffer)
       (set-buffer-file-coding-system 'unix)
       (insert "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
@@ -588,30 +588,30 @@ The arg _parentdir is not used. It is there so that this function can be passed 
 ")
 
       (mapc
-       (lambda (-f)
+       (lambda ($f)
          (when (not
                 (or
-                 (string-match "/xx" -f) ; ; dir/file starting with xx are not public
-                 (string-match "403error.html" -f)
-                 (string-match "404error.html" -f)))
+                 (string-match "/xx" $f) ; ; dir/file starting with xx are not public
+                 (string-match "403error.html" $f)
+                 (string-match "404error.html" $f)))
            (with-temp-buffer
-             (insert-file-contents -f)
+             (insert-file-contents $f)
              (when (not (search-forward "<p class=\"page_moved_64598\">" nil t))
-               (with-current-buffer -sitemapBuffer
+               (with-current-buffer $sitemapBuffer
                  (insert "<url><loc>")
-                 (insert (concat "http://" *domain-name "/" (substring -f (length --websiteDocRootPath))))
+                 (insert (concat "http://" *domain-name "/" (substring $f (length $websiteDocRootPath))))
                  (insert "</loc></url>\n"))))))
-       (xahsite-traverse-dir-file-list --websiteDocRootPath))
+       (xahsite-traverse-dir-file-list $websiteDocRootPath))
 
       (insert "</urlset>")
 
       (save-buffer)
-      (kill-buffer -sitemapBuffer)
+      (kill-buffer $sitemapBuffer)
 
       (if "zip it"
           (progn
-            (shell-command (concat "gzip " -filePath))
-            (find-file (concat -filePath ".gz")))
-        (progn (find-file -filePath ))))
+            (shell-command (concat "gzip " $filePath))
+            (find-file (concat $filePath ".gz")))
+        (progn (find-file $filePath ))))
 
     (print (concat "finished: " (format-time-string "%Y-%m-%dT%T")))))

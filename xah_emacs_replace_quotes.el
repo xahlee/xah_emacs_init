@@ -220,17 +220,17 @@ See also: `xah-remove-punctuation-trailing-redundant-space'.
 URL `http://ergoemacs.org/emacs/elisp_convert_chinese_punctuation.html'
 Version 2015-10-05"
   (interactive
-   (let (-p1 -p2)
+   (let ($p1 $p2)
      (if (use-region-p)
          (progn
-           (setq -p1 (region-beginning))
-           (setq -p2 (region-end)))
+           (setq $p1 (region-beginning))
+           (setq $p2 (region-end)))
        (progn
-         (setq -p1 (line-beginning-position))
-         (setq -p2 (line-end-position))))
+         (setq $p1 (line-beginning-position))
+         (setq $p2 (line-end-position))))
      (list
-      -p1
-      -p2
+      $p1
+      $p2
       (if current-prefix-arg
           (ido-completing-read
            "Change to: "
@@ -240,8 +240,8 @@ Version 2015-10-05"
         "auto"
         ))))
   (let (
-        (-input-str (buffer-substring-no-properties *begin *end))
-        (-replacePairs
+        ($input-str (buffer-substring-no-properties *begin *end))
+        ($replacePairs
          [
           [". " "。"]
           [".\n" "。\n"]
@@ -265,25 +265,25 @@ Version 2015-10-05"
        *to-direction
        (if
            (or
-            (string-match "　" -input-str)
-            (string-match "。" -input-str)
-            (string-match "，" -input-str)
-            (string-match "？" -input-str)
-            (string-match "！" -input-str))
+            (string-match "　" $input-str)
+            (string-match "。" $input-str)
+            (string-match "，" $input-str)
+            (string-match "？" $input-str)
+            (string-match "！" $input-str))
            "english"
          "chinese")))
     (save-excursion
       (save-restriction
         (narrow-to-region *begin *end)
         (mapc
-         (lambda (-x)
+         (lambda ($x)
            (progn
              (goto-char (point-min))
-             (while (search-forward (aref -x 0) nil t)
-               (replace-match (aref -x 1)))))
+             (while (search-forward (aref $x 0) nil t)
+               (replace-match (aref $x 1)))))
          (cond
-          ((string= *to-direction "chinese") -replacePairs)
-          ((string= *to-direction "english") (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) -replacePairs))
+          ((string= *to-direction "chinese") $replacePairs)
+          ((string= *to-direction "english") (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $replacePairs))
           (t (user-error "Your 3rd argument 「%s」 isn't valid" *to-direction))))))))
 
 (defun xah-convert-chinese-numeral (*begin *end &optional *to-chinese)
@@ -295,10 +295,10 @@ Version 2015-04-29"
    (if (use-region-p)
        (list (region-beginning) (region-end) current-prefix-arg)
      (list (line-beginning-position) (line-end-position) current-prefix-arg)))
-  (let* ((-numMap [["○" "0"] ["一" "1"] ["二" "2"] ["三" "3"] ["四" "4"] ["五" "5"] ["六" "6"] ["七" "7"] ["八" "8"] ["九" "9"] ]))
+  (let* (($numMap [["○" "0"] ["一" "1"] ["二" "2"] ["三" "3"] ["四" "4"] ["五" "5"] ["六" "6"] ["七" "7"] ["八" "8"] ["九" "9"] ]))
     (xah-replace-pairs-region
      *begin *end
-     (if *to-chinese (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) -numMap) -numMap )
+     (if *to-chinese (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $numMap) $numMap )
      t t
      )))
 
@@ -306,17 +306,17 @@ Version 2015-04-29"
   "Remove the following letters: {a e i o u} in current line or text selection.
 Version 2017-01-11"
   (interactive)
-  (let (-p1 -p2 )
+  (let ($p1 $p2 )
     (if (use-region-p)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (progn
-        (setq -p1 (line-beginning-position))
-        (setq -p2 (line-end-position))))
+        (setq $p1 (line-beginning-position))
+        (setq $p2 (line-end-position))))
     (save-excursion
       (save-restriction
-        (narrow-to-region -p1 -p2)
+        (narrow-to-region $p1 $p2)
         (let ( (case-fold-search nil))
           (goto-char (point-min))
           (while (re-search-forward "a\\|e\\|i\\|o\\|u" (point-max) t)
@@ -326,16 +326,16 @@ Version 2017-01-11"
   "Replace fuck shit scumbag … in current line or text selection.
 Version 2016-10-05"
   (interactive)
-  (let ( -p1 -p2)
+  (let ( $p1 $p2)
     (if (use-region-p)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (progn
-        (setq -p1 (line-beginning-position))
-        (setq -p2 (line-end-position))))
+        (setq $p1 (line-beginning-position))
+        (setq $p2 (line-end-position))))
     (xah-replace-pairs-region
-     -p1 -p2
+     $p1 $p2
      '(
        ["fuck" "f￼ck"]
        ["shit" "sh￼t"]
@@ -347,16 +347,16 @@ Version 2016-10-05"
 Works on current line or text selection.
 Example: 「it’s」 ⇒ 「it's」."
   (interactive)
-  (let ( -p1 -p2)
+  (let ( $p1 $p2)
     (if (use-region-p)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (progn
-        (setq -p1 (line-beginning-position))
-        (setq -p2 (line-end-position))))
+        (setq $p1 (line-beginning-position))
+        (setq $p2 (line-end-position))))
     (xah-replace-pairs-region
-     -p1 -p2
+     $p1 $p2
      '(
        ["‘tis" "'tis"]
        ["’s" "'s"]
@@ -386,15 +386,15 @@ When called in lisp code, *begin *end are region begin/end positions. *to-direct
 See also: `xah-remove-punctuation-trailing-redundant-space'.
 Version 2016-10-05"
   (interactive
-   (let (-p1 -p2)
+   (let ($p1 $p2)
      (if (use-region-p)
          (progn
-           (setq -p1 (region-beginning))
-           (setq -p2 (region-end)))
+           (setq $p1 (region-beginning))
+           (setq $p2 (region-end)))
        (progn
-         (setq -p1 (line-beginning-position))
-         (setq -p2 (line-end-position))))
-     (list -p1 -p2
+         (setq $p1 (line-beginning-position))
+         (setq $p2 (line-end-position))))
+     (list $p1 $p2
            (cond
             ((equal current-prefix-arg nil) "auto")
             ((equal current-prefix-arg '(4)) "ascii")
@@ -524,26 +524,26 @@ Version 2017-01-11"
        (list (region-beginning) (region-end) current-prefix-arg )
      (list (line-beginning-position) (line-end-position) current-prefix-arg )))
   (let (
-        (-latin-to-gothic [ ["A" "𝔄"] ["B" "𝔅"] ["C" "ℭ"] ["D" "𝔇"] ["E" "𝔈"] ["F" "𝔉"] ["G" "𝔊"] ["H" "ℌ"] ["I" "ℑ"] ["J" "𝔍"] ["K" "𝔎"] ["L" "𝔏"] ["M" "𝔐"] ["N" "𝔑"] ["O" "𝔒"] ["P" "𝔓"] ["Q" "𝔔"] ["R" "ℜ"] ["S" "𝔖"] ["T" "𝔗"] ["U" "𝔘"] ["V" "𝔙"] ["W" "𝔚"] ["X" "𝔛"] ["Y" "𝔜"] ["Z" "ℨ"] ["a" "𝔞"] ["b" "𝔟"] ["c" "𝔠"] ["d" "𝔡"] ["e" "𝔢"] ["f" "𝔣"] ["g" "𝔤"] ["h" "𝔥"] ["i" "𝔦"] ["j" "𝔧"] ["k" "𝔨"] ["l" "𝔩"] ["m" "𝔪"] ["n" "𝔫"] ["o" "𝔬"] ["p" "𝔭"] ["q" "𝔮"] ["r" "𝔯"] ["s" "𝔰"] ["t" "𝔱"] ["u" "𝔲"] ["v" "𝔳"] ["w" "𝔴"] ["x" "𝔵"] ["y" "𝔶"] ["z" "𝔷"] ])
-        -useMap
+        ($latin-to-gothic [ ["A" "𝔄"] ["B" "𝔅"] ["C" "ℭ"] ["D" "𝔇"] ["E" "𝔈"] ["F" "𝔉"] ["G" "𝔊"] ["H" "ℌ"] ["I" "ℑ"] ["J" "𝔍"] ["K" "𝔎"] ["L" "𝔏"] ["M" "𝔐"] ["N" "𝔑"] ["O" "𝔒"] ["P" "𝔓"] ["Q" "𝔔"] ["R" "ℜ"] ["S" "𝔖"] ["T" "𝔗"] ["U" "𝔘"] ["V" "𝔙"] ["W" "𝔚"] ["X" "𝔛"] ["Y" "𝔜"] ["Z" "ℨ"] ["a" "𝔞"] ["b" "𝔟"] ["c" "𝔠"] ["d" "𝔡"] ["e" "𝔢"] ["f" "𝔣"] ["g" "𝔤"] ["h" "𝔥"] ["i" "𝔦"] ["j" "𝔧"] ["k" "𝔨"] ["l" "𝔩"] ["m" "𝔪"] ["n" "𝔫"] ["o" "𝔬"] ["p" "𝔭"] ["q" "𝔮"] ["r" "𝔯"] ["s" "𝔰"] ["t" "𝔱"] ["u" "𝔲"] ["v" "𝔳"] ["w" "𝔴"] ["x" "𝔵"] ["y" "𝔶"] ["z" "𝔷"] ])
+        $useMap
         )
     (if *reverse-direction-p
-        (progn (setq -useMap
+        (progn (setq $useMap
                      (mapcar
-                      (lambda (-x)
-                        (vector (aref -x 1) (aref -x 0)))
-                      -latin-to-gothic)))
-      (progn (setq -useMap -latin-to-gothic)))
+                      (lambda ($x)
+                        (vector (aref $x 1) (aref $x 0)))
+                      $latin-to-gothic)))
+      (progn (setq $useMap $latin-to-gothic)))
     (save-excursion
       (save-restriction
         (narrow-to-region *begin *end)
         (let ( (case-fold-search nil))
           (mapc
-           (lambda (-x)
+           (lambda ($x)
              (goto-char (point-min))
-             (while (search-forward (elt -x 0) nil t)
-               (replace-match (elt -x 1) "FIXEDCASE" "LITERAL")))
-           -useMap))))))
+             (while (search-forward (elt $x 0) nil t)
+               (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
+           $useMap))))))
 
 (defun xah-twitterfy (*begin *end &optional *to-direction)
   "Shorten words for Twitter 140 char limit on current line or selection.
@@ -573,7 +573,7 @@ Version 2017-01-11"
           "REQUIRE-MATCH")
        "auto"
        ))))
-  (let ((-shorten-map
+  (let (($shorten-map
          [
           [" are " " r "]
           [" are, " " r,"]
@@ -617,13 +617,13 @@ Version 2017-01-11"
             (setq *to-direction 'shorten)))
         (let ( (case-fold-search nil))
           (mapc
-           (lambda (-x)
+           (lambda ($x)
              (goto-char (point-min))
-             (while (search-forward (elt -x 0) nil t)
-               (replace-match (elt -x 1) "FIXEDCASE" "LITERAL")))
+             (while (search-forward (elt $x 0) nil t)
+               (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
            (if (string= *to-direction 'shorten)
-               -shorten-map
-             (mapcar (lambda (-pair) (vector (elt -pair 1) (elt -pair 0))) -shorten-map)))
+               $shorten-map
+             (mapcar (lambda ($pair) (vector (elt $pair 1) (elt $pair 0))) $shorten-map)))
           (goto-char (point-min))
           (while (search-forward "  " nil t)
             (replace-match " " "FIXEDCASE" "LITERAL"))
@@ -637,19 +637,19 @@ Version 2017-01-11"
      ;;     ;; trying to auto find the replacement bracket by looking at char before or after
      ;;     ;; problem is, then you need to find the matching bracket for replacement. need more tedious code. abandone for now
      ;;     (
-     ;;      (-bracketsList '("() paren" "{} braces" "[] square" "<> greater" "“” curly quote" "‘’ single" "‹› french" "«» double french" "「」 corner" "『』 double corner" "【】 LENTICULAR" "〖〗 white LENTICULAR" "《》 double angle" "〈〉 angle " "〔〕 TORTOISE" "⦅⦆ white paren" "〚〛 white square" "⦃⦄ white braces" "〈〉" "⦑⦒" "⧼⧽" "⟦⟧ math square" "⟨⟩ math angle" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬t❭" "❮❯" "❰❱" " none" ))
+     ;;      ($bracketsList '("() paren" "{} braces" "[] square" "<> greater" "“” curly quote" "‘’ single" "‹› french" "«» double french" "「」 corner" "『』 double corner" "【】 LENTICULAR" "〖〗 white LENTICULAR" "《》 double angle" "〈〉 angle " "〔〕 TORTOISE" "⦅⦆ white paren" "〚〛 white square" "⦃⦄ white braces" "〈〉" "⦑⦒" "⧼⧽" "⟦⟧ math square" "⟨⟩ math angle" "⟪⟫" "⟮⟯" "⟬⟭" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬t❭" "❮❯" "❰❱" " none" ))
 
-     ;;      (-leftBrackets (mapcar (lambda (x) (substring x 0 1)) -bracketsList)))
-     ;;   (let ((-charBefore (char-before))
-     ;;         (-charAfter (char-after)))
+     ;;      ($leftBrackets (mapcar (lambda (x) (substring x 0 1)) $bracketsList)))
+     ;;   (let (($charBefore (char-before))
+     ;;         ($charAfter (char-after)))
      ;;     (or
      ;;      (catch 'found
-     ;;        (dolist (x -leftBrackets nil)
-     ;;          (when (eq (string-to-char x) -charBefore)
+     ;;        (dolist (x $leftBrackets nil)
+     ;;          (when (eq (string-to-char x) $charBefore)
      ;;            (progn (throw 'found x)))))
      ;;      (catch 'found
-     ;;        (dolist (x -leftBrackets nil)
-     ;;          (when (eq (string-to-char x) -charAfter)
+     ;;        (dolist (x $leftBrackets nil)
+     ;;          (when (eq (string-to-char x) $charAfter)
      ;;            (progn (throw 'found x))))))))
 
 (defun xah-change-bracket-pairs ( *from-chars *to-chars)
@@ -665,7 +665,7 @@ If *to-chars is equal to string “delete brackets”, the brackets are deleted.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
 Version 2017-05-17"
   (interactive
-   (let ((-bracketsList
+   (let (($bracketsList
           '("(paren)"
             "{brace}"
             "[square]"
@@ -709,42 +709,42 @@ Version 2017-05-17"
             "delete brackets"
             )))
      (list
-      (ido-completing-read "Replace this:" -bracketsList )
-      (ido-completing-read "To:" -bracketsList ))))
-  (let ( -begin -end )
+      (ido-completing-read "Replace this:" $bracketsList )
+      (ido-completing-read "To:" $bracketsList ))))
+  (let ( $begin $end )
     (if (use-region-p)
-        (setq -begin (region-beginning) -end (region-end))
-      (setq -begin (line-beginning-position) -end (line-end-position)))
+        (setq $begin (region-beginning) $end (region-end))
+      (setq $begin (line-beginning-position) $end (line-end-position)))
     (save-excursion
       (save-restriction
-        (narrow-to-region -begin -end)
+        (narrow-to-region $begin $end)
         (let ( (case-fold-search nil)
-               -fromLeft
-               -fromRight
-               -toLeft
-               -toRight)
+               $fromLeft
+               $fromRight
+               $toLeft
+               $toRight)
           (cond
            ((string-match ",2" *from-chars  )
             (progn
-              (setq -fromLeft (substring *from-chars 0 2))
-              (setq -fromRight (substring *from-chars -2))))
+              (setq $fromLeft (substring *from-chars 0 2))
+              (setq $fromRight (substring *from-chars -2))))
            (t
             (progn
-              (setq -fromLeft (substring *from-chars 0 1))
-              (setq -fromRight (substring *from-chars -1)))))
+              (setq $fromLeft (substring *from-chars 0 1))
+              (setq $fromRight (substring *from-chars -1)))))
           (cond
            ((string-match ",2" *to-chars)
             (progn
-              (setq -toLeft (substring *to-chars 0 2))
-              (setq -toRight (substring *to-chars -2))))
+              (setq $toLeft (substring *to-chars 0 2))
+              (setq $toRight (substring *to-chars -2))))
            ((string-match "delete brackets" *to-chars)
             (progn
-              (setq -toLeft "")
-              (setq -toRight "")))
+              (setq $toLeft "")
+              (setq $toRight "")))
            (t
             (progn
-              (setq -toLeft (substring *to-chars 0 1))
-              (setq -toRight (substring *to-chars -1)))))
+              (setq $toLeft (substring *to-chars 0 1))
+              (setq $toRight (substring *to-chars -1)))))
           (cond
            ((string-match "markdown" *from-chars)
             (progn
@@ -752,39 +752,39 @@ Version 2017-05-17"
               (while
                   (re-search-forward "`\\([^`]+?\\)`" nil t)
                 (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-                (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
+                (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
            ((string-match "tilde" *from-chars)
             (progn
               (goto-char (point-min))
               (while
                   (re-search-forward "~\\([^~]+?\\)~" nil t)
                 (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-                (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
+                (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
            ((string-match "ascii quote" *from-chars)
             (progn
               (goto-char (point-min))
               (while
                   (re-search-forward "\"\\([^\"]+?\\)\"" nil t)
                 (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-                (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
+                (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
            ((string-match "equal" *from-chars)
             (progn
               (goto-char (point-min))
               (while
                   (re-search-forward "=\\([^=]+?\\)=" nil t)
                 (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-                (replace-match (concat -toLeft "\\1" -toRight ) "FIXEDCASE" ))))
+                (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
            (t (progn
                 (progn
                   (goto-char (point-min))
-                  (while (search-forward -fromLeft nil t)
+                  (while (search-forward $fromLeft nil t)
                     (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-                    (replace-match -toLeft "FIXEDCASE" "LITERAL")))
+                    (replace-match $toLeft "FIXEDCASE" "LITERAL")))
                 (progn
                   (goto-char (point-min))
-                  (while (search-forward -fromRight nil t)
+                  (while (search-forward $fromRight nil t)
                     (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
-                    (replace-match -toRight "FIXEDCASE" "LITERAL")))))))))))
+                    (replace-match $toRight "FIXEDCASE" "LITERAL")))))))))))
 
 (defun xah-corner-bracket→html-i (*begin *end)
        "Replace all 「…」 to <code>…</code> in current text block.
@@ -821,43 +821,43 @@ When called non-interactively, *begin *end are region positions.
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 version 2017-06-10"
   (interactive)
-  (let ((-changedItems '())
+  (let (($changedItems '())
         (case-fold-search nil)
-        -p1 -p2
+        $p1 $p2
         )
     (if (and *begin *end)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (if (use-region-p)
           (progn
-            (setq -p1 (region-beginning))
-            (setq -p2 (region-end)))
+            (setq $p1 (region-beginning))
+            (setq $p2 (region-end)))
         (save-excursion
           (if (re-search-backward "\n[ \t]*\n" nil "move")
               (progn (re-search-forward "\n[ \t]*\n")
-                     (setq -p1 (point)))
-            (setq -p1 (point)))
+                     (setq $p1 (point)))
+            (setq $p1 (point)))
           (if (re-search-forward "\n[ \t]*\n" nil "move")
               (progn (re-search-backward "\n[ \t]*\n")
-                     (setq -p2 (point)))
-            (setq -p2 (point))))))
+                     (setq $p2 (point)))
+            (setq $p2 (point))))))
     (save-restriction
-      (narrow-to-region -p1 -p2)
+      (narrow-to-region $p1 $p2)
       (goto-char (point-min))
       (while (re-search-forward "《\\([^》]+?\\)》" nil t)
-        (push (match-string-no-properties 1) -changedItems)
+        (push (match-string-no-properties 1) $changedItems)
         (replace-match "<cite class=\"book\">\\1</cite>" "FIXEDCASE"))
       (goto-char (point-min))
       (while (re-search-forward "〈\\([^〉]+?\\)〉" nil t)
-        (push (match-string-no-properties 1) -changedItems)
+        (push (match-string-no-properties 1) $changedItems)
         (replace-match "<cite>\\1</cite>" t)))
-    (if (> (length -changedItems) 0)
+    (if (> (length $changedItems) 0)
         (mapcar
-         (lambda (-x)
-           (princ -x)
+         (lambda ($x)
+           (princ $x)
            (terpri))
-         (reverse -changedItems))
+         (reverse $changedItems))
       (message "No change needed."))))
 
 (defun xah-remove-square-brackets (&optional *begin *end)
@@ -873,43 +873,43 @@ When called non-interactively, *begin *end are region positions.
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 Version 2017-06-10"
   (interactive)
-  (let (-p1 -p2 -changedItems)
+  (let ($p1 $p2 $changedItems)
     (if (and  *begin *end)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (if (use-region-p)
           (progn
-            (setq -p1 (region-beginning))
-            (setq -p2 (region-end)))
+            (setq $p1 (region-beginning))
+            (setq $p2 (region-end)))
         (save-excursion
           (if (re-search-backward "\n[ \t]*\n" nil "move")
               (progn (re-search-forward "\n[ \t]*\n")
-                     (setq -p1 (point)))
-            (setq -p1 (point)))
+                     (setq $p1 (point)))
+            (setq $p1 (point)))
           (if (re-search-forward "\n[ \t]*\n" nil "move")
               (progn (re-search-backward "\n[ \t]*\n")
-                     (setq -p2 (point)))
-            (setq -p2 (point))))))
+                     (setq $p2 (point)))
+            (setq $p2 (point))))))
     (save-restriction
-      (narrow-to-region -p1 -p2)
+      (narrow-to-region $p1 $p2)
       (progn
         (goto-char 1)
         (while (re-search-forward "\\(\\[[0-9]+?\\]\\)" nil t)
-          (setq -changedItems (cons (match-string 1) -changedItems ))
+          (setq $changedItems (cons (match-string 1) $changedItems ))
           (replace-match "" t)))
       (progn
         (goto-char 1)
         (while (search-forward "[citation needed]" nil t)
-          (setq -changedItems (cons "[citation needed]" -changedItems ))
+          (setq $changedItems (cons "[citation needed]" $changedItems ))
           (backward-char 17)
           (delete-char 17))))
-    (if (> (length -changedItems) 0)
+    (if (> (length $changedItems) 0)
         (mapcar
-         (lambda (-x)
-           (princ -x)
+         (lambda ($x)
+           (princ $x)
            (terpri))
-         (reverse -changedItems))
+         (reverse $changedItems))
       (message "No change needed."))))
 
 
@@ -1019,17 +1019,17 @@ Version 2017-07-03"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
-     (let (-p1 -p2)
+     (let ($p1 $p2)
        (save-excursion
          (if (re-search-backward "\n[ \t]*\n" nil "move")
              (progn (re-search-forward "\n[ \t]*\n")
-                    (setq -p1 (point)))
-           (setq -p1 (point)))
+                    (setq $p1 (point)))
+           (setq $p1 (point)))
          (if (re-search-forward "\n[ \t]*\n" nil "move")
              (progn (re-search-backward "\n[ \t]*\n")
-                    (setq -p2 (point)))
-           (setq -p2 (point))))
-       (list -p1 -p2))))
+                    (setq $p2 (point)))
+           (setq $p2 (point))))
+       (list $p1 $p2))))
 
   (let ( (case-fold-search nil))
     (save-excursion

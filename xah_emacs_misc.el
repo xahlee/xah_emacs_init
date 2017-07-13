@@ -21,23 +21,23 @@ The clipboard should contain a file path or url to xah site. Open that file in e
 Version 2017-03-21"
   (interactive)
   (let (
-        (-inputStr
+        ($inputStr
          (with-temp-buffer
            (yank)
            (buffer-string)))
-        -fpath
+        $fpath
         )
-    (if (string-match-p "\\`http://" -inputStr)
+    (if (string-match-p "\\`http://" $inputStr)
         (progn
-          (setq -fpath (xahsite-url-to-filepath -inputStr "addFileName"))
-          (if (file-exists-p -fpath)
-              (progn (find-file -fpath))
-            (progn (error "file doesn't exist 「%s」" -fpath))))
+          (setq $fpath (xahsite-url-to-filepath $inputStr "addFileName"))
+          (if (file-exists-p $fpath)
+              (progn (find-file $fpath))
+            (progn (error "file doesn't exist 「%s」" $fpath))))
       (progn ; not starting “http://”
-        (setq -inputStr (xah-remove-uri-fragment -inputStr))
-        (setq -fpath (xahsite-web-path-to-filepath -inputStr default-directory))
-        (if (file-exists-p -fpath)
-            (progn (find-file -fpath))
+        (setq $inputStr (xah-remove-uri-fragment $inputStr))
+        (setq $fpath (xahsite-web-path-to-filepath $inputStr default-directory))
+        (if (file-exists-p $fpath)
+            (progn (find-file $fpath))
           (progn (user-error "file doesn't exist.")))))))
 
 (defun xah-open-file-at-cursor ()
@@ -52,43 +52,43 @@ This command is similar to `find-file-at-point' but without prompting for confir
 URL `http://ergoemacs.org/emacs/emacs_open_file_path_fast.html'
 Version 2016-06-14"
   (interactive)
-  (let* ((-inputStr (if (use-region-p)
+  (let* (($inputStr (if (use-region-p)
                  (buffer-substring-no-properties (region-beginning) (region-end))
-               (let (-p0 -p1 -p2
-                         (-charSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
-                 (setq -p0 (point))
+               (let ($p0 $p1 $p2
+                         ($charSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
+                 (setq $p0 (point))
                  ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-                 (skip-chars-backward -charSkipRegex)
-                 (setq -p1 (point))
-                 (goto-char -p0)
-                 (skip-chars-forward -charSkipRegex)
-                 (setq -p2 (point))
-                 (goto-char -p0)
-                 (buffer-substring-no-properties -p1 -p2))))
-         (-path (replace-regexp-in-string ":\\'" "" -inputStr)))
-    (if (string-match-p "\\`https?://" -path)
-        (browse-url -path)
+                 (skip-chars-backward $charSkipRegex)
+                 (setq $p1 (point))
+                 (goto-char $p0)
+                 (skip-chars-forward $charSkipRegex)
+                 (setq $p2 (point))
+                 (goto-char $p0)
+                 (buffer-substring-no-properties $p1 $p2))))
+         ($path (replace-regexp-in-string ":\\'" "" $inputStr)))
+    (if (string-match-p "\\`https?://" $path)
+        (browse-url $path)
       (progn ; not starting “http://”
-        (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" -path)
+        (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" $path)
             (progn
               (let (
-                    (-fpath (match-string 1 -path))
-                    (-line-num (string-to-number (match-string 2 -path))))
-                (if (file-exists-p -fpath)
+                    ($fpath (match-string 1 $path))
+                    ($line-num (string-to-number (match-string 2 $path))))
+                (if (file-exists-p $fpath)
                     (progn
-                      (find-file -fpath)
+                      (find-file $fpath)
                       (goto-char 1)
-                      (forward-line (1- -line-num)))
+                      (forward-line (1- $line-num)))
                   (progn
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fpath))
-                      (find-file -fpath))))))
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" $fpath))
+                      (find-file $fpath))))))
           (progn
-            (if (file-exists-p -path)
-                (find-file -path)
-              (if (file-exists-p (concat -path ".el"))
-                  (find-file (concat -path ".el"))
-                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -path))
-                  (find-file -path ))))))))))
+            (if (file-exists-p $path)
+                (find-file $path)
+              (if (file-exists-p (concat $path ".el"))
+                  (find-file (concat $path ".el"))
+                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" $path))
+                  (find-file $path ))))))))))
 
 (defun xah-open-file-path-under-cursor ()
   "Open the file path under cursor.
@@ -100,54 +100,54 @@ Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath
 Version 2017-04-21"
   (interactive)
   (let* (
-         (-inputStr1
+         ($inputStr1
           (xah-remove-uri-fragment
            (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
-             (let (-p0 -p1 -p2
-                       (-charSkipRegex "^  \"\t\n`'|()[]{}「」<>〔〕“”〈〉《》【】〖〗«»‹›❮❯❬❭·。\\`"))
-               (setq -p0 (point))
+             (let ($p0 $p1 $p2
+                       ($charSkipRegex "^  \"\t\n`'|()[]{}「」<>〔〕“”〈〉《》【】〖〗«»‹›❮❯❬❭·。\\`"))
+               (setq $p0 (point))
                ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-               (skip-chars-backward -charSkipRegex)
-               (setq -p1 (point))
-               (goto-char -p0)
-               (skip-chars-forward -charSkipRegex)
-               (setq -p2 (point))
-               (goto-char -p0)
-               (buffer-substring-no-properties -p1 -p2)))))
-         (-inputStr2 (replace-regexp-in-string ":\\'" "" -inputStr1))
-         -p
+               (skip-chars-backward $charSkipRegex)
+               (setq $p1 (point))
+               (goto-char $p0)
+               (skip-chars-forward $charSkipRegex)
+               (setq $p2 (point))
+               (goto-char $p0)
+               (buffer-substring-no-properties $p1 $p2)))))
+         ($inputStr2 (replace-regexp-in-string ":\\'" "" $inputStr1))
+         $p
          )
-    (if (string-equal -inputStr2 "")
+    (if (string-equal $inputStr2 "")
         (progn (user-error "No path under cursor" ))
       (progn
         ;; convenience. if the input string start with a xah domain name, make it a url string
-        (setq -p
+        (setq $p
               (cond
-               ((string-match "\\`//" -inputStr2 ) (concat "http:" -inputStr2)) ; relative http protocol, used in css
-               ((string-match "\\`ergoemacs\\.org" -inputStr2 ) (concat "http://" -inputStr2))
-               ((string-match "\\`wordyenglish\\.com" -inputStr2 ) (concat "http://" -inputStr2))
-               ((string-match "\\`xaharts\\.org" -inputStr2 ) (concat "http://" -inputStr2))
-               ((string-match "\\`xahlee\\.info" -inputStr2 ) (concat "http://" -inputStr2))
-               ((string-match "\\`xahlee\\.org" -inputStr2 ) (concat "http://" -inputStr2))
-               ((string-match "\\`xahmusic\\.org" -inputStr2 ) (concat "http://" -inputStr2))
-               ((string-match "\\`xahporn\\.org" -inputStr2 ) (concat "http://" -inputStr2))
-               ((string-match "\\`xahsl\\.org" -inputStr2 ) (concat "http://" -inputStr2))
-               (t -inputStr2)))
-        (if (string-match-p "\\`https?://" -p)
-            (if (xahsite-url-is-xah-website-p -p)
-                (let ((-fp (xahsite-url-to-filepath -p )))
-                  (if (file-exists-p -fp)
-                      (find-file -fp)
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fp)) (find-file -fp))))
-              (browse-url -p))
+               ((string-match "\\`//" $inputStr2 ) (concat "http:" $inputStr2)) ; relative http protocol, used in css
+               ((string-match "\\`ergoemacs\\.org" $inputStr2 ) (concat "http://" $inputStr2))
+               ((string-match "\\`wordyenglish\\.com" $inputStr2 ) (concat "http://" $inputStr2))
+               ((string-match "\\`xaharts\\.org" $inputStr2 ) (concat "http://" $inputStr2))
+               ((string-match "\\`xahlee\\.info" $inputStr2 ) (concat "http://" $inputStr2))
+               ((string-match "\\`xahlee\\.org" $inputStr2 ) (concat "http://" $inputStr2))
+               ((string-match "\\`xahmusic\\.org" $inputStr2 ) (concat "http://" $inputStr2))
+               ((string-match "\\`xahporn\\.org" $inputStr2 ) (concat "http://" $inputStr2))
+               ((string-match "\\`xahsl\\.org" $inputStr2 ) (concat "http://" $inputStr2))
+               (t $inputStr2)))
+        (if (string-match-p "\\`https?://" $p)
+            (if (xahsite-url-is-xah-website-p $p)
+                (let (($fp (xahsite-url-to-filepath $p )))
+                  (if (file-exists-p $fp)
+                      (find-file $fp)
+                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" $fp)) (find-file $fp))))
+              (browse-url $p))
           (progn ; not starting “http://”
-            (let ((-fff (xahsite-web-path-to-filepath -p default-directory)))
-              (if (file-exists-p -fff)
-                  (progn (find-file -fff))
-                (if (file-exists-p (concat -fff ".el"))
-                    (progn (find-file (concat -fff ".el")))
-                  (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fff)) (find-file -fff )))))))))))
+            (let (($fff (xahsite-web-path-to-filepath $p default-directory)))
+              (if (file-exists-p $fff)
+                  (progn (find-file $fff))
+                (if (file-exists-p (concat $fff ".el"))
+                    (progn (find-file (concat $fff ".el")))
+                  (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" $fff)) (find-file $fff )))))))))))
 
 
 
@@ -226,15 +226,15 @@ The differences are:
 • If there is a text selection, that is used as input.
 • The input is plain text, not regex."
   (interactive)
-  (let (-p1 -p2 -searchStr )
+  (let ($p1 $p2 $searchStr )
     (if (use-region-p)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end))
-          (setq -searchStr (buffer-substring-no-properties -p1 -p2)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end))
+          (setq $searchStr (buffer-substring-no-properties $p1 $p2)))
       (progn
-        (setq -searchStr (word-at-point))))
-    (list-matching-lines (regexp-quote -searchStr))))
+        (setq $searchStr (word-at-point))))
+    (list-matching-lines (regexp-quote $searchStr))))
 
 (defun xah-make-lojban-entry ()
   "Insert a blank a-lojban-a-day HTML template in a paritcular file."
@@ -269,25 +269,25 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 Version 2016-10-01"
   (interactive)
   (let* (
-         (-fromPath (buffer-file-name))
-         (-fromFileName (file-name-nondirectory -fromPath ))
-         -toPath
+         ($fromPath (buffer-file-name))
+         ($fromFileName (file-name-nondirectory $fromPath ))
+         $toPath
          )
     (copy-file
-     -fromPath
-     (concat -fromPath "~" (format-time-string "%Y%m%d_%H%M%S") "~")
+     $fromPath
+     (concat $fromPath "~" (format-time-string "%Y%m%d_%H%M%S") "~")
      "OK-IF-ALREADY-EXISTS") ;backup
     (save-buffer)
     (mapc
-     (lambda (-x)
+     (lambda ($x)
        (progn
-         (setq -toPath (concat (xahsite-url-to-filepath (format "http://%s/" -x)) -fromFileName))
-         (when (not (string= -fromPath -toPath ))
-           (if (file-exists-p -toPath)
+         (setq $toPath (concat (xahsite-url-to-filepath (format "http://%s/" $x)) $fromFileName))
+         (when (not (string= $fromPath $toPath ))
+           (if (file-exists-p $toPath)
                (progn
-                 (copy-file -fromPath -toPath "OK-IF-ALREADY-EXISTS")
-                 (message "wrote to 「%s」." -toPath))
-             (progn (error "logic error. The file 「%s」 doesn't exist, it should already." -toPath)))))) [
+                 (copy-file $fromPath $toPath "OK-IF-ALREADY-EXISTS")
+                 (message "wrote to 「%s」." $toPath))
+             (progn (error "logic error. The file 「%s」 doesn't exist, it should already." $toPath)))))) [
        "ergoemacs.org"
        "wordyenglish.com"
        "xaharts.org"
@@ -314,50 +314,50 @@ This is Xah Lee's personal command assuming a particular dir structure.
 Version 2016-11-02"
   (interactive)
   (let (
-        -p1 -p2
-        -inputStr
-        -file
-        -title
-        -temp
-        -urlFragmentPart
-        (-pathDelimitors "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+        $p1 $p2
+        $inputStr
+        $file
+        $title
+        $temp
+        $urlFragmentPart
+        ($pathDelimitors "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
         )
 
     (if (use-region-p)
-        (setq -p1 (region-beginning) -p2 (region-end))
-      (let (-p0)
-        (setq -p0 (point))
-        (skip-chars-backward -pathDelimitors)
-        (setq -p1 (point))
-        (goto-char -p0)
-        (skip-chars-forward -pathDelimitors)
-        (setq -p2 (point))))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (let ($p0)
+        (setq $p0 (point))
+        (skip-chars-backward $pathDelimitors)
+        (setq $p1 (point))
+        (goto-char $p0)
+        (skip-chars-forward $pathDelimitors)
+        (setq $p2 (point))))
 
-    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
-    (setq -temp (split-uri-hashmark -inputStr))
-    (setq -file (xahsite-web-path-to-filepath (aref -temp 0)))
-    (setq -urlFragmentPart (aref -temp 1))
+    (setq $inputStr (buffer-substring-no-properties $p1 $p2))
+    (setq $temp (split-uri-hashmark $inputStr))
+    (setq $file (xahsite-web-path-to-filepath (aref $temp 0)))
+    (setq $urlFragmentPart (aref $temp 1))
 
-    (if (file-exists-p -file)
+    (if (file-exists-p $file)
         (progn
-          (setq -title
-                (if (string-match-p ".+html\\'" -file)
-                    (xah-html-get-html-file-title -file t)
-                  (file-name-nondirectory -file)))
-          (setq -title (if (null -title) "" -title ))
-          (setq -title (xah-replace-pairs-in-string -title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
+          (setq $title
+                (if (string-match-p ".+html\\'" $file)
+                    (xah-html-get-html-file-title $file t)
+                  (file-name-nondirectory $file)))
+          (setq $title (if (null $title) "" $title ))
+          (setq $title (xah-replace-pairs-in-string $title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
-          (delete-region -p1 -p2)
-          (insert -title "\n" (xahsite-filepath-to-url -file) -urlFragmentPart))
+          (delete-region $p1 $p2)
+          (insert $title "\n" (xahsite-filepath-to-url $file) $urlFragmentPart))
       (progn (user-error "file doesn't exist.")))))
 
 (defun xah-copy-url-current-file ()
   "Put the current file's URL into the kill-ring."
   (interactive)
-  (let (-url)
-    (setq -url (xahsite-filepath-to-url (buffer-file-name)))
-    (kill-new -url)
-    (message "URL copied %s" -url)))
+  (let ($url)
+    (setq $url (xahsite-filepath-to-url (buffer-file-name)))
+    (kill-new $url)
+    (message "URL copied %s" $url)))
 
 
 
@@ -385,18 +385,18 @@ Version 2017-02-02"
               (while (search-forward "\n" nil t) (replace-match "" nil t))))
         (if currentStateIsCompact
             (fill-paragraph nil)
-          (let (-p1 -p2) ; -p1 and -p2 are beginning/end of text block
+          (let ($p1 $p2) ; $p1 and $p2 are beginning/end of text block
             (progn
               (if (re-search-backward "\n[ \t]*\n" nil "move")
                   (progn (re-search-forward "\n[ \t]*\n")
-                         (setq -p1 (point)))
-                (setq -p1 (point)))
+                         (setq $p1 (point)))
+                (setq $p1 (point)))
               (if (re-search-forward "\n[ \t]*\n" nil "move")
                   (progn (re-search-backward "\n[ \t]*\n")
-                         (setq -p2 (point)))
-                (setq -p2 (point))))
+                         (setq $p2 (point)))
+                (setq $p2 (point))))
             (save-restriction
-              (narrow-to-region -p1 -p2)
+              (narrow-to-region $p1 $p2)
               (goto-char (point-min))
               (while (search-forward "\n" nil t) (replace-match "" nil t))))))
       (put this-command 'stateIsCompact-p (if currentStateIsCompact nil t)))))
@@ -536,11 +536,11 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
                                      "FIXEDCASE" "LITERAL")
 
     (let* (
-           (-p1 (point-min))
-           (-p2 (point-max)))
+           ($p1 (point-min))
+           ($p2 (point-max)))
       (save-excursion
         (save-restriction
-          (narrow-to-region -p1 -p2)
+          (narrow-to-region $p1 $p2)
           (progn
             (goto-char (point-min))
             (while (re-search-forward "[ \t]+\n" nil t)
@@ -573,9 +573,9 @@ see `xah-replace-BOM-mark-etc'
 Version 2015-10-11"
   (interactive)
   (require 'xah-find)
-  (let (-dir)
-    (setq -dir (ido-read-directory-name "Directory: " default-directory default-directory "MUSTMATCH"))
-    (xah-find-replace-text (char-to-string 65279) "" -dir "\\.html\\'" t t t t)))
+  (let ($dir)
+    (setq $dir (ido-read-directory-name "Directory: " default-directory default-directory "MUSTMATCH"))
+    (xah-find-replace-text (char-to-string 65279) "" $dir "\\.html\\'" t t t t)))
 
 (defun xah-show-hexadecimal-value ()
   "Prints the decimal value of a hexadecimal string under cursor.
@@ -596,26 +596,26 @@ Test cases
   100 200 300   400 500 600"
   (interactive )
 
-  (let (-inputStr -tempStr -p1 -p2
+  (let ($inputStr $tempStr $p1 $p2
                  (case-fold-search t) )
     (save-excursion
       ;; (skip-chars-backward "0123456789abcdef")
       ;; (search-backward-regexp "[[:xdigit:]]+" nil t)
       (search-backward-regexp "[0123456789abcdef]+" nil t)
-      (setq -p1 (point) )
+      (setq $p1 (point) )
       (re-search-forward "[0123456789abcdef]+" nil t)
-      (setq -p2 (point) )
+      (setq $p2 (point) )
 
-      (setq -inputStr (buffer-substring-no-properties -p1 -p2) )
+      (setq $inputStr (buffer-substring-no-properties $p1 $p2) )
 
       (let ((case-fold-search nil) )
-        (setq -tempStr (replace-regexp-in-string "\\`0x" "" -inputStr )) ; C, Perl, …
-        (setq -tempStr (replace-regexp-in-string "\\`#x" "" -tempStr )) ; elisp …
-        (setq -tempStr (replace-regexp-in-string "\\`#" "" -tempStr ))  ; CSS …
+        (setq $tempStr (replace-regexp-in-string "\\`0x" "" $inputStr )) ; C, Perl, …
+        (setq $tempStr (replace-regexp-in-string "\\`#x" "" $tempStr )) ; elisp …
+        (setq $tempStr (replace-regexp-in-string "\\`#" "" $tempStr ))  ; CSS …
         )
 
-      ;; (message "Hex 「%s」 is 「%d」" -tempStr (string-to-number -tempStr 16))
-      (message "input 「%s」 Hex 「%s」 is 「%d」" -inputStr -tempStr (string-to-number -tempStr 16)))))
+      ;; (message "Hex 「%s」 is 「%d」" $tempStr (string-to-number $tempStr 16))
+      (message "input 「%s」 Hex 「%s」 is 「%d」" $inputStr $tempStr (string-to-number $tempStr 16)))))
 
 
 
@@ -652,18 +652,18 @@ Version 2015-12-17"
   (interactive "p")
   ;; uses a property “state”. Value is a integer.
   (let* (
-         (-values ["cornsilk" "pale green" "pale turquoise" "thistle" "seashell" "honeydew"])
-         (-index-before
+         ($values ["cornsilk" "pale green" "pale turquoise" "thistle" "seashell" "honeydew"])
+         ($index-before
           (if (get 'xah-cycle-background-color 'state)
               (get 'xah-cycle-background-color 'state)
             0))
-         (-index-after (% (+ -index-before (length -values) *n) (length -values)))
-         (-next-value (aref -values -index-after)))
+         ($index-after (% (+ $index-before (length $values) *n) (length $values)))
+         ($next-value (aref $values $index-after)))
 
-    (put 'xah-cycle-background-color 'state -index-after)
+    (put 'xah-cycle-background-color 'state $index-after)
 
-    (set-background-color -next-value)
-    (message "background color changed to %s" -next-value)))
+    (set-background-color $next-value)
+    (message "background color changed to %s" $next-value)))
 
 (defun xah-browse-url-of-buffer ()
   "Similar to `browse-url-of-buffer' but visit xahlee.org.
@@ -677,31 +677,31 @@ default browser will be launched and opening this URL:
  http://xahlee.info/index.html
 version 2017-04-10"
   (interactive)
-  (let (-url)
-    (setq -url
+  (let ($url)
+    (setq $url
           (if current-prefix-arg
               (xahsite-filepath-to-url (buffer-file-name))
             (buffer-file-name)))
     (when (buffer-modified-p )
       (xah-clean-whitespace (point-min) (point-max))
       (save-buffer))
-    (message "browsing %s" -url)
+    (message "browsing %s" $url)
     (cond
      ((string-equal system-type "windows-nt") ; Windows
-      (when (string-match "^c:/" -url) (setq -url (concat "file:///" -url)))
-      (browse-url -url))
+      (when (string-match "^c:/" $url) (setq $url (concat "file:///" $url)))
+      (browse-url $url))
      ((string-equal system-type "gnu/linux")
       ;; (let ( (process-connection-type nil))
       ;;   (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
       ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
-      (browse-url -url ))
+      (browse-url $url ))
      ;; ((string-equal system-type "gnu/linux")
      ;;  (start-process "xahbrowse"
      ;;                 nil "setsid"
      ;;                 "firefox"
      ;;                 (concat "file://" buffer-file-name )))
      ((string-equal system-type "darwin") ; Mac
-      (browse-url -url )))))
+      (browse-url $url )))))
 
 
 
@@ -718,9 +718,9 @@ For example, if the current buffer is the file x.java,
 then it'll call “java x” in a shell."
   (interactive)
   (let* (
-         (-fnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
-         (-prog-name "java"))
-    (shell-command (concat -prog-name " " -fnm " &"))))
+         ($fnm (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
+         ($prog-name "java"))
+    (shell-command (concat $prog-name " " $fnm " &"))))
 
 (defun xah-python-2to3-current-file ()
   "Convert current buffer from python 2 to python 3.
@@ -729,15 +729,15 @@ URL `http://ergoemacs.org/emacs/elisp_python_2to3.html'
 Version 2016-02-16"
   (interactive)
   (let* (
-         (-fName (buffer-file-name))
-         (-fSuffix (file-name-extension -fName)))
+         ($fName (buffer-file-name))
+         ($fSuffix (file-name-extension $fName)))
     (when (buffer-modified-p)
       (save-buffer))
-    (if (or (string-equal -fSuffix "py") (string-equal -fSuffix "py3"))
+    (if (or (string-equal $fSuffix "py") (string-equal $fSuffix "py3"))
         (progn
-          (shell-command (format "2to3 -w %s" -fName))
+          (shell-command (format "2to3 -w %s" $fName))
           (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES"))
-      (error "file 「%s」 doesn't end in “.py” or “.py3”." -fName))))
+      (error "file 「%s」 doesn't end in “.py” or “.py3”." $fName))))
 
 (defun xah-change-file-line-ending-style (*files *style)
   "Change current file or dired marked file's newline convention.
@@ -753,14 +753,14 @@ Version 2016-10-16"
       (list (buffer-file-name)))
     (ido-completing-read "Line ending:" '("Linux/MacOSX/Unix" "MacOS9" "Windows") "PREDICATE" "REQUIRE-MATCH")))
   (let* (
-         (-codingSystem
+         ($codingSystem
           (cond
            ((equal *style "Linux/MacOSX/Unix") 'unix)
            ((equal *style "MacOS9") 'mac)
            ((equal *style "Windows") 'dos)
            (t (error "code logic error 65327. Expect one of it." )))))
     (mapc
-     (lambda (x) (xah-convert-file-coding-system x -codingSystem))
+     (lambda (x) (xah-convert-file-coding-system x $codingSystem))
      *files)))
 
 (defun xah-convert-file-coding-system (*fpath *coding-system)
@@ -772,17 +772,17 @@ If the file is already opened, it will be saved after this command.
 
 URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
 Version 2015-07-24"
-  (let (-buffer
-        (-bufferOpened-p (get-file-buffer *fpath)))
-    (if -bufferOpened-p
-        (with-current-buffer -bufferOpened-p
+  (let ($buffer
+        ($bufferOpened-p (get-file-buffer *fpath)))
+    (if $bufferOpened-p
+        (with-current-buffer $bufferOpened-p
           (set-buffer-file-coding-system *coding-system)
           (save-buffer))
       (progn
-        (setq -buffer (find-file *fpath))
+        (setq $buffer (find-file *fpath))
         (set-buffer-file-coding-system *coding-system)
         (save-buffer)
-        (kill-buffer -buffer)))))
+        (kill-buffer $buffer)))))
 
 (defun xah-remove-wikipedia-link ()
   "delet wikipedia link at cursor position

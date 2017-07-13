@@ -139,18 +139,18 @@ Version 2015-07-06"
 This command will prompt you.
 Version 2017-02-02"
   (interactive)
-  (let (-mode
-        (-mouse-wheel-modes
+  (let ($mode
+        ($mouse-wheel-modes
          '(
            "50 lines"
            "block"
            "normal"
            )))
-    (setq -mode (ido-completing-read "set wheel mode to:" -mouse-wheel-modes))
+    (setq $mode (ido-completing-read "set wheel mode to:" $mouse-wheel-modes))
     (cond
-     ((string-equal -mode "normal") (xah-set-mouse-wheel-normal))
-     ((string-equal -mode "block") (xah-set-mouse-scroll-by-block))
-     ((string-equal -mode "50 lines") (xah-set-mouse-scroll-by-50-line))
+     ((string-equal $mode "normal") (xah-set-mouse-wheel-normal))
+     ((string-equal $mode "block") (xah-set-mouse-scroll-by-block))
+     ((string-equal $mode "50 lines") (xah-set-mouse-scroll-by-50-line))
      (t (error "%s" "program logic error. No choice found")))))
 
 ;; (defun xah-mouse-yank-primary ()

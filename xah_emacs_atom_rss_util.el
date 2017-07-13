@@ -15,15 +15,15 @@ Optional argument *alt-link is used in the atom tag: <link rel=\"alternate\" hre
 Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
   (interactive)
   (let* (
-         (-title (if *title (concat "<title>" *title "</title>") "▮") )
-         (-id (if *id *id (xah-new-atom-id-tag) ) )
-         (-summary (if *summary (concat "<summary>" *summary "</summary>\n") "") )
-         (-content (if *content-xml-text (format " <content type=\"xhtml\">
+         ($title (if *title (concat "<title>" *title "</title>") "▮") )
+         ($id (if *id *id (xah-new-atom-id-tag) ) )
+         ($summary (if *summary (concat "<summary>" *summary "</summary>\n") "") )
+         ($content (if *content-xml-text (format " <content type=\"xhtml\">
  <div xmlns=\"http://www.w3.org/1999/xhtml\">%s</div>
  </content>" *content-xml-text)
   "") )
-         (-updatedStr (xah-current-date-time-string))
-         (-altLink (if *alt-link *alt-link (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
+         ($updatedStr (xah-current-date-time-string))
+         ($altLink (if *alt-link *alt-link (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
          )
     (insert (format "<entry>
 %s
@@ -34,12 +34,12 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
 </entry>
 
 "
-                    -title
-                    -id
-                    -updatedStr
-                    -summary
-                    -content
-                    -altLink
+                    $title
+                    $id
+                    $updatedStr
+                    $summary
+                    $content
+                    $altLink
                     )) ) )
 
 (defun xah-new-atom-id-tag (&optional *domain-name)
@@ -56,15 +56,15 @@ to current date/time stamp.
 This command leaves the file unsaved."
   (interactive
    (list (buffer-file-name)))
-  (let (-p1 -p2)
+  (let ($p1 $p2)
     (find-file *file-path)
     (goto-char 1)
     (search-forward "<updated>")
-    (setq -p1 (point))
+    (setq $p1 (point))
     (search-forward "</updated>")
-    (setq -p2 (- (point) 10))
-    (delete-region -p1 -p2 )
-    (goto-char -p1)
+    (setq $p2 (- (point) 10))
+    (delete-region $p1 $p2 )
+    (goto-char $p1)
     (insert (xah-current-date-time-string))))
 
 (defun xah-make-atom-entry ()
@@ -93,36 +93,36 @@ Other files paths for blogs are:
 version 2017-05-09"
   (interactive)
   (let* (
-         -p1 -p2
-         -inputStr
-         (-currentFpath (buffer-file-name))
-         (-atomFilePath
-          (if (string-match-p "wordyenglish_com/words/new.html\\'" -currentFpath )
-              (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" -currentFpath "FIXEDCASE" "LITERAL")
-            (replace-regexp-in-string "\\.html\\'" ".xml" -currentFpath "FIXEDCASE" "LITERAL")))
-         -titleText
-         -altURL
+         $p1 $p2
+         $inputStr
+         ($currentFpath (buffer-file-name))
+         ($atomFilePath
+          (if (string-match-p "wordyenglish_com/words/new.html\\'" $currentFpath )
+              (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" $currentFpath "FIXEDCASE" "LITERAL")
+            (replace-regexp-in-string "\\.html\\'" ".xml" $currentFpath "FIXEDCASE" "LITERAL")))
+         $titleText
+         $altURL
          )
 
     (if (use-region-p)
         (progn
-          (setq -p1 (region-beginning))
-          (setq -p2 (region-end)))
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
       (save-excursion
         (search-backward "<section>" )
         (search-forward ">" )
         (forward-line 2) ; skip date stamp
-        (setq -p1 (point))
+        (setq $p1 (point))
         (search-forward "</section>" )
         (search-backward "<" )
         ;; (delete-blank-lines)
-        (setq -p2 (point))))
+        (setq $p2 (point))))
 
-    (setq -inputStr (buffer-substring-no-properties -p1 -p2))
-    (setq -inputStr
+    (setq $inputStr (buffer-substring-no-properties $p1 $p2))
+    (setq $inputStr
           ;; converct html boolean attributes to valid xml version. eg from iframes from youtube and google map
           (with-temp-buffer
-            (insert -inputStr)
+            (insert $inputStr)
             (goto-char (point-min))
             (while (search-forward " allowfullscreen" (point-max) t)
               (replace-match " " ))
@@ -142,44 +142,44 @@ version 2017-05-09"
             (insert "\n")
             (buffer-string)))
 
-    (setq -titleText
-          (if (string-match "<h3>\\(.+?\\)</h3>" -inputStr)
-              (progn (match-string 1 -inputStr ))
+    (setq $titleText
+          (if (string-match "<h3>\\(.+?\\)</h3>" $inputStr)
+              (progn (match-string 1 $inputStr ))
             (progn
-              (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" -inputStr)
-                  (progn (match-string 2 -inputStr))
+              (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" $inputStr)
+                  (progn (match-string 2 $inputStr))
                 (progn "▮")))))
 
-    (setq -altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
-          (let ( (-hrefValues (xah-html-extract-url -p1 -p2)) -firstLink1)
+    (setq $altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
+          (let ( ($hrefValues (xah-html-extract-url $p1 $p2)) $firstLink1)
             (if
                 (and
                  (with-temp-buffer ; 1 paragraph only
-                   (insert -inputStr)
+                   (insert $inputStr)
                    (goto-char (point-min))
                    (= (count-matches "<p>" (point-min) (point-max)) 1))
                  (progn ; 1 link only
-                   (= (length -hrefValues) 1)))
+                   (= (length $hrefValues) 1)))
                 (progn
-                  (setq -firstLink1 (elt -hrefValues 0))
-                  (if (string-match-p "\\`https?://" -firstLink1)
-                      -firstLink1
-                    ;; (if (xahsite-url-is-xah-website-p -firstLink1)
+                  (setq $firstLink1 (elt $hrefValues 0))
+                  (if (string-match-p "\\`https?://" $firstLink1)
+                      $firstLink1
+                    ;; (if (xahsite-url-is-xah-website-p $firstLink1)
                     ;;     (xahsite-filepath-to-href-value
-                    ;;      (xahsite-url-to-filepath -firstLink1 "addFileName")
-                    ;;      -currentFpath)
-                    ;;   -firstLink1
+                    ;;      (xahsite-url-to-filepath $firstLink1 "addFileName")
+                    ;;      $currentFpath)
+                    ;;   $firstLink1
                     ;;   )
                     (xahsite-filepath-to-url
-                     (expand-file-name -firstLink1 (file-name-directory -currentFpath )))))
-              (xahsite-filepath-to-url -currentFpath))))
+                     (expand-file-name $firstLink1 (file-name-directory $currentFpath )))))
+              (xahsite-filepath-to-url $currentFpath))))
 
-    (if (file-exists-p -atomFilePath)
-        (find-file -atomFilePath)
-      (user-error "file doesn't exist：%s" -atomFilePath))
+    (if (file-exists-p $atomFilePath)
+        (find-file $atomFilePath)
+      (user-error "file doesn't exist：%s" $atomFilePath))
     (update-atom-updated-tag (buffer-file-name))
     (goto-char 1)
     (search-forward "<entry>" nil t)
     (beginning-of-line)
-    (insert-atom-entry -titleText (xah-new-atom-id-tag) nil -inputStr -altURL)
+    (insert-atom-entry $titleText (xah-new-atom-id-tag) nil $inputStr $altURL)
     (search-backward "</title>")))

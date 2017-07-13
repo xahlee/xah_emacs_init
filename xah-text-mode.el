@@ -95,10 +95,10 @@ Version 2017-01-27"
 ;; syntax coloring related
 
 (setq xah-text-font-lock-keywords
-      (let ((-kw (regexp-opt xah-text-kword 'words)))
+      (let (($kw (regexp-opt xah-text-kword 'words)))
         `(
 
-          (,-kw . font-lock-function-name-face)
+          (,$kw . font-lock-function-name-face)
 
           )))
 

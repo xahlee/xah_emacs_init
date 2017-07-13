@@ -52,7 +52,7 @@
 
 ;; keys for moving to prev/next code section (form feed; ^L)
 (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
-(global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
+(global-set-key (kbd "<C-M-next>") 'forward-page) ; Ctrl+Alt+PageDown
 
 ;; 'xah-cycle-font-2
 ;; 'xah-cycle-font-next

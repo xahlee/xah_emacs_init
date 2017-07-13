@@ -6,25 +6,25 @@ Guaranteed to work on linux. Not tested on Microsoft Windows or Mac OS X
 Version 2015-06-16"
   (interactive)
   (let* (
-         (-file-list
+         ($file-list
           (if (string-equal major-mode "dired-mode")
               (dired-get-marked-files)
             (list (buffer-file-name))))
-         (-do-it-p (if (<= (length -file-list) 5)
+         ($do-it-p (if (<= (length $file-list) 5)
                        t
                      (y-or-n-p "Open more than 5 files? "))))
-    (when -do-it-p
+    (when $do-it-p
       (cond
        ((string-equal system-type "windows-nt")
         (mapc
-         (lambda (-fpath)
-           (w32-shell-execute "gimp" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
+         (lambda ($fpath)
+           (w32-shell-execute "gimp" (replace-regexp-in-string "/" "\\" $fpath t t))) $file-list))
        ((string-equal system-type "darwin")
         (mapc
-         (lambda (-fpath) (shell-command (format "gimp \"%s\"" -fpath)))  -file-list))
+         (lambda ($fpath) (shell-command (format "gimp \"%s\"" $fpath)))  $file-list))
        ((string-equal system-type "gnu/linux")
         (mapc
-         (lambda (-fpath) (let ((process-connection-type nil)) (start-process "" nil "gimp" -fpath))) -file-list))))))
+         (lambda ($fpath) (let ((process-connection-type nil)) (start-process "" nil "gimp" $fpath))) $file-list))))))
 
 (defun xah-dired-to-zip ()
   "Zip the current file in `dired'.
@@ -35,12 +35,12 @@ URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2015-07-30"
   (interactive)
   (require 'dired)
-  (let ( (-fName (elt (dired-get-marked-files) 0)))
+  (let ( ($fName (elt (dired-get-marked-files) 0)))
     (shell-command
      (format
       "zip -r '%s.zip' '%s'"
-      (file-relative-name -fName)
-      (file-relative-name -fName)))))
+      (file-relative-name $fName)
+      (file-relative-name $fName)))))
 
 (defun xah-process-image (*file-list *args-str *new-name-suffix *new-name-file-suffix )
   "Wrapper to ImageMagick's “convert” shell command.
@@ -53,27 +53,27 @@ URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
   (require 'dired)
   (mapc
-   (lambda (-f)
-     (let ( -newName -cmdStr )
-       (setq -newName
+   (lambda ($f)
+     (let ( $newName $cmdStr )
+       (setq $newName
              (concat
-              (file-name-sans-extension -f)
+              (file-name-sans-extension $f)
               *new-name-suffix
               *new-name-file-suffix))
-       (while (file-exists-p -newName)
-         (setq -newName
+       (while (file-exists-p $newName)
+         (setq $newName
                (concat
-                (file-name-sans-extension -newName)
+                (file-name-sans-extension $newName)
                 *new-name-suffix
-                (file-name-extension -newName t))))
+                (file-name-extension $newName t))))
        ;; relative paths used to get around Windows/Cygwin path remapping problem
-       (setq -cmdStr
+       (setq $cmdStr
              (format
               "convert %s '%s' '%s'"
               *args-str
-              (file-relative-name -f)
-              (file-relative-name -newName)))
-       (shell-command -cmdStr)))
+              (file-relative-name $f)
+              (file-relative-name $newName)))
+       (shell-command $cmdStr)))
    *file-list )
   (revert-buffer))
 
@@ -93,19 +93,19 @@ URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
   (interactive
    (let (
-         (-fileList
+         ($fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -fileList
+     (list $fileList
            (read-from-minibuffer "Scale %:")
            (y-or-n-p "Sharpen"))))
-  (let ( (-outputSuffix (if current-prefix-arg ".png" ".jpg" )))
+  (let ( ($outputSuffix (if current-prefix-arg ".png" ".jpg" )))
     (xah-process-image
      *file-list
      (format "-scale %s%% -quality 85%% %s " *scale-percentage (if *sharpen? "-sharpen 1" "" ))
-     "-s" -outputSuffix )))
+     "-s" $outputSuffix )))
 
 (defun xah-dired-image-autocrop (*file-list *output-image-type-suffix)
   "Create a new auto-cropped version of images of marked files in dired.
@@ -116,13 +116,13 @@ URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
   (interactive
    (let (
-         (-fileList
+         ($fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:")))))
          (*output-image-type-suffix (if current-prefix-arg ".png" ".jpg" )))
-     (list -fileList *output-image-type-suffix)))
+     (list $fileList *output-image-type-suffix)))
   (xah-process-image *file-list "-trim" "-cropped" *output-image-type-suffix ))
 
 (defun xah-dired-2png (*file-list)
@@ -132,12 +132,12 @@ URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
   (interactive
    (let (
-         (-fileList
+         ($fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -fileList)))
+     (list $fileList)))
   (xah-process-image *file-list "" "-2" ".png" ))
 
 (defun xah-dired-2drawing (*file-list *grayscale-p *max-colors-count)
@@ -148,12 +148,12 @@ Requires ImageMagick shell command.
 Version 2017-02-02"
   (interactive
    (let (
-         (-fileList
+         ($fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -fileList
+     (list $fileList
            (yes-or-no-p "Grayscale?")
            (ido-completing-read "Max number of colors:" '( "2" "4" "16" "256" )))))
   (xah-process-image *file-list
@@ -177,12 +177,12 @@ URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
   (interactive
    (let (
-         (-fileList
+         ($fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
-     (list -fileList)))
+     (list $fileList)))
   (xah-process-image *file-list "-quality 90%" "-2" ".jpg" ))
 
 (defun xah-dired-remove-all-metadata (*file-list)
@@ -201,11 +201,11 @@ Version 2016-07-19"
      (t (list (read-from-minibuffer "file name:"))))))
   (if (y-or-n-p "Sure to remove all metadata?")
       (mapc
-       (lambda (-f)
-         (let (-cmdStr)
-           (setq -cmdStr
-                 (format "exiftool -all= -overwrite_original '%s'" (file-relative-name -f))) ; relative paths used to get around Windows/Cygwin path remapping problem
-           (shell-command -cmdStr)))
+       (lambda ($f)
+         (let ($cmdStr)
+           (setq $cmdStr
+                 (format "exiftool -all= -overwrite_original '%s'" (file-relative-name $f))) ; relative paths used to get around Windows/Cygwin path remapping problem
+           (shell-command $cmdStr)))
        *file-list )
     nil
     ))
@@ -224,9 +224,9 @@ Version 2016-07-19"
      ((string-equal major-mode "image-mode") (list (buffer-file-name)))
      (t (list (read-from-minibuffer "file name:"))))))
   (mapc
-   (lambda (-f)
+   (lambda ($f)
      (shell-command 
-      (format "exiftool '%s'" (file-relative-name -f))
+      (format "exiftool '%s'" (file-relative-name $f))
       ;; relative paths used to get around Windows/Cygwin path remapping problem
       ))
    *file-list ))
@@ -237,13 +237,13 @@ Prompt for a choice.
 URL `http://ergoemacs.org/emacs/dired_sort.html'
 Version 2015-07-30"
   (interactive)
-  (let (-sort-by -arg)
-    (setq -sort-by (ido-completing-read "Sort by:" '( "date" "size" "name" "dir")))
+  (let ($sort-by $arg)
+    (setq $sort-by (ido-completing-read "Sort by:" '( "date" "size" "name" "dir")))
     (cond
-     ((equal -sort-by "name") (setq -arg "-Al --si --time-style long-iso "))
-     ((equal -sort-by "date") (setq -arg "-Al --si --time-style long-iso -t"))
-     ((equal -sort-by "size") (setq -arg "-Al --si --time-style long-iso -S"))
-     ((equal -sort-by "dir") (setq -arg "-Al --si --time-style long-iso --group-directories-first"))
+     ((equal $sort-by "name") (setq $arg "-Al --si --time-style long-iso "))
+     ((equal $sort-by "date") (setq $arg "-Al --si --time-style long-iso -t"))
+     ((equal $sort-by "size") (setq $arg "-Al --si --time-style long-iso -S"))
+     ((equal $sort-by "dir") (setq $arg "-Al --si --time-style long-iso --group-directories-first"))
      (t (error "logic error 09535" )))
-    (dired-sort-other -arg )))
+    (dired-sort-other $arg )))
 
