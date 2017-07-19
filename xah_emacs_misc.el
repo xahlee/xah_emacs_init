@@ -264,6 +264,11 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 
 
+;; "lbasic.css"
+;; "lit.css"
+;; "xah_img_animation.js"
+;; "xah_img_animation.ts"
+
 (defun xah-sync-css ()
   "Save current file and copy to all other xahsite dirs.
 Version 2016-10-01"
@@ -803,8 +808,6 @@ Version 2017-06-05"
         ))))
 
 (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
-
-
 
 (defun xah-remove-all-wikipedia-link ()
   "delete all wikipedia links in a html file, except image links etc.

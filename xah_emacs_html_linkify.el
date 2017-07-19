@@ -387,6 +387,7 @@ Example output:
 <a class=\"amz\" href=\"http://www.amazon.com/dp/B003CP0BHM/?tag=xahh-20\" title=\"Cyborg R T Gaming Mouse\">amazon</a>
 
 For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number'
+
 URL `http://ergoemacs.org/emacs/elisp_amazon-linkify.html'
 Version 2017-04-10"
   (interactive)

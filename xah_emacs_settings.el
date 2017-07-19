@@ -1,5 +1,24 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-;; Emacs settings for packages bundled with pure gnu emacs only
+;; Emacs settings plain gnu emacs only
+;; 2017-07-15
+
+
+
+(progn
+  ;; set a default font
+  (when (member "DejaVu Sans Mono" (font-family-list))
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono"))
+
+  ;; specify font for all unicode characters
+  (when (member "Symbola" (font-family-list))
+    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+
+  ;; ;; specify font for chinese characters using default chinese font on linux
+  ;; (when (member "WenQuanYi Micro Hei" (font-family-list))
+  ;;   (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
+
+  ;; 
+)
 
 
 ;; initial window and default window
@@ -14,7 +33,9 @@
               (width . 106)
               (height . 60)
               (background-color . "honeydew")
-              (font . "DejaVu Sans Mono-10")))
+              (font . "DejaVu Sans Mono-10")
+              ;;
+              ))
 
       (setq default-frame-alist
             '(
@@ -22,7 +43,9 @@
               (width . 106)
               (height . 60)
               (background-color . "honeydew")
-              (font . "DejaVu Sans Mono-10"))))
+              (font . "DejaVu Sans Mono-10")
+              ;;
+              )))
   (progn
     (setq initial-frame-alist
           '(
@@ -140,19 +163,19 @@
 ;;   (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
 ;; )
 
-(progn
-  ;; use variable-width font for some modes
-  (defun xah-use-variable-width-font ()
-    "Set current buffer to use variable-width font."
-    (variable-pitch-mode 1)
-    ;; (text-scale-increase 0.5 )
-    )
-  (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-  (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
-  )
+;; (progn
+;;   ;; use variable-width font for some modes
+;;   (defun xah-use-variable-width-font ()
+;;     "Set current buffer to use variable-width font."
+;;     (variable-pitch-mode 1)
+;;     ;; (text-scale-increase 0.5 )
+;;     )
+;;   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+;;   )
 
 (progn ; minibuffer
   (setq enable-recursive-minibuffers t)
@@ -317,18 +340,7 @@
 
 
 
-(progn
-  ;; set a default font
-  (when (member "DejaVu Sans Mono" (font-family-list))
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono"))
 
-  ;; specify font for all unicode characters
-  (when (member "Symbola" (font-family-list))
-    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-
-  ;; specify font for chinese characters using default chinese font on linux
-  (when (member "WenQuanYi Micro Hei" (font-family-list))
-    (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" )))
 
 
 

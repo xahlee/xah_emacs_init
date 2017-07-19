@@ -21,12 +21,11 @@ Version 2016-10-24"
 (define-abbrev-table 'global-abbrev-table
   '(
 
-    ;; english abbrev
+    ;; English phrases abbrev
     ("afaik" "as far as i know" )
     ("atm" "at the moment" )
     ("dfb" "difference between" )
     ("ty" "thank you" )
-
     ("btw" "by the way" )
     ("ur" "you are" )
     ("ull" "you'll" )
@@ -44,10 +43,16 @@ Version 2016-10-24"
     ("wtdb" "What's the difference between" )
     ("sa" "See also:" )
     ("re3" "return" )
+    ("im" "I'm" )
+    ("tr" "there are" )
 
     ;; english
+    ("cprs" "comparison" )
+    ("aprt" "apparently" )
+    ("pp" "people" )
     ("ann" "announcement" )
     ("und" "understand" )
+    ("uds" "underscore" )
     ("maint" "maintenance" )
     ("mtn" "mountain" )
     ("qaa" "questions and answers" )
@@ -130,6 +135,8 @@ Version 2016-10-24"
     ("sjw3" "social justice warriors" )
     ("temp3" "temperature" )
 
+    ("im3" "instant message" )
+
     ;; english, proper noun
     ("sf" "San Francisco" )
     ("ahd" "American Heritage Dictionary" )
@@ -189,7 +196,7 @@ Version 2016-10-24"
     ("msw" "Microsoft Windows" )
     ("nn" "non-nil" )
     ("osx" "OS X" )
-    ("pp" "PayPal" )
+    ("pp3" "PayPal" )
     ("ps3" "powershell" )
     ("sl" "Second Life" )
     ("so3" "StackOverflow" )
