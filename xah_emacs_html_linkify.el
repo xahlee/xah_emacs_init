@@ -6,8 +6,6 @@
 
 (require 'url-util)
 
-
-
 (defun xahsite-html-image-linkify ( &optional *begin *end)
   "Replace a image file's path under cursor with a HTML img tag.
 If there's a text selection, use that as path.
@@ -79,10 +77,10 @@ Example, if cursor is on the word “i/cat.png”, then it will became
 If there's a text selection, use that as image path.
 
 This function calls `xah-html-image-linkify'.
-Version 2017-06-09"
+Version 2017-07-20"
   (interactive)
-  (let ($p1 $p2 $alt-str)
-    (setq $alt-str (xah-html-image-linkify))
+  (let ($p1 $p2 $altStr)
+    (setq $altStr (xah-html-image-linkify))
 
     ;; (search-backward "alt=\"")
     ;; (forward-char 5)
@@ -91,18 +89,21 @@ Version 2017-06-09"
     ;;   (setq $p1 (point))
     ;;   (search-forward "\"")
     ;;   (setq $p2 (- (point) 1) )
-    ;;   (setq $alt-str (buffer-substring $p1 $p2)))
+    ;;   (setq $altStr (buffer-substring $p1 $p2)))
 
     (search-backward "<img ")
     (insert "<figure>\n")
     (search-forward ">")
     (insert "\n<figcaption>\n")
-    (insert $alt-str "\n</figcaption>\n</figure>\n")
+    (insert $altStr "\n</figcaption>\n</figure>\n")
 
-    ;; (search-backward "</figcaption>")
-    ;; (backward-char)
+    (search-backward "</figcaption>")
 
-))
+    (while (looking-back "[ 0-9\n]" 200 )
+      (delete-char -1))
+    (insert "\n")
+    ;;
+    ))
 
 (defun xah-html-full-size-img-linkify (&optional *begin *end)
   "Make image file path at cursor point into a img link.
@@ -386,41 +387,41 @@ https://alexa.design/2okfMcj
 Example output:
 <a class=\"amz\" href=\"http://www.amazon.com/dp/B003CP0BHM/?tag=xahh-20\" title=\"Cyborg R T Gaming Mouse\">amazon</a>
 
-For info about the Amazon ID in URL, see: URL `http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number'
+ASIN is a 10 character string that's a product id.
 
 URL `http://ergoemacs.org/emacs/elisp_amazon-linkify.html'
-Version 2017-04-10"
+Version 2017-07-22"
   (interactive)
   (let (($bds (bounds-of-thing-at-point 'url))
-        $p1 $p2 $inputText $asin $productName )
+        $p1 $p2 $url $asin $thingName )
     (if (use-region-p)
-        (progn (setq $p1 (region-beginning)) (setq $p2 (region-end)))
-      (progn (setq $p1 (car $bds)) (setq $p2 (cdr $bds))))
-    (setq $inputText (buffer-substring-no-properties $p1 $p2))
-    (if (or (string-match "//amzn.to/" $inputText)
-            (string-match "//alexa.design/" $inputText))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (car $bds) $p2 (cdr $bds)))
+    (setq $url (buffer-substring-no-properties $p1 $p2))
+    (if (or (string-match "//amzn.to/" $url)
+            (string-match "//alexa.design/" $url))
         (progn (delete-region $p1 $p2)
-               (insert (format "<a class=\"amz_search\" href=\"%s\">amazon</a>" $inputText)))
+               (insert (format "<a class=\"amz_search\" href=\"%s\">amazon</a>" $url)))
       (progn
         (setq $asin
               (cond
-               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" $inputText) (match-string 1 $inputText))
-               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" $inputText) (match-string 1 $inputText))
-               ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" $inputText) (match-string 1 $inputText))
-               ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" $inputText) (match-string 1 $inputText))
-               ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" $inputText) (match-string 1 $inputText))
+               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" $url) (match-string 1 $url))
+               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" $url) (match-string 1 $url))
+               ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" $url) (match-string 1 $url))
+               ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" $url) (match-string 1 $url))
+               ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" $url) (match-string 1 $url))
                ((and
-                 (equal 10 (length $inputText ))
-                 (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" $inputText))
-                $inputText)
+                 (equal 10 (length $url ))
+                 (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" $url))
+                $url)
                (t (error "no amazon ASIN found"))))
 
         (setq
-         $productName
+         $thingName
          (replace-regexp-in-string
           "-" " "
-          (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" $inputText)
-              (progn (match-string 1 $inputText))
+          (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" $url)
+              (progn (match-string 1 $url))
             (progn
               (message "no product name found" ))
             ""
@@ -429,7 +430,7 @@ Version 2017-04-10"
         (delete-region $p1 $p2)
         (insert
          "<a class=\"amz\" href=\"http://www.amazon.com/dp/"
-         $asin "/?tag=xahh-20\" title=\"" $productName "\">Buy at amazon</a>")
+         $asin "/?tag=xahh-20\" title=\"" $thingName "\">Buy at amazon</a>")
         (search-backward "\">")))))
 
 ;; (defun local-linkify ()
