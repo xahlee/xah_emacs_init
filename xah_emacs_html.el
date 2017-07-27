@@ -358,10 +358,10 @@ sNew file name:")
     (when (null $fromPath)
       (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))
     (setq $toPath (concat
-                    (file-name-as-directory *dir-name )
-                    (replace-regexp-in-string " " "_" *file-name)
-                    "."
-                    (downcase (file-name-extension $fromPath ))))
+                   (file-name-as-directory *dir-name )
+                   (replace-regexp-in-string " " "_" *file-name)
+                   "."
+                   (downcase (file-name-extension $fromPath ))))
 
     (when (string-equal (file-name-extension $toPath ) "jpg-large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))

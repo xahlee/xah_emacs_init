@@ -49,6 +49,7 @@ Version 2016-10-24"
 
     ;; english
 
+    ("eff" "efficient" )
     ("alt3" "alternative" )
     ("ann" "announcement" )
     ("aprt" "apparently" )
@@ -59,7 +60,7 @@ Version 2016-10-24"
     ("bg" "background" )
     ("bt" "between" )
     ("c3" "character" )
-    ("ch" "Chinese" )
+    ("cn" "Chinese" )
     ("chars3" "characters" )
     ("comm" "communication" )
     ("comp" "computer" )
@@ -142,11 +143,12 @@ Version 2016-10-24"
     ("wp" "Wikipedia" )
 
     ;; computing, general
-    ("ahk" "AutoHotkey" )
+
     ("ai" "artificial intelligence" )
     ("ca3" "cellular automata" )
     ("cfg" "context-free grammar" )
     ("cli" "command line interface" )
+    ("cp" "codepoint" )
     ("cs" "computer science" )
     ("db3" "database" )
     ("dt3" "data type" )
@@ -177,6 +179,7 @@ Version 2016-10-24"
     ("wm" "Window Manager" )
 
     ;; computing, proper noun
+    ("ahk" "AutoHotkey" )
     ("cj" "Clojure" )
     ("cl" "Common Lisp" )
     ("el3" "emacs lisp" )

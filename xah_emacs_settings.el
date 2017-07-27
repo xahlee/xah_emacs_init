@@ -147,6 +147,9 @@
       (rename-buffer "eww" t))
     (add-hook 'eww-mode-hook 'xah-rename-eww-hook)))
 
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
+
 ;; (progn
 ;;   (defun xah-turn-on-line-number ()
 ;;     "Turn on line number on margin."
@@ -163,19 +166,19 @@
 ;;   (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
 ;; )
 
-;; (progn
-;;   ;; use variable-width font for some modes
-;;   (defun xah-use-variable-width-font ()
-;;     "Set current buffer to use variable-width font."
-;;     (variable-pitch-mode 1)
-;;     ;; (text-scale-increase 0.5 )
-;;     )
-;;   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
-;;   )
+(progn
+  ;; use variable-width font for some modes
+  (defun xah-use-variable-width-font ()
+    "Set current buffer to use variable-width font."
+    (variable-pitch-mode 1)
+    ;; (text-scale-increase 0.5 )
+    )
+  (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+  )
 
 (progn ; minibuffer
   (setq enable-recursive-minibuffers t)

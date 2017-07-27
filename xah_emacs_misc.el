@@ -154,11 +154,11 @@ Version 2017-04-21"
 (defun xah-toggle-margin-right ()
   "Toggle the right margin between `fill-column' or window width.
 This command is convenient when reading novel, documentation.
-Version 2016-07-21"
+Version 2017-07-23"
   (interactive)
-  (if (null (cdr (window-margins)))
-      (set-window-margins nil 0 (- (window-body-width) fill-column))
-    (set-window-margins nil 0 0)))
+  (if (cdr (window-margins))
+      (set-window-margins nil 0 0)
+    (set-window-margins nil 0 (- (window-body-width) fill-column))))
 
 (defun xah-toggle-line-spacing ()
   "Toggle line spacing between no extra space to extra half line height.
@@ -182,19 +182,19 @@ Call again to toggle back.
 URL `http://ergoemacs.org/emacs/emacs_novel_reading_mode.html'
 Version 2017-02-27"
   (interactive)
-  (if (null (get this-command 'state-on-p))
+  (if (get this-command 'state-on-p)
       (progn
-        (set-window-margins nil 0 9)
-        (variable-pitch-mode 1)
-        (setq line-spacing 0.4)
-        (setq word-wrap t)
-        (put this-command 'state-on-p t))
+        (set-window-margins nil 0 0)
+        (variable-pitch-mode 0)
+        (setq line-spacing nil)
+        (setq word-wrap nil)
+        (put this-command 'state-on-p nil))
     (progn
-      (set-window-margins nil 0 0)
-      (variable-pitch-mode 0)
-      (setq line-spacing nil)
-      (setq word-wrap nil)
-      (put this-command 'state-on-p nil)))
+      (set-window-margins nil 0 9)
+      (variable-pitch-mode 1)
+      (setq line-spacing 0.4)
+      (setq word-wrap t)
+      (put this-command 'state-on-p t)))
   (redraw-frame (selected-frame)))
 
 
@@ -349,7 +349,7 @@ Version 2016-11-02"
                 (if (string-match-p ".+html\\'" $file)
                     (xah-html-get-html-file-title $file t)
                   (file-name-nondirectory $file)))
-          (setq $title (if (null $title) "" $title ))
+          (setq $title (if $title $title "" ))
           (setq $title (xah-replace-pairs-in-string $title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
 
           (delete-region $p1 $p2)
