@@ -40,56 +40,6 @@ Version 2017-03-21"
             (progn (find-file $fpath))
           (progn (user-error "file doesn't exist.")))))))
 
-(defun xah-open-file-at-cursor ()
-  "Open the file path under cursor.
-If there is text selection, uses the text selection for path.
-If the path starts with “http://”, open the URL in browser.
-Input path can be {relative, full path, URL}.
-Path may have a trailing “:‹n›” that indicates line number. If so, jump to that line number.
-If path does not have a file extention, automatically try with “.el” for elisp files.
-This command is similar to `find-file-at-point' but without prompting for confirmation.
-
-URL `http://ergoemacs.org/emacs/emacs_open_file_path_fast.html'
-Version 2016-06-14"
-  (interactive)
-  (let* (($inputStr (if (use-region-p)
-                 (buffer-substring-no-properties (region-beginning) (region-end))
-               (let ($p0 $p1 $p2
-                         ($charSkipRegex "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›❮❯·。\\`"))
-                 (setq $p0 (point))
-                 ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-                 (skip-chars-backward $charSkipRegex)
-                 (setq $p1 (point))
-                 (goto-char $p0)
-                 (skip-chars-forward $charSkipRegex)
-                 (setq $p2 (point))
-                 (goto-char $p0)
-                 (buffer-substring-no-properties $p1 $p2))))
-         ($path (replace-regexp-in-string ":\\'" "" $inputStr)))
-    (if (string-match-p "\\`https?://" $path)
-        (browse-url $path)
-      (progn ; not starting “http://”
-        (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" $path)
-            (progn
-              (let (
-                    ($fpath (match-string 1 $path))
-                    ($line-num (string-to-number (match-string 2 $path))))
-                (if (file-exists-p $fpath)
-                    (progn
-                      (find-file $fpath)
-                      (goto-char 1)
-                      (forward-line (1- $line-num)))
-                  (progn
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" $fpath))
-                      (find-file $fpath))))))
-          (progn
-            (if (file-exists-p $path)
-                (find-file $path)
-              (if (file-exists-p (concat $path ".el"))
-                  (find-file (concat $path ".el"))
-                (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" $path))
-                  (find-file $path ))))))))))
-
 (defun xah-open-file-path-under-cursor ()
   "Open the file path under cursor.
 If there is text selection, use the text selection for path.
@@ -105,18 +55,23 @@ Version 2017-04-21"
            (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
              (let ($p0 $p1 $p2
+                       ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+                       ;; the colon is a problem. cuz it's in url, but not in file name
+                       ;; don't want to use just space as delimiter because path or url are often in brackets or quotes as in markdown or html
                        ($charSkipRegex "^  \"\t\n`'|()[]{}「」<>〔〕“”〈〉《》【】〖〗«»‹›❮❯❬❭·。\\`"))
                (setq $p0 (point))
-               ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
                (skip-chars-backward $charSkipRegex)
                (setq $p1 (point))
                (goto-char $p0)
                (skip-chars-forward $charSkipRegex)
                (setq $p2 (point))
                (goto-char $p0)
-               (buffer-substring-no-properties $p1 $p2)))))
+               (buffer-substring-no-properties $p1 $p2)
+               ;;
+               ))))
          ($inputStr2 (replace-regexp-in-string ":\\'" "" $inputStr1))
          $p
+         $isURL-p
          )
     (if (string-equal $inputStr2 "")
         (progn (user-error "No path under cursor" ))

@@ -7,10 +7,10 @@
 ;;   (global-undo-tree-mode 1)
 ;;   )
 
-(when (fboundp 'smex)
-  ;; enhanced execute-extended-command
-  (require 'smex)
-  (smex-initialize))
+;; (when (fboundp 'smex)
+;;   ;; enhanced execute-extended-command
+;;   (require 'smex)
+;;   (smex-initialize))
 
 ;; (when (fboundp 'magit-status)
 ;;   (define-key magit-file-section-map (kbd "u") nil)
@@ -81,3 +81,6 @@
 
 (when (fboundp 'global-company-mode)
   (global-company-mode 1))
+
+(when (fboundp 'go-mode)
+  (add-hook 'before-save-hook #'gofmt-before-save))

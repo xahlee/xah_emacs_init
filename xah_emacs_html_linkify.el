@@ -748,7 +748,7 @@ text can be any of:
 They will be changed into a HTML link in various formats, depending on the input.
 
 If there is text selection, use it as input.
-Version 2017-02-12"
+Version 2017-07-27"
   (interactive)
   (if (string-match "^/home/xah/web/" (or (buffer-file-name) default-directory))
       (let ( $p1 $p2 $input)
@@ -797,6 +797,7 @@ Version 2017-02-12"
          ((string-match-p "\\.mp3\\'" $input) (xah-audio-file-linkify))
          ((string-match-p "\\.ogg\\'" $input) (xah-audio-file-linkify))
          ((string-match-p "\\.mp4\\'" $input) (xah-video-file-linkify))
+         ((string-match-p "\\.mov\\'" $input) (xah-video-file-linkify))
          ((string-match-p "\\.mkv\\'" $input) (xah-video-file-linkify))
          ((string-match-p "\\.webm\\'" $input) (xah-video-file-linkify))
 

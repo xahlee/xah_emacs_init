@@ -46,6 +46,7 @@ Version 2016-10-24"
     ("re3" "return" )
     ("im" "I'm" )
     ("tr" "there are" )
+    ("u" "you" )
 
     ;; english
 
@@ -69,8 +70,8 @@ Version 2016-10-24"
     ("def3" "definition" )
     ("desc" "description" )
     ("dev3" "development" )
-    ("df3" "different" )
-    ("dfc3" "difference" )
+    ("df" "different" )
+    ("dfc" "difference" )
     ("dict" "dictionary" )
     ("dicts" "dictionaries" )
     ("dir" "directory" )
@@ -217,7 +218,7 @@ Version 2016-10-24"
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
 
     ("mx" "<kbd>Alt</kbd>+<kbd>x</kbd>")
-
+    
     ;; ("twittercard" "<meta name=\"twitter:image\" content=\"http://example.com/cat.jpg\">" )
 
     ;; regex
@@ -349,6 +350,16 @@ QQ: http://user.qzone.qq.com/2609322939" )
     ;;
 
     ))
+
+(define-abbrev-table 'go-mode-abbrev-table
+  '(
+    ("g3" "package main
+
+import \"fmt\"
+
+func main() {
+        fmt.Println(\"i ♥ cats\")
+}")))
 
 (set-default 'abbrev-mode t)
 
