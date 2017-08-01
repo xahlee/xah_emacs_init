@@ -358,8 +358,30 @@ QQ: http://user.qzone.qq.com/2609322939" )
 import \"fmt\"
 
 func main() {
-        fmt.Println(\"i ♥ cats\")
-}")))
+	fmt.Println(\"i ♥ cats\")
+}")
+
+    ("for" "	for i := 0; i < 4; i++ {
+		fmt.Println(i)
+	}")
+
+    ("if" "        if x < 0 {
+                return 1
+        }
+")
+
+("r" "return")
+
+("ps" "+")
+
+("eq" "==")
+("pt" "fmt.Println(3)")
+("fu" "func(x int) int { return 1 }")
+("v" "var = 3")
+
+    ;;
+
+    ))
 
 (set-default 'abbrev-mode t)
 

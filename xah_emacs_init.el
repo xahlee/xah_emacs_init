@@ -145,7 +145,7 @@ Version 2017-07-19"
 (autoload 'xah-js-mode "xah-js-mode" )
 
 (add-to-list 'load-path "~/git/xah-typescript-mode/")
-(require 'xah-ts-mode)
+(require 'xah-ts-mode nil t)
 (autoload 'xah-ts-mode "xah-ts-mode" )
 
 (progn

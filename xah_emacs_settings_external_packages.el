@@ -83,4 +83,8 @@
   (global-company-mode 1))
 
 (when (fboundp 'go-mode)
-  (add-hook 'before-save-hook #'gofmt-before-save))
+  ;; (add-hook 'before-save-hook #'gofmt-before-save)
+)
+
+
+
