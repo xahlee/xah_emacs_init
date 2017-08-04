@@ -816,3 +816,31 @@ Version 2017-06-18"
     (aset buffer-display-table ?\^L
           (vconcat (make-list 70 (make-glyph-code ?─ 'font-lock-comment-face))))
     (redraw-frame)))
+
+(defun xah-redtube-linkify ()
+  "Make the current line into a embeded HTML video object.
+The line can be a redtube ID or full URL.
+Examples of input line syntax:
+
+http://redtube.com/25635
+25635
+
+Here's a example result:
+<iframe src=\"http://embed.redtube.com/?id=25635\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>
+
+Version old old some 2010 or so"
+  (interactive)
+  (let ($p1 $p2 $inputStr $tmp $id $fixedurl)
+    (setq $p1 (line-beginning-position))
+    (setq $p2 (line-end-position))
+    (setq $inputStr (buffer-substring-no-properties $p1 $p2))
+    (setq $tmp (replace-regexp-in-string "http://redtube\\.com/" "" $inputStr))
+    (setq $tmp (replace-regexp-in-string "http://www\\.redtube\\.com/" "" $tmp))
+    (setq $tmp (replace-regexp-in-string "http://embed\\.redtube\\.com/player/?id=" "" $tmp))
+    (setq $id $tmp)
+    (setq $fixedurl "http://embed.redtube.com/player/?id=")
+
+    (delete-region $p1 $p2)
+
+    (insert (format "<iframe src=\"http://embed.redtube.com/?id=%s\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>" $id))
+    ))

@@ -99,7 +99,6 @@ Version 2017-07-19"
       (define-key xah-html-mode-map (kbd "<f5>") 'xah-browse-url-of-buffer)
 
       (define-key xah-html-mode-no-chord-map (kbd "e") 'xah-make-atom-entry)
-      (define-key xah-html-mode-no-chord-map (kbd "h") 'xah-all-linkify)
       (define-key xah-html-mode-no-chord-map (kbd "u") 'xahsite-update-article-timestamp)
       (define-key xah-html-mode-no-chord-map (kbd "n") 'xah-insert-reference-span-tag)
       (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
@@ -114,10 +113,10 @@ Version 2017-07-19"
       (define-key xah-html-mode-no-chord-map (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
       (define-key xah-html-mode-no-chord-map (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
       (define-key xah-html-mode-no-chord-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)
-      (define-key xah-html-mode-no-chord-map (kbd "SPC r j") 'xah-image-file-to-html-figure-tag)
-      (define-key xah-html-mode-no-chord-map (kbd "SPC r p") 'xah-html-php-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r j") 'xah-html-image-figure-linkify)
+      
       (define-key xah-html-mode-no-chord-map (kbd "SPC r r") 'xah-add-to-related-links)
-      (define-key xah-html-mode-no-chord-map (kbd "SPC r z") 'xah-amazon-linkify)
+      
 
       (define-key xah-html-mode-no-chord-map (kbd "j") nil)
 
@@ -209,7 +208,6 @@ Version 2017-07-19"
 (load (xah-get-fullpath "xah_emacs_html_insert_things"))
 (load (xah-get-fullpath "xah_emacs_html_linkify"))
 (load (xah-get-fullpath "xah_emacs_ref_linkify"))
-(load (xah-get-fullpath "xah_emacs_vid_linkify"))
 (load (xah-get-fullpath "xah_emacs_google_earth"))
 
 ;; (load (xah-get-fullpath "xah_emacs_font"))

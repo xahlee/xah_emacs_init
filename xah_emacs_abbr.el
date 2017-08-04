@@ -48,9 +48,9 @@ Version 2016-10-24"
     ("tr" "there are" )
     ("u" "you" )
 
-    ;; english
+    ;; english, single word
 
-    ("eff" "efficient" )
+
     ("alt3" "alternative" )
     ("ann" "announcement" )
     ("aprt" "apparently" )
@@ -61,8 +61,8 @@ Version 2016-10-24"
     ("bg" "background" )
     ("bt" "between" )
     ("c3" "character" )
-    ("cn" "Chinese" )
     ("chars3" "characters" )
+    ("cn" "Chinese" )
     ("comm" "communication" )
     ("comp" "computer" )
     ("cprs" "comparison" )
@@ -70,7 +70,7 @@ Version 2016-10-24"
     ("def3" "definition" )
     ("desc" "description" )
     ("dev3" "development" )
-    ("df" "different" )
+    ("df3" "different" )
     ("dfc" "difference" )
     ("dict" "dictionary" )
     ("dicts" "dictionaries" )
@@ -79,6 +79,7 @@ Version 2016-10-24"
     ("disc" "discussion" )
     ("dl" "download" )
     ("doc3" "documentation" )
+    ("eff" "efficient" )
     ("eg3" "ergonomic" )
     ("ei" "Put this in your emacs init file:" )
     ("env" "environment" )
@@ -113,7 +114,6 @@ Version 2016-10-24"
     ("occ" "occurrence" )
     ("org3" "organization" )
     ("paren" "parenthesis" )
-    ("pl" "programing language" )
     ("pls" "please" )
     ("pm3" "parameter" )
     ("pp" "people" )
@@ -121,10 +121,8 @@ Version 2016-10-24"
     ("prog" "program" )
     ("prog3" "programing" )
     ("q3" "question" )
-    ("qaa" "questions and answers" )
     ("ref" "reference" )
     ("scs" "screenshot" )
-    ("sjw3" "social justice warriors" )
     ("st" "string" )
     ("sw" "software" )
     ("tb" "trackball" )
@@ -135,6 +133,15 @@ Version 2016-10-24"
     ("und" "understand" )
     ("ver" "version" )
     ("vid" "video" )
+    ("wo" "without" )
+
+    ;; english, multiple words
+
+
+    ("pl" "programing language" )
+    ("qaa" "questions and answers" )
+    ("sjw3" "social justice warriors" )
+    ("wip" "work in progress" )
 
     ;; english, proper noun
     ("ahd" "American Heritage Dictionary" )
@@ -218,7 +225,7 @@ Version 2016-10-24"
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
 
     ("mx" "<kbd>Alt</kbd>+<kbd>x</kbd>")
-    
+
     ;; ("twittercard" "<meta name=\"twitter:image\" content=\"http://example.com/cat.jpg\">" )
 
     ;; regex
@@ -354,30 +361,39 @@ QQ: http://user.qzone.qq.com/2609322939" )
 (define-abbrev-table 'go-mode-abbrev-table
   '(
     ("g3" "package main
-
 import \"fmt\"
-
 func main() {
-	fmt.Println(\"i ♥ cats\")
+
+	fmt.Println( 3 )
+
 }")
 
-    ("for" "	for i := 0; i < 4; i++ {
-		fmt.Println(i)
+    ("if" "if x < 0 { 3 }")
+    ("ie" " if x < 0 { 3 } else { 4 }")
+    ("ei" "else if x > 0 { 3 }")
+    ("else" "else { 3 }")
+    ("for" "for i := 0; i < 4; i++ { i }")
+    ("r" "return")
+    ("ps" "+")
+    ("eq" "==")
+    ("pt" "fmt.Println(3)")
+    ("fu" "func(x int) int { return 1 }")
+    ("v" "var x = 3")
+    ("ft" "fallthrough")
+    ("switch" "	switch 3 {
+	case 1:
+		fmt.Println( 3 )
+	case 2, 3:
+		fmt.Println( 4 )
+	default:
+		fmt.Println( 5 )
 	}")
 
-    ("if" "        if x < 0 {
-                return 1
-        }
-")
+    ("rto" "reflect.TypeOf()")
 
-("r" "return")
+    ("map" "map[string]string")
 
-("ps" "+")
 
-("eq" "==")
-("pt" "fmt.Println(3)")
-("fu" "func(x int) int { return 1 }")
-("v" "var = 3")
 
     ;;
 

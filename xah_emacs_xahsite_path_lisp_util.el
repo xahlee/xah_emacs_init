@@ -492,10 +492,6 @@ if the *input-str is a relative path, *default-dir is used to resolve to full pa
     $s
     ))
 
-(defun xah-path-ends-in-image-suffix-p (*path)
-  "Returns t if *path ends in .jpg .png .gif .svg, else nil."
-  (string-match-p "\.jpg\\'\\|\.png\\'\\|\.gif\\'\\|\.svg\\'" *path))
-
 (defun xah-find-files-file-predicate-p (*fname _parentdir)
   "return t if *fname is what we want. Else nil.
 The arg _parentdir is not used. It is there so that this function can be passed as 2nd arg to `find-lisp-find-files-internal', which requires 2 args.

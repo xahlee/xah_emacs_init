@@ -63,48 +63,6 @@ Version 2015-05-12"
         (delete-region $p1 $p2)
         (insert "<img src=\"" $fullPath "\" alt=\"" $altText "\">")))))
 
-(defun xah-image-file-to-html-figure-tag ()
-  "Replace a image file's path under cursor with a HTML img tag,
-and wrap it with “figure” and “figcaption” tags.
-
-Example, if cursor is on the word “i/cat.png”, then it will became
-
-<figure>
-<img src=\"cat.png\" alt=\"cat\" width=\"707\" height=\"517\" />
-<figcaption>▮</figcaption>
-</figure>
-
-If there's a text selection, use that as image path.
-
-This function calls `xah-html-image-linkify'.
-Version 2017-07-20"
-  (interactive)
-  (let ($p1 $p2 $altStr)
-    (setq $altStr (xah-html-image-linkify))
-
-    ;; (search-backward "alt=\"")
-    ;; (forward-char 5)
-
-    ;; (progn
-    ;;   (setq $p1 (point))
-    ;;   (search-forward "\"")
-    ;;   (setq $p2 (- (point) 1) )
-    ;;   (setq $altStr (buffer-substring $p1 $p2)))
-
-    (search-backward "<img ")
-    (insert "<figure>\n")
-    (search-forward ">")
-    (insert "\n<figcaption>\n")
-    (insert $altStr "\n</figcaption>\n</figure>\n")
-
-    (search-backward "</figcaption>")
-
-    (while (looking-back "[ 0-9\n]" 200 )
-      (delete-char -1))
-    (insert "\n")
-    ;;
-    ))
-
 (defun xah-html-full-size-img-linkify (&optional *begin *end)
   "Make image file path at cursor point into a img link.
 
@@ -372,67 +330,6 @@ There are other amazon categories, but not supported by this function."
     (insert  (xah-amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
 
-(defun xah-amazon-linkify ()
-  "Make the current amazon URL or selection into a link.
-
-Examples of amazon product URL formats
-http://www.amazon.com/Cyborg-R-T-Gaming-Mouse/dp/B003CP0BHM/ref=pd_sim_e_1
-http://www.amazon.com/gp/product/B003CP0BHM
-http://www.amazon.com/exec/obidos/ASIN/B003CP0BHM/xahh-20
-http://www.amazon.com/exec/obidos/tg/detail/-/B003CP0BHM/
-http://www.amazon.com/dp/B003CP0BHM?tag=xahhome-20
-http://amzn.to/1F5M1hA
-https://alexa.design/2okfMcj
-
-Example output:
-<a class=\"amz\" href=\"http://www.amazon.com/dp/B003CP0BHM/?tag=xahh-20\" title=\"Cyborg R T Gaming Mouse\">amazon</a>
-
-ASIN is a 10 character string that's a product id.
-
-URL `http://ergoemacs.org/emacs/elisp_amazon-linkify.html'
-Version 2017-07-22"
-  (interactive)
-  (let (($bds (bounds-of-thing-at-point 'url))
-        $p1 $p2 $url $asin $thingName )
-    (if (use-region-p)
-        (setq $p1 (region-beginning) $p2 (region-end))
-      (setq $p1 (car $bds) $p2 (cdr $bds)))
-    (setq $url (buffer-substring-no-properties $p1 $p2))
-    (if (or (string-match "//amzn.to/" $url)
-            (string-match "//alexa.design/" $url))
-        (progn (delete-region $p1 $p2)
-               (insert (format "<a class=\"amz_search\" href=\"%s\">amazon</a>" $url)))
-      (progn
-        (setq $asin
-              (cond
-               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)/?" $url) (match-string 1 $url))
-               ((string-match "/dp/\\([[:alnum:]]\\{10\\}\\)\\?tag=" $url) (match-string 1 $url))
-               ((string-match "/gp/product/\\([[:alnum:]]\\{10\\}\\)" $url) (match-string 1 $url))
-               ((string-match "/ASIN/\\([[:alnum:]]\\{10\\}\\)" $url) (match-string 1 $url))
-               ((string-match "/tg/detail/-/\\([[:alnum:]]\\{10\\}\\)/" $url) (match-string 1 $url))
-               ((and
-                 (equal 10 (length $url ))
-                 (string-match "\\`\\([[:alnum:]]\\{10\\}\\)\\'" $url))
-                $url)
-               (t (error "no amazon ASIN found"))))
-
-        (setq
-         $thingName
-         (replace-regexp-in-string
-          "-" " "
-          (if (string-match "amazon\.com/\\([^/]+?\\)/dp/" $url)
-              (progn (match-string 1 $url))
-            (progn
-              (message "no product name found" ))
-            ""
-            )))
-
-        (delete-region $p1 $p2)
-        (insert
-         "<a class=\"amz\" href=\"http://www.amazon.com/dp/"
-         $asin "/?tag=xahh-20\" title=\"" $thingName "\">Buy at amazon</a>")
-        (search-backward "\">")))))
-
 ;; (defun local-linkify ()
 ;; "Make the path under cursor into a local link.\n
 ;; For Example, if you cursor is on the text “../emacs/emacs.html”,
@@ -624,78 +521,6 @@ Version 2016-10-31"
           (insert $resultStr))
       (progn (message (format "Cannot locate the file: 「%s」" $fPath))))))
 
-(defun xah-javascript-linkify ()
-  "Make the path under cursor into a HTML link.
- eg <script src=\"xyz.js\"></script>
-Version 2016-10-31"
-  (interactive)
-  (let* (
-         ($bds (xah-get-bounds-of-thing-or-region 'filepath))
-         ($p1 (car $bds))
-         ($p2 (cdr $bds))
-         ($inputStr (buffer-substring-no-properties $p1 $p2))
-         ($src
-          (if (string-match "^http" $inputStr )
-              $inputStr
-            (file-relative-name $inputStr))))
-    (delete-region $p1 $p2)
-    (insert (format "<script defer src=\"%s\"></script>" $src))))
-
-(defun xah-audio-file-linkify ()
-  "Make the path under cursor into a HTML link.
-e.g. xyz.mp3
-becomes
-<audio src=\"xyz.mp3\"></audio>"
-  (interactive)
-  (let* (
-         ($bds (xah-get-bounds-of-thing-or-region 'filepath))
-         ($p1 (car $bds))
-         ($p2 (cdr $bds))
-         ($inputStr (buffer-substring-no-properties $p1 $p2))
-         ($src
-          (if (string-match "^http" $inputStr )
-              $inputStr
-            (file-relative-name $inputStr))))
-    (delete-region $p1 $p2)
-    (insert (format "<audio src=\"%s\" controls></audio>" $src))))
-
-(defun xah-video-file-linkify ()
-  "Make the path under cursor into a HTML video tag link.
-e.g. xyz.webm
-becomes
-<video src=\"i/xyz.webm\" controls loop autoplay></video>
-Version 2017-02-12"
-  (interactive)
-  (let* (
-         ($bds (bounds-of-thing-at-point 'filename ))
-         ($p1 (car $bds))
-         ($p2 (cdr $bds))
-         ($inputStr (buffer-substring-no-properties $p1 $p2 ))
-         ($src
-          (if (string-match "^http" $inputStr )
-              $inputStr
-            (if (file-exists-p $inputStr)
-                (file-relative-name $inputStr)
-              (user-error "file not found: 「%s」" $inputStr)))))
-    (delete-region $p1 $p2)
-    (insert (format "<video src=\"%s\" controls loop autoplay></video>" $src))))
-
-(defun xah-css-linkify ()
-  "Make the path under cursor into a HTML link.
- e.g. /home/xah/web/xahlee_org/lit.css
-becomes
-<link rel=\"stylesheet\" href=\"../lit.css\" />
-Version 2016-10-31"
-  (interactive)
-  (let* (
-         ($bds (xah-get-bounds-of-thing-or-region 'filepath))
-         ($p1 (car $bds))
-         ($p2 (cdr $bds))
-         ($inputStr (buffer-substring-no-properties $p1 $p2))
-         ($src (if (string-match "^http" $inputStr ) $inputStr (file-relative-name $inputStr))))
-    (delete-region $p1 $p2)
-    (insert (format "<link rel=\"stylesheet\" href=\"%s\" />" $src))))
-
 (defun xah-curve-linkify ()
   "Make the current word or text selection into a HTML link.
 
@@ -786,32 +611,15 @@ Version 2017-07-27"
          ((string-match-p "css_transitions/CSS_Transitions.html" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "php-doc/" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" $input) (xah-blogger-linkify))
-         ((string-match-p "www\.amazon\.com/" $input) (xah-amazon-linkify))
-         ((string-match-p "//amzn\.to/" $input) (xah-amazon-linkify))
-         ((string-match-p "alexa\.design/" $input) (xah-amazon-linkify))
-         ((string-match-p "www\.youtube\.com/watch" $input) (xah-youtube-linkify))
-         ((string-match-p "/emacs_manual/" $input) (xah-html-emacs-ref-linkify))
+         
          ((string-match-p "/node_api/" $input) (xah-nodejs-ref-linkify))
-         ((string-match-p "\\.js\\'" $input) (xah-javascript-linkify))
-         ((string-match-p "\\.css\\'" $input) (xah-css-linkify))
-         ((string-match-p "\\.mp3\\'" $input) (xah-audio-file-linkify))
-         ((string-match-p "\\.ogg\\'" $input) (xah-audio-file-linkify))
-         ((string-match-p "\\.mp4\\'" $input) (xah-video-file-linkify))
-         ((string-match-p "\\.mov\\'" $input) (xah-video-file-linkify))
-         ((string-match-p "\\.mkv\\'" $input) (xah-video-file-linkify))
-         ((string-match-p "\\.webm\\'" $input) (xah-video-file-linkify))
-
+         ((string-match-p "/emacs_manual/" $input) (xah-html-emacs-ref-linkify))
+         
          ((xahsite-url-is-xah-website-p $input) (xah-file-linkify $p1 $p2))
-         ((or (string-match-p "wikipedia.org/" $input)
-              (string-match-p "wiktionary.org/" $input))
-          (let ((case-fold-search nil))
-            (if (xah-path-ends-in-image-suffix-p $input)
-                (xah-html-source-url-linkify 0)
-              (xah-html-wikipedia-url-linkify ))))
+         
+;; (xah-html-image-figure-linkify)
 
-         ((and (string-match-p "\\`https?://" $input)) (xah-html-source-url-linkify 0)) ; generic URL
-
-         ((xah-path-ends-in-image-suffix-p $input) (xah-image-file-to-html-figure-tag))
+         ((xah-html-path-ends-in-image-suffix-p $input) (xah-html-image-figure-linkify))
 
          (t (xah-file-linkify $p1 $p2))))
     (xah-html-wrap-url)))
