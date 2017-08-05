@@ -60,21 +60,21 @@ Version 2015-07-06"
   (interactive)
   (backward-char xah-forward-n-chars))
 
-(defun xah-mouse-click-to-search (*click)
+(defun xah-mouse-click-to-search (@click)
   "Mouse click to start `isearch-forward-symbol-at-point' (emacs 24.4) at clicked point.
 URL `http://ergoemacs.org/emacs/emacs_mouse_click_highlight_word.html'
 Version 2016-07-18"
   (interactive "e")
-  (let ((p1 (posn-point (event-start *click))))
+  (let ((p1 (posn-point (event-start @click))))
     (goto-char p1)
     (isearch-forward-symbol-at-point)))
 
-(defun xah-click-describe-char (*click)
+(defun xah-click-describe-char (@click)
   "Mouse click to `describe-char' at clicked point.
 URL `http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html'
 Version 2016-07-18"
   (interactive "e")
-  (let ((p1 (posn-point (event-start *click))))
+  (let ((p1 (posn-point (event-start @click))))
     (goto-char p1)
     (describe-char p1)))
 

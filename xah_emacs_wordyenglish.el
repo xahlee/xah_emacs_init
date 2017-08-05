@@ -33,7 +33,7 @@ Version 2015-03-11"
   (progn
     (xah-html-wrap-html-tag "b" "w")))
 
-(defun xah-words-move-word-to-page (*category)
+(defun xah-words-move-word-to-page (@category)
   "Take current selection or block of text, ask which page to move it to."
   (interactive
    (list (ido-completing-read "Which:" '("specialwords"
@@ -55,7 +55,7 @@ Version 2015-03-11"
         $p1
         $p2
         $wordText
-        ($destFile (concat *category ".html")))
+        ($destFile (concat @category ".html")))
     (if (use-region-p)
         (progn
           (setq $p1 (region-beginning))

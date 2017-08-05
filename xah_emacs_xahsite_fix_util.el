@@ -4,23 +4,23 @@
 ;;   Xah Lee
 ;; ∑ http://xahlee.org/
 
-(defun xah-add-to-related-links (*source-file-path *dest-file-path)
+(defun xah-add-to-related-links (@source-file-path @dest-file-path)
   "Add current file as a link to the related links section of filename at point.
 
-When called interactively, *source-file-path is the path of current buffer, and *dest-file-path is the path/url under cursor.
+When called interactively, @source-file-path is the path of current buffer, and @dest-file-path is the path/url under cursor.
 
-When called interactively, the buffer for *dest-file-path is left unsaved and as current.
+When called interactively, the buffer for @dest-file-path is left unsaved and as current.
 
-When called non-interactively, *source-file-path and *dest-file-path should be file full paths. If changes are made to *dest-file-path, it returns t, else nil.
+When called non-interactively, @source-file-path and @dest-file-path should be file full paths. If changes are made to @dest-file-path, it returns t, else nil.
 
 Version 2016-12-19"
   (interactive
    (list (buffer-file-name)
          (xahsite-href-value-to-filepath (thing-at-point 'filename) (buffer-file-name))))
   (let ( $title $newHrefValue $buffer )
-    (setq $buffer (find-file *dest-file-path ))
+    (setq $buffer (find-file @dest-file-path ))
     (goto-char 1)
-    (setq $newHrefValue (xahsite-filepath-to-href-value *source-file-path *dest-file-path))
+    (setq $newHrefValue (xahsite-filepath-to-href-value @source-file-path @dest-file-path))
     (if (search-forward $newHrefValue nil t)
         (progn
           (when (called-interactively-p 'interactive)
@@ -28,11 +28,11 @@ Version 2016-12-19"
              (format
               "Already exists: 「%s」  at 「%s」"
               (file-name-nondirectory $newHrefValue)
-              (file-name-nondirectory *dest-file-path))))
+              (file-name-nondirectory @dest-file-path))))
           (kill-buffer $buffer)
           nil)
       (progn
-        (setq $title (xah-html-get-html-file-title *source-file-path))
+        (setq $title (xah-html-get-html-file-title @source-file-path))
         (goto-char 1)
         (if (search-forward "<div class=\"rltd\">" nil t)
             (progn (search-forward "<ul>" nil t)
@@ -48,19 +48,19 @@ Version 2016-12-19"
 
 " $newHrefValue $title))))
         (when (not (called-interactively-p 'interactive))
-          (write-region (point-min) (point-max) *dest-file-path)
+          (write-region (point-min) (point-max) @dest-file-path)
           (kill-buffer))
         t
         ))))
 
-(defun xahsite-update-related-links (*filePath *destFileList)
+(defun xahsite-update-related-links (@filePath @destFileList)
   "Update related links tags.
 
-Add the current page (*filePath) as link to the “related pages” section at *destFileList.
+Add the current page (@filePath) as link to the “related pages” section at @destFileList.
 
-When called interactively, *filePath is the current file. *destFileList is file paths extracted from current text block or text selection.
+When called interactively, @filePath is the current file. @destFileList is file paths extracted from current text block or text selection.
 
-When called non-interactively, *filePath is a string. *destFileList is list of filenames. All paths should be absolute path.
+When called non-interactively, @filePath is a string. @destFileList is list of filenames. All paths should be absolute path.
 
 The related pages are HTML “div.rltd” element, having this form
 
@@ -96,8 +96,8 @@ The related pages are HTML “div.rltd” element, having this form
 
   (mapc
    (lambda ($y)
-     (xah-add-to-related-links *filePath $y))
-   *destFileList))
+     (xah-add-to-related-links @filePath $y))
+   @destFileList))
 
 (defun xah-fix-add-alts ()
   "Add the alt attribute to image tags in current file.
@@ -121,17 +121,17 @@ This code is specific to xahlee.org ."
       (insert "\n"))
     ))
 
-(defun xah-fix-rm-span-quote (*start *end)
+(defun xah-fix-rm-span-quote (@start @end)
   "remove “” around <span class=\"code\"></span> tags in current buffer."
   (interactive "r")
 
   (save-excursion
-    (narrow-to-region *start *end)
+    (narrow-to-region @start @end)
     (while
         (re-search-forward "“<span class=\"code\">\\([^<]+?\\)</span>”" nil t)
       (replace-match "<span class=\"code\">\\1</span>" t))))
 
-(defun xah-fix-to-html4strict (&optional *fName)
+(defun xah-fix-to-html4strict (&optional @fName)
   "Change buffer content from HTML4 trans to HTML4 strict,
 by performing some custome set of find-replace operations.
 
@@ -146,7 +146,7 @@ todo:
 This function is specific to xahlee.org. 2008-05-10."
   (interactive)
 
-  (when *fName (find-file *fName))
+  (when @fName (find-file @fName))
 
 ;; wrap div.img to “<img …>”
   (goto-char (point-min))
@@ -286,12 +286,12 @@ version: ancient, 2010 perhaps. 2016-12-19"
         (funcall 'html-mode)
         (set-buffer $buff)))))
 
-(defun xah-fix-ellipsis (*string &optional *from *to)
+(defun xah-fix-ellipsis (@string &optional @from @to)
   "Change “...” to “…”.
 
 When called interactively, work on current text block or text selection. (a “text block” is text between blank lines)
 
-When called non-interactively, if *string is non-nil, returns a changed string.  If *string nil, change the text in the region between positions *from *to."
+When called non-interactively, if @string is non-nil, returns a changed string.  If @string nil, change the text in the region between positions @from @to."
   (interactive
    (if (use-region-p)
        (list nil (region-beginning) (region-end))
@@ -308,15 +308,15 @@ When called non-interactively, if *string is non-nil, returns a changed string. 
          (list nil pt1 pt2)))))
 
   (let ($workOnStringP $inputStr $outputStr)
-    (setq $workOnStringP (if *string t nil))
-    (setq $inputStr (if $workOnStringP *string (buffer-substring-no-properties *from *to)))
+    (setq $workOnStringP (if @string t nil))
+    (setq $inputStr (if $workOnStringP @string (buffer-substring-no-properties @from @to)))
     (setq $outputStr (replace-regexp-in-string "\\.\\.\\." "…" $inputStr))
 
     (if $workOnStringP
         $outputStr
       (save-excursion
-        (delete-region *from *to)
-        (goto-char *from)
+        (delete-region @from @to)
+        (goto-char @from)
         (insert $outputStr)))))
 
 (defun xah-fix-number-items-block  ()

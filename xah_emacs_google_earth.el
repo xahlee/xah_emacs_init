@@ -1,4 +1,5 @@
-;-*- coding: utf-8 -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
+
 ; Xah Lee's emacs customization related to google earth, and also a Geogebra function that work similarly.
 
 ; 2007-10, 2011-10-21
@@ -10,7 +11,7 @@
 ;; ✈ 🌎
 ;; ⊕ 🌐
 
-(defun xah-grab-lines (*n)
+(defun xah-grab-lines (@n)
   "Delete the next n lines and return a list
 Where each element is a line.
 each line does not include the newline character."
@@ -19,7 +20,7 @@ each line does not include the newline character."
   (let ((p1 (point))
         p2
         ($lines '()))
-    (dotimes ($i (- *n 1)) (forward-line))
+    (dotimes ($i (- @n 1)) (forward-line))
     (end-of-line)
     (setq p2 (point))
     (setq $lines (split-string (buffer-substring-no-properties p1 p2) "\n" ))
@@ -28,11 +29,11 @@ each line does not include the newline character."
     ;; (print $lines)
     $lines))
 
-(defun xah-insert-google-map-link (&optional *title *latlon)
+(defun xah-insert-google-map-link (&optional @title @latlon)
   "Insert HTML link to Google Map.
 
-*title is the title attribute for the HTML link.
-*latlon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
+@title is the title attribute for the HTML link.
+@latlon is a vector [y x] where y is latitude, x is longitude. Each must be a decimal number. See also: `xah-latitude-longitude-decimalize'
 
 Example of inserted text:
  <a href=\"http://maps.google.com/maps?q=40.71277777777778%2C-74.00583333333333\" title=\"▮\" target=\"_blank\">Google Map</a>
@@ -41,38 +42,38 @@ URL `http://ergoemacs.org/emacs/elisp_make_google-map_link.html'
 Version 2015-05-12"
   (interactive)
   (let ($title $y $x)
-    (setq $title (if *title *title ""))
-    (if *latlon
+    (setq $title (if @title @title ""))
+    (if @latlon
         (progn
-          (setq $y (elt *latlon 0))
-          (setq $x (elt *latlon 1)))
+          (setq $y (elt @latlon 0))
+          (setq $x (elt @latlon 1)))
       (progn
         (setq $y "y▮")
         (setq $x "x▮")))
     (insert "<a href=\"http://maps.google.com/maps?q=" (number-to-string $y) "%2C" (number-to-string $x) "\" title=\"" $title "\" target=\"_blank\">Google Map</a>\n")))
 
-(defun xah-insert-google-earth-link (&optional *title *filePath)
+(defun xah-insert-google-earth-link (&optional @title @filePath)
   "Insert a HTML markup for link to a local Goole Earth file.
- “*title” is the “title” attribute in the anchor link.
+ “@title” is the “title” attribute in the anchor link.
  “file-path” is the full path to the KML file.
 Here's a sample inserted text:
 <a href=\"../kml/las_vegas.kmz\" title=\"Las Vegas\">🌎</a>"
   (interactive)
-  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if *filePath (xahsite-filepath-to-url *filePath) "▮") (if *title *title "▮") )) )
+  (insert (format "<a href=\"%s\" title=\"%s\">🌎</a>\n" (if @filePath (xahsite-filepath-to-url @filePath) "▮") (if @title @title "▮") )) )
 
-(defun xah-insert-kml (&optional *kml-title *lon-lat *source-fpath)
+(defun xah-insert-kml (&optional @kml-title @lon-lat @source-fpath)
   "Insert a simple Google Earth KML markup template.
- *kml-title is the name to use for the <name> tag.
-*lon-lat is a vector [longitude latitude]. They must be real numbers.
- *source-fpath is the file that links to this kml file,
+ @kml-title is the name to use for the <name> tag.
+@lon-lat is a vector [longitude latitude]. They must be real numbers.
+ @source-fpath is the file that links to this kml file,
 used in the <description> tag."
   (interactive)
   (let (coord-x coord-y)
-    (when (not *kml-title) (setq *kml-title "▮"))
-    (if *lon-lat
+    (when (not @kml-title) (setq @kml-title "▮"))
+    (if @lon-lat
         (progn
-          (setq coord-x (elt *lon-lat 0))
-          (setq coord-y (elt *lon-lat 1)))
+          (setq coord-x (elt @lon-lat 0))
+          (setq coord-y (elt @lon-lat 1)))
       (progn
         (setq coord-x 0)
         (setq coord-y 0)))
@@ -89,13 +90,13 @@ used in the <description> tag."
 </Placemark>
 </kml>
 "
-             *kml-title
-             (if *source-fpath (format "See: %s" (xahsite-filepath-to-url *source-fpath)) "")
+             @kml-title
+             (if @source-fpath (format "See: %s" (xahsite-filepath-to-url @source-fpath)) "")
              (number-to-string coord-x)
              (number-to-string coord-y)))))
 
-(defun xah-latitude-longitude-decimalize (*latlon)
-  "Convert latitude longitude string *latlon in minutes second format to decimal.
+(defun xah-latitude-longitude-decimalize (@latlon)
+  "Convert latitude longitude string @latlon in minutes second format to decimal.
 Returns a vector.
 For example: 「\"37°26′36.42″N 06°15′14.28″W\"」
 becomes 「[37.44345 -6.253966666666667]」
@@ -108,7 +109,7 @@ Version 2015-02-08"
          (split-string
           (replace-regexp-in-string "'" "′"
                                     (replace-regexp-in-string "\"" "″"
-                                                              (replace-regexp-in-string "''" "″" *latlon t t) t t) t t)
+                                                              (replace-regexp-in-string "''" "″" @latlon t t) t t) t t)
           " +"))
         $latStr $latNum $lonStr $lonNum $deg $min $sec $sign ($c (/ 1.0 60.0)))
 
@@ -145,8 +146,8 @@ Version 2015-02-08"
       (progn (user-error "Your longitude is malformed")))
     (vector $latNum $lonNum)))
 
-;; (defun minsec-to-dec (*latlong)
-;;   "Convert latitude longitude string *latlong in minutes second format to decimal.
+;; (defun minsec-to-dec (@latlong)
+;;   "Convert latitude longitude string @latlong in minutes second format to decimal.
 
 ;; For example: 「37°26′36.42″N 06°15′14.28″W」
 ;; becomes
@@ -256,10 +257,10 @@ Version 2016-07-12"
 
 
 
-(defun xah-insert-ggb-link (*file-core-name *file-title)
+(defun xah-insert-ggb-link (@file-core-name @file-title)
   "Insert HTML link to GeoGebra (“.ggb”) file."
   (interactive)
-  (insert "<a class=\"ggb\" href=\"../ggb/" *file-core-name ".html\">" *file-title "</a>"))
+  (insert "<a class=\"ggb\" href=\"../ggb/" @file-core-name ".html\">" @file-title "</a>"))
 
 (defun xah-make-ggb ()
   "Create a Geogebra file set and link.

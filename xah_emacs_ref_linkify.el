@@ -13,25 +13,25 @@ For example: if current node is 「(elisp) The Mark」, switch to browser and lo
     (emacs-info-node-string-to-url
      (Info-copy-current-node-name)))))
 
-(defun emacs-info-node-string-to-url (*info-node-str)
-  "change the *info-node-str into a xah emacs doc link.
+(defun emacs-info-node-string-to-url (@info-node-str)
+  "change the @info-node-str into a xah emacs doc link.
 For example: 「(elisp) The Mark」 ⇒ 「http://ergoemacs.org/emacs_manual/elisp/The-Mark.html」"
   (let (($domainStr "http://ergoemacs.org/")
         ($tempPath
          (xah-replace-pairs-in-string
-          *info-node-str
+          @info-node-str
           [["(elisp) " ""]
            ["(emacs) " ""]
            ["-" "_002d"]
            [" " "-"] ] )))
 
     (cond
-     ((string-match "(elisp)" *info-node-str )
+     ((string-match "(elisp)" @info-node-str )
       (format "%s%s%s.html" $domainStr "emacs_manual/elisp/" $tempPath))
-     ((string-match "(emacs)" *info-node-str )
+     ((string-match "(emacs)" @info-node-str )
       (format "%s%s%s.html" $domainStr "emacs_manual/emacs/" $tempPath))
      (t
-      (user-error "*info-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" *info-node-str)))))
+      (user-error "@info-node-str 「%s」 doesn't match “(elisp)” or “(emacs)”" @info-node-str)))))
 
 (defun xah-html-emacs-ref-linkify ()
   "Make the current line or selection into a emacs reference link.

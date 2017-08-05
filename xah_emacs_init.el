@@ -10,8 +10,8 @@
 
 ; loading custom commands and functions
 
-(defun xah-get-fullpath (*file-relative-path)
-  "Return the full path of *file-relative-path, relative to caller's file location.
+(defun xah-get-fullpath (@file-relative-path)
+  "Return the full path of @file-relative-path, relative to caller's file location.
 
 Example: If you have this line
  (xah-get-fullpath \"../xyz.el\")
@@ -31,7 +31,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 Version 2017-07-19"
 
-  (concat (file-name-directory (or load-file-name buffer-file-name)) *file-relative-path)
+  (concat (file-name-directory (or load-file-name buffer-file-name)) @file-relative-path)
 )
 
 

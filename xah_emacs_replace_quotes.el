@@ -11,16 +11,16 @@
 
 
 
-(defun xah-format-c-lang-region (*begin *end)
+(defun xah-format-c-lang-region (@begin @end)
   "Expand region of C style syntax languages so that it is nicely formated.
 Experimental code.
 WARNING: If region has comment or string, the code'd be fucked up."
   (interactive "r")
   (save-excursion
     (save-restriction
-      (narrow-to-region *begin *end)
+      (narrow-to-region @begin @end)
       (xah-replace-regexp-pairs-region
-       *begin *end
+       @begin @end
        '(
          ["{" "{\n"]
          [";" ";\n"]
@@ -28,11 +28,11 @@ WARNING: If region has comment or string, the code'd be fucked up."
          [";[\t\n]*}" "; }"]
          )
        t)
-      (indent-region *begin *end))))
+      (indent-region @begin @end))))
 
 
 
-(defun xah-replace-latex-to-unicode (*begin *end)
+(defun xah-replace-latex-to-unicode (@begin @end)
   "Replace TeX markup to Unicode in current line or selection.
 Example: \\alpha becomes α.
 Version 2015-04-28"
@@ -41,8 +41,8 @@ Version 2015-04-28"
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-end-position))))
   (xah-replace-pairs-region
-   *begin
-   *end
+   @begin
+   @end
    '(
      ["\\rightarrow" "→"]
      ["\\Sigma" "Σ"]
@@ -58,7 +58,7 @@ Version 2015-04-28"
      ["\\in" "∈"]
      ) "REPORT" "HILIGHT" ))
 
-(defun xah-replace-text-to-latex-region (*begin *end)
+(defun xah-replace-text-to-latex-region (@begin @end)
   "Replace math function names or symbols by their LaTeX markup.
 Work on current line or selection.
 Version 2015-04-28"
@@ -67,8 +67,8 @@ Version 2015-04-28"
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-end-position))))
   (xah-replace-pairs-region
-   *begin
-   *end
+   @begin
+   @end
    '(
      ["*" "\\ "]
      ["cos(" "\\cos("]
@@ -79,7 +79,7 @@ Version 2015-04-28"
      ["R^3" "\\mathbb{R}^3"]
      ) "REPORT" "HILIGHT" ))
 
-(defun xah-replace-mathematica-symbols (*begin *end)
+(defun xah-replace-mathematica-symbols (@begin @end)
   "Replace Mathematica's special char markup to Unicode in current line or selection.
 For example:
  \\=\\[Infinity] ⇒ ∞
@@ -90,13 +90,13 @@ Version 2015-04-28"
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-end-position))))
   (xah-replace-pairs-region
-   *begin
-   *end
+   @begin
+   @end
    '(
      ["\\[Infinity]" "∞"]
      ["\\[Equal]" "=="]) "REPORT" "HILIGHT" ))
 
-(defun xah-replace-greek-letter-name-to-symbol (*begin *end)
+(defun xah-replace-greek-letter-name-to-symbol (@begin @end)
   "Replace alpha to α, beta to β etc in current line or selection.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_greeks_to_symbols.html'
@@ -107,8 +107,8 @@ Version 2016-10-05"
      (list (line-beginning-position) (line-end-position))))
   (let ((case-fold-search nil))
     (xah-replace-pairs-region
-     *begin
-     *end
+     @begin
+     @end
      '(
        ["Alpha" "Α"]
        ["Beta" "Β"]
@@ -165,7 +165,7 @@ Version 2016-10-05"
        ["piv" "ϖ"]
        ) "REPORT" "HILIGHT" )))
 
-(defun xah-replace-mathematica-to-lsl (*begin *end)
+(defun xah-replace-mathematica-to-lsl (@begin @end)
   "Change Mathematica syntax to LSL syntax on region.
 
 LSL is Linden Scripting Language.
@@ -175,8 +175,8 @@ Version 2015-04-28"
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-end-position))))
   (xah-replace-pairs-region
-   *begin
-   *end
+   @begin
+   @end
    '(
      ["Cos[" "llCos("]
      ["Sin[" "llSin("]
@@ -206,14 +206,14 @@ Version 2015-04-28"
   (goto-char 1)
   (while (re-search-forward "\\([0-9]\\)\\.\\([0-9][0-9][0-9]\\)[0-9]+" nil t) (replace-match "\\1.\\2" t nil)))
 
-(defun xah-convert-english-chinese-punctuation (*begin *end &optional *to-direction)
+(defun xah-convert-english-chinese-punctuation (@begin @end &optional @to-direction)
   "Convert punctuation from/to English/Chinese characters.
 
 When called interactively, do current line or selection. The conversion direction is automatically determined.
 
 If `universal-argument' is called, ask user for change direction.
 
-When called in lisp code, *begin *end are region begin/end positions. *to-direction must be any of the following values: 「\"chinese\"」, 「\"english\"」, 「\"auto\"」.
+When called in lisp code, @begin @end are region begin/end positions. @to-direction must be any of the following values: 「\"chinese\"」, 「\"english\"」, 「\"auto\"」.
 
 See also: `xah-remove-punctuation-trailing-redundant-space'.
 
@@ -240,7 +240,7 @@ Version 2015-10-05"
         "auto"
         ))))
   (let (
-        ($input-str (buffer-substring-no-properties *begin *end))
+        ($input-str (buffer-substring-no-properties @begin @end))
         ($replacePairs
          [
           [". " "。"]
@@ -260,9 +260,9 @@ Version 2015-10-05"
           ]
          ))
 
-    (when (string= *to-direction "auto")
+    (when (string= @to-direction "auto")
       (setq
-       *to-direction
+       @to-direction
        (if
            (or
             (string-match "　" $input-str)
@@ -274,7 +274,7 @@ Version 2015-10-05"
          "chinese")))
     (save-excursion
       (save-restriction
-        (narrow-to-region *begin *end)
+        (narrow-to-region @begin @end)
         (mapc
          (lambda ($x)
            (progn
@@ -282,11 +282,11 @@ Version 2015-10-05"
              (while (search-forward (aref $x 0) nil t)
                (replace-match (aref $x 1)))))
          (cond
-          ((string= *to-direction "chinese") $replacePairs)
-          ((string= *to-direction "english") (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $replacePairs))
-          (t (user-error "Your 3rd argument 「%s」 isn't valid" *to-direction))))))))
+          ((string= @to-direction "chinese") $replacePairs)
+          ((string= @to-direction "english") (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $replacePairs))
+          (t (user-error "Your 3rd argument 「%s」 isn't valid" @to-direction))))))))
 
-(defun xah-convert-chinese-numeral (*begin *end &optional *to-chinese)
+(defun xah-convert-chinese-numeral (@begin @end &optional @to-chinese)
   "Replace convert Chinese numeral to Arabic numeral, or reverse.
 On current line or selection.
 If `universal-argument' is called first, do reverse direction.
@@ -297,8 +297,8 @@ Version 2015-04-29"
      (list (line-beginning-position) (line-end-position) current-prefix-arg)))
   (let* (($numMap [["○" "0"] ["一" "1"] ["二" "2"] ["三" "3"] ["四" "4"] ["五" "5"] ["六" "6"] ["七" "7"] ["八" "8"] ["九" "9"] ]))
     (xah-replace-pairs-region
-     *begin *end
-     (if *to-chinese (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $numMap) $numMap )
+     @begin @end
+     (if @to-chinese (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $numMap) $numMap )
      t t
      )))
 
@@ -368,7 +368,7 @@ Example: 「it’s」 ⇒ 「it's」."
        ["’re" "'re"]
        ["s’ " "s' "]) "REPORT" "HILIGHT" )))
 
-(defun xah-convert-fullwidth-chars (*begin *end &optional *to-direction)
+(defun xah-convert-fullwidth-chars (@begin @end &optional @to-direction)
   "Convert ASCII chars to/from Unicode fullwidth version.
 Works on current line or text selection.
 
@@ -381,7 +381,7 @@ If `universal-argument' is called:
  C-u 1 → to ASCII
  C-u 2 → to Unicode
 
-When called in lisp code, *begin *end are region begin/end positions. *to-direction must be any of the following values: 「\"unicode\"」, 「\"ascii\"」, 「\"auto\"」.
+When called in lisp code, @begin @end are region begin/end positions. @to-direction must be any of the following values: 「\"unicode\"」, 「\"ascii\"」, 「\"auto\"」.
 
 See also: `xah-remove-punctuation-trailing-redundant-space'.
 Version 2016-10-05"
@@ -424,17 +424,17 @@ Version 2016-10-05"
 
   ;(message "before %s" stateBefore)
   ;(message "after %s" stateAfter)
-  ;(message "*to-direction %s" *to-direction)
+  ;(message "@to-direction %s" @to-direction)
   ;(message "real-this-command  %s" this-command)
   ;(message "real-last-command %s" last-command)
 
     (let ((case-fold-search nil))
       (xah-replace-pairs-region
-       *begin *end
+       @begin @end
        (cond
-        ((string= *to-direction "unicode") --ascii-unicode-map)
-        ((string= *to-direction "ascii") --reverse-map)
-        ((string= *to-direction "auto")
+        ((string= @to-direction "unicode") --ascii-unicode-map)
+        ((string= @to-direction "ascii") --reverse-map)
+        ((string= @to-direction "auto")
          (if (equal this-command last-command)
              (if (eq stateBefore 0)
                  --ascii-unicode-map
@@ -442,15 +442,15 @@ Version 2016-10-05"
                )
            --ascii-unicode-map
            ))
-        (t (user-error "Your 3rd argument 「%s」 isn't valid" *to-direction)))
+        (t (user-error "Your 3rd argument 「%s」 isn't valid" @to-direction)))
        t t ))
     (put 'xah-convert-fullwidth-chars 'state stateAfter)))
 
-(defun xah-remove-punctuation-trailing-redundant-space (*begin *end)
+(defun xah-remove-punctuation-trailing-redundant-space (@begin @end)
   "Remove redundant whitespace after punctuation.
 Works on current line or text selection.
 
-When called in emacs lisp code, the *begin *end are cursor positions for region.
+When called in emacs lisp code, the @begin @end are cursor positions for region.
 
 See also `xah-convert-english-chinese-punctuation'.
 
@@ -462,7 +462,7 @@ version 2015-08-22"
      (list (line-beginning-position) (line-end-position))))
   (require 'xah-replace-pairs)
   (xah-replace-regexp-pairs-region
-   *begin *end
+   @begin @end
    [
     ;; clean up. Remove extra space.
     [" +," ","]
@@ -482,11 +482,11 @@ version 2015-08-22"
     ]
    "FIXEDCASE" "LITERAL"))
 
-(defun xah-convert-asian/ascii-space (*begin *end)
+(defun xah-convert-asian/ascii-space (@begin @end)
   "Change all space characters between Asian Ideographic one to ASCII one.
 Works on current line or text selection.
 
-When called in emacs lisp code, the *begin *end are cursor positions for region.
+When called in emacs lisp code, the @begin @end are cursor positions for region.
 
 See also `xah-convert-english-chinese-punctuation'
  `xah-remove-punctuation-trailing-redundant-space'
@@ -501,13 +501,13 @@ See also `xah-convert-english-chinese-punctuation'
           ]
          ))
     (xah-replace-regexp-pairs-region
-     *begin *end
-     (if (string-match "　" (buffer-substring-no-properties *begin *end))
+     @begin @end
+     (if (string-match "　" (buffer-substring-no-properties @begin @end))
          --space-char-map
        (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) --space-char-map))
      "FIXEDCASE" "LITERAL")))
 
-(defun xah-convert-latin-alphabet-gothic (*begin *end *reverse-direction-p)
+(defun xah-convert-latin-alphabet-gothic (@begin @end @reverse-direction-p)
   "Replace English alphabets to Unicode gothic characters.
 For example, A ⇒ 𝔄, a ⇒ 𝔞.
 
@@ -515,7 +515,7 @@ When called interactively, work on current line or text selection.
 
 If any `universal-argument' is called first, reverse direction.
 
-When called in elisp, the *begin and *end are region begin/end positions to work on.
+When called in elisp, the @begin and @end are region begin/end positions to work on.
 
 URL `http://ergoemacs.org/misc/thou_shalt_use_emacs_lisp.html'
 Version 2017-01-11"
@@ -527,7 +527,7 @@ Version 2017-01-11"
         ($latin-to-gothic [ ["A" "𝔄"] ["B" "𝔅"] ["C" "ℭ"] ["D" "𝔇"] ["E" "𝔈"] ["F" "𝔉"] ["G" "𝔊"] ["H" "ℌ"] ["I" "ℑ"] ["J" "𝔍"] ["K" "𝔎"] ["L" "𝔏"] ["M" "𝔐"] ["N" "𝔑"] ["O" "𝔒"] ["P" "𝔓"] ["Q" "𝔔"] ["R" "ℜ"] ["S" "𝔖"] ["T" "𝔗"] ["U" "𝔘"] ["V" "𝔙"] ["W" "𝔚"] ["X" "𝔛"] ["Y" "𝔜"] ["Z" "ℨ"] ["a" "𝔞"] ["b" "𝔟"] ["c" "𝔠"] ["d" "𝔡"] ["e" "𝔢"] ["f" "𝔣"] ["g" "𝔤"] ["h" "𝔥"] ["i" "𝔦"] ["j" "𝔧"] ["k" "𝔨"] ["l" "𝔩"] ["m" "𝔪"] ["n" "𝔫"] ["o" "𝔬"] ["p" "𝔭"] ["q" "𝔮"] ["r" "𝔯"] ["s" "𝔰"] ["t" "𝔱"] ["u" "𝔲"] ["v" "𝔳"] ["w" "𝔴"] ["x" "𝔵"] ["y" "𝔶"] ["z" "𝔷"] ])
         $useMap
         )
-    (if *reverse-direction-p
+    (if @reverse-direction-p
         (progn (setq $useMap
                      (mapcar
                       (lambda ($x)
@@ -536,7 +536,7 @@ Version 2017-01-11"
       (progn (setq $useMap $latin-to-gothic)))
     (save-excursion
       (save-restriction
-        (narrow-to-region *begin *end)
+        (narrow-to-region @begin @end)
         (let ( (case-fold-search nil))
           (mapc
            (lambda ($x)
@@ -545,7 +545,7 @@ Version 2017-01-11"
                (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
            $useMap))))))
 
-(defun xah-twitterfy (*begin *end &optional *to-direction)
+(defun xah-twitterfy (@begin @end &optional @to-direction)
   "Shorten words for Twitter 140 char limit on current line or selection.
 The conversion direction is automatically determined.
 
@@ -553,7 +553,7 @@ If `universal-argument' is called, ask for conversion direction.
 
 Note: calling this function twice in opposite direction does not necessarily return the origial, because the map is not one-to-one, also the string in the map overlaps.
 
-When called in lisp code, *begin *end are region begin/end positions. *to-direction must be one of the following values:
+When called in lisp code, @begin @end are region begin/end positions. @to-direction must be one of the following values:
  'auto
  'shorten
  'lengthen
@@ -608,20 +608,20 @@ Version 2017-01-11"
          ))
     (save-excursion
       (save-restriction
-        (narrow-to-region *begin *end)
-        (when (string= *to-direction 'auto)
+        (narrow-to-region @begin @end)
+        (when (string= @to-direction 'auto)
           (goto-char (point-min))
           (if
               (re-search-forward "。\\|，\\|？\\|！" nil t)
-              (setq *to-direction 'lengthen)
-            (setq *to-direction 'shorten)))
+              (setq @to-direction 'lengthen)
+            (setq @to-direction 'shorten)))
         (let ( (case-fold-search nil))
           (mapc
            (lambda ($x)
              (goto-char (point-min))
              (while (search-forward (elt $x 0) nil t)
                (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
-           (if (string= *to-direction 'shorten)
+           (if (string= @to-direction 'shorten)
                $shorten-map
              (mapcar (lambda ($pair) (vector (elt $pair 1) (elt $pair 0))) $shorten-map)))
           (goto-char (point-min))
@@ -652,14 +652,14 @@ Version 2017-01-11"
      ;;          (when (eq (string-to-char x) $charAfter)
      ;;            (progn (throw 'found x))))))))
 
-(defun xah-change-bracket-pairs ( *from-chars *to-chars)
+(defun xah-change-bracket-pairs ( @from-chars @to-chars)
   "Change bracket pairs from one type to another on current line or text selection.
 For example, change all parenthesis () to square brackets [].
 
-When called in lisp program, *from-chars or *to-chars is a string of bracket pair. eg \"(paren)\",  \"[bracket]\", etc.
+When called in lisp program, @from-chars or @to-chars is a string of bracket pair. eg \"(paren)\",  \"[bracket]\", etc.
 The first and last characters are used.
 If the string contains “,2”, then the first 2 chars and last 2 chars are used, for example  \"[[bracket,2]]\".
-If *to-chars is equal to string “delete brackets”, the brackets are deleted.
+If @to-chars is equal to string “delete brackets”, the brackets are deleted.
 
  If the string has length greater than 2, the rest are ignored.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
@@ -724,50 +724,50 @@ Version 2017-05-17"
                $toLeft
                $toRight)
           (cond
-           ((string-match ",2" *from-chars  )
+           ((string-match ",2" @from-chars  )
             (progn
-              (setq $fromLeft (substring *from-chars 0 2))
-              (setq $fromRight (substring *from-chars -2))))
+              (setq $fromLeft (substring @from-chars 0 2))
+              (setq $fromRight (substring @from-chars -2))))
            (t
             (progn
-              (setq $fromLeft (substring *from-chars 0 1))
-              (setq $fromRight (substring *from-chars -1)))))
+              (setq $fromLeft (substring @from-chars 0 1))
+              (setq $fromRight (substring @from-chars -1)))))
           (cond
-           ((string-match ",2" *to-chars)
+           ((string-match ",2" @to-chars)
             (progn
-              (setq $toLeft (substring *to-chars 0 2))
-              (setq $toRight (substring *to-chars -2))))
-           ((string-match "delete brackets" *to-chars)
+              (setq $toLeft (substring @to-chars 0 2))
+              (setq $toRight (substring @to-chars -2))))
+           ((string-match "delete brackets" @to-chars)
             (progn
               (setq $toLeft "")
               (setq $toRight "")))
            (t
             (progn
-              (setq $toLeft (substring *to-chars 0 1))
-              (setq $toRight (substring *to-chars -1)))))
+              (setq $toLeft (substring @to-chars 0 1))
+              (setq $toRight (substring @to-chars -1)))))
           (cond
-           ((string-match "markdown" *from-chars)
+           ((string-match "markdown" @from-chars)
             (progn
               (goto-char (point-min))
               (while
                   (re-search-forward "`\\([^`]+?\\)`" nil t)
                 (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
                 (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
-           ((string-match "tilde" *from-chars)
+           ((string-match "tilde" @from-chars)
             (progn
               (goto-char (point-min))
               (while
                   (re-search-forward "~\\([^~]+?\\)~" nil t)
                 (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
                 (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
-           ((string-match "ascii quote" *from-chars)
+           ((string-match "ascii quote" @from-chars)
             (progn
               (goto-char (point-min))
               (while
                   (re-search-forward "\"\\([^\"]+?\\)\"" nil t)
                 (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
                 (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
-           ((string-match "equal" *from-chars)
+           ((string-match "equal" @from-chars)
             (progn
               (goto-char (point-min))
               (while
@@ -786,9 +786,9 @@ Version 2017-05-17"
                     (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
                     (replace-match $toRight "FIXEDCASE" "LITERAL")))))))))))
 
-(defun xah-corner-bracket→html-i (*begin *end)
+(defun xah-corner-bracket→html-i (@begin @end)
        "Replace all 「…」 to <code>…</code> in current text block.
-When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the *begin *end are region positions."
+When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the @begin @end are region positions."
        (interactive
         (cond
          ((equal current-prefix-arg nil) ; universal-argument not called
@@ -807,16 +807,16 @@ When called with `universal-argument', work on visible portion of whole buffer (
           (list (point-min) (point-max)))))
        (save-excursion
          (save-restriction
-           (narrow-to-region *begin *end)
+           (narrow-to-region @begin @end)
            (goto-char (point-min))
            (while (re-search-forward "「\\([^」]+?\\)」" nil t)
              (if (y-or-n-p "Replace this one?")
                  (replace-match "<code>\\1</code>" t) ) ) )) )
 
-(defun xah-angle-brackets-to-html (&optional *begin *end)
+(defun xah-angle-brackets-to-html (&optional @begin @end)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span> in current text block or selection.
 
-When called non-interactively, *begin *end are region positions.
+When called non-interactively, @begin @end are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 version 2017-06-10"
@@ -825,7 +825,7 @@ version 2017-06-10"
         (case-fold-search nil)
         $p1 $p2
         )
-    (if (and *begin *end)
+    (if (and @begin @end)
         (progn
           (setq $p1 (region-beginning))
           (setq $p2 (region-end)))
@@ -860,7 +860,7 @@ version 2017-06-10"
          (reverse $changedItems))
       (message "No change needed."))))
 
-(defun xah-remove-square-brackets (&optional *begin *end)
+(defun xah-remove-square-brackets (&optional @begin @end)
   "Delete any text of the form “[‹n›]”, eg [1], [2], … in current text block or selection.
 
 For example
@@ -868,13 +868,13 @@ For example
 becomes
  「… announced as Blu-ray Disc, and …」.
 
-When called non-interactively, *begin *end are region positions.
+When called non-interactively, @begin @end are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 Version 2017-06-10"
   (interactive)
   (let ($p1 $p2 $changedItems)
-    (if (and  *begin *end)
+    (if (and  @begin @end)
         (progn
           (setq $p1 (region-beginning))
           (setq $p2 (region-end)))
@@ -913,7 +913,7 @@ Version 2017-06-10"
       (message "No change needed."))))
 
 
-(defun xah-curly-quotes→bracket (*left-bracket *right-bracket)
+(defun xah-curly-quotes→bracket (@left-bracket @right-bracket)
   "Replace “…” to one of 「…」.
 Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
   (interactive)
@@ -922,11 +922,11 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
         (progn
           (dired-do-query-replace-regexp
            "“\\([^”]+?\\)”"
-           (concat *left-bracket "\\1" *right-bracket)
+           (concat @left-bracket "\\1" @right-bracket)
            ))
       (progn (query-replace-regexp
               "“\\([^”]+?\\)”"
-           (concat *left-bracket "\\1" *right-bracket) )) ) ))
+           (concat @left-bracket "\\1" @right-bracket) )) ) ))
 
 (defun xah-curly-quotes→code-bracket ()
   "Replace “…” to 「…」"
@@ -994,7 +994,7 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
   (xah-curly-quotes→bracket "〔" "〕")
 )
 
-(defun xah-replace-straight-quotes (*begin *end)
+(defun xah-replace-straight-quotes (@begin @end)
   "Replace straight double quotes to curly ones, and others.
 Works on current text block or selection.
 
@@ -1005,7 +1005,7 @@ Examples of changes:
  「--」 ⇒ 「—」
  「~=」 ⇒ 「≈」
 
-When called in lisp code, *begin and *end are region begin/end positions.
+When called in lisp code, @begin and @end are region begin/end positions.
 
 WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
 
@@ -1034,7 +1034,7 @@ Version 2017-07-03"
   (let ( (case-fold-search nil))
     (save-excursion
       (save-restriction
-        (narrow-to-region *begin *end )
+        (narrow-to-region @begin @end )
         ;; Note: order is important since this is huristic.
         (xah-replace-pairs-region
          (point-min) (point-max)

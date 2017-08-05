@@ -250,7 +250,7 @@ Requires a python script. See code."
       (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)))
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t))))
 
-;; (defun xah-move-image-file (*dir-name *file-name)
+;; (defun xah-move-image-file (@dir-name @file-name)
 ;;   "move image file at
 ;; ~/Downloads/xx.jpg
 ;; to current dir of subdir i
@@ -290,8 +290,8 @@ Requires a python script. See code."
 ;;             "/tmp/xx.png")
 ;;            (t (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))))
 ;;     (setq -to-path (concat
-;;                     (file-name-as-directory *dir-name )
-;;                     *file-name "."
+;;                     (file-name-as-directory @dir-name )
+;;                     @file-name "."
 ;;                     (downcase (file-name-extension -from-path ))))
 ;;     (if (file-exists-p -to-path)
 ;;         (message "move to path exist: %s" -to-path)
@@ -300,7 +300,7 @@ Requires a python script. See code."
 ;;         (find-file -to-path )
 ;;         (message "move to path: %s" -to-path)))))
 
-(defun xah-move-image-file (*dir-name *file-name)
+(defun xah-move-image-file (@dir-name @file-name)
   "Move image file to another dir.
 
 from directories checked are:
@@ -361,8 +361,8 @@ sNew file name:")
     (when (null $fromPath)
       (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))
     (setq $toPath (concat
-                   (file-name-as-directory *dir-name )
-                   (replace-regexp-in-string " " "_" *file-name)
+                   (file-name-as-directory @dir-name )
+                   (replace-regexp-in-string " " "_" @file-name)
                    "_"
                    $randomHex
                    "."

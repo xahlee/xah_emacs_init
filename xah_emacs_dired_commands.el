@@ -42,12 +42,12 @@ Version 2015-07-30"
       (file-relative-name $fName)
       (file-relative-name $fName)))))
 
-(defun xah-process-image (*file-list *args-str *new-name-suffix *new-name-file-suffix )
+(defun xah-process-image (@file-list @args-str @new-name-suffix @new-name-file-suffix )
   "Wrapper to ImageMagick's “convert” shell command.
-*file-list is a list of image file paths.
-*args-str is argument string passed to ImageMagick's “convert” command.
-*new-name-suffix is the string appended to file. e.g. “_new” gets you “…_new.jpg”
-*new-name-file-suffix is the new file's file extension. e.g. “.png”
+@file-list is a list of image file paths.
+@args-str is argument string passed to ImageMagick's “convert” command.
+@new-name-suffix is the string appended to file. e.g. “_new” gets you “…_new.jpg”
+@new-name-file-suffix is the new file's file extension. e.g. “.png”
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
@@ -58,35 +58,35 @@ Version 2016-07-19"
        (setq $newName
              (concat
               (file-name-sans-extension $f)
-              *new-name-suffix
-              *new-name-file-suffix))
+              @new-name-suffix
+              @new-name-file-suffix))
        (while (file-exists-p $newName)
          (setq $newName
                (concat
                 (file-name-sans-extension $newName)
-                *new-name-suffix
+                @new-name-suffix
                 (file-name-extension $newName t))))
        ;; relative paths used to get around Windows/Cygwin path remapping problem
        (setq $cmdStr
              (format
               "convert %s '%s' '%s'"
-              *args-str
+              @args-str
               (file-relative-name $f)
               (file-relative-name $newName)))
        (shell-command $cmdStr)))
-   *file-list )
+   @file-list )
   (revert-buffer))
 
-(defun xah-dired-scale-image (*file-list *scale-percentage *sharpen?)
+(defun xah-dired-scale-image (@file-list @scale-percentage @sharpen?)
   "Create a scaled version of images of marked files in dired.
 The new names have “-s” appended before the file name extension.
 
 If `universal-argument' is called first, output is PNG format. Else, JPG.
 
 When called in lisp code,
- *file-list is a list.
- *scale-percentage is a integer.
- *sharpen? is true or false.
+ @file-list is a list.
+ @scale-percentage is a integer.
+ @sharpen? is true or false.
 
 Requires ImageMagick unix shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
@@ -103,11 +103,11 @@ Version 2016-07-19"
            (y-or-n-p "Sharpen"))))
   (let ( ($outputSuffix (if current-prefix-arg ".png" ".jpg" )))
     (xah-process-image
-     *file-list
-     (format "-scale %s%% -quality 85%% %s " *scale-percentage (if *sharpen? "-sharpen 1" "" ))
+     @file-list
+     (format "-scale %s%% -quality 85%% %s " @scale-percentage (if @sharpen? "-sharpen 1" "" ))
      "-s" $outputSuffix )))
 
-(defun xah-dired-image-autocrop (*file-list *output-image-type-suffix)
+(defun xah-dired-image-autocrop (@file-list @output-image-type-suffix)
   "Create a new auto-cropped version of images of marked files in dired.
 Requires ImageMagick shell command.
 
@@ -121,11 +121,11 @@ Version 2016-07-19"
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:")))))
-         (*output-image-type-suffix (if current-prefix-arg ".png" ".jpg" )))
-     (list $fileList *output-image-type-suffix)))
-  (xah-process-image *file-list "-trim" "-cropped" *output-image-type-suffix ))
+         (@output-image-type-suffix (if current-prefix-arg ".png" ".jpg" )))
+     (list $fileList @output-image-type-suffix)))
+  (xah-process-image @file-list "-trim" "-cropped" @output-image-type-suffix ))
 
-(defun xah-dired-2png (*file-list)
+(defun xah-dired-2png (@file-list)
   "Create a png version of images of marked files in dired.
 Requires ImageMagick shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
@@ -138,9 +138,9 @@ Version 2016-07-19"
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
      (list $fileList)))
-  (xah-process-image *file-list "" "-2" ".png" ))
+  (xah-process-image @file-list "" "-2" ".png" ))
 
-(defun xah-dired-2drawing (*file-list *grayscale-p *max-colors-count)
+(defun xah-dired-2drawing (@file-list @grayscale-p @max-colors-count)
   "Create a png version of (drawing type) images of marked files in dired.
 Basically, make it grayscale, and reduce colors to any of {2, 4, 16, 256}.
 Requires ImageMagick shell command.
@@ -156,21 +156,21 @@ Version 2017-02-02"
      (list $fileList
            (yes-or-no-p "Grayscale?")
            (ido-completing-read "Max number of colors:" '( "2" "4" "16" "256" )))))
-  (xah-process-image *file-list
+  (xah-process-image @file-list
                      (format "+dither %s -depth %s"
-                             (if *grayscale-p "-type grayscale" "")
+                             (if @grayscale-p "-type grayscale" "")
                              ;; image magick “-colors” must be at least 8
-                             ;; (if (< (string-to-number *max-colors-count) 3)
+                             ;; (if (< (string-to-number @max-colors-count) 3)
                              ;;     8
-                             ;;     (expt 2 (string-to-number *max-colors-count)))
+                             ;;     (expt 2 (string-to-number @max-colors-count)))
                              (cond
-                              ((equal *max-colors-count "256") 8)
-                              ((equal *max-colors-count "16") 4)
-                              ((equal *max-colors-count "4") 2)
-                              ((equal *max-colors-count "2") 1)
-                              (t (error "logic error 0444533051: impossible condition on *max-colors-count: %s" *max-colors-count))))  "-2" ".png" ))
+                              ((equal @max-colors-count "256") 8)
+                              ((equal @max-colors-count "16") 4)
+                              ((equal @max-colors-count "4") 2)
+                              ((equal @max-colors-count "2") 1)
+                              (t (error "logic error 0444533051: impossible condition on @max-colors-count: %s" @max-colors-count))))  "-2" ".png" ))
 
-(defun xah-dired-2jpg (*file-list)
+(defun xah-dired-2jpg (@file-list)
   "Create a JPG version of images of marked files in dired.
 Requires ImageMagick shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
@@ -183,9 +183,9 @@ Version 2016-07-19"
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
      (list $fileList)))
-  (xah-process-image *file-list "-quality 90%" "-2" ".jpg" ))
+  (xah-process-image @file-list "-quality 90%" "-2" ".jpg" ))
 
-(defun xah-dired-remove-all-metadata (*file-list)
+(defun xah-dired-remove-all-metadata (@file-list)
   "Remove all metatata of buffer image file or marked files in dired.
  (typically image files)
 URL `http://xahlee.info/img/metadata_in_image_files.html'
@@ -206,11 +206,11 @@ Version 2016-07-19"
            (setq $cmdStr
                  (format "exiftool -all= -overwrite_original '%s'" (file-relative-name $f))) ; relative paths used to get around Windows/Cygwin path remapping problem
            (shell-command $cmdStr)))
-       *file-list )
+       @file-list )
     nil
     ))
 
-(defun xah-dired-show-metadata (*file-list)
+(defun xah-dired-show-metadata (@file-list)
   "Display metatata of buffer image file or marked files in dired.
  (typically image files)
 URL `http://xahlee.info/img/metadata_in_image_files.html'
@@ -229,7 +229,7 @@ Version 2016-07-19"
       (format "exiftool '%s'" (file-relative-name $f))
       ;; relative paths used to get around Windows/Cygwin path remapping problem
       ))
-   *file-list ))
+   @file-list ))
 
 (defun xah-dired-sort ()
   "Sort dired dir listing in different ways.

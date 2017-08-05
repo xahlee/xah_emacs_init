@@ -5,25 +5,25 @@
 (require 'subr-x) ; string-trim
 (require 'xah-get-thing)
 
-(defun insert-atom-entry (&optional *title *id *summary *content-xml-text *alt-link)
+(defun insert-atom-entry (&optional @title @id @summary @content-xml-text @alt-link)
   "Insert a Atom webfeed entry template,
  in the current buffer's cursor position.
 
-One of *summary or *content-xml-text must not be `nil'.
+One of @summary or @content-xml-text must not be `nil'.
 
-Optional argument *alt-link is used in the atom tag: <link rel=\"alternate\" href=\"…\"/>
+Optional argument @alt-link is used in the atom tag: <link rel=\"alternate\" href=\"…\"/>
 Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
   (interactive)
   (let* (
-         ($title (if *title (concat "<title>" *title "</title>") "▮") )
-         ($id (if *id *id (xah-new-atom-id-tag) ) )
-         ($summary (if *summary (concat "<summary>" *summary "</summary>\n") "") )
-         ($content (if *content-xml-text (format " <content type=\"xhtml\">
+         ($title (if @title (concat "<title>" @title "</title>") "▮") )
+         ($id (if @id @id (xah-new-atom-id-tag) ) )
+         ($summary (if @summary (concat "<summary>" @summary "</summary>\n") "") )
+         ($content (if @content-xml-text (format " <content type=\"xhtml\">
  <div xmlns=\"http://www.w3.org/1999/xhtml\">%s</div>
- </content>" *content-xml-text)
+ </content>" @content-xml-text)
   "") )
          ($updatedStr (xah-current-date-time-string))
-         ($altLink (if *alt-link *alt-link (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
+         ($altLink (if @alt-link @alt-link (xahsite-filepath-to-url (replace-regexp-in-string ".xml\\'" ".html" (buffer-file-name) "FIXEDCASE" "LITERAL")) ))
          )
     (insert (format "<entry>
 %s
@@ -42,22 +42,22 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
                     $altLink
                     )) ) )
 
-(defun xah-new-atom-id-tag (&optional *domain-name)
+(defun xah-new-atom-id-tag (&optional @domain-name)
   "Returns a newly generated ATOM webfeed's “id” element string.
 Example of return value: 「tag:xahlee.org,2010-03-31:022128」
 
 If DOMAINNAME is given, use that for the domain name.
 Else, use “xahlee.org”."
-    (format "tag:%s%s" (if *domain-name *domain-name "xahlee.org") (format-time-string ",%Y-%m-%d:%H%M%S" (current-time) 1)) )
+    (format "tag:%s%s" (if @domain-name @domain-name "xahlee.org") (format-time-string ",%Y-%m-%d:%H%M%S" (current-time) 1)) )
 
-(defun update-atom-updated-tag (*file-path)
-  "Update the <updated> tag of a ATOM webfeed file at *file-path,
+(defun update-atom-updated-tag (@file-path)
+  "Update the <updated> tag of a ATOM webfeed file at @file-path,
 to current date/time stamp.
 This command leaves the file unsaved."
   (interactive
    (list (buffer-file-name)))
   (let ($p1 $p2)
-    (find-file *file-path)
+    (find-file @file-path)
     (goto-char 1)
     (search-forward "<updated>")
     (setq $p1 (point))

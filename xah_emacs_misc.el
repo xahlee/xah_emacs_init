@@ -154,7 +154,7 @@ Version 2017-02-27"
 
 
 
-(defun xah-set-input-method-to-chinese (*n)
+(defun xah-set-input-method-to-chinese (@n)
   "Set input method to Chinese.
 
 Normally, set to 'chinese-py.
@@ -162,11 +162,11 @@ C-u → set to 'chinese-tonepy-punct.
 C-u 2 → set to 'chinese-py-b5."
 (interactive "P")
   (cond
-    ((equal *n nil)     ; universal-argument not called
+    ((equal @n nil)     ; universal-argument not called
      (set-input-method 'chinese-py))
-    ((equal *n '(4))    ; C-u
+    ((equal @n '(4))    ; C-u
      (set-input-method 'chinese-tonepy-punct))
-    ((equal *n 2)       ; C-u 2
+    ((equal @n 2)       ; C-u 2
      (set-input-method 'chinese-py-b5))
     (t                                  ; all other cases
      (set-input-method 'chinese-py))))
@@ -602,7 +602,7 @@ Version 2015-12-17"
       (set-background-color "honeydew")
       (put 'xah-toggle-background-color 'state t))))
 
-(defun xah-cycle-background-color (*n)
+(defun xah-cycle-background-color (@n)
   "Cycle background color among a preset list.
 
 If `universal-argument' is called first, cycle n steps. Default is 1 step.
@@ -617,7 +617,7 @@ Version 2015-12-17"
           (if (get 'xah-cycle-background-color 'state)
               (get 'xah-cycle-background-color 'state)
             0))
-         ($index-after (% (+ $index-before (length $values) *n) (length $values)))
+         ($index-after (% (+ $index-before (length $values) @n) (length $values)))
          ($next-value (aref $values $index-after)))
 
     (put 'xah-cycle-background-color 'state $index-after)
@@ -699,10 +699,10 @@ Version 2016-02-16"
           (revert-buffer  "IGNORE-AUTO" "NOCONFIRM" "PRESERVE-MODES"))
       (error "file 「%s」 doesn't end in “.py” or “.py3”." $fName))))
 
-(defun xah-change-file-line-ending-style (*files *style)
+(defun xah-change-file-line-ending-style (@files @style)
   "Change current file or dired marked file's newline convention.
 
-When called non-interactively, *style is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+When called non-interactively, @style is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 
 URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
 Version 2016-10-16"
@@ -715,32 +715,32 @@ Version 2016-10-16"
   (let* (
          ($codingSystem
           (cond
-           ((equal *style "Linux/MacOSX/Unix") 'unix)
-           ((equal *style "MacOS9") 'mac)
-           ((equal *style "Windows") 'dos)
+           ((equal @style "Linux/MacOSX/Unix") 'unix)
+           ((equal @style "MacOS9") 'mac)
+           ((equal @style "Windows") 'dos)
            (t (error "code logic error 65327. Expect one of it." )))))
     (mapc
      (lambda (x) (xah-convert-file-coding-system x $codingSystem))
-     *files)))
+     @files)))
 
-(defun xah-convert-file-coding-system (*fpath *coding-system)
+(defun xah-convert-file-coding-system (@fpath @coding-system)
   "Convert file's encoding.
- *fpath is full path to file.
- *coding-system is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
+ @fpath is full path to file.
+ @coding-system is one of 'unix 'dos 'mac or any of accepted emacs coding system. See `list-coding-systems'.
 
 If the file is already opened, it will be saved after this command.
 
 URL `http://ergoemacs.org/emacs/elisp_convert_line_ending.html'
 Version 2015-07-24"
   (let ($buffer
-        ($bufferOpened-p (get-file-buffer *fpath)))
+        ($bufferOpened-p (get-file-buffer @fpath)))
     (if $bufferOpened-p
         (with-current-buffer $bufferOpened-p
-          (set-buffer-file-coding-system *coding-system)
+          (set-buffer-file-coding-system @coding-system)
           (save-buffer))
       (progn
-        (setq $buffer (find-file *fpath))
-        (set-buffer-file-coding-system *coding-system)
+        (setq $buffer (find-file @fpath))
+        (set-buffer-file-coding-system @coding-system)
         (save-buffer)
         (kill-buffer $buffer)))))
 
