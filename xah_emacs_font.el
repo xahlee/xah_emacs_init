@@ -29,8 +29,9 @@ Version 2015-09-21"
 
 
 
-(defcustom xah-font-list nil "A list of fonts for `xah-cycle-font' to cycle from." :group 'font)
-(set-default 'xah-font-list
+(defvar xah-font-list nil "A list of fonts for `xah-cycle-font' to cycle from.")
+
+(setq 'xah-font-list
              (cond
               ((string-equal system-type "windows-nt") ; Windows
                '(

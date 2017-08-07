@@ -48,9 +48,11 @@ Version 2016-10-24"
     ("im" "I'm" )
     ("tr" "there are" )
     ("u" "you" )
+    ("sd" "should" )
 
     ;; english, single word
 
+    ("fol" "following" )
 
     ("alt3" "alternative" )
     ("ann" "announcement" )
@@ -100,7 +102,8 @@ Version 2016-10-24"
     ("implt" "implement" )
     ("intn" "international" )
     ("intro" "introduction" )
-    ("jp" "Japanese" )
+    ("jp" "Japan" )
+    ("jp3" "Japanese" )
     ("kb" "keyboard" )
     ("kbd" "keybinding" )
     ("kbs" "keyboards" )
@@ -135,7 +138,7 @@ Version 2016-10-24"
     ("ver" "version" )
     ("vid" "video" )
     ("wo" "without" )
-
+    
     ;; english, multiple words
 
 

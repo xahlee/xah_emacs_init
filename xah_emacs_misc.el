@@ -71,7 +71,6 @@ Version 2017-04-21"
                ))))
          ($inputStr2 (replace-regexp-in-string ":\\'" "" $inputStr1))
          $p
-         $isURL-p
          )
     (if (string-equal $inputStr2 "")
         (progn (user-error "No path under cursor" ))
@@ -830,7 +829,7 @@ Here's a example result:
 
 Version old old some 2010 or so"
   (interactive)
-  (let ($p1 $p2 $inputStr $tmp $id $fixedurl)
+  (let ($p1 $p2 $inputStr $tmp $id )
     (setq $p1 (line-beginning-position))
     (setq $p2 (line-end-position))
     (setq $inputStr (buffer-substring-no-properties $p1 $p2))
@@ -838,9 +837,70 @@ Version old old some 2010 or so"
     (setq $tmp (replace-regexp-in-string "http://www\\.redtube\\.com/" "" $tmp))
     (setq $tmp (replace-regexp-in-string "http://embed\\.redtube\\.com/player/?id=" "" $tmp))
     (setq $id $tmp)
-    (setq $fixedurl "http://embed.redtube.com/player/?id=")
 
     (delete-region $p1 $p2)
 
     (insert (format "<iframe src=\"http://embed.redtube.com/?id=%s\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>" $id))
     ))
+
+(defun xah-check-parens-balance ()
+  "Check if there are unbalanced parentheses/brackets/quotes in current bufffer.
+If so, place cursor there, print error to message buffer.
+
+URL `http://ergoemacs.org/emacs/emacs_check_parens_balance.html'
+Version 2017-08-06"
+  (interactive)
+  (let* (
+         ($bracket-alist
+          '( (?“ . ?”) (?‹ . ?›) (?« . ?») (?【 . ?】) (?〖 . ?〗) (?〈 . ?〉) (?《 . ?》) (?「 . ?」) (?『 . ?』) (?{ . ?}) (?[ . ?]) (?( . ?))))
+         ;; regex string of all pairs to search.
+         ($bregex
+          (let (($tempList nil))
+            (mapc
+             (lambda (x)
+               (push (char-to-string (car x)) $tempList)
+               (push (char-to-string (cdr x)) $tempList))
+             $bracket-alist)
+            (regexp-opt $tempList )))
+         $p1
+         $p2
+         ;; each entry is a vector [char position]
+         ($stack '())
+         ($char nil)
+         $pos
+         $is-closing-char-p
+         $matched-open-char
+         )
+    (if (region-active-p)
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (point-min) $p2 (point-max)))
+    (save-restriction
+      (narrow-to-region $p1 $p2)
+      (progn
+        (goto-char 1)
+        (while (re-search-forward $bregex nil "move")
+          (setq $pos (point))
+          (setq $char (char-before))
+          (progn
+            (setq $is-closing-char-p (rassoc $char $bracket-alist))
+            (if $is-closing-char-p
+                (progn
+                  (setq $matched-open-char
+                        (if $is-closing-char-p
+                            (car $is-closing-char-p)
+                          (error "logic error 64823. The char %s has no matching pair."
+                                 (char-to-string $char))))
+                  (if $stack
+                      (if (eq (aref (car $stack) 0) $matched-open-char )
+                          (pop $stack)
+                        (push (vector $char $pos) $stack ))
+                    (progn
+                      (goto-char $pos)
+                      (error "First mismtach found. the char %s has no matching pair."
+                             (char-to-string $char)))))
+              (push (vector $char $pos) $stack ))))
+        (if $stack
+            (progn
+              (goto-char (aref (car $stack) 1))
+              (message "Mismtach found. The char %s has no matching pair." $stack))
+          (print "All brackets/quotes match."))))))
