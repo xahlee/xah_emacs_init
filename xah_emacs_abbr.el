@@ -48,12 +48,13 @@ Version 2016-10-24"
     ("im" "I'm" )
     ("tr" "there are" )
     ("u" "you" )
+    ("r" "are" )
     ("sd" "should" )
 
     ;; english, single word
 
     ("fol" "following" )
-
+    ("hev" "however" )
     ("alt3" "alternative" )
     ("ann" "announcement" )
     ("aprt" "apparently" )
@@ -65,7 +66,6 @@ Version 2016-10-24"
     ("bt" "between" )
     ("c3" "character" )
     ("chars3" "characters" )
-    ("cn" "Chinese" )
     ("comm" "communication" )
     ("comp" "computer" )
     ("cprs" "comparison" )
@@ -102,8 +102,6 @@ Version 2016-10-24"
     ("implt" "implement" )
     ("intn" "international" )
     ("intro" "introduction" )
-    ("jp" "Japan" )
-    ("jp3" "Japanese" )
     ("kb" "keyboard" )
     ("kbd" "keybinding" )
     ("kbs" "keyboards" )
@@ -119,7 +117,8 @@ Version 2016-10-24"
     ("org3" "organization" )
     ("paren" "parenthesis" )
     ("pls" "please" )
-    ("pm3" "parameter" )
+    ("par3" "parameter" )
+    ("dec3" "declaration" )
     ("pp" "people" )
     ("prof" "professor" )
     ("prog" "program" )
@@ -138,25 +137,31 @@ Version 2016-10-24"
     ("ver" "version" )
     ("vid" "video" )
     ("wo" "without" )
-    
+
     ;; english, multiple words
 
-
+    ("mkb" "mechanical keyboard" )
     ("pl" "programing language" )
     ("qaa" "questions and answers" )
     ("sjw3" "social justice warriors" )
     ("wip" "work in progress" )
 
     ;; english, proper noun
+
+
     ("ahd" "American Heritage Dictionary" )
+    ("cn" "Chinese" )
     ("eng" "English" )
-    ("euro" "Europe" )
+    ("euro3" "Europe" )
+    ("jp" "Japan" )
+    ("jp3" "Japanese" )
     ("sf" "San Francisco" )
     ("wp" "Wikipedia" )
 
     ;; computing, general
 
     ("ai" "artificial intelligence" )
+    ("gv" "global variable" )
     ("ca3" "cellular automata" )
     ("cfg" "context-free grammar" )
     ("cli" "command line interface" )
@@ -262,6 +267,7 @@ Version 2016-10-24"
     ("ascii3" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
     ("catface" "😸" )
+    ("clown" "🤡" )
     ("emoji3" "😃😄😅😆
 😉😊😋😌
 😎😇😈
@@ -274,7 +280,8 @@ Version 2016-10-24"
 😒😠😡
 😞😟😣😤😥😦😧😨😬
 😢😭
-😸😹😺😻😼😽😾😿🙀" )
+😸😹😺😻😼😽😾😿🙀
+🤡" )
     ("hearts" "♥💕💓💔💖💗💘💝💞💟💙💚💛💜" )
     ("omg" "😂" )
     ("la" "←" )

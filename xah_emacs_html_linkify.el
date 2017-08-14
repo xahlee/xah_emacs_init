@@ -576,6 +576,7 @@ They will be changed into a HTML link in various formats, depending on the input
 If there is text selection, use it as input.
 Version 2017-07-27"
   (interactive)
+  (message "xah-all-linkify called" )
   (if (string-match "^/home/xah/web/" (or (buffer-file-name) default-directory))
       (let ( $p1 $p2 $input)
         ;; (if (string-match "%" $input )
@@ -612,13 +613,13 @@ Version 2017-07-27"
          ((string-match-p "css_transitions/CSS_Transitions.html" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "php-doc/" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" $input) (xah-blogger-linkify))
-         
+
          ((string-match-p "/node_api/" $input) (xah-nodejs-ref-linkify))
          ((string-match-p "/emacs_manual/" $input) (xah-html-emacs-ref-linkify))
-         
+
          ((xahsite-url-is-xah-website-p $input) (xah-file-linkify $p1 $p2))
-         
-;; (xah-html-image-figure-linkify)
+
+         ;; (xah-html-image-figure-linkify)
 
          ((xah-html-path-ends-in-image-suffix-p $input) (xah-html-image-figure-linkify))
 

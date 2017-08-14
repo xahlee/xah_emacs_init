@@ -400,17 +400,17 @@ Version 2017-02-02"
         ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")))
 
 (defun xah-interactive-abbrev ()
-  "Prompt to insert string from a alist `xah-shell-abbrev-alist'.
+  "Prompt to insert string from a alist ‘xah-interactive-abbrev-alist’
 
-URL `http://ergoemacs.org/emacs/emacs_interactive_abbrev.html'
-version 2017-06-07"
+URL ‘http://ergoemacs.org/emacs/emacs_interactive_abbrev.html’
+version 2017-08-13"
   (interactive)
-  (let ((x
+  (let (($x
          (ido-completing-read
           "abbrevs:"
           (mapcar (lambda (x) (car x)) xah-interactive-abbrev-alist)
           "PREDICATE" "REQUIRE-MATCH")))
-    (insert (cdr (assoc x xah-interactive-abbrev-alist)))))
+    (insert (cdr (assoc $x xah-interactive-abbrev-alist)))))
 
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.
