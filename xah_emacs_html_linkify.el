@@ -396,17 +396,17 @@ Version 2016-07-07"
          (list p1 p2)))))
   (let* (
          ($inputStr (buffer-substring-no-properties @begin @end))
-         ($inputStParts (split-uri-hashmark $inputStr))
-         (pt1 (aref $inputStParts 0))
+         ($inputStParts (xah-html-split-uri-hashmark $inputStr))
+         ($pt1 (aref $inputStParts 0))
          ($fragPart (aref $inputStParts 1))
-         ($fPath (xahsite-web-path-to-filepath pt1 default-directory))
-         $rltvPath $titleText $resultStr
+         ($fPath (xahsite-web-path-to-filepath $pt1 default-directory))
+         $rPath $title $resultStr
          ($currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
          ($currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
 
     (if (file-exists-p $fPath)
         (progn
-          (setq $titleText
+          (setq $title
                 (if (string-match-p ".+html\\'" $fPath)
                     (concat (xah-html-get-html-file-title $fPath t) $fragPart)
                   (file-name-nondirectory $fPath)))
@@ -415,12 +415,12 @@ Version 2016-07-07"
                      (xahsite-get-domain-of-local-file-path $currentBufferFilePathOrDir)
                      (xahsite-get-domain-of-local-file-path $fPath))
                     (progn
-                      (setq $rltvPath (file-relative-name $fPath $currentBufferFileDir))
+                      (setq $rPath (file-relative-name $fPath $currentBufferFileDir))
                       (format "<a href=\"%s\">%s</a>"
-                              (concat $rltvPath $fragPart)
-                              (if (string-equal $titleText "") $rltvPath $titleText )))
+                              (concat $rPath $fragPart)
+                              (if (string-equal $title "") $rPath $title )))
                   (progn
-                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url $fPath) $fragPart) $titleText))))
+                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url $fPath) $fragPart) $title))))
           (delete-region @begin @end)
           (insert $resultStr))
       (progn (message (format "Cannot locate the file: 「%s」" $fPath))))))
@@ -499,7 +499,7 @@ Version 2016-10-31"
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
-         (temp87318 (split-uri-hashmark $inputStr))
+         (temp87318 (xah-html-split-uri-hashmark $inputStr))
          (urlMainPart (elt temp87318 0))
          (urlFragPart (elt temp87318 1))
          ($fPath (xahsite-web-path-to-filepath urlMainPart default-directory))

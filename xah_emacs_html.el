@@ -23,18 +23,18 @@
 Version 2016-11-10"
   (interactive)
   (require 'xah-html-mode)
-  (let ( -p1 -p2 )
+  (let ( $p1 $p2 )
     (if (use-region-p)
-        (progn (setq -p1 (region-beginning))
-               (setq -p2 (region-end)))
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
       (progn
         (xah-html-skip-tag-backward)
-        (setq -p1 (point))
+        (setq $p1 (point))
         (xah-html-skip-tag-forward)
-        (setq -p2 (point))))
-    (set-mark -p1)
-    (goto-char -p2)
-    (xah-html-insert-open-close-tags "span" "ref" -p1 -p2)
+        (setq $p2 (point))))
+    (set-mark $p1)
+    (goto-char $p2)
+    (xah-html-insert-open-close-tags "span" "ref" $p1 $p2)
     ;; (xah-html-wrap-html-tag "span" "ref")
     ))
 
@@ -45,31 +45,31 @@ Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 Also, removes repeated empty lines.
 WARNING: This command saves buffer if it's a file.
-Version 2017-02-02"
+Version 2017-08-14"
   (interactive)
   (save-excursion ; remove empty lines
     (progn
       (goto-char (point-min))
       (while (re-search-forward "\n\n\n+" nil t)
         (replace-match (make-string 2 ?\n)))))
-  (let (-p1 -p2 -num -bufferTextOrig )
+  (let ($p1 $p2 $num $bufferTextOrig )
     (push-mark)
     (goto-char 1)
     (when (search-forward "<div class=\"byline\">" nil)
-      (progn ;; set -p1 -p2. they are boundaries of inner text
-        (setq -p1 (point))
+      (progn ;; set $p1 $p2. they are boundaries of inner text
+        (setq $p1 (point))
         (backward-char 1)
         (search-forward "</div>" )
         (backward-char 6)
-        (setq -p2 (point))
-        (let ((-bylineText (buffer-substring-no-properties -p1 -p2)))
-          (when (> (length -bylineText) 110)
-            (user-error "something's probably wrong. the length for the byline is long: 「%s」" -bylineText ))))
+        (setq $p2 (point))
+        (let (($bylineText (buffer-substring-no-properties $p1 $p2)))
+          (when (> (length $bylineText) 110)
+            (user-error "something's probably wrong. the length for the byline is long: 「%s」" $bylineText ))))
       (save-restriction ; update article timestamp
-        (narrow-to-region -p1 -p2)
-        (setq -bufferTextOrig (buffer-string ))
-        (setq -num (count-matches "<time>" (point-min) (point-max)))
-        (if (equal -num 1)
+        (narrow-to-region $p1 $p2)
+        (setq $bufferTextOrig (buffer-string ))
+        (setq $num (count-matches "<time>" (point-min) (point-max)))
+        (if (equal $num 1)
             (progn
               (goto-char (point-min))
               (search-forward "</time>")
@@ -77,33 +77,33 @@ Version 2017-02-02"
               (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
               (when (not (looking-at "\\.")) (insert ".")))
           (progn ;; if there are more than 1 “time” tag, delete the last one
-            (let (-p3 -p4)
+            (let ($p3 $p4)
               (goto-char (point-max))
               (search-backward "</time>")
               (search-forward "</time>")
-              (setq -p4 (point))
+              (setq $p4 (point))
               (search-backward "<time>")
-              (setq -p3 (point))
-              (delete-region -p3 -p4 ))
+              (setq $p3 (point))
+              (delete-region $p3 $p4 ))
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
             (when (not (looking-at "\\.")) (insert "."))
             (goto-char (point-max)))))
       (let ; backup
-          ((-fname (buffer-file-name)))
-        (if -fname
-            (let ((-backup-name
-                   (concat -fname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
-              (copy-file -fname -backup-name t)
-              (message (concat "Backup saved at: " -backup-name)))))
+          (($fname (buffer-file-name)))
+        (if $fname
+            (let (($backup-name
+                   (concat $fname "~" (format-time-string "%Y%m%dT%H%M%S") "~")))
+              (copy-file $fname $backup-name t)
+              (message (concat "Backup saved at: " $backup-name)))))
       (save-buffer )
-      (message "old date line: 「%s」" -bufferTextOrig)
+      (message "old date line: 「%s」" $bufferTextOrig)
 
-      (when ;; open in browser
-          (string-equal system-type "gnu/linux")
-        (let ( (process-connection-type nil))
-          (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
-        ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
-        )
+      ;; (when ;; open in browser
+      ;;     (string-equal system-type "gnu/linux")
+      ;;   (let ( (process-connection-type nil))
+      ;;     (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
+      ;;   ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
+      ;;   )
 
       ;;
       )))
@@ -126,20 +126,20 @@ Version before 2012 or so"
   (interactive)
   (require 'sgml-mode)
   (let* (
-         -p1 -p2
-         (-fileList (split-string (buffer-substring-no-properties -p1 -p2) "\n" t))
-         -pageNavStr )
-    (delete-region -p1 -p2)
+         $p1 $p2
+         ($fileList (split-string (buffer-substring-no-properties $p1 $p2) "\n" t))
+         $pageNavStr )
+    (delete-region $p1 $p2)
     ;; generate the page nav string
-    (setq -pageNavStr
+    (setq $pageNavStr
           (format "<nav class=\"page\">\n%s</nav>"
-                  (let (-result -linkPath -fTitle (-i 0))
-                    (while (< -i (length -fileList))
-                      (setq -linkPath (elt -fileList -i))
-                      (setq -fTitle (xah-html-get-html-file-title -linkPath))
-                      (setq -result (concat -result "<a href=\"" -linkPath "\" title=\"" -fTitle "\">" (number-to-string (1+ -i)) "</a>\n"))
-                      (setq -i (1+ -i)))
-                    -result
+                  (let ($result $linkPath $fTitle ($i 0))
+                    (while (< $i (length $fileList))
+                      (setq $linkPath (elt $fileList $i))
+                      (setq $fTitle (xah-html-get-html-file-title $linkPath))
+                      (setq $result (concat $result "<a href=\"" $linkPath "\" title=\"" $fTitle "\">" (number-to-string (1+ $i)) "</a>\n"))
+                      (setq $i (1+ $i)))
+                    $result
                     )))
     ;; open each file, insert the page nav string
     (mapc
@@ -148,20 +148,20 @@ Version before 2012 or so"
        (find-file thisFile)
        (goto-char 1)
        (if (search-forward "<nav class=\"page\">" nil t)
-           (let (-p3 -p4 )
+           (let ($p3 $p4 )
              (search-backward "<")
-             (setq -p3 (point))
+             (setq $p3 (point))
              (sgml-skip-tag-forward 1)
-             (setq -p4 (point))
-             (delete-region -p3 -p4)
-             (insert -pageNavStr))
+             (setq $p4 (point))
+             (delete-region $p3 $p4)
+             (insert $pageNavStr))
          (progn
            (search-forward "<script><!--
 google_ad_client")
            (progn
              (search-backward "<script>")
-             (insert -pageNavStr "\n\n")))))
-     -fileList)))
+             (insert $pageNavStr "\n\n")))))
+     $fileList)))
 
 (defun xah-syntax-color-hex ()
   "Syntax color text of the form 「#ff1100」 and 「#abc」 in current buffer.
@@ -265,9 +265,9 @@ Requires a python script. See code."
 ;;   (interactive "DMove xx img to dir:
 ;; sNew file name:")
 ;;   (let (
-;;         -from-path
-;;         -to-path )
-;;     (setq -from-path
+;;         $from-path
+;;         $to-path )
+;;     (setq $from-path
 ;;           (cond
 ;;            ((file-exists-p (expand-file-name "~/Downloads/xx.jpg"))
 ;;             (expand-file-name "~/Downloads/xx.jpg"))
@@ -289,16 +289,16 @@ Requires a python script. See code."
 ;;            ((file-exists-p "/tmp/xx.png")
 ;;             "/tmp/xx.png")
 ;;            (t (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))))
-;;     (setq -to-path (concat
+;;     (setq $to-path (concat
 ;;                     (file-name-as-directory @dir-name )
 ;;                     @file-name "."
-;;                     (downcase (file-name-extension -from-path ))))
-;;     (if (file-exists-p -to-path)
-;;         (message "move to path exist: %s" -to-path)
+;;                     (downcase (file-name-extension $from-path ))))
+;;     (if (file-exists-p $to-path)
+;;         (message "move to path exist: %s" $to-path)
 ;;       (progn
-;;         (rename-file -from-path -to-path)
-;;         (find-file -to-path )
-;;         (message "move to path: %s" -to-path)))))
+;;         (rename-file $from-path $to-path)
+;;         (find-file $to-path )
+;;         (message "move to path: %s" $to-path)))))
 
 (defun xah-move-image-file (@dir-name @file-name)
   "Move image file to another dir.
@@ -354,7 +354,7 @@ sNew file name:")
               )))
 
     ;; (if (null $fromPath)
-    ;;     (let ((-name-regex "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)-\\([0-9]\\{6\\}\\)_\\([0-9]\\{3\\}\\)x\\([0-9]\\{3\\}\\)_scrot"))
+    ;;     (let (($name-regex "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)-\\([0-9]\\{6\\}\\)_\\([0-9]\\{3\\}\\)x\\([0-9]\\{3\\}\\)_scrot"))
     ;;       3)
     ;;   (progn ))
 

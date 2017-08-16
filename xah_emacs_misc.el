@@ -34,7 +34,7 @@ Version 2017-03-21"
               (progn (find-file $fpath))
             (progn (error "file doesn't exist 「%s」" $fpath))))
       (progn ; not starting “http://”
-        (setq $inputStr (xah-remove-uri-fragment $inputStr))
+        (setq $inputStr (xah-html-remove-uri-fragment $inputStr))
         (setq $fpath (xahsite-web-path-to-filepath $inputStr default-directory))
         (if (file-exists-p $fpath)
             (progn (find-file $fpath))
@@ -51,7 +51,7 @@ Version 2017-04-21"
   (interactive)
   (let* (
          ($inputStr1
-          (xah-remove-uri-fragment
+          (xah-html-remove-uri-fragment
            (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
              (let ($p0 $p1 $p2
@@ -293,7 +293,7 @@ Version 2016-11-02"
         (setq $p2 (point))))
 
     (setq $inputStr (buffer-substring-no-properties $p1 $p2))
-    (setq $temp (split-uri-hashmark $inputStr))
+    (setq $temp (xah-html-split-uri-hashmark $inputStr))
     (setq $file (xahsite-web-path-to-filepath (aref $temp 0)))
     (setq $urlFragmentPart (aref $temp 1))
 

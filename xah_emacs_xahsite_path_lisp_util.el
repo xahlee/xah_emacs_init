@@ -189,10 +189,10 @@ This function does not check input is actually a URL, nor if the result path fil
   ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
 
   (let (($url @xahsiteURL) $fPath)
-    (setq $url (xah-remove-uri-fragment $url)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
+    (setq $url (xah-html-remove-uri-fragment $url)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
     (when @redirect (setq $url (xahsite-url-remap $url)))
     (when @add-file-name (setq $url (replace-regexp-in-string "/\\'" "/index.html" $url)))
-    ;; (replace-regexp-in-string "%27" "'" (xah-remove-uri-fragment $url))
+    ;; (replace-regexp-in-string "%27" "'" (xah-html-remove-uri-fragment $url))
 
     (setq $fPath
           (format "%s%s" (xahsite-server-root-path)
@@ -367,49 +367,9 @@ This function is not complete. i.e. it not contain complete url redirects as spe
     $s
     ))
 
-(defun xah-remove-uri-fragment (@href-value)
-  "remove URL @href-value fragment, anything after first 「#」 char, including the #.
-See also `split-uri-hashmark'
-Version 2016-11-02"
-  ;; test
-  ;; (xah-remove-uri-fragment "a#b") ; "a"
-  ;; (xah-remove-uri-fragment "#3") ; ""
-  ;; (xah-remove-uri-fragment "4") ; "4"
-  ;; (xah-remove-uri-fragment "#") ; ""
-  ;; (xah-remove-uri-fragment "") ; ""
-  (let (($x (string-match-p "#" @href-value )))
-    (if $x
-        (substring @href-value 0 $x)
-      @href-value )))
-
-(defun split-uri-hashmark (@href-value)
-  "Split a URL @href-value by 「#」 char, return a vector.
- e.g. \"y.html#z\" ⇒ [\"y.html\", \"#z\"]
-
-Examples:
- 「a#b」 ⇒ 「a」 「#b」
- 「#」 ⇒ 「」 「#」
- 「#3」 ⇒ 「」 「#3」
- 「3#」 ⇒ 「3」 「#」
- 「4」 ⇒  「4」 「」
- 「」 ⇒  「」 「」
-
-See also: `xah-remove-uri-fragment'
-Version 2016-11-02"
-  ;; test
-  ;; (split-uri-hashmark "a#b") ; ["a" "#b"]
-  ;; (split-uri-hashmark "#3") ; ["" "#3"]
-  ;; (split-uri-hashmark "#") ; ["" "#"]
-  ;; (split-uri-hashmark "4") ; ["4" ""]
-  ;; (split-uri-hashmark "") ; ["" ""]
-  (let (($x (string-match-p "#" @href-value )))
-    (if $x
-        (vector (substring @href-value 0 $x) (substring @href-value $x))
-      (vector @href-value "" ))))
-
 
 
-(defun file-moved-p (@fpath @moved-dirs )
+(defun xah-file-moved-p (@fpath @moved-dirs )
   "Return true if either paths are in @moved-dirs list or as a subdir.
 @fpath is a full path to a file.
 @moved-dirs is a list/sequence of file full paths.
@@ -422,9 +382,9 @@ Technically, if any string in @moved-dirs is a prefix of @fpath."
     $found
     ))
 ;; test
-;; (file-moved-p "abc/d" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d” equal to one of the moved dir
-;; (file-moved-p "abc/d/e" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d/e” is subdir of “abc/d”
-;; (file-moved-p "abc/" ["abc/d" "don/" "12/3/"] ) ; false, because “abc/” isn't in any of the moved dirs
+;; (xah-file-moved-p "abc/d" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d” equal to one of the moved dir
+;; (xah-file-moved-p "abc/d/e" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d/e” is subdir of “abc/d”
+;; (xah-file-moved-p "abc/" ["abc/d" "don/" "12/3/"] ) ; false, because “abc/” isn't in any of the moved dirs
 
 (defun xah-local-url-to-file-path (@local-file-url)
   "Turn a localhost file URL LOCALFILEURL into a file full path.
