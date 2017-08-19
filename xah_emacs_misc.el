@@ -55,9 +55,7 @@ Version 2017-04-21"
            (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
              (let ($p0 $p1 $p2
-                       ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-                       ;; the colon is a problem. cuz it's in url, but not in file name
-                       ;; don't want to use just space as delimiter because path or url are often in brackets or quotes as in markdown or html
+                       ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets. The colon is a problem. cuz it's in url, but not in file name. Don't want to use just space as delimiter because path or url are often in brackets or quotes as in markdown or html
                        ($charSkipRegex "^  \"\t\n`'|()[]{}「」<>〔〕“”〈〉《》【】〖〗«»‹›❮❯❬❭·。\\`"))
                (setq $p0 (point))
                (skip-chars-backward $charSkipRegex)
@@ -270,7 +268,7 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 
 This is Xah Lee's personal command assuming a particular dir structure.
 
-Version 2016-11-02"
+Version 2017-08-17"
   (interactive)
   (let (
         $p1 $p2
@@ -297,18 +295,26 @@ Version 2016-11-02"
     (setq $file (xahsite-web-path-to-filepath (aref $temp 0)))
     (setq $urlFragmentPart (aref $temp 1))
 
-    (if (file-exists-p $file)
+    (if (string-match "x3dxm" $inputStr )
         (progn
-          (setq $title
-                (if (string-match-p ".+html\\'" $file)
-                    (xah-html-get-html-file-title $file t)
-                  (file-name-nondirectory $file)))
-          (setq $title (if $title $title "" ))
-          (setq $title (xah-replace-pairs-in-string $title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
-
           (delete-region $p1 $p2)
-          (insert $title "\n" (xahsite-filepath-to-url $file) $urlFragmentPart))
-      (progn (user-error "file doesn't exist.")))))
+          (insert
+           (replace-regexp-in-string
+            "/home/xah/x3dxm/vmm/"
+            "http://VirtualMathMuseum.org/"
+            (replace-regexp-in-string "^file:///" "/" $inputStr t t) t t)))
+      (if (file-exists-p $file)
+          (progn
+            (setq $title
+                  (if (string-match-p ".+html\\'" $file)
+                      (xah-html-get-html-file-title $file t)
+                    (file-name-nondirectory $file)))
+            (setq $title (if $title $title "" ))
+            (setq $title (xah-replace-pairs-in-string $title [["&amp;" "&"] ["&lt;" "<"] ["&gt;" ">" ]]))
+
+            (delete-region $p1 $p2)
+            (insert $title "\n" (xahsite-filepath-to-url $file) $urlFragmentPart))
+        (progn (user-error "file doesn't exist."))))))
 
 (defun xah-copy-url-current-file ()
   "Put the current file's URL into the kill-ring."
@@ -367,7 +373,7 @@ Version 2017-02-02"
 
 
 
-(defcustom xah-interactive-abbrev-alist nil "A alist for interactive abbreves. Key and value are strings. Key is for abbrev. Value is the text to be inserted." :group 'xah)
+(defvar xah-interactive-abbrev-alist nil "A alist for interactive abbreves. Key and value are strings. Key is for abbrev. Value is the text to be inserted." )
 
 (setq xah-interactive-abbrev-alist
       '(
@@ -848,11 +854,11 @@ Version old old some 2010 or so"
 If so, place cursor there, print error to message buffer.
 
 URL `http://ergoemacs.org/emacs/emacs_check_parens_balance.html'
-Version 2017-08-06"
+Version 2017-08-17"
   (interactive)
   (let* (
          ($bracket-alist
-          '( (?“ . ?”) (?‹ . ?›) (?« . ?») (?【 . ?】) (?〖 . ?〗) (?〈 . ?〉) (?《 . ?》) (?「 . ?」) (?『 . ?』) (?{ . ?}) (?[ . ?]) (?( . ?))))
+          '( (?“ . ?”) (?‹ . ?›) (?« . ?») (?【 . ?】) (?〖 . ?〗) (?〈 . ?〉) (?《 . ?》) (?「 . ?」) (?『 . ?』) (?{ . ?}) (?\[ . ?\]) (?\( . ?\))))
          ;; regex string of all pairs to search.
          ($bregex
           (let (($tempList nil))

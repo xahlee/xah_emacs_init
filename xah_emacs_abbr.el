@@ -148,7 +148,6 @@ Version 2016-10-24"
 
     ;; english, proper noun
 
-
     ("ahd" "American Heritage Dictionary" )
     ("cn" "Chinese" )
     ("eng" "English" )
@@ -403,8 +402,6 @@ func main() {
     ("rto" "reflect.TypeOf()")
 
     ("map" "map[string]string")
-
-
 
     ;;
 
