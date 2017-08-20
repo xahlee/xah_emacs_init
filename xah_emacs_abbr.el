@@ -21,6 +21,23 @@ Version 2016-10-24"
 (define-abbrev-table 'global-abbrev-table
   '(
 
+("vmm3" "<figure class=\"movie_15932\">
+<img id=\"id_img_xl\" src=\"i/hopf_fibered_linked_tori_001.png\" alt=\"Hopf Fibered Linked Tor 001\" width=\"960\" height=\"720\" />
+</figure>
+
+<script>
+f_cycle_image ({
+ p_img_path_list: [
+
+\"i/hopf_fibered_linked_tori_001.png\",
+\"i/hopf_fibered_linked_tori_002.png\",
+
+] ,
+ p_img_tag_id: \"id_img_xl\",
+ p_backforth_loop: true,
+});
+</script>")
+
     ;; English phrases abbrev
     ("afaik" "as far as i know" )
     ("atm" "at the moment" )

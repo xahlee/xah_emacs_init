@@ -391,7 +391,7 @@ sNew file name:")
           (insert $toPath)
           (insert "\n\n")
           (backward-word )
-          (xah-all-linkify))))))
+          (xah-html-any-linkify))))))
 
 (defun xah-youtube-get-image ()
   "

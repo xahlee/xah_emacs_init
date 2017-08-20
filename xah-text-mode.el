@@ -3,7 +3,7 @@
 ;; Copyright © 2017 by Xah Lee
 
 ;; Author: Xah Lee ( http://xahlee.info/ )
-;; Version: 0.1.2 2017-06-23
+;; Version: 0.1.20170820
 ;; Created: 29 April 2017
 ;; Package-Requires: ((emacs "25.1"))
 ;; Keywords: convenience
@@ -12,7 +12,7 @@
 
 ;;; License:
 
-;; You can redistribute this program and/or modify it under the terms of the GNU General Public License version 2.
+;; You can redistribute this program and/or modify it under the terms of the GNU General Public License version 3.
 
 ;;; Commentary:
 

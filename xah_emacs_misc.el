@@ -392,7 +392,8 @@ Version 2017-02-02"
 
         ("delete empty file" . "find . -type f -empty")
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-        ("delete emacs backup~" . "find ~/web/ -name \"*~\" -delete")
+        ("delete emacs backup~" . "find . -name \"*~\" -delete")
+        ("clean xah sites~" . "find ~/web/ -name \"*~\" -delete")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
 
