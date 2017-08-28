@@ -653,8 +653,11 @@ Version 2017-01-11"
      ;;            (progn (throw 'found x))))))))
 
 (defun xah-change-bracket-pairs ( @from-chars @to-chars)
-  "Change bracket pairs from one type to another on current line or text selection.
+  "Change bracket pairs from one type to another.
+
 For example, change all parenthesis () to square brackets [].
+
+Works on selected text, or current text block.
 
 When called in lisp program, @from-chars or @to-chars is a string of bracket pair. eg \"(paren)\",  \"[bracket]\", etc.
 The first and last characters are used.
@@ -663,7 +666,7 @@ If @to-chars is equal to string “delete brackets”, the brackets are deleted.
 
  If the string has length greater than 2, the rest are ignored.
 URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
-Version 2017-05-17"
+Version 2017-08-24"
   (interactive
    (let (($bracketsList
           '("(paren)"
@@ -711,13 +714,23 @@ Version 2017-05-17"
      (list
       (ido-completing-read "Replace this:" $bracketsList )
       (ido-completing-read "To:" $bracketsList ))))
-  (let ( $begin $end )
+  (let ( $p1 $p2 )
     (if (use-region-p)
-        (setq $begin (region-beginning) $end (region-end))
-      (setq $begin (line-beginning-position) $end (line-end-position)))
+        (progn
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n")
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (if (re-search-forward "\n[ \t]*\n" nil "move")
+            (progn (re-search-backward "\n[ \t]*\n")
+                   (setq $p2 (point)))
+          (setq $p2 (point)))))
     (save-excursion
       (save-restriction
-        (narrow-to-region $begin $end)
+        (narrow-to-region $p1 $p2)
         (let ( (case-fold-search nil)
                $fromLeft
                $fromRight
@@ -785,33 +798,6 @@ Version 2017-05-17"
                   (while (search-forward $fromRight nil t)
                     (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
                     (replace-match $toRight "FIXEDCASE" "LITERAL")))))))))))
-
-(defun xah-corner-bracket→html-i (@begin @end)
-       "Replace all 「…」 to <code>…</code> in current text block.
-When called with `universal-argument', work on visible portion of whole buffer (i.e. respect `narrow-to-region'). When call in lisp program, the @begin @end are region positions."
-       (interactive
-        (cond
-         ((equal current-prefix-arg nil) ; universal-argument not called
-          (let (pt1 pt2)
-                   (save-excursion
-                     (if (re-search-backward "\n[ \t]*\n" nil "move")
-                         (progn (re-search-forward "\n[ \t]*\n")
-                                (setq pt1 (point)))
-                       (setq pt1 (point)))
-                     (if (re-search-forward "\n[ \t]*\n" nil "move")
-                         (progn (re-search-backward "\n[ \t]*\n")
-                                (setq pt2 (point)))
-                       (setq pt2 (point)))
-                     (list pt1 pt2))))
-         (t ; all other cases
-          (list (point-min) (point-max)))))
-       (save-excursion
-         (save-restriction
-           (narrow-to-region @begin @end)
-           (goto-char (point-min))
-           (while (re-search-forward "「\\([^」]+?\\)」" nil t)
-             (if (y-or-n-p "Replace this one?")
-                 (replace-match "<code>\\1</code>" t) ) ) )) )
 
 (defun xah-angle-brackets-to-html (&optional @begin @end)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span> in current text block or selection.

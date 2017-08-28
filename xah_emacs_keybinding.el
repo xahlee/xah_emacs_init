@@ -14,7 +14,7 @@
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
-(define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-path-under-cursor)
+(define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
 
 ;; (setq visible-bell nil)
 
@@ -69,7 +69,7 @@
 
       (define-key xah-html-mode-no-chord-map (kbd "e") 'xah-make-atom-entry)
       (define-key xah-html-mode-no-chord-map (kbd "u") 'xahsite-update-article-timestamp)
-      (define-key xah-html-mode-no-chord-map (kbd "n") 'xah-insert-reference-span-tag)
+      (define-key xah-html-mode-no-chord-map (kbd "s") 'xah-insert-reference-span-tag)
       (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
 
       (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
@@ -128,7 +128,7 @@
   (define-key xah-user-keymap (kbd "e") xah-fly-e-keymap)
   (define-key xah-user-keymap (kbd "f b") 'xah-dired-crop-image)
   (define-key xah-user-keymap (kbd "f c") 'xah-dired-2jpg)
-  (define-key xah-user-keymap (kbd "f d") 'xah-dired-image-autocrop)
+  (define-key xah-user-keymap (kbd "f d") 'xah-image-autocrop)
   (define-key xah-user-keymap (kbd "f e") 'xah-dired-show-metadata)
   (define-key xah-user-keymap (kbd "f f") 'xah-dired-scale-image)
   (define-key xah-user-keymap (kbd "f g") 'xah-dired-2drawing)
@@ -158,10 +158,10 @@
   (define-key xah-user-keymap (kbd "r .") 'xah-convert-english-chinese-punctuation)
   (define-key xah-user-keymap (kbd "r [") 'xah-remove-square-brackets)
   (define-key xah-user-keymap (kbd "r b") 'xah-change-bracket-pairs)
-  (define-key xah-user-keymap (kbd "r c") 'xah-escape-quotes)
+  
   (define-key xah-user-keymap (kbd "r d") 'xah-fix-datetime-stamp)
   (define-key xah-user-keymap (kbd "r g") 'xah-convert-latin-alphabet-gothic)
-  (define-key xah-user-keymap (kbd "r l") 'xah-unescape-quotes)
+  
   (define-key xah-user-keymap (kbd "r p") 'xah-convert-asian/ascii-space)
   (define-key xah-user-keymap (kbd "r p") 'xah-replace-profanity)
   (define-key xah-user-keymap (kbd "r t") 'xah-twitterfy)

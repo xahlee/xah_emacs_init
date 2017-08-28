@@ -576,7 +576,6 @@ They will be changed into a HTML link in various formats, depending on the input
 If there is text selection, use it as input.
 Version 2017-07-27"
   (interactive)
-  (message "xah-all-linkify called" )
   (if (string-match "^/home/xah/web/" (or (buffer-file-name) default-directory))
       (let ( $p1 $p2 $input)
         ;; (if (string-match "%" $input )

@@ -107,23 +107,52 @@ Version 2016-07-19"
      (format "-scale %s%% -quality 85%% %s " @scale-percentage (if @sharpen? "-sharpen 1" "" ))
      "-s" $outputSuffix )))
 
-(defun xah-dired-image-autocrop (@file-list @output-image-type-suffix)
-  "Create a new auto-cropped version of images of marked files in dired.
+(defun xah-image-autocrop ()
+  "Create a new auto-cropped version of image.
+If current buffer is jpg or png file, crop it.
+If current buffer is dired, do cursor file or marked files.
+
+The created file has “_crop638.” in the name, in the same dir.
+It's in png or jpg, same as the original.
+
 Requires ImageMagick shell command.
 
 If `universal-argument' is called first, output is PNG format. Else, JPG.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2016-07-19"
-  (interactive
-   (let (
-         ($fileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:")))))
-         (@output-image-type-suffix (if current-prefix-arg ".png" ".jpg" )))
-     (list $fileList @output-image-type-suffix)))
-  (xah-process-image @file-list "-trim" "-cropped" @output-image-type-suffix ))
+Version 2017-08-27"
+  (interactive)
+
+  (let (
+        ($bfName (buffer-file-name))
+        $newName
+        $cmdStr
+        )
+
+    (if (string-equal major-mode "dired-mode")
+        (progn
+          (let (($flist (dired-get-marked-files)))
+            (mapc
+             (lambda ($f)
+               (setq $newName (concat (file-name-sans-extension $f) "_crop638." (file-name-extension $f)))
+               (setq $cmdStr (format "convert -trim '%s' '%s'" (file-relative-name $f) (file-relative-name $newName)))
+               (shell-command $cmdStr))
+             $flist ))
+          (revert-buffer))
+      (progn
+        (if $bfName
+            (let (($ext (file-name-extension $bfName)))
+              (if (and (not (string-equal $ext "jpg"))
+                       (not (string-equal $ext "png")))
+                  (user-error "not png or jpg at %s" $bfName)
+                (progn
+                  (setq $cmdStr
+                        (format
+                         "convert -trim '%s' '%s'"
+                         $bfName
+                         (concat (file-name-sans-extension $bfName) "_crop638." $ext)))
+                  (shell-command  $cmdStr )
+                  (message  $cmdStr))))
+          (user-error "not img file or dired at %s" $bfName))))))
 
 (defun xah-dired-2png (@file-list)
   "Create a png version of images of marked files in dired.

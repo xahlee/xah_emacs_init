@@ -21,22 +21,27 @@ Version 2016-10-24"
 (define-abbrev-table 'global-abbrev-table
   '(
 
-("vmm3" "<figure class=\"movie_15932\">
-<img id=\"id_img_xl\" src=\"i/hopf_fibered_linked_tori_001.png\" alt=\"Hopf Fibered Linked Tor 001\" width=\"960\" height=\"720\" />
+("vmm3" "<script src=\"../../img_movie_player.js\"></script>
+
+<figure class=\"mvxl\">
+<img id=\"id_img_xl\" src=\"i/enneper2_cartesian_001.png\" alt=\"enneper2 cartesian 001\" width=\"960\" height=\"720\" />
+<figcaption>
+enneper2 cartesian 001
+</figcaption>
 </figure>
 
 <script>
 f_cycle_image ({
  p_img_path_list: [
 
-\"i/hopf_fibered_linked_tori_001.png\",
-\"i/hopf_fibered_linked_tori_002.png\",
+\"i/enneper2_cartesian_001.png\",
 
 ] ,
  p_img_tag_id: \"id_img_xl\",
  p_backforth_loop: true,
 });
-</script>")
+</script>
+")
 
     ;; English phrases abbrev
     ("afaik" "as far as i know" )
@@ -134,7 +139,7 @@ f_cycle_image ({
     ("org3" "organization" )
     ("paren" "parenthesis" )
     ("pls" "please" )
-    ("par3" "parameter" )
+    ("pm3" "parameter" )
     ("dec3" "declaration" )
     ("pp" "people" )
     ("prof" "professor" )
@@ -173,6 +178,11 @@ f_cycle_image ({
     ("jp3" "Japanese" )
     ("sf" "San Francisco" )
     ("wp" "Wikipedia" )
+
+    ;; math
+
+    ("fr" "fundamental region" )
+    ("def" ":=" )
 
     ;; computing, general
 

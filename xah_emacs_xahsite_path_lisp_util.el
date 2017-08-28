@@ -28,8 +28,6 @@ e.g. c:/Users/h3/web/"
    ]
   )
 
-
-
 
 (defun xahsite-local-link-p (@href-value)
   "Return true if it's a local file link, else false.
@@ -166,8 +164,7 @@ For reverse, see `xahsite-href-value-to-filepath'.
 @host-file-path is a full path of the host file name or its dir.
 
 For reverse, see `xahsite-filepath-to-href-value'.
-See also: `xahsite-url-to-filepath'
-"
+See also: `xahsite-url-to-filepath'"
   (if (string-match-p "\\`http://" @href-value)
       (progn (xahsite-url-to-filepath @href-value "addFileName"))
     (progn
@@ -175,36 +172,45 @@ See also: `xahsite-url-to-filepath'
 ;; test
 ;; (xahsite-href-value-to-filepath "http://xahlee.org/Netiquette_dir/death_of_a_troll.html" "c:/Users/h3/web/xahlee_info/comp/Google_Tech_Talk_Lisp_At_JPL_by_Ron_Garret.html")
 
-(defun xahsite-url-to-filepath (@xahsiteURL &optional @add-file-name @redirect)
-  "Returns the file path of a xah website URL @xahsiteURL.
+(defun xahsite-url-to-filepath (@xurl &optional @add-file-name @redirect)
+  "Returns the file path of a xah website URL @xurl.
 
 If the optional argument @add-file-name is true, then append “index.html” if the resulting path is a dir.
 If the optional argument @redirect is true, then also consider result of http redirect.
 
-This function does not check input is actually a URL, nor if the result path file exists."
+This function does not check input is actually a URL, nor if the result path file exists.
+Version 2017-08-27"
   ;; test cases:
   ;; (xahsite-url-to-filepath "http://xahlee.org/index.html") ; ⇒ "c:/Users/h3/web/xahlee_org/index.html"
   ;; (xahsite-url-to-filepath "http://xahlee.org/") ; ⇒ "c:/Users/h3/web/http://xahlee.org/index.html"
   ;; (xahsite-url-to-filepath "http://abc.org/x.html") ; ⇒ "c:/Users/h3/web/abc_org/x.html"
   ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
+  (let (
+        ($url (xah-html-remove-uri-fragment @xurl))
+        $fPath)
+    (if (string-match "^file:///"  $url )
+        (progn
+          (setq $fPath (replace-regexp-in-string "^file:///" "/" $url t t)))
+      (progn
+        (if (let ((case-fold-search t))
+              (string-match "VirtualMathMuseum" $url ))
+            (progn
+              (setq $fPath (replace-regexp-in-string
+                            "http://VirtualMathMuseum.org/"
+                            "/home/xah/x3dxm/vmm/"
+                            $url t t)))
+          (progn
+            (when @redirect (setq $url (xahsite-url-remap $url)))
+            (when @add-file-name (setq $url (replace-regexp-in-string "/\\'" "/index.html" $url)))
+            ;; (replace-regexp-in-string "%27" "'" (xah-html-remove-uri-fragment $url))
+            (setq $fPath
+                  (format "%s%s" (xahsite-server-root-path)
+                          ;; remove www
+                          (replace-regexp-in-string
+                           "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)"
+                           "\\2_\\3/\\4" $url)))))))))
 
-  (let (($url @xahsiteURL) $fPath)
-    (setq $url (xah-html-remove-uri-fragment $url)) ; remove HTML fragment, e.g. http://ergoemacs.org/emacs/elisp.html#comment-113416750
-    (when @redirect (setq $url (xahsite-url-remap $url)))
-    (when @add-file-name (setq $url (replace-regexp-in-string "/\\'" "/index.html" $url)))
-    ;; (replace-regexp-in-string "%27" "'" (xah-html-remove-uri-fragment $url))
-
-    (setq $fPath
-          (format "%s%s" (xahsite-server-root-path)
-                  ;; remove www
-                  (replace-regexp-in-string
-                   "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)"
-                   "\\2_\\3/\\4" $url)))
-    $fPath
-    ))
-
-
-(defvar xahsite-external-docs nil "A vector of dir path of xah sites are external docs, mostly computer language docs. 
+(defvar xahsite-external-docs nil "A vector of dir path of xah sites are external docs, mostly computer language docs.
 Each element is a string, looks like this:
 “ergoemacs_org/emacs_manual/”
 2017-05-17")

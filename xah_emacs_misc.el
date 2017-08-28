@@ -40,67 +40,6 @@ Version 2017-03-21"
             (progn (find-file $fpath))
           (progn (user-error "file doesn't exist.")))))))
 
-(defun xah-open-file-path-under-cursor ()
-  "Open the file path under cursor.
-If there is text selection, use the text selection for path.
-If path starts with “http://”, launch browser vistiting that URL, or open the corresponding file, if it's xah site.
-
-Input path can be {relative, full path, URL}. See: `xahsite-web-path-to-filepath' for types of paths supported.
-
-Version 2017-04-21"
-  (interactive)
-  (let* (
-         ($inputStr1
-          (xah-html-remove-uri-fragment
-           (if (use-region-p)
-               (buffer-substring-no-properties (region-beginning) (region-end))
-             (let ($p0 $p1 $p2
-                       ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets. The colon is a problem. cuz it's in url, but not in file name. Don't want to use just space as delimiter because path or url are often in brackets or quotes as in markdown or html
-                       ($charSkipRegex "^  \"\t\n`'|()[]{}「」<>〔〕“”〈〉《》【】〖〗«»‹›❮❯❬❭·。\\`"))
-               (setq $p0 (point))
-               (skip-chars-backward $charSkipRegex)
-               (setq $p1 (point))
-               (goto-char $p0)
-               (skip-chars-forward $charSkipRegex)
-               (setq $p2 (point))
-               (goto-char $p0)
-               (buffer-substring-no-properties $p1 $p2)
-               ;;
-               ))))
-         ($inputStr2 (replace-regexp-in-string ":\\'" "" $inputStr1))
-         $p
-         )
-    (if (string-equal $inputStr2 "")
-        (progn (user-error "No path under cursor" ))
-      (progn
-        ;; convenience. if the input string start with a xah domain name, make it a url string
-        (setq $p
-              (cond
-               ((string-match "\\`//" $inputStr2 ) (concat "http:" $inputStr2)) ; relative http protocol, used in css
-               ((string-match "\\`ergoemacs\\.org" $inputStr2 ) (concat "http://" $inputStr2))
-               ((string-match "\\`wordyenglish\\.com" $inputStr2 ) (concat "http://" $inputStr2))
-               ((string-match "\\`xaharts\\.org" $inputStr2 ) (concat "http://" $inputStr2))
-               ((string-match "\\`xahlee\\.info" $inputStr2 ) (concat "http://" $inputStr2))
-               ((string-match "\\`xahlee\\.org" $inputStr2 ) (concat "http://" $inputStr2))
-               ((string-match "\\`xahmusic\\.org" $inputStr2 ) (concat "http://" $inputStr2))
-               ((string-match "\\`xahporn\\.org" $inputStr2 ) (concat "http://" $inputStr2))
-               ((string-match "\\`xahsl\\.org" $inputStr2 ) (concat "http://" $inputStr2))
-               (t $inputStr2)))
-        (if (string-match-p "\\`https?://" $p)
-            (if (xahsite-url-is-xah-website-p $p)
-                (let (($fp (xahsite-url-to-filepath $p )))
-                  (if (file-exists-p $fp)
-                      (find-file $fp)
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" $fp)) (find-file $fp))))
-              (browse-url $p))
-          (progn ; not starting “http://”
-            (let (($fff (xahsite-web-path-to-filepath $p default-directory)))
-              (if (file-exists-p $fff)
-                  (progn (find-file $fff))
-                (if (file-exists-p (concat $fff ".el"))
-                    (progn (find-file (concat $fff ".el")))
-                  (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" $fff)) (find-file $fff )))))))))))
-
 
 
 (defun xah-toggle-margin-right ()
@@ -268,7 +207,7 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 
 This is Xah Lee's personal command assuming a particular dir structure.
 
-Version 2017-08-17"
+Version 2017-08-27"
   (interactive)
   (let (
         $p1 $p2
@@ -277,17 +216,16 @@ Version 2017-08-17"
         $title
         $temp
         $urlFragmentPart
-        ($pathDelimitors "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·，。\\`") ; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+        ($pathStops "^  \t\n\"`'‘’“”|()[]{}「」<>〔〕〈〉《》【】〖〗«»‹›❮❯❬❭·。\\")
         )
-
     (if (use-region-p)
         (setq $p1 (region-beginning) $p2 (region-end))
       (let ($p0)
         (setq $p0 (point))
-        (skip-chars-backward $pathDelimitors)
+        (skip-chars-backward $pathStops)
         (setq $p1 (point))
         (goto-char $p0)
-        (skip-chars-forward $pathDelimitors)
+        (skip-chars-forward $pathStops)
         (setq $p2 (point))))
 
     (setq $inputStr (buffer-substring-no-properties $p1 $p2))
@@ -391,6 +329,11 @@ Version 2017-02-02"
         ("firefox" . "setsid firefox &")
 
         ("delete empty file" . "find . -type f -empty")
+        ("delete mac junk DS_Store __MACOSX" . "find . -name \".DS_Store\" -delete;
+find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
+
+        ;; ("delete __MACOSX" . "find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
+
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
         ("delete emacs backup~" . "find . -name \"*~\" -delete")
         ("clean xah sites~" . "find ~/web/ -name \"*~\" -delete")
@@ -404,7 +347,7 @@ Version 2017-02-02"
         ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
 
         ("clojure" . "java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
-        ("multimedia keys" . "<kbd>◼</kbd>, <kbd>⏯</kbd>, <kbd>⏮</kbd>, <kbd>⏭</kbd>, <kbd>🔇</kbd>")))
+        ))
 
 (defun xah-interactive-abbrev ()
   "Prompt to insert string from a alist ‘xah-interactive-abbrev-alist’
@@ -412,12 +355,12 @@ Version 2017-02-02"
 URL ‘http://ergoemacs.org/emacs/emacs_interactive_abbrev.html’
 version 2017-08-13"
   (interactive)
-  (let (($x
+  (let (($input
          (ido-completing-read
           "abbrevs:"
           (mapcar (lambda (x) (car x)) xah-interactive-abbrev-alist)
           "PREDICATE" "REQUIRE-MATCH")))
-    (insert (cdr (assoc $x xah-interactive-abbrev-alist)))))
+    (insert (cdr (assoc $input xah-interactive-abbrev-alist)))))
 
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.
@@ -911,3 +854,38 @@ Version 2017-08-17"
               (goto-char (aref (car $stack) 1))
               (message "Mismtach found. The char %s has no matching pair." $stack))
           (print "All brackets/quotes match."))))))
+
+(defun xah-url-to-filepath ()
+  "of xah site url under cursor, change it to corresponding local file path.
+Version 2017-08-27"
+  (interactive)
+  (let (
+        $p1 $p2
+        $input
+        ($pathStops "^  \t\n\"`'‘’“”|()[]{}「」<>〔〕〈〉《》【】〖〗«»‹›❮❯❬❭·。\\")
+        $path
+        )
+    (if (use-region-p)
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (let ($p0)
+        (setq $p0 (point))
+        (skip-chars-backward $pathStops)
+        (setq $p1 (point))
+        (goto-char $p0)
+        (skip-chars-forward $pathStops)
+        (setq $p2 (point))))
+    (setq $input (buffer-substring-no-properties $p1 $p2))
+    (if (string-match "^file:///"  $input )
+        (progn
+          (setq $path (replace-regexp-in-string "^file:///" "/" $input t t)))
+      (progn
+        (if (let ((case-fold-search t))
+              (string-match "VirtualMathMuseum" $input ))
+            (progn
+              (setq $path (replace-regexp-in-string
+                              "http://VirtualMathMuseum.org/"
+                              "/home/xah/x3dxm/vmm/"
+                              $input t t)))
+          (setq $path  (xahsite-url-to-filepath (xah-html-remove-uri-fragment $input))))))
+    (delete-region $p1 $p2)
+    (insert $path)))
