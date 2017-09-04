@@ -110,30 +110,28 @@ Version 2016-07-19"
 (defun xah-image-autocrop ()
   "Create a new auto-cropped version of image.
 If current buffer is jpg or png file, crop it.
-If current buffer is dired, do cursor file or marked files.
+If current buffer is dired, do the file under cursor or marked files.
 
-The created file has “_crop638.” in the name, in the same dir.
+The created file has “_crp.” in the name, in the same dir.
 It's in png or jpg, same as the original.
 
-Requires ImageMagick shell command.
+Requires ImageMagick shell command “convert”
 
 If `universal-argument' is called first, output is PNG format. Else, JPG.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2017-08-27"
+Version 2017-08-30"
   (interactive)
-
   (let (
         ($bfName (buffer-file-name))
         $newName
         $cmdStr
         )
-
     (if (string-equal major-mode "dired-mode")
         (progn
           (let (($flist (dired-get-marked-files)))
             (mapc
              (lambda ($f)
-               (setq $newName (concat (file-name-sans-extension $f) "_crop638." (file-name-extension $f)))
+               (setq $newName (concat (file-name-sans-extension $f) "_crp." (file-name-extension $f)))
                (setq $cmdStr (format "convert -trim '%s' '%s'" (file-relative-name $f) (file-relative-name $newName)))
                (shell-command $cmdStr))
              $flist ))
@@ -149,7 +147,7 @@ Version 2017-08-27"
                         (format
                          "convert -trim '%s' '%s'"
                          $bfName
-                         (concat (file-name-sans-extension $bfName) "_crop638." $ext)))
+                         (concat (file-name-sans-extension $bfName) "_crp." $ext)))
                   (shell-command  $cmdStr )
                   (message  $cmdStr))))
           (user-error "not img file or dired at %s" $bfName))))))

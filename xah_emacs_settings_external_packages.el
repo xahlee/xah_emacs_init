@@ -82,7 +82,7 @@
 (when (fboundp 'global-company-mode)
   (global-company-mode 1))
 
-(when (fboundp 'go-mode) (add-hook 'before-save-hook #'gofmt-before-save) )
+;; (when (fboundp 'go-mode) (add-hook 'before-save-hook #'gofmt-before-save) )
 
 
 

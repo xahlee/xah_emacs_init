@@ -252,7 +252,7 @@ Version 2017-08-27"
 
             (delete-region $p1 $p2)
             (insert $title "\n" (xahsite-filepath-to-url $file) $urlFragmentPart))
-        (progn (user-error "file doesn't exist."))))))
+        (progn (user-error "file doesn't exist. 「%s」" $file))))))
 
 (defun xah-copy-url-current-file ()
   "Put the current file's URL into the kill-ring."
@@ -317,6 +317,11 @@ Version 2017-02-02"
       '(
         ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
         ("ssh" . "ssh -l u40651120 xahlee.org ")
+
+        ("vmm inbox" . "rsync -z -a -v -t --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ /home/xah/x3dxm/xstuff/inbox/")
+
+        ("vmm up" . "rsync -z -a -v -t --delete --exclude='.git/*' --exclude='*~' --rsh=\"ssh -l xahlee\" /home/xah/x3dxm/vmm/ xahlee@3d-xplormath.org:/Library/WebServer/Documents/vmm/" )
+
         ("img1" . "convert -quality 85% ")
         ("imgScale" . "convert -scale 50% -quality 85% ")
         ("img256" . "convert +dither -colors 256 ")
@@ -711,7 +716,7 @@ Version 2017-06-05"
         deletedText
         ))))
 
-(global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
+
 
 (defun xah-remove-all-wikipedia-link ()
   "delete all wikipedia links in a html file, except image links etc.
@@ -721,7 +726,7 @@ Version 2017-06-19"
         p2 deletedText
         (resultList '()))
     (goto-char (point-min))
-    (while (search-forward "<a href=\"http://en.wikipedia.org/wiki/" nil t)
+    (while (re-search-forward "<a href=\"https?://en.wikipedia.org/wiki/" nil t)
       (progn
         (search-backward "<a href" )
         (setq p1 (point))
@@ -737,10 +742,7 @@ Version 2017-06-19"
         (search-backward "</a>")
         (setq p1 (point))
         (delete-region p1 p2)))
-
     (mapc (lambda (x) (princ x) (terpri )) resultList)))
-
-(global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
 
 
 ;; don't use much anymore

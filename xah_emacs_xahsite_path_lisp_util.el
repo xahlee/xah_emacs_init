@@ -13,20 +13,22 @@ e.g. c:/Users/h3/web/"
 (expand-file-name "~/web/")
 )
 
-(defun xahsite-domain-names ()
-  "Returns a vector of xah web domain names."
-  [
-   "ergoemacs.org"
-   "wordyenglish.com"
-   ;; "wordyenglish.info"
-   "xaharts.org"
-   "xahlee.info"
-   "xahlee.org"
-   "xahmusic.org"
-   "xahporn.org"
-   "xahsl.org"
-   ]
-  )
+(defvar xahsite-domain-to-path-alist nil "alist of domain and path
+2017-09-03")
+
+(setq xahsite-domain-to-path-alist
+      '(
+        ("ergoemacs.org" . "ergoemacs_org")
+        ("wordyenglish.com" . "wordyenglish_com")
+        ( "wordyenglish.info" . "wordyenglish_info")
+        ("xaharts.org" . "xaharts_org")
+        ("xahlee.info" . "xahlee_info")
+        ("xahlee.org" . "xahlee_org")
+        ("xahmusic.org" . "xahmusic_org")
+        ("xahporn.org" . "xahporn_org")
+        ("xahsl.org" . "xahsl_org")))
+
+(setq xahsite-domain-names (mapcar (lambda (x) (car x)) xahsite-domain-to-path-alist))
 
 
 (defun xahsite-local-link-p (@href-value)
@@ -71,7 +73,7 @@ See: `xahsite-domain-names'."
     (mapc (lambda (x)
             (when (string-match-p (format "\\`http://\\(www\\.\\)*%s\.*/*" (regexp-quote x)) @url)
               (throw 'myloop t)))
-          (xahsite-domain-names))
+          xahsite-domain-names)
     nil
     ))
 ;; test cases
@@ -203,12 +205,15 @@ Version 2017-08-27"
             (when @redirect (setq $url (xahsite-url-remap $url)))
             (when @add-file-name (setq $url (replace-regexp-in-string "/\\'" "/index.html" $url)))
             ;; (replace-regexp-in-string "%27" "'" (xah-html-remove-uri-fragment $url))
-            (setq $fPath
-                  (format "%s%s" (xahsite-server-root-path)
-                          ;; remove www
-                          (replace-regexp-in-string
-                           "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)"
-                           "\\2_\\3/\\4" $url)))))))))
+            (if (xahsite-url-is-xah-website-p $url)
+                (setq $fPath
+                      (format "%s%s" (xahsite-server-root-path)
+                              ;; remove www
+                              (replace-regexp-in-string
+                               "\\`http://\\(www\\.\\)*\\([^.]+\\)\\.\\(info\\|org\\|com\\)/\\(.*\\)"
+                               "\\2_\\3/\\4" $url)))
+              $url
+              )))))))
 
 (defvar xahsite-external-docs nil "A vector of dir path of xah sites are external docs, mostly computer language docs.
 Each element is a string, looks like this:

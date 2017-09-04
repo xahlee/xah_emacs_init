@@ -16,6 +16,10 @@
 
 (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
 
+;; (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
+;; (global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
+
+
 ;; (setq visible-bell nil)
 
 ;; ring-bell-function

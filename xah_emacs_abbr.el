@@ -7,6 +7,9 @@
 
 
 
+(fset 'vmm
+   [?1 ?j ?d ?r ?l ?i ?d ?3 ?  home ?9 ?k ?c ?h ?l ?c ?l ?  backspace ?m ?v ?x ?l])
+
 (defun xah-abbrev-h-f ()
   "Abbrev hook function, used for `define-abbrev'.
  Our use is to prevent inserting the char that triggered expansion. Experimental.
@@ -21,16 +24,8 @@ Version 2016-10-24"
 (define-abbrev-table 'global-abbrev-table
   '(
 
-("vmm3" "<script src=\"../../img_movie_player.js\"></script>
+("vmm3" "
 
-<figure class=\"mvxl\">
-<img id=\"id_img_xl\" src=\"i/enneper2_cartesian_001.png\" alt=\"enneper2 cartesian 001\" width=\"960\" height=\"720\" />
-<figcaption>
-enneper2 cartesian 001
-</figcaption>
-</figure>
-
-<script>
 f_cycle_image ({
  p_img_path_list: [
 
@@ -40,7 +35,7 @@ f_cycle_image ({
  p_img_tag_id: \"id_img_xl\",
  p_backforth_loop: true,
 });
-</script>
+
 ")
 
     ;; English phrases abbrev
@@ -66,12 +61,14 @@ f_cycle_image ({
     ("wsnt" "wasn't" )
     ("wtdb" "What's the difference between" )
     ("sa" "See also:" )
-    ("re3" "return" )
+    ("r3" "return" )
     ("im" "I'm" )
     ("tr" "there are" )
     ("u" "you" )
     ("r" "are" )
     ("sd" "should" )
+    ("wt" "want" )
+    ("ts" "there is" )
 
     ;; english, single word
 
