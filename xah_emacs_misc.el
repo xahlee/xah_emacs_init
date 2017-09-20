@@ -580,42 +580,27 @@ Version 2015-12-17"
     (message "background color changed to %s" $next-value)))
 
 (defun xah-browse-url-of-buffer ()
-  "Similar to `browse-url-of-buffer' but visit xahlee.org.
+  "Similar to `browse-url-of-buffer' but with some extra features.
 
-save the file first.
+Save the file first.
 Then, if `universal-argument' is called, visit the corresponding xahsite URL.
 For example, if current buffer is of this file:
  ~/web/xahlee_info/index.html
 then after calling this function,
 default browser will be launched and opening this URL:
  http://xahlee.info/index.html
-version 2017-04-10"
+Version 2017-09-15"
   (interactive)
-  (let ($url)
-    (setq $url
-          (if current-prefix-arg
-              (xahsite-filepath-to-url (buffer-file-name))
-            (buffer-file-name)))
+  (let (($url
+         (if current-prefix-arg
+             (xahsite-filepath-to-url (buffer-file-name))
+           (buffer-file-name))))
+
     (when (buffer-modified-p )
       (xah-clean-whitespace (point-min) (point-max))
       (save-buffer))
     (message "browsing %s" $url)
-    (cond
-     ((string-equal system-type "windows-nt") ; Windows
-      (when (string-match "^c:/" $url) (setq $url (concat "file:///" $url)))
-      (browse-url $url))
-     ((string-equal system-type "gnu/linux")
-      ;; (let ( (process-connection-type nil))
-      ;;   (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
-      ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
-      (browse-url $url ))
-     ;; ((string-equal system-type "gnu/linux")
-     ;;  (start-process "xahbrowse"
-     ;;                 nil "setsid"
-     ;;                 "firefox"
-     ;;                 (concat "file://" buffer-file-name )))
-     ((string-equal system-type "darwin") ; Mac
-      (browse-url $url )))))
+    (browse-url $url )))
 
 
 

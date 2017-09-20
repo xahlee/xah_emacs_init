@@ -40,6 +40,8 @@ f_cycle_image ({
 
     ;; English phrases abbrev
     ("afaik" "as far as i know" )
+    ("iirc" "if i recall correctly" )
+
     ("atm" "at the moment" )
     ("dfb" "difference between" )
     ("ty" "thank you" )
@@ -178,8 +180,10 @@ f_cycle_image ({
 
     ;; math
 
+    ("sor" "surface of revolution" )
     ("fr" "fundamental region" )
     ("def" ":=" )
+    ("dg3" "differential geometry" )
 
     ;; computing, general
 
@@ -284,6 +288,21 @@ f_cycle_image ({
 </section>
 
 " )
+
+("topic3" "<div class=\"topic-xl\">
+<h4>Emacs Lisp Basics Topic</h4>
+<ol>
+<li><a href=\"elisp_basics.html\">Emacs Lisp Basics</a></li>
+<li><a href=\"elisp_editing_basics.html\">Overview of Text-Processing in Emacs Lisp</a></li>
+<li><a href=\"elisp_examples.html\">Emacs Lisp Examples, page 1</a></li>
+<li><a href=\"elisp_eval_lisp_code.html\">How to Evaluate Emacs Lisp Code</a></li>
+<li><a href=\"elisp_doc_lookup.html\">Elisp: Documentation Lookup</a></li>
+<li><a href=\"elisp_search_documentation.html\">Elisp: Search Documentation</a></li>
+<li><a href=\"emacs_editing_lisp.html\">How to Edit Lisp Code with Emacs</a></li>
+</ol>
+</div>
+
+")
 
     ;; unicode
     ("emd" "—" )
