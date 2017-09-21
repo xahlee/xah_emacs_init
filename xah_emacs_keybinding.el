@@ -19,7 +19,6 @@
 ;; (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
 ;; (global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
 
-
 ;; (setq visible-bell nil)
 
 ;; ring-bell-function
@@ -32,6 +31,18 @@
 ;; (setq ring-bell-function nil)
 
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+
+(define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
+
+(progn
+  ;; pc keyboard's delete key (under Insert key), in mac os, sends either <kp-delete> or <deletechar>. On linux, it sends <delete>
+  (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
+  (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
+
+)
+
+(when (string-equal system-type "darwin")
+  (global-set-key (kbd "s-w") 'xah-close-current-buffer))
 
 ;; (define-key key-translation-map (kbd "<delete>") (kbd "C-c C-c"))
 
@@ -162,10 +173,10 @@
   (define-key xah-user-keymap (kbd "r .") 'xah-convert-english-chinese-punctuation)
   (define-key xah-user-keymap (kbd "r [") 'xah-remove-square-brackets)
   (define-key xah-user-keymap (kbd "r b") 'xah-change-bracket-pairs)
-  
+
   (define-key xah-user-keymap (kbd "r d") 'xah-fix-datetime-stamp)
   (define-key xah-user-keymap (kbd "r g") 'xah-convert-latin-alphabet-gothic)
-  
+
   (define-key xah-user-keymap (kbd "r p") 'xah-convert-asian/ascii-space)
   (define-key xah-user-keymap (kbd "r p") 'xah-replace-profanity)
   (define-key xah-user-keymap (kbd "r t") 'xah-twitterfy)

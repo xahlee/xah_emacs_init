@@ -237,6 +237,7 @@ f_cycle_image ({
     ("lsl" "Linden Scripting Language" )
     ("mac" "Mac" )
     ("macosx" "Mac OS X" )
+    ("macos" "macOS" )
     ("mma" "Mathematica" )
     ("ms" "Microsoft" )
     ("msvs" "Microsoft Visual Studio" )

@@ -301,9 +301,7 @@
           (tab-mark 9 [9655 9] [92 9]) ; tab
           )))
 
-
 
-(setq browse-url-browser-function 'browse-url-firefox)
 
 
 

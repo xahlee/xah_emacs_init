@@ -72,10 +72,11 @@ i/goddess.jpg
 becomes
 <a class=\"big-i\" href=\"i/goddess.jpg\" title=\"622×800\" target=\"_blank\">❐</a>
 
-If there's a text selection, use that region as file name."
+If there's a text selection, use that region as file name.
+Version 2017-09-20"
   (interactive)
   (let
-      ($p0 $p1 $p2 $inputStr $imgPath $dimension $width $height $resultStr)
+      ($p0 $p1 $p2 $input $imgPath $dimension $width $height $resultStr)
     (progn ; sets $p1 $p2
       (if @begin
           (progn
@@ -93,10 +94,9 @@ If there's a text selection, use that region as file name."
             (goto-char $p0)
             (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
             (setq $p2 (point))))))
-
-    (setq $inputStr (buffer-substring-no-properties $p1 $p2))
-    (setq $imgPath (xah-local-url-to-file-path $inputStr))
-    (setq $dimension (xah-get-image-dimensions-imk $imgPath))
+    (setq $input (buffer-substring-no-properties $p1 $p2))
+    (setq $imgPath (xah-local-url-to-file-path $input))
+    (setq $dimension (xah-get-image-dimensions $imgPath))
     (setq $width (number-to-string (elt $dimension 0)))
     (setq $height (number-to-string (elt $dimension 1)))
     (setq $resultStr
@@ -249,8 +249,8 @@ Version 2015-05-15"
   (let* (($bounds (bounds-of-thing-at-point 'word))
          ($p1 (car $bounds))
          ($p2 (cdr $bounds))
-         ($inputStr (buffer-substring-no-properties $p1 $p2))
-         ($pageNum (substring $inputStr 1)))
+         ($input (buffer-substring-no-properties $p1 $p2))
+         ($pageNum (substring $input 1)))
     (delete-region $p1 $p2)
     (insert
      (concat
@@ -395,8 +395,8 @@ Version 2016-07-07"
          (setq p2 (point))
          (list p1 p2)))))
   (let* (
-         ($inputStr (buffer-substring-no-properties @begin @end))
-         ($inputStParts (xah-html-split-uri-hashmark $inputStr))
+         ($input (buffer-substring-no-properties @begin @end))
+         ($inputStParts (xah-html-split-uri-hashmark $input))
          ($pt1 (aref $inputStParts 0))
          ($fragPart (aref $inputStParts 1))
          ($fPath (xahsite-web-path-to-filepath $pt1 default-directory))
@@ -495,11 +495,11 @@ Version 2016-10-31"
          ($bds (xah-get-bounds-of-thing-or-region 'filepath))
          ($p1 (car $bds))
          ($p2 (cdr $bds))
-         ($inputStr (buffer-substring-no-properties $p1 $p2))
+         ($input (buffer-substring-no-properties $p1 $p2))
          (currentBufferFilePathOrDir (or (buffer-file-name) default-directory))
          (currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory)))
 
-         (temp87318 (xah-html-split-uri-hashmark $inputStr))
+         (temp87318 (xah-html-split-uri-hashmark $input))
          (urlMainPart (elt temp87318 0))
          (urlFragPart (elt temp87318 1))
          ($fPath (xahsite-web-path-to-filepath urlMainPart default-directory))
