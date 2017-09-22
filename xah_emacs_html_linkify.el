@@ -427,7 +427,7 @@ Version 2016-07-07"
 
 (defun nodejs-get-title (@fName @fragPart)
   "Return the file frag part function title.
- (nodejs-get-title \"/home/xah/web/xahlee_info/node_api/net.html\" \"#net_server_listen_port_host_backlog_callback\" )
+ (nodejs-get-title \"~/web/xahlee_info/node_api/net.html\" \"#net_server_listen_port_host_backlog_callback\" )
 returns
  \"server.listen(port, [host], [backlog], [callback])\"
 "
@@ -576,7 +576,7 @@ They will be changed into a HTML link in various formats, depending on the input
 If there is text selection, use it as input.
 Version 2017-07-27"
   (interactive)
-  (if (string-match "^/home/xah/web/" (or (buffer-file-name) default-directory))
+  (if (string-match (concat "^" (expand-file-name "~/" ) "web/") (or (buffer-file-name) default-directory))
       (let ( $p1 $p2 $input)
         ;; (if (string-match "%" $input )
         ;;     (decode-coding-string (url-unhex-string "https://mysticsiva.wordpress.com/2016/11/04/%E3%82%AD%E3%83%BC%E3%82%AD%E3%83%A3%E3%83%83%E3%83%97%E4%BA%A4%E6%8F%9B3/") 'utf-8)

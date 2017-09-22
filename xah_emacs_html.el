@@ -328,7 +328,7 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-09-20"
+Version 2017-09-22"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -336,7 +336,8 @@ sNew file name:")
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
         ($names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" "xx" "xxx" "t" "tt" "ttt" ))
-
+        ($regexName "Screen Shot [0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} at [0-9]\\{1,2\\}\.[0-9]\\{1,2\\}\.[0-9]\\{1,2\\} [AP]M.png")
+        ;; Screen Shot 2017-09-22 at 1.30.56 PM.png
         ($exts '("jpg" "jpeg" "jpg-large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "MOV" "svg" "pdf" ))
 
         ($randomHex (format "%03d" (random 99999))))
@@ -354,10 +355,8 @@ sNew file name:")
               nil
               )))
 
-    ;; (if (null $fromPath)
-    ;;     (let (($name-regex "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)-\\([0-9]\\{6\\}\\)_\\([0-9]\\{3\\}\\)x\\([0-9]\\{3\\}\\)_scrot"))
-    ;;       3)
-    ;;   (progn ))
+    (when (null $fromPath)
+      (setq $fromPath (car (last (directory-files "~/Desktop/" t "Screen Shot .+\.png$" t)))))
 
     (when (null $fromPath)
       (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))

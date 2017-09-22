@@ -216,8 +216,7 @@ Version 2017-08-27"
         $title
         $temp
         $urlFragmentPart
-        ($pathStops "^  \t\n\"`'‘’“”|()[]{}「」<>〔〕〈〉《》【】〖〗«»‹›❮❯❬❭·。\\")
-        )
+        ($pathStops "^  \t\n\"`'‘’“”|()[]{}「」<>〔〕〈〉《》【】〖〗«»‹›❮❯❬❭·。\\"))
     (if (use-region-p)
         (setq $p1 (region-beginning) $p2 (region-end))
       (let ($p0)
@@ -238,7 +237,7 @@ Version 2017-08-27"
           (delete-region $p1 $p2)
           (insert
            (replace-regexp-in-string
-            "/home/xah/x3dxm/vmm/"
+            (concat "^" (expand-file-name "~/")  "x3dxm/vmm/")
             "http://VirtualMathMuseum.org/"
             (replace-regexp-in-string "^file:///" "/" $inputStr t t) t t)))
       (if (file-exists-p $file)
@@ -318,9 +317,9 @@ Version 2017-02-02"
         ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
         ("ssh" . "ssh -l u40651120 xahlee.org ")
 
-        ("vmm inbox" . "rsync -z -a -v -t --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ /home/xah/x3dxm/xstuff/inbox/")
+        ("vmm inbox" . "rsync -z -a -v -t --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ ~/x3dxm/xstuff/inbox/")
 
-        ("vmm up" . "rsync -z -a -v -t --delete --exclude='.git/*' --exclude='*~' --rsh=\"ssh -l xahlee\" /home/xah/x3dxm/vmm/ xahlee@3d-xplormath.org:/Library/WebServer/Documents/vmm/" )
+        ("vmm up" . "rsync -z -a -v -t --delete --exclude='.git/*' --exclude='*~' --rsh=\"ssh -l xahlee\" ~/x3dxm/vmm/ xahlee@3d-xplormath.org:/Library/WebServer/Documents/vmm/" )
 
         ("img1" . "convert -quality 85% ")
         ("imgScale" . "convert -scale 50% -quality 85% ")
@@ -345,13 +344,13 @@ find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
 
-        ("empty trash" . "rm -r /home/xah/.local/share/Trash")
+        ("empty trash" . "rm -r ~/.local/share/Trash")
 
         ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
         ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
         ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
 
-        ("clojure" . "java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
+        ("clojure" . "java -cp ~/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
         ))
 
 (defun xah-interactive-abbrev ()
@@ -589,15 +588,14 @@ For example, if current buffer is of this file:
 then after calling this function,
 default browser will be launched and opening this URL:
  http://xahlee.info/index.html
-Version 2017-09-15"
+Version 2017-09-22"
   (interactive)
   (let (($url
          (if current-prefix-arg
              (xahsite-filepath-to-url (buffer-file-name))
            (buffer-file-name))))
-
     (when (buffer-modified-p )
-      (xah-clean-whitespace (point-min) (point-max))
+      (xah-clean-whitespace)
       (save-buffer))
     (message "browsing %s" $url)
     (browse-url $url )))
@@ -870,9 +868,9 @@ Version 2017-08-27"
               (string-match "VirtualMathMuseum" $input ))
             (progn
               (setq $path (replace-regexp-in-string
-                              "http://VirtualMathMuseum.org/"
-                              "/home/xah/x3dxm/vmm/"
-                              $input t t)))
+                           "http://VirtualMathMuseum.org/"
+                           (concat (expand-file-name "~/") "x3dxm/vmm/")
+                           $input t t)))
           (setq $path  (xahsite-url-to-filepath (xah-html-remove-uri-fragment $input))))))
     (delete-region $p1 $p2)
     (insert $path)))

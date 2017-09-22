@@ -355,14 +355,14 @@ f_cycle_image ({
     ("uhtml" "http://xahlee.info/js/html_index.html" )
     ("ujava" "http://xahlee.info/java-a-day/java.html" )
     ("ukinesis" "http://xahlee.info/kbd/keyboard_Kinesis.html" )
-    ("ulang" "/home/xah/web/xahlee_info/js/javascript_basics.html
-/home/xah/web/xahlee_info/python/python3_basics.html
-/home/xah/web/xahlee_info/ruby/ruby_basics.html
-/home/xah/web/xahlee_info/perl/perl_basics_1.html
-/home/xah/web/xahlee_info/php/php_basics.html
-/home/xah/web/ergoemacs_org/emacs/elisp_basics.html
-/home/xah/web/xahlee_info/java-a-day/java.html
-/home/xah/web/xahlee_info/clojure/clojure_index.html
+    ("ulang" "~/web/xahlee_info/js/javascript_basics.html
+~/web/xahlee_info/python/python3_basics.html
+~/web/xahlee_info/ruby/ruby_basics.html
+~/web/xahlee_info/perl/perl_basics_1.html
+~/web/xahlee_info/php/php_basics.html
+~/web/ergoemacs_org/emacs/elisp_basics.html
+~/web/xahlee_info/java-a-day/java.html
+~/web/xahlee_info/clojure/clojure_index.html
 "  )
     ("umaltron" "http://xahlee.info/kbd/Maltron_keyboard.html" )
     ("umma" "http://xahlee.info/M/index.html" )

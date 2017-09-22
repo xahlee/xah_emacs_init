@@ -181,7 +181,7 @@ If the optional argument @add-file-name is true, then append “index.html” if
 If the optional argument @redirect is true, then also consider result of http redirect.
 
 This function does not check input is actually a URL, nor if the result path file exists.
-Version 2017-08-27"
+Version 2017-09-21"
   ;; test cases:
   ;; (xahsite-url-to-filepath "http://xahlee.org/index.html") ; ⇒ "c:/Users/h3/web/xahlee_org/index.html"
   ;; (xahsite-url-to-filepath "http://xahlee.org/") ; ⇒ "c:/Users/h3/web/http://xahlee.org/index.html"
@@ -199,7 +199,7 @@ Version 2017-08-27"
             (progn
               (setq $fPath (replace-regexp-in-string
                             "http://VirtualMathMuseum.org/"
-                            "/home/xah/x3dxm/vmm/"
+                            "~/x3dxm/vmm/"
                             $url t t)))
           (progn
             (when @redirect (setq $url (xahsite-url-remap $url)))

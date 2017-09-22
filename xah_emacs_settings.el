@@ -2,23 +2,6 @@
 ;; Emacs settings plain gnu emacs only
 ;; 2017-07-15
 
-
-
-(progn
-  ;; set a default font
-  (when (member "DejaVu Sans Mono" (font-family-list))
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono"))
-
-  ;; specify font for all unicode characters
-  (when (member "Symbola" (font-family-list))
-    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-
-  ;; ;; specify font for chinese characters using default chinese font on linux
-  ;; (when (member "WenQuanYi Micro Hei" (font-family-list))
-  ;;   (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
-
-  ;; 
-)
 
 
 ;; initial window and default window
