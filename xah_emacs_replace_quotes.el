@@ -402,7 +402,7 @@ Version 2016-10-05"
             ((equal current-prefix-arg 2) "unicode")
             (t "unicode")))))
   (let* (
-         (--ascii-unicode-map
+         ($ascii-unicode-map
           [
            ["0" "０"] ["1" "１"] ["2" "２"] ["3" "３"] ["4" "４"] ["5" "５"] ["6" "６"] ["7" "７"] ["8" "８"] ["9" "９"]
            ["A" "Ａ"] ["B" "Ｂ"] ["C" "Ｃ"] ["D" "Ｄ"] ["E" "Ｅ"] ["F" "Ｆ"] ["G" "Ｇ"] ["H" "Ｈ"] ["I" "Ｉ"] ["J" "Ｊ"] ["K" "Ｋ"] ["L" "Ｌ"] ["M" "Ｍ"] ["N" "Ｎ"] ["O" "Ｏ"] ["P" "Ｐ"] ["Q" "Ｑ"] ["R" "Ｒ"] ["S" "Ｓ"] ["T" "Ｔ"] ["U" "Ｕ"] ["V" "Ｖ"] ["W" "Ｗ"] ["X" "Ｘ"] ["Y" "Ｙ"] ["Z" "Ｚ"]
@@ -411,10 +411,10 @@ Version 2016-10-05"
            ["&" "＆"] ["@" "＠"] ["#" "＃"] ["%" "％"] ["+" "＋"] ["-" "－"] ["*" "＊"] ["=" "＝"] ["<" "＜"] [">" "＞"] ["(" "（"] [")" "）"] ["[" "［"] ["]" "］"] ["{" "｛"] ["}" "｝"] ["(" "｟"] [")" "｠"] ["|" "｜"] ["¦" "￤"] ["/" "／"] ["\\" "＼"] ["¬" "￢"] ["$" "＄"] ["£" "￡"] ["¢" "￠"] ["₩" "￦"] ["¥" "￥"]
            ]
           )
-         (--reverse-map
+         ($reverse-map
           (mapcar
            (lambda (x) (vector (elt x 1) (elt x 0)))
-           --ascii-unicode-map))
+           $ascii-unicode-map))
 
          (cmdStates ["to-unicode" "to-ascii"])
          (stateBefore (if (get 'xah-convert-fullwidth-chars 'state) (get 'xah-convert-fullwidth-chars 'state) 0))
@@ -432,15 +432,15 @@ Version 2016-10-05"
       (xah-replace-pairs-region
        @begin @end
        (cond
-        ((string= @to-direction "unicode") --ascii-unicode-map)
-        ((string= @to-direction "ascii") --reverse-map)
+        ((string= @to-direction "unicode") $ascii-unicode-map)
+        ((string= @to-direction "ascii") $reverse-map)
         ((string= @to-direction "auto")
          (if (equal this-command last-command)
              (if (eq stateBefore 0)
-                 --ascii-unicode-map
-               --reverse-map
+                 $ascii-unicode-map
+               $reverse-map
                )
-           --ascii-unicode-map
+           $ascii-unicode-map
            ))
         (t (user-error "Your 3rd argument 「%s」 isn't valid" @to-direction)))
        t t ))
@@ -495,7 +495,7 @@ See also `xah-convert-english-chinese-punctuation'
    (if (use-region-p)
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-end-position))))
-  (let ((--space-char-map
+  (let (($space-char-map
          [
           ["　" " "]
           ]
@@ -503,8 +503,8 @@ See also `xah-convert-english-chinese-punctuation'
     (xah-replace-regexp-pairs-region
      @begin @end
      (if (string-match "　" (buffer-substring-no-properties @begin @end))
-         --space-char-map
-       (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) --space-char-map))
+         $space-char-map
+       (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $space-char-map))
      "FIXEDCASE" "LITERAL")))
 
 (defun xah-convert-latin-alphabet-gothic (@begin @end @reverse-direction-p)

@@ -34,15 +34,16 @@
 
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 
-(progn
+(when (string-equal system-type "darwin")
+
   ;; pc keyboard's delete key (under Insert key), in mac os, sends either <kp-delete> or <deletechar>. On linux, it sends <delete>
   (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
   (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
 
-)
+(global-set-key (kbd "s-w") 'xah-close-current-buffer)
+(global-set-key (kbd "s-r") 'xah-browse-url-of-buffer)
 
-(when (string-equal system-type "darwin")
-  (global-set-key (kbd "s-w") 'xah-close-current-buffer))
+)
 
 ;; (define-key key-translation-map (kbd "<delete>") (kbd "C-c C-c"))
 
