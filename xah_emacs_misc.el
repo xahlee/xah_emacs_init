@@ -314,7 +314,7 @@ Version 2017-02-02"
 
 (setq xah-interactive-abbrev-alist
       '(
-        ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+        ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='.DS_Store' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
         ("ssh" . "ssh -l u40651120 xahlee.org ")
 
         ("vmm inbox" . "rsync -z -a -v -t --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ ~/x3dxm/xstuff/inbox/")
@@ -357,7 +357,7 @@ find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
   "Prompt to insert string from a alist ‘xah-interactive-abbrev-alist’
 
 URL ‘http://ergoemacs.org/emacs/emacs_interactive_abbrev.html’
-version 2017-08-13"
+Version 2017-08-13"
   (interactive)
   (let (($input
          (ido-completing-read
@@ -686,46 +686,63 @@ Version 2015-07-24"
 Version 2017-06-05"
   (interactive)
   (require 'xah-html-mode)
-  (let ( p2
-        deletedText
+  (let ( $p2
+        $deletedText
         )
     (when (search-forward "</a>")
       (progn
-        (setq p2 (point))
+        (setq $p2 (point))
         (search-backward "<a href=\"http://en.wikipedia.org/wiki/")
-        (setq deletedText (buffer-substring (point) p2))
-        (xah-html-remove-html-tags (point) p2)
-        (message "%s" deletedText)
-        deletedText
+        (setq $deletedText (buffer-substring (point) $p2))
+        (xah-html-remove-html-tags (point) $p2)
+        (message "%s" $deletedText)
+        $deletedText
         ))))
-
-
 
 (defun xah-remove-all-wikipedia-link ()
   "delete all wikipedia links in a html file, except image links etc.
 Version 2017-06-19"
   (interactive)
-  (let (p1
-        p2 deletedText
-        (resultList '()))
+  (let ($p1
+        $p2 $deletedText
+        ($resultList '()))
     (goto-char (point-min))
     (while (re-search-forward "<a href=\"https?://en.wikipedia.org/wiki/" nil t)
       (progn
         (search-backward "<a href" )
-        (setq p1 (point))
+        (setq $p1 (point))
         (search-forward ">")
-        (setq p2 (point))
+        (setq $p2 (point))
 
-        (setq deletedText (buffer-substring-no-properties p1 p2))
-        (push deletedText resultList)
-        (delete-region p1 p2)
+        (setq $deletedText (buffer-substring-no-properties $p1 $p2))
+        (push $deletedText $resultList)
+        (delete-region $p1 $p2)
 
         (search-forward "</a>")
-        (setq p2 (point))
+        (setq $p2 (point))
         (search-backward "</a>")
-        (setq p1 (point))
-        (delete-region p1 p2)))
-    (mapc (lambda (x) (princ x) (terpri )) resultList)))
+        (setq $p1 (point))
+        (delete-region $p1 $p2)))
+
+    (goto-char (point-min))
+    (while (re-search-forward "<a class=\"wikipedia-69128\" href" nil t)
+      (progn
+        (search-backward "<a class=\"wikipedia-69128\" href" )
+        (setq $p1 (point))
+        (search-forward ">")
+        (setq $p2 (point))
+
+        (setq $deletedText (buffer-substring-no-properties $p1 $p2))
+        (push $deletedText $resultList)
+        (delete-region $p1 $p2)
+
+        (search-forward "</a>")
+        (setq $p2 (point))
+        (search-backward "</a>")
+        (setq $p1 (point))
+        (delete-region $p1 $p2)))
+
+    (mapc (lambda (x) (princ x) (terpri )) $resultList)))
 
 
 ;; don't use much anymore

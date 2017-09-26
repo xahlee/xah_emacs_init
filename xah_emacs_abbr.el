@@ -415,7 +415,9 @@ QQ: http://user.qzone.qq.com/2609322939" )
 (define-abbrev-table 'go-mode-abbrev-table
   '(
     ("g3" "package main
+
 import \"fmt\"
+
 func main() {
 
 	fmt.Println( 3 )
