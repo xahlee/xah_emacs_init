@@ -3,7 +3,6 @@
 
 (progn
   (require 'dired )
-  (define-key dired-mode-map (kbd "6") 'dired-up-directory)
   (define-key dired-mode-map (kbd "-") 'xah-dired-rename-space-to-underscore)
   (define-key dired-mode-map (kbd "s") 'xah-dired-sort))
 

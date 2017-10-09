@@ -112,14 +112,13 @@ Version 2016-07-19"
 If current buffer is jpg or png file, crop it.
 If current buffer is dired, do the file under cursor or marked files.
 
-The created file has “_crp.” in the name, in the same dir.
+The created file has “_crop.” in the name, in the same dir.
 It's in png or jpg, same as the original.
 
 Requires ImageMagick shell command “convert”
 
-If `universal-argument' is called first, output is PNG format. Else, JPG.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2017-08-30"
+Version 2017-10-08"
   (interactive)
   (let (
         ($bfName (buffer-file-name))
@@ -131,7 +130,7 @@ Version 2017-08-30"
           (let (($flist (dired-get-marked-files)))
             (mapc
              (lambda ($f)
-               (setq $newName (concat (file-name-sans-extension $f) "_crp." (file-name-extension $f)))
+               (setq $newName (concat (file-name-sans-extension $f) "_crop." (file-name-extension $f)))
                (setq $cmdStr (format "convert -trim '%s' '%s'" (file-relative-name $f) (file-relative-name $newName)))
                (shell-command $cmdStr))
              $flist ))
@@ -147,7 +146,7 @@ Version 2017-08-30"
                         (format
                          "convert -trim '%s' '%s'"
                          $bfName
-                         (concat (file-name-sans-extension $bfName) "_crp." $ext)))
+                         (concat (file-name-sans-extension $bfName) "_crop." $ext)))
                   (shell-command  $cmdStr )
                   (message  $cmdStr))))
           (user-error "not img file or dired at %s" $bfName))))))

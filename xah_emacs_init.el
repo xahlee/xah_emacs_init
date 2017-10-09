@@ -147,7 +147,7 @@ Version 2017-07-19"
     (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
     ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
     ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
-    (load (xah-get-fullpath "xah_emacs_mouse_binding")))
+    (load (xah-get-fullpath "xah_emacs_mouse_setup")))
 
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
 

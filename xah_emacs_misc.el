@@ -314,12 +314,12 @@ Version 2017-02-02"
 
 (setq xah-interactive-abbrev-alist
       '(
-        ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='.DS_Store' --exclude='xahbackup/' --exclude='.git/*' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+        ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='.DS_Store' --exclude='xahbackup/' --exclude='.git/' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
         ("ssh" . "ssh -l u40651120 xahlee.org ")
 
-        ("vmm inbox" . "rsync -z -a -v -t --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ ~/x3dxm/xstuff/inbox/")
+        ("vmm inbox" . "rsync -z -a -v -t --exclude='.DS_Store' --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ ~/x3dxm/xstuff/inbox/")
 
-        ("vmm up" . "rsync -z -a -v -t --delete --exclude='.git/*' --exclude='*~' --rsh=\"ssh -l xahlee\" ~/x3dxm/vmm/ xahlee@3d-xplormath.org:/Library/WebServer/Documents/vmm/" )
+        ("vmm up" . "rsync -z -a -v -t --delete --exclude='.DS_Store' --exclude='.git/' --exclude='*~' --rsh=\"ssh -l xahlee\" ~/x3dxm/vmm/ xahlee@3d-xplormath.org:/Library/WebServer/Documents/vmm/" )
 
         ("img1" . "convert -quality 85% ")
         ("imgScale" . "convert -scale 50% -quality 85% ")

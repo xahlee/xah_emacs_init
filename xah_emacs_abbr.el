@@ -46,7 +46,7 @@ f_cycle_image ({
     ("dfb" "difference between" )
     ("ty" "thank you" )
     ("btw" "by the way" )
-    ("ur" "you are" )
+    ("ur" "your" )
     ("ull" "you'll" )
     ("cnt" "can't" )
     ("ddnt" "didn't" )
@@ -124,7 +124,7 @@ f_cycle_image ({
     ("intn" "international" )
     ("intro" "introduction" )
     ("kb" "keyboard" )
-    ("kbd" "keybinding" )
+    ("kbg" "keybinding" )
     ("kbs" "keyboards" )
     ("kp" "keypad" )
     ("kw" "keyword" )
@@ -184,6 +184,8 @@ f_cycle_image ({
     ("fr" "fundamental region" )
     ("def" ":=" )
     ("dg3" "differential geometry" )
+    ("de3" "differential equations" )
+    ("dm" "dimension" )
 
     ;; computing, general
 
@@ -255,7 +257,7 @@ f_cycle_image ({
     ("yt" "YouTube" )
 
     ;; programing
-    ("pl3" "+" )
+    ("p3" "+" )
     ("eq" "==" )
     ("eqq" "===" )
 
@@ -277,10 +279,14 @@ f_cycle_image ({
     ("tag3" "\\([</>=\" A-Za-z0-9]+\\)" )
 
     ;; html
-    ("key3" "【Alt+f】" )
-    ("pmoved" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
-    ("menu3" "〖a ▸ b ▸ c〗" )
-    ("faq3" "<section class=\"qna_xl\">
+    ("hkey" "【Alt+f】" )
+    ("hpmoved" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
+    ("htopic" "<div class=\"topic-xl\">
+<h4>Keyboard Keys Topic</h4>
+</div>
+
+" )
+    ("hfaq" "<section class=\"qna_xl\">
 
 <h3 class=\"q\">How to ?</h3>
 

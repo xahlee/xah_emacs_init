@@ -35,6 +35,7 @@
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 
 (when (string-equal system-type "darwin")
+  ;; macOS
 
   ;; pc keyboard's delete key (under Insert key), in mac os, sends either <kp-delete> or <deletechar>. On linux, it sends <delete>
   (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
@@ -46,7 +47,19 @@
   (global-set-key (kbd "s-t") 'xah-new-empty-buffer)
   (global-set-key (kbd "s-n") 'xah-new-empty-buffer)
 
-  (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen))
+  (global-set-key (kbd "s-[") 'xah-previous-user-buffer)
+  (global-set-key (kbd "s-]") 'xah-next-user-buffer)
+
+  (global-set-key (kbd "s-+") 'text-scale-increase)
+  (global-set-key (kbd "s--") 'text-scale-decrease)
+
+  (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
+  (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
+  (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
+  (global-set-key (kbd "<f4>") 'xah-paste-or-paste-previous)
+  (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
+  ;;
+  )
 
 ;; (define-key key-translation-map (kbd "<delete>") (kbd "C-c C-c"))
 
