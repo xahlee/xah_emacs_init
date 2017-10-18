@@ -14,7 +14,9 @@
 
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
-(define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
+(when (boundp 'xah-fly-key-map)
+  (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
+)
 
 ;; (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
 ;; (global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
@@ -56,7 +58,8 @@
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
   (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
   (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
-  (global-set-key (kbd "<f4>") 'xah-paste-or-paste-previous)
+  (global-set-key (kbd "<f3>") 'nil)
+  
   (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
   ;;
   )
@@ -258,3 +261,4 @@
 ;;   (define-key key-translation-map (kbd "<menu> SPC .") (kbd "…"))
 ;;   (define-key key-translation-map (kbd "<menu> SPC 3") (kbd "-"))
 ;;   (define-key key-translation-map (kbd "<menu> SPC 9") (kbd "_")))
+

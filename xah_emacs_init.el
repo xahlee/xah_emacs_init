@@ -56,7 +56,6 @@ Version 2017-07-19"
 (require 'xah-fly-keys)
 (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
 
-
 (progn
   (require 'xah-text-mode)
   (setq initial-major-mode 'xah-text-mode))
@@ -64,10 +63,7 @@ Version 2017-07-19"
 (progn
   (add-to-list 'load-path "~/git/xah-elisp-mode/")
   (require 'xah-elisp-mode)
-  (when (boundp 'xah-elisp-mode-map)
-    (define-key xah-elisp-mode-map
-      (kbd "<delete>")
-      xah-elisp-mode-no-chord-map)))
+  )
 
 (add-to-list 'load-path "~/git/xah-find/")
 (require 'xah-find)
@@ -82,43 +78,46 @@ Version 2017-07-19"
 (progn
   (add-to-list 'load-path "~/git/xah-css-mode/")
   (require 'xah-css-mode)
-  (when (boundp 'xah-css-mode-no-chord-map)
-    (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
-    (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map)))
+  )
 
 (progn
   (add-to-list 'load-path "~/git/xah-html-mode.el/")
   (require 'xah-html-mode))
 
-(add-to-list 'load-path "~/git/xah-js-mode.el/")
-;; (require 'xah-js-mode)
-(autoload 'xah-js-mode "xah-js-mode" )
+(progn
+  (add-to-list 'load-path "~/git/xah-js-mode.el/")
+  ;; (require 'xah-js-mode)
+  (autoload 'xah-js-mode "xah-js-mode" ))
 
-(add-to-list 'load-path "~/git/xah-typescript-mode/")
-(require 'xah-ts-mode nil t)
-(autoload 'xah-ts-mode "xah-ts-mode" )
+(progn
+  (add-to-list 'load-path "~/git/xah-typescript-mode/")
+  (require 'xah-ts-mode nil t)
+  (autoload 'xah-ts-mode "xah-ts-mode" ))
 
 (progn
   (add-to-list 'load-path "~/git/xah-clojure-mode/")
   (require 'xah-clojure-mode)
   (autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t)
-  (when (boundp 'xah-clojure-mode-map)
-    (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map)))
+  )
 
-(add-to-list 'load-path "~/git/xah-php-mode.el/")
-;; (require 'xah-php-mode)
-(autoload 'xah-php-mode "xah-php-mode" "autoload the mode." t)
+(progn
+  (add-to-list 'load-path "~/git/xah-php-mode.el/")
+  ;; (require 'xah-php-mode)
+  (autoload 'xah-php-mode "xah-php-mode" "autoload the mode." t))
 
-(add-to-list 'load-path "~/git/xbbcode-mode.el/")
-;; (require 'xbbcode-mode)
-(autoload 'xbbcode-mode "xbbcode-mode" "autoload the mode." t)
+(progn
+  (add-to-list 'load-path "~/git/xbbcode-mode.el/")
+  ;; (require 'xbbcode-mode)
+  (autoload 'xbbcode-mode "xbbcode-mode" "autoload the mode." t))
 
-(add-to-list 'load-path "~/git/xub-mode.el/")
-;; (require 'xub-mode)
-(autoload 'xub-mode "xub-mode" "autoload the mode." t)
+(progn
+  (add-to-list 'load-path "~/git/xub-mode.el/")
+  ;; (require 'xub-mode)
+  (autoload 'xub-mode "xub-mode" "autoload the mode." t))
 
-(add-to-list 'load-path "~/git/lookup-word-on-internet/")
-(require 'xah-lookup)
+(progn
+  (add-to-list 'load-path "~/git/lookup-word-on-internet/")
+  (require 'xah-lookup))
 
 (progn
   (add-to-list 'load-path "~/git/xah-math-input/")
@@ -134,10 +133,12 @@ Version 2017-07-19"
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
 
-(add-to-list 'load-path "~/git/xahk-mode.el/")
-(autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
+(progn
+  (add-to-list 'load-path "~/git/xahk-mode.el/")
+  (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t))
 
-(when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
+(when (string-equal system-type "windows-nt")
+  (load (xah-get-fullpath "xah_emacs_ms_windows")))
 
 (when (fboundp 'xah-fly-keys)
     (setq xah-fly-swapped-1-8-and-2-7-p t)
@@ -169,8 +170,6 @@ Version 2017-07-19"
 (load (xah-get-fullpath "xah_emacs_xahsite_fix_util"))
 
 (load (xah-get-fullpath "xah_emacs_wordyenglish"))
-
-
 
 (load (xah-get-fullpath "xah_emacs_settings_external_packages"))
 (load (xah-get-fullpath "xah_emacs_file_association"))

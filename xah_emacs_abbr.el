@@ -185,6 +185,7 @@ f_cycle_image ({
     ("def" ":=" )
     ("dg3" "differential geometry" )
     ("de3" "differential equations" )
+    ("ode" "ordinary differential equations" )
     ("dm" "dimension" )
 
     ;; computing, general
