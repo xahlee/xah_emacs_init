@@ -2,8 +2,10 @@
 
 (defun xah-open-in-gimp ()
   "Open the current file or `dired' marked files in gimp.
-Guaranteed to work on linux. Not tested on Microsoft Windows or Mac OS X
-Version 2015-06-16"
+Works in linux and Mac. Not tested on Microsoft Windows.
+
+URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
+Version 2015-07-30"
   (interactive)
   (let* (
          ($file-list
@@ -21,7 +23,9 @@ Version 2015-06-16"
            (w32-shell-execute "gimp" (replace-regexp-in-string "/" "\\" $fpath t t))) $file-list))
        ((string-equal system-type "darwin")
         (mapc
-         (lambda ($fpath) (shell-command (format "gimp \"%s\"" $fpath)))  $file-list))
+         (lambda ($fpath)
+           (shell-command
+            (format "open -a /Applications/GIMP.app \"%s\"" $fpath))) $file-list))
        ((string-equal system-type "gnu/linux")
         (mapc
          (lambda ($fpath) (let ((process-connection-type nil)) (start-process "" nil "gimp" $fpath))) $file-list))))))
