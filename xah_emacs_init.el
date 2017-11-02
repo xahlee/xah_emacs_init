@@ -145,7 +145,6 @@ Version 2017-07-19"
     ;; (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
     (xah-fly-keys 1)
     (load (xah-get-fullpath "xah_emacs_keybinding"))
-    (load (xah-get-fullpath "xah_emacs_keybinding_mode_specific"))
     ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
     ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
     (load (xah-get-fullpath "xah_emacs_mouse_setup")))

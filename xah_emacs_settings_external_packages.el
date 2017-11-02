@@ -49,10 +49,6 @@
 ;;   ;; (setq which-key-popup-type 'side-window)
 ;;   )
 
-;; (when (featurep 'guide-key)
-;;   (setq guide-key/guide-key-sequence '("C-x" "x" "<menu>" "<end>" "<delete>"))
-;;   (guide-key-mode 1))
-
 (when (fboundp 'xah-find-text)
   (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil)))
 

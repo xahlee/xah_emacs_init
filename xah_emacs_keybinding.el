@@ -2,12 +2,6 @@
 
 ;; xah-fly-keys move to http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 
-;; (when (fboundp 'smex)
-;;   (define-key xah-fly-key-map (kbd "<menu>") 'smex)
-;;   )
-
-;; (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-mode-toggle)
-
 ;; (define-key xah-fly-key-map (kbd "<home>") xah-insertion-keymap)
 ;; (define-key xah-fly-key-map (kbd "DEL") 'xah-fly-command-mode-activate)
 ;; (define-key xah-fly-key-map (kbd "<backspace>") 'xah-fly-command-mode-activate)
@@ -38,11 +32,7 @@
 
 (when (string-equal system-type "darwin")
   ;; macOS
-
-  ;; pc keyboard's delete key (under Insert key), in mac os, sends either <kp-delete> or <deletechar>. On linux, it sends <delete>
-  (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
-  (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
-
+  
   (global-set-key (kbd "s-w") 'xah-close-current-buffer)
   (global-set-key (kbd "s-r") 'xah-browse-url-of-buffer)
   (global-set-key (kbd "s-T") 'xah-open-last-closed)
@@ -56,15 +46,13 @@
   (global-set-key (kbd "s--") 'text-scale-decrease)
 
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
-  (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
+  ;; (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
   (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
   (global-set-key (kbd "<f3>") 'nil)
   
   (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
   ;;
   )
-
-;; (define-key key-translation-map (kbd "<delete>") (kbd "C-c C-c"))
 
 ;; (current-input-mode)
 ;; (t nil t 7)
@@ -95,7 +83,7 @@
 
 (when (fboundp 'xah-html-mode)
 
-    (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
+    (define-key xah-html-mode-map (kbd "<f2>") xah-html-mode-no-chord-map)
 
     (defun xah-html-mode-keys ()
       "Modify keymaps used by `html-mode'."
@@ -107,7 +95,7 @@
       (define-key xah-html-mode-no-chord-map (kbd "s") 'xah-insert-reference-span-tag)
       (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
 
-      (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
+      (define-key xah-html-mode-no-chord-map (kbd "<f2>") 'xah-browse-url-of-buffer)
 
       (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
       (define-key xah-html-mode-no-chord-map (kbd "SPC b") 'xah-make-blogger-entry)
@@ -262,3 +250,46 @@
 ;;   (define-key key-translation-map (kbd "<menu> SPC 3") (kbd "-"))
 ;;   (define-key key-translation-map (kbd "<menu> SPC 9") (kbd "_")))
 
+
+
+
+(when (boundp 'xah-elisp-mode-map)
+    (define-key xah-elisp-mode-map
+      (kbd "<f2>")
+      xah-elisp-mode-no-chord-map))
+
+(when (boundp 'xah-css-mode-no-chord-map)
+    (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
+    (define-key xah-css-mode-map (kbd "<f2>") xah-css-mode-no-chord-map))
+
+(when (boundp 'xah-clojure-mode-map)
+    (define-key xah-clojure-mode-map (kbd "<f2>") xah-clojure-mode-no-chord-map))
+
+(progn
+  (require 'dired )
+  (define-key dired-mode-map (kbd "-") 'xah-dired-rename-space-to-underscore)
+  (define-key dired-mode-map (kbd "s") 'xah-dired-sort))
+
+(progn
+  (require 'info )
+  (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser))
+
+(when (boundp 'org-mode-hook)
+  (defun xah-org-mode-setup ()
+    "Modify keymaps used by `org-mode'."
+    (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
+  (add-hook 'org-mode-hook 'xah-org-mode-setup))
+
+
+
+(when (boundp 'tuareg-mode-map)
+    (define-key tuareg-mode-map (kbd "<backspace>") nil))
+
+(defun xah-rcirc-mode-keys ()
+  "Modify keybindings for `rcirc'.
+For `rcirc-mode-hook'."
+  (local-set-key (kbd "<M-f11>") 'rcirc-insert-prev-input)
+  (local-set-key (kbd "<M-f12>") 'rcirc-insert-next-input))
+(add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
+
+(setq rcirc-default-nick "mid2")

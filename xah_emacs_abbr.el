@@ -41,7 +41,7 @@ f_cycle_image ({
     ;; English phrases abbrev
     ("afaik" "as far as i know" )
     ("iirc" "if i recall correctly" )
-
+    ("wrt" "with respect to" )
     ("atm" "at the moment" )
     ("dfb" "difference between" )
     ("ty" "thank you" )
