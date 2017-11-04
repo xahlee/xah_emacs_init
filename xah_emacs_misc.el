@@ -179,11 +179,11 @@ Version 2016-10-01"
        (progn
          (setq $toPath (concat (xahsite-url-to-filepath (format "http://%s/" $x)) $fromFileName))
          (when (not (string= $fromPath $toPath ))
-           (if (file-exists-p $toPath)
+           (when (file-exists-p $toPath)
                (progn
                  (copy-file $fromPath $toPath "OK-IF-ALREADY-EXISTS")
                  (message "wrote to 「%s」." $toPath))
-             (progn (error "logic error. The file 「%s」 doesn't exist, it should already." $toPath)))))) [
+             )))) [
        "ergoemacs.org"
        "wordyenglish.com"
        "xaharts.org"
@@ -191,7 +191,6 @@ Version 2016-10-01"
        "xahlee.org"
        "xahmusic.org"
        "xahsl.org"
-       "xahporn.org"
        ])))
 
 (defun xah-cite ()

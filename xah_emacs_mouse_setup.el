@@ -9,12 +9,6 @@
 
 ;; mouse
 
-;; Emacs: How to Set Mouse Buttons ＆ Wheel
-;; http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html
-
-
-;; mouse
-
 ;; set the “forward button” (5th button) to close.
 (cond
  ((string-equal system-type "gnu/linux")
@@ -28,9 +22,15 @@
 
     (global-set-key (kbd "<mouse-6>") 'xah-beginning-of-line-or-block)
     (global-set-key (kbd "<mouse-7>") 'xah-end-of-line-or-block)))
+ ((string-equal system-type "darwin") ; Mac
+  (progn
+
+    (global-set-key (kbd "<S-wheel-left>") 'xah-previous-user-buffer)
+    (global-set-key (kbd "<S-wheel-right>") 'xah-next-user-buffer)
+
+    (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+    (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)))
 
  ((string-equal system-type "windows-nt") ; Windows
   (progn
-    nil))
- ((string-equal system-type "darwin") ; Mac
-  (progn nil)))
+    nil)))

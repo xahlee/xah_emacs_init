@@ -32,7 +32,10 @@
 
 (when (string-equal system-type "darwin")
   ;; macOS
-  
+
+  (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
+  (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
+
   (global-set-key (kbd "s-w") 'xah-close-current-buffer)
   (global-set-key (kbd "s-r") 'xah-browse-url-of-buffer)
   (global-set-key (kbd "s-T") 'xah-open-last-closed)
@@ -46,10 +49,10 @@
   (global-set-key (kbd "s--") 'text-scale-decrease)
 
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
-  ;; (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
+  (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
   (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
   (global-set-key (kbd "<f3>") 'nil)
-  
+
   (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
   ;;
   )
@@ -83,7 +86,7 @@
 
 (when (fboundp 'xah-html-mode)
 
-    (define-key xah-html-mode-map (kbd "<f2>") xah-html-mode-no-chord-map)
+    (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
 
     (defun xah-html-mode-keys ()
       "Modify keymaps used by `html-mode'."
@@ -95,7 +98,7 @@
       (define-key xah-html-mode-no-chord-map (kbd "s") 'xah-insert-reference-span-tag)
       (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
 
-      (define-key xah-html-mode-no-chord-map (kbd "<f2>") 'xah-browse-url-of-buffer)
+      (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
 
       (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
       (define-key xah-html-mode-no-chord-map (kbd "SPC b") 'xah-make-blogger-entry)
@@ -255,15 +258,15 @@
 
 (when (boundp 'xah-elisp-mode-map)
     (define-key xah-elisp-mode-map
-      (kbd "<f2>")
+      (kbd "<delete>")
       xah-elisp-mode-no-chord-map))
 
 (when (boundp 'xah-css-mode-no-chord-map)
     (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
-    (define-key xah-css-mode-map (kbd "<f2>") xah-css-mode-no-chord-map))
+    (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map))
 
 (when (boundp 'xah-clojure-mode-map)
-    (define-key xah-clojure-mode-map (kbd "<f2>") xah-clojure-mode-no-chord-map))
+    (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map))
 
 (progn
   (require 'dired )
@@ -283,7 +286,8 @@
 
 
 (when (boundp 'tuareg-mode-map)
-    (define-key tuareg-mode-map (kbd "<backspace>") nil))
+  (define-key tuareg-mode-map (kbd "<backspace>") nil)
+  (define-key tuareg-mode-map (kbd "DEL") nil))
 
 (defun xah-rcirc-mode-keys ()
   "Modify keybindings for `rcirc'.

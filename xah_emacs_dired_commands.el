@@ -1,11 +1,33 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(defun xah-open-in-textedit ()
+  "Open the current file or `dired' marked files in Mac's TextEdit.
+This command is for Mac only.
+
+Version 2017-11-02"
+  (interactive)
+  (let* (
+         ($file-list
+          (if (string-equal major-mode "dired-mode")
+              (dired-get-marked-files)
+            (list (buffer-file-name))))
+         ($do-it-p (if (<= (length $file-list) 5)
+                       t
+                     (y-or-n-p "Open more than 5 files? "))))
+    (when $do-it-p
+      (cond
+       ((string-equal system-type "darwin")
+        (mapc
+         (lambda ($fpath)
+           (shell-command
+            (format "open -a /Applications/TextEdit.app \"%s\"" $fpath))) $file-list))))))
+
 (defun xah-open-in-gimp ()
-  "Open the current file or `dired' marked files in gimp.
+  "Open the current file or `dired' marked files in image editor gimp.
 Works in linux and Mac. Not tested on Microsoft Windows.
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-07-30"
+Version 2017-11-02"
   (interactive)
   (let* (
          ($file-list
@@ -224,7 +246,7 @@ Requires exiftool shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
   (interactive
-   (list 
+   (list
     (cond
      ((string-equal major-mode "dired-mode") (dired-get-marked-files))
      ((string-equal major-mode "image-mode") (list (buffer-file-name)))
@@ -248,14 +270,14 @@ Requires exiftool shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
   (interactive
-   (list 
+   (list
     (cond
      ((string-equal major-mode "dired-mode") (dired-get-marked-files))
      ((string-equal major-mode "image-mode") (list (buffer-file-name)))
      (t (list (read-from-minibuffer "file name:"))))))
   (mapc
    (lambda ($f)
-     (shell-command 
+     (shell-command
       (format "exiftool '%s'" (file-relative-name $f))
       ;; relative paths used to get around Windows/Cygwin path remapping problem
       ))

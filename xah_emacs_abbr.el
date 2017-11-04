@@ -75,6 +75,7 @@ f_cycle_image ({
     ;; english, single word
 
     ("fol" "following" )
+    ("usu" "usually" )
     ("hev" "however" )
     ("alt3" "alternative" )
     ("ann" "announcement" )

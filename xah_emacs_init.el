@@ -183,4 +183,4 @@ Version 2017-07-19"
   (progn
     (load "~/Dropbox/xah-emacs-private_b53d8d39")))
 
-(setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")
+;; (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")

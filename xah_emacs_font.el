@@ -9,8 +9,16 @@
 
 (progn
   ;; set a default font
-  (when (member "DejaVu Sans Mono" (font-family-list))
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono"))
+  (cond
+   ((string-equal system-type "gnu/linux")
+    (when (member "DejaVu Sans Mono" (font-family-list))
+      (set-face-attribute 'default nil :font "DejaVu Sans Mono")))
+   ((string-equal system-type "darwin") ; Mac
+    (when (member "Courier" (font-family-list))
+      (set-face-attribute 'default nil :font "Courier")))
+   ((string-equal system-type "windows-nt") ; Windows
+    (progn
+      nil)))
 
   ;; specify font for all unicode characters
   (when (member "Symbola" (font-family-list))
