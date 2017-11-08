@@ -12,10 +12,17 @@
   (cond
    ((string-equal system-type "gnu/linux")
     (when (member "DejaVu Sans Mono" (font-family-list))
-      (set-face-attribute 'default nil :font "DejaVu Sans Mono")))
+      (set-face-attribute 'default nil :font "DejaVu Sans Mono"))
+    ;; specify font for chinese characters using default chinese font on linux
+    (when (member "WenQuanYi Micro Hei" (font-family-list))
+      (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
+    ;;
+    )
    ((string-equal system-type "darwin") ; Mac
-    (when (member "Courier" (font-family-list))
-      (set-face-attribute 'default nil :font "Courier")))
+    (when (member "Courier" (font-family-list)) (set-face-attribute 'default nil :font "Courier-14"))
+    (when (member "Menlo" (font-family-list)) (set-face-attribute 'default nil :font "Menlo-14"))
+    ;;
+    )
    ((string-equal system-type "windows-nt") ; Windows
     (progn
       nil)))
@@ -23,10 +30,6 @@
   ;; specify font for all unicode characters
   (when (member "Symbola" (font-family-list))
     (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-
-  ;; specify font for chinese characters using default chinese font on linux
-  (when (member "WenQuanYi Micro Hei" (font-family-list))
-    (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
 
   ;; ;; specify font for all unicode characters
   ;; (when (member "Apple Color Emoji" (font-family-list))
@@ -38,12 +41,13 @@
 
 (defun xah-cycle-font-2 (@n)
   "Change font in current window between 2 fonts.
+
 URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
 Version 2015-09-21"
   (interactive "p")
   ;; this function sets a property “state”. It is a integer. Possible values are 0 to length of $fontList
   (let (
-        ($fontList '("DejaVu Sans Mono-10" "DejaVu Sans-10"))
+        ($fontList '("Courier-14" "Menlo-14"))
         $fontToUse
         $stateBefore
         $stateAfter)
@@ -60,29 +64,24 @@ Version 2015-09-21"
 
 (defvar xah-font-list nil "A list of fonts for `xah-cycle-font' to cycle from.")
 
-(setq 'xah-font-list
-             (cond
-              ((string-equal system-type "windows-nt") ; Windows
-               '(
-                 "Courier New-10"
-                 "DejaVu Sans Mono-9"
-                 "Lucida Console-10"
-                 "Segoe UI Symbol-12"
-                 "DejaVu Sans-10"
-                 "Lucida Sans Unicode-10"
-                 ))
-              ((string-equal system-type "gnu/linux")
-               '(
-                 "DejaVu Sans Mono-9"
-                 "DejaVu Sans-9"
-                 "Symbola-13"
-                 ))
-              ((string-equal system-type "darwin") ; Mac
-               '(
-                 "DejaVu Sans Mono-9"
-                 "DejaVu Sans-9"
-                 "Symbola-13"
-                 ))))
+(setq xah-font-list
+      (cond
+       ((string-equal system-type "windows-nt")
+        '(
+          "Courier-10"
+          "Lucida Console-10"
+          "Segoe UI Symbol-12"
+          "Lucida Sans Unicode-10"
+          ))
+       ((string-equal system-type "gnu/linux")
+        '(
+          "DejaVu Sans Mono-10"
+          "DejaVu Sans-10"
+          "Symbola-13"
+          ))
+       ((string-equal system-type "darwin") ; Mac
+        '("Courier-14"
+          "Menlo-14"))))
 
 (defun xah-cycle-font (@n)
   "Change font in current frame.
@@ -90,6 +89,7 @@ Each time this is called, font cycles thru a predefined list of fonts in the var
 If @n is 1, cycle forward.
 If @n is -1, cycle backward.
 See also `xah-cycle-font-next', `xah-cycle-font-previous'.
+
 URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
 Version 2015-09-21"
   (interactive "p")

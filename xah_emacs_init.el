@@ -117,7 +117,12 @@ Version 2017-07-19"
 
 (progn
   (add-to-list 'load-path "~/git/lookup-word-on-internet/")
-  (require 'xah-lookup))
+  ;; (setq xah-lookup-browser-function 'eww )
+  (require 'xah-lookup)
+(put 'xah-lookup-word-definition 'xah-lookup-browser-function 'eww)
+(put 'xah-lookup-wikipedia 'xah-lookup-browser-function 'eww)
+
+)
 
 (progn
   (add-to-list 'load-path "~/git/xah-math-input/")
@@ -161,7 +166,7 @@ Version 2017-07-19"
 (load (xah-get-fullpath "xah_emacs_ref_linkify"))
 (load (xah-get-fullpath "xah_emacs_google_earth"))
 
-;; (load (xah-get-fullpath "xah_emacs_font"))
+(load (xah-get-fullpath "xah_emacs_font"))
 (load (xah-get-fullpath "xah_emacs_misc"))
 
 (load (xah-get-fullpath "xah_emacs_atom_rss_util"))
