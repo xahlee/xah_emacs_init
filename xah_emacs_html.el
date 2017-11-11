@@ -311,9 +311,9 @@ from directories checked are:
 /tmp/
 
 File name checked are:
-x.jpg
-x1.jpg
-x2.jpg
+t.jpg
+t1.jpg
+t2.jpg
 etc.
 
 file name can end in
@@ -328,14 +328,14 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-09-22"
-  (interactive "DMove x img to dir:
+Version 2017-11-09"
+  (interactive "DMove t img to dir:
 sNew file name:")
   (let (
         $fromPath
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
-        ($names '( "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" "xx" "xxx" "t" "tt" "ttt" ))
+        ($names '( "t" "t0" "t1" "t2" "t3" "t4" "t5" "t6" "t7" "t8" "t9" "t10" "tt" "ttt" ))
         ($regexName "Screen Shot [0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} at [0-9]\\{1,2\\}\.[0-9]\\{1,2\\}\.[0-9]\\{1,2\\} [AP]M.png")
         ;; Screen Shot 2017-09-22 at 1.30.56 PM.png
         ($exts '("jpg" "jpeg" "jpg-large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "MOV" "svg" "pdf" ))
@@ -359,7 +359,7 @@ sNew file name:")
       (setq $fromPath (car (last (directory-files "~/Desktop/" t "Screen Shot .+\.png$" t)))))
 
     (when (null $fromPath)
-      (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))
+      (error "no image file name starts with t, t1 t2 etc at downloads/pictures/tmp dirs"))
     (setq $toPath (concat
                    (file-name-as-directory @dir-name )
                    (replace-regexp-in-string " " "_" @file-name)

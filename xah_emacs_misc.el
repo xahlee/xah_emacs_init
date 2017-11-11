@@ -329,9 +329,13 @@ Version 2017-02-02"
         ("gif to mp4" . "avconv -f gif -i cat.gif cat.mp4")
 
         ("grep" . "grep -r -F \"xxx\" --include='*html' ~/web")
-        ("firefox" . "setsid firefox &")
+
+        ("delete metadata" . "exiftool -all= -overwrite_original *jpg")
+        ("delete mac attribute" . "xattr -c *png")
 
         ("delete empty file" . "find . -type f -empty")
+
+
         ("delete mac junk DS_Store __MACOSX" . "find . -name \".DS_Store\" -delete;
 find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
 

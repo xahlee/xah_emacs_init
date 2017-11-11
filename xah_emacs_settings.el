@@ -2,7 +2,6 @@
 ;; Emacs settings plain gnu emacs only
 ;; 2017-07-15
 
-
 
 ;; initial window and default window
 
@@ -124,11 +123,20 @@
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 
 (when (fboundp 'eww)
-  (progn
-    (defun xah-rename-eww-hook ()
-      "Rename eww browser's buffer so sites open in new page."
-      (rename-buffer "eww" t))
-    (add-hook 'eww-mode-hook 'xah-rename-eww-hook)))
+  (defun xah-rename-eww-buffer ()
+    "Rename `eww-mode' buffer so sites open in new page.
+URL `http://ergoemacs.org/emacs/emacs_eww_web_browser.html'
+Version 2017-11-10"
+    (let (($title (plist-get eww-data :title)))
+      (when (eq major-mode 'eww-mode )
+        (if $title
+            (rename-buffer (concat "eww " $title ) t)
+          (rename-buffer "eww" t)))))
+
+  (add-hook 'eww-after-render-hook 'xah-rename-eww-buffer))
+
+;; (add-hook 'eww-mode-hook 'xah-rename-eww-buffer)
+;; (remove-hook 'eww-mode-hook 'xah-rename-eww-buffer)
 
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
@@ -285,8 +293,6 @@
           (newline-mark 10 [182 10]) ; LINE FEED,
           (tab-mark 9 [9655 9] [92 9]) ; tab
           )))
-
-
 
 
 
