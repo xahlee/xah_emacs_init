@@ -2,9 +2,10 @@
 
 (defun xah-open-in-textedit ()
   "Open the current file or `dired' marked files in Mac's TextEdit.
-This command is for Mac only.
+This command is for macOS only.
 
-Version 2017-11-02"
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2017-11-21"
   (interactive)
   (let* (
          ($file-list
@@ -20,7 +21,29 @@ Version 2017-11-02"
         (mapc
          (lambda ($fpath)
            (shell-command
-            (format "open -a /Applications/TextEdit.app \"%s\"" $fpath))) $file-list))))))
+            (format "open -a TextEdit.app \"%s\"" $fpath))) $file-list))))))
+
+(defun xah-open-in-safari ()
+  "Open the current file or `dired' marked files in Mac's Safari browser.
+
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2017-11-21"
+  (interactive)
+  (let* (
+         ($file-list
+          (if (string-equal major-mode "dired-mode")
+              (dired-get-marked-files)
+            (list (buffer-file-name))))
+         ($do-it-p (if (<= (length $file-list) 5)
+                       t
+                     (y-or-n-p "Open more than 5 files? "))))
+    (when $do-it-p
+      (cond
+       ((string-equal system-type "darwin")
+        (mapc
+         (lambda ($fpath)
+           (shell-command
+            (format "open -a Safari.app \"%s\"" $fpath))) $file-list))))))
 
 (defun xah-open-in-gimp ()
   "Open the current file or `dired' marked files in image editor gimp.
