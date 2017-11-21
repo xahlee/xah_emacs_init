@@ -310,15 +310,13 @@ from directories checked are:
 ~/
 /tmp/
 
-File name checked are:
-t.jpg
-t1.jpg
-t2.jpg
-etc.
+File name checked are: x x1 x2 to x9, or xx and xxx, all followed by a image file name extension, such as .jpg.
+The x can also be e or t.
 
 file name can end in
 .jpg
 .jpg-large
+.jpg_large
 .png
 .webp
 .svg
@@ -328,19 +326,25 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-11-09"
-  (interactive "DMove t img to dir:
+Version 2017-11-20"
+  (interactive "DMove x img to dir:
 sNew file name:")
   (let (
         $fromPath
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
-        ($names '( "t" "t0" "t1" "t2" "t3" "t4" "t5" "t6" "t7" "t8" "t9" "t10" "tt" "ttt" ))
+        ($names '(
+                  "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "xx" "xxx"
+                  "t" "t0" "t1" "t2" "t3" "t4" "t5" "t6" "t7" "t8" "t9" "tt" "ttt"
+                  "e" "e0" "e1" "e2" "e3" "e4" "e5" "e6" "e7" "e8" "e9" "ee" "eee"
+                  ))
         ($regexName "Screen Shot [0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} at [0-9]\\{1,2\\}\.[0-9]\\{1,2\\}\.[0-9]\\{1,2\\} [AP]M.png")
         ;; Screen Shot 2017-09-22 at 1.30.56 PM.png
-        ($exts '("jpg" "jpeg" "jpg-large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "MOV" "svg" "pdf" ))
+        ($exts '("jpg" "jpeg" "jpg-large" "jpg_large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "MOV" "svg" "pdf" ))
 
-        ($randomHex (format "%03d" (random 99999))))
+        ($randomHex (format  (concat "%0" (number-to-string 5) "x" ) (random (1- (expt 16 5)))))
+        ;; ($randomHex (format "%03d" (random 99999)))
+        )
 
     (setq $fromPath
           (let (xpath)
@@ -359,7 +363,7 @@ sNew file name:")
       (setq $fromPath (car (last (directory-files "~/Desktop/" t "Screen Shot .+\.png$" t)))))
 
     (when (null $fromPath)
-      (error "no image file name starts with t, t1 t2 etc at downloads/pictures/tmp dirs"))
+      (error "no image file name starts with x, x1 x2 etc at downloads/pictures/tmp dirs"))
     (setq $toPath (concat
                    (file-name-as-directory @dir-name )
                    (replace-regexp-in-string " " "_" @file-name)
@@ -370,7 +374,8 @@ sNew file name:")
 
     (when (string-equal (file-name-extension $toPath ) "jpg-large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
-
+    (when (string-equal (file-name-extension $toPath ) "jpg_large")
+      (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
     (when (string-equal (file-name-extension $toPath ) "jpeg")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
 

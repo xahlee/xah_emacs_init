@@ -44,8 +44,8 @@
 
 
 
-;; make space equivalent to hyphen and newline for isearch-forward
-(setq search-whitespace-regexp "[-_ \n]")
+;; for isearch-forward, make these equivalent: space newline tab hyphen underscore
+(setq search-whitespace-regexp "[-_ \t\n]+")
 
 (setq make-backup-files nil)
 (setq backup-by-copying t)

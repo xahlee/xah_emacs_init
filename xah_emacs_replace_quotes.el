@@ -996,7 +996,7 @@ When called in lisp code, @begin and @end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2017-07-03"
+Version 2017-11-16"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
@@ -1034,6 +1034,7 @@ Version 2017-07-03"
           [" :(" " ☹"]
           [" ;)" " 😉"]
           ["~=" "≈"]
+          [" --> " " ⟶ "]
           [" , " ", "]
           ;; fix GNU style ASCII quotes
           ["``" "“"]
