@@ -86,11 +86,10 @@ Other files paths for blogs are:
 ~/web/xahlee_org/arts/blog.html
 ~/web/xahlee_org/blender/blog.html
 ~/web/xahlee_org/piano/blog.html
-~/web/xahlee_org/lit/blog.html
 ~/web/xahlee_org/sex/blog.html
 ~/web/xahlee_org/sl/blog.html
 
-version 2017-05-09"
+version 2017-11-29"
   (interactive)
   (let* (
          $p1 $p2
@@ -110,8 +109,7 @@ version 2017-05-09"
           (setq $p2 (region-end)))
       (save-excursion
         (search-backward "<section>" )
-        (search-forward ">" )
-        (forward-line 2) ; skip date stamp
+        (search-forward "</time></div>" )
         (setq $p1 (point))
         (search-forward "</section>" )
         (search-backward "<" )
@@ -127,8 +125,8 @@ version 2017-05-09"
             (while (search-forward " allowfullscreen" (point-max) t)
               (replace-match " " ))
             (goto-char (point-min))
-            (while (search-forward " controls loop autoplay></video>" (point-max) t)
-              (replace-match " controls=\"\" loop=\"\" autoplay=\"\"></video>" ))
+            (while (search-forward " controls loop></video>" (point-max) t)
+              (replace-match " controls=\"\" loop=\"\"></video>" ))
 
             (while (search-forward " controls></video>" (point-max) t)
               (replace-match " controls=\"\"></video>" ))
