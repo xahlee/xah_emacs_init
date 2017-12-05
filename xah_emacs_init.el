@@ -80,6 +80,8 @@ Version 2017-07-19"
   (require 'xah-css-mode)
   )
 
+(require 'htmlize)
+
 (progn
   (add-to-list 'load-path "~/git/xah-html-mode.el/")
   (require 'xah-html-mode))
@@ -119,8 +121,8 @@ Version 2017-07-19"
   (add-to-list 'load-path "~/git/lookup-word-on-internet/")
   ;; (setq xah-lookup-browser-function 'eww )
   (require 'xah-lookup)
-(put 'xah-lookup-word-definition 'xah-lookup-browser-function 'eww)
-(put 'xah-lookup-wikipedia 'xah-lookup-browser-function 'eww)
+;; (put 'xah-lookup-word-definition 'xah-lookup-browser-function 'eww)
+;; (put 'xah-lookup-wikipedia 'xah-lookup-browser-function 'eww)
 
 )
 
