@@ -23,6 +23,29 @@ Version 2017-11-21"
            (shell-command
             (format "open -a TextEdit.app \"%s\"" $fpath))) $file-list))))))
 
+
+(defun xah-open-in-chrome-browser ()
+  "Open the current file or `dired' marked files in Google Chrome browser.
+
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2017-12-07"
+  (interactive)
+  (let* (
+         ($file-list
+          (if (string-equal major-mode "dired-mode")
+              (dired-get-marked-files)
+            (list (buffer-file-name))))
+         ($do-it-p (if (<= (length $file-list) 5)
+                       t
+                     (y-or-n-p "Open more than 5 files? "))))
+    (when $do-it-p
+      (cond
+       ((string-equal system-type "darwin")
+        (mapc
+         (lambda ($fpath)
+           (shell-command
+            (format "open -a /Applications/Google\\ Chrome.app \"%s\"" $fpath))) $file-list))))))
+
 (defun xah-open-in-safari ()
   "Open the current file or `dired' marked files in Mac's Safari browser.
 

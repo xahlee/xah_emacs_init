@@ -428,7 +428,7 @@ QQ: http://user.qzone.qq.com/2609322939" )
   '(
     ("g3" "package main
 
-import \"fmt\"
+import ( \"fmt\"; \"math\" )
 
 func main() {
 
