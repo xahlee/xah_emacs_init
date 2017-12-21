@@ -75,8 +75,8 @@
 ;; (setq xah-find-context-char-count-before 0)
 ;; (setq xah-find-context-char-count-after 99) )
 
-(when (fboundp 'global-company-mode)
-  (global-company-mode 1))
+;; (when (fboundp 'global-company-mode)
+;;   (global-company-mode 1))
 
 ;; (when (fboundp 'go-mode) (add-hook 'before-save-hook #'gofmt-before-save) )
 

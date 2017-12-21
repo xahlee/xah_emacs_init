@@ -319,14 +319,17 @@ file name can end in
 .jpg_large
 .png
 .webp
+.gif
 .svg
 .mp4
+.pdf
+.css
 
 to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-12-06"
+Version 2017-12-15"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -340,7 +343,7 @@ sNew file name:")
                   ))
         ($regexName "Screen Shot [0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} at [0-9]\\{1,2\\}\.[0-9]\\{1,2\\}\.[0-9]\\{1,2\\} [AP]M.png")
         ;; Screen Shot 2017-09-22 at 1.30.56 PM.png
-        ($exts '("jpg" "jpeg" "jpg-large" "jpg_large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "webm" "MOV" "svg" "pdf" ))
+        ($exts '("jpg" "jpeg" "jpg-large" "jpg_large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "webm" "MOV" "svg" "pdf" "css" ))
 
         ;; ($randomHex (format  (concat "%0" (number-to-string 5) "x" ) (random (1- (expt 16 5)))))
         ($randomHex (format "%03d" (random 99999)))
