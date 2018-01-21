@@ -703,8 +703,8 @@ Version 2017-06-05"
         ))))
 
 (defun xah-remove-all-wikipedia-link ()
-  "delete all wikipedia links in a html file, except image links etc.
-Version 2017-06-19"
+  "Delete all wikipedia links in a html file, except image links etc.
+Version 2018-01-10"
   (interactive)
   (let ($p1
         $p2 $deletedText
@@ -744,7 +744,7 @@ Version 2017-06-19"
         (search-backward "</a>")
         (setq $p1 (point))
         (delete-region $p1 $p2)))
-
+    (terpri )
     (mapc (lambda (x) (princ x) (terpri )) $resultList)))
 
 

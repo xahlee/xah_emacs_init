@@ -40,14 +40,13 @@ f_cycle_image ({
 
     ;; English phrases abbrev
 
-
     ("afaik" "as far as i know" )
     ("atm" "at the moment" )
     ("btw" "by the way" )
     ("cnt" "can't" )
+    ("dnt" "don't" )
     ("ddnt" "didn't" )
     ("dfb" "difference between" )
-    ("dnt" "don't" )
     ("dsnt" "doesn't" )
     ("dvp" "develop" )
     ("eg" "e.g." )
@@ -73,7 +72,7 @@ f_cycle_image ({
     ("wnt" "won't" )
     ("wrt" "with respect to" )
     ("wsnt" "wasn't" )
-    ("wt" "want" )
+    ("w" "want" )
     ("wtdb" "What's the difference between" )
 
     ;; english, single word
@@ -428,7 +427,7 @@ QQ: http://user.qzone.qq.com/2609322939" )
   '(
     ("g3" "package main
 
-import ( \"fmt\"; \"math\" )
+import ( \"fmt\" )
 
 func main() {
 
