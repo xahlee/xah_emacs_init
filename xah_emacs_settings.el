@@ -117,7 +117,7 @@
 (setq mark-ring-max 5)
 (setq global-mark-ring-max 5)
 
-(electric-pair-mode 1)
+;; (electric-pair-mode 1)
 
 ;; set the fallback input method to Chinese for toggle-input-method
 (setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.

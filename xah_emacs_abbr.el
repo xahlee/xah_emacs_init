@@ -24,7 +24,7 @@ Version 2016-10-24"
 (define-abbrev-table 'global-abbrev-table
   '(
 
-("vmm3" "
+    ("vmm3" "
 
 f_cycle_image ({
  p_img_path_list: [
@@ -44,9 +44,10 @@ f_cycle_image ({
     ("atm" "at the moment" )
     ("btw" "by the way" )
     ("cnt" "can't" )
-    ("dnt" "don't" )
     ("ddnt" "didn't" )
     ("dfb" "difference between" )
+    ("dnt" "don't" )
+    ("ds" "does" )
     ("dsnt" "doesn't" )
     ("dvp" "develop" )
     ("eg" "e.g." )
@@ -62,6 +63,8 @@ f_cycle_image ({
     ("sa" "See also:" )
     ("sd" "should" )
     ("shnt" "shouldn't" )
+    ("t" "the" )
+    ("th" "there" )
     ("tr" "there are" )
     ("ts" "there is" )
     ("ty" "thank you" )
@@ -69,10 +72,11 @@ f_cycle_image ({
     ("uc" "you see" )
     ("ull" "you'll" )
     ("ur" "your" )
+    ("uv" "you've" )
+    ("w" "want" )
     ("wnt" "won't" )
     ("wrt" "with respect to" )
     ("wsnt" "wasn't" )
-    ("w" "want" )
     ("wtdb" "What's the difference between" )
 
     ;; english, single word
@@ -301,7 +305,7 @@ f_cycle_image ({
 
 " )
 
-("topic3" "<div class=\"topic-xl\">
+    ("topic3" "<div class=\"topic-xl\">
 <h4>Emacs Lisp Basics Topic</h4>
 <ol>
 <li><a href=\"elisp_basics.html\">Emacs Lisp Basics</a></li>

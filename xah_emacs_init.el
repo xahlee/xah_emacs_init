@@ -53,8 +53,13 @@ Version 2017-07-19"
 (require 'xeu_elisp_util)
 
 (add-to-list 'load-path "~/git/xah-fly-keys/")
+(setq xah-fly-swapped-1-8-and-2-7-p t)
 (require 'xah-fly-keys)
-(add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
+(when (fboundp 'xah-fly-keys)
+  (xah-fly-keys 1)
+  (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
+  (load (xah-get-fullpath "xah_emacs_keybinding"))
+  (load (xah-get-fullpath "xah_emacs_mouse_setup")))
 
 (progn
   (require 'xah-text-mode)
@@ -84,7 +89,55 @@ Version 2017-07-19"
 
 (progn
   (add-to-list 'load-path "~/git/xah-html-mode.el/")
-  (require 'xah-html-mode))
+  (require 'xah-html-mode)
+  (when (fboundp 'xah-html-mode)
+
+    (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
+
+    (defun xah-html-mode-keys ()
+      "Modify keymaps used by `html-mode'."
+
+      (define-key xah-html-mode-map (kbd "<f5>") 'xah-browse-url-of-buffer)
+
+      (define-key xah-html-mode-no-chord-map (kbd "e") 'xah-make-atom-entry)
+      (define-key xah-html-mode-no-chord-map (kbd "u") 'xahsite-update-article-timestamp)
+      (define-key xah-html-mode-no-chord-map (kbd "s") 'xah-insert-reference-span-tag)
+      (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
+
+      (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC b") 'xah-make-blogger-entry)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC c") 'xah-angle-brackets-to-html)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC e") 'xah-html-full-size-img-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC p") 'xah-copy-url-current-file)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r j") 'xah-html-image-figure-linkify)
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r r") 'xah-add-to-related-links)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j") nil)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j a") 'xah-words-annotate)
+      (define-key xah-html-mode-no-chord-map (kbd "j e") 'xah-words-bold-word)
+      (define-key xah-html-mode-no-chord-map (kbd "j c") 'xah-words-chinese-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "j m") 'xah-words-move-word-to-page)
+      (define-key xah-html-mode-no-chord-map (kbd "j t") 'xah-words-word-etymology-linkify)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j n") 'xah-words-new-word-entry )
+      (define-key xah-html-mode-no-chord-map (kbd "j i") 'xah-words-insert-word-entry )
+      (define-key xah-html-mode-no-chord-map (kbd "j d") 'xah-words-add-definition )
+      (define-key xah-html-mode-no-chord-map (kbd "j s") 'xah-words-add-source )
+      (define-key xah-html-mode-no-chord-map (kbd "j c") 'xah-words-add-comment )
+      (define-key xah-html-mode-no-chord-map (kbd "j g") 'xah-words-search-next-unbold )
+      (define-key xah-html-mode-no-chord-map (kbd "j p") 'xah-words-query-find-then-bold )
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC z b") 'xah-html-insert-lyrics-header)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC z f") 'xah-html-insert-midi))
+
+    (add-hook 'xah-html-mode-hook 'xah-html-mode-keys)))
 
 (progn
   (add-to-list 'load-path "~/git/xah-js-mode.el/")
@@ -146,15 +199,6 @@ Version 2017-07-19"
 
 (when (string-equal system-type "windows-nt")
   (load (xah-get-fullpath "xah_emacs_ms_windows")))
-
-(when (fboundp 'xah-fly-keys)
-    (setq xah-fly-swapped-1-8-and-2-7-p t)
-    ;; (xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
-    (xah-fly-keys 1)
-    (load (xah-get-fullpath "xah_emacs_keybinding"))
-    ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad"))
-    ;; (load (xah-get-fullpath "xah_emacs_keybinding_number_pad_number"))
-    (load (xah-get-fullpath "xah_emacs_mouse_setup")))
 
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
 
