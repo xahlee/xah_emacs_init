@@ -63,7 +63,6 @@ f_cycle_image ({
     ("sa" "See also:" )
     ("sd" "should" )
     ("shnt" "shouldn't" )
-    ("t" "the" )
     ("th" "there" )
     ("tr" "there are" )
     ("ts" "there is" )

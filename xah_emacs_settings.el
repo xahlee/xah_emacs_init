@@ -296,7 +296,34 @@ Version 2017-11-10"
 
 
 
+(setq hippie-expand-try-functions-list
+      '(
+        try-expand-dabbrev
+        try-expand-dabbrev-all-buffers
+        ;; try-expand-dabbrev-from-kill
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol
+        try-complete-file-name-partially
+        try-complete-file-name
+        ;; try-expand-all-abbrevs
+        ;; try-expand-list
+        ;; try-expand-line
+        ))
+
+
+
+
+
+(setq use-dialog-box nil)
+
+
+
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(defalias 'ms 'magit-status)
+(defalias 'jsm 'js-mode)
+
+(defalias 'ois 'xah-open-in-safari)
 
 (defalias 'lcd 'list-colors-display)
 (defalias 'ds 'desktop-save)
@@ -312,20 +339,7 @@ Version 2017-11-10"
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
 
-(setq hippie-expand-try-functions-list
-      '(
-        try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        ;; try-expand-dabbrev-from-kill
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol
-        try-complete-file-name-partially
-        try-complete-file-name
-        ;; try-expand-all-abbrevs
-        ;; try-expand-list
-        ;; try-expand-line
-        ))
-
-(setq use-dialog-box nil)
 
 
+
+;; (setq-default bidi-display-reordering nil)
