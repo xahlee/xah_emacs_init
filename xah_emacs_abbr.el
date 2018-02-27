@@ -117,7 +117,7 @@ f_cycle_image ({
     ("esp" "especially" )
     ("ex" "example" )
     ("exp3" "experience" )
-    ("expr3" "expression" )
+    ("expr" "expression" )
     ("faq" "frequently asked questions" )
     ("fex" "for example," )
     ("fp" "functional programing" )

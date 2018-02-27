@@ -206,7 +206,7 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 
 This is Xah Lee's personal command assuming a particular dir structure.
 
-Version 2017-08-27"
+Version 2018-02-25"
   (interactive)
   (let (
         $p1 $p2
@@ -230,15 +230,15 @@ Version 2017-08-27"
     (setq $temp (xah-html-split-uri-hashmark $inputStr))
     (setq $file (xahsite-web-path-to-filepath (aref $temp 0)))
     (setq $urlFragmentPart (aref $temp 1))
-
     (if (string-match "x3dxm" $inputStr )
-        (progn
+        (let (($fllpath (expand-file-name (replace-regexp-in-string "^file:///" "/" $inputStr t t))))
+          (setq $title (xah-html-get-html-file-title $file $fllpath))
           (delete-region $p1 $p2)
-          (insert
+          (insert $title "\n"
            (replace-regexp-in-string
-            (concat "^" (expand-file-name "~/")  "x3dxm/vmm/")
+            "^/Users/xah/x3dxm/vmm/"
             "http://VirtualMathMuseum.org/"
-            (replace-regexp-in-string "^file:///" "/" $inputStr t t) t t)))
+            $fllpath t t)))
       (if (file-exists-p $file)
           (progn
             (setq $title
@@ -316,7 +316,7 @@ Version 2017-02-02"
         ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='.DS_Store' --exclude='xahbackup/' --exclude='.git/' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
         ("ssh" . "ssh -l u40651120 xahlee.org ")
 
-        ("vmm inbox" . "rsync -z -a -v -t --exclude='.DS_Store' --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ ~/x3dxm/vmm/xah/xx/")
+        ("vmm inbox" . "rsync -z -a -v -t --exclude='.DS_Store' --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ ~/x3dxm/xstuff/inbox/")
 
         ("vmm up" . "rsync -z -a -v -t --delete --exclude='.DS_Store' --exclude='.git/' --exclude='*~' --rsh=\"ssh -l xahlee\" ~/x3dxm/vmm/ xahlee@3d-xplormath.org:/Library/WebServer/Documents/vmm/" )
 

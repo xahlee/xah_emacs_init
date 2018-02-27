@@ -141,35 +141,19 @@ Version 2017-11-10"
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
-;; (progn
-;;   (defun xah-turn-on-line-number ()
-;;     "Turn on line number on margin."
-;;     (linum-mode 1))
-;;   (add-hook 'text-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'xah-elisp-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'xah-css-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'xah-html-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'xah-js-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'xah-xahk-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'xah-clojure-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'xah-php-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'python-mode-hook 'xah-turn-on-line-number)
-;;   (add-hook 'racket-mode-hook 'xah-turn-on-line-number)
-;; )
-
-;; (progn
-;;   ;; use variable-width font for some modes
-;;   (defun xah-use-variable-width-font ()
-;;     "Set current buffer to use variable-width font."
-;;     (variable-pitch-mode 1)
-;;     (text-scale-increase 0.3 )
-;;     )
-;;   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
-;;   )
+(progn
+  ;; use variable-width font for some modes
+  (defun xah-use-variable-width-font ()
+    "Set current buffer to use variable-width font."
+    (variable-pitch-mode 1)
+    (text-scale-increase 1)
+    )
+  (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
+  (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+  )
 
 (progn ; minibuffer
   (setq enable-recursive-minibuffers t)
@@ -321,9 +305,8 @@ Version 2017-11-10"
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (defalias 'ms 'magit-status)
-(defalias 'jsm 'js-mode)
 
-(defalias 'ois 'xah-open-in-safari)
+(defalias 'xois 'xah-open-in-safari)
 
 (defalias 'lcd 'list-colors-display)
 (defalias 'ds 'desktop-save)
@@ -332,8 +315,10 @@ Version 2017-11-10"
 
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
-
+(defalias 'jsm 'js-mode)
+(defalias 'fm 'fundamental-mode)
 (defalias 'ssm 'shell-script-mode)
+
 (defalias 'rs 'replace-string)
 
 (defalias 'tpu-edt 'forward-char)

@@ -49,8 +49,10 @@ Version 2017-12-07"
 (defun xah-open-in-safari ()
   "Open the current file or `dired' marked files in Mac's Safari browser.
 
+If the file is not saved, save it first.
+
 URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2017-11-21"
+Version 2018-02-26"
   (interactive)
   (let* (
          ($file-list
@@ -65,6 +67,8 @@ Version 2017-11-21"
        ((string-equal system-type "darwin")
         (mapc
          (lambda ($fpath)
+           (when (buffer-modified-p )
+             (save-buffer))
            (shell-command
             (format "open -a Safari.app \"%s\"" $fpath))) $file-list))))))
 
