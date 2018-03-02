@@ -320,7 +320,7 @@ f_cycle_image ({
 ")
 
     ;; unicode
-    ("emd" "—" )
+    ("fnof" "ƒ" )
     ("ascii3" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
     ("catface" "😸" )
