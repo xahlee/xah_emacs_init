@@ -985,15 +985,15 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
 Works on current text block or selection.
 
 Examples of changes:
- 「\"…\"」 ⇒ 「“…”」
- 「...」 ⇒ 「…」
- 「I’m」 => 「I'm」
- 「--」 ⇒ 「—」
- 「~=」 ⇒ 「≈」
+ 「\"…\"」 → 「“…”」
+ 「...」 → 「…」
+ 「I’m」 → 「I'm」
+ 「--」 → 「—」
+ 「~=」 → 「≈」
 
 When called in lisp code, @begin and @end are region begin/end positions.
 
-WARNING: this command does not guarantee 100% correct conversion, because it's heuristics based. Also, if you use it in code, such as HTML, watch out for bad change of straight quotes such as in 「class=\"…\"」.
+WARNING: this command does not guarantee 100% correct conversion of quotes, because it impossible. You should double check highlighted places after.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
 Version 2018-03-02"
@@ -1039,7 +1039,7 @@ Version 2018-03-02"
           ;; fix GNU style ASCII quotes
           ["``" "“"]
           ["''" "”"]
-          ;; "straight quote" ⇒ “double quotes”
+          ;; double straight quote → double curly quotes
           ["\n\"" "\n“"]
           [">\"" ">“"]
           ["(\"" "(“"]

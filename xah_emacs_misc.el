@@ -335,7 +335,6 @@ Version 2017-02-02"
 
         ("delete empty file" . "find . -type f -empty")
 
-
         ("delete mac junk DS_Store __MACOSX" . "find . -name \".DS_Store\" -delete;
 find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
 
@@ -466,32 +465,21 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
             (while (re-search-forward "\n\n\n+" nil t)
               (replace-match "\n\n"))))))))
 
-(defun xah-replace-BOM-mark-etc ()
+(defun xah-replace-invisible-char ()
   "Query replace some invisible Unicode chars.
 The chars to be searched are:
- ZERO WIDTH NO-BREAK SPACE (codepoint 65279, #xfeff)
- RIGHT-TO-LEFT MARK (codepoint 8207, #x200f)
- RIGHT-TO-LEFT OVERRIDE (codepoint 8238, #x202e)
- OBJECT REPLACEMENT CHARACTER (codepoint 65532, #xfffc)
+ ZERO WIDTH NO-BREAK SPACE (65279, #xfeff)
+ RIGHT-TO-LEFT MARK (8207, #x200f)
+ RIGHT-TO-LEFT OVERRIDE (8238, #x202e)
+ LEFT-TO-RIGHT MARK ‎(8206, #x200e)
+ OBJECT REPLACEMENT CHARACTER (65532, #xfffc)
 
 Search begins at cursor position. (respects `narrow-to-region')
 
-This is useful for text copied from twitter or Google Plus, because they often contain BOM mark. See URL `http://xahlee.info/comp/unicode_BOM_byte_orde_mark.html'
-
 URL `http://ergoemacs.org/emacs/elisp_unicode_replace_invisible_chars.html'
-Version 2016-07-24"
+Version 2018-03-05"
   (interactive)
-  (query-replace-regexp "\u200f\\|\u202e\\|\ufeff\\|\ufffc" ""))
-
-(defun xah-replace-BOM-mark-dir ()
-  "temp hack. replace some invisible Unicode chars.
-see `xah-replace-BOM-mark-etc'
-Version 2015-10-11"
-  (interactive)
-  (require 'xah-find)
-  (let ($dir)
-    (setq $dir (ido-read-directory-name "Directory: " default-directory default-directory "MUSTMATCH"))
-    (xah-find-replace-text (char-to-string 65279) "" $dir "\\.html\\'" t t t t)))
+  (query-replace-regexp "\u200f\\|\u202e\\|\ufeff\\|\u200e\\|\ufffc" ""))
 
 (defun xah-show-hexadecimal-value ()
   "Prints the decimal value of a hexadecimal string under cursor.

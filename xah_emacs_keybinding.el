@@ -128,7 +128,7 @@
   (define-key xah-user-keymap (kbd "n") nil)
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
   (define-key xah-user-keymap (kbd "p") 'xah-find-text)
-  (define-key xah-user-keymap (kbd "q") 'xah-replace-BOM-mark-etc)
+  (define-key xah-user-keymap (kbd "q") 'xah-replace-invisible-char)
 
   (define-key xah-user-keymap (kbd "r '") 'xah-latex-to-unicode)
   (define-key xah-user-keymap (kbd "r ,") 'xah-remove-punctuation-trailing-redundant-space )

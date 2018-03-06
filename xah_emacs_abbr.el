@@ -169,6 +169,7 @@ f_cycle_image ({
     ;; english, multiple words
 
     ("mkb" "mechanical keyboard" )
+    ("pc" "political correctness" )
     ("pl" "programing language" )
     ("qaa" "questions and answers" )
     ("sjw3" "social justice warriors" )
