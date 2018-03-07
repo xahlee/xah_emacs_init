@@ -103,7 +103,6 @@
   (define-key xah-user-keymap (kbd "b") nil)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
   (define-key xah-user-keymap (kbd "e") xah-fly-e-keymap)
-  (define-key xah-user-keymap (kbd "f b") 'xah-dired-crop-image)
   (define-key xah-user-keymap (kbd "f c") 'xah-dired-2jpg)
   (define-key xah-user-keymap (kbd "f d") 'xah-image-autocrop)
   (define-key xah-user-keymap (kbd "f e") 'xah-dired-show-metadata)

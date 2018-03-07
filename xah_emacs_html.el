@@ -337,8 +337,7 @@ sNew file name:")
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
         ($names '(
-                  ;; "x" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "xx"
-                  ;; "t" "t0" "t1" "t2" "t3" "t4" "t5" "t6" "t7" "t8" "t9" "tt"
+                  "t" "t0" "t1" "t2" "t3" "t4" "t5" "t6" "t7" "t8" "t9" "tt"
                   "e" "e0" "e1" "e2" "e3" "e4" "e5" "e6" "e7" "e8" "e9"
                   ))
         ($regexName "Screen Shot [0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} at [0-9]\\{1,2\\}\.[0-9]\\{1,2\\}\.[0-9]\\{1,2\\} [AP]M.png")
