@@ -7,9 +7,6 @@
 
 
 
-(fset 'vmm
-   [?1 ?j ?d ?r ?l ?i ?d ?3 ?  home ?9 ?k ?c ?h ?l ?c ?l ?  backspace ?m ?v ?x ?l])
-
 (defun xah-abbrev-h-f ()
   "Abbrev hook function, used for `define-abbrev'.
  Our use is to prevent inserting the char that triggered expansion. Experimental.

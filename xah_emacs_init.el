@@ -204,6 +204,8 @@ Version 2017-07-19"
 
 (load (xah-get-fullpath "xah_emacs_abbr"))
 
+(load (xah-get-fullpath "xah_emacs_kmacro"))
+
 (load (xah-get-fullpath "xah_emacs_mouse_commands"))
 
 (load (xah-get-fullpath "xah_emacs_html"))

@@ -1,9 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-;; some font related emacs commands
-
-;; 2011-03-08
-;;   Xah Lee
-;; ∑ http://xahlee.info/
+;; Emacs: Font Setup
+;; http://ergoemacs.org/emacs/emacs_list_and_set_font.html
 
 
 
@@ -11,21 +8,18 @@
   ;; set a default font
   (cond
    ((string-equal system-type "gnu/linux")
-    (when (member "DejaVu Sans Mono" (font-family-list))
-      (set-face-attribute 'default nil :font "DejaVu Sans Mono"))
+    (when (member "DejaVu Sans Mono" (font-family-list)) (set-frame-font "DejaVu Sans Mono" t t))
     ;; specify font for chinese characters using default chinese font on linux
     (when (member "WenQuanYi Micro Hei" (font-family-list))
       (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
     ;;
     )
    ((string-equal system-type "darwin") ; Mac
-    (when (member "Courier" (font-family-list)) (set-face-attribute 'default nil :font "Courier-14"))
-    (when (member "Menlo" (font-family-list)) (set-face-attribute 'default nil :font "Menlo-14"))
+    (when (member "Menlo" (font-family-list)) (set-frame-font "Menlo-14" t t))
     ;;
     )
    ((string-equal system-type "windows-nt") ; Windows
-    (progn
-      nil)))
+   nil))
 
   ;; specify font for all unicode characters
   (when (member "Symbola" (font-family-list))
@@ -37,7 +31,6 @@
 
   ;;
   )
-
 
 (defun xah-cycle-font-2 (@n)
   "Change font in current window between 2 fonts.
@@ -114,5 +107,4 @@ See `xah-cycle-font'."
 See `xah-cycle-font'."
   (interactive)
   (xah-cycle-font -1))
-
 
