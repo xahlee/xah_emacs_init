@@ -329,7 +329,7 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2017-12-15"
+Version 2018-03-31"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -344,8 +344,7 @@ sNew file name:")
         ;; Screen Shot 2017-09-22 at 1.30.56 PM.png
         ($exts '( "jpg" "jpeg" "jpg-large" "jpg_large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "webm" "MOV" "svg" "pdf" "css" ))
 
-        ;; ($randomHex (format  (concat "%0" (number-to-string 5) "x" ) (random (1- (expt 16 5)))))
-        ($randomHex (format "%03d" (random 99999))))
+        ($randomHex (format  (concat "%0" (number-to-string 5) "x" ) (random (1- (expt 16 5))))))
 
     (setq $fromPath
           (let (xpath)
@@ -391,13 +390,18 @@ sNew file name:")
         (when (string-equal major-mode "dired-mode")
           (revert-buffer))
 
-        (when (string-equal major-mode "xah-html-mode")
-          (kill-new $toPath)
-          (insert "\n\n")
-          (insert $toPath)
-          (insert "\n\n")
-          (backward-word )
-          (xah-html-any-linkify))))))
+        (if (string-equal major-mode "xah-html-mode")
+            (progn
+              (kill-new $toPath)
+              (insert "\n\n")
+              (insert $toPath)
+              (insert "\n\n")
+              (backward-word )
+              (xah-html-any-linkify))
+          (progn
+            (insert "\n\n")
+            (insert $toPath)
+            (insert "\n\n")))))))
 
 (defun xah-youtube-get-image ()
   "

@@ -313,7 +313,9 @@ Version 2017-02-02"
 
 (setq xah-interactive-abbrev-alist
       '(
-        ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='.DS_Store' --exclude='xahbackup/' --exclude='.git/' --rsh='ssh -l u40651120' ~/web/ u40651120@s168753655.onlinehome.us:~/")
+
+        ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='.DS_Store' --exclude='xahbackup/' --exclude='.git/' --rsh='ssh -l u40651120' ~/web/ u40651120@home168753635.1and1-data.host:~/")
+
         ("ssh" . "ssh -l u40651120 xahlee.org ")
 
         ("vmm inbox" . "rsync -z -a -v -t --exclude='.DS_Store' --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ ~/x3dxm/xstuff/inbox/")
@@ -352,8 +354,7 @@ find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
         ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
         ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
 
-        ("clojure" . "java -cp ~/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
-        ))
+        ("clojure" . "java -cp ~/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")))
 
 (defun xah-interactive-abbrev ()
   "Prompt to insert string from a alist ‘xah-interactive-abbrev-alist’

@@ -56,7 +56,7 @@ f_cycle_image ({
     ("isnt" "isn't" )
     ("n" "and" )
     ("r" "are" )
-    ("r3" "return" )
+    ("rt" "return" )
     ("sa" "See also:" )
     ("sd" "should" )
     ("shnt" "shouldn't" )
@@ -269,8 +269,6 @@ f_cycle_image ({
 
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
 
-    ("mx" "<kbd>Alt</kbd>+<kbd>x</kbd>")
-
     ;; ("twittercard" "<meta name=\"twitter:image\" content=\"http://example.com/cat.jpg\">" )
 
     ;; regex
@@ -285,14 +283,10 @@ f_cycle_image ({
     ("tag3" "\\([</>=\" A-Za-z0-9]+\\)" )
 
     ;; html
-    ("hkey" "【Alt+f】" )
-    ("hpmoved" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
-    ("htopic" "<div class=\"topic-xl\">
-<h4>Keyboard Keys Topic</h4>
-</div>
+    ("mxh" "<kbd>Alt</kbd>+<kbd>x</kbd>")
+    ("pmovedh" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
 
-" )
-    ("hfaq" "<section class=\"qna_xl\">
+    ("faqh" "<section class=\"qna_xl\">
 
 <h3 class=\"q\">How to ?</h3>
 
@@ -302,23 +296,17 @@ f_cycle_image ({
 
 " )
 
-    ("topic3" "<div class=\"topic-xl\">
+    ("topich" "<div class=\"topic_xl\">
 <h4>Emacs Lisp Basics Topic</h4>
 <ol>
 <li><a href=\"elisp_basics.html\">Emacs Lisp Basics</a></li>
 <li><a href=\"elisp_editing_basics.html\">Overview of Text-Processing in Emacs Lisp</a></li>
-<li><a href=\"elisp_examples.html\">Emacs Lisp Examples, page 1</a></li>
-<li><a href=\"elisp_eval_lisp_code.html\">How to Evaluate Emacs Lisp Code</a></li>
-<li><a href=\"elisp_doc_lookup.html\">Elisp: Documentation Lookup</a></li>
-<li><a href=\"elisp_search_documentation.html\">Elisp: Search Documentation</a></li>
-<li><a href=\"emacs_editing_lisp.html\">How to Edit Lisp Code with Emacs</a></li>
 </ol>
 </div>
 
 ")
 
     ;; unicode
-    ("fnof" "ƒ" )
     ("ascii3" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
     ("catface" "😸" )
