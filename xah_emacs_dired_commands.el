@@ -349,10 +349,6 @@ Version 2015-07-30"
      (t (error "logic error 09535" )))
     (dired-sort-other $arg )))
 
-(defun xah-get-scale (@area @width @height)
-  "Version 2018-04-19"
-  (sqrt (/ (float @area) (float (* @width @height)))))
-
 (defun xah-create-thumbnail-img ()
   "Create a thumbnail version of image path under cursor.
 
@@ -377,7 +373,7 @@ Version 2018-04-19"
          (size (xah-html--get-image-dimensions filepath))
          (width (aref size 0))
          (height (aref size 1))
-         (scale-percentage (round (* (xah-get-scale thumbnail-size-area width height) 100)))
+         (scale-percentage (round (* (sqrt (/ (float thumbnail-size-area) (float (* width height)))) 100)))
          $cmdStr
          )
 
@@ -390,8 +386,8 @@ Version 2018-04-19"
            filepath
            filepath-new))
 
-    (message "%s" $cmdStr)
     (shell-command $cmdStr)
 
     (search-backward "<" )
-    (insert new-rel-path "\n")))
+    (insert new-rel-path "\n")
+    (backward-word )))
