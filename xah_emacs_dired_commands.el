@@ -153,20 +153,20 @@ Version 2016-07-19"
    @file-list )
   (revert-buffer))
 
-(defun xah-dired-scale-image (@file-list @scale-percentage @sharpen?)
-  "Create a scaled version of images of marked files in dired.
-The new names have “-s” appended before the file name extension.
+(defun xah-dired-scale-image (@file-list @scale-percentage @sharpen-p)
+  "Create a scaled version of marked image files in dired.
+New file names have “-s” appended before the file name extension.
 
 If `universal-argument' is called first, output is PNG format. Else, JPG.
 
 When called in lisp code,
  @file-list is a list.
  @scale-percentage is a integer.
- @sharpen? is true or false.
+ @sharpen-p is true or false.
 
 Requires ImageMagick unix shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2016-07-19"
+Version 2018-04-16"
   (interactive
    (let (
          ($fileList
@@ -180,7 +180,7 @@ Version 2016-07-19"
   (let ( ($outputSuffix (if current-prefix-arg ".png" ".jpg" )))
     (xah-process-image
      @file-list
-     (format "-scale %s%% -quality 85%% %s " @scale-percentage (if @sharpen? "-sharpen 1" "" ))
+     (format "-scale %s%% -quality 90%% %s " @scale-percentage (if @sharpen-p "-sharpen 1" "" ))
      "-s" $outputSuffix )))
 
 (defun xah-image-autocrop ()
@@ -349,3 +349,49 @@ Version 2015-07-30"
      (t (error "logic error 09535" )))
     (dired-sort-other $arg )))
 
+(defun xah-get-scale (@area @width @height)
+  "Version 2018-04-19"
+  (sqrt (/ (float @area) (float (* @width @height)))))
+
+(defun xah-create-thumbnail-img ()
+  "Create a thumbnail version of image path under cursor.
+
+usage: in a html file, put cursor on a image file path, call the command,
+a thumbnail will be created, with file name prefix ztn_ in the same dir,
+and relative path will be inserted before the img tag.
+
+Version 2018-04-19"
+  (interactive)
+  (let* (
+         (bounds (bounds-of-thing-at-point 'filename))
+         (p1 (car bounds))
+         (p2 (cdr bounds))
+         (input-path (buffer-substring-no-properties p1 p2))
+         (filepath (expand-file-name input-path ))
+         (directory (file-name-directory filepath))
+         (filename (file-name-nondirectory filepath))
+         (filename-new (concat "ztn_" filename))
+         (filepath-new (concat directory filename-new))
+         (new-rel-path (file-relative-name filepath-new))
+         (thumbnail-size-area (* 250 250))
+         (size (xah-html--get-image-dimensions filepath))
+         (width (aref size 0))
+         (height (aref size 1))
+         (scale-percentage (round (* (xah-get-scale thumbnail-size-area width height) 100)))
+         $cmdStr
+         )
+
+    (setq $cmdStr
+          (format
+           "convert %s '%s' '%s'"
+           (format " -scale %s%% -quality 90%% %s "
+                   scale-percentage
+                   " -sharpen 1 ")
+           filepath
+           filepath-new))
+
+    (message "%s" $cmdStr)
+    (shell-command $cmdStr)
+
+    (search-backward "<" )
+    (insert new-rel-path "\n")))

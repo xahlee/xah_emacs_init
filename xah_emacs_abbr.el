@@ -50,6 +50,7 @@ f_cycle_image ({
     ("eg" "e.g." )
     ("hnt" "haven't" )
     ("hv" "have" )
+    ("hs" "here's" )
     ("ie" "i.e." )
     ("iirc" "if i recall correctly" )
     ("im" "I'm" )

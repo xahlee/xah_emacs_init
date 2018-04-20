@@ -68,12 +68,12 @@ Version 2015-05-12"
   "Make image file path at cursor point into a img link.
 
 Example:
-i/goddess.jpg
+i/cat.jpg
 becomes
-<a class=\"big-i\" href=\"i/goddess.jpg\" title=\"622×800\" target=\"_blank\">❐</a>
+<a class=\"big-i\" href=\"i/cat.jpg\">4176×2366</a>
 
 If there's a text selection, use that region as file name.
-Version 2017-09-20"
+Version 2018-04-10"
   (interactive)
   (let
       ($p0 $p1 $p2 $input $imgPath $dimension $width $height $resultStr)
@@ -100,8 +100,7 @@ Version 2017-09-20"
     (setq $width (number-to-string (elt $dimension 0)))
     (setq $height (number-to-string (elt $dimension 1)))
     (setq $resultStr
-          (concat "<a class=\"big-i\" href=\"" (file-relative-name $imgPath) "\" target=\"_blank\">" $width "×" $height "</a>"))
-
+          (concat "<a class=\"big-i\" href=\"" (file-relative-name $imgPath) "\">" $width "×" $height "</a>"))
     (delete-region $p1 $p2)
     (insert $resultStr)))
 
@@ -603,7 +602,6 @@ Version 2017-07-27"
          ((string-match-p "html_whatwg" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "html5_whatwg" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "css_2.1_spec" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "css_3_color_spec" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "clojure-doc-1.8" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "python_doc_2" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "python_doc_3" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))

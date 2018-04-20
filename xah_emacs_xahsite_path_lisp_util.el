@@ -228,7 +228,6 @@ Each element is a string, looks like this:
   "xahlee_info/REC-SVG11-20110816/"
   "xahlee_info/clojure-doc-1.8/"
   "xahlee_info/css_2.1_spec/"
-  "xahlee_info/css_3_color_spec/"
   "xahlee_info/css_transitions/"
   "xahlee_info/dom-whatwg/"
   "xahlee_info/html5_whatwg/"
@@ -482,7 +481,6 @@ The arg _parentdir is not used. It is there so that this function can be passed 
      (string-equal "REC-SVG11-20110816" @fname)
      (string-equal "clojure-doc-1.8" @fname)
      (string-equal "css_2.1_spec" @fname)
-     (string-equal "css_3_color_spec" @fname)
      (string-equal "css_transitions" @fname)
      (string-equal "dom-whatwg" @fname)
      (string-equal "html5_whatwg" @fname)

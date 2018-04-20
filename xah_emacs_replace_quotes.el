@@ -851,7 +851,7 @@ When called in lisp code, @begin and @end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion of quotes, because it impossible. You should double check highlighted places after.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2018-03-02"
+Version 2018-04-07"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
@@ -881,6 +881,7 @@ Version 2018-03-02"
          (point-min) (point-max)
          [
           ;; dash and ellipsis etc
+          [" --> " " ⟶ "]
           ["--" " — "]
           ["—" " — "]
           ["..." "…"]
@@ -889,7 +890,6 @@ Version 2018-03-02"
           [" :(" " ☹"]
           [" ;)" " 😉"]
           ["~=" "≈"]
-          [" --> " " ⟶ "]
           [" , " ", "]
           ;; fix GNU style ASCII quotes
           ["``" "“"]

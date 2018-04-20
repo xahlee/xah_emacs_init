@@ -1,13 +1,10 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-;; (define-key xah-fly-key-map (kbd "<home>") xah-insertion-keymap)
-;; (define-key xah-fly-key-map (kbd "DEL") 'xah-fly-command-mode-activate)
-;; (define-key xah-fly-key-map (kbd "<backspace>") 'xah-fly-command-mode-activate)
-
 (global-set-key (kbd "<end>") 'xah-user-keymap)
 
 (when (boundp 'xah-fly-key-map)
   (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
+  (define-key xah-fly-leader-key-map (kbd "<delete>") 'xah-close-current-buffer)
 )
 
 ;; (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
@@ -90,7 +87,7 @@
   (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
   (define-key xah-user-keymap (kbd "<end>") 'xah-insert-low-line)
   (define-key xah-user-keymap (kbd "DEL") nil)
-  (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
+
 
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
   (define-key xah-user-keymap (kbd "'") 'xah-replace-straight-quotes)
@@ -146,7 +143,7 @@
 
   (define-key xah-user-keymap (kbd "s") nil)
   (define-key xah-user-keymap (kbd "t") nil)
-  (define-key xah-user-keymap (kbd "u") 'nil)
+  (define-key xah-user-keymap (kbd "u") 'xah-insert-word-3)
   (define-key xah-user-keymap (kbd "v") nil)
   (define-key xah-user-keymap (kbd "w") nil)
   (define-key xah-user-keymap (kbd "y") nil)
