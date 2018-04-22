@@ -380,7 +380,7 @@ Version 2018-04-19"
     (setq $cmdStr
           (format
            "convert %s '%s' '%s'"
-           (format " -scale %s%% -quality 90%% %s "
+           (format " -scale %s%% -quality 92%% %s "
                    scale-percentage
                    " -sharpen 1 ")
            filepath

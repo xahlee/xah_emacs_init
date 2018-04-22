@@ -312,49 +312,9 @@ Version 2017-02-02"
 (defvar xah-interactive-abbrev-alist nil "A alist for interactive abbreves. Key and value are strings. Key is for abbrev. Value is the text to be inserted." )
 
 (setq xah-interactive-abbrev-alist
-      '(
-
-        ("rsync1" . "rsync -z -r -v -t --delete --chmod=Dugo+x --chmod=ugo+r --exclude='*~' --exclude='.bash_history' --exclude='logs/' --exclude='.DS_Store' --exclude='xahbackup/' --exclude='.git/' --rsh='ssh -l u40651120' ~/web/ u40651120@home168753635.1and1-data.host:~/")
-
-        ("ssh" . "ssh -l u40651120 xahlee.org ")
-
-        ("vmm inbox" . "rsync -z -a -v -t --exclude='.DS_Store' --rsh=\"ssh -l xahlee\" xahlee@3d-xplormath.org:/Users/MathMuseum/ ~/x3dxm/xstuff/inbox/")
-
-        ("vmm up" . "rsync -z -a -v -t --delete --exclude='.DS_Store' --exclude='.git/' --exclude='*~' --rsh=\"ssh -l xahlee\" ~/x3dxm/vmm/ xahlee@3d-xplormath.org:/Library/WebServer/Documents/vmm/" )
-
-        ("img1" . "convert -quality 85% ")
+      '(("img1" . "convert -quality 85% ")
         ("imgScale" . "convert -scale 50% -quality 85% ")
-        ("img256" . "convert +dither -colors 256 ")
-        ("imgBatch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
-        ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
-        ("gif to webm" . "avconv -f gif -i cat.gif cat.webm")
-        ("gif to mp4" . "avconv -f gif -i cat.gif cat.mp4")
-
-        ("grep" . "grep -r -F \"xxx\" --include='*html' ~/web")
-
-        ("delete metadata" . "exiftool -all= -overwrite_original *jpg")
-        ("delete mac attribute" . "xattr -c *png")
-
-        ("delete empty file" . "find . -type f -empty")
-
-        ("delete mac junk DS_Store __MACOSX" . "find . -name \".DS_Store\" -delete;
-find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
-
-        ;; ("delete __MACOSX" . "find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
-
-        ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-        ("delete emacs backup~" . "find . -name \"*~\" -delete")
-        ("clean xah sites~" . "find ~/web/ -name \"*~\" -delete")
-        ("find empty dir" . "find . -depth -empty -type d")
-        ("delete empty dir" . "find . -depth -empty -type d -delete")
-
-        ("empty trash" . "rm -r ~/.local/share/Trash")
-
-        ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
-        ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
-        ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
-
-        ("clojure" . "java -cp ~/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")))
+        ("img256" . "convert +dither -colors 256 ")))
 
 (defun xah-interactive-abbrev ()
   "Prompt to insert string from a alist ‘xah-interactive-abbrev-alist’
