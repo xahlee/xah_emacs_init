@@ -228,10 +228,6 @@ Version 2017-07-19"
 
 (load (xah-get-fullpath "xah_emacs_replace_quotes"))
 
-;; (server-force-delete)
-;; ;; (server-start "LEAVE-DEAD" "INHIBIT-PROMPT")
-;; (server-start )
-
 (when (file-exists-p "~/Dropbox/")
   (progn
     (load "~/Dropbox/xah-emacs-private_b53d8d39")))

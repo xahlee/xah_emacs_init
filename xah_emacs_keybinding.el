@@ -5,6 +5,7 @@
 (when (boundp 'xah-fly-key-map)
   (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
   (define-key xah-fly-leader-key-map (kbd "<delete>") 'xah-close-current-buffer)
+  ;; (define-key xah-fly-key-map (kbd "SPC") 'xah-fly-space-key)
 )
 
 ;; (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
@@ -87,7 +88,7 @@
   (define-key xah-user-keymap (kbd "SPC") 'xah-dump-keymap)
   (define-key xah-user-keymap (kbd "<end>") 'xah-insert-low-line)
   (define-key xah-user-keymap (kbd "DEL") nil)
-
+  (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
 
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
   (define-key xah-user-keymap (kbd "'") 'xah-replace-straight-quotes)
@@ -99,7 +100,7 @@
   (define-key xah-user-keymap (kbd "a") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "b") nil)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  (define-key xah-user-keymap (kbd "e") xah-fly-e-keymap)
+  (define-key xah-user-keymap (kbd "e") nil)
   (define-key xah-user-keymap (kbd "f c") 'xah-dired-2jpg)
   (define-key xah-user-keymap (kbd "f d") 'xah-image-autocrop)
   (define-key xah-user-keymap (kbd "f e") 'xah-dired-show-metadata)
@@ -143,7 +144,7 @@
 
   (define-key xah-user-keymap (kbd "s") nil)
   (define-key xah-user-keymap (kbd "t") nil)
-  (define-key xah-user-keymap (kbd "u") 'xah-insert-word-3)
+  (define-key xah-user-keymap (kbd "u") nil)
   (define-key xah-user-keymap (kbd "v") nil)
   (define-key xah-user-keymap (kbd "w") nil)
   (define-key xah-user-keymap (kbd "y") nil)

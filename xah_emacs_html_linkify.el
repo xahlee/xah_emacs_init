@@ -414,7 +414,8 @@ Version 2016-07-07"
                      (xahsite-get-domain-of-local-file-path $currentBufferFilePathOrDir)
                      (xahsite-get-domain-of-local-file-path $fPath))
                     (progn
-                      (setq $rPath (file-relative-name $fPath $currentBufferFileDir))
+                      ;; (setq $rPath (file-relative-name $fPath $currentBufferFileDir))
+                      (setq $rPath (xah-html-get-relative-path-to-webroot $fPath))
                       (format "<a href=\"%s\">%s</a>"
                               (concat $rPath $fragPart)
                               (if (string-equal $title "") $rPath $title )))

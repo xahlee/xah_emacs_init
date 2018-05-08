@@ -359,11 +359,15 @@ sNew file name:")
               nil
               )))
 
-    (when (null $fromPath)
+    (when (not $fromPath)
       (setq $fromPath (car (last (directory-files "~/Desktop/" t "Screen Shot .+\.png$" t)))))
 
-    (when (null $fromPath)
+    (when (not $fromPath)
+      (setq $fromPath (car (last (directory-files "~/Downloads/" t "Screen Shot .+\.png$" t)))))
+
+    (when (not $fromPath)
       (error "no image file name starts with x, x1 x2 etc at downloads/pictures/tmp dirs"))
+
     (setq $toPath (concat
                    (file-name-as-directory @dir-name )
                    (replace-regexp-in-string " " "_" @file-name)

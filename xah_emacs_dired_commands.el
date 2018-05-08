@@ -227,6 +227,47 @@ Version 2017-10-08"
                   (message  $cmdStr))))
           (user-error "not img file or dired at %s" $bfName))))))
 
+(defun xah-image-remove-transparency ()
+  "Create a new version of image without alpha channel.
+Works on png images only.
+If current buffer is png file, crop it.
+If current buffer is dired, do the file under cursor or marked files.
+
+The created file has the name, in the same dir.
+
+Requires ImageMagick shell command “convert”
+
+URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
+Version 2018-04-23"
+  (interactive)
+  (let (
+        ($bfName (buffer-file-name))
+        $cmdStr
+        )
+    (if (string-equal major-mode "dired-mode")
+        (progn
+          (let (($flist (dired-get-marked-files)))
+            (mapc
+             (lambda ($f)
+               (if (not (string-equal (file-name-extension $f) "png"))
+                   (message "skipping %s" $f)
+                 (progn
+                   (setq $cmdStr (format "convert -flatten '%s' '%s'" (file-relative-name $f) (file-relative-name $f)))                (shell-command $cmdStr))))
+             $flist ))
+          (revert-buffer))
+      (progn
+        (if $bfName
+            (if (not (string-equal (file-name-extension $bfName) "png"))
+                (message "skipping %s" $newName)
+              (progn
+                (setq $cmdStr
+                      (format
+                       "convert -flatten '%s' '%s'"
+                       $bfName
+                       $bfName))
+                (shell-command  $cmdStr )))
+          (user-error "not img file or dired at %s" $bfName))))))
+
 (defun xah-dired-2png (@file-list)
   "Create a png version of images of marked files in dired.
 Requires ImageMagick shell command.
@@ -356,7 +397,7 @@ usage: in a html file, put cursor on a image file path, call the command,
 a thumbnail will be created, with file name prefix ztn_ in the same dir,
 and relative path will be inserted before the img tag.
 
-Version 2018-04-19"
+Version 2018-04-28"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
@@ -376,7 +417,6 @@ Version 2018-04-19"
          (scale-percentage (round (* (sqrt (/ (float thumbnail-size-area) (float (* width height)))) 100)))
          $cmdStr
          )
-
     (setq $cmdStr
           (format
            "convert %s '%s' '%s'"
@@ -385,8 +425,10 @@ Version 2018-04-19"
                    " -sharpen 1 ")
            filepath
            filepath-new))
-
-    (shell-command $cmdStr)
+    (if (file-exists-p filepath-new)
+        (when (y-or-n-p "file exist 「%s」, do it anyway?")
+          (shell-command $cmdStr))
+      (shell-command $cmdStr))
 
     (search-backward "<" )
     (insert new-rel-path "\n")
