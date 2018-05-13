@@ -23,7 +23,6 @@ Version 2017-11-21"
            (shell-command
             (format "open -a TextEdit.app \"%s\"" $fpath))) $file-list))))))
 
-
 (defun xah-open-in-chrome-browser ()
   "Open the current file or `dired' marked files in Google Chrome browser.
 
@@ -394,10 +393,10 @@ Version 2015-07-30"
   "Create a thumbnail version of image path under cursor.
 
 usage: in a html file, put cursor on a image file path, call the command,
-a thumbnail will be created, with file name prefix ztn_ in the same dir,
+a thumbnail will be created, with file name prefix tn_‹width›x‹height› in the same dir,
 and relative path will be inserted before the img tag.
 
-Version 2018-04-28"
+Version 2018-05-09"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
@@ -407,21 +406,28 @@ Version 2018-04-28"
          (filepath (expand-file-name input-path ))
          (directory (file-name-directory filepath))
          (filename (file-name-nondirectory filepath))
-         (filename-new (concat "ztn_" filename))
-         (filepath-new (concat directory filename-new))
-         (new-rel-path (file-relative-name filepath-new))
+
          (thumbnail-size-area (* 250 250))
          (size (xah-html--get-image-dimensions filepath))
          (width (aref size 0))
          (height (aref size 1))
-         (scale-percentage (round (* (sqrt (/ (float thumbnail-size-area) (float (* width height)))) 100)))
+         (scale (sqrt (/ (float thumbnail-size-area) (float (* width height)))))
+
+         (new-width (round (* scale (float width))))
+         (new-height (round (* scale (float height))))
+
+         (filename-new (format "tn_%dx%d_%s" new-width new-height filename))
+         (filepath-new (concat directory filename-new))
+         (new-rel-path (file-relative-name filepath-new))
+
          $cmdStr
          )
+    (message "%s" new-width)
     (setq $cmdStr
           (format
            "convert %s '%s' '%s'"
            (format " -scale %s%% -quality 92%% %s "
-                   scale-percentage
+                   (* scale 100)
                    " -sharpen 1 ")
            filepath
            filepath-new))
