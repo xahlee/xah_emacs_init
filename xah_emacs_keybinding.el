@@ -3,7 +3,6 @@
 (when (boundp 'xah-fly-key-map)
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
-  (global-set-key (kbd "<f10>") 'xah-user-keymap)
 
   (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
   (define-key xah-fly-leader-key-map (kbd "2") 'xah-copy-file-path)
@@ -11,7 +10,7 @@
   (define-key xah-fly-leader-key-map (kbd "8") 'xah-open-file-at-cursor)
   (define-key xah-fly-leader-key-map (kbd "7") 'xah-copy-file-path)
 
-  (define-key xah-fly-leader-key-map (kbd "<f9>") 'xah-user-keymap)
+  (define-key xah-fly-leader-key-map (kbd "<f10>") 'xah-user-keymap)
 
   (define-key xah-fly-leader-key-map (kbd "<delete>") 'xah-close-current-buffer)
 
@@ -93,11 +92,35 @@
 ;; 'xah-cycle-font-previous
 
 (progn
+  ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
+  (define-prefix-command 'xah-dump-keymap)
+
+  ;; a
+  ;; b
+  (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
+  ;; d
+  (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
+  ;; f
+  ;; g
+  (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
+  ;; i
+  (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
+  ;; k
+  (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
+
+ ;; l ;; m ;; n ;; o ;; p ;; p ;; q ;; r ;; s
+
+  (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
+
+ ;; u ;; v ;; w ;; x ;; y ;; z
+
+  )
+(progn
   (define-prefix-command 'xah-user-keymap)
 
-  (define-key xah-user-keymap (kbd "SPC") 'xah-fly-insert-mode-activate)
-  (define-key xah-user-keymap (kbd "DEL") 'xah-fly-insert-mode-activate)
-  (define-key xah-user-keymap (kbd "<end>") 'xah-insert-low-line)
+  (define-key xah-user-keymap (kbd "SPC") xah-dump-keymap)
+
+  (define-key xah-user-keymap (kbd "<f10>") 'xah-insert-low-line)
   (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
@@ -109,15 +132,19 @@
   ;; a
   (define-key xah-user-keymap (kbd "b") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  (define-key xah-user-keymap (kbd "d c") 'xah-dired-2jpg)
-  (define-key xah-user-keymap (kbd "d d") 'xah-image-autocrop)
-  (define-key xah-user-keymap (kbd "d e") 'xah-dired-show-metadata)
-  (define-key xah-user-keymap (kbd "d f") 'xah-dired-scale-image)
-  (define-key xah-user-keymap (kbd "d g") 'xah-dired-2drawing)
-  (define-key xah-user-keymap (kbd "d n") 'xah-open-in-gimp)
-  (define-key xah-user-keymap (kbd "d r") 'xah-dired-2png)
-  (define-key xah-user-keymap (kbd "d u") 'xah-dired-remove-all-metadata)
-  ;; e
+  ;; d
+
+  (define-key xah-user-keymap (kbd "e h") 'xah-dired-scale-image)
+  (define-key xah-user-keymap (kbd "e t") 'xah-dired-2jpg)
+  (define-key xah-user-keymap (kbd "e d") 'xah-image-autocrop)
+  (define-key xah-user-keymap (kbd "e g") 'xah-dired-2drawing)
+  (define-key xah-user-keymap (kbd "e c") 'xah-dired-2png)
+
+  (define-key xah-user-keymap (kbd "e e") 'xah-dired-show-metadata)
+
+  (define-key xah-user-keymap (kbd "e n") 'xah-open-in-gimp)
+  (define-key xah-user-keymap (kbd "e u") 'xah-dired-remove-all-metadata)
+
   ;; f
   (define-key xah-user-keymap (kbd "g") 'xah-replace-straight-quotes)
   ;; h
@@ -154,41 +181,6 @@
 
   ;;  v w x y z
 
-  )
-
-(progn
-  ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
-  (define-prefix-command 'xah-dump-keymap)
-
-  ;; a
-  ;; b
-  (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
-  ;; d
-  (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
-  ;; f
-  ;; g
-  (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
-  ;; i
-  (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
-  ;; k
-  (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
-
-  ;; l
-  ;; m
-  ;; n
-  ;; o
-  ;; p
-  ;; p
-  ;; q
-  ;; r
-  ;; s
-  (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
-  ;; u
-  ;; v
-  ;; w
-  ;; x
-  ;; y
-  ;; z
   )
 
 ;; 2015-08-22 add these somewhere
