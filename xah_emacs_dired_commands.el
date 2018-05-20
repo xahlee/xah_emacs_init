@@ -396,7 +396,7 @@ usage: in a html file, put cursor on a image file path, call the command,
 a thumbnail will be created, with file name prefix tn_‹width›x‹height› in the same dir,
 and relative path will be inserted before the img tag.
 
-Version 2018-05-09"
+Version 2018-05-17"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
@@ -406,8 +406,10 @@ Version 2018-05-09"
          (filepath (expand-file-name input-path ))
          (directory (file-name-directory filepath))
          (filename (file-name-nondirectory filepath))
-
-         (thumbnail-size-area (* 250 250))
+         (corename (file-name-sans-extension filename))
+         (fname-ext (file-name-extension filename))
+         (side-length (string-to-number (read-from-minibuffer "~width:" "250" )))
+         (thumbnail-size-area (* side-length side-length))
          (size (xah-html--get-image-dimensions filepath))
          (width (aref size 0))
          (height (aref size 1))
@@ -416,13 +418,13 @@ Version 2018-05-09"
          (new-width (round (* scale (float width))))
          (new-height (round (* scale (float height))))
 
-         (filename-new (format "tn_%dx%d_%s" new-width new-height filename))
+         ;; (filename-new (format "tn_%dx%d_%s" new-width new-height filename))
+         (filename-new (format "%s-s%dx%d.%s" corename new-width new-height fname-ext ))
          (filepath-new (concat directory filename-new))
          (new-rel-path (file-relative-name filepath-new))
 
          $cmdStr
          )
-    (message "%s" new-width)
     (setq $cmdStr
           (format
            "convert %s '%s' '%s'"

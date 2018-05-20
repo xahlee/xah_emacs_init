@@ -3,14 +3,13 @@
 (when (boundp 'xah-fly-key-map)
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
+  (global-set-key (kbd "<f10>") 'xah-user-keymap)
 
   (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
   (define-key xah-fly-leader-key-map (kbd "2") 'xah-copy-file-path)
 
   (define-key xah-fly-leader-key-map (kbd "8") 'xah-open-file-at-cursor)
   (define-key xah-fly-leader-key-map (kbd "7") 'xah-copy-file-path)
-
-  (define-key xah-fly-leader-key-map (kbd "<f10>") 'xah-user-keymap)
 
   (define-key xah-fly-leader-key-map (kbd "<delete>") 'xah-close-current-buffer)
 
@@ -50,7 +49,7 @@
   (global-set-key (kbd "s-[") 'xah-previous-user-buffer)
   (global-set-key (kbd "s-]") 'xah-next-user-buffer)
 
-  (global-set-key (kbd "s-+") 'text-scale-increase)
+  (global-set-key (kbd "s-=") 'text-scale-increase)
   (global-set-key (kbd "s--") 'text-scale-decrease)
 
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
@@ -120,8 +119,10 @@
 
   (define-key xah-user-keymap (kbd "SPC") xah-dump-keymap)
 
-  (define-key xah-user-keymap (kbd "<f10>") 'xah-insert-low-line)
   (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
+
+  (define-key xah-user-keymap (kbd "<f10>") 'xah-insert-low-line)
+
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
 
@@ -138,7 +139,8 @@
   (define-key xah-user-keymap (kbd "e t") 'xah-dired-2jpg)
   (define-key xah-user-keymap (kbd "e d") 'xah-image-autocrop)
   (define-key xah-user-keymap (kbd "e g") 'xah-dired-2drawing)
-  (define-key xah-user-keymap (kbd "e c") 'xah-dired-2png)
+  (define-key xah-user-keymap (kbd "e n") 'xah-dired-2png)
+  (define-key xah-user-keymap (kbd "e c") 'xah-create-thumbnail-img)
 
   (define-key xah-user-keymap (kbd "e e") 'xah-dired-show-metadata)
 
