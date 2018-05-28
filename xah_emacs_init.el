@@ -57,9 +57,7 @@ Version 2017-07-19"
 (require 'xah-fly-keys)
 (when (fboundp 'xah-fly-keys)
   (xah-fly-keys 1)
-  (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
-  (load (xah-get-fullpath "xah_emacs_keybinding"))
-  (load (xah-get-fullpath "xah_emacs_mouse_setup")))
+  (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file))
 
 (progn
   (require 'xah-text-mode)
@@ -144,6 +142,10 @@ Version 2017-07-19"
     (autoload 'xlsl-mode "xlsl-mode" "autoload the mode." t)))
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
+
+(load (xah-get-fullpath "xah_emacs_keybinding"))
+(load (xah-get-fullpath "xah_emacs_mouse_setup"))
+
 
 (progn
   (add-to-list 'load-path "~/git/xahk-mode.el/")
