@@ -233,6 +233,58 @@
 
 
 
+(when (fboundp 'xah-html-mode)
+
+    (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
+
+    (progn
+
+      (define-key xah-html-mode-map (kbd "<f5>") 'xah-browse-url-of-buffer)
+
+      (define-key xah-html-mode-no-chord-map (kbd "u") 'xahsite-update-article-timestamp)
+      (define-key xah-html-mode-no-chord-map (kbd "s") 'xah-insert-reference-span-tag)
+      (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
+
+      (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC e") 'xah-make-atom-entry)
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC b") 'xah-make-blogger-entry)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC c") 'xah-angle-brackets-to-html)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC u") 'xah-html-full-size-img-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC p") 'xah-copy-url-current-file)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC t") 'xah-open-in-safari)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r j") 'xah-html-image-figure-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC r r") 'xah-add-to-related-links)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j") nil)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j a") 'xah-words-annotate)
+      (define-key xah-html-mode-no-chord-map (kbd "j e") 'xah-words-bold-word)
+      (define-key xah-html-mode-no-chord-map (kbd "j c") 'xah-words-chinese-linkify)
+      (define-key xah-html-mode-no-chord-map (kbd "j m") 'xah-words-move-word-to-page)
+      (define-key xah-html-mode-no-chord-map (kbd "j t") 'xah-words-word-etymology-linkify)
+
+      (define-key xah-html-mode-no-chord-map (kbd "j n") 'xah-words-new-word-entry )
+      (define-key xah-html-mode-no-chord-map (kbd "j i") 'xah-words-insert-word-entry )
+      (define-key xah-html-mode-no-chord-map (kbd "j d") 'xah-words-add-definition )
+      (define-key xah-html-mode-no-chord-map (kbd "j s") 'xah-words-add-source )
+      (define-key xah-html-mode-no-chord-map (kbd "j c") 'xah-words-add-comment )
+      (define-key xah-html-mode-no-chord-map (kbd "j g") 'xah-words-search-next-unbold )
+      (define-key xah-html-mode-no-chord-map (kbd "j p") 'xah-words-query-find-then-bold )
+
+      (define-key xah-html-mode-no-chord-map (kbd "SPC z b") 'xah-html-insert-lyrics-header)
+      (define-key xah-html-mode-no-chord-map (kbd "SPC z f") 'xah-html-insert-midi))
+
+)
+
+
+
 (when (boundp 'tuareg-mode-map)
   (define-key tuareg-mode-map (kbd "<backspace>") nil)
   (define-key tuareg-mode-map (kbd "DEL") nil))
