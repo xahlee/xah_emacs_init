@@ -73,23 +73,14 @@ This command leaves the file unsaved."
 Use current text block (between blank lines) or selected text as input, and update the Atom file's overall “updated” tag.
 
 If the current file is〔‹path›.html〕, then ATOM file updated will be 〔‹path›.xml〕.
-Exception: 〔c:/Users/h3/web/wordyenglish_com/words/new.html〕 goes to 〔~/web/wordyenglish_com/lit/blog.xml〕
+Exception:
+~/web/wordyenglish_com/words/new.html
+ goes to
+~/web/wordyenglish_com/lit/blog.xml
 
 Other files paths for blogs are:
-~/web/ergoemacs_org/emacs/blog.html
-~/web/xahlee_info/comp/blog.html
-~/web/xahlee_info/js/blog.html
-~/web/xahlee_info/math/blog.html
-~/web/wordyenglish_com/lit/blog.html
-~/web/wordyenglish_com/chinese/blog.html
-~/web/xahlee_org/Periodic_dosage_dir/pd.html
-~/web/xahlee_org/arts/blog.html
-~/web/xahlee_org/blender/blog.html
-~/web/xahlee_org/piano/blog.html
-~/web/xahlee_org/sex/blog.html
-~/web/xahlee_org/sl/blog.html
 
-version 2017-11-29"
+Version 2018-05-28"
   (interactive)
   (let* (
          $p1 $p2
