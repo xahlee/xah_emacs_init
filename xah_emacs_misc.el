@@ -653,13 +653,13 @@ Version 2017-06-05"
 
 (defun xah-remove-all-wikipedia-link ()
   "Delete all wikipedia links in a html file, except image links etc.
-Version 2018-01-10"
+Version 2018-06-03"
   (interactive)
   (let ($p1
         $p2 $deletedText
         ($resultList '()))
     (goto-char (point-min))
-    (while (re-search-forward "<a href=\"https?://en.wikipedia.org/wiki/" nil t)
+    (while (re-search-forward "<a href=\"https?://...wikipedia.org/wiki/" nil t)
       (progn
         (search-backward "<a href" )
         (setq $p1 (point))

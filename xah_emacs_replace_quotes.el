@@ -374,7 +374,7 @@ Works on current line or text selection.
 
 The conversion direction is determined like this: if the command has been repeated, then toggle. Else, always do to-Unicode direction.
 
-If `universal-argument' is called:
+If `universal-argument' is called first:
 
  no C-u → Automatic.
  C-u → to ASCII
@@ -384,7 +384,9 @@ If `universal-argument' is called:
 When called in lisp code, @begin @end are region begin/end positions. @to-direction must be any of the following values: 「\"unicode\"」, 「\"ascii\"」, 「\"auto\"」.
 
 See also: `xah-remove-punctuation-trailing-redundant-space'.
-Version 2016-10-05"
+
+URL `http://ergoemacs.org/emacs/elisp_convert_chinese_punctuation.html'
+Version 2018-06-04"
   (interactive
    (let ($p1 $p2)
      (if (use-region-p)
@@ -408,6 +410,7 @@ Version 2016-10-05"
            ["A" "Ａ"] ["B" "Ｂ"] ["C" "Ｃ"] ["D" "Ｄ"] ["E" "Ｅ"] ["F" "Ｆ"] ["G" "Ｇ"] ["H" "Ｈ"] ["I" "Ｉ"] ["J" "Ｊ"] ["K" "Ｋ"] ["L" "Ｌ"] ["M" "Ｍ"] ["N" "Ｎ"] ["O" "Ｏ"] ["P" "Ｐ"] ["Q" "Ｑ"] ["R" "Ｒ"] ["S" "Ｓ"] ["T" "Ｔ"] ["U" "Ｕ"] ["V" "Ｖ"] ["W" "Ｗ"] ["X" "Ｘ"] ["Y" "Ｙ"] ["Z" "Ｚ"]
            ["a" "ａ"] ["b" "ｂ"] ["c" "ｃ"] ["d" "ｄ"] ["e" "ｅ"] ["f" "ｆ"] ["g" "ｇ"] ["h" "ｈ"] ["i" "ｉ"] ["j" "ｊ"] ["k" "ｋ"] ["l" "ｌ"] ["m" "ｍ"] ["n" "ｎ"] ["o" "ｏ"] ["p" "ｐ"] ["q" "ｑ"] ["r" "ｒ"] ["s" "ｓ"] ["t" "ｔ"] ["u" "ｕ"] ["v" "ｖ"] ["w" "ｗ"] ["x" "ｘ"] ["y" "ｙ"] ["z" "ｚ"]
            ["," "，"] ["." "．"] [":" "："] [";" "；"] ["!" "！"] ["?" "？"] ["\"" "＂"] ["'" "＇"] ["`" "｀"] ["^" "＾"] ["~" "～"] ["¯" "￣"] ["_" "＿"]
+           [" " "　"]
            ["&" "＆"] ["@" "＠"] ["#" "＃"] ["%" "％"] ["+" "＋"] ["-" "－"] ["*" "＊"] ["=" "＝"] ["<" "＜"] [">" "＞"] ["(" "（"] [")" "）"] ["[" "［"] ["]" "］"] ["{" "｛"] ["}" "｝"] ["(" "｟"] [")" "｠"] ["|" "｜"] ["¦" "￤"] ["/" "／"] ["\\" "＼"] ["¬" "￢"] ["$" "＄"] ["£" "￡"] ["¢" "￠"] ["₩" "￦"] ["¥" "￥"]
            ]
           )
@@ -416,14 +419,19 @@ Version 2016-10-05"
            (lambda (x) (vector (elt x 1) (elt x 0)))
            $ascii-unicode-map))
 
-         (cmdStates ["to-unicode" "to-ascii"])
-         (stateBefore (if (get 'xah-convert-fullwidth-chars 'state) (get 'xah-convert-fullwidth-chars 'state) 0))
-         (stateAfter (% (+ stateBefore (length cmdStates) 1) (length cmdStates))))
+         ($stateBefore
+          (if (get 'xah-convert-fullwidth-chars 'state)
+              (get 'xah-convert-fullwidth-chars 'state)
+            (progn
+              (put 'xah-convert-fullwidth-chars 'state 0)
+              0
+              )))
+         ($stateAfter (if (eq $stateBefore 0) 1 0 )))
 
   ;"０\\|１\\|２\\|３\\|４\\|５\\|６\\|７\\|８\\|９\\|Ａ\\|Ｂ\\|Ｃ\\|Ｄ\\|Ｅ\\|Ｆ\\|Ｇ\\|Ｈ\\|Ｉ\\|Ｊ\\|Ｋ\\|Ｌ\\|Ｍ\\|Ｎ\\|Ｏ\\|Ｐ\\|Ｑ\\|Ｒ\\|Ｓ\\|Ｔ\\|Ｕ\\|Ｖ\\|Ｗ\\|Ｘ\\|Ｙ\\|Ｚ\\|ａ\\|ｂ\\|ｃ\\|ｄ\\|ｅ\\|ｆ\\|ｇ\\|ｈ\\|ｉ\\|ｊ\\|ｋ\\|ｌ\\|ｍ\\|ｎ\\|ｏ\\|ｐ\\|ｑ\\|ｒ\\|ｓ\\|ｔ\\|ｕ\\|ｖ\\|ｗ\\|ｘ\\|ｙ\\|ｚ"
 
-  ;(message "before %s" stateBefore)
-  ;(message "after %s" stateAfter)
+  ;(message "before %s" $stateBefore)
+  ;(message "after %s" $stateAfter)
   ;(message "@to-direction %s" @to-direction)
   ;(message "real-this-command  %s" this-command)
   ;(message "real-last-command %s" last-command)
@@ -435,16 +443,15 @@ Version 2016-10-05"
         ((string= @to-direction "unicode") $ascii-unicode-map)
         ((string= @to-direction "ascii") $reverse-map)
         ((string= @to-direction "auto")
-         (if (equal this-command last-command)
-             (if (eq stateBefore 0)
-                 $ascii-unicode-map
-               $reverse-map
-               )
+         (if (eq last-command this-command)
+             (if (eq $stateBefore 0)
+                 $reverse-map
+               $ascii-unicode-map )
            $ascii-unicode-map
            ))
         (t (user-error "Your 3rd argument 「%s」 isn't valid" @to-direction)))
        t t ))
-    (put 'xah-convert-fullwidth-chars 'state stateAfter)))
+    (put 'xah-convert-fullwidth-chars 'state $stateAfter)))
 
 (defun xah-remove-punctuation-trailing-redundant-space (@begin @end)
   "Remove redundant whitespace after punctuation.

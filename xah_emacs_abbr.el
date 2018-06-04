@@ -64,6 +64,7 @@ f_cycle_image ({
     ("th" "there" )
     ("tr" "there are" )
     ("ts" "there is" )
+    ("ths" "this is" )
     ("ty" "thank you" )
     ("u" "you" )
     ("uc" "you see" )

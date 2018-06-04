@@ -72,15 +72,13 @@ This command leaves the file unsaved."
 
 Use current text block (between blank lines) or selected text as input, and update the Atom file's overall “updated” tag.
 
-If the current file is〔‹path›.html〕, then ATOM file updated will be 〔‹path›.xml〕.
+If the current file is x.html, then ATOM file updated will be x.xml.
 Exception:
 ~/web/wordyenglish_com/words/new.html
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Other files paths for blogs are:
-
-Version 2018-05-28"
+Version 2018-05-29"
   (interactive)
   (let* (
          $p1 $p2
