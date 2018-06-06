@@ -330,7 +330,7 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2018-06-03"
+Version 2018-06-06"
   (interactive "DMove x img to dir:
 sNew file name:")
   (let (
@@ -338,12 +338,7 @@ sNew file name:")
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
 
-        ;; ($names '(
-        ;;                   "t" "t0" "t1" "t2" "t3" "t4" "t5" "t6" "t7" "t8" "t9" "tt"
-        ;;                   "e" "e0" "e1" "e2" "e3" "e4" "e5" "e6" "e7" "e8" "e9"
-        ;;                   ))
-
-        ($names (mapcar (lambda (x) (concat "e" (number-to-string x))) (number-sequence 1 99)))
+        ($names (append '("e" "ee" "eee") (mapcar (lambda (x) (concat "e" (number-to-string x))) (number-sequence 0 99))))
 
         ($exts '( "jpg" "jpeg" "jpg-large" "jpg_large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "webm" "MOV" "svg" "pdf" "css" ))
 

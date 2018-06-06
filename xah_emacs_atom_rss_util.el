@@ -78,7 +78,7 @@ Exception:
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Version 2018-05-29"
+Version 2018-06-05"
   (interactive)
   (let* (
          $p1 $p2
@@ -107,7 +107,7 @@ Version 2018-05-29"
 
     (setq $inputStr (buffer-substring-no-properties $p1 $p2))
     (setq $inputStr
-          ;; converct html boolean attributes to valid xml version. eg from iframes from youtube and google map
+          ;; convert html boolean attributes to valid xml version. eg from iframes from youtube and google map
           (with-temp-buffer
             (insert $inputStr)
             (goto-char (point-min))
@@ -137,7 +137,7 @@ Version 2018-05-29"
                   (progn (match-string 2 $inputStr))
                 (progn "▮")))))
 
-    (setq $altURL ; if the meat contain just one link, use that as alt url, else, url of current file name
+    (setq $altURL ; use first link, else, url of current file name
           (let ( ($hrefValues (xah-html-extract-url $p1 $p2)) $firstLink1)
             (if
                 (and
@@ -159,7 +159,8 @@ Version 2018-05-29"
                     ;;   )
                     (xahsite-filepath-to-url
                      (expand-file-name $firstLink1 (file-name-directory $currentFpath )))))
-              (xahsite-filepath-to-url $currentFpath))))
+              (xahsite-filepath-to-url $currentFpath))
+            ))
 
     (if (file-exists-p $atomFilePath)
         (find-file $atomFilePath)
