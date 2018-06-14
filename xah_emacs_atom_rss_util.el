@@ -78,7 +78,7 @@ Exception:
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Version 2018-06-05"
+Version 2018-06-08"
   (interactive)
   (let* (
          $p1 $p2
@@ -88,10 +88,10 @@ Version 2018-06-05"
           (if (string-match-p "wordyenglish_com/words/new.html\\'" $currentFpath )
               (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" $currentFpath "FIXEDCASE" "LITERAL")
             (replace-regexp-in-string "\\.html\\'" ".xml" $currentFpath "FIXEDCASE" "LITERAL")))
-         $titleText
+         ($dummyTitleText "hh")
+         ($titleText $dummyTitleText)
          $altURL
          )
-
     (if (use-region-p)
         (progn
           (setq $p1 (region-beginning))
@@ -104,7 +104,6 @@ Version 2018-06-05"
         (search-backward "<" )
         ;; (delete-blank-lines)
         (setq $p2 (point))))
-
     (setq $inputStr (buffer-substring-no-properties $p1 $p2))
     (setq $inputStr
           ;; convert html boolean attributes to valid xml version. eg from iframes from youtube and google map
@@ -116,13 +115,12 @@ Version 2018-06-05"
             (goto-char (point-min))
             (while (search-forward " controls loop></video>" (point-max) t)
               (replace-match " controls=\"\" loop=\"\"></video>" ))
-
+            (goto-char (point-min))
             (while (search-forward " controls></video>" (point-max) t)
               (replace-match " controls=\"\"></video>" ))
-
+            (goto-char (point-min))
             (while (search-forward " loop></video>" (point-max) t)
               (replace-match " loop=\"\"></video>" ))
-
             (goto-char (point-min))
             (insert "\n")
             (goto-char (point-max))
@@ -135,18 +133,19 @@ Version 2018-06-05"
             (progn
               (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" $inputStr)
                   (progn (match-string 2 $inputStr))
-                (progn "▮")))))
+                (progn $dummyTitleText)))))
 
     (setq $altURL ; use first link, else, url of current file name
           (let ( ($hrefValues (xah-html-extract-url $p1 $p2)) $firstLink1)
             (if
-                (and
-                 (with-temp-buffer ; 1 paragraph only
-                   (insert $inputStr)
-                   (goto-char (point-min))
-                   (= (count-matches "<p>" (point-min) (point-max)) 1))
-                 (progn ; 1 link only
-                   (= (length $hrefValues) 1)))
+                (>= (length $hrefValues) 1)
+                ;; (and
+                ;;  (with-temp-buffer ; 1 paragraph only
+                ;;    (insert $inputStr)
+                ;;    (goto-char (point-min))
+                ;;    (= (count-matches "<p>" (point-min) (point-max)) 1))
+                ;;  (progn ; 1 link only
+                ;;    (= (length $hrefValues) 1)))
                 (progn
                   (setq $firstLink1 (elt $hrefValues 0))
                   (if (string-match-p "\\`https?://" $firstLink1)
@@ -159,8 +158,7 @@ Version 2018-06-05"
                     ;;   )
                     (xahsite-filepath-to-url
                      (expand-file-name $firstLink1 (file-name-directory $currentFpath )))))
-              (xahsite-filepath-to-url $currentFpath))
-            ))
+              (xahsite-filepath-to-url $currentFpath))))
 
     (if (file-exists-p $atomFilePath)
         (find-file $atomFilePath)

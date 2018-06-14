@@ -206,7 +206,7 @@ File path must be a URL scheme, full path, or relative path. See: `xahsite-web-p
 
 This is Xah Lee's personal command assuming a particular dir structure.
 
-Version 2018-02-25"
+Version 2018-06-06"
   (interactive)
   (let (
         $p1 $p2
@@ -231,14 +231,15 @@ Version 2018-02-25"
     (setq $file (xahsite-web-path-to-filepath (aref $temp 0)))
     (setq $urlFragmentPart (aref $temp 1))
     (if (string-match "x3dxm" $inputStr )
-        (let (($fllpath (expand-file-name (replace-regexp-in-string "^file:///" "/" $inputStr t t))))
-          (setq $title (xah-html-get-html-file-title $file $fllpath))
+
+        (let (($fpath (expand-file-name (replace-regexp-in-string "^file:///" "/" $inputStr t t))))
+          (setq $title (xah-html-get-html-file-title $file $fpath))
           (delete-region $p1 $p2)
-          (insert $title "\n"
+          (insert (if $title $title "" ) "\n"
            (replace-regexp-in-string
             "^/Users/xah/x3dxm/vmm/"
             "http://VirtualMathMuseum.org/"
-            $fllpath t t)))
+            $fpath t t)))
       (if (file-exists-p $file)
           (progn
             (setq $title

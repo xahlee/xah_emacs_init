@@ -167,6 +167,7 @@ f_cycle_image ({
 
     ;; english, multiple words
 
+    ("diy" "Do It Yourself" )
     ("mkb" "mechanical keyboard" )
     ("pc" "political correctness" )
     ("pl" "programing language" )
@@ -329,6 +330,8 @@ f_cycle_image ({
 🤡" )
     ("hearts" "♥💕💓💔💖💗💘💝💞💟💙💚💛💜" )
     ("omg" "😂" )
+    ("star" "⭐" )
+    ("star2" "🌟" )
     ("la" "←" )
     ("ua" "↑" )
     ("ra" "→" )
