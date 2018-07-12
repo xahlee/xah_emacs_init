@@ -301,7 +301,7 @@ Requires a python script. See code."
 ;;         (find-file $to-path )
 ;;         (message "move to path: %s" $to-path)))))
 
-(defun xah-move-image-file (@dir-name @file-name)
+(defun xah-move-image-file ()
   "Move image file to another dir.
 
 from directories checked are:
@@ -330,20 +330,19 @@ to a different dir and rename, prompting user.
 Any space in filename is replaced by the low line char “_”.
 For files ending in png, 「optipng filename」 is called.
 
-Version 2018-06-06"
-  (interactive "DMove x img to dir:
-sNew file name:")
+Version 2018-07-11"
+  (interactive)
   (let (
+        $toDirName
+        $toFileName
         $fromPath
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
-
         ($names (append '("e" "ee" "eee") (mapcar (lambda (x) (concat "e" (number-to-string x))) (number-sequence 0 99))))
-
         ($exts '( "jpg" "jpeg" "jpg-large" "jpg_large" "webp" "png" "gif" "JPG" "PNG" "GIF" "mp4" "mov" "webm" "MOV" "svg" "pdf" "css" ))
-
         ($randomHex (format  (concat "%0" (number-to-string 5) "x" ) (random (1- (expt 16 5))))))
-
+    (setq $toDirName (ido-read-directory-name "Move to dir:" ))
+    (setq $toFileName (read-string "New file name:"))
     (setq $fromPath
           (let (xpath)
             (catch 'x42566
@@ -356,42 +355,34 @@ sNew file name:")
                         (throw 'x42566 xpath))))))
               nil
               )))
-
     (when (not $fromPath)
       (setq $fromPath (car (last (directory-files "~/Desktop/" t "Screen Shot .+\.png$" t)))))
-
     (when (not $fromPath)
       (setq $fromPath (car (last (directory-files "~/Downloads/" t "Screen Shot .+\.png$" t)))))
-
     (when (not $fromPath)
       (error "no image file name starts with x, x1 x2 etc at downloads/pictures/tmp dirs"))
-
     (setq $toPath (concat
-                   (file-name-as-directory @dir-name )
-                   (replace-regexp-in-string " " "_" @file-name)
+                   (file-name-as-directory $toDirName )
+                   (replace-regexp-in-string " " "_" $toFileName)
                    "_"
                    $randomHex
                    "."
                    (downcase (file-name-extension $fromPath ))))
-
     (when (string-equal (file-name-extension $toPath ) "jpg-large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
     (when (string-equal (file-name-extension $toPath ) "jpg_large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
     (when (string-equal (file-name-extension $toPath ) "jpeg")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
-
     (if (file-exists-p $toPath)
         (message "move to path exist: %s" $toPath)
       (progn
         (rename-file $fromPath $toPath)
-
         (when (string-equal (file-name-extension $toPath ) "png")
           (shell-command (concat "optipng " $toPath)))
 
         (when (string-equal major-mode "dired-mode")
           (revert-buffer))
-
         (if (string-equal major-mode "xah-html-mode")
             (progn
               (kill-new $toPath)

@@ -76,6 +76,9 @@ f_cycle_image ({
     ("wrt" "with respect to" )
     ("wsnt" "wasn't" )
     ("wtdb" "What's the difference between" )
+    ("pov" "point of view" )
+
+    ("mln" "millennials" )
 
     ;; english, single word
 
@@ -172,7 +175,7 @@ f_cycle_image ({
     ("pc" "political correctness" )
     ("pl" "programing language" )
     ("qaa" "questions and answers" )
-    ("sjw3" "social justice warriors" )
+    ("sj" "social justice" )
     ("wip" "work in progress" )
 
     ;; english, proper noun
@@ -232,6 +235,7 @@ f_cycle_image ({
     ("vas" "variables" )
     ("wd" "web development" )
     ("wm" "Window Manager" )
+    ("wh" "width height" )
 
     ;; computing, proper noun
     ("ahk" "AutoHotkey" )
@@ -249,6 +253,7 @@ f_cycle_image ({
     ("mac" "Mac" )
     ("macosx" "Mac OS X" )
     ("macos" "macOS" )
+    ("iPhone" "iPhone" )
     ("mma" "Mathematica" )
     ("ms" "Microsoft" )
     ("msvs" "Microsoft Visual Studio" )
@@ -269,6 +274,7 @@ f_cycle_image ({
     ("p3" "+" )
     ("eq" "==" )
     ("eqq" "===" )
+    ("hr" "--------------------------------------------------" )
 
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
 
@@ -313,7 +319,11 @@ f_cycle_image ({
     ("ascii3" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
     ("catface" "😸" )
+    ("heartface" "😻" )
     ("clown" "🤡" )
+    ("angry" "😠" )
+    ("horror" "😱" )
+    ("fear" "😬" ) 
     ("emoji3" "😃😄😅😆
 😉😊😋😌
 😎😇😈
@@ -332,6 +342,7 @@ f_cycle_image ({
     ("omg" "😂" )
     ("star" "⭐" )
     ("star2" "🌟" )
+
     ("la" "←" )
     ("ua" "↑" )
     ("ra" "→" )
@@ -412,6 +423,8 @@ QQ: http://user.qzone.qq.com/2609322939" )
  http://xahlee.org/
  US citizen.
  Mountain View, CA." )
+
+    ("xkb" "#xahkeyboard" )
 
     ;;
 

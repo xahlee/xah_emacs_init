@@ -749,11 +749,11 @@ Version old old some 2010 or so"
     ))
 
 (defun xah-check-parens-balance ()
-  "Check if there are unbalanced parentheses/brackets/quotes in current bufffer.
+  "Check if there are unbalanced parentheses/brackets/quotes in current bufffer or selection.
 If so, place cursor there, print error to message buffer.
 
 URL `http://ergoemacs.org/emacs/emacs_check_parens_balance.html'
-Version 2017-08-17"
+Version 2018-07-03"
   (interactive)
   (let* (
          ($bracket-alist
@@ -779,36 +779,38 @@ Version 2017-08-17"
     (if (region-active-p)
         (setq $p1 (region-beginning) $p2 (region-end))
       (setq $p1 (point-min) $p2 (point-max)))
-    (save-restriction
-      (narrow-to-region $p1 $p2)
-      (progn
-        (goto-char 1)
-        (while (re-search-forward $bregex nil "move")
-          (setq $pos (point))
-          (setq $char (char-before))
-          (progn
-            (setq $is-closing-char-p (rassoc $char $bracket-alist))
-            (if $is-closing-char-p
-                (progn
-                  (setq $matched-open-char
-                        (if $is-closing-char-p
-                            (car $is-closing-char-p)
-                          (error "logic error 64823. The char %s has no matching pair."
-                                 (char-to-string $char))))
-                  (if $stack
-                      (if (eq (aref (car $stack) 0) $matched-open-char )
-                          (pop $stack)
-                        (push (vector $char $pos) $stack ))
-                    (progn
-                      (goto-char $pos)
-                      (error "First mismtach found. the char %s has no matching pair."
-                             (char-to-string $char)))))
-              (push (vector $char $pos) $stack ))))
-        (if $stack
+
+    (save-excursion
+      (save-restriction
+        (narrow-to-region $p1 $p2)
+        (progn
+          (goto-char 1)
+          (while (re-search-forward $bregex nil "move")
+            (setq $pos (point))
+            (setq $char (char-before))
             (progn
-              (goto-char (aref (car $stack) 1))
-              (message "Mismtach found. The char %s has no matching pair." $stack))
-          (print "All brackets/quotes match."))))))
+              (setq $is-closing-char-p (rassoc $char $bracket-alist))
+              (if $is-closing-char-p
+                  (progn
+                    (setq $matched-open-char
+                          (if $is-closing-char-p
+                              (car $is-closing-char-p)
+                            (error "logic error 64823. The char %s has no matching pair."
+                                   (char-to-string $char))))
+                    (if $stack
+                        (if (eq (aref (car $stack) 0) $matched-open-char )
+                            (pop $stack)
+                          (push (vector $char $pos) $stack ))
+                      (progn
+                        (goto-char $pos)
+                        (error "First mismtach found. the char %s has no matching pair."
+                               (char-to-string $char)))))
+                (push (vector $char $pos) $stack ))))
+          (if $stack
+              (progn
+                (goto-char (aref (car $stack) 1))
+                (message "Mismtach found. The char %s has no matching pair." $stack))
+            (print "All brackets/quotes match.")))))))
 
 (defun xah-url-to-filepath ()
   "of xah site url under cursor, change it to corresponding local file path.
