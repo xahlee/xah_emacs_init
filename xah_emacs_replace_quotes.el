@@ -566,7 +566,7 @@ When called in lisp code, @begin @end are region begin/end positions. @to-direct
  'lengthen
 
 URL `http://ergoemacs.org/emacs/elisp_twitterfy.html'
-Version 2018-03-18"
+Version 2018-07-12"
   (interactive
    (list
     (if (use-region-p) (region-beginning) (line-beginning-position))
@@ -588,6 +588,7 @@ Version 2018-03-18"
           [" you," " u,"]
           [" you." " u."]
           [" you." " u。"]
+          ["e.g. " "eg "]
           [" to " " 2 "]
           [" your" " ur "]
           [" and " "＆"]

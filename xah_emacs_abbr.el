@@ -35,6 +35,21 @@ f_cycle_image ({
 
 ")
 
+    ;; English word abbrev
+
+    ("ds" "does" )
+    ("n" "and" )
+    ("r" "are" )
+    ("rt" "return" )
+    ("sd" "should" )
+    ("th" "there" )
+    ("u" "you" )
+    ("ur" "your" )
+    ("w" "want" )
+    ("hv" "have" )
+    ("k" "know" )
+    ("ab" "about" )
+
     ;; English phrases abbrev
 
     ("afaik" "as far as i know" )
@@ -44,44 +59,33 @@ f_cycle_image ({
     ("ddnt" "didn't" )
     ("dfb" "difference between" )
     ("dnt" "don't" )
-    ("ds" "does" )
     ("dsnt" "doesn't" )
     ("dvp" "develop" )
     ("eg" "e.g." )
     ("hnt" "haven't" )
-    ("hv" "have" )
     ("hs" "here's" )
     ("ie" "i.e." )
     ("iirc" "if i recall correctly" )
     ("im" "I'm" )
     ("isnt" "isn't" )
-    ("n" "and" )
-    ("r" "are" )
-    ("rt" "return" )
     ("sa" "See also:" )
-    ("sd" "should" )
     ("shnt" "shouldn't" )
-    ("th" "there" )
     ("tr" "there are" )
     ("ts" "there is" )
     ("ths" "this is" )
     ("ty" "thank you" )
-    ("u" "you" )
     ("uc" "you see" )
     ("ull" "you'll" )
-    ("ur" "your" )
     ("uv" "you've" )
-    ("w" "want" )
     ("wnt" "won't" )
     ("wrt" "with respect to" )
     ("wsnt" "wasn't" )
     ("wtdb" "What's the difference between" )
     ("pov" "point of view" )
 
-    ("mln" "millennials" )
-
     ;; english, single word
 
+    ("mln" "millennials" )
     ("fol" "following" )
     ("usu" "usually" )
     ("hev" "however" )
@@ -295,6 +299,10 @@ f_cycle_image ({
     ("mxh" "<kbd>Alt</kbd>+<kbd>x</kbd>")
     ("pmovedh" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
 
+    ("lyricsh" "<pre class=\"lyrics_xl\">
+▮
+</pre>")
+
     ("faqh" "<section class=\"qna_xl\">
 
 <h3 class=\"q\">How to ?</h3>
@@ -323,7 +331,7 @@ f_cycle_image ({
     ("clown" "🤡" )
     ("angry" "😠" )
     ("horror" "😱" )
-    ("fear" "😬" ) 
+    ("fear" "😬" )
     ("emoji3" "😃😄😅😆
 😉😊😋😌
 😎😇😈
