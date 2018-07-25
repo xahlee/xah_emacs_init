@@ -319,19 +319,20 @@ the new file name is with ee removed.
 Any space in filename is replaced by the low line char “_”.
 If the file name ends in png, 「optipng filename」 is called.
 
-Version 2018-07-21"
+Version 2018-07-25"
   (interactive
    (list
     (ido-read-directory-name "Move to dir:" )))
   (let (
         $fromPath
+        $toFileName
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
         ($randomHex (format  (concat "%0" (number-to-string 5) "x" ) (random (1- (expt 16 5))))))
     (setq $fromPath
           (catch 'TAG
             (dolist (x $dirs )
-              (let ((mm (directory-files "/Users/xah/Downloads/" t "^ee\\|Screen Shot" t)))
+              (let ((mm (directory-files x t "^ee\\|Screen Shot" t)))
                 (if mm
                     (progn
                       (throw 'TAG (car mm)))
@@ -339,16 +340,27 @@ Version 2018-07-21"
                   )))))
     (when (not $fromPath)
       (error "no file name starts with ee nor contain “Screen Shot” at dirs %s" $dirs))
-    (setq $toPath
-          (concat
-           (file-name-as-directory @toDirName )
-           (replace-regexp-in-string
-            " " "_"
-            (substring (file-name-nondirectory (file-name-sans-extension $fromPath)) 2))
-           "_"
-           $randomHex
-           "."
-           (downcase (file-name-extension $fromPath ))))
+
+    (setq $toFileName (file-name-nondirectory $fromPath))
+
+    (setq $toFileName
+          (replace-regexp-in-string
+           "Screen Shot \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\) at [0-9]+.[0-9]\\{2\\}.[0-9]\\{2\\} \\(AM\\|PM\\).png"
+           "screenshot_\\1.png"
+           $toFileName ))
+    ;; Screen Shot 2018-07-25 at 2.46.36 AM.png
+
+    (setq $toFileName (replace-regexp-in-string " " "_" $toFileName))
+
+    (setq $toFileName
+          (concat (file-name-sans-extension $toFileName)
+                  "_"
+                  $randomHex
+                  "."
+                  (downcase (file-name-extension $toFileName ))))
+
+    (setq $toPath (concat (file-name-as-directory @toDirName ) $toFileName))
+
     (when (string-equal (file-name-extension $toPath ) "jpg-large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
     (when (string-equal (file-name-extension $toPath ) "jpg_large")
