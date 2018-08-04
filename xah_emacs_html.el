@@ -319,7 +319,7 @@ the new file name is with ee removed.
 Any space in filename is replaced by the low line char “_”.
 If the file name ends in png, 「optipng filename」 is called.
 
-Version 2018-07-25"
+Version 2018-08-03"
   (interactive
    (list
     (ido-read-directory-name "Move to dir:" )))
@@ -373,7 +373,9 @@ Version 2018-07-25"
       (progn
         (rename-file $fromPath $toPath)
         (when (string-equal (file-name-extension $toPath ) "png")
-          (shell-command (concat "optipng " $toPath)))
+          (when (eq (shell-command "which optipng") 0)
+            (message "optimizing with optipng")
+            (shell-command (concat "optipng " $toPath))))
         (when (string-equal major-mode "dired-mode")
           (revert-buffer))
         (if (string-equal major-mode "xah-html-mode")

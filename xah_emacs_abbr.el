@@ -194,7 +194,6 @@ f_cycle_image ({
     ("wp" "Wikipedia" )
 
     ;; math
-
     ("sor" "surface of revolution" )
     ("fr" "fundamental region" )
     ("def" ":=" )
@@ -240,6 +239,11 @@ f_cycle_image ({
     ("wd" "web development" )
     ("wm" "Window Manager" )
     ("wh" "width height" )
+
+    ("pr" "(▮)" )
+    ("br" "[▮]" )
+    ("brc" "{▮}" )
+    ("q" "\"▮\"" )
 
     ;; computing, proper noun
     ("ahk" "AutoHotkey" )
@@ -413,7 +417,11 @@ f_cycle_image ({
     ("uxp" "http://xahporn.org/" )
     ("uxsl" "http://xahsl.org/" )
 
-    ;; xah lee
+    ;; personal
+
+    ("xkb" "#xahkeyboard" )
+    ("xc" "#xahcode" )
+    ("xjs" "#xahjs" )
 
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee
@@ -480,5 +488,51 @@ func main() {
     ))
 
 (set-default 'abbrev-mode t)
+
+(setq abbrev-expand-function 'xah-global-expand-abbrev)
+
+(defun xah-global-expand-abbrev ()
+  "Expand the symbol before cursor,
+if cursor is not in string or comment.
+Returns the abbrev symbol if there's a expansion, else nil.
+Version 2017-01-13"
+  (interactive)
+  (when (xah-elisp-abbrev-enable-function) ; abbrev property :enable-function doesn't seem to work, so check here instead
+    (let ( $p1 $p2
+               $abrStr
+               $abrSymbol
+               )
+
+      ;; (save-excursion
+      ;;   (forward-symbol -1)
+      ;;   (setq $p1 (point))
+      ;;   (goto-char $p0)
+      ;;   (setq $p2 $p0))
+
+      (save-excursion
+        ;; 2017-01-16 note: we select the whole symbol to solve a problem. problem is: if “aa”  is a abbrev, and “▮bbcc” is existing word with cursor at beginning, and user wants to type aabbcc. Normally, aa immediately expands. This prevent people editing bbcc to become aabbcc. This happens for example in elisp where “aa” is “re” for “region-end” and user wants to add “re-” to “search-forward” to get “re-search-forward”. The downside of this is that, people cannot type a abbrev when in middle of a word.
+        (forward-symbol -1)
+        (setq $p1 (point))
+        (forward-symbol 1)
+        (setq $p2 (point)))
+
+      (setq $abrStr (buffer-substring-no-properties $p1 $p2))
+      (setq $abrSymbol (abbrev-symbol $abrStr))
+      (if $abrSymbol
+          (progn
+            (abbrev-insert $abrSymbol $abrStr $p1 $p2 )
+            (xah-global-abbrev-position-cursor $p1)
+            $abrSymbol)
+        nil))))
+
+(defun xah-global-abbrev-position-cursor (&optional @pos)
+  "Move cursor back to ▮ if exist, else put at end.
+Return true if found, else false.
+Version 2016-10-24"
+  (interactive)
+  (let (($found-p (search-backward "▮" (if @pos @pos (max (point-min) (- (point) 100))) t )))
+    (when $found-p (delete-char 1))
+    $found-p
+    ))
 
 (setq save-abbrevs nil)

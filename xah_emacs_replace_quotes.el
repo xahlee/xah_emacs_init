@@ -386,7 +386,7 @@ When called in lisp code, @begin @end are region begin/end positions. @to-direct
 See also: `xah-remove-punctuation-trailing-redundant-space'.
 
 URL `http://ergoemacs.org/emacs/elisp_convert_chinese_punctuation.html'
-Version 2018-06-04"
+Version 2018-08-02"
   (interactive
    (let ($p1 $p2)
      (if (use-region-p)
@@ -430,11 +430,13 @@ Version 2018-06-04"
 
   ;"０\\|１\\|２\\|３\\|４\\|５\\|６\\|７\\|８\\|９\\|Ａ\\|Ｂ\\|Ｃ\\|Ｄ\\|Ｅ\\|Ｆ\\|Ｇ\\|Ｈ\\|Ｉ\\|Ｊ\\|Ｋ\\|Ｌ\\|Ｍ\\|Ｎ\\|Ｏ\\|Ｐ\\|Ｑ\\|Ｒ\\|Ｓ\\|Ｔ\\|Ｕ\\|Ｖ\\|Ｗ\\|Ｘ\\|Ｙ\\|Ｚ\\|ａ\\|ｂ\\|ｃ\\|ｄ\\|ｅ\\|ｆ\\|ｇ\\|ｈ\\|ｉ\\|ｊ\\|ｋ\\|ｌ\\|ｍ\\|ｎ\\|ｏ\\|ｐ\\|ｑ\\|ｒ\\|ｓ\\|ｔ\\|ｕ\\|ｖ\\|ｗ\\|ｘ\\|ｙ\\|ｚ"
 
-  ;(message "before %s" $stateBefore)
-  ;(message "after %s" $stateAfter)
-  ;(message "@to-direction %s" @to-direction)
-  ;(message "real-this-command  %s" this-command)
-  ;(message "real-last-command %s" last-command)
+    ;; (message "before %s" $stateBefore)
+    ;; (message "after %s" $stateAfter)
+    ;; (message "@to-direction %s" @to-direction)
+    ;; (message "real-this-command  %s" real-this-command)
+    ;; (message "real-last-command %s" real-last-command)
+    ;; (message "this-command  %s" this-command)
+    ;; (message "last-command %s" last-command)
 
     (let ((case-fold-search nil))
       (xah-replace-pairs-region
@@ -443,12 +445,24 @@ Version 2018-06-04"
         ((string= @to-direction "unicode") $ascii-unicode-map)
         ((string= @to-direction "ascii") $reverse-map)
         ((string= @to-direction "auto")
-         (if (eq last-command this-command)
-             (if (eq $stateBefore 0)
-                 $reverse-map
-               $ascii-unicode-map )
-           $ascii-unicode-map
-           ))
+         (if (eq $stateBefore 0)
+             $reverse-map
+           $ascii-unicode-map )
+
+         ;; 2018-08-02 this doesn't work when using smex
+         ;; (if (eq last-command this-command)
+         ;;     (progn
+         ;;       (message "%s" "repeated")
+         ;;       (if (eq $stateBefore 0)
+         ;;           $reverse-map
+         ;;         $ascii-unicode-map ))
+         ;;   (progn
+         ;;     (message "%s" "not repeated")
+         ;;     $ascii-unicode-map))
+
+         ;;
+
+         )
         (t (user-error "Your 3rd argument 「%s」 isn't valid" @to-direction)))
        t t ))
     (put 'xah-convert-fullwidth-chars 'state $stateAfter)))
