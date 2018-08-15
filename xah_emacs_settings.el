@@ -231,7 +231,7 @@ Version 2017-11-10"
 (setq-default indent-tabs-mode nil) ; gnu emacs 23.1, 24.4.1 default is t
 
 ;; 4 is more popular than 8.
-(setq tab-width 4) ; width for display tabs. emacs 23.1 default is 8
+(setq-default tab-width 4) ; width for display tabs. emacs 23.1 default is 8
 
 
 

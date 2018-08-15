@@ -2,8 +2,11 @@
 
 (when (boundp 'xah-fly-key-map)
 
-  ;; (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
-  (global-set-key (kbd "<end>") xah-fly-e-keymap)
+  (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
+  ;; (global-set-key (kbd "<end>") xah-fly-e-keymap)
+
+  (define-key xah-fly-key-map (kbd "<home>") xah-fly-e-keymap)
+
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
 
   (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
@@ -14,7 +17,7 @@
 
   (define-key xah-fly-leader-key-map (kbd "<delete>") 'xah-close-current-buffer)
 
-  (define-key xah-fly-leader-key-map (kbd "e") nil)
+  ;; (define-key xah-fly-leader-key-map (kbd "e") nil)
 
   ;; (define-key xah-fly-key-map (kbd "SPC") 'xah-fly-space-key)
   )
@@ -139,7 +142,6 @@
   (define-key xah-user-keymap (kbd ", n") 'xah-open-in-gimp)
   (define-key xah-user-keymap (kbd ", u") 'xah-dired-remove-all-metadata)
 
-
   (define-key xah-user-keymap (kbd "8") 'xah-find-count)
   (define-key xah-user-keymap (kbd "9") 'xah-find-replace-text-regex)
   (define-key xah-user-keymap (kbd "0") 'xah-find-text-regex)
@@ -149,7 +151,7 @@
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
   ;; d
 
-  ;; (define-key xah-user-keymap (kbd "e") xah-fly-e-keymap)
+  (define-key xah-user-keymap (kbd "e") xah-fly-e-keymap)
 
   ;; f
   (define-key xah-user-keymap (kbd "g") 'xah-replace-straight-quotes)
