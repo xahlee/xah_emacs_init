@@ -53,11 +53,8 @@ Version 2017-07-19"
 (require 'xeu_elisp_util)
 
 (add-to-list 'load-path "~/git/xah-fly-keys/")
-(setq xah-fly-swapped-1-8-and-2-7-p t)
 (require 'xah-fly-keys)
 (when (fboundp 'xah-fly-keys)
-;; (xah-fly-keys-set-layout "programer-dvorak")
-;; (xah-fly-keys-set-layout "dvorak")
   (xah-fly-keys 1)
   (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file))
 

@@ -209,7 +209,8 @@ insert a div tag above the current paragraph."
     (insert (format "<b class=\"x3nt\">%s</b> " $inputText))))
 
 (defun xah-words-word-etymology-linkify ()
-  "Make the current word into a etymology reference link."
+  "Make the current word into a etymology reference link.
+Version 2018-08-16"
   (interactive)
   (let ($p1 $p2 $input $result)
     (if (use-region-p)
@@ -218,7 +219,7 @@ insert a div tag above the current paragraph."
       (progn (setq $p1 (line-beginning-position))
              (setq $p2 (line-end-position))))
     (setq $input (buffer-substring-no-properties $p1 $p2))
-    (setq $result (concat "<span class=\"english-etymology-35252\"><a href=\"http://www.etymonline.com/index.php?search=" $input "\">" $input "</a></span>"))
+    (setq $result (concat "etymology of <a href=\"https://www.etymonline.com/word/" $input "\">" $input "</a>"))
     (delete-region $p1 $p2)
     (insert $result)))
 

@@ -446,23 +446,31 @@ QQ: http://user.qzone.qq.com/2609322939" )
 
     ))
 
+
+;; golang
 (define-abbrev-table 'go-mode-abbrev-table
   '(
-    ("g3" "package main
+    ("gg" "package main
 
-import ( \"fmt\" )
+import \"fmt\"
 
 func main() {
 
-	fmt.Println( 3 )
+	fmt.Printf(\"%v\\n\", 33)
 
 }")
 
+    ("p" "fmt.Printf(\"%v\\n\", hh▮)")
+    ("cmt" "/* \n▮\n*/")
     ("if" "if x < 0 { 3 }")
     ("ie" " if x < 0 { 3 } else { 4 }")
     ("ei" "else if x > 0 { 3 }")
     ("else" "else { 3 }")
     ("for" "for i := 0; i < 4; i++ { i }")
+    ("range" "for k, v := range xxx {
+▮
+    }
+")
     ("r" "return")
     ("ps" "+")
     ("eq" "==")

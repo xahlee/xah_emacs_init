@@ -37,9 +37,7 @@
 
 (when (fboundp 'htmlize-region)
   ;; htmlize.el
-  ;; make htmlize generate unicode directly instead of html entities
   (setq htmlize-convert-nonascii-to-entities nil)
-  ; make the output html use utf-8 charset
   (setq htmlize-html-charset "utf-8"))
 
 ;; (when (and (fboundp 'which-key-mode)

@@ -78,7 +78,7 @@ Exception:
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Version 2018-06-08"
+Version 2018-08-15"
   (interactive)
   (let* (
          $p1 $p2
@@ -88,7 +88,7 @@ Version 2018-06-08"
           (if (string-match-p "wordyenglish_com/words/new.html\\'" $currentFpath )
               (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" $currentFpath "FIXEDCASE" "LITERAL")
             (replace-regexp-in-string "\\.html\\'" ".xml" $currentFpath "FIXEDCASE" "LITERAL")))
-         ($dummyTitleText "hh")
+         ($dummyTitleText "hhh")
          ($titleText $dummyTitleText)
          $altURL
          )
