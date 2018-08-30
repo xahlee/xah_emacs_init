@@ -328,7 +328,7 @@ Version 2018-08-10"
         $toFileName
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
-        ($randomHex (format  (concat "%0" (number-to-string 5) "x" ) (random (1- (expt 16 5))))))
+        ($randomHex (format  (concat "%05x" ) (random (1- (expt 16 5))))))
     (setq $fromPath
           (catch 'TAG
             (dolist (x $dirs )

@@ -5,9 +5,11 @@
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
   ;; (global-set-key (kbd "<end>") xah-fly-e-keymap)
 
-  (define-key xah-fly-key-map (kbd "<home>") xah-fly-e-keymap)
+  ;; (define-key xah-fly-key-map (kbd "<home>") xah-fly-e-keymap)
 
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
+
+  (global-set-key (kbd "C-h h") nil)
 
   (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
   (define-key xah-fly-leader-key-map (kbd "2") 'xah-copy-file-path)
@@ -100,24 +102,7 @@
   ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
   (define-prefix-command 'xah-dump-keymap)
 
-  ;; a
-  ;; b
-  (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
-  ;; d
-  (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
-  ;; f
-  ;; g
-  (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
-  ;; i
-  (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
-  ;; k
   (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
-
- ;; l ;; m ;; n ;; o ;; p ;; p ;; q ;; r ;; s
-
-  (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
-
- ;; u ;; v ;; w ;; x ;; y ;; z
 
   )
 (progn

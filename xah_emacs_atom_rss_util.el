@@ -78,7 +78,7 @@ Exception:
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Version 2018-08-15"
+Version 2018-08-20"
   (interactive)
   (let* (
          $p1 $p2
@@ -135,30 +135,32 @@ Version 2018-08-15"
                   (progn (match-string 2 $inputStr))
                 (progn $dummyTitleText)))))
 
-    (setq $altURL ; use first link, else, url of current file name
-          (let ( ($hrefValues (xah-html-extract-url $p1 $p2)) $firstLink1)
-            (if
-                (>= (length $hrefValues) 1)
-                ;; (and
-                ;;  (with-temp-buffer ; 1 paragraph only
-                ;;    (insert $inputStr)
-                ;;    (goto-char (point-min))
-                ;;    (= (count-matches "<p>" (point-min) (point-max)) 1))
-                ;;  (progn ; 1 link only
-                ;;    (= (length $hrefValues) 1)))
-                (progn
-                  (setq $firstLink1 (elt $hrefValues 0))
-                  (if (string-match-p "\\`https?://" $firstLink1)
-                      $firstLink1
-                    ;; (if (xahsite-url-is-xah-website-p $firstLink1)
-                    ;;     (xahsite-filepath-to-href-value
-                    ;;      (xahsite-url-to-filepath $firstLink1 "addFileName")
-                    ;;      $currentFpath)
-                    ;;   $firstLink1
-                    ;;   )
-                    (xahsite-filepath-to-url
-                     (expand-file-name $firstLink1 (file-name-directory $currentFpath )))))
-              (xahsite-filepath-to-url $currentFpath))))
+    (setq  $altURL (xahsite-filepath-to-url $currentFpath))
+
+    ;; (setq $altURL ; use first link, else, url of current file name
+    ;;       (let ( ($hrefValues (xah-html-extract-url $p1 $p2)) $firstLink1)
+    ;;         (if
+    ;;             (>= (length $hrefValues) 1)
+    ;;             ;; (and
+    ;;             ;;  (with-temp-buffer ; 1 paragraph only
+    ;;             ;;    (insert $inputStr)
+    ;;             ;;    (goto-char (point-min))
+    ;;             ;;    (= (count-matches "<p>" (point-min) (point-max)) 1))
+    ;;             ;;  (progn ; 1 link only
+    ;;             ;;    (= (length $hrefValues) 1)))
+    ;;             (progn
+    ;;               (setq $firstLink1 (elt $hrefValues 0))
+    ;;               (if (string-match-p "\\`https?://" $firstLink1)
+    ;;                   $firstLink1
+    ;;                 ;; (if (xahsite-url-is-xah-website-p $firstLink1)
+    ;;                 ;;     (xahsite-filepath-to-href-value
+    ;;                 ;;      (xahsite-url-to-filepath $firstLink1 "addFileName")
+    ;;                 ;;      $currentFpath)
+    ;;                 ;;   $firstLink1
+    ;;                 ;;   )
+    ;;                 (xahsite-filepath-to-url
+    ;;                  (expand-file-name $firstLink1 (file-name-directory $currentFpath )))))
+    ;;           (xahsite-filepath-to-url $currentFpath))))
 
     (if (file-exists-p $atomFilePath)
         (find-file $atomFilePath)

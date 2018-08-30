@@ -286,9 +286,7 @@ Version 2017-11-10"
         ;; try-expand-line
         ))
 
-
 
-
 
 (setq use-dialog-box nil)
 
@@ -297,6 +295,12 @@ Version 2017-11-10"
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; (defalias 'outline-mode 'org-mode)
+
+(defalias 'xcm 'xah-css-mode)
+(defalias 'xem 'xah-elisp-mode)
+(defalias 'xhm 'xah-html-mode)
+(defalias 'xjm 'xah-js-mode)
+;; xah-clojure-mode
 
 (defalias 'ms 'magit-status)
 
@@ -318,7 +322,6 @@ Version 2017-11-10"
 
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
-
 
 
 

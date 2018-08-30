@@ -7,15 +7,6 @@
 
 
 
-(defun xah-abbrev-h-f ()
-  "Abbrev hook function, used for `define-abbrev'.
- Our use is to prevent inserting the char that triggered expansion. Experimental.
- the “h-f” stand for hook function.
-Version 2016-10-24"
-  t)
-
-(put 'xah-abbrev-h-f 'no-self-insert t)
-
 (clear-abbrev-table global-abbrev-table)
 
 (define-abbrev-table 'global-abbrev-table
@@ -91,7 +82,7 @@ f_cycle_image ({
     ("hev" "however" )
     ("alt3" "alternative" )
     ("ann" "announcement" )
-    ("aprt" "apparently" )
+    ("apr" "apparently" )
     ("arg" "argument" )
     ("auto3" "automatic" )
     ("autom" "automatic" )
@@ -446,11 +437,10 @@ QQ: http://user.qzone.qq.com/2609322939" )
 
     ))
 
-
 ;; golang
 (define-abbrev-table 'go-mode-abbrev-table
   '(
-    ("gg" "package main
+    ("pm" "package main
 
 import \"fmt\"
 
@@ -461,22 +451,34 @@ func main() {
 }")
 
     ("p" "fmt.Printf(\"%v\\n\", hh▮)")
+    ("pl" "fmt.Println(hh▮)")
     ("cmt" "/* \n▮\n*/")
-    ("if" "if x < 0 { 3 }")
-    ("ie" " if x < 0 { 3 } else { 4 }")
+    ("if" "if 4 { 3 }")
+    ("ie" " if err != nil { panic() }")
     ("ei" "else if x > 0 { 3 }")
     ("else" "else { 3 }")
     ("for" "for i := 0; i < 4; i++ { i }")
-    ("range" "for k, v := range xxx {
+    ("fr" "for k, v := range xxx {
 ▮
     }
 ")
+
+    ("f" "func ff(x int) int {
+	return nil
+}")
+
     ("r" "return")
     ("ps" "+")
+    ("st" "string")
+    ("stru" "type myS struct {
+y string
+x int
+}")
     ("eq" "==")
     ("pt" "fmt.Println(3)")
-    ("fu" "func(x int) int { return 1 }")
     ("v" "var x = 3")
+    ("df" "x := 3")
+    ("c" "const x = 3")
     ("ft" "fallthrough")
     ("switch" "	switch 3 {
 	case 1:
@@ -496,6 +498,17 @@ func main() {
     ))
 
 (set-default 'abbrev-mode t)
+
+
+
+(defun xah-abbrev-h-f ()
+  "Abbrev hook function, used for `define-abbrev'.
+ Our use is to prevent inserting the char that triggered expansion. Experimental.
+ the “h-f” stand for hook function.
+Version 2016-10-24"
+  t)
+
+(put 'xah-abbrev-h-f 'no-self-insert t)
 
 (setq abbrev-expand-function 'xah-global-expand-abbrev)
 
@@ -518,7 +531,7 @@ Version 2017-01-13"
       ;;   (setq $p2 $p0))
 
       (save-excursion
-        ;; 2017-01-16 note: we select the whole symbol to solve a problem. problem is: if “aa”  is a abbrev, and “▮bbcc” is existing word with cursor at beginning, and user wants to type aabbcc. Normally, aa immediately expands. This prevent people editing bbcc to become aabbcc. This happens for example in elisp where “aa” is “re” for “region-end” and user wants to add “re-” to “search-forward” to get “re-search-forward”. The downside of this is that, people cannot type a abbrev when in middle of a word.
+        ;; 2017-01-16 note: we select the whole symbol to solve a problem. problem is: if “aa”  is a abbrev, and “▮bbcc” is existing word with cursor at beginning, and user wants to type aa-bbcc. Normally, aa immediately expands. This prevent people editing bbcc to become aa-bbcc. This happens for example in elisp “search-forward” to get “re-search-forward”. The downside of this is that, people cannot type a abbrev when in middle of a word.
         (forward-symbol -1)
         (setq $p1 (point))
         (forward-symbol 1)
