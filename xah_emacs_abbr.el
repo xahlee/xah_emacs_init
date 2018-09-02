@@ -438,9 +438,12 @@ QQ: http://user.qzone.qq.com/2609322939" )
     ))
 
 ;; golang
+(when (boundp 'go-mode-abbrev-table)
+  (clear-abbrev-table go-mode-abbrev-table))
+
 (define-abbrev-table 'go-mode-abbrev-table
   '(
-    ("pm" "package main
+    ("go" "package main
 
 import \"fmt\"
 
@@ -454,7 +457,7 @@ func main() {
     ("pl" "fmt.Println(hh▮)")
     ("cmt" "/* \n▮\n*/")
     ("if" "if 4 { 3 }")
-    ("ie" " if err != nil { panic() }")
+    ("ie" " if err != nil { panic(err) }")
     ("ei" "else if x > 0 { 3 }")
     ("else" "else { 3 }")
     ("for" "for i := 0; i < 4; i++ { i }")
@@ -491,7 +494,9 @@ x int
 
     ("rto" "reflect.TypeOf()")
 
-    ("map" "map[string]string")
+    ("sl" "var bb = []string{`a`,`b`}")
+    ("mp" "var mm = map[string]string{`a`: `1`, `b`: `2`}")
+    ("mm" "var mp = make(map[string]int)")
 
     ;;
 

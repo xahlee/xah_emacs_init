@@ -698,55 +698,6 @@ Version 2018-06-03"
     (mapc (lambda (x) (princ x) (terpri )) $resultList)))
 
 
-;; don't use much anymore
-
-;; (defun xah-dec-to-bin (decStr)
-;;   "convert the decimal number string decStr into a binary (string)"
-;;   (require 'calc-bin)
-;;   (let ((calc-number-radix 2))
-;;     (math-format-radix (string-to-number decStr))))
-
-
-
-(defun xah-display-control-l-as-line ()
-  "Display the formfeed ^L char as line.
-URL `http://ergoemacs.org/emacs/emacs_form_feed_section_paging.html'
-Version 2017-06-18"
-  (interactive)
-  ;; 2016-10-11 thanks to Steve Purcell's page-break-lines.el
-  (progn
-    (when (not buffer-display-table)
-      (setq buffer-display-table (make-display-table)))
-    (aset buffer-display-table ?\^L
-          (vconcat (make-list 70 (make-glyph-code ?─ 'font-lock-comment-face))))
-    (redraw-frame)))
-
-(defun xah-redtube-linkify ()
-  "Make the current line into a embeded HTML video object.
-The line can be a redtube ID or full URL.
-Examples of input line syntax:
-
-http://redtube.com/25635
-25635
-
-Here's a example result:
-<iframe src=\"http://embed.redtube.com/?id=25635\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>
-
-Version old old some 2010 or so"
-  (interactive)
-  (let ($p1 $p2 $inputStr $tmp $id )
-    (setq $p1 (line-beginning-position))
-    (setq $p2 (line-end-position))
-    (setq $inputStr (buffer-substring-no-properties $p1 $p2))
-    (setq $tmp (replace-regexp-in-string "http://redtube\\.com/" "" $inputStr))
-    (setq $tmp (replace-regexp-in-string "http://www\\.redtube\\.com/" "" $tmp))
-    (setq $tmp (replace-regexp-in-string "http://embed\\.redtube\\.com/player/?id=" "" $tmp))
-    (setq $id $tmp)
-
-    (delete-region $p1 $p2)
-
-    (insert (format "<iframe src=\"http://embed.redtube.com/?id=%s\" frameborder=\"0\" width=\"651\" height=\"462\" scrolling=\"no\"></iframe>" $id))
-    ))
 
 (defun xah-check-parens-balance ()
   "Check if there are unbalanced parentheses/brackets/quotes in current bufffer or selection.

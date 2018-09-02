@@ -9,8 +9,6 @@
 
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
 
-  (global-set-key (kbd "C-h h") nil)
-
   (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
   (define-key xah-fly-leader-key-map (kbd "2") 'xah-copy-file-path)
 
@@ -102,7 +100,24 @@
   ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
   (define-prefix-command 'xah-dump-keymap)
 
+  ;; a
+  ;; b
+  (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
+  ;; d
+  (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
+  ;; f
+  ;; g
+  (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
+  ;; i
+  (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
+  ;; k
   (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
+
+ ;; l ;; m ;; n ;; o ;; p ;; p ;; q ;; r ;; s
+
+  (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
+
+ ;; u ;; v ;; w ;; x ;; y ;; z
 
   )
 (progn
@@ -228,7 +243,7 @@
   (define-key xah-html-mode-map (kbd "<f5>") 'xah-browse-url-of-buffer)
   (progn
     (define-key xah-html-mode-no-chord-map (kbd "s") 'xah-insert-reference-span-tag)
-    (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-tag)
+    (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-section)
 
     (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
 
