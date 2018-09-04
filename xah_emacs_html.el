@@ -429,11 +429,11 @@ todo
 
 (defun xah-html-insert-date-section ()
   "Insert a section tag with date tag inside.
-Version 2018-08-30"
+Version 2018-09-03"
   (interactive)
   (when (use-region-p)
     (delete-region (region-beginning) (region-end)))
-  (insert (format "<section>\n\n<div class=\"date-xl\"><time>%s</time></div>\n\nx\n\n</section>\n\n\n" (format-time-string "%Y-%m-%d")))
+  (insert (format "\n\n<section>\n\n<div class=\"date-xl\"><time>%s</time></div>\n\nx\n\n</section>\n\n\n" (format-time-string "%Y-%m-%d")))
   (search-backward "x" )
   (delete-char 1))
 

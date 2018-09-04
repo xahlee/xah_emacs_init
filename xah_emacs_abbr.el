@@ -83,7 +83,7 @@ f_cycle_image ({
     ("alt3" "alternative" )
     ("ann" "announcement" )
     ("apr" "apparently" )
-    ("arg" "argument" )
+    ("arg3" "argument" )
     ("auto3" "automatic" )
     ("autom" "automatic" )
     ("bc" "because" )
@@ -102,7 +102,7 @@ f_cycle_image ({
     ("dfc" "difference" )
     ("dict" "dictionary" )
     ("dicts" "dictionaries" )
-    ("dir" "directory" )
+    ("dir3" "directory" )
     ("dirs" "directories" )
     ("disc" "discussion" )
     ("dl" "download" )
@@ -222,8 +222,8 @@ f_cycle_image ({
     ("rhs3" "right-hand-side" )
     ("rsi" "Repetitive Strain Injury" )
     ("sc3" "source code" )
-    ("subdir" "sub-directory" )
-    ("subdirs" "sub-directories" )
+    ("subdir3" "sub-directory" )
+    ("subdirs3" "sub-directories" )
     ("ui3" "user interface" )
     ("va" "variable" )
     ("vas" "variables" )
@@ -452,10 +452,17 @@ func main() {
 	fmt.Printf(\"%v\\n\", 33)
 
 }")
-
     ("p" "fmt.Printf(\"%v\\n\", hh▮)")
     ("pl" "fmt.Println(hh▮)")
-    ("cmt" "/* \n▮\n*/")
+    ("r" "return")
+    ("st" "string")
+    ("eq" "==")
+    ("v" "var x = 3")
+    ("df" "x := 3")
+    ("c" "const x = 3")
+    ("f" "func ff(x int) int {
+	return nil
+}")
     ("if" "if 4 { 3 }")
     ("ie" " if err != nil { panic(err) }")
     ("ei" "else if x > 0 { 3 }")
@@ -465,23 +472,11 @@ func main() {
 ▮
     }
 ")
-
-    ("f" "func ff(x int) int {
-	return nil
-}")
-
-    ("r" "return")
-    ("ps" "+")
-    ("st" "string")
+    ("cmt" "/* \n▮\n*/")
     ("stru" "type myS struct {
 y string
 x int
 }")
-    ("eq" "==")
-    ("pt" "fmt.Println(3)")
-    ("v" "var x = 3")
-    ("df" "x := 3")
-    ("c" "const x = 3")
     ("ft" "fallthrough")
     ("switch" "	switch 3 {
 	case 1:
@@ -492,13 +487,13 @@ x int
 		fmt.Println( 5 )
 	}")
 
-    ("rto" "reflect.TypeOf()")
-
-    ("sl" "var bb = []string{`a`,`b`}")
+    ("mbs" "var bb = make([]byte, 0, 9)")
+    ("sl" "var ss = []string{`a`,`b`}")
     ("mp" "var mm = map[string]string{`a`: `1`, `b`: `2`}")
     ("mm" "var mp = make(map[string]int)")
 
-    ;;
+     ("make" "make([]byte, 0, 9)")
+   ;;
 
     ))
 

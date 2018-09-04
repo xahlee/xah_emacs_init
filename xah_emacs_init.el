@@ -141,6 +141,7 @@ Version 2017-07-19"
     (autoload 'xlsl-mode "xlsl-mode" "autoload the mode." t)))
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
+(load (xah-get-fullpath "xah_gen_sitemap"))
 
 (load (xah-get-fullpath "xah_emacs_keybinding"))
 (load (xah-get-fullpath "xah_emacs_mouse_setup"))

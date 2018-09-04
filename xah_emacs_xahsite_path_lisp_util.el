@@ -215,37 +215,6 @@ Version 2017-09-21"
               $url
               )))))))
 
-(defvar xahsite-external-docs nil "A vector of dir path of xah sites are external docs, mostly computer language docs.
-Each element is a string, looks like this:
-“ergoemacs_org/emacs_manual/”
-2017-05-17")
-
-(setq
- xahsite-external-docs
- [
-
-  "ergoemacs_org/emacs_manual/"
-  "xahlee_info/REC-SVG11-20110816/"
-  "xahlee_info/clojure-doc-1.8/"
-  "xahlee_info/css_2.1_spec/"
-  "xahlee_info/css_transitions/"
-  "xahlee_info/dom-whatwg/"
-  "xahlee_info/html5_whatwg/"
-  "xahlee_info/java8_doc/"
-  "xahlee_info/javascript_ecma-262_5.1_2011/"
-  "xahlee_info/javascript_ecma-262_6_2015/"
-  "xahlee_info/javascript_es2016/"
-  "xahlee_info/javascript_es6/"
-  "xahlee_info/jquery_doc/"
-  "xahlee_info/node_api/"
-  "xahlee_info/ocaml_doc/"
-  "xahlee_info/php-doc/"
-  "xahlee_info/python_doc_2.7.6/"
-  "xahlee_info/python_doc_3.3.3/"
-  "wordyenglish_com/arabian_nights/xx_full_2017-05-13/"
-
-  ])
-
 (defvar xahsite-xahlee-org-redirect nil "root dir map from xahlee.org to ergoemacs.org")
 (setq xahsite-xahlee-org-redirect
 ["3d"
@@ -518,63 +487,5 @@ The arg _parentdir is not used. It is there so that this function can be passed 
   (xahsite-generate-sitemap "xahporn.org" )
   (xahsite-generate-sitemap "xahsl.org"  ))
 
-(defun xahsite-generate-sitemap (@domain-name)
-  "Generate a sitemap.xml.gz file of xahsite at doc root.
-@domain-name must match a existing one."
-  (interactive
-   (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" ))))
-  (let (
-        ($sitemapFileName "sitemap" )
-        ($websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" @domain-name "FIXEDCASE" "LITERAL") "/")))
 
-    (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
 
-    ;; rename sitemap file to backup ~ if already exist
-    (let* (
-           (f1 (concat $websiteDocRootPath $sitemapFileName ".xml"))
-           (f2 (concat f1 ".gz")))
-      (when (file-exists-p f1)
-        (rename-file f1 (concat f1 "~") t))
-      (when (file-exists-p f2)
-        (rename-file f2 (concat f2 "~") t)))
-
-    ;; create sitemap buffer
-    (let (
-          ($filePath (concat $websiteDocRootPath $sitemapFileName ".xml"))
-          $sitemapBuffer
-          )
-      (setq $sitemapBuffer (find-file $filePath))
-      (erase-buffer)
-      (set-buffer-file-coding-system 'unix)
-      (insert "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">
-")
-
-      (mapc
-       (lambda ($f)
-         (when (not
-                (or
-                 (string-match "/xx" $f) ; ; dir/file starting with xx are not public
-                 (string-match "403error.html" $f)
-                 (string-match "404error.html" $f)))
-           (with-temp-buffer
-             (insert-file-contents $f)
-             (when (not (search-forward "<p class=\"page_moved_64598\">" nil t))
-               (with-current-buffer $sitemapBuffer
-                 (insert "<url><loc>")
-                 (insert (concat "http://" @domain-name "/" (substring $f (length $websiteDocRootPath))))
-                 (insert "</loc></url>\n"))))))
-       (xahsite-traverse-dir-file-list $websiteDocRootPath))
-
-      (insert "</urlset>")
-
-      (save-buffer)
-      (kill-buffer $sitemapBuffer)
-
-      (if "zip it"
-          (progn
-            (shell-command (concat "gzip " $filePath))
-            (find-file (concat $filePath ".gz")))
-        (progn (find-file $filePath ))))
-
-    (print (concat "finished: " (format-time-string "%Y-%m-%dT%T")))))
