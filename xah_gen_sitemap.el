@@ -34,7 +34,7 @@ Version 2018-09-04"
   (let (
         ($sitemapFileName "sitemap.xml" )
         ($websiteDocRootPath (concat xah-web-root-path (replace-regexp-in-string "\\." "_" @domain-name "FIXEDCASE" "LITERAL") "/")))
-    (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
+    ;; (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
     (let (
           ($filePath (concat $websiteDocRootPath $sitemapFileName ))
           ($sitemapBuffer (generate-new-buffer "sitemapbuff")))
@@ -71,14 +71,15 @@ Version 2018-09-04"
         (insert "</urlset>")
         (write-region (point-min) (point-max) $filePath nil 3)
         (kill-buffer ))
-      (find-file $filePath))
-    (print (concat "done: " (format-time-string "%Y-%m-%dT%T")))))
+      (find-file $filePath)
+      )
+    ;; (print (concat "done: " (format-time-string "%Y-%m-%dT%T")))
+    ))
 
 (defun xahsite-generate-sitemap-all ()
   "do all
 2016-08-15"
   (interactive)
-  (require 'find-lisp)
   (xahsite-generate-sitemap "ergoemacs.org" )
   (xahsite-generate-sitemap "wordyenglish.com" )
   (xahsite-generate-sitemap "xaharts.org" )
@@ -88,6 +89,3 @@ Version 2018-09-04"
   (xahsite-generate-sitemap "xahporn.org" )
   (xahsite-generate-sitemap "xahsl.org"  ))
 
-(xahsite-generate-sitemap "xahlee.info")
-
-;; (xahsite-generate-sitemap "xahsl.org"  )
