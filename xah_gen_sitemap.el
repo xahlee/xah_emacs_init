@@ -3,6 +3,8 @@
 
 (require 'seq)
 
+(setq xah-web-root-path "/Users/xah/web/" )
+
 (defvar xahsite-external-docs nil "A vector of dir paths.")
 (setq  xahsite-external-docs
  [
@@ -31,7 +33,7 @@ Version 2018-09-04"
    (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" ))))
   (let (
         ($sitemapFileName "sitemap.xml" )
-        ($websiteDocRootPath (concat (xahsite-server-root-path) (replace-regexp-in-string "\\." "_" @domain-name "FIXEDCASE" "LITERAL") "/")))
+        ($websiteDocRootPath (concat xah-web-root-path (replace-regexp-in-string "\\." "_" @domain-name "FIXEDCASE" "LITERAL") "/")))
     (print (concat "begin: " (format-time-string "%Y-%m-%dT%T")))
     (let (
           ($filePath (concat $websiteDocRootPath $sitemapFileName ))
@@ -71,3 +73,21 @@ Version 2018-09-04"
         (kill-buffer ))
       (find-file $filePath))
     (print (concat "done: " (format-time-string "%Y-%m-%dT%T")))))
+
+(defun xahsite-generate-sitemap-all ()
+  "do all
+2016-08-15"
+  (interactive)
+  (require 'find-lisp)
+  (xahsite-generate-sitemap "ergoemacs.org" )
+  (xahsite-generate-sitemap "wordyenglish.com" )
+  (xahsite-generate-sitemap "xaharts.org" )
+  (xahsite-generate-sitemap "xahlee.info" )
+  (xahsite-generate-sitemap "xahlee.org" )
+  (xahsite-generate-sitemap "xahmusic.org" )
+  (xahsite-generate-sitemap "xahporn.org" )
+  (xahsite-generate-sitemap "xahsl.org"  ))
+
+(xahsite-generate-sitemap "xahlee.info")
+
+;; (xahsite-generate-sitemap "xahsl.org"  )

@@ -473,19 +473,3 @@ The arg _parentdir is not used. It is there so that this function can be passed 
     'xah-find-files-file-predicate-p
     'xah-find-files-dir-predicate-p))
 
-(defun xahsite-generate-sitemap-all ()
-  "do all
-2016-08-15"
-  (interactive)
-  (require 'find-lisp)
-  (xahsite-generate-sitemap "ergoemacs.org" )
-  (xahsite-generate-sitemap "wordyenglish.com" )
-  (xahsite-generate-sitemap "xaharts.org" )
-  (xahsite-generate-sitemap "xahlee.info" )
-  (xahsite-generate-sitemap "xahlee.org" )
-  (xahsite-generate-sitemap "xahmusic.org" )
-  (xahsite-generate-sitemap "xahporn.org" )
-  (xahsite-generate-sitemap "xahsl.org"  ))
-
-
-
