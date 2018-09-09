@@ -431,6 +431,7 @@ https://www.paypal.com/us/cgi-bin/\\?cmd=_view-a-trans&id=\\([0-9a-zA-Z]\\{17\\}
   "Query replace some invisible Unicode chars.
 The chars to be searched are:
  ZERO WIDTH NO-BREAK SPACE (65279, #xfeff)
+ ZERO WIDTH SPACE (codepoint 8203, #x200b)
  RIGHT-TO-LEFT MARK (8207, #x200f)
  RIGHT-TO-LEFT OVERRIDE (8238, #x202e)
  LEFT-TO-RIGHT MARK ‎(8206, #x200e)
@@ -439,9 +440,10 @@ The chars to be searched are:
 Search begins at cursor position. (respects `narrow-to-region')
 
 URL `http://ergoemacs.org/emacs/elisp_unicode_replace_invisible_chars.html'
-Version 2018-03-05"
+Version 2018-09-07"
   (interactive)
-  (query-replace-regexp "\u200f\\|\u202e\\|\ufeff\\|\u200e\\|\ufffc" ""))
+  (query-replace-regexp "\ufeff\\|\u200b\\|\u200f\\|\u202e\\|\u200e\\|\ufffc" ""))
+
 
 (defun xah-show-hexadecimal-value ()
   "Prints the decimal value of a hexadecimal string under cursor.

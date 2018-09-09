@@ -78,11 +78,12 @@ Exception:
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Version 2018-08-20"
+Version 2018-09-09"
   (interactive)
   (let* (
          $p1 $p2
          $inputStr
+         $cursorLink
          ($currentFpath (buffer-file-name))
          ($atomFilePath
           (if (string-match-p "wordyenglish_com/words/new.html\\'" $currentFpath )
@@ -105,6 +106,12 @@ Version 2018-08-20"
         ;; (delete-blank-lines)
         (setq $p2 (point))))
     (setq $inputStr (buffer-substring-no-properties $p1 $p2))
+    (setq $cursorLink
+          (if (nth 3 (syntax-ppss))
+              (save-excursion
+                (thing-at-point 'filename ))
+            nil
+            ))
     (setq $inputStr
           ;; convert html boolean attributes to valid xml version. eg from iframes from youtube and google map
           (with-temp-buffer
@@ -134,8 +141,13 @@ Version 2018-08-20"
               (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" $inputStr)
                   (progn (match-string 2 $inputStr))
                 (progn $dummyTitleText)))))
+    (setq $altURL
+          (xahsite-filepath-to-url
+           (if $cursorLink
+               (xahsite-web-path-to-filepath $cursorLink)
+             $currentFpath)))
 
-    (setq  $altURL (xahsite-filepath-to-url $currentFpath))
+    (xahsite-web-path-to-filepath "../kbd/ibm_elect_dist_keyboard.html")
 
     ;; (setq $altURL ; use first link, else, url of current file name
     ;;       (let ( ($hrefValues (xah-html-extract-url $p1 $p2)) $firstLink1)

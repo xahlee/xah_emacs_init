@@ -437,13 +437,14 @@ QQ: http://user.qzone.qq.com/2609322939" )
 
     ))
 
-;; golang
-(when (boundp 'go-mode-abbrev-table)
-  (clear-abbrev-table go-mode-abbrev-table))
+(progn
+  ;; golang
+  (when (boundp 'go-mode-abbrev-table)
+    (clear-abbrev-table go-mode-abbrev-table))
 
-(define-abbrev-table 'go-mode-abbrev-table
-  '(
-    ("go" "package main
+  (define-abbrev-table 'go-mode-abbrev-table
+    '(
+      ("go" "package main
 
 import \"fmt\"
 
@@ -452,33 +453,33 @@ func main() {
 	fmt.Printf(\"%v\\n\", 33)
 
 }")
-    ("p" "fmt.Printf(\"%v\\n\", hh▮)")
-    ("pl" "fmt.Println(hh▮)")
-    ("r" "return")
-    ("st" "string")
-    ("eq" "==")
-    ("v" "var x = 3")
-    ("df" "x := 3")
-    ("c" "const x = 3")
-    ("f" "func ff(x int) int {
+      ("p" "fmt.Printf(\"%v\\n\", hh▮)")
+      ("pl" "fmt.Println(hh▮)")
+      ("r" "return")
+      ("st" "string")
+      ("eq" "==")
+      ("v" "var x = 3")
+      ("df" "x := 3")
+      ("c" "const x = 3")
+      ("f" "func ff(x int) int {
 	return nil
 }")
-    ("if" "if 4 { 3 }")
-    ("ie" " if err != nil { panic(err) }")
-    ("ei" "else if x > 0 { 3 }")
-    ("else" "else { 3 }")
-    ("for" "for i := 0; i < 4; i++ { i }")
-    ("fr" "for k, v := range xxx {
+      ("if" "if 4 { 3 }")
+      ("ie" " if err != nil { panic(err) }")
+      ("ei" "else if x > 0 { 3 }")
+      ("else" "else { 3 }")
+      ("for" "for i := 0; i < 4; i++ { i }")
+      ("fr" "for k, v := range xxx {
 ▮
     }
 ")
-    ("cmt" "/* \n▮\n*/")
-    ("stru" "type myS struct {
+      ("cmt" "/* \n▮\n*/")
+      ("stru" "type myS struct {
 y string
 x int
 }")
-    ("ft" "fallthrough")
-    ("switch" "	switch 3 {
+      ("ft" "fallthrough")
+      ("switch" "	switch 3 {
 	case 1:
 		fmt.Println( 3 )
 	case 2, 3:
@@ -487,15 +488,28 @@ x int
 		fmt.Println( 5 )
 	}")
 
-    ("mbs" "var bb = make([]byte, 0, 9)")
-    ("sl" "var ss = []string{`a`,`b`}")
-    ("mp" "var mm = map[string]string{`a`: `1`, `b`: `2`}")
-    ("mm" "var mp = make(map[string]int)")
+      ("mbs" "var bb = make([]byte, 0, 9)")
+      ("sl" "var ss = []string{`a`,`b`}")
+      ("mp" "var mm = map[string]string{`a`: `1`, `b`: `2`}")
+      ("mm" "var mp = make(map[string]int)")
 
-     ("make" "make([]byte, 0, 9)")
-   ;;
+      ("make" "make([]byte, 0, 9)")
+      ;;
 
-    ))
+      )))
+
+(progn
+  ;; python
+
+  (define-abbrev-table 'python-mode-abbrev-table
+    '(
+
+      ("p" "print(▮)")
+      ("r" "return")
+      ("eq" "==")
+      ;;
+
+      )))
 
 (set-default 'abbrev-mode t)
 

@@ -9,7 +9,6 @@
 (setq  xahsite-external-docs
  [
   "ergoemacs_org/emacs_manual/"
-  "wordyenglish_com/arabian_nights/xx_full_2017-05-13/"
   "xahlee_info/REC-SVG11-20110816/"
   "xahlee_info/clojure-doc-1.8/"
   "xahlee_info/css_2.1_spec/"
