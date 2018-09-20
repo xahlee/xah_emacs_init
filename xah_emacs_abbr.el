@@ -270,7 +270,6 @@ f_cycle_image ({
     ("yt" "YouTube" )
 
     ;; programing
-    ("p3" "+" )
     ("eq" "==" )
     ("eqq" "===" )
     ("hr" "--------------------------------------------------" )
@@ -321,6 +320,7 @@ f_cycle_image ({
     ;; unicode
     ("ascii3" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
+    ("usf" "🇺🇸" )
     ("catface" "😸" )
     ("heartface" "😻" )
     ("clown" "🤡" )

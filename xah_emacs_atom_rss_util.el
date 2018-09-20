@@ -109,9 +109,25 @@ Version 2018-09-09"
     (setq $cursorLink
           (if (nth 3 (syntax-ppss))
               (save-excursion
-                (thing-at-point 'filename ))
+                (let (p3 p4)
+                  (search-backward "\"")
+                  (forward-char 1)
+                  (setq p3 (point))
+                  (search-forward "\"" )
+                  (backward-char 1)
+                  (setq p4 (point))
+                  (buffer-substring-no-properties p3 p4)))
             nil
             ))
+
+    (setq $titleText
+          (if (string-match "<h3>\\(.+?\\)</h3>" $inputStr)
+              (progn (match-string 1 $inputStr ))
+            (progn
+              (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" $inputStr)
+                  (progn (match-string 2 $inputStr))
+                (progn $dummyTitleText)))))
+
     (setq $inputStr
           ;; convert html boolean attributes to valid xml version. eg from iframes from youtube and google map
           (with-temp-buffer
@@ -128,26 +144,27 @@ Version 2018-09-09"
             (goto-char (point-min))
             (while (search-forward " loop></video>" (point-max) t)
               (replace-match " loop=\"\"></video>" ))
+
+            (goto-char (point-min))
+            (search-forward "<h3>" nil t)
+            (delete-region (line-beginning-position) (line-end-position))
+
             (goto-char (point-min))
             (insert "\n")
             (goto-char (point-max))
             (insert "\n")
             (buffer-string)))
 
-    (setq $titleText
-          (if (string-match "<h3>\\(.+?\\)</h3>" $inputStr)
-              (progn (match-string 1 $inputStr ))
-            (progn
-              (if (string-match "<a href=\"\\([^\"]+?\\)\">\\([^<]+?\\)</a>" $inputStr)
-                  (progn (match-string 2 $inputStr))
-                (progn $dummyTitleText)))))
-    (setq $altURL
-          (xahsite-filepath-to-url
-           (if $cursorLink
-               (xahsite-web-path-to-filepath $cursorLink)
-             $currentFpath)))
 
-    (xahsite-web-path-to-filepath "../kbd/ibm_elect_dist_keyboard.html")
+    ;; (message "%s" $cursorLink)
+    (setq $altURL
+          (if $cursorLink
+              (if (string-match "^http" $cursorLink )
+                  $cursorLink
+                (xahsite-filepath-to-url (xahsite-web-path-to-filepath $cursorLink)))
+            (if (string-match "^http" $currentFpath )
+                $currentFpath
+              (xahsite-filepath-to-url (xahsite-web-path-to-filepath $currentFpath)))))
 
     ;; (setq $altURL ; use first link, else, url of current file name
     ;;       (let ( ($hrefValues (xah-html-extract-url $p1 $p2)) $firstLink1)

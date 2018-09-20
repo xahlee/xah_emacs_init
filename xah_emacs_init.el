@@ -67,9 +67,6 @@ Version 2017-07-19"
   (require 'xah-elisp-mode)
   )
 
-(add-to-list 'load-path "~/git/xah-find/")
-(require 'xah-find)
-
 (add-to-list 'load-path "~/git/xah-insert-random-id.el/")
 (require 'xah-insert-random-id)
 
@@ -82,7 +79,13 @@ Version 2017-07-19"
   (require 'xah-css-mode)
   )
 
-(require 'htmlize)
+(progn
+  (require 'htmlize)
+  (when (fboundp 'htmlize-region)
+    (setq htmlize-convert-nonascii-to-entities nil)
+    (setq htmlize-html-charset "utf-8")
+    (setq htmlize-untabify nil)))
+
 (progn
   (add-to-list 'load-path "~/git/xah-html-mode.el/")
   (require 'xah-html-mode)
@@ -185,5 +188,11 @@ Version 2017-07-19"
   (progn
     (load "~/Dropbox/xah-emacs-private_b53d8d39")))
 
-(setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")
+(progn
+  (add-to-list 'load-path "~/git/xah-find/")
+  (require 'xah-find)
+  (when (fboundp 'xah-find-text)
+    (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))))
+
+;; (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")
 

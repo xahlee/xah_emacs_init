@@ -16,13 +16,16 @@
 ;;   (define-key magit-file-section-map (kbd "u") nil)
 ;;   (define-key magit-file-section-map (kbd "a") nil))
 
-(when (fboundp 'keyfreq-mode)
+(progn
   ;; record command call statistics
   (require 'keyfreq)
-  (setq keyfreq-file "~/.emacs.d/.emacs.keyfreq")
-  (setq keyfreq-file-lock "~/.emacs.d/.emacs.keyfreq.lock")
-  (keyfreq-mode 1)
-  (keyfreq-autosave-mode 1))
+  (when (fboundp 'keyfreq-mode)
+    (setq keyfreq-file "~/.emacs.d/.emacs.keyfreq")
+    (setq keyfreq-file-lock "~/.emacs.d/.emacs.keyfreq.lock")
+    (keyfreq-mode 1)
+    (keyfreq-autosave-mode 1)))
+
+
 
 ;; (when (fboundp 'global-page-break-lines-mode)
 ;;   ;; make the formfeed char (^L) display as a line
@@ -35,10 +38,8 @@
 ;;      xah-html-mode xah-elisp-mode
 ;;      )))
 
-(when (fboundp 'htmlize-region)
-  ;; htmlize.el
-  (setq htmlize-convert-nonascii-to-entities nil)
-  (setq htmlize-html-charset "utf-8"))
+
+  
 
 ;; (when (and (fboundp 'which-key-mode)
 ;;            which-key-mode
@@ -47,8 +48,7 @@
 ;;   ;; (setq which-key-popup-type 'side-window)
 ;;   )
 
-(when (fboundp 'xah-find-text)
-  (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil)))
+
 
 ;; (when (fboundp 'elfeed)
 ;;   (setq elfeed-feeds

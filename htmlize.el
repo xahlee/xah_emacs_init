@@ -4,7 +4,7 @@
 
 ;; Author: Hrvoje Niksic <hniksic@gmail.com>
 ;; Keywords: hypermedia, extensions
-;; Version: 1.54
+;; Version: 1.55
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -87,7 +87,7 @@
   (defvar font-lock-support-mode)
   (defvar global-font-lock-mode))
 
-(defconst htmlize-version "1.54")
+(defconst htmlize-version "1.55")
 
 (defgroup htmlize nil
   "Convert buffer text and faces to HTML."
@@ -301,6 +301,11 @@ example:
           default (:foreground \"dark-green\" :background \"yellow\")))
 
 This variable can be also be `let' bound when running `htmlize-buffer'.")
+
+(defcustom htmlize-untabify t
+  "Non-nil means untabify buffer contents during htmlization."
+  :type 'boolean
+  :group 'htmlize)
 
 (defcustom htmlize-html-major-mode nil
   "The mode the newly created HTML buffer will be put in.
@@ -710,7 +715,7 @@ list."
       (setf (aref v i) (make-string i ?\ )))
     v))
 
-(defun htmlize-untabify (text start-column)
+(defun htmlize-untabify-string (text start-column)
   "Untabify TEXT, assuming it starts at START-COLUMN."
   (let ((column start-column)
 	(last-match 0)
@@ -762,7 +767,8 @@ list."
       (setq trailing-ellipsis
             (get-text-property (1- (length text))
                                'htmlize-ellipsis text)))
-    (setq text (htmlize-untabify text (current-column)))
+    (when htmlize-untabify
+      (setq text (htmlize-untabify-string text (current-column))))
     (setq text (htmlize-string-to-html text))
     (values text trailing-ellipsis)))
 
@@ -820,7 +826,14 @@ This is used to protect mailto links without modifying their meaning."
     (put-text-property 0 (length s) 'htmlize-literal t s)
     (let ((disp `(display ,s)))
       (while (re-search-forward "\n\^L" nil t)
-        (htmlize-make-tmp-overlay (match-beginning 0) (match-end 0) disp)))))
+        (let* ((beg (match-beginning 0))
+               (end (match-end 0))
+               ;; don't process ^L if invisible or covered by `display'
+               (show (and (htmlize-decode-invisibility-spec
+                           (get-char-property beg 'invisible))
+                          (not (get-char-property beg 'display)))))
+          (when show
+            (htmlize-make-tmp-overlay beg end disp)))))))
 
 (defun htmlize-defang-local-variables ()
   ;; Juri Linkov reports that an HTML-ized "Local variables" can lead

@@ -27,9 +27,9 @@
 (defun xahsite-generate-sitemap (@domain-name)
   "Generate a sitemap.xml.gz file of xahsite at doc root.
 @domain-name must match a existing one.
-Version 2018-09-04"
+Version 2018-09-17"
   (interactive
-   (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahporn.org" "xahsl.org" ))))
+   (list (ido-completing-read "choose:" '( "ergoemacs.org" "wordyenglish.com" "xaharts.org" "xahlee.info" "xahlee.org" "xahmusic.org" "xahsl.org" ))))
   (let (
         ($sitemapFileName "sitemap.xml" )
         ($websiteDocRootPath (concat xah-web-root-path (replace-regexp-in-string "\\." "_" @domain-name "FIXEDCASE" "LITERAL") "/")))
