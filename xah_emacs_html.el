@@ -325,7 +325,8 @@ Version 2018-08-10"
     (read-directory-name "Move to dir:" )))
   (let (
         $fromPath
-        $toFileName
+        $newName
+        $ext
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
         ($randomHex (format  (concat "%05x" ) (random (1- (expt 16 5))))))
@@ -341,28 +342,28 @@ Version 2018-08-10"
     (when (not $fromPath)
       (error "no file name starts with ee nor contain “Screen Shot” at dirs %s" $dirs))
 
-    (setq $toFileName (file-name-nondirectory $fromPath))
-    (setq $toFileName
+    (setq $ext (file-name-extension $fromPath ))
+    (setq $newName (file-name-nondirectory (file-name-sans-extension $fromPath)))
+    (setq $newName
           (replace-regexp-in-string
-           "Screen Shot \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\) at [0-9]+.[0-9]\\{2\\}.[0-9]\\{2\\} \\(AM\\|PM\\).png"
-           "screenshot_\\1.png"
-           $toFileName ))
+           "Screen Shot \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\) at [0-9]+.[0-9]\\{2\\}.[0-9]\\{2\\} \\(AM\\|PM\\)"
+           "screenshot_\\1"
+           $newName ))
     ;; Screen Shot 2018-07-25 at 2.46.36 AM.png
-    (setq $toFileName (read-string "file name:" $toFileName nil  $toFileName ))
-    (setq $toFileName (replace-regexp-in-string " " "_" $toFileName))
-    (setq $toFileName
-          (concat (file-name-sans-extension $toFileName)
+    (setq $newName (read-string "file name:" $newName nil $newName ))
+    (setq $newName
+          (concat (replace-regexp-in-string " " "_" $newName)
                   "_"
                   $randomHex
                   "."
-                  (downcase (file-name-extension $toFileName ))))
-    (setq $toPath (concat (file-name-as-directory @toDirName ) $toFileName))
+                  ))
+    (setq $toPath (concat (file-name-as-directory @toDirName ) $newName $ext))
 
-    (when (string-equal (file-name-extension $toPath ) "jpg-large")
+    (when (string-equal $ext "jpg-large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
-    (when (string-equal (file-name-extension $toPath ) "jpg_large")
+    (when (string-equal $ext "jpg_large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
-    (when (string-equal (file-name-extension $toPath ) "jpeg")
+    (when (string-equal $ext "jpeg")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
     (message "from path is 「%s」\n to path is 「%s」 " $fromPath $toPath)
     (if (file-exists-p $toPath)

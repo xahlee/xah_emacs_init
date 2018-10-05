@@ -31,6 +31,7 @@ e.g. c:/Users/h3/web/"
 (setq xahsite-domain-names (mapcar (lambda (x) (car x)) xahsite-domain-to-path-alist))
 
 
+
 (defun xahsite-local-link-p (@href-value)
   "Return true if it's a local file link, else false.
 

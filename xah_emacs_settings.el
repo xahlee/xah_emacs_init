@@ -75,6 +75,7 @@
   (setq dired-recursive-deletes 'always))
 
 
+
 (setq save-interprogram-paste-before-kill t)
 
 ;; 2015-07-04 bug of pasting in emacs.
@@ -92,6 +93,7 @@
 (setq mouse-wheel-progressive-speed nil)
 
 
+
 (require 'recentf)
 (recentf-mode 1)
 
@@ -174,7 +176,8 @@ Version 2017-11-10"
 ;;; editing related
 
 ;; make cursor movement stop in between camelCase words.
-(global-subword-mode 1)
+;; (global-subword-mode 1)
+(global-subword-mode 0)
 
 ;; make typing delete/overwrites selected text
 (delete-selection-mode 1)

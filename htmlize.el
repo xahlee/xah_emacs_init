@@ -1550,6 +1550,7 @@ it's called with the same value of KEY.  All other times, the cached
       (lambda ()
         (princ (cdr markup) buffer)))))
 
+
 (defun htmlize-buffer-1 ()
   ;; Internal function; don't call it from outside this file.  Htmlize
   ;; current buffer, writing the resulting HTML to a new buffer, and

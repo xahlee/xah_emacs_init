@@ -776,6 +776,7 @@ Version 2017-06-10"
       (message "No change needed."))))
 
 
+
 (defun xah-curly-quotes→bracket (@left-bracket @right-bracket)
   "Replace “…” to one of 「…」.
 Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
@@ -898,12 +899,20 @@ Version 2018-04-07"
     (save-excursion
       (save-restriction
         (narrow-to-region @begin @end )
-        ;; Note: order is important since this is huristic.
+
         (xah-replace-pairs-region
          (point-min) (point-max)
          [
-          ;; dash and ellipsis etc
+          ["  —  " " — "] ; rid of extra space in em-dash
+          ] "REPORT" "HILIGHT")
+
+        (xah-replace-pairs-region
+         (point-min) (point-max)
+         [
+          [" —-> " " ⟶ "]
           [" --> " " ⟶ "]
+          [" <= " " ≤ "]
+          [" >= " " ≥ "]
           ["--" " — "]
           ["—" " — "]
           ["..." "…"]
@@ -913,6 +922,14 @@ Version 2018-04-07"
           [" ;)" " 😉"]
           ["~=" "≈"]
           [" , " ", "]
+
+          ] "REPORT" "HILIGHT")
+
+        ;; Note: order is important since this is huristic.
+        (xah-replace-pairs-region
+         (point-min) (point-max)
+         [
+
           ;; fix GNU style ASCII quotes
           ["``" "“"]
           ["''" "”"]
@@ -922,12 +939,13 @@ Version 2018-04-07"
           ["(\"" "(“"]
           [" \"" " “"]
           ["\" " "” "]
-          
+
           ["\", " "”, "]
           ["\",\n" "”,\n"]
 
           ["\". " "”. "]
           ["\".\n" "”.\n"]
+          ["\"." "”."]
           ["\"?" "”?"]
           ["\";" "”;"]
           ["\":" "”:"]
@@ -942,20 +960,6 @@ Version 2018-04-07"
           ["?\"" "?”"]
           ["\"<" "”<"]
           ["\"\n" "”\n"]
-          ] "REPORT" "HILIGHT")
-
-        (xah-replace-pairs-region
-         (point-min) (point-max)
-         [
-          ["  —  " " — "] ; rid of extra space in em-dash
-          ] "REPORT" "HILIGHT")
-
-        (xah-replace-pairs-region
-         (point-min) (point-max)
-         [
-          [" —-> " " ⟶ "]
-          [" <= " " ≤ "]
-          [" >= " " ≥ "]
           ] "REPORT" "HILIGHT")
 
         ;; fix straight double quotes by regex
@@ -1028,6 +1032,4 @@ Version 2018-04-07"
           ["/” " "/\" "]
           ["\\([0-9]+\\)” "     "\\1\" "]
           ] "FIXEDCASE" nil "HILIGHT"
-         )
-
-        ))))
+         )))))

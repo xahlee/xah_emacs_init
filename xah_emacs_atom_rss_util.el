@@ -44,11 +44,11 @@ Default value is: http://xahlee.org/Periodic_dosage_dir/pd.html"
 
 (defun xah-new-atom-id-tag (&optional @domain-name)
   "Returns a newly generated ATOM webfeed's “id” element string.
-Example of return value: 「tag:xahlee.org,2010-03-31:022128」
+Example of return value: 「tag:xahlee,2010-03-31:022128」
 
 If DOMAINNAME is given, use that for the domain name.
-Else, use “xahlee.org”."
-    (format "tag:%s%s" (if @domain-name @domain-name "xahlee.org") (format-time-string ",%Y-%m-%d:%H%M%S" (current-time) 1)) )
+Else, use “xahlee”."
+    (format "tag:%s%s" (if @domain-name @domain-name "xahlee") (format-time-string ",%Y-%m-%d:%H%M%S" (current-time) 1)) )
 
 (defun update-atom-updated-tag (@file-path)
   "Update the <updated> tag of a ATOM webfeed file at @file-path,

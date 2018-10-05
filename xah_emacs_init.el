@@ -84,7 +84,8 @@ Version 2017-07-19"
   (when (fboundp 'htmlize-region)
     (setq htmlize-convert-nonascii-to-entities nil)
     (setq htmlize-html-charset "utf-8")
-    (setq htmlize-untabify nil)))
+    (setq htmlize-untabify nil)
+    (setq htmlize-generate-hyperlinks nil)))
 
 (progn
   (add-to-list 'load-path "~/git/xah-html-mode.el/")

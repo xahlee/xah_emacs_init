@@ -256,7 +256,7 @@
     (define-key xah-html-mode-no-chord-map (kbd "SPC c") 'xah-angle-brackets-to-html)
     (define-key xah-html-mode-no-chord-map (kbd "SPC .") 'xah-html-full-size-img-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "SPC p") 'xah-copy-url-current-file)
-    (define-key xah-html-mode-no-chord-map (kbd "SPC t") 'xah-open-in-brave)
+    (define-key xah-html-mode-no-chord-map (kbd "SPC t") 'xah-open-in-safari)
     (define-key xah-html-mode-no-chord-map (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)

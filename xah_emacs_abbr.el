@@ -167,10 +167,10 @@ f_cycle_image ({
 
     ("diy" "Do It Yourself" )
     ("mkb" "mechanical keyboard" )
-    ("pc" "political correctness" )
+    ("pc3" "political correctness" )
     ("pl" "programing language" )
     ("qaa" "questions and answers" )
-    ("sj" "social justice" )
+    ("sj3" "social justice" )
     ("wip" "work in progress" )
 
     ;; english, proper noun
@@ -322,25 +322,17 @@ f_cycle_image ({
     ("bu" "•" )
     ("usf" "🇺🇸" )
     ("catface" "😸" )
+
+    ("good3" "👍" )
+    ("applaud3" "👏" )
+
     ("heartface" "😻" )
     ("clown" "🤡" )
     ("angry" "😠" )
     ("horror" "😱" )
     ("fear" "😬" )
-    ("emoji3" "😃😄😅😆
-😉😊😋😌
-😎😇😈
-😁😂😀
-😚😘😍😙😗
-😛😜😝
-😩😫😪😴
-😏😓😔😖😐😑😕
-😮😯😰😱😲😳😵😶😷
-😒😠😡
-😞😟😣😤😥😦😧😨😬
-😢😭
-😸😹😺😻😼😽😾😿🙀
-🤡" )
+    ("grin" "😁" )
+    ("wink" "😜" )
     ("hearts" "♥💕💓💔💖💗💘💝💞💟💙💚💛💜" )
     ("omg" "😂" )
     ("star" "⭐" )
