@@ -196,4 +196,3 @@ Version 2017-07-19"
     (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))))
 
 ;; (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")
-

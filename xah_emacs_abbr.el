@@ -40,6 +40,7 @@ f_cycle_image ({
     ("hv" "have" )
     ("k" "know" )
     ("ab" "about" )
+    ("dn" "down" )
 
     ;; English phrases abbrev
 
@@ -289,6 +290,9 @@ f_cycle_image ({
     ("str3" "\\([^\"]+?\\)" )
     ("tag3" "\\([</>=\" A-Za-z0-9]+\\)" )
 
+    ;; shell
+    ("ytd" "youtube-dl --id -k -x " )
+
     ;; html
     ("mxh" "<kbd>Alt</kbd>+<kbd>x</kbd>")
     ("pmovedh" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
@@ -397,13 +401,14 @@ f_cycle_image ({
     ("uxl" "http://xahlee.org/" )
     ("uxli" "http://xahlee.info/" )
     ("uxm" "http://xahmusic.org/" )
-    ("uxp" "http://xahporn.org/" )
     ("uxsl" "http://xahsl.org/" )
 
     ;; personal
-
     ("xkb" "#xahkeyboard" )
+    ("xw" "#xahwords" )
+    ("xa" "#xahart" )
     ("xc" "#xahcode" )
+    ("xm" "#xahmusic" )
     ("xjs" "#xahjs" )
 
     ("xim" "Twitter: @xah_lee
@@ -456,7 +461,7 @@ func main() {
       ("f" "func ff(x int) int {
 	return nil
 }")
-      ("if" "if 4 { 3 }")
+      ("if" "if ▮ { 3 }")
       ("ie" " if err != nil { panic(err) }")
       ("ei" "else if x > 0 { 3 }")
       ("else" "else { 3 }")
@@ -486,6 +491,9 @@ x int
       ("mm" "var mp = make(map[string]int)")
 
       ("make" "make([]byte, 0, 9)")
+      ("rmc" "regexp.MustCompile(`str`▮)")
+      ("rfa" "re.FindAll(b▮, -1)")
+
       ;;
 
       )))

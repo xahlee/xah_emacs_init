@@ -158,8 +158,8 @@
   ;; h
 
   (define-key xah-user-keymap (kbd "i c") 'xah-insert-random-number)
-  (define-key xah-user-keymap (kbd "i h") 'xah-insert-random-string)
-  (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-hex)
+  (define-key xah-user-keymap (kbd "i h") 'xah-insert-random-hex)
+  (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-string)
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
 
   (define-key xah-user-keymap (kbd "j") 'xah-interactive-abbrev)
@@ -242,12 +242,13 @@
   (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
   (define-key xah-html-mode-map (kbd "<f5>") 'xah-browse-url-of-buffer)
   (progn
-    (define-key xah-html-mode-no-chord-map (kbd "s") 'xah-insert-reference-span-tag)
-    (define-key xah-html-mode-no-chord-map (kbd "i") 'xah-html-insert-date-section)
 
     (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
 
     (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
+
+    (define-key xah-html-mode-no-chord-map (kbd "SPC s") 'xah-insert-reference-span-tag)
+    (define-key xah-html-mode-no-chord-map (kbd "SPC SPC") 'xah-html-insert-date-section)
 
     (define-key xah-html-mode-no-chord-map (kbd "SPC e") 'xah-make-atom-entry)
     (define-key xah-html-mode-no-chord-map (kbd "SPC u") 'xahsite-update-article-timestamp)

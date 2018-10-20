@@ -39,8 +39,15 @@
 (setq make-backup-files nil)
 (setq backup-by-copying t)
 
+(setq create-lockfiles nil)
+
 (setq auto-save-default nil)
 ;; (setq auto-save-visited-file-name t)
+
+;; (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/backup/" nil)))
+;; (setq auto-save-list-file-prefix "~/.emacs.d/backup/.saves-")
+;; (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
+
 
 (column-number-mode 1)
 

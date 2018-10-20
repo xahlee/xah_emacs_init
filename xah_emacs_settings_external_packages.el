@@ -76,7 +76,18 @@
 ;; (when (fboundp 'global-company-mode)
 ;;   (global-company-mode 1))
 
-;; (when (fboundp 'go-mode) (add-hook 'before-save-hook #'gofmt-before-save) )
+(when (fboundp 'go-mode)
+
+  (defun xah-golang-config ()
+    "For use in `go-mode-hook'."
+    (local-set-key (kbd "C-c C-c") 'gofmt)
+    ;; more stuff here
+)
+
+  (add-hook 'go-mode-hook 'xah-golang-config)
+
+  ;; (add-hook 'before-save-hook #'gofmt-before-save)
+  )
 
 
 

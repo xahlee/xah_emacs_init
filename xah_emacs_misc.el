@@ -444,7 +444,6 @@ Version 2018-09-07"
   (interactive)
   (query-replace-regexp "\ufeff\\|\u200b\\|\u200f\\|\u202e\\|\u200e\\|\ufffc" ""))
 
-
 (defun xah-show-hexadecimal-value ()
   "Prints the decimal value of a hexadecimal string under cursor.
 TODO: 2014-05-23 doesn't work. something's broken.
@@ -799,3 +798,226 @@ Version 2017-08-27"
           (setq $path  (xahsite-url-to-filepath (xah-html-remove-uri-fragment $input))))))
     (delete-region $p1 $p2)
     (insert $path)))
+
+(defun xah-clone-html-by-link ()
+  "clone a html page, see:
+
+current buffer is a html file,
+it contains 2 lines, each is a href link.
+place cursor on the link of first line.
+This command will clone the file, from the 1st link's content, into the second link.
+The 2nd link file normally do not exit. it'll be created.
+
+version 2018-10-13"
+  (interactive)
+  (let ( p1 p2 fullPath fPath2 doitp )
+    (progn
+      (search-backward "href=\"" (line-beginning-position))
+      (forward-char 6)
+      (setq p1 (point))
+      (search-forward "\"" (line-end-position))
+      (backward-char 1)
+      (setq p2 (point))
+      (setq fullPath (expand-file-name (buffer-substring-no-properties p1 p2))))
+    (progn
+      (search-forward "href=\"" )
+      (setq p1 (point))
+      (search-forward "\"" (line-end-position))
+      (backward-char 1)
+      (setq p2 (point))
+      (setq fPath2 (expand-file-name (buffer-substring-no-properties p1 p2))))
+    (if (file-exists-p fPath2)
+        (progn
+          (setq doitp (yes-or-no-p (format "file 2 「%s」 exist. continue and replace?" fPath2))))
+      (setq doitp t))
+    (if doitp
+        (progn (find-file fPath2)
+               (erase-buffer)
+               (insert-file-contents fullPath ))
+      nil
+      )
+    ;;
+    ))
+
+(defun xah-table-to-dl ()
+  "change html table to dl
+Version 2018-10-19"
+  (interactive )
+  (let ($p1 $p2)
+    (if (use-region-p)
+        (progn
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n")
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (if (re-search-forward "\n[ \t]*\n" nil "move")
+            (progn (re-search-backward "\n[ \t]*\n")
+                   (setq $p2 (point)))
+          (setq $p2 (point)))))
+
+    (save-restriction
+      (narrow-to-region $p1 $p2)
+
+      (goto-char (point-min))
+      (search-forward "<table class=\"nrm\">")
+      (replace-match "<dl>" t t )
+
+      (goto-char (point-min))
+      (search-forward "</table>")
+      (replace-match "</dl>" t t )
+
+      (goto-char (point-min))
+      (when
+          (search-forward "<caption>" nil t)
+        (delete-region (line-beginning-position) (line-end-position))
+        (when (looking-at "\n")
+          (delete-char 1)))
+
+      (goto-char (point-min))
+      (when
+          (search-forward "<th>" nil t)
+        (delete-region (line-beginning-position) (line-end-position))
+        (when (looking-at "\n")
+          (delete-char 1)))
+
+      (goto-char (point-min))
+      (while (search-forward "<tr><td>" nil t)
+        (replace-match "<dt>" t t ))
+
+      (goto-char (point-min))
+      (while (search-forward "</td><td>" nil t)
+        (replace-match "</dt><dd>" t t ))
+
+      (goto-char (point-min))
+      (while (search-forward "</td></tr>" nil t)
+        (replace-match "</dd>" t t ))
+      (goto-char (point-max))
+
+      ;;
+      )))
+
+(defun xah-table-to-ul ()
+  "change html table to ul
+version 2018-10-16"
+  (interactive )
+  (let ($p1 $p2)
+    (if (use-region-p)
+        (progn
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n")
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (if (re-search-forward "\n[ \t]*\n" nil "move")
+            (progn (re-search-backward "\n[ \t]*\n")
+                   (setq $p2 (point)))
+          (setq $p2 (point)))))
+    (save-restriction
+      (narrow-to-region $p1 $p2)
+
+      (goto-char (point-min))
+      (when
+          (search-forward "<caption>" nil t)
+        (delete-region (line-beginning-position) (line-end-position))
+        (when (looking-at "\n")
+          (delete-char 1)))
+
+      (goto-char (point-min))
+      (when
+          (search-forward "<th>" nil t)
+        (delete-region (line-beginning-position) (line-end-position))
+        (when (looking-at "\n")
+          (delete-char 1)))
+
+      (goto-char (point-min))
+      (search-forward "<table class=\"nrm\">" nil t)
+      (replace-match "<ul>" t t )
+
+      (goto-char (point-min))
+      (search-forward "<table>" nil t)
+      (replace-match "<ul>" t t )
+
+      (goto-char (point-min))
+      (search-forward "</table>")
+      (replace-match "</ul>" t t )
+
+      (goto-char (point-min))
+      (while (search-forward "<tr><td>" nil t)
+        (replace-match "<li>" t t ))
+
+      (goto-char (point-min))
+      (while (search-forward "</td><td>" nil t)
+        (replace-match " → " t t ))
+
+      (goto-char (point-min))
+      (while (search-forward "</td></tr>" nil t)
+        (replace-match "</li>" t t ))
+
+      (goto-char (point-max))
+      ;;
+      )))
+
+(defun xah-new-pn ()
+  "make current path into a new file
+version 2018-10-17"
+  (interactive)
+  (let (
+        (ss
+         "<!doctype html><html><head><meta charset=\"utf-8\" />
+<meta name=viewport content=\"width=device-width, initial-scale=1\">
+
+<link rel=\"stylesheet\" href=\"../xpn.css\" />
+
+<title>x47945</title>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-10884311-6','xahporn.org');ga('send','pageview');</script>
+</head>
+<body>
+
+<nav class=\"nav-back-85230\"><a href=\"index.html\">Xah Porn</a></nav>
+
+<main>
+
+<h1>x47945</h1>
+
+<div class=\"bottom_ad_42482\">ads
+<a class=\"amz\" href=\"http://www.amazon.com/dp/B0017T2MWW/?tag=xahh-20\" title=\"\">Buy nice tea</a>
+</div>
+
+</main>
+
+</body></html>
+"
+         )
+        (basedir (file-name-directory (buffer-file-name)))
+        titlee
+        fname
+        fpath
+        p1 p2
+        (randhexstr (random 16777216)))
+    (setq p1 (line-beginning-position))
+    (setq p2 (line-end-position))
+    (setq titlee (buffer-substring-no-properties p1 p2))
+    (setq fname (replace-regexp-in-string " +" "_" titlee ))
+    (setq fpath (format "%s%s_%x.html" basedir fname randhexstr))
+
+    (find-file fpath)
+    (insert ss)
+
+    (goto-char (point-min))
+    (search-forward "x47945" )
+    (replace-match titlee )
+    (search-forward "x47945" )
+    (replace-match titlee )
+
+    (save-buffer )
+    (kill-buffer )
+    (delete-region p1 p2)
+    (insert fpath)
+    ;;
+    ))
+
