@@ -799,7 +799,7 @@ Version 2017-08-27"
     (delete-region $p1 $p2)
     (insert $path)))
 
-(defun xah-clone-html-by-link ()
+(defun xah-copy-html-by-link ()
   "clone a html page, see:
 
 current buffer is a html file,
@@ -808,9 +808,11 @@ place cursor on the link of first line.
 This command will clone the file, from the 1st link's content, into the second link.
 The 2nd link file normally do not exit. it'll be created.
 
-version 2018-10-13"
+version 2018-10-22"
   (interactive)
-  (let ( p1 p2 fullPath fPath2 doitp )
+  (let ( p1 p2 fullPath fPath2 doitp
+            bds p3 p4 buf
+            title)
     (progn
       (search-backward "href=\"" (line-beginning-position))
       (forward-char 6)
@@ -830,12 +832,20 @@ version 2018-10-13"
         (progn
           (setq doitp (yes-or-no-p (format "file 2 「%s」 exist. continue and replace?" fPath2))))
       (setq doitp t))
-    (if doitp
-        (progn (find-file fPath2)
-               (erase-buffer)
-               (insert-file-contents fullPath ))
-      nil
-      )
+    (when doitp
+      (setq buf (find-file fPath2))
+      (erase-buffer)
+      (insert-file-contents fullPath )
+      (save-buffer buf)
+      (kill-buffer buf))
+
+    ;; (setq bds (xah-get-bounds-of-thing [">" "<"]))
+    ;; (setq p3 (aref bds 0))
+    ;; (setq p4 (aref bds 1))
+    ;; (setq title (buffer-substring-no-properties p3 p4))
+
+    ;; (xah-get-thing-at-point [">" "<"])
+
     ;;
     ))
 

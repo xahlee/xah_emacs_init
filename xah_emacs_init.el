@@ -127,10 +127,14 @@ Version 2017-07-19"
   (add-to-list 'load-path "~/git/lookup-word-on-internet/")
   ;; (setq xah-lookup-browser-function 'eww )
   (require 'xah-lookup)
-;; (put 'xah-lookup-word-definition 'xah-lookup-browser-function 'eww)
-;; (put 'xah-lookup-wikipedia 'xah-lookup-browser-function 'eww)
+  (put 'xah-lookup-word-definition 'xah-lookup-browser-function 'eww)
+  (put 'xah-lookup-word-definition 'xah-lookup-url "http://www.thefreedictionary.com/word02051")
 
-)
+  (put 'xah-lookup-word-definition 'xah-lookup-url "https://www.ahdictionary.com/word/search.html?q=word02051")
+
+  ;; (put 'xah-lookup-wikipedia 'xah-lookup-browser-function 'eww)
+
+  )
 
 (progn
   (add-to-list 'load-path "~/git/xah-math-input/")
