@@ -422,7 +422,9 @@ usage: in a html file, put cursor on a image file path, call the command,
 a thumbnail will be created, with file name prefix tn_‹width›x‹height› in the same dir,
 and relative path will be inserted before the img tag.
 
-Version 2018-05-17"
+If `universal-argument' is called first, ask for jpeg quality. (default is 90)
+
+Version 2018-10-28"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
@@ -440,7 +442,10 @@ Version 2018-05-17"
          (width (aref size 0))
          (height (aref size 1))
          (scale (sqrt (/ (float thumbnail-size-area) (float (* width height)))))
-
+         (quality
+          (if current-prefix-arg
+              (progn (string-to-number (read-string "quality:" "85")))
+            (progn 90)))
          (new-width (round (* scale (float width))))
          (new-height (round (* scale (float height))))
 
@@ -451,11 +456,13 @@ Version 2018-05-17"
 
          $cmdStr
          )
+
     (setq $cmdStr
           (format
            "convert %s '%s' '%s'"
-           (format " -scale %s%% -quality 92%% %s "
+           (format " -scale %s%% -quality %s%% %s "
                    (* scale 100)
+                   quality
                    " -sharpen 1 ")
            filepath
            filepath-new))
