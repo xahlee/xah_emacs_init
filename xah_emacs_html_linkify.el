@@ -25,7 +25,7 @@ Version 2015-05-12"
       (if @begin
           (progn (setq $p1 @begin) (setq $p2 @end))
         (if (use-region-p)
-            (progn (setq $p1 (region-beginning)) (setq $p2 (region-end)))
+            (setq $p1 (region-beginning) $p2 (region-end))
           (save-excursion
             (setq $p0 (point))
             ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
@@ -84,9 +84,7 @@ Version 2018-04-10"
             (setq $p1 @begin)
             (setq $p2 @end))
         (if (use-region-p)
-            (progn
-              (setq $p1 (region-beginning))
-              (setq $p2 (region-end)))
+            (setq $p1 (region-beginning) $p2 (region-end))
           (save-excursion
             (setq $p0 (point))
             ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
@@ -130,10 +128,8 @@ Then it'll become
   (let ($p1 $p2 $word $url)
 
     (if (use-region-p)
-        (progn (setq $p1 (region-beginning))
-               (setq $p2 (region-end)))
-      (progn (setq $p1 (line-beginning-position))
-             (setq $p2 (line-end-position))))
+         (setq $p1 (region-beginning) $p2 (region-end))
+       (setq $p1 (line-beginning-position) $p2 (line-end-position)))
 
     (setq $word (buffer-substring-no-properties $p1 $p2) )
 
@@ -158,10 +154,8 @@ Note: old version returns this form:
   (interactive)
   (let ($p1 $p2 $word $url)
     (if (use-region-p)
-        (progn (setq $p1 (region-beginning))
-               (setq $p2 (region-end)))
-      (progn (setq $p1 (line-beginning-position))
-             (setq $p2 (line-end-position))))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (line-beginning-position) $p2 (line-end-position)))
 
     (setq $word (buffer-substring-no-properties $p1 $p2))
 
@@ -203,10 +197,8 @@ This command calls `xah-video-search-string'"
   (interactive)
   (let ($p1 $p2 $word $url)
     (if (use-region-p)
-        (progn (setq $p1 (region-beginning))
-               (setq $p2 (region-end)))
-      (progn (setq $p1 (line-beginning-position))
-             (setq $p2 (line-end-position))))
+         (setq $p1 (region-beginning) $p2 (region-end))
+       (setq $p1 (line-beginning-position) $p2 (line-end-position)))
     (setq $word (buffer-substring-no-properties $p1 $p2))
     (setq $url (xah-video-search-string $word))
     (delete-region $p1 $p2)
@@ -226,10 +218,8 @@ Warning: the line must end in a line return char else the result is wrong."
   (interactive)
   (let ($p1 $p2 $word $url)
     (if (use-region-p)
-        (progn (setq $p1 (region-beginning))
-               (setq $p2 (region-end)))
-      (progn (setq $p1 (line-beginning-position))
-             (setq $p2 (line-end-position))))
+         (setq $p1 (region-beginning) $p2 (region-end))
+       (setq $p1 (line-beginning-position) $p2 (line-end-position)))
     (setq $word (buffer-substring-no-properties $p1 $p2))
     (setq $url (concat "http://www.google.com/search?q=" $word))
     (setq $url (replace-regexp-in-string " " "+" $url ))
@@ -304,10 +294,7 @@ There are other amazon categories, but not supported by this function."
   (let ($p1 $p2 mainText tmplist sstr pcato pcc)
     (if (use-region-p)
         (setq $p1 (region-beginning) $p2 (region-end))
-      (progn
-        (setq $p1 (line-beginning-position) )
-        (setq $p2 (line-end-position) )
-        ))
+      (setq $p1 (line-beginning-position) $p2 (line-end-position) ))
     ;; get the text
     (setq mainText (buffer-substring-no-properties $p1 $p2) )
     (setq tmplist (split-string mainText ";") )

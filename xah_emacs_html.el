@@ -25,8 +25,7 @@ Version 2016-11-10"
   (require 'xah-html-mode)
   (let ( $p1 $p2 )
     (if (use-region-p)
-        (progn (setq $p1 (region-beginning))
-               (setq $p2 (region-end)))
+         (setq $p1 (region-beginning) $p2 (region-end))
       (progn
         (xah-html-skip-tag-backward)
         (setq $p1 (point))

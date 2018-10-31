@@ -138,12 +138,8 @@ Then it'll become
   (interactive)
   (let ($p1 $p2 $swd $url)
     (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (progn
-        (setq $p1 (line-beginning-position))
-        (setq $p2 (line-end-position))))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (line-beginning-position) $p2 (line-end-position)))
 
     (setq $swd (buffer-substring-no-properties $p1 $p2))
     (setq $url (replace-regexp-in-string

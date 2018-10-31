@@ -222,12 +222,8 @@ Version 2015-10-05"
   (interactive
    (let ($p1 $p2)
      (if (use-region-p)
-         (progn
-           (setq $p1 (region-beginning))
-           (setq $p2 (region-end)))
-       (progn
-         (setq $p1 (line-beginning-position))
-         (setq $p2 (line-end-position))))
+         (setq $p1 (region-beginning) $p2 (region-end))
+       (setq $p1 (line-beginning-position) $p2 (line-end-position)))
      (list
       $p1
       $p2
@@ -308,12 +304,8 @@ Version 2017-01-11"
   (interactive)
   (let ($p1 $p2 )
     (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (progn
-        (setq $p1 (line-beginning-position))
-        (setq $p2 (line-end-position))))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (line-beginning-position) $p2 (line-end-position)))
     (save-excursion
       (save-restriction
         (narrow-to-region $p1 $p2)
@@ -328,12 +320,8 @@ Version 2016-10-05"
   (interactive)
   (let ( $p1 $p2)
     (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (progn
-        (setq $p1 (line-beginning-position))
-        (setq $p2 (line-end-position))))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (line-beginning-position) $p2 (line-end-position)))
     (xah-replace-pairs-region
      $p1 $p2
      '(
@@ -349,12 +337,8 @@ Example: 「it’s」 ⇒ 「it's」."
   (interactive)
   (let ( $p1 $p2)
     (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (progn
-        (setq $p1 (line-beginning-position))
-        (setq $p2 (line-end-position))))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (line-beginning-position) $p2 (line-end-position)))
     (xah-replace-pairs-region
      $p1 $p2
      '(
@@ -390,12 +374,8 @@ Version 2018-08-02"
   (interactive
    (let ($p1 $p2)
      (if (use-region-p)
-         (progn
-           (setq $p1 (region-beginning))
-           (setq $p2 (region-end)))
-       (progn
-         (setq $p1 (line-beginning-position))
-         (setq $p2 (line-end-position))))
+         (setq $p1 (region-beginning) $p2 (region-end))
+       (setq $p1 (line-beginning-position) $p2 (line-end-position)))
      (list $p1 $p2
            (cond
             ((equal current-prefix-arg nil) "auto")
@@ -689,13 +669,9 @@ version 2017-06-10"
         $p1 $p2
         )
     (if (and @begin @end)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
+        (setq $p1 (region-beginning) $p2 (region-end))
       (if (use-region-p)
-          (progn
-            (setq $p1 (region-beginning))
-            (setq $p2 (region-end)))
+          (setq $p1 (region-beginning) $p2 (region-end))
         (save-excursion
           (if (re-search-backward "\n[ \t]*\n" nil "move")
               (progn (re-search-forward "\n[ \t]*\n")
@@ -738,13 +714,9 @@ Version 2017-06-10"
   (interactive)
   (let ($p1 $p2 $changedItems)
     (if (and  @begin @end)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
+        (setq $p1 (region-beginning) $p2 (region-end))
       (if (use-region-p)
-          (progn
-            (setq $p1 (region-beginning))
-            (setq $p2 (region-end)))
+          (setq $p1 (region-beginning) $p2 (region-end))
         (save-excursion
           (if (re-search-backward "\n[ \t]*\n" nil "move")
               (progn (re-search-forward "\n[ \t]*\n")

@@ -26,12 +26,8 @@ Version 2017-02-02"
          cssStr permLink)
 
     (if (use-region-p)
-        (progn
-          (setq p1 (region-beginning))
-          (setq p2 (region-end)))
-      (progn
-        (setq p1 (point-min))
-        (setq p2 (point-max))))
+        (setq p1 (region-beginning) p2 (region-end))
+      (setq p1 (point-min) p2 (point-max)))
 
     (setq mainText (buffer-substring-no-properties p1 p2))
 
@@ -67,7 +63,7 @@ Version 2017-02-02"
     (goto-char (point-max))
     (when (search-backward "<div id=\"disqus_thread\">" nil t)
       (delete-region (point) (point-max)))
-    
+
     ;; change amazong ad id
     (xah-replace-pairs-region 1 (point-max) [["?tag=xahh-20" "?tag=xahblg-20"]] )
 
@@ -125,5 +121,4 @@ Version 2017-02-02"
 
     (goto-char 1)
 
-    (kill-new (buffer-string))
-    ))
+    (kill-new (buffer-string))))

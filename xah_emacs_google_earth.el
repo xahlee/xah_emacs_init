@@ -234,12 +234,8 @@ Version 2016-07-12"
            $coord-y-x
            )
     (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (progn
-        (setq $p1 (line-beginning-position))
-        (setq $p2 (line-end-position))))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (line-beginning-position) $p2 (line-end-position)))
 
     (setq $input (buffer-substring-no-properties $p1 $p2))
     (if (string-match-p "°" $input)

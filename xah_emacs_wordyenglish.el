@@ -57,9 +57,7 @@ Version 2015-03-11"
         $wordText
         ($destFile (concat @category ".html")))
     (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
+        (setq $p1 (region-beginning) $p2 (region-end))
       (save-excursion
         (if (re-search-backward "\n[ \t]*\n" nil "move")
             (progn (re-search-forward "\n[ \t]*\n")
@@ -214,10 +212,8 @@ Version 2018-08-16"
   (interactive)
   (let ($p1 $p2 $input $result)
     (if (use-region-p)
-        (progn (setq $p1 (region-beginning))
-               (setq $p2 (region-end)))
-      (progn (setq $p1 (line-beginning-position))
-             (setq $p2 (line-end-position))))
+         (setq $p1 (region-beginning) $p2 (region-end))
+       (setq $p1 (line-beginning-position) $p2 (line-end-position)))
     (setq $input (buffer-substring-no-properties $p1 $p2))
     (setq $result (concat "etymology of <a href=\"https://www.etymonline.com/word/" $input "\">" $input "</a>"))
     (delete-region $p1 $p2)

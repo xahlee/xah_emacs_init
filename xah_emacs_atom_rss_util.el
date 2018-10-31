@@ -94,9 +94,7 @@ Version 2018-09-09"
          $altURL
          )
     (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
+        (setq $p1 (region-beginning) $p2 (region-end))
       (save-excursion
         (search-backward "<section>" )
         (search-forward "</time></div>" )

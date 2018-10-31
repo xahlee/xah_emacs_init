@@ -120,8 +120,7 @@ The differences are:
   (let ($p1 $p2 $searchStr )
     (if (use-region-p)
         (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end))
+          (setq $p1 (region-beginning) $p2 (region-end))
           (setq $searchStr (buffer-substring-no-properties $p1 $p2)))
       (progn
         (setq $searchStr (word-at-point))))
@@ -849,132 +848,9 @@ version 2018-10-22"
     ;;
     ))
 
-(defun xah-table-to-dl ()
-  "change html table to dl
-Version 2018-10-19"
-  (interactive )
-  (let ($p1 $p2)
-    (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (save-excursion
-        (if (re-search-backward "\n[ \t]*\n" nil "move")
-            (progn (re-search-forward "\n[ \t]*\n")
-                   (setq $p1 (point)))
-          (setq $p1 (point)))
-        (if (re-search-forward "\n[ \t]*\n" nil "move")
-            (progn (re-search-backward "\n[ \t]*\n")
-                   (setq $p2 (point)))
-          (setq $p2 (point)))))
-
-    (save-restriction
-      (narrow-to-region $p1 $p2)
-
-      (goto-char (point-min))
-      (search-forward "<table class=\"nrm\">")
-      (replace-match "<dl>" t t )
-
-      (goto-char (point-min))
-      (search-forward "</table>")
-      (replace-match "</dl>" t t )
-
-      (goto-char (point-min))
-      (when
-          (search-forward "<caption>" nil t)
-        (delete-region (line-beginning-position) (line-end-position))
-        (when (looking-at "\n")
-          (delete-char 1)))
-
-      (goto-char (point-min))
-      (when
-          (search-forward "<th>" nil t)
-        (delete-region (line-beginning-position) (line-end-position))
-        (when (looking-at "\n")
-          (delete-char 1)))
-
-      (goto-char (point-min))
-      (while (search-forward "<tr><td>" nil t)
-        (replace-match "<dt>" t t ))
-
-      (goto-char (point-min))
-      (while (search-forward "</td><td>" nil t)
-        (replace-match "</dt><dd>" t t ))
-
-      (goto-char (point-min))
-      (while (search-forward "</td></tr>" nil t)
-        (replace-match "</dd>" t t ))
-      (goto-char (point-max))
-
-      ;;
-      )))
-
-(defun xah-table-to-ul ()
-  "change html table to ul
-version 2018-10-16"
-  (interactive )
-  (let ($p1 $p2)
-    (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (save-excursion
-        (if (re-search-backward "\n[ \t]*\n" nil "move")
-            (progn (re-search-forward "\n[ \t]*\n")
-                   (setq $p1 (point)))
-          (setq $p1 (point)))
-        (if (re-search-forward "\n[ \t]*\n" nil "move")
-            (progn (re-search-backward "\n[ \t]*\n")
-                   (setq $p2 (point)))
-          (setq $p2 (point)))))
-    (save-restriction
-      (narrow-to-region $p1 $p2)
-
-      (goto-char (point-min))
-      (when
-          (search-forward "<caption>" nil t)
-        (delete-region (line-beginning-position) (line-end-position))
-        (when (looking-at "\n")
-          (delete-char 1)))
-
-      (goto-char (point-min))
-      (when
-          (search-forward "<th>" nil t)
-        (delete-region (line-beginning-position) (line-end-position))
-        (when (looking-at "\n")
-          (delete-char 1)))
-
-      (goto-char (point-min))
-      (search-forward "<table class=\"nrm\">" nil t)
-      (replace-match "<ul>" t t )
-
-      (goto-char (point-min))
-      (search-forward "<table>" nil t)
-      (replace-match "<ul>" t t )
-
-      (goto-char (point-min))
-      (search-forward "</table>")
-      (replace-match "</ul>" t t )
-
-      (goto-char (point-min))
-      (while (search-forward "<tr><td>" nil t)
-        (replace-match "<li>" t t ))
-
-      (goto-char (point-min))
-      (while (search-forward "</td><td>" nil t)
-        (replace-match " → " t t ))
-
-      (goto-char (point-min))
-      (while (search-forward "</td></tr>" nil t)
-        (replace-match "</li>" t t ))
-
-      (goto-char (point-max))
-      ;;
-      )))
-
 (defun xah-new-pn ()
   "make current path into a new file
-version 2018-10-17"
+version 2018-10-30"
   (interactive)
   (let (
         (ss
@@ -1009,8 +885,7 @@ version 2018-10-17"
         fpath
         p1 p2
         (randhexstr (random 16777216)))
-    (setq p1 (line-beginning-position))
-    (setq p2 (line-end-position))
+    (setq p1 (line-beginning-position) p2 (line-end-position))
     (setq titlee (buffer-substring-no-properties p1 p2))
     (setq fname (replace-regexp-in-string " +" "_" titlee ))
     (setq fpath (format "%s%s_%x.html" basedir fname randhexstr))
@@ -1023,6 +898,12 @@ version 2018-10-17"
     (replace-match titlee )
     (search-forward "x47945" )
     (replace-match titlee )
+
+    (search-forward "</h1>")
+
+    (insert "\n\n\n")
+
+    (backward-char )
 
     (save-buffer )
     (kill-buffer )

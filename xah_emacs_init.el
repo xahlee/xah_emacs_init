@@ -130,7 +130,7 @@ Version 2017-07-19"
   ;; (put 'xah-lookup-word-definition 'xah-lookup-browser-function 'eww)
   (put 'xah-lookup-word-definition 'xah-lookup-url "http://www.thefreedictionary.com/word02051")
 
-  (put 'xah-lookup-word-definition 'xah-lookup-url "https://www.ahdictionary.com/word/search.html?q=word02051")
+  ;; (put 'xah-lookup-word-definition 'xah-lookup-url "https://www.ahdictionary.com/word/search.html?q=word02051")
 
   ;; (put 'xah-lookup-wikipedia 'xah-lookup-browser-function 'eww)
 
