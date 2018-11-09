@@ -410,6 +410,7 @@ f_cycle_image ({
     ("xc" "#xahcode" )
     ("xm" "#xahmusic" )
     ("xjs" "#xahjs" )
+    ("xxzw" "#杀杀中文" )
 
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee

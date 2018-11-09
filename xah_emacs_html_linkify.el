@@ -367,7 +367,7 @@ The link text is pulled from the file's <title> tag.
 If there is text selection, use it as file path.
 
 The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath'.
-Version 2016-07-07"
+Version 2018-11-08"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
@@ -402,8 +402,8 @@ Version 2016-07-07"
                      (xahsite-get-domain-of-local-file-path $currentBufferFilePathOrDir)
                      (xahsite-get-domain-of-local-file-path $fPath))
                     (progn
-                      ;; (setq $rPath (file-relative-name $fPath $currentBufferFileDir))
-                      (setq $rPath (xah-html-get-relative-path-to-webroot $fPath))
+                      (setq $rPath (file-relative-name $fPath $currentBufferFileDir))
+                      ;; (setq $rPath (xah-html-get-relative-path-to-webroot $fPath))
                       (format "<a href=\"%s\">%s</a>"
                               (concat $rPath $fragPart)
                               (if (string-equal $title "") $rPath $title )))
