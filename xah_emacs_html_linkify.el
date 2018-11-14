@@ -607,7 +607,7 @@ Version 2017-07-27"
 
          ;; (xah-html-image-figure-linkify)
 
-         ((xah-html-path-ends-in-image-suffix-p $input) (xah-html-image-figure-linkify))
+         ((xah-html-image-file-suffix-p $input) (xah-html-image-figure-linkify))
 
          (t (xah-file-linkify $p1 $p2))))
     (xah-html-wrap-url)))
