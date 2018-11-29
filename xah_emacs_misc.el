@@ -852,9 +852,9 @@ version 2018-10-22"
   "make current path into a new file
 version 2018-10-30"
   (interactive)
-  (let (
-        (ss
-         "<!doctype html><html><head><meta charset=\"utf-8\" />
+  (let* (
+         (ss
+          "<!doctype html><html><head><meta charset=\"utf-8\" />
 <meta name=viewport content=\"width=device-width, initial-scale=1\">
 
 <link rel=\"stylesheet\" href=\"../xpn.css\" />
@@ -878,26 +878,24 @@ version 2018-10-30"
 
 </body></html>
 "
-         )
-        (basedir (file-name-directory (buffer-file-name)))
-        titlee
-        fname
-        fpath
-        p1 p2
-        (randhexstr (random 16777216)))
-    (setq p1 (line-beginning-position) p2 (line-end-position))
-    (setq titlee (buffer-substring-no-properties p1 p2))
-    (setq fname (replace-regexp-in-string " +" "_" titlee ))
-    (setq fpath (format "%s%s_%x.html" basedir fname randhexstr))
+          )
+         (p1 (line-beginning-position))
+         (p2 (line-end-position))
+         (randStr (format "%x" (random 16777216)))
+         (title1 (buffer-substring-no-properties p1 p2))
+         (titleFull (concat title1 " " randStr))
+         (basedir (file-name-directory (buffer-file-name)))
+         (fname (replace-regexp-in-string " +" "_" titleFull ))
+         (fpath (format "%s%s.html" basedir fname)))
 
     (find-file fpath)
     (insert ss)
 
     (goto-char (point-min))
     (search-forward "x47945" )
-    (replace-match titlee )
+    (replace-match titleFull )
     (search-forward "x47945" )
-    (replace-match titlee )
+    (replace-match titleFull )
 
     (search-forward "</h1>")
 

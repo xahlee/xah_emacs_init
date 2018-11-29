@@ -41,6 +41,7 @@ f_cycle_image ({
     ("k" "know" )
     ("ab" "about" )
     ("dn" "down" )
+    ("minh" "minutes" )
 
     ;; English phrases abbrev
 
@@ -110,7 +111,7 @@ f_cycle_image ({
     ("doc3" "documentation" )
     ("eff" "efficient" )
     ("eg3" "ergonomic" )
-    ("ei" "Put this in your emacs init file:" )
+    ("pt" "Put this in your emacs init file:" )
     ("env" "environment" )
     ("esp" "especially" )
     ("ex" "example" )
@@ -232,10 +233,10 @@ f_cycle_image ({
     ("wm" "Window Manager" )
     ("wh" "width height" )
 
-    ("pr" "(▮)" )
-    ("br" "[▮]" )
-    ("brc" "{▮}" )
-    ("q" "\"▮\"" )
+    ("e" "(▮)" )
+    ("eu" "[▮]" )
+    ("ei" "{▮}" )
+    ("eh" "\"▮\"" )
 
     ;; computing, proper noun
     ("ahk" "AutoHotkey" )
@@ -490,7 +491,7 @@ x int
       ("sl" "var ss = []string{`a`,`b`}")
       ("mp" "var mm = map[string]string{`a`: `1`, `b`: `2`}")
       ("mm" "var mp = make(map[string]int)")
-
+      ("len" "len(▮)")
       ("make" "make([]byte, 0, 9)")
       ("rmc" "regexp.MustCompile(`str`▮)")
       ("rfa" "re.FindAll(b▮, -1)")

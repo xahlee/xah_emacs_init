@@ -340,9 +340,11 @@ Version 2017-02-02"
 
 (defun xah-dired-2jpg (@file-list)
   "Create a JPG version of images of marked files in dired.
+If `universal-argument' is called first, ask for jpeg quality. (default is 90)
+
 Requires ImageMagick shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2016-07-19"
+Version 2018-11-28"
   (interactive
    (let (
          ($fileList
@@ -351,7 +353,11 @@ Version 2016-07-19"
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
      (list $fileList)))
-  (xah-process-image @file-list "-quality 90%" "-2" ".jpg" ))
+  (let ((quality
+         (if current-prefix-arg
+             (progn (string-to-number (read-string "quality:" "85")))
+           (progn 90))))
+    (xah-process-image @file-list (format "-quality %s%%" quality ) "-2" ".jpg" )))
 
 (defun xah-dired-remove-all-metadata (@file-list)
   "Remove all metatata of buffer image file or marked files in dired.
