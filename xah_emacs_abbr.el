@@ -128,7 +128,7 @@ f_cycle_image ({
     ("impl" "implementation" )
     ("implt" "implement" )
     ("intn" "international" )
-    ("intro" "introduction" )
+    ("introh" "introduction" )
     ("kb" "keyboard" )
     ("kbg" "keybinding" )
     ("kbs" "keyboards" )
@@ -411,6 +411,7 @@ f_cycle_image ({
     ("xc" "#xahcode" )
     ("xm" "#xahmusic" )
     ("xjs" "#xahjs" )
+    ("xp" "#xahpop" )
     ("xxzw" "#杀杀中文" )
 
     ("xim" "Twitter: @xah_lee
@@ -452,6 +453,10 @@ func main() {
 	fmt.Printf(\"%v\\n\", 33)
 
 }")
+
+      ("pac" "fmt.Printf(\"%v\\n\", hh▮)")
+      ("imp" "import \"fmt\"\n")
+
       ("p" "fmt.Printf(\"%v\\n\", hh▮)")
       ("pl" "fmt.Println(hh▮)")
       ("r" "return")

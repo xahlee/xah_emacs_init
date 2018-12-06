@@ -45,7 +45,7 @@ Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 Also, removes repeated empty lines.
 
-Version 2018-05-15"
+Version 2018-12-03"
   (interactive)
   (save-excursion ; remove empty lines
     (progn
@@ -87,7 +87,7 @@ Version 2018-05-15"
               (delete-region $p3 $p4 ))
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
             (when (not (looking-at "\\.")) (insert "."))
-            (goto-char (point-max)))))
+            )))
       (let ; backup
           (($fname (buffer-file-name)))
         (if $fname

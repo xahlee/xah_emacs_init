@@ -809,19 +809,18 @@ The 2nd link file normally do not exit. it'll be created.
 
 version 2018-10-22"
   (interactive)
-  (let ( p1 p2 fullPath fPath2 doitp
+  (let ( p1 p2 fPath1 fPath2 doitp
             bds p3 p4 buf
             title)
     (progn
-      (search-backward "href=\"" (line-beginning-position))
-      (forward-char 6)
+      (search-forward "href=\"")
       (setq p1 (point))
       (search-forward "\"" (line-end-position))
       (backward-char 1)
       (setq p2 (point))
-      (setq fullPath (expand-file-name (buffer-substring-no-properties p1 p2))))
+      (setq fPath1 (expand-file-name (buffer-substring-no-properties p1 p2))))
     (progn
-      (search-forward "href=\"" )
+      (search-forward "href=\"")
       (setq p1 (point))
       (search-forward "\"" (line-end-position))
       (backward-char 1)
@@ -834,7 +833,7 @@ version 2018-10-22"
     (when doitp
       (setq buf (find-file fPath2))
       (erase-buffer)
-      (insert-file-contents fullPath )
+      (insert-file-contents fPath1 )
       (save-buffer buf)
       (kill-buffer buf))
 
