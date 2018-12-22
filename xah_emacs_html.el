@@ -45,7 +45,7 @@ Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 Also, removes repeated empty lines.
 
-Version 2018-12-03"
+Version 2018-12-07"
   (interactive)
   (save-excursion ; remove empty lines
     (progn
@@ -87,7 +87,7 @@ Version 2018-12-03"
               (delete-region $p3 $p4 ))
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
             (when (not (looking-at "\\.")) (insert "."))
-            )))
+            (search-backward "<time>"))))
       (let ; backup
           (($fname (buffer-file-name)))
         (if $fname
@@ -310,15 +310,15 @@ from directories checked are:
 ~/
 /tmp/
 
-The first file whose name starts with ee, or contain “Screen Shot”, will be moved.
+The first file whose name starts with ee or tt or contain “Screen Shot”, will be moved.
 
 The destination dir is asked by a prompt.
 
 the new file name is with ee removed.
 Any space in filename is replaced by the low line char “_”.
-If the file name ends in png, 「optipng filename」 is called.
+If the file name ends in png, 「optipng filename」 is called on it.
 
-Version 2018-08-10"
+Version 2018-12-12"
   (interactive
    (list
     (read-directory-name "Move to dir:" )))
@@ -332,7 +332,7 @@ Version 2018-08-10"
     (setq $fromPath
           (catch 'TAG
             (dolist (x $dirs )
-              (let ((mm (directory-files x t "^ee\\|Screen Shot" t)))
+              (let ((mm (directory-files x t "^ee\\|^tt\\|Screen Shot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
                 (if mm
                     (progn
                       (throw 'TAG (car mm)))

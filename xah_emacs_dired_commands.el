@@ -430,7 +430,7 @@ and relative path will be inserted before the img tag.
 
 If `universal-argument' is called first, ask for jpeg quality. (default is 90)
 
-Version 2018-10-28"
+Version 2018-12-22"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
@@ -478,5 +478,5 @@ Version 2018-10-28"
       (shell-command $cmdStr))
 
     (search-backward "<" )
-    (insert new-rel-path "\n")
+    (insert filepath-new "\n")
     (backward-word )))

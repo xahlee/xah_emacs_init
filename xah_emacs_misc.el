@@ -849,7 +849,7 @@ version 2018-10-22"
 
 (defun xah-new-pn ()
   "make current path into a new file
-version 2018-10-30"
+version 2018-12-21"
   (interactive)
   (let* (
          (ss
@@ -906,6 +906,74 @@ version 2018-10-30"
     (kill-buffer )
     (delete-region p1 p2)
     (insert fpath)
+    (xah-all-linkify)
+    (beginning-of-line)
+    (insert "<p>")
+    (end-of-line )
+    (insert "</p>")
+
     ;;
     ))
 
+(defun xah-new-art ()
+  "make new arts blog page.
+/Users/xah/web/xaharts_org/arts/blog.html
+version 2018-12-22"
+  (interactive)
+  (let* (
+         (templatePagePath "/Users/xah/web/xaharts_org/arts/Hunger_Games_eyelash.html" )
+         (p1 (line-beginning-position))
+         (p2 (line-end-position))
+         (title1 (buffer-substring-no-properties p1 p2))
+         (fnameBase (downcase (replace-regexp-in-string " +" "_" title1 )))
+         (fpath (format "%s%s.html" (file-name-directory templatePagePath) fnameBase))
+         p3
+         )
+
+    (find-file fpath)
+    (insert-file-contents templatePagePath )
+
+    (progn
+      (goto-char (point-min))
+      (search-forward "<title>" )
+      (insert title1)
+      (setq p3 (point))
+      (skip-chars-forward "^<")
+      (delete-region p3 (point))
+
+      (search-forward "<h1>" )
+      (insert title1)
+      (setq p3 (point))
+      (skip-chars-forward "^<")
+      (delete-region p3 (point))
+
+      (search-forward "<div class=\"byline\">By Xah Lee. Date: <time>" )
+      (insert (format-time-string "%Y-%m-%d"))
+      (setq p3 (point))
+      (search-forward "</div>" )
+      (delete-region p3 (point))
+      (insert "</time>.</div>")
+
+      (setq p3 (point))
+      (search-forward "<div class=\"ads_96352\"" )
+      (search-backward "<")
+      (delete-region p3 (point))
+      (insert "\n\n\n\n")
+      (backward-char 2)
+      ;;
+      )
+
+    (save-buffer )
+    (kill-buffer )
+
+    (delete-region p1 p2)
+    (insert fpath)
+
+    (xah-all-linkify)
+    (beginning-of-line)
+    (insert "<p>")
+    (end-of-line )
+    (insert "</p>")
+
+    ;;
+    ))

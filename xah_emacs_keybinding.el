@@ -3,19 +3,12 @@
 (when (boundp 'xah-fly-key-map)
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
+
   ;; (global-set-key (kbd "<end>") xah-fly-e-keymap)
 
   ;; (define-key xah-fly-key-map (kbd "<home>") xah-fly-e-keymap)
 
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
-
-  (define-key xah-fly-leader-key-map (kbd "1") 'xah-open-file-at-cursor)
-  (define-key xah-fly-leader-key-map (kbd "2") 'xah-copy-file-path)
-
-  (define-key xah-fly-leader-key-map (kbd "8") 'xah-open-file-at-cursor)
-  (define-key xah-fly-leader-key-map (kbd "7") 'xah-copy-file-path)
-
-  (define-key xah-fly-leader-key-map (kbd "<delete>") 'xah-close-current-buffer)
 
   ;; (define-key xah-fly-leader-key-map (kbd "e") nil)
 
@@ -46,6 +39,8 @@
   (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
   (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
 
+  (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
+
   (global-set-key (kbd "s-w") 'xah-close-current-buffer)
   (global-set-key (kbd "s-r") 'xah-browse-url-of-buffer)
   (global-set-key (kbd "s-T") 'xah-open-last-closed)
@@ -61,9 +56,9 @@
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
   (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
   (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
-  (global-set-key (kbd "<f3>") 'nil)
+  ;; (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
 
-  (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
+  ;; (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
   ;;
   )
 
@@ -113,11 +108,11 @@
   ;; k
   (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
 
- ;; l ;; m ;; n ;; o ;; p ;; p ;; q ;; r ;; s
+  ;; l ;; m ;; n ;; o ;; p ;; p ;; q ;; r ;; s
 
   (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
 
- ;; u ;; v ;; w ;; x ;; y ;; z
+  ;; u ;; v ;; w ;; x ;; y ;; z
 
   )
 (progn
