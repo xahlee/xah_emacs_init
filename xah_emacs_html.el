@@ -463,3 +463,203 @@ Version 2018-09-03"
 ")
   )
 
+
+(defun xah-copy-html-by-link ()
+  "clone a html page, see:
+
+current buffer is a html file,
+it contains 2 lines, each is a href link.
+place cursor on the link of first line.
+This command will clone the file, from the 1st link's content, into the second link.
+The 2nd link file normally do not exit. it'll be created.
+
+version 2018-10-22"
+  (interactive)
+  (let ( p1 p2 fPath1 fPath2 doitp
+            bds p3 p4 buf
+            title)
+    (progn
+      (search-forward "href=\"")
+      (setq p1 (point))
+      (search-forward "\"" (line-end-position))
+      (backward-char 1)
+      (setq p2 (point))
+      (setq fPath1 (expand-file-name (buffer-substring-no-properties p1 p2))))
+    (progn
+      (search-forward "href=\"")
+      (setq p1 (point))
+      (search-forward "\"" (line-end-position))
+      (backward-char 1)
+      (setq p2 (point))
+      (setq fPath2 (expand-file-name (buffer-substring-no-properties p1 p2))))
+    (if (file-exists-p fPath2)
+        (progn
+          (setq doitp (yes-or-no-p (format "file 2 「%s」 exist. continue and replace?" fPath2))))
+      (setq doitp t))
+    (when doitp
+      (setq buf (find-file fPath2))
+      (erase-buffer)
+      (insert-file-contents fPath1 )
+      (save-buffer buf)
+      (kill-buffer buf))
+
+    ;; (setq bds (xah-get-bounds-of-thing [">" "<"]))
+    ;; (setq p3 (aref bds 0))
+    ;; (setq p4 (aref bds 1))
+    ;; (setq title (buffer-substring-no-properties p3 p4))
+
+    ;; (xah-get-thing-at-point [">" "<"])
+
+    ;;
+    ))
+
+(defun xah-remove-wikipedia-link ()
+  "delet wikipedia link at cursor position
+Version 2017-06-05"
+  (interactive)
+  (require 'xah-html-mode)
+  (let ( $p2
+        $deletedText
+        )
+    (when (search-forward "</a>")
+      (progn
+        (setq $p2 (point))
+        (search-backward "<a href=\"http://en.wikipedia.org/wiki/")
+        (setq $deletedText (buffer-substring (point) $p2))
+        (xah-html-remove-html-tags (point) $p2)
+        (message "%s" $deletedText)
+        $deletedText
+        ))))
+
+(defun xah-remove-all-wikipedia-link ()
+  "Delete all wikipedia links in a html file, except image links etc.
+Version 2018-06-03"
+  (interactive)
+  (let ($p1
+        $p2 $deletedText
+        ($resultList '()))
+    (goto-char (point-min))
+    (while (re-search-forward "<a href=\"https?://...wikipedia.org/wiki/" nil t)
+      (progn
+        (search-backward "<a href" )
+        (setq $p1 (point))
+        (search-forward ">")
+        (setq $p2 (point))
+
+        (setq $deletedText (buffer-substring-no-properties $p1 $p2))
+        (push $deletedText $resultList)
+        (delete-region $p1 $p2)
+
+        (search-forward "</a>")
+        (setq $p2 (point))
+        (search-backward "</a>")
+        (setq $p1 (point))
+        (delete-region $p1 $p2)))
+
+    (goto-char (point-min))
+    (while (re-search-forward "<a class=\"wikipedia-69128\" href" nil t)
+      (progn
+        (search-backward "<a class=\"wikipedia-69128\" href" )
+        (setq $p1 (point))
+        (search-forward ">")
+        (setq $p2 (point))
+
+        (setq $deletedText (buffer-substring-no-properties $p1 $p2))
+        (push $deletedText $resultList)
+        (delete-region $p1 $p2)
+
+        (search-forward "</a>")
+        (setq $p2 (point))
+        (search-backward "</a>")
+        (setq $p1 (point))
+        (delete-region $p1 $p2)))
+    (terpri )
+    (mapc (lambda (x) (princ x) (terpri )) $resultList)))
+
+(defun xah-new-page ()
+  "Make a new blog page.
+version 2018-12-24"
+  (interactive)
+  (let* (
+         ($path-map
+          '(
+            ("/Users/xah/web/xahporn_org/porn/" . "Renee_Pornero.html")
+            ("/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
+            ("/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
+            ("/Users/xah/web/xahlee_org/Periodic_dosage_dir/" . "20030907_la_gangs.html")
+            ("/Users/xah/web/xahlee_org/sex/" . "Korean_gymnast_Son_Yeon_jae.html")
+            ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
+            ;;
+
+            ))
+
+         ($cur-fpath (buffer-file-name))
+         ($dir-path (file-name-directory $cur-fpath))
+
+         ($temp-fname (cdr (assoc $dir-path $path-map)))
+
+         ($temp-fpath (concat $dir-path $temp-fname))
+         (p1 (line-beginning-position))
+         (p2 (line-end-position))
+         (title1 (buffer-substring-no-properties p1 p2))
+         (fnameBase (downcase (replace-regexp-in-string " +" "_" title1 )))
+         (fpath (format "%s%s.html" (file-name-directory $temp-fpath) fnameBase))
+         p3
+         )
+
+    (find-file fpath)
+    (insert-file-contents $temp-fpath )
+
+    (progn
+      (goto-char (point-min))
+      (search-forward "<title>" )
+      (insert title1)
+      (setq p3 (point))
+      (skip-chars-forward "^<")
+      (delete-region p3 (point))
+
+      (search-forward "<h1>" )
+      (insert title1)
+      (setq p3 (point))
+      (skip-chars-forward "^<")
+      (delete-region p3 (point))
+      (search-forward "</h1>" )
+
+      (when (search-forward "<div class=\"byline\">By Xah Lee. Date: <time>" nil t)
+        (insert (format-time-string "%Y-%m-%d"))
+        (setq p3 (point))
+        (search-forward "</div>" )
+        (delete-region p3 (point))
+        (insert "</time>.</div>"))
+
+      (setq p3 (point))
+
+      ;; porn bottom_ad_42482
+      ;; art ads_96352
+      ;; comp ads-bottom-65900
+
+      (when
+          (search-forward "ads-bottom-65900" nil t)
+        (search-backward "<")
+        (delete-region p3 (point))
+        (insert "\n\n\n\n")
+        (backward-char 2))
+
+      ;;
+      )
+
+    (save-buffer )
+    (kill-buffer )
+
+    (delete-region p1 p2)
+    (insert fpath)
+
+    (xah-all-linkify)
+    (search-backward "\"")
+    ;; (beginning-of-line)
+    ;; (insert "<p>")
+    ;; (end-of-line )
+    ;; (insert "</p>")
+
+    ;;
+    ))

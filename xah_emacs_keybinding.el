@@ -122,7 +122,7 @@
 
   (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
 
-  (define-key xah-user-keymap (kbd "<f10>") 'xah-insert-low-line)
+  (define-key xah-user-keymap (kbd "<f10>") 'xah-math-input-change-to-symbol)
 
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
