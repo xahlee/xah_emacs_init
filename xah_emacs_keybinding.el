@@ -292,3 +292,15 @@ For `rcirc-mode-hook'."
 (add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
 
 (setq rcirc-default-nick "mid2")
+
+(when (boundp 'xah-fly-h-keymap)
+  (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-etymology)
+  (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-word-dict-org)
+  (define-key xah-fly-h-keymap (kbd "3") 'xah-lookup-google)
+  (define-key xah-fly-h-keymap (kbd "4") 'xah-lookup-word-definition)
+  (define-key xah-fly-h-keymap (kbd "5") 'xah-lookup-wikipedia)
+  (define-key xah-fly-h-keymap (kbd "6") 'xah-lookup-wiktionary)
+  (define-key xah-fly-h-keymap (kbd "7") 'xah-lookup-all-dictionaries)
+  (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
+  ;;
+  )

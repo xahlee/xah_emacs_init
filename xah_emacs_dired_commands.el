@@ -143,12 +143,12 @@ Version 2015-07-30"
       (file-relative-name $fName)
       (file-relative-name $fName)))))
 
-(defun xah-process-image (@file-list @args-str @new-name-suffix @new-name-file-suffix )
+(defun xah-process-image (@file-list @args-str @new-name-suffix @new-file-ext )
   "Wrapper to ImageMagick's “convert” shell command.
 @file-list is a list of image file paths.
 @args-str is argument string passed to ImageMagick's “convert” command.
 @new-name-suffix is the string appended to file. e.g. “_new” gets you “…_new.jpg”
-@new-name-file-suffix is the new file's file extension. e.g. “.png”
+@new-file-ext is the new file's file extension. e.g. “.png”
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
@@ -160,7 +160,7 @@ Version 2016-07-19"
              (concat
               (file-name-sans-extension $f)
               @new-name-suffix
-              @new-name-file-suffix))
+              @new-file-ext))
        (while (file-exists-p $newName)
          (setq $newName
                (concat

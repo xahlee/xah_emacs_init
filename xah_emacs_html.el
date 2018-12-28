@@ -424,7 +424,6 @@ todo
 
     ))
 
-
 
 
 (defun xah-html-insert-date-section ()
@@ -463,7 +462,6 @@ Version 2018-09-03"
 ")
   )
 
-
 (defun xah-copy-html-by-link ()
   "clone a html page, see:
 
@@ -473,13 +471,14 @@ place cursor on the link of first line.
 This command will clone the file, from the 1st link's content, into the second link.
 The 2nd link file normally do not exit. it'll be created.
 
-version 2018-10-22"
+Version 2018-12-24"
   (interactive)
   (let ( p1 p2 fPath1 fPath2 doitp
             bds p3 p4 buf
             title)
     (progn
-      (search-forward "href=\"")
+      (search-backward " href=")
+      (forward-char 7)
       (setq p1 (point))
       (search-forward "\"" (line-end-position))
       (backward-char 1)
@@ -578,7 +577,7 @@ Version 2018-06-03"
 
 (defun xah-new-page ()
   "Make a new blog page.
-version 2018-12-24"
+Version 2018-12-28"
   (interactive)
   (let* (
          ($path-map
@@ -589,6 +588,9 @@ version 2018-12-24"
             ("/Users/xah/web/xahlee_org/Periodic_dosage_dir/" . "20030907_la_gangs.html")
             ("/Users/xah/web/xahlee_org/sex/" . "Korean_gymnast_Son_Yeon_jae.html")
             ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
+            ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
+            ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
+
             ;;
 
             ))
