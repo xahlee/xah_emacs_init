@@ -590,7 +590,7 @@ Version 2018-12-28"
             ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
             ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
             ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
-
+            ("/Users/xah/web/xaharts_org/dinju/" . "dunhuang.html")
             ;;
 
             ))
