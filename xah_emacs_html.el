@@ -577,7 +577,7 @@ Version 2018-06-03"
 
 (defun xah-new-page ()
   "Make a new blog page.
-Version 2018-12-28"
+Version 2019-01-02"
   (interactive)
   (let* (
          ($path-map
@@ -591,6 +591,9 @@ Version 2018-12-28"
             ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
             ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
             ("/Users/xah/web/xaharts_org/dinju/" . "dunhuang.html")
+            ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
+            ("/Users/xah/web/wordyenglish_com/lit/" . "china_dollar_bill_multilingual.html")
+            ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
             ;;
 
             ))

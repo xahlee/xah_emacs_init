@@ -9,6 +9,10 @@
 
 ;; mouse
 
+;; (setq mouse-yank-at-point t)
+(setq mouse-wheel-progressive-speed t)
+(setq mouse-wheel-progressive-speed nil)
+
 ;; set the “forward button” (5th button) to close.
 (cond
  ((string-equal system-type "gnu/linux")

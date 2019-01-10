@@ -130,6 +130,7 @@ f_cycle_image ({
     ("intn" "international" )
     ("introh" "introduction" )
     ("kb" "keyboard" )
+    ("ks" "keyboard shortcut" )
     ("kbg" "keybinding" )
     ("kbs" "keyboards" )
     ("kp" "keypad" )
@@ -340,7 +341,7 @@ f_cycle_image ({
     ("wink" "😜" )
     ("hearts" "♥💕💓💔💖💗💘💝💞💟💙💚💛💜" )
     ("omg" "😂" )
-    ("star" "⭐" )
+    ("star" "★" )
     ("star2" "🌟" )
 
     ("la" "←" )

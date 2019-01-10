@@ -15,11 +15,11 @@
 (defun xah-words-chinese-linkify ()
   "Make the Chinese character before cursor into Chinese dictionary reference links.
 URL `http://ergoemacs.org/emacs/elisp_chinese_char_linkify.html'
-Version 2016-01-18"
+Version 2019-01-03"
   (interactive)
   (let (
         ($template
-         "<div class=\"chinese-etymology-96656\"><b class=\"w\">▮</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|▮\">Translate</a> • <a href=\"http://en.wiktionary.org/wiki/▮\">Wiktionary</a> • <a href=\"http://www.chineseetymology.org/CharacterEtymology.aspx?submitButton1=Etymology&amp;characterInput=▮\">history</a></span></div>"
+         "<div class=\"chinese-etymology-96656\"><b class=\"w\">▮</b> <span class=\"en\"><a href=\"http://translate.google.com/#zh-CN|en|▮\">Translate</a> • <a href=\"http://en.wiktionary.org/wiki/▮\">Wiktionary</a> • <a href=\"http://hanziyuan.net/#▮\">history</a></span></div>"
          )
         ($char (buffer-substring-no-properties (- (point) 1) (point))))
     (delete-char -1)
