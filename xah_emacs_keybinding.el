@@ -9,6 +9,7 @@
   ;; (define-key xah-fly-key-map (kbd "<home>") xah-fly-e-keymap)
 
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
+  ;; (setq xah-fly-dot-keymap xah-user-keymap)
 
   ;; (define-key xah-fly-leader-key-map (kbd "e") nil)
 
@@ -145,8 +146,6 @@
   (define-key xah-user-keymap (kbd "b") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
   ;; d
-
-  (define-key xah-user-keymap (kbd "e") xah-fly-e-keymap)
 
   ;; f
   (define-key xah-user-keymap (kbd "g") 'xah-replace-straight-quotes)

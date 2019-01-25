@@ -546,47 +546,114 @@ Version 2017-01-11"
                (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
            $useMap))))))
 
-(defun xah-twitterfy (@begin @end &optional @to-direction)
-  "Shorten words for Twitter 140 char limit on current line or selection.
-The conversion direction is automatically determined.
+;; (defun xah-twitterfy-old-2019-01-14 (@begin @end &optional @direction)
+;;   "Shorten words for Twitter 280 char limit on current line or selection.
+;; The conversion direction is automatically determined.
 
-If `universal-argument' is called, ask for conversion direction.
+;; If `universal-argument' is called, ask for conversion direction.
 
-Note: calling this function twice in opposite direction does not necessarily return the origial, because the map is not one-to-one, also the string in the map overlaps.
+;; Note: calling this function twice in opposite direction does not necessarily return the origial, because the map is not one-to-one, also the string in the map overlaps.
 
-When called in lisp code, @begin @end are region begin/end positions. @to-direction must be one of the following values:
- 'auto
- 'shorten
- 'lengthen
+;; When called in lisp code, @begin @end are region begin/end positions. @direction must be one of the following values:
+;;  \"auto\"
+;;  \"shorten\"
+;;  \"lengthen\"
+
+;; URL `http://ergoemacs.org/emacs/elisp_twitterfy.html'
+;; Version 2019-01-14"
+;;   (interactive
+;;    (list
+;;     (if (use-region-p) (region-beginning) (line-beginning-position))
+;;     (if (use-region-p) (region-end) (line-end-position))
+;;     (if current-prefix-arg
+;;         (ido-completing-read
+;;          "Direction: "
+;;          '( "shorten"  "lengthen")
+;;          "PREDICATE"
+;;          "REQUIRE-MATCH")
+;;       "auto"
+;;       )))
+;;   (let (($shorten-map
+;;          [
+;;           [" are " " r "]
+;;           [" are, " " r,"]
+;;           [" you " " u "]
+;;           [" you," " u,"]
+;;           [" you." " u."]
+;;           [" you." " u。"]
+;;           ["e.g. " "eg "]
+;;           [" to " " 2 "]
+;;           [" your" " ur "]
+;;           [" and " "＆"]
+;;           ["because" "cuz"]
+;;           ["therefore " "∴"]
+;;           [" at " " @ "]
+;;           [" love " " ♥ "]
+;;           [" one " " 1 "]
+;;           [" two " " 2 "]
+;;           [" three " " 3 "]
+;;           [" four " " 4 "]
+;;           [" zero " " 0 "]
+;;           ["hexadecimal " "hex "]
+;;           ["Emacs: " "#emacs "]
+;;           ["JavaScript: " "#JavaScript "]
+;;           ["Python: " "#python "]
+;;           ["Ruby: " "#ruby "]
+;;           ["Perl: " "#perl "]
+;;           ["Emacs Lisp: " "#emacs #lisp "]
+;;           ["Elisp: " "#emacs #lisp "]
+;;           [", " "，"]
+;;           ["..." "…"]
+;;           [". " "。"]
+;;           ["? " "？"]
+;;           [": " "："]
+;;           ["! " "！"]]
+;;          ))
+;;     (save-restriction
+;;       (narrow-to-region @begin @end)
+;;       (when (string= @direction "auto")
+;;         (goto-char (point-min))
+;;         (setq @direction
+;;               (if (re-search-forward "。\\|，\\|？\\|！" nil t)
+;;                   "lengthen" "shorten"
+;;                   )))
+;;       (let ( (case-fold-search nil)
+;;              ($map (if (string= @direction "shorten")
+;;                        $shorten-map
+;;                      (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $shorten-map))))
+;;         (mapc
+;;          (lambda ($x)
+;;            (goto-char (point-min))
+;;            (while (search-forward (elt $x 0) nil t)
+;;              (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
+;;          $map)
+;;         (goto-char (point-min))
+;;         (while (re-search-forward "  +" nil t)
+;;           (replace-match " " "FIXEDCASE" "LITERAL")))
+;;       (goto-char 280))))
+
+(defun xah-twitterfy ()
+  "Shorten words for Twitter 280 char limit on current line or selection.
+
+If `universal-argument' is called first, ask for conversion direction (shorten/lenthen).
+
+Note: calling this function twice in opposite direction does not necessarily return the origial, because the map is not one-to-one.
 
 URL `http://ergoemacs.org/emacs/elisp_twitterfy.html'
-Version 2018-07-12"
-  (interactive
-   (list
-    (if (use-region-p) (region-beginning) (line-beginning-position))
-    (if (use-region-p) (region-end) (line-end-position))
-    (intern
-     (if current-prefix-arg
-         (ido-completing-read
-          "Direction: "
-          '( "shorten"  "lengthen")
-          "PREDICATE"
-          "REQUIRE-MATCH")
-       "auto"
-       ))))
-  (let (($shorten-map
+Version 2019-01-16"
+  (interactive)
+  (let (
+        $p1 $p2
+        $direction
+        ($shorten-map
          [
-          [" are " " r "]
-          [" are, " " r,"]
-          [" you " " u "]
-          [" you," " u,"]
-          [" you." " u."]
-          [" you." " u。"]
+          ["\\bare\\b" "r"]
+          ["\\byou\\b" "u"]
           ["e.g. " "eg "]
-          [" to " " 2 "]
+          ["\bto\b" "2"]
           [" your" " ur "]
-          [" and " "＆"]
-          ["because" "cuz"]
+          ["\\band\\b" "＆"]
+          ["because" "∵"]
           ["therefore " "∴"]
           [" at " " @ "]
           [" love " " ♥ "]
@@ -604,37 +671,79 @@ Version 2018-07-12"
           ["Emacs Lisp: " "#emacs #lisp "]
           ["Elisp: " "#emacs #lisp "]
           [", " "，"]
-          ["..." "…"]
-          [". " "。"]
-          ["? " "？"]
+          ["\\.\\.\\." "…"]
+          ["\\. " "。"]
+          ["\\? " "？"]
           [": " "："]
           ["! " "！"]]
+         )
+        ($lengeth-map
+         [
+          ["\\bu\\b" "you"]
+          ["\\br\\b" "are"]
+          ["eg " "e.g. "]
+          [" 2 " " to "]
+          ["\\bur\\b" "your"]
+          ["\\b＆\\b" "and"]
+          ["\\bcuz\\b" "because"]
+          ["\\b∴\\b" "therefore "]
+          [" @ " " at "]
+          [" ♥ " " love "]
+          [" 1 " " one "]
+          [" 2 " " two "]
+          [" 3 " " three "]
+          [" 4 " " four "]
+          [" 0 " " zero "]
+          ["hex " "hexadecimal "]
+          ["，" ", "]
+          ["…" "..."]
+          ["。" ". "]
+          ["？" "? "]
+          ["：" ": "]
+          ["！" "! "]
+          ]
          ))
-    (save-excursion
-      (save-restriction
-        (narrow-to-region @begin @end)
-        (when (string= @to-direction 'auto)
-          (goto-char (point-min))
-          (if
-              (re-search-forward "。\\|，\\|？\\|！" nil t)
-              (setq @to-direction 'lengthen)
-            (setq @to-direction 'shorten)))
-        (let ( (case-fold-search nil))
-          (mapc
-           (lambda ($x)
-             (goto-char (point-min))
-             (while (search-forward (elt $x 0) nil t)
-               (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
-           (if (string= @to-direction 'shorten)
-               $shorten-map
-             (mapcar (lambda ($pair) (vector (elt $pair 1) (elt $pair 0))) $shorten-map)))
-          (goto-char (point-min))
-          (while (search-forward "  " nil t)
-            (replace-match " " "FIXEDCASE" "LITERAL"))
-
-          (goto-char (point-min))
-          (while (search-forward "  " nil t)
-            (replace-match " " "FIXEDCASE" "LITERAL")))))))
+    (if (region-active-p)
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn
+              (setq $p1 (point))
+              (re-search-forward "\n[ \t]*\n"))
+          (setq $p1 (point)))
+        (progn
+          (re-search-forward "\n[ \t]*\n" nil "move")
+          (setq $p2 (point)))))
+    (setq $direction
+          (if current-prefix-arg
+              (ido-completing-read
+               "Direction: "
+               '( "shorten"  "lengthen")
+               "PREDICATE"
+               "REQUIRE-MATCH")
+            "auto"
+            ))
+    (save-restriction
+      (narrow-to-region $p1 $p2)
+      (when (string= $direction "auto")
+        (goto-char (point-min))
+        (setq $direction
+              (if (re-search-forward "。\\|，\\|？\\|！" nil t)
+                  "lengthen" "shorten"
+                  )))
+      (let ( (case-fold-search nil))
+        (mapc
+         (lambda ($x)
+           (goto-char (point-min))
+           (while (re-search-forward (elt $x 0) nil t)
+             (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
+         (if (string= $direction "shorten")
+             $shorten-map
+           $lengeth-map))
+        (goto-char (point-min))
+        (while (re-search-forward "  +" nil t)
+          (replace-match " " "FIXEDCASE" "LITERAL")))
+      (goto-char (+ (point-min) 280)))))
 
      ;; (let*
      ;;     ;; 2016-11-06

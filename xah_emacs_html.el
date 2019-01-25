@@ -312,13 +312,11 @@ from directories checked are:
 
 The first file whose name starts with ee or tt or contain “Screen Shot”, will be moved.
 
-The destination dir is asked by a prompt.
+The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase extension name is lowercased. Space in filename is replaced by the low line char “_”.
+If the file name ends in png, “optipng” is called on it.
 
-the new file name is with ee removed.
-Any space in filename is replaced by the low line char “_”.
-If the file name ends in png, 「optipng filename」 is called on it.
-
-Version 2018-12-12"
+URL `http://ergoemacs.org/emacs/move_image_file.html'
+Version 2019-01-16"
   (interactive
    (list
     (read-directory-name "Move to dir:" )))
@@ -328,7 +326,13 @@ Version 2018-12-12"
         $ext
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
-        ($randomHex (format  (concat "%05x" ) (random (1- (expt 16 5))))))
+        ($randStr
+         (let* (($charset "bcdfghjkmnpqrstvwxyz23456789")
+               ($len (length $charset))
+               (rdlist nil))
+           (dotimes (_ 5)
+             (push (char-to-string (elt $charset (random $len)))  rdlist))
+           (mapconcat 'identity rdlist ""))))
     (setq $fromPath
           (catch 'TAG
             (dolist (x $dirs )
@@ -341,7 +345,7 @@ Version 2018-12-12"
     (when (not $fromPath)
       (error "no file name starts with ee nor contain “Screen Shot” at dirs %s" $dirs))
 
-    (setq $ext (file-name-extension $fromPath ))
+    (setq $ext (downcase (file-name-extension $fromPath )))
     (setq $newName (file-name-nondirectory (file-name-sans-extension $fromPath)))
     (setq $newName
           (replace-regexp-in-string
@@ -353,7 +357,7 @@ Version 2018-12-12"
     (setq $newName
           (concat (replace-regexp-in-string " " "_" $newName)
                   "_"
-                  $randomHex
+                  $randStr
                   "."
                   ))
     (setq $toPath (concat (file-name-as-directory @toDirName ) $newName $ext))
@@ -513,8 +517,8 @@ Version 2018-12-24"
     ))
 
 (defun xah-remove-wikipedia-link ()
-  "delet wikipedia link at cursor position
-Version 2017-06-05"
+  "Delet wikipedia link at cursor position
+Version 2019-01-11"
   (interactive)
   (require 'xah-html-mode)
   (let ( $p2
@@ -523,7 +527,7 @@ Version 2017-06-05"
     (when (search-forward "</a>")
       (progn
         (setq $p2 (point))
-        (search-backward "<a href=\"http://en.wikipedia.org/wiki/")
+        (search-backward "<a href=\"https://en.wikipedia.org/wiki/")
         (setq $deletedText (buffer-substring (point) $p2))
         (xah-html-remove-html-tags (point) $p2)
         (message "%s" $deletedText)
@@ -577,7 +581,7 @@ Version 2018-06-03"
 
 (defun xah-new-page ()
   "Make a new blog page.
-Version 2019-01-02"
+Version 2019-01-13"
   (interactive)
   (let* (
          ($path-map
@@ -590,10 +594,13 @@ Version 2019-01-02"
             ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
             ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
             ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
-            ("/Users/xah/web/xaharts_org/dinju/" . "dunhuang.html")
+            ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
             ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
             ("/Users/xah/web/wordyenglish_com/lit/" . "china_dollar_bill_multilingual.html")
             ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
+            ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
+            ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
+            ("/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
             ;;
 
             ))

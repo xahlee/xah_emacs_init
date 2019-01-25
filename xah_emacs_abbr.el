@@ -2,9 +2,6 @@
 ;; emacs abbrev def
 ;; 〈Using Emacs Abbrev Mode for Abbreviation〉 http://ergoemacs.org/emacs/emacs_abbrev_mode.html
 
-; load my abbreviations file
-;(read-abbrev-file "emacs_abbrev")
-
 
 
 (clear-abbrev-table global-abbrev-table)
@@ -54,7 +51,6 @@ f_cycle_image ({
     ("dnt" "don't" )
     ("dsnt" "doesn't" )
     ("dvp" "develop" )
-    ("eg" "e.g." )
     ("hnt" "haven't" )
     ("hs" "here's" )
     ("ie" "i.e." )
@@ -114,7 +110,7 @@ f_cycle_image ({
     ("pt" "Put this in your emacs init file:" )
     ("env" "environment" )
     ("esp" "especially" )
-    ("ex" "example" )
+    ("ex" "example:" )
     ("exp3" "experience" )
     ("expr" "expression" )
     ("faq" "frequently asked questions" )
@@ -234,10 +230,25 @@ f_cycle_image ({
     ("wm" "Window Manager" )
     ("wh" "width height" )
 
-    ("e" "(▮)" )
-    ("eu" "[▮]" )
-    ("ei" "{▮}" )
-    ("eh" "\"▮\"" )
+    ;; brackets, parenthesis
+
+    ("eb" "" xah-insert-black-lenticular-bracket【】)
+    ("ec" "" xah-insert-ascii-single-quote)
+    ("ed" "" xah-insert-double-curly-quote“”)
+    ("ef" "" xah-insert-emacs-quote)
+    ("eg" "" xah-insert-ascii-double-quote)
+    ("eh" "" xah-insert-brace) ; {}
+    ("ei" "" xah-insert-curly-single-quote‘’)
+    ("el3" "" xah-insert-formfeed)
+    ("em" "" xah-insert-corner-bracket「」)
+    ("en" "" xah-insert-square-bracket) ; []
+    ("ep" "" xah-insert-single-angle-quote‹›)
+    ("er" "" xah-insert-tortoise-shell-bracket〔〕 )
+    ("es" "" xah-insert-string-assignment)
+    ("et" "" xah-insert-paren)
+    ("eu" "" xah-insert-date)
+    ("ew" "" xah-insert-angle-bracket〈〉)
+    ("ey" "" xah-insert-double-angle-quote«»)
 
     ;; computing, proper noun
     ("ahk" "AutoHotkey" )
@@ -535,10 +546,11 @@ Version 2016-10-24"
 (setq abbrev-expand-function 'xah-global-expand-abbrev)
 
 (defun xah-global-expand-abbrev ()
-  "Expand the symbol before cursor,
+  "function for value of `abbrev-expand-function'.
+Expand the symbol before cursor,
 if cursor is not in string or comment.
 Returns the abbrev symbol if there's a expansion, else nil.
-Version 2017-01-13"
+Version 2019-01-10"
   (interactive)
   (when (xah-elisp-abbrev-enable-function) ; abbrev property :enable-function doesn't seem to work, so check here instead
     (let ( $p1 $p2
@@ -553,7 +565,7 @@ Version 2017-01-13"
       ;;   (setq $p2 $p0))
 
       (save-excursion
-        ;; 2017-01-16 note: we select the whole symbol to solve a problem. problem is: if “aa”  is a abbrev, and “▮bbcc” is existing word with cursor at beginning, and user wants to type aa-bbcc. Normally, aa immediately expands. This prevent people editing bbcc to become aa-bbcc. This happens for example in elisp “search-forward” to get “re-search-forward”. The downside of this is that, people cannot type a abbrev when in middle of a word.
+        ;; 2017-01-16 note: we select the whole symbol to solve a problem. problem is: if “aa”  is a abbrev, and “▮bbcc” is existing word with cursor at beginning, and user wants to type aa- to result in aa-bbcc. Normally, aa immediately expands. This prevent people editing bbcc to become aa-bbcc. This happens for example in elisp, when editing “search-forward” to become “re-search-forward”. The downside of this is that, people cannot type a abbrev when in middle of a word.
         (forward-symbol -1)
         (setq $p1 (point))
         (forward-symbol 1)
