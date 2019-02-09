@@ -61,32 +61,34 @@ Version 2017-06-02"
     (setq line-spacing 0.5))
   (redraw-frame (selected-frame)))
 
-(defun xah-toggle-read-novel-mode ()
-  "Setup current buffer to be suitable for reading long novel/article text.
+;; (defun xah-toggle-read-novel-mode-old-2019-01-30 ()
+;;   "Setup current buffer to be suitable for reading long novel/article text.
 
-• Line wrap at word boundaries.
-• Set a right margin.
-• line spacing is increased.
-• variable width font is used.
+;; • Line wrap at word boundaries.
+;; • Set a right margin.
+;; • line spacing is increased.
+;; • variable width font is used.
 
-Call again to toggle back.
-URL `http://ergoemacs.org/emacs/emacs_novel_reading_mode.html'
-Version 2017-02-27"
-  (interactive)
-  (if (get this-command 'state-on-p)
-      (progn
-        (set-window-margins nil 0 0)
-        (variable-pitch-mode 0)
-        (setq line-spacing nil)
-        (setq word-wrap nil)
-        (put this-command 'state-on-p nil))
-    (progn
-      (set-window-margins nil 0 9)
-      (variable-pitch-mode 1)
-      (setq line-spacing 0.4)
-      (setq word-wrap t)
-      (put this-command 'state-on-p t)))
-  (redraw-frame (selected-frame)))
+;; Call again to toggle back.
+;; URL `http://ergoemacs.org/emacs/emacs_novel_reading_mode.html'
+;; Version 2017-02-27"
+;;   (interactive)
+;;   (if (get this-command 'state-on-p)
+;;       (progn
+;;         (set-window-margins nil 0 0)
+;;         (variable-pitch-mode 0)
+;;         (setq line-spacing nil)
+;;         (setq word-wrap nil)
+;;         (put this-command 'state-on-p nil))
+;;     (progn
+;;       (set-window-margins nil 0 30)
+;;       (variable-pitch-mode 1)
+;;       (setq line-spacing 0.4)
+;;       (setq word-wrap t)
+;;       (put this-command 'state-on-p t)))
+;;   (redraw-frame (selected-frame)))
+
+
 
 
 

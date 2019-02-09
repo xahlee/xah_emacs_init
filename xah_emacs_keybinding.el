@@ -128,14 +128,15 @@
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
 
-  (define-key xah-user-keymap (kbd ", h") 'xah-dired-scale-image)
-  (define-key xah-user-keymap (kbd ", t") 'xah-dired-2jpg)
-  (define-key xah-user-keymap (kbd ", d") 'xah-image-autocrop)
-  (define-key xah-user-keymap (kbd ", g") 'xah-dired-2drawing)
-  (define-key xah-user-keymap (kbd ", n") 'xah-dired-2png)
+
   (define-key xah-user-keymap (kbd ", c") 'xah-create-thumbnail-img)
+  (define-key xah-user-keymap (kbd ", d") 'xah-image-autocrop)
   (define-key xah-user-keymap (kbd ", e") 'xah-dired-show-metadata)
-  (define-key xah-user-keymap (kbd ", n") 'xah-open-in-gimp)
+  (define-key xah-user-keymap (kbd ", g") 'xah-dired-2drawing)
+  (define-key xah-user-keymap (kbd ", h") 'xah-dired-scale-image)
+  (define-key xah-user-keymap (kbd ", n") 'xah-dired-2png)
+  (define-key xah-user-keymap (kbd ", p") 'xah-open-in-gimp)
+  (define-key xah-user-keymap (kbd ", t") 'xah-dired-2jpg)
   (define-key xah-user-keymap (kbd ", u") 'xah-dired-remove-all-metadata)
 
   (define-key xah-user-keymap (kbd "8") 'xah-find-count)
@@ -208,8 +209,11 @@
   (define-key xah-elisp-mode-map (kbd "<delete>") xah-elisp-mode-no-chord-map))
 
 (when (boundp 'xah-css-mode-no-chord-map)
-    (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
-    (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map))
+  (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
+  (define-key xah-css-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
+  (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map)
+  ;;
+  )
 
 (when (boundp 'xah-clojure-mode-map)
     (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map))

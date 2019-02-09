@@ -57,11 +57,13 @@ f_cycle_image ({
     ("iirc" "if i recall correctly" )
     ("im" "I'm" )
     ("isnt" "isn't" )
+    ("pov" "point of view" )
     ("sa" "See also:" )
     ("shnt" "shouldn't" )
+    ("ths" "this is" )
+    ("ti" "that is," )
     ("tr" "there are" )
     ("ts" "there is" )
-    ("ths" "this is" )
     ("ty" "thank you" )
     ("uc" "you see" )
     ("ull" "you'll" )
@@ -70,7 +72,6 @@ f_cycle_image ({
     ("wrt" "with respect to" )
     ("wsnt" "wasn't" )
     ("wtdb" "What's the difference between" )
-    ("pov" "point of view" )
 
     ;; english, single word
 

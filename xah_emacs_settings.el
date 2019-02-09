@@ -293,38 +293,6 @@ Version 2017-11-10"
 
 (setq use-dialog-box nil)
 
-
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; (defalias 'outline-mode 'org-mode)
-
-(defalias 'xcm 'xah-css-mode)
-(defalias 'xem 'xah-elisp-mode)
-(defalias 'xhm 'xah-html-mode)
-(defalias 'xjm 'xah-js-mode)
-;; xah-clojure-mode
-
-(defalias 'ms 'magit-status)
-
-(defalias 'xois 'xah-open-in-safari)
-
-(defalias 'lcd 'list-colors-display)
-(defalias 'ds 'desktop-save)
-(defalias 'dt 'desktop-save)
-(defalias 'dsm 'desktop-save-mode)
-
-(defalias 'elm 'emacs-lisp-mode)
-(defalias 'hm 'html-mode)
-(defalias 'gm 'go-mode)
-(defalias 'jsm 'js-mode)
-(defalias 'fm 'fundamental-mode)
-(defalias 'ssm 'shell-script-mode)
-
-(defalias 'rs 'replace-string)
-
-(defalias 'tpu-edt 'forward-char)
-(defalias 'tpu-edt-on 'forward-char) ; fuck tpu-edt
 
 
 

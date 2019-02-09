@@ -310,33 +310,32 @@ from directories checked are:
 ~/
 /tmp/
 
-The first file whose name starts with ee or tt or contain “Screen Shot”, will be moved.
+The first file whose name starts with ee or tt or contain “Screenshot”, “Screen Shot” , will be moved.
 
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase extension name is lowercased. Space in filename is replaced by the low line char “_”.
 If the file name ends in png, “optipng” is called on it.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2019-01-16"
-  (interactive
-   (list
-    (read-directory-name "Move to dir:" )))
+Version 2019-02-09"
+  (interactive (list (read-directory-name "Move to dir:" )))
   (let (
         $fromPath
-        $newName
+        $newName1
         $ext
         $toPath
         ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
         ($randStr
          (let* (($charset "bcdfghjkmnpqrstvwxyz23456789")
-               ($len (length $charset))
-               (rdlist nil))
+                ($len (length $charset))
+                (rdlist nil))
            (dotimes (_ 5)
              (push (char-to-string (elt $charset (random $len)))  rdlist))
            (mapconcat 'identity rdlist ""))))
     (setq $fromPath
           (catch 'TAG
             (dolist (x $dirs )
-              (let ((mm (directory-files x t "^ee\\|^tt\\|Screen Shot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
+
+              (let ((mm (directory-files x t "^ee\\|^tt\\|Screen Shot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
                 (if mm
                     (progn
                       (throw 'TAG (car mm)))
@@ -346,21 +345,21 @@ Version 2019-01-16"
       (error "no file name starts with ee nor contain “Screen Shot” at dirs %s" $dirs))
 
     (setq $ext (downcase (file-name-extension $fromPath )))
-    (setq $newName (file-name-nondirectory (file-name-sans-extension $fromPath)))
-    (setq $newName
+    (setq $newName1 (file-name-nondirectory (file-name-sans-extension $fromPath)))
+    (setq $newName1
           (replace-regexp-in-string
            "Screen Shot \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\) at [0-9]+.[0-9]\\{2\\}.[0-9]\\{2\\} \\(AM\\|PM\\)"
            "screenshot_\\1"
-           $newName ))
+           $newName1 ))
     ;; Screen Shot 2018-07-25 at 2.46.36 AM.png
-    (setq $newName (read-string "file name:" $newName nil $newName ))
-    (setq $newName
-          (concat (replace-regexp-in-string " " "_" $newName)
+    (setq $newName1 (read-string "file name:" $newName1 nil $newName1 ))
+    (setq $newName1
+          (concat (replace-regexp-in-string " " "_" $newName1)
                   "_"
                   $randStr
                   "."
                   ))
-    (setq $toPath (concat (file-name-as-directory @toDirName ) $newName $ext))
+    (setq $toPath (concat (file-name-as-directory @toDirName ) $newName1 $ext))
 
     (when (string-equal $ext "jpg-large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
@@ -376,7 +375,7 @@ Version 2019-01-16"
         (when (string-equal (file-name-extension $toPath ) "png")
           (when (eq (shell-command "which optipng") 0)
             (message "optimizing with optipng")
-            (shell-command (concat "optipng " $toPath))))
+            (shell-command (concat "optipng " $toPath " &"))))
         (when (string-equal major-mode "dired-mode")
           (revert-buffer))
         (if (string-equal major-mode "xah-html-mode")
@@ -581,7 +580,7 @@ Version 2018-06-03"
 
 (defun xah-new-page ()
   "Make a new blog page.
-Version 2019-01-13"
+Version 2019-02-02"
   (interactive)
   (let* (
          ($path-map
@@ -596,11 +595,13 @@ Version 2019-01-13"
             ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
             ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
             ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
-            ("/Users/xah/web/wordyenglish_com/lit/" . "china_dollar_bill_multilingual.html")
             ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
             ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
             ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
             ("/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
+            ("/Users/xah/web/wordyenglish_com/lit/" . "china_dollar_bill_multilingual.html")
+            ("/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
+
             ;;
 
             ))

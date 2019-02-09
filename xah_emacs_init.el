@@ -154,6 +154,7 @@ Version 2017-07-19"
 (load (xah-get-fullpath "xah_emacs_keybinding"))
 (load (xah-get-fullpath "xah_emacs_mouse_setup"))
 
+(load (xah-get-fullpath "xah_emacs_alias"))
 
 (progn
   (add-to-list 'load-path "~/git/xahk-mode.el/")

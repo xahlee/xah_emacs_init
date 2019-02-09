@@ -472,8 +472,6 @@ The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath
 sample
 file:///home/xah/web/xahlee_info/node_api/process.html#process_process_execpath
 
-file:///home/xah/web/xahlee_info/node_api/process.html#process_process_execpath
-
 <span class=\"ref\"><a href=\"../node_api/process.html#process_process_execpath\">Node doc process.execpath</a></span>
 
 linkText
