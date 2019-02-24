@@ -54,6 +54,8 @@
   (global-set-key (kbd "s-=") 'text-scale-increase)
   (global-set-key (kbd "s--") 'text-scale-decrease)
 
+  (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
+
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
   (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
   (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
@@ -210,7 +212,6 @@
 
 (when (boundp 'xah-css-mode-no-chord-map)
   (define-key xah-css-mode-no-chord-map (kbd "s") 'xah-sync-css)
-  (define-key xah-css-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
   (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map)
   ;;
   )

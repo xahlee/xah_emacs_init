@@ -88,8 +88,6 @@ Version 2017-06-02"
 ;;       (put this-command 'state-on-p t)))
 ;;   (redraw-frame (selected-frame)))
 
-
-
 
 
 (defun xah-set-input-method-to-chinese (@n)
@@ -636,8 +634,6 @@ Version 2015-07-24"
         (save-buffer)
         (kill-buffer $buffer)))))
 
-
-
 
 
 (defun xah-check-parens-balance ()
@@ -739,3 +735,89 @@ Version 2017-08-27"
     (delete-region $p1 $p2)
     (insert $path)))
 
+(defun xah-open-link-in-firefox (&optional @fullpath)
+  "open url under cursor in Brave browser.
+Work in Mac OS only
+Version 2019-02-17"
+  (interactive)
+  (let ($path)
+    (if @fullpath
+        (progn (setq $path @fullpath))
+      (let (($inputStr
+              (if (use-region-p)
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (let ($p0 $p1 $p2
+                          ($pathStops "^  \t\n\"`'‘’“”|[]{}「」<>〔〕〈〉《》【】〖〗«»‹›❮❯❬❭〘〙·。\\"))
+                  (setq $p0 (point))
+                  (skip-chars-backward $pathStops)
+                  (setq $p1 (point))
+                  (goto-char $p0)
+                  (skip-chars-forward $pathStops)
+                  (setq $p2 (point))
+                  (goto-char $p0)
+                  (buffer-substring-no-properties $p1 $p2)))))
+        (setq $path (replace-regexp-in-string
+                     "^file:///" "/"
+                     (replace-regexp-in-string
+                      ":\\'" "" $inputStr)))))
+    (shell-command
+     (format "open -a 'Firefox.app' \"%s\"" $path))))
+
+(defun xah-open-link-in-brave (&optional @fullpath)
+  "open url under cursor in Brave browser.
+Work in Mac OS only
+Version 2019-02-17"
+  (interactive)
+  (let ($path)
+    (if @fullpath
+        (progn (setq $path @fullpath))
+      (let (($inputStr
+              (if (use-region-p)
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (let ($p0 $p1 $p2
+                          ($pathStops "^  \t\n\"`'‘’“”|[]{}「」<>〔〕〈〉《》【】〖〗«»‹›❮❯❬❭〘〙·。\\"))
+                  (setq $p0 (point))
+                  (skip-chars-backward $pathStops)
+                  (setq $p1 (point))
+                  (goto-char $p0)
+                  (skip-chars-forward $pathStops)
+                  (setq $p2 (point))
+                  (goto-char $p0)
+                  (buffer-substring-no-properties $p1 $p2)))))
+        (setq $path (replace-regexp-in-string
+                     "^file:///" "/"
+                     (replace-regexp-in-string
+                      ":\\'" "" $inputStr)))))
+    (shell-command
+     (format "open -a 'Brave Browser.app' \"%s\"" $path))))
+
+(defun xah-open-link-in-safari ()
+  "open url under cursor in Safari.
+Work in Mac OS only
+Version 2019-02-09"
+  (interactive)
+  (let* (($inputStr (if (use-region-p)
+                        (buffer-substring-no-properties (region-beginning) (region-end))
+                      (let ($p0 $p1 $p2
+                                ($pathStops "^  \t\n\"`'‘’“”|[]{}「」<>〔〕〈〉《》【】〖〗«»‹›❮❯❬❭〘〙·。\\"))
+                        (setq $p0 (point))
+                        (skip-chars-backward $pathStops)
+                        (setq $p1 (point))
+                        (goto-char $p0)
+                        (skip-chars-forward $pathStops)
+                        (setq $p2 (point))
+                        (goto-char $p0)
+                        (buffer-substring-no-properties $p1 $p2))))
+         ($path
+          (replace-regexp-in-string
+           "^file:///" "/"
+           (replace-regexp-in-string
+            ":\\'" "" $inputStr))))
+    (shell-command
+     (format "open -a Safari.app \"%s\"" $path))))
+
+(defun xah-clear-recentf-history ()
+  "Clear recentf history
+version 2019-02-11"
+  (interactive)
+  (setq recentf-list nil))

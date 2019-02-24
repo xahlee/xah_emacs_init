@@ -54,6 +54,7 @@ Version 2017-07-19"
 
 (add-to-list 'load-path "~/git/xah-fly-keys/")
 (require 'xah-fly-keys)
+(xah-fly-keys-set-layout "dvorak")
 (when (fboundp 'xah-fly-keys)
   (xah-fly-keys 1)
   (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file))

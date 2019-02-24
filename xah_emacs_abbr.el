@@ -305,7 +305,7 @@ f_cycle_image ({
     ("tag3" "\\([</>=\" A-Za-z0-9]+\\)" )
 
     ;; shell
-    ("ytd" "youtube-dl --id -k -x " )
+    ("ytd" "youtube-dl --id -k -x --" )
 
     ;; html
     ("mxh" "<kbd>Alt</kbd>+<kbd>x</kbd>")

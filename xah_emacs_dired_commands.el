@@ -50,8 +50,7 @@ Version 2017-12-07"
 
 If the file is not saved, save it first.
 
-URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2018-09-19"
+Version 2019-02-14"
   (interactive)
   (let* (
          ($file-list
@@ -69,7 +68,7 @@ Version 2018-09-19"
            (when (buffer-modified-p )
              (save-buffer))
            (shell-command
-            (format "open -a Brave.app \"%s\"" $fpath))) $file-list))))))
+            (format "open -a 'Brave Browser.app' \"%s\"" $fpath))) $file-list))))))
 
 (defun xah-open-in-safari ()
   "Open the current file or `dired' marked files in Mac's Safari browser.
@@ -178,34 +177,39 @@ Version 2016-07-19"
    @file-list )
   (revert-buffer))
 
-(defun xah-dired-scale-image (@file-list @scale-percentage @sharpen-p)
+(defun xah-dired-scale-image (@file-list @scale-percentage @quality @sharpen-p)
   "Create a scaled version of marked image files in dired.
 New file names have “-s” appended before the file name extension.
 
 If `universal-argument' is called first, output is PNG format. Else, JPG.
 
 When called in lisp code,
- @file-list is a list.
+ @file-list is a file fullpath list.
  @scale-percentage is a integer.
+ @quality is a integer, from 1 to 100.
  @sharpen-p is true or false.
 
 Requires ImageMagick unix shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2018-04-16"
+Version 2019-02-18"
   (interactive
    (let (
          ($fileList
           (cond
            ((string-equal major-mode "dired-mode") (dired-get-marked-files))
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:"))))))
+           (t (list (read-from-minibuffer "file name:")))))
+         (@quality (if current-prefix-arg
+                      (string-to-number (read-string "quality:" "90"))
+                    90)))
      (list $fileList
            (read-from-minibuffer "Scale %:")
-           (y-or-n-p "Sharpen"))))
+           @quality
+(y-or-n-p "Sharpen"))))
   (let ( ($outputSuffix (if current-prefix-arg ".png" ".jpg" )))
     (xah-process-image
      @file-list
-     (format "-scale %s%% -quality 90%% %s " @scale-percentage (if @sharpen-p "-sharpen 1" "" ))
+     (format "-scale %s%% -quality %s%% %s " @scale-percentage @quality (if @sharpen-p "-sharpen 1" "" ))
      "-s" $outputSuffix )))
 
 (defun xah-image-autocrop ()
@@ -470,15 +474,12 @@ Version 2018-12-22"
             (progn 90)))
          (new-width (round (* scale (float width))))
          (new-height (round (* scale (float height))))
-
          ;; (filename-new (format "tn_%dx%d_%s" new-width new-height filename))
          (filename-new (format "%s-s%dx%d.%s" corename new-width new-height fname-ext ))
          (filepath-new (concat directory filename-new))
          (new-rel-path (file-relative-name filepath-new))
-
          $cmdStr
          )
-
     (setq $cmdStr
           (format
            "convert %s '%s' '%s'"
@@ -492,7 +493,6 @@ Version 2018-12-22"
         (when (y-or-n-p "file exist 「%s」, do it anyway?")
           (shell-command $cmdStr))
       (shell-command $cmdStr))
-
     (search-backward "<" )
     (insert filepath-new "\n")
     (backward-word )))

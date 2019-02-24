@@ -78,7 +78,7 @@ Exception:
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Version 2018-09-09"
+Version 2019-02-09"
   (interactive)
   (let* (
          $p1 $p2
@@ -153,7 +153,6 @@ Version 2018-09-09"
             (insert "\n")
             (buffer-string)))
 
-
     ;; (message "%s" $cursorLink)
     (setq $altURL
           (if $cursorLink
@@ -197,4 +196,10 @@ Version 2018-09-09"
     (search-forward "<entry>" nil t)
     (beginning-of-line)
     (insert-atom-entry $titleText (xah-new-atom-id-tag) nil $inputStr $altURL)
-    (search-backward "</title>")))
+    (search-backward "<div xmlns=")
+    (search-forward ">")
+    (skip-chars-forward " \n")
+    (push-mark )
+    (search-backward "<title>")
+    (search-forward ">")
+    (push-mark )))

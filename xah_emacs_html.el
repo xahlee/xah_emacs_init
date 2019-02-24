@@ -316,8 +316,8 @@ The destination dir and new file name is asked by a prompt. A random string atta
 If the file name ends in png, “optipng” is called on it.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2019-02-09"
-  (interactive (list (read-directory-name "Move to dir:" )))
+Version 2019-02-17"
+  (interactive (list (read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
         $newName1
@@ -327,10 +327,10 @@ Version 2019-02-09"
         ($randStr
          (let* (($charset "bcdfghjkmnpqrstvwxyz23456789")
                 ($len (length $charset))
-                (rdlist nil))
+                ($randlist nil))
            (dotimes (_ 5)
-             (push (char-to-string (elt $charset (random $len)))  rdlist))
-           (mapconcat 'identity rdlist ""))))
+             (push (char-to-string (elt $charset (random $len)))  $randlist))
+           (mapconcat 'identity $randlist ""))))
     (setq $fromPath
           (catch 'TAG
             (dolist (x $dirs )
@@ -385,7 +385,19 @@ Version 2019-02-09"
               (insert $toPath)
               (insert "\n\n")
               (backward-word )
-              (xah-html-any-linkify))
+
+              (xah-html-any-linkify)
+
+              ;; (let ($p1 $p2 $altStr)
+              ;;   (setq $altStr (xah-html-image-linkify))
+              ;;   (search-backward "<img ")
+              ;;   (insert "<figure>\n")
+              ;;   (search-forward ">")
+              ;;   (insert "\n<figcaption>\n")
+              ;;   (insert $altStr "\n</figcaption>\n</figure>\n\n")
+              ;;   ;;
+              ;;   )
+              )
           (progn
             (insert "\n\n")
             (insert $toPath)
@@ -580,7 +592,7 @@ Version 2018-06-03"
 
 (defun xah-new-page ()
   "Make a new blog page.
-Version 2019-02-02"
+Version 2019-02-14"
   (interactive)
   (let* (
          ($path-map
@@ -620,59 +632,64 @@ Version 2019-02-02"
          p3
          )
 
-    (find-file fpath)
-    (insert-file-contents $temp-fpath )
+    (if (file-exists-p fpath)
+        (message "file exist: %s" fpath)
+      (progn
 
-    (progn
-      (goto-char (point-min))
-      (search-forward "<title>" )
-      (insert title1)
-      (setq p3 (point))
-      (skip-chars-forward "^<")
-      (delete-region p3 (point))
+        (find-file fpath)
+        (insert-file-contents $temp-fpath )
 
-      (search-forward "<h1>" )
-      (insert title1)
-      (setq p3 (point))
-      (skip-chars-forward "^<")
-      (delete-region p3 (point))
-      (search-forward "</h1>" )
+        (progn
+          (goto-char (point-min))
+          (search-forward "<title>" )
+          (insert title1)
+          (setq p3 (point))
+          (skip-chars-forward "^<")
+          (delete-region p3 (point))
 
-      (when (search-forward "<div class=\"byline\">By Xah Lee. Date: <time>" nil t)
-        (insert (format-time-string "%Y-%m-%d"))
-        (setq p3 (point))
-        (search-forward "</div>" )
-        (delete-region p3 (point))
-        (insert "</time>.</div>"))
+          (search-forward "<h1>" )
+          (insert title1)
+          (setq p3 (point))
+          (skip-chars-forward "^<")
+          (delete-region p3 (point))
+          (search-forward "</h1>" )
 
-      (setq p3 (point))
+          (when (search-forward "<div class=\"byline\">By Xah Lee. Date: <time>" nil t)
+            (insert (format-time-string "%Y-%m-%d"))
+            (setq p3 (point))
+            (search-forward "</div>" )
+            (delete-region p3 (point))
+            (insert "</time>.</div>"))
 
-      ;; porn bottom_ad_42482
-      ;; art ads_96352
-      ;; comp ads-bottom-65900
+          (setq p3 (point))
 
-      (when
-          (search-forward "ads-bottom-65900" nil t)
-        (search-backward "<")
-        (delete-region p3 (point))
-        (insert "\n\n\n\n")
-        (backward-char 2))
+          ;; porn bottom_ad_42482
+          ;; art ads_96352
+          ;; comp ads-bottom-65900
 
-      ;;
+          (when
+              (search-forward "ads-bottom-65900" nil t)
+            (search-backward "<")
+            (delete-region p3 (point))
+            (insert "\n\n\n\n")
+            (backward-char 2))
+
+          (save-buffer )
+          (kill-buffer )
+
+          ;;
+          ))
+      (delete-region p1 p2)
+      (insert fpath)
+
+      (xah-all-linkify)
+      (search-backward "\"")
+      ;; (beginning-of-line)
+      ;; (insert "<p>")
+      ;; (end-of-line )
+      ;; (insert "</p>")
+
       )
-
-    (save-buffer )
-    (kill-buffer )
-
-    (delete-region p1 p2)
-    (insert fpath)
-
-    (xah-all-linkify)
-    (search-backward "\"")
-    ;; (beginning-of-line)
-    ;; (insert "<p>")
-    ;; (end-of-line )
-    ;; (insert "</p>")
 
     ;;
     ))
