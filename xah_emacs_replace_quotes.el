@@ -640,7 +640,7 @@ If `universal-argument' is called first, ask for conversion direction (shorten/l
 Note: calling this function twice in opposite direction does not necessarily return the origial, because the map is not one-to-one.
 
 URL `http://ergoemacs.org/emacs/elisp_twitterfy.html'
-Version 2019-01-16"
+Version 2019-03-02"
   (interactive)
   (let (
         $p1 $p2
@@ -653,7 +653,8 @@ Version 2019-01-16"
           ["\bto\b" "2"]
           [" your" " ur "]
           ["\\band\\b" "＆"]
-          ["because" "∵"]
+          ["\\bbecause\\b" "∵"]
+          ["\\bcuz\\b" "∵"]
           ["therefore " "∴"]
           [" at " " @ "]
           [" love " " ♥ "]

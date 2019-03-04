@@ -68,6 +68,7 @@ Version 2017-07-19"
   (require 'xah-elisp-mode)
   )
 
+
 (add-to-list 'load-path "~/git/xah-insert-random-id.el/")
 (require 'xah-insert-random-id)
 
@@ -87,6 +88,10 @@ Version 2017-07-19"
     (setq htmlize-html-charset "utf-8")
     (setq htmlize-untabify nil)
     (setq htmlize-generate-hyperlinks nil)))
+
+;; (progn
+;;   (require 'command-log-mode)
+;;   )
 
 (progn
   (add-to-list 'load-path "~/git/xah-html-mode.el/")
