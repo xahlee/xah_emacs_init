@@ -510,16 +510,16 @@ See also `xah-convert-english-chinese-punctuation'
 
 (defun xah-convert-latin-alphabet-gothic (@begin @end @reverse-direction-p)
   "Replace English alphabets to Unicode gothic characters.
-For example, A ⇒ 𝔄, a ⇒ 𝔞.
+For example, A → 𝔄, a → 𝔞.
 
 When called interactively, work on current line or text selection.
 
-If any `universal-argument' is called first, reverse direction.
+If `universal-argument' is called first, reverse direction.
 
 When called in elisp, the @begin and @end are region begin/end positions to work on.
 
 URL `http://ergoemacs.org/misc/thou_shalt_use_emacs_lisp.html'
-Version 2017-01-11"
+Version 2019-03-07"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end) current-prefix-arg )
@@ -538,6 +538,110 @@ Version 2017-01-11"
     (save-excursion
       (save-restriction
         (narrow-to-region @begin @end)
+        (let ( (case-fold-search nil))
+          (mapc
+           (lambda ($x)
+             (goto-char (point-min))
+             (while (search-forward (elt $x 0) nil t)
+               (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
+           $useMap))))))
+
+(defun xah-convert-latin-to-rune (@begin @end @to-latin-p)
+  "Replace English alphabet to Unicode runic characters.
+For example, f → ᚠ, d → ᛞ.
+When called interactively, work on current line or text selection.
+
+If `universal-argument' is called first, reverse direction.
+Note: original letter case are not preserved. B may become b.
+
+URL `http://ergoemacs.org/misc/elisp_latin_to_rune.html'
+Version 2019-03-08"
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end) current-prefix-arg )
+     (list (line-beginning-position) (line-end-position) current-prefix-arg )))
+  (let* (
+         ($toLower
+          [["A" "a"]
+           ["B" "b"]
+           ["C" "c"]
+           ["D" "d"]
+           ["E" "e"]
+           ["F" "f"]
+           ["G" "g"]
+           ["H" "h"]
+           ["I" "i"]
+           ["J" "j"]
+           ["K" "k"]
+           ["L" "l"]
+           ["M" "m"]
+           ["N" "n"]
+           ["O" "o"]
+           ["P" "p"]
+           ["Q" "q"]
+           ["R" "r"]
+           ["S" "s"]
+           ["T" "t"]
+           ["U" "u"]
+           ["V" "v"]
+           ["W" "w"]
+           ["X" "x"]
+           ["Y" "y"]
+           ["Z" "z"]
+           ]
+          )
+         ($toLatin
+          [
+           ["ᚠ" "f"]
+           ["ᚢ" "u"]
+           ["ᚦ" "þ"]
+           ["ᚨ" "a"]
+           ["ᚱ" "r"]
+           ["ᚲ" "k"]
+           ["ᚷ" "g"]
+           ["ᚹ" "w"]
+           ["ᚺ" "h"]
+           ["ᚾ" "n"]
+           ["ᛁ" "i"]
+           ["ᛃ" "j"]
+           ["ᛈ" "p"]
+           ["ᛇ" "ï"]
+           ["ᛉ" "z"]
+           ["ᛊ" "s"]
+           ["ᛏ" "t"]
+           ["ᛒ" "b"]
+           ["ᛖ" "e"]
+           ["ᛗ" "m"]
+           ["ᛚ" "l"]
+           ["ᛜ" "ŋ"]
+           ["ᛞ" "d"]
+           ["ᛟ" "o"]
+           ["ᛍ" "c"]
+           ["ᛩ" "q"]
+           ["ᛪ" "x"]
+           ["ᚤ" "y"]
+           ["ᚡ" "v"]
+           ]
+          )
+         ($toRunic
+          (mapcar
+           (lambda ($x)
+             (vector (aref $x 1) (aref $x 0)))
+           $toLatin))
+         ($useMap (if @to-latin-p
+                      $toLatin
+                    $toRunic)))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region @begin @end)
+        (when (not @to-latin-p)
+          ;; change to lower case, but only for English letters, not for example greek etc.
+          (mapc
+           (lambda ($x)
+             (goto-char (point-min))
+             (while (search-forward (elt $x 0) nil t)
+               (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
+           $toLower))
         (let ( (case-fold-search nil))
           (mapc
            (lambda ($x)

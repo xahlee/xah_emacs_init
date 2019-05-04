@@ -75,7 +75,6 @@ f_cycle_image ({
 
     ;; english, single word
 
-
     ("alt3" "alternative" )
     ("ann" "announcement" )
     ("apr" "apparently" )
@@ -107,6 +106,7 @@ f_cycle_image ({
     ("dt" "deepthroat" )
     ("eff" "efficient" )
     ("eg3" "ergonomic" )
+    ("ege" "e.g." )
     ("env" "environment" )
     ("esp" "especially" )
     ("ex" "example:" )
@@ -342,10 +342,9 @@ f_cycle_image ({
     ("bu" "•" )
     ("usf" "🇺🇸" )
     ("catface" "😸" )
-
+    ("bell" "🔔" )
     ("good3" "👍" )
     ("applaud3" "👏" )
-
     ("heartface" "😻" )
     ("clown" "🤡" )
     ("angry" "😠" )
@@ -357,12 +356,10 @@ f_cycle_image ({
     ("omg" "😂" )
     ("star" "★" )
     ("star2" "🌟" )
-
     ("la" "←" )
     ("ua" "↑" )
     ("ra" "→" )
     ("da" "↓" )
-
     ("fn" "ƒ" )
 
     ;; code
@@ -419,7 +416,7 @@ f_cycle_image ({
     ("uxm" "http://xahmusic.org/" )
     ("uxsl" "http://xahsl.org/" )
 
-    ;; personal
+    ;; xah personal
     ("xkb" "#xahkeyboard" )
     ("xw" "#xahwords" )
     ("xa" "#xahart" )
@@ -428,6 +425,7 @@ f_cycle_image ({
     ("xjs" "#xahjs" )
     ("xp" "#xahpop" )
     ("sszw" "#杀杀中文" )
+    ("xts" "xah talk show" )
 
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee
@@ -473,6 +471,8 @@ func main() {
       ("imp" "import \"fmt\"\n")
 
       ("p" "fmt.Printf(\"%v\\n\", hh▮)")
+      ("spf" "fmt.Sprintf(\"%v\", hh▮)")
+
       ("pl" "fmt.Println(hh▮)")
       ("r" "return")
       ("st" "string")
@@ -508,7 +508,7 @@ x int
 	}")
 
       ("mbs" "var bb = make([]byte, 0, 9)")
-      ("sl" "var ss = []string{`a`,`b`}")
+      ("sl" "var ss = []int{1,2}")
       ("mp" "var mm = map[string]string{`a`: `1`, `b`: `2`}")
       ("mm" "var mp = make(map[string]int)")
       ("len" "len(▮)")

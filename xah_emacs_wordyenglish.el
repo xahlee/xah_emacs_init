@@ -208,16 +208,16 @@ insert a div tag above the current paragraph."
 
 (defun xah-words-word-etymology-linkify ()
   "Make the current word into a etymology reference link.
-Version 2018-08-16"
+Version 2019-03-20"
   (interactive)
-  (let ($p1 $p2 $input $result)
+  (let ($p1 $p2 $word
+            ($url "https://www.etymonline.com/word/"))
     (if (use-region-p)
-         (setq $p1 (region-beginning) $p2 (region-end))
-       (setq $p1 (line-beginning-position) $p2 (line-end-position)))
-    (setq $input (buffer-substring-no-properties $p1 $p2))
-    (setq $result (concat "etymology of <a href=\"https://www.etymonline.com/word/" $input "\">" $input "</a>"))
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (setq $p1 (line-beginning-position) $p2 (line-end-position)))
+    (setq $word (buffer-substring-no-properties $p1 $p2))
     (delete-region $p1 $p2)
-    (insert $result)))
+    (insert (format "[etymology of %s <a href=\"%s%s\">%s%s</a>]" $word $url $word $url $word))))
 
 (defun xah-words-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.

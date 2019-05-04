@@ -316,8 +316,8 @@ The destination dir and new file name is asked by a prompt. A random string atta
 If the file name ends in png, “optipng” is called on it.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2019-02-17"
-  (interactive (list (read-directory-name "Move img to dir:" )))
+Version 2019-04-30"
+  (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
         $newName1
@@ -343,8 +343,12 @@ Version 2019-02-17"
                   )))))
     (when (not $fromPath)
       (error "no file name starts with ee nor contain “Screen Shot” at dirs %s" $dirs))
-
-    (setq $ext (downcase (file-name-extension $fromPath )))
+    (setq $ext
+          (let (($x (file-name-extension $fromPath )))
+            (if $x
+                (downcase $x)
+              ""
+              )))
     (setq $newName1 (file-name-nondirectory (file-name-sans-extension $fromPath)))
     (setq $newName1
           (replace-regexp-in-string
@@ -529,16 +533,17 @@ Version 2018-12-24"
 
 (defun xah-remove-wikipedia-link ()
   "Delet wikipedia link at cursor position
-Version 2019-01-11"
+Version 2019-04-07"
   (interactive)
   (require 'xah-html-mode)
   (let ( $p2
-        $deletedText
-        )
+         $deletedText
+         )
     (when (search-forward "</a>")
       (progn
         (setq $p2 (point))
-        (search-backward "<a href=\"https://en.wikipedia.org/wiki/")
+        (re-search-backward "http.?://..\\.wikipedia.org/wiki/")
+        (re-search-backward "<a .*href=")
         (setq $deletedText (buffer-substring (point) $p2))
         (xah-html-remove-html-tags (point) $p2)
         (message "%s" $deletedText)
@@ -592,12 +597,11 @@ Version 2018-06-03"
 
 (defun xah-new-page ()
   "Make a new blog page.
-Version 2019-02-14"
+Version 2019-04-04"
   (interactive)
   (let* (
          ($path-map
           '(
-            ("/Users/xah/web/xahporn_org/porn/" . "Renee_Pornero.html")
             ("/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
             ("/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
             ("/Users/xah/web/xahlee_org/Periodic_dosage_dir/" . "20030907_la_gangs.html")
@@ -607,13 +611,14 @@ Version 2019-02-14"
             ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
             ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
             ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
+            ("/Users/xah/web/xahporn_org/porn/" . "Renee_Pornero.html")
             ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
             ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
             ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
             ("/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
             ("/Users/xah/web/wordyenglish_com/lit/" . "china_dollar_bill_multilingual.html")
             ("/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
-
+            ("/Users/xah/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
             ;;
 
             ))

@@ -830,4 +830,5 @@ Version 2019-03-03"
   (load "/Users/xah/git/xah_emacs_init/command-log-mode.el" )
   (command-log-mode)
   (global-command-log-mode)
-  (clm/open-command-log-buffer))
+  (clm/open-command-log-buffer)
+  (delete-window))

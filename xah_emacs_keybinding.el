@@ -44,6 +44,7 @@
 
   (global-set-key (kbd "s-w") 'xah-close-current-buffer)
   (global-set-key (kbd "s-r") 'xah-browse-url-of-buffer)
+  ;; (global-set-key (kbd "s-r") 'xah-open-in-safari)
   (global-set-key (kbd "s-T") 'xah-open-last-closed)
   (global-set-key (kbd "s-t") 'xah-new-empty-buffer)
   (global-set-key (kbd "s-n") 'xah-new-empty-buffer)
