@@ -7,22 +7,19 @@
 
 (defvar xahsite-external-docs nil "A vector of dir paths.")
 (setq  xahsite-external-docs
- [
-  "ergoemacs_org/emacs_manual/"
-  "xahlee_info/REC-SVG11-20110816/"
-  "xahlee_info/clojure-doc-1.8/"
-  "xahlee_info/css_2.1_spec/"
-  "xahlee_info/css_transitions/"
-  "xahlee_info/javascript_ecma-262_5.1_2011/"
-  "xahlee_info/javascript_ecma-262_6_2015/"
-  "xahlee_info/javascript_es2016/"
-  "xahlee_info/javascript_es6/"
-  "xahlee_info/jquery_doc/"
-  "xahlee_info/node_api/"
-  "xahlee_info/ocaml_doc/"
-  "xahlee_info/python_doc_2.7.6/"
-  "xahlee_info/python_doc_3.3.3/"
-  ])
+       [
+        "ergoemacs_org/emacs_manual/"
+        "xahlee_info/REC-SVG11-20110816/"
+        "xahlee_info/clojure-doc-1.8/"
+        "xahlee_info/css_2.1_spec/"
+        "xahlee_info/css_transitions/"
+        "xahlee_info/js_es2011/"
+        "xahlee_info/js_es2015/"
+        "xahlee_info/js_es2015_orig/"
+        "xahlee_info/js_es2016/"
+        "xahlee_info/js_es2018/"
+        "xahlee_info/node_api/"
+        ])
 
 (defun xahsite-generate-sitemap (@domain-name)
   "Generate a sitemap.xml.gz file of xahsite at doc root.

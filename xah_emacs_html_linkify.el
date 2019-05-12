@@ -560,7 +560,7 @@ text can be any of:
 They will be changed into a HTML link in various formats, depending on the input.
 
 If there is text selection, use it as input.
-Version 2017-07-27"
+Version 2019-05-11"
   (interactive)
   (if (string-match (concat "^" (expand-file-name "~/" ) "web/") (or (buffer-file-name) default-directory))
       (let ( $p1 $p2 $input)
@@ -581,21 +581,20 @@ Version 2017-07-27"
               (setq $p2 (point)))))
         (setq $input (buffer-substring-no-properties $p1 $p2))
         (cond
-         ((string-match-p "javascript_es2016/ECMAScript_2016" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "javascript_es6" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "javascript_ecma-262_5.1_2011" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "java8_doc" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "godoc" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "html_whatwg" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "html5_whatwg" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "css_2.1_spec" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "clojure-doc-1.8" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "python_doc_2" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "python_doc_3" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "dom-whatwg/DOM_Standard.html" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "REC-SVG11-20110816" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "css_transitions/CSS_Transitions.html" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "php-doc/" $input) (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+
+         ((string-match-p "js_es2011\\|js_es2015\\|js_es2015_orig\\|js_es2016\\|js_es2018" $input)
+          (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+
+         ((string-match-p "css_2.1_spec" $input)
+          (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+         ((string-match-p "clojure-doc-1.8" $input)
+          (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+
+         ((string-match-p "REC-SVG11-20110816" $input)
+          (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+         ((string-match-p "css_transitions/CSS_Transitions.html" $input)
+          (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
+
          ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" $input) (xah-blogger-linkify))
 
          ((string-match-p "/node_api/" $input) (xah-nodejs-ref-linkify))

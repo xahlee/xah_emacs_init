@@ -307,6 +307,7 @@ from directories checked are:
 ~/Downloads/
 ~/Pictures/
 ~/Desktop/
+~/Documents/
 ~/
 /tmp/
 
@@ -316,14 +317,14 @@ The destination dir and new file name is asked by a prompt. A random string atta
 If the file name ends in png, “optipng” is called on it.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2019-04-30"
+Version 2019-05-06"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
         $newName1
         $ext
         $toPath
-        ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/" "/tmp" ))
+        ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/Documents/" "~/" "/tmp" ))
         ($randStr
          (let* (($charset "bcdfghjkmnpqrstvwxyz23456789")
                 ($len (length $charset))
@@ -334,7 +335,6 @@ Version 2019-04-30"
     (setq $fromPath
           (catch 'TAG
             (dolist (x $dirs )
-
               (let ((mm (directory-files x t "^ee\\|^tt\\|Screen Shot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
                 (if mm
                     (progn
@@ -447,13 +447,24 @@ todo
 
 (defun xah-html-insert-date-section ()
   "Insert a section tag with date tag inside.
-Version 2018-09-03"
+Version 2019-05-10"
   (interactive)
   (when (use-region-p)
     (delete-region (region-beginning) (region-end)))
-  (insert (format "\n\n<section>\n\n<div class=\"date-xl\"><time>%s</time></div>\n\nx\n\n</section>\n\n\n" (format-time-string "%Y-%m-%d")))
-  (search-backward "x" )
-  (delete-char 1))
+  (insert (format "
+
+<section>
+
+<div class=\"date-xl\"><time>%s</time></div>
+
+<h3></h3>
+
+x
+
+</section>
+
+" (format-time-string "%Y-%m-%d")))
+  (search-backward "</h3>" ))
 
 (defun xah-html-insert-date-tag ()
   "Insert a date tag."
