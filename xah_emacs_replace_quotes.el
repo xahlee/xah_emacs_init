@@ -548,20 +548,21 @@ Version 2019-03-07"
 
 (defun xah-convert-latin-to-rune (@begin @end @to-latin-p)
   "Replace English alphabet to Unicode runic characters.
-For example, f → ᚠ, d → ᛞ.
+For example, f → ᚠ.
 When called interactively, work on current line or text selection.
 
 If `universal-argument' is called first, reverse direction.
 Note: original letter case are not preserved. B may become b.
 
 URL `http://ergoemacs.org/misc/elisp_latin_to_rune.html'
-Version 2019-03-08"
+Version 2019-06-07"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end) current-prefix-arg )
      (list (line-beginning-position) (line-end-position) current-prefix-arg )))
   (let* (
          ($toLower
+          ;; this, because we no want to change case of other lang's chars
           [["A" "a"]
            ["B" "b"]
            ["C" "c"]
@@ -591,37 +592,43 @@ Version 2019-03-08"
            ]
           )
          ($toLatin
-          [
-           ["ᚠ" "f"]
-           ["ᚢ" "u"]
-           ["ᚦ" "þ"]
-           ["ᚨ" "a"]
-           ["ᚱ" "r"]
-           ["ᚲ" "k"]
-           ["ᚷ" "g"]
-           ["ᚹ" "w"]
-           ["ᚺ" "h"]
-           ["ᚾ" "n"]
-           ["ᛁ" "i"]
-           ["ᛃ" "j"]
-           ["ᛈ" "p"]
-           ["ᛇ" "ï"]
-           ["ᛉ" "z"]
-           ["ᛊ" "s"]
-           ["ᛏ" "t"]
-           ["ᛒ" "b"]
-           ["ᛖ" "e"]
-           ["ᛗ" "m"]
-           ["ᛚ" "l"]
-           ["ᛜ" "ŋ"]
-           ["ᛞ" "d"]
-           ["ᛟ" "o"]
-           ["ᛍ" "c"]
-           ["ᛩ" "q"]
-           ["ᛪ" "x"]
-           ["ᚤ" "y"]
-           ["ᚡ" "v"]
-           ]
+          [ ["ᛆ" "a"]
+            ["ᛒ" "b"]
+            ["ᛍ" "c"]
+            ["ᛑ" "d"]
+            ["ᚧ" "ð"]
+            ["ᛂ" "e"]
+            ["ᚠ" "f"]
+            ["ᚵ" "g"]
+            ["ᚼ" "h"]
+            ["ᛁ" "i"]
+            ["ᚴ" "k"]
+            ["ᛚ" "l"]
+            ["ᛘ" "m"]
+            ["ᚿ" "n"]
+            ["ᚮ" "o"]
+            ["ᛔ" "p"]
+            ["ᛕ" "p"]
+            ["ᛩ" "q"]
+            ["ᚱ" "r"]
+            ["ᛌ" "s"]
+            ["ᛋ" "s"]
+            ["ᛐ" "t"]
+            ["ᚢ" "u"]
+            ["ᚡ" "v"]
+            ["ᚢ" "v"]
+            ["ᚥ" "w"]
+            ["ᛪ" "x"]
+            ["ᛦ" "y"]
+            ["ᚤ" "y"]
+            ["ᛨ" "y"]
+            ["ᛎ" "z"]
+            ["ᚦ" "þ"]
+            ["ᛅ" "æ"]
+            ["ᛆ" "ä"]
+            ["ᚯ" "ø"]
+            ["ᚯ" "ö"]
+            ]
           )
          ($toRunic
           (mapcar
