@@ -11,27 +11,6 @@
 
 
 
-(defun xah-format-c-lang-region (@begin @end)
-  "Expand region of C style syntax languages so that it is nicely formated.
-Experimental code.
-WARNING: If region has comment or string, the code'd be fucked up."
-  (interactive "r")
-  (save-excursion
-    (save-restriction
-      (narrow-to-region @begin @end)
-      (xah-replace-regexp-pairs-region
-       @begin @end
-       '(
-         ["{" "{\n"]
-         [";" ";\n"]
-         ["}" "}\n"]
-         [";[\t\n]*}" "; }"]
-         )
-       t)
-      (indent-region @begin @end))))
-
-
-
 (defun xah-replace-latex-to-unicode (@begin @end)
   "Replace TeX markup to Unicode in current line or selection.
 Example: \\alpha becomes α.

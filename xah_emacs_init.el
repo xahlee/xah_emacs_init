@@ -155,7 +155,7 @@ Version 2017-07-19"
     (autoload 'xlsl-mode "xlsl-mode" "autoload the mode." t)))
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
-(load (xah-get-fullpath "xah_gen_sitemap"))
+;; (load (xah-get-fullpath "xah_gen_sitemap"))
 
 (load (xah-get-fullpath "xah_emacs_keybinding"))
 (load (xah-get-fullpath "xah_emacs_mouse_setup"))
@@ -199,6 +199,22 @@ Version 2017-07-19"
 (when (file-exists-p "~/Dropbox/")
   (progn
     (load "~/Dropbox/xah-emacs-private_b53d8d39")))
+
+(defvar xahsite-external-docs nil "A vector of dir paths. Version 2019-06-11")
+(setq  xahsite-external-docs
+       [
+        "ergoemacs_org/emacs_manual/"
+        "xahlee_info/REC-SVG11-20110816/"
+        "xahlee_info/clojure-doc-1.8/"
+        "xahlee_info/css_2.1_spec/"
+        "xahlee_info/css_transitions/"
+        "xahlee_info/js_es2011/"
+        "xahlee_info/js_es2015/"
+        "xahlee_info/js_es2015_orig/"
+        "xahlee_info/js_es2016/"
+        "xahlee_info/js_es2018/"
+        "xahlee_info/node_api/"
+        ])
 
 (progn
   (add-to-list 'load-path "~/git/xah-find/")

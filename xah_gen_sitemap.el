@@ -1,11 +1,12 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-;; 2018-09-04
+;; version: 2019-06-11
+;; home page: /Users/xah/web/ergoemacs_org/emacs/make_sitemap.html
 
 (require 'seq)
 
 (setq xah-web-root-path "/Users/xah/web/" )
 
-(defvar xahsite-external-docs nil "A vector of dir paths.")
+(defvar xahsite-external-docs nil "A vector of dir paths. Version 2019-06-11")
 (setq  xahsite-external-docs
        [
         "ergoemacs_org/emacs_manual/"
@@ -71,17 +72,4 @@ Version 2018-09-17"
       )
     ;; (print (concat "done: " (format-time-string "%Y-%m-%dT%T")))
     ))
-
-(defun xahsite-generate-sitemap-all ()
-  "do all
-2016-08-15"
-  (interactive)
-  (xahsite-generate-sitemap "ergoemacs.org" )
-  (xahsite-generate-sitemap "wordyenglish.com" )
-  (xahsite-generate-sitemap "xaharts.org" )
-  (xahsite-generate-sitemap "xahlee.info" )
-  (xahsite-generate-sitemap "xahlee.org" )
-  (xahsite-generate-sitemap "xahmusic.org" )
-  (xahsite-generate-sitemap "xahporn.org" )
-  (xahsite-generate-sitemap "xahsl.org"  ))
 
