@@ -467,13 +467,11 @@ func main() {
 
 }")
 
-      ("pac" "fmt.Printf(\"%v\\n\", hh▮)")
       ("imp" "import \"fmt\"\n")
+      ("p" "fmt.Printf(\"%v\\n\", ▮)")
+      ("spf" "fmt.Sprintf(\"%v\", ▮)")
 
-      ("p" "fmt.Printf(\"%v\\n\", hh▮)")
-      ("spf" "fmt.Sprintf(\"%v\", hh▮)")
-
-      ("pl" "fmt.Println(hh▮)")
+      ("pl" "fmt.Println(▮)")
       ("r" "return")
       ("st" "string")
       ("eq" "==")
