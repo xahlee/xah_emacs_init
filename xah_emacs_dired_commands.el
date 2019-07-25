@@ -450,7 +450,7 @@ and relative path will be inserted before the img tag.
 
 If `universal-argument' is called first, ask for jpeg quality. (default is 90)
 
-Version 2018-12-22"
+Version 2019-07-07"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
@@ -490,7 +490,7 @@ Version 2018-12-22"
            filepath
            filepath-new))
     (if (file-exists-p filepath-new)
-        (when (y-or-n-p "file exist 「%s」, do it anyway?")
+        (when (y-or-n-p (format "File exist 「%s」, do it anyway?" filepath-new))
           (shell-command $cmdStr))
       (shell-command $cmdStr))
     (search-backward "<" )

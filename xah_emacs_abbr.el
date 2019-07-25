@@ -72,6 +72,7 @@ f_cycle_image ({
     ("wrt" "with respect to" )
     ("wsnt" "wasn't" )
     ("wtdb" "What's the difference between" )
+    ("evt" "every time" )
 
     ;; english, single word
 
@@ -425,7 +426,9 @@ f_cycle_image ({
     ("xjs" "#xahjs" )
     ("xp" "#xahpop" )
     ("sszw" "#杀杀中文" )
-    ("xts" "xah talk show" )
+    ("xs" "Xah Show" )
+    ("xts" "Xah Talk Show" )
+    ("xkb" "#xahkeyboard" )
 
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee
@@ -437,14 +440,6 @@ Yahoo: P0lyglut
 MSN: p0lyglut@yahoo.com or xahlee
 Second Life: Xah Toll
 QQ: http://user.qzone.qq.com/2609322939" )
-
-    ("xs" " Xah Lee
- xahlee@gmail.com
- http://xahlee.org/
- US citizen.
- Mountain View, CA." )
-
-    ("xkb" "#xahkeyboard" )
 
     ;;
 
@@ -475,7 +470,7 @@ func main() {
       ("r" "return")
       ("st" "string")
       ("eq" "==")
-      ("v" "var x = 3")
+      ("v" "var ▮ = ")
       ("df" "x := 3")
       ("c" "const x = 3")
       ("f" "func ff(x int) int {
@@ -486,7 +481,7 @@ func main() {
       ("ei" "else if x > 0 { 3 }")
       ("else" "else { 3 }")
       ("for" "for i := 0; i < 4; i++ { i }")
-      ("fr" "for k, v := range xxx {
+      ("fr" "for key, val := range xxx {
 ▮
     }
 ")

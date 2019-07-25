@@ -1046,12 +1046,13 @@ When called in lisp code, @begin and @end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion of quotes, because it impossible. You should double check highlighted places after.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2018-04-07"
+Version 2019-07-22"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
   ;; said "can’t have it, can’t, just can’t"
   ;; ‘I’ve can’t’
+
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
@@ -1112,7 +1113,7 @@ Version 2018-04-07"
           [" \"" " “"]
           ["\" " "” "]
 
-          ["\", " "”, "]
+          ["\"," "”,"]
           ["\",\n" "”,\n"]
 
           ["\". " "”. "]
@@ -1205,3 +1206,4 @@ Version 2018-04-07"
           ["\\([0-9]+\\)” "     "\\1\" "]
           ] "FIXEDCASE" nil "HILIGHT"
          )))))
+
