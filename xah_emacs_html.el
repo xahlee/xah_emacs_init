@@ -645,15 +645,12 @@ Version 2019-07-31"
          ($temp-fpath (concat $dir-path $temp-fname))
          (p1 (line-beginning-position))
          (p2 (line-end-position))
-         ($title1 (buffer-substring-no-properties p1 p2))
-
-         ;; ($fnameBase (downcase (replace-regexp-in-string " +" "_" $title1 )))
+         ($title1 (downcase (buffer-substring-no-properties p1 p2)))
 
          ($fnameBase
-          (downcase
-           (replace-regexp-in-string
-            "/" "_"
-            (replace-regexp-in-string " +" "_" $title1 ))))
+          (replace-regexp-in-string
+           "/" "_"
+           (replace-regexp-in-string " +" "_" $title1 )))
 
          ($fpath (format "%s%s.html" (file-name-directory $temp-fpath) $fnameBase))
          p3
@@ -689,10 +686,6 @@ Version 2019-07-31"
             (insert "</time>.</div>"))
 
           (setq p3 (point))
-
-          ;; porn bottom_ad_42482
-          ;; art ads_96352
-          ;; comp ads-bottom-65900
 
           (when
               (search-forward "ads-bottom-65900" nil t)
