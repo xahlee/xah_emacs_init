@@ -634,35 +634,23 @@ Version 2019-07-31"
             ("/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
             ("/Users/xah/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
             ;;
-
             ))
-
          ($cur-fpath (buffer-file-name))
          ($dir-path (file-name-directory $cur-fpath))
-
          ($temp-fname (cdr (assoc $dir-path $path-map)))
-
          ($temp-fpath (concat $dir-path $temp-fname))
          (p1 (line-beginning-position))
          (p2 (line-end-position))
          ($title1 (downcase (buffer-substring-no-properties p1 p2)))
-
-         ($fnameBase
-          (replace-regexp-in-string
-           "/" "_"
-           (replace-regexp-in-string " +" "_" $title1 )))
-
+         ($fnameBase (replace-regexp-in-string " +\\|/" "_" $title1 ))
          ($fpath (format "%s%s.html" (file-name-directory $temp-fpath) $fnameBase))
          p3
          )
-
     (if (file-exists-p $fpath)
         (message "file exist: %s" $fpath)
       (progn
-
         (find-file $fpath)
         (insert-file-contents $temp-fpath )
-
         (progn
           (goto-char (point-min))
           (search-forward "<title>" )
