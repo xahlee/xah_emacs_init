@@ -65,7 +65,7 @@ Version 2018-09-17"
                 )))
         (directory-files-recursively $websiteDocRootPath "\\.html$" )))
       (with-current-buffer $sitemapBuffer
-        (insert "</urlset>")
+        (insert "</urlset>\n")
         (write-region (point-min) (point-max) $filePath nil 3)
         (kill-buffer ))
       (find-file $filePath)

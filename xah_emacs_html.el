@@ -608,9 +608,11 @@ Version 2018-06-03"
     (terpri )
     (mapc (lambda (x) (princ x) (terpri )) $resultList)))
 
+
+
 (defun xah-new-page ()
   "Make a new blog page.
-Version 2019-04-04"
+Version 2019-07-31"
   (interactive)
   (let* (
          ($path-map
@@ -624,7 +626,6 @@ Version 2019-04-04"
             ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
             ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
             ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
-            ("/Users/xah/web/xahporn_org/porn/" . "Renee_Pornero.html")
             ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
             ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
             ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
@@ -644,29 +645,37 @@ Version 2019-04-04"
          ($temp-fpath (concat $dir-path $temp-fname))
          (p1 (line-beginning-position))
          (p2 (line-end-position))
-         (title1 (buffer-substring-no-properties p1 p2))
-         (fnameBase (downcase (replace-regexp-in-string " +" "_" title1 )))
-         (fpath (format "%s%s.html" (file-name-directory $temp-fpath) fnameBase))
+         ($title1 (buffer-substring-no-properties p1 p2))
+
+         ;; ($fnameBase (downcase (replace-regexp-in-string " +" "_" $title1 )))
+
+         ($fnameBase
+          (downcase
+           (replace-regexp-in-string
+            "/" "_"
+            (replace-regexp-in-string " +" "_" $title1 ))))
+
+         ($fpath (format "%s%s.html" (file-name-directory $temp-fpath) $fnameBase))
          p3
          )
 
-    (if (file-exists-p fpath)
-        (message "file exist: %s" fpath)
+    (if (file-exists-p $fpath)
+        (message "file exist: %s" $fpath)
       (progn
 
-        (find-file fpath)
+        (find-file $fpath)
         (insert-file-contents $temp-fpath )
 
         (progn
           (goto-char (point-min))
           (search-forward "<title>" )
-          (insert title1)
+          (insert $title1)
           (setq p3 (point))
           (skip-chars-forward "^<")
           (delete-region p3 (point))
 
           (search-forward "<h1>" )
-          (insert title1)
+          (insert $title1)
           (setq p3 (point))
           (skip-chars-forward "^<")
           (delete-region p3 (point))
@@ -698,7 +707,7 @@ Version 2019-04-04"
           ;;
           ))
       (delete-region p1 p2)
-      (insert fpath)
+      (insert $fpath)
 
       (xah-all-linkify)
       (search-backward "\"")

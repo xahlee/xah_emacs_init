@@ -343,6 +343,7 @@ f_cycle_image ({
     ("bu" "•" )
     ("usf" "🇺🇸" )
     ("catface" "😸" )
+    ("haha" "🤩" )
     ("bell" "🔔" )
     ("good3" "👍" )
     ("applaud3" "👏" )
