@@ -832,3 +832,4 @@ Version 2019-03-03"
   (global-command-log-mode)
   (clm/open-command-log-buffer)
   (delete-window))
+

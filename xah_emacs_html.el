@@ -612,27 +612,28 @@ Version 2018-06-03"
 
 (defun xah-new-page ()
   "Make a new blog page.
-Version 2019-07-31"
+Version 2019-08-15"
   (interactive)
   (let* (
          ($path-map
           '(
-            ("/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
-            ("/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
-            ("/Users/xah/web/xahlee_org/Periodic_dosage_dir/" . "20030907_la_gangs.html")
-            ("/Users/xah/web/xahlee_org/sex/" . "Korean_gymnast_Son_Yeon_jae.html")
-            ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
-            ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
-            ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
-            ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
-            ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
-            ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
             ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
             ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
-            ("/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
-            ("/Users/xah/web/wordyenglish_com/lit/" . "china_dollar_bill_multilingual.html")
             ("/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
+            ("/Users/xah/web/wordyenglish_com/lit/" . "china_dollar_bill_multilingual.html")
+            ("/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
+            ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
+            ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
+            ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
+            ("/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
+            ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
+            ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
             ("/Users/xah/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
+            ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
+            ("/Users/xah/web/xahlee_org/Periodic_dosage_dir/" . "20030907_la_gangs.html")
+            ("/Users/xah/web/xahlee_org/sex/" . "Korean_gymnast_Son_Yeon_jae.html")
+            ("/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
+            ("/Users/xah/web/xahporn_org/porn/" . "Renee_Pornero.html")
             ;;
             ))
          ($cur-fpath (buffer-file-name))

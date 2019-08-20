@@ -78,7 +78,7 @@ Exception:
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Version 2019-02-09"
+Version 2019-08-16"
   (interactive)
   (let* (
          $p1 $p2
@@ -89,7 +89,7 @@ Version 2019-02-09"
           (if (string-match-p "wordyenglish_com/words/new.html\\'" $currentFpath )
               (replace-regexp-in-string "words/new.html\\'" "lit/blog.xml" $currentFpath "FIXEDCASE" "LITERAL")
             (replace-regexp-in-string "\\.html\\'" ".xml" $currentFpath "FIXEDCASE" "LITERAL")))
-         ($dummyTitleText "hhh")
+         ($dummyTitleText "hhhhh")
          ($titleText $dummyTitleText)
          $altURL
          )
@@ -203,3 +203,28 @@ Version 2019-02-09"
     (search-backward "<title>")
     (search-forward ">")
     (push-mark )))
+
+
+(defun xah-update-atom-entry-date ()
+  "Update the date time stamp of atom rss file
+when cursor is in a atom entry,
+move cursor to the <updated> tag
+replace the date time by current date time
+
+version 2019-08-03"
+  (interactive)
+  (let (p1 p2)
+    (search-backward "<updated>" )
+    (search-forward ">" )
+    (setq p1 (point))
+    (search-forward ">" )
+    (search-backward "<" )
+    (setq p2 (point))
+    (delete-region p1 p2)
+    (insert
+     (concat
+      (format-time-string "%Y-%m-%dT%T")
+      (funcall
+       (lambda ($x)
+         (format "%s:%s" (substring $x 0 3) (substring $x 3 5)))
+       (format-time-string "%z"))))))
