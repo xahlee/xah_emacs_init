@@ -450,36 +450,57 @@ and relative path will be inserted before the img tag.
 
 If `universal-argument' is called first, ask for jpeg quality. (default is 90)
 
-Version 2019-07-07"
+Version 2019-09-06"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
          (p1 (car bounds))
          (p2 (cdr bounds))
-         (input-path (buffer-substring-no-properties p1 p2))
-         (filepath (expand-file-name input-path ))
-         (directory (file-name-directory filepath))
-         (filename (file-name-nondirectory filepath))
-         (corename (file-name-sans-extension filename))
-         (fname-ext (file-name-extension filename))
-         (side-length (string-to-number (read-from-minibuffer "~width:" "250" )))
-         (thumbnail-size-area (* side-length side-length))
-         (size (xah-html--get-image-dimensions filepath))
-         (width (aref size 0))
-         (height (aref size 1))
-         (scale (sqrt (/ (float thumbnail-size-area) (float (* width height)))))
-         (quality
+         (inputPath (buffer-substring-no-properties p1 p2))
+         filepath
+         directory
+         filename
+         corename
+         fnameExt
+         sideLength
+         thumbnailSizeArea
+         size
+         width
+         height
+         scale
+         quality
+         newWidth
+         newHeight
+         filename-new
+         filepath-new
+         new-rel-path
+         $cmdStr
+         )
+
+    (when (not (file-exists-p inputPath)) (user-error "file not exist: %s" inputPath))
+
+    (setq filepath (expand-file-name inputPath ))
+    (setq directory (file-name-directory filepath))
+    (setq filename (file-name-nondirectory filepath))
+    (setq corename (file-name-sans-extension filename))
+    (setq fnameExt (file-name-extension filename))
+    (setq sideLength (string-to-number (read-from-minibuffer "~width:" "250" )))
+    (setq thumbnailSizeArea (* sideLength sideLength))
+    (setq size (xah-html--get-image-dimensions filepath))
+    (setq width (aref size 0))
+    (setq height (aref size 1))
+    (setq scale (sqrt (/ (float thumbnailSizeArea) (float (* width height)))))
+    (setq quality
           (if current-prefix-arg
               (progn (string-to-number (read-string "quality:" "85")))
             (progn 90)))
-         (new-width (round (* scale (float width))))
-         (new-height (round (* scale (float height))))
-         ;; (filename-new (format "tn_%dx%d_%s" new-width new-height filename))
-         (filename-new (format "%s-s%dx%d.%s" corename new-width new-height fname-ext ))
-         (filepath-new (concat directory filename-new))
-         (new-rel-path (file-relative-name filepath-new))
-         $cmdStr
-         )
+    (setq newWidth (round (* scale (float width))))
+    (setq newHeight (round (* scale (float height))))
+    ;; (filename-new (format "tn_%dx%d_%s" newWidth newHeight filename))
+    (setq filename-new (format "%s-s%dx%d.%s" corename newWidth newHeight fnameExt ))
+    (setq filepath-new (concat directory filename-new))
+    (setq new-rel-path (file-relative-name filepath-new))
+
     (setq $cmdStr
           (format
            "convert %s '%s' '%s'"
