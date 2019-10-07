@@ -157,12 +157,14 @@ Version 2017-11-10"
 ;;     "Set current buffer to use variable-width font."
 ;;     (variable-pitch-mode 1)
 ;;     ;; (text-scale-increase 1)
+;;     ;; (text-scale-increase 0.5)
 ;;     )
+;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
 ;;   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
 ;;   (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
 ;;   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
 ;;   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
+;;   (add-hook 'go-mode-hook 'xah-use-variable-width-font)
 ;;   )
 
 (progn ; minibuffer

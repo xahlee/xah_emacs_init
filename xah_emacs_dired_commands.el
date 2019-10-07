@@ -1,131 +1,5 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(defun xah-open-in-textedit ()
-  "Open the current file or `dired' marked files in Mac's TextEdit.
-This command is for macOS only.
-
-URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2017-11-21"
-  (interactive)
-  (let* (
-         ($file-list
-          (if (string-equal major-mode "dired-mode")
-              (dired-get-marked-files)
-            (list (buffer-file-name))))
-         ($do-it-p (if (<= (length $file-list) 5)
-                       t
-                     (y-or-n-p "Open more than 5 files? "))))
-    (when $do-it-p
-      (cond
-       ((string-equal system-type "darwin")
-        (mapc
-         (lambda ($fpath)
-           (shell-command
-            (format "open -a TextEdit.app \"%s\"" $fpath))) $file-list))))))
-
-(defun xah-open-in-chrome-browser ()
-  "Open the current file or `dired' marked files in Google Chrome browser.
-
-URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2017-12-07"
-  (interactive)
-  (let* (
-         ($file-list
-          (if (string-equal major-mode "dired-mode")
-              (dired-get-marked-files)
-            (list (buffer-file-name))))
-         ($do-it-p (if (<= (length $file-list) 5)
-                       t
-                     (y-or-n-p "Open more than 5 files? "))))
-    (when $do-it-p
-      (cond
-       ((string-equal system-type "darwin")
-        (mapc
-         (lambda ($fpath)
-           (shell-command
-            (format "open -a /Applications/Google\\ Chrome.app \"%s\"" $fpath))) $file-list))))))
-
-(defun xah-open-in-brave ()
-  "Open the current file or `dired' marked files in Mac's Brave browser.
-
-If the file is not saved, save it first.
-
-Version 2019-02-14"
-  (interactive)
-  (let* (
-         ($file-list
-          (if (string-equal major-mode "dired-mode")
-              (dired-get-marked-files)
-            (list (buffer-file-name))))
-         ($do-it-p (if (<= (length $file-list) 5)
-                       t
-                     (y-or-n-p "Open more than 5 files? "))))
-    (when $do-it-p
-      (cond
-       ((string-equal system-type "darwin")
-        (mapc
-         (lambda ($fpath)
-           (when (buffer-modified-p )
-             (save-buffer))
-           (shell-command
-            (format "open -a 'Brave Browser.app' \"%s\"" $fpath))) $file-list))))))
-
-(defun xah-open-in-safari ()
-  "Open the current file or `dired' marked files in Mac's Safari browser.
-
-If the file is not saved, save it first.
-
-URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2018-02-26"
-  (interactive)
-  (let* (
-         ($file-list
-          (if (string-equal major-mode "dired-mode")
-              (dired-get-marked-files)
-            (list (buffer-file-name))))
-         ($do-it-p (if (<= (length $file-list) 5)
-                       t
-                     (y-or-n-p "Open more than 5 files? "))))
-    (when $do-it-p
-      (cond
-       ((string-equal system-type "darwin")
-        (mapc
-         (lambda ($fpath)
-           (when (buffer-modified-p )
-             (save-buffer))
-           (shell-command
-            (format "open -a Safari.app \"%s\"" $fpath))) $file-list))))))
-
-(defun xah-open-in-gimp ()
-  "Open the current file or `dired' marked files in image editor gimp.
-Works in linux and Mac. Not tested on Microsoft Windows.
-
-URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2017-11-02"
-  (interactive)
-  (let* (
-         ($file-list
-          (if (string-equal major-mode "dired-mode")
-              (dired-get-marked-files)
-            (list (buffer-file-name))))
-         ($do-it-p (if (<= (length $file-list) 5)
-                       t
-                     (y-or-n-p "Open more than 5 files? "))))
-    (when $do-it-p
-      (cond
-       ((string-equal system-type "windows-nt")
-        (mapc
-         (lambda ($fpath)
-           (w32-shell-execute "gimp" (replace-regexp-in-string "/" "\\" $fpath t t))) $file-list))
-       ((string-equal system-type "darwin")
-        (mapc
-         (lambda ($fpath)
-           (shell-command
-            (format "open -a /Applications/GIMP.app \"%s\"" $fpath))) $file-list))
-       ((string-equal system-type "gnu/linux")
-        (mapc
-         (lambda ($fpath) (let ((process-connection-type nil)) (start-process "" nil "gimp" $fpath))) $file-list))))))
-
 (defun xah-dired-to-zip ()
   "Zip the current file in `dired'.
 If multiple files are marked, only zip the first one.
@@ -450,7 +324,7 @@ and relative path will be inserted before the img tag.
 
 If `universal-argument' is called first, ask for jpeg quality. (default is 90)
 
-Version 2019-09-06"
+Version 2019-10-01"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
@@ -477,7 +351,8 @@ Version 2019-09-06"
          $cmdStr
          )
 
-    (when (not (file-exists-p inputPath)) (user-error "file not exist: %s" inputPath))
+    (when (not (file-exists-p inputPath))
+      (user-error "File not exist: %s" inputPath))
 
     (setq filepath (expand-file-name inputPath ))
     (setq directory (file-name-directory filepath))
@@ -511,8 +386,11 @@ Version 2019-09-06"
            filepath
            filepath-new))
     (if (file-exists-p filepath-new)
-        (when (y-or-n-p (format "File exist 「%s」, do it anyway?" filepath-new))
-          (shell-command $cmdStr))
+        (if (y-or-n-p (format "File exist 「%s」. Replace it?" filepath-new))
+            (shell-command $cmdStr)
+          (progn
+            (message "path copied to kill-ring")
+            (kill-new filepath-new)))
       (shell-command $cmdStr))
     (search-backward "<" )
     (insert filepath-new "\n")

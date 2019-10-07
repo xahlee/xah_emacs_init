@@ -636,6 +636,47 @@ Version 2019-06-07"
                (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
            $useMap))))))
 
+(defun xah-convert-latin-to-braille (@begin @end @reverse-direction-p)
+  "Replace English alphabet to Unicode braille characters.
+
+When called interactively, work on current line or text selection.
+If `universal-argument' is called first, reverse direction.
+Note: original letter case are not preserved. B may become b.
+
+URL `http://ergoemacs.org/misc/elisp_latin_to_braille.html'
+Version 2019-09-17"
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end) current-prefix-arg )
+     (list (line-beginning-position) (line-end-position) current-prefix-arg )))
+  (let (
+        ($latin-to-braille
+         [
+          ["1" "⠼⠁"] ["2" "⠼⠃"] ["3" "⠼⠉"] ["4" "⠼⠙"] ["5" "⠼⠑"] ["6" "⠼⠋"] ["7" "⠼⠛"] ["8" "⠼⠓"] ["9" "⠼⠊"] ["0" "⠼⠚"]
+          ["," "⠂"] [";" "⠆"] [":" "⠒"] ["." "⠲"] ["?" "⠦"] ["!" "⠖"] ["‘" "⠄"] ["“" "⠄⠶"] ["“" "⠘⠦"] ["”" "⠘⠴"] ["‘" "⠄⠦"] ["’" "⠄⠴"] ["(" "⠐⠣"] [")" "⠐⠜"] ["/" "⠸⠌"] ["\\","⠸⠡"] ["-" "⠤"] ["–" "⠠⠤"] ["—" "⠐⠠⠤"]
+          ["a" "⠁"] ["b" "⠃"] ["c" "⠉"] ["d" "⠙"] ["e" "⠑"] ["f" "⠋"] ["g" "⠛"] ["h" "⠓"] ["i" "⠊"] ["j" "⠚"] ["k" "⠅"] ["l" "⠇"] ["m" "⠍"] ["n" "⠝"] ["o" "⠕"] ["p" "⠏"] ["q" "⠟"] ["r" "⠗"] ["s" "⠎"] ["t" "⠞"] ["u" "⠥"] ["v" "⠧"] ["w" "⠺"] ["x" "⠭"] ["y" "⠽"] ["z" "⠵"] ]
+         )
+        $useMap
+        )
+    (setq $useMap
+          (if @reverse-direction-p
+              (mapcar
+               (lambda ($x)
+                 (vector (aref $x 1) (aref $x 0)))
+               $latin-to-braille)
+            $latin-to-braille))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region @begin @end)
+        (let ( (case-fold-search t))
+          (mapc
+           (lambda ($x)
+             (goto-char (point-min))
+             (while (search-forward (elt $x 0) nil t)
+               (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
+           $useMap))))))
+
+
 ;; (defun xah-twitterfy-old-2019-01-14 (@begin @end &optional @direction)
 ;;   "Shorten words for Twitter 280 char limit on current line or selection.
 ;; The conversion direction is automatically determined.

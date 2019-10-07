@@ -25,6 +25,7 @@ f_cycle_image ({
 
     ;; English word abbrev
 
+
     ("ds" "does" )
     ("n" "and" )
     ("r" "are" )
@@ -38,7 +39,6 @@ f_cycle_image ({
     ("k" "know" )
     ("ab" "about" )
     ("dn" "down" )
-    ("minh" "minutes" )
 
     ;; English phrases abbrev
 
@@ -107,7 +107,7 @@ f_cycle_image ({
     ("dt" "deepthroat" )
     ("eff" "efficient" )
     ("eg3" "ergonomic" )
-    ("ege" "e.g." )
+    ("eg" "e.g." )
     ("env" "environment" )
     ("esp" "especially" )
     ("ex" "example:" )
@@ -233,26 +233,6 @@ f_cycle_image ({
     ("wd" "web development" )
     ("wm" "Window Manager" )
     ("wh" "width height" )
-
-    ;; brackets, parenthesis
-
-    ("eb" "" xah-insert-black-lenticular-bracket【】)
-    ("ec" "" xah-insert-ascii-single-quote)
-    ("ed" "" xah-insert-double-curly-quote“”)
-    ("ef" "" xah-insert-emacs-quote)
-    ("eg" "" xah-insert-ascii-double-quote)
-    ("eh" "" xah-insert-brace) ; {}
-    ("ei" "" xah-insert-curly-single-quote‘’)
-    ("el3" "" xah-insert-formfeed)
-    ("em" "" xah-insert-corner-bracket「」)
-    ("en" "" xah-insert-square-bracket) ; []
-    ("ep" "" xah-insert-single-angle-quote‹›)
-    ("er" "" xah-insert-tortoise-shell-bracket〔〕 )
-    ("es" "" xah-insert-string-assignment)
-    ("et" "" xah-insert-paren)
-    ("eu" "" xah-insert-date)
-    ("ew" "" xah-insert-angle-bracket〈〉)
-    ("ey" "" xah-insert-double-angle-quote«»)
 
     ;; computing, proper noun
     ("ahk" "AutoHotkey" )
