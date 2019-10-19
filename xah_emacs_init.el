@@ -184,6 +184,7 @@ Version 2017-07-19"
 
 (load (xah-get-fullpath "xah_emacs_font"))
 (load (xah-get-fullpath "xah_emacs_misc"))
+(load (xah-get-fullpath "xah_emacs_open"))
 
 (load (xah-get-fullpath "xah_emacs_atom_rss_util"))
 (load (xah-get-fullpath "xah_emacs_blogger_util"))

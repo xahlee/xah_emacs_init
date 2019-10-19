@@ -25,7 +25,6 @@ f_cycle_image ({
 
     ;; English word abbrev
 
-
     ("ds" "does" )
     ("n" "and" )
     ("r" "are" )
@@ -321,12 +320,13 @@ f_cycle_image ({
     ;; unicode
     ("ascii3" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
-    ("usf" "🇺🇸" )
     ("catface" "😸" )
     ("haha" "🤩" )
+
     ("bell" "🔔" )
     ("good3" "👍" )
     ("applaud3" "👏" )
+    ("thx" "🙏" )
     ("heartface" "😻" )
     ("clown" "🤡" )
     ("angry" "😠" )
@@ -334,7 +334,7 @@ f_cycle_image ({
     ("fear" "😬" )
     ("grin" "😁" )
     ("wink" "😜" )
-    ("hearts" "♥💕💓💔💖💗💘💝💞💟💙💚💛💜" )
+    ("hearts" "♥💕💖" )
     ("omg" "😂" )
     ("star" "★" )
     ("star2" "🌟" )
