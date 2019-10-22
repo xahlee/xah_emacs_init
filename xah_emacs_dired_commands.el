@@ -395,3 +395,11 @@ Version 2019-10-01"
     (search-backward "<" )
     (insert filepath-new "\n")
     (backward-word )))
+
+(defun xah-open-dired-marked ()
+  "Open marked files in dired.
+Version 2019-10-22"
+  (interactive)
+  (mapc 'find-file (dired-get-marked-files))
+)
+

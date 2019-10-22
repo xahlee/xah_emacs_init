@@ -1,6 +1,15 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+
+
 (when (boundp 'xah-fly-key-map)
+
+  (defun xah-expand-pane-switch-command-mode ()
+    "Version 2019-10-22"
+    (interactive)
+    (progn
+      (delete-other-windows)
+      (xah-fly-command-mode-activate)))
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
 
@@ -14,7 +23,96 @@
   ;; (define-key xah-fly-leader-key-map (kbd "e") nil)
 
   ;; (define-key xah-fly-key-map (kbd "SPC") 'xah-fly-space-key)
-  )
+
+  (global-set-key (kbd "C-=") 'xah-cycle-hyphen-underscore-space)
+
+  (defun xah-fly-command-mode-init ()
+    "Set command mode keys.
+Version 2017-01-21"
+    (interactive)
+    (xah-fly--define-keys
+     xah-fly-key-map
+     '(
+       ("~" . nil)
+       (":" . nil)
+
+       ("SPC" . xah-fly-leader-key-map)
+       ("DEL" . xah-fly-leader-key-map)
+
+       ("'" . xah-reformat-lines)
+       ("," . xah-shrink-whitespaces)
+       ("-" . xah-expand-pane-switch-command-mode)
+       ("." . xah-backward-kill-word)
+       (";" . xah-comment-dwim)
+       ("/" . hippie-expand)
+       ("\\" . nil)
+       ;; ("=" . xah-forward-equal-sign)
+       ;; ("[" . xah-backward-punct )
+       ("[" . split-window-below )
+       ;; ("]" . xah-forward-punct)
+       ("]" . delete-other-windows)
+       ("`" . other-frame)
+
+       ("1" . xah-extend-selection)
+       ("2" . xah-select-line)
+       ("3" . forward-char)
+       ("4" . forward-char)
+       ("5" . delete-char)
+       ("6" . xah-select-block)
+       ("7" . xah-select-line)
+       ("8" . xah-extend-selection)
+       ("9" . xah-select-text-in-quote)
+       ("0" . xah-pop-local-mark-ring)
+
+       ("a" . execute-extended-command)
+       ("b" . isearch-forward)
+       ("c" . previous-line)
+       ("d" . xah-beginning-of-line-or-block)
+       ("e" . xah-delete-backward-char-or-bracket-text)
+       ("f" . undo)
+       ("g" . backward-word)
+       ("h" . backward-char)
+       ("i" . xah-delete-current-text-block)
+       ("j" . xah-copy-line-or-region)
+       ("k" . xah-paste-or-paste-previous)
+       ;; ("l" . xah-fly-insert-mode-activate-space-before)
+       ("l" . xah-insert-space-before)
+       ("m" . xah-backward-left-bracket)
+       ("n" . forward-char)
+       ("o" . open-line)
+       ("p" . xah-kill-word)
+       ("q" . xah-cut-line-or-region)
+       ("r" . forward-word)
+       ("s" . xah-end-of-line-or-block)
+       ("t" . next-line)
+       ("u" . xah-fly-insert-mode-activate)
+       ("v" . xah-forward-right-bracket)
+       ("w" . xah-next-window-or-frame)
+       ("x" . xah-toggle-letter-case)
+       ("y" . set-mark-command)
+       ("z" . xah-goto-matching-bracket)))
+
+    (define-key xah-fly-key-map (kbd (xah-fly--key-char "a"))
+      (if (fboundp 'smex) 'smex (if (fboundp 'helm-M-x) 'helm-M-x 'execute-extended-command)))
+
+    ;; (when xah-fly-swapped-1-8-and-2-7-p
+    ;;     (xah-fly--define-keys
+    ;;      xah-fly-key-map
+    ;;      '(
+    ;;        ("8" . pop-global-mark)
+    ;;        ("7" . xah-pop-local-mark-ring)
+    ;;        ("2" . xah-select-line)
+    ;;        ("1" . xah-extend-selection))))
+
+    (progn
+      (setq xah-fly-insert-state-q nil )
+      (modify-all-frames-parameters (list (cons 'cursor-type 'box))))
+
+    (setq mode-line-front-space "C")
+    (force-mode-line-update)
+
+    ;;
+    ))
 
 ;; (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
 ;; (global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
@@ -309,3 +407,6 @@ For `rcirc-mode-hook'."
   (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
   ;;
   )
+
+
+
