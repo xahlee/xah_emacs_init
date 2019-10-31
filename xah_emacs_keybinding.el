@@ -1,7 +1,5 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-
-
 (when (boundp 'xah-fly-key-map)
 
   (defun xah-expand-pane-switch-command-mode ()
@@ -399,7 +397,7 @@ For `rcirc-mode-hook'."
 (when (boundp 'xah-fly-h-keymap)
   (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-etymology)
   (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-word-dict-org)
-  (define-key xah-fly-h-keymap (kbd "3") 'xah-lookup-web)
+  (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
   (define-key xah-fly-h-keymap (kbd "4") 'xah-lookup-word-definition)
   (define-key xah-fly-h-keymap (kbd "5") 'xah-lookup-wikipedia)
   (define-key xah-fly-h-keymap (kbd "6") 'xah-lookup-wiktionary)

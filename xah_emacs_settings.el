@@ -61,7 +61,6 @@ Version 2019-02-22"
 ;; (setq auto-save-list-file-prefix "~/.emacs.d/backup/.saves-")
 ;; (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
 
-
 (column-number-mode 1)
 
 ;; (setq time-stamp-active nil)
@@ -310,7 +309,6 @@ Version 2017-11-10"
 
 
 (setq use-dialog-box nil)
-
 
 
 
