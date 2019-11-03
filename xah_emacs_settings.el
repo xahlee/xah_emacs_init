@@ -150,6 +150,35 @@ Version 2017-11-10"
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
+
+(progn
+  ;; set a default font
+  (cond
+   ((string-equal system-type "gnu/linux")
+    (when (member "DejaVu Sans Mono" (font-family-list)) (set-frame-font "DejaVu Sans Mono" t t))
+    ;; specify font for chinese characters using default chinese font on linux
+    (when (member "WenQuanYi Micro Hei" (font-family-list))
+      (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
+    ;;
+    )
+   ((string-equal system-type "darwin") ; Mac
+    (when (member "Menlo" (font-family-list)) (set-frame-font "Menlo-14" t t))
+    ;;
+    )
+   ((string-equal system-type "windows-nt") ; Windows
+   nil))
+
+  ;; specify font for all unicode characters
+  (when (member "Symbola" (font-family-list))
+    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+
+  ;; ;; specify font for all unicode characters
+  ;; (when (member "Apple Color Emoji" (font-family-list))
+  ;;   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
+
+  ;;
+  )
+
 ;; (progn
 ;;   ;; use variable-width font for some modes
 ;;   (defun xah-use-variable-width-font ()
@@ -313,4 +342,32 @@ Version 2017-11-10"
 
 
 ;; (setq-default bidi-display-reordering nil)
+
+
+
+;; convenient
+(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'rs 'replace-string)
+
+(defalias 'lcd 'list-colors-display)
+(defalias 'ds 'desktop-save)
+(defalias 'dt 'desktop-save)
+(defalias 'dsm 'desktop-save-mode)
+
+(defalias 'elm 'emacs-lisp-mode)
+(defalias 'hm 'html-mode)
+(defalias 'jsm 'js-mode)
+(defalias 'fm 'fundamental-mode)
+(defalias 'ssm 'shell-script-mode)
+(defalias 'om 'org-mode)
+
+(when (fboundp 'xah-new-page)
+  (defalias 'xnp 'xah-new-page))
+
+(when (fboundp 'magit-status)
+  (defalias 'ms 'magit-status))
+
+;; fuck tpu-edt
+(defalias 'tpu-edt 'forward-char)
+(defalias 'tpu-edt-on 'forward-char)
 

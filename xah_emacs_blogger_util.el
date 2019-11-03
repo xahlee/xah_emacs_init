@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; part of Xah Lee's emacs init file.
 ;; 2011-05-28
-;; Xah Lee,
+;; Xah Lee
 ;; ∑ http://xahlee.org/
 
 (defun xah-make-blogger-entry ()

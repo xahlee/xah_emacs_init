@@ -187,10 +187,6 @@ Version 2017-01-21"
 
 (global-set-key (kbd "C-t") 'hippie-expand)
 
-;; 'xah-cycle-font-2
-;; 'xah-cycle-font-next
-;; 'xah-cycle-font-previous
-
 (progn
   ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
   (define-prefix-command 'xah-dump-keymap)

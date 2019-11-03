@@ -37,6 +37,7 @@ Version 2017-07-19"
 
 
 (load (xah-get-fullpath "xah_emacs_settings"))
+(load (xah-get-fullpath "xah_emacs_abbr"))
 
 
 
@@ -67,7 +68,6 @@ Version 2017-07-19"
   (add-to-list 'load-path "~/git/xah-elisp-mode/")
   (require 'xah-elisp-mode)
   )
-
 
 (add-to-list 'load-path "~/git/xah-insert-random-id.el/")
 (require 'xah-insert-random-id)
@@ -160,18 +160,13 @@ Version 2017-07-19"
 (load (xah-get-fullpath "xah_emacs_keybinding"))
 (load (xah-get-fullpath "xah_emacs_mouse_setup"))
 
-(load (xah-get-fullpath "xah_emacs_alias"))
-
 (progn
   (add-to-list 'load-path "~/git/xahk-mode.el/")
   (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t))
 
-(when (string-equal system-type "windows-nt")
-  (load (xah-get-fullpath "xah_emacs_ms_windows")))
+;; (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
 
 (load (xah-get-fullpath "xah_emacs_dired_commands"))
-
-(load (xah-get-fullpath "xah_emacs_abbr"))
 
 (load (xah-get-fullpath "xah_emacs_kmacro"))
 
@@ -182,12 +177,11 @@ Version 2017-07-19"
 (load (xah-get-fullpath "xah_emacs_ref_linkify"))
 (load (xah-get-fullpath "xah_emacs_google_earth"))
 
-(load (xah-get-fullpath "xah_emacs_font"))
 (load (xah-get-fullpath "xah_emacs_misc"))
 (load (xah-get-fullpath "xah_emacs_open"))
 
 (load (xah-get-fullpath "xah_emacs_atom_rss_util"))
-(load (xah-get-fullpath "xah_emacs_blogger_util"))
+
 (load (xah-get-fullpath "xah_emacs_xahsite_fix_util"))
 
 (load (xah-get-fullpath "xah_emacs_wordyenglish"))

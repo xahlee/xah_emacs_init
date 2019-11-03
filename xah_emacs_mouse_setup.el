@@ -3,14 +3,13 @@
 ;; Xah Lee
 ;; created: 2011-11-13
 
-;; Emacs: How to Set Mouse Buttons ＆ Wheel
+;; Emacs: How to Set Mouse Buttons
 ;; http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html
 
 
 ;; mouse
 
 ;; (setq mouse-yank-at-point t)
-(setq mouse-wheel-progressive-speed t)
 (setq mouse-wheel-progressive-speed nil)
 
 ;; set the “forward button” (5th button) to close.

@@ -25,8 +25,6 @@
     (keyfreq-mode 1)
     (keyfreq-autosave-mode 1)))
 
-
-
 ;; (when (fboundp 'global-page-break-lines-mode)
 ;;   ;; make the formfeed char (^L) display as a line
 ;;   (global-page-break-lines-mode 1)
@@ -38,17 +36,12 @@
 ;;      xah-html-mode xah-elisp-mode
 ;;      )))
 
-
-  
-
 ;; (when (and (fboundp 'which-key-mode)
 ;;            which-key-mode
 ;;            )
 ;;   ;; (which-key-setup-side-window-right)
 ;;   ;; (setq which-key-popup-type 'side-window)
 ;;   )
-
-
 
 ;; (when (fboundp 'elfeed)
 ;;   (setq elfeed-feeds
@@ -77,17 +70,12 @@
 ;;   (global-company-mode 1))
 
 (when (fboundp 'go-mode)
-
   (defun xah-golang-config ()
     "For use in `go-mode-hook'."
     (local-set-key (kbd "C-c C-c") 'gofmt)
     ;; more stuff here
-)
-
+    )
   (add-hook 'go-mode-hook 'xah-golang-config)
-
   ;; (add-hook 'before-save-hook #'gofmt-before-save)
   )
-
-
 
