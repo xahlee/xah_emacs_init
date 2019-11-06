@@ -40,14 +40,14 @@ Version 2016-11-10"
 (defun xahsite-update-article-timestamp ()
   "Update article's timestamp.
 Add today's date to the “byline” tag of current file, also delete the last one if there are more than one.
-This command saves buffer if it's a file.
 Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 Also, removes repeated empty lines.
 
 Version 2018-12-07"
   (interactive)
-  (save-excursion ; remove empty lines
+  (save-excursion
+    ;; remove empty lines
     (progn
       (goto-char (point-min))
       (while (re-search-forward "\n\n\n+" nil t)
@@ -88,14 +88,6 @@ Version 2018-12-07"
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
             (when (not (looking-at "\\.")) (insert "."))
             (search-backward "<time>"))))
-      (let ; backup
-          (($fname (buffer-file-name)))
-        (if $fname
-            (let (($backup-name
-                   (concat $fname "~" (format-time-string "%Y-%m-%d_%H%M%S") "~")))
-              (copy-file $fname $backup-name t)
-              (message (concat "Backup saved at: " $backup-name)))))
-      (save-buffer )
       (message "old date line: 「%s」" $bufferTextOrig)
 
       ;; (when ;; open in browser
@@ -609,8 +601,6 @@ Version 2018-06-03"
         (delete-region $p1 $p2)))
     (terpri )
     (mapc (lambda (x) (princ x) (terpri )) $resultList)))
-
-
 
 (defun xah-new-page ()
   "Make a new blog page.

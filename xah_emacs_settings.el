@@ -1,8 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; Emacs settings plain gnu emacs only
-;; 2017-07-15
+;; 2019-11-06
+;; http://ergoemacs.org/emacs/emacs_init_index.html
 
-
+;;; --------------------
 ;; initial window and default window
 
 (setq inhibit-startup-screen t)
@@ -20,7 +21,7 @@
 
 (setq default-frame-alist initial-frame-alist)
 
-
+;;; --------------------
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
@@ -28,7 +29,7 @@
 ;; (setenv "LANG" "en_US.UTF-8" )
 ;; (setenv "LC_ALL" "en_US.UTF-8" )
 
-
+;;; --------------------
 
 ;; for isearch-forward, make these equivalent: space newline tab hyphen underscore
 (setq search-whitespace-regexp "[-_ \t\n]+")
@@ -55,15 +56,8 @@ Version 2019-02-22"
 (setq create-lockfiles nil)
 
 (setq auto-save-default nil)
-;; (setq auto-save-visited-file-name t)
-
-;; (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/backup/" nil)))
-;; (setq auto-save-list-file-prefix "~/.emacs.d/backup/.saves-")
-;; (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
 
 (column-number-mode 1)
-
-;; (setq time-stamp-active nil)
 
 (progn
   ;; seems pointless to warn. There's always undo.
@@ -76,27 +70,18 @@ Version 2019-02-22"
   (put 'dired-find-alternate-file 'disabled nil)
 )
 
-
+;;; --------------------
 
 (progn
-  ;; dired
   (require 'dired-x)
-
-  ;; make dired suggest target dir (for copy, move, …) that's in the other dired pane
   (setq dired-dwim-target t)
-
-  ;; make dired not include 「.」 and 「..」, and use metric prefix for file size
-  (when (string-equal system-type "gnu/linux")
-    (setq dired-listing-switches "-al --time-style long-iso"))
-
-  ;; make dired allow deleting/copy whole dir
+  (when (string-equal system-type "gnu/linux") (setq dired-listing-switches "-al --time-style long-iso"))
   (setq dired-recursive-copies 'always)
   (setq dired-recursive-deletes 'always))
 
-
+;;; --------------------
 
 (setq save-interprogram-paste-before-kill t)
-
 ;; 2015-07-04 bug of pasting in emacs.
 ;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
 ;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
@@ -104,10 +89,7 @@ Version 2019-02-22"
 
 (setq x-select-enable-clipboard-manager nil)
 
-;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)﻿
-;; ;; (setq ediff-split-window-function 'split-window-horizontally)
-
-
+;;; --------------------
 
 (require 'recentf)
 (recentf-mode 1)
@@ -120,16 +102,11 @@ Version 2019-02-22"
 
 (setq sentence-end-double-space nil )
 
-;; (setq switch-to-visible-buffer nil)
-
 (setq set-mark-command-repeat-pop t)
 (setq mark-ring-max 5)
 (setq global-mark-ring-max 5)
 
 ;; (electric-pair-mode 1)
-
-;; set the fallback input method to Chinese for toggle-input-method
-(setq default-input-method 'chinese-py) ; as of emacs 24, default is nil anyway.
 
 (when (fboundp 'eww)
   (defun xah-rename-eww-buffer ()
@@ -144,13 +121,10 @@ Version 2017-11-10"
 
   (add-hook 'eww-after-render-hook 'xah-rename-eww-buffer))
 
-;; (add-hook 'eww-mode-hook 'xah-rename-eww-buffer)
-;; (remove-hook 'eww-mode-hook 'xah-rename-eww-buffer)
-
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
-
+;;; --------------------
 (progn
   ;; set a default font
   (cond
@@ -179,23 +153,7 @@ Version 2017-11-10"
   ;;
   )
 
-;; (progn
-;;   ;; use variable-width font for some modes
-;;   (defun xah-use-variable-width-font ()
-;;     "Set current buffer to use variable-width font."
-;;     (variable-pitch-mode 1)
-;;     ;; (text-scale-increase 1)
-;;     ;; (text-scale-increase 0.5)
-;;     )
-;;   (add-hook 'xah-html-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'nxml-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-elisp-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-js-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'xah-css-mode-hook 'xah-use-variable-width-font)
-;;   (add-hook 'go-mode-hook 'xah-use-variable-width-font)
-;;   )
-
-(progn ; minibuffer
+(progn
   (setq enable-recursive-minibuffers t)
 
   ;; Save minibuffer history
@@ -209,7 +167,7 @@ Version 2017-11-10"
    'minibuffer-prompt-properties
    (quote (read-only t cursor-intangible t face minibuffer-prompt))))
 
-
+;;; --------------------
 
 ;; remember cursor position
 (if (version< emacs-version "25.0")
@@ -218,12 +176,8 @@ Version 2017-11-10"
       (setq-default save-place t))
   (save-place-mode 1))
 
-
+;;; --------------------
 ;;; editing related
-
-;; make cursor movement stop in between camelCase words.
-;; (global-subword-mode 1)
-(global-subword-mode 0)
 
 ;; make typing delete/overwrites selected text
 (delete-selection-mode 1)
@@ -269,20 +223,21 @@ Version 2017-11-10"
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)))
 
-
+;;; --------------------
 ;; indentation, tab
 
-(electric-indent-mode 0) ; default is on in emacs 24.4
+(electric-indent-mode 0)
 
 (set-default 'tab-always-indent 'complete)
 
-;; no mixed tabs and spaces
-(setq-default indent-tabs-mode nil) ; gnu emacs 23.1, 24.4.1 default is t
+;; no mixed tab space
+(setq-default indent-tabs-mode nil)
+ ; gnu emacs 23.1, 24.4.1 default is t
 
 ;; 4 is more popular than 8.
-(setq-default tab-width 4) ; width for display tabs. emacs 23.1 default is 8
+(setq-default tab-width 4)
 
-
+;;; --------------------
 
 (progn
   ;; org-mode
@@ -292,7 +247,7 @@ Version 2017-11-10"
   (setq org-return-follows-link t)
   (setq org-startup-truncated nil))
 
-
+;;; --------------------
 
 ;; load emacs 24's package system. Add MELPA repository.
 (when (>= emacs-major-version 24)
@@ -303,7 +258,7 @@ Version 2017-11-10"
    '("melpa" . "http://melpa.milkbox.net/packages/")
    t))
 
-
+;;; --------------------
 
 (progn
  ;; Make whitespace-mode with very basic background coloring for whitespaces.
@@ -319,7 +274,7 @@ Version 2017-11-10"
           (tab-mark 9 [9655 9] [92 9]) ; tab
           )))
 
-
+;;; --------------------
 
 (setq hippie-expand-try-functions-list
       '(
@@ -335,15 +290,11 @@ Version 2017-11-10"
         ;; try-expand-line
         ))
 
-
+;;; --------------------
 
 (setq use-dialog-box nil)
 
-
-
-;; (setq-default bidi-display-reordering nil)
-
-
+;;; --------------------
 
 ;; convenient
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -367,7 +318,17 @@ Version 2017-11-10"
 (when (fboundp 'magit-status)
   (defalias 'ms 'magit-status))
 
-;; fuck tpu-edt
+;; no want tpu-edt
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char)
+
+;;; --------------------
+
+(defun xah-save-all-unsaved ()
+  "Save all unsaved files. no ask.
+Version 2019-11-05"
+  (interactive)
+  (save-some-buffers t ))
+
+(add-hook 'focus-out-hook 'xah-save-all-unsaved)
 

@@ -2,6 +2,13 @@
 
 (when (boundp 'xah-fly-key-map)
 
+;; (when (fboundp 'xah-fly-keys) (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file) )
+
+;; (defun my-highlight-line-on () (global-hl-line-mode 1))
+;; (defun my-highlight-line-off () (global-hl-line-mode 0))
+;; (add-hook 'xah-fly-command-mode-activate-hook 'my-highlight-line-on)
+;; (add-hook 'xah-fly-insert-mode-activate-hook  'my-highlight-line-off)
+
   (defun xah-expand-pane-switch-command-mode ()
     "Version 2019-10-22"
     (interactive)
@@ -108,6 +115,15 @@ Version 2017-01-21"
 
     (setq mode-line-front-space "C")
     (force-mode-line-update)
+
+  (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-etymology)
+  (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-word-dict-org)
+  (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
+  (define-key xah-fly-h-keymap (kbd "4") 'xah-lookup-word-definition)
+  (define-key xah-fly-h-keymap (kbd "5") 'xah-lookup-wikipedia)
+  (define-key xah-fly-h-keymap (kbd "6") 'xah-lookup-wiktionary)
+  (define-key xah-fly-h-keymap (kbd "7") 'xah-lookup-all-dictionaries)
+  (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
 
     ;;
     ))
@@ -222,7 +238,6 @@ Version 2017-01-21"
 
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
-
 
   (define-key xah-user-keymap (kbd ", c") 'xah-create-thumbnail-img)
   (define-key xah-user-keymap (kbd ", d") 'xah-image-autocrop)
@@ -389,18 +404,4 @@ For `rcirc-mode-hook'."
 (add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
 
 (setq rcirc-default-nick "mid2")
-
-(when (boundp 'xah-fly-h-keymap)
-  (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-etymology)
-  (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-word-dict-org)
-  (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
-  (define-key xah-fly-h-keymap (kbd "4") 'xah-lookup-word-definition)
-  (define-key xah-fly-h-keymap (kbd "5") 'xah-lookup-wikipedia)
-  (define-key xah-fly-h-keymap (kbd "6") 'xah-lookup-wiktionary)
-  (define-key xah-fly-h-keymap (kbd "7") 'xah-lookup-all-dictionaries)
-  (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
-  ;;
-  )
-
-
 

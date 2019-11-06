@@ -56,13 +56,11 @@ Version 2017-07-19"
 (add-to-list 'load-path "~/git/xah-fly-keys/")
 (require 'xah-fly-keys)
 (xah-fly-keys-set-layout "dvorak")
-(when (fboundp 'xah-fly-keys)
-  (xah-fly-keys 1)
-  (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file))
+(xah-fly-keys 1)
 
 (progn
   (require 'xah-text-mode)
-  (setq initial-major-mode 'xah-text-mode))
+  )
 
 (progn
   (add-to-list 'load-path "~/git/xah-elisp-mode/")
@@ -96,7 +94,7 @@ Version 2017-07-19"
 (progn
   (add-to-list 'load-path "~/git/xah-html-mode.el/")
   (require 'xah-html-mode)
-  )
+  (setq initial-major-mode 'xah-html-mode))
 
 (progn
   (add-to-list 'load-path "~/git/xah-js-mode.el/")
