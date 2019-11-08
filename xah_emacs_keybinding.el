@@ -155,7 +155,7 @@ Version 2017-01-21"
   (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
 
   (global-set-key (kbd "s-w") 'xah-close-current-buffer)
-  (global-set-key (kbd "s-r") 'xah-browse-url-of-buffer)
+  (global-set-key (kbd "s-r") 'xah-html-browse-url-of-buffer)
   ;; (global-set-key (kbd "s-r") 'xah-open-in-safari)
   (global-set-key (kbd "s-T") 'xah-open-last-closed)
   (global-set-key (kbd "s-t") 'xah-new-empty-buffer)
@@ -347,10 +347,10 @@ Version 2017-01-21"
 (when (fboundp 'xah-html-mode)
 
   (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
-  (define-key xah-html-mode-map (kbd "<f5>") 'xah-browse-url-of-buffer)
+  (define-key xah-html-mode-map (kbd "<f5>") 'xah-html-browse-url-of-buffer)
   (progn
 
-    (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-browse-url-of-buffer)
+    (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-html-browse-url-of-buffer)
 
     (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
 

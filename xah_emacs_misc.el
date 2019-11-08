@@ -531,28 +531,6 @@ Version 2015-12-17"
     (set-background-color $next-value)
     (message "background color changed to %s" $next-value)))
 
-(defun xah-browse-url-of-buffer ()
-  "Similar to `browse-url-of-buffer' but with some extra features.
-
-Save the file first.
-Then, if `universal-argument' is called, visit the corresponding xahsite URL.
-For example, if current buffer is of this file:
- ~/web/xahlee_info/index.html
-then after calling this function,
-default browser will be launched and opening this URL:
- http://xahlee.info/index.html
-Version 2017-09-22"
-  (interactive)
-  (let (($url
-         (if current-prefix-arg
-             (xahsite-filepath-to-url (buffer-file-name))
-           (buffer-file-name))))
-    (when (buffer-modified-p )
-      (xah-clean-whitespace)
-      (save-buffer))
-    (message "browsing %s" $url)
-    (browse-url $url )))
-
 
 
 ;; from newsgroup gnu.emacs.help, by Richard Riley, 2009-08-02
@@ -765,6 +743,4 @@ Version 2019-03-03"
   (delete-window))
 
 
-
-
 
