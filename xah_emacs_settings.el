@@ -147,9 +147,25 @@ Version 2017-11-10"
   ;; ;; specify font for all unicode characters
   ;; (when (member "Apple Color Emoji" (font-family-list))
   ;;   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
-
   ;;
   )
+
+(progn
+  ;; use variable-width font for some modes
+  (defun xah-set-proportial-font ()
+    "Set current buffer to use variable-width font."
+    (variable-pitch-mode 1)
+    ;; (text-scale-increase 1 )
+    )
+  (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
+  (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
+  (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
+  (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
+  (add-hook 'html-mode-hook 'xah-set-proportial-font)
+  (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
+  (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
+  (add-hook 'js-mode-hook 'xah-set-proportial-font)
+  (add-hook 'css-mode-hook 'xah-set-proportial-font))
 
 (progn
   (setq enable-recursive-minibuffers t)
