@@ -2,19 +2,12 @@
 
 (when (boundp 'xah-fly-key-map)
 
-;; (when (fboundp 'xah-fly-keys) (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file) )
+  ;; (when (fboundp 'xah-fly-keys) (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file) )
 
-;; (defun my-highlight-line-on () (global-hl-line-mode 1))
-;; (defun my-highlight-line-off () (global-hl-line-mode 0))
-;; (add-hook 'xah-fly-command-mode-activate-hook 'my-highlight-line-on)
-;; (add-hook 'xah-fly-insert-mode-activate-hook  'my-highlight-line-off)
-
-  (defun xah-expand-pane-switch-command-mode ()
-    "Version 2019-10-22"
-    (interactive)
-    (progn
-      (delete-other-windows)
-      (xah-fly-command-mode-activate)))
+  ;; (defun my-highlight-line-on () (global-hl-line-mode 1))
+  ;; (defun my-highlight-line-off () (global-hl-line-mode 0))
+  ;; (add-hook 'xah-fly-command-mode-activate-hook 'my-highlight-line-on)
+  ;; (add-hook 'xah-fly-insert-mode-activate-hook  'my-highlight-line-off)
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
 
@@ -29,104 +22,22 @@
 
   ;; (define-key xah-fly-key-map (kbd "SPC") 'xah-fly-space-key)
 
-  (global-set-key (kbd "C-=") 'xah-cycle-hyphen-underscore-space)
+  (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
 
-  (defun xah-fly-command-mode-init ()
-    "Set command mode keys.
-Version 2017-01-21"
+  (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
+
+  (defun xah-xfk-add ()
+    "addon for `xah-fly-command-mode-activate-hook' 
+Version 2019-11-09"
     (interactive)
     (xah-fly--define-keys
      xah-fly-key-map
      '(
-       ("~" . nil)
-       (":" . nil)
-
-       ("SPC" . xah-fly-leader-key-map)
-       ("DEL" . xah-fly-leader-key-map)
-
-       ("'" . xah-reformat-lines)
-       ("," . xah-shrink-whitespaces)
-       ("-" . xah-expand-pane-switch-command-mode)
-       ("." . xah-backward-kill-word)
-       (";" . xah-comment-dwim)
-       ("/" . hippie-expand)
-       ("\\" . nil)
-       ;; ("=" . xah-forward-equal-sign)
-       ;; ("[" . xah-backward-punct )
-       ("[" . split-window-below )
-       ;; ("]" . xah-forward-punct)
+       ;; the first element of cons cell is dvorak key
        ("]" . delete-other-windows)
-       ("`" . other-frame)
+       ("[" . split-window-below ))))
 
-       ("1" . xah-extend-selection)
-       ("2" . xah-select-line)
-       ("3" . forward-char)
-       ("4" . forward-char)
-       ("5" . delete-char)
-       ("6" . xah-select-block)
-       ("7" . xah-select-line)
-       ("8" . xah-extend-selection)
-       ("9" . xah-select-text-in-quote)
-       ("0" . xah-pop-local-mark-ring)
-
-       ("a" . execute-extended-command)
-       ("b" . isearch-forward)
-       ("c" . previous-line)
-       ("d" . xah-beginning-of-line-or-block)
-       ("e" . xah-delete-backward-char-or-bracket-text)
-       ("f" . undo)
-       ("g" . backward-word)
-       ("h" . backward-char)
-       ("i" . xah-delete-current-text-block)
-       ("j" . xah-copy-line-or-region)
-       ("k" . xah-paste-or-paste-previous)
-       ;; ("l" . xah-fly-insert-mode-activate-space-before)
-       ("l" . xah-insert-space-before)
-       ("m" . xah-backward-left-bracket)
-       ("n" . forward-char)
-       ("o" . open-line)
-       ("p" . xah-kill-word)
-       ("q" . xah-cut-line-or-region)
-       ("r" . forward-word)
-       ("s" . xah-end-of-line-or-block)
-       ("t" . next-line)
-       ("u" . xah-fly-insert-mode-activate)
-       ("v" . xah-forward-right-bracket)
-       ("w" . xah-next-window-or-frame)
-       ("x" . xah-toggle-letter-case)
-       ("y" . set-mark-command)
-       ("z" . xah-goto-matching-bracket)))
-
-    (define-key xah-fly-key-map (kbd (xah-fly--key-char "a"))
-      (if (fboundp 'smex) 'smex (if (fboundp 'helm-M-x) 'helm-M-x 'execute-extended-command)))
-
-    ;; (when xah-fly-swapped-1-8-and-2-7-p
-    ;;     (xah-fly--define-keys
-    ;;      xah-fly-key-map
-    ;;      '(
-    ;;        ("8" . pop-global-mark)
-    ;;        ("7" . xah-pop-local-mark-ring)
-    ;;        ("2" . xah-select-line)
-    ;;        ("1" . xah-extend-selection))))
-
-    (progn
-      (setq xah-fly-insert-state-q nil )
-      (modify-all-frames-parameters (list (cons 'cursor-type 'box))))
-
-    (setq mode-line-front-space "C")
-    (force-mode-line-update)
-
-  (define-key xah-fly-h-keymap (kbd "1") 'xah-lookup-etymology)
-  (define-key xah-fly-h-keymap (kbd "2") 'xah-lookup-word-dict-org)
-  (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
-  (define-key xah-fly-h-keymap (kbd "4") 'xah-lookup-word-definition)
-  (define-key xah-fly-h-keymap (kbd "5") 'xah-lookup-wikipedia)
-  (define-key xah-fly-h-keymap (kbd "6") 'xah-lookup-wiktionary)
-  (define-key xah-fly-h-keymap (kbd "7") 'xah-lookup-all-dictionaries)
-  (define-key xah-fly-h-keymap (kbd "9") 'xah-lookup-word-definition)
-
-    ;;
-    ))
+  (add-hook 'xah-fly-command-mode-activate-hook 'xah-xfk-add))
 
 ;; (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
 ;; (global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
@@ -156,7 +67,6 @@ Version 2017-01-21"
 
   (global-set-key (kbd "s-w") 'xah-close-current-buffer)
   (global-set-key (kbd "s-r") 'xah-html-browse-url-of-buffer)
-  ;; (global-set-key (kbd "s-r") 'xah-open-in-safari)
   (global-set-key (kbd "s-T") 'xah-open-last-closed)
   (global-set-key (kbd "s-t") 'xah-new-empty-buffer)
   (global-set-key (kbd "s-n") 'xah-new-empty-buffer)
@@ -364,7 +274,7 @@ Version 2017-01-21"
     (define-key xah-html-mode-no-chord-map (kbd "SPC c") 'xah-angle-brackets-to-html)
     (define-key xah-html-mode-no-chord-map (kbd "SPC .") 'xah-html-full-size-img-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "SPC p") 'xah-copy-url-current-file)
-    (define-key xah-html-mode-no-chord-map (kbd "SPC t") 'xah-open-in-safari)
+    (define-key xah-html-mode-no-chord-map (kbd "SPC t") 'xah-html-open-in-safari)
     (define-key xah-html-mode-no-chord-map (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)

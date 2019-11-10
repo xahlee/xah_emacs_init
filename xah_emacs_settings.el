@@ -136,11 +136,9 @@ Version 2017-11-10"
     ;;
     )
    ((string-equal system-type "darwin") ; Mac
-    (when (member "Menlo" (font-family-list)) (set-frame-font "Menlo-14" t t))
-    ;;
-    )
+    (when (member "Menlo" (font-family-list)) (set-frame-font "Menlo-14" t t)))
    ((string-equal system-type "windows-nt") ; Windows
-   nil))
+    (when (member "Courier" (font-family-list)) (set-frame-font "Courier" t t))))
 
   ;; specify font for all unicode characters
   (when (member "Symbola" (font-family-list))
