@@ -150,22 +150,22 @@ Version 2017-11-10"
   ;;
   )
 
-(progn
-  ;; use variable-width font for some modes
-  (defun xah-set-proportial-font ()
-    "Set current buffer to use variable-width font."
-    (variable-pitch-mode 1)
-    ;; (text-scale-increase 1 )
-    )
-  (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
-  (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
-  (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
-  (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
-  (add-hook 'html-mode-hook 'xah-set-proportial-font)
-  (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
-  (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
-  (add-hook 'js-mode-hook 'xah-set-proportial-font)
-  (add-hook 'css-mode-hook 'xah-set-proportial-font))
+;; (progn
+;;   ;; use variable-width font for some modes
+;;   (defun xah-set-proportial-font ()
+;;     "Set current buffer to use variable-width font."
+;;     (variable-pitch-mode 1)
+;;     ;; (text-scale-increase 1 )
+;;     )
+;;   (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'html-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'js-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'css-mode-hook 'xah-set-proportial-font))
 
 (progn
   (setq enable-recursive-minibuffers t)
@@ -326,8 +326,7 @@ Version 2017-11-10"
 (defalias 'ssm 'shell-script-mode)
 (defalias 'om 'org-mode)
 
-(when (fboundp 'xah-new-page)
-  (defalias 'xnp 'xah-new-page))
+(defalias 'xnp 'xah-new-page)
 
 (when (fboundp 'magit-status)
   (defalias 'ms 'magit-status))

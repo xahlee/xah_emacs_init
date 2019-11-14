@@ -38,6 +38,7 @@ f_cycle_image ({
     ("k" "know" )
     ("ab" "about" )
     ("dn" "down" )
+    ("sts" "sometimes" )
 
     ;; English phrases abbrev
 
