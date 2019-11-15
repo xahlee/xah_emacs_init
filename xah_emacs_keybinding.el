@@ -11,9 +11,8 @@
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
 
-  ;; (global-set-key (kbd "<f10>") 'xah-user-keymap)
+  (global-set-key (kbd "<f10>") 'xah-user-keymap)
   (define-key xah-fly-leader-key-map (kbd ".") 'xah-user-keymap)
-  
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
 
