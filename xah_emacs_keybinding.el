@@ -12,7 +12,7 @@
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
 
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
-  (define-key xah-fly-leader-key-map (kbd ".") 'xah-user-keymap)
+  (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-user-keymap)
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
 
@@ -249,7 +249,7 @@ Version 2019-11-09"
 (when (fboundp 'xah-html-mode)
 
   (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
-  (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-html-mode-no-chord-map)
+  (define-key xah-fly-leader-key-map (kbd ".") 'xah-html-mode-no-chord-map)
   (define-key xah-html-mode-map (kbd "<f5>") 'xah-html-browse-url-of-buffer)
   (progn
 
