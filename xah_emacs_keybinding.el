@@ -11,23 +11,16 @@
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
 
-  ;; (global-set-key (kbd "<end>") xah-fly-e-keymap)
-
-  ;; (define-key xah-fly-key-map (kbd "<home>") xah-fly-e-keymap)
-
-  (global-set-key (kbd "<f10>") 'xah-user-keymap)
-  ;; (setq xah-fly-dot-keymap xah-user-keymap)
-
-  ;; (define-key xah-fly-leader-key-map (kbd "e") nil)
-
-  ;; (define-key xah-fly-key-map (kbd "SPC") 'xah-fly-space-key)
+  ;; (global-set-key (kbd "<f10>") 'xah-user-keymap)
+  (define-key xah-fly-leader-key-map (kbd ".") 'xah-user-keymap)
+  
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
 
   (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
 
   (defun xah-xfk-add ()
-    "addon for `xah-fly-command-mode-activate-hook' 
+    "addon for `xah-fly-command-mode-activate-hook'
 Version 2019-11-09"
     (interactive)
     (xah-fly--define-keys
@@ -257,6 +250,7 @@ Version 2019-11-09"
 (when (fboundp 'xah-html-mode)
 
   (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
+  (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-html-mode-no-chord-map)
   (define-key xah-html-mode-map (kbd "<f5>") 'xah-html-browse-url-of-buffer)
   (progn
 
