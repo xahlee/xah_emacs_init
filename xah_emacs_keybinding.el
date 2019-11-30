@@ -9,12 +9,12 @@
   ;; (add-hook 'xah-fly-command-mode-activate-hook 'my-highlight-line-on)
   ;; (add-hook 'xah-fly-insert-mode-activate-hook  'my-highlight-line-off)
 
-  (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
-
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
   (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-user-keymap)
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
+
+  (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
 
   (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
 

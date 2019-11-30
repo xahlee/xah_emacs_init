@@ -442,6 +442,26 @@ todo
 
 
 
+(defun xah-html-insert-divflow ()
+  "Insert a section tag with date tag inside.
+Version 2019-11-28"
+  (interactive)
+  (when (use-region-p)
+    (delete-region (region-beginning) (region-end)))
+  (insert (format "
+
+<section class=\"divFlow81777\">
+
+<div class=\"date-xl\"><time>%s</time></div>
+
+x
+
+</section>
+
+" (format-time-string "%Y-%m-%d")))
+  (search-backward "x" )
+  (delete-char 1))
+
 (defun xah-html-insert-date-section ()
   "Insert a section tag with date tag inside.
 Version 2019-05-21"

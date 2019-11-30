@@ -23,6 +23,12 @@ f_cycle_image ({
 
 ")
 
+    ;; maybe temp
+
+    ("lst" "live stream" )
+    ("elispt" "emacs lisp" )
+    ("sof" "StackOverflow" )
+
     ;; English word abbrev
 
     ("ds" "does" )
@@ -39,6 +45,7 @@ f_cycle_image ({
     ("ab" "about" )
     ("dn" "down" )
     ("sts" "sometimes" )
+    ("thx" "thanks" )
 
     ;; English phrases abbrev
 
@@ -79,6 +86,7 @@ f_cycle_image ({
     ("ann" "announcement" )
     ("apr" "apparently" )
     ("argt" "argument" )
+    ("cmdt" "command" )
     ("autot" "automatic" )
     ("autom" "automatic" )
     ("bc" "because" )
@@ -325,8 +333,8 @@ f_cycle_image ({
 
     ("bell" "🔔" )
     ("goodt" "👍" )
-    ("applaudt" "👏" )
-    ("thx" "🙏" )
+    ("clapt" "👏" )
+    ("thxt" "🙏" )
     ("heartface" "😻" )
     ("clown" "🤡" )
     ("angry" "😠" )
@@ -336,7 +344,7 @@ f_cycle_image ({
     ("wink" "😜" )
     ("hearts" "♥💕💖" )
     ("omg" "😂" )
-    ("star" "★" )
+    ("start" "★" )
     ("star2" "🌟" )
     ("la" "←" )
     ("ua" "↑" )
