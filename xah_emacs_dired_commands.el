@@ -237,6 +237,32 @@ Version 2018-11-28"
            (progn 90))))
     (xah-process-image @file-list (format "-quality %s%%" quality ) "-2" ".jpg" )))
 
+(defun xah-dired-show-metadata (@file-list)
+  "Display metatata of buffer image file or marked files in dired.
+ (typically image files)
+URL `http://xahlee.info/img/metadata_in_image_files.html'
+Requires exiftool shell command.
+
+URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
+Version 2019-12-04"
+  (interactive
+   (list
+    (cond
+     ((string-equal major-mode "dired-mode") (dired-get-marked-files))
+     ((string-equal major-mode "image-mode") (list (buffer-file-name)))
+     (t (list (read-from-minibuffer "file name:"))))))
+  (let ( (outputBuf (get-buffer-create "*xah metadata output*")))
+    (switch-to-buffer outputBuf)
+    (erase-buffer)
+    (mapc (lambda (f)
+            (call-process
+             "exiftool"
+             nil outputBuf nil
+             (file-relative-name f))
+            (insert "\nhh========================================\n"))
+          @file-list)
+    (goto-char (point-min))))
+
 (defun xah-dired-remove-all-metadata (@file-list)
   "Remove all metatata of buffer image file or marked files in dired.
  (typically image files)
@@ -261,27 +287,6 @@ Version 2016-07-19"
        @file-list )
     nil
     ))
-
-(defun xah-dired-show-metadata (@file-list)
-  "Display metatata of buffer image file or marked files in dired.
- (typically image files)
-URL `http://xahlee.info/img/metadata_in_image_files.html'
-Requires exiftool shell command.
-URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2016-07-19"
-  (interactive
-   (list
-    (cond
-     ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-     ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-     (t (list (read-from-minibuffer "file name:"))))))
-  (mapc
-   (lambda ($f)
-     (shell-command
-      (format "exiftool '%s'" (file-relative-name $f))
-      ;; relative paths used to get around Windows/Cygwin path remapping problem
-      ))
-   @file-list ))
 
 (defun xah-dired-sort ()
   "Sort dired dir listing in different ways.

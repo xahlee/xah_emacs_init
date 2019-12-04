@@ -49,11 +49,14 @@ Version 2019-11-09"
 
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 
+;; kinesis
+(define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
+
 (when (string-equal system-type "darwin")
   ;; macOS
 
   (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
-  (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
+
 
   (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
 
