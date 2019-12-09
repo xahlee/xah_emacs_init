@@ -28,6 +28,7 @@ f_cycle_image ({
     ("lst" "live stream" )
     ("elispt" "emacs lisp" )
     ("sof" "StackOverflow" )
+    ("xl" "xahlee" )
 
     ;; English word abbrev
 
@@ -305,16 +306,6 @@ f_cycle_image ({
 ▮
 </pre>")
 
-    ("faqh" "<section class=\"qna_xl\">
-
-<h3 class=\"q\">How to ?</h3>
-
-<p>this</p>
-
-</section>
-
-" )
-
     ("topich" "<div class=\"topic_xl\">
 <h4>Emacs Lisp Basics Topic</h4>
 <ol>
@@ -324,6 +315,16 @@ f_cycle_image ({
 </div>
 
 ")
+
+    ("faqh" "<section class=\"qna_xl\">
+
+<h3 class=\"q\">How to ?</h3>
+
+<p>this</p>
+
+</section>
+
+" )
 
     ;; unicode
     ("asciit" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
@@ -519,14 +520,13 @@ x int
 
 
 
-(defun xah-abbrev-h-f ()
+(defun xah-abbrev-hook-function ()
   "Abbrev hook function, used for `define-abbrev'.
  Our use is to prevent inserting the char that triggered expansion. Experimental.
- the “h-f” stand for hook function.
 Version 2016-10-24"
   t)
 
-(put 'xah-abbrev-h-f 'no-self-insert t)
+(put 'xah-abbrev-hook-function 'no-self-insert t)
 
 (setq abbrev-expand-function 'xah-global-expand-abbrev)
 

@@ -742,5 +742,18 @@ Version 2019-03-03"
   (clm/open-command-log-buffer)
   (delete-window))
 
-
-
+(defun xah-bigger-font-global ()
+  "Make font size larger globally.
+currently only works for mac. because, the right size for a “bigger” font depends on your monitor resolution and also font used, and in turn, also what font is available on which OS.
+Version 2019-12-08"
+  (interactive)
+  (cond
+   ((string-equal system-type "gnu/linux")
+    (when (member "DejaVu Sans Mono" (font-family-list))
+      (set-frame-font "DejaVu Sans Mono" t t)))
+   ((string-equal system-type "darwin")
+    (when (member "Menlo" (font-family-list))
+      (set-frame-font "Menlo-15" t t)))
+   ((string-equal system-type "windows-nt")
+    (when (member "Courier" (font-family-list))
+      (set-frame-font "Courier" t t)))))
