@@ -215,6 +215,7 @@ Version 2017-07-19"
   (add-to-list 'load-path "~/git/xah-find/")
   (require 'xah-find)
   (when (fboundp 'xah-find-text)
-    (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))))
+    (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))
+    (defalias 'xfom 'xah-find-output-mode)))
 
 ;; (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")

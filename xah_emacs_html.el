@@ -303,13 +303,13 @@ from directories checked are:
 ~/
 /tmp/
 
-The first file whose name starts with ee or tt or contain “Screenshot”, “Screen Shot” , will be moved.
+The first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
 
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase extension name is lowercased. Space in filename is replaced by the low line char “_”.
 If the file name ends in png, “optipng” is called on it.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2019-08-23"
+Version 2019-12-27"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -328,7 +328,7 @@ Version 2019-08-23"
     (setq $fromPath
           (catch 'TAG
             (dolist (x $dirs )
-              (let ((mm (directory-files x t "^ee\\|^tt\\|Screen Shot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
+              (let ((mm (directory-files x t "^ee\\|^tt\\|^IMG_\\|Screen Shot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
                 (if mm
                     (progn
                       (throw 'TAG (car mm)))

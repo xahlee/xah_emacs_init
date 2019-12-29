@@ -401,10 +401,36 @@ Version 2019-10-01"
     (insert filepath-new "\n")
     (backward-word )))
 
+(defun xah-html-convert-png-to-jpg ()
+  "Convert the image file under cursor in a html file, from jpg to png, then, linkify it in html.
+
+If `universal-argument' is called first, ask to delete png.
+
+Version 2019-12-17"
+  (interactive)
+  (let (
+        inputPath
+        cmdStr
+        fileCoreName
+        )
+    (setq inputPath (thing-at-point 'filename))
+    (setq fileCoreName (file-name-sans-extension inputPath))
+    (setq cmdStr (format "convert %s.png %s.jpg" fileCoreName fileCoreName ))
+    (shell-command cmdStr )
+    (when current-prefix-arg
+      (when (yes-or-no-p "Delete the png file?")
+        (delete-file inputPath)))
+    (search-backward "<" )
+    (insert fileCoreName ".jpg")
+    (insert "\n")
+    (backward-char 2)
+    (xah-html-image-linkify)
+    ;;
+    ))
+
 (defun xah-open-dired-marked ()
   "Open marked files in dired.
 Version 2019-10-22"
   (interactive)
-  (mapc 'find-file (dired-get-marked-files))
-)
+  (mapc 'find-file (dired-get-marked-files)))
 

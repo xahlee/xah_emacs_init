@@ -30,6 +30,9 @@ f_cycle_image ({
     ("sof" "StackOverflow" )
     ("xl" "xahlee" )
 
+    ("xls" "live stream in x hours. x San Francisco time.
+https://www.youtube.com/c/xahlee/live sub+🔔" )
+
     ;; English word abbrev
 
     ("ds" "does" )
@@ -345,8 +348,8 @@ f_cycle_image ({
     ("wink" "😜" )
     ("hearts" "♥💕💖" )
     ("omg" "😂" )
-    ("start" "★" )
-    ("star2" "🌟" )
+    ("startt" "★" )
+    ("newt" "🌟" )
     ("la" "←" )
     ("ua" "↑" )
     ("ra" "→" )

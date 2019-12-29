@@ -10,6 +10,8 @@
   ;; (add-hook 'xah-fly-insert-mode-activate-hook  'my-highlight-line-off)
 
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
+  ;; (global-set-key (kbd "<f10>") 'xah-fly-mode-toggle)
+
   (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-user-keymap)
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
@@ -263,7 +265,7 @@ Version 2019-11-09"
     (define-key xah-html-mode-no-chord-map (kbd "SPC s") 'xah-insert-reference-span-tag)
     (define-key xah-html-mode-no-chord-map (kbd "SPC SPC") 'xah-html-insert-date-section)
 
-    (define-key xah-html-mode-no-chord-map (kbd "SPC e") 'xah-make-atom-entry)
+    (define-key xah-html-mode-no-chord-map (kbd "SPC e") 'xah-atom-new-entry)
     (define-key xah-html-mode-no-chord-map (kbd "SPC u") 'xahsite-update-article-timestamp)
     ;; . p eu gc ht
     (define-key xah-html-mode-no-chord-map (kbd "SPC b") 'xah-make-blogger-entry)
