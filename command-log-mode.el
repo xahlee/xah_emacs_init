@@ -153,8 +153,10 @@ self-insert-command
   "Last logged keyboard command.")
 
 
-(defvar clm/log-command-indentation 11
+(defvar clm/log-command-indentation 6
   "*Indentation of commands in command log buffer.")
+
+;; (setq clm/log-command-indentation 6)
 
 (defgroup command-log nil
   "Customization for the command log.")

@@ -12,14 +12,29 @@
     (setq initial-frame-alist
           '(
             (tool-bar-lines . 0)
+            (background-color . "honeydew")
             (width . 106)
             (height . 60)
-            (background-color . "honeydew")
-            (left . 50)
-            (top . 50)))
+            ;; (left . 50)
+            ;; (top . 50)
+            ))
   (setq initial-frame-alist '( (tool-bar-lines . 0))))
 
-(setq default-frame-alist initial-frame-alist)
+(setq default-frame-alist
+      '(
+        (tool-bar-lines . 0)
+        (background-color . "honeydew")
+        (width . 100)
+        (height . 50)))
+
+;; (setq default-frame-alist
+;;       '(
+;;        (tool-bar-lines . 0)
+;;        (width . 106)
+;;        (height . 60)
+;;        (background-color . "honeydew")
+;;        (left . 50)
+;;        (top . 50)))
 
 ;;; --------------------
 

@@ -29,9 +29,12 @@ f_cycle_image ({
     ("elispt" "emacs lisp" )
     ("sof" "StackOverflow" )
     ("xl" "xahlee" )
+    ("toc" "table of contents" )
+    ("phpt" "<?php 3 ?>" )
 
     ("xls" "live stream in x hours. x San Francisco time.
-https://www.youtube.com/c/xahlee/live sub+🔔" )
+Goto YouTube xah lee, sub + 🔔 .
+https://www.youtube.com/c/xahlee/live" )
 
     ;; English word abbrev
 
@@ -43,6 +46,7 @@ https://www.youtube.com/c/xahlee/live sub+🔔" )
     ("th" "there" )
     ("u" "you" )
     ("ur" "your" )
+    ("ure" "you are" )
     ("w" "want" )
     ("hv" "have" )
     ("k" "know" )
@@ -236,6 +240,7 @@ https://www.youtube.com/c/xahlee/live sub+🔔" )
     ("rhst" "right-hand-side" )
     ("rsi" "Repetitive Strain Injury" )
     ("sct" "source code" )
+    ("sst" "screenshot" )
     ("subdirt" "sub-directory" )
     ("subdirst" "sub-directories" )
     ("uit" "user interface" )
@@ -271,7 +276,6 @@ https://www.youtube.com/c/xahlee/live sub+🔔" )
     ("ppt" "PayPal" )
     ("pst" "powershell" )
     ("sl" "Second Life" )
-    ("sot" "StackOverflow" )
     ("tek" "Truly Ergonomic keyboard" )
     ("tst" "TypeScript" )
     ("vb" "Visual Basic" )
@@ -281,7 +285,7 @@ https://www.youtube.com/c/xahlee/live sub+🔔" )
     ;; programing
     ("eq" "==" )
     ("eqq" "===" )
-    ("hr" "================================================================================" )
+    ("hr" "HH====================================================================" )
 
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
 
@@ -386,7 +390,7 @@ https://www.youtube.com/c/xahlee/live sub+🔔" )
 ~/web/xahlee_info/java-a-day/java.html
 ~/web/xahlee_info/clojure/clojure_index.html
 "  )
-    ("umaltron" "http://xahlee.info/kbd/Maltron_keyboard.html" )
+
     ("umma" "http://xahlee.info/M/index.html" )
     ("uocaml" "http://xahlee.info/ocaml/ocaml.html" )
     ("uperl" "http://xahlee.info/perl-python/perl_basics.html" )
@@ -395,11 +399,15 @@ https://www.youtube.com/c/xahlee/live sub+🔔" )
 
     ("upython" "http://xahlee.info/python/python3_basics.html" )
     ("uruby" "http://xahlee.info/ruby/ruby_basics.html" )
-    ("ute" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html" )
-    ("utek" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html" )
+
+
     ("utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html" )
     ("uunicode" "http://xahlee.info/comp/unicode_index.html" )
+
+    ("umaltron" "http://xahlee.info/kbd/Maltron_keyboard.html" )
+    ("utek" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html" )
     ("uutron" "http://xahlee.info/kbd/uTRON_keyboard.html" )
+
     ("uvi" "http://ergoemacs.org/emacs/emergency_vi.html" )
     ("uvmm" "http://VirtualMathMuseum.org/" )
     ("uwd" "http://xahlee.info/js/index.html" )

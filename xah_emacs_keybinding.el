@@ -11,8 +11,13 @@
 
   (global-set-key (kbd "<f10>") 'xah-user-keymap)
   ;; (global-set-key (kbd "<f10>") 'xah-fly-mode-toggle)
+  (global-set-key (kbd "<menu-bar> <edit>") nil)
+  (global-set-key (kbd "<menu-bar> <file>") nil)
 
   (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-user-keymap)
+  (define-key xah-fly-key-map (kbd "<f9>") nil)
+  (define-key xah-fly-key-map (kbd "<menu>") nil)
+  (define-key xah-fly-key-map (kbd "C-SPC") nil)
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
 
@@ -32,9 +37,6 @@ Version 2019-11-09"
        ("[" . split-window-below ))))
 
   (add-hook 'xah-fly-command-mode-activate-hook 'xah-xfk-add))
-
-;; (global-set-key (kbd "<end> 3") 'xah-remove-wikipedia-link)
-;; (global-set-key (kbd "<end> 4") 'xah-remove-all-wikipedia-link)
 
 ;; (setq visible-bell nil)
 

@@ -734,13 +734,14 @@ version 2019-02-11"
 (defun xah-start-command-log ()
   "Start the `command-log-mode' globally and
 make current buffer the log buffer.
-Version 2019-03-03"
+Version 2020-01-02"
   (interactive)
   (load "/Users/xah/git/xah_emacs_init/command-log-mode.el" )
   (command-log-mode)
   (global-command-log-mode)
   (clm/open-command-log-buffer)
-  (delete-window))
+  (delete-window)
+  (set-background-color "thistle"))
 
 (defun xah-bigger-font-global ()
   "Make font size larger globally.

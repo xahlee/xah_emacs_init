@@ -55,7 +55,7 @@ Version 2016-07-19"
   "Create a scaled version of marked image files in dired.
 New file names have “-s” appended before the file name extension.
 
-If `universal-argument' is called first, output is PNG format. Else, JPG.
+If `universal-argument' is ask for png/jpg and sharpen options.
 
 When called in lisp code,
  @file-list is a file fullpath list.
@@ -65,26 +65,21 @@ When called in lisp code,
 
 Requires ImageMagick unix shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2019-02-18"
+Version 2019-12-30"
   (interactive
-   (let (
-         ($fileList
-          (cond
-           ((string-equal major-mode "dired-mode") (dired-get-marked-files))
-           ((string-equal major-mode "image-mode") (list (buffer-file-name)))
-           (t (list (read-from-minibuffer "file name:")))))
-         (@quality (if current-prefix-arg
-                      (string-to-number (read-string "quality:" "90"))
-                    90)))
-     (list $fileList
-           (read-from-minibuffer "Scale %:")
-           @quality
-(y-or-n-p "Sharpen"))))
-  (let ( ($outputSuffix (if current-prefix-arg ".png" ".jpg" )))
+   (list (cond
+          ((string-equal major-mode "dired-mode") (dired-get-marked-files))
+          ((string-equal major-mode "image-mode") (list (buffer-file-name)))
+          (t (list (read-from-minibuffer "file name:"))))
+         (read-from-minibuffer "Scale %:")
+         (if current-prefix-arg (string-to-number (read-string "quality:" "90")) 90)
+         (if current-prefix-arg (y-or-n-p "Sharpen") t)))
+  (let ( ($nameExt
+          (if current-prefix-arg (if (y-or-n-p "to png?") ".png" ".jpg" ) ".jpg" )))
     (xah-process-image
      @file-list
      (format "-scale %s%% -quality %s%% %s " @scale-percentage @quality (if @sharpen-p "-sharpen 1" "" ))
-     "-s" $outputSuffix )))
+     "-s" $nameExt )))
 
 (defun xah-image-autocrop ()
   "Create a new auto-cropped version of image.
