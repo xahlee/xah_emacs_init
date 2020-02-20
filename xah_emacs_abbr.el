@@ -336,9 +336,14 @@ https://www.youtube.com/c/xahlee/live" )
     ;; unicode
     ("asciit" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
     ("bu" "•" )
+    ("la" "←" )
+    ("ua" "↑" )
+    ("ra" "→" )
+    ("da" "↓" )
+    ("fn" "ƒ" )
+
     ("catface" "😸" )
     ("haha" "🤩" )
-
     ("bell" "🔔" )
     ("goodt" "👍" )
     ("clapt" "👏" )
@@ -354,11 +359,6 @@ https://www.youtube.com/c/xahlee/live" )
     ("omg" "😂" )
     ("startt" "★" )
     ("newt" "🌟" )
-    ("la" "←" )
-    ("ua" "↑" )
-    ("ra" "→" )
-    ("da" "↓" )
-    ("fn" "ƒ" )
 
     ;; code
     ("utf8t" "-*- coding: utf-8 -*-" )

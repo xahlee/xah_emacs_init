@@ -445,43 +445,41 @@ Version 2018-09-07"
 
 (defun xah-show-hexadecimal-value ()
   "Prints the decimal value of a hexadecimal string under cursor.
-TODO: 2014-05-23 doesn't work. something's broken.
 
 Samples of valid input:
 
-  ffaf
-  ffff
-  0xffff
-  #xffff
-  FFFF
-  0xFFFF
-  #xFFFF
+  ffff → 65535
+  0xffff → 65535
+  #xffff → 65535
+  FFFF → 65535
+  0xFFFF → 65535
+  #xFFFF → 65535
 
-Test cases
+more test cases
   64*0xc8+#x12c 190*0x1f4+#x258
-  100 200 300   400 500 600"
+  100 200 300   400 500 600
+
+URL `http://ergoemacs.org/emacs/elisp_converting_hex_decimal.html'
+Version 2020-02-17"
   (interactive )
-
-  (let ($inputStr $tempStr $p1 $p2
-                 (case-fold-search t) )
-    (save-excursion
-      ;; (skip-chars-backward "0123456789abcdef")
-      ;; (search-backward-regexp "[[:xdigit:]]+" nil t)
-      (search-backward-regexp "[0123456789abcdef]+" nil t)
-      (setq $p1 (point) )
-      (re-search-forward "[0123456789abcdef]+" nil t)
-      (setq $p2 (point) )
-
-      (setq $inputStr (buffer-substring-no-properties $p1 $p2) )
-
-      (let ((case-fold-search nil) )
-        (setq $tempStr (replace-regexp-in-string "\\`0x" "" $inputStr )) ; C, Perl, …
-        (setq $tempStr (replace-regexp-in-string "\\`#x" "" $tempStr )) ; elisp …
-        (setq $tempStr (replace-regexp-in-string "\\`#" "" $tempStr ))  ; CSS …
-        )
-
-      ;; (message "Hex 「%s」 is 「%d」" $tempStr (string-to-number $tempStr 16))
-      (message "input 「%s」 Hex 「%s」 is 「%d」" $inputStr $tempStr (string-to-number $tempStr 16)))))
+  (let ($inputStr $tempStr $p1 $p2 )
+    (if (region-active-p)
+        (progn
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
+      (progn
+        (save-excursion
+          (skip-chars-backward "0123456789abcdefABCDEF#x")
+          (setq $p1 (point))
+          (skip-chars-forward "0123456789abcdefABCDEF#x" )
+          (setq $p2 (point)))))
+    (setq $inputStr (buffer-substring-no-properties $p1 $p2))
+    (let ((case-fold-search nil))
+      (setq $tempStr (replace-regexp-in-string "\\`0x" "" $inputStr )) ; C, Perl, …
+      (setq $tempStr (replace-regexp-in-string "\\`#x" "" $tempStr )) ; elisp …
+      (setq $tempStr (replace-regexp-in-string "\\`#" "" $tempStr )) ; CSS …
+      )
+    (message "input 「%s」, Hex 「%s」 is 「%d」" $inputStr $tempStr (string-to-number $tempStr 16))))
 
 
 

@@ -9,7 +9,7 @@
   ;; (add-hook 'xah-fly-command-mode-activate-hook 'my-highlight-line-on)
   ;; (add-hook 'xah-fly-insert-mode-activate-hook  'my-highlight-line-off)
 
-  (global-set-key (kbd "<f10>") 'xah-user-keymap)
+  ;; (global-set-key (kbd "<f10>") 'xah-user-keymap)
   ;; (global-set-key (kbd "<f10>") 'xah-fly-mode-toggle)
   (global-set-key (kbd "<menu-bar> <edit>") nil)
   (global-set-key (kbd "<menu-bar> <file>") nil)
@@ -143,8 +143,6 @@ Version 2019-11-09"
 
   (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
 
-  (define-key xah-user-keymap (kbd "<f10>") 'xah-math-input-change-to-symbol)
-
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
 
@@ -165,12 +163,9 @@ Version 2019-11-09"
   ;; a
   (define-key xah-user-keymap (kbd "b") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  ;; d
-
-  ;; f
+  ;; d e f
   (define-key xah-user-keymap (kbd "g") 'xah-replace-straight-quotes)
   ;; h
-
   (define-key xah-user-keymap (kbd "i c") 'xah-insert-random-number)
   (define-key xah-user-keymap (kbd "i h") 'xah-insert-random-hex)
   (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-string)
@@ -186,6 +181,7 @@ Version 2019-11-09"
   (define-key xah-user-keymap (kbd "q") 'xah-replace-invisible-char)
 
   ;; r s t
+  (define-key xah-user-keymap (kbd "t") 'xah-math-input-change-to-symbol)
 
   (define-key xah-user-keymap (kbd "u ,") 'xah-remove-punctuation-trailing-redundant-space )
   (define-key xah-user-keymap (kbd "u .") 'xah-convert-english-chinese-punctuation)

@@ -27,15 +27,6 @@
         (width . 100)
         (height . 50)))
 
-;; (setq default-frame-alist
-;;       '(
-;;        (tool-bar-lines . 0)
-;;        (width . 106)
-;;        (height . 60)
-;;        (background-color . "honeydew")
-;;        (left . 50)
-;;        (top . 50)))
-
 ;;; --------------------
 
 ;; UTF-8 as default encoding
