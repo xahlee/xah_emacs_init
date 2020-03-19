@@ -27,10 +27,10 @@ Version 2015-05-12"
         (save-excursion
           (setq $p0 (point))
           ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-          (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+          (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\`")
           (setq $p1 (point))
           (goto-char $p0)
-          (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+          (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\'")
           (setq $p2 (point)))))
     (progn
       (setq $inputPath (buffer-substring-no-properties $p1 $p2))
@@ -85,10 +85,10 @@ Version 2018-04-10"
           (save-excursion
             (setq $p0 (point))
             ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-            (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+            (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\`")
             (setq $p1 (point))
             (goto-char $p0)
-            (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+            (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\'")
             (setq $p2 (point))))))
     (setq $input (buffer-substring-no-properties $p1 $p2))
     (setq $imgPath (xah-local-url-to-file-path $input))
@@ -249,10 +249,10 @@ Version 2018-11-08"
        (let (p0 p1 p2)
          (setq p0 (point))
          ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-         (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+         (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\`")
          (setq p1 (point))
          (goto-char p0)
-         (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+         (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\'")
          (setq p2 (point))
          (list p1 p2)))))
   (let* (
@@ -448,10 +448,10 @@ Version 2019-05-11"
             (let ($p0)
               (setq $p0 (point))
               ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-              (skip-chars-backward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+              (skip-chars-backward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\`")
               (setq $p1 (point))
               (goto-char $p0)
-              (skip-chars-forward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+              (skip-chars-forward "^  \"\t\n'|[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\'")
               (setq $p2 (point)))))
         (setq $input (buffer-substring-no-properties $p1 $p2))
         (cond

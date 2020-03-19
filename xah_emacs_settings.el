@@ -337,6 +337,9 @@ Version 2017-11-10"
 (when (fboundp 'magit-status)
   (defalias 'ms 'magit-status))
 
+(when (fboundp 'xah-find-count)
+  (defalias 'xfc 'xah-find-count))
+
 ;; no want tpu-edt
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char)
@@ -351,3 +354,16 @@ Version 2019-11-05"
 
 (add-hook 'focus-out-hook 'xah-save-all-unsaved)
 
+;; HH====================================================================
+
+;; set default font
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (when (member "Consolas" (font-family-list))
+    (set-frame-font "Consolas" t t)))
+ ((string-equal system-type "darwin") ; macOS
+  (when (member "Menlo" (font-family-list))
+    (set-frame-font "Menlo" t t)))
+ ((string-equal system-type "gnu/linux") ; linux
+  (when (member "DejaVu Sans Mono" (font-family-list))
+    (set-frame-font "DejaVu Sans Mono" t t))))

@@ -756,3 +756,34 @@ Version 2019-12-08"
    ((string-equal system-type "windows-nt")
     (when (member "Courier" (font-family-list))
       (set-frame-font "Courier" t t)))))
+
+(defun xah-remove-lenticular-brackets ()
+  "Remove lenticular brackets 【】 in current block or region.
+Version 2020-03-02"
+  (interactive)
+  (let ( $p1 $p2 $clist)
+    (if (use-region-p)
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n")
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (if (re-search-forward "\n[ \t]*\n" nil "move")
+            (progn (re-search-backward "\n[ \t]*\n")
+                   (setq $p2 (point)))
+          (setq $p2 (point)))))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region $p1 $p2)
+        (let ((case-fold-search nil))
+          (progn
+            (goto-char (point-min))
+            (while (search-forward "【" nil t)
+              (replace-match "" )
+              (push (buffer-substring-no-properties (point) (line-end-position)) $clist)))
+          (progn
+            (goto-char (point-min))
+            (while (search-forward "】" nil t)
+              (replace-match "" ))))))
+    (mapcar (lambda (x) (princ "【") (princ x) (princ "\n")) (reverse $clist))))
