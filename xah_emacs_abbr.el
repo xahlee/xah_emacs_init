@@ -364,7 +364,7 @@ https://www.youtube.com/c/xahlee/live" )
     ("utf8t" "-*- coding: utf-8 -*-" )
 
     ("vdspc" "Visual Dictionary of Special Plane Curves" )
-    ("xfk" "xah-fly-keys" )
+    ("xfk" "xah fly keys" )
     ("eem" "ergoemacs-mode" )
 
     ;; url

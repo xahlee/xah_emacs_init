@@ -88,15 +88,9 @@ Version 2018-12-07"
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
             (when (not (looking-at "\\.")) (insert "."))
             (search-backward "<time>"))))
+      (require 'xah-fly-keys)
+      (xah-make-backup-and-save)
       (message "old date line: 「%s」" $bufferTextOrig)
-
-      ;; (when ;; open in browser
-      ;;     (string-equal system-type "gnu/linux")
-      ;;   (let ( (process-connection-type nil))
-      ;;     (start-process "" nil "setsid" "firefox" (concat "file://" buffer-file-name )))
-      ;;   ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. eg with nautilus
-      ;;   )
-
       ;;
       )))
 
