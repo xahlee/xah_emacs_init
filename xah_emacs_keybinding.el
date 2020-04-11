@@ -27,12 +27,16 @@
 
   (defun xah-xfk-add ()
     "addon for `xah-fly-command-mode-activate-hook'
-Version 2019-11-09"
+Version 2020-04-09"
     (interactive)
     (xah-fly--define-keys
      xah-fly-key-map
      '(
        ;; the first element of cons cell is dvorak key
+       ("3" . nil )
+       ("4" . nil )
+       ("-" . delete-other-windows)
+       ("\\" . split-window-below)
        ("]" . delete-other-windows)
        ("[" . split-window-below ))))
 

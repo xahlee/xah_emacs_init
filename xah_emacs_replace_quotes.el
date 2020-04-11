@@ -294,8 +294,9 @@ Version 2017-01-11"
             (replace-match "" "FIXEDCASE" "LITERAL")))))))
 
 (defun xah-replace-profanity ()
-  "Replace fuck shit scumbag … in current line or text selection.
-Version 2016-10-05"
+  "Replace swearing words by replacing some chars.
+Works in current line or text selection.
+Version 2020-04-10"
   (interactive)
   (let ( $p1 $p2)
     (if (use-region-p)
@@ -304,9 +305,11 @@ Version 2016-10-05"
     (xah-replace-pairs-region
      $p1 $p2
      '(
-       ["fuck" "f￼ck"]
-       ["shit" "sh￼t"]
-       ["motherfuck" "m￼th￼rf￼ck"]
+       ["fuck" "f�ck"]
+       ["shit" "sh�t"]
+       ["ass" "�ss"]
+       ["motherfuck" "m�th�rf�ck"]
+       ["pussy" "p�ssy"]
        ) "REPORT" "HILIGHT" )))
 
 (defun xah-replace-slanted-apostrophe ()
