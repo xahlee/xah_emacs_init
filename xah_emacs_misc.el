@@ -42,6 +42,35 @@ Version 2017-03-21"
 
 
 
+(defun xah-get-matching-bracket (@bracket-char-string)
+  "Returns a char in string form matching @bracket-char-string.
+ For example, if input is \"[\" returns \"]\".
+This works with any unicode bracket, such as 「」【】〈〉etc.
+This function uses the current syntax table to determine what's brackets and the matching char.
+If the input is not a bracket, returns nil.
+
+URL `http://ergoemacs.org/emacs/elisp_find_matching_bracket_char.html'
+Version 2017-01-16"
+  (interactive)
+  (let (($syntableValue (aref (syntax-table) (string-to-char @bracket-char-string))))
+    (if (or
+         (eq (car $syntableValue ) 4) ; syntax table, code 4 is open bracket
+         (eq (car $syntableValue ) 5) ; syntax table, code 5 is close bracket
+         )
+        (char-to-string (cdr $syntableValue))
+      nil
+      )))
+
+;; test
+;; (xah-get-matching-bracket "(" ) ; ")"
+;; (xah-get-matching-bracket ")" ) ; "("
+;; (xah-get-matching-bracket "[" ) ; "]"
+;; (xah-get-matching-bracket "]" ) ; "["
+;; (xah-get-matching-bracket "「" ) ; "」"
+;; (xah-get-matching-bracket "」" ) ; "「"
+;; (xah-get-matching-bracket "【" ) ; "】"
+;; (xah-get-matching-bracket "】" ) ; "【"
+
 (defun xah-toggle-margin-right ()
   "Toggle the right margin between `fill-column' or window width.
 This command is convenient when reading novel, documentation.
