@@ -119,27 +119,15 @@ Version 2020-04-09"
 (progn
   ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
   (define-prefix-command 'xah-dump-keymap)
-
-  ;; a
-  ;; b
-  (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
-  ;; d
-  (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
-  ;; f
-  ;; g
-  (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
-  ;; i
-  (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
-  ;; k
-  (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
-
-  ;; l ;; m ;; n ;; o ;; p ;; p ;; q ;; r ;; s
-
-  (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
-
-  ;; u ;; v ;; w ;; x ;; y ;; z
-
+  ;; (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
+  ;; (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
+  ;; (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
+  ;; (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
+  ;; (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
+  ;; (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
+  ;;
   )
+
 (progn
   (define-prefix-command 'xah-user-keymap)
 

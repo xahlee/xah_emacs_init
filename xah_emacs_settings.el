@@ -340,6 +340,12 @@ Version 2017-11-10"
 (when (fboundp 'xah-find-count)
   (defalias 'xfc 'xah-find-count))
 
+(defalias 'xcm 'xah-css-mode)
+(defalias 'xem 'xah-elisp-mode)
+(defalias 'xhm 'xah-html-mode)
+(defalias 'xjm 'xah-js-mode)
+(defalias 'xcm 'xah-clojure-mode)
+
 ;; no want tpu-edt
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char)
