@@ -77,6 +77,9 @@ Version 2020-04-09"
   (global-set-key (kbd "s-[") 'xah-previous-user-buffer)
   (global-set-key (kbd "s-]") 'xah-next-user-buffer)
 
+  (global-set-key (kbd "<M-s-left>") 'xah-previous-user-buffer)
+  (global-set-key (kbd "<M-s-right>") 'xah-next-user-buffer)
+
   (global-set-key (kbd "s-=") 'text-scale-increase)
   (global-set-key (kbd "s--") 'text-scale-decrease)
 

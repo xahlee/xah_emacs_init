@@ -58,6 +58,10 @@ Version 2017-07-19"
 (xah-fly-keys-set-layout "dvorak")
 (xah-fly-keys 1)
 
+;; (load-file "/Users/xah/git/xah-fly-keys/xah-fly-keys.el")
+;; (xah-fly-keys-set-layout "dvorak")
+;; (xah-fly-keys 1)
+
 (progn
   (require 'xah-text-mode)
   )
@@ -219,3 +223,4 @@ Version 2017-07-19"
     (defalias 'xfom 'xah-find-output-mode)))
 
 ;; (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")
+
