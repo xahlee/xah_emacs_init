@@ -53,9 +53,6 @@ Version 2020-04-09"
 
 ;; (setq ring-bell-function nil)
 
-(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-(define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
-
 ;; kinesis
 (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
 
