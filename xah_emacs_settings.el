@@ -14,7 +14,7 @@
             (tool-bar-lines . 0)
             (background-color . "honeydew")
             (width . 106)
-            (height . 60)
+            (height . 56)
             ;; (left . 50)
             ;; (top . 50)
             ))
@@ -25,7 +25,7 @@
         (tool-bar-lines . 0)
         (background-color . "honeydew")
         (width . 100)
-        (height . 50)))
+        (height . 55)))
 
 ;;; --------------------
 

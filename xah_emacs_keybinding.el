@@ -54,7 +54,6 @@ Version 2020-04-09"
 ;; (setq ring-bell-function nil)
 
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 
 ;; kinesis
@@ -64,7 +63,6 @@ Version 2020-04-09"
   ;; macOS
 
   (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
-
 
   (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
 

@@ -730,3 +730,33 @@ Version 2020-03-02"
             (while (search-forward "】" nil t)
               (replace-match "" ))))))
     (mapcar (lambda (x) (princ "【") (princ x) (princ "\n")) (reverse $clist))))
+
+(defun xah-bracket-caps ()
+  "add ‹› to sequence of CAP LETTERS, on selection or current text block.
+
+Example:
+ Change value in PLIST of PROP to VAL
+becomes
+ Change value in ‹PLIST› of ‹PROP› to ‹VAL›
+
+This function is mostly used as help writing elisp doc.
+
+Version 2020-04-19"
+  (interactive)
+  (let ($p $p2 (case-fold-search nil))
+    (if (use-region-p)
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n")
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (if (re-search-forward "\n[ \t]*\n" nil "move")
+            (progn (re-search-backward "\n[ \t]*\n")
+                   (setq $p2 (point)))
+          (setq $p2 (point)))))
+    (save-restriction
+      (narrow-to-region $p1 $p2)
+      (goto-char (point-min))
+      (while (re-search-forward "\\b\\([A-Z][A-Z]+[0-9]*\\)\\b" nil t)
+        (replace-match (concat "‹" (match-string 1) "›") t )))))
