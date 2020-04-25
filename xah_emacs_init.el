@@ -54,7 +54,6 @@ Version 2017-07-19"
 (require 'xeu_elisp_util)
 
 (add-to-list 'load-path "~/git/xah-fly-keys/")
-(setq xah-fly-use-esc-c-g t)
 (require 'xah-fly-keys)
 (xah-fly-keys-set-layout "dvorak")
 (xah-fly-keys 1)

@@ -19,6 +19,17 @@
   (define-key xah-fly-key-map (kbd "<menu>") nil)
   (define-key xah-fly-key-map (kbd "C-SPC") nil)
 
+  (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+
+;; (when xah-fly-use-esc-c-g
+;;   (define-key key-translation-map (kbd "ESC") (kbd "C-g")))
+
+;; (defcustom xah-fly-use-esc-c-g nil
+;;   "If non-nil, treat ESC as C-g when it has no other binding."
+;;   :type 'boolean
+;;   :group 'xah-fly-keys)
+
+
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
