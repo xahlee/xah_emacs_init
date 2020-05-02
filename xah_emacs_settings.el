@@ -131,30 +131,33 @@ Version 2017-11-10"
   (global-display-line-numbers-mode))
 
 ;;; --------------------
-(progn
+
+(cond
   ;; set a default font
-  (cond
    ((string-equal system-type "gnu/linux")
     (when (member "DejaVu Sans Mono" (font-family-list)) (set-frame-font "DejaVu Sans Mono" t t))
     ;; specify font for chinese characters using default chinese font on linux
     (when (member "WenQuanYi Micro Hei" (font-family-list))
-      (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))
-    ;;
-    )
+      (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" )))
    ((string-equal system-type "darwin") ; Mac
     (when (member "Menlo" (font-family-list)) (set-frame-font "Menlo-14" t t)))
    ((string-equal system-type "windows-nt") ; Windows
     (when (member "Courier" (font-family-list)) (set-frame-font "Courier" t t))))
 
-  ;; specify font for all unicode characters
+(cond
+ ;; specify font for all unicode characters
+ ((string-equal system-type "gnu/linux")
   (when (member "Symbola" (font-family-list))
     (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-
-  ;; ;; specify font for all unicode characters
-  ;; (when (member "Apple Color Emoji" (font-family-list))
-  ;;   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
-  ;;
-  )
+  ;; specify font for chinese characters using default chinese font on linux
+  (when (member "WenQuanYi Micro Hei" (font-family-list))
+    (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" )))
+ ((string-equal system-type "darwin") ; Mac
+  (when (member "Apple Color Emoji" (font-family-list))
+    (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)))
+ ((string-equal system-type "windows-nt") ; Windows
+  nil
+  ))
 
 ;; (progn
 ;;   ;; use variable-width font for some modes
