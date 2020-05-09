@@ -36,6 +36,8 @@ f_cycle_image ({
 Goto YouTube xah lee, sub + 🔔 .
 https://www.youtube.com/c/xahlee/live" )
 
+    ("xtv" "XahTV")
+
     ;; English word abbrev
 
     ("ds" "does" )
@@ -314,11 +316,11 @@ https://www.youtube.com/c/xahlee/live" )
 </pre>")
 
     ("topich" "<div class=\"topic_xl\">
-<h4>Emacs Lisp Basics Topic</h4>
-<ol>
-<li><a href=\"elisp_basics.html\">Emacs Lisp Basics</a></li>
-<li><a href=\"elisp_editing_basics.html\">Overview of Text-Processing in Emacs Lisp</a></li>
-</ol>
+<h4>JavaScript Reverse Key/Value</h4>
+<ul>
+<li><a href=\"js_map_reverse_key_val.html\">JS: Reverse Key/Value of Map</a></li>
+<li><a href=\"js_reverse_obj_key_val.html\">JS: Reverse Object Key/Value</a></li>
+</ul>
 </div>
 
 ")
@@ -399,7 +401,6 @@ https://www.youtube.com/c/xahlee/live" )
 
     ("upython" "http://xahlee.info/python/python3_basics.html" )
     ("uruby" "http://xahlee.info/ruby/ruby_basics.html" )
-
 
     ("utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html" )
     ("uunicode" "http://xahlee.info/comp/unicode_index.html" )
