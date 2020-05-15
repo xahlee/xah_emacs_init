@@ -236,56 +236,6 @@ Requires a python script. See code."
       (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)))
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t))))
 
-;; (defun xah-move-image-file (@dir-name @file-name)
-;;   "move image file at
-;; ~/Downloads/xx.jpg
-;; to current dir of subdir i
-;; and rename file to current line's text.
-
-;; if xx.jpg doesn't exit, try xx.png. The dirs to try are
-;;  ~/Downloads/
-;;  ~/Pictures/
-;;  /tmp
-
-;; Version 2016-10-08"
-;;   (interactive "DMove xx img to dir:
-;; sNew file name:")
-;;   (let (
-;;         $from-path
-;;         $to-path )
-;;     (setq $from-path
-;;           (cond
-;;            ((file-exists-p (expand-file-name "~/Downloads/xx.jpg"))
-;;             (expand-file-name "~/Downloads/xx.jpg"))
-;;            ((file-exists-p (expand-file-name "~/Downloads/xx.JPG"))
-;;             (expand-file-name "~/Downloads/xx.JPG"))
-;;            ((file-exists-p (expand-file-name "~/Downloads/xx.png"))
-;;             (expand-file-name "~/Downloads/xx.png"))
-;;            ((file-exists-p (expand-file-name "~/Pictures/xx.jpg"))
-;;             (expand-file-name "~/Pictures/xx.jpg"))
-;;            ((file-exists-p (expand-file-name "~/Pictures/xx.png"))
-;;             (expand-file-name "~/Pictures/xx.png"))
-;;            ((file-exists-p (expand-file-name "~/Pictures/xx.gif"))
-;;             (expand-file-name "~/Pictures/gif.png"))
-;;            ((file-exists-p (expand-file-name "~/Downloads/xx.gif"))
-;;             (expand-file-name "~/Downloads/xx.gif"))
-
-;;            ((file-exists-p "/tmp/xx.jpg")
-;;             "/tmp/xx.jpg")
-;;            ((file-exists-p "/tmp/xx.png")
-;;             "/tmp/xx.png")
-;;            (t (error "no xx.jpg or xx.png at downloads dir nor pictures dir nor /tmp dir"))))
-;;     (setq $to-path (concat
-;;                     (file-name-as-directory @dir-name )
-;;                     @file-name "."
-;;                     (downcase (file-name-extension $from-path ))))
-;;     (if (file-exists-p $to-path)
-;;         (message "move to path exist: %s" $to-path)
-;;       (progn
-;;         (rename-file $from-path $to-path)
-;;         (find-file $to-path )
-;;         (message "move to path: %s" $to-path)))))
-
 (defun xah-move-image-file ( @toDirName  )
   "Move image file to another dir.
 
@@ -299,11 +249,11 @@ from directories checked are:
 
 The first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
 
-The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase extension name is lowercased. Space in filename is replaced by the low line char “_”.
+The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 If the file name ends in png, “optipng” is called on it.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2019-12-27"
+Version 2020-05-15"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -311,7 +261,9 @@ Version 2019-12-27"
         $ext
         ($p0 (point))
         $toPath
-        ($dirs '( "~/Downloads/" "~/Pictures/" "~/Desktop/" "~/Documents/" "~/" "/tmp" ))
+        ($dirs '( "~/Downloads/" "~/Pictures/"
+                  "~/Downloads/Pictures/"
+                  "~/Desktop/" "~/Documents/" "~/" "/tmp" ))
         ($randStr
          (let* (($charset "bcdfghjkmnpqrstvwxyz23456789")
                 ($len (length $charset))
@@ -321,13 +273,14 @@ Version 2019-12-27"
            (mapconcat 'identity $randlist ""))))
     (setq $fromPath
           (catch 'TAG
-            (dolist (x $dirs )
-              (let ((mm (directory-files x t "^ee\\|^tt\\|^IMG_\\|Screen Shot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
-                (if mm
-                    (progn
-                      (throw 'TAG (car mm)))
-                  nil
-                  )))))
+            (dolist (xdir $dirs )
+              (when (file-exists-p xdir)
+                (let ((flist (directory-files xdir t "^ee\\|^tt\\|^IMG_\\|Screen Shot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
+                  (if flist
+                      (progn
+                        (throw 'TAG (car flist)))
+                    nil
+                    ))))))
     (when (not $fromPath)
       (error "no file name starts with ee nor contain “Screen Shot” at dirs %s" $dirs))
     (setq $ext
