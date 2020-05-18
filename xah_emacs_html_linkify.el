@@ -441,7 +441,6 @@ Version 2019-05-11"
         ;; (if (string-match "%" $input )
         ;;     (decode-coding-string (url-unhex-string "https://mysticsiva.wordpress.com/2016/11/04/%E3%82%AD%E3%83%BC%E3%82%AD%E3%83%A3%E3%83%83%E3%83%97%E4%BA%A4%E6%8F%9B3/") 'utf-8)
         ;;   $input)
-
         (if (use-region-p)
             (setq $p1 (region-beginning) $p2 (region-end))
           (save-excursion
@@ -455,30 +454,21 @@ Version 2019-05-11"
               (setq $p2 (point)))))
         (setq $input (buffer-substring-no-properties $p1 $p2))
         (cond
-
          ((string-match-p "js_es2011\\|js_es2015\\|js_es2015_orig\\|js_es2016\\|js_es2018" $input)
           (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-
          ((string-match-p "css_2.1_spec" $input)
           (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "clojure-doc-1.8" $input)
           (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-
          ((string-match-p "REC-SVG11-20110816" $input)
           (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "css_transitions/CSS_Transitions.html" $input)
           (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-
          ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" $input) (xah-blogger-linkify))
-
          ((string-match-p "/node_api/" $input) (xah-nodejs-ref-linkify))
          ((string-match-p "/emacs_manual/" $input) (xah-html-emacs-ref-linkify))
-
          ((xahsite-url-is-xah-website-p $input) (xah-file-linkify $p1 $p2))
-
          ;; (xah-html-image-figure-linkify)
-
          ((xah-html-image-file-suffix-p $input) (xah-html-image-figure-linkify))
-
          (t (xah-file-linkify $p1 $p2))))
     (xah-html-wrap-url)))
