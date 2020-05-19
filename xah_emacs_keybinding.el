@@ -207,18 +207,6 @@ Version 2020-04-09"
 ;; 'xah-toggle-margin-right
 ;; 'xah-toggle-line-spacing
 
-;; (progn
-;;   (define-key key-translation-map (kbd "<menu> SPC <up>") (kbd "↑"))
-;;   (define-key key-translation-map (kbd "<menu> SPC <down>") (kbd "↓"))
-;;   (define-key key-translation-map (kbd "<menu> SPC <left>") (kbd "←"))
-;;   (define-key key-translation-map (kbd "<menu> SPC <right>") (kbd "→"))
-;;   (define-key key-translation-map (kbd "<menu> SPC 4") (kbd "◆"))
-;;   (define-key key-translation-map (kbd "<menu> SPC 2") (kbd "＆"))
-;;   (define-key key-translation-map (kbd "<menu> SPC 1") (kbd "•"))
-;;   (define-key key-translation-map (kbd "<menu> SPC .") (kbd "…"))
-;;   (define-key key-translation-map (kbd "<menu> SPC 3") (kbd "-"))
-;;   (define-key key-translation-map (kbd "<menu> SPC 9") (kbd "_")))
-
 
 
 (when (boundp 'xah-elisp-mode-map)
