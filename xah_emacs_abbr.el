@@ -26,6 +26,7 @@ f_cycle_image ({
     ;; maybe temp
 
     ("lst" "live stream" )
+    ("wpmt" "words per minute" )
     ("elispt" "emacs lisp" )
     ("sof" "StackOverflow" )
     ("xl" "xahlee" )
