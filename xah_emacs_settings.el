@@ -132,32 +132,61 @@ Version 2017-11-10"
 
 ;;; --------------------
 
+;; ;; set default font
+;; (cond
+;;  ((string-equal system-type "windows-nt") ; Microsoft Windows
+;;   (when (member "Consolas" (font-family-list))
+;;     (set-frame-font "Consolas" t t)))
+;;  ((string-equal system-type "darwin") ; macOS
+;;   (when (member "Menlo" (font-family-list))
+;;     (set-frame-font "Menlo" t t)))
+;;  ((string-equal system-type "gnu/linux") ; linux
+;;   (when (member "DejaVu Sans Mono" (font-family-list))
+;;     (set-frame-font "DejaVu Sans Mono" t t))))
+
+;; set default font
 (cond
-  ;; set a default font
-   ((string-equal system-type "gnu/linux")
-    (when (member "DejaVu Sans Mono" (font-family-list)) (set-frame-font "DejaVu Sans Mono" t t))
-    ;; specify font for chinese characters using default chinese font on linux
-    (when (member "WenQuanYi Micro Hei" (font-family-list))
-      (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" )))
-   ((string-equal system-type "darwin") ; Mac
-    (when (member "Menlo" (font-family-list)) (set-frame-font "Menlo-14" t t)))
-   ((string-equal system-type "windows-nt") ; Windows
-    (when (member "Courier" (font-family-list)) (set-frame-font "Courier" t t))))
+ ((member "Consolas" (font-family-list)) ; win
+  (set-frame-font "Consolas" t t))
+ ((member "Menlo" (font-family-list)) ; mac
+  (set-frame-font "Menlo" t t))
+ ((member "DejaVu Sans Mono" (font-family-list)) ; linux
+  (set-frame-font "DejaVu Sans Mono" t t)))
+
+;; set font for emoji
+(set-fontset-font
+ t
+ '(#x1f300 . #x1fad0)
+ (cond
+  ((member "Noto Color Emoji" (font-family-list)) "Noto Color Emoji")
+  ((member "Noto Emoji" (font-family-list)) "Noto Emoji")
+  ((member "Segoe UI Emoji" (font-family-list)) "Segoe UI Emoji")
+  ((member "Apple Color Emoji" (font-family-list)) "Apple Color Emoji")
+  ((member "Symbola" (font-family-list)) "Symbola"))
+ ;;
+)
 
 (cond
- ;; specify font for all unicode characters
+ ;; specify font for all chinese characters
+ ((string-equal system-type "windows-nt")
+  (set-fontset-font
+   t
+   '(#x4e00 . #x9fff)
+   (cond
+    ((member "Microsoft YaHei" (font-family-list)) "Microsoft YaHei")
+    ((member "PMingLiU" (font-family-list)) "PMingLiU")
+    ((member "SimHei" (font-family-list)) "SimHei")
+    ((member "Microsoft YaHei UI" (font-family-list)) "Microsoft YaHei UI")
+    ((member "MingLiU" (font-family-list)) "MingLiU")
+    ((member "SimHei" (font-family-list)) "SimHei")
+    ((member "DengXian" (font-family-list)) "DengXian")
+    ((member "KaiTi" (font-family-list)) "KaiTi")
+    ((member "SimSun" (font-family-list)) "SimSun"))))
+ ((string-equal system-type "darwin")
+  nil)
  ((string-equal system-type "gnu/linux")
-  (when (member "Symbola" (font-family-list))
-    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-  ;; specify font for chinese characters using default chinese font on linux
   (when (member "WenQuanYi Micro Hei" (font-family-list))
-    (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" )))
- ((string-equal system-type "darwin") ; Mac
-  (when (member "Apple Color Emoji" (font-family-list))
-    (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)))
- ((string-equal system-type "windows-nt") ; Windows
-  nil
-  ))
+    (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))))
 
 ;; (progn
 ;;   ;; use variable-width font for some modes
@@ -365,14 +394,3 @@ Version 2019-11-05"
 
 ;; HH====================================================================
 
-;; set default font
-(cond
- ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (when (member "Consolas" (font-family-list))
-    (set-frame-font "Consolas" t t)))
- ((string-equal system-type "darwin") ; macOS
-  (when (member "Menlo" (font-family-list))
-    (set-frame-font "Menlo" t t)))
- ((string-equal system-type "gnu/linux") ; linux
-  (when (member "DejaVu Sans Mono" (font-family-list))
-    (set-frame-font "DejaVu Sans Mono" t t))))
