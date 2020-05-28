@@ -149,7 +149,7 @@ Version 2017-11-10"
  ((member "Consolas" (font-family-list)) ; win
   (set-frame-font "Consolas" t t))
  ((member "Menlo" (font-family-list)) ; mac
-  (set-frame-font "Menlo" t t))
+  (set-frame-font "Menlo-14" t t))
  ((member "DejaVu Sans Mono" (font-family-list)) ; linux
   (set-frame-font "DejaVu Sans Mono" t t)))
 
@@ -161,10 +161,13 @@ Version 2017-11-10"
   ((member "Noto Color Emoji" (font-family-list)) "Noto Color Emoji")
   ((member "Noto Emoji" (font-family-list)) "Noto Emoji")
   ((member "Segoe UI Emoji" (font-family-list)) "Segoe UI Emoji")
-  ((member "Apple Color Emoji" (font-family-list)) "Apple Color Emoji")
-  ((member "Symbola" (font-family-list)) "Symbola"))
+  ((member "Symbola" (font-family-list)) "Symbola")
+  ((member "Apple Color Emoji" (font-family-list)) "Apple Color Emoji"))
+ ;; Apple Color Emoji should be before Symbola, but Richard Stallman skum disabled it.
+ ;; GNU Emacs Removes Color Emoji Support on the Mac
+ ;; http://ergoemacs.org/misc/emacs_macos_emoji.html
  ;;
-)
+ )
 
 (cond
  ;; specify font for all chinese characters
@@ -183,10 +186,16 @@ Version 2017-11-10"
     ((member "KaiTi" (font-family-list)) "KaiTi")
     ((member "SimSun" (font-family-list)) "SimSun"))))
  ((string-equal system-type "darwin")
-  nil)
+  (cond
+   ((member "Heiti SC" (font-family-list)) "Heiti SC")
+   ((member "Heiti TC" (font-family-list)) "Heiti TC")
+   ((member "Songti SC" (font-family-list)) "Songti SC")
+   ((member "Songti TC" (font-family-list)) "Songti TC")
+   ((member "Kaiti SC" (font-family-list)) "Kaiti SC")
+   ((member "BiauKai" (font-family-list)) "BiauKai")))
  ((string-equal system-type "gnu/linux")
-  (when (member "WenQuanYi Micro Hei" (font-family-list))
-    (set-fontset-font t '(#x4e00 . #x9fff) "WenQuanYi Micro Hei" ))))
+  (cond
+   ((member "WenQuanYi Micro Hei" (font-family-list)) "WenQuanYi Micro Hei"))))
 
 ;; (progn
 ;;   ;; use variable-width font for some modes
