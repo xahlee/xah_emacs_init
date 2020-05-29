@@ -21,17 +21,24 @@
 
   (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
-;; (when xah-fly-use-esc-c-g
-;;   (define-key key-translation-map (kbd "ESC") (kbd "C-g")))
+  ;; (when xah-fly-use-esc-c-g
+  ;;   (define-key key-translation-map (kbd "ESC") (kbd "C-g")))
 
-;; (defcustom xah-fly-use-esc-c-g nil
-;;   "If non-nil, treat ESC as C-g when it has no other binding."
-;;   :type 'boolean
-;;   :group 'xah-fly-keys)
+  ;; (defcustom xah-fly-use-esc-c-g nil
+  ;;   "If non-nil, treat ESC as C-g when it has no other binding."
+  ;;   :type 'boolean
+  ;;   :group 'xah-fly-keys)
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
+
+  (defun xahXfkCmdActivateInsDash ()
+    "Insert a dash then call `xah-fly-command-mode-activate'
+Version 2020-05-28"
+    (interactive)
+    (insert "-")
+    (xah-fly-command-mode-activate))
 
   (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
 
@@ -127,12 +134,14 @@ Version 2020-04-09"
 (progn
   ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
   (define-prefix-command 'xah-dump-keymap)
-  ;; (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
-  ;; (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
-  ;; (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
-  ;; (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
-  ;; (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
-  ;; (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
+  (define-key xah-dump-keymap (kbd "1") 'xah-insert-word-1)
+  (define-key xah-dump-keymap (kbd "2") 'xah-insert-word-2)
+  (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
+  (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
+  (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
+  (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
+  (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
+  (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
   ;;
   )
 
@@ -140,8 +149,7 @@ Version 2020-04-09"
   (define-prefix-command 'xah-user-keymap)
 
   (define-key xah-user-keymap (kbd "SPC") xah-dump-keymap)
-
-  (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-3)
+  (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-1)
 
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)

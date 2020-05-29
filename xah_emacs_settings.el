@@ -3,7 +3,7 @@
 ;; 2019-11-06
 ;; http://ergoemacs.org/emacs/emacs_init_index.html
 
-;;; --------------------
+;; HH====================================================================
 ;; initial window and default window
 
 (setq inhibit-startup-screen t)
@@ -27,34 +27,20 @@
         (width . 100)
         (height . 55)))
 
-;;; --------------------
-
+;; HH====================================================================
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
-;; (setenv "LANG" "en_US.UTF-8" )
-;; (setenv "LC_ALL" "en_US.UTF-8" )
 
-;;; --------------------
+;; HH====================================================================
+;; backup and file related
 
-;; for isearch-forward, make these equivalent: space newline tab hyphen underscore
-(setq search-whitespace-regexp "[-_ \t\n]+")
-
-(defun xah-toggle-search-whitespace ()
-  "Set `search-whitespace-regexp' to nil or includes hyphen lowline tab newline.
-Explanation: When in isearch (M-x `isearch-forward'), space key can also stand for other chars such as hyphen lowline tab newline. It depend on a regex. It's convenient. But sometimes you want literal. This command makes it easy to toggle.
-
-Emacs Isearch Space Toggle
-http://ergoemacs.org/emacs/emacs_isearch_space.html
-Version 2019-02-22"
+(defun xah-save-all-unsaved ()
+  "Save all unsaved files. no ask.
+Version 2019-11-05"
   (interactive)
-  (if (string-equal search-whitespace-regexp nil)
-      (progn
-        (setq search-whitespace-regexp "[-_ \t\n]+")
-        (message "Space set to hyphen lowline tab newline space"))
-    (progn
-      (setq search-whitespace-regexp nil)
-      (message "Space set to literal."))))
+  (save-some-buffers t ))
+(add-hook 'focus-out-hook 'xah-save-all-unsaved)
 
 (setq make-backup-files nil)
 (setq backup-by-copying t)
@@ -63,10 +49,27 @@ Version 2019-02-22"
 
 (setq auto-save-default nil)
 
+(require 'recentf)
+(recentf-mode 1)
+
+(desktop-save-mode 1)
+
+(global-auto-revert-mode 1)
+
+;; HH====================================================================
+;; user interface
+
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
+
 (column-number-mode 1)
 
+(blink-cursor-mode 0)
+
+(setq use-dialog-box nil)
+
 (progn
-  ;; seems pointless to warn. There's always undo.
+  ;; no need warn. just undo.
   (put 'narrow-to-region 'disabled nil)
   (put 'narrow-to-page 'disabled nil)
   (put 'upcase-region 'disabled nil)
@@ -76,7 +79,7 @@ Version 2019-02-22"
   (put 'dired-find-alternate-file 'disabled nil)
 )
 
-;;; --------------------
+;; HH====================================================================
 
 (progn
   (require 'dired-x)
@@ -85,28 +88,7 @@ Version 2019-02-22"
   (setq dired-recursive-copies 'always)
   (setq dired-recursive-deletes 'always))
 
-;;; --------------------
-
-(setq save-interprogram-paste-before-kill t)
-;; 2015-07-04 bug of pasting in emacs.
-;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
-;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
-;; (setq x-selection-timeout 300)
-
-(setq x-select-enable-clipboard-manager nil)
-
-;;; --------------------
-
-(require 'recentf)
-(recentf-mode 1)
-
-(desktop-save-mode 1)
-
-(blink-cursor-mode 0)
-
-(global-auto-revert-mode 1)
-
-(setq sentence-end-double-space nil )
+;; HH====================================================================
 
 (setq set-mark-command-repeat-pop t)
 (setq mark-ring-max 5)
@@ -114,44 +96,28 @@ Version 2019-02-22"
 
 ;; (electric-pair-mode 1)
 
-(when (fboundp 'eww)
-  (defun xah-rename-eww-buffer ()
-    "Rename `eww-mode' buffer so sites open in new page.
-URL `http://ergoemacs.org/emacs/emacs_eww_web_browser.html'
-Version 2017-11-10"
-    (let (($title (plist-get eww-data :title)))
-      (when (eq major-mode 'eww-mode )
-        (if $title
-            (rename-buffer (concat "eww " $title ) t)
-          (rename-buffer "eww" t)))))
-
-  (add-hook 'eww-after-render-hook 'xah-rename-eww-buffer))
-
-(when (version<= "26.0.50" emacs-version )
-  (global-display-line-numbers-mode))
-
-;;; --------------------
-
-;; ;; set default font
-;; (cond
-;;  ((string-equal system-type "windows-nt") ; Microsoft Windows
-;;   (when (member "Consolas" (font-family-list))
-;;     (set-frame-font "Consolas" t t)))
-;;  ((string-equal system-type "darwin") ; macOS
-;;   (when (member "Menlo" (font-family-list))
-;;     (set-frame-font "Menlo" t t)))
-;;  ((string-equal system-type "gnu/linux") ; linux
-;;   (when (member "DejaVu Sans Mono" (font-family-list))
-;;     (set-frame-font "DejaVu Sans Mono" t t))))
+;; HH====================================================================
 
 ;; set default font
-(cond
- ((member "Consolas" (font-family-list)) ; win
-  (set-frame-font "Consolas" t t))
- ((member "Menlo" (font-family-list)) ; mac
-  (set-frame-font "Menlo-14" t t))
- ((member "DejaVu Sans Mono" (font-family-list)) ; linux
-  (set-frame-font "DejaVu Sans Mono" t t)))
+(set-frame-font
+ (cond
+  ((string-equal system-type "windows-nt") ; Microsoft Windows
+   (if (member "Consolas" (font-family-list))
+       "Consolas"
+     nil
+     ))
+  ((string-equal system-type "darwin") ; macOS
+   (if (member "Menlo" (font-family-list))
+       "Menlo-14"
+     nil
+     ))
+  ((string-equal system-type "gnu/linux") ; linux
+   (if (member "DejaVu Sans Mono" (font-family-list))
+       "DejaVu Sans Mono"
+     nil
+     ))
+  (t nil))
+ t t)
 
 ;; set font for emoji
 (set-fontset-font
@@ -170,7 +136,7 @@ Version 2017-11-10"
  )
 
 (cond
- ;; specify font for all chinese characters
+ ;; specify font for chinese characters
  ((string-equal system-type "windows-nt")
   (set-fontset-font
    t
@@ -214,40 +180,18 @@ Version 2017-11-10"
 ;;   (add-hook 'js-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'css-mode-hook 'xah-set-proportial-font))
 
+;; HH====================================================================
+
 (progn
+  ;; minibuffer setup
   (setq enable-recursive-minibuffers t)
-
-  ;; Save minibuffer history
   (savehist-mode 1)
-
-;; big minibuffer height, for ido to show choices vertically
-(setq max-mini-window-height 0.5)
-
+  ;; big minibuffer height, for ido to show choices vertically
+  (setq max-mini-window-height 0.5)
   ;; minibuffer, stop cursor going into prompt
   (customize-set-variable
    'minibuffer-prompt-properties
    (quote (read-only t cursor-intangible t face minibuffer-prompt))))
-
-;;; --------------------
-
-;; remember cursor position
-(if (version< emacs-version "25.0")
-    (progn
-      (require 'saveplace)
-      (setq-default save-place t))
-  (save-place-mode 1))
-
-;;; --------------------
-;;; editing related
-
-;; make typing delete/overwrites selected text
-(delete-selection-mode 1)
-
-(setq shift-select-mode nil)
-
-;; set highlighting brackets
-(show-paren-mode 1)
-(setq show-paren-style 'parenthesis)
 
 (progn
   ;; minibuffer enhanced completion
@@ -284,8 +228,55 @@ Version 2017-11-10"
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)))
 
-;;; --------------------
-;; indentation, tab
+;; HH====================================================================
+
+;; remember cursor position
+(if (version< emacs-version "25.0")
+    (progn
+      (require 'saveplace)
+      (setq-default save-place t))
+  (save-place-mode 1))
+
+;; HH====================================================================
+;;; editing related
+
+;; make typing delete/overwrites selected text
+(delete-selection-mode 1)
+
+(setq shift-select-mode nil)
+
+;; set highlighting brackets
+(show-paren-mode 1)
+(setq show-paren-style 'parenthesis)
+
+;; for isearch-forward, make these equivalent: space newline tab hyphen underscore
+(setq search-whitespace-regexp "[-_ \t\n]+")
+
+(defun xah-toggle-search-whitespace ()
+  "Set `search-whitespace-regexp' to nil or includes hyphen lowline tab newline.
+Explanation: When in isearch (M-x `isearch-forward'), space key can also stand for other chars such as hyphen lowline tab newline. It depend on a regex. It's convenient. But sometimes you want literal. This command makes it easy to toggle.
+
+Emacs Isearch Space Toggle
+http://ergoemacs.org/emacs/emacs_isearch_space.html
+Version 2019-02-22"
+  (interactive)
+  (if (string-equal search-whitespace-regexp nil)
+      (progn
+        (setq search-whitespace-regexp "[-_ \t\n]+")
+        (message "Space set to hyphen lowline tab newline space"))
+    (progn
+      (setq search-whitespace-regexp nil)
+      (message "Space set to literal."))))
+
+;; 2015-07-04 bug of pasting in emacs.
+;; http://debbugs.gnu.org/cgi/bugreport.cgi?bug=16737#17
+;; http://ergoemacs.org/misc/emacs_bug_cant_paste_2015.html
+;; (setq x-selection-timeout 300)
+(setq save-interprogram-paste-before-kill t)
+(setq x-select-enable-clipboard-manager nil)
+
+;; HH====================================================================
+;; indentation, end of line
 
 (electric-indent-mode 0)
 
@@ -298,17 +289,9 @@ Version 2017-11-10"
 ;; 4 is more popular than 8.
 (setq-default tab-width 4)
 
-;;; --------------------
+(setq sentence-end-double-space nil )
 
-(progn
-  ;; org-mode
-  ;; make “org-mode” syntax color code sections
-  (setq org-src-fontify-natively t)
-  (setq org-startup-folded nil)
-  (setq org-return-follows-link t)
-  (setq org-startup-truncated nil))
-
-;;; --------------------
+;; HH====================================================================
 
 ;; load emacs 24's package system. Add MELPA repository.
 (when (>= emacs-major-version 24)
@@ -319,7 +302,7 @@ Version 2017-11-10"
    '("melpa" . "http://melpa.milkbox.net/packages/")
    t))
 
-;;; --------------------
+;; HH====================================================================
 
 (progn
  ;; Make whitespace-mode with very basic background coloring for whitespaces.
@@ -335,7 +318,8 @@ Version 2017-11-10"
           (tab-mark 9 [9655 9] [92 9]) ; tab
           )))
 
-;;; --------------------
+;; HH====================================================================
+;; edit related
 
 (setq hippie-expand-try-functions-list
       '(
@@ -351,11 +335,7 @@ Version 2017-11-10"
         ;; try-expand-line
         ))
 
-;;; --------------------
-
-(setq use-dialog-box nil)
-
-;;; --------------------
+;; HH====================================================================
 
 ;; convenient
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -391,15 +371,27 @@ Version 2017-11-10"
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char)
 
-;;; --------------------
-
-(defun xah-save-all-unsaved ()
-  "Save all unsaved files. no ask.
-Version 2019-11-05"
-  (interactive)
-  (save-some-buffers t ))
-
-(add-hook 'focus-out-hook 'xah-save-all-unsaved)
+;; HH====================================================================
+(progn
+  ;; org-mode
+  ;; make “org-mode” syntax color code sections
+  (setq org-src-fontify-natively t)
+  (setq org-startup-folded nil)
+  (setq org-return-follows-link t)
+  (setq org-startup-truncated nil))
 
 ;; HH====================================================================
+
+(when (fboundp 'eww)
+  (defun xah-rename-eww-buffer ()
+    "Rename `eww-mode' buffer so sites open in new page.
+URL `http://ergoemacs.org/emacs/emacs_eww_web_browser.html'
+Version 2017-11-10"
+    (let (($title (plist-get eww-data :title)))
+      (when (eq major-mode 'eww-mode )
+        (if $title
+            (rename-buffer (concat "eww " $title ) t)
+          (rename-buffer "eww" t)))))
+
+  (add-hook 'eww-after-render-hook 'xah-rename-eww-buffer))
 
