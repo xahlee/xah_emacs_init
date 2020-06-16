@@ -32,6 +32,7 @@ f_cycle_image ({
     ("xl" "xahlee" )
     ("toc" "table of contents" )
     ("phpt" "<?php 3 ?>" )
+    ("uhk" "Ultimate Hacking Keyboard")
 
     ("xls" "live stream in x hours. x San Francisco time.
 Goto YouTube xah lee, sub + 🔔 .

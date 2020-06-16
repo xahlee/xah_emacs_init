@@ -149,8 +149,6 @@ Version 2020-04-09"
   (define-prefix-command 'xah-user-keymap)
 
   (define-key xah-user-keymap (kbd "SPC") xah-dump-keymap)
-  (define-key xah-user-keymap (kbd "RET") 'xah-insert-word-1)
-
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
 
@@ -251,8 +249,6 @@ Version 2020-04-09"
   (define-key xah-fly-leader-key-map (kbd ".") 'xah-html-mode-no-chord-map)
   (define-key xah-html-mode-map (kbd "<f5>") 'xah-html-browse-url-of-buffer)
   (progn
-
-    (define-key xah-html-mode-no-chord-map (kbd "<delete>") 'xah-html-browse-url-of-buffer)
 
     (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
 
