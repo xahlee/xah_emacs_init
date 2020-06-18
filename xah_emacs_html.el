@@ -507,7 +507,7 @@ Version 2018-12-24"
 
 (defun xah-new-page ()
   "Make a new blog page.
-Version 2019-08-15"
+Version 2020-06-17"
   (interactive)
   (let* (
          ($path-map
@@ -515,7 +515,7 @@ Version 2019-08-15"
             ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
             ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
             ("/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
-            ("/Users/xah/web/wordyenglish_com/lit/" . "china_dollar_bill_multilingual.html")
+            ("/Users/xah/web/wordyenglish_com/lit/" . "capitalists_vs_communists_chess_set.html")
             ("/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
             ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
             ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
