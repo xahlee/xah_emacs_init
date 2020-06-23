@@ -289,6 +289,8 @@ https://www.youtube.com/c/xahlee/live" )
     ;; programing
     ("eq" "==" )
     ("eqq" "===" )
+    ("eqt" "=\"▮\"" )
+
     ("hr" "HH====================================================================" )
 
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )

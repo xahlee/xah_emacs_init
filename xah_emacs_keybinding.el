@@ -134,8 +134,6 @@ Version 2020-04-09"
 (progn
   ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
   (define-prefix-command 'xah-dump-keymap)
-  (define-key xah-dump-keymap (kbd "1") 'xah-insert-word-1)
-  (define-key xah-dump-keymap (kbd "2") 'xah-insert-word-2)
   (define-key xah-dump-keymap (kbd "c") 'xah-css-mode)
   (define-key xah-dump-keymap (kbd "e") 'xah-elisp-mode)
   (define-key xah-dump-keymap (kbd "h") 'xah-html-mode)
@@ -165,6 +163,9 @@ Version 2020-04-09"
   (define-key xah-user-keymap (kbd "8") 'xah-find-count)
   (define-key xah-user-keymap (kbd "9") 'xah-find-replace-text-regex)
   (define-key xah-user-keymap (kbd "0") 'xah-find-text-regex)
+
+  (define-key xah-user-keymap (kbd "1") 'xah-insert-word-1)
+  (define-key xah-user-keymap (kbd "2") 'xah-insert-word-2)
 
   ;; a
   (define-key xah-user-keymap (kbd "b") 'xah-toggle-previous-letter-case)
