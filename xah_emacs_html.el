@@ -399,7 +399,7 @@ Version 2019-11-28"
 
 <section class=\"divFlow81777\">
 
-<div class=\"date-xl\"><time>%s</time></div>
+<div class=\"date_xl\"><time>%s</time></div>
 
 x
 
@@ -419,7 +419,7 @@ Version 2019-05-21"
 
 <section>
 
-<div class=\"date-xl\"><time>%s</time></div>
+<div class=\"date_xl\"><time>%s</time></div>
 
 x
 
@@ -435,7 +435,7 @@ x
   (when (use-region-p)
     (delete-region (region-beginning) (region-end) )
     )
-  (insert (concat "<div class=\"date-xl\"><time>" (format-time-string "%Y-%m-%d") "</time></div>\n\n\n" ))
+  (insert (concat "<div class=\"date_xl\"><time>" (format-time-string "%Y-%m-%d") "</time></div>\n\n\n" ))
   (backward-char 1)
   )
 
@@ -572,7 +572,7 @@ Version 2020-06-17"
           (setq p3 (point))
 
           (when
-              (search-forward "ads-bottom-65900" nil t)
+              (search-forward "ads_bottom_dtpcz" nil t)
             (search-backward "<")
             (delete-region p3 (point))
             (insert "\n\n\n\n")

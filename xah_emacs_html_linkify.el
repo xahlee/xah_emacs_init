@@ -68,10 +68,10 @@ Version 2015-05-12"
 Example:
 i/cat.jpg
 becomes
-<a class=\"big-i\" href=\"i/cat.jpg\">4176×2366</a>
+<a class=\"bigImg\" href=\"i/cat.jpg\">4176×2366</a>
 
 If there's a text selection, use that region as file name.
-Version 2018-04-10"
+Version 2020-06-24"
   (interactive)
   (let
       ($p0 $p1 $p2 $input $imgPath $dimension $width $height $resultStr)
@@ -96,7 +96,7 @@ Version 2018-04-10"
     (setq $width (number-to-string (elt $dimension 0)))
     (setq $height (number-to-string (elt $dimension 1)))
     (setq $resultStr
-          (concat "<a class=\"big-i\" href=\"" (file-relative-name $imgPath) "\">" $width "×" $height "</a>"))
+          (concat "<a class=\"bigImg\" href=\"" (file-relative-name $imgPath) "\">" $width "×" $height "</a>"))
     (delete-region $p1 $p2)
     (insert $resultStr)))
 

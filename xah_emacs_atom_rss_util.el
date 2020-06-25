@@ -108,7 +108,7 @@ Exception:
  goes to
 ~/web/wordyenglish_com/lit/blog.xml
 
-Version 2019-08-16"
+Version 2020-06-24"
   (interactive)
   (let* (
          $p1 $p2
@@ -230,9 +230,6 @@ Version 2019-08-16"
     (search-forward ">")
     (skip-chars-forward " \n")
     (push-mark )
-    (search-backward "<title>")
-    (search-forward ">")
+    (search-backward "</title>")
+    (push-mark )
     (push-mark )))
-
-
-
