@@ -77,7 +77,7 @@
 ;; User quotes: "You sir, are a sick, sick, _sick_ person. :)"
 ;;                  -- Bill Perry, author of Emacs/W3
 
-
+;; HHH___________________________________________________________________
 ;;; Code:
 
 (require 'cl)
@@ -337,7 +337,7 @@ output.")
   "Hook run by `htmlize-file' after htmlizing a file, but before saving it.")
 
 (defvar htmlize-buffer-places)
-
+;; HHH___________________________________________________________________
 ;;; Some cross-Emacs compatibility.
 
 ;; We need a function that efficiently finds the next change of a
@@ -379,7 +379,7 @@ output.")
     ;; cl extensions have a macro implementing lexical let
     `(lexical-let ,@letforms)))
 
-
+;; HHH___________________________________________________________________
 ;;; Transformation of buffer text: HTML escapes, untabification, etc.
 
 (defvar htmlize-basic-character-table
@@ -844,7 +844,7 @@ This is used to protect mailto links without modifying their meaning."
   (while (search-forward "Local Variables:" nil t)
     (replace-match "Local Variables&#58;" nil t)))
   
-
+;; HHH___________________________________________________________________
 ;;; Color handling.
 
 (defvar htmlize-x-library-search-path
@@ -913,7 +913,7 @@ If no rgb.txt file is found, return nil."
 ;; missing, the value of the variable will be nil, and rgb.txt will
 ;; not be used.
 (defvar htmlize-color-rgb-hash (htmlize-get-color-rgb-hash))
-
+;; HHH___________________________________________________________________
 ;;; Face handling.
 
 (defun htmlize-face-specifies-property (face prop)
@@ -1335,7 +1335,7 @@ overlays that specify `face'."
       ;; faces specified by text properties.
       (setq all-faces (nconc all-faces list)))
     all-faces))
-
+;; HHH___________________________________________________________________
 ;; htmlize supports generating HTML in several flavors, some of which
 ;; use CSS, and others the <font> element.  We take an OO approach and
 ;; define "methods" that indirect to the functions that depend on
@@ -1379,7 +1379,7 @@ it's called with the same value of KEY.  All other times, the cached
 	 (setq ,value ,generator)
 	 (setf (gethash ,key htmlize-memoization-table) ,value))
        ,value)))
-
+;; HHH___________________________________________________________________
 ;;; Default methods.
 
 (defun htmlize-default-doctype ()
@@ -1399,7 +1399,7 @@ it's called with the same value of KEY.  All other times, the cached
   face-map ; shut up the byte-compiler
   "<pre>")
 
-
+;; HHH___________________________________________________________________
 ;;; CSS based output support.
 
 ;; Internal function; not a method.
@@ -1478,7 +1478,7 @@ it's called with the same value of KEY.  All other times, the cached
       (dolist (fstruct fstruct-list)
         (ignore fstruct)                ; shut up the byte-compiler
         (princ "</span>" buffer)))))
-
+;; HHH___________________________________________________________________
 ;; `inline-css' output support.
 
 (defun htmlize-inline-css-body-tag (face-map)
@@ -1508,7 +1508,7 @@ it's called with the same value of KEY.  All other times, the cached
       (lambda ()
         (when style
           (princ "</span>" buffer))))))
-
+;; HHH___________________________________________________________________
 ;;; `font' tag based output support.
 
 (defun htmlize-font-body-tag (face-map)
@@ -1549,7 +1549,7 @@ it's called with the same value of KEY.  All other times, the cached
     (htmlize-lexlet ((markup markup) (buffer buffer))
       (lambda ()
         (princ (cdr markup) buffer)))))
-
+;; HHH___________________________________________________________________
 
 (defun htmlize-buffer-1 ()
   ;; Internal function; don't call it from outside this file.  Htmlize
@@ -1721,7 +1721,7 @@ it's called with the same value of KEY.  All other times, the cached
      ;; just saves it to an external cache so it's not done twice.
      )))
 
-
+;; HHH___________________________________________________________________
 ;;;###autoload
 (defun htmlize-buffer (&optional buffer)
   "Convert BUFFER to HTML, preserving colors and decorations.

@@ -18,12 +18,12 @@
 
 ;; Major mode for editing text code. same enhancement for xah
 
-
+;; HHH___________________________________________________________________
 ;;; Code:
 
 (defvar xah-text-mode-hook nil "Standard hook for `xah-text-mode'")
 
-
+;; HHH___________________________________________________________________
 
 (defface xah-text-fc1
   '(
@@ -52,13 +52,13 @@
  'face-defface-spec
  )
 
-
+;; HHH___________________________________________________________________
 
 (defvar xah-text-kword nil "List of words to highlight")
 
 (setq xah-text-kword '( ))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-text-display-page-break-as-line ()
   "Display the formfeed ^L char as line.
@@ -72,7 +72,7 @@ Version 2017-01-27"
           (vconcat (make-list 70 (make-glyph-code ?─ 'font-lock-comment-face))))
     (redraw-frame)))
 
-
+;; HHH___________________________________________________________________
 ;; syntax table
 (defvar xah-text-mode-syntax-table nil "Syntax table for `xah-text-mode'.")
 (setq xah-text-mode-syntax-table
@@ -91,7 +91,7 @@ Version 2017-01-27"
 
         synTable))
 
-
+;; HHH___________________________________________________________________
 ;; syntax coloring related
 
 (setq xah-text-font-lock-keywords
@@ -102,15 +102,15 @@ Version 2017-01-27"
 
           )))
 
-
+;; HHH___________________________________________________________________
 ;; indent/reformat related
 
-
+;; HHH___________________________________________________________________
 ;; keybinding
 
 (defvar xah-text-mode-map nil "Keybinding for `xah-text-mode'")
 
-
+;; HHH___________________________________________________________________
 
 ;;;###autoload
 (define-derived-mode xah-text-mode fundamental-mode "∑text"

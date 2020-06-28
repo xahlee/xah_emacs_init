@@ -2,7 +2,7 @@
 ;; emacs abbrev def
 ;; 〈Using Emacs Abbrev Mode for Abbreviation〉 http://ergoemacs.org/emacs/emacs_abbrev_mode.html
 
-
+;; HHH___________________________________________________________________
 
 (clear-abbrev-table global-abbrev-table)
 
@@ -39,6 +39,7 @@ Goto YouTube xah lee, sub + 🔔 .
 https://www.youtube.com/c/xahlee/live" )
 
     ("xtv" "XahTV")
+    ("mwl" "Mac, Windows, Linux")
 
     ;; English word abbrev
 
@@ -291,7 +292,7 @@ https://www.youtube.com/c/xahlee/live" )
     ("eqq" "===" )
     ("eqt" "=\"▮\"" )
 
-    ("hr" "HH====================================================================" )
+    ("hh" "HHH___________________________________________________________________" )
 
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2009-07-30</time>. Last updated: <time>2017-05-09</time>.</div>" )
 
@@ -534,7 +535,7 @@ x int
 
 (set-default 'abbrev-mode t)
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-abbrev-hook-function ()
   "Abbrev hook function, used for `define-abbrev'.

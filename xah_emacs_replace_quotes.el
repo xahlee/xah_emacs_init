@@ -9,7 +9,7 @@
 
 (require 'xah-replace-pairs)
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-replace-latex-to-unicode (@begin @end)
   "Replace TeX markup to Unicode in current line or selection.
@@ -991,7 +991,7 @@ Version 2017-06-10"
          (reverse $changedItems))
       (message "No change needed."))))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-curly-quotes→bracket (@left-bracket @right-bracket)
   "Replace “…” to one of 「…」.

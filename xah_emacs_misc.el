@@ -4,7 +4,7 @@
 ;; Xah Lee,
 ;; ∑ http://xahlee.org/
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-display-minor-mode-key-priority  ()
   "Print out minor mode's key priority.
@@ -40,7 +40,7 @@ Version 2017-03-21"
             (progn (find-file $fpath))
           (progn (user-error "file doesn't exist.")))))))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-get-matching-bracket (@bracket-char-string)
   "Returns a char in string form matching @bracket-char-string.
@@ -118,7 +118,7 @@ Version 2017-06-02"
 ;;       (put this-command 'state-on-p t)))
 ;;   (redraw-frame (selected-frame)))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-set-input-method-to-chinese (@n)
   "Set input method to Chinese.
@@ -137,7 +137,7 @@ C-u 2 → set to 'chinese-py-b5."
     (t                                  ; all other cases
      (set-input-method 'chinese-py))))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-list-matching-lines-no-regex ()
   "Show lines in the current buffer matching current word or text selection.
@@ -182,7 +182,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 (re-search-backward "<p><b>" nil t)
 (re-search-forward "<p><b>" nil t))
 
-
+;; HHH___________________________________________________________________
 
 ;; "lbasic.css"
 ;; "lit.css"
@@ -290,7 +290,7 @@ Version 2018-06-06"
     (kill-new $url)
     (message "URL copied %s" $url)))
 
-
+;; HHH___________________________________________________________________
 
 (defun compact-uncompact-block-chinese ()
   "Remove or add line ending chars on current text block.
@@ -337,7 +337,7 @@ Version 2017-02-02"
 ;;                 after-setting-font-hook))
 ;;   (add-hook hook 'xah-display-page-break-as-line))
 
-
+;; HHH___________________________________________________________________
 
 (defvar xah-interactive-abbrev-alist nil "A alist for interactive abbreves. Key and value are strings. Key is for abbrev. Value is the text to be inserted." )
 
@@ -459,7 +459,7 @@ Version 2020-02-17"
       )
     (message "input 「%s」, Hex 「%s」 is 「%d」" $inputStr $tempStr (string-to-number $tempStr 16))))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-unfontify-region-or-buffer ()
   "Unfontify text selection or buffer.
@@ -507,7 +507,7 @@ Version 2015-12-17"
     (set-background-color $next-value)
     (message "background color changed to %s" $next-value)))
 
-
+;; HHH___________________________________________________________________
 
 ;; from newsgroup gnu.emacs.help, by Richard Riley, 2009-08-02
 (defun xah-open-current-file-as-admin ()
@@ -588,7 +588,7 @@ Version 2015-07-24"
         (save-buffer)
         (kill-buffer $buffer)))))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-check-parens-balance ()
   "Check if there are unbalanced parentheses/brackets/quotes in current bufffer or selection.

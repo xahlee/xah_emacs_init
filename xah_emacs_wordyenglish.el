@@ -7,7 +7,7 @@
 ;; some functions personal to working on XahLee.org's website
 ;; many of these opens a particular file and insert a string
 
-
+;; HHH___________________________________________________________________
 ;; xwe = xah wordy english
 ;; 〈Wordy English — the Making of Belles-Lettres〉
 ;; http://wordyenglish.com/words/vocabulary.html

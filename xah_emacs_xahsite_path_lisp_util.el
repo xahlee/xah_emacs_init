@@ -30,7 +30,7 @@ e.g. c:/Users/h3/web/"
 
 (setq xahsite-domain-names (mapcar (lambda (x) (car x)) xahsite-domain-to-path-alist))
 
-
+;; HHH___________________________________________________________________
 
 (defun xahsite-local-link-p (@href-value)
   "Return true if it's a local file link, else false.
@@ -98,7 +98,7 @@ See: `xahsite-local-link-p', `xahsite-url-is-xah-website-p'."
       t
     (xahsite-url-is-xah-website-p @href-value)))
 
-
+;; HHH___________________________________________________________________
 
 (defun xahsite-url-to-domain-name (@url)
   "Returns the domain name of a xah site.
@@ -346,7 +346,7 @@ This function is not complete. i.e. it not contain complete url redirects as spe
     $s
     ))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-file-moved-p (@fpath @moved-dirs )
   "Return true if either paths are in @moved-dirs list or as a subdir.

@@ -6,7 +6,7 @@
 ;; Emacs: How to Set Mouse Buttons
 ;; http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html
 
-
+;; HHH___________________________________________________________________
 ;; mouse
 
 ;; (setq mouse-yank-at-point t)

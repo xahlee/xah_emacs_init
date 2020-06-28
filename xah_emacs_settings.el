@@ -3,7 +3,7 @@
 ;; 2019-11-06
 ;; http://ergoemacs.org/emacs/emacs_init_index.html
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 ;; initial window and default window
 
 (setq inhibit-startup-screen t)
@@ -27,12 +27,12 @@
         (width . 100)
         (height . 55)))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 ;; backup and file related
 
 (defun xah-save-all-unsaved ()
@@ -56,7 +56,7 @@ Version 2019-11-05"
 
 (global-auto-revert-mode 1)
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 ;; user interface
 
 (when (version<= "26.0.50" emacs-version )
@@ -79,7 +79,7 @@ Version 2019-11-05"
   (put 'dired-find-alternate-file 'disabled nil)
 )
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 (progn
   (require 'dired-x)
@@ -88,7 +88,7 @@ Version 2019-11-05"
   (setq dired-recursive-copies 'always)
   (setq dired-recursive-deletes 'always))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 (setq set-mark-command-repeat-pop t)
 (setq mark-ring-max 5)
@@ -96,7 +96,7 @@ Version 2019-11-05"
 
 ;; (electric-pair-mode 1)
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 ;; set default font
 (set-frame-font
@@ -180,7 +180,7 @@ Version 2019-11-05"
 ;;   (add-hook 'js-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'css-mode-hook 'xah-set-proportial-font))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 (progn
   ;; minibuffer setup
@@ -228,7 +228,7 @@ Version 2019-11-05"
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 ;; remember cursor position
 (if (version< emacs-version "25.0")
@@ -237,7 +237,7 @@ Version 2019-11-05"
       (setq-default save-place t))
   (save-place-mode 1))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 ;;; editing related
 
 ;; make typing delete/overwrites selected text
@@ -275,7 +275,7 @@ Version 2019-02-22"
 (setq save-interprogram-paste-before-kill t)
 (setq x-select-enable-clipboard-manager nil)
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 ;; indentation, end of line
 
 (electric-indent-mode 0)
@@ -291,7 +291,7 @@ Version 2019-02-22"
 
 (setq sentence-end-double-space nil )
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 ;; load emacs 24's package system. Add MELPA repository.
 (when (>= emacs-major-version 24)
@@ -302,7 +302,7 @@ Version 2019-02-22"
    '("melpa" . "http://melpa.milkbox.net/packages/")
    t))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 (progn
  ;; Make whitespace-mode with very basic background coloring for whitespaces.
@@ -318,7 +318,7 @@ Version 2019-02-22"
           (tab-mark 9 [9655 9] [92 9]) ; tab
           )))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 ;; edit related
 
 (setq hippie-expand-try-functions-list
@@ -335,7 +335,7 @@ Version 2019-02-22"
         ;; try-expand-line
         ))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 ;; convenient
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -371,7 +371,7 @@ Version 2019-02-22"
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char)
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 (progn
   ;; org-mode
   ;; make “org-mode” syntax color code sections
@@ -380,7 +380,7 @@ Version 2019-02-22"
   (setq org-return-follows-link t)
   (setq org-startup-truncated nil))
 
-;; HH====================================================================
+;; HHH___________________________________________________________________
 
 (when (fboundp 'eww)
   (defun xah-rename-eww-buffer ()

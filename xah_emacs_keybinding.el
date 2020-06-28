@@ -213,7 +213,7 @@ Version 2020-04-09"
 ;; 'xah-toggle-margin-right
 ;; 'xah-toggle-line-spacing
 
-
+;; HHH___________________________________________________________________
 
 (when (boundp 'xah-elisp-mode-map)
   (define-key xah-elisp-mode-map (kbd "<delete>") xah-elisp-mode-no-chord-map))
@@ -242,7 +242,7 @@ Version 2020-04-09"
     (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
   (add-hook 'org-mode-hook 'xah-org-mode-setup))
 
-
+;; HHH___________________________________________________________________
 
 (when (fboundp 'xah-html-mode)
 
@@ -289,7 +289,7 @@ Version 2020-04-09"
     (define-key xah-html-mode-no-chord-map (kbd "o g") 'xah-words-search-next-unbold )
     (define-key xah-html-mode-no-chord-map (kbd "o p") 'xah-words-query-find-then-bold )))
 
-
+;; HHH___________________________________________________________________
 
 (when (boundp 'tuareg-mode-map)
   (define-key tuareg-mode-map (kbd "<backspace>") nil)

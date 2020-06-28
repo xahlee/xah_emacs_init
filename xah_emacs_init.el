@@ -7,7 +7,7 @@
 
 (require 'ido)
 
-
+;; HHH___________________________________________________________________
 ; loading custom commands and functions
 
 (defun xah-get-fullpath (@file-relative-path)
@@ -34,12 +34,12 @@ Version 2017-07-19"
   (concat (file-name-directory (or load-file-name buffer-file-name)) @file-relative-path)
 )
 
-
+;; HHH___________________________________________________________________
 
 (load (xah-get-fullpath "xah_emacs_settings"))
 (load (xah-get-fullpath "xah_emacs_abbr"))
 
-
+;; HHH___________________________________________________________________
 
 ; add the dir of this file to load path
 (add-to-list 'load-path (xah-get-fullpath ""))

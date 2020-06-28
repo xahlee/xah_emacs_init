@@ -4,7 +4,7 @@
 
 ;; NUMBERIC KEYPAD. nice number pad conveniences as extra function keys
 
-
+;; HHH___________________________________________________________________
 
 (global-set-key (kbd "<kp-subtract>") 'xah-close-current-buffer)
 (global-set-key (kbd "<kp-divide>") 'xah-previous-user-buffer)

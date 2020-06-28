@@ -6,7 +6,7 @@
 ;   Xah Lee
 ; ∑ http://xahlee.org/
 
-
+;; HHH___________________________________________________________________
 
 ;; ✈ 🌎
 ;; ⊕ 🌐
@@ -251,7 +251,7 @@ Version 2016-07-12"
     (delete-region $p1 $p2)
     (xah-insert-google-map-link "▮" $coord-y-x)))
 
-
+;; HHH___________________________________________________________________
 
 (defun xah-insert-ggb-link (@file-core-name @file-title)
   "Insert HTML link to GeoGebra (“.ggb”) file."

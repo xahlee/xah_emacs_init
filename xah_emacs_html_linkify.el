@@ -4,7 +4,7 @@
 ;; 2007-10, 2011-05-29
 ;; ∑ http://xahlee.org/
 
-
+;; HHH___________________________________________________________________
 
 (require 'url-util)
 
@@ -100,7 +100,7 @@ Version 2020-06-24"
     (delete-region $p1 $p2)
     (insert $resultStr)))
 
-
+;; HHH___________________________________________________________________
 ;; some custom HTML markup and functions for working with HTML
 
 (defun xah-nks-linkify ()
@@ -121,7 +121,7 @@ Version 2015-05-15"
       "<a href=\"http://www.wolframscience.com/nksonline/page-"
       $pageNum "\">p" $pageNum "</a>"))))
 
-
+;; HHH___________________________________________________________________
 ;; more specific to Xah Lee
 
 (defun xah-amazon-search-linkify-url (@sString @productCat @assid)
