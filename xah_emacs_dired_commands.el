@@ -324,14 +324,14 @@ and relative path will be inserted before the img tag.
 
 If `universal-argument' is called first, ask for jpeg quality. (default is 90)
 
-Version 2019-10-01"
+Version 2020-07-04"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
          (p1 (car bounds))
          (p2 (cdr bounds))
          (inputPath (buffer-substring-no-properties p1 p2))
-         filepath
+         fPath
          directory
          filename
          corename
@@ -345,8 +345,8 @@ Version 2019-10-01"
          quality
          newWidth
          newHeight
-         filename-new
-         filepath-new
+         filenameNew
+         fPathNew
          new-rel-path
          $cmdStr
          )
@@ -354,14 +354,14 @@ Version 2019-10-01"
     (when (not (file-exists-p inputPath))
       (user-error "File not exist: %s" inputPath))
 
-    (setq filepath (expand-file-name inputPath ))
-    (setq directory (file-name-directory filepath))
-    (setq filename (file-name-nondirectory filepath))
+    (setq fPath (expand-file-name inputPath ))
+    (setq directory (file-name-directory fPath))
+    (setq filename (file-name-nondirectory fPath))
     (setq corename (file-name-sans-extension filename))
     (setq fnameExt (file-name-extension filename))
     (setq sideLength (string-to-number (read-from-minibuffer "~width:" "250" )))
     (setq thumbnailSizeArea (* sideLength sideLength))
-    (setq size (xah-html--get-image-dimensions filepath))
+    (setq size (xah-html--get-image-dimensions fPath))
     (setq width (aref size 0))
     (setq height (aref size 1))
     (setq scale (sqrt (/ (float thumbnailSizeArea) (float (* width height)))))
@@ -371,10 +371,11 @@ Version 2019-10-01"
             (progn 90)))
     (setq newWidth (round (* scale (float width))))
     (setq newHeight (round (* scale (float height))))
-    ;; (filename-new (format "tn_%dx%d_%s" newWidth newHeight filename))
-    (setq filename-new (format "%s-s%dx%d.%s" corename newWidth newHeight fnameExt ))
-    (setq filepath-new (concat directory filename-new))
-    (setq new-rel-path (file-relative-name filepath-new))
+    ;; (filenameNew (format "tn_%dx%d_%s" newWidth newHeight filename))
+    ;; (setq filenameNew (format "%s-s%dx%d.%s" corename newWidth newHeight fnameExt ))
+    (setq filenameNew (format "%s-s%d.%s" corename sideLength fnameExt ))
+    (setq fPathNew (concat directory filenameNew))
+    (setq new-rel-path (file-relative-name fPathNew))
 
     (setq $cmdStr
           (format
@@ -383,17 +384,17 @@ Version 2019-10-01"
                    (* scale 100)
                    quality
                    " -sharpen 1 ")
-           filepath
-           filepath-new))
-    (if (file-exists-p filepath-new)
-        (if (y-or-n-p (format "File exist 「%s」. Replace it?" filepath-new))
+           fPath
+           fPathNew))
+    (if (file-exists-p fPathNew)
+        (if (y-or-n-p (format "File exist 「%s」. Replace it?" fPathNew))
             (shell-command $cmdStr)
           (progn
             (message "path copied to kill-ring")
-            (kill-new filepath-new)))
+            (kill-new fPathNew)))
       (shell-command $cmdStr))
     (search-backward "<" )
-    (insert filepath-new "\n")
+    (insert fPathNew "\n")
     (backward-word )))
 
 (defun xah-html-convert-png-to-jpg ()
