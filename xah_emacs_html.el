@@ -505,35 +505,39 @@ Version 2018-12-24"
     ;;
     ))
 
-(defun xah-new-page ()
+
+(defvar xahsite-new-page-template
+ nil "a alist, the first element is a dir, second is a file name in that dir. Used by `xahsite-new-page' as base template.")
+
+(setq xahsite-new-page-template
+      '(
+        ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
+        ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
+        ("/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
+        ("/Users/xah/web/wordyenglish_com/lit/" . "capitalists_vs_communists_chess_set.html")
+        ("/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
+        ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
+        ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
+        ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
+        ("/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
+        ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
+        ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
+        ("/Users/xah/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
+        ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
+        ("/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
+        ;;
+        ))
+
+(defun xahsite-new-page ()
   "Make a new blog page.
-Version 2020-06-17"
+
+The base template depends on the variable `xahsite-new-page-paths'.
+Version 2020-07-16"
   (interactive)
   (let* (
-         ($path-map
-          '(
-            ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
-            ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
-            ("/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
-            ("/Users/xah/web/wordyenglish_com/lit/" . "capitalists_vs_communists_chess_set.html")
-            ("/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
-            ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
-            ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
-            ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
-            ("/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
-            ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
-            ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
-            ("/Users/xah/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
-            ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
-            ("/Users/xah/web/xahlee_org/Periodic_dosage_dir/" . "20030907_la_gangs.html")
-            ("/Users/xah/web/xahlee_org/sex/" . "Korean_gymnast_Son_Yeon_jae.html")
-            ("/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
-            ("/Users/xah/web/xahporn_org/porn/" . "Renee_Pornero.html")
-            ;;
-            ))
          ($cur-fpath (buffer-file-name))
          ($dir-path (file-name-directory $cur-fpath))
-         ($temp-fname (cdr (assoc $dir-path $path-map)))
+         ($temp-fname (cdr (assoc $dir-path xahsite-new-page-template)))
          ($temp-fpath (concat $dir-path $temp-fname))
          (p1 (line-beginning-position))
          (p2 (line-end-position))

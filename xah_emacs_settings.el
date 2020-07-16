@@ -44,16 +44,13 @@ Version 2019-11-05"
 
 (setq make-backup-files nil)
 (setq backup-by-copying t)
-
 (setq create-lockfiles nil)
-
 (setq auto-save-default nil)
 
 (require 'recentf)
 (recentf-mode 1)
 
 (desktop-save-mode 1)
-
 (global-auto-revert-mode 1)
 
 ;; HHH___________________________________________________________________
@@ -63,13 +60,11 @@ Version 2019-11-05"
   (global-display-line-numbers-mode))
 
 (column-number-mode 1)
-
 (blink-cursor-mode 0)
-
 (setq use-dialog-box nil)
 
 (progn
-  ;; no need warn. just undo.
+  ;; no need to warn
   (put 'narrow-to-region 'disabled nil)
   (put 'narrow-to-page 'disabled nil)
   (put 'upcase-region 'disabled nil)
@@ -93,8 +88,6 @@ Version 2019-11-05"
 (setq set-mark-command-repeat-pop t)
 (setq mark-ring-max 5)
 (setq global-mark-ring-max 5)
-
-;; (electric-pair-mode 1)
 
 ;; HHH___________________________________________________________________
 
@@ -168,17 +161,18 @@ Version 2019-11-05"
 ;;   (defun xah-set-proportial-font ()
 ;;     "Set current buffer to use variable-width font."
 ;;     (variable-pitch-mode 1)
-;;     ;; (text-scale-increase 1 )
-;;     )
+;;     (text-scale-increase 1 ))
+;;   (add-hook 'html-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'emacs-lisp-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'js-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'css-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'html-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'js-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'css-mode-hook 'xah-set-proportial-font))
+;;   ;;
+;;   )
 
 ;; HHH___________________________________________________________________
 
@@ -244,6 +238,8 @@ Version 2019-11-05"
 (delete-selection-mode 1)
 
 (setq shift-select-mode nil)
+
+(electric-pair-mode 1)
 
 ;; set highlighting brackets
 (show-paren-mode 1)
@@ -340,12 +336,10 @@ Version 2019-02-22"
 ;; convenient
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'rs 'replace-string)
-
 (defalias 'lcd 'list-colors-display)
 (defalias 'ds 'desktop-save)
-(defalias 'dt 'desktop-save)
-(defalias 'dsm 'desktop-save-mode)
 
+(defalias 'dsm 'desktop-save-mode)
 (defalias 'elm 'emacs-lisp-mode)
 (defalias 'hm 'html-mode)
 (defalias 'jsm 'js-mode)
@@ -353,14 +347,9 @@ Version 2019-02-22"
 (defalias 'ssm 'shell-script-mode)
 (defalias 'om 'org-mode)
 
-(defalias 'xnp 'xah-new-page)
-
-(when (fboundp 'magit-status)
-  (defalias 'ms 'magit-status))
-
-(when (fboundp 'xah-find-count)
-  (defalias 'xfc 'xah-find-count))
-
+(defalias 'ms 'magit-status)
+(defalias 'xnp 'xahsite-new-page)
+(defalias 'xfc 'xah-find-count)
 (defalias 'xcm 'xah-css-mode)
 (defalias 'xem 'xah-elisp-mode)
 (defalias 'xhm 'xah-html-mode)
@@ -394,4 +383,3 @@ Version 2017-11-10"
           (rename-buffer "eww" t)))))
 
   (add-hook 'eww-after-render-hook 'xah-rename-eww-buffer))
-

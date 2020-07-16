@@ -34,6 +34,7 @@ f_cycle_image ({
     ("phpt" "<?php 3 ?>" )
     ("uhk" "Ultimate Hacking Keyboard")
     ("expln" "explanation")
+    ("cali" "California")
 
     ("xls" "live stream in x hours. x San Francisco time.
 Goto YouTube xah lee, sub + 🔔 .
