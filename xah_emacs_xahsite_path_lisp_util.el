@@ -32,30 +32,7 @@ e.g. c:/Users/h3/web/"
 
 ;; HHH___________________________________________________________________
 
-(defun xahsite-local-link-p (@href-value)
-  "Return true if it's a local file link, else false.
 
-Non local link may start with these:
-
- http://
- https://
- mailto:
- irc:
- ftp:
- javascript:
- //
-"
-  ;; (not (string-match-p "\\`https?://\\|\\`mailto:\\|\\`irc:\\|\\`ftp:\\|\\`javascript:" @href-value) )
-
-  (cond
-   ((string-match-p "^//" @href-value) nil)
-   ((string-match-p "^http://" @href-value) nil)
-   ((string-match-p "^https://" @href-value) nil)
-   ((string-match-p "^mailto:" @href-value) nil)
-   ((string-match-p "^irc:" @href-value) nil)
-   ((string-match-p "^ftp:" @href-value) nil)
-   ((string-match-p "^javascript:" @href-value) nil)
-   (t t)))
 
 (defun xahsite-url-is-xah-website-p (@url)
   "Returns t if @url is a xah website, else nil.
@@ -87,14 +64,23 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
 
+(defun xahsite-link-in-xahsite-dir-p (@fullPath)
+  "Returns true if @fullPath is in a xah website dir, else false.
+Version 2020-07-16"
+  ;; todo
+t
+)
+
+
 (defun xahsite-is-link-to-xahsite-p (@href-value)
   "Returns true if @href-value points to a xah website, else false.
-@href-value is the string in 「<a href=\"…\">」 or 「<img src=\"…\">」 or any such.
+@href-value is the string in 「<a href=\"‹href-value›\">」 or 「<img src=\"‹href-value›\">」 or any such.
 
 Technically, returns true if @href-value is a local link (relative file path) or is URL to xah site 「http://…‹xah domain›/」.
 
-See: `xahsite-local-link-p', `xahsite-url-is-xah-website-p'."
-  (if (xahsite-local-link-p @href-value)
+See: `xah-html-local-link-p', `xahsite-url-is-xah-website-p'.
+Version 2020-07-16"
+  (if (xah-html-local-link-p @href-value)
       t
     (xahsite-url-is-xah-website-p @href-value)))
 
@@ -150,9 +136,12 @@ If the two paths are in different domain, then return a URL (string starts with 
 Else, return a relative path.
 
 For reverse, see `xahsite-href-value-to-filepath'.
-"
-  (let ((sameDomain-p (string= (xahsite-get-domain-of-local-file-path @linkFilePath) (xahsite-get-domain-of-local-file-path @currentFilePathOrDir))))
-    (if sameDomain-p
+Version 2020-07-16"
+  (let (($sameDomain-p
+         (string=
+          (xahsite-get-domain-of-local-file-path @linkFilePath)
+          (xahsite-get-domain-of-local-file-path @currentFilePathOrDir))))
+    (if $sameDomain-p
         (xah-file-relative-name-emacs24.1.1-fix @linkFilePath (file-name-directory @currentFilePathOrDir))
       (xahsite-filepath-to-url @linkFilePath))))
 ;; test
