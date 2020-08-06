@@ -25,6 +25,7 @@ f_cycle_image ({
 
     ;; maybe temp
 
+    ("iv" "i have" )
     ("lst" "live stream" )
     ("wpmt" "words per minute" )
     ("elispt" "emacs lisp" )

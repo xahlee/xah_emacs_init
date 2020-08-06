@@ -345,8 +345,6 @@ Version 2017-02-02"
       '(
 
         ("img1" . "convert -quality 85% ")
-        ("macscreenshot.jpg" . "defaults write com.apple.screencapture type jpg")
-        ("macscreenshot.png" . "defaults write com.apple.screencapture type png")
         ("imgScale" . "convert -scale 50% -quality 85% ")
         ("img256" . "convert +dither -colors 256 ")
         ("imgBatch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
