@@ -1,9 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-;; 2007-06, 2012-09-24
+;; 2007-06
 ;; http://ergoemacs.org/emacs/xah_emacs_init.html
 
-(require 'package)
-(package-initialize)
+(when (< emacs-major-version 27) (package-initialize))
 
 (require 'ido)
 

@@ -20,7 +20,7 @@ Version 2020-06-17"
   (interactive)
   (let (
         ($template
-         "<div class=\"chinese-etymology-96656\"><b class=\"w\">▮</b> <span class=\"en\"><a href=\"https://translate.google.com/#zh-CN|en|▮\" target=\"_blank\">Translate</a> • <a href=\"https://en.wiktionary.org/wiki/▮\" target=\"_blank\">Wiktionary</a> • <a href=\"https://hanziyuan.net/#▮\" target=\"_blank\">history</a></span></div>"
+         "<div class=\"chinese_5F5hs\"><b class=\"w\">▮</b> <span class=\"en\"><a href=\"https://translate.google.com/#zh-CN|en|▮\" target=\"_blank\">Translate</a> • <a href=\"https://en.wiktionary.org/wiki/▮\" target=\"_blank\">Wiktionary</a> • <a href=\"https://hanziyuan.net/#▮\" target=\"_blank\">history</a></span></div>"
          )
         ($char (buffer-substring-no-properties (- (point) 1) (point))))
     (delete-char -1)
