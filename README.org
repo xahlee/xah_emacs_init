@@ -1,19 +1,7 @@
--*- coding: utf-8 -*-
-
 Xah Lee's emacs init files.
 
-This is not good for public use, because they are only for my own workflow, and change randomly every week.
+'tis not good for you, cuz they change precariously by whims.
 
-Try the following instead:
+Try this instead:
 
-• How to Set Emacs's User Interface
-http://ergoemacs.org/emacs/emacs_make_modern.html
-
-• List of Emacs Starter Kits
-http://ergoemacs.org/misc/list_of_emacs_starter_kits.html
-
-• Practical Emacs Tutorial
-http://ergoemacs.org/emacs/emacs.html
-
-• Practical Emacs Lisp
-http://ergoemacs.org/emacs/elisp.html
+Emacs Init Setup http://ergoemacs.org/emacs/emacs_init_index.html

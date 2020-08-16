@@ -95,14 +95,13 @@ Version 2020-04-09"
   (global-set-key (kbd "s-=") 'text-scale-increase)
   (global-set-key (kbd "s--") 'text-scale-decrease)
 
-  (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
+  (global-set-key (kbd "<C-s-f>") 'toggle-frame-fullscreen)
 
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
   (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
   (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
   ;; (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
 
-  ;; (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
   ;;
   )
 
