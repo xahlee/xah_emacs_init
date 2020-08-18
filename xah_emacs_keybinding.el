@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(when (boundp 'projectile-mode)
+  (projectile-mode 1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
 (when (boundp 'xah-fly-key-map)
 
   ;; (when (fboundp 'xah-fly-keys) (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file) )
