@@ -1,7 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(when (boundp 'projectile-mode)
-  (projectile-mode 1)
+(when (boundp 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (when (boundp 'xah-fly-key-map)
@@ -99,7 +98,7 @@ Version 2020-04-09"
   (global-set-key (kbd "s-=") 'text-scale-increase)
   (global-set-key (kbd "s--") 'text-scale-decrease)
 
-  (global-set-key (kbd "<C-s-f>") 'toggle-frame-fullscreen)
+  (global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
   (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
