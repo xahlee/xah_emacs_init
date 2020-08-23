@@ -391,26 +391,6 @@ todo
 
 ;; HHH___________________________________________________________________
 
-(defun xah-html-insert-divflow ()
-  "Insert a section tag with date tag inside.
-Version 2019-11-28"
-  (interactive)
-  (when (use-region-p)
-    (delete-region (region-beginning) (region-end)))
-  (insert (format "
-
-<section class=\"divFlow81777\">
-
-<div class=\"date_xl\"><time>%s</time></div>
-
-x
-
-</section>
-
-" (format-time-string "%Y-%m-%d")))
-  (search-backward "x" )
-  (delete-char 1))
-
 (defun xah-html-insert-date-section ()
   "Insert a section tag with date tag inside.
 Version 2019-05-21"
@@ -603,3 +583,66 @@ Version 2020-07-16"
 
     ;;
     ))
+
+HHH___________________________________________________________________ 
+
+(defun xah-html-fix-youtube-description ()
+  "Delete unwanted youtube description under cursor.
+
+For example,
+
+<figcaption>
+#DESKWATCH 04 村上ゆいちさんの左手デバイス捌き！ - pixivision
+74,915 views
+•Aug 15, 2016
+1K
+17
+Share
+Save
+pixivision
+33.6K subscribers
+</figcaption>
+
+becomes
+
+<figcaption>#DESKWATCH 04 村上ゆいちさんの左手デバイス捌き！ - pixivision<br />
+Aug 15, 2016<br />
+pixivision<br />
+</figcaption>
+
+Version 2020-08-20"
+  (interactive)
+  (let (p1 p2)
+    (save-excursion
+      (search-backward "<figcaption>")
+      (search-forward "<figcaption>" )
+      (setq p1 (point))
+      (search-forward "</figcaption>")
+      (search-backward "</figcaption>" )
+      (setq p2 (point)))
+    (save-restriction
+      (narrow-to-region p1 p2)
+      (goto-char (point-max))
+      (delete-char (- (skip-chars-backward "\n")))
+      (goto-char (point-min))
+      (when (re-search-forward "[,0-9]+ views" )
+        (replace-match ""))
+      (when (search-forward "•" )
+        (replace-match ""))
+      ;; •Aug 15, 2016
+      (re-search-forward "[A-Z][a-z][a-z] [0-9][0-9], [0-9]\\{4,4\\}" nil t)
+      ;; thumb up/down count
+      (when (re-search-forward "[0-9]+[KM]?\n[0-9]+\n" nil "NOERROR")
+        (replace-match ""))
+      (when (search-forward "Share\nSave" nil "NOERROR" )
+        (replace-match ""))
+      (when (re-search-forward "[0-9]*\\.*[0-9]+K? subscribers" nil "NOERROR")
+        (replace-match ""))
+      (goto-char (point-min))
+      (when (re-search-forward "\n\n+" nil "NOERROR")
+        (replace-match "\n"))
+      (goto-char (point-min))
+      (skip-chars-forward "\n")
+      (while (search-forward "\n" nil "NOERROR")
+        (replace-match "<br />\n" ))
+      )))

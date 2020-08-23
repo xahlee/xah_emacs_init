@@ -715,7 +715,8 @@ Version 2020-01-02"
   (global-command-log-mode)
   (clm/open-command-log-buffer)
   (delete-window)
-  (set-background-color "thistle"))
+  (set-background-color "thistle")
+  (set-frame-width (selected-frame) 55))
 
 (defun xah-bigger-font-global ()
   "Make font size larger globally.

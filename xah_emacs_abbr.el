@@ -44,6 +44,14 @@ https://www.youtube.com/c/xahlee/live" )
     ("xtv" "XahTV")
     ("mwl" "Mac, Windows, Linux")
 
+    ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2010-10-05</time>. Last updated: <time>2020-08-16</time>.</div>")
+
+    ("divflow" "<section class=\"divFlow81777\">
+
+</section>
+
+")
+
     ;; English word abbrev
 
     ("ds" "does" )
