@@ -584,8 +584,6 @@ Version 2020-07-16"
     ;;
     ))
 
-HHH___________________________________________________________________ 
-
 (defun xah-html-fix-youtube-description ()
   "Delete unwanted youtube description under cursor.
 
@@ -610,7 +608,7 @@ Aug 15, 2016<br />
 pixivision<br />
 </figcaption>
 
-Version 2020-08-20"
+Version 2020-08-23"
   (interactive)
   (let (p1 p2)
     (save-excursion
@@ -630,7 +628,7 @@ Version 2020-08-20"
       (when (search-forward "•" )
         (replace-match ""))
       ;; •Aug 15, 2016
-      (re-search-forward "[A-Z][a-z][a-z] [0-9][0-9], [0-9]\\{4,4\\}" nil t)
+      (re-search-forward "[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}" nil t)
       ;; thumb up/down count
       (when (re-search-forward "[0-9]+[KM]?\n[0-9]+\n" nil "NOERROR")
         (replace-match ""))
