@@ -630,7 +630,7 @@ Version 2020-08-24"
       ;; •Aug 15, 2016
       (re-search-forward "[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}" nil t)
       ;; thumb up/down count
-      (when (re-search-forward "[0-9]+[KM]?\n\n+[0-9]+\n" nil "NOERROR")
+      (when (re-search-forward "[0-9]+[KM]?\n\n?[0-9]+\n" nil "NOERROR")
         (replace-match ""))
       (let ((case-fold-search t))
         (when (re-search-forward "share\n\n?save" nil "NOERROR" )
