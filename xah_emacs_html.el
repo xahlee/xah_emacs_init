@@ -608,7 +608,7 @@ Aug 15, 2016<br />
 pixivision<br />
 </figcaption>
 
-Version 2020-08-23"
+Version 2020-08-24"
   (interactive)
   (let (p1 p2)
     (save-excursion
@@ -630,17 +630,17 @@ Version 2020-08-23"
       ;; •Aug 15, 2016
       (re-search-forward "[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}" nil t)
       ;; thumb up/down count
-      (when (re-search-forward "[0-9]+[KM]?\n[0-9]+\n" nil "NOERROR")
+      (when (re-search-forward "[0-9]+[KM]?\n\n+[0-9]+\n" nil "NOERROR")
         (replace-match ""))
-      (when (search-forward "Share\nSave" nil "NOERROR" )
-        (replace-match ""))
-      (when (re-search-forward "[0-9]*\\.*[0-9]+K? subscribers" nil "NOERROR")
+      (let ((case-fold-search t))
+        (when (re-search-forward "share\n\n?save" nil "NOERROR" )
+          (replace-match "")))
+      (when (re-search-forward "[0-9]*\\.*[0-9]+[KM]? subscribers" nil "NOERROR")
         (replace-match ""))
       (goto-char (point-min))
-      (when (re-search-forward "\n\n+" nil "NOERROR")
+      (while (re-search-forward "\n\n+" nil "NOERROR")
         (replace-match "\n"))
       (goto-char (point-min))
       (skip-chars-forward "\n")
       (while (search-forward "\n" nil "NOERROR")
-        (replace-match "<br />\n" ))
-      )))
+        (replace-match "<br />\n" )))))
