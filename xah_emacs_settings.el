@@ -50,7 +50,13 @@ Version 2019-11-05"
 (require 'recentf)
 (recentf-mode 1)
 
-(desktop-save-mode 1)
+(progn
+  (desktop-save-mode 1)
+  (setq desktop-restore-frames nil)
+  (setq desktop-auto-save-timeout 300)
+  (setq desktop-globals-to-save nil)
+  )
+
 (global-auto-revert-mode 1)
 
 ;; HHH___________________________________________________________________
