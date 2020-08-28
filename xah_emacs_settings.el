@@ -245,7 +245,7 @@ Version 2019-11-05"
 
 (setq shift-select-mode nil)
 
-(electric-pair-mode 1)
+;; (electric-pair-mode 1)
 
 ;; set highlighting brackets
 (show-paren-mode 1)

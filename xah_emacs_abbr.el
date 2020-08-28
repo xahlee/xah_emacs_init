@@ -36,6 +36,8 @@ f_cycle_image ({
     ("uhk" "Ultimate Hacking Keyboard")
     ("expln" "explanation")
     ("cali" "California")
+    ("todo" "todo, review, work in progress")
+    ("pos" "position")
 
     ("xls" "live stream in x hours. x San Francisco time.
 Goto YouTube xah lee, sub + 🔔 .
@@ -123,7 +125,7 @@ https://www.youtube.com/c/xahlee/live" )
     ("cprs" "comparison" )
     ("cvnt" "convenient" )
     ("dect" "declaration" )
-    ("deft" "definition" )
+    ("def" "definition" )
     ("desc" "description" )
     ("devt" "development" )
     ("dft" "different" )
@@ -221,7 +223,6 @@ https://www.youtube.com/c/xahlee/live" )
     ;; math
     ("sor" "surface of revolution" )
     ("fr" "fundamental region" )
-    ("def" ":=" )
     ("dgt" "differential geometry" )
     ("det" "differential equations" )
     ("ode" "ordinary differential equations" )
