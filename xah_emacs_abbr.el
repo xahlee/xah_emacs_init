@@ -38,6 +38,7 @@ f_cycle_image ({
     ("cali" "California")
     ("todo" "todo, review, work in progress")
     ("pos" "position")
+    ("mech" "mechanical")
 
     ("xls" "live stream in x hours. x San Francisco time.
 Goto YouTube xah lee, sub + 🔔 .

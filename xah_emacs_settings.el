@@ -14,7 +14,7 @@
             (tool-bar-lines . 0)
             (background-color . "honeydew")
             (width . 106)
-            (height . 56)
+            (height . 54)
             ;; (left . 50)
             ;; (top . 50)
             ))
@@ -25,7 +25,7 @@
         (tool-bar-lines . 0)
         (background-color . "honeydew")
         (width . 100)
-        (height . 55)))
+        (height . 52)))
 
 ;; HHH___________________________________________________________________
 ;; UTF-8 as default encoding
@@ -107,7 +107,7 @@ Version 2019-11-05"
      ))
   ((string-equal system-type "darwin") ; macOS
    (if (member "Menlo" (font-family-list))
-       "Menlo-14"
+       "Menlo-15"
      nil
      ))
   ((string-equal system-type "gnu/linux") ; linux
@@ -162,23 +162,24 @@ Version 2019-11-05"
   (cond
    ((member "WenQuanYi Micro Hei" (font-family-list)) "WenQuanYi Micro Hei"))))
 
-;; (progn
-;;   ;; use variable-width font for some modes
-;;   (defun xah-set-proportial-font ()
-;;     "Set current buffer to use variable-width font."
-;;     (variable-pitch-mode 1)
-;;     (text-scale-increase 1 ))
-;;   (add-hook 'html-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'emacs-lisp-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'js-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'css-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
-;;   (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
-;;   ;;
-;;   )
+(progn
+  ;; use variable-width font for some modes
+  (defun xah-set-proportial-font ()
+    "Set current buffer to use variable-width font."
+    (variable-pitch-mode 1)
+    (text-scale-increase 1 )
+)
+  (add-hook 'html-mode-hook 'xah-set-proportial-font)
+  (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
+  (add-hook 'emacs-lisp-mode-hook 'xah-set-proportial-font)
+  (add-hook 'js-mode-hook 'xah-set-proportial-font)
+  (add-hook 'css-mode-hook 'xah-set-proportial-font)
+  (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
+  (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
+  (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
+  (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
+  ;;
+  )
 
 ;; HHH___________________________________________________________________
 
