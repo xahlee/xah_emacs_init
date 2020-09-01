@@ -608,7 +608,7 @@ Aug 15, 2016<br />
 pixivision<br />
 </figcaption>
 
-Version 2020-08-24"
+Version 2020-09-01"
   (interactive)
   (let (p1 p2)
     (save-excursion
@@ -623,9 +623,9 @@ Version 2020-08-24"
       (goto-char (point-min))
       (when (re-search-forward "[,0-9]+ views" ) (replace-match ""))
       ;; •Aug 15, 2016
-      (when (re-search-forward "•[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}") (replace-match ""))
+      (re-search-forward "•[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}")
       ;; thumb up/down count
-      (when (re-search-forward "[0-9]+[KM]?\n\n?[0-9]+\n" nil "NOERROR") (replace-match ""))
+      (when (re-search-forward "[.0-9]+[KM]?\n\n?[.0-9]+[KM]?\n" ) (replace-match ""))
       (let ((case-fold-search t))
         (when (re-search-forward "share\n\n?save" nil "NOERROR" ) (replace-match "")))
       (when (re-search-forward "[0-9]*\\.*[0-9]+[KM]? subscribers") (replace-match ""))
