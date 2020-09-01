@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-;; Emacs settings plain gnu emacs only
+;; basic emacs settings, no external packages required
 ;; 2019-11-06
-;; http://ergoemacs.org/emacs/emacs_init_index.html
+;; http://ergoemacs.org/emacs/emacs_make_modern.html
 
 ;; HHH___________________________________________________________________
 ;; initial window and default window
