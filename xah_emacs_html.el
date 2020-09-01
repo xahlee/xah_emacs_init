@@ -622,8 +622,9 @@ Version 2020-09-01"
       (narrow-to-region p1 p2)
       (goto-char (point-min))
       (when (re-search-forward "[,0-9]+ views" ) (replace-match ""))
+      (search-forward "•" ) (replace-match "")
       ;; •Aug 15, 2016
-      (re-search-forward "•[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}")
+      (re-search-forward "[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}")
       ;; thumb up/down count
       (when (re-search-forward "[.0-9]+[KM]?\n\n?[.0-9]+[KM]?\n" ) (replace-match ""))
       (let ((case-fold-search t))
@@ -631,7 +632,7 @@ Version 2020-09-01"
       (when (re-search-forward "[0-9]*\\.*[0-9]+[KM]? subscribers") (replace-match ""))
       (goto-char (point-min))
       (while (re-search-forward "\n\n+" nil "NOERROR") (replace-match "\n"))
-      (goto-char (point-min)) (when (equal (char-after ) ?\n )) 
+      (goto-char (point-min)) (when (equal (char-after ) ?\n ))
       (skip-chars-forward "\n")
       (while (search-forward "\n" nil "NOERROR")
         (replace-match "<br />\n" )))))
