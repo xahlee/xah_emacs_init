@@ -39,6 +39,7 @@ f_cycle_image ({
     ("todo" "todo, review, work in progress")
     ("pos" "position")
     ("mech" "mechanical")
+    ("nyt" "New York Times")
 
     ("xls" "live stream in x hours. x San Francisco time.
 Goto YouTube xah lee, sub + 🔔 .

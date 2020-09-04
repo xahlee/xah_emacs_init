@@ -14,7 +14,7 @@
             (tool-bar-lines . 0)
             (background-color . "honeydew")
             (width . 106)
-            (height . 54)
+            (height . 56)
             ;; (left . 50)
             ;; (top . 50)
             ))
@@ -25,7 +25,7 @@
         (tool-bar-lines . 0)
         (background-color . "honeydew")
         (width . 100)
-        (height . 52)))
+        (height . 54)))
 
 ;; HHH___________________________________________________________________
 ;; UTF-8 as default encoding
@@ -107,7 +107,7 @@ Version 2019-11-05"
      ))
   ((string-equal system-type "darwin") ; macOS
    (if (member "Menlo" (font-family-list))
-       "Menlo-15"
+       "Menlo-14"
      nil
      ))
   ((string-equal system-type "gnu/linux") ; linux
