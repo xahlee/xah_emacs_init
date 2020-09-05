@@ -472,3 +472,50 @@ Version 2019-05-11"
          ((xah-html-image-file-suffix-p $input) (xah-html-image-figure-linkify))
          (t (xah-file-linkify $p1 $p2))))
     (xah-html-wrap-url)))
+
+
+(defun xah-icon-linkify ()
+  "given 2 lines of file path under cursor, make them into a link with image.
+
+For example, this:
+
+~/web/keyboard.html
+~/web/keyboard.jpg
+
+becomes
+
+<div>
+<a href=\"keyboard.html\">
+<img src=\"keyboard.jpg\" alt=\"keyboard\" width=\"289\" height=\"217\" /><br />
+My Keyboard</a>
+</div>
+
+Version 2020-09-04"
+  (interactive)
+  (let (boundary1 boundary2 p1 p2 p3 p4 htmlPath imgPath)
+    (setq boundary1 (bounds-of-thing-at-point 'filename))
+    (setq p1 (car boundary1))
+    (setq p2 (cdr boundary1))
+    (setq htmlPath (buffer-substring-no-properties p1 p2))
+    (delete-region p1 p2)
+    (forward-word 1)
+    (setq boundary2 (bounds-of-thing-at-point 'filename))
+    (setq p3 (car boundary2))
+    (setq p4 (cdr boundary2))
+    (setq imgPath (buffer-substring-no-properties p3 p4))
+    (delete-region p3 p4)
+    (insert "<div>\n" )
+    (insert "<a href=\"")
+    (insert (file-relative-name htmlPath ))
+    (insert "\">\n")
+    (insert "<img src=\"")
+    (insert (file-relative-name imgPath ))
+    (insert "\"")
+    (insert " alt=\"")
+    (insert (replace-regexp-in-string "-_" " " (file-name-sans-extension (file-name-nondirectory imgPath))))
+    (insert "\" ")
+    (insert " /><br />\n")
+    (insert (xah-html-get-html-file-title htmlPath))
+    (insert "</a>")
+    (insert "\n</div>" )))
+

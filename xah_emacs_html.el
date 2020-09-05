@@ -608,7 +608,7 @@ Aug 15, 2016<br />
 pixivision<br />
 </figcaption>
 
-Version 2020-09-01"
+Version 2020-09-05"
   (interactive)
   (let (p1 p2)
     (save-excursion
@@ -629,7 +629,7 @@ Version 2020-09-01"
       (when (re-search-forward "[.0-9]+[KM]?\n\n?[.0-9]+[KM]?\n" ) (replace-match ""))
       (let ((case-fold-search t))
         (when (re-search-forward "share\n\n?save" nil "NOERROR" ) (replace-match "")))
-      (when (re-search-forward "[0-9]*\\.*[0-9]+[KM]? subscribers") (replace-match ""))
+      (when (re-search-forward "[0-9]*\\.*[0-9]+[KM]? subscribers" nil t) (replace-match ""))
       (goto-char (point-min))
       (while (re-search-forward "\n\n+" nil "NOERROR") (replace-match "\n"))
       (goto-char (point-min)) (when (equal (char-after ) ?\n ))
