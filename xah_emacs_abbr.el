@@ -40,6 +40,7 @@ f_cycle_image ({
     ("pos" "position")
     ("mech" "mechanical")
     ("nyt" "New York Times")
+    ("ele" "element")
 
     ("xls" "live stream in x hours. x San Francisco time.
 Goto YouTube xah lee, sub + 🔔 .

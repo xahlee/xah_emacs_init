@@ -4,6 +4,11 @@
 ;; http://ergoemacs.org/emacs/emacs_make_modern.html
 
 ;; HHH___________________________________________________________________
+;; UTF-8 as default encoding
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8-unix)
+
+;; HHH___________________________________________________________________
 ;; initial window and default window
 
 (setq inhibit-startup-screen t)
@@ -13,7 +18,7 @@
           '(
             (tool-bar-lines . 0)
             (background-color . "honeydew")
-            (width . 106)
+            (width . 90)
             (height . 56)
             ;; (left . 50)
             ;; (top . 50)
@@ -24,76 +29,8 @@
       '(
         (tool-bar-lines . 0)
         (background-color . "honeydew")
-        (width . 100)
+        (width . 88)
         (height . 54)))
-
-;; HHH___________________________________________________________________
-;; UTF-8 as default encoding
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8-unix)
-
-;; HHH___________________________________________________________________
-;; backup and file related
-
-(defun xah-save-all-unsaved ()
-  "Save all unsaved files. no ask.
-Version 2019-11-05"
-  (interactive)
-  (save-some-buffers t ))
-(add-hook 'focus-out-hook 'xah-save-all-unsaved)
-
-(setq make-backup-files nil)
-(setq backup-by-copying t)
-(setq create-lockfiles nil)
-(setq auto-save-default nil)
-
-(require 'recentf)
-(recentf-mode 1)
-
-(progn
-  (desktop-save-mode 1)
-  (setq desktop-restore-frames nil)
-  (setq desktop-auto-save-timeout 300)
-  (setq desktop-globals-to-save nil)
-  )
-
-(global-auto-revert-mode 1)
-
-;; HHH___________________________________________________________________
-;; user interface
-
-(when (version<= "26.0.50" emacs-version )
-  (global-display-line-numbers-mode))
-
-(column-number-mode 1)
-(blink-cursor-mode 0)
-(setq use-dialog-box nil)
-
-(progn
-  ;; no need to warn
-  (put 'narrow-to-region 'disabled nil)
-  (put 'narrow-to-page 'disabled nil)
-  (put 'upcase-region 'disabled nil)
-  (put 'downcase-region 'disabled nil)
-  (put 'erase-buffer 'disabled nil)
-  (put 'scroll-left 'disabled nil)
-  (put 'dired-find-alternate-file 'disabled nil)
-)
-
-;; HHH___________________________________________________________________
-
-(progn
-  (require 'dired-x)
-  (setq dired-dwim-target t)
-  (when (string-equal system-type "gnu/linux") (setq dired-listing-switches "-al --time-style long-iso"))
-  (setq dired-recursive-copies 'always)
-  (setq dired-recursive-deletes 'always))
-
-;; HHH___________________________________________________________________
-
-(setq set-mark-command-repeat-pop t)
-(setq mark-ring-max 5)
-(setq global-mark-ring-max 5)
 
 ;; HHH___________________________________________________________________
 
@@ -171,9 +108,75 @@ Version 2019-11-05"
 ;;   (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
 ;;   (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
 ;;   ;;
 ;;   )
+
+;; HHH___________________________________________________________________
+;; backup and file related
+
+(defun xah-save-all-unsaved ()
+  "Save all unsaved files. no ask.
+Version 2019-11-05"
+  (interactive)
+  (save-some-buffers t ))
+(add-hook 'focus-out-hook 'xah-save-all-unsaved)
+
+(setq make-backup-files nil)
+(setq backup-by-copying t)
+(setq create-lockfiles nil)
+(setq auto-save-default nil)
+
+(require 'recentf)
+(recentf-mode 1)
+
+(progn
+  (desktop-save-mode 1)
+  (setq desktop-restore-frames nil)
+  (setq desktop-auto-save-timeout 300)
+  (setq desktop-globals-to-save nil)
+  )
+
+(global-auto-revert-mode 1)
+
+;; HHH___________________________________________________________________
+;; user interface
+
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
+
+(column-number-mode 1)
+(blink-cursor-mode 0)
+(setq use-dialog-box nil)
+
+(progn
+  ;; no need to warn
+  (put 'narrow-to-region 'disabled nil)
+  (put 'narrow-to-page 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+  (put 'erase-buffer 'disabled nil)
+  (put 'scroll-left 'disabled nil)
+  (put 'dired-find-alternate-file 'disabled nil)
+)
+
+;; HHH___________________________________________________________________
+
+(progn
+  (require 'dired-x)
+  (setq dired-dwim-target t)
+  (when (string-equal system-type "gnu/linux") (setq dired-listing-switches "-al --time-style long-iso"))
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always))
+
+;; HHH___________________________________________________________________
+
+(setq set-mark-command-repeat-pop t)
+(setq mark-ring-max 5)
+(setq global-mark-ring-max 5)
+
+
 
 ;; HHH___________________________________________________________________
 
