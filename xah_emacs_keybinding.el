@@ -197,7 +197,7 @@ Version 2020-04-09"
   (define-key xah-user-keymap (kbd "u [") 'xah-remove-square-brackets)
   (define-key xah-user-keymap (kbd "u b") 'xah-change-bracket-pairs)
 
-  (define-key xah-user-keymap (kbd "u d") 'xah-fix-datetime-stamp)
+  (define-key xah-user-keymap (kbd "u d") 'xah-fix-datetime)
   (define-key xah-user-keymap (kbd "u g") 'xah-convert-latin-alphabet-gothic)
 
   (define-key xah-user-keymap (kbd "u p") 'xah-convert-asian/ascii-space)

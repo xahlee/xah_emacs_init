@@ -19,7 +19,7 @@
             (tool-bar-lines . 0)
             (background-color . "honeydew")
             (width . 90)
-            (height . 56)
+            (height . 52)
             ;; (left . 50)
             ;; (top . 50)
             ))
@@ -30,7 +30,7 @@
         (tool-bar-lines . 0)
         (background-color . "honeydew")
         (width . 88)
-        (height . 54)))
+        (height . 50)))
 
 ;; HHH___________________________________________________________________
 
