@@ -846,3 +846,31 @@ version 2020-07-19"
       (search-forward "</ul>" )
       (replace-match "</ol>")
       )))
+
+(defun xah-html-p-to-dl ()
+  "make 2 html p tags into a dl tag.
+The first p tag is the term, the second is the definition.
+Version 2020-09-12"
+  (interactive)
+  (let (p1 p2 p3 p4)
+
+    (search-forward ">" nil "NOERROR" )
+    (search-backward "<p>" nil "NOERROR" )
+    (setq p1 (point))
+
+    (search-forward "</p>" nil "NOERROR" ) (setq p2 (point))
+    (search-forward "<p>" nil "NOERROR" ) (setq p3 (point))
+    (search-forward "</p>" nil "NOERROR" ) (setq p4 (point))
+
+    (save-restriction
+      (narrow-to-region p1 p4)
+      (goto-char (point-min))
+      (search-forward "<p>" ) (replace-match "<dt>" t t)
+      (search-forward "</p>" ) (replace-match "</dt>" t t)
+      (search-forward "<p>" ) (replace-match "<dd>\n" t t)
+      (search-forward "</p>" ) (replace-match "\n</dd>" t t)
+      (goto-char (point-min))
+      (while (re-search-forward "\n\n+" nil "NOERROR")
+        (replace-match "\n" ))
+      (goto-char (point-min)) (insert "<dl>\n")
+      (goto-char (point-max)) (insert "\n</dl>"))))

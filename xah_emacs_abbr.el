@@ -41,6 +41,7 @@ f_cycle_image ({
     ("mech" "mechanical")
     ("nyt" "New York Times")
     ("ele" "element")
+    ("ftr" "feature")
 
     ("xls" "live stream in x hours. x San Francisco time.
 Goto YouTube xah lee, sub + 🔔 .
