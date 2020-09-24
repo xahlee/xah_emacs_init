@@ -44,7 +44,7 @@ Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
 Also, removes repeated empty lines.
 
-Version 2018-12-07"
+Version 2018-12-07 2020-09-22"
   (interactive)
   (save-excursion
     ;; remove empty lines
@@ -86,11 +86,11 @@ Version 2018-12-07"
               (setq $p3 (point))
               (delete-region $p3 $p4 ))
             (insert (format "<time>%s</time>" (format-time-string "%Y-%m-%d")))
-            (when (not (looking-at "\\.")) (insert "."))
-            (search-backward "<time>"))))
+            (when (not (looking-at "\\.")) (insert ".")))))
       (require 'xah-fly-keys)
       (xah-make-backup-and-save)
       (message "old date line: 「%s」" $bufferTextOrig)
+      (search-forward "</div>" )
       ;;
       )))
 

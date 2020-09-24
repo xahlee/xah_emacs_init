@@ -874,3 +874,31 @@ Version 2020-09-12"
         (replace-match "\n" ))
       (goto-char (point-min)) (insert "<dl>\n")
       (goto-char (point-max)) (insert "\n</dl>"))))
+
+(defun xah-remove-console-log ()
+  "Remove the 「console.log(‹body›)」 but keep ‹body›, in current text block or text selection.
+
+Version 2020-09-13 "
+  (interactive)
+  (let (p1 p2 posBeginConsole posLeftParen)
+    (if (use-region-p)
+        (setq p1 (region-beginning) p2 (region-end))
+      (save-excursion
+        (search-backward "\n\n" nil "NOERROR" )
+        (search-forward "\n\n" nil "NOERROR" )
+        (setq p1 (point))
+        (search-forward "\n\n" nil "NOERROR" )
+        (search-backward "\n\n" nil "NOERROR" )
+        (setq p2 (point))))
+    (save-restriction
+      (narrow-to-region p1 p2)
+      (goto-char (point-min))
+      (while
+          (re-search-forward "console ?\\. ?log" nil "NOERROR")
+        (setq posBeginConsole (match-beginning 0))
+        (search-forward "(")
+        (setq posLeftParen (point))
+        (backward-char 1)
+        (forward-sexp)
+        (delete-char -1)
+        (delete-region posBeginConsole posLeftParen)))))

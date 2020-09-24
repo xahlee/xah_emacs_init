@@ -426,10 +426,6 @@ https://www.youtube.com/c/xahlee/live" )
     ("utg" "http://xahlee.info/UnixResource_dir/writ/tech_geeker.html" )
     ("uunicode" "http://xahlee.info/comp/unicode_index.html" )
 
-    ("umaltron" "http://xahlee.info/kbd/Maltron_keyboard.html" )
-    ("utek" "http://xahlee.info/kbd/Truly_Ergonomic_keyboard.html" )
-    ("uutron" "http://xahlee.info/kbd/uTRON_keyboard.html" )
-
     ("uvi" "http://ergoemacs.org/emacs/emergency_vi.html" )
     ("uvmm" "http://VirtualMathMuseum.org/" )
     ("uwd" "http://xahlee.info/js/index.html" )
@@ -441,17 +437,7 @@ https://www.youtube.com/c/xahlee/live" )
     ("uxsl" "http://xahsl.org/" )
 
     ;; xah personal
-    ("xkb" "#xahkeyboard" )
-    ("xw" "#xahwords" )
-    ("xa" "#xahart" )
-    ("xc" "#xahcode" )
-    ("xm" "#xahmusic" )
-    ("xjs" "#xahjs" )
-    ("xp" "#xahpop" )
-    ("sszw" "#杀杀中文" )
-    ("xs" "Xah Show" )
     ("xts" "Xah Talk Show" )
-    ("xkb" "#xahkeyboard" )
 
     ("xim" "Twitter: @xah_lee
 Facebook: https://www.facebook.com/xahlee
