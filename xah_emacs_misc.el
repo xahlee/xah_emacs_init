@@ -902,3 +902,60 @@ Version 2020-09-13 "
         (forward-sexp)
         (delete-char -1)
         (delete-region posBeginConsole posLeftParen)))))
+
+(defvar xah-font-list nil "A list of fonts for `xah-cycle-font' to cycle from.")
+
+(setq xah-font-list
+      (cond
+       ((string-equal system-type "windows-nt")
+        '(
+          "Courier-10"
+          "Lucida Console-10"
+          "Segoe UI Symbol-12"
+          "Lucida Sans Unicode-10"
+          ))
+       ((string-equal system-type "gnu/linux")
+        '(
+          "DejaVu Sans Mono-10"
+          "DejaVu Sans-10"
+          "Symbola-13"
+          ))
+       ((string-equal system-type "darwin") ; Mac
+        '(
+          "Courier-16"
+          "Menlo-15"
+          "Iosevka-16"
+          ))))
+
+(defun xah-cycle-font (@n)
+  "Change font in current frame.
+Each time this is called, font cycles thru a predefined list of fonts in the variable `xah-font-list' .
+If @n is 1, cycle forward.
+If @n is -1, cycle backward.
+See also `xah-cycle-font-next', `xah-cycle-font-previous'.
+
+URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
+Version 2015-09-21"
+  (interactive "p")
+  ;; this function sets a property “state”. It is a integer. Possible values are any index to the fontList.
+  (let ($fontToUse $stateBefore $stateAfter )
+    (setq $stateBefore (if (get 'xah-cycle-font 'state) (get 'xah-cycle-font 'state) 0))
+    (setq $stateAfter (% (+ $stateBefore (length xah-font-list) @n) (length xah-font-list)))
+    (setq $fontToUse (nth $stateAfter xah-font-list))
+    (set-frame-font $fontToUse t)
+    ;; (set-frame-parameter nil 'font $fontToUse)
+    (message "Current font is: %s" $fontToUse )
+    (put 'xah-cycle-font 'state $stateAfter)))
+
+(defun xah-cycle-font-next ()
+  "Switch to the next font, in current window.
+See `xah-cycle-font'."
+  (interactive)
+  (xah-cycle-font 1))
+
+(defun xah-cycle-font-previous ()
+  "Switch to the previous font, in current window.
+See `xah-cycle-font'."
+  (interactive)
+  (xah-cycle-font -1))
+

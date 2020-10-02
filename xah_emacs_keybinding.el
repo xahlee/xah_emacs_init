@@ -33,6 +33,8 @@
   ;;   :group 'xah-fly-keys)
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
+  (global-set-key (kbd "<f10>") 'xah-cycle-font)
+
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
 

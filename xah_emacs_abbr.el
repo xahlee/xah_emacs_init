@@ -48,7 +48,7 @@ Goto YouTube xah lee, sub + 🔔 .
 https://www.youtube.com/c/xahlee/live" )
 
     ("xtv" "XahTV")
-    ("mwl" "Mac, Windows, Linux")
+    ("wml" "Windows, Mac, Linux")
 
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2010-10-05</time>. Last updated: <time>2020-08-16</time>.</div>")
 
@@ -148,6 +148,7 @@ https://www.youtube.com/c/xahlee/live" )
     ("env" "environment" )
     ("esp" "especially" )
     ("ex" "example:" )
+    ("exs" "examples" )
     ("expt" "experience" )
     ("expr" "expression" )
     ("faq" "frequently asked questions" )

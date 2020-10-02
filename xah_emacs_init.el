@@ -101,8 +101,8 @@ Version 2017-07-19"
 
 (progn
   (add-to-list 'load-path "~/git/xah-js-mode.el/")
-  ;; (require 'xah-js-mode)
-  (autoload 'xah-js-mode "xah-js-mode" ))
+  (require 'xah-js-mode)
+  )
 
 (progn
   (add-to-list 'load-path "~/git/xah-clojure-mode/")

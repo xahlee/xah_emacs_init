@@ -350,10 +350,8 @@ Version 2020-07-04"
          new-rel-path
          $cmdStr
          )
-
     (when (not (file-exists-p inputPath))
       (user-error "File not exist: %s" inputPath))
-
     (setq fPath (expand-file-name inputPath ))
     (setq directory (file-name-directory fPath))
     (setq filename (file-name-nondirectory fPath))
@@ -376,14 +374,14 @@ Version 2020-07-04"
     (setq filenameNew (format "%s-s%d.%s" corename sideLength fnameExt ))
     (setq fPathNew (concat directory filenameNew))
     (setq new-rel-path (file-relative-name fPathNew))
-
     (setq $cmdStr
           (format
            "convert %s '%s' '%s'"
            (format " -scale %s%% -quality %s%% %s "
                    (* scale 100)
                    quality
-                   " -sharpen 1 ")
+                   " -sharpen 1 "
+                   )
            fPath
            fPathNew))
     (if (file-exists-p fPathNew)
