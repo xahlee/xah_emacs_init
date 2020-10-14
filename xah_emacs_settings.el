@@ -104,7 +104,7 @@
 Version 2019-11-05"
   (interactive)
   (save-some-buffers t ))
-(if (version< emacs-version "72")
+(if (version< emacs-version "27")
     (add-hook 'focus-out-hook 'xah-save-all-unsaved)
   (add-hook 'after-focus-change-function 'xah-save-all-unsaved))
 
