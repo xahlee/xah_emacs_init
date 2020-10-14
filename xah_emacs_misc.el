@@ -922,7 +922,7 @@ Version 2020-09-13 "
           ))
        ((string-equal system-type "darwin") ; Mac
         '(
-          "Courier-16"
+          ;; "Courier-16"
           "Menlo-15"
           "Iosevka-16"
           ))))

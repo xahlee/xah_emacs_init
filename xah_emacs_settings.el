@@ -37,21 +37,12 @@
 ;; set default font
 (set-frame-font
  (cond
-  ((string-equal system-type "windows-nt") ; Microsoft Windows
-   (if (member "Consolas" (font-family-list))
-       "Consolas"
-     nil
-     ))
-  ((string-equal system-type "darwin") ; macOS
-   (if (member "Menlo" (font-family-list))
-       "Menlo-16"
-     nil
-     ))
-  ((string-equal system-type "gnu/linux") ; linux
-   (if (member "DejaVu Sans Mono" (font-family-list))
-       "DejaVu Sans Mono"
-     nil
-     ))
+  ((string-equal system-type "windows-nt")
+   (if (member "Consolas" (font-family-list)) "Consolas" nil ))
+  ((string-equal system-type "darwin")
+   (if (member "Menlo" (font-family-list)) "Menlo-16" nil ))
+  ((string-equal system-type "gnu/linux")
+   (if (member "DejaVu Sans Mono" (font-family-list)) "DejaVu Sans Mono" nil ))
   (t nil))
  t t)
 
@@ -79,22 +70,13 @@
    '(#x4e00 . #x9fff)
    (cond
     ((member "Microsoft YaHei" (font-family-list)) "Microsoft YaHei")
-    ((member "PMingLiU" (font-family-list)) "PMingLiU")
-    ((member "SimHei" (font-family-list)) "SimHei")
-    ((member "Microsoft YaHei UI" (font-family-list)) "Microsoft YaHei UI")
-    ((member "MingLiU" (font-family-list)) "MingLiU")
-    ((member "SimHei" (font-family-list)) "SimHei")
-    ((member "DengXian" (font-family-list)) "DengXian")
-    ((member "KaiTi" (font-family-list)) "KaiTi")
-    ((member "SimSun" (font-family-list)) "SimSun"))))
+    ((member "Microsoft JhengHei" (font-family-list)) "Microsoft JhengHei")
+    ((member "SimHei" (font-family-list)) "SimHei"))))
  ((string-equal system-type "darwin")
   (cond
+   ((member "Hei" (font-family-list)) "Hei")
    ((member "Heiti SC" (font-family-list)) "Heiti SC")
-   ((member "Heiti TC" (font-family-list)) "Heiti TC")
-   ((member "Songti SC" (font-family-list)) "Songti SC")
-   ((member "Songti TC" (font-family-list)) "Songti TC")
-   ((member "Kaiti SC" (font-family-list)) "Kaiti SC")
-   ((member "BiauKai" (font-family-list)) "BiauKai")))
+   ((member "Heiti TC" (font-family-list)) "Heiti TC")))
  ((string-equal system-type "gnu/linux")
   (cond
    ((member "WenQuanYi Micro Hei" (font-family-list)) "WenQuanYi Micro Hei"))))
