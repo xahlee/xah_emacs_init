@@ -25,6 +25,13 @@ f_cycle_image ({
 
     ;; maybe temp
 
+    ("tp" "transpersonal" )
+    ("tps" "transpersonal psychology" )
+    ("psy" "psychology" )
+    ("herm" "hermeneutics" )
+    ("phen" "phenomenology" )
+    ("phenon" "phenomenon" )
+
     ("iv" "i have" )
     ("lst" "live stream" )
     ("wpmt" "words per minute" )
@@ -68,7 +75,6 @@ https://www.youtube.com/c/xahlee/live" )
     ("th" "there" )
     ("u" "you" )
     ("ur" "your" )
-    ("ure" "you are" )
     ("w" "want" )
     ("hv" "have" )
     ("k" "know" )
@@ -80,6 +86,7 @@ https://www.youtube.com/c/xahlee/live" )
     ;; English phrases abbrev
 
     ("afaik" "as far as i know" )
+    ("idk" "I don't know" )
     ("atm" "at the moment" )
     ("btw" "by the way" )
     ("cnt" "can't" )
