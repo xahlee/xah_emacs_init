@@ -31,6 +31,9 @@ f_cycle_image ({
     ("herm" "hermeneutics" )
     ("phen" "phenomenology" )
     ("phenon" "phenomenon" )
+    ("progb" "programable" )
+    ("todo" "<span class=\"todo\">todo▮ </span>" )
+    ("parag" "paragraph" )
 
     ("iv" "i have" )
     ("lst" "live stream" )
@@ -43,7 +46,6 @@ f_cycle_image ({
     ("uhk" "Ultimate Hacking Keyboard")
     ("expln" "explanation")
     ("cali" "California")
-    ("todo" "todo, review, work in progress")
     ("pos" "position")
     ("mech" "mechanical")
     ("nyt" "New York Times")
