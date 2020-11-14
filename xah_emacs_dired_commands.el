@@ -24,7 +24,7 @@ Version 2015-07-30"
 @new-file-ext is the new file's file extension. e.g. “.png”
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2016-07-19"
+Version 2020-11-13"
   (require 'dired)
   (mapc
    (lambda ($f)
@@ -47,7 +47,8 @@ Version 2016-07-19"
               @args-str
               (file-relative-name $f)
               (file-relative-name $newName)))
-       (shell-command $cmdStr)))
+       (shell-command $cmdStr)
+       (message "ran 「%s」" $cmdStr)))
    @file-list )
   (revert-buffer))
 
@@ -324,7 +325,7 @@ and relative path will be inserted before the img tag.
 
 If `universal-argument' is called first, ask for jpeg quality. (default is 90)
 
-Version 2020-07-04"
+Version 2020-11-13"
   (interactive)
   (let* (
          (bounds (bounds-of-thing-at-point 'filename))
@@ -391,6 +392,7 @@ Version 2020-07-04"
             (message "path copied to kill-ring")
             (kill-new fPathNew)))
       (shell-command $cmdStr))
+    (message "ran 「%s」" $cmdStr)
     (search-backward "<" )
     (insert fPathNew "\n")
     (backward-word )))
