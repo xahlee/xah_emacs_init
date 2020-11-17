@@ -391,38 +391,6 @@ todo
 
 ;; HHH___________________________________________________________________
 
-(defun xah-html-insert-date-section ()
-  "Insert a section tag with date tag inside.
-Version 2019-05-21"
-  (interactive)
-  (when (use-region-p)
-    (delete-region (region-beginning) (region-end)))
-  (insert (format "
-
-<section>
-
-<div class=\"date_xl\"><time>%s</time></div>
-
-x
-
-</section>
-
-" (format-time-string "%Y-%m-%d")))
-  (search-backward "x" )
-  (delete-char 1))
-
-(defun xah-html-insert-date-tag ()
-  "Insert a date tag."
-  (interactive)
-  (when (use-region-p)
-    (delete-region (region-beginning) (region-end) )
-    )
-  (insert (concat "<div class=\"date_xl\"><time>" (format-time-string "%Y-%m-%d") "</time></div>\n\n\n" ))
-  (backward-char 1)
-  )
-
-;; HHH___________________________________________________________________
-
 (defun xah-html-insert-midi ()
   "Insert a midi audio markup."
   (interactive)
