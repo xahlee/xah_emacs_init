@@ -25,6 +25,7 @@ f_cycle_image ({
 
     ;; maybe temp
 
+    ("ws" "what is" )
     ("tp" "transpersonal" )
     ("tps" "transpersonal psychology" )
     ("psy" "psychology" )
