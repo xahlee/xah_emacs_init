@@ -26,17 +26,21 @@ f_cycle_image ({
     ;; maybe temp
 
     ("ws" "what is" )
+    ("phil" "philosophy" )
+    ("psy" "psychology" )
+
     ("tp" "transpersonal" )
     ("tps" "transpersonal psychology" )
-    ("psy" "psychology" )
     ("herm" "hermeneutics" )
     ("phen" "phenomenology" )
     ("phenon" "phenomenon" )
+
     ("progb" "programable" )
     ("todo" "<span class=\"todo\">todo▮ </span>" )
     ("parag" "paragraph" )
 
     ("lst" "live stream" )
+    ("lit" "literature" )
 
     ("wpmt" "words per minute" )
     ("uhk" "Ultimate Hacking Keyboard")
