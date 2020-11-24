@@ -34,6 +34,7 @@ f_cycle_image ({
     ("herm" "hermeneutics" )
     ("phen" "phenomenology" )
     ("phenon" "phenomenon" )
+    ("prob" "problem" )
 
     ("progb" "programable" )
     ("todo" "<span class=\"todo\">todo▮ </span>" )
@@ -178,7 +179,7 @@ https://www.youtube.com/c/xahlee/live" )
     ("fol" "following" )
     ("fp" "functional programing" )
     ("fu" "function" )
-    ("gvn" "government" )
+    ("gov" "government" )
     ("hev" "however" )
     ("hex" "hexadecimal" )
     ("ia" "interactive" )
@@ -186,7 +187,7 @@ https://www.youtube.com/c/xahlee/live" )
     ("impl" "implementation" )
     ("implt" "implement" )
     ("intn" "international" )
-    ("introh" "introduction" )
+    ("introt" "introduction" )
     ("kb" "keyboard" )
     ("kbg" "keybinding" )
     ("kbs" "keyboards" )
@@ -569,7 +570,7 @@ Version 2016-10-24"
 
 (put 'xah-abbrev-hook-function 'no-self-insert t)
 
-(setq abbrev-expand-function 'xah-global-expand-abbrev)
+;; (setq abbrev-expand-function 'xah-global-expand-abbrev)
 
 (defun xah-global-expand-abbrev ()
   "function for value of `abbrev-expand-function'.
