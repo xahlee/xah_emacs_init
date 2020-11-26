@@ -959,3 +959,28 @@ See `xah-cycle-font'."
   (interactive)
   (xah-cycle-font -1))
 
+(defun xah-add-period-to-eol ()
+  "Add a period to each end of line character that does not have one.
+Work on current paragraph if there is no selection.
+Version 2020-11-25"
+  (interactive)
+  (let ($p1 $p2)
+    (if (use-region-p)
+        (setq $p1 (region-beginning) $p2 (region-end))
+      (progn
+        (if (re-search-backward "\n[ \t]*\n+" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n+")
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (re-search-forward "\n[ \t]*\n" nil "move")
+        (setq $p2 (point))))
+    (save-restriction
+      (narrow-to-region $p1 $p2)
+      (goto-char (point-min))
+      (while (search-forward "\n" nil "move" )
+        (backward-char )
+        (if (eq (char-before ) ?\. )
+            nil
+          (insert "."))
+        (forward-char )))))
+

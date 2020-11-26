@@ -28,6 +28,9 @@ f_cycle_image ({
     ("ws" "what is" )
     ("phil" "philosophy" )
     ("psy" "psychology" )
+    ("proj" "project" )
+    ("projt" "projection" )
+    ("marj" "marijuana" )
 
     ("tp" "transpersonal" )
     ("tps" "transpersonal psychology" )
