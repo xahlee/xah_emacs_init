@@ -959,7 +959,7 @@ See `xah-cycle-font'."
   (interactive)
   (xah-cycle-font -1))
 
-(defun xah-add-period-to-eol ()
+(defun xah-add-period-to-line-end ()
   "Add a period to each end of line character that does not have one.
 Work on current paragraph if there is no selection.
 Version 2020-11-25"
