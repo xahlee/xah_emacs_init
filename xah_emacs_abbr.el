@@ -8,95 +8,56 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
-
-    ("vmmt" "
-
-f_cycle_image ({
- p_img_path_list: [
-
-\"i/enneper2_cartesian_001.png\",
-
-] ,
- p_img_tag_id: \"id_img_xl\",
- p_backforth_loop: true,
-});
-
-")
-
     ;; maybe temp
 
-    ("ws" "what is" )
-    ("phil" "philosophy" )
-    ("psy" "psychology" )
-    ("proj" "project" )
-    ("projt" "projection" )
-    ("marj" "marijuana" )
+    ("cite" "\n\n<span class=\"cite\">(Regan & Totten, 1975)</span>
+<li>familyName, D. (1975). <cite>title</cite> Journal of Science.</li>\n\n" )
+
+    ("todo" "<span class=\"todo\">▮ </span>" )
 
     ("tp" "transpersonal" )
     ("tps" "transpersonal psychology" )
     ("herm" "hermeneutics" )
     ("phen" "phenomenology" )
     ("phenon" "phenomenon" )
-    ("prob" "problem" )
 
-    ("progb" "programable" )
-    ("todo" "<span class=\"todo\">todo▮ </span>" )
-    ("parag" "paragraph" )
-
-    ("lst" "live stream" )
-    ("lit" "literature" )
-
-    ("wpmt" "words per minute" )
+    ("wpm" "words per minute" )
     ("uhk" "Ultimate Hacking Keyboard")
     ("elispt" "emacs lisp" )
     ("sof" "StackOverflow" )
 
-    ("xl" "xahlee" )
     ("phpt" "<?php 3 ?>" )
-
-    ("toc" "table of contents" )
-    ("cali" "California")
-    ("mech" "mechanical")
-    ("nyt" "New York Times")
-    ("ftr" "feature")
-
-    ("xls" "live stream in x hours. x San Francisco time.
-Goto YouTube xah lee, sub + 🔔 .
-https://www.youtube.com/c/xahlee/live" )
-
-    ("xtv" "XahTV")
-    ("wml" "Windows, Mac, Linux")
-
-    ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2010-10-05</time>. Last updated: <time>2020-08-16</time>.</div>")
-
-    ("divflow" "<section class=\"divFlow81777\">
-
-</section>
-
-")
 
     ;; English word abbrev
 
     ("ab" "about" )
     ("dn" "down" )
     ("ds" "does" )
-    ("expln" "explanation")
     ("hv" "have" )
     ("iv" "i have" )
     ("k" "know" )
     ("n" "and" )
+    ("oft" "often" )
+    ("pp" "people" )
+    ("prob" "problem" )
+    ("q" "question" )
     ("r" "are" )
+    ("rly" "really" )
     ("rt" "return" )
     ("sd" "should" )
     ("sts" "sometimes" )
     ("th" "there" )
     ("thx" "thanks" )
     ("u" "you" )
+    ("und" "understand" )
     ("ur" "your" )
+    ("usu" "usually" )
     ("w" "want" )
     ("wa" "what" )
     ("wh" "where" )
     ("wi" "with" )
+    ("wo" "without" )
+
 
     ("cnt" "can't" )
     ("ddnt" "didn't" )
@@ -106,13 +67,13 @@ https://www.youtube.com/c/xahlee/live" )
     ("hs" "here's" )
     ("im" "I'm" )
     ("isnt" "isn't" )
-    ("wsnt" "wasn't" )
+    ("pls" "please" )
+    ("tu" "thank you" )
     ("ull" "you'll" )
     ("uv" "you've" )
     ("wnt" "won't" )
-
-    ("pos" "position")
-    ("ele" "element")
+    ("ws" "what is" )
+    ("wsnt" "wasn't" )
 
     ;; English phrases abbrev
 
@@ -122,10 +83,10 @@ https://www.youtube.com/c/xahlee/live" )
     ("btw" "by the way" )
     ("dfb" "difference between" )
     ("dvp" "develop" )
+    ("dvmt" "development" )
     ("ie" "i.e." )
     ("iirc" "if i recall correctly" )
     ("pov" "point of view" )
-    ("sa" "See also:" )
     ("shnt" "shouldn't" )
     ("ths" "this is" )
     ("ti" "that is," )
@@ -138,114 +99,127 @@ https://www.youtube.com/c/xahlee/live" )
     ("evt" "every time" )
 
     ;; english, single word
+
     ("alt" "alternative" )
     ("ann" "announcement" )
     ("apr" "apparently" )
     ("argt" "argument" )
-    ("cmdt" "command" )
-    ("autot" "automatic" )
     ("autom" "automatic" )
     ("bc" "because" )
     ("bg" "background" )
     ("bt" "between" )
-    ("ct" "character" )
     ("charst" "characters" )
+    ("cmdt" "command" )
     ("comm" "communication" )
     ("comp" "computer" )
     ("cprs" "comparison" )
+    ("ct" "character" )
     ("cvnt" "convenient" )
     ("dect" "declaration" )
     ("def" "definition" )
     ("desc" "description" )
     ("devt" "development" )
-    ("dft" "different" )
     ("dfc" "difference" )
+    ("dft" "different" )
     ("dict" "dictionary" )
     ("dicts" "dictionaries" )
-    ("dirt" "directory" )
     ("dirs" "directories" )
+    ("dirt" "directory" )
     ("disc" "discussion" )
     ("dl" "download" )
     ("doct" "documentation" )
     ("dt" "deepthroat" )
     ("eff" "efficient" )
-    ("egt" "ergonomic" )
     ("eg" "e.g." )
+    ("egt" "ergonomic" )
+    ("ele" "element")
     ("env" "environment" )
     ("esp" "especially" )
-    ("ex" "example:" )
-    ("exs" "examples" )
-    ("expt" "experience" )
+    ("ex" "example" )
+    ("expln" "explanation")
     ("expr" "expression" )
-    ("faq" "frequently asked questions" )
-    ("fex" "for example," )
+    ("expt" "experience" )
+    ("exs" "examples" )
     ("fol" "following" )
-    ("fp" "functional programing" )
+    ("ftr" "feature")
     ("fu" "function" )
     ("gov" "government" )
     ("hev" "however" )
     ("hex" "hexadecimal" )
     ("ia" "interactive" )
-    ("imt" "instant message" )
-    ("impl" "implementation" )
-    ("implt" "implement" )
+    ("imp" "implement" )
+    ("impttn" "implementation" )
     ("intn" "international" )
-    ("introt" "introduction" )
+    ("introd" "introduction" )
     ("kb" "keyboard" )
     ("kbg" "keybinding" )
     ("kbs" "keyboards" )
     ("kp" "keypad" )
-    ("ks" "keyboard shortcut" )
     ("kw" "keyword" )
+    ("lit" "literature" )
+    ("lst" "live stream" )
     ("lt" "language" )
     ("maint" "maintenance" )
+    ("marj" "marijuana" )
     ("matht" "mathematics" )
+    ("mech" "mechanical")
     ("mln" "millennials" )
     ("mtn" "mountain" )
+    ("nyt" "New York")
     ("ob" "object" )
     ("oc" "occur" )
     ("occ" "occurrence" )
-    ("orgt" "organization" )
+    ("orgn" "organize" )
+    ("orgntn" "organization" )
+    ("parag" "paragraph" )
     ("paren" "parenthesis" )
-    ("pls" "please" )
+    ("phil" "philosophy" )
+    ("pj" "project" )
+    ("pjtn" "projection" )
     ("pmt" "parameter" )
-    ("pp" "people" )
+    ("pos" "position")
     ("prof" "professor" )
     ("prog" "program" )
+    ("progb" "programable" )
     ("progt" "programing" )
-    ("pt" "Put this in your emacs init file:" )
-    ("q" "question" )
+    ("psy" "psychology" )
     ("ref" "reference" )
-    ("scs" "screenshot" )
+    ("scn" "screen" )
+    ("ss" "screenshot" )
     ("st" "string" )
     ("sw" "software" )
     ("tb" "trackball" )
     ("techn" "technology" )
     ("tempt" "temperature" )
+    ("toc" "table of contents" )
     ("trad" "traditional" )
     ("uds" "underscore" )
-    ("und" "understand" )
-    ("usu" "usually" )
     ("ver" "version" )
     ("vid" "video" )
-    ("wo" "without" )
 
     ;; english, multiple words
 
     ("diy" "Do It Yourself" )
+    ("faq" "frequently asked questions" )
+    ("fex" "for example" )
+    ("fp" "functional programing" )
+    ("imt" "instant message" )
+    ("ks" "keyboard shortcut" )
     ("mkb" "mechanical keyboard" )
     ("pct" "political correctness" )
     ("pl" "programing language" )
-    ("qaa" "questions and answers" )
-    ("sjt" "social justice" )
+    ("qna" "questions and answers" )
+    ("sa" "See also" )
+    ("sj" "social justice" )
     ("wip" "work in progress" )
 
     ;; english, proper noun
 
     ("ahd" "American Heritage Dictionary" )
+    ("cali" "California")
     ("cn" "Chinese" )
     ("eng" "English" )
-    ("eurot" "Europe" )
+    ("europ" "Europe" )
     ("jp" "Japan" )
     ("jpt" "Japanese" )
     ("sf" "San Francisco" )
@@ -261,6 +235,7 @@ https://www.youtube.com/c/xahlee/live" )
 
     ;; computing, general
 
+    ("wml" "Windows, Mac, Linux")
     ("ai" "artificial intelligence" )
     ("gv" "global variable" )
     ("cat" "cellular automata" )
@@ -268,15 +243,14 @@ https://www.youtube.com/c/xahlee/live" )
     ("cli" "command line interface" )
     ("cp" "codepoint" )
     ("cs" "computer science" )
-    ("dbt" "database" )
+    ("db" "database" )
     ("dtt" "data type" )
-    ("ee" "ergoemacs" )
     ("ev" "environment variable" )
     ("evs" "environment variables" )
     ("flt" "functional language" )
     ("fpt" "functional programing" )
     ("fs" "fullscreen" )
-    ("guit" "graphical user interface" )
+    ("gui" "graphical user interface" )
     ("ipa" "IP address" )
     ("ist" "image source" )
     ("lhst" "left-hand-side" )
@@ -289,9 +263,9 @@ https://www.youtube.com/c/xahlee/live" )
     ("rsi" "Repetitive Strain Injury" )
     ("sct" "source code" )
     ("sst" "screenshot" )
-    ("subdirt" "sub-directory" )
-    ("subdirst" "sub-directories" )
-    ("uit" "user interface" )
+    ("subdir" "subdirectory" )
+    ("subdirs" "subdirectories" )
+    ("ui" "user interface" )
     ("va" "variable" )
     ("vas" "variables" )
     ("wd" "web development" )
@@ -357,30 +331,16 @@ https://www.youtube.com/c/xahlee/live" )
     ;; html
     ("mxh" "<kbd>Alt</kbd>+<kbd>x</kbd>")
     ("pmovedh" "<p class=\"page_moved_64598\">page moved to <a href=\"x.html\">x</a></p>" )
+    ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2010-10-05</time>. Last updated: <time>2020-08-16</time>.</div>")
+    ("divflow" "<section class=\"divFlow81777\">\n\n</section>\n\n")
+    ("xls" "live stream in x hours. x San Francisco time.
+Goto YouTube xah lee, sub + 🔔 .
+https://www.youtube.com/c/xahlee/live" )
+    ("lyricsh" "<pre class=\"lyrics_xl\">\n▮\n</pre>")
+    ("pt" "<p>\nPut this in your emacs init file:\n</p>\n\n" )
+    ("topich" "<div class=\"topic_xl\">\n<h4>JavaScript Reverse Key/Value</h4>\n<ul>\n<li><a href=\"xx1.html\">xx1</a></li>\n<li><a href=\"xx2.html\">xx2</a></li>\n</ul>\n</div>\n\n")
 
-    ("lyricsh" "<pre class=\"lyrics_xl\">
-▮
-</pre>")
-
-    ("topich" "<div class=\"topic_xl\">
-<h4>JavaScript Reverse Key/Value</h4>
-<ul>
-<li><a href=\"js_map_reverse_key_val.html\">JS: Reverse Key/Value of Map</a></li>
-<li><a href=\"js_reverse_obj_key_val.html\">JS: Reverse Object Key/Value</a></li>
-</ul>
-</div>
-
-")
-
-    ("faqh" "<section class=\"qna_xl\">
-
-<h3 class=\"q\">How to ?</h3>
-
-<p>this</p>
-
-</section>
-
-" )
+    ("faqh" "<section class=\"qna_xl\">\n\n<h3 class=\"q\">How to ?</h3>\n\n<p>this</p>\n\n</section>\n\n" )
 
     ;; unicode
     ("asciit" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
@@ -431,15 +391,6 @@ https://www.youtube.com/c/xahlee/live" )
     ("uhtml" "http://xahlee.info/js/html_index.html" )
     ("ujava" "http://xahlee.info/java-a-day/java.html" )
     ("ukinesis" "http://xahlee.info/kbd/keyboard_Kinesis.html" )
-    ("ulang" "~/web/xahlee_info/js/javascript_basics.html
-~/web/xahlee_info/python/python3_basics.html
-~/web/xahlee_info/ruby/ruby_basics.html
-~/web/xahlee_info/perl/perl_basics_1.html
-~/web/xahlee_info/php/php_basics.html
-~/web/ergoemacs_org/emacs/elisp_basics.html
-~/web/xahlee_info/java-a-day/java.html
-~/web/xahlee_info/clojure/clojure_index.html
-"  )
 
     ("umma" "http://xahlee.info/M/index.html" )
     ("uocaml" "http://xahlee.info/ocaml/ocaml.html" )
@@ -465,10 +416,12 @@ https://www.youtube.com/c/xahlee/live" )
 
     ;; xah personal
     ("xts" "Xah Talk Show" )
+    ("ee" "ergoemacs" )
+    ("xtv" "XahTV")
+    ("xl" "xahlee" )
+
 
     ("xim" "Twitter: @xah_lee
-Facebook: https://www.facebook.com/xahlee
-g+: https://plus.google.com/112757647855302148298/posts
 Google talk: xahlee@gmail.com
 Skype: XahLee
 AIM: xahlee
@@ -488,15 +441,7 @@ QQ: http://user.qzone.qq.com/2609322939" )
 
   (define-abbrev-table 'go-mode-abbrev-table
     '(
-      ("go" "package main
-
-import \"fmt\"
-
-func main() {
-
-	fmt.Printf(\"%v\\n\", 33)
-
-}")
+      ("go" "package main\n\nimport \"fmt\"\n\nfunc main() {\n\n	fmt.Printf(\"%v\\n\", 33)\n\n}")
 
       ("imp" "import \"fmt\"\n")
       ("p" "fmt.Printf(\"%v\\n\", ▮)")
@@ -509,9 +454,7 @@ func main() {
       ("v" "var ▮ = ")
       ("df" "x := 3")
       ("c" "const x = 3")
-      ("f" "func ff(x int) int {
-	return nil
-}")
+      ("f" "func ff(x int) int {\n	return nil\n}")
       ("if" "if ▮ { 3 }")
       ("ie" " if err != nil { panic(err) }")
       ("ei" "else if x > 0 { 3 }")
@@ -522,19 +465,9 @@ func main() {
     }
 ")
       ("cmt" "/* \n▮\n*/")
-      ("stru" "type myS struct {
-y string
-x int
-}")
+      ("stru" "type myS struct {\ny string\nx int\n}")
       ("ft" "fallthrough")
-      ("switch" "	switch 3 {
-	case 1:
-		fmt.Println( 3 )
-	case 2, 3:
-		fmt.Println( 4 )
-	default:
-		fmt.Println( 5 )
-	}")
+      ("switch" "	switch 3 {\n	case 1:\n		fmt.Println( 3 )\n	case 2, 3:\n		fmt.Println( 4 )\n	default:\n		fmt.Println( 5 )\n	}")
 
       ("mbs" "var bb = make([]byte, 0, 9)")
       ("sl" "var ss = []int{1,2}")
