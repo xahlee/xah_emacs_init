@@ -35,7 +35,6 @@
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
   (global-set-key (kbd "<f10>") 'xah-cycle-font)
 
-
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
 
   (defun xahXfkCmdActivateInsDash ()
@@ -55,12 +54,18 @@ Version 2020-04-09"
      xah-fly-key-map
      '(
        ;; the first element of cons cell is dvorak key
-       ("3" . nil )
+       ("3" . nil ) ; got pain on this with kinesis advantage keyboard ;; Xah Lee Emacs Pinky 2020 http://ergoemacs.org/emacs/emacs_pinky_2020.html
        ("4" . nil )
-       ("-" . delete-other-windows)
-       ("\\" . split-window-below)
-       ("]" . delete-other-windows)
-       ("[" . split-window-below ))))
+
+       ;; workaround
+       ("-" . delete-other-windows) ; for dvorak on kinesis advantage keyboard http://xahlee.info/kbd/keyboard_kinesis.html
+       ("\\" . split-window-below) ; for kinesis advantage keyboard
+
+       ("]" . delete-other-windows) ; for dvorak on kinesis advantage keyboard http://xahlee.info/kbd/keyboard_kinesis.html
+       ("[" . split-window-below ) ; for dvorak on kinesis advantage keyboard
+
+       ;;
+       )))
 
   (add-hook 'xah-fly-command-mode-activate-hook 'xah-xfk-add))
 
