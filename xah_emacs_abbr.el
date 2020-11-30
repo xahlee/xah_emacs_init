@@ -8,12 +8,22 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
+
+    ;; general scheme
+    ;; words ending in ing has abbrev g
+    ;; words ending in tion has abbrev n
+    ;; words ending in ment has abbrev mt
+    ;; words past tense ed abbrev d
+
     ;; maybe temp
 
     ("cite" "\n\n<span class=\"cite\">(Regan & Totten, 1975)</span>
 <li>familyName, D. (1975). <cite>title</cite> Journal of Science.</li>\n\n" )
 
     ("todo" "<span class=\"todo\">▮ </span>" )
+
+    ("exp" "experience" )
+    ("struct" "structure" )
 
     ("tp" "transpersonal" )
     ("tps" "transpersonal psychology" )
@@ -52,6 +62,7 @@
     ("thx" "thanks" )
     ("u" "you" )
     ("und" "understand" )
+    ("undg" "understanding" )
     ("ur" "your" )
     ("usu" "usually" )
     ("w" "want" )
@@ -102,6 +113,8 @@
     ;; english, single word
 
     ("alt" "alternative" )
+    ("sig" "significant" )
+    ("sigc" "significance" )
     ("ann" "announcement" )
     ("apr" "apparently" )
     ("argt" "argument" )
@@ -118,7 +131,8 @@
     ("cvnt" "convenient" )
     ("dect" "declaration" )
     ("def" "definition" )
-    ("desc" "description" )
+    ("desc" "describe" )
+    ("descn" "description" )
     ("devt" "development" )
     ("dfc" "difference" )
     ("dft" "different" )
