@@ -98,7 +98,8 @@ e.g. 「c:/Users/h3/web/ergoemacs_org/emacs/xyz.html」
 returns 「ergoemacs.org」.
 
 This function depends on `xahsite-server-root-path'.
-Version 2020-10-26"
+If cannot determine domain, return nil.
+Version 2020-10-26 2020-11-29"
   (let ((case-fold-search nil)
         $str
         ($pathPart
@@ -109,7 +110,10 @@ Version 2020-10-26"
         (progn
           (setq $str (match-string 1 $pathPart))
           (replace-regexp-in-string "_" "." $str "FIXEDCASE" "LITERAL"))
-      (error "error 56924 「%s」 is not a full path for xah site." @abs-path ))))
+      (progn
+        (message "error 56924 「%s」 is not a full path for xah site." @abs-path )
+        nil
+        ))))
 
 (defun xahsite-get-path-relative-to-domain (@fpath)
   "Returns the path relative to that file's domain's root dir.
