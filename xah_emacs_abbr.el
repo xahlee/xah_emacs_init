@@ -38,7 +38,9 @@
     ("k" "know" )
     ("n" "and" )
     ("oft" "often" )
+    ("ph" "perhaps" )
     ("pp" "people" )
+    ("prb" "probably" )
     ("prob" "problem" )
     ("q" "question" )
     ("r" "are" )
@@ -57,7 +59,6 @@
     ("wh" "where" )
     ("wi" "with" )
     ("wo" "without" )
-
 
     ("cnt" "can't" )
     ("ddnt" "didn't" )
@@ -140,7 +141,8 @@
     ("expr" "expression" )
     ("expt" "experience" )
     ("exs" "examples" )
-    ("fol" "following" )
+    ("flw" "follow" )
+    ("flwg" "following" )
     ("ftr" "feature")
     ("fu" "function" )
     ("gov" "government" )
@@ -178,10 +180,10 @@
     ("pjtn" "projection" )
     ("pmt" "parameter" )
     ("pos" "position")
+    ("pg" "program" )
+    ("pgb" "programable" )
+    ("pgg" "programing" )
     ("prof" "professor" )
-    ("prog" "program" )
-    ("progb" "programable" )
-    ("progt" "programing" )
     ("psy" "psychology" )
     ("ref" "reference" )
     ("scn" "screen" )
@@ -226,12 +228,13 @@
     ("wp" "Wikipedia" )
 
     ;; math
-    ("sor" "surface of revolution" )
-    ("fr" "fundamental region" )
-    ("dgt" "differential geometry" )
+
     ("det" "differential equations" )
-    ("ode" "ordinary differential equations" )
+    ("dgt" "differential geometry" )
     ("dm" "dimension" )
+    ("fr" "fundamental region" )
+    ("ode" "ordinary differential equations" )
+    ("sor" "surface of revolution" )
 
     ;; computing, general
 
@@ -248,7 +251,6 @@
     ("ev" "environment variable" )
     ("evs" "environment variables" )
     ("flt" "functional language" )
-    ("fpt" "functional programing" )
     ("fs" "fullscreen" )
     ("gui" "graphical user interface" )
     ("ipa" "IP address" )
@@ -257,12 +259,11 @@
     ("libt" "library" )
     ("libst" "libraries" )
     ("mdt" "metadata" )
-    ("oopt" "object oriented programing" )
-    ("ost" "operating system" )
-    ("rhst" "right-hand-side" )
+    ("oop" "object oriented programing" )
+    ("os" "operating system" )
+    ("rhs" "right-hand-side" )
     ("rsi" "Repetitive Strain Injury" )
-    ("sct" "source code" )
-    ("sst" "screenshot" )
+    ("sc" "source code" )
     ("subdir" "subdirectory" )
     ("subdirs" "subdirectories" )
     ("ui" "user interface" )
@@ -419,7 +420,6 @@ https://www.youtube.com/c/xahlee/live" )
     ("ee" "ergoemacs" )
     ("xtv" "XahTV")
     ("xl" "xahlee" )
-
 
     ("xim" "Twitter: @xah_lee
 Google talk: xahlee@gmail.com
