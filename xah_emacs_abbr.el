@@ -9,21 +9,12 @@
 (define-abbrev-table 'global-abbrev-table
   '(
 
-    ;; general scheme
-    ;; words ending in ing has abbrev g
-    ;; words ending in tion has abbrev n
-    ;; words ending in ment has abbrev mt
-    ;; words past tense ed abbrev d
-
     ;; maybe temp
 
     ("cite" "\n\n<span class=\"cite\">(Regan & Totten, 1975)</span>
 <li>familyName, D. (1975). <cite>title</cite> Journal of Science.</li>\n\n" )
 
     ("todo" "<span class=\"todo\">▮ </span>" )
-
-    ("exp" "experience" )
-    ("struct" "structure" )
 
     ("tp" "transpersonal" )
     ("tps" "transpersonal psychology" )
@@ -112,9 +103,14 @@
 
     ;; english, single word
 
+    ;; general scheme
+    ;; words ending in ing has abbrev g
+    ;; words ending in tion has abbrev n
+    ;; words ending in ment has abbrev mt
+    ;; words past tense ed abbrev d
+
+
     ("alt" "alternative" )
-    ("sig" "significant" )
-    ("sigc" "significance" )
     ("ann" "announcement" )
     ("apr" "apparently" )
     ("argt" "argument" )
@@ -126,6 +122,8 @@
     ("cmdt" "command" )
     ("comm" "communication" )
     ("comp" "computer" )
+    ("condn" "condition" )
+    ("cont" "continue" )
     ("cprs" "comparison" )
     ("ct" "character" )
     ("cvnt" "convenient" )
@@ -151,6 +149,7 @@
     ("env" "environment" )
     ("esp" "especially" )
     ("ex" "example" )
+    ("exp" "experience" )
     ("expln" "explanation")
     ("expr" "expression" )
     ("expt" "experience" )
@@ -189,20 +188,23 @@
     ("orgntn" "organization" )
     ("parag" "paragraph" )
     ("paren" "parenthesis" )
+    ("pg" "program" )
+    ("pgb" "programable" )
+    ("pgg" "programing" )
     ("phil" "philosophy" )
     ("pj" "project" )
     ("pjtn" "projection" )
     ("pmt" "parameter" )
     ("pos" "position")
-    ("pg" "program" )
-    ("pgb" "programable" )
-    ("pgg" "programing" )
     ("prof" "professor" )
     ("psy" "psychology" )
     ("ref" "reference" )
     ("scn" "screen" )
+    ("sig" "significant" )
+    ("sigc" "significance" )
     ("ss" "screenshot" )
     ("st" "string" )
+    ("struct" "structure" )
     ("sw" "software" )
     ("tb" "trackball" )
     ("techn" "technology" )
