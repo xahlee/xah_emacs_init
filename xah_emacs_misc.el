@@ -984,10 +984,10 @@ Version 2020-11-25"
           (insert "."))
         (forward-char )))))
 
-(defun xah-paragraph-to-sentence-lines ()
+(defun xah-reformat-to-sentence-lines ()
   "Break a long line or text block into multiple lines by ending period.
-work on text selection if there is one, else the current text block.
-Version 2020-12-01"
+Work on text selection if there is one, else the current text block.
+Version 2020-12-02"
   (interactive)
   (let ($p1 $p2)
     (if (use-region-p)
@@ -1004,5 +1004,5 @@ Version 2020-12-01"
       (let ((fill-column most-positive-fixnum ))
         (fill-region (point-min) (point-max)))
       (goto-char (point-min))
-      (while (search-forward ". " nil "NOERROR" )
-        (replace-match ".\n" )))))
+      (while (re-search-forward "\\. +\\([A-Z][a-z]+\\)" nil "NOERROR")
+        (replace-match ".\n \\1" )))))
