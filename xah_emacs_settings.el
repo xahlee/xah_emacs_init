@@ -82,20 +82,20 @@
    (cond
     ((member "WenQuanYi Micro Hei" (font-family-list)) "WenQuanYi Micro Hei")))))
 
-(progn
-  ;; use variable-width font for some modes
-  (defun xah-set-proportial-font ()
-    "Set current buffer to use variable-width font."
-    (variable-pitch-mode 1)
-    ;; (text-scale-increase 1 )
-    )
-  (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
-  (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
-  ;; (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
-  ;; (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
-  ;; (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
-  ;;
-  )
+;; (progn
+;;   ;; use variable-width font for some modes
+;;   (defun xah-set-proportial-font ()
+;;     "Set current buffer to use variable-width font."
+;;     (variable-pitch-mode 1)
+;;     ;; (text-scale-increase 1 )
+;;     )
+;;   (add-hook 'nxml-mode-hook 'xah-set-proportial-font)
+;;   (add-hook 'xah-html-mode-hook 'xah-set-proportial-font)
+;;   ;; (add-hook 'xah-css-mode-hook 'xah-set-proportial-font)
+;;   ;; (add-hook 'xah-elisp-mode-hook 'xah-set-proportial-font)
+;;   ;; (add-hook 'xah-js-mode-hook 'xah-set-proportial-font)
+;;   ;;
+;;   )
 
 ;; HHH___________________________________________________________________
 ;; backup and file related

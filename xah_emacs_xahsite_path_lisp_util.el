@@ -5,6 +5,7 @@
 ;; ∑ http://xahlee.org/
 
 (require 'subr-x) ; string-trim
+(require 'seq)
 
 (defun xahsite-server-root-path ()
   "Returns the full path of xah lee website local file web root.
@@ -64,13 +65,13 @@ See: `xahsite-domain-names'."
 ;; (xahsite-url-is-xah-website-p "http://ergoemacs.org/") ; t
 ;; (xahsite-url-is-xah-website-p "http://www.ergoemacs.org/") ; t
 
-(defun xahsite-link-in-xahsite-dir-p (@fullPath)
+(defun xahsite-file-path-is-xahsite-p (@fullPath)
   "Returns true if @fullPath is in a xah website dir, else false.
-Version 2020-07-16"
-  ;; todo
-t
-)
-
+Version 2020-12-02"
+  (seq-some
+   (lambda (x)
+     (string-match (cdr x) @fullPath ))
+   xahsite-domain-to-path-alist))
 
 (defun xahsite-is-link-to-xahsite-p (@href-value)
   "Returns true if @href-value points to a xah website, else false.

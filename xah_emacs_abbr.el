@@ -96,7 +96,7 @@
     ("tis" "it is" )
     ("tr" "there are" )
     ("ts" "there is" )
-    ("tss" "this is" ) 
+    ("tss" "this is" )
     ("tts" "that is," )
     ("ty" "thank you" )
     ("uc" "you see" )
@@ -110,6 +110,10 @@
     ;; words ending in tion has abbrev n
     ;; words ending in ment has abbrev m
     ;; words past tense ed abbrev d
+
+    ("sepl" "separately" )
+    ("sep" "separate" )
+    ("confu" "confusion" )
 
     ("alt" "alternative" )
     ("annm" "announcement" )
@@ -180,6 +184,7 @@
     ("mech" "mechanical")
     ("mln" "millennials" )
     ("mtn" "mountain" )
+    ("num" "number" )
     ("ob" "object" )
     ("oc" "occur" )
     ("occ" "occurrence" )
