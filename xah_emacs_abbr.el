@@ -32,6 +32,7 @@
     ;; English word abbrev
 
     ("ab" "about" )
+    ("aft" "after" )
     ("bc" "because" )
     ("bt" "between" )
     ("dn" "down" )
@@ -51,6 +52,7 @@
     ("rt" "return" )
     ("sd" "should" )
     ("sts" "sometimes" )
+    ("t" "the" )
     ("th" "there" )
     ("thx" "thanks" )
     ("u" "you" )
@@ -58,11 +60,13 @@
     ("undg" "understanding" )
     ("ur" "your" )
     ("usu" "usually" )
-    ("w" "want" )
+    ("w" "with" )
     ("wa" "what" )
+    ("wc" "which" )
+    ("wd" "would" )
     ("wh" "where" )
-    ("wi" "with" )
     ("wo" "without" )
+
 
     ("cnt" "can't" )
     ("ddnt" "didn't" )
@@ -76,6 +80,7 @@
     ("tu" "thank you" )
     ("ull" "you'll" )
     ("uv" "you've" )
+    ("wdnt" "wouldn't" )
     ("wnt" "won't" )
     ("ws" "what is" )
     ("wsnt" "wasn't" )
@@ -106,14 +111,20 @@
     ;; english, single word
 
     ;; general scheme
+    ;; when there are several alternatives, then
     ;; words ending in ing has abbrev g
     ;; words ending in tion has abbrev n
     ;; words ending in ment has abbrev m
+    ;; words ending in ly has abbrev l
     ;; words past tense ed abbrev d
 
     ("sepl" "separately" )
     ("sep" "separate" )
     ("confu" "confusion" )
+    ("rv" "review" )
+    ("freq" "frequency" )
+    ("freql" "frequently" )
+    ("impt" "important" )
 
     ("alt" "alternative" )
     ("annm" "announcement" )
@@ -293,7 +304,6 @@
     ("ui" "user interface" )
     ("va" "variable" )
     ("vas" "variables" )
-    ("wd" "web development" )
     ("wm" "Window Manager" )
     ("wml" "Windows, Mac, Linux")
 
