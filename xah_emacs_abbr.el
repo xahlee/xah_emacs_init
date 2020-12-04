@@ -55,6 +55,7 @@
     ("t" "the" )
     ("th" "there" )
     ("thx" "thanks" )
+    ("ty" "they" )
     ("u" "you" )
     ("und" "understand" )
     ("undg" "understanding" )
@@ -66,7 +67,7 @@
     ("wd" "would" )
     ("wh" "where" )
     ("wo" "without" )
-
+    ("cnnt" "cannot" )
 
     ("cnt" "can't" )
     ("ddnt" "didn't" )
@@ -103,10 +104,10 @@
     ("ts" "there is" )
     ("tss" "this is" )
     ("tts" "that is," )
-    ("ty" "thank you" )
     ("uc" "you see" )
     ("wrt" "with respect to" )
     ("wtdb" "What's the difference between" )
+    ("ht" "how to" )
 
     ;; english, single word
 
@@ -138,6 +139,7 @@
     ("comp" "computer" )
     ("condn" "condition" )
     ("cont" "continue" )
+    ("cpr" "compare" )
     ("cprs" "comparison" )
     ("cs" "computer science" )
     ("ct" "character" )
