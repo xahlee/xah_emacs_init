@@ -87,16 +87,16 @@ Version 2019-12-30"
 If current buffer is jpg or png file, crop it.
 If current buffer is dired, do the file under cursor or marked files.
 
-The created file has “_crop.” in the name, in the same dir.
-It's in png or jpg, same as the original.
+The created file has “_crop.” in the name, in the same dir. The image format is same as the original.
+Automatically call command 「optipng」 if available on the cropped png file.
 
 Requires ImageMagick shell command “convert”
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2017-10-08"
+Version 2020-12-06"
   (interactive)
   (let (
-        ($bfName (buffer-file-name))
+        ($buffFileName (buffer-file-name))
         $newName
         $cmdStr
         )
@@ -111,20 +111,25 @@ Version 2017-10-08"
              $flist ))
           (revert-buffer))
       (progn
-        (if $bfName
-            (let (($ext (file-name-extension $bfName)))
+        (if $buffFileName
+            (let (($ext (file-name-extension $buffFileName)))
               (if (and (not (string-equal $ext "jpg"))
                        (not (string-equal $ext "png")))
-                  (user-error "not png or jpg at %s" $bfName)
+                  (user-error "not png or jpg at %s" $buffFileName)
                 (progn
+                  (setq $newName (concat (file-name-sans-extension $f) "_crop." (file-name-extension $f)))
                   (setq $cmdStr
                         (format
                          "convert -trim '%s' '%s'"
-                         $bfName
-                         (concat (file-name-sans-extension $bfName) "_crop." $ext)))
+                         $buffFileName
+                         $newName))
+                  (message "running 「%s」" $cmdStr)
                   (shell-command  $cmdStr )
-                  (message  $cmdStr))))
-          (user-error "not img file or dired at %s" $bfName))))))
+                  (when (string-equal $ext "png")
+                    (when (eq (shell-command "which optipng") 0)
+                      (message "optimizing with optipng")
+                      (shell-command (concat "optipng " $newName " &")))))))
+          (user-error "not img file or dired at %s" $buffFileName))))))
 
 (defun xah-image-remove-transparency ()
   "Create a new version of image without alpha channel.

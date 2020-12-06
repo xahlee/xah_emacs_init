@@ -252,6 +252,8 @@ The first file whose name starts with ee or tt or IMG_ or contain “Screenshot�
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 If the file name ends in png, “optipng” is called on it.
 
+Automatically call 「exiftool」 afterwards to remove metadata, if the command is available.
+
 URL `http://ergoemacs.org/emacs/move_image_file.html'
 Version 2020-12-06"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
@@ -277,7 +279,7 @@ Version 2020-12-06"
           (catch 'TAG
             (dolist (xdir $dirs )
               (when (file-exists-p xdir)
-                (let ((flist (directory-files xdir t "^ee\\|^tt\\|^IMG_\\|Screen Shot\\|screenshot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
+                (let ((flist (directory-files xdir t "^ee\\|^tt\\|^IMG_\\|^Screen Shot\\|^Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
                   (if flist
                       (progn
                         (throw 'TAG (car flist)))
@@ -320,6 +322,9 @@ Version 2020-12-06"
         (error "move to path exist: %s" $toPath)
       (progn
         (rename-file $fromPath $toPath)
+        (when (eq (shell-command "which exiftool") 0)
+          (message "removing metadata")
+          (shell-command (format "exiftool -all= -overwrite_original '%s'" $toPath )))
         (when (string-equal (file-name-extension $toPath ) "png")
           (when (eq (shell-command "which optipng") 0)
             (message "optimizing with optipng")
