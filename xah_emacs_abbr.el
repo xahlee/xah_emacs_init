@@ -31,6 +31,10 @@
 
     ;; English word abbrev
 
+    ("sec" "second" )
+    ("secs" "seconds" )
+    ("min" "minute" )
+
     ("ab" "about" )
     ("aft" "after" )
     ("bc" "because" )
@@ -88,6 +92,7 @@
 
     ;; English phrases abbrev
 
+    ("hdu" "how do you" )
     ("afaik" "as far as i know" )
     ("atm" "at the moment" )
     ("btw" "by the way" )

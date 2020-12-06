@@ -253,7 +253,7 @@ The destination dir and new file name is asked by a prompt. A random string atta
 If the file name ends in png, “optipng” is called on it.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2020-07-21"
+Version 2020-12-06"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -277,7 +277,7 @@ Version 2020-07-21"
           (catch 'TAG
             (dolist (xdir $dirs )
               (when (file-exists-p xdir)
-                (let ((flist (directory-files xdir t "^ee\\|^tt\\|^IMG_\\|Screen Shot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
+                (let ((flist (directory-files xdir t "^ee\\|^tt\\|^IMG_\\|Screen Shot\\|screenshot\\|Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
                   (if flist
                       (progn
                         (throw 'TAG (car flist)))
