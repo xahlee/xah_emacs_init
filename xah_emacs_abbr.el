@@ -73,6 +73,10 @@
     ("wo" "without" )
     ("cnnt" "cannot" )
 
+
+    ("itd" "it would" )
+    ("interg" "interesting" )
+
     ("cnt" "can't" )
     ("ddnt" "didn't" )
     ("dnt" "don't" )

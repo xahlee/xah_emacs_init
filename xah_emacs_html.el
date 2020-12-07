@@ -250,12 +250,12 @@ from directories checked are:
 The first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
 
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
-If the file name ends in png, “optipng” is called on it.
 
 Automatically call 「exiftool」 afterwards to remove metadata, if the command is available.
+Automatically call 「optipng」 afterwards to optimize it, if the file name ends in png and if the command is available.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2020-12-06"
+Version 2020-12-07"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -322,13 +322,6 @@ Version 2020-12-06"
         (error "move to path exist: %s" $toPath)
       (progn
         (rename-file $fromPath $toPath)
-        (when (eq (shell-command "which exiftool") 0)
-          (message "removing metadata")
-          (shell-command (format "exiftool -all= -overwrite_original '%s'" $toPath )))
-        (when (string-equal (file-name-extension $toPath ) "png")
-          (when (eq (shell-command "which optipng") 0)
-            (message "optimizing with optipng")
-            (shell-command (concat "optipng " $toPath " &"))))
         (when (string-equal major-mode "dired-mode")
           (revert-buffer))
         (if (string-equal major-mode "xah-html-mode")
@@ -339,24 +332,19 @@ Version 2020-12-06"
               (insert $toPath)
               (insert "\n\n")
               (backward-word )
-
-              (xah-html-any-linkify)
-
-              ;; (let ($p1 $p2 $altStr)
-              ;;   (setq $altStr (xah-html-image-linkify))
-              ;;   (search-backward "<img ")
-              ;;   (insert "<figure>\n")
-              ;;   (search-forward ">")
-              ;;   (insert "\n<figcaption>\n")
-              ;;   (insert $altStr "\n</figcaption>\n</figure>\n\n")
-              ;;   ;;
-              ;;   )
-              )
+              (xah-html-any-linkify))
           (progn
             (goto-char $p0)
             (insert "\n\n")
             (insert $toPath)
-            (insert "\n\n")))))))
+            (insert "\n\n")))
+        (when (eq (shell-command "which exiftool") 0)
+          (message "removing metadata")
+          (shell-command (format "exiftool -all= -overwrite_original '%s'" $toPath )))
+        (when (string-equal (file-name-extension $toPath ) "png")
+          (when (eq (shell-command "which optipng") 0)
+            (message "optimizing with optipng")
+            (shell-command (concat "optipng " $toPath " &"))))))))
 
 (defun xah-youtube-get-image ()
   "
