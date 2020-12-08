@@ -766,16 +766,15 @@ Version 2020-03-02"
     (mapcar (lambda (x) (princ "【") (princ x) (princ "\n")) (reverse $clist))))
 
 (defun xah-bracket-caps ()
-  "add ‹› to sequence of CAP LETTERS, on selection or current text block.
+  "add ‹› to CAPITALIZED WORDS, on selection or current text block.
 
 Example:
  Change value in PLIST of PROP to VAL
 becomes
  Change value in ‹PLIST› of ‹PROP› to ‹VAL›
 
-This function is mostly used as help writing elisp doc.
-
-Version 2020-04-19"
+URL `http://ergoemacs.org/emacs/elisp_braket_allcap_words.html'
+Version 2020-04-19, 2020-12-08"
   (interactive)
   (let ($p $p2 (case-fold-search nil))
     (if (use-region-p)
@@ -792,7 +791,7 @@ Version 2020-04-19"
     (save-restriction
       (narrow-to-region $p1 $p2)
       (goto-char (point-min))
-      (while (re-search-forward "\\b\\([A-Z][A-Z]+[0-9]*\\)\\b" nil t)
+      (while (re-search-forward "\\b\\([A-Z][-A-Z0-9]+\\)\\b" nil t)
         (replace-match (concat "‹" (match-string 1) "›") t )))))
 
 (defun xah-update-keyboard-index ()

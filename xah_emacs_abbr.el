@@ -27,6 +27,8 @@
     ("elispt" "emacs lisp" )
     ("sof" "StackOverflow" )
 
+    ("rl" "real life" )
+
     ("phpt" "<?php 3 ?>" )
 
     ;; English word abbrev

@@ -255,7 +255,7 @@ Automatically call 「exiftool」 afterwards to remove metadata, if the command 
 Automatically call 「optipng」 afterwards to optimize it, if the file name ends in png and if the command is available.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2020-12-07"
+Version 2020-12-08"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -340,11 +340,11 @@ Version 2020-12-07"
             (insert "\n\n")))
         (when (eq (shell-command "which exiftool") 0)
           (message "removing metadata")
-          (shell-command (format "exiftool -all= -overwrite_original '%s'" $toPath )))
+          (shell-command (format "exiftool -all= -overwrite_original '%s' &" $toPath ) (generate-new-buffer "*xah shell output*" )))
         (when (string-equal (file-name-extension $toPath ) "png")
           (when (eq (shell-command "which optipng") 0)
             (message "optimizing with optipng")
-            (shell-command (concat "optipng " $toPath " &"))))))))
+            (shell-command (concat "optipng " $toPath " &") (generate-new-buffer "*xah shell output*" ))))))))
 
 (defun xah-youtube-get-image ()
   "
