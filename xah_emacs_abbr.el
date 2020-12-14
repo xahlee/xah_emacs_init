@@ -26,8 +26,10 @@
     ("uhk" "Ultimate Hacking Keyboard")
     ("elispt" "emacs lisp" )
     ("sof" "StackOverflow" )
+    ("obj" "object" )
 
     ("rl" "real life" )
+    ("oned" "one would" )
 
     ("phpt" "<?php 3 ?>" )
 
@@ -75,7 +77,6 @@
     ("wo" "without" )
     ("cnnt" "cannot" )
 
-
     ("itd" "it would" )
     ("interg" "interesting" )
 
@@ -85,8 +86,10 @@
     ("dsnt" "doesn't" )
     ("hnt" "haven't" )
     ("hs" "here's" )
+    ("il" "I will" )
     ("im" "I'm" )
     ("isnt" "isn't" )
+    ("itl" "it will" )
     ("pls" "please" )
     ("tu" "thank you" )
     ("ull" "you'll" )
@@ -284,7 +287,7 @@
 
     ("dt" "deepthroat" )
     ("dirs" "directories" )
-    ("dirt" "directory" )
+    ("dir" "directory" )
     ("uds" "underscore" )
 
     ("ai" "artificial intelligence" )
@@ -330,7 +333,7 @@
     ("gc" "Google Chrome" )
     ("iet" "Internet Explorer" )
     ("jq" "jQuery" )
-    ("jst" "JavaScript" )
+    ("js" "JavaScript" )
     ("jvm" "Java Virtual Machine" )
     ("lsl" "Linden Scripting Language" )
     ("mac" "Mac" )
