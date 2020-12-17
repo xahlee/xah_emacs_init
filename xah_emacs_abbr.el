@@ -27,6 +27,7 @@
     ("elispt" "emacs lisp" )
     ("sof" "StackOverflow" )
     ("obj" "object" )
+    ("ot" "other" )
 
     ("rl" "real life" )
     ("oned" "one would" )
