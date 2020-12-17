@@ -34,10 +34,10 @@
     (modify-syntax-entry ?\“ "(”" $temp-syn-table)
     (modify-syntax-entry ?\” ")“" $temp-syn-table)
     (when (or
-           (string= major-mode "xah-html-mode")
-           (string= major-mode "xml-mode")
-           (string= major-mode "nxml-mode")
-           (string= major-mode "html-mode"))
+           (string-equal major-mode "xah-html-mode")
+           (string-equal major-mode "xml-mode")
+           (string-equal major-mode "nxml-mode")
+           (string-equal major-mode "html-mode"))
       (modify-syntax-entry ?\> "(<" $temp-syn-table)
       (modify-syntax-entry ?\< ")>" $temp-syn-table))
 
@@ -60,10 +60,10 @@ eg  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》
     (modify-syntax-entry ?\“ "(”" $temp-syn-table)
     (modify-syntax-entry ?\” ")“" $temp-syn-table)
     (when (or
-           (string= major-mode "xah-html-mode")
-           (string= major-mode "xml-mode")
-           (string= major-mode "nxml-mode")
-           (string= major-mode "html-mode"))
+           (string-equal major-mode "xah-html-mode")
+           (string-equal major-mode "xml-mode")
+           (string-equal major-mode "nxml-mode")
+           (string-equal major-mode "html-mode"))
       (modify-syntax-entry ?\> "(<" $temp-syn-table)
       (modify-syntax-entry ?\< ")>" $temp-syn-table))
 

@@ -269,7 +269,7 @@ Version 2017-09-21"
 ;;             ($pathFirstPart (replace-regexp-in-string "\\`\\([^/]+?\\)/" "\\1" $path) )
 ;;             )
 ;;         (while (and (not $stop) (< $i $len) )
-;;           (if (string= (elt xahsite-xahlee-org-redirect $i) $pathFirstPart)
+;;           (if (string-equal (elt xahsite-xahlee-org-redirect $i) $pathFirstPart)
 ;;               (progn
 ;;                 ;; ...
 ;;                 (setq $stop t ))

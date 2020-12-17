@@ -125,9 +125,9 @@ Version 2015-02-08"
           (setq $sign (match-string 4 $latStr))
           (setq $latNum (+ $deg (* (+ $min (* $sec $c)) $c)))
           (cond
-           ((string= (downcase $sign) "n") nil)
-           ((string= $sign "") nil)
-           ((string= (downcase $sign) "s") (setq $latNum (* -1 $latNum)))
+           ((string-equal (downcase $sign) "n") nil)
+           ((string-equal $sign "") nil)
+           ((string-equal (downcase $sign) "s") (setq $latNum (* -1 $latNum)))
            (t (user-error "Your input is malformed. Your latitude ends with a char that's not N or S"))))
       (progn (user-error "Your latitude is malformed")))
 
@@ -139,9 +139,9 @@ Version 2015-02-08"
           (setq $sign (match-string 4 $lonStr))
           (setq $lonNum (+ $deg (* (+ $min (* $sec $c)) $c)))
           (cond
-           ((string= (downcase $sign) "e") nil)
-           ((string= $sign "") nil)
-           ((string= (downcase $sign) "w") (setq $lonNum (* -1 $lonNum)))
+           ((string-equal (downcase $sign) "e") nil)
+           ((string-equal $sign "") nil)
+           ((string-equal (downcase $sign) "w") (setq $lonNum (* -1 $lonNum)))
            (t (user-error "Your input is malformed. Your longitude ends with a char that's not E or W"))))
       (progn (user-error "Your longitude is malformed")))
     (vector $latNum $lonNum)))

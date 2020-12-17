@@ -235,7 +235,7 @@ Version 2015-10-05"
           ]
          ))
 
-    (when (string= @to-direction "auto")
+    (when (string-equal @to-direction "auto")
       (setq
        @to-direction
        (if
@@ -257,8 +257,8 @@ Version 2015-10-05"
              (while (search-forward (aref $x 0) nil t)
                (replace-match (aref $x 1)))))
          (cond
-          ((string= @to-direction "chinese") $replacePairs)
-          ((string= @to-direction "english") (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $replacePairs))
+          ((string-equal @to-direction "chinese") $replacePairs)
+          ((string-equal @to-direction "english") (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $replacePairs))
           (t (user-error "Your 3rd argument 「%s」 isn't valid" @to-direction))))))))
 
 (defun xah-convert-chinese-numeral (@begin @end &optional @to-chinese)
@@ -404,9 +404,9 @@ Version 2018-08-02"
       (xah-replace-pairs-region
        @begin @end
        (cond
-        ((string= @to-direction "unicode") $ascii-unicode-map)
-        ((string= @to-direction "ascii") $reverse-map)
-        ((string= @to-direction "auto")
+        ((string-equal @to-direction "unicode") $ascii-unicode-map)
+        ((string-equal @to-direction "ascii") $reverse-map)
+        ((string-equal @to-direction "auto")
          (if (eq $stateBefore 0)
              $reverse-map
            $ascii-unicode-map )
@@ -745,14 +745,14 @@ Version 2019-09-17"
 ;;          ))
 ;;     (save-restriction
 ;;       (narrow-to-region @begin @end)
-;;       (when (string= @direction "auto")
+;;       (when (string-equal @direction "auto")
 ;;         (goto-char (point-min))
 ;;         (setq @direction
 ;;               (if (re-search-forward "。\\|，\\|？\\|！" nil t)
 ;;                   "lengthen" "shorten"
 ;;                   )))
 ;;       (let ( (case-fold-search nil)
-;;              ($map (if (string= @direction "shorten")
+;;              ($map (if (string-equal @direction "shorten")
 ;;                        $shorten-map
 ;;                      (mapcar (lambda (x) (vector (elt x 1) (elt x 0))) $shorten-map))))
 ;;         (mapc
@@ -860,7 +860,7 @@ Version 2019-03-02"
             ))
     (save-restriction
       (narrow-to-region $p1 $p2)
-      (when (string= $direction "auto")
+      (when (string-equal $direction "auto")
         (goto-char (point-min))
         (setq $direction
               (if (re-search-forward "。\\|，\\|？\\|！" nil t)
@@ -872,7 +872,7 @@ Version 2019-03-02"
            (goto-char (point-min))
            (while (re-search-forward (elt $x 0) nil t)
              (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
-         (if (string= $direction "shorten")
+         (if (string-equal $direction "shorten")
              $shorten-map
            $lengeth-map))
         (goto-char (point-min))
@@ -998,7 +998,7 @@ Version 2017-06-10"
 Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
   (interactive)
   (let ()
-    (if (string= major-mode "dired-mode")
+    (if (string-equal major-mode "dired-mode")
         (progn
           (dired-do-query-replace-regexp
            "“\\([^”]+?\\)”"

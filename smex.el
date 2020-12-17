@@ -431,7 +431,7 @@ Returns nil when reaching the end of the list."
     (string-match "\\(.+?\\)\\(-mode\\)?$" mode-name)
     ;; 'lisp-mode' -> 'lisp'
     (setq mode-name (match-string 1 mode-name))
-    (if (string= mode-name "c") (setq mode-name "cc"))
+    (if (string-equal mode-name "c") (setq mode-name "cc"))
     (setq mode-name (regexp-quote mode-name))
 
     (dolist (feature load-history)

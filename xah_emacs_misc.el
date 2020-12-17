@@ -191,7 +191,7 @@ mi renro (le bolci ku) do = i throw ball to you = 我 丢 球qiu2 给gei3 你
 
 (defun xah-sync-css ()
   "Save current file and copy to all other xahsite dirs.
-Version 2016-10-01"
+Version 2020-12-16"
   (interactive)
   (let* (
          ($fromPath (buffer-file-name))
@@ -206,21 +206,36 @@ Version 2016-10-01"
     (mapc
      (lambda ($x)
        (progn
-         (setq $toPath (concat (xahsite-url-to-filepath (format "http://%s/" $x)) $fromFileName))
-         (when (not (string= $fromPath $toPath ))
-           (when (file-exists-p $toPath)
+         (setq $toPath (concat $x $fromFileName))
+         (when (not (string-equal $fromPath $toPath ))
+           (if (file-exists-p $toPath)
                (progn
                  (copy-file $fromPath $toPath "OK-IF-ALREADY-EXISTS")
                  (message "wrote to 「%s」." $toPath))
-             )))) [
-       "ergoemacs.org"
-       "wordyenglish.com"
-       "xaharts.org"
-       "xahlee.info"
-       "xahlee.org"
-       "xahmusic.org"
-       "xahsl.org"
+             (progn
+               (if (yes-or-no-p "File does not exist. Copy to 「%s」 anyway?" $toPath)
+                   (progn (copy-file $fromPath $toPath "OK-IF-ALREADY-EXISTS")
+                          (message "copied to 「%s」." $toPath))
+                 nil)))))) [
+       "/Users/xah/web/ergoemacs_org/"
+       "/Users/xah/web/wordyenglish_com/"
+       "/Users/xah/web/xaharts_org/"
+       "/Users/xah/web/xahlee_info/"
+       "/Users/xah/web/xahlee_org/"
+       "/Users/xah/web/xahmusic_org/"
+       "/Users/xah/web/xahporn_org/"
+       "/Users/xah/web/xahsl_org/"
        ])))
+
+;; 2020-12-16 old 
+;; /Users/xah/web/ergoemacs_org/xahemacs.css
+;; /Users/xah/web/wordyenglish_com/wordy.css
+;; /Users/xah/web/xaharts_org/xaharts.css
+;; /Users/xah/web/xahlee_info/lbasic.css
+;; /Users/xah/web/xahlee_org/xlo22481.css
+;; /Users/xah/web/xahmusic_org/xahmusic.css
+;; /Users/xah/web/xahporn_org/xpn.css
+;; /Users/xah/web/xahsl_org/xahsl.css
 
 (defun xah-cite ()
   "Change the file path under cursor into title and URL.

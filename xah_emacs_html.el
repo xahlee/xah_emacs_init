@@ -340,7 +340,7 @@ Version 2020-12-08"
             (insert "\n\n")))
         (when (eq (shell-command "which exiftool") 0)
           (message "removing metadata")
-          (shell-command (format "exiftool -all= -overwrite_original '%s' &" $toPath ) (generate-new-buffer "*xah shell output*" )))
+          (shell-command (format "exiftool -all= -overwrite_original '%s'" $toPath ) (generate-new-buffer "*xah shell output*" )))
         (when (string-equal (file-name-extension $toPath ) "png")
           (when (eq (shell-command "which optipng") 0)
             (message "optimizing with optipng")

@@ -177,14 +177,14 @@ There are other amazon categories, but not supported by this function."
     (message "%s , %s" sstr pcato)
 
     (cond
-     ((string= pcato "a") (setq pcc "blended"))
-     ((string= pcato "d") (setq pcc "dvd"))
-     ((string= pcato "b") (setq pcc "books"))
-     ((string= pcato "c") (setq pcc "classical"))
-     ((string= pcato "p") (setq pcc "pc-hardware"))
-     ((string= pcato "e") (setq pcc "electronics"))
-     ((string= pcato "m") (setq pcc "music"))
-     ((string= pcato "s") (setq pcc "software"))
+     ((string-equal pcato "a") (setq pcc "blended"))
+     ((string-equal pcato "d") (setq pcc "dvd"))
+     ((string-equal pcato "b") (setq pcc "books"))
+     ((string-equal pcato "c") (setq pcc "classical"))
+     ((string-equal pcato "p") (setq pcc "pc-hardware"))
+     ((string-equal pcato "e") (setq pcc "electronics"))
+     ((string-equal pcato "m") (setq pcc "music"))
+     ((string-equal pcato "s") (setq pcc "software"))
      (t (error "Code does not match"))
      )
 
@@ -296,7 +296,7 @@ returns
   (with-temp-buffer
     (insert-file-contents @fName nil nil nil t)
     (goto-char 1)
-    (if (string= @fragPart "")
+    (if (string-equal @fragPart "")
         (progn
           (search-forward "<div id=\"apicontent\">")
           (if (search-forward "<h1>" nil t)
