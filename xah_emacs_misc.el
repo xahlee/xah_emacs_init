@@ -198,10 +198,6 @@ Version 2020-12-16"
          ($fromFileName (file-name-nondirectory $fromPath ))
          $toPath
          )
-    (copy-file
-     $fromPath
-     (concat $fromPath "~" (format-time-string "%Y%m%d_%H%M%S") "~")
-     "OK-IF-ALREADY-EXISTS") ;backup
     (save-buffer)
     (mapc
      (lambda ($x)
@@ -210,6 +206,10 @@ Version 2020-12-16"
          (when (not (string-equal $fromPath $toPath ))
            (if (file-exists-p $toPath)
                (progn
+                 (copy-file
+                  $toPath
+                  (concat $toPath "~" (format-time-string "%Y%m%d_%H%M%S") "~")
+                  "OK-IF-ALREADY-EXISTS")
                  (copy-file $fromPath $toPath "OK-IF-ALREADY-EXISTS")
                  (message "wrote to 「%s」." $toPath))
              (progn
