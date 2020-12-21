@@ -312,7 +312,7 @@ Version 2020-04-10"
        ["pussy" "p�ssy"]
        ) "REPORT" "HILIGHT" )))
 
-(defun xah-replace-slanted-apostrophe ()
+(defun xah-replace-curly-apostrophe ()
   "Replace some single curly apostrophe to straight version.
 Works on current line or text selection.
 Example: 「it’s」 ⇒ 「it's」."
@@ -993,7 +993,7 @@ Version 2017-06-10"
 
 ;; HHH___________________________________________________________________
 
-(defun xah-curly-quotes→bracket (@left-bracket @right-bracket)
+(defun xah-curly-quotes-to-bracket (@left-bracket @right-bracket)
   "Replace “…” to one of 「…」.
 Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
   (interactive)
@@ -1008,70 +1008,70 @@ Which bracket is determined by the string LEFTBRACKET and RIGHTBRACKET."
               "“\\([^”]+?\\)”"
            (concat @left-bracket "\\1" @right-bracket) )) ) ))
 
-(defun xah-curly-quotes→code-bracket ()
+(defun xah-curly-quotes-to-code-bracket ()
   "Replace “…” to 「…」"
   (interactive)
-  (xah-curly-quotes→bracket "「" "」")
+  (xah-curly-quotes-to-bracket "「" "」")
 )
 
-(defun xah-curly-quotes→html-code-tag ()
+(defun xah-curly-quotes-to-html-code-tag ()
   "Replace 「“…”」 to 「<code>…</code>」"
   (interactive)
-  (xah-curly-quotes→bracket "<code>" "</code>")
+  (xah-curly-quotes-to-bracket "<code>" "</code>")
 )
 
-(defun xah-curly-quotes→html-strong-tag ()
+(defun xah-curly-quotes-to-html-strong-tag ()
   "Replace 「“…”」 to 「<strong>…</strong>」"
   (interactive)
-  (xah-curly-quotes→bracket "<strong>" "</strong>")
+  (xah-curly-quotes-to-bracket "<strong>" "</strong>")
 )
 
-(defun xah-curly-quotes→elisp-function-bracket ()
+(defun xah-curly-quotes-to-elisp-function-bracket ()
   "Replace “…” to ｢…｣"
   (interactive)
-  (xah-curly-quotes→bracket "｢" "｣")
+  (xah-curly-quotes-to-bracket "｢" "｣")
 )
 
-(defun xah-curly-quotes→french-quote ()
+(defun xah-curly-quotes-to-french-quote ()
   "Replace “…” to «…»"
   (interactive)
-  (xah-curly-quotes→bracket "«" "»")
+  (xah-curly-quotes-to-bracket "«" "»")
 )
 
-(defun xah-curly-quotes→kbd-tag ()
+(defun xah-curly-quotes-to-kbd-tag ()
   "Replace “…” to <kbd>…</kbd>"
   (interactive)
-  (xah-curly-quotes→bracket "<kbd>" "</kbd>")
+  (xah-curly-quotes-to-bracket "<kbd>" "</kbd>")
 )
 
-(defun xah-curly-quotes→keyboard-bracket ()
+(defun xah-curly-quotes-to-keyboard-bracket ()
   "Replace “…” to 【…】"
   (interactive)
-  (xah-curly-quotes→bracket "【" "】")
+  (xah-curly-quotes-to-bracket "【" "】")
 )
 
-(defun xah-curly-quotes→menu-bracket ()
+(defun xah-curly-quotes-to-menu-bracket ()
   "Replace “…” to 〖…〗"
   (interactive)
-  (xah-curly-quotes→bracket "〖" "〗")
+  (xah-curly-quotes-to-bracket "〖" "〗")
 )
 
-(defun xah-curly-quotes→book-bracket ()
+(defun xah-curly-quotes-to-book-bracket ()
   "Replace “…” to 《…》"
   (interactive)
-  (xah-curly-quotes→bracket "《" "》")
+  (xah-curly-quotes-to-bracket "《" "》")
 )
 
-(defun xah-curly-quotes→title-bracket ()
+(defun xah-curly-quotes-to-title-bracket ()
   "Replace “…” to 〈…〉"
   (interactive)
-  (xah-curly-quotes→bracket "〈" "〉")
+  (xah-curly-quotes-to-bracket "〈" "〉")
 )
 
-(defun xah-curly-quotes→file-path ()
+(defun xah-curly-quotes-to-file-path ()
   "Replace “…” to 〔…〕"
   (interactive)
-  (xah-curly-quotes→bracket "〔" "〕")
+  (xah-curly-quotes-to-bracket "〔" "〕")
 )
 
 (defun xah-single-quote-to-curly (@begin @end)

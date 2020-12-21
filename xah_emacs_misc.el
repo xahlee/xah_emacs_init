@@ -209,8 +209,8 @@ Version 2020-12-16"
                  (copy-file
                   $toPath
                   (concat $toPath "~" (format-time-string "%Y%m%d_%H%M%S") "~")
-                  "OK-IF-ALREADY-EXISTS")
-                 (copy-file $fromPath $toPath "OK-IF-ALREADY-EXISTS")
+                  "overwrite")
+                 (copy-file $fromPath $toPath "overwrite")
                  (message "wrote to 「%s」." $toPath))
              (progn
                (if (yes-or-no-p "File does not exist. Copy to 「%s」 anyway?" $toPath)

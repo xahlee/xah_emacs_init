@@ -286,7 +286,6 @@
 
     ;; computing, general
 
-    ("dt" "deepthroat" )
     ("dirs" "directories" )
     ("dir" "directory" )
     ("uds" "underscore" )

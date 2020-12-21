@@ -210,8 +210,9 @@ Version 2019-11-05"
   ;; use current pane for newly switched buffer
   (setq ido-default-buffer-method 'selected-window)
   ;; stop ido from suggesting when naming new file
-  (when (boundp 'ido-minor-mode-map-entry)
-    (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)))
+  ;; (when (boundp 'ido-minor-mode-map-entry)
+  ;;   (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
+  )
 
 ;; HHH___________________________________________________________________
 

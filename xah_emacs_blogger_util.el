@@ -65,10 +65,10 @@ Version 2017-02-02"
       (delete-region (point) (point-max)))
 
     ;; change amazong ad id
-    (xah-replace-pairs-region 1 (point-max) [["?tag=xahh-20" "?tag=xahblg-20"]] )
+    (xah-replace-pairs-region (point-min) (point-max) [["?tag=xahh-20" "?tag=xahblg-20"]] )
 
     ;; remove header, author, etc.
-    (xah-replace-regexp-pairs-region 1 (point-max)
+    (xah-replace-regexp-pairs-region (point-min) (point-max)
                                      [
                                       ["<nav id=\"t5\">[ \n[:graph:]]+</nav>" ""]
                                       ["<article>" ""]
@@ -117,7 +117,7 @@ Version 2017-02-02"
     (goto-char 1)
     (insert cssStr "\n\n")
 
-    (xah-replace-regexp-pairs-region 1 (point-max) [["\n\n+" "\n\n"]])
+    (xah-replace-regexp-pairs-region (point-min) (point-max) [["\n\n+" "\n\n"]])
 
     (goto-char 1)
 

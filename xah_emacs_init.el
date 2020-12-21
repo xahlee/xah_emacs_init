@@ -216,5 +216,4 @@ Version 2017-07-19"
     (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))
     (defalias 'xfom 'xah-find-output-mode)))
 
-(when (file-exists-p "~/.emacs.d/UnicodeData.txt")
-  (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt"))
+;; (when (file-exists-p "~/.emacs.d/UnicodeData.txt") (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")) 
