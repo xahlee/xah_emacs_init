@@ -255,7 +255,7 @@ Automatically call 「exiftool」 afterwards to remove metadata, if the command 
 Automatically call 「optipng」 afterwards to optimize it, if the file name ends in png and if the command is available.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2020-12-16"
+Version 2020-12-22"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -302,11 +302,12 @@ Version 2020-12-16"
     ;; Screen Shot 2018-07-25 at 2.46.36 AM.png
     (setq $newName1 (read-string "file name:" $newName1 nil $newName1 ))
     (setq $newName1
-          (concat (replace-regexp-in-string " " "_" $newName1)
-                  "_"
-                  $randStr
-                  "."
-                  ))
+          (concat
+           (replace-regexp-in-string "," "_" (replace-regexp-in-string " " "_" $newName1))
+           "_"
+           $randStr
+           "."
+           ))
     (setq $toPath (concat (file-name-as-directory @toDirName ) $newName1 $ext))
 
     (when (string-equal $ext "jpg-large")
