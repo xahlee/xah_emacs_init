@@ -1232,13 +1232,12 @@ When called in lisp code, @begin and @end are region begin/end positions.
 WARNING: this command does not guarantee 100% correct conversion of quotes, because it impossible. You should double check highlighted places after.
 
 URL `http://ergoemacs.org/emacs/elisp_straight_curly_quotes.html'
-Version 2019-07-22"
+Version 2019-07-22 2020-12-22"
   ;; some examples for debug
   ;; do "‘em all -- done..."
   ;; I’am not
   ;; said "can’t have it, can’t, just can’t"
   ;; ‘I’ve can’t’
-
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
@@ -1253,33 +1252,32 @@ Version 2019-07-22"
                     (setq $p2 (point)))
            (setq $p2 (point))))
        (list $p1 $p2))))
-
   (let ( (case-fold-search nil))
     (save-excursion
       (save-restriction
         (narrow-to-region @begin @end )
-
         (xah-prettify-punctuations (point-min) (point-max))
         (xah-ascii-to-math-symbol (point-min) (point-max))
-
         ;; Note: order is important since this is huristic.
         (xah-replace-pairs-region
-         (point-min) (point-max)
+         (point-min)
+         (point-max)
          [
-
           ;; fix GNU style ASCII quotes
           ["``" "“"]
           ["''" "”"]
+          ] "REPORT" "HILIGHT")
+        (xah-replace-pairs-region
+         (point-min) (point-max)
+         [
           ;; double straight quote → double curly quotes
           ["\n\"" "\n“"]
           [">\"" ">“"]
           ["(\"" "(“"]
           [" \"" " “"]
           ["\" " "” "]
-
           ["\"," "”,"]
           ["\",\n" "”,\n"]
-
           ["\". " "”. "]
           ["\".\n" "”.\n"]
           ["\"." "”."]
@@ -1288,9 +1286,7 @@ Version 2019-07-22"
           ["\":" "”:"]
           ["\")" "”)"]
           ["\"]" "”]"]
-
           ;; ["\"[" "\”["]
-
           [".\"" ".”"]
           [",\"" ",”"]
           ["!\"" "!”"]
@@ -1298,7 +1294,6 @@ Version 2019-07-22"
           ["\"<" "”<"]
           ["\"\n" "”\n"]
           ] "REPORT" "HILIGHT")
-
         ;; fix straight double quotes by regex
         (xah-replace-regexp-pairs-region
          (point-min) (point-max)
@@ -1307,9 +1302,7 @@ Version 2019-07-22"
           ;; ["\"\\([-A-Za-z0-9]+\\)\"" "“"]
           ["\"\\([-A-Za-z0-9]+\\)\"" "“\\1”"]
           ] "FIXEDCASE" "LITERAL-P" "HILIGHT")
-
         (xah-single-quote-to-curly (point-min) (point-max))
-
         ;; fix back escaped quotes in code
         (xah-replace-pairs-region
          (point-min) (point-max)
@@ -1317,7 +1310,6 @@ Version 2019-07-22"
           ["\\”" "\\\""]
           ["\\”" "\\\""]
           ] "REPORT" "HILIGHT")
-
         ;; fix back. quotes in HTML code
         (xah-replace-regexp-pairs-region
          (point-min) (point-max)

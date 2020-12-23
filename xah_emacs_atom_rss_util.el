@@ -85,7 +85,7 @@ when cursor is in a atom entry,
 move cursor to the <updated> tag
 replace the date time by current date time
 
-version 2019-08-03"
+Version 2019-08-03 2020-12-23"
   (interactive)
   (let (p1 p2)
     (search-backward "<updated>" )
@@ -95,7 +95,8 @@ version 2019-08-03"
     (search-backward "<" )
     (setq p2 (point))
     (delete-region p1 p2)
-    (insert (xah-atom-datetime-string))))
+    (insert (xah-atom-datetime-string))
+    (overlay-put (make-overlay p1 (point)) 'face 'highlight)))
 
 (defun xah-atom-new-entry ()
   "Create a Atom (RSS) entry of the current blog file.
