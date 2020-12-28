@@ -4,7 +4,6 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (when (boundp 'xah-fly-key-map)
-
   ;; (when (fboundp 'xah-fly-keys) (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file) )
 
   ;; (defun my-highlight-line-on () (global-hl-line-mode 1))
@@ -45,6 +44,7 @@ Version 2020-05-28"
     (xah-fly-command-mode-activate))
 
   (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
+  (define-key xah-fly-h-keymap (kbd "w") 'xah-lookup-word-definition)
 
   (defun xah-xfk-add ()
     "addon for `xah-fly-command-mode-activate-hook'
@@ -59,14 +59,13 @@ Version 2020-04-09"
 
        ;; workaround
        ("-" . delete-other-windows) ; for dvorak on kinesis advantage keyboard http://xahlee.info/kbd/keyboard_kinesis.html
-       ("\\" . split-window-below) ; for kinesis advantage keyboard
+       ("\\" . split-window-below)  ; for kinesis advantage keyboard
 
        ("]" . delete-other-windows) ; for dvorak on kinesis advantage keyboard http://xahlee.info/kbd/keyboard_kinesis.html
        ("[" . split-window-below ) ; for dvorak on kinesis advantage keyboard
 
        ;;
        )))
-
   (add-hook 'xah-fly-command-mode-activate-hook 'xah-xfk-add))
 
 ;; (setq visible-bell nil)

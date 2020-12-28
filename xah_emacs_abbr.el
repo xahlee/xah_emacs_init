@@ -17,6 +17,7 @@
     ("todo" "<span class=\"todo\">▮ </span>" )
 
     ("tp" "transpersonal" )
+    ("tf" "transformation" )
     ("tps" "transpersonal psychology" )
     ("herm" "hermeneutics" )
     ("phen" "phenomenology" )
@@ -524,7 +525,8 @@ Version 2016-10-24"
 
 (put 'xah-abbrev-hook-function 'no-self-insert t)
 
-;; (setq abbrev-expand-function 'xah-global-expand-abbrev)
+(setq abbrev-expand-function 'xah-global-expand-abbrev)
+;; (setq abbrev-expand-function 'abbrev--default-expand)
 
 (defun xah-global-expand-abbrev ()
   "function for value of `abbrev-expand-function'.

@@ -189,9 +189,9 @@ Version 2017-07-19"
 
 (load (xah-get-fullpath "xah_gen_sitemap"))
 
-(when (file-exists-p "~/Dropbox/")
+(when (file-exists-p "~/Documents/no_Dropbox/")
   (progn
-    (load "~/Dropbox/xah-emacs-private_b53d8d39")))
+    (load "~/Documents/no_Dropbox/xah-emacs-private_b53d8d39")))
 
 (defvar xahsite-external-docs nil "A vector of dir paths. Version 2019-06-11")
 (setq  xahsite-external-docs
