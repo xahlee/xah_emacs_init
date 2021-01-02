@@ -22,6 +22,7 @@
     ("herm" "hermeneutics" )
     ("phen" "phenomenology" )
     ("phenon" "phenomenon" )
+    ("appa" "apparently" )
 
     ("wpm" "words per minute" )
     ("uhk" "Ultimate Hacking Keyboard")
@@ -144,6 +145,7 @@
     ("impt" "important" )
 
     ("alt" "alternative" )
+    ("altl" "alternatively" )
     ("annm" "announcement" )
     ("apr" "apparently" )
     ("argm" "argument" )

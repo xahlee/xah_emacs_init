@@ -153,7 +153,9 @@ Version 2019-11-05"
 (progn
   (require 'dired-x)
   (setq dired-dwim-target t)
-  (when (string-equal system-type "gnu/linux") (setq dired-listing-switches "-al --time-style long-iso"))
+  ;; (cond
+  ;;  ((string-equal system-type "gnu/linux") (setq dired-listing-switches "-al --time-style long-iso"))
+  ;;  ((string-equal system-type "darwin") (setq dired-listing-switches "-alh")))
   (setq dired-recursive-copies 'always)
   (setq dired-recursive-deletes 'always))
 
