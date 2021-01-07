@@ -42,10 +42,12 @@
     ("secs" "seconds" )
     ("min" "minute" )
 
+
     ("ab" "about" )
     ("aft" "after" )
     ("bc" "because" )
     ("bt" "between" )
+    ("cnnt" "cannot" )
     ("dn" "down" )
     ("ds" "does" )
     ("hv" "have" )
@@ -77,8 +79,8 @@
     ("wc" "which" )
     ("wd" "would" )
     ("wh" "where" )
+    ("wn" "want" )
     ("wo" "without" )
-    ("cnnt" "cannot" )
 
     ("itd" "it would" )
     ("interg" "interesting" )
@@ -227,6 +229,7 @@
     ("pg" "program" )
     ("pgb" "programable" )
     ("pgg" "programing" )
+    ("pgr" "programer" )
     ("phil" "philosophy" )
     ("pj" "project" )
     ("pjtn" "projection" )
@@ -274,6 +277,7 @@
     ("ahd" "American Heritage Dictionary" )
     ("cali" "California")
     ("ny" "New York")
+    ("nyt" "New York Times" )
     ("cn" "Chinese" )
     ("eng" "English" )
     ("europ" "Europe" )

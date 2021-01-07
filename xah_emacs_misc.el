@@ -389,7 +389,7 @@ find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
 
         ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
-        ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=100")
+        ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=76 xxxxxxurl > xxfileName.txt")
         ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
 
         ))
