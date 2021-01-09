@@ -144,9 +144,9 @@ Version 2017-07-19"
   (global-xah-math-input-mode 1)
   )
 
-(when (file-exists-p "~/Dropbox/")
+(when (file-exists-p "~/no_Dropbox/")
   (progn
-    (add-to-list 'load-path "~/Dropbox/")
+    (add-to-list 'load-path "~/no_Dropbox/")
     ;; (require 'xlsl-mode)
     (autoload 'xlsl-mode "xlsl-mode" "autoload the mode." t)))
 
