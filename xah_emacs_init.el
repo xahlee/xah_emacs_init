@@ -57,10 +57,6 @@ Version 2017-07-19"
 (xah-fly-keys-set-layout "dvorak")
 (xah-fly-keys 1)
 
-;; (load-file "/Users/xah/git/xah-fly-keys/xah-fly-keys.el")
-;; (xah-fly-keys-set-layout "dvorak")
-;; (xah-fly-keys 1)
-
 (progn
   (require 'xah-text-mode)
   )
@@ -118,7 +114,7 @@ Version 2017-07-19"
 
 (progn
   (add-to-list 'load-path "~/git/xah-php-mode.el/")
-  ;; (require 'xah-php-mode)
+  (require 'xah-php-mode)
   (autoload 'xah-php-mode "xah-php-mode" "autoload the mode." t))
 
 (progn
