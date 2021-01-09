@@ -788,8 +788,8 @@ Example:
 becomes
  Change value in ‹PLIST› of ‹PROP› to ‹VAL›
 
-URL `http://ergoemacs.org/emacs/elisp_braket_allcap_words.html'
-Version 2020-04-19, 2020-12-08"
+URL `http://ergoemacs.org/emacs/elisp_bracket_caps.html'
+Version 2020-04-19, 2021-01-07"
   (interactive)
   (let ($p $p2 (case-fold-search nil))
     (if (use-region-p)

@@ -255,6 +255,7 @@
     ("trad" "traditional" )
     ("ver" "version" )
     ("vid" "video" )
+    ("co" "company" )
 
     ;; english, multiple words
 
