@@ -39,7 +39,7 @@
 (set-frame-font
  (cond
   ((string-equal system-type "windows-nt")
-   (if (member "Consolas" (font-family-list)) "Consolas" nil ))
+   (if (member "Consolas" (font-family-list)) "Consolas-12" nil ))
   ((string-equal system-type "darwin")
    (if (member "Menlo" (font-family-list)) "Menlo-16" nil ))
   ((string-equal system-type "gnu/linux")
