@@ -105,6 +105,13 @@ Version 2017-07-19"
   )
 
 (progn
+  (add-to-list 'load-path "~/git/xah-find/")
+  (require 'xah-find)
+  (when (fboundp 'xah-find-text)
+    (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))
+    (defalias 'xfom 'xah-find-output-mode)))
+
+(progn
   (add-to-list 'load-path "~/git/xah-clojure-mode/")
   (require 'xah-clojure-mode)
   (autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t)
@@ -119,11 +126,6 @@ Version 2017-07-19"
   (add-to-list 'load-path "~/git/xbbcode-mode.el/")
   ;; (require 'xbbcode-mode)
   (autoload 'xbbcode-mode "xbbcode-mode" "autoload the mode." t))
-
-(progn
-  (add-to-list 'load-path "~/git/xub-mode.el/")
-  ;; (require 'xub-mode)
-  (autoload 'xub-mode "xub-mode" "autoload the mode." t))
 
 (progn
   (add-to-list 'load-path "~/git/lookup-word-on-internet/")
@@ -143,6 +145,11 @@ Version 2017-07-19"
   (require 'xah-math-input)
   (global-xah-math-input-mode 1)
   )
+
+(progn
+  (add-to-list 'load-path "~/git/xub-mode.el/")
+  ;; (require 'xub-mode)
+  (autoload 'xub-mode "xub-mode" "autoload the mode." t))
 
 (when (file-exists-p "~/no_Dropbox/")
   (progn
@@ -209,11 +216,4 @@ Version 2017-07-19"
         "xahlee_info/node_api/"
         ])
 
-(progn
-  (add-to-list 'load-path "~/git/xah-find/")
-  (require 'xah-find)
-  (when (fboundp 'xah-find-text)
-    (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))
-    (defalias 'xfom 'xah-find-output-mode)))
-
-;; (when (file-exists-p "~/.emacs.d/UnicodeData.txt") (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt")) 
+;; (when (file-exists-p "~/.emacs.d/UnicodeData.txt") (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt"))
