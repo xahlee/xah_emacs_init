@@ -16,14 +16,14 @@
 ;;   (define-key magit-file-section-map (kbd "u") nil)
 ;;   (define-key magit-file-section-map (kbd "a") nil))
 
-(progn
-  ;; record command call statistics
-  (require 'keyfreq)
-  (when (fboundp 'keyfreq-mode)
-    (setq keyfreq-file "~/.emacs.d/.emacs.keyfreq")
-    (setq keyfreq-file-lock "~/.emacs.d/.emacs.keyfreq.lock")
-    (keyfreq-mode 1)
-    (keyfreq-autosave-mode 1)))
+;; (progn
+;;   ;; record command call statistics
+;;   (require 'keyfreq)
+;;   (when (fboundp 'keyfreq-mode)
+;;     (setq keyfreq-file "~/.emacs.d/.emacs.keyfreq")
+;;     (setq keyfreq-file-lock "~/.emacs.d/.emacs.keyfreq.lock")
+;;     (keyfreq-mode 1)
+;;     (keyfreq-autosave-mode 1)))
 
 ;; (when (fboundp 'global-page-break-lines-mode)
 ;;   ;; make the formfeed char (^L) display as a line

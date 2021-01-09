@@ -108,7 +108,6 @@ Version 2017-07-19"
   (add-to-list 'load-path "~/git/xah-find/")
   (require 'xah-find)
   (when (fboundp 'xah-find-text)
-    (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))
     (defalias 'xfom 'xah-find-output-mode)))
 
 (progn
@@ -200,20 +199,24 @@ Version 2017-07-19"
   (progn
     (load "~/Documents/no_Dropbox/xah-emacs-private_b53d8d39")))
 
-(defvar xahsite-external-docs nil "A vector of dir paths. Version 2019-06-11")
-(setq  xahsite-external-docs
-       [
-        "ergoemacs_org/emacs_manual/"
-        "xahlee_info/REC-SVG11-20110816/"
-        "xahlee_info/clojure-doc-1.8/"
-        "xahlee_info/css_2.1_spec/"
-        "xahlee_info/css_transitions/"
-        "xahlee_info/js_es2011/"
-        "xahlee_info/js_es2015/"
-        "xahlee_info/js_es2015_orig/"
-        "xahlee_info/js_es2016/"
-        "xahlee_info/js_es2018/"
-        "xahlee_info/node_api/"
-        ])
-
 ;; (when (file-exists-p "~/.emacs.d/UnicodeData.txt") (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt"))
+
+(progn
+  (when (fboundp 'xah-find-text)
+    (defvar xahsite-external-docs nil "A vector of dir paths. Version 2019-06-11")
+    (setq  xahsite-external-docs
+           [
+            "ergoemacs_org/emacs_manual/"
+            "xahlee_info/REC-SVG11-20110816/"
+            "xahlee_info/clojure-doc-1.8/"
+            "xahlee_info/css_2.1_spec/"
+            "xahlee_info/css_transitions/"
+            "xahlee_info/js_es2011/"
+            "xahlee_info/js_es2015/"
+            "xahlee_info/js_es2015_orig/"
+            "xahlee_info/js_es2016/"
+            "xahlee_info/js_es2018/"
+            "xahlee_info/node_api/"
+            ])
+    (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))))
+
