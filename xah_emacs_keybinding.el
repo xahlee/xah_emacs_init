@@ -56,14 +56,11 @@ Version 2020-04-09"
        ;; the first element of cons cell is dvorak key
        ("3" . nil ) ; got pain on this with kinesis advantage keyboard ;; Xah Lee Emacs Pinky 2020 http://ergoemacs.org/emacs/emacs_pinky_2020.html
        ("4" . nil )
-
        ;; workaround
        ("-" . delete-other-windows) ; for dvorak on kinesis advantage keyboard http://xahlee.info/kbd/keyboard_kinesis.html
        ("\\" . split-window-below)  ; for kinesis advantage keyboard
-
        ("]" . delete-other-windows) ; for dvorak on kinesis advantage keyboard http://xahlee.info/kbd/keyboard_kinesis.html
        ("[" . split-window-below ) ; for dvorak on kinesis advantage keyboard
-
        ;;
        )))
   (add-hook 'xah-fly-command-mode-activate-hook 'xah-xfk-add))
@@ -82,9 +79,10 @@ Version 2020-04-09"
 ;; kinesis
 (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
 
+
+
 (when (string-equal system-type "darwin")
   ;; macOS
-
   (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
 
   (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
@@ -250,17 +248,15 @@ Version 2020-04-09"
 ;; HHH___________________________________________________________________
 
 (when (fboundp 'xah-html-mode)
-
+  (when (string-equal system-type "windows-nt")
+    (global-set-key (kbd "C-r") 'xah-html-browse-url-of-buffer))
   (define-key xah-html-mode-map (kbd "<delete>") xah-html-mode-no-chord-map)
   (define-key xah-fly-leader-key-map (kbd ".") 'xah-html-mode-no-chord-map)
   (define-key xah-html-mode-map (kbd "<f5>") 'xah-html-browse-url-of-buffer)
   (progn
-
     (define-key xah-html-mode-no-chord-map (kbd "SPC") nil)
-
     (define-key xah-html-mode-no-chord-map (kbd "SPC s") 'xah-insert-reference-span-tag)
     (define-key xah-html-mode-no-chord-map (kbd "SPC SPC") 'xah-html-insert-date-section)
-
     (define-key xah-html-mode-no-chord-map (kbd "SPC e") 'xah-atom-new-entry)
     (define-key xah-html-mode-no-chord-map (kbd "SPC u") 'xahsite-update-article-timestamp)
     ;; . p eu gc ht
@@ -274,18 +270,14 @@ Version 2020-04-09"
     (define-key xah-html-mode-no-chord-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "SPC r j") 'xah-html-image-figure-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "SPC r r") 'xah-add-to-related-links)
-
     (define-key xah-html-mode-no-chord-map (kbd "SPC z b") 'xah-html-insert-lyrics-header)
     (define-key xah-html-mode-no-chord-map (kbd "SPC z f") 'xah-html-insert-midi)
-
     (define-key xah-html-mode-no-chord-map (kbd "o") nil)
-
     (define-key xah-html-mode-no-chord-map (kbd "o a") 'xah-words-annotate)
     (define-key xah-html-mode-no-chord-map (kbd "o e") 'xah-words-bold-word)
     (define-key xah-html-mode-no-chord-map (kbd "o c") 'xah-words-chinese-linkify)
     (define-key xah-html-mode-no-chord-map (kbd "o m") 'xah-words-move-word-to-page)
     (define-key xah-html-mode-no-chord-map (kbd "o t") 'xah-words-word-etymology-linkify)
-
     (define-key xah-html-mode-no-chord-map (kbd "o n") 'xah-words-new-word-entry )
     (define-key xah-html-mode-no-chord-map (kbd "o i") 'xah-words-insert-word-entry )
     (define-key xah-html-mode-no-chord-map (kbd "o d") 'xah-words-add-definition )

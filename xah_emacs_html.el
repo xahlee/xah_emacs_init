@@ -255,7 +255,7 @@ Automatically call 「exiftool」 afterwards to remove metadata, if the command 
 Automatically call 「optipng」 afterwards to optimize it, if the file name ends in png and if the command is available.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2020-12-22"
+Version 2020-12-22 2021-01-10"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -309,7 +309,6 @@ Version 2020-12-22"
            "."
            ))
     (setq $toPath (concat (file-name-as-directory @toDirName ) $newName1 $ext))
-
     (when (string-equal $ext "jpg-large")
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
     (when (string-equal $ext "jpg_large")
@@ -339,11 +338,25 @@ Version 2020-12-22"
             (insert "\n\n")
             (insert $toPath)
             (insert "\n\n")))
-        (when (eq (shell-command "which exiftool") 0)
+        (when
+            (cond
+             ((string-equal system-type "windows-nt") t)
+             ((string-equal system-type "darwin")
+              (eq (shell-command "which exiftool") 0))
+             ((string-equal system-type "gnu/linux")
+              (eq (shell-command "which exiftool") 0))
+             (t nil))
           (message "removing metadata")
           (shell-command (format "exiftool -all= -overwrite_original '%s'" $toPath ) (generate-new-buffer "*xah shell output*" )))
         (when (string-equal (file-name-extension $toPath ) "png")
-          (when (eq (shell-command "which optipng") 0)
+          (when
+              (cond
+               ((string-equal system-type "windows-nt") t)
+               ((string-equal system-type "darwin")
+                (eq (shell-command "which optipng") 0))
+               ((string-equal system-type "gnu/linux")
+                (eq (shell-command "which optipng") 0))
+               (t nil))
             (message "optimizing with optipng")
             (shell-command (concat "optipng " $toPath " &") (generate-new-buffer "*xah shell output*" ))))))))
 

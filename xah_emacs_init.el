@@ -75,8 +75,7 @@ Version 2017-07-19"
 
 (progn
   (add-to-list 'load-path "~/git/xah-css-mode/")
-  (require 'xah-css-mode)
-  )
+  (require 'xah-css-mode))
 
 (progn
   (require 'htmlize)
@@ -97,8 +96,7 @@ Version 2017-07-19"
 
 (progn
   (add-to-list 'load-path "~/git/xah-js-mode.el/")
-  (require 'xah-js-mode)
-  )
+  (require 'xah-js-mode))
 
 (progn
   (add-to-list 'load-path "~/git/xah-find/")
@@ -108,13 +106,12 @@ Version 2017-07-19"
 
 (progn
   (add-to-list 'load-path "~/git/xah-clojure-mode/")
-  (require 'xah-clojure-mode)
-  (autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t)
-  )
+  ;; (require 'xah-clojure-mode)
+  (autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t))
 
 (progn
   (add-to-list 'load-path "~/git/xah-php-mode.el/")
-  (require 'xah-php-mode)
+  ;; (require 'xah-php-mode)
   (autoload 'xah-php-mode "xah-php-mode" "autoload the mode." t))
 
 (progn
@@ -191,9 +188,7 @@ Version 2017-07-19"
 
 (load (xah-get-fullpath "xah_gen_sitemap"))
 
-(when (file-exists-p "~/Documents/no_Dropbox/")
-  (progn
-    (load "~/Documents/no_Dropbox/xah-emacs-private_b53d8d39")))
+(load "~/xdoc/xah-emacs-private_b53d8d39.el" "NOERROR" "NOMESSAGE" "NOSUFFIX" "MUST-SUFFIX")
 
 ;; (when (file-exists-p "~/.emacs.d/UnicodeData.txt") (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt"))
 
