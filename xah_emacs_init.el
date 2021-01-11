@@ -188,7 +188,7 @@ Version 2017-07-19"
 
 (load (xah-get-fullpath "xah_gen_sitemap"))
 
-(load "~/xdoc/xah-emacs-private_b53d8d39.el" "NOERROR" "NOMESSAGE" "NOSUFFIX" "MUST-SUFFIX")
+(load "~/xdoc/xah_emacs_private_HYfgS.el" "NOERROR" "NOMESSAGE" "NOSUFFIX" "MUST-SUFFIX")
 
 ;; (when (file-exists-p "~/.emacs.d/UnicodeData.txt") (setq describe-char-unicodedata-file "~/.emacs.d/UnicodeData.txt"))
 

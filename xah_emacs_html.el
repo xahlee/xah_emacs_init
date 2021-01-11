@@ -238,7 +238,6 @@ Requires a python script. See code."
 
 (defun xah-move-image-file ( @toDirName  )
   "Move image file to another dir.
-
 from directories checked are:
 ~/Downloads/
 ~/Pictures/
@@ -248,7 +247,6 @@ from directories checked are:
 /tmp/
 
 The first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
-
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 
 Automatically call 「exiftool」 afterwards to remove metadata, if the command is available.
@@ -361,8 +359,7 @@ Version 2020-12-22 2021-01-10"
             (shell-command (concat "optipng " $toPath " &") (generate-new-buffer "*xah shell output*" ))))))))
 
 (defun xah-youtube-get-image ()
-  "
-given a youtube url, get its image.
+  "given a youtube url, get its image.
 the url is taken from current line
 tttttttttttttttttttttttttttttttt
 todo
