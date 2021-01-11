@@ -79,38 +79,24 @@ Version 2020-04-09"
 ;; kinesis
 (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
 
-
-
 (when (string-equal system-type "darwin")
-  ;; macOS
   (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
-
   (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
-
   (global-set-key (kbd "s-w") 'xah-close-current-buffer)
   (global-set-key (kbd "s-r") 'xah-html-browse-url-of-buffer)
   (global-set-key (kbd "s-T") 'xah-open-last-closed)
   (global-set-key (kbd "s-t") 'xah-new-empty-buffer)
   (global-set-key (kbd "s-n") 'xah-new-empty-buffer)
-
   (global-set-key (kbd "s-[") 'xah-previous-user-buffer)
   (global-set-key (kbd "s-]") 'xah-next-user-buffer)
-
   (global-set-key (kbd "<M-s-left>") 'xah-previous-user-buffer)
   (global-set-key (kbd "<M-s-right>") 'xah-next-user-buffer)
-
   (global-set-key (kbd "s-=") 'text-scale-increase)
   (global-set-key (kbd "s--") 'text-scale-decrease)
-
   (global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
-
   (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
   (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
-  (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
-  ;; (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
-
-  ;;
-  )
+  (global-set-key (kbd "<f3>") 'xah-copy-line-or-region))
 
 ;; (current-input-mode)
 ;; (t nil t 7)
