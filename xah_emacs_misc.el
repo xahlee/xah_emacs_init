@@ -203,7 +203,10 @@ Version 2020-12-16"
      (lambda ($x)
        (progn
          (setq $toPath (concat $x $fromFileName))
-         (when (not (string-equal $fromPath $toPath ))
+         (message "%s → %s" $fromPath $toPath )
+         (when (not (string-equal
+                     (expand-file-name $fromPath)
+                     (expand-file-name $toPath)))
            (if (file-exists-p $toPath)
                (progn
                  (copy-file
