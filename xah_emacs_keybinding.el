@@ -142,7 +142,6 @@ Version 2020-04-09"
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
 
-  (define-key xah-user-keymap (kbd ", c") 'xah-create-thumbnail-img)
   (define-key xah-user-keymap (kbd ", d") 'xah-image-autocrop)
   (define-key xah-user-keymap (kbd ", e") 'xah-dired-show-metadata)
   (define-key xah-user-keymap (kbd ", g") 'xah-dired-2drawing)

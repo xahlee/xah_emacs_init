@@ -245,7 +245,7 @@
     ("sig" "significant" )
     ("sigc" "significance" )
     ("ss" "screenshot" )
-    ("st" "string" )
+    ("str" "string" )
     ("struct" "structure" )
     ("sw" "software" )
     ("tb" "trackball" )

@@ -16,51 +16,49 @@ Version 2015-07-30"
       (file-relative-name $fName)
       (file-relative-name $fName)))))
 
-(defun xah-process-image (@file-list @args-str @new-name-suffix @new-file-ext )
+(defun xah-process-image (@fileList @argsStr @newNameSuffix @newFileExt )
   "Wrapper to ImageMagick's “convert” shell command.
-@file-list is a list of image file paths.
-@args-str is argument string passed to ImageMagick's “convert” command.
-@new-name-suffix is the string appended to file. e.g. “_new” gets you “…_new.jpg”
-@new-file-ext is the new file's file extension. e.g. “.png”
+@fileList is a list of image file paths.
+@argsStr is argument string passed to ImageMagick's “convert” command.
+@newNameSuffix is the string appended to file. e.g. “_2” may result “_2.jpg”
+@newFileExt is the new file's file extension. e.g. “.png”
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2020-11-13"
-  (require 'dired)
   (mapc
    (lambda ($f)
      (let ( $newName $cmdStr )
        (setq $newName
              (concat
               (file-name-sans-extension $f)
-              @new-name-suffix
-              @new-file-ext))
+              @newNameSuffix
+              @newFileExt))
        (while (file-exists-p $newName)
          (setq $newName
                (concat
                 (file-name-sans-extension $newName)
-                @new-name-suffix
+                @newNameSuffix
                 (file-name-extension $newName t))))
        ;; relative paths used to get around Windows/Cygwin path remapping problem
        (setq $cmdStr
              (format
               "convert %s '%s' '%s'"
-              @args-str
+              @argsStr
               (file-relative-name $f)
               (file-relative-name $newName)))
        (shell-command $cmdStr)
        (message "ran 「%s」" $cmdStr)))
-   @file-list )
-  (revert-buffer))
+   @fileList ))
 
-(defun xah-dired-scale-image (@file-list @scale-percentage @quality @sharpen-p)
+(defun xah-dired-scale-image (@fileList @scalePercent @quality @sharpen-p)
   "Create a scaled version of marked image files in dired.
 New file names have “-s” appended before the file name extension.
 
 If `universal-argument' is ask for png/jpg and sharpen options.
 
 When called in lisp code,
- @file-list is a file fullpath list.
- @scale-percentage is a integer.
+ @fileList is a file fullpath list.
+ @scalePercent is a integer.
  @quality is a integer, from 1 to 100.
  @sharpen-p is true or false.
 
@@ -78,8 +76,8 @@ Version 2019-12-30"
   (let ( ($nameExt
           (if current-prefix-arg (if (y-or-n-p "to png?") ".png" ".jpg" ) ".jpg" )))
     (xah-process-image
-     @file-list
-     (format "-scale %s%% -quality %s%% %s " @scale-percentage @quality (if @sharpen-p "-sharpen 1" "" ))
+     @fileList
+     (format "-scale %s%% -quality %s%% %s " @scalePercent @quality (if @sharpen-p "-sharpen 1" "" ))
      "-s" $nameExt )))
 
 (defun xah-image-autocrop ()
@@ -172,7 +170,7 @@ Version 2018-04-23"
                 (shell-command  $cmdStr )))
           (user-error "not img file or dired at %s" $bfName))))))
 
-(defun xah-dired-2png (@file-list)
+(defun xah-dired-2png (@fileList)
   "Create a png version of images of marked files in dired.
 Requires ImageMagick shell command.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
@@ -185,9 +183,9 @@ Version 2016-07-19"
            ((string-equal major-mode "image-mode") (list (buffer-file-name)))
            (t (list (read-from-minibuffer "file name:"))))))
      (list $fileList)))
-  (xah-process-image @file-list "" "-2" ".png" ))
+  (xah-process-image @fileList "" "-2" ".png" ))
 
-(defun xah-dired-2drawing (@file-list @grayscale-p @max-colors-count)
+(defun xah-dired-2drawing (@fileList @grayscale-p @max-colors-count)
   "Create a png version of (drawing type) images of marked files in dired.
 Basically, make it grayscale, and reduce colors to any of {2, 4, 16, 256}.
 Requires ImageMagick shell command.
@@ -203,7 +201,7 @@ Version 2017-02-02"
      (list $fileList
            (yes-or-no-p "Grayscale?")
            (ido-completing-read "Max number of colors:" '( "2" "4" "16" "256" )))))
-  (xah-process-image @file-list
+  (xah-process-image @fileList
                      (format "+dither %s -depth %s"
                              (if @grayscale-p "-type grayscale" "")
                              ;; image magick “-colors” must be at least 8
@@ -217,7 +215,7 @@ Version 2017-02-02"
                               ((equal @max-colors-count "2") 1)
                               (t (error "logic error 0444533051: impossible condition on @max-colors-count: %s" @max-colors-count))))  "-2" ".png" ))
 
-(defun xah-dired-2jpg (@file-list)
+(defun xah-dired-2jpg (@fileList)
   "Create a JPG version of images of marked files in dired.
 If `universal-argument' is called first, ask for jpeg quality. (default is 90)
 
@@ -236,9 +234,9 @@ Version 2018-11-28"
          (if current-prefix-arg
              (progn (string-to-number (read-string "quality:" "85")))
            (progn 90))))
-    (xah-process-image @file-list (format "-quality %s%%" quality ) "-2" ".jpg" )))
+    (xah-process-image @fileList (format "-quality %s%%" quality ) "-2" ".jpg" )))
 
-(defun xah-dired-show-metadata (@file-list)
+(defun xah-dired-show-metadata (@fileList)
   "Display metatata of buffer image file or marked files in dired.
  (typically image files)
 URL `http://xahlee.info/img/metadata_in_image_files.html'
@@ -261,10 +259,10 @@ Version 2019-12-04"
              nil outputBuf nil
              (file-relative-name f))
             (insert "\nhh========================================\n"))
-          @file-list)
+          @fileList)
     (goto-char (point-min))))
 
-(defun xah-dired-remove-all-metadata (@file-list)
+(defun xah-dired-remove-all-metadata (@fileList)
   "Remove all metatata of buffer image file or marked files in dired.
  (typically image files)
 URL `http://xahlee.info/img/metadata_in_image_files.html'
@@ -285,7 +283,7 @@ Version 2016-07-19"
            (setq $cmdStr
                  (format "exiftool -all= -overwrite_original '%s'" (file-relative-name $f))) ; relative paths used to get around Windows/Cygwin path remapping problem
            (shell-command $cmdStr)))
-       @file-list )
+       @fileList )
     nil
     ))
 
@@ -320,114 +318,6 @@ Version 2018-12-23"
 ;;      ((equal $sort-by "dir") (setq $arg "-Al --si --time-style long-iso --group-directories-first"))
 ;;      (t (error "logic error 09535" )))
 ;;     (dired-sort-other $arg )))
-
-(defun xah-create-thumbnail-img ()
-  "Create a thumbnail version of image path under cursor.
-
-usage: in a html file, put cursor on a image file path, call the command,
-a thumbnail will be created, with file name prefix tn_‹width›x‹height› in the same dir,
-and relative path will be inserted before the img tag.
-
-If `universal-argument' is called first, ask for jpeg quality. (default is 90)
-
-Version 2020-11-13"
-  (interactive)
-  (let* (
-         (bounds (bounds-of-thing-at-point 'filename))
-         (p1 (car bounds))
-         (p2 (cdr bounds))
-         (inputPath (buffer-substring-no-properties p1 p2))
-         fPath
-         directory
-         filename
-         corename
-         fnameExt
-         sideLength
-         thumbnailSizeArea
-         size
-         width
-         height
-         scale
-         quality
-         newWidth
-         newHeight
-         filenameNew
-         fPathNew
-         new-rel-path
-         $cmdStr
-         )
-    (when (not (file-exists-p inputPath))
-      (user-error "File not exist: %s" inputPath))
-    (setq fPath (expand-file-name inputPath ))
-    (setq directory (file-name-directory fPath))
-    (setq filename (file-name-nondirectory fPath))
-    (setq corename (file-name-sans-extension filename))
-    (setq fnameExt (file-name-extension filename))
-    (setq sideLength (string-to-number (read-from-minibuffer "~width:" "250" )))
-    (setq thumbnailSizeArea (* sideLength sideLength))
-    (setq size (xah-html--get-image-dimensions fPath))
-    (setq width (aref size 0))
-    (setq height (aref size 1))
-    (setq scale (sqrt (/ (float thumbnailSizeArea) (float (* width height)))))
-    (setq quality
-          (if current-prefix-arg
-              (progn (string-to-number (read-string "quality:" "85")))
-            (progn 90)))
-    (setq newWidth (round (* scale (float width))))
-    (setq newHeight (round (* scale (float height))))
-    ;; (filenameNew (format "tn_%dx%d_%s" newWidth newHeight filename))
-    ;; (setq filenameNew (format "%s-s%dx%d.%s" corename newWidth newHeight fnameExt ))
-    (setq filenameNew (format "%s-s%d.%s" corename sideLength fnameExt ))
-    (setq fPathNew (concat directory filenameNew))
-    (setq new-rel-path (file-relative-name fPathNew))
-    (setq $cmdStr
-          (format
-           "convert %s '%s' '%s'"
-           (format " -scale %s%% -quality %s%% %s "
-                   (* scale 100)
-                   quality
-                   " -sharpen 1 "
-                   )
-           fPath
-           fPathNew))
-    (if (file-exists-p fPathNew)
-        (if (y-or-n-p (format "File exist 「%s」. Replace it?" fPathNew))
-            (shell-command $cmdStr)
-          (progn
-            (message "path copied to kill-ring")
-            (kill-new fPathNew)))
-      (shell-command $cmdStr))
-    (message "ran 「%s」" $cmdStr)
-    (search-backward "<" )
-    (insert fPathNew "\n")
-    (backward-word )))
-
-(defun xah-html-convert-png-to-jpg ()
-  "Convert the image file under cursor in a html file, from jpg to png, then, linkify it in html.
-
-If `universal-argument' is called first, ask to delete png.
-
-Version 2019-12-17"
-  (interactive)
-  (let (
-        inputPath
-        cmdStr
-        fileCoreName
-        )
-    (setq inputPath (thing-at-point 'filename))
-    (setq fileCoreName (file-name-sans-extension inputPath))
-    (setq cmdStr (format "convert %s.png %s.jpg" fileCoreName fileCoreName ))
-    (shell-command cmdStr )
-    (when current-prefix-arg
-      (when (yes-or-no-p "Delete the png file?")
-        (delete-file inputPath)))
-    (search-backward "<" )
-    (insert fileCoreName ".jpg")
-    (insert "\n")
-    (backward-char 2)
-    (xah-html-image-linkify)
-    ;;
-    ))
 
 (defun xah-open-dired-marked ()
   "Open marked files in dired.

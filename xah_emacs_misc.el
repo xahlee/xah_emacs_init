@@ -361,7 +361,6 @@ Version 2017-02-02"
 
 (setq xah-interactive-abbrev-alist
       '(
-
         ("img1" . "convert -quality 85% ")
         ("imgScale" . "convert -scale 50% -quality 85% ")
         ("img256" . "convert +dither -colors 256 ")
@@ -386,7 +385,7 @@ find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
         ;; ("delete __MACOSX" . "find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
 
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-        ("delete emacs backup~" . "find . -name \"*~\" -delete &")
+        ("delete emacs backup~" . "C:/ProgramData/chocolatey/bin/find.exe . -name \"*~\" -delete")
         ("clean xah sites~" . "find ~/web/ -name \"*~\" -delete")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
