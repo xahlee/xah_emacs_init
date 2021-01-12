@@ -902,9 +902,7 @@ Version 2019-03-02"
 
 (defun xah-angle-brackets-to-html (&optional @begin @end)
   "Replace all 〈…〉 to <cite>…</cite> and 《…》 to <cite class=\"book\">…</span> in current text block or selection.
-
-When called non-interactively, @begin @end are region positions.
-
+When called non-interactively, @begin @end are region positions.\n
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
 version 2017-06-10"
   (interactive)

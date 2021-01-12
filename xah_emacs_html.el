@@ -37,13 +37,13 @@ Version 2016-11-10"
     ;; (xah-html-wrap-html-tag "span" "ref")
     ))
 
-(defun xahsite-update-article-timestamp ()
+(defun xah-update-article-timestamp ()
   "Update article's timestamp.
-Add today's date to the “byline” tag of current file, also delete the last one if there are more than one.
+Add or update today's date to a line lie this
+<div class=\"byline\">By Xah Lee. Date: <time>2013-04-28</time>. Last updated: <time>2021-01-11</time>.</div>
 Also, move cursor there.
 Also, pushes mark. You can go back to previous location `exchange-point-and-mark'.
-Also, removes repeated empty lines.
-
+Also, removes repeated empty lines in buffer.
 Version 2018-12-07 2020-09-22"
   (interactive)
   (save-excursion
@@ -394,20 +394,6 @@ todo
     ))
 
 ;; HHH___________________________________________________________________
-
-(defun xah-html-insert-midi ()
-  "Insert a midi audio markup."
-  (interactive)
-  (insert "<div class=\"obj\">
-<object type=\"application/x-midi\" data=\"../../ClassicalMusic_dir/midi/liszt/Transcendetal_Etudes_dir/12_chasse.mid\" width=\"300\" height=\"20\">
-<param name=\"src\" value=\"../../ClassicalMusic_dir/midi/liszt/Transcendetal_Etudes_dir/12_chasse.mid\">
-<param name=\"autoStart\" value=\"0\">
-</object>
-<p class=\"cpt\">Liszt's transcendental etude #12.
-<a href=\"../ClassicalMusic_dir/midi/liszt/Transcendetal_Etudes_dir/12_chasse.mid\">midi file ♪</a>.</p>
-</div>
-")
-  )
 
 (defun xah-copy-html-by-link ()
   "clone a html page, see:

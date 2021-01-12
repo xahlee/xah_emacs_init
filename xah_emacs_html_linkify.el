@@ -62,44 +62,6 @@ Version 2015-05-12"
         (delete-region $p1 $p2)
         (insert "<img src=\"" $fullPath "\" alt=\"" $altText "\">")))))
 
-(defun xah-html-full-size-img-linkify (&optional @begin @end)
-  "Make image file path at cursor point into a img link.
-
-Example:
-i/cat.jpg
-becomes
-<a class=\"bigImg\" href=\"i/cat.jpg\">4176×2366</a>
-
-If there's a text selection, use that region as file name.
-Version 2020-06-24"
-  (interactive)
-  (let
-      ($p0 $p1 $p2 $input $imgPath $dimension $width $height $resultStr)
-    (progn ; sets $p1 $p2
-      (if @begin
-          (progn
-            (setq $p1 @begin)
-            (setq $p2 @end))
-        (if (use-region-p)
-            (setq $p1 (region-beginning) $p2 (region-end))
-          (save-excursion
-            (setq $p0 (point))
-            ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-            (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\`")
-            (setq $p1 (point))
-            (goto-char $p0)
-            (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\'")
-            (setq $p2 (point))))))
-    (setq $input (buffer-substring-no-properties $p1 $p2))
-    (setq $imgPath (xah-local-url-to-file-path $input))
-    (setq $dimension (xah-get-image-dimensions $imgPath))
-    (setq $width (number-to-string (elt $dimension 0)))
-    (setq $height (number-to-string (elt $dimension 1)))
-    (setq $resultStr
-          (concat "<a class=\"bigImg\" href=\"" (file-relative-name $imgPath) "\">" $width "×" $height "</a>"))
-    (delete-region $p1 $p2)
-    (insert $resultStr)))
-
 ;; HHH___________________________________________________________________
 ;; some custom HTML markup and functions for working with HTML
 
