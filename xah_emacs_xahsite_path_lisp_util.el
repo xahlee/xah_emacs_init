@@ -360,42 +360,6 @@ Technically, if any string in @moved-dirs is a prefix of @fpath."
 ;; (xah-file-moved-p "abc/d/e" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d/e” is subdir of “abc/d”
 ;; (xah-file-moved-p "abc/" ["abc/d" "don/" "12/3/"] ) ; false, because “abc/” isn't in any of the moved dirs
 
-(defun xah-local-url-to-file-path (@local-file-url)
-  "Turn a localhost file URL LOCALFILEURL into a file full path.
-
-@local-file-url must be a full path.
-
-For example, the following string shown in browser URL field:
-; On Windows Vista 2009-06
- 〔C:\\Users\\xah\\web\\emacs\\emacs.html〕  IE
- 〔file:///C:/Users/xah/web/emacs/emacs.html〕  Firefox, Google Chrome, Safari
- 〔file://localhost/C:/Users/xah/web/emacs/emacs.html〕  Opera
- becomes
- 〔C:/Users/xah/web/emacs/emacs.html〕
-
- On Mac 2009-06
- 〔file:///Users/xah/web/emacs/emacs.html〕  Safari, Firefox
- 〔file://localhost/Users/xah/web/emacs/emacs.html〕  Opera
- becomes
- 〔/Users/xah/web/emacs/emacs.html〕
-
- On Ubuntu Linux, 2011-05
- 〔file:///media/HP/Users/xah/web/xahlee_org/index.html〕 firefox
- becomes
- 〔/media/HP/Users/xah/web/xahlee_org/index.html〕
-"
-  (let ((case-fold-search nil))
-    (xah-replace-regexp-pairs-in-string @local-file-url
-                                    [
-                                     ["\\`file://localhost" ""]
-                                     ["\\`file://" ""]
-                                     ["\\`/\\([A-Za-z]\\):" "\\1:"] ; Windows C:\\
-                                     ["\\`C:" "c:"] ; need because a bug in `file-relative-name', it doesn't work when path C: is cap
-                                     ["\\\\" "/"]   ; Windows \ → /
-                                     ]
-                                    "FIXEDCASE"
-                                    )))
-
 (defun xahsite-web-path-to-filepath (@input-str &optional @default-dir)
   "Returns a file full path of @input-str.
 @input-str can have any of these form:
@@ -406,7 +370,7 @@ For example, the following string shown in browser URL field:
  /cygdrive/c/Users/h3/web/ergoemacs_org/a/x.html (Cygwin)
  /Users/xah/web/ergoemacs_org/a/x.html (unix style)
  ~/web/ergoemacs_org/a/x.html
- file://… (file URL. See: `xah-local-url-to-file-path')
+ file://… (file URL. See: `xah-html-local-url-to-file-path')
  http://ergoemacs.org/a/x.html (URL)
 
 if the @input-str is a relative path, @default-dir is used to resolve to full path."
@@ -418,7 +382,7 @@ if the @input-str is a relative path, @default-dir is used to resolve to full pa
     (if (string-match-p "\\`https?://" $s)
         (progn (setq $s (xahsite-url-to-filepath $s "addFileName")))
       (progn
-        (when (string-match-p "\\`file://" $s) (setq $s (xah-local-url-to-file-path $s)))
+        (when (string-match-p "\\`file://" $s) (setq $s (xah-html-local-url-to-file-path $s)))
         (when (string-match-p "\\`[A-Za-z]:\\|\\\\" $s) ; change Microsoft Windows style path to unix
           (setq $s (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" $s t t))))
         (setq $s (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" $s))

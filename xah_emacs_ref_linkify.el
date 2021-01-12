@@ -71,7 +71,7 @@ Version 2016-12-22"
               ;; convert local URL to file path
               (setq $fpath
                     (cond
-                     ((string-match "^file" $input) (xah-local-url-to-file-path $input))
+                     ((string-match "^file" $input) (xah-html-local-url-to-file-path $input))
                      ((string-match "^http" $input) (xahsite-url-to-filepath $input))
                      (t $input)))
 

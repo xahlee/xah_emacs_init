@@ -35,7 +35,7 @@ Version 2015-05-12"
     (progn
       (setq $inputPath (buffer-substring-no-properties $p1 $p2))
       (setq $currentDir (file-name-directory (or (buffer-file-name) default-directory )))
-      (setq $fullPath (expand-file-name (xah-local-url-to-file-path $inputPath) $currentDir ))
+      (setq $fullPath (expand-file-name (xah-html-local-url-to-file-path $inputPath) $currentDir ))
       (setq $altText (replace-regexp-in-string "-s$" "" (replace-regexp-in-string "_" " " (file-name-sans-extension (file-name-nondirectory $fullPath)) t t))))
 
     (if (xahsite-is-link-to-xahsite-p (file-relative-name $fullPath (or (buffer-file-name) default-directory)))
