@@ -18,7 +18,7 @@ Version 2017-01-27"
 (defun xah-open-file-from-clipboard ()
   "Open the file path from OS's clipboard.
 The clipboard should contain a file path or url to xah site. Open that file in emacs.
-Version 2017-03-21"
+Version 2017-03-21 2021-01-13"
   (interactive)
   (let (
         ($inputStr
@@ -31,14 +31,14 @@ Version 2017-03-21"
         (progn
           (setq $fpath (xahsite-url-to-filepath $inputStr "addFileName"))
           (if (file-exists-p $fpath)
-              (progn (find-file $fpath))
-            (progn (error "file doesn't exist 「%s」" $fpath))))
+              (find-file $fpath)
+            (error "file doesn't exist 「%s」" $fpath)))
       (progn ; not starting “http://”
         (setq $inputStr (xah-html-remove-uri-fragment $inputStr))
         (setq $fpath (xahsite-web-path-to-filepath $inputStr default-directory))
         (if (file-exists-p $fpath)
-            (progn (find-file $fpath))
-          (progn (user-error "file doesn't exist.")))))))
+            (find-file $fpath)
+          (user-error "file doesn't exist. 「%s」" $fpath))))))
 
 ;; HHH___________________________________________________________________
 

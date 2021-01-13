@@ -360,10 +360,9 @@ Technically, if any string in @moved-dirs is a prefix of @fpath."
 ;; (xah-file-moved-p "abc/d/e" ["abc/d" "don/" "12/3/"] ) ; true, because “abc/d/e” is subdir of “abc/d”
 ;; (xah-file-moved-p "abc/" ["abc/d" "don/" "12/3/"] ) ; false, because “abc/” isn't in any of the moved dirs
 
-(defun xahsite-web-path-to-filepath (@input-str &optional @default-dir)
-  "Returns a file full path of @input-str.
-@input-str can have any of these form:
-
+(defun xahsite-web-path-to-filepath (@inputStr &optional @defaultDir)
+  "Returns a file full path of @inputStr.
+@inputStr can have any of these form:
  x.html (relative path)
  c:/Users/h3/web/ergoemacs_org/a/x.html (Windows style)
  c:\\Users\\h3\\web\\ergoemacs_org\\emacs\\x.html (Windows style)
@@ -372,21 +371,22 @@ Technically, if any string in @moved-dirs is a prefix of @fpath."
  ~/web/ergoemacs_org/a/x.html
  file://… (file URL. See: `xah-html-local-url-to-file-path')
  http://ergoemacs.org/a/x.html (URL)
-
-if the @input-str is a relative path, @default-dir is used to resolve to full path."
-  (let ( ($s @input-str))
-
+if the @inputStr is a relative path, @defaultDir is used to resolve to full path.
+Version 2021-01-12"
+  (let ( ($s @inputStr))
     ;; (setq $s (replace-regexp-in-string "^file:///" "" $s "FIXEDCASE" "LITERAL" ) )
     ;; (setq $s (replace-regexp-in-string "^/media/OS/Users/h3" "~" $s "FIXEDCASE" "LITERAL" ) )
 
     (if (string-match-p "\\`https?://" $s)
         (progn (setq $s (xahsite-url-to-filepath $s "addFileName")))
       (progn
-        (when (string-match-p "\\`file://" $s) (setq $s (xah-html-local-url-to-file-path $s)))
-        (when (string-match-p "\\`[A-Za-z]:\\|\\\\" $s) ; change Microsoft Windows style path to unix
-          (setq $s (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" $s t t))))
+        (when (string-match-p "\\`file://" $s)
+          (setq $s (xah-html-local-url-to-file-path $s)))
+        ;; (when (string-match-p "\\`[A-Za-z]:\\|\\\\" $s)
+        ;;   ;; change Microsoft Windows style path to unix
+        ;;   (setq $s (replace-regexp-in-string "\\`[A-Za-z]:" "" (replace-regexp-in-string "\\\\" "/" $s t t))))
         (setq $s (replace-regexp-in-string "\\`/cygdrive/[a-zA-Z]" "" $s))
-        (setq $s (expand-file-name $s @default-dir))))
+        (setq $s (expand-file-name $s @defaultDir))))
     $s
     ))
 
