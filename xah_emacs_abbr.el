@@ -37,12 +37,9 @@
     ("phpt" "<?php 3 ?>" )
 
     ;; English word abbrev
-
     ("sec" "second" )
     ("secs" "seconds" )
     ("min" "minute" )
-
-
     ("ab" "about" )
     ("aft" "after" )
     ("bc" "because" )
@@ -65,6 +62,7 @@
     ("rt" "return" )
     ("sd" "should" )
     ("sts" "sometimes" )
+    ("sth" "something" )
     ("t" "the" )
     ("th" "there" )
     ("thx" "thanks" )
@@ -80,6 +78,7 @@
     ("wd" "would" )
     ("wh" "where" )
     ("wn" "want" )
+    ("wns" "wants" )
     ("wo" "without" )
 
     ("itd" "it would" )

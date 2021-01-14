@@ -108,12 +108,6 @@ Version 2020-04-09"
 ;;    (nth 2 x)
 ;;    27))
 
-;; (global-set-key (kbd "<prior>") 'scroll-down-command)
-;; (global-set-key (kbd "<next>") 'scroll-up-command)
-
-;; (global-set-key (kbd "<prior>") 'hippie-expand)
-;; (global-set-key (kbd "<next>") 'xah-toggle-letter-case)
-
 (global-set-key (kbd "<S-prior>") 'scroll-down)
 (global-set-key (kbd "<S-next>") 'scroll-up)
 
@@ -142,15 +136,6 @@ Version 2020-04-09"
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
 
-  (define-key xah-user-keymap (kbd ", d") 'xah-image-autocrop)
-  (define-key xah-user-keymap (kbd ", e") 'xah-dired-show-metadata)
-  (define-key xah-user-keymap (kbd ", g") 'xah-dired-2drawing)
-  (define-key xah-user-keymap (kbd ", h") 'xah-dired-scale-image)
-  (define-key xah-user-keymap (kbd ", n") 'xah-dired-2png)
-  (define-key xah-user-keymap (kbd ", p") 'xah-open-in-gimp)
-  (define-key xah-user-keymap (kbd ", t") 'xah-dired-2jpg)
-  (define-key xah-user-keymap (kbd ", u") 'xah-dired-remove-all-metadata)
-
   (define-key xah-user-keymap (kbd "8") 'xah-find-count)
   (define-key xah-user-keymap (kbd "9") 'xah-find-replace-text-regex)
   (define-key xah-user-keymap (kbd "0") 'xah-find-text-regex)
@@ -161,7 +146,19 @@ Version 2020-04-09"
   ;; a
   (define-key xah-user-keymap (kbd "b") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  ;; d e f
+  ;; d 
+
+  (define-key xah-user-keymap (kbd "e d") 'xah-image-autocrop)
+  (define-key xah-user-keymap (kbd "e e") 'xah-dired-show-metadata)
+  (define-key xah-user-keymap (kbd "e g") 'xah-dired-2drawing)
+  (define-key xah-user-keymap (kbd "e h") 'xah-dired-scale-image)
+  (define-key xah-user-keymap (kbd "e n") 'xah-dired-2png)
+  (define-key xah-user-keymap (kbd "e p") 'xah-open-in-gimp)
+  (define-key xah-user-keymap (kbd "e t") 'xah-dired-2jpg)
+  (define-key xah-user-keymap (kbd "e u") 'xah-dired-remove-all-metadata)
+
+  ;; f
+
   (define-key xah-user-keymap (kbd "g") 'xah-replace-straight-quotes)
   ;; h
   (define-key xah-user-keymap (kbd "i c") 'xah-insert-random-number)

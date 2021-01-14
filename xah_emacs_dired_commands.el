@@ -269,7 +269,7 @@ URL `http://xahlee.info/img/metadata_in_image_files.html'
 Requires exiftool shell command.
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2016-07-19"
+Version 2016-07-19 2021-01-14"
   (interactive
    (list
     (cond
@@ -277,13 +277,20 @@ Version 2016-07-19"
      ((string-equal major-mode "image-mode") (list (buffer-file-name)))
      (t (list (read-from-minibuffer "file name:"))))))
   (if (y-or-n-p "Sure to remove all metadata?")
-      (mapc
-       (lambda ($f)
-         (let ($cmdStr)
-           (setq $cmdStr
-                 (format "exiftool -all= -overwrite_original '%s'" (file-relative-name $f))) ; relative paths used to get around Windows/Cygwin path remapping problem
-           (shell-command $cmdStr)))
-       @fileList )
+
+      (let ( (outputBuf (get-buffer-create "*xah metadata output*")))
+        (switch-to-buffer outputBuf)
+        (erase-buffer)
+        (mapc (lambda (f)
+                (call-process
+                 "exiftool"
+                 nil outputBuf nil
+                 "-all="
+                 "-overwrite_original"
+                 (file-relative-name f))
+                (insert "\nhh========================================\n"))
+              @fileList)
+        (goto-char (point-min)))
     nil
     ))
 
