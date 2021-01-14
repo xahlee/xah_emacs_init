@@ -148,7 +148,7 @@ Version 2020-04-09"
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
   ;; d 
 
-  (define-key xah-user-keymap (kbd "e d") 'xah-image-autocrop)
+  (define-key xah-user-keymap (kbd "e d") 'xah-dired-image-autocrop)
   (define-key xah-user-keymap (kbd "e e") 'xah-dired-show-metadata)
   (define-key xah-user-keymap (kbd "e g") 'xah-dired-2drawing)
   (define-key xah-user-keymap (kbd "e h") 'xah-dired-scale-image)

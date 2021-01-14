@@ -1,21 +1,5 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(defun xah-dired-to-zip ()
-  "Zip the current file in `dired'.
-If multiple files are marked, only zip the first one.
-Require unix zip command line tool.
-
-URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2015-07-30"
-  (interactive)
-  (require 'dired)
-  (let ( ($fName (elt (dired-get-marked-files) 0)))
-    (shell-command
-     (format
-      "zip -r '%s.zip' '%s'"
-      (file-relative-name $fName)
-      (file-relative-name $fName)))))
-
 (defun xah-process-image (@fileList @argsStr @newNameSuffix @newFileExt )
   "Wrapper to ImageMagick's “convert” shell command.
 @fileList is a list of image file paths.
@@ -24,31 +8,33 @@ Version 2015-07-30"
 @newFileExt is the new file's file extension. e.g. “.png”
 
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2020-11-13"
-  (mapc
-   (lambda ($f)
-     (let ( $newName $cmdStr )
-       (setq $newName
-             (concat
-              (file-name-sans-extension $f)
-              @newNameSuffix
-              @newFileExt))
-       (while (file-exists-p $newName)
+Version 2020-11-13 2021-01-14"
+  (let (($cmdName (if (string-equal system-type "windows-nt") "magick.exe convert" "convert" )))
+    (mapc
+     (lambda ($f)
+       (let ( $newName $cmdStr )
          (setq $newName
                (concat
-                (file-name-sans-extension $newName)
+                (file-name-sans-extension $f)
                 @newNameSuffix
-                (file-name-extension $newName t))))
-       ;; relative paths used to get around Windows/Cygwin path remapping problem
-       (setq $cmdStr
-             (format
-              "convert %s '%s' '%s'"
-              @argsStr
-              (file-relative-name $f)
-              (file-relative-name $newName)))
-       (shell-command $cmdStr)
-       (message "ran 「%s」" $cmdStr)))
-   @fileList ))
+                @newFileExt))
+         (while (file-exists-p $newName)
+           (setq $newName
+                 (concat
+                  (file-name-sans-extension $newName)
+                  @newNameSuffix
+                  (file-name-extension $newName t))))
+         ;; relative paths used to get around Windows/Cygwin path remapping problem
+         (setq $cmdStr
+               (format
+                "%s %s %s %s"
+                $cmdName
+                @argsStr
+                (shell-quote-argument (file-relative-name $f))
+                (shell-quote-argument (file-relative-name $newName))))
+         (shell-command $cmdStr)
+         (message "Ran:「%s」" $cmdStr)))
+     @fileList )))
 
 (defun xah-dired-scale-image (@fileList @scalePercent @quality @sharpen-p)
   "Create a scaled version of marked image files in dired.
@@ -62,7 +48,7 @@ When called in lisp code,
  @quality is a integer, from 1 to 100.
  @sharpen-p is true or false.
 
-Requires ImageMagick unix shell command.
+Requires shell command ImageMagick.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2019-12-30"
   (interactive
@@ -80,99 +66,44 @@ Version 2019-12-30"
      (format "-scale %s%% -quality %s%% %s " @scalePercent @quality (if @sharpen-p "-sharpen 1" "" ))
      "-s" $nameExt )))
 
-(defun xah-image-autocrop ()
-  "Create a new auto-cropped version of image.
-If current buffer is jpg or png file, crop it.
-If current buffer is dired, do the file under cursor or marked files.
-
+(defun xah-dired-image-autocrop ()
+  "Create auto-cropped version of image in `dired', current or marked files
 The created file has “_crop.” in the name, in the same dir. The image format is same as the original.
-Automatically call command 「optipng」 if available on the cropped png file.
-
-Requires ImageMagick shell command “convert”
-
-URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2020-12-06"
+Requires shell command ImageMagick.
+Version 2021-01-14"
   (interactive)
-  (let (
-        ($buffFileName (buffer-file-name))
-        $newName
-        $cmdStr
-        )
-    (if (string-equal major-mode "dired-mode")
-        (progn
-          (let (($flist (dired-get-marked-files)))
-            (mapc
-             (lambda ($f)
-               (setq $newName (concat (file-name-sans-extension $f) "_crop." (file-name-extension $f)))
-               (setq $cmdStr (format "convert -trim '%s' '%s'" (file-relative-name $f) (file-relative-name $newName)))
-               (shell-command $cmdStr))
-             $flist ))
-          (revert-buffer))
+  (if (string-equal major-mode "dired-mode")
       (progn
-        (if $buffFileName
-            (let (($ext (file-name-extension $buffFileName)))
-              (if (and (not (string-equal $ext "jpg"))
-                       (not (string-equal $ext "png")))
-                  (user-error "not png or jpg at %s" $buffFileName)
-                (progn
-                  (setq $newName (concat (file-name-sans-extension $f) "_crop." (file-name-extension $f)))
-                  (setq $cmdStr
-                        (format
-                         "convert -trim '%s' '%s'"
-                         $buffFileName
-                         $newName))
-                  (message "running 「%s」" $cmdStr)
-                  (shell-command  $cmdStr )
-                  (when (string-equal $ext "png")
-                    (when (eq (shell-command "which optipng") 0)
-                      (message "optimizing with optipng")
-                      (shell-command (concat "optipng " $newName " &")))))))
-          (user-error "not img file or dired at %s" $buffFileName))))))
+        (let (($flist (dired-get-marked-files)))
+          (mapc
+           (lambda ($f)
+             (xah-process-image (list $f) "-trim" "_crop" (file-name-extension $f t)))
+           $flist ))
+        (revert-buffer))))
 
-(defun xah-image-remove-transparency ()
-  "Create a new version of image without alpha channel.
-Works on png images only.
-If current buffer is png file, crop it.
-If current buffer is dired, do the file under cursor or marked files.
-
-The created file has the name, in the same dir.
-
-Requires ImageMagick shell command “convert”
-
+(defun xah-dired-image-remove-transparency ()
+  "Create opaque version of image in `dired', current or marked files.
+Works on png images only. The created file has the name, in the same dir.
+Requires shell command ImageMagick.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
-Version 2018-04-23"
+Version 2021-01-14"
   (interactive)
-  (let (
-        ($bfName (buffer-file-name))
-        $cmdStr
-        )
-    (if (string-equal major-mode "dired-mode")
-        (progn
-          (let (($flist (dired-get-marked-files)))
-            (mapc
-             (lambda ($f)
-               (if (not (string-equal (file-name-extension $f) "png"))
-                   (message "skipping %s" $f)
-                 (progn
-                   (setq $cmdStr (format "convert -flatten '%s' '%s'" (file-relative-name $f) (file-relative-name $f)))                (shell-command $cmdStr))))
-             $flist ))
-          (revert-buffer))
-      (progn
-        (if $bfName
-            (if (not (string-equal (file-name-extension $bfName) "png"))
-                (message "skipping %s" $newName)
-              (progn
-                (setq $cmdStr
-                      (format
-                       "convert -flatten '%s' '%s'"
-                       $bfName
-                       $bfName))
-                (shell-command  $cmdStr )))
-          (user-error "not img file or dired at %s" $bfName))))))
+  (if (string-equal major-mode "dired-mode")
+      (let (($flist (dired-get-marked-files))
+            $fExt
+            )
+        (mapc
+         (lambda ($f)
+           (setq $fExt (file-name-extension $f))
+           (if (not (string-equal $fExt "png"))
+               (message "Skipping %s" $f)
+             (xah-process-image (list $f) "-flatten" "_opa" (concat "." $fExt ))))
+         $flist ))
+    (revert-buffer)))
 
 (defun xah-dired-2png (@fileList)
   "Create a png version of images of marked files in dired.
-Requires ImageMagick shell command.
+Requires shell command ImageMagick.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2016-07-19"
   (interactive
@@ -188,7 +119,7 @@ Version 2016-07-19"
 (defun xah-dired-2drawing (@fileList @grayscale-p @max-colors-count)
   "Create a png version of (drawing type) images of marked files in dired.
 Basically, make it grayscale, and reduce colors to any of {2, 4, 16, 256}.
-Requires ImageMagick shell command.
+Requires shell command ImageMagick.
 
 Version 2017-02-02"
   (interactive
@@ -219,7 +150,7 @@ Version 2017-02-02"
   "Create a JPG version of images of marked files in dired.
 If `universal-argument' is called first, ask for jpeg quality. (default is 90)
 
-Requires ImageMagick shell command.
+Requires shell command ImageMagick.
 URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
 Version 2018-11-28"
   (interactive
@@ -250,13 +181,13 @@ Version 2019-12-04"
      ((string-equal major-mode "dired-mode") (dired-get-marked-files))
      ((string-equal major-mode "image-mode") (list (buffer-file-name)))
      (t (list (read-from-minibuffer "file name:"))))))
-  (let ( (outputBuf (get-buffer-create "*xah metadata output*")))
-    (switch-to-buffer outputBuf)
+  (let ( ($outputBuf (get-buffer-create "*xah metadata output*")))
+    (switch-to-buffer $outputBuf)
     (erase-buffer)
     (mapc (lambda (f)
             (call-process
              "exiftool"
-             nil outputBuf nil
+             nil $outputBuf nil
              (file-relative-name f))
             (insert "\nhh========================================\n"))
           @fileList)
@@ -277,14 +208,13 @@ Version 2016-07-19 2021-01-14"
      ((string-equal major-mode "image-mode") (list (buffer-file-name)))
      (t (list (read-from-minibuffer "file name:"))))))
   (if (y-or-n-p "Sure to remove all metadata?")
-
-      (let ( (outputBuf (get-buffer-create "*xah metadata output*")))
-        (switch-to-buffer outputBuf)
+      (let ( ($outputBuf (get-buffer-create "*xah metadata output*")))
+        (switch-to-buffer $outputBuf)
         (erase-buffer)
         (mapc (lambda (f)
                 (call-process
                  "exiftool"
-                 nil outputBuf nil
+                 nil $outputBuf nil
                  "-all="
                  "-overwrite_original"
                  (file-relative-name f))
@@ -332,3 +262,18 @@ Version 2019-10-22"
   (interactive)
   (mapc 'find-file (dired-get-marked-files)))
 
+(defun xah-dired-to-zip ()
+  "Zip the current file in `dired'.
+If multiple files are marked, only zip the first one.
+Require unix zip command line tool.
+
+URL `http://ergoemacs.org/emacs/emacs_dired_convert_images.html'
+Version 2015-07-30 2021-01-14"
+  (interactive)
+  (require 'dired)
+  (let ( ($fName (elt (dired-get-marked-files) 0)))
+    (shell-command
+     (format
+      "zip -r %s %s"
+      (shell-quote-argument (concat (file-relative-name $fName) ".zip"))
+      (shell-quote-argument (file-relative-name $fName))))))
