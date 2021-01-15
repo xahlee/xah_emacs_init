@@ -236,6 +236,8 @@ Version 2021-01-15"
     (interactive)
     (let ((xfname (buffer-file-name)))
       (when xfname
+        (when (buffer-modified-p )
+          (save-buffer))
         (shell-command (format "gofmt -w %s" xfname)))))
   (defun xah-config-go-mode ()
     "config go-mode. Version 2021-01-15"
@@ -243,8 +245,7 @@ Version 2021-01-15"
     (define-prefix-command 'xah-golang-leader-map)
     (define-key xah-golang-leader-map (kbd "c") 'xah-gofmt)
     (define-key xah-golang-leader-map (kbd "j") 'godef-jump)
-    (define-key go-mode-map (kbd "<delete>") xah-golang-leader-map)
-    )
+    (define-key go-mode-map (kbd "<delete>") xah-golang-leader-map))
   (add-hook 'go-mode-hook 'xah-config-go-mode))
 
 (when (fboundp 'xah-html-mode)
