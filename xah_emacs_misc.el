@@ -1022,3 +1022,5 @@ Version 2020-12-02"
       (goto-char (point-min))
       (while (re-search-forward "\\. +\\([A-Z][a-z]+\\)" nil "NOERROR")
         (replace-match ".\n \\1" )))))
+
+

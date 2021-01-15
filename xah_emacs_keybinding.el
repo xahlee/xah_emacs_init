@@ -229,18 +229,30 @@ Version 2020-04-09"
 
 ;; HHH___________________________________________________________________
 
+(when (fboundp 'go-mode)
+  (defun xah-gofmt ()
+    "Reformat current file by calling shell command gofmt.
+Version 2021-01-15"
+    (interactive)
+    (let ((xfname (buffer-file-name)))
+      (when xfname
+        (shell-command (format "gofmt -w %s" xfname)))))
+  (defun xah-config-go-mode ()
+    "config go-mode. Version 2021-01-15"
+    (interactive)
+    (define-prefix-command 'xah-golang-leader-map)
+    (define-key xah-golang-leader-map (kbd "c") 'xah-gofmt)
+    (define-key xah-golang-leader-map (kbd "j") 'godef-jump)
+    (define-key go-mode-map (kbd "<delete>") xah-golang-leader-map)
+    )
+  (add-hook 'go-mode-hook 'xah-config-go-mode))
+
 (when (fboundp 'xah-html-mode)
-  (when (string-equal system-type "windows-nt")
-    (global-set-key (kbd "C-r") 'xah-html-browse-url-of-buffer))
-  (define-key xah-html-mode-map (kbd "<delete>") xah-html-leader-map)
-  (define-key xah-fly-leader-key-map (kbd ".") 'xah-html-leader-map)
   (progn
-    ;; (define-key xah-html-leader-map (kbd "SPC") nil)
     (define-key xah-html-leader-map (kbd "SPC s") 'xah-insert-reference-span-tag)
     (define-key xah-html-leader-map (kbd "SPC e") 'xah-atom-new-entry)
     (define-key xah-html-leader-map (kbd "SPC u") 'xah-update-article-timestamp)
     (define-key xah-html-leader-map (kbd "SPC t") 'xah-html-wrap-big-tag)
-
     (define-key xah-html-leader-map (kbd "SPC c") 'xah-angle-brackets-to-html)
     (define-key xah-html-leader-map (kbd "SPC p") 'xah-copy-url-current-file)
     (define-key xah-html-leader-map (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
@@ -259,7 +271,14 @@ Version 2020-04-09"
     (define-key xah-html-leader-map (kbd "o s") 'xah-words-add-source )
     (define-key xah-html-leader-map (kbd "o c") 'xah-words-add-comment )
     (define-key xah-html-leader-map (kbd "o g") 'xah-words-search-next-unbold )
-    (define-key xah-html-leader-map (kbd "o p") 'xah-words-query-find-then-bold )))
+    (define-key xah-html-leader-map (kbd "o p") 'xah-words-query-find-then-bold ))
+  (defun xah-config-xah-html-mode ()
+    "Version 2021-01-15"
+    (interactive)
+    (define-key xah-html-mode-map (kbd "<delete>") xah-html-leader-map)
+    (when (string-equal system-type "windows-nt")
+      (define-key xah-html-mode-map (kbd "C-r") 'xah-html-browse-url-of-buffer)))
+  (add-hook 'xah-html-mode-hook 'xah-config-xah-html-mode))
 
 ;; HHH___________________________________________________________________
 
