@@ -105,6 +105,11 @@ Version 2017-07-19"
     (defalias 'xfom 'xah-find-output-mode)))
 
 (progn
+  (add-to-list 'load-path "~/git/xah-dired/")
+  (require 'xah-dired)
+  )
+
+(progn
   (add-to-list 'load-path "~/git/xah-clojure-mode/")
   ;; (require 'xah-clojure-mode)
   (autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t))
@@ -161,8 +166,6 @@ Version 2017-07-19"
 
 ;; (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
 
-(load (xah-get-fullpath "xah_emacs_dired_commands"))
-
 (load (xah-get-fullpath "xah_emacs_kmacro"))
 
 (load (xah-get-fullpath "xah_emacs_mouse_commands"))
@@ -173,7 +176,6 @@ Version 2017-07-19"
 (load (xah-get-fullpath "xah_emacs_google_earth"))
 
 (load (xah-get-fullpath "xah_emacs_misc"))
-(load (xah-get-fullpath "xah_emacs_open"))
 
 (load (xah-get-fullpath "xah_emacs_atom_rss_util"))
 

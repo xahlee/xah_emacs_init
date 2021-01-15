@@ -412,12 +412,12 @@ Version 2017-08-13"
 (defun xah-slide-show ()
   "start external program to do slideshow of current dir.
 Linux only. Requires 「feh」 image viewer.
-Version 2015-10-20"
+Version 2015-10-20 2021-01-14"
   (interactive)
-  (progn
-    (shell-command (format "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%%f'\" --geometry 1600x1000 '%s'" (expand-file-name default-directory)))
-    ;; (shell-command (format "gthumb --slideshow ." (expand-file-name default-directory)) )
-    ))
+  (shell-command
+   (format
+    "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%%f'\" --geometry 1600x1000 %s"
+    (shell-quote-argument (expand-file-name default-directory)))))
 
 (defun xah-replace-invisible-char ()
   "Query replace some invisible Unicode chars.

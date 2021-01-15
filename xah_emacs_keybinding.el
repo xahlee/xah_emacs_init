@@ -153,7 +153,7 @@ Version 2020-04-09"
   (define-key xah-user-keymap (kbd "e g") 'xah-dired-2drawing)
   (define-key xah-user-keymap (kbd "e h") 'xah-dired-scale-image)
   (define-key xah-user-keymap (kbd "e n") 'xah-dired-2png)
-  (define-key xah-user-keymap (kbd "e p") 'xah-open-in-gimp)
+  (define-key xah-user-keymap (kbd "e p") 'xah-dired-open-in-gimp)
   (define-key xah-user-keymap (kbd "e t") 'xah-dired-2jpg)
   (define-key xah-user-keymap (kbd "e u") 'xah-dired-remove-all-metadata)
 
@@ -239,7 +239,8 @@ Version 2020-04-09"
     (define-key xah-html-leader-map (kbd "SPC s") 'xah-insert-reference-span-tag)
     (define-key xah-html-leader-map (kbd "SPC e") 'xah-atom-new-entry)
     (define-key xah-html-leader-map (kbd "SPC u") 'xah-update-article-timestamp)
-    ;; . p eu gc ht
+    (define-key xah-html-leader-map (kbd "SPC t") 'xah-html-wrap-big-tag)
+
     (define-key xah-html-leader-map (kbd "SPC c") 'xah-angle-brackets-to-html)
     (define-key xah-html-leader-map (kbd "SPC p") 'xah-copy-url-current-file)
     (define-key xah-html-leader-map (kbd "SPC r d") 'xah-html-perldoc-ref-linkify)
