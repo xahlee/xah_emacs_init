@@ -232,6 +232,7 @@ Version 2020-04-09"
 (when (fboundp 'go-mode)
   (defun xah-gofmt ()
     "Reformat current file by calling shell command gofmt.
+URL `http://ergoemacs.org/misc/emacs_go-mode_gofmt_diff.html'
 Version 2021-01-15"
     (interactive)
     (let ((xfname (buffer-file-name)))

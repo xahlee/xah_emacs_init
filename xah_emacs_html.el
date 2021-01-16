@@ -249,11 +249,10 @@ from directories checked are:
 The first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 
-Automatically call 「exiftool」 afterwards to remove metadata, if the command is available.
-Automatically call 「optipng」 afterwards to optimize it, if the file name ends in png and if the command is available.
+Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' afterwards.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2020-12-22 2021-01-14"
+Version 2020-12-22 2021-01-14 2021-01-15"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -338,7 +337,7 @@ Version 2020-12-22 2021-01-14"
             (insert "\n\n")))
         (when (fboundp 'xah-dired-remove-all-metadata)
           (xah-dired-remove-all-metadata (list $toPath)))
-        (when (fboundp 'xah-dired-optimize-png)
+        (when (and (string-equal $ext "png") (fboundp 'xah-dired-optimize-png))
           (xah-dired-optimize-png (list $toPath)))))))
 
 (defun xah-youtube-get-image ()

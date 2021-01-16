@@ -63,7 +63,6 @@
     ("sd" "should" )
     ("sts" "sometimes" )
     ("sth" "something" )
-    ("t" "the" )
     ("th" "there" )
     ("thx" "thanks" )
     ("ty" "they" )
