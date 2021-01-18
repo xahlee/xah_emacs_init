@@ -227,6 +227,28 @@ Version 2021-01-15"
   ;;
   )
 
+(progn
+  (require 'image-mode )
+  (defun xah-config-image-mode ()
+    "Version 2021-01-17"
+    (interactive)
+    (define-prefix-command 'xah-image-mode-leader-map)
+    (define-key xah-image-mode-leader-map (kbd "d") 'xah-dired-image-autocrop)
+    (define-key xah-image-mode-leader-map (kbd "e") 'xah-dired-show-metadata)
+    (define-key xah-image-mode-leader-map (kbd "g") 'xah-dired-2drawing)
+    (define-key xah-image-mode-leader-map (kbd "h") 'xah-dired-scale-image)
+    (define-key xah-image-mode-leader-map (kbd "n") 'xah-dired-2png)
+    (define-key xah-image-mode-leader-map (kbd "p") 'xah-dired-open-in-gimp)
+    (define-key xah-image-mode-leader-map (kbd "t") 'xah-dired-2jpg)
+    (define-key xah-image-mode-leader-map (kbd "u") 'xah-dired-remove-all-metadata)
+    (define-key xah-image-mode-leader-map (kbd ".") 'xah-dired-optimize-png)
+    (define-key image-mode-map (kbd "<delete>") xah-image-mode-leader-map)
+    ;;
+    )
+  (add-hook 'image-mode-hook 'xah-config-image-mode)
+  ;;
+  )
+
 (when (fboundp 'xah-html-mode)
   (progn
     (define-key xah-html-leader-map (kbd "SPC s") 'xah-insert-reference-span-tag)

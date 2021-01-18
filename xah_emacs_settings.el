@@ -29,8 +29,8 @@
       '(
         (tool-bar-lines . 0)
         (background-color . "honeydew")
-        (width . 88)
-        (height . 50)))
+        (width . 90)
+        (height . 52)))
 
 ;; HHH___________________________________________________________________
 ;; Emacs: Font Setup http://ergoemacs.org/emacs/emacs_list_and_set_font.html
