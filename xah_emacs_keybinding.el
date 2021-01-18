@@ -135,37 +135,22 @@ Version 2020-04-09"
   (define-key xah-user-keymap (kbd "SPC") xah-dump-keymap)
   ;; '
   (define-key xah-user-keymap (kbd ".") 'xah-title-case-region-or-line)
-
   (define-key xah-user-keymap (kbd "8") 'xah-find-count)
   (define-key xah-user-keymap (kbd "9") 'xah-find-replace-text-regex)
   (define-key xah-user-keymap (kbd "0") 'xah-find-text-regex)
-
   (define-key xah-user-keymap (kbd "1") 'xah-insert-word-1)
   (define-key xah-user-keymap (kbd "2") 'xah-insert-word-2)
-
   ;; a
   (define-key xah-user-keymap (kbd "b") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  ;; d 
-
-  (define-key xah-user-keymap (kbd "e d") 'xah-dired-image-autocrop)
-  (define-key xah-user-keymap (kbd "e e") 'xah-dired-show-metadata)
-  (define-key xah-user-keymap (kbd "e g") 'xah-dired-2drawing)
-  (define-key xah-user-keymap (kbd "e h") 'xah-dired-scale-image)
-  (define-key xah-user-keymap (kbd "e n") 'xah-dired-2png)
-  (define-key xah-user-keymap (kbd "e p") 'xah-dired-open-in-gimp)
-  (define-key xah-user-keymap (kbd "e t") 'xah-dired-2jpg)
-  (define-key xah-user-keymap (kbd "e u") 'xah-dired-remove-all-metadata)
-
+  ;; d e
   ;; f
-
   (define-key xah-user-keymap (kbd "g") 'xah-replace-straight-quotes)
   ;; h
   (define-key xah-user-keymap (kbd "i c") 'xah-insert-random-number)
   (define-key xah-user-keymap (kbd "i h") 'xah-insert-random-hex)
   (define-key xah-user-keymap (kbd "i t") 'xah-insert-random-string)
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
-
   (define-key xah-user-keymap (kbd "j") 'xah-interactive-abbrev)
   (define-key xah-user-keymap (kbd "k") 'xah-find-replace-text)
   ;; l
@@ -174,58 +159,26 @@ Version 2020-04-09"
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
   (define-key xah-user-keymap (kbd "p") 'xah-find-text)
   (define-key xah-user-keymap (kbd "q") 'xah-replace-invisible-char)
-
   ;; r s t
   (define-key xah-user-keymap (kbd "t") 'xah-math-input-change-to-symbol)
-
   (define-key xah-user-keymap (kbd "u ,") 'xah-remove-punctuation-trailing-redundant-space )
   (define-key xah-user-keymap (kbd "u .") 'xah-convert-english-chinese-punctuation)
   (define-key xah-user-keymap (kbd "u [") 'xah-remove-square-brackets)
   (define-key xah-user-keymap (kbd "u b") 'xah-change-bracket-pairs)
-
   (define-key xah-user-keymap (kbd "u d") 'xah-fix-datetime)
   (define-key xah-user-keymap (kbd "u g") 'xah-convert-latin-alphabet-gothic)
-
   (define-key xah-user-keymap (kbd "u p") 'xah-convert-asian/ascii-space)
   (define-key xah-user-keymap (kbd "u p") 'xah-replace-profanity)
   (define-key xah-user-keymap (kbd "u t") 'xah-twitterfy)
   (define-key xah-user-keymap (kbd "u w") 'xah-convert-fullwidth-chars)
   (define-key xah-user-keymap (kbd "u x") 'xah-remove-quotes-or-brackets)
-
   ;;  v w x y z
-
   )
 
 ;; 2015-08-22 add these somewhere
 ;; 'xah-toggle-read-novel-mode
 ;; 'xah-toggle-margin-right
 ;; 'xah-toggle-line-spacing
-
-;; HHH___________________________________________________________________
-
-(when (boundp 'xah-elisp-mode-map)
-  (define-key xah-elisp-mode-map (kbd "<delete>") xah-elisp-mode-no-chord-map))
-
-(when (boundp 'xah-css-mode-no-chord-map)
-  (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map))
-
-(when (boundp 'xah-clojure-mode-map)
-    (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map))
-
-(progn
-  (require 'dired )
-  (define-key dired-mode-map (kbd "-") 'xah-dired-rename-space-to-underscore)
-  (define-key dired-mode-map (kbd "s") 'xah-dired-sort))
-
-(progn
-  (require 'info )
-  (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser))
-
-(when (boundp 'org-mode-hook)
-  (defun xah-org-mode-setup ()
-    "Modify keymaps used by `org-mode'."
-    (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
-  (add-hook 'org-mode-hook 'xah-org-mode-setup))
 
 ;; HHH___________________________________________________________________
 
@@ -248,6 +201,31 @@ Version 2021-01-15"
     (define-key xah-golang-leader-map (kbd "j") 'godef-jump)
     (define-key go-mode-map (kbd "<delete>") xah-golang-leader-map))
   (add-hook 'go-mode-hook 'xah-config-go-mode))
+
+(progn
+  (require 'dired )
+  (defun xah-config-dired ()
+    "Version 2021-01-17"
+    (interactive)
+    (define-prefix-command 'xah-dired-leader-map)
+    (define-key xah-dired-leader-map (kbd "d") 'xah-dired-image-autocrop)
+    (define-key xah-dired-leader-map (kbd "e") 'xah-dired-show-metadata)
+    (define-key xah-dired-leader-map (kbd "g") 'xah-dired-2drawing)
+    (define-key xah-dired-leader-map (kbd "h") 'xah-dired-scale-image)
+    (define-key xah-dired-leader-map (kbd "n") 'xah-dired-2png)
+    (define-key xah-dired-leader-map (kbd "p") 'xah-dired-open-in-gimp)
+    (define-key xah-dired-leader-map (kbd "t") 'xah-dired-2jpg)
+    (define-key xah-dired-leader-map (kbd "u") 'xah-dired-remove-all-metadata)
+    (define-key xah-dired-leader-map (kbd ".") 'xah-dired-optimize-png)
+    (define-key dired-mode-map (kbd "<delete>") xah-dired-leader-map)
+    ;;
+    (define-key dired-mode-map (kbd "-") 'xah-dired-rename-space-to-underscore)
+    (define-key dired-mode-map (kbd "s") 'xah-dired-sort)
+    ;;
+    )
+  (add-hook 'dired-mode-hook 'xah-config-dired)
+  ;;
+  )
 
 (when (fboundp 'xah-html-mode)
   (progn
@@ -281,6 +259,25 @@ Version 2021-01-15"
     (when (string-equal system-type "windows-nt")
       (define-key xah-html-mode-map (kbd "C-r") 'xah-html-browse-url-of-buffer)))
   (add-hook 'xah-html-mode-hook 'xah-config-xah-html-mode))
+
+(when (boundp 'xah-elisp-mode-map)
+  (define-key xah-elisp-mode-map (kbd "<delete>") xah-elisp-mode-no-chord-map))
+
+(when (boundp 'xah-css-mode-no-chord-map)
+  (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map))
+
+(when (boundp 'xah-clojure-mode-map)
+    (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map))
+
+(progn
+  (require 'info )
+  (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser))
+
+(when (boundp 'org-mode-hook)
+  (defun xah-org-mode-setup ()
+    "Modify keymaps used by `org-mode'."
+    (local-set-key (kbd "<C-tab>") 'xah-next-user-buffer))
+  (add-hook 'org-mode-hook 'xah-org-mode-setup))
 
 ;; HHH___________________________________________________________________
 

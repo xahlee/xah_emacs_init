@@ -1293,29 +1293,19 @@ Version 2019-07-22 2020-12-22"
           ["\"\n" "”\n"]
           ] "REPORT" "HILIGHT")
         ;; fix straight double quotes by regex
-        (xah-replace-regexp-pairs-region
-         (point-min) (point-max)
-         [
-          ;; ["\\`\"" "“"]
-          ;; ["\"\\([-A-Za-z0-9]+\\)\"" "“"]
-          ["\"\\([-A-Za-z0-9]+\\)\"" "“\\1”"]
-          ] "FIXEDCASE" "LITERAL-P" "HILIGHT")
+        ;; (xah-replace-regexp-pairs-region (point-min) (point-max) [ ["\"\\([-A-Za-z0-9]+\\)\"" "“\\1”"] ] "FIXEDCASE" nil "HILIGHT")
         (xah-single-quote-to-curly (point-min) (point-max))
         ;; fix back escaped quotes in code
-        (xah-replace-pairs-region
-         (point-min) (point-max)
-         [
-          ["\\”" "\\\""]
-          ["\\”" "\\\""]
-          ] "REPORT" "HILIGHT")
+        ;; (xah-replace-pairs-region (point-min) (point-max) [ ["\\”" "\\\""] ["\\”" "\\\""] ] "REPORT" "HILIGHT")
         ;; fix back. quotes in HTML code
-        (xah-replace-regexp-pairs-region
-         (point-min) (point-max)
-         [
-          ["” \\([-a-z]+\\)="       "\" \\1="] ; any 「” some-thing=」
-          ["=”" "=\""]
-          ["/” " "/\" "]
-          ["\\([0-9]+\\)” "     "\\1\" "]
-          ] "FIXEDCASE" nil "HILIGHT"
-         )))))
+        ;; (xah-replace-regexp-pairs-region
+        ;;  (point-min) (point-max)
+        ;;  [
+        ;;   ["” \\([-a-z]+\\)="       "\" \\1="] ; any 「” some-thing=」
+        ;;   ["=”" "=\""]
+        ;;   ["/” " "/\" "]
+        ;;   ["\\([0-9]+\\)” "     "\\1\" "]
+        ;;   ] "FIXEDCASE" nil "HILIGHT"
+        ;;  )
+        ))))
 
