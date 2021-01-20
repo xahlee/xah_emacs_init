@@ -239,6 +239,7 @@ Requires a python script. See code."
 (defun xah-move-image-file ( @toDirName  )
   "Move image file to another dir.
 from directories checked are:
+~/Pictures/ShareX/
 ~/Downloads/
 ~/Pictures/
 ~/Desktop/
@@ -246,13 +247,16 @@ from directories checked are:
 ~/
 /tmp/
 
-The first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
+If ~/Pictures/ShareX/ exist, use the first file ending in jpg or png there.
+Else, the first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
+
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 
 Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' afterwards.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2020-12-22 2021-01-14 2021-01-15"
+First version: 2019
+Version 2021-01-20"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -263,9 +267,9 @@ Version 2020-12-22 2021-01-14 2021-01-15"
         ($dirs '( "~/Downloads/" "~/Pictures/"
                   "~/Downloads/Pictures/"
                   "~/Desktop/" "~/Documents/" "~/" "/tmp" ))
+        ($shareXDir "C:/Users/xah/Pictures/ShareX/")
         ($randStr
          (let* (
-                ;; ($charset "bcdfghjkmnpqrstvwxyz23456789")
                 ($charset "bcdfghjkmnpqrstvwxyz23456789BCDFGHJKMNPQRSTVWXYZ")
                 ($len (length $charset))
                 ($randlist nil))
@@ -273,15 +277,22 @@ Version 2020-12-22 2021-01-14 2021-01-15"
              (push (char-to-string (elt $charset (random $len)))  $randlist))
            (mapconcat 'identity $randlist ""))))
     (setq $fromPath
-          (catch 'TAG
-            (dolist (xdir $dirs )
-              (when (file-exists-p xdir)
-                (let ((flist (directory-files xdir t "^ee\\|^tt\\|^IMG_\\|^Screen Shot\\|^Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
-                  (if flist
-                      (progn
-                        (throw 'TAG (car flist)))
-                    nil
-                    ))))))
+          (when (file-exists-p $shareXDir )
+            (setq $flist (directory-files $shareXDir t "jpg$\\|png$" t))
+            (if (> (length $flist) 0)
+                (car $flist)
+              nil)))
+    (when (not $fromPath)
+      (setq $fromPath
+            (catch 'TAG
+              (dolist (xdir $dirs )
+                (when (file-exists-p xdir)
+                  (let (($flist (directory-files xdir t "^ee\\|^tt\\|^IMG_\\|^Screen Shot\\|^Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
+                    (if $flist
+                        (progn
+                          (throw 'TAG (car $flist)))
+                      nil
+                      )))))))
     (when (not $fromPath)
       (error "no file name starts with ee nor contain “Screen Shot” at dirs %s" $dirs))
     (setq $ext
