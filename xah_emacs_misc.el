@@ -382,11 +382,11 @@ Version 2017-02-02"
         ("delete mac junk DS_Store __MACOSX" . "find . -name \".DS_Store\" -delete;
 find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
 
-        ;; ("delete __MACOSX" . "find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
+        ("delete __MACOSX" . "find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
 
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-        ("delete emacs backup~" . "C:/ProgramData/chocolatey/bin/find.exe . -name \"*~\" -delete")
-        ("clean xah sites~" . "find ~/web/ -name \"*~\" -delete")
+        ("delete emacs backup~" . "find . -name \"*~\" -delete")
+        ("delete backup~" . "Get-ChildItem * -Recurse -Include *~ | Remove-Item")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
 
