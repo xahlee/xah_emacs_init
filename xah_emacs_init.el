@@ -52,10 +52,36 @@ Version 2017-07-19"
 (add-to-list 'load-path "~/git/xeu_elisp_util.el/")
 (require 'xeu_elisp_util)
 
-(add-to-list 'load-path "~/git/xah-fly-keys/")
-(require 'xah-fly-keys)
-(xah-fly-keys-set-layout "dvorak")
-(xah-fly-keys 1)
+(progn
+  (add-to-list 'load-path "~/git/xah-fly-keys/")
+  (require 'xah-fly-keys)
+  (xah-fly-keys-set-layout "dvorak")
+  (xah-fly-keys 1)
+  (setq
+   xah-run-current-file-map
+   '(
+     ("php" . "php")
+     ("pl" . "perl")
+     ("py" . "python")
+     ("py2" . "python")
+     ("py3" . "C:/Python39/python.exe")
+     ("rb" . "ruby")
+     ("go" . "go run")
+     ("hs" . "runhaskell")
+     ("js" . "deno run")
+     ("ts" . "deno run") ; TypeScript
+     ("tsx" . "tsc")
+     ("mjs" . "node --experimental-modules ")
+     ("sh" . "bash")
+     ("clj" . "java -cp ~/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
+     ("rkt" . "racket")
+     ("ml" . "ocaml")
+     ("vbs" . "cscript")
+     ("tex" . "pdflatex")
+     ("latex" . "pdflatex")
+     ("java" . "javac")
+     ;; ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
+     )))
 
 (progn
   (require 'xah-text-mode)

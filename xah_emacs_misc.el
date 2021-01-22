@@ -386,8 +386,8 @@ find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
         ("delete __MACOSX" . "find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
 
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
-        ("delete emacs backup~" . "find . -name \"*~\" -delete")
-        ("delete backup~" . "Get-ChildItem * -Recurse -Include *~ | Remove-Item")
+        ("unix delete emacs backup~" . "find . -name \"*~\" -delete")
+        ("pwsh delete emacs backup~" . "Get-ChildItem * -Recurse -Include *~ | Remove-Item")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
 
