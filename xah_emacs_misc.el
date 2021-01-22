@@ -372,6 +372,7 @@ Version 2017-02-02"
 
         ("grep" . "grep -r -F \"hhhh\" --include='*html' ~/web")
         ("gitdiff" . "git --no-pager diff --color --no-index f1 f2")
+        ("powershell diff" . "diff (cat f1) (cat f2) ")
         ("ytd" . "youtube-dl -f 'bestvideo,bestaudio' -o 'f%(format_id)s.%(ext)s' url")
 
         ("delete metadata" . "exiftool -all= -overwrite_original *jpg")
@@ -392,9 +393,7 @@ find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
 
         ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
         ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=76 xxxxxxurl > xxfileName.txt")
-        ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")
-
-        ))
+        ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")))
 
 (defun xah-interactive-abbrev ()
   "Prompt to insert string from a alist ‘xah-interactive-abbrev-alist’
