@@ -293,7 +293,8 @@ Version 2021-01-15"
 
 (progn
   (require 'info )
-  (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser))
+  (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser)
+  (define-key Info-mode-map (kbd "C-r") 'xah-view-emacs-manual-in-browser))
 
 (when (boundp 'org-mode-hook)
   (defun xah-org-mode-setup ()

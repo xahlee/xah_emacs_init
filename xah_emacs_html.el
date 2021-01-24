@@ -267,7 +267,7 @@ Version 2021-01-20"
         ($dirs '( "~/Downloads/" "~/Pictures/"
                   "~/Downloads/Pictures/"
                   "~/Desktop/" "~/Documents/" "~/" "/tmp" ))
-        ($shareXDir "C:/Users/xah/Pictures/ShareX/")
+        ($shareXDir "~/Pictures/ShareX/")
         ($randStr
          (let* (
                 ($charset "bcdfghjkmnpqrstvwxyz23456789BCDFGHJKMNPQRSTVWXYZ")

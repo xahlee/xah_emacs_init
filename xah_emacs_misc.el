@@ -361,6 +361,13 @@ Version 2017-02-02"
 
 (setq xah-interactive-abbrev-alist
       '(
+        ("PowerShell diff" . "diff (cat f1) (cat f2) ")
+        ("PowerShell emacs backup~" . "Get-ChildItem * -Recurse -Include *~")
+        ("PowerShell .DS_Store" . "Get-ChildItem * -Recurse -Include '.DS_Store'")
+        ("PowerShell #emacs_auto_save#" . "Get-ChildItem * -Recurse -Include '#*#'")
+        ("PowerShell htaccess" . "Get-ChildItem * -Recurse -Include '.htaccess'")
+        ("PowerShell xx temp file" . "Get-ChildItem * -Recurse -Include 'xx*'")
+
         ("img1" . "convert -quality 85% ")
         ("imgScale" . "convert -scale 50% -quality 85% ")
         ("img256" . "convert +dither -colors 256 ")
@@ -372,7 +379,6 @@ Version 2017-02-02"
 
         ("grep" . "grep -r -F \"hhhh\" --include='*html' ~/web")
         ("gitdiff" . "git --no-pager diff --color --no-index f1 f2")
-        ("powershell diff" . "diff (cat f1) (cat f2) ")
         ("ytd" . "youtube-dl -f 'bestvideo,bestaudio' -o 'f%(format_id)s.%(ext)s' url")
 
         ("delete metadata" . "exiftool -all= -overwrite_original *jpg")
@@ -387,13 +393,13 @@ find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
 
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
         ("unix delete emacs backup~" . "find . -name \"*~\" -delete")
-        ("pwsh delete emacs backup~" . "Get-ChildItem * -Recurse -Include *~ | Remove-Item")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
 
         ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
         ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=76 xxxxxxurl > xxfileName.txt")
-        ("viewp" . "setsid feh --randomize --recursive --auto-zoom --action \"gvfs-trash '%f'\" --geometry 1600x980+10+10 .")))
+
+))
 
 (defun xah-interactive-abbrev ()
   "Prompt to insert string from a alist ‘xah-interactive-abbrev-alist’
