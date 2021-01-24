@@ -61,6 +61,8 @@
     ("rly" "really" )
     ("rt" "return" )
     ("sd" "should" )
+    ("sdv" "should have" )
+    ("sdvb" "should have been" )
     ("sts" "sometimes" )
     ("sth" "something" )
     ("th" "there" )

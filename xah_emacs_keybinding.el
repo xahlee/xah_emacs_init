@@ -153,8 +153,7 @@ Version 2020-04-09"
   (define-key xah-user-keymap (kbd "i n") 'xah-insert-random-uuid)
   (define-key xah-user-keymap (kbd "j") 'xah-interactive-abbrev)
   (define-key xah-user-keymap (kbd "k") 'xah-find-replace-text)
-  ;; l
-  (define-key xah-user-keymap (kbd "m") 'xah-move-image-file)
+  ;; l m
   ;; n
   (define-key xah-user-keymap (kbd "o") 'xah-open-file-from-clipboard)
   (define-key xah-user-keymap (kbd "p") 'xah-find-text)
@@ -253,6 +252,7 @@ Version 2021-01-15"
   (progn
     (define-key xah-html-leader-map (kbd "SPC s") 'xah-insert-reference-span-tag)
     (define-key xah-html-leader-map (kbd "SPC e") 'xah-atom-new-entry)
+    (define-key xah-html-leader-map (kbd "SPC m") 'xah-move-image-file)
     (define-key xah-html-leader-map (kbd "SPC u") 'xah-update-article-timestamp)
     (define-key xah-html-leader-map (kbd "SPC t") 'xah-html-wrap-big-tag)
     (define-key xah-html-leader-map (kbd "SPC c") 'xah-angle-brackets-to-html)
@@ -261,6 +261,7 @@ Version 2021-01-15"
     (define-key xah-html-leader-map (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
     (define-key xah-html-leader-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)
     (define-key xah-html-leader-map (kbd "SPC r r") 'xah-add-to-related-links)
+
     (define-key xah-html-leader-map (kbd "o") nil)
     (define-key xah-html-leader-map (kbd "o a") 'xah-words-annotate)
     (define-key xah-html-leader-map (kbd "o e") 'xah-words-bold-word)
