@@ -238,7 +238,10 @@ Requires a python script. See code."
 
 (defun xah-move-image-file ( @toDirName  )
   "Move image file to another dir.
-from directories checked are:
+
+If ~/Pictures/ShareX/ exist, use the first file ending in jpg or png there.
+Else, check these dir:
+
 ~/Pictures/ShareX/
 ~/Downloads/
 ~/Pictures/
@@ -247,8 +250,7 @@ from directories checked are:
 ~/
 /tmp/
 
-If ~/Pictures/ShareX/ exist, use the first file ending in jpg or png there.
-Else, the first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
+The first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
 
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 
@@ -256,7 +258,7 @@ Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' 
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
 First version: 2019
-Version 2021-01-20"
+Version 2021-01-24"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -440,24 +442,25 @@ Version 2018-12-24"
 
 
 (defvar xahsite-new-page-template
- nil "a alist, the first element is a dir, second is a file name in that dir. Used by `xahsite-new-page' as base template.")
-
+ nil "A alist, the first element is a dir, second is a file name in that dir. Used by `xahsite-new-page' as base template.")
 (setq xahsite-new-page-template
       '(
-        ("/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
-        ("/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
-        ("/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
-        ("/Users/xah/web/wordyenglish_com/lit/" . "capitalists_vs_communists_chess_set.html")
-        ("/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
-        ("/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
-        ("/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
-        ("/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
-        ("/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
-        ("/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
-        ("/Users/xah/web/xahlee_info/math/" . "math_books.html")
-        ("/Users/xah/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
-        ("/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
-        ("/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
+        ("~/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
+        ("~/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
+        ("~/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
+        ("~/web/wordyenglish_com/lit/" . "capitalists_vs_communists_chess_set.html")
+        ("~/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
+        ("~/web/xaharts_org/dinju/" . "Petronas_towers.html")
+        ("~/web/xaharts_org/movie/" . "brazil_movie.html")
+        ("~/web/xahlee_info/comp/" . "artificial_neural_network.html")
+        ("~/web/xahlee_info/golang/" . "golang_run.html")
+
+
+        ("~/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
+        ("~/web/xahlee_info/math/" . "math_books.html")
+        ("~/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
+        ("~/web/xahlee_info/w/" . "spam_farm_2018.html")
+        ("~/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
         ;;
         ))
 
@@ -465,35 +468,35 @@ Version 2018-12-24"
   "Make a new blog page.
 
 The base template depends on the variable `xahsite-new-page-paths'.
-Version 2020-07-16"
+Version 2020-07-16 2021-01-24"
   (interactive)
   (let* (
-         ($cur-fpath (buffer-file-name))
-         ($dir-path (file-name-directory $cur-fpath))
-         ($temp-fname (cdr (assoc $dir-path xahsite-new-page-template)))
-         ($temp-fpath (concat $dir-path $temp-fname))
+         (curFile (buffer-file-name))
+         (dirPath (file-name-directory (expand-file-name curFile)))
+         (tempFname (cdr (assoc dirPath xahsite-new-page-template)))
+         (tempFpath (concat dirPath tempFname))
          (p1 (line-beginning-position))
          (p2 (line-end-position))
-         ($title1 (downcase (buffer-substring-no-properties p1 p2)))
-         ($fnameBase (replace-regexp-in-string " +\\|/" "_" $title1 ))
-         ($fpath (format "%s%s.html" (file-name-directory $temp-fpath) $fnameBase))
+         (xTitle (downcase (buffer-substring-no-properties p1 p2)))
+         (fnameBase (replace-regexp-in-string " +\\|/" "_" xTitle ))
+         (xFPath (format "%s%s.html" (file-name-directory tempFpath) fnameBase))
          p3
          )
-    (if (file-exists-p $fpath)
-        (message "file exist: %s" $fpath)
+    (if (file-exists-p xFPath)
+        (message "file exist: %s" xFPath)
       (progn
-        (find-file $fpath)
-        (insert-file-contents $temp-fpath )
+        (find-file xFPath)
+        (insert-file-contents tempFpath )
         (progn
           (goto-char (point-min))
           (search-forward "<title>" )
-          (insert $title1)
+          (insert xTitle)
           (setq p3 (point))
           (skip-chars-forward "^<")
           (delete-region p3 (point))
 
           (search-forward "<h1>" )
-          (insert $title1)
+          (insert xTitle)
           (setq p3 (point))
           (skip-chars-forward "^<")
           (delete-region p3 (point))
@@ -521,7 +524,7 @@ Version 2020-07-16"
           ;;
           ))
       (delete-region p1 p2)
-      (insert $fpath)
+      (insert xFPath)
 
       (xah-all-linkify)
       (search-backward "\"")
