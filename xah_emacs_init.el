@@ -104,6 +104,7 @@ Version 2017-07-19"
   (require 'xah-css-mode))
 
 (progn
+  (add-to-list 'load-path "~/git/xah_emacs_init/")
   (require 'htmlize)
   (when (fboundp 'htmlize-region)
     (setq htmlize-convert-nonascii-to-entities nil)
