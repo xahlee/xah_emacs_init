@@ -104,13 +104,15 @@ Version 2017-07-19"
   (require 'xah-css-mode))
 
 (progn
-  (add-to-list 'load-path "~/git/xah_emacs_init/")
-  (require 'htmlize)
+  (load "~/git/xah_emacs_init/htmlize")
   (when (fboundp 'htmlize-region)
     (setq htmlize-convert-nonascii-to-entities nil)
     (setq htmlize-html-charset "utf-8")
     (setq htmlize-untabify nil)
     (setq htmlize-generate-hyperlinks nil)))
+
+(progn
+  (load "~/git/xah_emacs_init/smex"))
 
 ;; (progn
 ;;   (require 'command-log-mode)
