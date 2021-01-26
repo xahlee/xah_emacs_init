@@ -443,22 +443,20 @@ Version 2018-12-24"
  nil "A alist, the first element is a dir, second is a file name in that dir. Used by `xahsite-new-page' as base template.")
 (setq xahsite-new-page-template
       '(
-        ("~/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
-        ("~/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
-        ("~/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
-        ("~/web/wordyenglish_com/lit/" . "capitalists_vs_communists_chess_set.html")
-        ("~/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
-        ("~/web/xaharts_org/dinju/" . "Petronas_towers.html")
-        ("~/web/xaharts_org/movie/" . "brazil_movie.html")
-        ("~/web/xahlee_info/comp/" . "artificial_neural_network.html")
-        ("~/web/xahlee_info/golang/" . "golang_run.html")
-
-
-        ("~/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
-        ("~/web/xahlee_info/math/" . "math_books.html")
-        ("~/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
-        ("~/web/xahlee_info/w/" . "spam_farm_2018.html")
-        ("~/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
+        ("c:/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
+        ("c:/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
+        ("c:/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
+        ("c:/Users/xah/web/wordyenglish_com/lit/" . "capitalists_vs_communists_chess_set.html")
+        ("c:/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
+        ("c:/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
+        ("c:/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
+        ("c:/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
+        ("c:/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
+        ("c:/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
+        ("c:/Users/xah/web/xahlee_info/math/" . "math_books.html")
+        ("c:/Users/xah/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
+        ("c:/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
+        ("c:/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
         ;;
         ))
 
@@ -470,7 +468,7 @@ Version 2020-07-16 2021-01-24"
   (interactive)
   (let* (
          (curFile (buffer-file-name))
-         (dirPath (file-name-directory (expand-file-name curFile)))
+         (dirPath (file-name-directory curFile))
          (tempFname (cdr (assoc dirPath xahsite-new-page-template)))
          (tempFpath (concat dirPath tempFname))
          (p1 (line-beginning-position))
