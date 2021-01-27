@@ -14,23 +14,37 @@
 (setq inhibit-startup-screen t)
 
 (if (display-graphic-p)
-    (setq initial-frame-alist
-          '(
-            (tool-bar-lines . 0)
-            (background-color . "honeydew")
-            (width . 90)
-            (height . 50)
-            ;; (left . 50)
-            ;; (top . 50)
-            ))
-  (setq initial-frame-alist '( (tool-bar-lines . 0))))
+    (cond
+     ( (string-equal (system-name) "XGPC")
+       (setq default-frame-alist
+             '(
+               (tool-bar-lines . 0)
+               (background-color . "honeydew")
+               (width . 90)
+               (height . 56)
+               ;; (left . 50)
+               ;; (top . 50)
+               )))
+     ( (string-equal (system-name) "XPC")
+       (setq default-frame-alist
+             '(
+               (tool-bar-lines . 0)
+               (background-color . "honeydew")
+               (width . 90)
+               (height . 50))))
+     ( t nil))
+  nil
+  )
 
-(setq default-frame-alist
-      '(
-        (tool-bar-lines . 0)
-        (background-color . "honeydew")
-        (width . 90)
-        (height . 50)))
+;; (if (display-graphic-p)
+;;     (setq initial-frame-alist
+;;           '(
+;;             (tool-bar-lines . 0)
+;;             (background-color . "honeydew")
+;;             (width . 90)
+;;             (height . 50)
+;;             ))
+;;   (setq initial-frame-alist '( (tool-bar-lines . 0))))
 
 ;; HHH___________________________________________________________________
 ;; Emacs: Font Setup http://ergoemacs.org/emacs/emacs_list_and_set_font.html
@@ -164,8 +178,6 @@ Version 2019-11-05"
 (setq set-mark-command-repeat-pop t)
 (setq mark-ring-max 5)
 (setq global-mark-ring-max 5)
-
-
 
 ;; HHH___________________________________________________________________
 
