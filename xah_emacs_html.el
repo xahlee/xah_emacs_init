@@ -438,27 +438,8 @@ Version 2018-12-24"
     ;;
     ))
 
-
 (defvar xahsite-new-page-template
  nil "A alist, the first element is a dir, second is a file name in that dir. Used by `xahsite-new-page' as base template.")
-(setq xahsite-new-page-template
-      '(
-        ("c:/Users/xah/web/ergoemacs_org/emacs/" . "ErgoEmacs_logo.html")
-        ("c:/Users/xah/web/ergoemacs_org/misc/" . "Daniel_Weinreb_died.html")
-        ("c:/Users/xah/web/wordyenglish_com/chinese/" . "Zhuangzi.html")
-        ("c:/Users/xah/web/wordyenglish_com/lit/" . "capitalists_vs_communists_chess_set.html")
-        ("c:/Users/xah/web/xaharts_org/arts/" . "Hunger_Games_eyelash.html")
-        ("c:/Users/xah/web/xaharts_org/dinju/" . "Petronas_towers.html")
-        ("c:/Users/xah/web/xaharts_org/movie/" . "brazil_movie.html")
-        ("c:/Users/xah/web/xahlee_info/comp/" . "artificial_neural_network.html")
-        ("c:/Users/xah/web/xahlee_info/golang/" . "golang_run.html")
-        ("c:/Users/xah/web/xahlee_info/kbd/" . "3m_ergonomic_mouse.html")
-        ("c:/Users/xah/web/xahlee_info/math/" . "math_books.html")
-        ("c:/Users/xah/web/xahlee_info/talk_show/" . "xah_talk_show_2019-03-05_unicode.html")
-        ("c:/Users/xah/web/xahlee_info/w/" . "spam_farm_2018.html")
-        ("c:/Users/xah/web/xahmusic_org/music/" . "Disney_Frozen__let_it_go.html")
-        ;;
-        ))
 
 (defun xahsite-new-page ()
   "Make a new blog page.
@@ -468,21 +449,21 @@ Version 2020-07-16 2021-01-24"
   (interactive)
   (let* (
          (curFile (buffer-file-name))
-         (dirPath (file-name-directory curFile))
-         (tempFname (cdr (assoc dirPath xahsite-new-page-template)))
-         (tempFpath (concat dirPath tempFname))
+         (curDirPath (file-name-directory curFile))
+         (templateFname (cdr (assoc curDirPath xahsite-new-page-template)))
+         (templateFpath (concat curDirPath templateFname))
          (p1 (line-beginning-position))
          (p2 (line-end-position))
          (xTitle (downcase (buffer-substring-no-properties p1 p2)))
          (fnameBase (replace-regexp-in-string " +\\|/" "_" xTitle ))
-         (xFPath (format "%s%s.html" (file-name-directory tempFpath) fnameBase))
+         (xFPath (format "%s%s.html" (file-name-directory templateFpath) fnameBase))
          p3
          )
     (if (file-exists-p xFPath)
         (message "file exist: %s" xFPath)
       (progn
         (find-file xFPath)
-        (insert-file-contents tempFpath )
+        (insert-file-contents templateFpath )
         (progn
           (goto-char (point-min))
           (search-forward "<title>" )
