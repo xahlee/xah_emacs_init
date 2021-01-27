@@ -13,38 +13,21 @@
 
 (setq inhibit-startup-screen t)
 
-(if (display-graphic-p)
-    (cond
-     ( (string-equal (system-name) "XGPC")
-       (setq default-frame-alist
-             '(
-               (tool-bar-lines . 0)
+(setq default-frame-alist
+      (if (display-graphic-p)
+          (cond
+           ( (string-equal (upcase (system-name))  "XGPC")
+             '((tool-bar-lines . 0)
                (background-color . "honeydew")
                (width . 90)
-               (height . 56)
-               ;; (left . 50)
-               ;; (top . 50)
-               )))
-     ( (string-equal (system-name) "XPC")
-       (setq default-frame-alist
-             '(
-               (tool-bar-lines . 0)
+               (height . 56)))
+           ( (string-equal (upcase (system-name)) "XPC")
+             '((tool-bar-lines . 0)
                (background-color . "honeydew")
                (width . 90)
-               (height . 50))))
-     ( t nil))
-  nil
-  )
-
-;; (if (display-graphic-p)
-;;     (setq initial-frame-alist
-;;           '(
-;;             (tool-bar-lines . 0)
-;;             (background-color . "honeydew")
-;;             (width . 90)
-;;             (height . 50)
-;;             ))
-;;   (setq initial-frame-alist '( (tool-bar-lines . 0))))
+               (height . 50)))
+           ( t nil))
+        '( (tool-bar-lines . 0))))
 
 ;; HHH___________________________________________________________________
 ;; Emacs: Font Setup http://ergoemacs.org/emacs/emacs_list_and_set_font.html
