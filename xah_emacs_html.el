@@ -554,8 +554,9 @@ Version 2020-09-05"
       (goto-char (point-min))
       (when (re-search-forward "[,0-9]+ views" ) (replace-match ""))
       (search-forward "•" ) (replace-match "")
-      ;; •Aug 15, 2016
-      (re-search-forward "[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}")
+      (if (re-search-forward "[A-Z][a-z][a-z] [0-9][0-9]?, [0-9]\\{4,4\\}" nil "NOERROR") ;; •Aug 15, 2016
+          nil
+        (re-search-forward "[0-9]+ hours ago" ))
       ;; thumb up/down count
       (when (re-search-forward "[.0-9]+[KM]?\n\n?[.0-9]+[KM]?\n" ) (replace-match ""))
       (let ((case-fold-search t))
