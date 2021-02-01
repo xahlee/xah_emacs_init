@@ -362,44 +362,34 @@ Version 2017-02-02"
 (setq xah-interactive-abbrev-alist
       '(
         ("PowerShell diff" . "diff (cat f1) (cat f2) ")
-        ("PowerShell emacs backup~" . "Get-ChildItem * -Recurse -Include *~")
-        ("PowerShell .DS_Store" . "Get-ChildItem * -Recurse -Include '.DS_Store'")
-        ("PowerShell #emacs_auto_save#" . "Get-ChildItem * -Recurse -Include '#*#'")
-        ("PowerShell htaccess" . "Get-ChildItem * -Recurse -Include '.htaccess'")
-        ("PowerShell xx temp file" . "Get-ChildItem * -Recurse -Include 'xx*'")
-
-        ("img1" . "convert -quality 85% ")
-        ("imgScale" . "convert -scale 50% -quality 85% ")
-        ("img256" . "convert +dither -colors 256 ")
-        ("imgBatch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
-        ("img-bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
+        ("PowerShell emacs backup~" . "Get-ChildItem . -name -Recurse -Include *~")
+        ("PowerShell .DS_Store" . "Get-ChildItem . -name -Recurse -Include '.DS_Store'")
+        ("PowerShell #emacs_auto_save#" . "Get-ChildItem . -name -Recurse -Include '#*#'")
+        ("PowerShell htaccess" . "Get-ChildItem . -Recurse -name -Include '.htaccess'")
+        ("PowerShell xx temp file" . "Get-ChildItem . -name -Recurse -Include 'xx*'")
+        ("image convert" . "convert -quality 85% ")
+        ("image scale" . "convert -scale 50% -quality 85% ")
+        ("image 256" . "convert +dither -colors 256 ")
+        ("image Batch" . "find . -name \"*png\" | xargs -l -i basename \"{}\" \".png\" | xargs -l -i  convert -quality 85% \"{}.png\" \"{}.jpg\"")
+        ("image -bmp2png" . "find . -name \"*bmp\" | xargs -l -i basename \"{}\" \".bmp\" | xargs -l -i  convert \"{}.bmp\" \"{}.png\"")
         ("gif to webm" . "ffmpeg -f gif -i x.gif x.webm")
         ("gif to mp4" . "ffmpeg -f gif -i x.gif x.mp4")
         ("mov to mp4" . "ffmpeg -f mov -i x.mov x.mp4")
-
         ("grep" . "grep -r -F \"hhhh\" --include='*html' ~/web")
         ("gitdiff" . "git --no-pager diff --color --no-index f1 f2")
         ("ytd" . "youtube-dl -f 'bestvideo,bestaudio' -o 'f%(format_id)s.%(ext)s' url")
-
         ("delete metadata" . "exiftool -all= -overwrite_original *jpg")
         ("delete mac attribute" . "xattr -c *png")
-
         ("delete empty file" . "find . -type f -empty")
-
         ("delete mac junk DS_Store __MACOSX" . "find . -name \".DS_Store\" -delete;
 find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
-
         ("delete __MACOSX" . "find . -depth -name \"__MACOSX\" -type d -exec rm -rf {} ';'")
-
         ("chmod file" . "find . -type f -exec chmod 644 {} ';'")
         ("unix delete emacs backup~" . "find . -name \"*~\" -delete")
         ("find empty dir" . "find . -depth -empty -type d")
         ("delete empty dir" . "find . -depth -empty -type d -delete")
-
         ("chmod2" . "find . -type d -exec chmod 755 {} ';'")
-        ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=76 xxxxxxurl > xxfileName.txt")
-
-))
+        ("lynx" . "lynx -dump -assume_local_charset=utf-8 -display_charset=utf-8 -width=76 xxxxxxurl > xxfileName.txt")))
 
 (defun xah-interactive-abbrev ()
   "Prompt to insert string from a alist ‘xah-interactive-abbrev-alist’
