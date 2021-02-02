@@ -25,7 +25,7 @@
              '((tool-bar-lines . 0)
                (background-color . "honeydew")
                (width . 90)
-               (height . 50)))
+               (height . 46)))
            ( t nil))
         '( (tool-bar-lines . 0))))
 
