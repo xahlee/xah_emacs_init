@@ -438,19 +438,44 @@ Version 2018-12-24"
     ;;
     ))
 
-(defvar xahsite-new-page-template
- nil "A alist, the first element is a dir, second is a file name in that dir. Used by `xahsite-new-page' as base template.")
+(defvar xahsite-new-page-paths nil
+  "A list of file paths that's used as template for creating a new xah site page. Used by `xahsite-new-page'.")
+(setq xahsite-new-page-paths
+      '(
+        "c:/Users/xah/web/ergoemacs_org/emacs/ErgoEmacs_logo.html"
+        "c:/Users/xah/web/ergoemacs_org/misc/Daniel_Weinreb_died.html"
+        "c:/Users/xah/web/wordyenglish_com/chinese/Zhuangzi.html"
+        "c:/Users/xah/web/wordyenglish_com/lit/capitalists_vs_communists_chess_set.html"
+        "c:/Users/xah/web/xaharts_org/arts/Hunger_Games_eyelash.html"
+        "c:/Users/xah/web/xaharts_org/dinju/Petronas_towers.html"
+        "c:/Users/xah/web/xaharts_org/movie/brazil_movie.html"
+        "c:/Users/xah/web/xahlee_info/comp/artificial_neural_network.html"
+        "c:/Users/xah/web/xahlee_info/golang/golang_run.html"
+        "c:/Users/xah/web/xahlee_info/js/js.html"
+        "c:/Users/xah/web/xahlee_info/kbd/3m_ergonomic_mouse.html"
+        "c:/Users/xah/web/xahlee_info/math/math_books.html"
+        "c:/Users/xah/web/xahlee_info/mswin/xah_windows_setup.html"
+        "c:/Users/xah/web/xahlee_info/talk_show/xah_talk_show_2019-03-05_unicode.html"
+        "c:/Users/xah/web/xahlee_info/w/spam_farm_2018.html"
+        "c:/Users/xah/web/xahlee_org/Periodic_dosage_dir/sarah_jeong.html"
+        "c:/Users/xah/web/xahlee_org/sex/Camille_Paglia_free_women_free_men.html"
+        "c:/Users/xah/web/xahmusic_org/music/Disney_Frozen__let_it_go.html"
+        "c:/Users/xah/web/xahporn_org/porn/birth_of_a_Nokia.html"
+        ;;
+        ))
 
 (defun xahsite-new-page ()
   "Make a new blog page.
-
 The base template depends on the variable `xahsite-new-page-paths'.
-Version 2020-07-16 2021-01-24"
+Version 2020-07-16 2021-02-02"
   (interactive)
   (let* (
          (curFile (buffer-file-name))
          (curDirPath (file-name-directory curFile))
-         (templateFname (cdr (assoc curDirPath xahsite-new-page-template)))
+         (templateFname (cdr (assoc curDirPath (mapcar
+                                                (lambda (x)
+                                                  (cons (file-name-directory x) (file-name-nondirectory x)))
+                                                xahsite-new-page-paths))))
          (templateFpath (concat curDirPath templateFname))
          (p1 (line-beginning-position))
          (p2 (line-end-position))
@@ -471,35 +496,27 @@ Version 2020-07-16 2021-01-24"
           (setq p3 (point))
           (skip-chars-forward "^<")
           (delete-region p3 (point))
-
           (search-forward "<h1>" )
           (insert xTitle)
           (setq p3 (point))
           (skip-chars-forward "^<")
           (delete-region p3 (point))
           (search-forward "</h1>" )
-
           (when (search-forward "<div class=\"byline\">By Xah Lee. Date: <time>" nil t)
             (insert (format-time-string "%Y-%m-%d"))
             (setq p3 (point))
             (search-forward "</div>" )
             (delete-region p3 (point))
             (insert "</time>.</div>"))
-
           (setq p3 (point))
-
           (when
               (search-forward "ads_bottom_dtpcz" nil t)
             (search-backward "<")
             (delete-region p3 (point))
             (insert "\n\n\n\n")
             (backward-char 2))
-
           (save-buffer )
-          (kill-buffer )
-
-          ;;
-          ))
+          (kill-buffer )))
       (delete-region p1 p2)
       (insert xFPath)
 
