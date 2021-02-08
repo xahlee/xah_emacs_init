@@ -269,7 +269,7 @@
     ("pct" "political correctness" )
     ("pl" "programing language" )
     ("qna" "questions and answers" )
-    ("sa" "See also" )
+    ("sa" "See also:" )
     ("sj" "social justice" )
     ("wip" "work in progress" )
 
@@ -333,6 +333,7 @@
     ("wml" "Windows, Mac, Linux")
 
     ;; computing, proper noun
+
     ("ahk" "AutoHotkey" )
     ("cj" "Clojure" )
     ("cl" "Common Lisp" )
@@ -346,8 +347,8 @@
     ("jvm" "Java Virtual Machine" )
     ("lsl" "Linden Scripting Language" )
     ("mac" "Mac" )
-    ("macosx" "Mac OS X" )
     ("macos" "macOS" )
+    ("macosx" "Mac OS X" )
     ("mma" "Mathematica" )
     ("ms" "Microsoft" )
     ("msvs" "Microsoft Visual Studio" )
@@ -359,10 +360,12 @@
     ("tek" "Truly Ergonomic keyboard" )
     ("tst" "TypeScript" )
     ("vb" "Visual Basic" )
+    ("wfs" "WolframScript" )
     ("wl" "Wolfram Language" )
     ("yt" "YouTube" )
 
     ;; programing
+
     ("eq" "==" )
     ("eqq" "===" )
     ("eqt" "=\"▮\"" )
