@@ -477,7 +477,6 @@ QQ: http://user.qzone.qq.com/2609322939" )
 
       ("pl" "fmt.Println(▮)")
       ("r" "return")
-      ("st" "string")
       ("eq" "==")
       ("v" "var ▮ = ")
       ("df" "x := 3")

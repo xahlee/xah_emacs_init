@@ -54,7 +54,7 @@ Version 2018-12-07 2020-09-22"
         (replace-match (make-string 2 ?\n)))))
   (let ($p1 $p2 $num $bufferTextOrig )
     (push-mark)
-    (goto-char 1)
+    (goto-char (point-min))
     (when (search-forward "<div class=\"byline\">" nil)
       (progn ;; set $p1 $p2. they are boundaries of inner text
         (setq $p1 (point))
@@ -389,54 +389,47 @@ todo
 ;; HHH___________________________________________________________________
 
 (defun xah-copy-html-by-link ()
-  "clone a html page, see:
-
+  "Make a copy of a html file via link.
+Explanation:
 current buffer is a html file,
-it contains 2 lines, each is a href link.
-place cursor on the link of first line.
-This command will clone the file, from the 1st link's content, into the second link.
-The 2nd link file normally do not exit. it'll be created.
-
-Version 2018-12-24"
+and contains 2 lines, each is a href link, each on a line by itself, example:
+<a href=\"cat.html\">my cat</a>
+<a href=\"dog.html\">my dog</a>
+place cursor on the href value part of first line.
+Call this command.
+This command will copy the file, from the 1st link's content, into the second link.
+The second link file normally do not exist. It'll be created.
+Version 2018-12-24 2021-02-09"
   (interactive)
-  (let ( p1 p2 fPath1 fPath2 doitp
-            bds p3 p4 buf
-            title)
-    (progn
-      (search-backward " href=")
-      (forward-char 7)
-      (setq p1 (point))
-      (search-forward "\"" (line-end-position))
-      (backward-char 1)
-      (setq p2 (point))
-      (setq fPath1 (expand-file-name (buffer-substring-no-properties p1 p2))))
-    (progn
-      (search-forward "href=\"")
-      (setq p1 (point))
-      (search-forward "\"" (line-end-position))
-      (backward-char 1)
-      (setq p2 (point))
-      (setq fPath2 (expand-file-name (buffer-substring-no-properties p1 p2))))
-    (if (file-exists-p fPath2)
-        (progn
-          (setq doitp (yes-or-no-p (format "file 2 「%s」 exist. continue and replace?" fPath2))))
-      (setq doitp t))
-    (when doitp
-      (setq buf (find-file fPath2))
-      (erase-buffer)
-      (insert-file-contents fPath1 )
-      (save-buffer buf)
-      (kill-buffer buf))
-
-    ;; (setq bds (xah-get-bounds-of-thing [">" "<"]))
-    ;; (setq p3 (aref bds 0))
-    ;; (setq p4 (aref bds 1))
-    ;; (setq title (buffer-substring-no-properties p3 p4))
-
-    ;; (xah-get-thing-at-point [">" "<"])
-
-    ;;
-    ))
+  (require 'xah-html-mode)
+  (save-excursion
+    (let* (
+           $p1 $p2 $doIt-p $buf
+           ($fPath1 (thing-at-point 'filename))
+           ($fPath2
+            (progn
+              (search-forward "href=\"")
+              (thing-at-point 'filename)))
+           ($newTitle
+            (progn
+              (search-forward ">" (line-end-position))
+              (setq $p1 (point))
+              (search-forward "<" (line-end-position))
+              (setq $p2 (- (point) 1))
+              (buffer-substring-no-properties $p1 $p2))))
+      (setq $doIt-p
+            (if (file-exists-p $fPath2)
+                (yes-or-no-p (format "file 2 「%s」 exist. continue and replace?" $fPath2))
+              t))
+      (when $doIt-p
+        (setq $buf (find-file $fPath2))
+        (erase-buffer)
+        (insert-file-contents $fPath1 )
+        (xah-html-update-title $newTitle)
+        (save-buffer $buf)
+        (kill-buffer $buf))
+      ;;
+      )))
 
 (defvar xahsite-new-page-paths nil
   "A list of file paths that's used as template for creating a new xah site page. Used by `xahsite-new-page'.")
@@ -477,9 +470,9 @@ Version 2020-07-16 2021-02-02"
                                                   (cons (file-name-directory x) (file-name-nondirectory x)))
                                                 xahsite-new-page-paths))))
          (templateFpath (concat curDirPath templateFname))
-         (p1 (line-beginning-position))
-         (p2 (line-end-position))
-         (xTitle (downcase (buffer-substring-no-properties p1 p2)))
+         ($p1 (line-beginning-position))
+         ($p2 (line-end-position))
+         (xTitle (downcase (buffer-substring-no-properties $p1 $p2)))
          (fnameBase (replace-regexp-in-string " +\\|/" "_" xTitle ))
          (xFPath (format "%s%s.html" (file-name-directory templateFpath) fnameBase))
          p3
@@ -517,7 +510,7 @@ Version 2020-07-16 2021-02-02"
             (backward-char 2))
           (save-buffer )
           (kill-buffer )))
-      (delete-region p1 p2)
+      (delete-region $p1 $p2)
       (insert xFPath)
 
       (xah-all-linkify)
@@ -558,16 +551,16 @@ pixivision<br />
 
 Version 2020-09-05"
   (interactive)
-  (let (p1 p2)
+  (let ($p1 $p2)
     (save-excursion
       (search-backward "<figcaption>")
       (search-forward "<figcaption>" )
-      (setq p1 (point))
+      (setq $p1 (point))
       (search-forward "</figcaption>")
       (search-backward "</figcaption>" )
-      (setq p2 (point)))
+      (setq $p2 (point)))
     (save-restriction
-      (narrow-to-region p1 p2)
+      (narrow-to-region $p1 $p2)
       (goto-char (point-min))
       (when (re-search-forward "[,0-9]+ views" ) (replace-match ""))
       (search-forward "•" ) (replace-match "")

@@ -343,6 +343,8 @@ Version 2019-02-22"
 (defalias 'xjm 'xah-js-mode)
 (defalias 'xcm 'xah-clojure-mode)
 
+(defalias 'xil 'xah-icon-linkify)
+
 ;; no want tpu-edt
 (defalias 'tpu-edt 'forward-char)
 (defalias 'tpu-edt-on 'forward-char)

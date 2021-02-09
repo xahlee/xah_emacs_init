@@ -648,7 +648,7 @@ Version 2019-09-18"
       (save-restriction
         (narrow-to-region $p1 $p2)
         (progn
-          (goto-char 1)
+          (goto-char (point-min))
           (while (re-search-forward $bregex nil "move")
             (setq $pos (point))
             (setq $char (char-before))
