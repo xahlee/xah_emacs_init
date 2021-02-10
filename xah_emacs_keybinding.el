@@ -114,8 +114,6 @@ Version 2020-04-09"
 (global-set-key (kbd "<C-M-prior>") 'backward-page)
 (global-set-key (kbd "<C-M-next>") 'forward-page)
 
-(global-set-key (kbd "C-t") 'hippie-expand)
-
 (progn
   ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
   (define-prefix-command 'xah-dump-keymap)
