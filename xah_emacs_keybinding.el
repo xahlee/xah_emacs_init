@@ -241,6 +241,10 @@ Version 2021-01-15"
     (define-key xah-image-mode-leader-map (kbd "u") 'xah-dired-remove-all-metadata)
     (define-key xah-image-mode-leader-map (kbd ".") 'xah-dired-optimize-png)
     (define-key image-mode-map (kbd "<delete>") xah-image-mode-leader-map)
+    (define-key image-mode-map (kbd "<left>") 'image-previous-file)
+    (define-key image-mode-map (kbd "<right>") 'image-next-file)
+    (define-key image-mode-map (kbd "<wheel-up>") 'image-previous-file)
+    (define-key image-mode-map (kbd "<wheel-down>") 'image-next-file)
     ;;
     )
   (add-hook 'image-mode-hook 'xah-config-image-mode)
@@ -260,7 +264,6 @@ Version 2021-01-15"
     (define-key xah-html-leader-map (kbd "SPC r e") 'xah-html-emacs-ref-linkify)
     (define-key xah-html-leader-map (kbd "SPC r g") 'xah-clojure-word-ref-linkify)
     (define-key xah-html-leader-map (kbd "SPC r r") 'xah-add-to-related-links)
-
     (define-key xah-html-leader-map (kbd "o") nil)
     (define-key xah-html-leader-map (kbd "o a") 'xah-words-annotate)
     (define-key xah-html-leader-map (kbd "o e") 'xah-words-bold-word)
@@ -291,10 +294,13 @@ Version 2021-01-15"
 (when (boundp 'xah-clojure-mode-map)
     (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map))
 
+
+
 (progn
   (require 'info )
   (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser)
   (define-key Info-mode-map (kbd "C-r") 'xah-view-emacs-manual-in-browser))
+
 
 (when (boundp 'org-mode-hook)
   (defun xah-org-mode-setup ()
