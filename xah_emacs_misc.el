@@ -984,6 +984,7 @@ Version 2020-11-25"
                    (setq $p1 (point)))
           (setq $p1 (point)))
         (re-search-forward "\n[ \t]*\n" nil "move")
+        (backward-char )
         (setq $p2 (point))))
     (save-restriction
       (narrow-to-region $p1 $p2)
@@ -998,7 +999,7 @@ Version 2020-11-25"
 (defun xah-reformat-to-sentence-lines ()
   "Break a long line or text block into multiple lines by ending period.
 Work on text selection if there is one, else the current text block.
-Version 2020-12-02 2021-02-10"
+Version 2020-12-02 2021-02-12"
   (interactive)
   (let ($p1 $p2)
     (if (use-region-p)
@@ -1015,7 +1016,6 @@ Version 2020-12-02 2021-02-10"
       (let ((fill-column most-positive-fixnum ))
         (fill-region (point-min) (point-max)))
       (goto-char (point-min))
-      (while (re-search-forward "\\. +\\([A-Za-z]+\\)" nil "NOERROR")
+      (while (re-search-forward "\\. +\\([0-9A-Za-z]+\\)" nil "NOERROR")
         (replace-match ".\n\\1" )))))
-
 

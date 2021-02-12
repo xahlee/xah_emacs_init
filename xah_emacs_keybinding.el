@@ -1,46 +1,19 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(when (boundp 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+;; keys for moving to prev/next code section (form feed; ^L)
+(global-set-key (kbd "<C-M-prior>") 'backward-page)
+(global-set-key (kbd "<C-M-next>") 'forward-page)
+
+;; HHH___________________________________________________________________ 
 
 (when (boundp 'xah-fly-key-map)
-  ;; (when (fboundp 'xah-fly-keys) (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file) )
-
-  ;; (defun my-highlight-line-on () (global-hl-line-mode 1))
-  ;; (defun my-highlight-line-off () (global-hl-line-mode 0))
-  ;; (add-hook 'xah-fly-command-mode-activate-hook 'my-highlight-line-on)
-  ;; (add-hook 'xah-fly-insert-mode-activate-hook  'my-highlight-line-off)
-
-  ;; (global-set-key (kbd "<f10>") 'xah-user-keymap)
-  ;; (global-set-key (kbd "<f10>") 'xah-fly-mode-toggle)
-  (global-set-key (kbd "<menu-bar> <edit>") nil)
-  (global-set-key (kbd "<menu-bar> <file>") nil)
 
   (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-user-keymap)
-  (define-key xah-fly-key-map (kbd "<f9>") nil)
-  (define-key xah-fly-key-map (kbd "<menu>") nil)
-  (define-key xah-fly-key-map (kbd "C-SPC") nil)
-
   (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-
-  ;; (when xah-fly-use-esc-c-g
-  ;;   (define-key key-translation-map (kbd "ESC") (kbd "C-g")))
-
-  ;; (defcustom xah-fly-use-esc-c-g nil
-  ;;   "If non-nil, treat ESC as C-g when it has no other binding."
-  ;;   :type 'boolean
-  ;;   :group 'xah-fly-keys)
 
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
 
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
-
-  (defun xahXfkCmdActivateInsDash ()
-    "Insert a dash then call `xah-fly-command-mode-activate'
-Version 2020-05-28"
-    (interactive)
-    (insert "-")
-    (xah-fly-command-mode-activate))
 
   (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
   (define-key xah-fly-h-keymap (kbd "w") 'xah-lookup-word-definition)
@@ -62,21 +35,17 @@ Version 2020-04-09"
        ("[" . split-window-below ) ; for dvorak on kinesis advantage keyboard
        ;;
        )))
-  (add-hook 'xah-fly-command-mode-activate-hook 'xah-xfk-add))
+  (add-hook 'xah-fly-command-mode-activate-hook 'xah-xfk-add)
+  ;;
+  )
 
-;; (setq visible-bell nil)
+;; HHH___________________________________________________________________
 
-;; ring-bell-function
-
- ;; (setq ring-bell-function (lambda ()
-                            ;; (play-sound-file "/this/is/my/errorsound.au")))
-
-;; (setq ring-bell-function 'ding)
-
-;; (setq ring-bell-function nil)
 
 ;; kinesis
-(define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
+;; (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
+
+;; HHH___________________________________________________________________ 
 
 (when (string-equal system-type "darwin")
   (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
@@ -97,6 +66,8 @@ Version 2020-04-09"
   (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
   (global-set-key (kbd "<f3>") 'xah-copy-line-or-region))
 
+;; HHH___________________________________________________________________ 
+
 ;; (current-input-mode)
 ;; (t nil t 7)
 
@@ -106,13 +77,6 @@ Version 2020-04-09"
 ;;    (nth 1 x)
 ;;    (nth 2 x)
 ;;    27))
-
-(global-set-key (kbd "<S-prior>") 'scroll-down)
-(global-set-key (kbd "<S-next>") 'scroll-up)
-
-;; keys for moving to prev/next code section (form feed; ^L)
-(global-set-key (kbd "<C-M-prior>") 'backward-page)
-(global-set-key (kbd "<C-M-next>") 'forward-page)
 
 (progn
   ;; command dump. temp, rare, or whatever. put them here to have a key for now. worry later
@@ -140,7 +104,8 @@ Version 2020-04-09"
   ;; a
   (define-key xah-user-keymap (kbd "b") 'xah-toggle-previous-letter-case)
   (define-key xah-user-keymap (kbd "c") 'xah-cite)
-  ;; d e
+  (define-key xah-user-keymap (kbd "d") 'xah-reformat-to-sentence-lines)
+  (define-key xah-user-keymap (kbd "e") 'xah-add-period-to-line-end)
   ;; f
   (define-key xah-user-keymap (kbd "g") 'xah-replace-straight-quotes)
   ;; h
@@ -312,6 +277,9 @@ Version 2021-01-15"
   (define-key tuareg-mode-map (kbd "<backspace>") nil)
   (define-key tuareg-mode-map (kbd "DEL") nil))
 
+;; HHH___________________________________________________________________
+
+
 (defun xah-rcirc-mode-keys ()
   "Modify keybindings for `rcirc'.
 For `rcirc-mode-hook'."
@@ -320,4 +288,9 @@ For `rcirc-mode-hook'."
 (add-hook 'rcirc-mode-hook 'xah-rcirc-mode-keys)
 
 (setq rcirc-default-nick "mid2")
+
+;; HHH___________________________________________________________________
+
+(when (boundp 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 

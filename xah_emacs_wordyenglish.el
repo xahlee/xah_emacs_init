@@ -16,11 +16,11 @@
   "Make the Chinese character before cursor into Chinese dictionary reference links.
 
 URL `http://ergoemacs.org/emacs/elisp_chinese_char_linkify.html'
-Version 2020-11-24"
+Version 2020-11-24 2021-02-11"
   (interactive)
   (let (
         ($template
-         "<div class=\"chineseXL\"><span lang=\"zh\">▮</span> <span class=\"en\"><a href=\"https://translate.google.com/#zh-CN|en|▮\" target=\"_blank\">Translate</a> • <a href=\"https://en.wiktionary.org/wiki/▮\" target=\"_blank\">Wiktionary</a></span></div>"
+         "<div class=\"chineseXL\"><span lang=\"zh\">▮</span> <span class=\"en\"><a rel=\"noopener\" target=\"_blank\" href=\"https://translate.google.com/#zh-CN|en|▮\">Translate</a> • <a rel=\"noopener\" target=\"_blank\" href=\"https://en.wiktionary.org/wiki/▮\">Wiktionary</a></span></div>"
          )
         ($char (buffer-substring-no-properties (- (point) 1) (point))))
     (delete-char -1)
@@ -209,7 +209,7 @@ insert a div tag above the current paragraph."
 
 (defun xah-words-word-etymology-linkify ()
   "Make the current word into a etymology reference link.
-Version 2020-06-16"
+Version 2020-06-16 2021-02-11"
   (interactive)
   (let ($p1 $p2 $word
             ($url "https://www.etymonline.com/word/"))
@@ -218,7 +218,7 @@ Version 2020-06-16"
       (setq $p1 (line-beginning-position) $p2 (line-end-position)))
     (setq $word (buffer-substring-no-properties $p1 $p2))
     (delete-region $p1 $p2)
-    (insert (format "[etymology of %s <a href=\"%s%s\" target=\"_blank\">%s%s</a>]" $word $url $word $url $word))))
+    (insert (format "[etymology of %s <a rel=\"noopener\" target=\"_blank\" href=\"%s%s\">%s%s</a>]" $word $url $word $url $word))))
 
 (defun xah-words-query-find-then-bold ()
   "personal to xahlee.org's vocabulary pages.
