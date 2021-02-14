@@ -743,8 +743,8 @@ Version 2019-12-08"
     (when (member "Menlo" (font-family-list))
       (set-frame-font "Menlo-15" t t)))
    ((string-equal system-type "windows-nt")
-    (when (member "Courier" (font-family-list))
-      (set-frame-font "Courier" t t)))))
+    (when (member "Consolas" (font-family-list))
+      (set-frame-font "Consolas" t t)))))
 
 (defun xah-remove-lenticular-brackets ()
   "Remove lenticular brackets 【】 in current block or region.

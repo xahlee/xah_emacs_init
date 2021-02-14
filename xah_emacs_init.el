@@ -57,6 +57,7 @@ Version 2017-07-19"
   (require 'xah-fly-keys)
   (xah-fly-keys-set-layout "dvorak")
   (xah-fly-keys 1)
+  (setq xah-fly-M-x-command 'smex)
   (setq
    xah-run-current-file-map
    '(
