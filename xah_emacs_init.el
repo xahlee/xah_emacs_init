@@ -191,8 +191,11 @@ Version 2017-07-19"
 (load (xah-get-fullpath "xah_emacs_mouse_setup"))
 
 (progn
+;; AutoHotkey
   (add-to-list 'load-path "~/git/xahk-mode.el/")
-  (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t))
+  (require 'xahk-mode)
+  ;; (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
+  )
 
 ;; (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
 
