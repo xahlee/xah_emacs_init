@@ -8,6 +8,63 @@
 
 (require 'url-util)
 
+(defun xah-file-linkify (&optional @begin @end)
+  "Make the path under cursor into a HTML link for xah site.
+
+For Example, if you cursor is on the text “../emacs/emacs.html”,
+then it'll become:
+“<a href=\"../emacs/emacs.html\">Xah's Emacs Tutorial</a>”.
+The link text is pulled from the file's <title> tag.
+
+If there is text selection, use it as file path.
+
+The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath'.
+Version 2018-11-08"
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (save-excursion
+       (let (p0 p1 p2)
+         (setq p0 (point))
+         ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+         (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\`")
+         (setq p1 (point))
+         (goto-char p0)
+         (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\'")
+         (setq p2 (point))
+         (list p1 p2)))))
+  (let* (
+         ($input (buffer-substring-no-properties @begin @end))
+         ($inputStParts (xah-html-split-uri-hashmark $input))
+         ($pt1 (aref $inputStParts 0))
+         ($fragPart (aref $inputStParts 1))
+         ($fPath (xahsite-web-path-to-filepath $pt1 default-directory))
+         $rPath $title $resultStr
+         ($currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
+         ($currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
+
+    (if (file-exists-p $fPath)
+        (progn
+          (setq $title
+                (if (string-match-p ".+html\\'" $fPath)
+                    (concat (xah-html-get-html-file-title $fPath t) $fragPart)
+                  (file-name-nondirectory $fPath)))
+          (setq $resultStr
+                (if (string-equal
+                     (xahsite-get-domain-of-local-file-path $currentBufferFilePathOrDir)
+                     (xahsite-get-domain-of-local-file-path $fPath))
+                    (progn
+                      (setq $rPath (file-relative-name $fPath $currentBufferFileDir))
+                      ;; (setq $rPath (xah-html-get-relative-path-to-webroot $fPath))
+                      (format "<a href=\"%s\">%s</a>"
+                              (concat $rPath $fragPart)
+                              (if (string-equal $title "") $rPath $title )))
+                  (progn
+                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url $fPath) $fragPart) $title))))
+          (delete-region @begin @end)
+          (insert $resultStr))
+      (progn (message (format "Cannot locate the file: 「%s」" $fPath))))))
+
 (defun xahsite-html-image-linkify ()
   "Replace a image file's path under cursor with a HTML img tag.
 If there's a text selection, use that as path.
@@ -61,6 +118,8 @@ Version 2015-05-12"
       (progn
         (delete-region $p1 $p2)
         (insert "<img src=\"" $fullPath "\" alt=\"" $altText "\">")))))
+
+
 
 ;; HHH___________________________________________________________________
 ;; some custom HTML markup and functions for working with HTML
@@ -154,100 +213,7 @@ There are other amazon categories, but not supported by this function."
     (insert  (xah-amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
 
-;; (defun local-linkify ()
-;; "Make the path under cursor into a local link.\n
-;; For Example, if you cursor is on the text “../emacs/emacs.html”,
-;; then it'll become:
-;; “<a href=\"../emacs/emacs.html\">Xah's Emacs Tutorial</a>”.
-;; The link text is pulled from the file's <h1> tag.
 
-;; If a region is active, use the region as file path."
-;;  (interactive)
-;;  (let ($path bounds tempBuff x1 x2 titleText $resultStr)
-;;    (setq $path
-;;          (if (use-region-p)
-;;              (buffer-substring-no-properties (region-beginning) (region-end))
-;;            (thing-at-point 'filename)
-;;            ))
-;;    (setq bounds (bounds-of-thing-at-point 'filename))
-
-;;    (setq tempBuff (generate-new-buffer-name " temp"))
-
-;;    (when (file-exists-p $path)
-;;        (progn
-;;          (save-current-buffer
-;;            (message $path)
-;;            (set-buffer (get-buffer-create tempBuff))
-;;            (goto-char (point-min))
-;;            (insert-file-contents $path nil nil nil t)
-;;            (setq x1 (search-forward "<title>"))
-;;            (search-forward "</title>")
-;;            (setq x2 (search-backward "<"))
-;;            (setq titleText (buffer-substring-no-properties x1 x2))
-;;            (kill-buffer tempBuff))
-
-;;          (setq $resultStr (concat "<a href=\"" $path "\">" titleText "</a>"))
-;;          (save-excursion
-;;            (delete-region (car bounds) (cdr bounds))
-;;            (insert $resultStr))))
-;;    ))
-
-(defun xah-file-linkify (&optional @begin @end)
-  "Make the path under cursor into a HTML link for xah site.
-
-For Example, if you cursor is on the text “../emacs/emacs.html”,
-then it'll become:
-“<a href=\"../emacs/emacs.html\">Xah's Emacs Tutorial</a>”.
-The link text is pulled from the file's <title> tag.
-
-If there is text selection, use it as file path.
-
-The file path can also be a full path or URL, See: `xahsite-web-path-to-filepath'.
-Version 2018-11-08"
-  (interactive
-   (if (use-region-p)
-       (list (region-beginning) (region-end))
-     (save-excursion
-       (let (p0 p1 p2)
-         (setq p0 (point))
-         ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-         (skip-chars-backward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\`")
-         (setq p1 (point))
-         (goto-char p0)
-         (skip-chars-forward "^  \"\t\n'|()[]{}<>〔〕“”〈〉《》【】〖〗〘〙«»‹›·。\\'")
-         (setq p2 (point))
-         (list p1 p2)))))
-  (let* (
-         ($input (buffer-substring-no-properties @begin @end))
-         ($inputStParts (xah-html-split-uri-hashmark $input))
-         ($pt1 (aref $inputStParts 0))
-         ($fragPart (aref $inputStParts 1))
-         ($fPath (xahsite-web-path-to-filepath $pt1 default-directory))
-         $rPath $title $resultStr
-         ($currentBufferFilePathOrDir (expand-file-name (or (buffer-file-name) default-directory)))
-         ($currentBufferFileDir (file-name-directory (or (buffer-file-name) default-directory))))
-
-    (if (file-exists-p $fPath)
-        (progn
-          (setq $title
-                (if (string-match-p ".+html\\'" $fPath)
-                    (concat (xah-html-get-html-file-title $fPath t) $fragPart)
-                  (file-name-nondirectory $fPath)))
-          (setq $resultStr
-                (if (string-equal
-                     (xahsite-get-domain-of-local-file-path $currentBufferFilePathOrDir)
-                     (xahsite-get-domain-of-local-file-path $fPath))
-                    (progn
-                      (setq $rPath (file-relative-name $fPath $currentBufferFileDir))
-                      ;; (setq $rPath (xah-html-get-relative-path-to-webroot $fPath))
-                      (format "<a href=\"%s\">%s</a>"
-                              (concat $rPath $fragPart)
-                              (if (string-equal $title "") $rPath $title )))
-                  (progn
-                    (format "<a href=\"%s\">%s</a>" (concat (xahsite-filepath-to-url $fPath) $fragPart) $title))))
-          (delete-region @begin @end)
-          (insert $resultStr))
-      (progn (message (format "Cannot locate the file: 「%s」" $fPath))))))
 
 (defun nodejs-get-title (@fName @fragPart)
   "Return the file frag part function title.
@@ -384,6 +350,8 @@ Version 2015-03-18"
           (delete-region $p1 $p2)
           (insert (concat "<a href=\"" (file-relative-name $rPath) "\">" $linkWord "</a>")))
       (progn (beep) (message "No file found")))))
+
+
 
 (defun xah-all-linkify ()
   "Make the text under cursor into a HTML link for xah's sites.

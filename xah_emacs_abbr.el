@@ -256,6 +256,7 @@
     ("ver" "version" )
     ("vid" "video" )
     ("co" "company" )
+    ("addr" "address")
 
     ;; english, multiple words
 
@@ -331,6 +332,8 @@
     ("vas" "variables" )
     ("wm" "Window Manager" )
     ("wml" "Windows, Mac, Linux")
+    ("win10" "Windows 10")
+
 
     ;; computing, proper noun
 
