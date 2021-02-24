@@ -720,9 +720,9 @@ version 2019-02-11"
 (defun xah-start-command-log ()
   "Start the `command-log-mode' globally and
 make current buffer the log buffer.
-Version 2020-01-02"
+Version 2021-02-22"
   (interactive)
-  (load "/Users/xah/git/xah_emacs_init/command-log-mode.el" )
+  (load "~/git/xah_emacs_init/command-log-mode.el" )
   (command-log-mode)
   (global-command-log-mode)
   (clm/open-command-log-buffer)

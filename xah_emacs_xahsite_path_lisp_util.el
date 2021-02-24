@@ -170,21 +170,21 @@ See also: `xahsite-url-to-filepath'"
 ;; test
 ;; (xahsite-href-value-to-filepath "http://xahlee.org/Netiquette_dir/death_of_a_troll.html" "c:/Users/h3/web/xahlee_info/comp/Google_Tech_Talk_Lisp_At_JPL_by_Ron_Garret.html")
 
-(defun xahsite-url-to-filepath (@xurl &optional @add-file-name @redirect)
-  "Returns the file path of a xah website URL @xurl.
+(defun xahsite-url-to-filepath (@url &optional @add-file-name @redirect)
+  "Returns the file path of a xah website URL @url.
 
 If the optional argument @add-file-name is true, then append “index.html” if the resulting path is a dir.
 If the optional argument @redirect is true, then also consider result of http redirect.
 
 This function does not check input is actually a URL, nor if the result path file exists.
-Version 2017-09-21"
+Version 2017-09-21 2021-02-24"
   ;; test cases:
   ;; (xahsite-url-to-filepath "http://xahlee.org/index.html") ; ⇒ "c:/Users/h3/web/xahlee_org/index.html"
   ;; (xahsite-url-to-filepath "http://xahlee.org/") ; ⇒ "c:/Users/h3/web/http://xahlee.org/index.html"
   ;; (xahsite-url-to-filepath "http://abc.org/x.html") ; ⇒ "c:/Users/h3/web/abc_org/x.html"
   ;; (xahsite-url-to-filepath "some water") ; ⇒ "c:/Users/h3/web/some water"
   (let (
-        ($url (xah-html-remove-uri-fragment @xurl))
+        ($url (xah-html-remove-uri-fragment @url))
         $fPath)
     (if (string-match "^file:///"  $url )
         (progn

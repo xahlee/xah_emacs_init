@@ -112,7 +112,8 @@ This code is specific to xahlee.org ."
     ))
 
 (defun xah-fix-rm-span-quote (@start @end)
-  "remove “” around <span class=\"code\"></span> tags in current buffer."
+  "remove “” around <span class=\"code\"></span> tags in current buffer.
+Version 2021-02-23"
   (interactive "r")
   (save-excursion
     (narrow-to-region @start @end)

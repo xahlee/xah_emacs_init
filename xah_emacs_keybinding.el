@@ -4,20 +4,15 @@
 (global-set-key (kbd "<C-M-prior>") 'backward-page)
 (global-set-key (kbd "<C-M-next>") 'forward-page)
 
-;; HHH___________________________________________________________________ 
+;; HHH___________________________________________________________________
 
 (when (boundp 'xah-fly-key-map)
-
   (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-user-keymap)
   (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-
   (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
-
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
-
   (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
   (define-key xah-fly-h-keymap (kbd "w") 'xah-lookup-word-definition)
-
   (defun xah-xfk-add ()
     "addon for `xah-fly-command-mode-activate-hook'
 Version 2020-04-09"
@@ -41,11 +36,10 @@ Version 2020-04-09"
 
 ;; HHH___________________________________________________________________
 
-
 ;; kinesis
 ;; (define-key key-translation-map (kbd "<kp-delete>") (kbd "<delete>"))
 
-;; HHH___________________________________________________________________ 
+;; HHH___________________________________________________________________
 
 (when (string-equal system-type "darwin")
   (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
@@ -66,7 +60,7 @@ Version 2020-04-09"
   (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
   (global-set-key (kbd "<f3>") 'xah-copy-line-or-region))
 
-;; HHH___________________________________________________________________ 
+;; HHH___________________________________________________________________
 
 ;; (current-input-mode)
 ;; (t nil t 7)
@@ -257,13 +251,10 @@ Version 2021-01-15"
 (when (boundp 'xah-clojure-mode-map)
     (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map))
 
-
-
 (progn
   (require 'info )
   (define-key Info-mode-map (kbd "<f5>") 'xah-view-emacs-manual-in-browser)
   (define-key Info-mode-map (kbd "C-r") 'xah-view-emacs-manual-in-browser))
-
 
 (when (boundp 'org-mode-hook)
   (defun xah-org-mode-setup ()
@@ -278,7 +269,6 @@ Version 2021-01-15"
   (define-key tuareg-mode-map (kbd "DEL") nil))
 
 ;; HHH___________________________________________________________________
-
 
 (defun xah-rcirc-mode-keys ()
   "Modify keybindings for `rcirc'.
