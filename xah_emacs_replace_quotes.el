@@ -679,7 +679,6 @@ Version 2019-09-17"
                (replace-match (elt $x 1) "FIXEDCASE" "LITERAL")))
            $useMap))))))
 
-
 ;; (defun xah-twitterfy-old-2019-01-14 (@begin @end &optional @direction)
 ;;   "Shorten words for Twitter 280 char limit on current line or selection.
 ;; The conversion direction is automatically determined.
@@ -945,14 +944,14 @@ version 2017-06-10"
   "Delete any text of the form “[‹n›]”, eg [1], [2], … in current text block or selection.
 
 For example
- 「… announced as Blu-ray Disc [11][12], and …」
+ as Blu-ray Disc [11][12],
 becomes
- 「… announced as Blu-ray Disc, and …」.
+ as Blu-ray Disc,
 
 When called non-interactively, @begin @end are region positions.
 
 URL `http://ergoemacs.org/emacs/elisp_replace_title_tags.html'
-Version 2017-06-10"
+Version 2017-06-10 2021-03-04"
   (interactive)
   (let ($p1 $p2 $changedItems)
     (if (and  @begin @end)
@@ -980,7 +979,8 @@ Version 2017-06-10"
         (while (search-forward "[citation needed]" nil t)
           (setq $changedItems (cons "[citation needed]" $changedItems ))
           (backward-char 17)
-          (delete-char 17))))
+          (delete-char 17)))
+      (goto-char (point-max)))
     (if (> (length $changedItems) 0)
         (mapcar
          (lambda ($x)

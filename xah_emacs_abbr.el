@@ -587,3 +587,7 @@ Version 2016-10-24"
     ))
 
 (setq save-abbrevs nil)
+
+;; http://virtualmathmuseum.org/
+;; http://3d-xplormath.org/
+
