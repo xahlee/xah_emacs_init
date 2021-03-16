@@ -82,12 +82,11 @@ This command leaves the file unsaved."
 (defun xah-atom-update-entry-date ()
   "Update the <updated> date time stamp of current entry in a atom rss file.
 If cursor is not inside a <entry> tag, update any <updated> before cursor.
-Version 2019-08-03 2021-02-16"
+Version 2019-08-03 2021-03-16"
   (interactive)
   (let (p1 p2)
     (search-backward "<entry>" )
     (search-forward "<updated>" )
-    (search-forward ">" )
     (setq p1 (point))
     (search-forward ">" )
     (search-backward "<" )
