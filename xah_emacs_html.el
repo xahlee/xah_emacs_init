@@ -258,7 +258,7 @@ Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' 
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
 First version: 2019
-Version 2021-02-14"
+Version 2021-02-14 2021-03-20"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -313,7 +313,7 @@ Version 2021-02-14"
     (setq $newName1 (read-string "file name:" $newName1 nil $newName1 ))
     (setq $newName1
           (concat
-           (replace-regexp-in-string "^tt\\|^ee\\|,\\| \\|(\\|)" "_" $newName1)
+           (replace-regexp-in-string "^tt\\|^ee\\|,\\| \\|\\+\\|(\\|)" "_" $newName1)
            "_"
            $randStr
            "."
