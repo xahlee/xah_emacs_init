@@ -976,7 +976,7 @@ See `xah-cycle-font'."
 (defun xah-add-period-to-line-end ()
   "Add a period to each end of line that does not have one.
 Work on current paragraph if there is no selection.
-Version 2020-11-25"
+Version 2020-11-25 2021-04-06"
   (interactive)
   (let ($p1 $p2)
     (if (use-region-p)
@@ -994,10 +994,8 @@ Version 2020-11-25"
       (goto-char (point-min))
       (while (search-forward "\n" nil "move" )
         (backward-char )
-        (if (eq (char-before ) ?\. )
+        (if (or (eq (char-before ) ?\. ) (eq (char-before ) ?\n ))
             nil
           (insert "."))
         (forward-char )))))
-
-
 

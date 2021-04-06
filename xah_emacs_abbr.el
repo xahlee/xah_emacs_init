@@ -170,7 +170,7 @@
     ("desc" "describe" )
     ("descn" "description" )
     ("dfc" "difference" )
-    ("dft" "different" )
+    ("df" "different" )
     ("dict" "dictionary" )
     ("dicts" "dictionaries" )
     ("disc" "discussion" )
