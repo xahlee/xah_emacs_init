@@ -780,16 +780,15 @@ Version 2020-03-02"
               (replace-match "" ))))))
     (mapcar (lambda (x) (princ "【") (princ x) (princ "\n")) (reverse $clist))))
 
-(defun xah-bracket-caps ()
-  "add ‹› to CAPITALIZED WORDS, on selection or current text block.
+(defun xah-bracket-capitalized-words ()
+  "Add ‹› to CAPITALIZED WORDS, on selection or current text block.
 
-Example:
- Change value in PLIST of PROP to VAL
-becomes
- Change value in ‹PLIST› of ‹PROP› to ‹VAL›
+Example: Change value in PLIST of PROP to VAL
+becomes: Change value in ‹PLIST› of ‹PROP› to ‹VAL›
 
+2021-04-10 command name was xah-bracket-caps.
 URL `http://ergoemacs.org/emacs/elisp_bracket_caps.html'
-Version 2020-04-19, 2021-01-07"
+Version 2020-04-19, 2021-04-10"
   (interactive)
   (let ($p $p2 (case-fold-search nil))
     (if (use-region-p)
