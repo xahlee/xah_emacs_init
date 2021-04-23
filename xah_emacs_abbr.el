@@ -399,8 +399,8 @@
     ("byline" "<div class=\"byline\">By Xah Lee. Date: <time>2010-10-05</time>. Last updated: <time>2020-08-16</time>.</div>")
     ("divflow" "<section class=\"divFlow81777\">\n\n</section>\n\n")
     ("xls" "live stream in x hours. x San Francisco time.
-Goto YouTube xah lee, sub + 🔔 .
-https://www.youtube.com/c/xahlee/live" )
+https://www.youtube.com/c/xahlee/live
+sub + 🔔" )
     ("lyricsh" "<pre class=\"lyrics_xl\">\n▮\n</pre>")
     ("pt" "<p>\nPut this in your emacs init file:\n</p>\n\n" )
     ("topich" "<div class=\"topic_xl\">\n<h4>JavaScript Reverse Key/Value</h4>\n<ul>\n<li><a href=\"xx1.html\">xx1</a></li>\n<li><a href=\"xx2.html\">xx2</a></li>\n</ul>\n</div>\n\n")
@@ -433,7 +433,7 @@ https://www.youtube.com/c/xahlee/live" )
     ("startu" "★" )
     ("newu" "🆕" )
     ("staru" "🌟" )
-    ("emo" "😃😄😅😂🤩🤡🤗😠😮😒😑🚀🛸🌛🌞☄🌬🎪🎠🎡🎢☠♥🌟💠❌💨🔥💯👍👎💦👀")
+    ("emo" "😃😄😅😂🤩🤡🤗😠😮😒😑🚀🛸🌛🌞☄🎪☠♥🌟💠❌💨🔥💯👍👎💦👀")
 
     ;; code
 

@@ -805,7 +805,7 @@ Version 2020-04-19, 2021-04-10"
     (save-restriction
       (narrow-to-region $p1 $p2)
       (goto-char (point-min))
-      (while (re-search-forward "\\b\\([A-Z][-A-Z0-9]+\\)\\b" nil t)
+      (while (re-search-forward "\\b\\([A-Z]+\\)\\b" nil t)
         (replace-match (concat "‹" (match-string 1) "›") t )))))
 
 (defun xah-update-keyboard-index ()
@@ -975,6 +975,8 @@ See `xah-cycle-font'."
 (defun xah-add-period-to-line-end ()
   "Add a period to each end of line that does not have one.
 Work on current paragraph if there is no selection.
+
+URL `http://ergoemacs.org/emacs/emacs_period_to_line_end.html'
 Version 2020-11-25 2021-04-06"
   (interactive)
   (let ($p1 $p2)
