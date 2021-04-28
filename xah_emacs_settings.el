@@ -60,10 +60,96 @@
  ;;
  )
 
-;; set font for chinese characters
+;; set font for symbols
 (set-fontset-font
  t
- '(#x4e00 . #x9fff)
+ 'symbol
+ (cond
+  ((string-equal system-type "windows-nt")
+   (cond
+    ((member "Segoe UI Symbol" (font-family-list)) "Segoe UI Symbol")))
+  ((string-equal system-type "darwin")
+   (cond
+    ((member "Apple Symbols" (font-family-list)) "Apple Symbols")))
+  ((string-equal system-type "gnu/linux")
+   (cond
+    ((member "Symbola" (font-family-list)) "Symbola")))))
+
+;; set font for cuneiform
+(set-fontset-font
+ t
+ 'cuneiform
+ (cond
+  ((string-equal system-type "windows-nt")
+   (cond
+    ((member "Segoe UI Historic" (font-family-list)) "Segoe UI Historic")))
+  ((string-equal system-type "darwin")
+   (cond
+    ((member "Noto Sans Cuneiform Regular" (font-family-list)) "Noto Sans Cuneiform Regular")))
+  ((string-equal system-type "gnu/linux")
+   (cond
+    ((member "Noto Sans Cuneiform Regular" (font-family-list)) "Noto Sans Cuneiform Regular")))))
+
+(set-fontset-font
+ t
+ 'phoenician
+ (cond
+  ((string-equal system-type "windows-nt")
+   (cond
+    ((member "Segoe UI Historic" (font-family-list)) "Segoe UI Historic")))
+  ((string-equal system-type "darwin")
+   (cond
+    ((member "Noto Sans Phoenician Regular" (font-family-list)) "Noto Sans Phoenician Regular")))
+  ((string-equal system-type "gnu/linux")
+   (cond
+    ((member "Noto Sans Phoenician Regular" (font-family-list)) "Noto Sans Phoenician Regular")))))
+
+(set-fontset-font
+ t
+ 'deseret
+ (cond
+  ((string-equal system-type "windows-nt")
+   (cond
+    ((member "Segoe UI Symbol" (font-family-list)) "Segoe UI Symbol")))
+  ((string-equal system-type "darwin")
+   (cond
+    ((member "Noto Sans Deseret" (font-family-list)) "Noto Sans Deseret")))
+  ((string-equal system-type "gnu/linux")
+   (cond
+    ((member "Noto Sans Deseret" (font-family-list)) "Noto Sans Deseret")))))
+
+(set-fontset-font
+ t
+ 'shavian
+ (cond
+  ((string-equal system-type "windows-nt")
+   (cond
+    ((member "Segoe UI Historic" (font-family-list)) "Segoe UI Historic")))
+  ((string-equal system-type "darwin")
+   (cond
+    ((member "Noto Sans Shavian Regular" (font-family-list)) "Noto Sans Shavian Regular")))
+  ((string-equal system-type "gnu/linux")
+   (cond
+    ((member "Noto Sans Shavian Regular" (font-family-list)) "Noto Sans Shavian Regular")))))
+
+(set-fontset-font
+ t
+ 'egyptian
+ (cond
+  ((string-equal system-type "windows-nt")
+   (cond
+    ((member "Segoe UI Historic" (font-family-list)) "Segoe UI Historic")))
+  ((string-equal system-type "darwin")
+   (cond
+    ((member "Noto Sans Egyptian Hieroglyphs" (font-family-list)) "Noto Sans Egyptian Hieroglyphs")))
+  ((string-equal system-type "gnu/linux")
+   (cond
+    ((member "Noto Sans Egyptian Hieroglyphs" (font-family-list)) "Noto Sans Egyptian Hieroglyphs")))))
+
+;; set font for chinese
+(set-fontset-font
+ t
+ 'han
  (cond
   ((string-equal system-type "windows-nt")
    (cond
