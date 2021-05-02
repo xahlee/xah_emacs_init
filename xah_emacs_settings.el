@@ -113,7 +113,7 @@
     ((member "Segoe UI Symbol" (font-family-list)) "Segoe UI Symbol")))
   ((string-equal system-type "darwin")
    (cond
-    ((member "Noto Sans Deseret" (font-family-list)) "Noto Sans Deseret")))
+    ((member "Apple Symbols" (font-family-list)) "Apple Symbols")))
   ((string-equal system-type "gnu/linux")
    (cond
     ((member "Noto Sans Deseret" (font-family-list)) "Noto Sans Deseret")))))
@@ -127,7 +127,7 @@
     ((member "Segoe UI Historic" (font-family-list)) "Segoe UI Historic")))
   ((string-equal system-type "darwin")
    (cond
-    ((member "Noto Sans Shavian Regular" (font-family-list)) "Noto Sans Shavian Regular")))
+    ((member "Apple Symbols" (font-family-list)) "Apple Symbols")))
   ((string-equal system-type "gnu/linux")
    (cond
     ((member "Noto Sans Shavian Regular" (font-family-list)) "Noto Sans Shavian Regular")))))
@@ -144,7 +144,7 @@
     ((member "Noto Sans Egyptian Hieroglyphs" (font-family-list)) "Noto Sans Egyptian Hieroglyphs")))
   ((string-equal system-type "gnu/linux")
    (cond
-    ((member "Noto Sans Egyptian Hieroglyphs" (font-family-list)) "Noto Sans Egyptian Hieroglyphs")))))
+    ((member "Aegyptus" (font-family-list)) "Aegyptus")))))
 
 ;; set font for chinese
 (set-fontset-font
