@@ -10,7 +10,6 @@
 (setq  xahsite-external-docs
        [
         "ergoemacs_org/emacs_manual/"
-        "xahlee_info/REC-SVG11-20110816/"
         "xahlee_info/clojure-doc-1.8/"
         "xahlee_info/css_2.1_spec/"
         "xahlee_info/css_transitions/"

@@ -390,8 +390,6 @@ Version 2019-05-11"
           (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "clojure-doc-1.8" $input)
           (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
-         ((string-match-p "REC-SVG11-20110816" $input)
-          (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "css_transitions/CSS_Transitions.html" $input)
           (xah-file-linkify $p1 $p2) (xah-insert-reference-span-tag))
          ((string-match-p "\\`http://xahlee\.blogspot\.com/\\|\\`http://wordy-english\.blogspot\.com/" $input) (xah-blogger-linkify))
