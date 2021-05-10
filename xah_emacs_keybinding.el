@@ -6,6 +6,15 @@
 
 ;; HHH___________________________________________________________________
 
+;; (define-key xah-fly-leader-key-map (kbd ".") 'xah-mode-key-table )
+;; (defun xah-mode-key-table ()
+;;   "2021-05-09"
+;;   (interactive)
+;;   (let ()
+;;     (cond
+;;      ((string-equal major-mode "xah-html-mode") xah-html-leader-map)
+;;      (t nil))))
+
 (when (boundp 'xah-fly-key-map)
   (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-user-keymap)
   (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
@@ -13,6 +22,7 @@
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
   (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
   (define-key xah-fly-h-keymap (kbd "w") 'xah-lookup-word-definition)
+
   (defun xah-xfk-add ()
     "addon for `xah-fly-command-mode-activate-hook'
 Version 2020-04-09"

@@ -418,19 +418,21 @@ becomes
 My Keyboard</a>
 </div>
 
-Version 2020-09-04"
+Version 2020-09-04 2021-05-09"
   (interactive)
-  (let (boundary1 boundary2 p1 p2 p3 p4 htmlPath imgPath)
+  (let (boundary1 boundary2 p1 p2 p3 p4 htmlPath htmlTitle imgPath )
     (setq boundary1 (bounds-of-thing-at-point 'filename))
     (setq p1 (car boundary1))
     (setq p2 (cdr boundary1))
     (setq htmlPath (buffer-substring-no-properties p1 p2))
+    (setq htmlTitle (xah-html-get-html-file-title htmlPath))
     (delete-region p1 p2)
     (forward-word 1)
     (setq boundary2 (bounds-of-thing-at-point 'filename))
     (setq p3 (car boundary2))
     (setq p4 (cdr boundary2))
     (setq imgPath (buffer-substring-no-properties p3 p4))
+
     (delete-region p3 p4)
     (insert "<div>\n" )
     (insert "<a href=\"")
@@ -443,7 +445,6 @@ Version 2020-09-04"
     (insert (replace-regexp-in-string "-_" " " (file-name-sans-extension (file-name-nondirectory imgPath))))
     (insert "\" ")
     (insert " /><br />\n")
-    (insert (xah-html-get-html-file-title htmlPath))
+    (insert htmlTitle)
     (insert "</a>")
     (insert "\n</div>" )))
-
