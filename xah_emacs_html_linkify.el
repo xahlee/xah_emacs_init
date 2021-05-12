@@ -414,7 +414,7 @@ becomes
 
 <div>
 <a href=\"keyboard.html\">
-<img src=\"keyboard.jpg\" alt=\"keyboard\" width=\"289\" height=\"217\" /><br />
+<img src=\"keyboard.jpg\" alt=\"keyboard\" /><br />
 My Keyboard</a>
 </div>
 

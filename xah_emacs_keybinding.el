@@ -1,8 +1,10 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-;; keys for moving to prev/next code section (form feed; ^L)
+;; keys for moving to prev/next code section (form feed)
 (global-set-key (kbd "<C-M-prior>") 'backward-page)
 (global-set-key (kbd "<C-M-next>") 'forward-page)
+
+(global-set-key (kbd "M-d") 'xah-html-delete-tag-pair)
 
 ;; HHH___________________________________________________________________
 

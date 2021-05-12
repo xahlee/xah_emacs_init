@@ -829,33 +829,64 @@ version 2020-07-19"
       (replace-match "</ol>")
       )))
 
-(defun xah-html-p-to-dl ()
-  "make 2 html p tags into a dl tag.
-The first p tag is the term, the second is the definition.
-Version 2020-09-12"
-  (interactive)
-  (let (p1 p2 p3 p4)
+;; (defun xah-html-p-to-dl ()
+;;   "make 2 html p tags into a dl tag.
+;; The first p tag is the term, the second is the definition.
+;; Version 2020-09-12"
+;;   (interactive)
+;;   (let (p1 p2 p3 p4)
 
-    (search-forward ">" nil "NOERROR" )
-    (search-backward "<p>" nil "NOERROR" )
-    (setq p1 (point))
+;;     (search-forward ">" nil "NOERROR" )
+;;     (search-backward "<p>" nil "NOERROR" )
+;;     (setq p1 (point))
 
-    (search-forward "</p>" nil "NOERROR" ) (setq p2 (point))
-    (search-forward "<p>" nil "NOERROR" ) (setq p3 (point))
-    (search-forward "</p>" nil "NOERROR" ) (setq p4 (point))
+;;     (search-forward "</p>" nil "NOERROR" ) (setq p2 (point))
+;;     (search-forward "<p>" nil "NOERROR" ) (setq p3 (point))
+;;     (search-forward "</p>" nil "NOERROR" ) (setq p4 (point))
 
+;;     (save-restriction
+;;       (narrow-to-region p1 p4)
+;;       (goto-char (point-min))
+;;       (search-forward "<p>" ) (replace-match "<dt>" t t)
+;;       (search-forward "</p>" ) (replace-match "</dt>" t t)
+;;       (search-forward "<p>" ) (replace-match "<dd>\n" t t)
+;;       (search-forward "</p>" ) (replace-match "\n</dd>" t t)
+;;       (goto-char (point-min))
+;;       (while (re-search-forward "\n\n+" nil "NOERROR")
+;;         (replace-match "\n" ))
+;;       (goto-char (point-min)) (insert "<dl>\n")
+;;       (goto-char (point-max)) (insert "\n</dl>"))))
+
+(defun xah-html-p-to-dl ( @sep )
+  "Change the current or next html <p> element to a single definition list.
+Version 2021-05-11"
+  (interactive
+   (list
+    ;; (read-string "Seperator:" " → " )
+    " → "
+    ))
+  (when (or (string-equal @sep "") (eq @sep nil))
+    (user-error "Seperator is empty %s" @sep))
+  (let ( $p1 $p2 )
+    (search-forward "<p>" )
+    (setq $p1 (- (point) 3))
+    (search-forward "</p>")
+    (setq $p2 (point))
     (save-restriction
-      (narrow-to-region p1 p4)
+      (narrow-to-region $p1 $p2)
       (goto-char (point-min))
-      (search-forward "<p>" ) (replace-match "<dt>" t t)
-      (search-forward "</p>" ) (replace-match "</dt>" t t)
-      (search-forward "<p>" ) (replace-match "<dd>\n" t t)
-      (search-forward "</p>" ) (replace-match "\n</dd>" t t)
+      (when (not (search-forward @sep ))
+        (user-error "Seperator %s not found" @sep))
       (goto-char (point-min))
-      (while (re-search-forward "\n\n+" nil "NOERROR")
-        (replace-match "\n" ))
-      (goto-char (point-min)) (insert "<dl>\n")
-      (goto-char (point-max)) (insert "\n</dl>"))))
+      (delete-char 3)
+      (insert "<dl>\n<dt>")
+      (goto-char (point-max))
+      (delete-char -4)
+      (insert "</dd>\n</dl>")
+      (goto-char (point-min))
+      (search-forward @sep )
+      (replace-match "</dt>\n<dd>\n" t t )
+      (goto-char (point-max)))))
 
 (defun xah-remove-console-log ()
   "Remove the 「console.log(‹body›)」 but keep ‹body›, in current text block or text selection.
