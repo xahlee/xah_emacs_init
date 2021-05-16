@@ -14,7 +14,7 @@
     ("cite" "\n\n<span class=\"cite\">(Regan & Totten, 1975)</span>
 <li>familyName, D. (1975). <cite>title</cite> Journal of Science.</li>\n\n" )
 
-    ("todo" "<span class=\"todo\">▮ </span>" )
+    ("todo" "<span class=\"todo\">xtodo▮ </span>" )
 
     ("tp" "transpersonal" )
     ("tf" "transformation" )

@@ -246,14 +246,15 @@ Version 2020-12-16"
 For example, this line
  /Users/xah/web/ergoemacs_org/emacs/emacs.html
 becomes
- 〈Xah's Emacs Tutorial〉 @ http://ergoemacs.org/emacs/emacs.html
+Practical Emacs Tutorial
+http://ergoemacs.org/emacs/emacs.html
 
 The title came from HTML file's title tag.
 File path must be a URL scheme, full path, or relative path. See: `xahsite-web-path-to-filepath'.
 
 This is Xah Lee's personal command assuming a particular dir structure.
 
-Version 2018-06-06"
+Version 2018-06-06 2021-05-12"
   (interactive)
   (let (
         $p1 $p2
@@ -272,13 +273,11 @@ Version 2018-06-06"
         (goto-char $p0)
         (skip-chars-forward $pathStops)
         (setq $p2 (point))))
-
     (setq $inputStr (buffer-substring-no-properties $p1 $p2))
     (setq $temp (xah-html-split-uri-hashmark $inputStr))
     (setq $file (xahsite-web-path-to-filepath (aref $temp 0)))
     (setq $urlFragmentPart (aref $temp 1))
     (if (string-match "x3dxm" $inputStr )
-
         (let (($fpath (expand-file-name (replace-regexp-in-string "^file:///" "/" $inputStr t t))))
           (setq $title (xah-html-get-html-file-title $file $fpath))
           (delete-region $p1 $p2)
@@ -858,8 +857,9 @@ version 2020-07-19"
 ;;       (goto-char (point-max)) (insert "\n</dl>"))))
 
 (defun xah-html-p-to-dl ( @sep )
-  "Change the current or next html <p> element to a single definition list.
-Version 2021-05-11"
+  "Change the previous html <p> element to a single definition list.
+previous means the first <p to the left of cursor.
+Version 2021-05-11 2021-05-15"
   (interactive
    (list
     ;; (read-string "Seperator:" " → " )
@@ -868,8 +868,8 @@ Version 2021-05-11"
   (when (or (string-equal @sep "") (eq @sep nil))
     (user-error "Seperator is empty %s" @sep))
   (let ( $p1 $p2 )
-    (search-forward "<p>" )
-    (setq $p1 (- (point) 3))
+    (search-backward "<p>" )
+    (setq $p1 (point))
     (search-forward "</p>")
     (setq $p2 (point))
     (save-restriction
@@ -977,7 +977,7 @@ See `xah-cycle-font'."
 Work on current paragraph if there is no selection.
 
 URL `http://ergoemacs.org/emacs/emacs_period_to_line_end.html'
-Version 2020-11-25 2021-04-06"
+Version 2020-11-25 2021-05-13"
   (interactive)
   (let ($p1 $p2)
     (if (use-region-p)
@@ -995,8 +995,8 @@ Version 2020-11-25 2021-04-06"
       (goto-char (point-min))
       (while (search-forward "\n" nil "move" )
         (backward-char )
-        (if (or (eq (char-before ) ?\. ) (eq (char-before ) ?\n ))
-            nil
-          (insert "."))
+        (let ( (charX (char-before )))
+          (if (or (eq charX ?\. ) (eq charX ?! ) (eq charX ?? ) (eq charX ?\n ))
+              nil
+            (insert ".")))
         (forward-char )))))
-
