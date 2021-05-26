@@ -310,6 +310,7 @@ Version 2019-11-05"
 ;; make typing delete/overwrites selected text
 (delete-selection-mode 1)
 
+;; disable shift select
 (setq shift-select-mode nil)
 
 ;; (electric-pair-mode 1)
@@ -429,7 +430,10 @@ Version 2019-02-22"
 (defalias 'xjm 'xah-js-mode)
 (defalias 'xcm 'xah-clojure-mode)
 
+(defalias 'xytd 'xah-html-fix-youtube-description)
+(defalias 'xytt 'xah-html-youtube-to-text)
 (defalias 'xil 'xah-icon-linkify)
+(defalias 'xchbl 'xah-copy-html-by-link)
 
 ;; no want tpu-edt
 (defalias 'tpu-edt 'forward-char)

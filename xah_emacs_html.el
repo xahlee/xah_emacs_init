@@ -250,7 +250,7 @@ Else, check these dir:
 ~/
 /tmp/
 
-The first file whose name starts with ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
+The first file whose name starts with xx or ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
 
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 
@@ -258,7 +258,7 @@ Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' 
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
 First version: 2019
-Version 2021-02-14 2021-03-20"
+Version 2021-02-14 2021-03-20 2021-05-25"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -289,7 +289,7 @@ Version 2021-02-14 2021-03-20"
             (catch 'TAG
               (dolist (xdir $dirs )
                 (when (file-exists-p xdir)
-                  (let (($flist (directory-files xdir t "^ee\\|^tt\\|^IMG_\\|^Screen Shot\\|^Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
+                  (let (($flist (directory-files xdir t "^xx\\|^ee\\|^tt\\|^IMG_\\|^Screen Shot\\|^Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
                     (if $flist
                         (progn
                           (throw 'TAG (car $flist)))

@@ -886,7 +886,8 @@ Version 2021-05-11 2021-05-15"
       (goto-char (point-min))
       (search-forward @sep )
       (replace-match "</dt>\n<dd>\n" t t )
-      (goto-char (point-max)))))
+      (goto-char (point-max))))
+  (when (fboundp 'xah-upcase-sentence) (xah-upcase-sentence)))
 
 (defun xah-remove-console-log ()
   "Remove the 「console.log(‹body›)」 but keep ‹body›, in current text block or text selection.

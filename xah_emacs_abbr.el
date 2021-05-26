@@ -14,7 +14,7 @@
     ("cite" "\n\n<span class=\"cite\">(Regan & Totten, 1975)</span>
 <li>familyName, D. (1975). <cite>title</cite> Journal of Science.</li>\n\n" )
 
-    ("todo" "<span class=\"todo\">xtodo▮ </span>" )
+    ("todo" "<span class=\"todo\">xtodo▮</span>" )
 
     ("tp" "transpersonal" )
     ("tf" "transformation" )
@@ -465,6 +465,27 @@ QQ: http://user.qzone.qq.com/2609322939" )
     ;;
 
     ))
+
+
+
+(progn
+  (when (boundp 'powershell-mode-abbrev-table)
+    (clear-abbrev-table powershell-mode-abbrev-table))
+
+  (define-abbrev-table 'powershell-mode-abbrev-table
+    '(
+      ("if" "if (3 -gt 2) { 3 }")
+      ("else" "else { 4 }")
+      ("ifexpr" "( $x -gt 5 ? 3 : 4)")
+
+      ("foreach" "foreach ($e in $arr) { $e }")
+      ("ForEach" "ForEach(property_name_str, new_val)")
+
+      ("while" "$i=5; while($i -lt 10) { $a[$i] }")
+      ("for" "for ($i=0; $i -le $arr.length; $i=$i+1) { $arr[$i] }")
+
+      ;;
+      )))
 
 (progn
   ;; golang
