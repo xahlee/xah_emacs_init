@@ -33,8 +33,6 @@ e.g. c:/Users/h3/web/"
 
 ;; HHH___________________________________________________________________
 
-
-
 (defun xahsite-url-is-xah-website-p (@url)
   "Returns t if @url is a xah website, else nil.
 

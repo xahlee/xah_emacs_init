@@ -146,8 +146,8 @@
     ("freql" "frequently" )
     ("impt" "important" )
 
-    ("alt" "alternative" )
-    ("altl" "alternatively" )
+    ("altn" "alternative" )
+    ("altnl" "alternatively" )
     ("annm" "announcement" )
     ("apr" "apparently" )
     ("argm" "argument" )
@@ -409,6 +409,7 @@ sub + 🔔" )
 
     ;; unicode
     ("asciit" "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" )
+
     ("bu" "•" )
     ("la" "←" )
     ("ua" "↑" )

@@ -119,8 +119,6 @@ Version 2015-05-12"
         (delete-region $p1 $p2)
         (insert "<img src=\"" $fullPath "\" alt=\"" $altText "\">")))))
 
-
-
 ;; HHH___________________________________________________________________
 ;; some custom HTML markup and functions for working with HTML
 
@@ -212,8 +210,6 @@ There are other amazon categories, but not supported by this function."
     (delete-region $p1 $p2)
     (insert  (xah-amazon-search-linkify-url sstr pcc "xahh-20"))
     ))
-
-
 
 (defun nodejs-get-title (@fName @fragPart)
   "Return the file frag part function title.
@@ -351,8 +347,6 @@ Version 2015-03-18"
           (insert (concat "<a href=\"" (file-relative-name $rPath) "\">" $linkWord "</a>")))
       (progn (beep) (message "No file found")))))
 
-
-
 (defun xah-all-linkify ()
   "Make the text under cursor into a HTML link for xah's sites.
 
@@ -400,7 +394,6 @@ Version 2019-05-11"
          ((xah-html-image-file-suffix-p $input) (xah-html-image-figure-linkify))
          (t (xah-file-linkify $p1 $p2))))
     (xah-html-wrap-url)))
-
 
 (defun xah-icon-linkify ()
   "given 2 lines of file path under cursor, make them into a link with image.

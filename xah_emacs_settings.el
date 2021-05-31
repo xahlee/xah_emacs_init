@@ -432,6 +432,8 @@ Version 2019-02-22"
 
 (defalias 'xytd 'xah-html-fix-youtube-description)
 (defalias 'xytt 'xah-html-youtube-to-text)
+(defalias 'XahHtmlFixYoutubeDescription 'xah-html-fix-youtube-description)
+(defalias 'XahHtmlYoutubeToText 'xah-html-youtube-to-text)
 (defalias 'xil 'xah-icon-linkify)
 (defalias 'xchbl 'xah-copy-html-by-link)
 
