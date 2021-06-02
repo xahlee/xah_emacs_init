@@ -236,29 +236,47 @@ Requires a python script. See code."
       (setq scriptName (format "/usr/bin/python ~/git/xahscripts/emacs_pydoc_ref_linkify.py %s" (buffer-file-name)))
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t))))
 
+(defvar xah-move-image-file-from-dirs nil "A list of dir paths used by `xah-move-image-file' to search for temp image files.")
+
+(setq xah-move-image-file-from-dirs
+      '(
+        "~/Downloads/"
+        "~/Pictures/"
+        "~/Pictures/ShareX/"
+        "~/Downloads/Pictures/"
+        "~/Desktop/"
+        "~/Documents/"
+        "~/"
+        "/tmp"
+        ))
+
+(defvar xah-move-image-file-regex-list nil "A list of regex strings used by `xah-move-image-file' to search for temp image files.")
+
+(setq xah-move-image-file-regex-list
+      '(
+        "^tt"
+        "^IMG_"
+        "^Screen Shot"
+        "^Screenshot"
+        "^screenshot"
+        "[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg"
+        ))
+
 (defun xah-move-image-file ( @toDirName  )
   "Move image file to another dir.
 
-If ~/Pictures/ShareX/ exist, use the first file ending in jpg or png there.
-Else, check these dir:
+Search a list of dirs by a list of regex. If a match is found, move it into a new file path, by prompting user to type it.
 
-~/Pictures/ShareX/
-~/Downloads/
-~/Pictures/
-~/Desktop/
-~/Documents/
-~/
-/tmp/
+The from dirs is defined in `xah-move-image-file-from-dirs'
+The regex list is defined in `xah-move-image-file-regex-list'
 
-The first file whose name starts with tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
-
-The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
+A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 
 Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' afterwards.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
 First version: 2019
-Version 2021-02-14 2021-06-01"
+Version 2021-02-14 2021-06-02"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -266,10 +284,7 @@ Version 2021-02-14 2021-06-01"
         $ext
         ($p0 (point))
         $toPath
-        ($dirs '( "~/Downloads/" "~/Pictures/"
-                  "~/Downloads/Pictures/"
-                  "~/Desktop/" "~/Documents/" "~/" "/tmp" ))
-        ($shareXDir "~/Pictures/ShareX/")
+        ($dirs xah-move-image-file-from-dirs )
         ($randStr
          (let* (
                 ($charset "bcdfghjkmnpqrstvwxyz23456789BCDFGHJKMNPQRSTVWXYZ")
@@ -279,24 +294,13 @@ Version 2021-02-14 2021-06-01"
              (push (char-to-string (elt $charset (random $len)))  $randlist))
            (mapconcat 'identity $randlist ""))))
     (setq $fromPath
-          (when (file-exists-p $shareXDir )
-            (setq $flist (directory-files $shareXDir t "jpg$\\|png$" t))
-            (if (> (length $flist) 0)
-                (car $flist)
-              nil)))
+          (catch 'found57804
+            (dolist (xdir $dirs )
+              (when (file-exists-p xdir)
+                (let (($dirFiles (directory-files xdir t (mapconcat 'identity xah-move-image-file-regex-list "\\|"))))
+                  (when $dirFiles (throw 'found57804 (car $dirFiles))))))))
     (when (not $fromPath)
-      (setq $fromPath
-            (catch 'TAG
-              (dolist (xdir $dirs )
-                (when (file-exists-p xdir)
-                  (let (($flist (directory-files xdir t "^tt\\|^IMG_\\|^Screen Shot\\|^Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
-                    (if $flist
-                        (progn
-                          (throw 'TAG (car $flist)))
-                      nil
-                      )))))))
-    (when (not $fromPath)
-      (error "no file name starts with tt nor contain “Screen Shot” at dirs %s" $dirs))
+      (error "No file name matched regexes %s at dirs %s" xah-move-image-file-regex-list $dirs))
     (setq $ext
           (let (($x (file-name-extension $fromPath )))
             (if $x
