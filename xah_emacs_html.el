@@ -250,7 +250,7 @@ Else, check these dir:
 ~/
 /tmp/
 
-The first file whose name starts with xx or ee or tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
+The first file whose name starts with tt or IMG_ or contain “Screenshot”, “Screen Shot” , will be moved.
 
 The destination dir and new file name is asked by a prompt. A random string attached (as id) is added to file name, and any uppercase file extension name is lowercased, e.g. .JPG becomes .jpg. Space in filename is replaced by the low line char “_”.
 
@@ -258,7 +258,7 @@ Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' 
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
 First version: 2019
-Version 2021-02-14 2021-03-20 2021-05-25"
+Version 2021-02-14 2021-06-01"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -289,14 +289,14 @@ Version 2021-02-14 2021-03-20 2021-05-25"
             (catch 'TAG
               (dolist (xdir $dirs )
                 (when (file-exists-p xdir)
-                  (let (($flist (directory-files xdir t "^xx\\|^ee\\|^tt\\|^IMG_\\|^Screen Shot\\|^Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
+                  (let (($flist (directory-files xdir t "^tt\\|^IMG_\\|^Screen Shot\\|^Screenshot\\|[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" t)))
                     (if $flist
                         (progn
                           (throw 'TAG (car $flist)))
                       nil
                       )))))))
     (when (not $fromPath)
-      (error "no file name starts with ee nor contain “Screen Shot” at dirs %s" $dirs))
+      (error "no file name starts with tt nor contain “Screen Shot” at dirs %s" $dirs))
     (setq $ext
           (let (($x (file-name-extension $fromPath )))
             (if $x
@@ -304,16 +304,17 @@ Version 2021-02-14 2021-03-20 2021-05-25"
               ""
               )))
     (setq $newName1 (file-name-nondirectory (file-name-sans-extension $fromPath)))
+    (setq $newName1 (replace-regexp-in-string "^tt[0-9]*" "" $newName1 ))
     (setq $newName1
           (replace-regexp-in-string
            "Screen Shot \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\) at [0-9]+.[0-9]\\{2\\}.[0-9]\\{2\\} \\(AM\\|PM\\)"
            "screenshot_\\1"
            $newName1 ))
     ;; Screen Shot 2018-07-25 at 2.46.36 AM.png
-    (setq $newName1 (read-string "file name:" $newName1 nil $newName1 ))
+    (setq $newName1 (read-string "new name:" $newName1 nil $newName1 ))
     (setq $newName1
           (concat
-           (replace-regexp-in-string "^tt\\|^ee\\|,\\| \\|\\+\\|(\\|)" "_" $newName1)
+           (replace-regexp-in-string "^tt\\|,\\| \\|\\+\\|(\\|)" "_" $newName1)
            "_"
            $randStr
            "."
