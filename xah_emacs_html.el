@@ -242,8 +242,6 @@ Requires a python script. See code."
       '(
         "~/Downloads/"
         "~/Pictures/"
-        "~/Pictures/ShareX/"
-        "~/Downloads/Pictures/"
         "~/Desktop/"
         "~/Documents/"
         "~/"
@@ -259,7 +257,9 @@ Requires a python script. See code."
         "^Screen Shot"
         "^Screenshot"
         "^screenshot"
-        "[0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg"
+        "[+0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" ; amazon pic
+        "[+0-9A-Za-z]\\{11\\}\._[A-Z]\\{2\\}_[A-Z]\\{2\\}[0-9]\\{4\\}_\.jpg" ; amazon pic
+        ;; 711UVfyz+FL._AC_SL1500_.jpg
         ))
 
 (defun xah-move-image-file ( @toDirName  )
@@ -276,7 +276,7 @@ Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' 
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
 First version: 2019
-Version 2021-02-14 2021-06-02"
+Version 2021-02-14 2021-06-05"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let (
         $fromPath
@@ -284,7 +284,13 @@ Version 2021-02-14 2021-06-02"
         $ext
         ($p0 (point))
         $toPath
-        ($dirs xah-move-image-file-from-dirs )
+        ($dirs (if xah-move-image-file-from-dirs
+                   xah-move-image-file-from-dirs
+                 '(
+                   "~/Downloads/"
+                   "~/Desktop/"
+                   "/tmp"
+                   )))
         ($randStr
          (let* (
                 ($charset "bcdfghjkmnpqrstvwxyz23456789BCDFGHJKMNPQRSTVWXYZ")
@@ -297,7 +303,19 @@ Version 2021-02-14 2021-06-02"
           (catch 'found57804
             (dolist (xdir $dirs )
               (when (file-exists-p xdir)
-                (let (($dirFiles (directory-files xdir t (mapconcat 'identity xah-move-image-file-regex-list "\\|"))))
+                (let (($dirFiles
+                       (directory-files
+                        xdir t
+                        (mapconcat 'identity
+                                   (if xah-move-image-file-regex-list
+                                       xah-move-image-file-regex-list
+                                     '(
+                                       "^IMG_"
+                                       "^Screen Shot"
+                                       "^Screenshot"
+                                       "^screenshot"
+                                       ))
+                                   "\\|"))))
                   (when $dirFiles (throw 'found57804 (car $dirFiles))))))))
     (when (not $fromPath)
       (error "No file name matched regexes %s at dirs %s" xah-move-image-file-regex-list $dirs))
