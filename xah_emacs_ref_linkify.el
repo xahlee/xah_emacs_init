@@ -149,18 +149,21 @@ Then it'll become
     (delete-region $p1 $p2)
     (insert "<span class=\"ref\"><a href=\"" $url "\">" "perldoc " $swd "</a></span>")))
 
-(defun mathematica-ref-linkify ()
+(defun xah-wolfram-lang-ref-linkify ()
   "Make the current word into a link to Mathematica ref site.
 For example, if the cursor is on the line:
 Table
 Then it'll become:
-<span class=\"ref\"><a href=\"http://reference.wolfram.com/mathematica/ref/Table.html\">Mathematica Ref: Table</a></span>"
+<span class=\"ref\"><a href=\"https://reference.wolfram.com/language/ref/Table.html\">Wolfram Lang Ref: Table</a></span>
+
+Version 2021-06-06"
   (interactive)
   (let ($bds $p1 $p2 $swd $url)
-    (setq $bds (thing-at-point 'word))
+    (setq $bds (bounds-of-thing-at-point 'word))
     (setq $p1 (car $bds))
     (setq $p2 (cdr $bds))
     (setq $swd (buffer-substring-no-properties $p1 $p2))
-    (setq $url (concat "http://reference.wolfram.com/mathematica/ref/" $swd ".html"))
+    (setq $url
+          (format "https://reference.wolfram.com/language/ref/%s.html" $swd))
     (delete-region $p1 $p2)
-    (insert "<span class=\"ref\"><a href=\"" $url "\">" "Mathematica: " $swd "</a></span>")))
+    (insert "<span class=\"ref\"><a href=\"" $url "\">" "Wolfram Lang: " $swd "</a></span>")))
