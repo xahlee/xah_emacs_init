@@ -391,7 +391,7 @@
     ("tagt" "\\([</>=\" A-Za-z0-9]+\\)" )
 
     ;; shell
-    ("ytd" "youtube-dl --id -k -x --" )
+    ("ytd" "youtube-dl --id --keep-video --extract-audio --" )
 
     ;; html
     ("mxh" "<kbd>Alt</kbd>+<kbd>x</kbd>")
