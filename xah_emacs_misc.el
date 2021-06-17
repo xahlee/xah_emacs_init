@@ -230,7 +230,7 @@ Version 2020-12-16"
        "/Users/xah/web/xahsl_org/"
        ])))
 
-;; 2020-12-16 old 
+;; 2020-12-16 old
 ;; /Users/xah/web/ergoemacs_org/xahemacs.css
 ;; /Users/xah/web/wordyenglish_com/wordy.css
 ;; /Users/xah/web/xaharts_org/xaharts.css

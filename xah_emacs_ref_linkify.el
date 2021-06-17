@@ -154,16 +154,17 @@ Then it'll become
 For example, if the cursor is on the line:
 Table
 Then it'll become:
-<span class=\"ref\"><a href=\"https://reference.wolfram.com/language/ref/Table.html\">Wolfram Lang Ref: Table</a></span>
+<span class=\"ref\"><a href=\"https://reference.wolfram.com/language/ref/Table.html\">Table</a></span>
 
-Version 2021-06-06"
+Version 2021-06-06 2021-06-16"
   (interactive)
   (let ($bds $p1 $p2 $swd $url)
-    (setq $bds (bounds-of-thing-at-point 'word))
+    ;; (setq $bds (bounds-of-thing-at-point 'word))
+    ;; (setq $bds (xah-get-bounds-of-thing-or-region 'glyphs))
+    (setq $bds (xah-get-bounds-of-thing-or-region ["$A-Za-z" "$A-Za-z"]))
     (setq $p1 (car $bds))
     (setq $p2 (cdr $bds))
     (setq $swd (buffer-substring-no-properties $p1 $p2))
-    (setq $url
-          (format "https://reference.wolfram.com/language/ref/%s.html" $swd))
+    (setq $url (format "https://reference.wolfram.com/language/ref/%s.html" $swd))
     (delete-region $p1 $p2)
-    (insert "<span class=\"ref\"><a href=\"" $url "\">" "Wolfram Lang: " $swd "</a></span>")))
+    (insert "<span class=\"ref\"><a href=\"" $url "\">" $swd "</a></span>")))

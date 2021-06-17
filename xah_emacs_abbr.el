@@ -249,7 +249,7 @@
     ("struct" "structure" )
     ("sw" "software" )
     ("tb" "trackball" )
-    ("tech" "technology" )
+    ("techn" "technology" )
     ("tempt" "temperature" )
     ("toc" "table of contents" )
     ("trad" "traditional" )
