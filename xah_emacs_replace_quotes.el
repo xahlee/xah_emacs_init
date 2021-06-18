@@ -305,11 +305,11 @@ Version 2020-04-10"
     (xah-replace-pairs-region
      $p1 $p2
      '(
-       ["fuck" "f�ck"]
-       ["shit" "sh�t"]
-       ["ass" "�ss"]
-       ["motherfuck" "m�th�rf�ck"]
-       ["pussy" "p�ssy"]
+       ["fuck" "faak"]
+       ["shit" "sheeet"]
+       ["ass" "arss"]
+       ["motherfuck" "momfaak"]
+       ["pussy" "poossy"]
        ) "REPORT" "HILIGHT" )))
 
 (defun xah-replace-curly-apostrophe ()
