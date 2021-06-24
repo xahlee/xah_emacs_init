@@ -16,6 +16,9 @@
 
     ("todo" "<span class=\"todo\">xtodo▮</span>" )
 
+    ("caseinsen" "Case-insensitive" )
+    ("casesen" "Case-sensitive" )
+
     ("tp" "transpersonal" )
     ("tf" "transformation" )
     ("tps" "transpersonal psychology" )
@@ -346,7 +349,7 @@
     ("gc" "Google Chrome" )
     ("iet" "Internet Explorer" )
     ("jq" "jQuery" )
-    ("js" "JavaScript" )
+    ("jst" "JavaScript" )
     ("jvm" "Java Virtual Machine" )
     ("lsl" "Linden Scripting Language" )
     ("mac" "Mac" )

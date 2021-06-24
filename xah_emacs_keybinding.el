@@ -4,8 +4,6 @@
 (global-set-key (kbd "<C-M-prior>") 'backward-page)
 (global-set-key (kbd "<C-M-next>") 'forward-page)
 
-(global-set-key (kbd "M-d") 'xah-html-delete-tag-pair)
-
 ;; HHH___________________________________________________________________
 
 ;; (define-key xah-fly-leader-key-map (kbd ".") 'xah-mode-key-table )
@@ -93,6 +91,7 @@ Version 2020-04-09"
   (define-key xah-dump-keymap (kbd "j") 'xah-js-mode)
   (define-key xah-dump-keymap (kbd "l") 'xah-scan-list)
   (define-key xah-dump-keymap (kbd "t") 'xah-clojure-mode)
+  (define-key xah-dump-keymap (kbd "f") 'xah-find-output-mode)
   ;;
   )
 

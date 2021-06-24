@@ -130,9 +130,7 @@ Version 2017-07-19"
 
 (progn
   (add-to-list 'load-path "~/git/xah-find/")
-  (require 'xah-find)
-  (when (fboundp 'xah-find-text)
-    (defalias 'xfom 'xah-find-output-mode)))
+  (require 'xah-find))
 
 (progn
   (add-to-list 'load-path "~/git/xah-dired/")
