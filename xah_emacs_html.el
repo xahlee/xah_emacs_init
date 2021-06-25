@@ -412,47 +412,46 @@ todo
 ;; HHH___________________________________________________________________
 
 (defun xah-copy-html-by-link ()
-  "Make a copy of a html file via link.
+  "Make a copy of a html file from 2 previous html file link in current buffer.
 Explanation:
 current buffer is a html file,
-and contains 2 lines, each is a href link, each on a line by itself, example:
+and contains 2 href links, example:
 <a href=\"cat.html\">my cat</a>
-<a href=\"dog.html\">my dog</a>
-place cursor on the href value part of first line.
+<a href=\"dog.html\">my dog</a>▮
+cursor is somewhere after the second href value.
 Call this command.
 This command will copy the file, from the 1st link's content, into the second link.
 The second link file normally do not exist. It'll be created.
-Version 2018-12-24 2021-02-09"
+Version 2018-12-24 2021-06-25"
   (interactive)
   (require 'xah-html-mode)
   (save-excursion
-    (let* (
-           $p1 $p2 $doIt-p $buf
-           ($fPath1 (thing-at-point 'filename))
-           ($fPath2
-            (progn
-              (search-forward "href=\"")
-              (thing-at-point 'filename)))
-           ($newTitle
-            (progn
-              (search-forward ">" (line-end-position))
-              (setq $p1 (point))
-              (search-forward "<" (line-end-position))
-              (setq $p2 (- (point) 1))
-              (buffer-substring-no-properties $p1 $p2))))
-      (setq $doIt-p
-            (if (file-exists-p $fPath2)
-                (yes-or-no-p (format "file 2 「%s」 exist. continue and replace?" $fPath2))
-              t))
-      (when $doIt-p
-        (setq $buf (find-file $fPath2))
-        (erase-buffer)
-        (insert-file-contents $fPath1 )
-        (xah-html-update-title $newTitle)
-        (save-buffer $buf)
-        (kill-buffer $buf))
-      ;;
-      )))
+    (let ( $p0 $path1 $path2 $buf )
+      (search-backward "href=\"" )
+      (setq $p0 (point))
+      (forward-char 6)
+      (setq $path2 (expand-file-name (thing-at-point 'filename)))
+      (goto-char $p0)
+      (search-backward "href=\"" )
+      (forward-char 6)
+      (setq $path1 (expand-file-name (thing-at-point 'filename)))
+      (message "%s" $path1)
+      (message "%s" $path2)
+      (if (file-exists-p $path2)
+          (user-error "%s" (format "file 2 「%s」 exist." $path2))
+        (progn
+          (setq $buf (find-file $path2))
+          (erase-buffer)
+          (insert-file-contents $path1 )
+          (progn
+            (goto-char (point-min))
+            (re-search-forward "<title>\\([^<]+?\\)</title>")
+            (replace-match "<title>newFilexxx</title>" )
+            (re-search-forward "<h1>\\([^<]+?\\)</h1>")
+            (replace-match "<h1>newFilexxx</h1>" ))
+          (save-buffer $buf)
+          ;; (kill-buffer $buf)
+          )))))
 
 (defvar xahsite-new-page-paths nil
   "A list of file paths that's used as template for creating a new xah site page. Used by `xahsite-new-page'.")
