@@ -220,6 +220,7 @@ Version 2021-01-15"
   )
 
 (when (fboundp 'xah-html-mode)
+  (add-hook 'xah-html-browse-url-of-buffer-hook 'xah-clean-whitespace)
   (progn
     (define-key xah-html-leader-map (kbd "SPC s") 'xah-insert-reference-span-tag)
     (define-key xah-html-leader-map (kbd "SPC e") 'xah-atom-new-entry)
