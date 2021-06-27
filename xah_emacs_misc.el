@@ -361,7 +361,7 @@ Version 2017-02-02"
 (setq xah-interactive-abbrev-alist
       '(
         ("PowerShell diff" . "diff (cat f1) (cat f2) ")
-        ("PowerShell emacs backup~" . "Get-ChildItem -name -Recurse -Include *~")
+        ("PowerShell emacs backup~" . "Get-ChildItem -name -Recurse -Include *~ -path c:/Users/xah/web/ | rm")
         ("PowerShell .DS_Store" . "Get-ChildItem -name -Recurse -Include '.DS_Store'")
         ("PowerShell #emacs_auto_save#" . "Get-ChildItem -name -Recurse -Include '#*#'")
         ("PowerShell htaccess" . "Get-ChildItem -Recurse -name -Include '.htaccess'")

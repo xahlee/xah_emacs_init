@@ -257,6 +257,9 @@ Version 2021-01-15"
 (when (boundp 'xah-elisp-mode-map)
   (define-key xah-elisp-mode-map (kbd "<delete>") xah-elisp-leader-map))
 
+(when (boundp 'xah-js-mode-map)
+  (define-key xah-js-mode-map (kbd "<delete>") xah-js-leader-map))
+
 (when (boundp 'xah-css-leader-map)
   (define-key xah-css-mode-map (kbd "<delete>") xah-css-leader-map))
 
