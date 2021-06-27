@@ -255,13 +255,13 @@ Version 2021-01-15"
   (add-hook 'xah-html-mode-hook 'xah-config-xah-html-mode))
 
 (when (boundp 'xah-elisp-mode-map)
-  (define-key xah-elisp-mode-map (kbd "<delete>") xah-elisp-mode-no-chord-map))
+  (define-key xah-elisp-mode-map (kbd "<delete>") xah-elisp-leader-map))
 
-(when (boundp 'xah-css-mode-no-chord-map)
-  (define-key xah-css-mode-map (kbd "<delete>") xah-css-mode-no-chord-map))
+(when (boundp 'xah-css-leader-map)
+  (define-key xah-css-mode-map (kbd "<delete>") xah-css-leader-map))
 
 (when (boundp 'xah-clojure-mode-map)
-    (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-mode-no-chord-map))
+    (define-key xah-clojure-mode-map (kbd "<delete>") xah-clojure-leader-map))
 
 (progn
   (require 'info )
