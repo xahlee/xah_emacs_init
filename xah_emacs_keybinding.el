@@ -18,7 +18,7 @@
 (when (boundp 'xah-fly-key-map)
   (define-key xah-fly-leader-key-map (kbd "SPC") 'xah-user-keymap)
   (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
-  (global-set-key (kbd "C-b") 'xah-cycle-hyphen-underscore-space)
+  (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
   (global-set-key (kbd "<end>") 'xah-fly-command-mode-activate)
   (define-key xah-fly-h-keymap (kbd "t") 'xah-lookup-web)
   (define-key xah-fly-h-keymap (kbd "w") 'xah-lookup-word-definition)
