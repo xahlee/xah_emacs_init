@@ -62,7 +62,7 @@ Version 2017-07-19"
    xah-run-current-file-map
    '(
      ("php" . "php")
-     ("pl" . "perl")
+     ("pl" . "d:/Strawberry/perl/bin/perl.exe")
      ("py" . "python")
      ("py2" . "python")
      ("py3" . "C:/Python39/python.exe")
@@ -74,7 +74,7 @@ Version 2017-07-19"
      ("tsx" . "tsc")
      ("mjs" . "node --experimental-modules ")
      ("sh" . "bash")
-     ("clj" . "java -cp ~/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
+     ("clj" . "clj")
      ("rkt" . "racket")
      ("ml" . "ocaml")
      ("vbs" . "cscript")
@@ -242,4 +242,3 @@ Version 2017-07-19"
             "xahlee_info/node_api/"
             ])
     (setq xah-find-dir-ignore-regex-list (append xahsite-external-docs [ "\\.git/" "xahlee_info/js/ex/" ] nil))))
-
