@@ -978,7 +978,7 @@ See `xah-cycle-font'."
 Work on current paragraph if there is no selection.
 
 URL `http://ergoemacs.org/emacs/emacs_period_to_line_end.html'
-Version 2020-11-25 2021-05-13"
+Version 2020-11-25 2021-07-04"
   (interactive)
   (let ($p1 $p2)
     (if (use-region-p)
@@ -997,7 +997,7 @@ Version 2020-11-25 2021-05-13"
       (while (search-forward "\n" nil "move" )
         (backward-char )
         (let ( (charX (char-before )))
-          (if (or (eq charX ?\. ) (eq charX ?! ) (eq charX ?? ) (eq charX ?\n ))
+          (if (or (eq charX ?\. ) (eq charX ?! ) (eq charX ?? ) (eq charX ?\n ) (eq charX ?> ))
               nil
             (insert ".")))
         (forward-char )))))
