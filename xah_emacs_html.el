@@ -243,7 +243,7 @@ Requires a python script. See code."
         "~/Downloads/"
         "~/Pictures/"
         "~/Desktop/"
-        "~/Documents/"
+        ;; "~/Documents/"
         "~/"
         "/tmp"
         ))
@@ -275,30 +275,21 @@ A random string attached (as id) is added to file name, and any uppercase file e
 Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' afterwards.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-First version: 2019
-Version 2021-02-14 2021-06-05"
+Version 2019 2021-07-04"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
-  (let (
-        $fromPath
-        $newName1
-        $ext
-        ($p0 (point))
-        $toPath
-        ($dirs (if xah-move-image-file-from-dirs
-                   xah-move-image-file-from-dirs
-                 '(
-                   "~/Downloads/"
-                   "~/Desktop/"
-                   "/tmp"
-                   )))
-        ($randStr
-         (let* (
-                ($charset "bcdfghjkmnpqrstvwxyz23456789BCDFGHJKMNPQRSTVWXYZ")
-                ($len (length $charset))
-                ($randlist nil))
-           (dotimes (_ 5)
-             (push (char-to-string (elt $charset (random $len)))  $randlist))
-           (mapconcat 'identity $randlist ""))))
+  (let ($p0 $dirs $fromPath $newName1 $ext $toPath $randStr)
+    (setq $p0 (point))
+    (setq $dirs (if xah-move-image-file-from-dirs
+                    xah-move-image-file-from-dirs
+                  '( "~/Downloads/" "~/Desktop/" "/tmp" )))
+    (setq $randStr
+          (let ( $charset $len $randlist )
+            (setq $charset "bcdfghjkmnpqrstvwxyz23456789BCDFGHJKMNPQRSTVWXYZ")
+            (setq $len (length $charset))
+            (setq $randlist nil)
+            (dotimes (_ 5)
+              (push (char-to-string (elt $charset (random $len)))  $randlist))
+            (mapconcat 'identity $randlist "")))
     (setq $fromPath
           (catch 'found57804
             (dolist (xdir $dirs )
@@ -348,7 +339,7 @@ Version 2021-02-14 2021-06-05"
               (string-equal $ext "jpeg")
               (string-equal $ext "jfif"))
       (setq $toPath (concat (file-name-sans-extension $toPath) ".jpg")))
-    (message "from path is 「%s」\n to path is 「%s」 " $fromPath $toPath)
+    (message "xah-move-image-file: from path is 「%s」\n to path is 「%s」 " $fromPath $toPath)
     (if (file-exists-p $toPath)
         (error "move to path exist: %s" $toPath)
       (progn
