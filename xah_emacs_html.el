@@ -237,7 +237,6 @@ Requires a python script. See code."
       (shell-command-on-region (car bds) (cdr bds) scriptName nil "REPLACE" nil t))))
 
 (defvar xah-move-image-file-from-dirs nil "A list of dir paths used by `xah-move-image-file' to search for temp image files.")
-
 (setq xah-move-image-file-from-dirs
       '(
         "~/Downloads/"
@@ -249,7 +248,6 @@ Requires a python script. See code."
         ))
 
 (defvar xah-move-image-file-regex-list nil "A list of regex strings used by `xah-move-image-file' to search for temp image files.")
-
 (setq xah-move-image-file-regex-list
       '(
         "^tt"
@@ -275,7 +273,7 @@ A random string attached (as id) is added to file name, and any uppercase file e
 Automatically call `xah-dired-remove-all-metadata' and `xah-dired-optimize-png' afterwards.
 
 URL `http://ergoemacs.org/emacs/move_image_file.html'
-Version 2019 2021-07-04"
+Version 2019 2021-07-05"
   (interactive (list (ido-read-directory-name "Move img to dir:" )))
   (let ($p0 $dirs $fromPath $newName1 $ext $toPath $randStr)
     (setq $p0 (point))
@@ -294,28 +292,27 @@ Version 2019 2021-07-04"
           (catch 'found57804
             (dolist (xdir $dirs )
               (when (file-exists-p xdir)
-                (let (($dirFiles
-                       (directory-files
-                        xdir t
-                        (mapconcat 'identity
-                                   (if xah-move-image-file-regex-list
-                                       xah-move-image-file-regex-list
-                                     '(
-                                       "^IMG_"
-                                       "^Screen Shot"
-                                       "^Screenshot"
-                                       "^screenshot"
-                                       ))
-                                   "\\|"))))
+                (let ($dirFiles)
+                  (setq $dirFiles
+                        (directory-files
+                         xdir t
+                         (mapconcat 'identity
+                                    (if xah-move-image-file-regex-list
+                                        xah-move-image-file-regex-list
+                                      '(
+                                        "^IMG_"
+                                        "^Screen Shot"
+                                        "^Screenshot"
+                                        "^screenshot"
+                                        ))
+                                    "\\|")))
                   (when $dirFiles (throw 'found57804 (car $dirFiles))))))))
     (when (not $fromPath)
       (error "No file name matched regexes %s at dirs %s" xah-move-image-file-regex-list $dirs))
     (setq $ext
-          (let (($x (file-name-extension $fromPath )))
-            (if $x
-                (downcase $x)
-              ""
-              )))
+          (let ($x)
+            (setq $x (file-name-extension $fromPath ))
+            (if $x (downcase $x) "" )))
     (setq $newName1 (file-name-nondirectory (file-name-sans-extension $fromPath)))
     (setq $newName1 (replace-regexp-in-string "^tt[0-9]*" "" $newName1 ))
     (setq $newName1

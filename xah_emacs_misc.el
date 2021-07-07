@@ -361,11 +361,11 @@ Version 2017-02-02"
 (setq xah-interactive-abbrev-alist
       '(
         ("PowerShell diff" . "diff (cat f1) (cat f2) ")
-        ("PowerShell emacs backup~" . "Get-ChildItem -name -Recurse -Include *~ -path c:/Users/xah/web/ | rm")
-        ("PowerShell .DS_Store" . "Get-ChildItem -name -Recurse -Include '.DS_Store'")
-        ("PowerShell #emacs_auto_save#" . "Get-ChildItem -name -Recurse -Include '#*#'")
-        ("PowerShell htaccess" . "Get-ChildItem -Recurse -name -Include '.htaccess'")
-        ("PowerShell xx temp file" . "Get-ChildItem -name -Recurse -Include 'xx*'")
+        ("PowerShell emacs backup~" . "Get-ChildItem -Recurse -Include *~ -path c:/Users/xah/web/ | rm")
+        ("PowerShell .DS_Store" . "Get-ChildItem -Recurse -Include '.DS_Store'")
+        ("PowerShell #emacs_auto_save#" . "Get-ChildItem -Recurse -Include '#*#'")
+        ("PowerShell htaccess" . "Get-ChildItem -Recurse -Include '.htaccess'")
+        ("PowerShell xx temp file" . "Get-ChildItem -Recurse -Include 'xx*'")
         ("PowerShell list empty dir" . "Get-ChildItem -Directory -Recurse | Where-Object { $_.GetFileSystemInfos().Count -eq 0 }")
 
         ("delete mac attribute" . "xattr -c *png")
