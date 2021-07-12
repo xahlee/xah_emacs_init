@@ -399,22 +399,40 @@ todo
 
 ;; HHH___________________________________________________________________
 
+(defvar xah-copy-html-by-link-template nil "template for `xah-copy-html-by-link'.")
+
+(setq xah-copy-html-by-link-template "<main>
+
+<div class=\"ad_top_39054\"></div>
+
+<h1>xxxxxtitle</h1>
+
+<div class=\"byline\">By Xah Lee. Date: <time>xxxxxdate</time>.</div>
+
+<div class=\"ads_bottom_dtpcz\"></div>
+
+</main>")
+
 (defun xah-copy-html-by-link ()
   "Make a copy of a html file from 2 previous html file link in current buffer.
 Explanation:
 current buffer is a html file,
 and contains 2 href links, example:
 <a href=\"cat.html\">my cat</a>
-<a href=\"dog.html\">my dog</a>▮
-cursor is somewhere after the second href value.
+<a href=\"dog.html\">my dog▮</a>
+cursor is somewhere in the link description of the second href value.
 Call this command.
-This command will copy the file, from the 1st link's content, into the second link.
-The second link file normally do not exist. It'll be created.
+This command will basically use the first link as template and create the second file. Quit if second file already exist.
 Version 2018-12-24 2021-06-25"
   (interactive)
   (require 'xah-html-mode)
   (save-excursion
-    (let ( $p0 $path1 $path2 $buf )
+    (let ( $p0 $p1 $p2 $newTitle  $path1 $path2 $buf )
+      (skip-chars-backward "^>")
+      (setq $p1 (point))
+      (skip-chars-forward "^<")
+      (setq $p2 (point))
+      (setq $newTitle (buffer-substring-no-properties $p1 $p2 ))
       (search-backward "href=\"" )
       (setq $p0 (point))
       (forward-char 6)
@@ -423,20 +441,30 @@ Version 2018-12-24 2021-06-25"
       (search-backward "href=\"" )
       (forward-char 6)
       (setq $path1 (expand-file-name (thing-at-point 'filename)))
-      (message "%s" $path1)
-      (message "%s" $path2)
       (if (file-exists-p $path2)
           (user-error "%s" (format "file 2 「%s」 exist." $path2))
         (progn
           (setq $buf (find-file $path2))
           (erase-buffer)
           (insert-file-contents $path1 )
+          (let (p1 p2)
+            (goto-char (point-min))
+            (search-forward "<main>" )
+            (setq p1 (- (point) (length "<main>")))
+            (search-forward "</main>" )
+            (setq p2 (point))
+            (delete-region p1 p2)
+            (insert xah-copy-html-by-link-template))
           (progn
             (goto-char (point-min))
             (re-search-forward "<title>\\([^<]+?\\)</title>")
-            (replace-match "<title>newFilexxx</title>" )
+            (replace-match (format "<title>%s</title>" $newTitle ))
             (re-search-forward "<h1>\\([^<]+?\\)</h1>")
-            (replace-match "<h1>newFilexxx</h1>" ))
+            (replace-match (format "<h1>%s</h1>" $newTitle ))
+            (goto-char (point-min))
+            (search-forward "xxxxxdate" )
+            (delete-char (- (length "xxxxxdate")))
+            (insert (format-time-string "%Y-%m-%d")))
           (save-buffer $buf)
           ;; (kill-buffer $buf)
           )))))
