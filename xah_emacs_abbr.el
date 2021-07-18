@@ -16,6 +16,7 @@
 
     ("todo" "<span class=\"todo\">xtodo▮</span>" )
 
+    ("xe" "XahEmacs" )
     ("caseinsen" "Case-insensitive" )
     ("casesen" "Case-sensitive" )
 

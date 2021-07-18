@@ -7,9 +7,7 @@
 ;; xah fly keys
 
 (xah-fly-keys-set-layout "dvorak")
-
 (setq xah-fly-M-x-command 'smex)
-
 (setq xah-run-current-file-map
       '(("php" . "php")
         ("pl" . "d:/Strawberry/perl/bin/perl.exe")
@@ -38,68 +36,44 @@
 
 (load (xah-get-fullpath "xah_emacs_abbr"))
 
-(progn
-  (require 'xah-text-mode)
-  )
+(require 'xah-text-mode)
 
 ;; (add-to-list 'load-path "~/git/xah-comment.el/")
 
 ;; (add-to-list 'load-path "~/git/xah-html6-mode.el/")
 
-;; (progn
-;;   (require 'command-log-mode)
-;;   )
-
 (setq initial-major-mode 'xah-html-mode)
 
 (progn
   (add-to-list 'load-path "~/git/xah-clojure-mode/")
-  ;; (require 'xah-clojure-mode)
   (autoload 'xah-clojure-mode "xah-clojure-mode" "autoload the mode." t))
 
 (progn
   (add-to-list 'load-path "~/git/xah-php-mode.el/")
-  ;; (require 'xah-php-mode)
   (autoload 'xah-php-mode "xah-php-mode" "autoload the mode." t))
 
 (progn
   (add-to-list 'load-path "~/git/xbbcode-mode.el/")
-  ;; (require 'xbbcode-mode)
   (autoload 'xbbcode-mode "xbbcode-mode" "autoload the mode." t))
-
-;; (progn
-;;   (put 'xah-lookup-word-definition 'xah-lookup-url "https://www.thefreedictionary.com/curlicue")
-;;   (put 'xah-lookup-web 'xah-lookup-url "https://www.bing.com/search?q=curlicue"))
 
 (progn
   (add-to-list 'load-path "~/git/xub-mode.el/")
-  ;; (require 'xub-mode)
   (autoload 'xub-mode "xub-mode" "autoload the mode." t))
 
 (when (file-exists-p "~/no_Dropbox/")
   (progn
     (add-to-list 'load-path "~/no_Dropbox/")
-    ;; (require 'xlsl-mode)
     (autoload 'xlsl-mode "xlsl-mode" "autoload the mode." t)))
 
 (load (xah-get-fullpath "xah_emacs_xahsite_path_lisp_util"))
-;; (load (xah-get-fullpath "xah_gen_sitemap"))
 
 (load (xah-get-fullpath "xah_emacs_keybinding"))
 (load (xah-get-fullpath "xah_emacs_mouse_setup"))
 
 (progn
-;; AutoHotkey
+  ;; AutoHotkey
   (add-to-list 'load-path "~/git/xahk-mode.el/")
-  (require 'xahk-mode)
-  ;; (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t)
-  )
-
-;; (when (string-equal system-type "windows-nt") (load (xah-get-fullpath "xah_emacs_ms_windows")))
-
-(load (xah-get-fullpath "xah_emacs_kmacro"))
-
-(load (xah-get-fullpath "xah_emacs_mouse_commands"))
+  (autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotkey scripts." t))
 
 (load (xah-get-fullpath "xah_emacs_html"))
 (load (xah-get-fullpath "xah_emacs_html_linkify"))
@@ -148,6 +122,7 @@
 (defalias 'xytt 'xah-html-youtube-to-text)
 (defalias 'xil 'xah-icon-linkify)
 (defalias 'xchbl 'xah-copy-html-by-link)
+(defalias 'ms 'magit-status)
 
 ;; no want tpu-edt
 (defalias 'tpu-edt 'forward-char)

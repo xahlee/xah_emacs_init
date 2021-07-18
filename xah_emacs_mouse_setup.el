@@ -4,6 +4,17 @@
 
 ;; HHH___________________________________________________________________
 
+(defun xah-click-describe-char (@click)
+  "Mouse click to `describe-char' at clicked point.
+URL `http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html'
+Version 2016-07-18"
+  (interactive "e")
+  (let ((p1 (posn-point (event-start @click))))
+    (goto-char p1)
+    (describe-char p1)))
+
+(global-set-key (kbd "<mouse-3>") 'xah-click-describe-char)
+
 ;; (setq mouse-yank-at-point t)
 
 ;; 2020-08-15 make mouse wheel scroll just 1 line. great for logitech spin wheel

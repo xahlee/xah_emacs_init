@@ -1,7 +1,0 @@
-Xah Lee's emacs init files.
-
-'tis not good for you, cuz they change precariously by whims.
-
-Try this instead:
-
-Emacs Init Setup http://ergoemacs.org/emacs/emacs_init_index.html
